@@ -1,0 +1,51 @@
+h5 {
+    color: white;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.p15 {
+    padding: 15px;
+}
+
+.btnStyle {
+    text-align: center;
+    border: solid 1px #dfd9d9d2;
+    border-radius: 8px;
+    border-bottom: solid 3px #dfd9d9d2;
+    border-right: solid 3px #dfd9d9d2;
+    margin-bottom: 0.25em;
+    cursor: pointer;
+}
+
+.m15 {
+    margin: 15px;
+}
+
+i {
+    color: #0c2b90;
+}
+
+i:hover {
+    color: #0d91e4;
+}
+
+.someS {
+    margin-top: 0;
+    padding-bottom: 0.15em;
+    background-color: #0c2b90;
+    border-radius: 6px;    
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.someS:hover {
+    background-color: #0d91e4;
+}
+
+.btnStyle:hover {
+    border-color: #181717d2;
+    border-left: solid 3px #181717d2; 
+}
