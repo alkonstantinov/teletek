@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="IRIS.css" />
+    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+    <title>Teletek ProsTe</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Proste 6.1</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        File
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Scan</a>
+                        <a class="dropdown-item" href="javascript: $('#divModal').modal('show')">New</a>
+                        <a class="dropdown-item" href="#">Save</a>
+                        <a class="dropdown-item" href="#">Save as</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Exit</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Device
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Read</a>
+                        <a class="dropdown-item" href="#">Write</a>
+                        <a class="dropdown-item" href="#">Log</a>
+                        <a class="dropdown-item" href="#">Clock/Date</a>
+                        <a class="dropdown-item" href="#">Verify</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Export</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        System
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Update</a>
+                        <a class="dropdown-item" href="#">Help</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" id="olBC">
+
+        </ol>
+    </nav>
+    <div class="container" id="divMain">
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer text-center">
+
+        © 2022 Copyright:
+        <a class="text-reset fw-bold" href="https://teletek-electronics.com/">Teletek Electroincs</a>
+
+    </footer>
+    <!-- Footer -->
+
+    <div style="display: none;" id="divDevices">
+        <div class="row m15 no-gutter">
+            <a href="javascript:loadDiv('divIRIS', 'Devices|IRIS')" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa fa-lock fa-2x colored p15 p15" aria-hidden="true"></i>
+                    <div class="someS">
+                        <h5>Iris</h5>
+                        USB
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa fa-volume-up fa-2x colored p15 p15" aria-hidden="true"></i>
+                    <div class="someS">
+                        <h5>Eclipse</h5>
+                        Com-3
+                    </div>
+                </div>
+            </a>
+
+
+        </div>
+    </div>
+
+    <div style="display: none;" id="divIRIS">
+        <div class="row m15 no-gutter">
+            <a href="javascript:loadDiv('divAccessCode', 'Devices|IRIS|Access Codes')" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-fingerprint fa-2x colored p15 p15"></i>
+                    <div class="someS">
+                        <h5>Access Codes</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="./Network.html" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-diagram-project fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Network</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-network-wired fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Panels in network</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-arrow-down-1-9 fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Inputs</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row m15">
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-arrow-down-wide-short fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Inputs Group</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-arrow-up-9-1 fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Outputs</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-laptop-file fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>FAT - FBF</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-clone fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Zones</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row m15">
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-house-medical-flag fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>EVAC Zones</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-hard-drive fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Peripherial Devices</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="javascript:void" class="col-sm-3">
+                <div class="btnStyle">
+                    <i class="fa-solid fa-compact-disc fa-2x colored p15"></i>
+                    <div class="someS">
+                        <h5>Loop Devices</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div style="display: none;" id="divAccessCode">
+        <form action="">
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <div class="form-item">
+                <label for="panel">Panel name</label>
+                <input type="text" id="panel" name="panel" placeholder="Enter the panel name" />
+            </div>
+
+            <fieldset>
+                <legend>Parameters</legend>
+                <div class="form-item roww">
+                    <label for="enabled">Enabled</label>
+                    <input type="checkbox" id="enabled" />
+                </div>
+                <div class="form-item">
+                    <label for="network-type">Network Type</label>
+                    <div class="select">
+                        <select id="network-type" name="network-type">
+                            <option value="title">Choose network type</option>
+                            <option value="loc">LAN</option>
+                            <option value="loc">RS 485</option>
+                            <option value="loc">Voice EVAC</option>
+                            <option value="loc">Voice EVAC + LAN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label for="protocol">Protocol</label>
+                    <div class="select">
+                        <select id="sector" name="protocol">
+                            <option value="title">Choose protocol</option>
+                            <option value="loc">Modbus RTU over TCP/IP</option>
+                            <option value="loc">Modbus TCP/IP</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-item roww">
+                    <label for="redundancy">Redundancy ON</label>
+                    <input type="checkbox" id="redundancy" />
+                </div>
+            </fieldset>
+
+            <div class="form-item">
+                <label for="panel-number">Panel Number</label>
+                <input type="number" id="panel-number" name="panel-number" placeholder="Enter panel number" min="1" />
+            </div>
+            <div class="form-item">
+                <label for="hostip">Host IP</label>
+                <!-- <input type="text" class="form-input" id="hostip" name="hostip" placeholder="xxx.xxx.xxx.xxx"/> -->
+                <input type="text" class="form-input" id="hostip" name="hostip" minlength="7" maxlength="15" size="15"
+                    pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                    placeholder=" 0 . 0 . 0 . 0 " />
+            </div>
+            <div class="form-item">
+                <label for="netmask">Net Mask</label>
+                <input type="text" id="netmask" name="netmask" minlength="7" maxlength="15" size="15"
+                    pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                    placeholder=" 0 . 0 . 0 . 0 " />
+            </div>
+            <div class="form-item">
+                <label for="gateway">Gateway</label>
+                <input type="text" id="gateway" name="gateway" minlength="7" maxlength="15" size="15"
+                    pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                    placeholder=" 0 . 0 . 0 . 0 " />
+            </div>
+            <div class="form-item">
+                <label for="port">Port</label>
+                <input type="number" id="port" name="port" data-maxlength="5"
+                    oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="7000" min="1" />
+            </div>
+            <div class="form-item">
+                <label for="evac-panel-number">EVAC Panel number</label>
+                <input type="number" id="evac-panel-number" name="evac-panel-number" data-maxlength="5"
+                    oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="1" min="1" />
+            </div>
+            <fieldset>
+                <div class="form-item">
+                    <label for="emacETHADDR0">emacETHADDR0</label>
+                    <input type="text" id="emacETHADDR0" name="emacETHADDR0" placeholder="00" disabled />
+                </div>
+                <div class="form-item">
+                    <label for="emacETHADDR1">emacETHADDR1</label>
+                    <input type="text" id="emacETHADDR1" name="emacETHADDR1" placeholder="00" disabled />
+                </div>
+                <div class="form-item">
+                    <label for="emacETHADDR2">emacETHADDR2</label>
+                    <input type="text" id="emacETHADDR2" name="emacETHADDR2" placeholder="00" disabled />
+                </div>
+                <div class="form-item">
+                    <label for="emacETHADDR3">emacETHADDR3</label>
+                    <input type="text" id="emacETHADDR3" name="emacETHADDR3" placeholder="00" disabled />
+                </div>
+                <div class="form-item">
+                    <label for="emacETHADDR4">emacETHADDR4</label>
+                    <input type="text" id="emacETHADDR4" name="emacETHADDR4" placeholder="00" disabled />
+                </div>
+                <div class="form-item">
+                    <label for="emacETHADDR5">emacETHADDR5</label>
+                    <input type="text" id="emacETHADDR5" name="emacETHADDR5" placeholder="00" disabled />
+                </div>
+            </fieldset>
+            <div class="buttons-row mt15">
+                <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
+                <a href="./IRIS.html"><button type="button" class="btn-round btn-border-black">Cancel</button></a>
+                <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="divModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+
+        function loadDiv(id, bc) {
+            $("#divMain").html($(`#${id}`).html());
+            $("#olBC").empty();
+            bc.split('|').forEach(x => $("#olBC").append($(`<li class='breadcrumb-item active' aria-current='page'>${x}</li>`)));
+        }
+        $(document).ready(() => {
+            loadDiv("divDevices", "Devices");
+        });
+    </script>
+</body>
+
+</html>
