@@ -1,0 +1,330 @@
+﻿<Window x:Class="teletekWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:teletekWPF"
+        mc:Ignorable="d"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        Title="" Height="720" Width="1280">
+    <Window.Resources>
+        <Style x:Key="Selection" TargetType="Button" >
+            <Setter Property="Background" Value="{StaticResource DefaultColor}"/>
+            <Setter Property="BorderBrush" Value="#ddd"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="170"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Margin" Value="30"/>
+            <Setter Property="Border.CornerRadius" Value="10,10,10,10" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform CenterX="100" CenterY="100"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width"
+                                                 To="260" Duration="0:0:0.2"/>
+                                <DoubleAnimation Storyboard.TargetProperty="Height"
+                                                 To="170" Duration="0:0:0.2"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
+                                                 To="6"
+                                                 Duration="0:0:0.2"/>
+                                <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" 
+                                                To="#007bff" 
+                                                FillBehavior="Stop" 
+                                                Duration="0:0:1"/>
+                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"
+                                                To="Black"
+                                                FillBehavior="Stop" 
+                                                Duration="0:0:1"/>
+                                <!-- <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle"
+                                                 To="-2" Duration="0:0:0.1"/> -->
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width"
+                                                 To="250" Duration="0:0:1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="Height"
+                                                 To="170" Duration="0:0:1"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
+                                                    To="2"
+                                                    Duration="0:0:0.1"/>
+                                <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" 
+                                                To="#0c2b90"
+                                                FillBehavior="Stop" 
+                                                Duration="0:0:1"/>
+                                <!-- <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle"
+                                                 To="0" Duration="0:0:0.1"/> -->
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TextBlock FontSize="40">Teletek ProsTe IRIS Panel</TextBlock>
+        <Line Stroke="#aaa" StrokeThickness="2" Margin="5,0,0,630" HorizontalAlignment="Left" X1="0" X2="1280" VerticalAlignment="Bottom"></Line>
+        <Grid Background="AliceBlue" Margin="0,56,0,0">
+            <StackPanel>
+                <UniformGrid Rows="3" Columns="4">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbAccess" Text="&#xf577;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Access Code</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn2">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbNetwork" Text="&#xf542;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Network</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn3">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbPanels" Text="&#xf6ff;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="40" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Panels in network</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn4">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbInputs" Text="&#xf162;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Inputs</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn5">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbInpGroups" Text="&#xf160;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Inputs Group</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn6">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbOutputs" Text="&#xf887;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Outputs</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn7">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbFatBFB" Text="&#xe51d;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>FAT - FBF</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn8">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbZones" Text="&#xf24d;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Zones</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn9">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbEvacZone" Text="&#xe514;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>EVAC Zones</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn10">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbPerifDevices" Text="&#xf0a0;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Periferial Devices</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn11">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel>
+                            <Border CornerRadius="12">
+                                <Label Background="White" Padding="90,30,85,30" Width="246">
+                                    <Label.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
+                                        </Style>
+                                    </Label.Resources>
+                                    <TextBlock x:Name="tbLoopDevices" Text="&#xf51f;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                </Label>
+                            </Border>
+                            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
+                                <Bold>Loop Devices</Bold>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </UniformGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

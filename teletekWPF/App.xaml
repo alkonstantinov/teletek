@@ -1,0 +1,14 @@
+﻿<Application x:Class="teletekWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:teletekWPF"
+             Startup="Application_Startup">
+             <!--StartupUri="MainWindow.xaml" -->
+    <Application.Resources>
+        <SolidColorBrush x:Key="DefaultColor" Color="#0c2b90" />
+        <SolidColorBrush x:Key="LighterColor" Color="#007bff" />
+        <FontFamily x:Key="fa_brands">/Font/fa-brands-400.ttf#Font Awesome 6 Brands Regular</FontFamily>
+        <FontFamily x:Key="fa_regular">/Font/fa-regular-400.ttf#Font Awesome 6 Free Regular</FontFamily>
+        <FontFamily x:Key="fa_solid">/Font/fa-solid-900.ttf#Font Awesome 6 Free Solid</FontFamily>
+    </Application.Resources>
+</Application>
