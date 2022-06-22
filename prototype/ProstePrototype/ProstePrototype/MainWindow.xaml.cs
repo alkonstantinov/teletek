@@ -23,12 +23,31 @@ namespace ProstePrototype
         public MainWindow()
         {
             InitializeComponent();
+            //Uri iconUri = new Uri("pack://application:,,,/html/Icon.ico", UriKind.RelativeOrAbsolute);
+            //this.Icon = BitmapFrame.Create(iconUri);
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+
+
             wb.Load("file:///" + myFile);
         }
 
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var i = e;
+        }
+
         private void wb_JavascriptMessageReceived(object sender, CefSharp.JavascriptMessageReceivedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }

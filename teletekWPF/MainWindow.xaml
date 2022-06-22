@@ -8,7 +8,7 @@
         Topmost="True"
         WindowStartupLocation="CenterScreen"
         WindowState="Normal"
-        Title="" Height="720" Width="1280">
+        Title="" Height="780" Width="1280">
     <Window.Resources>
         <Style x:Key="Selection" TargetType="Button" >
             <Setter Property="Background" Value="{StaticResource DefaultColor}"/>
@@ -81,7 +81,7 @@
         <Grid Background="AliceBlue" Margin="0,56,0,0">
             <StackPanel>
                 <UniformGrid Rows="3" Columns="4">
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn1">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnAccess">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -103,7 +103,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn2">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnNetwork">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -125,7 +125,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn3">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnPanels">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -147,7 +147,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn4">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnInputs">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -169,7 +169,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn5">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnInpGroups">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -191,7 +191,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn6">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnOutputs">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -213,7 +213,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn7">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnFatFBF">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -227,7 +227,7 @@
                                             <Setter Property="CornerRadius" Value="12, 12, 0, 0"/>
                                         </Style>
                                     </Label.Resources>
-                                    <TextBlock x:Name="tbFatBFB" Text="&#xe51d;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock x:Name="tbFatFBF" Text="&#xe51d;" FontFamily="{StaticResource fa_solid}" Foreground="{StaticResource DefaultColor}" FontSize="44" Margin="4, 10" VerticalAlignment="Center"></TextBlock>
                                 </Label>
                             </Border>
                             <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center">
@@ -235,7 +235,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn8">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnZones">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -257,7 +257,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn9">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnEvacZone">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -279,7 +279,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn10">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnPerifDevices">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -301,7 +301,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btn11">
+                    <Button Style="{StaticResource Selection}" Click="Button_Click" Tag="btnLoopDevices">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="12"/>

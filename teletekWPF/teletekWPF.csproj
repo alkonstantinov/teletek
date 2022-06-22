@@ -11,22 +11,12 @@
     <None Remove="Font\fa-brands-400.ttf" />
     <None Remove="Font\fa-regular-400.ttf" />
     <None Remove="Font\fa-solid-900.ttf" />
-    <None Remove="images\ButterflyGraphMode.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Font\fa-brands-400.ttf" />
     <Resource Include="Font\fa-regular-400.ttf" />
     <Resource Include="Font\fa-solid-900.ttf" />
-    <Resource Include="images\ButterflyGraphMode.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="images\ButterflyGraphMode.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
   </ItemGroup>
 
 </Project>

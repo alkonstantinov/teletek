@@ -2,16 +2,164 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="Proste" Height="450" Width="800"
-        WindowState="Maximized"
+        Title="Proste 6.1" Height="450" Width="800"
         WindowStyle="None"
         >
+    <!-- WindowState="Maximized" -->
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+    </Window.CommandBindings>
     <Grid>
-        <wpf:ChromiumWebBrowser Grid.Row="0"
-                          x:Name="wb"
-                                JavascriptMessageReceived="wb_JavascriptMessageReceived"    
-                          />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <StackPanel Background="#f8f9fa">
+            <DockPanel  Height="50" HorizontalAlignment="Left" >
+                <Image Source="/html/Icon.ico"/>
+                <TextBlock FontSize="20" VerticalAlignment="Center">Proste 6.1</TextBlock>
+                <Menu DockPanel.Dock="Top" FontSize="16" VerticalAlignment="Center" Margin="10, 0, 0, 0" Background="#f8f9fa" Foreground="#7c7c7d">
+                    <MenuItem Margin="10,0,0,0">
+                        <MenuItem.Header>
+                            <DockPanel>
+                                <TextBlock Text="File" Margin="0, 0, 5, 0"/>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </DockPanel>
+                        </MenuItem.Header>
+                        <MenuItem Header="S_can">
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_New" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Open" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Save" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Save _As" />
+                        <Separator />
+                        <MenuItem Header="_Exit" Click="Exit_Clicked" InputGestureText="Ctrl+E">
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Margin="10,0,0,0">
+                        <MenuItem.Header>
+                            <DockPanel>
+                                <TextBlock Text="Device" Margin="0, 0, 5, 0"/>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </DockPanel>
+                        </MenuItem.Header>
+                        <MenuItem Header="_Read" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Write" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Log" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Clock/Date" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Verify" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Header="_Export" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Margin="10,0,0,0">
+                        <MenuItem.Header>
+                            <DockPanel>
+                                <TextBlock Text="System" Margin="0, 0, 5, 0"/>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </DockPanel>
+                        </MenuItem.Header>
+                        <MenuItem Header="S_ettings" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Update" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Help" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Margin="10,0,0,0">
+                        <MenuItem.Header>
+                            <DockPanel>
+                                <TextBlock Text="Language" Margin="0, 0, 5, 0"/>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                            </DockPanel>
+                        </MenuItem.Header>
+                        <MenuItem Header="_English">
+                            <MenuItem.Icon>
+                                <Image Source="/html/gb-eng.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_German">
+                            <MenuItem.Icon>
+                                <Image Source="/html/de.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Bulgarian">
+                            <MenuItem.Icon>
+                                <Image Source="/html/bg.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
+        </StackPanel>
+
+        <GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" />
+
+        <wpf:ChromiumWebBrowser 
+            Grid.Row="2"
+            x:Name="wb"
+            JavascriptMessageReceived="wb_JavascriptMessageReceived"    
+         />
+
+        <GridSplitter Grid.Row="3" Height="3" HorizontalAlignment="Stretch" />
+        <TextBlock Grid.Row="4" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Background="#f8f9fa">
+            © 2022 Copyright: <Bold>Teletek Electroincs</Bold>
+        </TextBlock>
     </Grid>
 </Window>

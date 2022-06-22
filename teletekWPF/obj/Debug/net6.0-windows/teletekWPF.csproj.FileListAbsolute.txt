@@ -20,4 +20,3 @@ C:\Users\vbb12\GitHub\Teletek\teletek\teletekWPF\obj\Debug\net6.0-windows\telete
 C:\Users\vbb12\GitHub\Teletek\teletek\teletekWPF\obj\Debug\net6.0-windows\teletekWPF.genruntimeconfig.cache
 C:\Users\vbb12\GitHub\Teletek\teletek\teletekWPF\obj\Debug\net6.0-windows\ref\teletekWPF.dll
 C:\Users\vbb12\GitHub\Teletek\teletek\teletekWPF\obj\Debug\net6.0-windows\App.baml
-C:\Users\vbb12\GitHub\Teletek\teletek\teletekWPF\obj\Debug\net6.0-windows\images\ButterflyGraphMode.baml

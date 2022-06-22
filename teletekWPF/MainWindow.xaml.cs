@@ -28,6 +28,22 @@ namespace teletekWPF
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // (sender as Button).Content = (sender as Button).Content;
+            var btnCase = (sender as Button).Tag;
+            switch (btnCase)
+            {
+                case "btnAccess": break;
+                case "btnNetwork": break;
+                case "btnPanels": break;
+                case "btnInputs": break;
+                case "btnInpGroups": break;
+                case "btnOutputs": break;
+                case "btnFatFBF": break;
+                case "btnZones": break;
+                case "btnEvacZone": break;
+                case "btnPerifDevices": break;
+                case "btnLoopDevices": break;
+                default: break;
+            };
             Console.WriteLine(e.ToString());
         }
     }

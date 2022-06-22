@@ -7,19 +7,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Font\fa-brands-400.ttf" />
+    <None Remove="Font\fa-regular-400.ttf" />
+    <None Remove="Font\fa-solid-900.ttf" />
+    <None Remove="html\bg.png" />
+    <None Remove="html\de.png" />
+    <None Remove="html\gb-eng.png" />
+    <None Remove="html\Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="html\de.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="102.0.90" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="html\bg.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\de.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\gb-eng.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Resource Include="Font\fa-brands-400.ttf" />
+    <Resource Include="Font\fa-regular-400.ttf" />
+    <Resource Include="Font\fa-solid-900.ttf" />
+    <Resource Include="html\bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\gb-eng.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="html\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
