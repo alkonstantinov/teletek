@@ -29,34 +29,34 @@
                         <MenuItem.Header>
                             <DockPanel>
                                 <TextBlock Text="File" Margin="0, 0, 5, 0"/>
-                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </DockPanel>
                         </MenuItem.Header>
                         <MenuItem Header="S_can">
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_New" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Open" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Save" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Save _As" />
                         <Separator />
                         <MenuItem Header="_Exit" Click="Exit_Clicked" InputGestureText="Ctrl+E">
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -64,38 +64,38 @@
                         <MenuItem.Header>
                             <DockPanel>
                                 <TextBlock Text="Device" Margin="0, 0, 5, 0"/>
-                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </DockPanel>
                         </MenuItem.Header>
                         <MenuItem Header="_Read" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Write" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Log" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Clock/Date" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Verify" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="_Export" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -103,22 +103,22 @@
                         <MenuItem.Header>
                             <DockPanel>
                                 <TextBlock Text="System" Margin="0, 0, 5, 0"/>
-                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </DockPanel>
                         </MenuItem.Header>
                         <MenuItem Header="S_ettings" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Update" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="_Help" >
                             <MenuItem.Icon>
-                                <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -126,7 +126,7 @@
                         <MenuItem.Header>
                             <DockPanel>
                                 <TextBlock Text="Language" Margin="0, 0, 5, 0"/>
-                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="16" VerticalAlignment="Bottom"></TextBlock>
+                                <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                             </DockPanel>
                         </MenuItem.Header>
                         <MenuItem Header="_English">
@@ -158,7 +158,7 @@
          />
 
         <GridSplitter Grid.Row="3" Height="3" HorizontalAlignment="Stretch" />
-        <TextBlock Grid.Row="4" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Background="#f8f9fa">
+        <TextBlock Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Background="#f8f9fa">
             © 2022 Copyright: <Bold>Teletek Electroincs</Bold>
         </TextBlock>
     </Grid>

@@ -26,8 +26,11 @@ namespace ProstePrototype
             //Uri iconUri = new Uri("pack://application:,,,/html/Icon.ico", UriKind.RelativeOrAbsolute);
             //this.Icon = BitmapFrame.Create(iconUri);
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "access.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "panels_in_network.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "input.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "inputs_group.html");
 
             wb.Load("file:///" + myFile);
         }

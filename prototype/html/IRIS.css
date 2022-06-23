@@ -24,6 +24,10 @@ a, a:hover {
     margin: 15px;
 }
 
+.ml10 {
+    margin-left: 10px;
+}
+
 i {
     color: #0c2b90;
 }
@@ -179,9 +183,12 @@ fieldset legend {
       .form-item .radio-button-box label {
         display: inline; } */
     .form-item.disabled {
-      pointer-events: none; }
-      .form-item.disabled .select {
-        background-color: #fafafa; }
+      pointer-events: none;
+    }
+      .form-item.disabled .select select {
+        background-color: #eee; }
+        .form-item.disabled input {
+            background-color: #eee; }
   
   .checkbox-group .form-item.roww {
     padding: 8px 0; }
@@ -223,3 +230,19 @@ fieldset legend {
 .mt15 {
     margin-top: 15px;
 }
+
+.select {
+    display: grid;
+    grid-template-areas: "select";
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    height: 24px;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff; }
+    .select:disabled {
+      pointer-events: none; }
+    .select select, .select::after {
+      grid-area: select; }

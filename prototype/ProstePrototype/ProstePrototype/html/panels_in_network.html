@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="IRIS.css" />
+        <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+        <title>Teletek ProsTe</title>
+    </head>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" id="olBC"></ol>
+    </nav>
+    <div class="container" id="divMain">
+        <form action="">
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <div class="form-item">
+                <label for="panelip">Panel IP</label>
+                <input
+                    type="text"
+                    id="panelip"
+                    name="panelip"
+                    minlength="7"
+                    maxlength="15"
+                    size="15"
+                    pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                    placeholder=" 0 . 0 . 0 . 0 "
+                />
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="receive_msg"><strong>Receive messages</strong></label>
+                    <input type="checkbox" id="receive_msg" class="ml10" />
+                </div>
+                <div class="col">
+                    <label for="receive_cmd"><strong>Receive commands</strong></label>
+                    <input type="checkbox" id="receive_cmd" class="ml10" />
+                </div>
+            </div>
+
+            <div class="form-item disabled">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state" name="state">
+                        <option value="loc">Normal</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-item disabled">
+                <label for="status">Status</label>
+                <div class="select">
+                    <select id="status" name="status">
+                        <option value="loc">none</option>
+                    </select>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend>Panel Outputs</legend>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="r_sounder">Repeat sounder</label>
+                            <input type="checkbox" id="r_sounder" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="r_fire_brigade">Repeat Fire bigrade</label>
+                            <input type="checkbox" id="r_fire_brigade" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="r_fault_output">Repeat Fault output</label>
+                            <input type="checkbox" id="r_fault_output" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="r_fire_protection">Repeat Fire protection</label>
+                            <input type="checkbox" id="r_fire_protection" class="ml10" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-item roww">
+                <label for="send_commands">Send commands</label>
+                <input type="checkbox" id="send_commands" class="ml10" />
+            </div>
+
+            <div class="buttons-row mt15">
+                <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
+                <a href="./IRIS.html"
+                    ><button type="button" class="btn-round btn-border-black">Cancel</button></a
+                >
+                <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+            </div>
+        </form>
+    </div>
+    <body></body>
+</html>
