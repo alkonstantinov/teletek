@@ -54,6 +54,9 @@
     <None Update="html\fat-fbf.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\zone_evac.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\zone.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

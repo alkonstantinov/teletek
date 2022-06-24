@@ -33,7 +33,8 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "inputs_group.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "output.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "fat-fbf.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone_evac.html");
 
             wb.Load("file:///" + myFile);
         }
