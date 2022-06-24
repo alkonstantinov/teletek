@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="IRIS.css" />
+        <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+        <title>Teletek ProsTe</title>
+    </head>
+    <body>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="olBC"></ol>
+        </nav>
+        <div class="container" id="divMain">
+            <form action="">
+                <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+                <div class="form-item disabled">
+                    <label for="device_state">Device State</label>
+                    <div class="select">
+                        <select id="device_state" name="device_state">
+                            <option value="none" selected>NONE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="buttons-row mt15">
+                    <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
+                    <a href="./IRIS.html"
+                        ><button type="button" class="btn-round btn-border-black">Cancel</button></a
+                    >
+                    <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

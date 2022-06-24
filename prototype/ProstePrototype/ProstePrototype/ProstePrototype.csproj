@@ -54,6 +54,12 @@
     <None Update="html\fat-fbf.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\peripherial_devices_none.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\peripherial_devices.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\zone_evac.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
