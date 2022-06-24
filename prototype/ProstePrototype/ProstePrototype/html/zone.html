@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="IRIS.css" />
+        <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+        <title>Teletek ProsTe</title>
+    </head>
+    <body>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="olBC"></ol>
+        </nav>
+        <div class="container" id="divMain">
+            <form action="">
+                <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+                <div class="form-item">
+                    <label for="sounder_delay">Sounder delay (seconds)</label>
+                    <input
+                        type="number"
+                        id="sounder_delay"
+                        name="sounder_delay"
+                        data-maxlength="3"
+                        oninput="javascript: myFunction(this.id)"
+                        onblur="javascript: myFunction2(this.id)"
+                        value="60"
+                        min="1"
+                        max="540"
+                    />
+                </div>
+                <div class="form-item">
+                    <label for="fire_brigade_delay">Fire brigade delay (seconds)</label>
+                    <input
+                        type="number"
+                        id="fire_brigade_delay"
+                        name="fire_brigade_delay"
+                        data-maxlength="3"
+                        oninput="javascript: myFunction(this.id)"
+                        onblur="javascript: myFunction2(this.id)"
+                        value="60"
+                        min="1"
+                        max="540"
+                    />
+                </div>
+                <div class="form-item">
+                    <label for="fire_protection_delay">Fire protection delay (seconds)</label>
+                    <input
+                        type="number"
+                        id="fire_protection_delay"
+                        name="fire_protection_delay"
+                        data-maxlength="3"
+                        oninput="javascript: myFunction(this.id)"
+                        onblur="javascript: myFunction2(this.id)"
+                        value="0"
+                        min="1"
+                        max="540"
+                    />
+                </div>
+
+                <div class="form-item">
+                    <label for="zone_name">Zone name</label>
+                    <input type="text" id="zone_name" name="zone_name" />
+                </div>
+
+                <div class="form-item">
+                    <label for="zone_mode">Zone Mode</label>
+                    <div class="select">
+                        <select
+                            id="zone_mode"
+                            name="zone_mode"
+                        >
+                            <option value="normal" selected>NORMAL</option>
+                            <option value="double">DOUBLE</option>
+                            <option value="two_devices">TWO DEVICES</option>
+                        </select>
+                    </div>  
+                </div>
+
+                <fieldset>
+                    <legend>Zone</legend>
+                    <div class="form-item roww">
+                        <label for="zone_group_A">Group A</label>
+                        <input
+                            type="number"
+                            id="zone_group_A"
+                            name="zone_group_A"
+                            data-maxlength="2"
+                            oninput="javascript: myFunction(this.id)"
+                            onblur="javascript: myFunction2(this.id)"
+                            value="0"
+                            min="1"
+                            max="48"
+                        />
+                    </div>
+                    <div class="form-item roww">
+                        <label for="zone_group_B">Group B</label>
+                        <input
+                            type="number"
+                            id="zone_group_B"
+                            name="zone_group_B"
+                            data-maxlength="2"
+                            oninput="javascript: myFunction(this.id)"
+                            onblur="javascript: myFunction2(this.id)"
+                            value="0"
+                            min="1"
+                            max="48"
+                        />
+                        </div>
+                        <div class="form-item roww">
+                            <label for="zone_group_C">Group C</label>
+                        <input
+                            type="number"
+                            id="zone_group_C"
+                            name="zone_group_C"
+                            data-maxlength="2"
+                            oninput="javascript: myFunction(this.id)"
+                            onblur="javascript: myFunction2(this.id)"
+                            value="0"
+                            min="1"
+                            max="48"
+                        />
+                    </div>
+                </fieldset>
+
+                <div class="form-item roww">
+                    <label for="zone_sounders">Zone Sounders</label>
+                    <input type="checkbox" id="zone_sounders" name="zone_sounders" class="ml10" />
+                </div>
+
+                <fieldset>
+                    <legend>Sounder</legend>
+                    <div class="form-item roww">
+                        <label for="sounder_group_A">Group A</label>
+                        <input
+                            type="number"
+                            id="sounder_group_A"
+                            name="sounder_group_A"
+                            data-maxlength="2"
+                            oninput="javascript: myFunction(this.id)"
+                            onblur="javascript: myFunction2(this.id)"
+                            value="0"
+                            min="1"
+                            max="96"
+                        />
+                    </div>
+                    <div class="form-item roww">
+                        <label for="sounder_group_B">Group B</label>
+                        <input
+                            type="number"
+                            id="sounder_group_B"
+                            name="sounder_group_B"
+                            data-maxlength="2"
+                            oninput="javascript: myFunction(this.id)"
+                            onblur="javascript: myFunction2(this.id)"
+                            value="0"
+                            min="1"
+                            max="96"
+                        />
+                        </div>
+                        <div class="form-item roww">
+                            <label for="sounder_group_C">Group C</label>
+                        <input
+                            type="number"
+                            id="sounder_group_C"
+                            name="sounder_group_C"
+                            data-maxlength="2"
+                            oninput="javascript: myFunction(this.id)"
+                            onblur="javascript: myFunction2(this.id)"
+                            value="0"
+                            min="1"
+                            max="96"
+                        />
+                    </div>
+                </fieldset>
+
+                <div class="buttons-row mt15">
+                    <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
+                    <a href="./IRIS.html"
+                        ><button type="button" class="btn-round btn-border-black">Cancel</button></a
+                    >
+                    <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+                </div>
+            </form>
+            <script>
+                function myFunction(id) {
+                    var element = document.getElementById(id);
+                    element.value = element.value.slice(0, element.dataset.maxlength);
+                }
+                function myFunction2(id) {
+                    var element = document.getElementById(id);
+                    if (element.value > element.max) {
+                        element.value = element.max;
+                    }
+                }
+            </script>
+        </div>
+    </body>
+</html>
