@@ -38,8 +38,9 @@
                         <a class="dropdown-item" href="#">Save</a>
                         <a class="dropdown-item" href="#">Save as</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:CefSharp.PostMessage({ 'Type': 'Exit', 'Data': null, 'Callback': null });">Exit</a>
-                    </div>
+                        <a class="dropdown-item" href="#">Exit</a>-->
+                        <!-- href="javascript:CefSharp.PostMessage({ 'Type': 'Exit', 'Data': null, 'Callback': null });" -->
+                    <!--</div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -231,11 +232,11 @@
                 <legend>Parameters</legend>
                 <div class="form-item roww">
                     <label for="enabled">Enabled</label>
-                    <input type="checkbox" id="enabled" />
+                    <input class="ml10" type="checkbox" id="enabled" />
                 </div>
-                <div class="form-item">
+                <div class="form-item roww">
                     <label for="network-type">Network Type</label>
-                    <div class="select">
+                    <div class="select ml10">
                         <select id="network-type" name="network-type">
                             <option value="title">Choose network type</option>
                             <option value="loc">LAN</option>
@@ -245,9 +246,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-item">
+                <div class="form-item roww">
                     <label for="protocol">Protocol</label>
-                    <div class="select">
+                    <div class="select ml10">
                         <select id="sector" name="protocol">
                             <option value="title">Choose protocol</option>
                             <option value="loc">Modbus RTU over TCP/IP</option>
@@ -257,7 +258,7 @@
                 </div>
                 <div class="form-item roww">
                     <label for="redundancy">Redundancy ON</label>
-                    <input type="checkbox" id="redundancy" />
+                    <input class="ml10" type="checkbox" id="redundancy" />
                 </div>
             </fieldset>
 
@@ -294,36 +295,65 @@
                 <input type="number" id="evac-panel-number" name="evac-panel-number" data-maxlength="5"
                        oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="1" min="1" />
             </div>
-            <fieldset>
-                <div class="form-item">
-                    <label for="emacETHADDR0">emacETHADDR0</label>
-                    <input type="text" id="emacETHADDR0" name="emacETHADDR0" placeholder="00" disabled />
+
+            <div class="form-item">
+                <label>MAC Address</label>
+                <div class="row m0">
+                    <input class="col-1"
+                           type="text"
+                           id="emacETHADDR0"
+                           name="emacETHADDR0"
+                           placeholder="00"
+                           disabled />
+
+                    <div>:</div>
+                    <input class="col-1"
+                           type="text"
+                           id="emacETHADDR1"
+                           name="emacETHADDR1"
+                           placeholder="00"
+                           disabled />
+
+                    <div>:</div>
+                    <input type="text"
+                           class="col-1"
+                           id="emacETHADDR2"
+                           name="emacETHADDR2"
+                           placeholder="00"
+                           disabled />
+
+                    <div>:</div>
+
+                    <input type="text"
+                           class="col-1"
+                           id="emacETHADDR3"
+                           name="emacETHADDR3"
+                           placeholder="00"
+                           disabled />
+
+                    <div>:</div>
+
+                    <input type="text"
+                           class="col-1"
+                           id="emacETHADDR4"
+                           name="emacETHADDR4"
+                           placeholder="00"
+                           disabled />
+
+                    <div>:</div>
+
+                    <input type="text"
+                           class="col-1"
+                           id="emacETHADDR5"
+                           name="emacETHADDR5"
+                           placeholder="00"
+                           disabled />
                 </div>
-                <div class="form-item">
-                    <label for="emacETHADDR1">emacETHADDR1</label>
-                    <input type="text" id="emacETHADDR1" name="emacETHADDR1" placeholder="00" disabled />
-                </div>
-                <div class="form-item">
-                    <label for="emacETHADDR2">emacETHADDR2</label>
-                    <input type="text" id="emacETHADDR2" name="emacETHADDR2" placeholder="00" disabled />
-                </div>
-                <div class="form-item">
-                    <label for="emacETHADDR3">emacETHADDR3</label>
-                    <input type="text" id="emacETHADDR3" name="emacETHADDR3" placeholder="00" disabled />
-                </div>
-                <div class="form-item">
-                    <label for="emacETHADDR4">emacETHADDR4</label>
-                    <input type="text" id="emacETHADDR4" name="emacETHADDR4" placeholder="00" disabled />
-                </div>
-                <div class="form-item">
-                    <label for="emacETHADDR5">emacETHADDR5</label>
-                    <input type="text" id="emacETHADDR5" name="emacETHADDR5" placeholder="00" disabled />
-                </div>
-            </fieldset>
+            </div>
+
             <div class="buttons-row mt15">
-                <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
-                <a href="./IRIS.html"><button type="button" class="btn-round btn-border-black">Cancel</button></a>
-                <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+                <button type="button" class="btn-round btn-blue">Save</button>
+                <button type="button" class="btn-round btn-border-black">Back</button>
             </div>
         </form>
 

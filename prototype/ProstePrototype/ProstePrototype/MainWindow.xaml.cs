@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CefSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace ProstePrototype
             //Uri iconUri = new Uri("pack://application:,,,/html/Icon.ico", UriKind.RelativeOrAbsolute);
             //this.Icon = BitmapFrame.Create(iconUri);
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "access.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "panels_in_network.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "input.html");
@@ -36,9 +37,10 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone_evac.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "peripherial_devices.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "peripherial_devices_none.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "peripherial_devices_none.html");
 
-            wb.Load("file:///" + myFile);
+            wb1.Load("file:///" + myFile);
+            wb2.Load("file:///" + myFile);
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -51,11 +53,17 @@ namespace ProstePrototype
             var i = e;
         }
 
-        private void wb_JavascriptMessageReceived(object sender, CefSharp.JavascriptMessageReceivedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
+        //private void wb_JavascriptMessageReceived(object sender, CefSharp.JavascriptMessageReceivedEventArgs e)
+        //{
+        //    Environment.Exit(0);
+        //}
 
+        private void Read_Clicked(object sender, RoutedEventArgs e)
+        {
+            string script = "$('#divModal').modal('show')";
+            wb2.ExecuteScriptAsync(script);
+
+        }
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);

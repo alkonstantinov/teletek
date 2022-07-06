@@ -30,14 +30,12 @@
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
                 <fieldset>
                     <legend>Input Type</legend>
-                    <div class="form-item">
+                    <div class="form-item roww">
                         <label for="state">State</label>
                         <div class="select">
-                            <select
-                                id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('showDiv', this.value)"
-                            >
+                            <select id="state"
+                                    name="state"
+                                    onchange="javascript: loadDiv('showDiv', this.value)">
                                 <option value="0">NONE</option>
                                 <option value="1">LOOP_DEVICE</option>
                             </select>
@@ -51,48 +49,42 @@
                             <legend>Loop Type</legend>
 
                             <div id="showLoop">
-                                <div class="form-item">
+                                <div class="form-item roww">
                                     <label for="dev_addr_loop">Loop</label>
-                                    <input
-                                        type="number"
-                                        id="dev_addr_loop"
-                                        name="dev_addr_loop"
-                                        data-maxlength="1"
-                                        oninput="javascript: myFunction(this.id)"
-                                        onblur="javascript: myFunction2(this.id)"
-                                        value="1"
-                                        min="1"
-                                        max="4"
-                                    />
+                                    <input type="number"
+                                           id="dev_addr_loop"
+                                           name="dev_addr_loop"
+                                           data-maxlength="1"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="1"
+                                           min="1"
+                                           max="4" />
                                 </div>
-                                <div class="form-item">
+                                <div class="form-item roww">
                                     <label for="dev_addr">Device address</label>
-                                    <input
-                                        type="number"
-                                        id="dev_addr"
-                                        name="dev_addr"
-                                        data-maxlength="3"
-                                        oninput="javascript: myFunction(this.id)"
-                                        onblur="javascript: myFunction2(this.id)"
-                                        value="1"
-                                        min="1"
-                                        max="250"
-                                    />
+                                    <input type="number"
+                                           id="dev_addr"
+                                           name="dev_addr"
+                                           data-maxlength="3"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="1"
+                                           min="1"
+                                           max="250" />
                                 </div>
-                                
-                                <div class="form-item">
+
+                                <div class="form-item roww">
                                     <label for="dev_channel">Channel</label>
-                                    <input
-                                        type="number"
-                                        id="dev_channel"
-                                        name="dev_channel"
-                                        data-maxlength="1"
-                                        oninput="javascript: myFunction(this.id)"
-                                        onblur="javascript: myFunction2(this.id)"
-                                        value="1"
-                                        min="1"
-                                        max="4"
-                                    />
+                                    <input type="number"
+                                           id="dev_channel"
+                                           name="dev_channel"
+                                           data-maxlength="1"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="1"
+                                           min="1"
+                                           max="4" />
                                 </div>
                             </div>
                         </fieldset>
@@ -100,11 +92,8 @@
                 </fieldset>
 
                 <div class="buttons-row mt15">
-                    <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
-                    <a href="./IRIS.html"
-                        ><button type="button" class="btn-round btn-border-black">Cancel</button></a
-                    >
-                    <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+                    <button type="button" class="btn-round btn-blue">Save</button>
+                    <button type="button" class="btn-round btn-border-black">Back</button>
                 </div>
             </form>
             <script>

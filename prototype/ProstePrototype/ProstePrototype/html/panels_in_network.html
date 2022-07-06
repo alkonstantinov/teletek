@@ -29,28 +29,28 @@
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="form-item">
                 <label for="panelip">Panel IP</label>
-                <input
-                    type="text"
-                    id="panelip"
-                    name="panelip"
-                    minlength="7"
-                    maxlength="15"
-                    size="15"
-                    pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                    placeholder=" 0 . 0 . 0 . 0 "
-                />
+                <input type="text"
+                       id="panelip"
+                       name="panelip"
+                       minlength="7"
+                       maxlength="15"
+                       size="15"
+                       pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                       placeholder=" 0 . 0 . 0 . 0 " />
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="receive_msg"><strong>Receive messages</strong></label>
-                    <input type="checkbox" id="receive_msg" class="ml10" />
+            <fieldset>
+                <div class="row">
+                    <div class="col">
+                        <label for="receive_msg"><strong>Receive messages</strong></label>
+                        <input type="checkbox" id="receive_msg" class="ml10" />
+                    </div>
+                    <div class="col">
+                        <label for="receive_cmd"><strong>Receive commands</strong></label>
+                        <input type="checkbox" id="receive_cmd" class="ml10" />
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="receive_cmd"><strong>Receive commands</strong></label>
-                    <input type="checkbox" id="receive_cmd" class="ml10" />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="form-item disabled">
                 <label for="state">State</label>
@@ -106,11 +106,8 @@
             </div>
 
             <div class="buttons-row mt15">
-                <a href=""><button type="button" class="btn-round btn-blue">Apply</button></a>
-                <a href="./IRIS.html"
-                    ><button type="button" class="btn-round btn-border-black">Cancel</button></a
-                >
-                <a href=""><button type="button" class="btn-round btn-blue">Apply Selected</button></a>
+                <button type="button" class="btn-round btn-blue">Save</button>
+                <button type="button" class="btn-round btn-border-black">Back</button>
             </div>
         </form>
     </div>
