@@ -22,9 +22,6 @@
         <title>Teletek ProsTe</title>
     </head>
     <body>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" id="olBC"></ol>
-        </nav>
         <div class="container" id="divMain">
             <form action="">
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
@@ -35,46 +32,42 @@
 
                 <div class="form-item roww">
                     <label for="delay">Delay (seconds)</label>
-                    <input
-                        class="ml10"
-                        type="number"
-                        id="delay"
-                        name="delay"
-                        data-maxlength="3"
-                        oninput="javascript: myFunction(this.id)"
-                        onblur="javascript: myFunction2(this.id)"
-                        placeholder="0"
-                        min="1"
-                        max="600"
-                    />
+                    <input class="ml10"
+                           type="number"
+                           id="delay"
+                           name="delay"
+                           data-maxlength="3"
+                           oninput="javascript: myFunction(this.id)"
+                           onblur="javascript: myFunction2(this.id)"
+                           placeholder="0"
+                           min="1"
+                           max="600" />
                 </div>
 
                 <div class="form-item roww">
                     <label for="group">Group</label>
-                    <input
-                        class="ml10"
-                        type="number"
-                        id="group"
-                        name="group"
-                        data-maxlength="3"
-                        oninput="javascript: myFunction(this.id)"
-                        onblur="javascript: myFunction2(this.id)"
-                        placeholder="0"
-                        min="1"
-                        max="250"
-                    />
+                    <input class="ml10"
+                           type="number"
+                           id="group"
+                           name="group"
+                           data-maxlength="3"
+                           oninput="javascript: myFunction(this.id)"
+                           onblur="javascript: myFunction2(this.id)"
+                           placeholder="0"
+                           min="1"
+                           max="250" />
                 </div>
 
                 <fieldset>
                     <legend>Parameters</legend>
                     <div class="row align-items-center">
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-item roww">
                                 <label for="latched">Latched</label>
                                 <input type="checkbox" id="latched" class="ml10" />
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-item roww">
                                 <label for="inverted">Inverted</label>
                                 <input type="checkbox" id="inverted" class="ml10" />
@@ -88,11 +81,9 @@
                     <div class="form-item">
                         <label for="state">State</label>
                         <div class="select">
-                            <select
-                                id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('showDiv', this.value)"
-                            >
+                            <select id="state"
+                                    name="state"
+                                    onchange="javascript: loadDiv('showDiv', this.value)">
                                 <option value="0">NONE</option>
                                 <option value="1">PERIPHERY_DEVICE</option>
                                 <option value="2">LOOP_DEVICE</option>
@@ -114,31 +105,27 @@
                     <div style="display: none" id="1">
                         <div class="form-item roww">
                             <label for="per_dev_addr">Peripherial device address</label>
-                            <input
-                                type="number"
-                                id="per_dev_addr"
-                                name="per_dev_addr"
-                                data-maxlength="1"
-                                oninput="javascript: myFunction(this.id)"
-                                onblur="javascript: myFunction2(this.id)"
-                                value="1"
-                                min="1"
-                                max="6"
-                            />
+                            <input type="number"
+                                   id="per_dev_addr"
+                                   name="per_dev_addr"
+                                   data-maxlength="1"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="6" />
                         </div>
                         <div class="form-item roww">
                             <label for="per_dev_inp">Peripherial device input</label>
-                            <input
-                                type="number"
-                                id="per_dev_inp"
-                                name="per_dev_inp"
-                                data-maxlength="2"
-                                oninput="javascript: myFunction(this.id)"
-                                onblur="javascript: myFunction2(this.id)"
-                                value="1"
-                                min="1"
-                                max="24"
-                            />
+                            <input type="number"
+                                   id="per_dev_inp"
+                                   name="per_dev_inp"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="24" />
                         </div>
                     </div>
 
@@ -148,11 +135,9 @@
                             <div class="form-item">
                                 <label for="state">State</label>
                                 <div class="select">
-                                    <select
-                                        id="state"
-                                        name="state"
-                                        onchange="javascript: loadDiv('showLoop', this.value)"
-                                    >
+                                    <select id="state"
+                                            name="state"
+                                            onchange="javascript: loadDiv('showLoop', this.value)">
                                         <option value="Teletek" selected>TELETEK LOOP</option>
                                         <option value="System">SYSTEM SENSOR LOOP</option>
                                     </select>
@@ -163,45 +148,39 @@
                                 <div id="Teletek">
                                     <div class="form-item roww">
                                         <label for="dev_addr">Device address</label>
-                                        <input
-                                            type="number"
-                                            id="dev_addr"
-                                            name="dev_addr"
-                                            data-maxlength="3"
-                                            oninput="javascript: myFunction(this.id)"
-                                            onblur="javascript: myFunction2(this.id)"
-                                            value="1"
-                                            min="1"
-                                            max="250"
-                                        />
+                                        <input type="number"
+                                               id="dev_addr"
+                                               name="dev_addr"
+                                               data-maxlength="3"
+                                               oninput="javascript: myFunction(this.id)"
+                                               onblur="javascript: myFunction2(this.id)"
+                                               value="1"
+                                               min="1"
+                                               max="250" />
                                     </div>
                                     <div class="form-item roww">
                                         <label for="dev_addr_loop">Loop</label>
-                                        <input
-                                            type="number"
-                                            id="dev_addr_loop"
-                                            name="dev_addr_loop"
-                                            data-maxlength="1"
-                                            oninput="javascript: myFunction(this.id)"
-                                            onblur="javascript: myFunction2(this.id)"
-                                            value="1"
-                                            min="1"
-                                            max="4"
-                                        />
+                                        <input type="number"
+                                               id="dev_addr_loop"
+                                               name="dev_addr_loop"
+                                               data-maxlength="1"
+                                               oninput="javascript: myFunction(this.id)"
+                                               onblur="javascript: myFunction2(this.id)"
+                                               value="1"
+                                               min="1"
+                                               max="4" />
                                     </div>
                                     <div class="form-item roww">
                                         <label for="dev_channel">Channel</label>
-                                        <input
-                                            type="number"
-                                            id="dev_channel"
-                                            name="dev_channel"
-                                            data-maxlength="1"
-                                            oninput="javascript: myFunction(this.id)"
-                                            onblur="javascript: myFunction2(this.id)"
-                                            value="1"
-                                            min="1"
-                                            max="4"
-                                        />
+                                        <input type="number"
+                                               id="dev_channel"
+                                               name="dev_channel"
+                                               data-maxlength="1"
+                                               oninput="javascript: myFunction(this.id)"
+                                               onblur="javascript: myFunction2(this.id)"
+                                               value="1"
+                                               min="1"
+                                               max="4" />
                                     </div>
                                 </div>
                             </div>
@@ -209,31 +188,27 @@
                             <div style="display: none" id="System">
                                 <div class="form-item roww">
                                     <label for="dev_addr_sys">Device address</label>
-                                    <input
-                                        type="number"
-                                        id="dev_addr_sys"
-                                        name="dev_addr_sys"
-                                        data-maxlength="2"
-                                        oninput="javascript: myFunction(this.id)"
-                                        onblur="javascript: myFunction2(this.id)"
-                                        value="1"
-                                        min="1"
-                                        max="99"
-                                    />
+                                    <input type="number"
+                                           id="dev_addr_sys"
+                                           name="dev_addr_sys"
+                                           data-maxlength="2"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="1"
+                                           min="1"
+                                           max="99" />
                                 </div>
                                 <div class="form-item roww">
                                     <label for="dev_addr_sys_loop">Loop</label>
-                                    <input
-                                        type="number"
-                                        id="dev_addr_sys_loop"
-                                        name="dev_addr_sys_loop"
-                                        data-maxlength="1"
-                                        oninput="javascript: myFunction(this.id)"
-                                        onblur="javascript: myFunction2(this.id)"
-                                        value="1"
-                                        min="1"
-                                        max="4"
-                                    />
+                                    <input type="number"
+                                           id="dev_addr_sys_loop"
+                                           name="dev_addr_sys_loop"
+                                           data-maxlength="1"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="1"
+                                           min="1"
+                                           max="4" />
                                 </div>
                                 <div class="form-item roww">
                                     <label for="sys_dev_type">Device Type</label>
@@ -262,17 +237,15 @@
                         </div>
                         <div class="form-item roww">
                             <label for="zone_number">Zone number</label>
-                            <input
-                                type="number"
-                                id="zone_number"
-                                name="zone_number"
-                                data-maxlength="2"
-                                oninput="javascript: myFunction(this.id)"
-                                onblur="javascript: myFunction2(this.id)"
-                                value="1"
-                                min="1"
-                                max="96"
-                            />
+                            <input type="number"
+                                   id="zone_number"
+                                   name="zone_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="96" />
                         </div>
                     </div>
 
@@ -282,11 +255,9 @@
                             <div class="form-item roww">
                                 <label for="zone_gr_func">Function</label>
                                 <div class="select">
-                                    <select
-                                        id="zone_gr_func"
-                                        name="zone_gr_func"
-                                        onchange="javascript: changeStyleDisplay('alarms_counter_main')"
-                                    >
+                                    <select id="zone_gr_func"
+                                            name="zone_gr_func"
+                                            onchange="javascript: changeStyleDisplay('alarms_counter_main')">
                                         <option value="Fire">FIRE</option>
                                         <option value="Fault">FAULT</option>
                                     </select>
@@ -294,17 +265,15 @@
                             </div>
                             <div class="form-item roww">
                                 <label for="zone_number">Zone group number</label>
-                                <input
-                                    type="number"
-                                    id="zone_number"
-                                    name="zone_number"
-                                    data-maxlength="2"
-                                    oninput="javascript: myFunction(this.id)"
-                                    onblur="javascript: myFunction2(this.id)"
-                                    value="1"
-                                    min="1"
-                                    max="48"
-                                />
+                                <input type="number"
+                                       id="zone_number"
+                                       name="zone_number"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="48" />
                             </div>
                             <div class="form-item roww">
                                 <label for="zone_gr_logic">Logic</label>
@@ -317,17 +286,15 @@
                             </div>
                             <div style="display: block" class="form-item" id="alarms_counter_main">
                                 <label for="alarms_counter">Alarms counter</label>
-                                <input
-                                    type="number"
-                                    id="alarms_counter"
-                                    name="alarms_counter"
-                                    data-maxlength="1"
-                                    oninput="javascript: myFunction(this.id)"
-                                    onblur="javascript: myFunction2(this.id)"
-                                    value="1"
-                                    min="1"
-                                    max="9"
-                                />
+                                <input type="number"
+                                       id="alarms_counter"
+                                       name="alarms_counter"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="9" />
                             </div>
                         </fieldset>
                     </div>
@@ -344,48 +311,42 @@
                         </div>
                         <div class="form-item roww">
                             <label for="dev_group_number">Group number</label>
-                            <input
-                                type="number"
-                                id="dev_group_number"
-                                name="dev_group_number"
-                                data-maxlength="3"
-                                oninput="javascript: myFunction(this.id)"
-                                onblur="javascript: myFunction2(this.id)"
-                                value="1"
-                                min="1"
-                                max="100"
-                            />
+                            <input type="number"
+                                   id="dev_group_number"
+                                   name="dev_group_number"
+                                   data-maxlength="3"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="100" />
                         </div>
                     </div>
 
                     <div style="display: none" id="6">
                         <div class="form-item roww">
                             <label for="alarms_zone_number">Zone number</label>
-                            <input
-                                type="number"
-                                id="alarms_zone_number"
-                                name="alarms_zone_number"
-                                data-maxlength="2"
-                                oninput="javascript: myFunction(this.id)"
-                                onblur="javascript: myFunction2(this.id)"
-                                value="1"
-                                min="1"
-                                max="96"
-                            />
+                            <input type="number"
+                                   id="alarms_zone_number"
+                                   name="alarms_zone_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="96" />
                         </div>
                         <div class="form-item roww">
                             <label for="alarms_cnt">Alarms counter</label>
-                            <input
-                                type="number"
-                                id="alarms_cnt"
-                                name="alarms_cnt"
-                                data-maxlength="1"
-                                oninput="javascript: myFunction(this.id)"
-                                onblur="javascript: myFunction2(this.id)"
-                                value="1"
-                                min="1"
-                                max="9"
-                            />
+                            <input type="number"
+                                   id="alarms_cnt"
+                                   name="alarms_cnt"
+                                   data-maxlength="1"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="9" />
                         </div>
                     </div>
 
@@ -546,14 +507,14 @@
                             <div class="form-item roww">
                                 <label for="zone_number">Zone number</label>
                                 <input type="number"
-                                        id="zone_number"
-                                        name="zone_number"
-                                        data-maxlength="2"
-                                        oninput="javascript: myFunction(this.id)"
-                                        onblur="javascript: myFunction2(this.id)"
-                                        value="1"
-                                        min="1"
-                                        max="96" />
+                                       id="zone_number"
+                                       name="zone_number"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="96" />
                             </div>
                         </div>
                     </div>
@@ -582,14 +543,14 @@
                                 <div class="form-item roww">
                                     <label for="alarms_counter_general">Alarms counter</label>
                                     <input type="number"
-                                            id="alarms_counter_general"
-                                            name="alarms_counter_general"
-                                            data-maxlength="1"
-                                            oninput="javascript: myFunction(this.id)"
-                                            onblur="javascript: myFunction2(this.id)"
-                                            value="1"
-                                            min="1"
-                                            max="9" />
+                                           id="alarms_counter_general"
+                                           name="alarms_counter_general"
+                                           data-maxlength="1"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="1"
+                                           min="1"
+                                           max="9" />
                                 </div>
                             </div>
                         </div>
@@ -599,26 +560,26 @@
                         <div class="form-item roww">
                             <label for="output_number">Output number</label>
                             <input type="number"
-                                    id="output_number"
-                                    name="output_number"
-                                    data-maxlength="3"
-                                    oninput="javascript: myFunction(this.id)"
-                                    onblur="javascript: myFunction2(this.id)"
-                                    value="1"
-                                    min="1"
-                                    max="250" />
+                                   id="output_number"
+                                   name="output_number"
+                                   data-maxlength="3"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="250" />
                         </div>
                         <div class="form-item roww">
                             <label for="panel_number">Panel number</label>
                             <input type="number"
-                                    id="panel_number"
-                                    name="panel_number"
-                                    data-maxlength="2"
-                                    oninput="javascript: myFunction(this.id)"
-                                    onblur="javascript: myFunction2(this.id)"
-                                    value="1"
-                                    min="1"
-                                    max="64" />
+                                   id="panel_number"
+                                   name="panel_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="1"
+                                   min="1"
+                                   max="64" />
                         </div>
                     </div>
 
@@ -676,5 +637,22 @@
                 }
             </script>
         </div>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>-->
+        <script>
+            function sendMessage(bc) {
+                CefSharp.PostMessage(bc);
+            }
+            $(document).ready(() => {
+                sendMessage("Devices|IRIS|Input");
+            });
+        </script>
     </body>
 </html>

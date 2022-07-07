@@ -22,9 +22,7 @@
         <title>Teletek ProsTe</title>
     </head>
     <body>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" id="olBC"></ol>
-        </nav>
+
         <div class="container" id="divMain">
             <form action="">
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
@@ -121,5 +119,23 @@
                 }
             </script>
         </div>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>-->
+        <script>
+            function sendMessage(bc) {
+                CefSharp.PostMessage(bc);
+            }
+            $(document).ready(() => {
+                sendMessage("Devices|IRIS|FAT - FBF");
+            });
+        </script>
     </body>
 </html>

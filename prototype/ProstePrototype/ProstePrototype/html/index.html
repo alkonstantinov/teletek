@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="boostrap.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="IRIS.css" />
     <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
@@ -84,17 +83,17 @@
 
         </div>
     </nav>-->
-    <nav aria-label="breadcrumb">
+    <!--<nav aria-label="breadcrumb">
         <ol class="breadcrumb" id="olBC">
         </ol>
-    </nav>
+    </nav>-->
     <div class="container" id="divMain">
 
     </div>
     <!-- Footer -->
-    <footer class="footer text-center">
+    <!--<footer class="footer text-center">
 
-    </footer>
+    </footer>-->
     <!-- Footer -->
 
     <div style="display: none;" id="divDevices">
@@ -124,7 +123,7 @@
 
     <div style="display: none;" id="divIRIS">
         <div class="row m15 no-gutter">
-            <a href="javascript:void" class="col-sm-3">
+            <a href="javascript: void" oncontextmenu="javascript: showContextMenu(this)" class="col-sm-3">
                 <div class="btnStyle">
                     <i class="fa-solid fa-fingerprint fa-2x colored p15 p15"></i>
                     <div class="someS">
@@ -518,10 +517,31 @@
 
         }
 
+        function showContextMenu(element) {
+            //element.addEventListener("onclick", show);
+
+            element.addEventListener("contextmenu", function (e) {
+                if (e.which === 3 || e.button === 2) {
+                    console.log('Right mouse button at ' + e.clientX + 'x' + e.clientY);
+                }
+                console.log('eee', e);
+                console.log('eee44', e);
+                e.preventDefault();
+            });
+            //function show(e) {
+            //    if (e.which === 3 || e.button === 2) {
+            //        console.log('Right mouse button at ' + e.clientX + 'x' + e.clientY);
+            //    } 
+            //        console.log('eee', e);
+            //    }
+        }
+
+
         function loadDiv(id, bc) {
             $("#divMain").html($('#' + id).html());
-            $("#olBC").empty();
-            bc.split('|').forEach(x => $("#olBC").append($("<li class='breadcrumb-item active' aria-current='page'>" + x + "</li>")));
+            CefSharp.PostMessage(bc);
+            //$("#olBC").empty();
+            //bc.split('|').forEach(x => $("#olBC").append($("<li class='breadcrumb-item active' aria-current='page'>" + x + "</li>")));
         }
         $(document).ready(() => {
             loadDiv("divDevices", "Devices");
