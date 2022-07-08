@@ -29,7 +29,8 @@ namespace ProstePrototype
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "IRISPanel.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "access.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "panels_in_network.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "input.html");

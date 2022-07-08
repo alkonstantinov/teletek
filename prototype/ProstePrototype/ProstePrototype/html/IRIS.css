@@ -10,6 +10,15 @@ a, a:hover {
     text-decoration: none;
 }
 
+.pb10 {
+    padding: 0 !important;
+    padding-bottom: 10px !important;
+}
+
+.p0 {
+    padding: 0 !important;
+}
+
 .p15 {
     padding: 15px;
 }
@@ -34,6 +43,14 @@ a, a:hover {
 
 .m15 {
     margin: 15px;
+}
+
+.ml10p {
+    margin-left: calc(10px + 2ch) !important;
+}
+
+.ml15 {
+    margin-left: 15px;
 }
 
 .ml10 {
@@ -111,6 +128,15 @@ fieldset legend {
     margin: 0;
 }
 
+    fieldset .bn {
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
+    fieldset fieldset legend {
+        font-size: 1rem;
+    }
+
 .wrapper {
     position: relative;
     display: -webkit-box;
@@ -174,6 +200,13 @@ fieldset legend {
         .form-item.roww label {
             margin-bottom: 0;
         }
+      .form-item.roww.mw {
+          margin: 0;
+          padding: 2px 0;
+      }
+      .form-item.roww.mw input {
+          max-width: 6ch;
+      }
       .form-item.roww:last-child input:not([type="checkbox"]) {
         margin: 0 0 0 10px; }
     .form-item:first-child {
@@ -271,6 +304,12 @@ fieldset legend {
       pointer-events: none; }
     .select select, .select::after {
       grid-area: select; }
+
+input:focus {
+    outline: none !important;
+    border: 1px solid blue;
+    box-shadow: 0 0 10px #719ECE;
+}
 
 .context-menu {
     display: none;

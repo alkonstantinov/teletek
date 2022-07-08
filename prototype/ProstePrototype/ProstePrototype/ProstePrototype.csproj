@@ -57,6 +57,9 @@
     <None Update="html\fat-fbf.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\IRISPanel.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\peripherial_devices_none.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
