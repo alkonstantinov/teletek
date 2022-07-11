@@ -293,7 +293,7 @@ fieldset legend {
     grid-template-areas: "select";
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     height: 30px;
     cursor: pointer;
@@ -304,6 +304,11 @@ fieldset legend {
       pointer-events: none; }
     .select select, .select::after {
       grid-area: select; }
+
+.select select {
+    height: 25.2px;
+    padding: 1px 2px;
+}
 
 input:focus {
     outline: none !important;
