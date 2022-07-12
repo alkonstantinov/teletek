@@ -51,124 +51,175 @@
     <None Update="html\boostrap.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\ECLIPSE\Users.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\ECLIPSE\General Settings.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\fat-fbf.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensolIRIS_MIMIC.html">
+    <None Update="html\LoopDevices\System Sensor\Modules\Default - normal.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SOUNDER WSOU.html">
+    <None Update="html\LoopDevices\System Sensor\Modules\Default - none.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_BSOU IS.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\7251.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_BSST IS.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\22051TE_TLE_CTLE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\CALLPOINT_MCP50.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\LZR1M.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MC-D.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\52051HTE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_GAS SENSE.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\52051RE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_GAS.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\52051E.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_BSTR IS.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\6500.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MCP150.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\FTXP1.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_BSOU.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\6200.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_BSST.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\22051EISE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_BSTR.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\22051E.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\M22.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\1251E.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_WSTR IS.html">
+    <None Update="html\LoopDevices\System Sensor\Sensors\Default.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_WSTR.html">
+    <None Update="html\LoopDevices\Teletek\SensolIRIS_MIMIC.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_WSST IS.html">
+    <None Update="html\LoopDevices\Teletek\SOUNDER WSOU.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_WSST.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_BSOU IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_WSOU IS.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_BSST IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_WSOU.html">
+    <None Update="html\LoopDevices\Teletek\CALLPOINT_MCP50.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_S140 IS.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MC-D.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_S140.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_GAS SENSE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_S130 IS.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_GAS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_S130.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_BSTR IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_T110 IS.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MCP150.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_T110.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_BSOU.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MCZ.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_BSST.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MINP (PANIC).html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_BSTR.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MINP (GAS).html">
+    <None Update="html\LoopDevices\Teletek\M22.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MINP (FIRE).html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_WSTR IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MINP.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_WSTR.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOUT240_2.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_WSST IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOUT240_1.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_WSST.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOUT.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_WSOU IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOI22M.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_WSOU.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOI22.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_S140 IS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOI40.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_S140.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\LoopDevices\SensoIRIS_MOI04.html">
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_S130 IS.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_S130.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_T110 IS.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_T110.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MCZ.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MINP (PANIC).html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MINP (GAS).html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MINP (FIRE).html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MINP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOUT240_2.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOUT240_1.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOUT.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOI22M.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOI22.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOI40.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\LoopDevices\Teletek\SensoIRIS_MOI04.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\IRISPanel.html">
@@ -178,6 +229,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\peripherial_devices.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\TTE GPRS\Receiver Settings.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\TTE GPRS\Mobile Operators.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\TTE GPRS\Input_Output.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\TTE GPRS\Phones.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\TTE GPRS\General Settings.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\zone_evac.html">
@@ -203,6 +269,60 @@
     </None>
     <None Update="html\panels_in_network.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\BG.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\BH.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\EL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\EN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\FR.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\GE.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\HU.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\IR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\IT.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\NL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\NO.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\PL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\PT.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\RO.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\RU.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\SP.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\SR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="languages\TR.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

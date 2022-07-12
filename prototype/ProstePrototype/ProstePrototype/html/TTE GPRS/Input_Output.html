@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+    <title>Teletek ProsTe</title>
+</head>
+<body>
+    <div class="container" id="divMain">
+        <form action="">
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <fieldset>
+                <legend>Input/Output Settings 1</legend>
+                <div class="form-item roww">
+                    <label for="io_settings_1">Set as</label>
+                    <div class="select">
+                        <select id="io_settings_1"
+                                name="io_settings_1"
+                                onchange="javascript:IOtoggler(this)">
+                            <option value="input" selected>Input</option>
+                            <option value="output">Output</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: block" id="input">
+                    <fieldset>
+                        <legend>Alarm Event</legend>
+                        <div class="form-item roww">
+                            <label for="alarm_event_1">Enable</label>
+                            <input type="checkbox" id="alarm_event_1" name="alarm_event_1" class="ml10" />
+                        </div>
+                        <div class="form-item roww">
+                            <label for="alarm_sia_code">SIA Code</label>
+                            <div class="select">
+                                <select id="alarm_sia_code"
+                                        name="alarm_sia_code"
+                                        onchange="">
+                                    <option value="BA">Burglary Alarm [BA]</option>
+                                    <option value="BH">Burglary Alarm Restore [BH]</option>
+                                    <option value="FA">Fire Alarm [FA]</option>
+                                    <option value="FH">Fire Alarm Restore [FH]</option>
+                                    <option value="PA">Panic Alarm [PA]</option>
+                                    <option value="PH">Panic Alarm Restore [PH]</option>
+                                    <option value="TA">Tamper Alarm [TA]</option>
+                                    <option value="TH">Tamper Alarm Restore [TH]</option>
+                                    <option value="MA">Medical Alarm [MA]</option>
+                                    <option value="MH">Medical Alarm Restore [MH]</option>
+                                    <option value="UB">Sensor Bypass [UB]</option>
+                                    <option value="UU">Sensor Bypass Restore [UU]</option>
+                                    <option value="WA">Water Alarm [WA]</option>
+                                    <option value="WH">Water Alarm Restore [WH]</option>
+                                    <option value="KA">Heat Alarm [KA]</option>
+                                    <option value="KH">Heat Alarm Restore [KH]</option>
+                                    <option value="ZA">Low Temperature [ZA]</option>
+                                    <option value="ZH">Low Temp. Restore [ZH]</option>
+                                    <option value="OP">Disarm User [OP]</option>
+                                    <option value="OS">Disarm Key [OS]</option>
+                                    <option value="CL">Arm User [CL]</option>
+                                    <option value="CS">Arm Key [CS]</option>
+                                    <option value="qCL">Quick Arm [CL]</option>
+                                    <option value="HA">Duress [HA]</option>
+                                    <option value="YS">Communication Line Trbl. [YS]</option>
+                                    <option value="YK">Communication Line Restore Trbl. [YK]</option>
+                                    <option value="AT">AC Loss [AT]</option>
+                                    <option value="AR">AC Restore [AR]</option>
+                                    <option value="FT">Fire Trouble [FT]</option>
+                                    <option value="FJ">Fire Trouble Restore [FJ]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend>SMS Message (Phones)</legend>
+                            <div class="row mr-1">
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_sms_message_1">1</label>
+                                        <input type="checkbox" id="alarm_sms_message_1" name="alarm_sms_message_1" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_sms_message_2">2</label>
+                                        <input type="checkbox" id="alarm_sms_message_2" name="alarm_sms_message_2" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_sms_message_3">3</label>
+                                        <input type="checkbox" id="alarm_sms_message_3" name="alarm_sms_message_3" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_sms_message_4">4</label>
+                                        <input type="checkbox" id="alarm_sms_message_4" name="alarm_sms_message_4" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_sms_message_5">5</label>
+                                        <input type="checkbox" id="alarm_sms_message_5" name="alarm_sms_message_5" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_sms_message_6">6</label>
+                                        <input type="checkbox" id="alarm_sms_message_6" name="alarm_sms_message_6" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Voice Messages (Phones)</legend>
+                            <div class="row mr-1">
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_voice_message_1">1</label>
+                                        <input type="checkbox" id="alarm_voice_message_1" name="alarm_voice_message_1" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_voice_message_2">2</label>
+                                        <input type="checkbox" id="alarm_voice_message_2" name="alarm_voice_message_2" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_voice_message_3">3</label>
+                                        <input type="checkbox" id="alarm_voice_message_3" name="alarm_voice_message_3" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_voice_message_4">4</label>
+                                        <input type="checkbox" id="alarm_voice_message_4" name="alarm_voice_message_4" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_voice_message_5">5</label>
+                                        <input type="checkbox" id="alarm_voice_message_5" name="alarm_voice_message_5" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="alarm_voice_message_6">6</label>
+                                        <input type="checkbox" id="alarm_voice_message_6" name="alarm_voice_message_6" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-item roww">
+                            <label for="alarm_sms_text">SMS Message Text</label>
+                            <input type="text" maxlength="30" />
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Restore Event</legend>
+                        <div class="form-item roww">
+                            <label for="restore_event_1">Enable</label>
+                            <input type="checkbox" id="restore_event_1" name="restore_event_1" class="ml10" />
+                        </div>
+                        <div class="form-item roww">
+                            <label for="restore_sia_code">SIA Code</label>
+                            <div class="select">
+                                <select id="restore_sia_code"
+                                        name="restore_sia_code"
+                                        onchange="">
+                                    <option value="BA">Burglary Alarm [BA]</option>
+                                    <option value="BH">Burglary Alarm Restore [BH]</option>
+                                    <option value="FA">Fire Alarm [FA]</option>
+                                    <option value="FH">Fire Alarm Restore [FH]</option>
+                                    <option value="PA">Panic Alarm [PA]</option>
+                                    <option value="PH">Panic Alarm Restore [PH]</option>
+                                    <option value="TA">Tamper Alarm [TA]</option>
+                                    <option value="TH">Tamper Alarm Restore [TH]</option>
+                                    <option value="MA">Medical Alarm [MA]</option>
+                                    <option value="MH">Medical Alarm Restore [MH]</option>
+                                    <option value="UB">Sensor Bypass [UB]</option>
+                                    <option value="UU">Sensor Bypass Restore [UU]</option>
+                                    <option value="WA">Water Alarm [WA]</option>
+                                    <option value="WH">Water Alarm Restore [WH]</option>
+                                    <option value="KA">Heat Alarm [KA]</option>
+                                    <option value="KH">Heat Alarm Restore [KH]</option>
+                                    <option value="ZA">Low Temperature [ZA]</option>
+                                    <option value="ZH">Low Temp. Restore [ZH]</option>
+                                    <option value="OP">Disarm User [OP]</option>
+                                    <option value="OS">Disarm Key [OS]</option>
+                                    <option value="CL">Arm User [CL]</option>
+                                    <option value="CS">Arm Key [CS]</option>
+                                    <option value="qCL">Quick Arm [CL]</option>
+                                    <option value="HA">Duress [HA]</option>
+                                    <option value="YS">Communication Line Trbl. [YS]</option>
+                                    <option value="YK">Communication Line Restore Trbl. [YK]</option>
+                                    <option value="AT">AC Loss [AT]</option>
+                                    <option value="AR">AC Restore [AR]</option>
+                                    <option value="FT">Fire Trouble [FT]</option>
+                                    <option value="FJ">Fire Trouble Restore [FJ]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend>SMS Message (Phones)</legend>
+                            <div class="row mr-1">
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_sms_message_1">1</label>
+                                        <input type="checkbox" id="restore_sms_message_1" name="restore_sms_message_1" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_sms_message_2">2</label>
+                                        <input type="checkbox" id="restore_sms_message_2" name="restore_sms_message_2" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_sms_message_3">3</label>
+                                        <input type="checkbox" id="restore_sms_message_3" name="restore_sms_message_3" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_sms_message_4">4</label>
+                                        <input type="checkbox" id="restore_sms_message_4" name="restore_sms_message_4" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_sms_message_5">5</label>
+                                        <input type="checkbox" id="restore_sms_message_5" name="restore_sms_message_5" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_sms_message_6">6</label>
+                                        <input type="checkbox" id="restore_sms_message_6" name="restore_sms_message_6" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Voice Messages (Phones)</legend>
+                            <div class="row mr-1">
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_voice_message_1">1</label>
+                                        <input type="checkbox" id="restore_voice_message_1" name="restore_voice_message_1" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_voice_message_2">2</label>
+                                        <input type="checkbox" id="restore_voice_message_2" name="restore_voice_message_2" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_voice_message_3">3</label>
+                                        <input type="checkbox" id="restore_voice_message_3" name="restore_voice_message_3" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_voice_message_4">4</label>
+                                        <input type="checkbox" id="restore_voice_message_4" name="restore_voice_message_4" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_voice_message_5">5</label>
+                                        <input type="checkbox" id="restore_voice_message_5" name="restore_voice_message_5" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-item roww">
+                                        <label for="restore_voice_message_6">6</label>
+                                        <input type="checkbox" id="restore_voice_message_6" name="restore_voice_message_6" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-item roww">
+                            <label for="restore_sms_text">SMS Message Text</label>
+                            <input type="text" maxlength="30" />
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div style="display: none" id="output">
+                    <fieldset>
+                        <legend>CLIP Deactivation (Phones)</legend>
+                        <div class="row mr-1">
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_deactivation_1">1</label>
+                                    <input type="checkbox" id="clip_deactivation_1" name="clip_deactivation_1" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_deactivation_2">2</label>
+                                    <input type="checkbox" id="clip_deactivation_2" name="clip_deactivation_2" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_deactivation_3">3</label>
+                                    <input type="checkbox" id="clip_deactivation_3" name="clip_deactivation_3" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_deactivation_4">4</label>
+                                    <input type="checkbox" id="clip_deactivation_4" name="clip_deactivation_4" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_deactivation_5">5</label>
+                                    <input type="checkbox" id="clip_deactivation_5" name="clip_deactivation_5" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_deactivation_6">6</label>
+                                    <input type="checkbox" id="clip_deactivation_6" name="clip_deactivation_6" class="ml10" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>CLIP Activation (Phones)</legend>
+                        <div class="row mr-1">
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_activation_1">1</label>
+                                    <input type="checkbox" id="clip_activation_1" name="clip_activation_1" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_activation_2">2</label>
+                                    <input type="checkbox" id="clip_activation_2" name="clip_activation_2" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_activation_3">3</label>
+                                    <input type="checkbox" id="clip_activation_3" name="clip_activation_3" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_activation_4">4</label>
+                                    <input type="checkbox" id="clip_activation_4" name="clip_activation_4" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_activation_5">5</label>
+                                    <input type="checkbox" id="clip_activation_5" name="clip_activation_5" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-item roww">
+                                    <label for="clip_activation_6">6</label>
+                                    <input type="checkbox" id="clip_activation_6" name="clip_activation_6" class="ml10" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-item roww">
+                        <label for="sms_control_enable">SMS Control Enable</label>
+                        <input type="checkbox" id="sms_control_enable" name="sms_control_enable" class="ml10" />
+                    </div>
+                </div>
+
+            </fieldset>
+ 
+
+    <button type="button" onclick="javascript:changeStyleDisplay('io_settings')" class="m-2">
+        <i class="fa-solid fa-plus 5x"></i> Add New I/O
+    </button>
+
+    <div class="buttons-row mt15">
+        <button type="button" class="btn-round btn-blue">Save</button>
+        <button type="button" class="btn-round btn-border-black">Back</button>
+    </div>
+    </form>
+    <script>
+        function myFunction(id) {
+            var element = document.getElementById(id);
+            element.value = element.value.slice(0, element.dataset.maxlength);
+        }
+        function myFunction2(id) {
+            var element = document.getElementById(id);
+            if (element.value > element.max) {
+                element.value = element.max;
+            }
+        }
+        function myFunction3(id) {
+            var element = document.getElementById(id);
+            if (!element.value.includes(":")) {
+                console.log('before:', element.value);
+                element.value += ":";
+                console.log('after:', element.value);
+            }
+            const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
+            console.log('test', regex.test(element.value));
+            element.value = regex.exec(element.value);
+            console.log(element.value);
+        }
+
+        function IOtoggler(el) {
+            var val = el.value;
+            var input = document.getElementById("input");
+            var output = document.getElementById("output");
+            if (val === "input") {
+                input.style.display = "block";
+                output.style.display = "none";
+            } else {
+                output.style.display = "block";
+                input.style.display = "none";
+            }
+        }
+
+        var lst = [];
+        function changeStyleDisplay(id) {
+            let divId = id;
+            var last = 0;
+            if (!id.includes("_")) {
+                for (i = 2; i <= 6; i++) {
+                    if (lst.includes(i)) {
+                        continue;
+                    } else {
+                        last = i;
+                        break;
+                    }
+                }
+                if (last === 0) return;
+                divId += `_${last}`;
+            } else {
+                last = parseInt(divId[divId.length - 1]);
+            }
+            var element = document.getElementById(divId);
+            console.log('divId', divId, "id", id);
+            console.log('last', last);
+            if (lst.includes(last)) {
+                element.style.display = "none";
+                lst = lst.filter(function (item) {
+                    return item !== last
+                })
+            } else {
+                lst.push(last);
+                element.style.display = "block";
+            }
+            console.log('list', lst);
+        }
+    </script>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>-->
+    <script>
+        function sendMessage(bc) {
+            //CefSharp.PostMessage(bc);
+        }
+        $(document).ready(() => {
+            sendMessage("Devices|TTE GPRS|I/O Settings");
+        });
+    </script>
+</body>
+</html>

@@ -19,6 +19,14 @@ a, a:hover {
     padding: 0 !important;
 }
 
+.pl0 {
+    padding-left: 0 !important;
+}
+
+.pr0 {
+    padding-right: 0 !important;
+}
+
 .p15 {
     padding: 15px;
 }
@@ -53,8 +61,16 @@ a, a:hover {
     margin-left: 15px;
 }
 
+.ml25 {
+    margin-left: 25px;
+}
+
 .ml10 {
     margin-left: 10px;
+}
+
+.mr10 {
+    margin-right: 10px;
 }
 
 i {
@@ -69,9 +85,13 @@ i:hover {
     margin-top: 0;
     padding-bottom: 0.15em;
     background-color: #0c2b90;
-    border-radius: 6px;    
+    border-radius: 6px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
+}
+
+.minh {
+    min-height: 51.51px;
 }
 
 .someS:hover {
@@ -207,6 +227,11 @@ fieldset legend {
       .form-item.roww.mw input {
           max-width: 6ch;
       }
+        .form-item.roww.flex {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        } 
       .form-item.roww:last-child input:not([type="checkbox"]) {
         margin: 0 0 0 10px; }
     .form-item:first-child {
@@ -217,7 +242,7 @@ fieldset legend {
       display: block;
       margin-bottom: 10px;
       font-weight: 700; }
-    /* .form-item .radio-buttons {
+    .form-item .radio-buttons {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -225,8 +250,8 @@ fieldset legend {
           flex-wrap: nowrap;
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
-          -ms-flex-direction: row;
-              flex-direction: row;
+          -ms-flex-direction: row-reverse;
+              flex-direction: row-reverse;
       -webkit-box-align: center;
           -ms-flex-align: center;
               align-items: center;
@@ -234,7 +259,7 @@ fieldset legend {
     .form-item .radio-button-box {
       margin-right: 10px; }
       .form-item .radio-button-box label {
-        display: inline; } */
+        display: inline; } 
     .form-item.disabled {
       pointer-events: none;
     }
@@ -264,6 +289,13 @@ fieldset legend {
     text-align: center;
     min-height: 50px;
 }
+
+.br {
+    border-left: 1px solid #181717d2;
+}
+/*.br:first-child {
+    border-left: none;
+}*/
 
 .btn-blue {
     background-color: #0c2b90;
@@ -324,4 +356,22 @@ input:focus {
 
 .context-menu--active {
     display: block;
+}
+
+.input-group-text {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 0.75rem 0 0;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
 }
