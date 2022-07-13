@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+    <title>Teletek ProsTe</title>
+</head>
+<body>
+    <div class="container" id="divMain">
+        <form action="">
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <div class="form-item roww">
+                <label for="pgm4_mode">PGM4 Mode</label>
+                <div class="select">
+                    <select id="pgm4_mode"
+                            name="pgm4_mode">
+                        <option value="output">Output</option>
+                        <option value="fire_zone">Fire Zone</option>
+                    </select>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend>PGM 1</legend>
+
+                <fieldset>
+                    <legend>Attachment</legend>
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="form-item roww">
+                                <label for="device_number_1">Device Number (RO for PGMs 1-5)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="device_number_1"
+                                       name="device_number_1"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="0"
+                                       max="63" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="form-item roww col">
+                                <label for="terminal_number_1">Terminal Number (RO for PGMs 1-5)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="terminal_number_1"
+                                       name="terminal_number_1"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="0"
+                                       max="32" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Options</legend>
+                    <div class="row m-2">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="mode_1">Mode</label>
+                                <div class="select">
+                                    <select id="mode_1"
+                                            name="mode_1">
+                                        <option value="general">General</option>
+                                        <option value="siren_output">Siren Output</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="polarity_1">Polarity</label>
+                                <div class="select">
+                                    <select id="polarity_1"
+                                            name="polarity_1">
+                                        <option value="normal">Normal</option>
+                                        <option value="invert">Invert</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="delay_unit_1">Delay Unit</label>
+                                <div class="select">
+                                    <select id="delay_unit_1"
+                                            name="delay_unit_1">
+                                        <option value="seconds">Seconds</option>
+                                        <option value="minutes">Minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="pulsed_fire_mode_1">Pulsed Fire Mode</label>
+                                <div class="select">
+                                    <select id="pulsed_fire_mode_1"
+                                            name="pulsed_fire_mode_1">
+                                        <option value="disable">Disable</option>
+                                        <option value="enable">Enable</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="deactivation_timer_unit_1">Deactivation Timer Unit</label>
+                                <div class="select">
+                                    <select id="deactivation_timer_unit_1"
+                                            name="deactivation_timer_unit_1">
+                                        <option value="seconds">Seconds</option>
+                                        <option value="minutes">Minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Areas</legend>
+                    <div class="row mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_1">1</label>
+                                <input type="checkbox" id="1_1" name="1_1" class="ml10" checked />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_2">2</label>
+                                <input type="checkbox" id="1_2" name="1_2" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_3">3</label>
+                                <input type="checkbox" id="1_3" name="1_3" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_4">4</label>
+                                <input type="checkbox" id="1_4" name="1_4" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_5">5</label>
+                                <input type="checkbox" id="1_5" name="1_5" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_6">6</label>
+                                <input type="checkbox" id="1_6" name="1_6" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_7">7</label>
+                                <input type="checkbox" id="1_7" name="1_7" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_8">8</label>
+                                <input type="checkbox" id="1_8" name="1_8" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_9">9</label>
+                                <input type="checkbox" id="1_9" name="1_9" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_10">10</label>
+                                <input type="checkbox" id="1_10" name="1_10" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_11">11</label>
+                                <input type="checkbox" id="1_11" name="1_11" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_12">12</label>
+                                <input type="checkbox" id="1_12" name="1_12" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_13">13</label>
+                                <input type="checkbox" id="1_13" name="1_13" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_14">14</label>
+                                <input type="checkbox" id="1_14" name="1_14" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_15">15</label>
+                                <input type="checkbox" id="1_15" name="1_15" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="1_16">16</label>
+                                <input type="checkbox" id="1_16" name="1_16" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Activation Event</legend>
+                    <div class="row mr-2">
+                        <div class="col">
+                            <div class="form-item">
+                                <!--<label for="attributes_aux_1">Action Type</label>-->
+                                <div class="select">
+                                    <select id="activation_event_1"
+                                            name="activation_event_1"
+                                            onchange="javascript:activationEventHandler(this.value, 'activation_event_result_1')">
+                                        <option value="arm" disabled style="display:none;">Label</option>
+                                        <option value="none">None</option>
+                                        <option value="zone_open">Zone open</option>
+                                        <option value="zone_bypass">Zone bypass</option>
+                                        <option value="zone_tamper">Zone tamper</option>
+                                        <option value="zone_in_alarm">Zone in alarm</option>
+                                        <option value="zone_in_fire_alarm">Zone in fire alarm</option>
+                                        <option value="zone_in_medical_alarm">Zone in medical alarm</option>
+                                        <option value="arm" selected>Arm</option>
+                                        <option value="group_alarm">Group alarm</option>
+                                        <option value="panic">Panic</option>
+                                        <option value="valid_code_entered">Valid code entered</option>
+                                        <option value="ambush_code_entered">Ambush code entered</option>
+                                        <option value="3_invalid_codes_entered">3 invalid codes entered</option>
+                                        <option value="valid_proxy_card">Valid proxy card</option>
+                                        <option value="invalid_proxy_card">Invalid proxy card</option>
+                                        <option value="valid_remote_control">Valid remote control</option>
+                                        <option value="bravo_rc_button">Bravo RC button</option>
+                                        <option value="system_fault">System fault</option>
+                                        <option value="eng_menu_entry">Eng. menu entry</option>
+                                        <option value="chime">Chime</option>
+                                        <option value="video_on_armed">Video on armed</option>
+                                        <option value="fire_reset">Fire reset</option>
+                                        <option value="time_slot_number">Time slot number</option>
+                                        <option value="remote_control">Remote Control</option>
+                                        <option value="alarm_or_entry_time">Alarm or Entry time</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mr-2">
+                        <div class="col" id="activation_event_result_1">
+                            <fieldset>
+                                <legend>Arm Type</legend>
+                                <div class="row align-items-center mr-2">
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="full_arm_type">Full</label>
+                                            <input type="checkbox" id="full_arm_type" name="full_arm_type" class="ml10" checked/>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="stay_arm_type">Stay</label>
+                                            <input type="checkbox" id="stay_arm_type" name="stay_arm_type" class="ml10" checked/>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="sleep_arm_type">Sleep</label>
+                                            <input type="checkbox" id="sleep_arm_type" name="sleep_arm_type" class="ml10" checked/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </fieldset>
+
+            <div id="none" style="display: none;"></div>
+            <div id="zone_open" style="display: none;">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="from_zone_number">From Zone Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="from_zone_number"
+                                   name="from_zone_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="to_zone_number">To Zone Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="to_zone_number"
+                                   name="to_zone_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="zone_bypass" style="display: none;"></div>
+            <div id="zone_tamper" style="display: none;"></div>
+            <div id="zone_in_alarm" style="display: none;"></div>
+            <div id="zone_in_fire_alarm" style="display: none;"></div>
+            <div id="zone_in_medical_alarm" style="display: none;"></div>
+            <div id="arm" style="display: none;">
+                <fieldset>
+                    <legend>Arm Type</legend>
+                    <div class="row align-items-center mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="full_arm_type">Full</label>
+                                <input type="checkbox" id="full_arm_type" name="full_arm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="stay_arm_type">Stay</label>
+                                <input type="checkbox" id="stay_arm_type" name="stay_arm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="sleep_arm_type">Sleep</label>
+                                <input type="checkbox" id="sleep_arm_type" name="sleep_arm_type" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div id="group_alarm" style="display: none;">
+                <fieldset>
+                    <legend>Alarm Type</legend>
+                    <div class="row align-items-center mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="burglary_alarm_type">Burglary Alarm</label>
+                                <input type="checkbox" id="burglary_alarm_type" name="burglary_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="fire_alarm_type">Fire Alarm</label>
+                                <input type="checkbox" id="fire_alarm_type" name="fire_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="panic_alarm_type">Panic Alarm</label>
+                                <input type="checkbox" id="panic_alarm_type" name="panic_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="tamper_alarm_type">Tamper Alarm</label>
+                                <input type="checkbox" id="tamper_alarm_type" name="tamper_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="medical_alarm_type">Medical Alarm</label>
+                                <input type="checkbox" id="medical_alarm_type" name="medical_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="ambush_code_entered_alarm">Ambush Code Entered</label>
+                                <input type="checkbox" id="ambush_code_entered_alarm" name="ambush_code_entered_alarm" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div id="panic" style="display: none;">
+                <fieldset>
+                    <legend>Alarm Type</legend>
+                    <div class="row align-items-center mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="silent_panic_alarm_type">Silent Panic</label>
+                                <input type="checkbox" id="silent_panic_alarm_type" name="silent_panic_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="audible_panic_alarm_type">Audible Panic</label>
+                                <input type="checkbox" id="audible_panic_alarm_type" name="audible_panic_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="silent_medical_alarm_type">Silent Medical</label>
+                                <input type="checkbox" id="silent_medical_alarm_type" name="silent_medical_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="audible_medical_alarm_type">Audible Medical</label>
+                                <input type="checkbox" id="audible_medical_alarm_type" name="audible_medical_alarm_type" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="fire_panic_type">Fire</label>
+                                <input type="checkbox" id="fire_panic_type" name="fire_panic_type" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div id="valid_code_entered" style="display: none;">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="from_code_number">From Code Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="from_code_number"
+                                   name="from_code_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="to_code_number">To Code Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="to_code_number"
+                                   name="to_code_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ambush_code_entered" style="display: none;">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="from_code_number">From Code Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="from_code_number"
+                                   name="from_code_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="to_code_number">To Code Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="to_code_number"
+                                   name="to_code_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3_invalid_codes_entered" style="display: none;"></div>
+            <div id="valid_proxy_card" style="display: none;">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="from_proxy_number">From Proxy Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="from_proxy_number"
+                                   name="from_proxy_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="to_proxy_number">To Proxy Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="to_proxy_number"
+                                   name="to_proxy_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="invalid_proxy_card" style="display: none;"></div>
+            <div id="valid_remote_control" style="display: none;">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="from_rc_number">From RC Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="from_proxy_number"
+                                   name="from_proxy_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="to_rc_number">To RC Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="to_proxy_number"
+                                   name="to_proxy_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bravo_rc_button" style="display: none;">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="from_rc_number">From RC Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="from_proxy_number"
+                                   name="from_proxy_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="to_rc_number">To RC Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="to_proxy_number"
+                                   name="to_proxy_number"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="99" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="system_fault" style="display: none;">
+                <fieldset>
+                    <legend>Troubles Sound Mask</legend>
+                    <div class="row align-items-center mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_ac_lost">AC Lost</label>
+                                <input type="checkbox" id="mask_ac_lost" name="mask_ac_lost" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_battery_low">Battery Low</label>
+                                <input type="checkbox" id="mask_battery_low" name="mask_battery_low" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_blow_fuse">Blow Fuse</label>
+                                <input type="checkbox" id="mask_blow_fuse" name="mask_blow_fuse" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_comm_failure">Telephone Line Trouble / Comm failure</label>
+                                <input type="checkbox" id="mask_comm_failure" name="mask_comm_failure" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_tamper">Tamper</label>
+                                <input type="checkbox" id="mask_tamper" name="mask_tamper" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_system_bus_error">System Bus Error</label>
+                                <input type="checkbox" id="mask_system_bus_error" name="mask_system_bus_error" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mr-2">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_fire_line">Fire Line Error</label>
+                                <input type="checkbox" id="mask_fire_line" name="mask_fire_line" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_siren_fault">Siren Fault</label>
+                                <input type="checkbox" id="mask_siren_fault" name="mask_siren_fault" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_clock_lost">Clock Lost</label>
+                                <input type="checkbox" id="mask_clock_lost" name="mask_clock_lost" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_wl_devices">WL Devices Error</label>
+                                <input type="checkbox" id="mask_wl_devices" name="mask_wl_devices" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_rf_jamming">RF Jamming</label>
+                                <input type="checkbox" id="mask_rf_jamming" name="mask_rf_jamming" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="mask_aux_psu_trouble">AUX PSU Trouble</label>
+                                <input type="checkbox" id="mask_aux_psu_trouble" name="mask_aux_psu_trouble" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div id="eng_menu_entry" style="display: none;"></div>
+            <div id="chime" style="display: none;"></div>
+            <div id="video_on_armed" style="display: none;"></div>
+            <div id="fire_reset" style="display: none;"></div>
+            <div id="time_slot_number" style="display: none;">
+                <div class="form-item roww m-2">
+                    <label for="from_rc_number">Time slot Number</label>
+                    <input class="ml10"
+                           type="number"
+                           id="from_proxy_number"
+                           name="from_proxy_number"
+                           data-maxlength="1"
+                           oninput="javascript: myFunction(this.id)"
+                           onblur="javascript: myFunction2(this.id)"
+                           value="1"
+                           min="1"
+                           max="8" />
+                </div>
+            </div>
+            <div id="remote_control" style="display: none;"></div>
+            <div id="alarm_or_entry_time" style="display: none;"></div>
+
+            <div id="new_pgm"></div>
+
+            <button type="button" onclick="javascript:addPGM('pgm')" class="m-4">
+                <i class="fa-solid fa-plus 5x"></i> Add New PGM
+            </button>
+
+            <div style="bottom: 10px; position: fixed;" class="buttons-row mt15">
+                <button type="button" class="btn-round btn-blue">Save</button>
+                <button type="button" class="btn-round btn-border-black">Back</button>
+            </div>
+        </form>
+        <script>
+            function myFunction(id) {
+                var element = document.getElementById(id);
+                element.value = element.value.slice(0, element.dataset.maxlength);
+            }
+            function myFunction2(id) {
+                var element = document.getElementById(id);
+                if (element.value > element.max) {
+                    element.value = element.max;
+                }
+            }
+            function myFunction3(id) {
+                var element = document.getElementById(id);
+                if (!element.value.includes(":")) {
+                    console.log('before:', element.value);
+                    element.value += ":";
+                    console.log('after:', element.value);
+                }
+                const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
+                console.log('test', regex.test(element.value));
+                element.value = regex.exec(element.value);
+                console.log(element.value);
+            }
+
+            function activationEventHandler(val, target) {
+                console.log('val', val, 'target', target);
+                if (val.includes("zone")) {
+                    val = "zone_open";
+                }
+                var valElem = document.getElementById(val);
+                if (target === "activation_event_result_1") setCheckedAll("arm");
+                if (target === "activation_event_result_2") setCheckedAll("group_alarm");
+                if (target === "activation_event_result_3") setCheckedAll("system_fault");
+                //    (target === "activation_event_result_1" && val === "arm") ||
+                //    (target === "activation_event_result_2" && val === "group_alarm") ||
+                //    (target === "activation_event_result_3" && val === "system_fault")
+                //) { 
+                //    let inputs = valElem.querySelectorAll("input[type=checkbox]");
+                //    for (index = 0; index < inputs.length; ++index) {
+                //        inputs[index].setAttribute("checked", "true");
+                //    }
+                //}
+                var element = document.getElementById(target);
+
+                console.log('target', target);
+                element.innerHTML = valElem.innerHTML;
+            }
+
+            var lst = [];
+            function addPGM(id) {
+                if (id === "pgm") {
+                    var last = 0;
+                    for (i = 2; i <= 99; i++) {
+                        if (lst.includes(i)) {
+                            continue;
+                        } else {
+                            last = i;
+                            break;
+                        }
+                    }
+                    if (last === 0 || lst.includes(last)) return;
+
+                    const newUserElement = `
+                        <div style="display: block" id="${last}">
+                            <fieldset>
+                                <legend>PGM ${last}</legend>
+
+                                <div class="row justify-content-end"><button type="button" onclick="javascript:addPGM(${last})" class="m-2">
+                                    <i class="fa-solid fa-minus 5x"></i> Remove Zone
+                                </button></div>
+                                <fieldset>
+                                    <legend>Attachment</legend>
+                                    <div class="row align-items-center">
+                                        <div class="col-xs-12 col-lg-6">
+                                            <div class="form-item roww">
+                                                <label for="device_number_${last}">Device Number (RO for PGMs 1-5)</label>
+                                                <input class="ml10"
+                                                        type="number"
+                                                        id="device_number_${last}"
+                                                        name="device_number_${last}"
+                                                        data-maxlength="2"
+                                                        oninput="javascript: myFunction(this.id)"
+                                                        onblur="javascript: myFunction2(this.id)"
+                                                        value="1"
+                                                        min="0"
+                                                        max="63" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-6">
+                                            <div class="form-item roww col">
+                                                <label for="terminal_number_${last}">Terminal Number (RO for PGMs 1-5)</label>
+                                                <input class="ml10"
+                                                        type="number"
+                                                        id="terminal_number_${last}"
+                                                        name="terminal_number_${last}"
+                                                        data-maxlength="2"
+                                                        oninput="javascript: myFunction(this.id)"
+                                                        onblur="javascript: myFunction2(this.id)"
+                                                        value="${last < 6 ? last : ''}"
+                                                        min="0"
+                                                        max="32" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Options</legend>
+                                    <div class="row m-2">
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="mode_${last}">Mode</label>
+                                                <div class="select">
+                                                    <select id="mode_${last}"
+                                                            name="mode_${last}">
+                                                        <option value="general">General</option>
+                                                        <option value="siren_output" ${last === 5 ? 'selected' : ''}>Siren Output</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="polarity_${last}">Polarity</label>
+                                                <div class="select">
+                                                    <select id="polarity_${last}"
+                                                            name="polarity_${last}">
+                                                        <option value="normal">Normal</option>
+                                                        <option value="invert">Invert</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="delay_unit_${last}">Delay Unit</label>
+                                                <div class="select">
+                                                    <select id="delay_unit_${last}"
+                                                            name="delay_unit_${last}">
+                                                        <option value="seconds">Seconds</option>
+                                                        <option value="minutes">Minutes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-2">
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="pulsed_fire_mode_${last}">Pulsed Fire Mode</label>
+                                                <div class="select">
+                                                    <select id="pulsed_fire_mode_${last}"
+                                                            name="pulsed_fire_mode_${last}">
+                                                        <option value="disable">Disable</option>
+                                                        <option value="enable">Enable</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="deactivation_timer_unit_${last}">Deactivation Timer Unit</label>
+                                                <div class="select">
+                                                    <select id="deactivation_timer_unit_${last}"
+                                                            name="deactivation_timer_unit_${last}">
+                                                        <option value="seconds">Seconds</option>
+                                                        <option value="minutes">Minutes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Areas</legend>
+                                    <div class="row mr-2">
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_1">1</label>
+                                                <input type="checkbox" id="${last}_1" name="${last}_1" class="ml10" checked />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_2">2</label>
+                                                <input type="checkbox" id="${last}_2" name="${last}_2" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_3">3</label>
+                                                <input type="checkbox" id="${last}_3" name="${last}_3" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_4">4</label>
+                                                <input type="checkbox" id="${last}_4" name="${last}_4" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_5">5</label>
+                                                <input type="checkbox" id="${last}_5" name="${last}_5" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_6">6</label>
+                                                <input type="checkbox" id="${last}_6" name="${last}_6" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_7">7</label>
+                                                <input type="checkbox" id="${last}_7" name="${last}_7" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_8">8</label>
+                                                <input type="checkbox" id="${last}_8" name="${last}_8" class="ml10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mr-2">
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_9">9</label>
+                                                <input type="checkbox" id="${last}_9" name="${last}_9" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_10">10</label>
+                                                <input type="checkbox" id="${last}_10" name="${last}_10" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_11">11</label>
+                                                <input type="checkbox" id="${last}_11" name="${last}_11" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_12">12</label>
+                                                <input type="checkbox" id="${last}_12" name="${last}_12" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_13">13</label>
+                                                <input type="checkbox" id="${last}_13" name="${last}_13" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_14">14</label>
+                                                <input type="checkbox" id="${last}_14" name="${last}_14" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_15">15</label>
+                                                <input type="checkbox" id="${last}_15" name="${last}_15" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="${last}_16">16</label>
+                                                <input type="checkbox" id="${last}_16" name="${last}_16" class="ml10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Activation Event</legend>
+                                    <div class="row mr-2">
+                                        <div class="col">
+                                            <div class="form-item">
+                                                <!--<label for="attributes_aux_1">Action Type</label>-->
+                                                <div class="select">
+                                                    <select id="activation_event_${last}"
+                                                            name="activation_event_${last}"
+                                                            onchange="javascript:activationEventHandler(this.value, 'activation_event_result_${last}')">
+                                                        <option value="none">None</option>
+                                                        <option value="zone_open">Zone open</option>
+                                                        <option value="zone_bypass">Zone bypass</option>
+                                                        <option value="zone_tamper">Zone tamper</option>
+                                                        <option value="zone_in_alarm">Zone in alarm</option>
+                                                        <option value="zone_in_fire_alarm">Zone in fire alarm</option>
+                                                        <option value="zone_in_medical_alarm">Zone in medical alarm</option>
+                                                        <option value="arm">Arm</option>
+                                                        <option value="group_alarm" ${last === 2 ? 'selected' : ''}>Group alarm</option>
+                                                        <option value="panic">Panic</option>
+                                                        <option value="valid_code_entered">Valid code entered</option>
+                                                        <option value="ambush_code_entered">Ambush code entered</option>
+                                                        <option value="3_invalid_codes_entered">3 invalid codes entered</option>
+                                                        <option value="valid_proxy_card">Valid proxy card</option>
+                                                        <option value="invalid_proxy_card">Invalid proxy card</option>
+                                                        <option value="valid_remote_control">Valid remote control</option>
+                                                        <option value="bravo_rc_button">Bravo RC button</option>
+                                                        <option value="system_fault" ${last === 3 ? 'selected' : ''}>System fault</option>
+                                                        <option value="eng_menu_entry">Eng. menu entry</option>
+                                                        <option value="chime">Chime</option>
+                                                        <option value="video_on_armed">Video on armed</option>
+                                                        <option value="fire_reset">Fire reset</option>
+                                                        <option value="time_slot_number">Time slot number</option>
+                                                        <option value="remote_control">Remote Control</option>
+                                                        <option value="alarm_or_entry_time">Alarm or Entry time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mr-2">
+                                        <div class="col" id="activation_event_result_${last}">
+                                            ${last === 2 ? setCheckedAll('group_alarm') : (last === 3 ? setCheckedAll('system_fault') : '')}
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                            </fieldset></div>`;
+                    var element = document.getElementById("new_pgm");
+                    console.log('ele', element);
+                    var new_inner = `
+                                        ${element.innerHTML}
+                                        ${newUserElement}
+                                    `;
+                    console.log('element.innerHTML', new_inner);
+                    lst.push(last);
+                    element.innerHTML = new_inner;
+
+                    // reordering
+                    var main = document.getElementById('new_pgm');
+
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
+                } else {
+                    if (lst.includes(id)) {
+                        var elem = document.getElementById(`${id}`);
+                        elem.parentNode.removeChild(elem);
+                        lst = lst.filter(function (item) {
+                            return item !== id
+                        })
+                    } else {
+                        return;
+                    }
+                }
+            }
+
+            function setCheckedAll(identificator) {
+                let e = document.getElementById(identificator);
+                e.querySelectorAll("input[type=checkbox]").forEach(input => input.setAttribute('checked', 'true'));
+                return e.innerHTML;
+            }
+        </script>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>-->
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+        $(document).ready(() => {
+            sendMessage("Devices|ECLIPSE|Outputs");
+        });
+    </script>
+</body>
+</html>
