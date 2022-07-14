@@ -57,6 +57,10 @@ a, a:hover {
     margin: 15px;
 }
 
+.period_range {
+    border: 1px solid #181717d2
+}
+
 .ml10p {
     margin-left: calc(10px + 2ch) !important;
 }
