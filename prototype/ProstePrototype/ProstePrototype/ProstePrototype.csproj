@@ -81,6 +81,9 @@
     <None Update="html\ECLIPSE\ConnectionType\Type9.PNG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="html\ECLIPSE\Areas.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\ECLIPSE\Outputs.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

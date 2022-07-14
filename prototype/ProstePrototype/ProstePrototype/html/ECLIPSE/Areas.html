@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+    <title>Teletek ProsTe</title>
+</head>
+<body>
+    <div class="container" id="divMain">
+        <form action="">
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <fieldset>
+                <legend>Areas Settings</legend>
+                <div class="form-item roww">
+                    <label for="accounts_length">Accounts Length</label>
+                    <div class="select">
+                        <select id="accounts_length"
+                                name="accounts_length">
+                            <option value="4">4</option>
+                            <option value="6">6 Zone</option>
+                        </select>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>Timings (min)</legend>
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="double_knock">Double Knock</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="double_knock"
+                                       name="double_knock"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="3"
+                                       min="1"
+                                       max="5" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="auto_arm_on_no_mvt">Auto Arm on No Movement</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="auto_arm_on_no_mvt"
+                                       name="auto_arm_on_no_mvt"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="0"
+                                       min="0"
+                                       max="255" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="postpone_autoarm">Postpone autoarm</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="postpone_autoarm"
+                                       name="postpone_autoarm"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="10"
+                                       min="1"
+                                       max="255" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+
+            <fieldset>
+                <legend>Area 1</legend>
+
+                <div class="row align-items-center">
+                    <div class="col-xs-12 col-lg-5">
+                        <div class="form-item roww flex">
+                            <label for="areaname_1">Name</label>
+                            <input type="text" id="areaname_1" name="areaname_1" value="Area 01" maxlength="16" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <div class="form-item roww">
+                            <label for="time_slot_number_1">Time Slot Number</label>
+                            <input class="ml10"
+                                   type="number"
+                                   id="time_slot_number_1"
+                                   name="time_slot_number_1"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="16" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-item roww flex">
+                            <label for="accountcode_1">Account Code</label>
+                            <input type="text" id="accountcode_1" name="accountcode_1" value="ffffff" maxlength="6" />
+                        </div>
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>On / Off Settings</legend>
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="entry_time_1">Entry Time (sec)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="entry_time_1"
+                                       name="entry_time_1"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="15"
+                                       min="0"
+                                       max="255" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="entry_time2_1">Entry Time 2 (sec)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="entry_time2_1"
+                                       name="entry_time2_1"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="15"
+                                       min="0"
+                                       max="255" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="exit_time_1">Exit Time (sec)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="exit_time_1"
+                                       name="exit_time_1"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="45"
+                                       min="0"
+                                       max="255" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend>Options (Attributes)</legend>
+                        <div class="row align-items-center mr-1">
+                            <div class="col-xs-12 col-md mr-2">
+                                <div class="form-item roww">
+                                    <label for="auto_disarm_on_timeslot_1">Auto disarm on Time slot</label>
+                                    <input type="checkbox" id="auto_disarm_on_timeslot_1" name="auto_disarm_on_timeslot_1" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md">
+                                <div class="form-item roww">
+                                    <label for="auto_arm_type_1">Auto arm type</label>
+                                    <div class="select">
+                                        <select id="auto_arm_type_1"
+                                                name="auto_arm_type_1">
+                                            <option value="full">Full</option>
+                                            <option value="stay">Stay</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md mr-2">
+                                <div class="form-item roww">
+                                    <label for="clear_bypass_on_disarm_1">Clear Bypass on disarm</label>
+                                    <input type="checkbox" id="clear_bypass_on_disarm_1" name="clear_bypass_on_disarm_1" class="ml10" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md">
+                                <div class="form-item roww">
+                                    <label for="one_touch_arming_1">One touch arming</label>
+                                    <input type="checkbox" id="one_touch_arming_1" name="one_touch_arming_1" class="ml10" checked />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md mr-2">
+                                <div class="form-item roww">
+                                    <label for="auto_arm_on_no_mvt_1">Auto arm on no movement</label>
+                                    <input type="checkbox" id="auto_arm_on_no_mvt_1" name="auto_arm_on_no_mvt_1" class="ml10" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Bell Settings</legend>
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="form-item roww">
+                                <label for="bell_time_1">Bell Time (min)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="bell_time_1"
+                                       name="bell_time_1"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="0"
+                                       max="255" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="form-item roww">
+                                <label for="bell_delay_1">Bell Delay (sec)</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="bell_delay_1"
+                                       name="bell_delay_1"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="0"
+                                       min="0"
+                                       max="255" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend>Options (Attributes)</legend>
+                        <div class="row align-items-center m-1">
+                            <div class="col-xs-12 col-md">
+                                <div class="form-item roww">
+                                    <label for="squark_on_arm_1">Squark on arm</label>
+                                    <input type="checkbox" id="squark_on_arm_1" name="squark_on_arm_1" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md">
+                                <div class="form-item roww">
+                                    <label for="squark_on_disarm_1">Squark on disarm</label>
+                                    <input type="checkbox" id="squark_on_disarm_1" name="squark_on_disarm_1" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md pr-4">
+                                <div class="form-item roww">
+                                    <label for="alarm_memory_squark_1">Alarm Memory Squark</label>
+                                    <input type="checkbox" id="alarm_memory_squark_1" name="alarm_memory_squark_1" class="ml10" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md">
+                                <div class="form-item roww">
+                                    <label for="10min_warning_1">10 min warning</label>
+                                    <input type="checkbox" id="10min_warning_1" name="10min_warning_1" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md">
+                                <div class="form-item roww">
+                                    <label for="fire_alarm_duration_1">Fire alarm duration</label>
+                                    <input type="checkbox" id="fire_alarm_duration_1" name="fire_alarm_duration_1" class="ml10" checked />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Panic Alarm Types</legend>
+                    <div class="row align-items-center m-2">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-item roww">
+                                <label for="enable_police_panic_1">Enable Police Panic</label>
+                                <input type="checkbox" id="enable_police_panic_1" name="enable_police_panic_1" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-item roww">
+                                <label for="police_panic_sound_type_1">Police Panic Sound Type</label>
+                                <div class="select">
+                                    <select id="police_panic_sound_type_1"
+                                            name="police_panic_sound_type_1">
+                                        <option value="audible">Audible</option>
+                                        <option value="silent">Silent</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m-2">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-item roww">
+                                <label for="enable_medical_panic_1">Enable Medical Panic</label>
+                                <input type="checkbox" id="enable_medical_panic_1" name="enable_medical_panic_1" class="ml10" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-item roww">
+                                <label for="medical_panic_sound_type_1">Medical Panic Sound Type</label>
+                                <div class="select">
+                                    <select id="medical_panic_sound_type_1"
+                                            name="medical_panic_sound_type_1">
+                                        <option value="audible">Audible</option>
+                                        <option value="silent">Silent</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m-2">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-item roww">
+                                <label for="enable_fire_panic_1">Enable Fire Panic (Always Audible)</label>
+                                <input type="checkbox" id="enable_fire_panic_1" name="enable_fire_panic_1" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </fieldset>
+
+            <div id="new_area"></div>
+
+            <button type="button" onclick="javascript:addArea('area')" class="m-4">
+                <i class="fa-solid fa-plus 5x"></i> Add New Area
+            </button>
+
+            <div style="bottom: 10px; position: fixed;" class="buttons-row mt15">
+                <button type="button" class="btn-round btn-blue">Save</button>
+                <button type="button" class="btn-round btn-border-black">Back</button>
+            </div>
+        </form>
+        <script>
+            function myFunction(id) {
+                var element = document.getElementById(id);
+                element.value = element.value.slice(0, element.dataset.maxlength);
+            }
+            function myFunction2(id) {
+                var element = document.getElementById(id);
+                if (element.value > element.max) {
+                    element.value = element.max;
+                }
+            }
+            function myFunction3(id) {
+                var element = document.getElementById(id);
+                if (!element.value.includes(":")) {
+                    console.log('before:', element.value);
+                    element.value += ":";
+                    console.log('after:', element.value);
+                }
+                const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
+                console.log('test', regex.test(element.value));
+                element.value = regex.exec(element.value);
+                console.log(element.value);
+            }
+
+            var lst = [];
+            function addArea(id) {
+                if (id === "area") {
+                    var last = 0;
+                    for (i = 2; i <= 16; i++) {
+                        if (lst.includes(i)) {
+                            continue;
+                        } else {
+                            last = i;
+                            break;
+                        }
+                    }
+                    if (last === 0 || lst.includes(last)) return;
+
+                    const newUserElement = `
+                        <div style="display: block" id="${last}">
+                            <fieldset>
+                                <legend>Area ${last}</legend>
+                            
+                                <div class="row align-items-center">
+                                    <div class="col-7 col-lg-3">
+                                        <div class="form-item roww flex">
+                                            <label for="areaname_${last}">Name</label>
+                                            <input type="text" id="areaname_${last}" name="areaname_${last}" value="Area ${String(last).padStart(2, '0') }" maxlength="16" />
+                                        </div>
+                                    </div>
+                                    <div class="col-5 col-lg-2"><button type="button" onclick="javascript:addArea(${last})">
+                                        <i class="fa-solid fa-minus 5x"></i> Remove Area
+                                    </button></div>
+                                    <div class="col-xs-12 col-lg-3">
+                                        <div class="form-item roww">
+                                            <label for="time_slot_number_${last}">Time Slot Number</label>
+                                            <input class="ml10"
+                                                   type="number"
+                                                   id="time_slot_number_${last}"
+                                                   name="time_slot_number_${last}"
+                                                   data-maxlength="2"
+                                                   oninput="javascript: myFunction(this.id)"
+                                                   onblur="javascript: myFunction2(this.id)"
+                                                   value="0"
+                                                   min="0"
+                                                   max="16" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-4">
+                                        <div class="form-item roww flex">
+                                            <label for="accountcode_${last}">Account Code</label>
+                                            <input type="text" id="accountcode_${last}" name="accountcode_${last}" value="ffffff" maxlength="6" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <fieldset>
+                                    <legend>On / Off Settings</legend>
+                                    <div class="row align-items-center">
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="entry_time_${last}">Entry Time (sec)</label>
+                                                <input class="ml10"
+                                                       type="number"
+                                                       id="entry_time_${last}"
+                                                       name="entry_time_${last}"
+                                                       data-maxlength="3"
+                                                       oninput="javascript: myFunction(this.id)"
+                                                       onblur="javascript: myFunction2(this.id)"
+                                                       value="15"
+                                                       min="0"
+                                                       max="255" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="entry_time2_${last}">Entry Time 2 (sec)</label>
+                                                <input class="ml10"
+                                                       type="number"
+                                                       id="entry_time2_${last}"
+                                                       name="entry_time2_${last}"
+                                                       data-maxlength="3"
+                                                       oninput="javascript: myFunction(this.id)"
+                                                       onblur="javascript: myFunction2(this.id)"
+                                                       value="15"
+                                                       min="0"
+                                                       max="255" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                            <div class="form-item roww">
+                                                <label for="exit_time_${last}">Exit Time (sec)</label>
+                                                <input class="ml10"
+                                                       type="number"
+                                                       id="exit_time_${last}"
+                                                       name="exit_time_${last}"
+                                                       data-maxlength="3"
+                                                       oninput="javascript: myFunction(this.id)"
+                                                       onblur="javascript: myFunction2(this.id)"
+                                                       value="45"
+                                                       min="0"
+                                                       max="255" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <fieldset>
+                                        <legend>Options (Attributes)</legend>
+                                        <div class="row align-items-center mr-1">
+                                            <div class="col-xs-12 col-md mr-2">
+                                                <div class="form-item roww">
+                                                    <label for="auto_disarm_on_timeslot_${last}">Auto disarm on Time slot</label>
+                                                    <input type="checkbox" id="auto_disarm_on_timeslot_${last}" name="auto_disarm_on_timeslot_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md">
+                                                <div class="form-item roww">
+                                                    <label for="auto_arm_type_${last}">Auto arm type</label>
+                                                    <div class="select">
+                                                        <select id="auto_arm_type_${last}"
+                                                                name="auto_arm_type_${last}">
+                                                            <option value="full">Full</option>
+                                                            <option value="stay">Stay</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md mr-2">
+                                                <div class="form-item roww">
+                                                    <label for="clear_bypass_on_disarm_${last}">Clear Bypass on disarm</label>
+                                                    <input type="checkbox" id="clear_bypass_on_disarm_${last}" name="clear_bypass_on_disarm_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md">
+                                                <div class="form-item roww">
+                                                    <label for="one_touch_arming_${last}">One touch arming</label>
+                                                    <input type="checkbox" id="one_touch_arming_${last}" name="one_touch_arming_${last}" class="ml10" checked />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md mr-2">
+                                                <div class="form-item roww">
+                                                    <label for="auto_arm_on_no_mvt_${last}">Auto arm on no movement</label>
+                                                    <input type="checkbox" id="auto_arm_on_no_mvt_${last}" name="auto_arm_on_no_mvt_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Bell Settings</legend>
+                                    <div class="row align-items-center">
+                                        <div class="col-xs-12 col-lg-6">
+                                            <div class="form-item roww">
+                                                <label for="bell_time_${last}">Bell Time (min)</label>
+                                                <input class="ml10"
+                                                       type="number"
+                                                       id="bell_time_${last}"
+                                                       name="bell_time_${last}"
+                                                       data-maxlength="3"
+                                                       oninput="javascript: myFunction(this.id)"
+                                                       onblur="javascript: myFunction2(this.id)"
+                                                       value="1"
+                                                       min="0"
+                                                       max="255" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-6">
+                                            <div class="form-item roww">
+                                                <label for="bell_delay_${last}">Bell Delay (sec)</label>
+                                                <input class="ml10"
+                                                       type="number"
+                                                       id="bell_delay_${last}"
+                                                       name="bell_delay_${last}"
+                                                       data-maxlength="3"
+                                                       oninput="javascript: myFunction(this.id)"
+                                                       onblur="javascript: myFunction2(this.id)"
+                                                       value="0"
+                                                       min="0"
+                                                       max="255" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <fieldset>
+                                        <legend>Options (Attributes)</legend>
+                                        <div class="row align-items-center m-1">
+                                            <div class="col-xs-12 col-md">
+                                                <div class="form-item roww">
+                                                    <label for="squark_on_arm_${last}">Squark on arm</label>
+                                                    <input type="checkbox" id="squark_on_arm_${last}" name="squark_on_arm_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md">
+                                                <div class="form-item roww">
+                                                    <label for="squark_on_disarm_${last}">Squark on disarm</label>
+                                                    <input type="checkbox" id="squark_on_disarm_${last}" name="squark_on_disarm_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md pr-4">
+                                                <div class="form-item roww">
+                                                    <label for="alarm_memory_squark_${last}">Alarm Memory Squark</label>
+                                                    <input type="checkbox" id="alarm_memory_squark_${last}" name="alarm_memory_squark_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md">
+                                                <div class="form-item roww">
+                                                    <label for="10min_warning_${last}">10 min warning</label>
+                                                    <input type="checkbox" id="10min_warning_${last}" name="10min_warning_${last}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md">
+                                                <div class="form-item roww">
+                                                    <label for="fire_alarm_duration_${last}">Fire alarm duration</label>
+                                                    <input type="checkbox" id="fire_alarm_duration_${last}" name="fire_alarm_duration_${last}" class="ml10" checked />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Panic Alarm Types</legend>
+                                    <div class="row align-items-center m-2">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-item roww">
+                                                <label for="enable_police_panic_${last}">Enable Police Panic</label>
+                                                <input type="checkbox" id="enable_police_panic_${last}" name="enable_police_panic_${last}" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-item roww">
+                                                <label for="police_panic_sound_type_${last}">Police Panic Sound Type</label>
+                                                <div class="select">
+                                                    <select id="police_panic_sound_type_${last}"
+                                                            name="police_panic_sound_type_${last}">
+                                                        <option value="audible">Audible</option>
+                                                        <option value="silent">Silent</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center m-2">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-item roww">
+                                                <label for="enable_medical_panic_${last}">Enable Medical Panic</label>
+                                                <input type="checkbox" id="enable_medical_panic_${last}" name="enable_medical_panic_${last}" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-item roww">
+                                                <label for="medical_panic_sound_type_${last}">Medical Panic Sound Type</label>
+                                                <div class="select">
+                                                    <select id="medical_panic_sound_type_${last}"
+                                                            name="medical_panic_sound_type_${last}">
+                                                        <option value="audible">Audible</option>
+                                                        <option value="silent">Silent</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center m-2">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-item roww">
+                                                <label for="enable_fire_panic_${last}">Enable Fire Panic (Always Audible)</label>
+                                                <input type="checkbox" id="enable_fire_panic_${last}" name="enable_fire_panic_${last}" class="ml10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset></div>`;
+                    var element = document.getElementById("new_area");
+                    var new_inner = `
+                        ${element.innerHTML}
+                        ${newUserElement}
+                    `;
+                    lst.push(last);
+                    element.innerHTML = new_inner;
+
+                    // reordering
+                    var main = document.getElementById('new_area');
+
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
+                } else {
+                    if (lst.includes(id)) {
+                        var elem = document.getElementById(`${id}`);
+                        elem.parentNode.removeChild(elem);
+                        lst = lst.filter(function (item) {
+                            return item !== id
+                        })
+                    } else {
+                        return;
+                    }
+                }
+            }
+
+        </script>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>-->
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+        $(document).ready(() => {
+            sendMessage("Devices|ECLIPSE|Areas");
+        });
+    </script>
+</body>
+</html>
