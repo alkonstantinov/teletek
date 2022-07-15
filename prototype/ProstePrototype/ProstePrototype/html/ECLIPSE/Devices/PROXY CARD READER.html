@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../IRIS.css" />
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+
+    <title>Teletek ProsTe</title>
+</head>
+<body>
+    <div class="container" id="divMain">
+        <form action="">
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <div class="row m-1">
+                <div class="col-6">
+                    <div class="form-item roww">
+                        <label for="identification_proxy_cr">Identification</label>
+                        <input type="text" id="identification_proxy_cr" name="identification_proxy_cr" value="98765432" maxlength="8" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-item roww disabled">
+                        <label for="in_proxy_cr">In</label>
+                        <input class="ml10"
+                               type="number"
+                               id="in_proxy_cr"
+                               name="in_proxy_cr"
+                               data-maxlength="2"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               value="2"
+                               min="0"
+                               max="16" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-item roww disabled">
+                        <label for="out_proxy_cr">Out</label>
+                        <input class="ml10"
+                               type="number"
+                               id="out_proxy_cr"
+                               name="out_proxy_cr"
+                               data-maxlength="2"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               value="1"
+                               min="0"
+                               max="16" />
+                    </div>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend>Areas</legend>
+                <div class="row align-items-center mr-1">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="1_proxy_cr">1</label>
+                            <input type="checkbox" id="1_proxy_cr" name="1_proxy_cr" class="ml10" checked />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="2_proxy_cr">2</label>
+                            <input type="checkbox" id="2_proxy_cr" name="2_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="3_proxy_cr">3</label>
+                            <input type="checkbox" id="3_proxy_cr" name="3_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="4_proxy_cr">4</label>
+                            <input type="checkbox" id="4_proxy_cr" name="4_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="5_proxy_cr">5</label>
+                            <input type="checkbox" id="5_proxy_cr" name="5_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="6_proxy_cr">6</label>
+                            <input type="checkbox" id="6_proxy_cr" name="6_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="7_proxy_cr">7</label>
+                            <input type="checkbox" id="7_proxy_cr" name="7_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="8_proxy_cr">8</label>
+                            <input type="checkbox" id="8_proxy_cr" name="8_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mr-1">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="9_proxy_cr">9</label>
+                            <input type="checkbox" id="9_proxy_cr" name="9_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="10_proxy_cr">10</label>
+                            <input type="checkbox" id="10_proxy_cr" name="10_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="11_proxy_cr">11</label>
+                            <input type="checkbox" id="11_proxy_cr" name="11_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="12_proxy_cr">12</label>
+                            <input type="checkbox" id="12_proxy_cr" name="12_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="13_proxy_cr">13</label>
+                            <input type="checkbox" id="13_proxy_cr" name="13_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="14_proxy_cr">14</label>
+                            <input type="checkbox" id="14_proxy_cr" name="14_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="15_proxy_cr">15</label>
+                            <input type="checkbox" id="15_proxy_cr" name="15_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="16_proxy_cr">16</label>
+                            <input type="checkbox" id="16_proxy_cr" name="16_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Options</legend>
+                <div class="row m-1">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="chime_proxy_cr">Chime</label>
+                            <input type="checkbox" id="chime_proxy_cr" name="chime_proxy_cr" class="ml10" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Arm Type</legend>
+                <div class="row m-1">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 1</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a1_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a1_mode_a_proxy_cr"
+                                            name="a1_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a1_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a1_mode_b_proxy_cr"
+                                            name="a1_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 2</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a2_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a2_mode_a_proxy_cr"
+                                            name="a2_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a2_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a2_mode_b_proxy_cr"
+                                            name="a2_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 3</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a3_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a3_mode_a_proxy_cr"
+                                            name="a3_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a3_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a3_mode_b_proxy_cr"
+                                            name="a3_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 4</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a4_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a4_mode_a_proxy_cr"
+                                            name="a4_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a4_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a4_mode_b_proxy_cr"
+                                            name="a4_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row m-1">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 5</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a5_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a5_mode_a_proxy_cr"
+                                            name="a5_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a5_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a5_mode_b_proxy_cr"
+                                            name="a5_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 6</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a6_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a6_mode_a_proxy_cr"
+                                            name="a6_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a6_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a6_mode_b_proxy_cr"
+                                            name="a6_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 7</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a7_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a7_mode_a_proxy_cr"
+                                            name="a7_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a7_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a7_mode_b_proxy_cr"
+                                            name="a7_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 8</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a8_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a8_mode_a_proxy_cr"
+                                            name="a8_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a8_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a8_mode_b_proxy_cr"
+                                            name="a8_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row m-1">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 9</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a9_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a9_mode_a_proxy_cr"
+                                            name="a9_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a9_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a9_mode_b_proxy_cr"
+                                            name="a9_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 10</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a10_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a10_mode_a_proxy_cr"
+                                            name="a10_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a10_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a10_mode_b_proxy_cr"
+                                            name="a10_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 11</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a11_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a11_mode_a_proxy_cr"
+                                            name="a11_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a11_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a11_mode_b_proxy_cr"
+                                            name="a11_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 12</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a12_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a12_mode_a_proxy_cr"
+                                            name="a12_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a12_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a12_mode_b_proxy_cr"
+                                            name="a12_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row m-1">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 13</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a13_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a13_mode_a_proxy_cr"
+                                            name="a13_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a13_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a13_mode_b_proxy_cr"
+                                            name="a13_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 14</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a14_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a14_mode_a_proxy_cr"
+                                            name="a14_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a14_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a14_mode_b_proxy_cr"
+                                            name="a14_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 15</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a15_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a15_mode_a_proxy_cr"
+                                            name="a15_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a15_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a15_mode_b_proxy_cr"
+                                            name="a15_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <fieldset class="bn">
+                            <legend>Area 16</legend>
+                            <div class="form-item roww p-0">
+                                <label for="a16_mode_a_proxy_cr">Mode A</label>
+                                <div class="select">
+                                    <select id="a16_mode_a_proxy_cr"
+                                            name="a16_mode_a_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item roww p-0">
+                                <label for="a16_mode_b_proxy_cr">Mode B</label>
+                                <div class="select">
+                                    <select id="a16_mode_b_proxy_cr"
+                                            name="a16_mode_b_proxy_cr">
+                                        <option value="none">None</option>
+                                        <option value="disarm">Disarm</option>
+                                        <option value="full">Full</option>
+                                        <option value="stay">Stay</option>
+                                        <option value="sleep">Sleep</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+                <button type="button" class="btn-round btn-blue">Save</button>
+                <button type="button" class="btn-round btn-border-black">Back</button>
+            </div>
+        </form>
+        <script>
+            function myFunction(id) {
+                var element = document.getElementById(id);
+                element.value = element.value.slice(0, element.dataset.maxlength);
+            }
+            function myFunction2(id) {
+                var element = document.getElementById(id);
+                if (element.value > element.max) {
+                    element.value = element.max;
+                }
+            }
+            function myFunction3(id) {
+                var element = document.getElementById(id);
+                if (!element.value.includes(":")) {
+                    console.log('before:', element.value);
+                    element.value += ":";
+                    console.log('after:', element.value);
+                }
+                const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
+                console.log('test', regex.test(element.value));
+                element.value = regex.exec(element.value);
+                console.log(element.value);
+            }
+
+        </script>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
+    <!-- DatePicker Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+        $(document).ready(() => {
+            sendMessage("Devices|ECLIPSE|Timeslots");
+        });
+    </script>
+</body>
+</html>
