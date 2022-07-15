@@ -117,7 +117,7 @@
 
                 <div id="new_timeslot"></div>
 
-                <button type="button" onclick="javascript:addTimeslot('timeslot')" class="m-4">
+                <button style="display: block;" type="button" onclick="javascript:addTimeslot('timeslot')" class="m-4" id="timeslots_btn">
                     <i class="fa-solid fa-plus 5x"></i> Add New Timeslot
                 </button>
 
@@ -128,12 +128,12 @@
                                 
                 <div id="new_period"></div>
 
-                <button type="button" onclick="javascript:addPeriod('period')" class="m-4">
+                <button style="display: block;" type="button" onclick="javascript:addPeriod('period')" class="m-4" id="period_btn">
                     <i class="fa-solid fa-plus 5x"></i> Add New Holidays
                 </button>
             </fieldset>
 
-            <div style="bottom: 10px; position: fixed;" class="buttons-row mt-5">
+            <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
                 <button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>
             </div>
@@ -163,10 +163,11 @@
             }
 
             var lst = [];
+            const timeslots = 16;
             function addTimeslot(id) {
                 if (id === "timeslot") {
                     var last = 0;
-                    for (i = 2; i <= 16; i++) {
+                    for (i = 2; i <= timeslots; i++) {
                         if (lst.includes(i)) {
                             continue;
                         } else {
@@ -284,6 +285,11 @@
                     }).forEach(function (elem) {
                         main.appendChild(elem);
                     });
+
+                    if (periodLst.length === timeslots) {
+                        let btn = document.getElementById("timeslots_btn");
+                        btn.style.display = "none";
+                    }
                 } else {
                     if (lst.includes(id)) {
                         var elem = document.getElementById(`${id}`);
@@ -291,6 +297,11 @@
                         lst = lst.filter(function (item) {
                             return item !== id
                         })
+
+                        let btn = document.getElementById("timeslots_btn");
+                        if (periodLst.length < timeslots && btn.style.display === "none") {
+                            btn.style.display = "block";
+                        }
                     } else {
                         return;
                     }
@@ -298,10 +309,11 @@
             }
 
             var periodLst = [];
+            const periods = 300;
             function addPeriod(id) {
                 if (id === "period") {
                     var last = 0;
-                    for (i = 1; i <= 16; i++) {
+                    for (i = 1; i <= periods; i++) {
                         if (periodLst.includes(i)) {
                             continue;
                         } else {
@@ -335,6 +347,11 @@
                                 `;
                     periodLst.push(last);
                     element.innerHTML = new_inner;
+
+                    if (periodLst.length === periods) {
+                        let btn = document.getElementById("period_btn");
+                        btn.style.display = "none";
+                    }
                 } else {
                     let lastChar = parseInt(id.split("_")[id.split("_").length - 1]);
                     if (periodLst.includes(lastChar)) {
@@ -343,6 +360,11 @@
                         periodLst = periodLst.filter(function (item) {
                             return item !== lastChar
                         })
+
+                        let btn = document.getElementById("period_btn");
+                        if (periodLst.length < periods && btn.style.display === "none") {
+                            btn.style.display = "block";
+                        }
                     } else {
                         return;
                     }
