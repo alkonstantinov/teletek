@@ -51,6 +51,9 @@
     <None Update="html\boostrap.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\ECLIPSE\Communicator.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\ECLIPSE\Timeslots.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

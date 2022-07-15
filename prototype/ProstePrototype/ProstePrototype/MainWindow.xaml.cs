@@ -29,7 +29,7 @@ namespace ProstePrototype
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "IRISPanel.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "access.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "panels_in_network.html");
@@ -49,7 +49,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Input_Output.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Mobile Operators.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Receiver Settings.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html/ECLIPSE", "General Settings.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/ECLIPSE", "General Settings.html");
 
             //wb0.Load("file:///" + navigation);
             this.DataContext = this;
