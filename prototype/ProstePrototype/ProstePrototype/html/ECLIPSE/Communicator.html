@@ -1091,12 +1091,12 @@
                         main.appendChild(elem);
                     });
                 } else {
-                    let lastChar = id.substr(id.length - 1);
-                    if (phoneNumberLst.includes(parseInt(lastChar))) {
+                    let lastChar = parseInt(id.split("_")[id.split("_").length - 1]);
+                    if (phoneNumberLst.includes(lastChar)) {
                         var elem = document.getElementById(id);
                         elem.parentNode.removeChild(elem);
                         phoneNumberLst = phoneNumberLst.filter(function (item) {
-                            return item !== parseInt(lastChar)
+                            return item !== lastChar
                         })
                     } else {
                         return;

@@ -301,7 +301,7 @@
             function addPeriod(id) {
                 if (id === "period") {
                     var last = 0;
-                    for (i = 2; i <= 16; i++) {
+                    for (i = 1; i <= 16; i++) {
                         if (periodLst.includes(i)) {
                             continue;
                         } else {
@@ -330,14 +330,14 @@
                     </div>`;
                     var element = document.getElementById("new_period");
                     var new_inner = `
-                                                                                                ${element.innerHTML}
-                                                                                                ${newUserElement}
-                                                                                            `;
+                                    ${element.innerHTML}
+                                    ${newUserElement}
+                                `;
                     periodLst.push(last);
                     element.innerHTML = new_inner;
                 } else {
-                    let lastChar = id.substr(id.length - 1);
-                    if (periodLst.includes(parseInt(lastChar))) {
+                    let lastChar = parseInt(id.split("_")[id.split("_").length - 1]);
+                    if (periodLst.includes(lastChar)) {
                         var elem = document.getElementById(id);
                         elem.parentNode.removeChild(elem);
                         periodLst = periodLst.filter(function (item) {
