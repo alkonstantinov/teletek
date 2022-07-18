@@ -25,17 +25,27 @@
         <div class="container" id="divMain">
             <form action="">
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-                <div class="row align-items-center">
-                    <div class="form-item roww">
-                        <label for="gr_input_logic">Input Logic</label>
-                        <div class="select">
-                            <select id="gr_input_logic" name="gr_input_logic">
-                                <option value="or">OR</option>
-                                <option value="and">AND</option>
-                            </select>
+                <fieldset>
+                    <legend>Input Group 1</legend>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="gr_input_logic_1">Input Logic</label>
+                                <div class="select">
+                                    <select id="gr_input_logic_1" name="gr_input_logic_1">
+                                        <option value="or">OR</option>
+                                        <option value="and">AND</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </fieldset>
+                <div id="new_input_group"></div>
+
+                <button style="display: block;" type="button" onclick="javascript:addInputGroup('input_group')" class="m-4" id="input_group_btn">
+                    <i class="fa-solid fa-plus 5x"></i> Add New Input Group
+                </button>
 
                 <div class="buttons-row mt15">
                     <button type="button" class="btn-round btn-blue">Save</button>
@@ -53,6 +63,83 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>-->
         <script>
+            var lst = [];
+            const inputs = 250;
+            function addInputGroup(id) {
+                if (id === "input_group") {
+                    var last = 0;
+                    for (i = 2; i <= inputs; i++) {
+                        if (lst.includes(i)) {
+                            continue;
+                        } else {
+                            last = i;
+                            break;
+                        }
+                    }
+                    if (last === 0 || lst.includes(last)) return;
+
+                    const newUserElement = `
+                                    <div style="display: block" id="${last}">
+                                        <fieldset>
+                                            <legend>Input Group ${last}</legend>
+                                            <div class="row align-items-center">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <div class="form-item roww">
+                                                        <label for="gr_input_logic_${last}">Input Logic</label>
+                                                        <div class="select">
+                                                            <select id="gr_input_logic_${last}" name="gr_input_logic_${last}">
+                                                                <option value="or">OR</option>
+                                                                <option value="and">AND</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col"><button type="button" onclick="javascript:addInputGroup(${last})" class="m-2">
+                                                    <i class="fa-solid fa-minus 5x"></i> Remove Input Group
+                                                </button></div>
+                                            </div>
+                                        </fieldset>
+                                    </div>`;
+                    var element = document.getElementById("new_input_group");
+                    var new_inner = `
+                                                        ${element.innerHTML}
+                                                        ${newUserElement}
+                                                    `;
+                    lst.push(last);
+                    element.innerHTML = new_inner;
+
+                    // reordering
+                    var main = document.getElementById('new_input_group');
+
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
+
+                    // button display check
+                    if (lst.length === inputs - 1) {
+                        let button = document.getElementById("input_group_btn");
+                        button.style.display = "none";
+                    }
+                } else {
+                    if (lst.includes(id)) {
+                        var elem = document.getElementById(`${id}`);
+                        elem.parentNode.removeChild(elem);
+                        lst = lst.filter(function (item) {
+                            return item !== id
+                        })
+
+                        let button = document.getElementById("input_group_btn");
+                        if (lst.length < inputs - 1 && button.style.display === "none") {
+                            button.style.display = "block";
+                        }
+                    } else {
+                        return;
+                    }
+                }
+            }
+
             function sendMessage(bc) {
                 CefSharp.PostMessage(bc);
             }
