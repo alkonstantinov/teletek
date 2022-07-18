@@ -78,19 +78,38 @@
                     </div>
                 </fieldset>
 
-                <div class="form-item roww">
-                    <label for="zone">Zone</label>
-                    <input class="ml10"
-                           type="number"
-                           id="zone"
-                           name="zone"
-                           data-maxlength="2"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="1"
-                           min="1"
-                           max="96" />
-                </div>
+                <fieldset>
+                    <legend>Parameters</legend>
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="zone">Zone</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="zone"
+                                       name="zone"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww disabled">
+                                <label for="dust_level">Dust Level [%]</label>
+                                <input type="text" id="dust_level" name="dust_level" value="??" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="led">LED</label>
+                                <input type="checkbox" id="led" class="ml10" checked />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>                
 
                 <fieldset>
                     <legend>Alarm Level</legend>
@@ -125,16 +144,6 @@
                         </div>
                     </div>
                 </fieldset>
-
-                <div class="form-item roww">
-                    <label for="led">LED</label>
-                    <input type="checkbox" id="led" class="ml10" checked />
-                </div>
-
-                <div class="form-item roww disabled">
-                    <label for="dust_level">Dust Level [%]</label>
-                    <input type="text" id="dust_level" name="dust_level" value="??"/>
-                </div>
 
                 <div class="buttons-row mt15">
                     <button type="button" class="btn-round btn-blue">Save</button>

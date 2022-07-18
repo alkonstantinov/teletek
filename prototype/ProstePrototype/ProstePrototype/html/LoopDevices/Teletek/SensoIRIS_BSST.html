@@ -50,49 +50,58 @@
                         </div>
                     </div>
                 </fieldset>
-                <div class="form-item roww">
-                    <label for="zone">Zone</label>
-                    <input class="ml10"
-                           type="number"
-                           id="zone"
-                           name="zone"
-                           data-maxlength="2"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="1"
-                           min="1"
-                           max="96" />
-                </div>
-
-                <div class="form-item roww">
-                    <label for="sounder_group">Sounder Group</label>
-                    <input class="ml10"
-                           type="number"
-                           id="sounder_group"
-                           name="sounder_group"
-                           data-maxlength="2"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="0"
-                           min="1"
-                           max="96" />
-                </div>
-
-
-                <div class="form-item roww">
-                    <label for="parameters">Parameters</label>
-                    <div class="select">
-                        <select id="parameters"
-                                name="parameters">
-                            <option value="sound-high_level-strobe">Sound / High Level / Strobe</option>
-                            <option value="sound-low_level-strobe">Sound / Low Level / Strobe</option>
-                            <option value="sound-high_level">Sound / High Level</option>
-                            <option value="sound-low_level">Sound / Low Level</option>
-                            <option value="strobe-high_level">Strobe / High Level</option>
-                            <option value="strobe-low_level">Strobe / Low Level</option>
-                        </select>
+                
+                <fieldset>
+                    <legend>Parameters</legend>
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="zone">Zone</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="zone"
+                                       name="zone"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="sounder_group">Sounder Group</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="sounder_group"
+                                       name="sounder_group"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="0"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="parameters">Parameters</label>
+                                <div class="select">
+                                    <select id="parameters"
+                                            name="parameters">
+                                        <option value="sound-high_level-strobe">Sound / High Level / Strobe</option>
+                                        <option value="sound-low_level-strobe">Sound / Low Level / Strobe</option>
+                                        <option value="sound-high_level">Sound / High Level</option>
+                                        <option value="sound-low_level">Sound / Low Level</option>
+                                        <option value="strobe-high_level">Strobe / High Level</option>
+                                        <option value="strobe-low_level">Strobe / Low Level</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
 
                 <div class="buttons-row mt15">
                     <button type="button" class="btn-round btn-blue">Save</button>

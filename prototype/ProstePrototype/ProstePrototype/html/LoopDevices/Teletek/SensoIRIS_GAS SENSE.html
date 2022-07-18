@@ -50,30 +50,32 @@
                         </div>
                     </div>
                 </fieldset>
-                <div class="form-item roww">
-                    <label for="zone">Zone</label>
-                    <input class="ml10"
-                           type="number"
-                           id="zone"
-                           name="zone"
-                           data-maxlength="2"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="1"
-                           min="1"
-                           max="96" />
-                </div>
-
+                
                 <fieldset>
                     <legend>Parameters</legend>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww">
+                                <label for="zone">Zone</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="zone"
+                                       name="zone"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
                             <div class="form-item roww">
                                 <label for="sounder_on">SOUNDER ON</label>
                                 <input type="checkbox" id="sounder_on" name="sounder_on" class="ml10" />
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <div class="form-item roww">
                                 <label for="led">LED</label>
                                 <input type="checkbox" id="led" name="led" class="ml10" checked />
