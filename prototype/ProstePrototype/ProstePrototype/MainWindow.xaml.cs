@@ -29,18 +29,18 @@ namespace ProstePrototype
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "IRISPanel.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "access.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "panels_in_network.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "input.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "inputs_group.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "output.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "fat-fbf.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "zone_evac.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "peripherial_devices.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "peripherial_devices_none.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "IRISPanel.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "access.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "panels_in_network.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "input.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "inputs_group.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "output.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "fat-fbf.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone_evac.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices_none.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/Teletek", "M22.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/System Sensor/Modules", "Default - normal.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/System Sensor/Sensors", "1251E.html");
@@ -58,7 +58,8 @@ namespace ProstePrototype
             {
                 wb1.Width = 0; //if index.html is loaded
                 Splitter1.Width = 0; //if index.html is loaded
-            } else
+            }
+            else
             {
                 wb1.Width = this.Width / 5;
             }
@@ -109,7 +110,7 @@ namespace ProstePrototype
                     if (i.Length > 2)
                     {
                         string wb1CommandLine = "div" + i[i.Length - 2];
-                        wb1.ExecuteScriptAsync("loadDiv(" + wb1CommandLine +", " + i[0] + "|" + i[i.Length - 2]+ ")"); // not working
+                        wb1.ExecuteScriptAsync("loadDiv(" + wb1CommandLine + ", " + i[0] + "|" + i[i.Length - 2] + ")"); // not working
                     }
                     wb1.Width = this.Width / 5;
                     Splitter1.Width = 5;

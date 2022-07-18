@@ -46,10 +46,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="html\access.html">
+    <None Update="html\IRIS\access.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\ANDFunction.png">
+    <None Update="Images\ANDFunction.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\boostrap.css">
@@ -145,7 +145,7 @@
     <None Update="html\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\fat-fbf.html">
+    <None Update="html\IRIS\fat-fbf.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\LoopDevices\System Sensor\Modules\Default - normal.html">
@@ -307,13 +307,13 @@
     <None Update="html\LoopDevices\Teletek\SensoIRIS_MOI04.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\IRISPanel.html">
+    <None Update="html\IRIS\IRISPanel.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\peripherial_devices_none.html">
+    <None Update="html\IRIS\peripherial_devices_none.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\peripherial_devices.html">
+    <None Update="html\IRIS\peripherial_devices.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\TTE GPRS\Receiver Settings.html">
@@ -331,28 +331,28 @@
     <None Update="html\TTE GPRS\General Settings.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\zone_evac.html">
+    <None Update="html\IRIS\zone_evac.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\zone.html">
+    <None Update="html\IRIS\zone.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\output.html">
+    <None Update="html\IRIS\output.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\input.html">
+    <None Update="html\IRIS\input.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\inputs_group.html">
+    <None Update="html\IRIS\inputs_group.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\IRIS.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\ORFunction.png">
+    <None Update="Images\ORFunction.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\panels_in_network.html">
+    <None Update="html\IRIS\panels_in_network.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\1102. motherboard.ico">
