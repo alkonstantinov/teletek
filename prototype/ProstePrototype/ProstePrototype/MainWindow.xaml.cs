@@ -29,7 +29,7 @@ namespace ProstePrototype
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "IRISPanel.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "access.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "panels_in_network.html");
@@ -39,7 +39,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "fat-fbf.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone_evac.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices_none.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/Teletek", "M22.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/System Sensor/Modules", "Default - normal.html");

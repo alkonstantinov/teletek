@@ -286,9 +286,10 @@
                         main.appendChild(elem);
                     });
 
-                    if (periodLst.length === timeslots) {
-                        let btn = document.getElementById("timeslots_btn");
-                        btn.style.display = "none";
+                    // button display check
+                    if (lst.length === timeslots - 1) {
+                        let button = document.getElementById("timeslots_btn");
+                        button.style.display = "none";
                     }
                 } else {
                     if (lst.includes(id)) {
@@ -299,7 +300,7 @@
                         })
 
                         let btn = document.getElementById("timeslots_btn");
-                        if (periodLst.length < timeslots && btn.style.display === "none") {
+                        if (lst.length < timeslots - 1 && btn.style.display === "none") {
                             btn.style.display = "block";
                         }
                     } else {

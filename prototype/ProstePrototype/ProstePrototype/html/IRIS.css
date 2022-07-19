@@ -39,6 +39,21 @@ a, a:hover {
     padding-bottom: 16px !important;
 }
 
+.bl {
+    border-right: 2px dotted #0c2b90;
+}
+
+.bt {
+    border-top: 2px dotted #0c2b90;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #0c2b90;
+    border-color: #0c2b90;
+}
+
 .btnStyle {
     text-align: center;
     border: solid 1px #dfd9d9d2;
@@ -321,11 +336,13 @@ fieldset legend {
 
 .btn-border-black {
     background-color: #ffffff;
-    border: 1px solid #000000;
-    color: #000000; }
+    border: 1px solid #0c2b90;
+    color: #0c2b90;
+}
     .btn-border-black:hover {
         background-color: rgba(128, 128, 128, .6);
-        color: #000000; }
+        color: #0c91e4;
+    }
 
 .mt15 {
     margin-top: 15px;
