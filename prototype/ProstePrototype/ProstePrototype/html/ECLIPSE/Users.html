@@ -18,7 +18,7 @@
     <title>Teletek ProsTe</title>
 </head>
 <body>
-    <div class="container" id="divMain">
+    <div class="container mt-2" id="divMain">
         <form action="">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="form-item roww">
@@ -32,259 +32,33 @@
                 </div>
             </div>
 
-            <fieldset>
-                <legend>User 1</legend>
-
-                <div class="form-item roww flex">
-                    <label for="username">Name</label>
-                    <input type="text" id="username" name="username" value="User 01" maxlength="16" />
+            <div class="row mt-2 pt-2 bt">
+                <div class="col-3 bl scroll">
+                    <div id="new_user" class="row">
+                        <div class="col-11 pr-1">
+                            <a href="javascript:showUser('1')">
+                                <div class="btnStyle">
+                                    <img src="../../Images/33.User.ico" alt="" width="25" height="25" class="m15" />
+                                    <div class="someS">
+                                        <h5>User 1</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div id="selected_area"></div>
                 </div>
 
-                <fieldset>
-                    <legend>Codes</legend>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Code</span>
-                        </div>
-                        <input type="password" aria-label="eng_code_name" id="code_name" name="code_name" maxlength="6" value="123456" class="ml25" />
-                        <input type="password" aria-label="eng_code_pass" id="code_pass" name="code_pass" maxlength="6" value="123456" />
-                    </div>
-                    <div class="form-item roww">
-                        <label for="proximity_code">Proximity Code</label>
-                        <input type="text" id="proximity_code" name="proximity_code" value="ffffffffffff" maxlength="12" />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Attributes</legend>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="disarm">Disarm</label>
-                                <input type="checkbox" id="disarm" name="disarm" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="ss_arm">Stay & Sleep Arm</label>
-                                <input type="checkbox" id="ss_arm" name="ss_arm" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="bypass">Bypass</label>
-                                <input type="checkbox" id="bypass" name="bypass" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="programming">Programming</label>
-                                <input type="checkbox" id="programming" name="programming" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="manager_feature">Manager Feature</label>
-                                <input type="checkbox" id="manager_feature" name="manager_feature" class="ml10" checked />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Proxy Attributes</legend>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="disarm">Disarm</label>
-                                <input type="checkbox" id="disarm" name="disarm" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="arming_type">Arming Type</label>
-                                <div class="select">
-                                    <select id="arming_type"
-                                            name="arming_type">
-                                        <option value="disabled">Disabled</option>
-                                        <option value="full_arm">Full Arm</option>
-                                        <option value="stay_arm">Stay Arm</option>
-                                        <option value="sleep_arm" selected>Sleep Arm</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Areas</legend>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_1">1</label>
-                                <input type="checkbox" id="1_1" name="1_1" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_2">2</label>
-                                <input type="checkbox" id="1_2" name="1_2" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_3">3</label>
-                                <input type="checkbox" id="1_3" name="1_3" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_4">4</label>
-                                <input type="checkbox" id="1_4" name="1_4" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_5">5</label>
-                                <input type="checkbox" id="1_5" name="1_5" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_6">6</label>
-                                <input type="checkbox" id="1_6" name="1_6" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_7">7</label>
-                                <input type="checkbox" id="1_7" name="1_7" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_8">8</label>
-                                <input type="checkbox" id="1_8" name="1_8" class="ml10" checked />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_9">9</label>
-                                <input type="checkbox" id="1_9" name="1_9" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_10">10</label>
-                                <input type="checkbox" id="1_10" name="1_10" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_11">11</label>
-                                <input type="checkbox" id="1_11" name="1_11" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_12">12</label>
-                                <input type="checkbox" id="1_12" name="1_12" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_13">13</label>
-                                <input type="checkbox" id="1_13" name="1_13" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_14">14</label>
-                                <input type="checkbox" id="1_14" name="1_14" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_15">15</label>
-                                <input type="checkbox" id="1_15" name="1_15" class="ml10" checked />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_16">16</label>
-                                <input type="checkbox" id="1_16" name="1_16" class="ml10" checked />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <div class="form-item roww">
-                    <label for="time_slot">Time slot</label>
-                    <input class="ml10"
-                           type="number"
-                           id="time_slot"
-                           name="time_slot"
-                           data-maxlength="2"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           value="0"
-                           min="0"
-                           max="16" />
-                </div>
-                <fieldset>
-                    <legend>RC</legend>
-
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="rc_A">RC A (*)</label>
-                                <div class="select">
-                                    <select id="rc_A"
-                                            name="rc_A">
-                                        <option value="not_used">Not Used</option>
-                                        <option value="sleep_arm">Sleep Arm</option>
-                                        <option value="stay_arm">Stay Arm</option>
-                                        <option value="fire_alarm">Fire Alarm</option>
-                                        <option value="medical_alarm">Medical Alarm</option>
-                                        <option value="police_alarm">Police Alarm</option>
-                                        <option value="pgm_switch">PGM Switch</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="rc_B">RC B</label>
-                                <div class="select">
-                                    <select id="rc_B"
-                                            name="rc_B">
-                                        <option value="not_used">Not Used</option>
-                                        <option value="sleep_arm">Sleep Arm</option>
-                                        <option value="stay_arm">Stay Arm</option>
-                                        <option value="fire_alarm">Fire Alarm</option>
-                                        <option value="medical_alarm">Medical Alarm</option>
-                                        <option value="police_alarm">Police Alarm</option>
-                                        <option value="pgm_switch">PGM Switch</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </fieldset>
-
-            <div id="new_user"></div>
-
-            <button type="button" onclick="javascript:addUser('user')" class="m-4">
-                <i class="fa-solid fa-plus 5x"></i> Add New User
-            </button>
+            </div>
 
             <div style="bottom: 10px; position: sticky;" class="buttons-row mt15">
                 <button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>
+                <button style="display: inline-flex;" type="button" onclick="javascript:addUser('user')" id="user_btn" class="btn-round btn-border-black">
+                    <i class="fa-solid fa-plus 5x"></i> Add New User
+                </button>
             </div>
         </form>
         <script>
@@ -311,34 +85,19 @@
                 console.log(element.value);
             }
 
-            var lst = [];
-            function addUser(id) {
-                if (id === "user") {
-                    var last = 0;
-                    for (i = 2; i <= 99; i++) {
-                        if (lst.includes(i)) {
-                            continue;
-                        } else {
-                            last = i;
-                            break;
-                        }
-                    }
-                    if (last === 0) return;
-                    if (lst.includes(last)) { return; }
-                    const newUserElement = `<div style="display: block" id="${last}">
-                    <fieldset>
-                        <legend>User ${last}</legend>
+            function showUser(id) {
+                var el = document.getElementById("selected_area");
+                id = parseInt(id);
+                var target = `<fieldset id="id_${id}">
+                        <legend>User ${id}</legend>
                     
                         <div class="row align-items-center">
                             <div class="col">
                                 <div class="form-item roww flex">
-                                    <label for="username${last}">Name</label>
-                                    <input type="text" id="username${last}" name="username${last}" value="User ${String(last).padStart(2, '0')}" maxlength="16" />
+                                    <label for="username${id}">Name</label>
+                                    <input type="text" id="username${id}" name="username${id}" value="User ${String(id).padStart(2, '0')}" maxlength="16" />
                                 </div>
                             </div>
-                            <div class="col"><button type="button" onclick="javascript:addUser(${last})" class="m-2">
-                                <i class="fa-solid fa-minus 5x"></i> Remove User
-                            </button></div>
                         </div>
 
                         <fieldset>
@@ -347,46 +106,46 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Code</span>
                                 </div>
-                                <input type="password" aria-label="eng_code_name" id="code_name${last}" name="code_name${last}" maxlength="6" class="ml25" />
-                                <input type="password" aria-label="eng_code_pass" id="code_pass${last}" name="code_pass${last}" maxlength="6" />
+                                <input type="password" aria-label="eng_code_name" id="code_name${id}" name="code_name${id}" maxlength="6" class="ml25" ${id===1 ? "value='123456'" : ''}/>
+                                <input type="password" aria-label="eng_code_pass" id="code_pass${id}" name="code_pass${id}" maxlength="6" ${id === 1 ? "value='123456'" : ''}/>
                             </div>
                             <div class="form-item roww">
                                 <label for="proximity_code">Proximity Code</label>
-                                <input type="text" id="proximity_code${last}" name="proximity_code${last}" value="ffffffffffff" maxlength="12" />
+                                <input type="text" id="proximity_code${id}" name="proximity_code${id}" value="ffffffffffff" maxlength="12" />
                             </div>
                         </fieldset>
 
                         <fieldset>
                             <legend>Attributes</legend>
-                            <div class="row mt-2">
+                            <div class="row align-items-center m-1">
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="disarm${last}">Disarm</label>
-                                        <input type="checkbox" id="disarm${last}" name="disarm${last}" class="ml10" checked />
+                                        <label for="disarm${id}">Disarm</label>
+                                        <input type="checkbox" id="disarm${id}" name="disarm${id}" class="ml10" checked />
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="ss_arm${last}">Stay & Sleep Arm</label>
-                                        <input type="checkbox" id="ss_arm${last}" name="ss_arm${last}" class="ml10" checked />
+                                        <label for="ss_arm${id}">Stay & Sleep Arm</label>
+                                        <input type="checkbox" id="ss_arm${id}" name="ss_arm${id}" class="ml10" checked />
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="bypass${last}">Bypass</label>
-                                        <input type="checkbox" id="bypass${last}" name="bypass${last}" class="ml10" />
+                                        <label for="bypass${id}">Bypass</label>
+                                        <input type="checkbox" id="bypass${id}" name="bypass${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="programming${last}">Programming</label>
-                                        <input type="checkbox" id="programming${last}" name="programming${last}" class="ml10" />
+                                        <label for="programming${id}">Programming</label>
+                                        <input type="checkbox" id="programming${id}" name="programming${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="manager_feature${last}">Manager Feature</label>
-                                        <input type="checkbox" id="manager_feature${last}" name="manager_feature${last}" class="ml10" />
+                                        <label for="manager_feature${id}">Manager Feature</label>
+                                        <input type="checkbox" id="manager_feature${id}" name="manager_feature${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                             </div>
@@ -394,19 +153,19 @@
 
                         <fieldset>
                             <legend>Proxy Attributes</legend>
-                            <div class="row mt-2">
-                                <div class="col">
+                            <div class="row m-1">
+                                <div class="col-xs-12 col-md-6">
                                     <div class="form-item roww">
-                                        <label for="disarm${last}${last}">Disarm</label>
-                                        <input type="checkbox" id="disarm${last}${last}" name="disarm${last}${last}" class="ml10" checked />
+                                        <label for="disarm${id}${id}">Disarm</label>
+                                        <input type="checkbox" id="disarm${id}${id}" name="disarm${id}${id}" class="ml10" checked />
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="arming_type${last}">Arming Type</label>
+                                        <label for="arming_type${id}">Arming Type</label>
                                         <div class="select">
-                                            <select id="arming_type${last}"
-                                                    name="arming_type${last}">
+                                            <select id="arming_type${id}"
+                                                    name="arming_type${id}">
                                                 <option value="disabled">Disabled</option>
                                                 <option value="full_arm">Full Arm</option>
                                                 <option value="stay_arm">Stay Arm</option>
@@ -420,113 +179,113 @@
 
                         <fieldset>
                             <legend>Areas</legend>
-                            <div class="row mt-2">
+                            <div class="row align-items-center">
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="1_${last}">1</label>
-                                        <input type="checkbox" id="1_${last}" name="1_${last}" class="ml10" checked />
+                                        <label for="1_${id}">1</label>
+                                        <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" checked />
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="2_${last}">2</label>
-                                        <input type="checkbox" id="2_${last}" name="2_${last}" class="ml10" />
+                                        <label for="2_${id}">2</label>
+                                        <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="3_${last}">3</label>
-                                        <input type="checkbox" id="3_${last}" name="3_${last}" class="ml10" />
+                                        <label for="3_${id}">3</label>
+                                        <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="4_${last}">4</label>
-                                        <input type="checkbox" id="4_${last}" name="4_${last}" class="ml10" />
+                                        <label for="4_${id}">4</label>
+                                        <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="5_${last}">5</label>
-                                        <input type="checkbox" id="5_${last}" name="5_${last}" class="ml10" />
+                                        <label for="5_${id}">5</label>
+                                        <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="6_${last}">6</label>
-                                        <input type="checkbox" id="6_${last}" name="6_${last}" class="ml10" />
+                                        <label for="6_${id}">6</label>
+                                        <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="7_${last}">7</label>
-                                        <input type="checkbox" id="7_${last}" name="7_${last}" class="ml10" />
+                                        <label for="7_${id}">7</label>
+                                        <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="8_${last}">8</label>
-                                        <input type="checkbox" id="8_${last}" name="8_${last}" class="ml10" />
+                                        <label for="8_${id}">8</label>
+                                        <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row align-items-center">
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="9_${last}">9</label>
-                                        <input type="checkbox" id="9_${last}" name="9_${last}" class="ml10" />
+                                        <label for="9_${id}">9</label>
+                                        <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="10_${last}">10</label>
-                                        <input type="checkbox" id="10_${last}" name="10_${last}" class="ml10" />
+                                        <label for="10_${id}">10</label>
+                                        <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="11_${last}">11</label>
-                                        <input type="checkbox" id="11_${last}" name="11_${last}" class="ml10" />
+                                        <label for="11_${id}">11</label>
+                                        <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="12_${last}">12</label>
-                                        <input type="checkbox" id="12_${last}" name="12_${last}" class="ml10" />
+                                        <label for="12_${id}">12</label>
+                                        <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="13_${last}">13</label>
-                                        <input type="checkbox" id="13_${last}" name="13_${last}" class="ml10" />
+                                        <label for="13_${id}">13</label>
+                                        <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="14_${last}">14</label>
-                                        <input type="checkbox" id="14_${last}" name="14_${last}" class="ml10" />
+                                        <label for="14_${id}">14</label>
+                                        <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="15_${last}">15</label>
-                                        <input type="checkbox" id="15_${last}" name="15_${last}" class="ml10" />
+                                        <label for="15_${id}">15</label>
+                                        <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="16_${last}">16</label>
-                                        <input type="checkbox" id="16_${last}" name="16_${last}" class="ml10" />
+                                        <label for="16_${id}">16</label>
+                                        <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" ${id === 1 ? 'checked' : ""}/>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
                         <div class="form-item roww">
-                            <label for="time_slot${last}">Time slot</label>
+                            <label for="time_slot${id}">Time slot</label>
                             <input class="ml10"
                                    type="number"
-                                   id="time_slot${last}"
-                                   name="time_slot${last}"
+                                   id="time_slot${id}"
+                                   name="time_slot${id}"
                                    data-maxlength="2"
                                    oninput="javascript: myFunction(this.id)"
                                    onblur="javascript: myFunction2(this.id)"
@@ -540,10 +299,10 @@
                             <div class="row mt-2">
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="rc_A${last}">RC A (*)</label>
+                                        <label for="rc_A${id}">RC A (*)</label>
                                         <div class="select">
-                                            <select id="rc_A${last}"
-                                                    name="rc_A${last}">
+                                            <select id="rc_A${id}"
+                                                    name="rc_A${id}">
                                                 <option value="not_used">Not Used</option>
                                                 <option value="sleep_arm">Sleep Arm</option>
                                                 <option value="stay_arm">Stay Arm</option>
@@ -557,10 +316,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-item roww">
-                                        <label for="rc_B${last}">RC B</label>
+                                        <label for="rc_B${id}">RC B</label>
                                         <div class="select">
-                                            <select id="rc_B${last}"
-                                                    name="rc_B${last}">
+                                            <select id="rc_B${id}"
+                                                    name="rc_B${id}">
                                                 <option value="not_used">Not Used</option>
                                                 <option value="sleep_arm">Sleep Arm</option>
                                                 <option value="stay_arm">Stay Arm</option>
@@ -575,13 +334,47 @@
                             </div>
 
                         </fieldset>
-                    </fieldset></div>`;
+                    </fieldset>`;
+                el.innerHTML = target;
+            }
+
+            var lst = [1];
+            const users = 99;
+            function addUser(id) {
+                if (id === "user") {
+                    var last = 0;
+                    for (i = 2; i <= users; i++) {
+                        if (lst.includes(i)) {
+                            continue;
+                        } else {
+                            last = i;
+                            break;
+                        }
+                    }
+                    if (last === 0) return;
+                    if (lst.includes(last)) { return; }
+                    const newUserElement = `<div class="col-12" id=${last}>
+                                    <div class="row">
+                                        <div class="col-11 pr-1">
+                                            <a href="javascript:showUser('${last}')">
+                                                <div class="btnStyle">
+                                                    <img src="../../Images/33.User.ico" alt="" width="25" height="25" class="m15" />
+                                                    <div class="someS">
+                                                        <h5>User ${last}</h5>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-1 p-0 m-0" onclick="javascript:addUser(${last})">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </div>
+                                    </div>
+                                </div>`;
                     var element = document.getElementById("new_user");
                     var new_inner = `
                         ${element.innerHTML}
                         ${newUserElement}
                     `;
-                    console.log('element.innerHTML', new_inner);
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -593,6 +386,12 @@
                     }).forEach(function (elem) {
                         main.appendChild(elem);
                     });
+
+                    // button display check
+                    if (lst.length === users) {
+                        let button = document.getElementById("user_btn");
+                        button.style.display = "none";
+                    }
                 } else {
                     if (lst.includes(id)) {
                         var elem = document.getElementById(`${id}`);
@@ -600,6 +399,14 @@
                         lst = lst.filter(function (item) {
                             return item !== id
                         })
+
+                        var el = document.getElementById(`id_${id}`);
+                        el.parentNode.removeChild(el);
+
+                        let button = document.getElementById("user_btn");
+                        if (lst.length < zones && button.style.display === "none") {
+                            button.style.display = "inline-flex";
+                        }
                     } else {
                         return;
                     }
