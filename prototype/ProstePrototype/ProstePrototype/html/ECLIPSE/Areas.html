@@ -460,7 +460,7 @@
                         })
 
                         var el = document.getElementById(`id_${id}`);
-                        el.parentNode.removeChild(el);
+                        if (el) el.parentNode.removeChild(el);
 
                         let button = document.getElementById("areas_btn");
                         if (lst.length < areas && button.style.display === "none") {

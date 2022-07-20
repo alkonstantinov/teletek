@@ -401,7 +401,7 @@
                         })
 
                         var el = document.getElementById(`id_${id}`);
-                        el.parentNode.removeChild(el);
+                        if (el) el.parentNode.removeChild(el);
 
                         let button = document.getElementById("user_btn");
                         if (lst.length < zones && button.style.display === "none") {

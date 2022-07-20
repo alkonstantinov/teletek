@@ -1334,7 +1334,7 @@
                 }
                 if (lst.includes(parseInt(+id))) {
                     var elem = document.querySelector(`[id $= _${+id}]`);
-                    elem.parentNode.removeChild(elem);
+                    if (elem) elem.parentNode.removeChild(elem);
                     lst = lst.filter(function (item) {
                         return item !== +id
                     })

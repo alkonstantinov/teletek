@@ -106,8 +106,8 @@
     </fieldset>-->
 
             <fieldset>
-                <legend>Voice Option</legend>
-                <div class="row">
+                <legend>Voice Options</legend>
+                <div class="row align-items-center">
                     <div class="col-xs-12 col-lg-4">
                         <div class="form-item roww">
                             <label for="voice_message_repetition">Voice Message Repetition</label>
@@ -177,614 +177,34 @@
                 </div>
             </fieldset>
 
-            <div id="phone_1">
-                <fieldset>
-                    <legend>Phone 1</legend>
-                    <div class="form-item roww">
-                        <label for="phone_number_1">Phone Number</label>
-                        <input type="tel" id="phone_number_1" name="phone_number_1" class="ml10" pattern="[+]{1}[0-9]{11,14}">
-                    </div>
-
-                    <fieldset>
-                        <legend>Options</legend>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="messaging_1">Messaging</label>
-                                    <div class="select">
-                                        <select id="messaging_1"
-                                                name="messaging_1">
-                                            <option value="sms">SMS</option>
-                                            <option value="voice">Voice</option>
-                                        </select>
+            <div class="row mt-2 pt-2 bt">
+                <div class="col-3 bl">
+                    <div id="new_phone" class="row">
+                        <div class="col-11 pr-1">
+                            <a href="javascript:showPhone('1')">
+                                <div class="btnStyle">
+                                    <img src="../../Images/2041.DigiComm.ico" alt="" width="25" height="25" class="m15" />
+                                    <div class="someS">
+                                        <h5>Phone Number 1</h5>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="phone_reporting_1">Enable for Reporting</label>
-                                    <input type="checkbox" id="phone_reporting_1" name="phone_reporting_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="voice_management_1">Enable for Voice Management</label>
-                                    <input type="checkbox" id="voice_management_1" name="voice_management_1" class="ml10" />
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Message Type</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="alarm_1">Alarm and Restore</label>
-                                    <input type="checkbox" id="alarm_1" name="alarm_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="tamper_1">Tamper and Restore</label>
-                                    <input type="checkbox" id="tamper_1" name="tamper_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="panic_1">Panic and Ambush Code</label>
-                                    <input type="checkbox" id="panic_1" name="panic_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="fire_1">Fire and Restore</label>
-                                    <input type="checkbox" id="fire_1" name="fire_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="arm_1">Arm, Disarm and Bypass</label>
-                                    <input type="checkbox" id="arm_1" name="arm_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="medical_1">Medical Alarm</label>
-                                    <input type="checkbox" id="medical_1" name="medical_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="trouble_1">Trouble and Trouble Restore</label>
-                                    <input type="checkbox" id="trouble_1" name="trouble_1" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="spacial_1">Special Messages</label>
-                                    <input type="checkbox" id="spacial_1" name="spacial_1" class="mr10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Message Areas</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="1_1">1</label>
-                                    <input type="checkbox" id="1_1" name="1_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="2_1">2</label>
-                                    <input type="checkbox" id="2_1" name="2_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="3_1">3</label>
-                                    <input type="checkbox" id="3_1" name="3_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="4_1">4</label>
-                                    <input type="checkbox" id="4_1" name="4_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="5_1">5</label>
-                                    <input type="checkbox" id="5_1" name="5_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="6_1">6</label>
-                                    <input type="checkbox" id="6_1" name="6_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="7_1">7</label>
-                                    <input type="checkbox" id="7_1" name="7_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="8_1">8</label>
-                                    <input type="checkbox" id="8_1" name="8_1" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="9_1">9</label>
-                                    <input type="checkbox" id="9_1" name="9_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="10_1">10</label>
-                                    <input type="checkbox" id="10_1" name="10_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="11_1">11</label>
-                                    <input type="checkbox" id="11_1" name="11_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="12_1">12</label>
-                                    <input type="checkbox" id="12_1" name="12_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="13_1">13</label>
-                                    <input type="checkbox" id="13_1" name="13_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="14_1">14</label>
-                                    <input type="checkbox" id="14_1" name="14_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="15_1">15</label>
-                                    <input type="checkbox" id="15_1" name="15_1" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="16_1">16</label>
-                                    <input type="checkbox" id="16_1" name="16_1" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </fieldset>
-            </div>
-
-            <div style="display: none;" id="phone_2">
-                <fieldset>
-                    <legend>Phone 2</legend>
-                    <div class="form-item roww">
-                        <label for="phone_number_2">Phone Number</label>
-                        <input type="tel" id="phone_number_2" name="phone_number_2" class="ml10" pattern="[+]{1}[0-9]{11,14}">
-                        <button type="button" onclick="javascript:changeStyleDisplay('phone_2')" class="m-2">
-                            <i class="fa-solid fa-minus 5x"></i> Remove This Phone
-                        </button>
                     </div>
+                </div>
+                <div class="col-9">
+                    <div id="selected_area"></div>
+                </div>
 
-                    <fieldset>
-                        <legend>Options</legend>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="messaging_2">Messaging</label>
-                                    <div class="select">
-                                        <select id="messaging_2"
-                                                name="messaging_2">
-                                            <option value="sms">SMS</option>
-                                            <option value="voice">Voice</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="phone_reporting_2">Enable for Reporting</label>
-                                    <input type="checkbox" id="phone_reporting_2" name="phone_reporting_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="voice_management_2">Enable for Voice Management</label>
-                                    <input type="checkbox" id="voice_management_2" name="voice_management_2" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Message Type</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="alarm_2">Alarm and Restore</label>
-                                    <input type="checkbox" id="alarm_2" name="alarm_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="tamper_2">Tamper and Restore</label>
-                                    <input type="checkbox" id="tamper_2" name="tamper_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="panic_2">Panic and Ambush Code</label>
-                                    <input type="checkbox" id="panic_2" name="panic_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="fire_2">Fire and Restore</label>
-                                    <input type="checkbox" id="fire_2" name="fire_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="arm_2">Arm, Disarm and Bypass</label>
-                                    <input type="checkbox" id="arm_2" name="arm_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="medical_2">Medical Alarm</label>
-                                    <input type="checkbox" id="medical_2" name="medical_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="trouble_2">Trouble and Trouble Restore</label>
-                                    <input type="checkbox" id="trouble_2" name="trouble_2" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="spacial_2">Special Messages</label>
-                                    <input type="checkbox" id="spacial_2" name="spacial_2" class="mr10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Message Areas</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="1_2">1</label>
-                                    <input type="checkbox" id="1_2" name="1_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="2_2">2</label>
-                                    <input type="checkbox" id="2_2" name="2_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="3_2">3</label>
-                                    <input type="checkbox" id="3_2" name="3_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="4_2">4</label>
-                                    <input type="checkbox" id="4_2" name="4_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="5_2">5</label>
-                                    <input type="checkbox" id="5_2" name="5_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="6_2">6</label>
-                                    <input type="checkbox" id="6_2" name="6_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="7_2">7</label>
-                                    <input type="checkbox" id="7_2" name="7_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="8_2">8</label>
-                                    <input type="checkbox" id="8_2" name="8_2" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="9_2">9</label>
-                                    <input type="checkbox" id="9_2" name="9_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="10_2">10</label>
-                                    <input type="checkbox" id="10_2" name="10_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="11_2">11</label>
-                                    <input type="checkbox" id="11_2" name="11_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="12_2">12</label>
-                                    <input type="checkbox" id="12_2" name="12_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="13_2">13</label>
-                                    <input type="checkbox" id="13_2" name="13_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="14_2">14</label>
-                                    <input type="checkbox" id="14_2" name="14_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="15_2">15</label>
-                                    <input type="checkbox" id="15_2" name="15_2" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="16_2">16</label>
-                                    <input type="checkbox" id="16_2" name="16_2" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </fieldset>
             </div>
 
-            <div style="display: none;" id="phone_3">
-                <fieldset>
-                    <legend>Phone 3</legend>
-                    <div class="form-item roww">
-                        <label for="phone_number_3">Phone Number</label>
-                        <input type="tel" id="phone_number_3" name="phone_number_3" class="ml10" pattern="[+]{1}[0-9]{11,14}">
-                        <button type="button" onclick="javascript:changeStyleDisplay('phone_3')" class="m-2">
-                            <i class="fa-solid fa-minus 5x"></i> Remove This Phone
-                        </button>
-                    </div>
-
-                    <fieldset>
-                        <legend>Options</legend>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="messaging_3">Messaging</label>
-                                    <div class="select">
-                                        <select id="messaging_3"
-                                                name="messaging_3">
-                                            <option value="sms">SMS</option>
-                                            <option value="voice">Voice</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="phone_reporting_3">Enable for Reporting</label>
-                                    <input type="checkbox" id="phone_reporting_3" name="phone_reporting_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="voice_management_3">Enable for Voice Management</label>
-                                    <input type="checkbox" id="voice_management_3" name="voice_management_3" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Message Type</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="alarm_3">Alarm and Restore</label>
-                                    <input type="checkbox" id="alarm_3" name="alarm_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="tamper_3">Tamper and Restore</label>
-                                    <input type="checkbox" id="tamper_3" name="tamper_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="panic_3">Panic and Ambush Code</label>
-                                    <input type="checkbox" id="panic_3" name="panic_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="fire_3">Fire and Restore</label>
-                                    <input type="checkbox" id="fire_3" name="fire_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="arm_3">Arm, Disarm and Bypass</label>
-                                    <input type="checkbox" id="arm_3" name="arm_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="medical_3">Medical Alarm</label>
-                                    <input type="checkbox" id="medical_3" name="medical_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="trouble_3">Trouble and Trouble Restore</label>
-                                    <input type="checkbox" id="trouble_3" name="trouble_3" class="mr10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="spacial_3">Special Messages</label>
-                                    <input type="checkbox" id="spacial_3" name="spacial_3" class="mr10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Message Areas</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="1_3">1</label>
-                                    <input type="checkbox" id="1_3" name="1_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="2_3">2</label>
-                                    <input type="checkbox" id="2_3" name="2_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="3_3">3</label>
-                                    <input type="checkbox" id="3_3" name="3_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="4_3">4</label>
-                                    <input type="checkbox" id="4_3" name="4_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="5_3">5</label>
-                                    <input type="checkbox" id="5_3" name="5_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="6_3">6</label>
-                                    <input type="checkbox" id="6_3" name="6_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="7_3">7</label>
-                                    <input type="checkbox" id="7_3" name="7_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="8_3">8</label>
-                                    <input type="checkbox" id="8_3" name="8_3" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="9_3">9</label>
-                                    <input type="checkbox" id="9_3" name="9_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="10_3">10</label>
-                                    <input type="checkbox" id="10_3" name="10_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="11_3">11</label>
-                                    <input type="checkbox" id="11_3" name="11_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="12_3">12</label>
-                                    <input type="checkbox" id="12_3" name="12_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="13_3">13</label>
-                                    <input type="checkbox" id="13_3" name="13_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="14_3">14</label>
-                                    <input type="checkbox" id="14_3" name="14_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="15_3">15</label>
-                                    <input type="checkbox" id="15_3" name="15_3" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="16_3">16</label>
-                                    <input type="checkbox" id="16_3" name="16_3" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </fieldset>
-            </div>
-
-            <button type="button" onclick="javascript:changeStyleDisplay('phone')" class="m-2">
-                <i class="fa-solid fa-plus 5x"></i> Add New Phone
-            </button>
-
-            <div class="buttons-row mt15">
+            <div style="bottom: 10px; position: sticky;" class="buttons-row mt15">
                 <button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>
-            </div>
+                <button style="display: inline-flex;" type="button" onclick="javascript:addPhone('phone')" id="phone_btn" class="btn-round btn-border-black">
+                    <i class="fa-solid fa-plus 5x"></i> Add New Phone
+                </button>
+            </div>            
         </form>
         <script>
             function myFunction(id) {
@@ -824,12 +244,213 @@
                 element.innerHTML = imgTag;
             }
 
-            var lst = [];
-            function changeStyleDisplay(id) {
-                let divId = id;
-                var last = 0;
-                if (!id.includes("_")) {
-                    for (i = 2; i <= 6; i++) {
+            function showPhone(id) {
+                var el = document.getElementById("selected_area");
+                id = parseInt(id);
+                var target = `<fieldset id="id_${id}">
+                    <legend>Phone Number ${id}</legend>
+                    <div class="form-item roww">
+                        <label for="phone_number_${id}">Phone Number</label>
+                        <input type="tel" id="phone_number_${id}" name="phone_number_${id}" class="ml10" pattern="[+]{1}[0-9]{11,14}">
+                    </div>
+
+                    <fieldset>
+                        <legend>Options</legend>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="messaging_${id}">Messaging</label>
+                                    <div class="select">
+                                        <select id="messaging_${id}"
+                                                name="messaging_${id}">
+                                            <option value="sms">SMS</option>
+                                            <option value="voice">Voice</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="phone_reporting_${id}">Enable for Reporting</label>
+                                    <input type="checkbox" id="phone_reporting_${id}" name="phone_reporting_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="voice_management_${id}">Enable for Voice Management</label>
+                                    <input type="checkbox" id="voice_management_${id}" name="voice_management_${id}" class="ml10" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Message Type</legend>
+                        <div class="row align-items-center mr-1">
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="alarm_${id}">Alarm and Restore</label>
+                                    <input type="checkbox" id="alarm_${id}" name="alarm_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="tamper_${id}">Tamper and Restore</label>
+                                    <input type="checkbox" id="tamper_${id}" name="tamper_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="panic_${id}">Panic and Ambush Code</label>
+                                    <input type="checkbox" id="panic_${id}" name="panic_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="fire_${id}">Fire and Restore</label>
+                                    <input type="checkbox" id="fire_${id}" name="fire_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="arm_${id}">Arm, Disarm and Bypass</label>
+                                    <input type="checkbox" id="arm_${id}" name="arm_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="medical_${id}">Medical Alarm</label>
+                                    <input type="checkbox" id="medical_${id}" name="medical_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="trouble_${id}">Trouble and Trouble Restore</label>
+                                    <input type="checkbox" id="trouble_${id}" name="trouble_${id}" class="mr10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="spacial_${id}">Special Messages</label>
+                                    <input type="checkbox" id="spacial_${id}" name="spacial_${id}" class="mr10" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Message Areas</legend>
+                        <div class="row align-items-center mr-1">
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="1_${id}">1</label>
+                                    <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="2_${id}">2</label>
+                                    <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="3_${id}">3</label>
+                                    <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="4_${id}">4</label>
+                                    <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="5_${id}">5</label>
+                                    <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="6_${id}">6</label>
+                                    <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="7_${id}">7</label>
+                                    <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="8_${id}">8</label>
+                                    <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mr-1">
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="9_${id}">9</label>
+                                    <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="10_${id}">10</label>
+                                    <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="11_${id}">11</label>
+                                    <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="12_${id}">12</label>
+                                    <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="13_${id}">13</label>
+                                    <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="14_${id}">14</label>
+                                    <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="15_${id}">15</label>
+                                    <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-item roww">
+                                    <label for="16_${id}">16</label>
+                                    <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </fieldset>`;
+                el.innerHTML = target;
+            }
+
+            var lst = [1];
+            const phones = 6;
+            function addPhone(id) {
+                if (id === "phone") {
+                    var last = 0;
+                    for (i = 2; i <= phones; i++) {
                         if (lst.includes(i)) {
                             continue;
                         } else {
@@ -838,21 +459,64 @@
                         }
                     }
                     if (last === 0) return;
-                    divId += `_${last}`;
-                } else {
-                    last = parseInt(divId[divId.length - 1]);
-                }
-                var element = document.getElementById(divId);
-                if (lst.includes(last)) { 
-                    element.style.display = "none";
-                    lst = lst.filter(function (item) {
-                        return item !== last
-                    })
-                } else {
+                    if (lst.includes(last)) { return; }
+                    const newUserElement = `<div class="col-12" id=${last}>
+                                    <div class="row">
+                                        <div class="col-11 pr-1">
+                                            <a href="javascript:showPhone('${last}')">
+                                                <div class="btnStyle">
+                                                    <img src="../../Images/2041.DigiComm.ico" alt="" width="25" height="25" class="m15" />
+                                                    <div class="someS">
+                                                        <h5>Phone Number ${last}</h5>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-1 p-0 m-0" onclick="javascript:addPhone(${last})">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </div>
+                                    </div>
+                                </div>`;
+                    var element = document.getElementById("new_phone");
+                    var new_inner = `
+                        ${element.innerHTML}
+                        ${newUserElement}
+                    `;
                     lst.push(last);
-                    element.style.display = "block";
+                    element.innerHTML = new_inner;
+
+                    // reordering
+                    var main = document.getElementById('new_phone');
+
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
+
+                    // button display check
+                    if (lst.length === phones) {
+                        let button = document.getElementById("phone_btn");
+                        button.style.display = "none";
+                    }
+                } else {
+                    if (lst.includes(id)) {
+                        var elem = document.getElementById(`${id}`);
+                        elem.parentNode.removeChild(elem);
+                        lst = lst.filter(function (item) {
+                            return item !== id
+                        })
+                        var el = document.getElementById(`id_${id}`);
+                        if (el) el.parentNode.removeChild(el);
+
+                        let button = document.getElementById("phone_btn");
+                        if (lst.length < phones && button.style.display === "none") {
+                            button.style.display = "inline-flex";
+                        }
+                    } else {
+                        return;
+                    }
                 }
-                console.log('list', lst);
             }
         </script>
     </div>

@@ -862,7 +862,7 @@
                         })
 
                         var el = document.getElementById(`id_${id}`);
-                        el.parentNode.removeChild(el);
+                        if (el) el.parentNode.removeChild(el);
 
                         let button = document.getElementById("output_btn");
                         if (lst.length < pgms && button.style.display === "none") {
