@@ -21,459 +21,33 @@
     <div class="container" id="divMain">
         <form action="">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <fieldset>
-                <legend>Output 1</legend>
-                <div class="row align-items-center">
-                    <div class="col">
-                        <div class="form-item roww flex">
-                            <label for="note_1">Note</label>
-                            <input type="text" id="note_1" name="note_1" />
+            <div class="row mt-2 pt-2">
+                <div class="col-3 bl scroll">
+                    <div id="new_output" class="row">
+                        <div class="col-11 pr-1">
+                            <a href="javascript:showOutput('1')">
+                                <div class="btnStyle">
+                                    <img src="../../Images/1011.Outputs.ico" alt="" width="25" height="25" class="m15" />
+                                    <div class="someS">
+                                        <h5>Output 1</h5>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
+                <div class="col-9">
+                    <div id="selected_area"></div>
+                </div>
 
-                <fieldset>
-                    <legend>Settings</legend>
-
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <div class="form-item roww">
-                                <label for="delay_1">Delay (seconds)</label>
-                                <input type="number"
-                                       id="delay_1"
-                                       name="delay_1"
-                                       data-maxlength="3"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       placeholder="0"
-                                       min="1"
-                                       max="600" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="pulse-duration_1">Pulse duration (seconds)</label>
-                                <input type="number"
-                                       id="pulse-duration_1"
-                                       name="pulse-duration_1"
-                                       data-maxlength="3"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       placeholder="0"
-                                       min="1"
-                                       max="250" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Parameters</legend>
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="latched_1">Latched</label>
-                                <input type="checkbox" id="latched_1" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="inverted_1">Inverted</label>
-                                <input type="checkbox" id="inverted_1" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <fieldset>
-                                <legend>Logic</legend>
-                                <div class="form-item">
-                                    <div class="select">
-                                        <select id="logic-select_1"
-                                                name="logic-select_1"
-                                                onchange="javascript: loadDiv('showSchema_1', this.value)">
-                                            <option value="ORschema" selected>OR</option>
-                                            <option value="ANDschema">AND</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div id="showSchema_1" class="txt-ctr">
-                                    <img src="../../Images/ORFunction.png" alt="ORschema" />
-                                </div>
-
-                                <div style="display: none" id="ORschema">
-                                    <img src="../../Images/ORFunction.png" alt="ORschema" />
-                                </div>
-
-                                <div style="display: none" id="ANDschema">
-                                    <img src="../../Images/ANDFunction.png" alt="ANDschema" />
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-6">
-                            <fieldset>
-                                <legend>Signal type</legend>
-                                <div class="form-item">
-                                    <div class="select">
-                                        <select id="signal-type_1"
-                                                name="signal-type_1">
-                                            <option value="one_pulsed" selected>ONE PULSED</option>
-                                            <option value="pulsed">PULSED</option>
-                                            <option value="continious">CONTINIOUS</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>OR group inputs</legend>
-                    <div class="form-item roww">
-                        <input type="number"
-                               id="or_group1_1"
-                               name="or_group1_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="or_group2_1"
-                               name="or_group2_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="or_group3_1"
-                               name="or_group3_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="or_group4_1"
-                               name="or_group4_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>AND group inputs</legend>
-                    <div class="form-item roww">
-                        <input type="number"
-                               id="and_group1_1"
-                               name="and_group1_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="and_group2_1"
-                               name="and_group2_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="and_group3_1"
-                               name="and_group3_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="and_group4_1"
-                               name="and_group4_1"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Input Type</legend>
-                    <div class="form-item roww">
-                        <label for="state">State</label>
-                        <div class="select">
-                            <select id="state_1"
-                                    name="state_1"
-                                    onchange="javascript: loadDiv('showDiv_1', this.value)">
-                                <option value="0">NONE</option>
-                                <option value="1_1">PERIPHERY_DEVICE</option>
-                                <option value="2_1">LOOP_DEVICE</option>
-                                <option value="3_1">NETWORK</option>
-                                <option value="4_1">ACTION</option>
-                                <option value="5_1">EVENT</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="showDiv_1"></div>
-
-                    <div style="display: none" id="1_1">
-                        <div class="row align-items-center">
-                            <div class="col-6">
-                                <div class="form-item roww">
-                                    <label for="per_dev_addr">Peripherial device address</label>
-                                    <input type="number"
-                                           id="per_dev_addr"
-                                           name="per_dev_addr"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="6" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="per_dev_inp">Peripherial device output</label>
-                                    <input type="number"
-                                           id="per_dev_inp"
-                                           name="per_dev_inp"
-                                           data-maxlength="2"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="24" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="2_1">
-                        <fieldset>
-                            <legend>Loop Type</legend>
-                            <div class="form-item roww">
-                                <label for="state">State</label>
-                                <div class="select">
-                                    <select id="state"
-                                            name="state"
-                                            onchange="javascript: loadDiv('showLoop_1', this.value)">
-                                        <option value="Teletek_1" selected>TELETEK LOOP</option>
-                                        <option value="System_1">SYSTEM SENSOR LOOP</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div id="showLoop_1">
-                                <div id="Teletek_1">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="dev_addr">Device address</label>
-                                                <input type="number"
-                                                       id="dev_addr"
-                                                       name="dev_addr"
-                                                       data-maxlength="3"
-                                                       oninput="javascript: myFunction(this.id)"
-                                                       onblur="javascript: myFunction2(this.id)"
-                                                       value="1"
-                                                       min="1"
-                                                       max="250" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="dev_addr_loop">Loop</label>
-                                                <input type="number"
-                                                       id="dev_addr_loop"
-                                                       name="dev_addr_loop"
-                                                       data-maxlength="1"
-                                                       oninput="javascript: myFunction(this.id)"
-                                                       onblur="javascript: myFunction2(this.id)"
-                                                       value="1"
-                                                       min="1"
-                                                       max="4" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="dev_channel">Channel</label>
-                                                <input type="number"
-                                                       id="dev_channel"
-                                                       name="dev_channel"
-                                                       data-maxlength="1"
-                                                       oninput="javascript: myFunction(this.id)"
-                                                       onblur="javascript: myFunction2(this.id)"
-                                                       value="1"
-                                                       min="1"
-                                                       max="4" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="display: none" id="System_1">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="dev_addr_sys">Device address</label>
-                                            <input type="number"
-                                                   id="dev_addr_sys"
-                                                   name="dev_addr_sys"
-                                                   data-maxlength="2"
-                                                   oninput="javascript: myFunction(this.id)"
-                                                   onblur="javascript: myFunction2(this.id)"
-                                                   value="1"
-                                                   min="1"
-                                                   max="99" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="dev_addr_sys_loop">Loop</label>
-                                            <input type="number"
-                                                   id="dev_addr_sys_loop"
-                                                   name="dev_addr_sys_loop"
-                                                   data-maxlength="1"
-                                                   oninput="javascript: myFunction(this.id)"
-                                                   onblur="javascript: myFunction2(this.id)"
-                                                   value="1"
-                                                   min="1"
-                                                   max="4" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="sys_dev_type">Device Type</label>
-                                            <div class="select">
-                                                <select id="sys_dev_type" name="sys_dev_type">
-                                                    <option value="Sensor">SENSOR</option>
-                                                    <option value="Module">MODULE</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div style="display: none" id="3_1">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="input_number">Input number</label>
-                                    <input type="number"
-                                           id="input_number"
-                                           name="input_number"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="panel_number">Panel number</label>
-                                    <input type="number"
-                                           id="panel_number"
-                                           name="panel_number"
-                                           data-maxlength="2"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="64" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="4_1">
-                        <div class="form-item roww">
-                            <label for="func">Function</label>
-                            <div class="select">
-                                <select id="func"
-                                        name="func"
-                                        onchange="javascript: loadDiv('zonal_1', this.value)">
-                                    <option value="silence_buzzer">SILENCE BUZZER</option>
-                                    <option value="silence_sounder">SILENCE SOUNDER</option>
-                                    <option value="reset">RESET</option>
-                                    <option value="evacuate">EVACUATE</option>
-                                    <option value="delay_override">DELAY OVERRIDE</option>
-                                    <option value="class_change">CLASS CHANGE</option>
-                                    <option value="sounder_strobe">SILENCE SOUNDER (STROBE ON))</option>
-                                    <option value="day">DAY</option>
-                                    <option value="night">NIGHT</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="zonal_1"></div>
-
-                        <div style="display: none" id="sounder_strobe">
-                            <div class="form-item roww">
-                                <label for="zone_number">Zone number</label>
-                                <input type="number"
-                                       id="zone_number"
-                                       name="zone_number"
-                                       data-maxlength="2"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       value="1"
-                                       min="1"
-                                       max="96" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="5_1">
-                        <div class="form-item roww">
-                            <label for="func_event">Function</label>
-                            <div class="select">
-                                <select id="func_event"
-                                        name="func_event">
-                                    <option value="func_event_alarm">ALARM</option>
-                                    <option value="func_event_fault">FAULT</option>
-                                    <option value="func_event_warning">WARNING</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </fieldset>
-
-            <div id="new_output"></div>
-
-            <button style="display: block;" type="button" onclick="javascript:addOutput('output')" class="m-4" id="output_btn">
-                <i class="fa-solid fa-plus 5x"></i> Add New Output
-            </button>
+            </div>
 
             <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
                 <button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>
+                <button style="display: inline-flex;" type="button" onclick="javascript:addOutput('output')" id="output_btn" class="btn-round btn-border-black">
+                    <i class="fa-solid fa-plus 5x"></i> Add New Output
+                </button>
             </div>
         </form>
         <script>
@@ -509,7 +83,459 @@
                 }
             }
 
-            var lst = [];
+            function showOutput(id) {
+                var el = document.getElementById("selected_area");
+                id = parseInt(id);
+                var target = `<fieldset id="id_${id}">
+                            <legend>Output ${id}</legend>
+                                <div class="row align-items-center">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-item roww flex">
+                                            <label for="note_${id}">Note</label>
+                                            <input type="text" id="note_${id}" name="note_${id}" />
+                                        </div>
+                                    </div>
+                                    <div class="col"><button type="button" onclick="javascript:addOutput(${id})" class="m-2">
+                                        <i class="fa-solid fa-minus 5x"></i> Remove Output
+                                    </button></div>
+                                </div>
+
+                                <fieldset>
+                                    <legend>Settings</legend>
+
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <div class="form-item roww">
+                                                <label for="delay_${id}">Delay (seconds)</label>
+                                                <input type="number"
+                                                        id="delay_${id}"
+                                                        name="delay_${id}"
+                                                        data-maxlength="3"
+                                                        oninput="javascript: myFunction(this.id)"
+                                                        onblur="javascript: myFunction2(this.id)"
+                                                        placeholder="0"
+                                                        min="1"
+                                                        max="600" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="pulse-duration_${id}">Pulse duration (seconds)</label>
+                                                <input type="number"
+                                                        id="pulse-duration_${id}"
+                                                        name="pulse-duration_${id}"
+                                                        data-maxlength="3"
+                                                        oninput="javascript: myFunction(this.id)"
+                                                        onblur="javascript: myFunction2(this.id)"
+                                                        placeholder="0"
+                                                        min="1"
+                                                        max="250" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Parameters</legend>
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="latched_${id}">Latched</label>
+                                                <input type="checkbox" id="latched_${id}" class="ml10" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-item roww">
+                                                <label for="inverted_${id}">Inverted</label>
+                                                <input type="checkbox" id="inverted_${id}" class="ml10" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <fieldset>
+                                                <legend>Logic</legend>
+                                                <div class="form-item">
+                                                    <div class="select">
+                                                        <select id="logic-select_${id}"
+                                                                name="logic-select_${id}"
+                                                                onchange="javascript: loadDiv('showSchema_${id}', this.value)">
+                                                            <option value="ORschema" selected>OR</option>
+                                                            <option value="ANDschema">AND</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div id="showSchema_${id}" class="txt-ctr">
+                                                    <img src="../../Images/ORFunction.png" alt="ORschema" />
+                                                </div>
+
+                                                <div style="display: none" id="ORschema">
+                                                    <img src="../../Images/ORFunction.png" alt="ORschema" />
+                                                </div>
+
+                                                <div style="display: none" id="ANDschema">
+                                                    <img src="../../Images/ANDFunction.png" alt="ANDschema" />
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-6">
+                                            <fieldset>
+                                                <legend>Signal type</legend>
+                                                <div class="form-item">
+                                                    <div class="select">
+                                                        <select id="signal-type_${id}"
+                                                                name="signal-type_${id}">
+                                                            <option value="one_pulsed" selected>ONE PULSED</option>
+                                                            <option value="pulsed">PULSED</option>
+                                                            <option value="continious">CONTINIOUS</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>OR group inputs</legend>
+                                    <div class="form-item roww">
+                                        <input type="number"
+                                                id="or_group1_${id}"
+                                                name="or_group1_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                        <input type="number"
+                                                id="or_group2_${id}"
+                                                name="or_group2_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                        <input type="number"
+                                                id="or_group3_${id}"
+                                                name="or_group3_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                        <input type="number"
+                                                id="or_group4_${id}"
+                                                name="or_group4_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>AND group inputs</legend>
+                                    <div class="form-item roww">
+                                        <input type="number"
+                                                id="and_group1_${id}"
+                                                name="and_group1_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                        <input type="number"
+                                                id="and_group2_${id}"
+                                                name="and_group2_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                        <input type="number"
+                                                id="and_group3_${id}"
+                                                name="and_group3_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                        <input type="number"
+                                                id="and_group4_${id}"
+                                                name="and_group4_${id}"
+                                                data-maxlength="3"
+                                                oninput="javascript: myFunction(this.id)"
+                                                onblur="javascript: myFunction2(this.id)"
+                                                placeholder="0"
+                                                min="1"
+                                                max="250" />
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Input Type</legend>
+                                    <div class="form-item roww">
+                                        <label for="state">State</label>
+                                        <div class="select">
+                                            <select id="state_${id}"
+                                                    name="state_${id}"
+                                                    onchange="javascript: loadDiv('showDiv_${id}', this.value)">
+                                                <option value="0">NONE</option>                                
+                                                <option value="1_${id}">PERIPHERY_DEVICE</option>
+                                                <option value="2_${id}">LOOP_DEVICE</option>
+                                                <option value="3_${id}">NETWORK</option>
+                                                <option value="4_${id}">ACTION</option>
+                                                <option value="5_${id}">EVENT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div id="showDiv_${id}"></div>
+
+                                    <div style="display: none" id="1_${id}">
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <div class="form-item roww">
+                                                    <label for="per_dev_addr">Peripherial device address</label>
+                                                    <input type="number"
+                                                            id="per_dev_addr"
+                                                            name="per_dev_addr"
+                                                            data-maxlength="1"
+                                                            oninput="javascript: myFunction(this.id)"
+                                                            onblur="javascript: myFunction2(this.id)"
+                                                            value="1"
+                                                            min="1"
+                                                            max="6" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="per_dev_inp">Peripherial device output</label>
+                                                    <input type="number"
+                                                            id="per_dev_inp"
+                                                            name="per_dev_inp"
+                                                            data-maxlength="2"
+                                                            oninput="javascript: myFunction(this.id)"
+                                                            onblur="javascript: myFunction2(this.id)"
+                                                            value="1"
+                                                            min="1"
+                                                            max="24" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: none" id="2_${id}">
+                                        <fieldset>
+                                            <legend>Loop Type</legend>
+                                            <div class="form-item roww">
+                                                <label for="state">State</label>
+                                                <div class="select">
+                                                    <select id="state"
+                                                            name="state"
+                                                            onchange="javascript: loadDiv('showLoop_${id}', this.value)">
+                                                        <option value="Teletek_${id}" selected>TELETEK LOOP</option>
+                                                        <option value="System_${id}">SYSTEM SENSOR LOOP</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div id="showLoop_${id}">
+                                                <div id="Teletek_${id}">
+                                                    <div class="row align-items-center">
+                                                        <div class="col">
+                                                            <div class="form-item roww">
+                                                                <label for="dev_addr">Device address</label>
+                                                                <input type="number"
+                                                                        id="dev_addr"
+                                                                        name="dev_addr"
+                                                                        data-maxlength="3"
+                                                                        oninput="javascript: myFunction(this.id)"
+                                                                        onblur="javascript: myFunction2(this.id)"
+                                                                        value="1"
+                                                                        min="1"
+                                                                        max="250" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-item roww">
+                                                                <label for="dev_addr_loop">Loop</label>
+                                                                <input type="number"
+                                                                        id="dev_addr_loop"
+                                                                        name="dev_addr_loop"
+                                                                        data-maxlength="1"
+                                                                        oninput="javascript: myFunction(this.id)"
+                                                                        onblur="javascript: myFunction2(this.id)"
+                                                                        value="1"
+                                                                        min="1"
+                                                                        max="4" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-item roww">
+                                                                <label for="dev_channel">Channel</label>
+                                                                <input type="number"
+                                                                        id="dev_channel"
+                                                                        name="dev_channel"
+                                                                        data-maxlength="1"
+                                                                        oninput="javascript: myFunction(this.id)"
+                                                                        onblur="javascript: myFunction2(this.id)"
+                                                                        value="1"
+                                                                        min="1"
+                                                                        max="4" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div style="display: none" id="System_${id}">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="dev_addr_sys">Device address</label>
+                                                            <input type="number"
+                                                                    id="dev_addr_sys"
+                                                                    name="dev_addr_sys"
+                                                                    data-maxlength="2"
+                                                                    oninput="javascript: myFunction(this.id)"
+                                                                    onblur="javascript: myFunction2(this.id)"
+                                                                    value="1"
+                                                                    min="1"
+                                                                    max="99" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="dev_addr_sys_loop">Loop</label>
+                                                            <input type="number"
+                                                                    id="dev_addr_sys_loop"
+                                                                    name="dev_addr_sys_loop"
+                                                                    data-maxlength="1"
+                                                                    oninput="javascript: myFunction(this.id)"
+                                                                    onblur="javascript: myFunction2(this.id)"
+                                                                    value="1"
+                                                                    min="1"
+                                                                    max="4" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="sys_dev_type">Device Type</label>
+                                                            <div class="select">
+                                                                <select id="sys_dev_type" name="sys_dev_type">
+                                                                    <option value="Sensor">SENSOR</option>
+                                                                    <option value="Module">MODULE</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div style="display: none" id="3_${id}">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="input_number">Input number</label>
+                                                    <input type="number"
+                                                            id="input_number"
+                                                            name="input_number"
+                                                            data-maxlength="3"
+                                                            oninput="javascript: myFunction(this.id)"
+                                                            onblur="javascript: myFunction2(this.id)"
+                                                            value="1"
+                                                            min="1"
+                                                            max="250" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="panel_number">Panel number</label>
+                                                    <input type="number"
+                                                            id="panel_number"
+                                                            name="panel_number"
+                                                            data-maxlength="2"
+                                                            oninput="javascript: myFunction(this.id)"
+                                                            onblur="javascript: myFunction2(this.id)"
+                                                            value="1"
+                                                            min="1"
+                                                            max="64" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: none" id="4_${id}">
+                                        <div class="form-item roww">
+                                            <label for="func">Function</label>
+                                            <div class="select">
+                                                <select id="func"
+                                                        name="func"
+                                                        onchange="javascript: loadDiv('zonal_${id}', this.value)">
+                                                    <option value="silence_buzzer">SILENCE BUZZER</option>
+                                                    <option value="silence_sounder">SILENCE SOUNDER</option>
+                                                    <option value="reset">RESET</option>
+                                                    <option value="evacuate">EVACUATE</option>
+                                                    <option value="delay_override">DELAY OVERRIDE</option>
+                                                    <option value="class_change">CLASS CHANGE</option>
+                                                    <option value="sounder_strobe">SILENCE SOUNDER (STROBE ON))</option>
+                                                    <option value="day">DAY</option>
+                                                    <option value="night">NIGHT</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="zonal_${id}"></div>
+
+                                        <div style="display: none" id="sounder_strobe">
+                                            <div class="form-item roww">
+                                                <label for="zone_number">Zone number</label>
+                                                <input type="number"
+                                                        id="zone_number"
+                                                        name="zone_number"
+                                                        data-maxlength="2"
+                                                        oninput="javascript: myFunction(this.id)"
+                                                        onblur="javascript: myFunction2(this.id)"
+                                                        value="1"
+                                                        min="1"
+                                                        max="96" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: none" id="5_${id}">
+                                        <div class="form-item roww">
+                                            <label for="func_event">Function</label>
+                                            <div class="select">
+                                                <select id="func_event"
+                                                        name="func_event">
+                                                    <option value="func_event_alarm">ALARM</option>
+                                                    <option value="func_event_fault">FAULT</option>
+                                                    <option value="func_event_warning">WARNING</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </fieldset>`;
+                el.innerHTML = target;
+            }
+
+            var lst = [1];
             const outputs = 250;
             function addOutput(id) {
                 if (id === "output") {
@@ -524,460 +550,28 @@
                     }
                     if (last === 0 || lst.includes(last)) return;
 
-                    const newUserElement = `
-                                    <div style="display: block" id="${last}">
-                                        <fieldset>
-                <legend>Output ${last}</legend>
-                <div class="row align-items-center">
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="form-item roww flex">
-                            <label for="note_${last}">Note</label>
-                            <input type="text" id="note_${last}" name="note_${last}" />
-                        </div>
-                    </div>
-                    <div class="col"><button type="button" onclick="javascript:addOutput(${last})" class="m-2">
-                        <i class="fa-solid fa-minus 5x"></i> Remove Output
-                    </button></div>
-                </div>
-
-                <fieldset>
-                    <legend>Settings</legend>
-
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <div class="form-item roww">
-                                <label for="delay_${last}">Delay (seconds)</label>
-                                <input type="number"
-                                       id="delay_${last}"
-                                       name="delay_${last}"
-                                       data-maxlength="3"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       placeholder="0"
-                                       min="1"
-                                       max="600" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="pulse-duration_${last}">Pulse duration (seconds)</label>
-                                <input type="number"
-                                       id="pulse-duration_${last}"
-                                       name="pulse-duration_${last}"
-                                       data-maxlength="3"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       placeholder="0"
-                                       min="1"
-                                       max="250" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Parameters</legend>
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="latched_${last}">Latched</label>
-                                <input type="checkbox" id="latched_${last}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="inverted_${last}">Inverted</label>
-                                <input type="checkbox" id="inverted_${last}" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <fieldset>
-                                <legend>Logic</legend>
-                                <div class="form-item">
-                                    <div class="select">
-                                        <select id="logic-select_${last}"
-                                                name="logic-select_${last}"
-                                                onchange="javascript: loadDiv('showSchema_${last}', this.value)">
-                                            <option value="ORschema" selected>OR</option>
-                                            <option value="ANDschema">AND</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div id="showSchema_${last}" class="txt-ctr">
-                                    <img src="../../Images/ORFunction.png" alt="ORschema" />
-                                </div>
-
-                                <div style="display: none" id="ORschema">
-                                    <img src="../../Images/ORFunction.png" alt="ORschema" />
-                                </div>
-
-                                <div style="display: none" id="ANDschema">
-                                    <img src="../../Images/ANDFunction.png" alt="ANDschema" />
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-6">
-                            <fieldset>
-                                <legend>Signal type</legend>
-                                <div class="form-item">
-                                    <div class="select">
-                                        <select id="signal-type_${last}"
-                                                name="signal-type_${last}">
-                                            <option value="one_pulsed" selected>ONE PULSED</option>
-                                            <option value="pulsed">PULSED</option>
-                                            <option value="continious">CONTINIOUS</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>OR group inputs</legend>
-                    <div class="form-item roww">
-                        <input type="number"
-                               id="or_group1_${last}"
-                               name="or_group1_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="or_group2_${last}"
-                               name="or_group2_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="or_group3_${last}"
-                               name="or_group3_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="or_group4_${last}"
-                               name="or_group4_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>AND group inputs</legend>
-                    <div class="form-item roww">
-                        <input type="number"
-                               id="and_group1_${last}"
-                               name="and_group1_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="and_group2_${last}"
-                               name="and_group2_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="and_group3_${last}"
-                               name="and_group3_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                        <input type="number"
-                               id="and_group4_${last}"
-                               name="and_group4_${last}"
-                               data-maxlength="3"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)"
-                               placeholder="0"
-                               min="1"
-                               max="250" />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Input Type</legend>
-                    <div class="form-item roww">
-                        <label for="state">State</label>
-                        <div class="select">
-                            <select id="state_${last}"
-                                    name="state_${last}"
-                                    onchange="javascript: loadDiv('showDiv_${last}', this.value)">
-                                <option value="0">NONE</option>                                
-                                <option value="1_${last}">PERIPHERY_DEVICE</option>
-                                <option value="2_${last}">LOOP_DEVICE</option>
-                                <option value="3_${last}">NETWORK</option>
-                                <option value="4_${last}">ACTION</option>
-                                <option value="5_${last}">EVENT</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="showDiv_${last}"></div>
-
-                    <div style="display: none" id="1_${last}">
-                        <div class="row align-items-center">
-                            <div class="col-6">
-                                <div class="form-item roww">
-                                    <label for="per_dev_addr">Peripherial device address</label>
-                                    <input type="number"
-                                           id="per_dev_addr"
-                                           name="per_dev_addr"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="6" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="per_dev_inp">Peripherial device output</label>
-                                    <input type="number"
-                                           id="per_dev_inp"
-                                           name="per_dev_inp"
-                                           data-maxlength="2"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="24" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="2_${last}">
-                        <fieldset>
-                            <legend>Loop Type</legend>
-                            <div class="form-item roww">
-                                <label for="state">State</label>
-                                <div class="select">
-                                    <select id="state"
-                                            name="state"
-                                            onchange="javascript: loadDiv('showLoop_${last}', this.value)">
-                                        <option value="Teletek_${last}" selected>TELETEK LOOP</option>
-                                        <option value="System_${last}">SYSTEM SENSOR LOOP</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div id="showLoop_${last}">
-                                <div id="Teletek_${last}">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="dev_addr">Device address</label>
-                                                <input type="number"
-                                                       id="dev_addr"
-                                                       name="dev_addr"
-                                                       data-maxlength="3"
-                                                       oninput="javascript: myFunction(this.id)"
-                                                       onblur="javascript: myFunction2(this.id)"
-                                                       value="1"
-                                                       min="1"
-                                                       max="250" />
-                                            </div>
+                    const newUserElement = `<div class="col-12" id=${last}>
+                                    <div class="row">
+                                        <div class="col-11 pr-1">
+                                            <a href="javascript:showOutput('${last}')">
+                                                <div class="btnStyle">
+                                                    <img src="../../Images/1011.Outputs.ico" alt="" width="25" height="25" class="m15" />
+                                                    <div class="someS">
+                                                        <h5>Output ${last}</h5>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="dev_addr_loop">Loop</label>
-                                                <input type="number"
-                                                       id="dev_addr_loop"
-                                                       name="dev_addr_loop"
-                                                       data-maxlength="1"
-                                                       oninput="javascript: myFunction(this.id)"
-                                                       onblur="javascript: myFunction2(this.id)"
-                                                       value="1"
-                                                       min="1"
-                                                       max="4" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="dev_channel">Channel</label>
-                                                <input type="number"
-                                                       id="dev_channel"
-                                                       name="dev_channel"
-                                                       data-maxlength="1"
-                                                       oninput="javascript: myFunction(this.id)"
-                                                       onblur="javascript: myFunction2(this.id)"
-                                                       value="1"
-                                                       min="1"
-                                                       max="4" />
-                                            </div>
+                                        <div class="col-1 p-0 m-0" onclick="javascript:addOutput(${last})">
+                                            <i class="fa-solid fa-xmark"></i>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div style="display: none" id="System_${last}">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="dev_addr_sys">Device address</label>
-                                            <input type="number"
-                                                   id="dev_addr_sys"
-                                                   name="dev_addr_sys"
-                                                   data-maxlength="2"
-                                                   oninput="javascript: myFunction(this.id)"
-                                                   onblur="javascript: myFunction2(this.id)"
-                                                   value="1"
-                                                   min="1"
-                                                   max="99" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="dev_addr_sys_loop">Loop</label>
-                                            <input type="number"
-                                                   id="dev_addr_sys_loop"
-                                                   name="dev_addr_sys_loop"
-                                                   data-maxlength="1"
-                                                   oninput="javascript: myFunction(this.id)"
-                                                   onblur="javascript: myFunction2(this.id)"
-                                                   value="1"
-                                                   min="1"
-                                                   max="4" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="sys_dev_type">Device Type</label>
-                                            <div class="select">
-                                                <select id="sys_dev_type" name="sys_dev_type">
-                                                    <option value="Sensor">SENSOR</option>
-                                                    <option value="Module">MODULE</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div style="display: none" id="3_${last}">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="input_number">Input number</label>
-                                    <input type="number"
-                                           id="input_number"
-                                           name="input_number"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="panel_number">Panel number</label>
-                                    <input type="number"
-                                           id="panel_number"
-                                           name="panel_number"
-                                           data-maxlength="2"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="64" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="4_${last}">
-                        <div class="form-item roww">
-                            <label for="func">Function</label>
-                            <div class="select">
-                                <select id="func"
-                                        name="func"
-                                        onchange="javascript: loadDiv('zonal_${last}', this.value)">
-                                    <option value="silence_buzzer">SILENCE BUZZER</option>
-                                    <option value="silence_sounder">SILENCE SOUNDER</option>
-                                    <option value="reset">RESET</option>
-                                    <option value="evacuate">EVACUATE</option>
-                                    <option value="delay_override">DELAY OVERRIDE</option>
-                                    <option value="class_change">CLASS CHANGE</option>
-                                    <option value="sounder_strobe">SILENCE SOUNDER (STROBE ON))</option>
-                                    <option value="day">DAY</option>
-                                    <option value="night">NIGHT</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="zonal_${last}"></div>
-
-                        <div style="display: none" id="sounder_strobe">
-                            <div class="form-item roww">
-                                <label for="zone_number">Zone number</label>
-                                <input type="number"
-                                       id="zone_number"
-                                       name="zone_number"
-                                       data-maxlength="2"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       value="1"
-                                       min="1"
-                                       max="96" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="5_${last}">
-                        <div class="form-item roww">
-                            <label for="func_event">Function</label>
-                            <div class="select">
-                                <select id="func_event"
-                                        name="func_event">
-                                    <option value="func_event_alarm">ALARM</option>
-                                    <option value="func_event_fault">FAULT</option>
-                                    <option value="func_event_warning">WARNING</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </fieldset>
-                                    </div>`;
+                                </div>`;
                     var element = document.getElementById("new_output");
                     var new_inner = `
-                                                        ${element.innerHTML}
-                                                        ${newUserElement}
-                                                    `;
+                                    ${element.innerHTML}
+                                    ${newUserElement}
+                                `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -991,7 +585,7 @@
                     });
 
                     // button display check
-                    if (lst.length === outputs - 1) {
+                    if (lst.length === outputs) {
                         let button = document.getElementById("output_btn");
                         button.style.display = "none";
                     }
@@ -1002,9 +596,11 @@
                         lst = lst.filter(function (item) {
                             return item !== id
                         })
+                        var el = document.getElementById(`id_${id}`);
+                        if (el) el.parentNode.removeChild(el);
 
                         let button = document.getElementById("output_btn");
-                        if (lst.length < outputs - 1 && button.style.display === "none") {
+                        if (lst.length < outputs && button.style.display === "none") {
                             button.style.display = "block";
                         }
                     } else {

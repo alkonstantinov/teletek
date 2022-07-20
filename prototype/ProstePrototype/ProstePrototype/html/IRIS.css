@@ -52,6 +52,16 @@ a, a:hover {
     height: 600px;
 }
 
+.scroll400 {
+    overflow-y: auto;
+    height: 400px;
+}
+
+.scroll500 {
+    overflow-y: auto;
+    height: 500px;
+}
+
 .list-group-item.active {
     z-index: 2;
     color: #fff;

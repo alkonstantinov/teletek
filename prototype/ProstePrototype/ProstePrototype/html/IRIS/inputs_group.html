@@ -25,31 +25,31 @@
         <div class="container" id="divMain">
             <form action="">
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-                <fieldset>
-                    <legend>Input Group 1</legend>
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="gr_input_logic_1">Input Logic</label>
-                                <div class="select">
-                                    <select id="gr_input_logic_1" name="gr_input_logic_1">
-                                        <option value="or">OR</option>
-                                        <option value="and">AND</option>
-                                    </select>
-                                </div>
-                            </div>
+                <div id="new_input_group" class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" id="1">
+                        <div class="row">
+                            <fieldset style="min-width: 200px;">
+                                <legend>Input Group 1</legend>
+                                        <div class="form-item roww">
+                                            <label for="gr_input_logic_1">Input Logic</label>
+                                            <div class="select">
+                                                <select id="gr_input_logic_1" name="gr_input_logic_1">
+                                                    <option value="or">OR</option>
+                                                    <option value="and">AND</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                            </fieldset>
                         </div>
                     </div>
-                </fieldset>
-                <div id="new_input_group"></div>
-
-                <button style="display: block;" type="button" onclick="javascript:addInputGroup('input_group')" class="m-4" id="input_group_btn">
-                    <i class="fa-solid fa-plus 5x"></i> Add New Input Group
-                </button>
-
+                </div>
+                
                 <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
                     <button type="button" class="btn-round btn-blue">Save</button>
                     <button type="button" class="btn-round btn-border-black">Back</button>
+                    <button style="display: inline-flex;" type="button" onclick="javascript:addInputGroup('input_group')" class="btn-round btn-border-black" id="input_group_btn">
+                        <i class="fa-solid fa-plus 5x"></i> Add New Input Group
+                    </button>
                 </div>
             </form>
         </div>
@@ -79,32 +79,30 @@
                     if (last === 0 || lst.includes(last)) return;
 
                     const newUserElement = `
-                                    <div style="display: block" id="${last}">
-                                        <fieldset>
-                                            <legend>Input Group ${last}</legend>
-                                            <div class="row align-items-center">
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <div class="form-item roww">
-                                                        <label for="gr_input_logic_${last}">Input Logic</label>
-                                                        <div class="select">
-                                                            <select id="gr_input_logic_${last}" name="gr_input_logic_${last}">
-                                                                <option value="or">OR</option>
-                                                                <option value="and">AND</option>
-                                                            </select>
-                                                        </div>
+                                    <div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                        <div class="row">
+                                            <fieldset style="min-width: 200px;">
+                                                <legend>Input Group ${last}</legend>
+                                                <div class="form-item roww">
+                                                    <label for="gr_input_logic_${last}">Input Logic</label>
+                                                    <div class="select">
+                                                        <select id="gr_input_logic_${last}" name="gr_input_logic_${last}">
+                                                            <option value="or">OR</option>
+                                                            <option value="and">AND</option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div class="col"><button type="button" onclick="javascript:addInputGroup(${last})" class="m-2">
-                                                    <i class="fa-solid fa-minus 5x"></i> Remove Input Group
-                                                </button></div>
+                                            </fieldset>
+                                            <div onclick="javascript:addInputGroup(${last})" class="mt-2 ml-1">
+                                                <i class="fa-solid fa-xmark 5x"></i>
                                             </div>
-                                        </fieldset>
+                                        </div>
                                     </div>`;
                     var element = document.getElementById("new_input_group");
                     var new_inner = `
-                                                        ${element.innerHTML}
-                                                        ${newUserElement}
-                                                    `;
+                                    ${element.innerHTML}
+                                    ${newUserElement}
+                                `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 

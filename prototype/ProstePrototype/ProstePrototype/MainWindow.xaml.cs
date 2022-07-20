@@ -38,14 +38,14 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "output.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "fat-fbf.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone_evac.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone_evac.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices_none.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/Teletek", "M22.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/System Sensor/Modules", "Default - normal.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/System Sensor/Sensors", "1251E.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "General Settings.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Phones.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Phones.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Input_Output.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Mobile Operators.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Receiver Settings.html");
