@@ -47,6 +47,11 @@ a, a:hover {
     border-top: 2px dotted #0c2b90;
 }
 
+.scroll {
+    overflow-y: auto;
+    height: 600px;
+}
+
 .list-group-item.active {
     z-index: 2;
     color: #fff;
@@ -327,7 +332,7 @@ fieldset legend {
 
 .btn-blue {
     background-color: #0c2b90;
-    border: none;
+    border: 1px solid #ffffff;
     color: #f4f4f4; }
     .btn-blue:hover {
         background-color: #0c91e4;
