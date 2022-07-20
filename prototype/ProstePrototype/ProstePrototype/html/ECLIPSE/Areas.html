@@ -108,7 +108,7 @@
             <div style="bottom: 10px; position: sticky;" class="buttons-row mt15">
                 <button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>
-                <button style="display: inline-flex;" type="button" onclick="javascript:addArea('area')" id="device_btn" class="btn-round btn-border-black">
+                <button style="display: inline-flex;" type="button" onclick="javascript:addArea('area')" id="areas_btn" class="btn-round btn-border-black">
                     <i class="fa-solid fa-plus 5x"></i> Add New Area
                 </button>
             </div>
@@ -445,6 +445,12 @@
                     }).forEach(function (elem) {
                         main.appendChild(elem);
                     });
+
+                    // button display check
+                    if (lst.length === areas) {
+                        let button = document.getElementById("areas_btn");
+                        button.style.display = "none";
+                    }
                 } else {
                     if (lst.includes(id)) {
                         var elem = document.getElementById(`${id}`);
@@ -455,6 +461,11 @@
 
                         var el = document.getElementById(`id_${id}`);
                         el.parentNode.removeChild(el);
+
+                        let button = document.getElementById("areas_btn");
+                        if (lst.length < areas && button.style.display === "none") {
+                            button.style.display = "inline-flex";
+                        }
                     } else {
                         return;
                     }
