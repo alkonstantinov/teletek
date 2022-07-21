@@ -87,18 +87,15 @@
         <ol class="breadcrumb" id="olBC">
         </ol>
     </nav>-->
-    <div class="container" id="divMain">
-
-    </div>
     <!-- Footer -->
     <!--<footer class="footer text-center">
 
     </footer>-->
     <!-- Footer -->
 
-    <div style="display: none;" id="divDevices">
+    <div id="divDevices">
         <div class="row m15 no-gutter">
-            <a href="javascript:loadDiv('divIRIS', 'Devices|IRIS')" class="col-sm-3">
+            <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':['IRIS/IRISPANEL.html', 'index.html']})" class="col-sm-3">
                 <div class="btnStyle">
                     <i class="fa fa-lock fa-2x colored p15 p15" aria-hidden="true"></i>
                     <div class="someS">
@@ -665,10 +662,9 @@
             //$("#olBC").empty();
             //bc.split('|').forEach(x => $("#olBC").append($("<li class='breadcrumb-item active' aria-current='page'>" + x + "</li>")));
         }
-        $(document).ready(() => {
-            loadDiv("divDevices", "Devices");
-        });
+       
     </script>
+    <script src="mainfuncs.js"></script>
 </body>
 
 </html>

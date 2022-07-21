@@ -1,4 +1,6 @@
 ﻿using CefSharp;
+using Newtonsoft.Json.Linq;
+using ProstePrototype.POCO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +23,16 @@ namespace ProstePrototype
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly string applicationDirectory;
         public MainWindow()
         {
             InitializeComponent();
             //Uri iconUri = new Uri("pack://application:,,,/html/Icon.ico", UriKind.RelativeOrAbsolute);
             //this.Icon = BitmapFrame.Create(iconUri);
-            string applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "IRISPanel.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "access.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "panels_in_network.html");
@@ -38,7 +41,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "output.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "fat-fbf.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone_evac.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "zone_evac.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "peripherial_devices_none.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/LoopDevices/Teletek", "M22.html");
@@ -95,28 +98,67 @@ namespace ProstePrototype
             wb2.ExecuteScriptAsync(script);
         }
 
+        private void LoadPage(LoadPageData data)
+        {
+            if (!string.IsNullOrEmpty(data.LeftBrowserUrl))
+            {
+                wb1.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl) );
+                this.Dispatcher.Invoke(() =>
+                {
+                        wb1.Width = this.Width / 5;
+                        Splitter1.Width = 5;
+                    
+                });
+
+            }
+            else
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    wb1.Width = 0;
+                    Splitter1.Width = 0;
+
+                });
+            }
+            wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl));
+
+        }
+
         private void wb_JSBreadCrumb(object sender, JavascriptMessageReceivedEventArgs e)
         {
-            var i = ((string)e.Message).Split('|');
-            string str = i[0];
-            for (int j = 1; j < i.Length; j++)
+            JObject json = JObject.Parse(e.Message.ToString());
+            switch (json["Command"].ToString())
             {
-                str += " \\ " + i[j];
-            }
-            this.Dispatcher.Invoke(() =>
-            {
-                if (i.Length > 1)
-                {
-                    if (i.Length > 2)
+                case "LoadPage":
+                    var lpd = new LoadPageData()
                     {
-                        string wb1CommandLine = "div" + i[i.Length - 2];
-                        wb1.ExecuteScriptAsync("loadDiv(" + wb1CommandLine + ", " + i[0] + "|" + i[i.Length - 2] + ")"); // not working
-                    }
-                    wb1.Width = this.Width / 5;
-                    Splitter1.Width = 5;
-                }
-                NavField.Text = str;// your code here.
-            });
+                        RightBrowserUrl = json["Params"].Value<JArray>()[0].Value<string>(),
+                        LeftBrowserUrl = json["Params"].Value<JArray>()[1].Value<string>()
+                    };
+                    LoadPage(lpd);
+                    break;
+            }
+
+            //var i = ((string)e.Message).Split('|');
+            //string str = i[0];
+            //for (int j = 1; j < i.Length; j++)
+            //{
+            //    str += " \\ " + i[j];
+            //}
+            //this.Dispatcher.Invoke(() =>
+            //{
+            //    if (i.Length > 1)
+            //    {
+            //        if (i.Length > 2)
+            //        {
+            //            string wb1CommandLine = "div" + i[i.Length - 2];
+            //            wb1.ExecuteScriptAsync("loadDiv(" + wb1CommandLine + ", " + i[0] + "|" + i[i.Length - 2] + ")"); // not working
+            //        }
+            //        wb1.Width = this.Width / 5;
+            //        Splitter1.Width = 5;
+            //    }
+            //    NavField.Text = str;// your code here.
+            //});
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {
