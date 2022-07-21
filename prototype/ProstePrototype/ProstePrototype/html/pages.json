@@ -1,12 +1,132 @@
 {
+  "eclipse": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/General Settings.html",
+    "breadcrumbs": [ "index" ]
+  },
+  "eclipse_areas": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Areas.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_gen_settings": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/General Settings.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_outputs": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Outputs.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_timeslots": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Timeslots.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_users": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Users.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_zones": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Zones.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_communicator": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Communicator.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
+  "eclipse_devices": {
+    "left": "ECLIPSE/divECLIPSE.html",
+    "right": "ECLIPSE/Devices.html",
+    "breadcrumbs": [ "index", "eclipse" ]
+  },
   "index": {
     "left": null,
     "right": "index.html",
     "breadcrumbs": []
   },
   "iris": {
-    "left": "index.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/IRISPANEL.html",
-    "breadcrumbs": ["index"]
+    "breadcrumbs": [ "index" ]
+  },
+  "iris_access_code": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/access.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_network": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/network.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_panels_in_network": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/panels_in_network.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_inputs": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/input.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_inputs_group": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/inputs_group.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_outputs": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/output.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_fat_fbf": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/fat-fbf.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_zones": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/zone.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_evac_zones": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/zone_evac.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "tte": {
+    "left": "TTE GPRS/divTTE.html",
+    "right": "TTE GPRS/General Settings.html",
+    "breadcrumbs": [ "index" ]
+  },
+  "tte_gen_settings": {
+    "left": "TTE GPRS/divTTE.html",
+    "right": "TTE GPRS/General Settings.html",
+    "breadcrumbs": [ "index", "tte" ]
+  },
+  "tte_phones": {
+    "left": "TTE GPRS/divTTE.html",
+    "right": "TTE GPRS/Phones.html",
+    "breadcrumbs": [ "index", "tte" ]
+  },
+  "tte_inputs_outputs": {
+    "left": "TTE GPRS/divTTE.html",
+    "right": "TTE GPRS/Input_Output.html",
+    "breadcrumbs": [ "index", "tte" ]
+  },
+  "tte_mobile_operators": {
+    "left": "TTE GPRS/divTTE.html",
+    "right": "TTE GPRS/Mobile Operators.html",
+    "breadcrumbs": [ "index", "tte" ]
+  },
+  "tte_receiver_settings": {
+    "left": "TTE GPRS/divTTE.html",
+    "right": "TTE GPRS/Receiver Settings.html",
+    "breadcrumbs": [ "index", "tte" ]
   }
 }

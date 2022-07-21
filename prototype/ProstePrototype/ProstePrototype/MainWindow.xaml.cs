@@ -142,31 +142,17 @@ namespace ProstePrototype
                     break;
             }
 
-            //var i = ((string)e.Message).Split('|');
-            //string str = i[0];
-            //for (int j = 1; j < i.Length; j++)
-            //{
-            //    str += " \\ " + i[j];
-            //}
-            //this.Dispatcher.Invoke(() =>
-            //{
-            //    if (i.Length > 1)
-            //    {
-            //        if (i.Length > 2)
-            //        {
-            //            string wb1CommandLine = "div" + i[i.Length - 2];
-            //            wb1.ExecuteScriptAsync("loadDiv(" + wb1CommandLine + ", " + i[0] + "|" + i[i.Length - 2] + ")"); // not working
-            //        }
-            //        wb1.Width = this.Width / 5;
-            //        Splitter1.Width = 5;
-            //    }
-            //    NavField.Text = str;// your code here.
-            //});
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {
-            string script = "$('#divModal').modal('show')";
-            wb2.ExecuteScriptAsync(script);
+            this.Dispatcher.Invoke(() =>
+            {
+                wb1.Width = 0;
+                Splitter1.Width = 0;
+
+            });
+            wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", "modal.html"));
+            
         }
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {

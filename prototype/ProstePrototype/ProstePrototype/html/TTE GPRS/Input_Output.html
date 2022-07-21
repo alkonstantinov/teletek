@@ -551,11 +551,11 @@
             crossorigin="anonymous"></script>-->
     <script>
         function sendMessage(bc) {
-            //CefSharp.PostMessage(bc);
+            CefSharp.PostMessage(bc);
         }
-        $(document).ready(() => {
-            sendMessage("Devices|TTE GPRS|I/O Settings");
-        });
+        //$(document).ready(() => {
+        //    sendMessage("Devices|TTE GPRS|I/O Settings");
+        //});
     </script>
 </body>
 </html>

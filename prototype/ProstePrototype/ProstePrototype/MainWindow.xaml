@@ -173,6 +173,7 @@
                 Width="{Binding Width}"
                 Margin="0, 0, 0, 0"
                 Padding="0, 0, 0, 50"
+                JavascriptMessageReceived="wb_JSBreadCrumb"
                 />
             <GridSplitter x:Name="Splitter1" Grid.Column="1" HorizontalAlignment="Stretch" />
             <wpf:ChromiumWebBrowser
