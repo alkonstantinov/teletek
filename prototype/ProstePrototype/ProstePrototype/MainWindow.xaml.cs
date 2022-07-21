@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace ProstePrototype
     public partial class MainWindow : Window
     {
         private readonly string applicationDirectory;
+        private readonly JObject pages;
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +57,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/ECLIPSE", "General Settings.html");
 
             //wb0.Load("file:///" + navigation);
+            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
             this.DataContext = this;
             wb1.Load("file:///" + firstFile);
             if (myFile == firstFile)
@@ -132,8 +135,8 @@ namespace ProstePrototype
                 case "LoadPage":
                     var lpd = new LoadPageData()
                     {
-                        RightBrowserUrl = json["Params"].Value<JArray>()[0].Value<string>(),
-                        LeftBrowserUrl = json["Params"].Value<JArray>()[1].Value<string>()
+                        RightBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["right"].Value<string>(),
+                        LeftBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["left"].Value<string>()
                     };
                     LoadPage(lpd);
                     break;
