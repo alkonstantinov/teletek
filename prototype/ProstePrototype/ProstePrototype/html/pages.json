@@ -99,6 +99,16 @@
     "right": "IRIS/zone_evac.html",
     "breadcrumbs": [ "index", "iris" ]
   },
+  "iris_peripherial_devices": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/periph_devices.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
+  "iris_loop_devices": {
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/loop_devices.html",
+    "breadcrumbs": [ "index", "iris" ]
+  },
   "tte": {
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/General Settings.html",
