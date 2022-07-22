@@ -24,7 +24,18 @@
                 <fieldset>
                     <legend>Device</legend>
                     <div class="row">
-
+                        <div class="col-12">
+                            <div class="form-item roww disabled">
+                                <label for="device_state">State</label>
+                                <div class="select">
+                                    <select id="device_state"
+                                            name="device_state">
+                                        <option value="none">NONE</option>
+                                        <option value="normal" selected>NORMAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col">
                             <div class="form-item roww">
                                 <label for="name">Name</label>
@@ -37,18 +48,7 @@
                                 <input type="text" id="serial_id" name="serial_id" />
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-item roww disabled">
-                                <label for="device_state">State</label>
-                                <div class="select">
-                                    <select id="device_state"
-                                            name="device_state">
-                                        <option value="none">NONE</option>
-                                        <option value="normal" selected>NORMAL</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </fieldset>
 

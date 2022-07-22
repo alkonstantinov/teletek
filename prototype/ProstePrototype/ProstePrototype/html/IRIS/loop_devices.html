@@ -24,42 +24,9 @@
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
         <div class="row">
-            <div class="col-3 bl scroll400">
+            <div class="col-3 bl scroll500">
                 <div id="new_device" class="row">
-                    <div class="col-12" id="id_1">
-                        <div class="row">
-                            <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('power_supply')">
-                                    <div class="btnStyle">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="25" height="25" class="m15" />
-                                        <div class="someS">
-                                            <h5>Power Supply</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(1)">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12" id="id_2">
-                        <div class="row">
-                            <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('input0_outrel4_outmon4')">
-                                    <div class="btnStyle">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="25" height="25" class="m15" />
-                                        <div class="someS">
-                                            <h5>INPUT0 OUTREL4 OUTMON4</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(1)">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="col-9">
@@ -75,128 +42,32 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="list-group" id="list-tab" role="tablist">
-                                <button type="button" class="list-group-item list-group-item-action active show" id="list-power_supply-list" data-toggle="tab" href="#list-power_supply" role="tab" aria-controls="list-power_supply" aria-selected="false">Power Supply</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-input0_outrel4_outmon4-list" data-toggle="tab" href="#list-input0_outrel4_outmon4" role="tab" aria-controls="list-input0_outrel4_outmon4" aria-selected="false">INPUT0 OUTREL4 OUTMON4</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-tte_loop-list" data-toggle="tab" href="#list-tte_loop" role="tab" aria-controls="list-tte_loop" aria-selected="false">TTE LOOP</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-system_sensor_loop-list" data-toggle="tab" href="#list-system_sensor_loop" role="tab" aria-controls="list-system_sensor_loop" aria-selected="false">SYSTEM SENSOR LOOP</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-loop1_outrel4-list" data-toggle="tab" href="#list-loop1_outrel4" role="tab" aria-controls="list-loop1_outrel4" aria-selected="false">LOOP1 OUTREL4</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-loop1_input4-list" data-toggle="tab" href="#list-loop1_input4" role="tab" aria-controls="list-loop1_input4" aria-selected="false">LOOP1 INPUT4</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-input4_outrel4_outmon4-list" data-toggle="tab" href="#list-input4_outrel4_outmon4" role="tab" aria-controls="list-input4_outrel4_outmon4" aria-selected="false">INPUT4 OUTREL4 OUTMON4</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-input4_outrel20_outmon4-list" data-toggle="tab" href="#list-input4_outrel20_outmon4" role="tab" aria-controls="list-input4_outrel20_outmon4" aria-selected="false">INPUT4 OUTREL20 OUTMON4</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-input0_outrel0_outmon4-list" data-toggle="tab" href="#list-input0_outrel0_outmon4" role="tab" aria-controls="list-input0_outrel0_outmon4" aria-selected="false">INPUT0 OUTREL0 OUTMON4</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-input4_outrel0_outmon4-list" data-toggle="tab" href="#list-input4_outrel0_outmon4" role="tab" aria-controls="list-input4_outrel0_outmon4" aria-selected="false">INPUT4 OUTREL0 OUTMON4</button>
+                                <button type="button" class="list-group-item list-group-item-action active show" id="list-teletek_loop-list" data-toggle="tab" href="#list-teletek_loop" role="tab" aria-controls="list-teletek_loop" aria-selected="false">Teletek Loop</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-system_sensor_loop-list" data-toggle="tab" href="#list-system_sensor_loop" role="tab" aria-controls="list-system_sensor_loop" aria-selected="false">System Sensor Loop</button>
                             </div>
                         </div>
                         <div class="col-8">
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade active show" id="list-power_supply" role="tabpanel" aria-labelledby="list-power_supply-list">
+                                <div class="tab-pane fade active show" id="list-teletek_loop" role="tabpanel" aria-labelledby="list-teletek_loop-list">
                                     <div class="row m-1 justify-content-center">
-                                        <h2>Power Supply</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="power_supply_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-input0_outrel4_outmon4" role="tabpanel" aria-labelledby="list-input0_outrel4_outmon4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>INPUT0 OUTREL4 OUTMON4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="input0_outrel4_outmon4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-tte_loop" role="tabpanel" aria-labelledby="list-tte_loop-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>TTE LOOP</h2>
+                                        <h2>Teletek Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
                                         <img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />
                                     </div>
                                     <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="tte_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
+                                        <button type="button" class="btn-round" id="teletek_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="list-system_sensor_loop" role="tabpanel" aria-labelledby="list-system_sensor_loop-list">
                                     <div class="row m-1 justify-content-center">
-                                        <h2>SYSTEM SENSOR LOOP</h2>
+                                        <h2>System Sensor Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
                                         <img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />
                                     </div>
                                     <div class="row m-1 justify-content-end">
                                         <button type="button" class="btn-round" id="system_sensor_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-loop1_outrel4" role="tabpanel" aria-labelledby="list-loop1_outrel4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>LOOP1 OUTREL4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="loop1_outrel4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-loop1_input4" role="tabpanel" aria-labelledby="list-loop1_input4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>LOOP1 INPUT4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="loop1_input4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-input4_outrel4_outmon4" role="tabpanel" aria-labelledby="list-input4_outrel4_outmon4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>INPUT4 OUTREL4 OUTMON4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="input4_outrel4_outmon4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-input4_outrel20_outmon4" role="tabpanel" aria-labelledby="list-input4_outrel20_outmon4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>INPUT4 OUTREL20 OUTMON4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="input4_outrel20_outmon4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-input0_outrel0_outmon4" role="tabpanel" aria-labelledby="list-input0_outrel0_outmon4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>INPUT0 OUTREL0 OUTMON4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="input0_outrel0_outmon4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-input4_outrel0_outmon4" role="tabpanel" aria-labelledby="list-input4_outrel0_outmon4-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>INPUT4 OUTREL0 OUTMON4</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1024.Module.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="input4_outrel0_outmon4_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -241,46 +112,513 @@
 
             function showDevice(id) {
                 var el = document.getElementById("selected_device");
-                let ver = false;
-                switch (id) {
-                    case "system_sensor_loop":
-                    case "tte_loop": ver = true; break
-                    
-                    default: break; //pwer_supply, inputs, loops
-                }
-                var target = `<div class="row mt-2">
-                    ${ver ? `<div class="col-xs-12 col-md-6">
-                    <div class="form-item roww flex disabled">
-                        <label for="ver_${id}">Ver</label>
-                        <input type = "text" id = "ver_${id}" name = "ver_${id}" />
-                        </div >
-                    </div >` : ''}
-                    <div class="${ver ? 'col-xs-12 col-md-6' : 'col-12'}"><div class="form-item roww flex disabled">
-                    <label for="device_state_${id}">Device State</label>
-                    <div class="select">
-                        <select id="device_state_${id}" name="device_state_${id}">
-                            <option value="normal" selected>NORMAL</option>
-                        </select>
-                    </div></div></div>
-                </div>`;
-                var main_target = ``;
+                
+                var target = `<div class="row">
+            <div class="col-3 bl scroll400">
+                <div id="new_device_${id}" class="row">
+
+                </div>
+            </div>
+            <div class="col-9">
+                <div id="selected_device_${id}">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList_${id}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <button type="button" class="list-group-item list-group-item-action active show" id="list-sensoIRIS_mio40-list" data-toggle="tab" href="#list-sensoIRIS_mio40" role="tab" aria-controls="list-sensoIRIS_mio40" aria-selected="false">SensoIRIS MIO40</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio04-list" data-toggle="tab" href="#list-sensoIRIS_mio04" role="tab" aria-controls="list-sensoIRIS_mio04" aria-selected="false">SensoIRIS MIO04</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio22-list" data-toggle="tab" href="#list-sensoIRIS_mio22" role="tab" aria-controls="list-sensoIRIS_mio22" aria-selected="false">SensoIRIS MIO22</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio22m-list" data-toggle="tab" href="#list-sensoIRIS_mio22m" role="tab" aria-controls="list-sensoIRIS_mio22m" aria-selected="false">SensoIRIS MIO22M</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp-list" data-toggle="tab" href="#list-sensoIRIS_minp" role="tab" aria-controls="list-sensoIRIS_minp" aria-selected="false">SensoIRIS MINP</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp_fire-list" data-toggle="tab" href="#list-sensoIRIS_minp_fire" role="tab" aria-controls="list-sensoIRIS_minp_fire" aria-selected="false">SensoIRIS MINP (FIRE)</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp_gas-list" data-toggle="tab" href="#list-sensoIRIS_minp_gas" role="tab" aria-controls="list-sensoIRIS_minp_gas" aria-selected="false">SensoIRIS MINP (GAS)</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp_panic-list" data-toggle="tab" href="#list-sensoIRIS_minp_panic" role="tab" aria-controls="list-sensoIRIS_minp_panic" aria-selected="false">SensoIRIS MINP (PANIC)</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mout-list" data-toggle="tab" href="#list-sensoIRIS_mout" role="tab" aria-controls="list-sensoIRIS_mout" aria-selected="false">SensoIRIS MOUT</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mout2401-list" data-toggle="tab" href="#list-sensoIRIS_mout2401" role="tab" aria-controls="list-sensoIRIS_mout2401" aria-selected="false">SensoIRIS MOUT240/1</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mout2402-list" data-toggle="tab" href="#list-sensoIRIS_mout2402" role="tab" aria-controls="list-sensoIRIS_mout2402" aria-selected="false">SensoIRIS MOUT240/2</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mcz-list" data-toggle="tab" href="#list-sensoIRIS_mcz" role="tab" aria-controls="list-sensoIRIS_mcz" aria-selected="false">SensoIRIS MCZ</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mcp150-list" data-toggle="tab" href="#list-sensoIRIS_mcp150" role="tab" aria-controls="list-sensoIRIS_mcp150" aria-selected="false">SensoIRIS MCP150</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_t110-list" data-toggle="tab" href="#list-sensoIRIS_t110" role="tab" aria-controls="list-sensoIRIS_t110" aria-selected="false">SensoIRIS T110</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_t110_is-list" data-toggle="tab" href="#list-sensoIRIS_t110_is" role="tab" aria-controls="list-sensoIRIS_t110_is" aria-selected="false">SensoIRIS T110 IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_s130-list" data-toggle="tab" href="#list-sensoIRIS_s130" role="tab" aria-controls="list-sensoIRIS_s130" aria-selected="false">SensoIRIS S130</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_s130_is-list" data-toggle="tab" href="#list-sensoIRIS_s130_is" role="tab" aria-controls="list-sensoIRIS_s130_is" aria-selected="false">SensoIRIS S130 IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_m140-list" data-toggle="tab" href="#list-sensoIRIS_m140" role="tab" aria-controls="list-sensoIRIS_m140" aria-selected="false">SensoIRIS M140</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_m140_is-list" data-toggle="tab" href="#list-sensoIRIS_m140_is" role="tab" aria-controls="list-sensoIRIS_m140_is" aria-selected="false">SensoIRIS M140 IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsou-list" data-toggle="tab" href="#list-sensoIRIS_wsou" role="tab" aria-controls="list-sensoIRIS_wsou" aria-selected="false">SensoIRIS WSOU</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsou_is-list" data-toggle="tab" href="#list-sensoIRIS_wsou_is" role="tab" aria-controls="list-sensoIRIS_wsou_is" aria-selected="false">SensoIRIS WSOU IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsst-list" data-toggle="tab" href="#list-sensoIRIS_wsst" role="tab" aria-controls="list-sensoIRIS_wsst" aria-selected="false">SensoIRIS WSST</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsst_is-list" data-toggle="tab" href="#list-sensoIRIS_wsst_is" role="tab" aria-controls="list-sensoIRIS_wsst_is" aria-selected="false">SensoIRIS WSST IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wstr-list" data-toggle="tab" href="#list-sensoIRIS_wstr" role="tab" aria-controls="list-sensoIRIS_wstr" aria-selected="false">SensoIRIS WSTR</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wstr_is-list" data-toggle="tab" href="#list-sensoIRIS_wstr_is" role="tab" aria-controls="list-sensoIRIS_wstr_is" aria-selected="false">SensoIRIS WSTR IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsou-list" data-toggle="tab" href="#list-sensoIRIS_bsou" role="tab" aria-controls="list-sensoIRIS_bsou" aria-selected="false">SensoIRIS BSOU</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsou_is-list" data-toggle="tab" href="#list-sensoIRIS_bsou_is" role="tab" aria-controls="list-sensoIRIS_bsou_is" aria-selected="false">SensoIRIS BSOU IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsst-list" data-toggle="tab" href="#list-sensoIRIS_bsst" role="tab" aria-controls="list-sensoIRIS_bsst" aria-selected="false">SensoIRIS BSST</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsst_is-list" data-toggle="tab" href="#list-sensoIRIS_bsst_is" role="tab" aria-controls="list-sensoIRIS_bsst_is" aria-selected="false">SensoIRIS BSST IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bstr-list" data-toggle="tab" href="#list-sensoIRIS_bstr" role="tab" aria-controls="list-sensoIRIS_bstr" aria-selected="false">SensoIRIS BSTR</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bstr_is-list" data-toggle="tab" href="#list-sensoIRIS_bstr_is" role="tab" aria-controls="list-sensoIRIS_bstr_is" aria-selected="false">SensoIRIS BSTR IS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_gas-list" data-toggle="tab" href="#list-sensoIRIS_gas" role="tab" aria-controls="list-sensoIRIS_gas" aria-selected="false">SensoIRIS GAS</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_gas_sense-list" data-toggle="tab" href="#list-sensoIRIS_gas_sense" role="tab" aria-controls="list-sensoIRIS_gas_sense" aria-selected="false">SensoIRIS GAS SENSE</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mc-d-list" data-toggle="tab" href="#list-sensoIRIS_mc-d" role="tab" aria-controls="list-sensoIRIS_mc-d" aria-selected="false">SensoIRIS MC-D</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-callpoint_mcp50-list" data-toggle="tab" href="#list-callpoint_mcp50" role="tab" aria-controls="list-callpoint_mcp50" aria-selected="false">CALLPOINT MCP50</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-m22-list" data-toggle="tab" href="#list-m22" role="tab" aria-controls="list-m22" aria-selected="false">M22</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sounder_wsou-list" data-toggle="tab" href="#list-sounder_wsou" role="tab" aria-controls="list-sounder_wsou" aria-selected="false">SOUNDER WSOU</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mimic-list" data-toggle="tab" href="#list-sensoIRIS_mimic" role="tab" aria-controls="list-sensoIRIS_mimic" aria-selected="false">SensoIRIS MIMIC</button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade active show" id="list-sensoIRIS_mio40" role="tabpanel" aria-labelledby="list-sensoIRIS_mio40-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIO40</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mio40_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active" id="list-sensoIRIS_mio04" role="tabpanel" aria-labelledby="list-sensoIRIS_mio04-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIO04</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mio04_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active" id="list-sensoIRIS_mio22" role="tabpanel" aria-labelledby="list-sensoIRIS_mio22-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIO22</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mio22_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mio22m" role="tabpanel" aria-labelledby="list-sensoIRIS_mio22m-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIO22M</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mio22m_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_minp" role="tabpanel" aria-labelledby="list-sensoIRIS_minp-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MINP</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_minp_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_minp_fire" role="tabpanel" aria-labelledby="list-sensoIRIS_minp_fire-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MINP (FIRE)</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_minp_fire_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_minp_gas" role="tabpanel" aria-labelledby="list-sensoIRIS_minp_gas-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MINP (GAS)</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_minp_gas_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_minp_panic" role="tabpanel" aria-labelledby="list-sensoIRIS_minp_panic-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MINP (PANIC)</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_minp_panic_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mout" role="tabpanel" aria-labelledby="list-sensoIRIS_mout-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MOUT</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mout_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mout2401" role="tabpanel" aria-labelledby="list-sensoIRIS_mout2401-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MOUT240/1</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mout2401_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mout2402" role="tabpanel" aria-labelledby="list-sensoIRIS_mout2402-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MOUT240/2</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mout2402_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mcz" role="tabpanel" aria-labelledby="list-sensoIRIS_mcz-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MCZ</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mcz_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mcp150" role="tabpanel" aria-labelledby="list-sensoIRIS_mcp150-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MCP150</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1027. Call Point (IRIS).ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mcp150_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_t110" role="tabpanel" aria-labelledby="list-sensoIRIS_t110-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS T110</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_t110_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_t110_is" role="tabpanel" aria-labelledby="list-sensoIRIS_t110_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS T110 IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_t110_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_s130" role="tabpanel" aria-labelledby="list-sensoIRIS_s130-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS S130</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_s130_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_s130_is" role="tabpanel" aria-labelledby="list-sensoIRIS_s130_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS S130 IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_s130_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_m140" role="tabpanel" aria-labelledby="list-sensoIRIS_m140-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS M140</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/71.SensoIRIS_M140.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_m140_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_m140_is" role="tabpanel" aria-labelledby="list-sensoIRIS_m140_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS M140 IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/71.SensoIRIS_M140.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_m140_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_wsou" role="tabpanel" aria-labelledby="list-sensoIRIS_wsou-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS WSOU</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_wsou_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_wsou_is" role="tabpanel" aria-labelledby="list-sensoIRIS_wsou_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS WSOU IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_wsou_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_wsst" role="tabpanel" aria-labelledby="list-sensoIRIS_wsst-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS WSST</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/75.SensoIRIS_wsst.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_wsst_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_wsst_is" role="tabpanel" aria-labelledby="list-sensoIRIS_wsst_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS WSST IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/75.SensoIRIS_wsst.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_wsst_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_wstr" role="tabpanel" aria-labelledby="list-sensoIRIS_wstr-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS WSTR</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_wstr_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_wstr_is" role="tabpanel" aria-labelledby="list-sensoIRIS_wstr_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS WSTR IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_wstr_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_bsou" role="tabpanel" aria-labelledby="list-sensoIRIS_bsou-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS BSOU</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_bsou_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_bsou_is" role="tabpanel" aria-labelledby="list-sensoIRIS_bsou_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS BSOU IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_bsou_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_bsst" role="tabpanel" aria-labelledby="list-sensoIRIS_bsst-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS BSST</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_bsst_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_bsst_is" role="tabpanel" aria-labelledby="list-sensoIRIS_bsst_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS BSST IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_bsst_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_bstr" role="tabpanel" aria-labelledby="list-sensoIRIS_bstr-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS BSTR</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_bstr_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_bstr_is" role="tabpanel" aria-labelledby="list-sensoIRIS_bstr_is-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS BSTR IS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_bstr_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_gas" role="tabpanel" aria-labelledby="list-sensoIRIS_gas-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS GAS</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1081.SensoIRIS_GAS.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_gas_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_gas_sense" role="tabpanel" aria-labelledby="list-sensoIRIS_gas_sense-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS GAS SENSE</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1081.SensoIRIS_GAS.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_gas_sense_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mc-d" role="tabpanel" aria-labelledby="list-sensoIRIS_mc-d-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MC-D</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/68.SensoIRIS_address_base.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mc-d_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-callpoint_mcp50" role="tabpanel" aria-labelledby="list-callpoint_mcp50-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>CALLPOINT MCP50</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/27. Call Point (IRIS).ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="callpoint_mcp50_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-m22" role="tabpanel" aria-labelledby="list-m22-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>M22</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1058. IRIS M22_IRIS Zone.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="m22_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sounder_wsou" role="tabpanel" aria-labelledby="list-sounder_wsou-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SOUNDER WSOU</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/1059. Sounder WSOU.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sounder_wsou_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list-sensoIRIS_mimic" role="tabpanel" aria-labelledby="list-sensoIRIS_mimic-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIMIC</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mimic_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+            <button type="button" class="btn-round btn-blue">Save</button>
+            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList_${id}" id="device_btn_${id}" class="btn-round btn-border-black">
+                <i class="fa-solid fa-plus 5x"></i> Add New Device in ${id.replaceAll("_", " ")}
+            </button>
+        </div>`;
+                
                 var proxy_target = ``;
-                switch (id) {
-                    case "main_board":
-                    case "pgm8_expander":
-                    case "zone8_expander":
-                    case "wireless_expander": target = main_target; break;
-                    case "proxy_card_reader_it":
-                    case "proxy_card_reader": target = proxy_target; break;
+                switch (true) {
+                    case id.includes("system_sensor_loop"): el.innerHTML = proxy_target; break;
+                    case id.includes("teletek_loop"): el.innerHTML = target; break;
+
                     default: break;
                 }
-                el.innerHTML = target;
             }
 
-            var lst = [1, 2];
-            const devices = 6;
+            var lst = [];
+            const devices = 4;
             function addConcreteDevice(id) {
-                for (i = 0; i <= devices; i++) {
+                for (i = 1; i <= devices; i++) {
                     if (lst.includes(i)) {
                         continue;
                     } else {
@@ -305,36 +643,32 @@
                     let link = id.substr(0, id.length - 4);
                     let title = link.toUpperCase().replaceAll("_", " ");
                     switch (link) {
-                        case "loop1_input4":
-                        case "loop1_outrel4":
-                        case "system_sensor_loop":
-                        case "tte_loop": imgSource += "1013.LoopDecices.ico"; break;
-                        default: imgSource += "1024.Module.ico";
+                        default: imgSource += "1013.LoopDecices.ico";
                     }
                     const newUserElement = `
-                                                        <div class="col-12" id=${id + '_' + last}>
-                                                            <div class="row">
-                                                                <div class="col-11 pr-1">
-                                                                    <a href="javascript:showDevice('${link}')" >
-                                                                        <div class="btnStyle">
-                                                                            <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
-                                                                            <div class="someS">
-                                                                                <h5>${title}</h5>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
-                                                                    <i class="fa-solid fa-xmark"></i>
+                                            <div class="col-12" id='${last}'>
+                                                <div class="row">
+                                                    <div class="col-11 pr-1">
+                                                        <a href="javascript:showDevice('${link}_${last}')" >
+                                                            <div class="btnStyle">
+                                                                <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                                <div class="someS">
+                                                                    <h5>${title + ' ' + last}</h5>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                `;
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        `;
                     var element = document.getElementById("new_device");
                     var new_inner = `
-                                                    ${element.innerHTML}
-                                                    ${newUserElement}
-                                                `;
+                                            ${element.innerHTML}
+                                            ${newUserElement}
+                                        `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -344,6 +678,662 @@
                         button.style.display = "none";
                     }
                     $('#deviceList').modal('toggle');
+                }
+            }
+
+            function showDevice2(id, loop_id) {
+                var el = document.getElementById(`selected_device_${loop_id}`);
+                console.log('id', id, 'el', el);
+
+                let i = false; let o = false; let c = false; let p = false;
+                let st = false; let n = false;
+                switch (true) {
+                    case id.includes('sensoIRIS_gas_sense'): i = true; c = true;
+                    case id.includes('sensoIRIS_gas'):
+                    case id.includes('sensoIRIS_m140_is'):
+                    case id.includes('sensoIRIS_m140'):
+                    case id.includes('sensoIRIS_s130_is'):
+                    case id.includes('sensoIRIS_s130'):
+                    case id.includes('sensoIRIS_minp_panic'):
+                    case id.includes('sensoIRIS_minp_gas'):
+                    case id.includes('_mio40_'): i = true; break;
+                    case id.includes('_mio22_'): i = true; o = true; break;
+                    case id.includes('_mio22m_'): i = true; o = true; break;
+                    case id.includes('sensoIRIS_mcp150'): p = true; break;
+                    case id.includes('sensoIRIS_bstr_is'): 
+                    case id.includes('sensoIRIS_bstr'): 
+                    case id.includes('sensoIRIS_wstr_is'): 
+                    case id.includes('sensoIRIS_wstr'): n = true;
+                    case id.includes('sensoIRIS_bsst_is'): 
+                    case id.includes('sensoIRIS_bsst'): 
+                    case id.includes('sensoIRIS_wsst'): 
+                    case id.includes('sensoIRIS_wsst'): st = true;
+                    case id.includes('sensoIRIS_bsou_is'): 
+                    case id.includes('sensoIRIS_bsou'): 
+                    case id.includes('sensoIRIS_wsou_is'):
+                    case id.includes('sensoIRIS_wsou'): p = true;                    
+                    case id.includes('sensoIRIS_mimic'): 
+                    case id.includes('sensoIRIS_mcz'): 
+                    case id.includes('sensoIRIS_mout2402'): 
+                    case id.includes('sensoIRIS_mout2401'): 
+                    case id.includes('sensoIRIS_mout'): c = true; break;
+                    case id.includes('m22'): c = true;
+                    case id.includes('sounder_wsou'): o = true; break;
+                    case id.includes('sensoIRIS_mc-d'): n = true; break;
+                    case id.includes('callpoint_mcp50'): st = true; break;
+                    default: break;
+                }
+                var target = `<fieldset>
+                    <legend>Device</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-item roww disabled">
+                                <label for="device_state">State</label>
+                                <div class="select">
+                                    <select id="device_state"
+                                            name="device_state">
+                                        <option value="none">NONE</option>
+                                        <option value="normal" selected>NORMAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww disabled">
+                                <label for="serial_id">Serial ID</label>
+                                <input type="text" id="serial_id" name="serial_id" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Parameters</legend>
+                    <div class="row align-items-center">
+                        <div class="${i ? 'col-6' : 'col'}">
+                            <div class="form-item roww">
+                                <label for="zone">Zone</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="zone"
+                                       name="zone"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            ${o ? `<div class="form-item roww">
+                                <label for="sounder_group">Sounder Group</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="sounder_group"
+                                       name="sounder_group"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="1"
+                                       min="1"
+                                       max="96" />
+                            </div>` : ''}
+                            ${i ? `
+                                <div class="form-item roww">
+                                    <label for="sounder_on">SOUNDER ON</label>
+                                    <input type="checkbox" id="sounder_on" name="sounder_on" class="ml10" ${c ? '' : 'checked'} />
+                                </div>` : ''}                            
+                            ${st ? `<div class="form-item roww">
+                                    <label for="evacuate">Evacuate</label>
+                                    <input type="checkbox" id="evacuate" name="evacuate" class="ml10" checked />
+                                </div>` : ''}
+                        </div>
+                        ${c ? `<div class="col"><div class="form-item roww">
+                                    <label for="led">LED</label>
+                                    <input type="checkbox" id="led" name="led" class="ml10" checked />
+                            </div></div>` : ''}
+                    </div>
+                    ${p ? `<div class="row align-items-center mt-1">
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="event">Event</label>
+                                <div class="select">
+                                    <select id="event"
+                                            name="event">
+                                        <option value="alarms">Alarms</option>
+                                        <option value="evacuate">Evacuate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="led">LED</label>
+                                <input type="checkbox" id="led" class="ml10" checked />
+                            </div>
+                        </div>
+                    </div>` : ''}
+                </fieldset>
+
+                ${n ? `<fieldset>
+                    <legend>Verify Time</legend>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="day-verify-time">Day [sec]</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="day-verify-time"
+                                       name="day-verify-time"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="0"
+                                       min="0"
+                                       max="60" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="night-verify-time">Night [sec]</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="night-verify-time"
+                                       name="night-verify-time"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="0"
+                                       min="0"
+                                       max="60" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>` : ''}
+
+                <div class="buttons-row mt15">
+                    <button type="button" class="btn-round btn-blue">Save</button>
+                    <button type="button" class="btn-round btn-border-black">Back</button>
+                </div>`;
+                var proxy_target = `<fieldset>
+                    <legend>Device</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-item roww disabled">
+                                <label for="device_state">State</label>
+                                <div class="select">
+                                    <select id="device_state"
+                                            name="device_state">
+                                        <option value="none">NONE</option>
+                                        <option value="normal" selected>NORMAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww disabled">
+                                <label for="serial_id">Serial ID</label>
+                                <input type="text" id="serial_id" name="serial_id" />
+                            </div>
+                        </div>                        
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Parameters</legend>
+                    <div class="row align-items-center">
+                        <div class="${i && !o ? 'col-6' : 'col-4'}">
+                            <div class="form-item roww">
+                                <label for="zone">Zone</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="zone"
+                                       name="zone"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div> 
+                        ${i && !o ? '' : `<div class="col">
+                            <div class="form-item roww">
+                                <label for="sounder_group">Sounder Group</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="sounder_group"
+                                       name="sounder_group"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>`}
+                        ${n ? '' : `${p ? `<div class="col-12 mt-1">
+                            <div class="form-item roww">
+                                ${st ? `<label for="parameters">Parameters</label>
+                                <div class="select">
+                                    <select id="parameters"
+                                            name="parameters">
+                                        <option value="sound-high_level-strobe">Sound / High Level / Strobe</option>
+                                        <option value="sound-low_level-strobe">Sound / Low Level / Strobe</option>
+                                        <option value="sound-high_level">Sound / High Level</option>
+                                        <option value="sound-low_level">Sound / Low Level</option>
+                                        <option value="strobe-high_level">Strobe / High Level</option>
+                                        <option value="strobe-low_level">Strobe / Low Level</option>
+                                    </select>
+                                </div>` : `<label for="sound">Sound</label>
+                                <div class="select">
+                                    <select id="sound"
+                                            name="sound">
+                                        <option value="high_level">High Level</option>
+                                        <option value="low_level">Low Level</option>
+                                    </select>
+                                </div>`}
+                            </div>
+                        </div>` : `<div class="col">
+                            <div class="form-item roww">
+                                <label for="led">LED</label>
+                                <input type="checkbox" id="led" class="ml10" checked />
+                            </div>`}`}
+                        </div>
+                    </div>
+                </fieldset>
+
+                ${p ? '' : `<fieldset>
+                    <legend>Channels</legend>
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="form-item roww">
+                                <label for="name_channel_1">Channel 1</label>
+                                <input type="text" id="name_channel_1" name="name_channel_1" placeholder="Channel 1 name"/>                            
+                                <div class="select mt-1">
+                                    <select id="channel_1"
+                                            name="channel_1">
+                                        ${i ? `<option value="input" selected>Input</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="gas_alarm">GAS ALARM !</option>
+                                        <option value="panic">PANIC !</option>` : `<option value="output" selected>Output</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="reset">Reset</option>
+                                        <option value="sounder_mode">Sounder Mode</option>`}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                    ${!c ? `<div class="row align-items-center">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-item roww">
+                                <label for="name_channel_2">Channel 2</label>
+                                <input type="text" id="name_channel_2" name="name_channel_2" placeholder="Channel 2 name"/>
+                           
+                                <div class="select mt-1">
+                                    <select id="channel_2"
+                                            name="channel_2">
+                                        ${i ? `<option value="input" selected>Input</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="gas_alarm">GAS ALARM !</option>
+                                        <option value="panic">PANIC !</option>` : `<option value="output" selected>Output</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="reset">Reset</option>
+                                        <option value="sounder_mode">Sounder Mode</option>`}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-item roww">
+                                <label for="name_channel_3">Channel 3</label>
+                                <input type="text" id="name_channel_3" name="name_channel_3" placeholder="Channel 3 name"/>
+
+                                <div class="select mt-1">
+                                    <select id="channel_3"
+                                            name="channel_3">
+                                        ${i && !o ? `<option value="input" selected>Input</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="gas_alarm">GAS ALARM !</option>
+                                        <option value="panic">PANIC !</option>` : `<option value="output" selected>Output</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="reset">Reset</option>
+                                        <option value="sounder_mode">Sounder Mode</option>`}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-item roww">
+                                <label for="name_channel_4">Channel 4</label>
+                                <input type="text" id="name_channel_4" name="name_channel_4" placeholder="Channel 4 name"/>
+
+                                <div class="select mt-1">
+                                    <select id="channel_4"
+                                            name="channel_4">
+                                        ${i && !o ? `<option value="input" selected>Input</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="gas_alarm">GAS ALARM !</option>
+                                        <option value="panic">PANIC !</option>` : `<option value="output" selected>Output</option>
+                                        <option value="alarm">Alarm</option>
+                                        <option value="evacuate">Evacuate</option>
+                                        <option value="reset">Reset</option>
+                                        <option value="sounder_mode">Sounder Mode</option>`}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>` : ''}
+                </fieldset>`}
+
+
+                <div class="buttons-row mt15">
+                    <button type="button" class="btn-round btn-blue">Save</button>
+                    <button type="button" class="btn-round btn-border-black">Back</button>
+                </div>`;
+                var ttarget = `<fieldset>
+                    <legend>Device</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-item roww disabled">
+                                <label for="device_state">State</label>
+                                <div class="select">
+                                    <select id="device_state"
+                                            name="device_state">
+                                        <option value="none">NONE</option>
+                                        <option value="normal" selected>NORMAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww disabled">
+                                <label for="serial_id">Serial ID</label>
+                                <input type="text" id="serial_id" name="serial_id" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>RI Output/Group</legend>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="group_number">Group Number</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="group_number"
+                                       name="group_number"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="0"
+                                       min="0"
+                                       max="100" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="activation">Activation</label>
+                                <input type="checkbox" id="activation" name="activation" class="ml10" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Parameters</legend>
+                    <div class="row align-items-center">
+                        <div class="${i ? 'col-xs-12 col-lg-4' :'col-xs-12 col-lg-6'}">
+                            <div class="form-item roww">
+                                <label for="zone">Zone</label>
+                                <input class="ml10"
+                                       type="number"
+                                       id="zone"
+                                       name="zone"
+                                       data-maxlength="2"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       placeholder="1"
+                                       min="1"
+                                       max="96" />
+                            </div>
+                        </div>
+                        ${i ? `<div class="col-xs-12 col-lg-4">
+                            <div class="form-item roww disabled">
+                                <label for="dust_level">Dust Level [%]</label>
+                                <input type="text" id="dust_level" name="dust_level" value="??" maxlength="4"/>
+                            </div>
+                        </div>` : ''}
+                        <div class="${i ? 'col-12 mt-2': 'col'}">
+                            <div class="form-item roww">
+                                <label for="led">LED</label>
+                                <input type="checkbox" id="led" class="ml10" checked />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+
+                <fieldset>
+                    <legend>Alarm Level</legend>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="day">Day</label>
+                                <div class="select">
+                                    <select id="day"
+                                            name="day">
+                                        <option value="a1r">A1R</option>
+                                        <option value="a2s">A2S</option>
+                                        <option value="bs">BS</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-item roww">
+                                <label for="night">Night</label>
+                                <div class="select">
+                                    <select id="night"
+                                            name="night">
+                                        <option value="a1r">A1R</option>
+                                        <option value="a2s">A2S</option>
+                                        <option value="bs">BS</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="buttons-row mt15">
+                    <button type="button" class="btn-round btn-blue">Save</button>
+                    <button type="button" class="btn-round btn-border-black">Back</button>
+                </div>`;
+                switch (true) {
+                    case id.includes("sensoIRIS_bstr_is"):
+                    case id.includes("sensoIRIS_bstr"):
+                    case id.includes("sensoIRIS_bsst_is"):
+                    case id.includes("sensoIRIS_bsst"):
+                    case id.includes("sensoIRIS_bsou_is"):
+                    case id.includes("sensoIRIS_bsou"):
+                    case id.includes("sensoIRIS_wstr_is"):
+                    case id.includes("sensoIRIS_wstr"):
+                    case id.includes("sensoIRIS_wsst_is"):
+                    case id.includes("sensoIRIS_wsst"):
+                    case id.includes("sensoIRIS_wsou_is"):
+                    case id.includes("sensoIRIS_wsou"):
+                    case id.includes("sensoIRIS_mout2402"):
+                    case id.includes("sensoIRIS_mout2401"):
+                    case id.includes("sensoIRIS_mout"):
+                    case id.includes("sensoIRIS_mio22m"):
+                    case id.includes("sensoIRIS_mio22"):
+                    case id.includes("sensoIRIS_mio04"):
+                    case id.includes("sensoIRIS_mio40"): el.innerHTML = proxy_target; break;
+                    case id.includes("sensoIRIS_mimic"): 
+                    case id.includes("sounder_wsou"): 
+                    case id.includes("m22"): 
+                    case id.includes("callpoint_mcp50"): 
+                    case id.includes("sensoIRIS_mc-d"): 
+                    case id.includes("sensoIRIS_gas_sense"): 
+                    case id.includes("sensoIRIS_gas"): 
+                    case id.includes("sensoIRIS_mcp150"): 
+                    case id.includes("sensoIRIS_mcz"): 
+                    case id.includes("sensoIRIS_minp_panic"): 
+                    case id.includes("sensoIRIS_minp_fire"): 
+                    case id.includes("sensoIRIS_minp"): el.innerHTML = target; break;
+
+                    default: el.innerHTML = ttarget;  break;
+                }
+            }
+
+
+            var lst2 = [];
+            const devices2 = 250;
+            function addConcreteDevice2(id, loop_id) {
+                for (i = 1; i <= devices2; i++) {
+                    if (lst2.includes(i)) {
+                        continue;
+                    } else {
+                        var last = i;
+                        break;
+                    }
+                }
+                if (lst2.includes(parseInt(+id))) {
+                    var elem = document.querySelector(`[id $= ${loop_id}_${+id}]`);
+                    if (elem) elem.parentNode.removeChild(elem);
+                    lst2 = lst2.filter(function (item) {
+                        return item !== +id
+                    })
+
+                    let button = document.getElementById(`device_btn_${loop_id}`);
+                    if (lst2.length < devices2 && button.style.display === "none") {
+                        button.style.display = "inline-flex";
+                    }
+                }
+                else {
+                    let imgSource = "../../Images/";
+                    let link = id.split("_");
+                    let curr = link.splice(link.length - 1)[0];
+                    link = link.join("_");
+                    let title = link.toUpperCase().replaceAll("_", " ");
+
+                    console.log('link defined at', link);
+                    switch (link) {
+                        case "sounder_wsou": imgSource += "1059. Sounder WSOU.ico"; break;
+                        case "m22": imgSource += "1058. IRIS M22_IRIS Zone.ico"; break;
+                        case "sensoIRIS_mc-d": imgSource += "68.SensoIRIS_address_base.ico"; break;
+                        case "sensoIRIS_gas_sense":
+                        case "sensoIRIS_gas": imgSource += "1081.SensoIRIS_GAS.ico"; break;
+                        case "sensoIRIS_bstr_is":
+                        case "sensoIRIS_bstr":
+                        case "sensoIRIS_bsstis":
+                        case "sensoIRIS_bsst":
+                        case "sensoIRIS_bsou_is":
+                        case "sensoIRIS_bsou": imgSource += "BSOU-600x460.png"; break;
+                        case "sensoIRIS_wsst_is":
+                        case "sensoIRIS_wsst": imgSource += "75.SensoIRIS_wsst.ico"; break;
+                        case "sensoIRIS_wstr_is":
+                        case "sensoIRIS_wstr":
+                        case "sensoIRIS_wsou_is":
+                        case "sensoIRIS_wsou": imgSource += "72.SensoIRIS_WSOU.ico"; break;
+                        case "sensoIRIS_minp_gas":
+                        case "sensoIRIS_minp_fire":
+                        case "sensoIRIS_minp": imgSource += "1080.MINP.ico"; break;
+                        case "callpoint_mcp50":
+                        case "sensoIRIS_mcp150": imgSource += "1027. Call Point (IRIS).ico"; break;
+                        case "sensoIRIS_mimic":
+                        case "sensoIRIS_mcz":
+                        case "sensoIRIS_mout2401":
+                        case "sensoIRIS_mout":
+                        case "sensoIRIS_mio22m":
+                        case "sensoIRIS_mio22":
+                        case "sensoIRIS_mio04":
+                        case "sensoIRIS_mio40": imgSource += "69.SensoIRIS_Module_box.ico"; break;
+                        case "sensoIRIS_m140_is": 
+                        case "sensoIRIS_m140": imgSource += "71.SensoIRIS_M140.ico"; break;
+                        default: imgSource += "70.SensoIRIS_T110_S130.ico";
+                    }
+                    const newUserElement = `
+                                            <div class="col-12" id='${loop_id}_${last}'>
+                                                <div class="row">
+                                                    <div class="col-11 pr-1">
+                                                        <a href="javascript:showDevice2('${link}_${last}', '${loop_id}')" >
+                                                            <div class="btnStyle">
+                                                                <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                                <div class="someS">
+                                                                    <h5>${last + '. ' + title}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice2(${last}, '${loop_id}')">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        `;
+                    var element = document.getElementById(`new_device_${loop_id}`);
+                    var new_inner = `
+                                            ${element.innerHTML}
+                                            ${newUserElement}
+                                        `;
+                    lst2.push(last);
+                    element.innerHTML = new_inner;
+
+                    // reordering
+                    var main = document.getElementById(`new_device_${loop_id}`);
+
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+$/) - +b.id.match(/\d+$/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
+
+                    // button display check
+                    if (lst2.length === devices2) {
+                        let button = document.getElementById(`device_btn_${loop_id}`);
+                        button.style.display = "none";
+                    }
+                    $(`#deviceList_${loop_id}`).modal('toggle');
                 }
             }
         </script>
@@ -361,12 +1351,13 @@
     <!-- DatePicker Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script>
+
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-        //$(document).ready(() => {
-        //    sendMessage("Devices|ECLIPSE|Timeslots");
-        //});
+            //$(document).ready(() => {
+            //    sendMessage("Devices|ECLIPSE|Timeslots");
+            //});
     </script>
 </body>
 </html>

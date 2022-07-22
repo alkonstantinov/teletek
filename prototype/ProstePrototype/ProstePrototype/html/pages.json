@@ -109,6 +109,16 @@
     "right": "IRIS/loop_devices.html",
     "breadcrumbs": [ "index", "iris" ]
   },
+  "loop_devices_system_sensor_loop": {
+    "left": "IRIS/loop_devices.html",
+    "right": "IRIS/loop_devices_system_sensor.html",
+    "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
+  },
+  "loop_devices_teletek_loop": {
+    "left": "IRIS/loop_devices.html",
+    "right": "IRIS/loop_devices_teletek.html",
+    "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
+  },
   "tte": {
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/General Settings.html",
