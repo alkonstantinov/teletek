@@ -19,131 +19,170 @@
     <div class="container" id="divMain">
         <form action="">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <div class="form-item">
-                <label for="panel">Panel name</label>
-                <input type="text" id="panel" name="panel" placeholder="Enter the panel name" />
+            <div class="row align-items-center m-2">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-item roww flex">
+                        <label for="panel">Panel name</label>
+                        <input type="text" id="panel" name="panel" placeholder="Enter the panel name" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="panel-number">Panel Number</label>
+                        <input type="number" id="panel-number" name="panel-number" placeholder="Enter panel number" min="1" />
+                    </div>
+                </div>
             </div>
 
             <fieldset>
                 <legend>Parameters</legend>
-                <div class="form-item roww">
-                    <label for="enabled">Enabled</label>
-                    <input class="ml10" type="checkbox" id="enabled" />
-                </div>
-                <div class="form-item roww">
-                    <label for="network-type">Network Type</label>
-                    <div class="select ml10">
-                        <select id="network-type" name="network-type">
-                            <option value="title">Choose network type</option>
-                            <option value="loc">LAN</option>
-                            <option value="loc">RS 485</option>
-                            <option value="loc">Voice EVAC</option>
-                            <option value="loc">Voice EVAC + LAN</option>
-                        </select>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="enabled">Enabled</label>
+                            <input class="ml10" type="checkbox" id="enabled" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="redundancy">Redundancy ON</label>
+                            <input class="ml10" type="checkbox" id="redundancy" />
+                        </div>
                     </div>
                 </div>
-                <div class="form-item roww">
-                    <label for="protocol">Protocol</label>
-                    <div class="select ml10">
-                        <select id="protocol" name="protocol">
-                            <option value="title">Choose protocol</option>
-                            <option value="loc">Modbus RTU over TCP/IP</option>
-                            <option value="loc">Modbus TCP/IP</option>
-                        </select>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="network-type">Network Type</label>
+                            <div class="select ml10">
+                                <select id="network-type" name="network-type">
+                                    <option value="title">Choose network type</option>
+                                    <option value="loc">LAN</option>
+                                    <option value="loc">RS 485</option>
+                                    <option value="loc">Voice EVAC</option>
+                                    <option value="loc">Voice EVAC + LAN</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="protocol">Protocol</label>
+                            <div class="select ml10">
+                                <select id="protocol" name="protocol">
+                                    <option value="title">Choose protocol</option>
+                                    <option value="loc">Modbus RTU over TCP/IP</option>
+                                    <option value="loc">Modbus TCP/IP</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-item roww">
-                    <label for="redundancy">Redundancy ON</label>
-                    <input class="ml10" type="checkbox" id="redundancy" />
-                </div>
+
             </fieldset>
 
-            <div class="form-item">
-                <label for="panel-number">Panel Number</label>
-                <input type="number" id="panel-number" name="panel-number" placeholder="Enter panel number" min="1" />
+            <div class="row align-items-center m-2">
+                <div class="col">
+                    <div class="form-item roww flex">
+                        <label for="hostip">Host IP</label>
+                        <!-- <input type="text" class="form-input" id="hostip" name="hostip" placeholder="xxx.xxx.xxx.xxx"/> -->
+                        <input type="text" class="form-input" id="hostip" name="hostip" minlength="7" maxlength="15" size="15"
+                               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                               placeholder=" 0 . 0 . 0 . 0 " />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="port">Port</label>
+                        <input type="number" id="port" name="port" data-maxlength="5"
+                               oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="7000" min="1" />
+                    </div>
+                </div>
             </div>
-            <div class="form-item">
-                <label for="hostip">Host IP</label>
-                <!-- <input type="text" class="form-input" id="hostip" name="hostip" placeholder="xxx.xxx.xxx.xxx"/> -->
-                <input type="text" class="form-input" id="hostip" name="hostip" minlength="7" maxlength="15" size="15"
-                       pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                       placeholder=" 0 . 0 . 0 . 0 " />
+            <div class="row align-items-center m-2">
+                <div class="col">
+                    <div class="form-item roww flex">
+                        <label for="netmask">Net Mask</label>
+                        <input type="text" id="netmask" name="netmask" minlength="7" maxlength="15" size="15"
+                               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                               placeholder=" 0 . 0 . 0 . 0 " />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww flex">
+                        <label for="gateway">Gateway</label>
+                        <input type="text" id="gateway" name="gateway" minlength="7" maxlength="15" size="15"
+                               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                               placeholder=" 0 . 0 . 0 . 0 " />
+                    </div>
+                </div>
             </div>
-            <div class="form-item">
-                <label for="netmask">Net Mask</label>
-                <input type="text" id="netmask" name="netmask" minlength="7" maxlength="15" size="15"
-                       pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                       placeholder=" 0 . 0 . 0 . 0 " />
-            </div>
-            <div class="form-item">
-                <label for="gateway">Gateway</label>
-                <input type="text" id="gateway" name="gateway" minlength="7" maxlength="15" size="15"
-                       pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                       placeholder=" 0 . 0 . 0 . 0 " />
-            </div>
-            <div class="form-item">
-                <label for="port">Port</label>
-                <input type="number" id="port" name="port" data-maxlength="5"
-                       oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="7000" min="1" />
-            </div>
-            <div class="form-item">
-                <label for="evac-panel-number">EVAC Panel number</label>
-                <input type="number" id="evac-panel-number" name="evac-panel-number" data-maxlength="5"
-                       oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="1" min="1" />
+            <div class="row align-items-center m-2">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="evac-panel-number">EVAC Panel number</label>
+                        <input type="number" id="evac-panel-number" name="evac-panel-number" data-maxlength="5"
+                               oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="1" min="1" />
+                    </div>
+                </div>
             </div>
 
-            <div class="form-item">
-                <label>MAC Address</label>
-                <div class="row m0">
-                    <input class="col-1"
-                           type="text"
-                           id="emacETHADDR0"
-                           name="emacETHADDR0"
-                           placeholder="00"
-                           disabled />
+            <div class="row align-items-center m-2">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label>MAC Address</label>
+                        <div class="row m0">
+                            <input class="col-1"
+                                   type="text"
+                                   id="emacETHADDR0"
+                                   name="emacETHADDR0"
+                                   placeholder="00"
+                                   disabled />
 
-                    <div>:</div>
-                    <input class="col-1"
-                           type="text"
-                           id="emacETHADDR1"
-                           name="emacETHADDR1"
-                           placeholder="00"
-                           disabled />
+                            <div>:</div>
+                            <input class="col-1"
+                                   type="text"
+                                   id="emacETHADDR1"
+                                   name="emacETHADDR1"
+                                   placeholder="00"
+                                   disabled />
 
-                    <div>:</div>
-                    <input type="text"
-                           class="col-1"
-                           id="emacETHADDR2"
-                           name="emacETHADDR2"
-                           placeholder="00"
-                           disabled />
+                            <div>:</div>
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR2"
+                                   name="emacETHADDR2"
+                                   placeholder="00"
+                                   disabled />
 
-                    <div>:</div>
+                            <div>:</div>
 
-                    <input type="text"
-                           class="col-1"
-                           id="emacETHADDR3"
-                           name="emacETHADDR3"
-                           placeholder="00"
-                           disabled />
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR3"
+                                   name="emacETHADDR3"
+                                   placeholder="00"
+                                   disabled />
 
-                    <div>:</div>
+                            <div>:</div>
 
-                    <input type="text"
-                           class="col-1"
-                           id="emacETHADDR4"
-                           name="emacETHADDR4"
-                           placeholder="00"
-                           disabled />
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR4"
+                                   name="emacETHADDR4"
+                                   placeholder="00"
+                                   disabled />
 
-                    <div>:</div>
+                            <div>:</div>
 
-                    <input type="text"
-                           class="col-1"
-                           id="emacETHADDR5"
-                           name="emacETHADDR5"
-                           placeholder="00"
-                           disabled />
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR5"
+                                   name="emacETHADDR5"
+                                   placeholder="00"
+                                   disabled />
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -166,9 +205,9 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-        //$(document).ready(() => {
-        //    sendMessage("Devices|IRIS|Access");
-        //});
+                //$(document).ready(() => {
+                //    sendMessage("Devices|IRIS|Access");
+                //});
     </script>
 </body>
 </html>

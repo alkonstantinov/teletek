@@ -89,15 +89,12 @@
                 var target = `<fieldset id="id_${id}">
                             <legend>Output ${id}</legend>
                                 <div class="row align-items-center">
-                                    <div class="col-xs-12 col-sm-6">
+                                    <div class="col">
                                         <div class="form-item roww flex">
                                             <label for="note_${id}">Note</label>
                                             <input type="text" id="note_${id}" name="note_${id}" />
                                         </div>
                                     </div>
-                                    <div class="col"><button type="button" onclick="javascript:addOutput(${id})" class="m-2">
-                                        <i class="fa-solid fa-minus 5x"></i> Remove Output
-                                    </button></div>
                                 </div>
 
                                 <fieldset>

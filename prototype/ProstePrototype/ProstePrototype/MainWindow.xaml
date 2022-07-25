@@ -6,8 +6,8 @@
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         Title="Proste 6.1" Height="768" Width="1300"
-        WindowStyle="None"
         >
+        <!--WindowStyle="None"-->
     <!-- WindowState="Maximized" -->
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
