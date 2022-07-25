@@ -29,8 +29,8 @@ namespace ProstePrototype
         public MainWindow()
         {
             InitializeComponent();
-            //Uri iconUri = new Uri("pack://application:,,,/html/Icon.ico", UriKind.RelativeOrAbsolute);
-            //this.Icon = BitmapFrame.Create(iconUri);
+            Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/html/Icon.ico", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
             applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
@@ -153,6 +153,14 @@ namespace ProstePrototype
             });
             wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", "modal.html"));
             
+        }
+        private void Button_Hide_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void Button_Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = (this.WindowState != WindowState.Maximized) ? WindowState.Maximized : WindowState.Normal;
         }
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
