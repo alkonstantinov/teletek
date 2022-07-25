@@ -438,3 +438,15 @@ input:focus {
     border: none;
     border-radius: 0;
 }
+
+
+.stick {
+    top: 10px;
+    position: sticky;
+    flex-grow: 1;
+}
+
+flexicol {
+    display: flex !important;
+    flex-flow: column;
+}

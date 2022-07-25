@@ -172,9 +172,9 @@
                                 <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mimic-list" data-toggle="tab" href="#list-sensoIRIS_mimic" role="tab" aria-controls="list-sensoIRIS_mimic" aria-selected="false">SensoIRIS MIMIC</button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade active show" id="list-sensoIRIS_mio40" role="tabpanel" aria-labelledby="list-sensoIRIS_mio40-list">
+                        <div class="col-8 flexicol" >
+                            <div class="tab-content stick" id="nav-tabContent">
+                                <div class="tab-pane fade active show" id="list-sensoIRIS_mio40" role="tabpanel" aria-labelledby="list-sensoIRIS_mio40-list" >
                                     <div class="row m-1 justify-content-center">
                                         <h2>SensoIRIS MIO40</h2>
                                     </div>
@@ -185,7 +185,7 @@
                                         <button type="button" class="btn-round" id="sensoIRIS_mio40_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade active" id="list-sensoIRIS_mio04" role="tabpanel" aria-labelledby="list-sensoIRIS_mio04-list">
+                                <div class="tab-pane fade" id="list-sensoIRIS_mio04" role="tabpanel" aria-labelledby="list-sensoIRIS_mio04-list">
                                     <div class="row m-1 justify-content-center">
                                         <h2>SensoIRIS MIO04</h2>
                                     </div>
@@ -196,7 +196,7 @@
                                         <button type="button" class="btn-round" id="sensoIRIS_mio04_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade active" id="list-sensoIRIS_mio22" role="tabpanel" aria-labelledby="list-sensoIRIS_mio22-list">
+                                <div class="tab-pane fade" id="list-sensoIRIS_mio22" role="tabpanel" aria-labelledby="list-sensoIRIS_mio22-list">
                                     <div class="row m-1 justify-content-center">
                                         <h2>SensoIRIS MIO22</h2>
                                     </div>
@@ -606,7 +606,71 @@
             </button>
         </div>`;
                 
-                var proxy_target = ``;
+                var proxy_target = `<div class="row">
+            <div class="col-3 bl scroll400">
+                <div id="new_sensor_${id}" class="row">
+
+                </div>
+            </div>
+            <div class="col-9">
+                <div id="selected_sensor_${id}">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="sensorList_${id}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <div>Sensors</div>
+                                <button type="button" class="list-group-item list-group-item-action active show" id="list-sensoIRIS_mio40-list" data-toggle="tab" href="#list-sensoIRIS_mio40" role="tab" aria-controls="list-sensoIRIS_mio40" aria-selected="false">SensoIRIS MIO40</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio04-list" data-toggle="tab" href="#list-sensoIRIS_mio04" role="tab" aria-controls="list-sensoIRIS_mio04" aria-selected="false">SensoIRIS MIO04</button>
+                                 <div>Modules</div>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio40-list" data-toggle="tab" href="#list-sensoIRIS_mio40" role="tab" aria-controls="list-sensoIRIS_mio40" aria-selected="false">SensoIRIS MIO40</button>
+                                <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio04-list" data-toggle="tab" href="#list-sensoIRIS_mio04" role="tab" aria-controls="list-sensoIRIS_mio04" aria-selected="false">SensoIRIS MIO04</button>
+                            </div>
+                        </div>
+                        <div class="col-8 flexicol" >
+                            <div class="tab-content stick" id="nav-tabContent">
+                                <div class="tab-pane fade active show" id="list-sensoIRIS_mio40" role="tabpanel" aria-labelledby="list-sensoIRIS_mio40-list" >
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIO40</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mio40_btn" onclick="javascript: addSensor(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-pane fade" id="list-sensoIRIS_mio04" role="tabpanel" aria-labelledby="list-sensoIRIS_mio04-list">
+                                    <div class="row m-1 justify-content-center">
+                                        <h2>SensoIRIS MIO04</h2>
+                                    </div>
+                                    <div class="row m-1 justify-content-center">
+                                        <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
+                                    </div>
+                                    <div class="row m-1 justify-content-end">
+                                        <button type="button" class="btn-round" id="sensoIRIS_mio04_btn" onclick="javascript: addSensor(this.id, '${id}')">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+            <button type="button" class="btn-round btn-blue">Save</button>
+            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#sensorList_${id}" id="sensor_btn_${id}" class="btn-round btn-border-black">
+                <i class="fa-solid fa-plus 5x"></i> Add New Sensor in ${id.replaceAll("_", " ")}
+            </button>
+        </div>`;
                 switch (true) {
                     case id.includes("system_sensor_loop"): el.innerHTML = proxy_target; break;
                     case id.includes("teletek_loop"): el.innerHTML = target; break;
@@ -681,9 +745,111 @@
                 }
             }
 
+            function showSensor(id, loop_id) {
+                var el = document.getElementById(`selected_sensor_${loop_id}`);
+                console.log('el', el, 'id', id);
+
+                switch (true) {
+                    case id.includes('sensoIRIS_gas_sense'):
+
+                    default: break;
+                }
+                var target = ``;
+                var proxy_target = ``;
+                var ttarget = ``;
+                switch (true) {
+                    case id.includes("sensoIRIS_mio40"): el.innerHTML = proxy_target; break;
+                    case id.includes("sensoIRIS_minp"): el.innerHTML = target; break;
+
+                    default: el.innerHTML = ttarget; break;
+                }
+            }
+
+            var sensorsLst2 = [];
+            const sensors = 250;
+            function addSensor(id, loop_id) {
+                for (i = 1; i <= sensors; i++) {
+                    if (sensorsLst2.includes(i)) {
+                        continue;
+                    } else {
+                        var last = i;
+                        break;
+                    }
+                }
+                if (sensorsLst2.includes(parseInt(+id))) {
+                    // if function called from concrete sensor, it removes the sensor
+                    var elem = document.querySelector(`[id $= ${loop_id}_${+id}]`);
+                    if (elem) elem.parentNode.removeChild(elem);
+                    sensorsLst2 = sensorsLst2.filter(function (item) {
+                        return item !== +id
+                    })
+
+                    // should add new sensor button be shown in case it is hidden
+                    let button = document.getElementById(`sensor_btn_${loop_id}`);
+                    if (sensorsLst2.length < sensors && button.style.display === "none") {
+                        button.style.display = "inline-flex";
+                    }
+                }
+                else {
+                    // if a new sensor is requested
+                    let imgSource = "../../Images/";
+                    let link = id.split("_");
+                    let curr = link.splice(link.length - 1)[0];
+                    link = link.join("_");
+                    let title = link.toUpperCase().replaceAll("_", " ");
+
+                    console.log('link defined at', link);
+                    // set the image source
+                    switch (link) {
+                        default: imgSource += "70.SensoIRIS_T110_S130.ico";
+                    }
+                    const newUserElement = `
+                                            <div class="col-12" id='${loop_id}_${last}'>
+                                                <div class="row">
+                                                    <div class="col-11 pr-1">
+                                                        <a href="javascript:showSensor('${link}_${last}', '${loop_id}')" >
+                                                            <div class="btnStyle">
+                                                                <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                                <div class="someS">
+                                                                    <h5>${last + '. ' + title}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-1 p-0 m-0" onclick="javascript:addSensor(${last}, '${loop_id}')">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+                    // adds the new sensor
+                    var element = document.getElementById(`new_sensor_${loop_id}`);
+                    var new_inner = `
+                                            ${element.innerHTML}
+                                            ${newUserElement}
+                                        `;
+                    sensorsLst2.push(last);
+                    element.innerHTML = new_inner;
+
+                    // reordering
+                    var main = document.getElementById(`new_sensor_${loop_id}`);
+
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+$/) - +b.id.match(/\d+$/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
+
+                    // button display check
+                    if (sensorsLst2.length === sensors) {
+                        let button = document.getElementById(`sensor_btn_${loop_id}`);
+                        button.style.display = "none";
+                    }
+                    $(`#sensorList_${loop_id}`).modal('toggle');
+                }
+            }
+
             function showDevice2(id, loop_id) {
                 var el = document.getElementById(`selected_device_${loop_id}`);
-                console.log('id', id, 'el', el);
 
                 let i = false; let o = false; let c = false; let p = false;
                 let st = false; let n = false;
@@ -1224,7 +1390,6 @@
                     default: el.innerHTML = ttarget;  break;
                 }
             }
-
 
             var lst2 = [];
             const devices2 = 250;
