@@ -47,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="html\dark.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\ECLIPSE\divECLIPSE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
