@@ -26,7 +26,7 @@
                 <div class="col-3 bl scroll400">
                     <div id="new_panel" class="row">
                         <div class="col-11 pr-1">
-                            <a href="javascript:showPanel('1')">
+                            <a href="javascript:showPanel('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle">
                                     <img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
@@ -63,6 +63,13 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>-->
     <script>
+        function addActive() {
+            $(document).on('click', '.btnStyle', function () {
+                $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                $(this).addClass('active');// here apply selected class on clicked btnStyle
+            });
+        }
+
         function showPanel(id) {
             var el = document.getElementById("selected_area");
             id = parseInt(id);
@@ -184,7 +191,7 @@
                 const newUserElement = `<div class="col-12" id=${last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showPanel('${last}')">
+                                            <a href="javascript:showPanel('${last}')" onclick="javascript:addActive()">
                                                 <div class="btnStyle">
                                                     <img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">

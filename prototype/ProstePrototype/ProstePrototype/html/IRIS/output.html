@@ -25,7 +25,7 @@
                 <div class="col-3 bl scroll">
                     <div id="new_output" class="row">
                         <div class="col-11 pr-1">
-                            <a href="javascript:showOutput('1')">
+                            <a href="javascript:showOutput('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle">
                                     <img src="../../Images/1011.Outputs.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
@@ -81,6 +81,13 @@
                         document.getElementById(id).innerHTML = "";
                         break;
                 }
+            }
+
+            function addActive() {
+                $(document).on('click', '.btnStyle', function () {
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                });
             }
 
             function showOutput(id) {
@@ -550,7 +557,7 @@
                     const newUserElement = `<div class="col-12" id=${last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showOutput('${last}')">
+                                            <a href="javascript:showOutput('${last}')" onclick="javascript:addActive()">
                                                 <div class="btnStyle">
                                                     <img src="../../Images/1011.Outputs.ico" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">

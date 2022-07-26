@@ -145,20 +145,9 @@ i:hover {
     border-left: solid 3px #181717d2; 
 }
 
-.btnStyle .active h5 {
-    color: #b200ff !important;
-}
-.pink {
-    color: #b200ff !important;
-}
-
-.btnStyle .active {
-    border-color: #b200ff;
-    border-left: solid 3px #b200ff;
-}
-
-a:focus {
-    border: 2px solid #b200ff;
+.btnStyle.active {
+    border-color: #0d91e4;
+    border-width: 3px;
 }
 
 .footer {

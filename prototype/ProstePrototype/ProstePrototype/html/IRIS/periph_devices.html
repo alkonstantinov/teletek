@@ -29,7 +29,7 @@
                     <div class="col-12" id="id_1">
                         <div class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('power_supply')">
+                                <a href="javascript:showDevice('power_supply')" onclick="javascript:addActive()">
                                     <div class="btnStyle">
                                         <img src="../../Images/1024.Module.ico" alt="" width="25" height="25" class="m15" />
                                         <div class="someS">
@@ -46,7 +46,7 @@
                     <div class="col-12" id="id_2">
                         <div class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('input0_outrel4_outmon4')">
+                                <a href="javascript:showDevice('input0_outrel4_outmon4')" onclick="javascript:addActive()">
                                     <div class="btnStyle">
                                         <img src="../../Images/1024.Module.ico" alt="" width="25" height="25" class="m15" />
                                         <div class="someS">
@@ -239,6 +239,13 @@
                 console.log(element.value);
             }
 
+            function addActive() {
+                $(document).on('click', '.btnStyle', function () {
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                });
+            }
+
             function showDevice(id) {
                 var el = document.getElementById("selected_device");
                 let ver = false;
@@ -304,7 +311,7 @@
                                                         <div class="col-12" id=${id + '_' + last}>
                                                             <div class="row">
                                                                 <div class="col-11 pr-1">
-                                                                    <a href="javascript:showDevice('${link}')" >
+                                                                    <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
                                                                         <div class="btnStyle">
                                                                             <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                                             <div class="someS">

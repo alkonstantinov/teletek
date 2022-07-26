@@ -25,7 +25,7 @@
                 <div class="col-3 bl">
                     <div id="new_io" class="row">
                         <div class="col-11 pr-1">
-                            <a href="javascript:showIO('1')">
+                            <a href="javascript:showIO('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle">
                                     <img src="../../Images/2051.InOut.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
@@ -87,7 +87,15 @@
             }
         }
 
+        function addActive() {
+            $(document).on('click', '.btnStyle', function () {
+                $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                $(this).addClass('active');// here apply selected class on clicked btnStyle
+            });
+        }
+
         function showIO(id) {
+            
             var el = document.getElementById("selected_area");
             id = parseInt(id);
             var target = `<fieldset id="id_${id}">
@@ -483,7 +491,7 @@
                 const newUserElement = `<div class="col-12" id=${last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showIO('${last}')">
+                                            <a href="javascript:showIO('${last}')" onclick="javascript:addActive()">
                                                 <div class="btnStyle">
                                                     <img src="../../Images/2051.InOut.ico" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">

@@ -30,7 +30,7 @@
                     <div class="col-3 bl scroll500">
                         <div id="new_evac_zone" class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showEvacZone('1')">
+                                <a href="javascript:showEvacZone('1')" onclick="javascript:addActive()">
                                     <div class="btnStyle">
                                         <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
                                         <div class="someS">
@@ -64,6 +64,13 @@
                     if (element.value > element.max) {
                         element.value = element.max;
                     }
+                }
+
+                function addActive() {
+                    $(document).on('click', '.btnStyle', function () {
+                        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                        $(this).addClass('active');// here apply selected class on clicked btnStyle
+                    });
                 }
 
                 function showEvacZone(id) {
@@ -422,7 +429,7 @@
                         const newUserElement = `<div class="col-12" id=${last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showEvacZone('${last}')">
+                                            <a href="javascript:showEvacZone('${last}')" onclick="javascript:addActive()">
                                                 <div class="btnStyle">
                                                     <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">

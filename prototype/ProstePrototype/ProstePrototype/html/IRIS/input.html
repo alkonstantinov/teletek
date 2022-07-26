@@ -25,7 +25,7 @@
                 <div class="col-3 bl scroll500">
                     <div id="new_input" class="row">
                         <div class="col-11 pr-1">
-                            <a href="javascript:showInput('1')">
+                            <a href="javascript:showInput('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle">
                                     <img src="../../Images/1010.Inputs.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
@@ -536,6 +536,13 @@
                 }
             }
 
+            function addActive() {
+                $(document).on('click', '.btnStyle', function () {
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                });
+            }
+
             function showInput(id) {
                 var el = document.getElementById("selected_area");
                 id = parseInt(id);
@@ -823,7 +830,7 @@
                     const newUserElement = `<div class="col-12" id=${last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showInput('${last}')">
+                                            <a href="javascript:showInput('${last}')" onclick="javascript:addActive()">
                                                 <div class="btnStyle">
                                                     <img src="../../Images/1010.Inputs.ico" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">

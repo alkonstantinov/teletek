@@ -181,7 +181,7 @@
                 <div class="col-3 bl">
                     <div id="new_phone" class="row">
                         <div class="col-11 pr-1">
-                            <a href="javascript:showPhone('1')">
+                            <a href="javascript:showPhone('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle">
                                     <img src="../../Images/2041.DigiComm.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
@@ -242,6 +242,13 @@
                 var imgTag = `<img src=${path} alt='' style="${style}" width="30" height="18"/>`;
                 var element = document.getElementById("flag");
                 element.innerHTML = imgTag;
+            }
+
+            function addActive() {
+                $(document).on('click', '.btnStyle', function () {
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                });
             }
 
             function showPhone(id) {
@@ -463,7 +470,7 @@
                     const newUserElement = `<div class="col-12" id=${last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showPhone('${last}')">
+                                            <a href="javascript:showPhone('${last}')" onclick="javascript: addActive()">
                                                 <div class="btnStyle">
                                                     <img src="../../Images/2041.DigiComm.ico" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">

@@ -123,7 +123,11 @@ namespace ProstePrototype
 
                 });
             }
-            wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl));
+            var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
+            //if (wb2.Address != wb2UrlAddress)
+            //{
+            wb2.Load(wb2UrlAddress);
+            //}
 
         }
 

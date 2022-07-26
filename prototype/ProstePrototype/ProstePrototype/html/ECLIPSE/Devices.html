@@ -27,7 +27,7 @@
             <div class="col-3 bl">
                 <div id="new_device" class="row">
                     <div class="col-11 pr-1">
-                        <a href="javascript:showDevice('main_board')">
+                        <a href="javascript:showDevice('main_board')" onclick="javascript:addActive()">
                             <div class="btnStyle">
                                 <img src="../../Images/102. motherboard.ico" alt="" width="25" height="25" class="m15" />
                                 <div class="someS">
@@ -225,6 +225,13 @@
                 console.log('test', regex.test(element.value));
                 element.value = regex.exec(element.value);
                 console.log(element.value);
+            }
+
+            function addActive() {
+                $(document).on('click', '.btnStyle', function () {
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                });
             }
 
             function showDevice(id) {
@@ -1364,7 +1371,7 @@
                                 <div class="col-12" id=${id + '_' + last}>
                                     <div class="row">
                                         <div class="col-11 pr-1">
-                                            <a href="javascript:showDevice('${link}')" >
+                                            <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
                                                 <div class="btnStyle">
                                                     <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                     <div class="someS">
