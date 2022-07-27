@@ -22,7 +22,7 @@
     <div class="container" id="divMain">
         <form action="">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-           
+
             <div class="row mt-2 pt-2">
                 <div class="col-3 bl scroll400">
                     <div id="new_zone" class="row">
@@ -75,180 +75,180 @@
                 var el = document.getElementById("selected_area");
                 id = parseInt(id);
                 var target = `<fieldset id="id_${id}">
-                            <legend>Zone ${id}</legend>
-                                <div class="row align-items-center">
-                                    <div class="colxs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-                                            <label for="zone_name_${id}">Zone name</label>
-                                            <input type="text" id="zone_name_${id}" name="zone_name_${id}" />
+                                    <legend>Zone ${id}</legend>
+                                        <div class="row align-items-center">
+                                            <div class="colxs-12 col-lg-6">
+                                                <div class="form-item roww flex">
+                                                    <label for="zone_name_${id}">Zone name</label>
+                                                    <input type="text" id="zone_name_${id}" name="zone_name_${id}" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="zone_mode_${id}">Zone Mode</label>
+                                                    <div class="select">
+                                                        <select id="zone_mode_${id}"
+                                                                name="zone_mode_${id}">
+                                                            <option value="normal" selected>NORMAL</option>
+                                                            <option value="double">DOUBLE</option>
+                                                            <option value="two_devices">TWO DEVICES</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
+
+                                        <fieldset>
+                                            <legend>Delays</legend>
+                                            <div class="row align-items-center">
+                                                <div class="col-xs-12 col-lg-4">
+                                                    <div class="form-item roww">
+                                                        <label for="sounder_delay">Sounder delay (seconds)</label>
+                                                        <input type="number"
+                                                                id="sounder_delay_${id}"
+                                                                name="sounder_delay_${id}"
+                                                                data-maxlength="3"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="60"
+                                                                min="1"
+                                                                max="540" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center mt-2">
+                                                <div class="col-xs-12 col-lg-6">
+                                                    <div class="form-item roww">
+                                                        <label for="fire_brigade_delay">Fire brigade delay (seconds)</label>
+                                                        <input type="number"
+                                                                id="fire_brigade_delay_${id}"
+                                                                name="fire_brigade_delay_${id}"
+                                                                data-maxlength="3"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="60"
+                                                                min="1"
+                                                                max="540" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-6">
+                                                    <div class="form-item roww">
+                                                        <label for="fire_protection_delay">Fire protection delay (seconds)</label>
+                                                        <input type="number"
+                                                                id="fire_protection_delay_${id}"
+                                                                name="fire_protection_delay_${id}"
+                                                                data-maxlength="3"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="540" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>Zone</legend>
+                                            <div class="row align-items-center">
+                                                <div class="col-xs-14 col-sm-4">
+                                                    <div class="form-item roww">
+                                                        <label for="zone_group_A_${id}">Group A</label>
+                                                        <input type="number"
+                                                                id="zone_group_A_${id}"
+                                                                name="zone_group_A_${id}"
+                                                                data-maxlength="2"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="48" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-14 col-sm-4">
+                                                    <div class="form-item roww">
+                                                        <label for="zone_group_B_${id}">Group B</label>
+                                                        <input type="number"
+                                                                id="zone_group_B_${id}"
+                                                                name="zone_group_B_${id}"
+                                                                data-maxlength="2"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="48" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-14 col-sm-4">
+                                                    <div class="form-item roww">
+                                                        <label for="zone_group_C_${id}">Group C</label>
+                                                        <input type="number"
+                                                                id="zone_group_C_${id}"
+                                                                name="zone_group_C_${id}"
+                                                                data-maxlength="2"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="48" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
                                         <div class="form-item roww">
-                                            <label for="zone_mode_${id}">Zone Mode</label>
-                                            <div class="select">
-                                                <select id="zone_mode_${id}"
-                                                        name="zone_mode_${id}">
-                                                    <option value="normal" selected>NORMAL</option>
-                                                    <option value="double">DOUBLE</option>
-                                                    <option value="two_devices">TWO DEVICES</option>
-                                                </select>
-                                            </div>
+                                            <label for="zone_sounders_${id}">Zone Sounders</label>
+                                            <input type="checkbox" id="zone_sounders_${id}" name="zone_sounders_${id}" class="ml10" />
                                         </div>
-                                    </div>
-                                </div>
 
-                                <fieldset>
-                                    <legend>Delays</legend>
-                                    <div class="row align-items-center">
-                                        <div class="col-xs-12 col-lg-4">
-                                            <div class="form-item roww">
-                                                <label for="sounder_delay">Sounder delay (seconds)</label>
-                                                <input type="number"
-                                                        id="sounder_delay_${id}"
-                                                        name="sounder_delay_${id}"
-                                                        data-maxlength="3"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="60"
-                                                        min="1"
-                                                        max="540" />
+                                        <fieldset>
+                                            <legend>Sounder</legend>
+                                            <div class="row align-items-center">
+                                                <div class="col-xs-14 col-sm-4">
+                                                    <div class="form-item roww">
+                                                        <label for="sounder_group_A_${id}">Group A</label>
+                                                        <input type="number"
+                                                                id="sounder_group_A_${id}"
+                                                                name="sounder_group_A_${id}"
+                                                                data-maxlength="2"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="96" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-14 col-sm-4">
+                                                    <div class="form-item roww">
+                                                        <label for="sounder_group_B_${id}">Group B</label>
+                                                        <input type="number"
+                                                                id="sounder_group_B_${id}"
+                                                                name="sounder_group_B_${id}"
+                                                                data-maxlength="2"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="96" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-14 col-sm-4">
+                                                    <div class="form-item roww">
+                                                        <label for="sounder_group_C_${id}">Group C</label>
+                                                        <input type="number"
+                                                                id="sounder_group_C_${id}"
+                                                                name="sounder_group_C_${id}"
+                                                                data-maxlength="2"
+                                                                oninput="javascript: myFunction(this.id)"
+                                                                onblur="javascript: myFunction2(this.id)"
+                                                                value="0"
+                                                                min="1"
+                                                                max="96" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-2">
-                                        <div class="col-xs-12 col-lg-6">
-                                            <div class="form-item roww">
-                                                <label for="fire_brigade_delay">Fire brigade delay (seconds)</label>
-                                                <input type="number"
-                                                        id="fire_brigade_delay_${id}"
-                                                        name="fire_brigade_delay_${id}"
-                                                        data-maxlength="3"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="60"
-                                                        min="1"
-                                                        max="540" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-6">
-                                            <div class="form-item roww">
-                                                <label for="fire_protection_delay">Fire protection delay (seconds)</label>
-                                                <input type="number"
-                                                        id="fire_protection_delay_${id}"
-                                                        name="fire_protection_delay_${id}"
-                                                        data-maxlength="3"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="540" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>Zone</legend>
-                                    <div class="row align-items-center">
-                                        <div class="col-xs-14 col-sm-4">
-                                            <div class="form-item roww">
-                                                <label for="zone_group_A_${id}">Group A</label>
-                                                <input type="number"
-                                                        id="zone_group_A_${id}"
-                                                        name="zone_group_A_${id}"
-                                                        data-maxlength="2"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="48" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-14 col-sm-4">
-                                            <div class="form-item roww">
-                                                <label for="zone_group_B_${id}">Group B</label>
-                                                <input type="number"
-                                                        id="zone_group_B_${id}"
-                                                        name="zone_group_B_${id}"
-                                                        data-maxlength="2"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="48" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-14 col-sm-4">
-                                            <div class="form-item roww">
-                                                <label for="zone_group_C_${id}">Group C</label>
-                                                <input type="number"
-                                                        id="zone_group_C_${id}"
-                                                        name="zone_group_C_${id}"
-                                                        data-maxlength="2"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="48" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <div class="form-item roww">
-                                    <label for="zone_sounders_${id}">Zone Sounders</label>
-                                    <input type="checkbox" id="zone_sounders_${id}" name="zone_sounders_${id}" class="ml10" />
-                                </div>
-
-                                <fieldset>
-                                    <legend>Sounder</legend>
-                                    <div class="row align-items-center">
-                                        <div class="col-xs-14 col-sm-4">
-                                            <div class="form-item roww">
-                                                <label for="sounder_group_A_${id}">Group A</label>
-                                                <input type="number"
-                                                        id="sounder_group_A_${id}"
-                                                        name="sounder_group_A_${id}"
-                                                        data-maxlength="2"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="96" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-14 col-sm-4">
-                                            <div class="form-item roww">
-                                                <label for="sounder_group_B_${id}">Group B</label>
-                                                <input type="number"
-                                                        id="sounder_group_B_${id}"
-                                                        name="sounder_group_B_${id}"
-                                                        data-maxlength="2"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="96" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-14 col-sm-4">
-                                            <div class="form-item roww">
-                                                <label for="sounder_group_C_${id}">Group C</label>
-                                                <input type="number"
-                                                        id="sounder_group_C_${id}"
-                                                        name="sounder_group_C_${id}"
-                                                        data-maxlength="2"
-                                                        oninput="javascript: myFunction(this.id)"
-                                                        onblur="javascript: myFunction2(this.id)"
-                                                        value="0"
-                                                        min="1"
-                                                        max="96" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </fieldset>`;
+                                        </fieldset>
+                                    </fieldset>`;
                 el.innerHTML = target;
             }
 
@@ -268,27 +268,27 @@
                     if (last === 0 || lst.includes(last)) return;
 
                     const newUserElement = `<div class="col-12" id=${last}>
-                                    <div class="row">
-                                        <div class="col-11 pr-1">
-                                            <a href="javascript:showZone('${last}')" onclick="javascript:addActive()">
-                                                <div class="btnStyle">
-                                                    <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
-                                                    <div class="someS">
-                                                        <h5>Zone ${last}</h5>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-11 pr-1">
+                                                    <a href="javascript:showZone('${last}')" onclick="javascript:addActive()">
+                                                        <div class="btnStyle">
+                                                            <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
+                                                            <div class="someS">
+                                                                <h5>Zone ${last}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-1 p-0 m-0" onclick="javascript:addZone(${last})">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </div>
-                                    </div>
-                                </div>`;
+                                                <div class="col-1 p-0 m-0" onclick="javascript:addZone(${last})">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </div>
+                                            </div>
+                                        </div>`;
                     var element = document.getElementById("new_zone");
                     var new_inner = `
-                                    ${element.innerHTML}
-                                    ${newUserElement}
-                                `;
+                                            ${element.innerHTML}
+                                            ${newUserElement}
+                                        `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -340,9 +340,10 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-        //$(document).ready(() => {
-        //    sendMessage("Devices|IRIS|Zone");
-        //});
+            //$(document).ready(() => {
+            //    sendMessage("Devices|IRIS|Zone");
+            //});
     </script>
+    <script src="../mainfuncs.js"></script>
 </body>
 </html>

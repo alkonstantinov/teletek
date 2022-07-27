@@ -50,7 +50,7 @@
                     <i class="fa-solid fa-plus 5x"></i> Add New Panel
                 </button>
             </div>
-            
+
         </form>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -74,102 +74,102 @@
             var el = document.getElementById("selected_area");
             id = parseInt(id);
             var target = `<fieldset id="id_${id}">
-                            <legend>Panel ${id}</legend>                                            
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <div class="form-item roww flex">
-                                            <label for="panelip_${id}">Panel IP</label>
-                                            <input type="text"
-                                                    id="panelip_${id}"
-                                                    name="panelip_${id}"
-                                                    minlength="7"
-                                                    maxlength="15"
-                                                    size="15"
-                                                    pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                                                    value=" 0 . 0 . 0 . 0 " />
+                                <legend>Panel ${id}</legend>
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <div class="form-item roww flex">
+                                                <label for="panelip_${id}">Panel IP</label>
+                                                <input type="text"
+                                                        id="panelip_${id}"
+                                                        name="panelip_${id}"
+                                                        minlength="7"
+                                                        maxlength="15"
+                                                        size="15"
+                                                        pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                                        value=" 0 . 0 . 0 . 0 " />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <fieldset>
-                                    <legend>Parameters</legend>
-                                    <div class="row align-items-center m-1">
-                                        <div class="col-6">
-                                            <div class="form-item roww disabled">
-                                                <label for="state_${id}">State</label>
-                                                <div class="select">
-                                                    <select id="state_${id}" name="state">
-                                                        <option value="loc">Normal</option>
-                                                    </select>
+                                    <fieldset>
+                                        <legend>Parameters</legend>
+                                        <div class="row align-items-center m-1">
+                                            <div class="col-6">
+                                                <div class="form-item roww disabled">
+                                                    <label for="state_${id}">State</label>
+                                                    <div class="select">
+                                                        <select id="state_${id}" name="state">
+                                                            <option value="loc">Normal</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="form-item roww disabled">
+                                                    <label for="status_${id}">Status</label>
+                                                    <div class="select">
+                                                        <select id="status_${id}" name="status">
+                                                            <option value="loc">none</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                                    
-                                        <div class="col">
-                                            <div class="form-item roww disabled">
-                                                <label for="status_${id}">Status</label>
-                                                <div class="select">
-                                                    <select id="status_${id}" name="status">
-                                                        <option value="loc">none</option>
-                                                    </select>
+
+                                        <div class="row align-items-center m-1">
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="receive_msg_${id}">Receive messages</label>
+                                                    <input type="checkbox" id="receive_msg_${id}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="receive_cmd_${id}">Receive commands</label>
+                                                    <input type="checkbox" id="receive_cmd_${id}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="send_commands_${id}">Send commands</label>
+                                                    <input type="checkbox" id="send_commands_${id}" class="ml10" />
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row align-items-center m-1">
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="receive_msg_${id}">Receive messages</label>
-                                                <input type="checkbox" id="receive_msg_${id}" class="ml10" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="receive_cmd_${id}">Receive commands</label>
-                                                <input type="checkbox" id="receive_cmd_${id}" class="ml10" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="send_commands_${id}">Send commands</label>
-                                                <input type="checkbox" id="send_commands_${id}" class="ml10" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </fieldset>
 
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>Panel Outputs</legend>
-                                    <div class="row align-items-center m-1">
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="r_sounder_${id}">Repeat sounder</label>
-                                                <input type="checkbox" id="r_sounder_${id}" class="ml10" />
+                                    <fieldset>
+                                        <legend>Panel Outputs</legend>
+                                        <div class="row align-items-center m-1">
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="r_sounder_${id}">Repeat sounder</label>
+                                                    <input type="checkbox" id="r_sounder_${id}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="r_fire_brigade_${id}">Repeat Fire bigrade</label>
+                                                    <input type="checkbox" id="r_fire_brigade_${id}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="r_fault_output_${id}">Repeat Fault output</label>
+                                                    <input type="checkbox" id="r_fault_output_${id}" class="ml10" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-item roww">
+                                                    <label for="r_fire_protection_${id}">Repeat Fire protection</label>
+                                                    <input type="checkbox" id="r_fire_protection_${id}" class="ml10" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="r_fire_brigade_${id}">Repeat Fire bigrade</label>
-                                                <input type="checkbox" id="r_fire_brigade_${id}" class="ml10" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="r_fault_output_${id}">Repeat Fault output</label>
-                                                <input type="checkbox" id="r_fault_output_${id}" class="ml10" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-item roww">
-                                                <label for="r_fire_protection_${id}">Repeat Fire protection</label>
-                                                <input type="checkbox" id="r_fire_protection_${id}" class="ml10" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </fieldset>`;
+                                    </fieldset>
+                                </fieldset>`;
             el.innerHTML = target;
         }
 
@@ -189,27 +189,27 @@
                 if (last === 0 || lst.includes(last)) return;
 
                 const newUserElement = `<div class="col-12" id=${last}>
-                                    <div class="row">
-                                        <div class="col-11 pr-1">
-                                            <a href="javascript:showPanel('${last}')" onclick="javascript:addActive()">
-                                                <div class="btnStyle">
-                                                    <img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />
-                                                    <div class="someS">
-                                                        <h5>Panel ${last}</h5>
+                                        <div class="row">
+                                            <div class="col-11 pr-1">
+                                                <a href="javascript:showPanel('${last}')" onclick="javascript:addActive()">
+                                                    <div class="btnStyle">
+                                                        <img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />
+                                                        <div class="someS">
+                                                            <h5>Panel ${last}</h5>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            </div>
+                                            <div class="col-1 p-0 m-0" onclick="javascript:addPanel(${last})">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
                                         </div>
-                                        <div class="col-1 p-0 m-0" onclick="javascript:addPanel(${last})">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </div>
-                                    </div>
-                                </div>`;
+                                    </div>`;
                 var element = document.getElementById("new_panel");
                 var new_inner = `
-                                    ${element.innerHTML}
-                                    ${newUserElement}
-                                `;
+                                        ${element.innerHTML}
+                                        ${newUserElement}
+                                    `;
                 lst.push(last);
                 element.innerHTML = new_inner;
 
@@ -250,9 +250,10 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-        //$(document).ready(() => {
-        //    sendMessage("Devices|IRIS|Panels in network");
-        //});
+            //$(document).ready(() => {
+            //    sendMessage("Devices|IRIS|Panels in network");
+            //});
     </script>
+    <script src="../mainfuncs.js"></script>
 </body>
 </html>

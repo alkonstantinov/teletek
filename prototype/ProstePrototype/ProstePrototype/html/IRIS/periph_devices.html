@@ -252,24 +252,24 @@
                 switch (id) {
                     case "system_sensor_loop":
                     case "tte_loop": ver = true; break
-                    
+
                     default: break; //pwer_supply, inputs, loops
                 }
                 var target = `<div class="row mt-2">
-                    ${ver ? `<div class="col-xs-12 col-md-6">
-                    <div class="form-item roww flex disabled">
-                        <label for="ver_${id}">Ver</label>
-                        <input type = "text" id = "ver_${id}" name = "ver_${id}" />
-                        </div >
-                    </div >` : ''}
-                    <div class="${ver ? 'col-xs-12 col-md-6' : 'col-12'}"><div class="form-item roww flex disabled">
-                    <label for="device_state_${id}">Device State</label>
-                    <div class="select">
-                        <select id="device_state_${id}" name="device_state_${id}">
-                            <option value="normal" selected>NORMAL</option>
-                        </select>
-                    </div></div></div>
-                </div>`;
+                            ${ver ? `<div class="col-xs-12 col-md-6">
+                            <div class="form-item roww flex disabled">
+                                <label for="ver_${id}">Ver</label>
+                                <input type = "text" id = "ver_${id}" name = "ver_${id}" />
+                                </div >
+                            </div >` : ''}
+                            <div class="${ver ? 'col-xs-12 col-md-6' : 'col-12'}"><div class="form-item roww flex disabled">
+                            <label for="device_state_${id}">Device State</label>
+                            <div class="select">
+                                <select id="device_state_${id}" name="device_state_${id}">
+                                    <option value="normal" selected>NORMAL</option>
+                                </select>
+                            </div></div></div>
+                        </div>`;
                 el.innerHTML = target;
             }
 
@@ -308,29 +308,29 @@
                         default: imgSource += "1024.Module.ico";
                     }
                     const newUserElement = `
-                                                        <div class="col-12" id=${id + '_' + last}>
-                                                            <div class="row">
-                                                                <div class="col-11 pr-1">
-                                                                    <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
-                                                                        <div class="btnStyle">
-                                                                            <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
-                                                                            <div class="someS">
-                                                                                <h5>${title}</h5>
-                                                                            </div>
+                                                                <div class="col-12" id=${id + '_' + last}>
+                                                                    <div class="row">
+                                                                        <div class="col-11 pr-1">
+                                                                            <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
+                                                                                <div class="btnStyle">
+                                                                                    <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                                                    <div class="someS">
+                                                                                        <h5>${title}</h5>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
                                                                         </div>
-                                                                    </a>
+                                                                        <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                `;
+                                                        `;
                     var element = document.getElementById("new_device");
                     var new_inner = `
-                                                    ${element.innerHTML}
-                                                    ${newUserElement}
-                                                `;
+                                                            ${element.innerHTML}
+                                                            ${newUserElement}
+                                                        `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -360,9 +360,10 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-        //$(document).ready(() => {
-        //    sendMessage("Devices|ECLIPSE|Timeslots");
-        //});
+            //$(document).ready(() => {
+            //    sendMessage("Devices|ECLIPSE|Timeslots");
+            //});
     </script>
+    <script src="../mainfuncs.js"></script>
 </body>
 </html>

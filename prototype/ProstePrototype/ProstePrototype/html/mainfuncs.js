@@ -13,6 +13,10 @@ function addActive() {
 
 function toggleDarkMode(show, filename) {
     if (show) {
+        let ss = document.getElementById(darkModeStylesheetId);
+        if (ss) {
+            return;
+        }
         let head = document.head;
         let link = document.createElement("link");
         link.type = "text/css";
@@ -23,7 +27,7 @@ function toggleDarkMode(show, filename) {
         
     }
     else {
-        let ss = document.getElementById("ssDarkMode");
+        let ss = document.getElementById(darkModeStylesheetId);
         ss.parentNode.removeChild(ss);
     }
 }

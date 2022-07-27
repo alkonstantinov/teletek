@@ -109,6 +109,7 @@ namespace ProstePrototype
 
         private void LoadPage(LoadPageData data)
         {
+                       
             if (!string.IsNullOrEmpty(data.LeftBrowserUrl))
             {
                 wb1.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl) );
@@ -130,11 +131,29 @@ namespace ProstePrototype
                 });
             }
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
-            //if (wb2.Address != wb2UrlAddress)
-            //{
             wb2.Load(wb2UrlAddress);
-            //}
+            if (DarkMode)
+            {
+                var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
 
+                string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
+                wb1.LoadingStateChanged += (sender, args) =>
+                {
+                    //Wait for the Page to finish loading
+                    if (args.IsLoading == false)
+                    {
+                        wb1.ExecuteScriptAsync(script);
+                    }
+                };
+                wb2.LoadingStateChanged += (sender, args) =>
+                {
+                    //Wait for the Page to finish loading
+                    if (args.IsLoading == false)
+                    {
+                        wb2.ExecuteScriptAsync(script);
+                    }
+                };
+            }
         }
 
         private void wb_JSBreadCrumb(object sender, JavascriptMessageReceivedEventArgs e)
