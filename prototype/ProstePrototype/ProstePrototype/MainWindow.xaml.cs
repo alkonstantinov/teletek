@@ -100,8 +100,8 @@ namespace ProstePrototype
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
             DarkMode = !DarkMode;
-            var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\","/");
-            
+            var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
+
             string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
             wb1.ExecuteScriptAsync(script);
             wb2.ExecuteScriptAsync(script);
@@ -109,14 +109,15 @@ namespace ProstePrototype
 
         private void LoadPage(LoadPageData data)
         {
+
             if (!string.IsNullOrEmpty(data.LeftBrowserUrl))
             {
-                wb1.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl) );
+                wb1.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl));
                 this.Dispatcher.Invoke(() =>
                 {
-                        wb1.Width = this.Width / 5;
-                        Splitter1.Width = 5;
-                    
+                    wb1.Width = this.Width / 5;
+                    Splitter1.Width = 5;
+
                 });
 
             }
@@ -133,6 +134,7 @@ namespace ProstePrototype
             //if (wb2.Address != wb2UrlAddress)
             //{
             wb2.Load(wb2UrlAddress);
+            
             //}
 
         }
@@ -149,17 +151,22 @@ namespace ProstePrototype
                         LeftBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["left"].Value<string>()
                     };
                     LoadPage(lpd);
-                    break;
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        initBreadCrumbs(pages[json["Params"].Value<string>()].Value<JObject>()["breadcrumbs"].Value<JArray>());
+                    });
+                    
+                    break; 
             }
 
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {
-            
+
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
             rw.Show();
-            
+
             //rw.Deactivated += (sender, args) => { rw.Hide(); };
             //this.Dispatcher.Invoke(() =>
             //{
@@ -186,5 +193,43 @@ namespace ProstePrototype
         {
             Environment.Exit(0);
         }
+
+        private void addBreadCrumb(string title, string page)
+        {
+            var btn = new Button()
+            {
+                ClickMode = ClickMode.Press,
+                Tag = page,
+                Content = title,
+                Background = Brushes.Transparent,
+                BorderBrush = Brushes.Transparent                
+            };
+            btn.Click += breadCrumbItemClick;
+
+            lvBreadCrumbs.Items.Add(btn);
+        }
+
+        private void breadCrumbItemClick(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = ((Button)sender).Tag.ToString();
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+
+            result = MessageBox.Show(messageBoxText, "", button, icon, MessageBoxResult.Yes);
+        }
+        private void initBreadCrumbs(JArray breadCrumbs)
+        {
+            lvBreadCrumbs.Items.Clear();
+            foreach(var item in breadCrumbs.Select(x=>x.Value<string>()))
+            {
+                
+                string title = pages[item].Value<JObject>()["title"].Value<string>();
+                addBreadCrumb(title, item); 
+
+            }
+
+        }
+        
     }
 }
