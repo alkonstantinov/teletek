@@ -132,28 +132,28 @@ namespace ProstePrototype
             }
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
             wb2.Load(wb2UrlAddress);
-            if (DarkMode)
-            {
-                var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
+            //if (DarkMode)
+            //{
+            var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
 
-                string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
-                wb1.LoadingStateChanged += (sender, args) =>
+            string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
+            wb1.LoadingStateChanged += (sender, args) =>
+            {
+                //Wait for the Page to finish loading
+                if (args.IsLoading == false)
                 {
-                    //Wait for the Page to finish loading
-                    if (args.IsLoading == false)
-                    {
-                        wb1.ExecuteScriptAsync(script);
-                    }
-                };
-                wb2.LoadingStateChanged += (sender, args) =>
+                    wb1.ExecuteScriptAsync(script);
+                }
+            };
+            wb2.LoadingStateChanged += (sender, args) =>
+            {
+                //Wait for the Page to finish loading
+                if (args.IsLoading == false)
                 {
-                    //Wait for the Page to finish loading
-                    if (args.IsLoading == false)
-                    {
-                        wb2.ExecuteScriptAsync(script);
-                    }
-                };
-            }
+                    wb2.ExecuteScriptAsync(script);
+                }
+            };
+            //}
         }
 
         private void wb_JSBreadCrumb(object sender, JavascriptMessageReceivedEventArgs e)
