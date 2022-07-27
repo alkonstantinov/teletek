@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
 using System;
@@ -27,6 +28,7 @@ namespace ProstePrototype
         private readonly string applicationDirectory;
         private readonly JObject pages;
         private ReadWindow rw;
+        private SettingsDialog settings;
 
         public bool DarkMode { get; set; }
         public MainWindow()
@@ -171,6 +173,58 @@ namespace ProstePrototype
                     break;
             }
 
+        }
+
+        private void Open_Clicked(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+            {
+
+            //    txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
+            }
+        }
+        private void Export_Clicked(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = dlg.FileName;
+            }
+        }
+
+        private void SaveAs_Clicked(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = dlg.FileName;
+            }
+        }
+        private void SettingsClicked(object sender, RoutedEventArgs e)
+        {
+            settings = new SettingsDialog();
+            settings.ShowDialog();
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {

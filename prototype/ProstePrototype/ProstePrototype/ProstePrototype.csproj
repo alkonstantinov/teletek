@@ -221,39 +221,6 @@
     <None Update="html\ECLIPSE\Communicator.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\ECLIPSE\Devices\LED8.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\LED16.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\LED32.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\LED16A.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\LCD32.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\LCD32S.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\PROXY CARD READER IT.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\PROXY CARD READER.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\ZONE8 EXPANDER.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\PGM8 EXPANDER.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="html\ECLIPSE\Devices\MainBoard.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="html\ECLIPSE\Timeslots.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

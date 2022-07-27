@@ -51,7 +51,7 @@
                                     <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="_Open" >
+                            <MenuItem Header="_Open" Click="Open_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
@@ -61,7 +61,7 @@
                                     <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Save _As" />
+                            <MenuItem Header="Save _As" Click="SaveAs_Clicked"/>
                             <Separator />
                             <MenuItem Header="_Exit" Click="Exit_Clicked" InputGestureText="Ctrl+E">
                                 <MenuItem.Icon>
@@ -81,17 +81,17 @@
                                     <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="_Write" >
+                            <MenuItem Header="_Write" Click="Read_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="_Log" >
+                            <MenuItem Header="_Log" Click="Read_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="_Clock/Date" >
+                            <MenuItem Header="_Clock/Date" Click="Read_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
@@ -102,7 +102,7 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="_Export" >
+                            <MenuItem Header="_Export" Click="Export_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
@@ -115,7 +115,7 @@
                                     <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </DockPanel>
                             </MenuItem.Header>
-                            <MenuItem Header="S_ettings" >
+                            <MenuItem Header="S_ettings" Click="SettingsClicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
