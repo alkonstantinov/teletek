@@ -9,5 +9,6 @@
         <FontFamily x:Key="fa_brands">/Font/fa-brands-400.ttf#Font Awesome 6 Brands Regular</FontFamily>
         <FontFamily x:Key="fa_regular">/Font/fa-regular-400.ttf#Font Awesome 6 Free Regular</FontFamily>
         <FontFamily x:Key="fa_solid">/Font/fa-solid-900.ttf#Font Awesome 6 Free Solid</FontFamily>
+        <!--<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />-->
     </Application.Resources>
 </Application>

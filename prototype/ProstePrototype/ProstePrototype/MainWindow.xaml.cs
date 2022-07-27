@@ -26,11 +26,16 @@ namespace ProstePrototype
     {
         private readonly string applicationDirectory;
         private readonly JObject pages;
+        private ReadWindow rw;
         public MainWindow()
         {
             InitializeComponent();
             Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/html/Icon.ico", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
+
+            rw = new ReadWindow();
+            //rw.LostFocus += _child_LostFocus;
+
             applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
             string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
@@ -81,11 +86,13 @@ namespace ProstePrototype
         {
             var i = e;
         }
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
 
-        //private void wb_JavascriptMessageReceived(object sender, CefSharp.JavascriptMessageReceivedEventArgs e)
-        //{
-        //    Environment.Exit(0);
-        //}
+            // Begin dragging the window
+            this.DragMove();
+        }
 
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
@@ -149,16 +156,26 @@ namespace ProstePrototype
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.Invoke(() =>
-            {
-                wb1.Width = 0;
-                Splitter1.Width = 0;
-
-            });
-            wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", "modal.html"));
             
+            rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            rw.Owner = this;
+            rw.Show();
+            
+            //rw.Deactivated += (sender, args) => { rw.Hide(); };
+            //this.Dispatcher.Invoke(() =>
+            //{
+            //    wb1.Width = 0;
+            //    Splitter1.Width = 0;
+
+            //});
+            //wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", "modal.html"));
+
         }
-        private void Button_Hide_Click(object sender, RoutedEventArgs e)
+        private void _child_LostFocus(object sender, RoutedEventArgs e)
+        {
+            rw.Hide();
+        }
+        private void Button_Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }

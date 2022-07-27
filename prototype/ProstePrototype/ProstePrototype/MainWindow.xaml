@@ -163,7 +163,7 @@
                 </Button>
             </DockPanel>
             <DockPanel Grid.Column="2">
-                <Button Click="Button_Hide_Click" Background="#f8f9fa" Foreground="#7c7c7d" BorderThickness="0">
+                <Button Click="Button_Minimize_Click" Background="#f8f9fa" Foreground="#7c7c7d" BorderThickness="0">
                     <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                 </Button>
             </DockPanel>
@@ -220,7 +220,7 @@
                 Padding="0, 0, 0, 50"
                 JavascriptMessageReceived="wb_JSBreadCrumb"
                 />
-            <GridSplitter x:Name="Splitter1" Grid.Column="1" HorizontalAlignment="Stretch" />
+            <GridSplitter x:Name="Splitter1" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
             <wpf:ChromiumWebBrowser
                     Grid.Column="2"
                     x:Name="wb2"
