@@ -27,6 +27,8 @@ namespace ProstePrototype
         private readonly string applicationDirectory;
         private readonly JObject pages;
         private ReadWindow rw;
+
+        public bool DarkMode { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -75,6 +77,7 @@ namespace ProstePrototype
                 wb1.Width = this.Width / 5;
             }
             wb2.Load("file:///" + myFile);
+            DarkMode = false;
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -96,15 +99,11 @@ namespace ProstePrototype
 
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
-            string script = @"$().click(()=>{
-                $(["".light [class*='-light']"", "".dark [class*='-dark']""]).each((i, ele) => {
-                    $(ele).toggleClass('bg-light bg-dark')
-                    $(ele).toggleClass('text-light text-dark')
-                    $(ele).toggleClass('navbar-light navbar-dark')
-                })
-                    // toggle body class selector
-                    $('body').toggleClass('light dark')
-                })";
+            DarkMode = !DarkMode;
+            var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\","/");
+            
+            string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
+            wb1.ExecuteScriptAsync(script);
             wb2.ExecuteScriptAsync(script);
         }
 
