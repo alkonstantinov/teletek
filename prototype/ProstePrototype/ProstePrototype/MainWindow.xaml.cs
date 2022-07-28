@@ -64,7 +64,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Mobile Operators.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Receiver Settings.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/ECLIPSE", "General Settings.html");
-
+            
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
             this.DataContext = this;
@@ -82,6 +82,42 @@ namespace ProstePrototype
             }
             wb2.Load("file:///" + myFile);
             DarkMode = false;
+            ChangeTheme(DarkMode);
+        }
+
+        private void ChangeTheme(bool darkMode)
+        {
+            var bgd = Color.FromRgb(248, 249, 250);
+            var fgd = Color.FromRgb(124, 124, 125);
+
+            if (darkMode)
+            {
+                bgd = Color.FromRgb(51, 51, 34);
+                fgd = Color.FromRgb(238, 238, 221);
+                grid4.Background = new SolidColorBrush(bgd);
+            } else
+            {
+                grid4.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)); // Colors.Transparent;
+            }
+            mainGrid.Background = new SolidColorBrush(bgd);
+            mainPanel.Background = new SolidColorBrush(bgd);
+            title.Background = new SolidColorBrush(bgd);
+            title.Foreground = new SolidColorBrush(fgd);
+            topMenu.Background = new SolidColorBrush(bgd);
+            topMenu.Foreground = new SolidColorBrush(fgd);
+            changeTheme_btn.Background = new SolidColorBrush(bgd);
+            changeTheme_btn.Foreground = new SolidColorBrush(fgd);
+            minimize_btn.Background = new SolidColorBrush(bgd);
+            minimize_btn.Foreground = new SolidColorBrush(fgd);
+            maximize_btn.Background = new SolidColorBrush(bgd);
+            maximize_btn.Foreground = new SolidColorBrush(fgd);
+            exit_btn.Background = new SolidColorBrush(bgd);
+            exit_btn.Foreground = new SolidColorBrush(fgd);
+            grid2.Background = new SolidColorBrush(bgd);
+            lvBreadCrumbs.Background = new SolidColorBrush(bgd);
+            grid6.Background = new SolidColorBrush(bgd);
+            textblock_bottom.Background = new SolidColorBrush(bgd);
+            textblock_bottom.Foreground = new SolidColorBrush(fgd);            
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -104,6 +140,9 @@ namespace ProstePrototype
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
             DarkMode = !DarkMode;
+
+            ChangeTheme(DarkMode);
+
             var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
 
             string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
@@ -270,6 +309,7 @@ namespace ProstePrototype
                 Tag = page,
                 Content = title,
                 Background = Brushes.Transparent,
+                Foreground = new SolidColorBrush(Color.FromRgb(13, 145, 228)),
                 BorderBrush = Brushes.Transparent                
             };
             btn.Click += breadCrumbItemClick;
