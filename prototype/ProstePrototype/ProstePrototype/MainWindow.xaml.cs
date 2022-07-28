@@ -107,7 +107,7 @@ namespace ProstePrototype
             wb2.ExecuteScriptAsync(script);
         }
 
-        private void LoadPage(LoadPageData data)
+        private void LoadBrowsers(LoadPageData data)
         {
 
             if (!string.IsNullOrEmpty(data.LeftBrowserUrl))
@@ -145,20 +145,24 @@ namespace ProstePrototype
             switch (json["Command"].ToString())
             {
                 case "LoadPage":
-                    var lpd = new LoadPageData()
-                    {
-                        RightBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["right"].Value<string>(),
-                        LeftBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["left"].Value<string>()
-                    };
-                    LoadPage(lpd);
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        initBreadCrumbs(pages[json["Params"].Value<string>()].Value<JObject>()["breadcrumbs"].Value<JArray>());
-                    });
-                    
+                    LoadPage(json["Params"].Value<string>());                    
                     break; 
             }
 
+        }
+
+        private void LoadPage(string page)
+        {
+            var lpd = new LoadPageData()
+            {
+                RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
+                LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
+            };
+            LoadBrowsers(lpd);
+            this.Dispatcher.Invoke(() =>
+            {
+                initBreadCrumbs(pages[page].Value<JObject>()["breadcrumbs"].Value<JArray>());
+            });
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {
@@ -211,12 +215,8 @@ namespace ProstePrototype
 
         private void breadCrumbItemClick(object sender, RoutedEventArgs e)
         {
-            string messageBoxText = ((Button)sender).Tag.ToString();
-            MessageBoxButton button = MessageBoxButton.YesNoCancel;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult result;
-
-            result = MessageBox.Show(messageBoxText, "", button, icon, MessageBoxResult.Yes);
+            string page = ((Button)sender).Tag.ToString();
+            LoadPage(page);
         }
         private void initBreadCrumbs(JArray breadCrumbs)
         {
