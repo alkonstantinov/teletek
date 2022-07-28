@@ -73,10 +73,12 @@ namespace ProstePrototype
             {
                 wb1.Width = 0; //if index.html is loaded
                 Splitter1.Width = 0; //if index.html is loaded
+                gsp3.Height = 0;
             }
             else
             {
                 wb1.Width = this.Width / 5;
+                gsp3.Height = 3;
             }
             wb2.Load("file:///" + myFile);
             DarkMode = false;
@@ -119,7 +121,7 @@ namespace ProstePrototype
                 {
                     wb1.Width = this.Width / 5;
                     Splitter1.Width = 5;
-
+                    gsp3.Height = 3;
                 });
 
             }
@@ -129,7 +131,7 @@ namespace ProstePrototype
                 {
                     wb1.Width = 0;
                     Splitter1.Width = 0;
-
+                    gsp3.Height = 0;
                 });
             }
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
@@ -182,10 +184,7 @@ namespace ProstePrototype
             {
                 initBreadCrumbs(pages[page].Value<JObject>()["breadcrumbs"].Value<JArray>());
             });
-            
         }
-
-        
 
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {
@@ -245,15 +244,6 @@ namespace ProstePrototype
             rw.Owner = this;
             rw.Show();
 
-            //rw.Deactivated += (sender, args) => { rw.Hide(); };
-            //this.Dispatcher.Invoke(() =>
-            //{
-            //    wb1.Width = 0;
-            //    Splitter1.Width = 0;
-
-            //});
-            //wb2.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", "modal.html"));
-
         }
         private void _child_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -297,12 +287,13 @@ namespace ProstePrototype
             lvBreadCrumbs.Items.Clear();
             foreach(var item in breadCrumbs.Select(x=>x.Value<string>()))
             {
-                
                 string title = pages[item].Value<JObject>()["title"].Value<string>();
-                addBreadCrumb(title, item); 
-
+                if (title != "Start")
+                {
+                    title = $">  {title}";
+                }
+                addBreadCrumb(title, item);
             }
-
         }
         
     }
