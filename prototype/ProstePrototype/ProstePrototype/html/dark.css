@@ -1,16 +1,60 @@
 ﻿body {
-    background-color: #111 !important;
-    color: #eee;
+    background-color: #332 !important;
+    color: #eed;
 }
 
+.modal-content {
+    background-color: #332 !important;
+    color: #eed;
+}
+
+[id^=list-]:not(.active) {
+    background-color: #332 !important;
+}
+
+    [id^=list-] button:not([id$=_btn]) {
+        color: #eed;
+        border: 1px solid #eed;
+    }
+
 .bg-light {
-    background-color: #333 !important;
+    background-color: #555 !important;
 }
 
 .bg-white {
-    background-color: #000 !important;
+    background-color: #442 !important;
 }
 
 .bg-black {
     background-color: #eee !important;
+}
+
+.input-group-text {
+    color: #eed;
+}
+
+input, select, input[type="checkbox" i] {
+    background-color: #eed;
+    border-radius: 3px;
+}
+
+.form-item.disabled input, .form-item.disabled .select select{
+    border-radius: 0;
+}
+
+.btn-blue {
+    border: 1px solid #eed;
+}
+
+    .btn-blue:hover {
+        color: #eed;
+    }
+
+.btn-border-black {
+    background-color: #eed;
+}
+
+#connection_type_scheme img, [id^=showSchema_] img {
+    -webkit-filter: invert(82%);
+    filter: invert(82%);
 }

@@ -3,11 +3,15 @@ body {
 }
 
 h5 {
-    color: white;
+    color: #eed;
 }
 
 a, a:hover {
     text-decoration: none;
+}
+
+button {
+    border-radius: 3px;
 }
 
 .pb10 {
@@ -382,7 +386,7 @@ fieldset legend {
     height: 30px;
     cursor: pointer;
     line-height: 1.1;
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
     .select:disabled {
       pointer-events: none; }
@@ -420,7 +424,7 @@ input:focus {
     font-size: 0.8rem;
     font-weight: 700;
     line-height: 1.5;
-    color: #495057;
+    color: #212529;
     text-align: center;
     white-space: nowrap;
     background-color: transparent;
