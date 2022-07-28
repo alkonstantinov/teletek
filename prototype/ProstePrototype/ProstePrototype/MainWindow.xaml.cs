@@ -182,16 +182,10 @@ namespace ProstePrototype
             {
                 initBreadCrumbs(pages[page].Value<JObject>()["breadcrumbs"].Value<JArray>());
             });
-                    var lpd = new LoadPageData()
-                    {
-                        RightBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["right"].Value<string>(),
-                        LeftBrowserUrl = pages[json["Params"].Value<string>()].Value<JObject>()["left"].Value<string>()
-                    };
-                    LoadPage(lpd);
-                    break;
-            }
-
+            
         }
+
+        
 
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {
