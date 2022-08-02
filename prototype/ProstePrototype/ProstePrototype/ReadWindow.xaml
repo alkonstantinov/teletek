@@ -60,16 +60,7 @@
         <Grid Grid.Row="1" Margin="15,2">
             <TabControl Name="tabControl" TabStripPlacement="Top" BorderThickness="0, 1, 0, 0" SelectionChanged="tabControl_SelectionChanged" Foreground="{Binding Foreground}" Background="{Binding Background}">
                 <TabControl.Resources>
-                    <Style TargetType="TabItem">
-                        <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=rw, Path=DarkMode}" Value="True"/>
-                                    <Condition Binding="{Binding IsSelected}" Value="False"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Foreground" Value="#eed"></Setter>
-                            </MultiDataTrigger>
-                        </Style.Triggers>
+                    <Style TargetType="TabItem">                        
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -90,6 +81,26 @@
                                             <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,0" />
                                             <Setter TargetName="Border" Property="Background" Value="Transparent" />
                                         </Trigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="False"></Condition>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DarkMode}" Value="true" ></Condition>
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,0" />
+                                                <Setter TargetName="Border" Property="Background" Value="green" />
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="False"></Condition>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DarkMode}" Value="false" ></Condition>
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,0" />
+                                                <Setter TargetName="Border" Property="Background" Value="red" />
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
