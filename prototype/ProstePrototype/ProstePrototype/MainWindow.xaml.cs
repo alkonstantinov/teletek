@@ -94,10 +94,10 @@ namespace ProstePrototype
             {
                 bgd = Color.FromRgb(51, 51, 34);
                 fgd = Color.FromRgb(238, 238, 221);
-                grid4.Background = new SolidColorBrush(bgd);
+                gridBrowsers.Background = new SolidColorBrush(bgd);
             } else
             {
-                grid4.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)); // Colors.Transparent;
+                gridBrowsers.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)); // Colors.Transparent;
             }
             mainGrid.Background = new SolidColorBrush(bgd);
             mainPanel.Background = new SolidColorBrush(bgd);
@@ -211,6 +211,8 @@ namespace ProstePrototype
                 wb1.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl));
                 this.Dispatcher.Invoke(() =>
                 {
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 5);
+                    wb2.Margin = new Thickness(0);
                     wb1.Width = this.Width / 5;
                     Splitter1.Width = 5;
                     gsp3.Height = 3;
@@ -221,6 +223,8 @@ namespace ProstePrototype
             {
                 this.Dispatcher.Invoke(() =>
                 {
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
+                    wb2.Margin = new Thickness(this.Width / 5, 0, 0, 0);
                     wb1.Width = 0;
                     Splitter1.Width = 0;
                     gsp3.Height = 0;
@@ -324,18 +328,24 @@ namespace ProstePrototype
                 wb1.Load("file:///" + firstFile);
                 if (myFile == firstFile)
                 {
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
+                    wb2.Margin = new Thickness(this.Width / 5, 0, 0, 0);
                     wb1.Width = 0; //if index.html is loaded
                     Splitter1.Width = 0; //if index.html is loaded
                     gsp3.Height = 0;
                 }
                 else
                 {
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 5);
+                    wb2.Margin = new Thickness(0);
                     wb1.Width = this.Width / 5;
                     gsp3.Height = 3;
                 }
                 wb2.Load("file:///" + myFile);
             } else
             {
+                gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
+                wb2.Margin = new Thickness(this.Width / 5, 0, 0, 0);
                 wb1.Width = 0; //if index.html is loaded
                 Splitter1.Width = 0; //if index.html is loaded
                 gsp3.Height = 0;

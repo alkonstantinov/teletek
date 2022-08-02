@@ -249,13 +249,14 @@
             </ListView>
         </StackPanel>
         <GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
-        <Grid x:Name="grid4" Grid.Row="4" Background="{Binding Background}" >
+        <Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="4*" />
             </Grid.ColumnDefinitions>
             <wpf:ChromiumWebBrowser
+                Grid.Column="0"
                 x:Name="wb1"
                 Width="{Binding Width}"
                 Background="Transparent"
@@ -267,6 +268,7 @@
             <wpf:ChromiumWebBrowser
                 Grid.Column="2"
                 x:Name="wb2"
+                Margin="{Binding Margin}"
                 JavascriptMessageReceived="wb_JSBreadCrumb"
                 Background="Transparent"
             />
