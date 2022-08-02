@@ -15,6 +15,9 @@
     <None Remove="html\gb-eng.png" />
     <None Remove="html\Icon.ico" />
     <None Remove="Images\de.png" />
+    <None Remove="Images\ProsTE.ico" />
+    <None Remove="Images\ProsTE.png" />
+    <None Remove="Images\teletek_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +45,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\de.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ProsTE.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ProsTE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\teletek_logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

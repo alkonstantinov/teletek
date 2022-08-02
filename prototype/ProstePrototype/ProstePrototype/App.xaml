@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProstePrototype"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Welcome.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="DefaultColor" Color="#0c2b90" />
         <SolidColorBrush x:Key="LighterColor" Color="#007bff" />

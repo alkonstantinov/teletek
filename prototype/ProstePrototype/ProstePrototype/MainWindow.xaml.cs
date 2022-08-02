@@ -42,8 +42,8 @@ namespace ProstePrototype
 
             applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string navigation = System.IO.Path.Combine(applicationDirectory, "html", "nav.html");
-            string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "IRISPanel.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "access.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/IRIS", "panels_in_network.html");
@@ -64,23 +64,23 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Mobile Operators.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/TTE GPRS", "Receiver Settings.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html/ECLIPSE", "General Settings.html");
-            
+
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
-            this.DataContext = this;
-            wb1.Load("file:///" + firstFile);
-            if (myFile == firstFile)
-            {
-                wb1.Width = 0; //if index.html is loaded
-                Splitter1.Width = 0; //if index.html is loaded
-                gsp3.Height = 0;
-            }
-            else
-            {
-                wb1.Width = this.Width / 5;
-                gsp3.Height = 3;
-            }
-            wb2.Load("file:///" + myFile);
+            DataContext = this;
+            //wb1.Load("file:///" + firstFile);
+            //if (myFile == firstFile)
+            //{
+            //    wb1.Width = 0; //if index.html is loaded
+            //    Splitter1.Width = 0; //if index.html is loaded
+            //    gsp3.Height = 0;
+            //}
+            //else
+            //{
+            //    wb1.Width = this.Width / 5;
+            //    gsp3.Height = 3;
+            //}
+            //wb2.Load("file:///" + myFile);
             DarkMode = false;
             ChangeTheme(DarkMode);
         }
@@ -117,7 +117,34 @@ namespace ProstePrototype
             lvBreadCrumbs.Background = new SolidColorBrush(bgd);
             grid6.Background = new SolidColorBrush(bgd);
             textblock_bottom.Background = new SolidColorBrush(bgd);
-            textblock_bottom.Foreground = new SolidColorBrush(fgd);            
+            textblock_bottom.Foreground = new SolidColorBrush(fgd);
+        }
+        
+        private void ChangeThemeRW(bool darkMode)
+        {
+            var bgd = Color.FromRgb(248, 249, 250);
+            var fgd = Color.FromRgb(124, 124, 125);
+
+            if (darkMode)
+            {
+                
+                bgd = Color.FromRgb(51, 51, 34);
+                fgd = Color.FromRgb(238, 238, 221);
+            }
+
+            rw.ReadWindowMain.Background = new SolidColorBrush(bgd);
+            rw.tabControl.Background = new SolidColorBrush(bgd);
+            rw.tabControl.Foreground = new SolidColorBrush(fgd);
+            rw.listBox.Background = new SolidColorBrush(bgd);
+            rw.listBox.Foreground = new SolidColorBrush(fgd);
+            rw.txtBlk.Foreground = new SolidColorBrush(fgd);
+            rw.lbHost.Foreground = new SolidColorBrush(fgd);
+            rw.lbPort.Foreground = new SolidColorBrush(fgd);
+            rw.lbComPort.Foreground = new SolidColorBrush(fgd);
+            rw.lbParity.Foreground = new SolidColorBrush(fgd);
+            rw.lbBaudRate.Foreground = new SolidColorBrush(fgd);
+            rw.lbStopBits.Foreground = new SolidColorBrush(fgd);
+            rw.lbDataBits.Foreground = new SolidColorBrush(fgd);
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -150,6 +177,32 @@ namespace ProstePrototype
             wb2.ExecuteScriptAsync(script);
         }
 
+        private void ApplyTheme()
+        {
+            //if (DarkMode)
+            //{
+            var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
+
+            string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
+            wb1.LoadingStateChanged += (sender, args) =>
+            {
+                //Wait for the Page to finish loading
+                if (args.IsLoading == false)
+                {
+                    wb1.ExecuteScriptAsync(script);
+                }
+            };
+            wb2.LoadingStateChanged += (sender, args) =>
+            {
+                //Wait for the Page to finish loading
+                if (args.IsLoading == false)
+                {
+                    wb2.ExecuteScriptAsync(script);
+                }
+            };
+            //}
+        }
+
         private void LoadBrowsers(LoadPageData data)
         {
 
@@ -175,28 +228,7 @@ namespace ProstePrototype
             }
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
             wb2.Load(wb2UrlAddress);
-            //if (DarkMode)
-            //{
-            var fnm = System.IO.Path.Combine(applicationDirectory, "html/dark.css").Replace(@"\", "/");
-
-            string script = $"toggleDarkMode({DarkMode.ToString().ToLower()}, '{fnm}')";
-            wb1.LoadingStateChanged += (sender, args) =>
-            {
-                //Wait for the Page to finish loading
-                if (args.IsLoading == false)
-                {
-                    wb1.ExecuteScriptAsync(script);
-                }
-            };
-            wb2.LoadingStateChanged += (sender, args) =>
-            {
-                //Wait for the Page to finish loading
-                if (args.IsLoading == false)
-                {
-                    wb2.ExecuteScriptAsync(script);
-                }
-            };
-            //}
+            ApplyTheme();
         }
 
         private void wb_JSBreadCrumb(object sender, JavascriptMessageReceivedEventArgs e)
@@ -274,15 +306,44 @@ namespace ProstePrototype
         private void SettingsClicked(object sender, RoutedEventArgs e)
         {
             settings = new SettingsDialog();
+            settings.changeTheme(DarkMode);
             settings.ShowDialog();
         }
         private void Read_Clicked(object sender, RoutedEventArgs e)
         {
-
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
-            rw.Show();
-
+            ChangeThemeRW(DarkMode);
+            rw.DarkMode = DarkMode;
+            rw.ShowDialog();
+            var c = rw.DialogResult;
+            if ((bool)c)
+            {
+                string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+                string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+                wb1.Load("file:///" + firstFile);
+                if (myFile == firstFile)
+                {
+                    wb1.Width = 0; //if index.html is loaded
+                    Splitter1.Width = 0; //if index.html is loaded
+                    gsp3.Height = 0;
+                }
+                else
+                {
+                    wb1.Width = this.Width / 5;
+                    gsp3.Height = 3;
+                }
+                wb2.Load("file:///" + myFile);
+            } else
+            {
+                wb1.Width = 0; //if index.html is loaded
+                Splitter1.Width = 0; //if index.html is loaded
+                gsp3.Height = 0;
+                wb2.Load("file:///");
+            }
+            lvBreadCrumbs.Items.Clear();
+            ApplyTheme();
+            rw = new ReadWindow();
         }
         private void _child_LostFocus(object sender, RoutedEventArgs e)
         {

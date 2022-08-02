@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SettingsDialog" Height="350" Width="400"
         WindowStyle="None" WindowStartupLocation ="CenterScreen">
-    <Grid>
+    <Grid x:Name="mainGrid" Background="{Binding Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
@@ -15,23 +15,21 @@
         </Grid.RowDefinitions>
         <Border BorderBrush="#e8e9ea" BorderThickness="0 0 0 2" >
             <StackPanel>
-                <Grid>
+                <Grid Height="48">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Settings" Margin="25, 10, 10, 0" FontSize="18" VerticalAlignment="Center"></TextBlock>
-                    <DockPanel Grid.Column="1">
-                        <Button Click="ExitSettings_Clicked" Background="Transparent" Foreground="#7c7c7d" BorderThickness="0">
-                            <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
-                        </Button>
-                    </DockPanel>
+                    <TextBlock x:Name="mainTbl" Text="Settings" Margin="25, 0" FontSize="18" VerticalAlignment="Center" Foreground="{Binding Foreground}"/>
+                    <Button Name="exit_btn" Grid.Column="1" Click="ExitSettings_Clicked" Background="Transparent" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xF00D;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Center"/>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Border>
         <Grid Grid.Row="1" Margin="15,2">
             <StackPanel Margin="10">
-                <CheckBox FontSize="14" VerticalContentAlignment="Center">Automatic check for updates</CheckBox>
+                <CheckBox Name="autoCheck" FontSize="14" VerticalContentAlignment="Center" Foreground="{Binding Foreground}">Automatic check for updates</CheckBox>
             </StackPanel>
         </Grid>
         <Border Grid.Row="2" BorderBrush="#e8e9ea" BorderThickness="0 2 0 0" >

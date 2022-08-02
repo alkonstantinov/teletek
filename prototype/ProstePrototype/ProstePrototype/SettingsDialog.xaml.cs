@@ -19,7 +19,7 @@ namespace ProstePrototype
     {
         public SettingsDialog()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void OKSettings_Clicked(object sender, RoutedEventArgs e)
@@ -30,6 +30,23 @@ namespace ProstePrototype
             });
         }
 
+        public void changeTheme(bool DarkMode)
+        {
+            var bgd = Color.FromRgb(248, 249, 250);
+            var fgd = Color.FromRgb(124, 124, 125);
+
+            if (DarkMode)
+            {
+
+                bgd = Color.FromRgb(51, 51, 34);
+                fgd = Color.FromRgb(238, 238, 221);
+            }
+            
+            mainGrid.Background = new SolidColorBrush(bgd);
+            mainTbl.Foreground = new SolidColorBrush(fgd);
+            autoCheck.Foreground = new SolidColorBrush(fgd);
+            exit_btn.Foreground = new SolidColorBrush(fgd);
+        }
         private void ExitSettings_Clicked(object sender, RoutedEventArgs e)
         {
             this.Dispatcher.Invoke(() =>

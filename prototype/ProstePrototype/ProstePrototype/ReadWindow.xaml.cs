@@ -26,6 +26,8 @@ namespace ProstePrototype
         private readonly List<TextBox> _segments = new List<TextBox>();
 
         private bool _suppressAddressUpdate = false;
+
+        public bool DarkMode { get; set; }
         public ReadWindow()
         {
             InitializeComponent();
@@ -34,11 +36,23 @@ namespace ProstePrototype
             _segments.Add(SecondSegment);
             _segments.Add(ThirdSegment);
             _segments.Add(LastSegment);
+            this.DataContext = this;
         }
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
             this.Dispatcher.Invoke(() =>
             {
+                this.DialogResult = false;
+                this.Hide();
+            });
+        }
+
+        private void Connect_Clicked(object sender, RoutedEventArgs e)
+        {
+            
+            this.Dispatcher.Invoke(() =>
+            {
+                this.DialogResult= true;
                 this.Hide();
             });
         }
