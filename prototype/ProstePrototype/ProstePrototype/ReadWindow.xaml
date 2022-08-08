@@ -43,17 +43,15 @@
         </Grid.RowDefinitions>
         <Border x:Name="ReadWindowBorder" BorderBrush="#e8e9ea" BorderThickness="0 0 0 2" >
             <StackPanel>
-                <Grid>
+                <Grid Height="48">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="txtBlk" Text="Read from device" Margin="25, 10, 10, 0" FontSize="18" VerticalAlignment="Center" Foreground="{Binding Foreground}"></TextBlock>
-                    <DockPanel Grid.Column="1">
-                        <Button Click="Exit_Clicked" Background="Transparent" Foreground="#7c7c7d" BorderThickness="0" VerticalContentAlignment="Bottom">
-                            <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
-                        </Button>
-                    </DockPanel>
+                    <TextBlock x:Name="txtBlk" Text="Read from device" Margin="25, 10" FontSize="18" VerticalAlignment="Stretch" Foreground="{Binding Foreground}"></TextBlock>
+                    <Button Grid.Column="1" Click="Exit_Clicked" Background="Transparent" Foreground="#7c7c7d" BorderThickness="0" VerticalContentAlignment="Center">
+                        <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Border>
