@@ -1,284 +1,284 @@
 ﻿<Window x:Class="ProstePrototype.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
-        mc:Ignorable="d"
-        Title="T-Manager 6.1" Height="768" Width="1300"
-        WindowStyle="None"        
-        >
-    <!-- WindowState="Maximized" -->
-    <Window.CommandBindings>
-        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
-    </Window.CommandBindings>
-    <Window.Resources>
-        <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type MenuItem}">
-                        <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <Grid VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
-                                       HorizontalOffset="1" VerticalOffset="-1">
-                                    <Border Background="{Binding ElementName=topMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
-                                        <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                        </ScrollViewer>
-                                    </Border>
-                                </Popup>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="29" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
-        <Grid x:Name="mainGrid" Background="{Binding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="45" />
-            </Grid.ColumnDefinitions>
-            <StackPanel x:Name="mainPanel" Background="{Binding Background}">
-                <DockPanel  Height="50" HorizontalAlignment="Left" >
-                    <Image Source="/Images/teletek_logo_m.png" Margin="15,0,0,-15" Width="180" VerticalAlignment="Center"/>
-                    <!--<TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>-->
-                    <Menu x:Name="topMenu" DockPanel.Dock="Top" FontSize="16" VerticalAlignment="Center" Margin="10, 0, 0, 0" Background="{Binding Background}" Foreground="{Binding Foreground}">
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header >
-                                <DockPanel>
-                                    <TextBlock Text="File" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+		mc:Ignorable="d"
+		Title="T-Manager 6.1" Height="768" Width="1300"
+		WindowStyle="None"        
+		>
+	<!-- WindowState="Maximized" -->
+	<Window.CommandBindings>
+		<CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+	</Window.CommandBindings>
+	<Window.Resources>
+		<Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type MenuItem}">
+						<Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+							<Grid VerticalAlignment="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+								<Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
+									   HorizontalOffset="1" VerticalOffset="-1">
+									<Border Background="{Binding ElementName=topMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+										<ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+											<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+										</ScrollViewer>
+									</Border>
+								</Popup>
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
+			<RowDefinition Height="3" />
+			<RowDefinition Height="29" />
+			<RowDefinition Height="3" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="3" />
+			<RowDefinition Height="40" />
+		</Grid.RowDefinitions>
+		<Grid x:Name="mainGrid" Background="{Binding Background}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="45" />
+				<ColumnDefinition Width="45" />
+				<ColumnDefinition Width="45" />
+				<ColumnDefinition Width="45" />
+			</Grid.ColumnDefinitions>
+			<StackPanel x:Name="mainPanel" Background="{Binding Background}">
+				<DockPanel  Height="50" HorizontalAlignment="Left" >
+					<Image Source="/Images/teletek_logo_m.png" Margin="15,0,0,-15" Width="180" VerticalAlignment="Center"/>
+					<!--<TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>-->
+					<Menu x:Name="topMenu" DockPanel.Dock="Top" FontSize="16" VerticalAlignment="Center" Margin="10, 0, 0, 0" Background="{Binding Background}" Foreground="{Binding Foreground}">
+						<MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
+							<MenuItem.Header >
+								<DockPanel>
+									<TextBlock Text="File" Margin="0, 0, 5, 0"/>
+									<TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</DockPanel>
+							</MenuItem.Header>
 
-                            <MenuItem Header="_New" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Open" Click="Open_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Save" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="Save _As" Click="SaveAs_Clicked"/>
-                            <Separator Background="{StaticResource DefaultColor}"/>
-                            <MenuItem Header="_Exit" Click="Exit_Clicked" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                        <!--<MenuItem Margin="10,0,0,0" Click="Read_Clicked"  >
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="&#xf02a;" Margin="5, 3, 5, 0" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="Scan"/>
-                                </DockPanel>
-                            </MenuItem.Header>
-                        </MenuItem>-->
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="Device" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-                            <MenuItem Header="_Read" Click="Read_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Write" Click="Read_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Log" Click="Read_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Clock/Date" Click="Read_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Verify" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <Separator Background="{StaticResource DefaultColor}"/>
-                            <MenuItem Header="_Export" Click="Export_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="System" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-                            <MenuItem Header="S_ettings" Click="SettingsClicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Update" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Help" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="Language" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-                            <MenuItem Header="_English">
-                                <MenuItem.Icon>
-                                    <Image Source="/html/gb-eng.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_German">
-                                <MenuItem.Icon>
-                                    <Image Source="/html/de.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Bulgarian">
-                                <MenuItem.Icon>
-                                    <Image Source="/html/bg.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                    </Menu>
-                </DockPanel>
-            </StackPanel>
-            <DockPanel Grid.Column="1">
-                <Button x:Name="changeTheme_btn" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="2">
-                <Button x:Name="minimize_btn" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="3">
-                <Button x:Name="maximize_btn" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger 
-                                    Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    Value="Maximized">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <TextBlock Text="&#xf2d0;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                                <DataTrigger 
-                                    Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    Value="Normal">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <TextBlock Text="&#xf2d2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <Button.ToolTip>
-                        <ToolTip>Maximize or Restore</ToolTip>
-                    </Button.ToolTip>
+							<MenuItem Header="_New" >
+								<MenuItem.Icon>
+									<TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Open" Click="Open_Clicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Save" >
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Save _As" Click="SaveAs_Clicked"/>
+							<Separator Background="{StaticResource DefaultColor}"/>
+							<MenuItem Header="_Exit" Click="Exit_Clicked" >
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+						<MenuItem Margin="10,0,0,0" Click="Read_Clicked"  >
+							<MenuItem.Header>
+								<DockPanel>
+									<TextBlock Text="&#xf02a;" Margin="5, 3, 5, 0" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Center"></TextBlock>
+									<TextBlock Text="Scan"/>
+								</DockPanel>
+							</MenuItem.Header>
+						</MenuItem>
+						<MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
+							<MenuItem.Header>
+								<DockPanel>
+									<TextBlock Text="Device" Margin="0, 0, 5, 0"/>
+									<TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</DockPanel>
+							</MenuItem.Header>
+							<MenuItem Header="_Read" Click="Read_Clicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Write" Click="Read_Clicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Log" Click="Read_Clicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Clock/Date" Click="Read_Clicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Verify" >
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<Separator Background="{StaticResource DefaultColor}"/>
+							<MenuItem Header="_Export" Click="Export_Clicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+						<MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
+							<MenuItem.Header>
+								<DockPanel>
+									<TextBlock Text="System" Margin="0, 0, 5, 0"/>
+									<TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</DockPanel>
+							</MenuItem.Header>
+							<MenuItem Header="S_ettings" Click="SettingsClicked">
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Update" >
+								<MenuItem.Icon>
+									<TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Help" >
+								<MenuItem.Icon>
+									<TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+						<MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
+							<MenuItem.Header>
+								<DockPanel>
+									<TextBlock Text="Language" Margin="0, 0, 5, 0"/>
+									<TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+								</DockPanel>
+							</MenuItem.Header>
+							<MenuItem Header="_English">
+								<MenuItem.Icon>
+									<Image Source="/html/gb-eng.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_German">
+								<MenuItem.Icon>
+									<Image Source="/html/de.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Bulgarian">
+								<MenuItem.Icon>
+									<Image Source="/html/bg.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+					</Menu>
+				</DockPanel>
+			</StackPanel>
+			<DockPanel Grid.Column="1">
+				<Button x:Name="changeTheme_btn" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+					<TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+				</Button>
+			</DockPanel>
+			<DockPanel Grid.Column="2">
+				<Button x:Name="minimize_btn" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+					<TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+				</Button>
+			</DockPanel>
+			<DockPanel Grid.Column="3">
+				<Button x:Name="maximize_btn" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+					<Button.Style>
+						<Style TargetType="Button">
+							<Style.Triggers>
+								<DataTrigger 
+									Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
+									Value="Maximized">
+									<Setter Property="Content">
+										<Setter.Value>
+											<TextBlock Text="&#xf2d0;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+										</Setter.Value>
+									</Setter>
+								</DataTrigger>
+								<DataTrigger 
+									Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
+									Value="Normal">
+									<Setter Property="Content">
+										<Setter.Value>
+											<TextBlock Text="&#xf2d2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+										</Setter.Value>
+									</Setter>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+					<Button.ToolTip>
+						<ToolTip>Maximize or Restore</ToolTip>
+					</Button.ToolTip>
 
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="4">
-                <Button x:Name="exit_btn" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
-                </Button>
-            </DockPanel>
-        </Grid>
-        <GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" />
-        <StackPanel Grid.Row="2" x:Name="grid2" Background="{Binding Background}">
-            <ListView x:Name="lvBreadCrumbs" Margin="20, 0" Background="{Binding Background}"
-                FontSize="14" BorderThickness="0" VerticalContentAlignment="Center">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"></StackPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </StackPanel>
-        <GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
-        <Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
-            <wpf:ChromiumWebBrowser
-                Grid.Column="0"
-                x:Name="wb1"
-                Width="{Binding Width}"
-                Background="Transparent"
-                Margin="0, 0, 0, 0"
-                Padding="0, 0, 0, 50"
-                JavascriptMessageReceived="wb_JSBreadCrumb"
-                />
-            <GridSplitter x:Name="Splitter1" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
-            <wpf:ChromiumWebBrowser
-                Grid.Column="2"
-                x:Name="wb2"
-                Margin="{Binding Margin}"
-                JavascriptMessageReceived="wb_JSBreadCrumb"
-                Background="Transparent"
-            />
-        </Grid>
-        <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
-        <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
-            <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}">
-                © 2022 Copyright: <Bold>Teletek Electroincs</Bold>
-            </TextBlock>
-        </StackPanel>
-    </Grid>
+				</Button>
+			</DockPanel>
+			<DockPanel Grid.Column="4">
+				<Button x:Name="exit_btn" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+					<TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
+				</Button>
+			</DockPanel>
+		</Grid>
+		<GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" />
+		<StackPanel Grid.Row="2" x:Name="grid2" Background="{Binding Background}">
+			<ListView x:Name="lvBreadCrumbs" Margin="20, 0" Background="{Binding Background}"
+				FontSize="14" BorderThickness="0" VerticalContentAlignment="Center">
+				<ListView.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal"></StackPanel>
+					</ItemsPanelTemplate>
+				</ListView.ItemsPanel>
+			</ListView>
+		</StackPanel>
+		<GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
+		<Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="5" />
+				<ColumnDefinition Width="5*" />
+			</Grid.ColumnDefinitions>
+			<wpf:ChromiumWebBrowser
+				Grid.Column="0"
+				x:Name="wb1"
+				Width="{Binding Width}"
+				Background="Transparent"
+				Margin="0, 0, 0, 0"
+				Padding="0, 0, 0, 50"
+				JavascriptMessageReceived="wb_JSBreadCrumb"
+				/>
+			<GridSplitter x:Name="Splitter1" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
+			<wpf:ChromiumWebBrowser
+				Grid.Column="2"
+				x:Name="wb2"
+				Margin="{Binding Margin}"
+				JavascriptMessageReceived="wb_JSBreadCrumb"
+				Background="Transparent"
+			/>
+		</Grid>
+		<GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
+		<StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
+			<TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
+				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}">
+				© 2022 Copyright: <Bold>Teletek Electroincs</Bold>
+			</TextBlock>
+		</StackPanel>
+	</Grid>
 </Window>

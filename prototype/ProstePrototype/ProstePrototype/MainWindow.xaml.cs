@@ -79,7 +79,7 @@ namespace ProstePrototype
             //}
             //else
             //{
-            //    wb1.Width = this.Width / 5;
+            //    wb1.Width = this.Width / 6;
             //    gsp3.Height = 3;
             //}
             //wb2.Load("file:///" + myFile);
@@ -213,9 +213,9 @@ namespace ProstePrototype
                 wb1.Load("file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl));
                 this.Dispatcher.Invoke(() =>
                 {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 5);
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
                     wb2.Margin = new Thickness(0);
-                    wb1.Width = this.Width / 5;
+                    wb1.Width = this.Width / 6;
                     Splitter1.Width = 5;
                     gsp3.Height = 3;
                 });
@@ -338,9 +338,9 @@ namespace ProstePrototype
                 }
                 else
                 {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 5);
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
                     wb2.Margin = new Thickness(0);
-                    wb1.Width = this.Width / 5;
+                    wb1.Width = this.Width / 6;
                     gsp3.Height = 3;
                 }
                 wb2.Load("file:///" + myFile);

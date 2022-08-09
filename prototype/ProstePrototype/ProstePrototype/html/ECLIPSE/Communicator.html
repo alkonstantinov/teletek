@@ -7,16 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../font-awesome.min.css" />
     <link rel="stylesheet" href="../IRIS.css" />
-    <!-- Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
-
     <title>Teletek Manager</title>
 </head>
 <body>
@@ -714,198 +707,198 @@
                     if (last === 0 || lst.includes(last)) return;
 
                     const newUserElement = `
-                                            <div style="display: block" id="${last}">
-                                                <fieldset>
-                                                    <legend>Phone number ${last}</legend>
+                                                    <div style="display: block" id="${last}">
+                                                        <fieldset>
+                                                            <legend>Phone number ${last}</legend>
 
-                                                    <div class="row align-items-center">
-                                                        <div class="col-xs-12 col-lg-7">
-                                                            <div class="form-item roww flex">
-                                                                <label for="phone_number_${last}">Number</label>
-                                                                <input type="tel" id="phone_number_${last}" name="phone_number_${last}" class="ml10" pattern="[+]{1}[0-9]{11,14}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col"><button type="button" onclick="javascript:addPhone(${last})" class="m-2">
-                                                            <i class="fa-solid fa-minus 5x"></i> Remove Phone
-                                                        </button></div>
-                                                        <div class="col-xs-12 col-lg">
-                                                            <div class="form-item roww">
-                                                                <label for="protocol_${last}">Protocol</label>
-                                                                <div class="select">
-                                                                    <select id="protocol_${last}"
-                                                                            name="protocol_${last}">
-                                                                        <option value="cid">CID</option>
-                                                                        <option value="sia">SIA</option>
-                                                                    </select>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-xs-12 col-lg-7">
+                                                                    <div class="form-item roww flex">
+                                                                        <label for="phone_number_${last}">Number</label>
+                                                                        <input type="tel" id="phone_number_${last}" name="phone_number_${last}" class="ml10" pattern="[+]{1}[0-9]{11,14}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col"><button type="button" onclick="javascript:addPhone(${last})" class="m-2">
+                                                                    <i class="fa-solid fa-minus 5x"></i> Remove Phone
+                                                                </button></div>
+                                                                <div class="col-xs-12 col-lg">
+                                                                    <div class="form-item roww">
+                                                                        <label for="protocol_${last}">Protocol</label>
+                                                                        <div class="select">
+                                                                            <select id="protocol_${last}"
+                                                                                    name="protocol_${last}">
+                                                                                <option value="cid">CID</option>
+                                                                                <option value="sia">SIA</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <fieldset>
-                                                        <legend>Message Type</legend>
-                                                        <div class="row align-items-center mr-1">
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="alarm_${last}">Alarm and Restore</label>
-                                                                    <input type="checkbox" id="alarm_${last}" name="alarm_${last}" class="mr10" checked />
+                                                            <fieldset>
+                                                                <legend>Message Type</legend>
+                                                                <div class="row align-items-center mr-1">
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="alarm_${last}">Alarm and Restore</label>
+                                                                            <input type="checkbox" id="alarm_${last}" name="alarm_${last}" class="mr10" checked />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="tamper_${last}">Tamper and Restore</label>
+                                                                            <input type="checkbox" id="tamper_${last}" name="tamper_${last}" class="mr10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="panic_${last}">Panic and Ambush Code</label>
+                                                                            <input type="checkbox" id="panic_${last}" name="panic_${last}" class="mr10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="fire_${last}">Fire</label>
+                                                                            <input type="checkbox" id="fire_${last}" name="fire_${last}" class="mr10 ml10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="arm_${last}">Arm, Disarm and Bypass</label>
+                                                                            <input type="checkbox" id="arm_${last}" name="arm_${last}" class="mr10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="medical_${last}">Medical Alarm</label>
+                                                                            <input type="checkbox" id="medical_${last}" name="medical_${last}" class="mr10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="trouble_${last}">Trouble and Trouble Restore</label>
+                                                                            <input type="checkbox" id="trouble_${last}" name="trouble_${last}" class="mr10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="spacial_${last}">Special Messages</label>
+                                                                            <input type="checkbox" id="spacial_${last}" name="spacial_${last}" class="mr10" checked/>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="tamper_${last}">Tamper and Restore</label>
-                                                                    <input type="checkbox" id="tamper_${last}" name="tamper_${last}" class="mr10" checked/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="panic_${last}">Panic and Ambush Code</label>
-                                                                    <input type="checkbox" id="panic_${last}" name="panic_${last}" class="mr10" checked/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="fire_${last}">Fire</label>
-                                                                    <input type="checkbox" id="fire_${last}" name="fire_${last}" class="mr10 ml10" checked/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="arm_${last}">Arm, Disarm and Bypass</label>
-                                                                    <input type="checkbox" id="arm_${last}" name="arm_${last}" class="mr10" checked/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="medical_${last}">Medical Alarm</label>
-                                                                    <input type="checkbox" id="medical_${last}" name="medical_${last}" class="mr10" checked/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="trouble_${last}">Trouble and Trouble Restore</label>
-                                                                    <input type="checkbox" id="trouble_${last}" name="trouble_${last}" class="mr10" checked/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="spacial_${last}">Special Messages</label>
-                                                                    <input type="checkbox" id="spacial_${last}" name="spacial_${last}" class="mr10" checked/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
+                                                            </fieldset>
 
-                                                    <fieldset>
-                                                        <legend>Message Areas</legend>
-                                                        <div class="row align-items-center mr-1">
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="1_${last}">1</label>
-                                                                    <input type="checkbox" id="1_${last}" name="1_${last}" class="ml10" checked/>
+                                                            <fieldset>
+                                                                <legend>Message Areas</legend>
+                                                                <div class="row align-items-center mr-1">
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="1_${last}">1</label>
+                                                                            <input type="checkbox" id="1_${last}" name="1_${last}" class="ml10" checked/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="2_${last}">2</label>
+                                                                            <input type="checkbox" id="2_${last}" name="2_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="3_${last}">3</label>
+                                                                            <input type="checkbox" id="3_${last}" name="3_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="4_${last}">4</label>
+                                                                            <input type="checkbox" id="4_${last}" name="4_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="5_${last}">5</label>
+                                                                            <input type="checkbox" id="5_${last}" name="5_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="6_${last}">6</label>
+                                                                            <input type="checkbox" id="6_${last}" name="6_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="7_${last}">7</label>
+                                                                            <input type="checkbox" id="7_${last}" name="7_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="8_${last}">8</label>
+                                                                            <input type="checkbox" id="8_${last}" name="8_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="2_${last}">2</label>
-                                                                    <input type="checkbox" id="2_${last}" name="2_${last}" class="ml10" />
+                                                                <div class="row align-items-center mr-1">
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="9_${last}">9</label>
+                                                                            <input type="checkbox" id="9_${last}" name="9_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="10_${last}">10</label>
+                                                                            <input type="checkbox" id="10_${last}" name="10_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="11_${last}">11</label>
+                                                                            <input type="checkbox" id="11_${last}" name="11_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="12_${last}">12</label>
+                                                                            <input type="checkbox" id="12_${last}" name="12_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="13_${last}">13</label>
+                                                                            <input type="checkbox" id="13_${last}" name="13_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="14_${last}">14</label>
+                                                                            <input type="checkbox" id="14_${last}" name="14_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="15_${last}">15</label>
+                                                                            <input type="checkbox" id="15_${last}" name="15_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-item roww">
+                                                                            <label for="16_${last}">16</label>
+                                                                            <input type="checkbox" id="16_${last}" name="16_${last}" class="ml10" />
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="3_${last}">3</label>
-                                                                    <input type="checkbox" id="3_${last}" name="3_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="4_${last}">4</label>
-                                                                    <input type="checkbox" id="4_${last}" name="4_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="5_${last}">5</label>
-                                                                    <input type="checkbox" id="5_${last}" name="5_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="6_${last}">6</label>
-                                                                    <input type="checkbox" id="6_${last}" name="6_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="7_${last}">7</label>
-                                                                    <input type="checkbox" id="7_${last}" name="7_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="8_${last}">8</label>
-                                                                    <input type="checkbox" id="8_${last}" name="8_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row align-items-center mr-1">
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="9_${last}">9</label>
-                                                                    <input type="checkbox" id="9_${last}" name="9_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="10_${last}">10</label>
-                                                                    <input type="checkbox" id="10_${last}" name="10_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="11_${last}">11</label>
-                                                                    <input type="checkbox" id="11_${last}" name="11_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="12_${last}">12</label>
-                                                                    <input type="checkbox" id="12_${last}" name="12_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="13_${last}">13</label>
-                                                                    <input type="checkbox" id="13_${last}" name="13_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="14_${last}">14</label>
-                                                                    <input type="checkbox" id="14_${last}" name="14_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="15_${last}">15</label>
-                                                                    <input type="checkbox" id="15_${last}" name="15_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-item roww">
-                                                                    <label for="16_${last}">16</label>
-                                                                    <input type="checkbox" id="16_${last}" name="16_${last}" class="ml10" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </fieldset>
-                                                </div>`;
+                                                            </fieldset>
+                                                        </fieldset>
+                                                        </div>`;
                     var element = document.getElementById("new_phone");
                     var new_inner = `
-                                                                ${element.innerHTML}
-                                                                ${newUserElement}
-                                                            `;
+                                                                        ${element.innerHTML}
+                                                                        ${newUserElement}
+                                                                    `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -956,185 +949,185 @@
                     if (last === 0 || phoneNumberLst.includes(last)) return;
 
                     const newUserElement = `
-                                        <div id="vd_${last}">
-                                            <fieldset>
-                                                <legend>Phone number ${last}</legend>
+                                                <div id="vd_${last}">
+                                                    <fieldset>
+                                                        <legend>Phone number ${last}</legend>
 
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <div class="form-item roww flex">
-                                                            <label for="phone_number_vd_${last}">Number</label>
-                                                            <input type="tel" id="phone_number_vd_${last}" name="phone_number_vd_${last}" class="ml10" pattern="[+]{1}[0-9]{11,14}">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="form-item roww flex">
+                                                                    <label for="phone_number_vd_${last}">Number</label>
+                                                                    <input type="tel" id="phone_number_vd_${last}" name="phone_number_vd_${last}" class="ml10" pattern="[+]{1}[0-9]{11,14}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col"><button type="button" onclick="javascript:addPhoneNumber('vd_${last}')" class="m-2">
+                                                                <i class="fa-solid fa-minus 5x"></i> Remove Phone
+                                                            </button></div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col"><button type="button" onclick="javascript:addPhoneNumber('vd_${last}')" class="m-2">
-                                                        <i class="fa-solid fa-minus 5x"></i> Remove Phone
-                                                    </button></div>
-                                                </div>
 
-                                                <fieldset>
-                                                    <legend>Message Type</legend>
-                                                    <div class="row align-items-center mr-1">
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="alarm_vd_${last}">Alarm and Restore</label>
-                                                                <input type="checkbox" id="alarm_vd_${last}" name="alarm_vd_${last}" class="mr10" checked />
+                                                        <fieldset>
+                                                            <legend>Message Type</legend>
+                                                            <div class="row align-items-center mr-1">
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="alarm_vd_${last}">Alarm and Restore</label>
+                                                                        <input type="checkbox" id="alarm_vd_${last}" name="alarm_vd_${last}" class="mr10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="tamper_vd_${last}">Tamper and Restore</label>
+                                                                        <input type="checkbox" id="tamper_vd_${last}" name="tamper_vd_${last}" class="mr10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="panic_vd_${last}">Panic and Ambush Code</label>
+                                                                        <input type="checkbox" id="panic_vd_${last}" name="panic_vd_${last}" class="mr10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="fire_vd_${last}">Fire </label>
+                                                                        <input type="checkbox" id="fire_vd_${last}" name="fire_vd_${last}" class="mr10 ml10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="arm_vd_${last}">Arm, Disarm and Bypass</label>
+                                                                        <input type="checkbox" id="arm_vd_${last}" name="arm_vd_${last}" class="mr10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="medical_vd_${last}">Medical Alarm</label>
+                                                                        <input type="checkbox" id="medical_vd_${last}" name="medical_vd_${last}" class="mr10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="trouble_vd_${last}">Trouble and Trouble Restore</label>
+                                                                        <input type="checkbox" id="trouble_vd_${last}" name="trouble_vd_${last}" class="mr10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="spacial_vd_${last}">Special Messages</label>
+                                                                        <input type="checkbox" id="spacial_vd_${last}" name="spacial_vd_${last}" class="mr10" checked />
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="tamper_vd_${last}">Tamper and Restore</label>
-                                                                <input type="checkbox" id="tamper_vd_${last}" name="tamper_vd_${last}" class="mr10" checked />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="panic_vd_${last}">Panic and Ambush Code</label>
-                                                                <input type="checkbox" id="panic_vd_${last}" name="panic_vd_${last}" class="mr10" checked />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="fire_vd_${last}">Fire </label>
-                                                                <input type="checkbox" id="fire_vd_${last}" name="fire_vd_${last}" class="mr10 ml10" checked />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="arm_vd_${last}">Arm, Disarm and Bypass</label>
-                                                                <input type="checkbox" id="arm_vd_${last}" name="arm_vd_${last}" class="mr10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="medical_vd_${last}">Medical Alarm</label>
-                                                                <input type="checkbox" id="medical_vd_${last}" name="medical_vd_${last}" class="mr10" checked />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="trouble_vd_${last}">Trouble and Trouble Restore</label>
-                                                                <input type="checkbox" id="trouble_vd_${last}" name="trouble_vd_${last}" class="mr10" checked />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="spacial_vd_${last}">Special Messages</label>
-                                                                <input type="checkbox" id="spacial_vd_${last}" name="spacial_vd_${last}" class="mr10" checked />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
+                                                        </fieldset>
 
-                                                <fieldset>
-                                                    <legend>Message Areas</legend>
-                                                    <div class="row align-items-center mr-1">
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="1_vd_${last}">1</label>
-                                                                <input type="checkbox" id="1_vd_${last}" name="1_vd_${last}" class="ml10" checked />
+                                                        <fieldset>
+                                                            <legend>Message Areas</legend>
+                                                            <div class="row align-items-center mr-1">
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="1_vd_${last}">1</label>
+                                                                        <input type="checkbox" id="1_vd_${last}" name="1_vd_${last}" class="ml10" checked />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="2_vd_${last}">2</label>
+                                                                        <input type="checkbox" id="2_vd_${last}" name="2_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="3_vd_${last}">3</label>
+                                                                        <input type="checkbox" id="3_vd_${last}" name="3_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="4_vd_${last}">4</label>
+                                                                        <input type="checkbox" id="4_vd_${last}" name="4_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="5_vd_${last}">5</label>
+                                                                        <input type="checkbox" id="5_vd_${last}" name="5_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="6_vd_${last}">6</label>
+                                                                        <input type="checkbox" id="6_vd_${last}" name="6_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="7_vd_${last}">7</label>
+                                                                        <input type="checkbox" id="7_vd_${last}" name="7_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="8_vd_${last}">8</label>
+                                                                        <input type="checkbox" id="8_vd_${last}" name="8_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="2_vd_${last}">2</label>
-                                                                <input type="checkbox" id="2_vd_${last}" name="2_vd_${last}" class="ml10" />
+                                                            <div class="row align-items-center mr-1">
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="9_vd_${last}">9</label>
+                                                                        <input type="checkbox" id="9_vd_${last}" name="9_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="10_vd_${last}">10</label>
+                                                                        <input type="checkbox" id="10_vd_${last}" name="10_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="11_vd_${last}">11</label>
+                                                                        <input type="checkbox" id="11_vd_${last}" name="11_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="12_vd_${last}">12</label>
+                                                                        <input type="checkbox" id="12_vd_${last}" name="12_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="13_vd_${last}">13</label>
+                                                                        <input type="checkbox" id="13_vd_${last}" name="13_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="14_vd_${last}">14</label>
+                                                                        <input type="checkbox" id="14_vd_${last}" name="14_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="15_vd_${last}">15</label>
+                                                                        <input type="checkbox" id="15_vd_${last}" name="15_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="16_vd_${last}">16</label>
+                                                                        <input type="checkbox" id="16_vd_${last}" name="16_vd_${last}" class="ml10" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="3_vd_${last}">3</label>
-                                                                <input type="checkbox" id="3_vd_${last}" name="3_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="4_vd_${last}">4</label>
-                                                                <input type="checkbox" id="4_vd_${last}" name="4_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="5_vd_${last}">5</label>
-                                                                <input type="checkbox" id="5_vd_${last}" name="5_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="6_vd_${last}">6</label>
-                                                                <input type="checkbox" id="6_vd_${last}" name="6_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="7_vd_${last}">7</label>
-                                                                <input type="checkbox" id="7_vd_${last}" name="7_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="8_vd_${last}">8</label>
-                                                                <input type="checkbox" id="8_vd_${last}" name="8_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row align-items-center mr-1">
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="9_vd_${last}">9</label>
-                                                                <input type="checkbox" id="9_vd_${last}" name="9_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="10_vd_${last}">10</label>
-                                                                <input type="checkbox" id="10_vd_${last}" name="10_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="11_vd_${last}">11</label>
-                                                                <input type="checkbox" id="11_vd_${last}" name="11_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="12_vd_${last}">12</label>
-                                                                <input type="checkbox" id="12_vd_${last}" name="12_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="13_vd_${last}">13</label>
-                                                                <input type="checkbox" id="13_vd_${last}" name="13_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="14_vd_${last}">14</label>
-                                                                <input type="checkbox" id="14_vd_${last}" name="14_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="15_vd_${last}">15</label>
-                                                                <input type="checkbox" id="15_vd_${last}" name="15_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-item roww">
-                                                                <label for="16_vd_${last}">16</label>
-                                                                <input type="checkbox" id="16_vd_${last}" name="16_vd_${last}" class="ml10" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>`;
+                                                        </fieldset>
+                                                    </div>`;
                     var element = document.getElementById("new_phone_number");
                     var new_inner = `
-                                                        ${element.innerHTML}
-                                                        ${newUserElement}
-                                                    `;
+                                                                ${element.innerHTML}
+                                                                ${newUserElement}
+                                                            `;
                     phoneNumberLst.push(last);
                     element.innerHTML = new_inner;
 
@@ -1188,25 +1181,19 @@
         </script>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>-->
-    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
-    <!-- DatePicker Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
     <script>
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-            //$(document).ready(() => {
-            //    sendMessage("Devices|ECLIPSE|Timeslots");
-            //});
+                //$(document).ready(() => {
+                //    sendMessage("Devices|ECLIPSE|Timeslots");
+                //});
     </script>
-    <script src="../mainfuncs.js"></script>
 </body>
 </html>

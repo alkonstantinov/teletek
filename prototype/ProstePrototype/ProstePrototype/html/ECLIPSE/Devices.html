@@ -7,16 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../font-awesome.min.css" />
     <link rel="stylesheet" href="../IRIS.css" />
-    <!-- Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
-
     <title>Teletek Manager</title>
 </head>
 <body>
@@ -284,1071 +277,1071 @@
                     default: break; //lcd_32s
                 }
                 var target = `<div class="row m-1">
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="identification_${id}">Identification</label>
-                            <input type="text" id="identification_${id}" name="identification_${id}" value="" maxlength="8" />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item roww disabled">
-                            <label for="in_${id}">In</label>
-                            <input class="ml10"
-                                   type="number"
-                                   id="in_${id}"
-                                   name="in_${id}"
-                                   data-maxlength="2"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   value="2"
-                                   min="0"
-                                   max="16" />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item roww disabled">
-                            <label for="out_${id}">Out</label>
-                            <input class="ml10"
-                                   type="number"
-                                   id="out_${id}"
-                                   name="out_${id}"
-                                   data-maxlength="2"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   value="${out}"
-                                   min="0"
-                                   max="16" />
-                        </div>
-                    </div>
-                </div>
-
-                <fieldset>
-                    <legend>Areas</legend>
-                    <div class="row align-items-center mr-1">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_${id}">1</label>
-                                <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="2_${id}">2</label>
-                                <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="3_${id}">3</label>
-                                <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="4_${id}">4</label>
-                                <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="5_${id}">5</label>
-                                <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="6_${id}">6</label>
-                                <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="7_${id}">7</label>
-                                <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="8_${id}">8</label>
-                                <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mr-1">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="9_${id}">9</label>
-                                <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="10_${id}">10</label>
-                                <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="11_${id}">11</label>
-                                <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="12_${id}">12</label>
-                                <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="13_${id}">13</label>
-                                <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="14_${id}">14</label>
-                                <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="15_${id}">15</label>
-                                <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="16_${id}">16</label>
-                                <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Options</legend>
-                    <div class="row m-1">
-                        <div class="col-xs-12 col-md-4">
-                            <div class="form-item roww">
-                                <label for="chime_${id}">Chime</label>
-                                <input type="checkbox" id="chime_${id}" name="chime_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="form-item roww">
-                                <label for="hiding_zone_${id}">Hiding the zone information</label>
-                                <input type="checkbox" id="hiding_zone_${id}" name="hiding_zone_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="form-item roww">
-                                <label for="confidential_mode_${id}">Confidential mode</label>
-                                <input type="checkbox" id="confidential_mode_${id}" name="confidential_mode_${id}" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row m-1">
-                        <div class="col-12">
-                            <div class="form-item roww">
-                                <label for="exit_type_of_confidential_mode_${id}">Exit type of confidential mode</label>
-                                <div class="select">
-                                    <select id="exit_type_of_confidential_mode_${id}"
-                                            name="exit_type_of_confidential_mode_${id}">
-                                        <option value="random_button">with a random button</option>
-                                        <option value="valid_code">with a valid user code</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-item roww">
-                                <label for="main_screen_${id}">Main screen</label>
-                                <div class="select">
-                                    <select id="main_screen_${id}"
-                                            name="main_screen_${id}">
-                                        <option value="default">System name, date, time, areas status on mouvement (default)</option>
-                                        <option value="areas_status_only">Areas status only</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Additional options</legend>
-
-                    <div class="row align-items-center m-1">
-                        <div class="col-xs-12 col-lg-${colWidth}">
-                            <div class="form-item roww">
-                                <label for="buzzer_level_${id}">Buzzer Level</label>
-                                <div class="select">
-                                    <select id="buzzer_level_${id}"
-                                            name="buzzer_level_${id}">
-                                        <option value="buzzer_level_1">1</option>
-                                        <option value="buzzer_level_2" ${sel ? 'selected' : ''}>2</option>
-                                        <option value="buzzer_level_3">3</option>
-                                        <option value="buzzer_level_4">4</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-${colWidth}">
-                            <div class="form-item roww">
-                                <label for="brightness_${id}">Brigthness</label>
-                                <div class="select">
-                                    <select id="brightness_${id}"
-                                            name="brightness_${id}">
-                                        <option value="brightness_1">1</option>
-                                        <option value="brightness_2">2</option>
-                                        <option value="brightness_3">3</option>
-                                        <option value="brightness_4" ${sel ? 'selected' : ''}>4</option>
-                                        <option value="brightness_5">5</option>
-                                        <option value="brightness_6">6</option>
-                                        <option value="brightness_7">7</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        ${out ? `<div class="col-xs-12 col-lg-${colWidth}">
-                            <div class="form-item roww">
-                                <label for="scroll_speed_${id}">Scroll Speed</label>
-                                <div class="select">
-                                    <select id="scroll_speed_${id}"
-                                            name="scroll_speed_${id}">
-                                        <option value="scroll_speed_1">1</option>
-                                        <option value="scroll_speed_2">2</option>
-                                        <option value="scroll_speed_3">3</option>
-                                        <option value="scroll_speed_4" selected>4</option>
-                                        <option value="scroll_speed_5">5</option>
-                                        <option value="scroll_speed_6">6</option>
-                                        <option value="scroll_speed_7">7</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>` : `<div class="col-xs-12 col-lg-4">
+                            <div class="col-6">
                                 <div class="form-item roww">
-                                    <label for="first_led_zone_led32">First LED Zone</label>
+                                    <label for="identification_${id}">Identification</label>
+                                    <input type="text" id="identification_${id}" name="identification_${id}" value="" maxlength="8" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-item roww disabled">
+                                    <label for="in_${id}">In</label>
                                     <input class="ml10"
                                            type="number"
-                                           id="first_led_zone_led32"
-                                           name="first_led_zone_led32"
+                                           id="in_${id}"
+                                           name="in_${id}"
                                            data-maxlength="2"
                                            oninput="javascript: myFunction(this.id)"
                                            onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="99" />
+                                           value="2"
+                                           min="0"
+                                           max="16" />
                                 </div>
-                            </div>`}
-                        ${colWidth === 3 ? `<div class="col-xs-12 col-lg-3">
-                            <div class="form-item roww">
-                                <label for="backlight_${id}">Backlight Enabled</label>
-                                <input type="checkbox" id="backlight_${id}" name="backlight_${id}" class="ml10" />
                             </div>
-                        </div>` : ''}
-                    </div>
-                </fieldset>`;
+                            <div class="col-3">
+                                <div class="form-item roww disabled">
+                                    <label for="out_${id}">Out</label>
+                                    <input class="ml10"
+                                           type="number"
+                                           id="out_${id}"
+                                           name="out_${id}"
+                                           data-maxlength="2"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="${out}"
+                                           min="0"
+                                           max="16" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <fieldset>
+                            <legend>Areas</legend>
+                            <div class="row align-items-center mr-1">
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="1_${id}">1</label>
+                                        <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="2_${id}">2</label>
+                                        <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="3_${id}">3</label>
+                                        <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="4_${id}">4</label>
+                                        <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="5_${id}">5</label>
+                                        <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="6_${id}">6</label>
+                                        <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="7_${id}">7</label>
+                                        <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="8_${id}">8</label>
+                                        <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mr-1">
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="9_${id}">9</label>
+                                        <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="10_${id}">10</label>
+                                        <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="11_${id}">11</label>
+                                        <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="12_${id}">12</label>
+                                        <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="13_${id}">13</label>
+                                        <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="14_${id}">14</label>
+                                        <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="15_${id}">15</label>
+                                        <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="16_${id}">16</label>
+                                        <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Options</legend>
+                            <div class="row m-1">
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="form-item roww">
+                                        <label for="chime_${id}">Chime</label>
+                                        <input type="checkbox" id="chime_${id}" name="chime_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="form-item roww">
+                                        <label for="hiding_zone_${id}">Hiding the zone information</label>
+                                        <input type="checkbox" id="hiding_zone_${id}" name="hiding_zone_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="form-item roww">
+                                        <label for="confidential_mode_${id}">Confidential mode</label>
+                                        <input type="checkbox" id="confidential_mode_${id}" name="confidential_mode_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-1">
+                                <div class="col-12">
+                                    <div class="form-item roww">
+                                        <label for="exit_type_of_confidential_mode_${id}">Exit type of confidential mode</label>
+                                        <div class="select">
+                                            <select id="exit_type_of_confidential_mode_${id}"
+                                                    name="exit_type_of_confidential_mode_${id}">
+                                                <option value="random_button">with a random button</option>
+                                                <option value="valid_code">with a valid user code</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-item roww">
+                                        <label for="main_screen_${id}">Main screen</label>
+                                        <div class="select">
+                                            <select id="main_screen_${id}"
+                                                    name="main_screen_${id}">
+                                                <option value="default">System name, date, time, areas status on mouvement (default)</option>
+                                                <option value="areas_status_only">Areas status only</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Additional options</legend>
+
+                            <div class="row align-items-center m-1">
+                                <div class="col-xs-12 col-lg-${colWidth}">
+                                    <div class="form-item roww">
+                                        <label for="buzzer_level_${id}">Buzzer Level</label>
+                                        <div class="select">
+                                            <select id="buzzer_level_${id}"
+                                                    name="buzzer_level_${id}">
+                                                <option value="buzzer_level_1">1</option>
+                                                <option value="buzzer_level_2" ${sel ? 'selected' : ''}>2</option>
+                                                <option value="buzzer_level_3">3</option>
+                                                <option value="buzzer_level_4">4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-${colWidth}">
+                                    <div class="form-item roww">
+                                        <label for="brightness_${id}">Brigthness</label>
+                                        <div class="select">
+                                            <select id="brightness_${id}"
+                                                    name="brightness_${id}">
+                                                <option value="brightness_1">1</option>
+                                                <option value="brightness_2">2</option>
+                                                <option value="brightness_3">3</option>
+                                                <option value="brightness_4" ${sel ? 'selected' : ''}>4</option>
+                                                <option value="brightness_5">5</option>
+                                                <option value="brightness_6">6</option>
+                                                <option value="brightness_7">7</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                ${out ? `<div class="col-xs-12 col-lg-${colWidth}">
+                                    <div class="form-item roww">
+                                        <label for="scroll_speed_${id}">Scroll Speed</label>
+                                        <div class="select">
+                                            <select id="scroll_speed_${id}"
+                                                    name="scroll_speed_${id}">
+                                                <option value="scroll_speed_1">1</option>
+                                                <option value="scroll_speed_2">2</option>
+                                                <option value="scroll_speed_3">3</option>
+                                                <option value="scroll_speed_4" selected>4</option>
+                                                <option value="scroll_speed_5">5</option>
+                                                <option value="scroll_speed_6">6</option>
+                                                <option value="scroll_speed_7">7</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>` : `<div class="col-xs-12 col-lg-4">
+                                        <div class="form-item roww">
+                                            <label for="first_led_zone_led32">First LED Zone</label>
+                                            <input class="ml10"
+                                                   type="number"
+                                                   id="first_led_zone_led32"
+                                                   name="first_led_zone_led32"
+                                                   data-maxlength="2"
+                                                   oninput="javascript: myFunction(this.id)"
+                                                   onblur="javascript: myFunction2(this.id)"
+                                                   value="1"
+                                                   min="1"
+                                                   max="99" />
+                                        </div>
+                                    </div>`}
+                                ${colWidth === 3 ? `<div class="col-xs-12 col-lg-3">
+                                    <div class="form-item roww">
+                                        <label for="backlight_${id}">Backlight Enabled</label>
+                                        <input type="checkbox" id="backlight_${id}" name="backlight_${id}" class="ml10" />
+                                    </div>
+                                </div>` : ''}
+                            </div>
+                        </fieldset>`;
                 var main_target = `<div class="row m-1">
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="identification_${id}">Identification</label>
-                            <input type="text" id="identification_${id}" name="identification_${id}" value="${identification}" maxlength="8" />
+                            <div class="col-6">
+                                <div class="form-item roww">
+                                    <label for="identification_${id}">Identification</label>
+                                    <input type="text" id="identification_${id}" name="identification_${id}" value="${identification}" maxlength="8" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-item roww disabled">
+                                    <label for="in_${id}">In</label>
+                                    <input class="ml10"
+                                           type="number"
+                                           id="in_${id}"
+                                           name="in_${id}"
+                                           data-maxlength="2"
+                                           oninput="javascript: myFunction(this.id)"
+                                           onblur="javascript: myFunction2(this.id)"
+                                           value="${typeof (out) === "number" && out !== 8 ? 16 : typeof (out) === "string" ? 32 : 0}"
+                                           min="0"
+                                           max="16" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-item roww disabled">
+                                    <label for="out_${id}">Out</label>
+                                    <input class="ml10"
+                                           type="text"
+                                           id="out_${id}"
+                                           name="out_${id}"
+                                           value="${out}" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item roww disabled">
-                            <label for="in_${id}">In</label>
-                            <input class="ml10"
-                                   type="number"
-                                   id="in_${id}"
-                                   name="in_${id}"
-                                   data-maxlength="2"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   value="${typeof (out) === "number" && out !== 8 ? 16 : typeof (out) === "string" ? 32 : 0}"
-                                   min="0"
-                                   max="16" />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item roww disabled">
-                            <label for="out_${id}">Out</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="out_${id}"
-                                   name="out_${id}"
-                                   value="${out}" />
-                        </div>
-                    </div>
-                </div>
 
-                <fieldset>
-                    <legend>Areas</legend>
-                    <div class="row align-items-center mr-1">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="1_${id}">1</label>
-                                <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" ${id === 'main_board' ? 'checked' : ''} />
+                        <fieldset>
+                            <legend>Areas</legend>
+                            <div class="row align-items-center mr-1">
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="1_${id}">1</label>
+                                        <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" ${id === 'main_board' ? 'checked' : ''} />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="2_${id}">2</label>
+                                        <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="3_${id}">3</label>
+                                        <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="4_${id}">4</label>
+                                        <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="5_${id}">5</label>
+                                        <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="6_${id}">6</label>
+                                        <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="7_${id}">7</label>
+                                        <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="8_${id}">8</label>
+                                        <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="2_${id}">2</label>
-                                <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
+                            <div class="row align-items-center mr-1">
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="9_${id}">9</label>
+                                        <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="10_${id}">10</label>
+                                        <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="11_${id}">11</label>
+                                        <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="12_${id}">12</label>
+                                        <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="13_${id}">13</label>
+                                        <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="14_${id}">14</label>
+                                        <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="15_${id}">15</label>
+                                        <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-item roww">
+                                        <label for="16_${id}">16</label>
+                                        <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="3_${id}">3</label>
-                                <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="4_${id}">4</label>
-                                <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="5_${id}">5</label>
-                                <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="6_${id}">6</label>
-                                <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="7_${id}">7</label>
-                                <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="8_${id}">8</label>
-                                <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mr-1">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="9_${id}">9</label>
-                                <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="10_${id}">10</label>
-                                <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="11_${id}">11</label>
-                                <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="12_${id}">12</label>
-                                <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="13_${id}">13</label>
-                                <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="14_${id}">14</label>
-                                <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="15_${id}">15</label>
-                                <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="16_${id}">16</label>
-                                <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>`;
+                        </fieldset>`;
                 var proxy_target = `<div class="row m-1">
-                        <div class="col-6">
-                            <div class="form-item roww">
-                                <label for="identification_${id}">Identification</label>
-                                <input type="text" id="identification_${id}" name="identification_${id}" value="" maxlength="8" />
+                                <div class="col-6">
+                                    <div class="form-item roww">
+                                        <label for="identification_${id}">Identification</label>
+                                        <input type="text" id="identification_${id}" name="identification_${id}" value="" maxlength="8" />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-item roww disabled">
+                                        <label for="in_${id}">In</label>
+                                        <input class="ml10"
+                                               type="number"
+                                               id="in_${id}"
+                                               name="in_${id}"
+                                               data-maxlength="2"
+                                               oninput="javascript: myFunction(this.id)"
+                                               onblur="javascript: myFunction2(this.id)"
+                                               value="${out ? 2 : 0}"
+                                               min="0"
+                                               max="16" />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-item roww disabled">
+                                        <label for="out_${id}">Out</label>
+                                        <input class="ml10"
+                                               type="number"
+                                               id="out_${id}"
+                                               name="out_${id}"
+                                               data-maxlength="2"
+                                               oninput="javascript: myFunction(this.id)"
+                                               onblur="javascript: myFunction2(this.id)"
+                                               value="${out ? 1 : 0}"
+                                               min="0"
+                                               max="16" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-item roww disabled">
-                                <label for="in_${id}">In</label>
-                                <input class="ml10"
-                                       type="number"
-                                       id="in_${id}"
-                                       name="in_${id}"
-                                       data-maxlength="2"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       value="${out ? 2 : 0}"
-                                       min="0"
-                                       max="16" />
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-item roww disabled">
-                                <label for="out_${id}">Out</label>
-                                <input class="ml10"
-                                       type="number"
-                                       id="out_${id}"
-                                       name="out_${id}"
-                                       data-maxlength="2"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       value="${out ? 1 : 0}"
-                                       min="0"
-                                       max="16" />
-                            </div>
-                        </div>
-                    </div>
 
-                    <fieldset>
-                        <legend>Areas</legend>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="1_${id}">1</label>
-                                    <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" />
+                            <fieldset>
+                                <legend>Areas</legend>
+                                <div class="row align-items-center mr-1">
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="1_${id}">1</label>
+                                            <input type="checkbox" id="1_${id}" name="1_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="2_${id}">2</label>
+                                            <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="3_${id}">3</label>
+                                            <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="4_${id}">4</label>
+                                            <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="5_${id}">5</label>
+                                            <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="6_${id}">6</label>
+                                            <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="7_${id}">7</label>
+                                            <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="8_${id}">8</label>
+                                            <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="2_${id}">2</label>
-                                    <input type="checkbox" id="2_${id}" name="2_${id}" class="ml10" />
+                                <div class="row align-items-center mr-1">
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="9_${id}">9</label>
+                                            <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="10_${id}">10</label>
+                                            <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="11_${id}">11</label>
+                                            <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="12_${id}">12</label>
+                                            <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="13_${id}">13</label>
+                                            <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="14_${id}">14</label>
+                                            <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="15_${id}">15</label>
+                                            <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="16_${id}">16</label>
+                                            <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="3_${id}">3</label>
-                                    <input type="checkbox" id="3_${id}" name="3_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="4_${id}">4</label>
-                                    <input type="checkbox" id="4_${id}" name="4_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="5_${id}">5</label>
-                                    <input type="checkbox" id="5_${id}" name="5_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="6_${id}">6</label>
-                                    <input type="checkbox" id="6_${id}" name="6_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="7_${id}">7</label>
-                                    <input type="checkbox" id="7_${id}" name="7_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="8_${id}">8</label>
-                                    <input type="checkbox" id="8_${id}" name="8_${id}" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mr-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="9_${id}">9</label>
-                                    <input type="checkbox" id="9_${id}" name="9_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="10_${id}">10</label>
-                                    <input type="checkbox" id="10_${id}" name="10_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="11_${id}">11</label>
-                                    <input type="checkbox" id="11_${id}" name="11_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="12_${id}">12</label>
-                                    <input type="checkbox" id="12_${id}" name="12_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="13_${id}">13</label>
-                                    <input type="checkbox" id="13_${id}" name="13_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="14_${id}">14</label>
-                                    <input type="checkbox" id="14_${id}" name="14_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="15_${id}">15</label>
-                                    <input type="checkbox" id="15_${id}" name="15_${id}" class="ml10" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="16_${id}">16</label>
-                                    <input type="checkbox" id="16_${id}" name="16_${id}" class="ml10" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
+                            </fieldset>
 
-                    <fieldset>
-                        <legend>Options</legend>
-                        <div class="row m-1">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="chime_${id}">Chime</label>
-                                    <input type="checkbox" id="chime_${id}" name="chime_${id}" class="ml10" />
+                            <fieldset>
+                                <legend>Options</legend>
+                                <div class="row m-1">
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="chime_${id}">Chime</label>
+                                            <input type="checkbox" id="chime_${id}" name="chime_${id}" class="ml10" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </fieldset>
+                            </fieldset>
 
-                    <fieldset>
-                        <legend>Arm Type</legend>
-                        <div class="row m-1">
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 1</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a1_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a1_mode_a_${id}"
-                                                    name="a1_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                            <fieldset>
+                                <legend>Arm Type</legend>
+                                <div class="row m-1">
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 1</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a1_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a1_mode_a_${id}"
+                                                            name="a1_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a1_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a1_mode_b_${id}"
+                                                            name="a1_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a1_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a1_mode_b_${id}"
-                                                    name="a1_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 2</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a2_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a2_mode_a_${id}"
+                                                            name="a2_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a2_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a2_mode_b_${id}"
+                                                            name="a2_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 2</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a2_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a2_mode_a_${id}"
-                                                    name="a2_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 3</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a3_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a3_mode_a_${id}"
+                                                            name="a3_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a3_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a3_mode_b_${id}"
+                                                            name="a3_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a2_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a2_mode_b_${id}"
-                                                    name="a2_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 4</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a4_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a4_mode_a_${id}"
+                                                            name="a4_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a4_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a4_mode_b_${id}"
+                                                            name="a4_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 3</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a3_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a3_mode_a_${id}"
-                                                    name="a3_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 5</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a5_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a5_mode_a_${id}"
+                                                            name="a5_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a5_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a5_mode_b_${id}"
+                                                            name="a5_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a3_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a3_mode_b_${id}"
-                                                    name="a3_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 6</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a6_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a6_mode_a_${id}"
+                                                            name="a6_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a6_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a6_mode_b_${id}"
+                                                            name="a6_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 4</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a4_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a4_mode_a_${id}"
-                                                    name="a4_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 7</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a7_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a7_mode_a_${id}"
+                                                            name="a7_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a7_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a7_mode_b_${id}"
+                                                            name="a7_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a4_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a4_mode_b_${id}"
-                                                    name="a4_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 8</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a8_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a8_mode_a_${id}"
+                                                            name="a8_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a8_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a8_mode_b_${id}"
+                                                            name="a8_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="row m-1">
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 5</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a5_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a5_mode_a_${id}"
-                                                    name="a5_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 9</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a9_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a9_mode_a_${id}"
+                                                            name="a9_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a9_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a9_mode_b_${id}"
+                                                            name="a9_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a5_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a5_mode_b_${id}"
-                                                    name="a5_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 10</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a10_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a10_mode_a_${id}"
+                                                            name="a10_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a10_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a10_mode_b_${id}"
+                                                            name="a10_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 6</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a6_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a6_mode_a_${id}"
-                                                    name="a6_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 11</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a11_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a11_mode_a_${id}"
+                                                            name="a11_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a11_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a11_mode_b_${id}"
+                                                            name="a11_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a6_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a6_mode_b_${id}"
-                                                    name="a6_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 12</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a12_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a12_mode_a_${id}"
+                                                            name="a12_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a12_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a12_mode_b_${id}"
+                                                            name="a12_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 7</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a7_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a7_mode_a_${id}"
-                                                    name="a7_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 13</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a13_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a13_mode_a_${id}"
+                                                            name="a13_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a13_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a13_mode_b_${id}"
+                                                            name="a13_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a7_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a7_mode_b_${id}"
-                                                    name="a7_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 14</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a14_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a14_mode_a_${id}"
+                                                            name="a14_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a14_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a14_mode_b_${id}"
+                                                            name="a14_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 8</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a8_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a8_mode_a_${id}"
-                                                    name="a8_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 15</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a15_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a15_mode_a_${id}"
+                                                            name="a15_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a15_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a15_mode_b_${id}"
+                                                            name="a15_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a8_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a8_mode_b_${id}"
-                                                    name="a8_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <fieldset class="bn">
+                                            <legend>Area 16</legend>
+                                            <div class="form-item roww p-0">
+                                                <label for="a16_mode_a_${id}">Mode A</label>
+                                                <div class="select">
+                                                    <select id="a16_mode_a_${id}"
+                                                            name="a16_mode_a_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item roww p-0">
+                                                <label for="a16_mode_b_${id}">Mode B</label>
+                                                <div class="select">
+                                                    <select id="a16_mode_b_${id}"
+                                                            name="a16_mode_b_${id}">
+                                                        <option value="none">None</option>
+                                                        <option value="disarm">Disarm</option>
+                                                        <option value="full">Full</option>
+                                                        <option value="stay">Stay</option>
+                                                        <option value="sleep">Sleep</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="row m-1">
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 9</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a9_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a9_mode_a_${id}"
-                                                    name="a9_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a9_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a9_mode_b_${id}"
-                                                    name="a9_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 10</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a10_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a10_mode_a_${id}"
-                                                    name="a10_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a10_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a10_mode_b_${id}"
-                                                    name="a10_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 11</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a11_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a11_mode_a_${id}"
-                                                    name="a11_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a11_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a11_mode_b_${id}"
-                                                    name="a11_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 12</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a12_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a12_mode_a_${id}"
-                                                    name="a12_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a12_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a12_mode_b_${id}"
-                                                    name="a12_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="row m-1">
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 13</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a13_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a13_mode_a_${id}"
-                                                    name="a13_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a13_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a13_mode_b_${id}"
-                                                    name="a13_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 14</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a14_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a14_mode_a_${id}"
-                                                    name="a14_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a14_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a14_mode_b_${id}"
-                                                    name="a14_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 15</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a15_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a15_mode_a_${id}"
-                                                    name="a15_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a15_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a15_mode_b_${id}"
-                                                    name="a15_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <fieldset class="bn">
-                                    <legend>Area 16</legend>
-                                    <div class="form-item roww p-0">
-                                        <label for="a16_mode_a_${id}">Mode A</label>
-                                        <div class="select">
-                                            <select id="a16_mode_a_${id}"
-                                                    name="a16_mode_a_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-item roww p-0">
-                                        <label for="a16_mode_b_${id}">Mode B</label>
-                                        <div class="select">
-                                            <select id="a16_mode_b_${id}"
-                                                    name="a16_mode_b_${id}">
-                                                <option value="none">None</option>
-                                                <option value="disarm">Disarm</option>
-                                                <option value="full">Full</option>
-                                                <option value="stay">Stay</option>
-                                                <option value="sleep">Sleep</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </fieldset>`;
+                                </div>
+                            </fieldset>`;
                 switch (id) {
                     case "main_board":
                     case "pgm8_expander":
@@ -1401,29 +1394,29 @@
                         default: imgSource += "03.PanelsInNetwork.ico";
                     }
                     const newUserElement = `
-                                        <div class="col-12" id=${id + '_' + last}>
-                                            <div class="row">
-                                                <div class="col-11 pr-1">
-                                                    <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
-                                                        <div class="btnStyle">
-                                                            <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
-                                                            <div class="someS">
-                                                                <h5>${title}</h5>
-                                                            </div>
+                                                <div class="col-12" id=${id + '_' + last}>
+                                                    <div class="row">
+                                                        <div class="col-11 pr-1">
+                                                            <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
+                                                                <div class="btnStyle">
+                                                                    <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                                    <div class="someS">
+                                                                        <h5>${title}</h5>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </div>
-                                                    </a>
+                                                        <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                `;
+                                        `;
                     var element = document.getElementById("new_device");
                     var new_inner = `
-                                    ${element.innerHTML}
-                                    ${newUserElement}
-                                `;
+                                            ${element.innerHTML}
+                                            ${newUserElement}
+                                        `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -1438,25 +1431,19 @@
         </script>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
-    <!-- DatePicker Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
     <script>
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-            //$(document).ready(() => {
-            //    sendMessage("Devices|ECLIPSE|Timeslots");
-            //});
+                //$(document).ready(() => {
+                //    sendMessage("Devices|ECLIPSE|Timeslots");
+                //});
     </script>
-    <script src="../mainfuncs.js"></script>
 </body>
 </html>

@@ -79,6 +79,24 @@
     <None Update="html\ECLIPSE\divECLIPSE.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\font-awesome.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\boostrap%404.3.1.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\bootstrap-datepicker.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\font-awesome.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\jquery-3.6.0.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\popper.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\IRIS\loop_devices.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -97,7 +115,7 @@
     <None Update="html\IRIS\divIRIS.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\mainfuncs.js">
+    <None Update="html\imports\mainfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\pages.json">

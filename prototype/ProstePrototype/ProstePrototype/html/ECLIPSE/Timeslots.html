@@ -7,15 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../font-awesome.min.css" />
     <link rel="stylesheet" href="../IRIS.css" />
-    <!-- Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
 
     <title>Teletek Manager</title>
 </head>
@@ -178,102 +172,102 @@
                     if (last === 0 || lst.includes(last)) return;
 
                     const newUserElement = `
-                                                                                                        <div style="display: block" id="${last}">
-                                                                                                            <fieldset>
-                                                                                                                <legend>Timeslot ${last}</legend>
+                                                                                                                <div style="display: block" id="${last}">
+                                                                                                                    <fieldset>
+                                                                                                                        <legend>Timeslot ${last}</legend>
 
-                                                                                                                <div class="row align-items-center">
-                                                                                                                    <div class="col-12 col-md-3">
-                                                                                                                        <div class="form-item roww">
-                                                                                                                            <label for="begin_time_${last}">Begin Time</label>
-                                                                                                                            <input class="ml10"
-                                                                                                                                   type="time"
-                                                                                                                                   id="begin_time_${last}"
-                                                                                                                                   name="begin_time_${last}"
-                                                                                                                                   value="00:00" />
+                                                                                                                        <div class="row align-items-center">
+                                                                                                                            <div class="col-12 col-md-3">
+                                                                                                                                <div class="form-item roww">
+                                                                                                                                    <label for="begin_time_${last}">Begin Time</label>
+                                                                                                                                    <input class="ml10"
+                                                                                                                                           type="time"
+                                                                                                                                           id="begin_time_${last}"
+                                                                                                                                           name="begin_time_${last}"
+                                                                                                                                           value="00:00" />
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-12 col-md-3">
+                                                                                                                                <div class="form-item roww">
+                                                                                                                                    <label for="begin_time_${last}">End Time</label>
+                                                                                                                                    <input class="ml10"
+                                                                                                                                           type="time"
+                                                                                                                                           id="begin_time_${last}"
+                                                                                                                                           name="begin_time_${last}"
+                                                                                                                                           value="23:59" />
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-12 col-md-2">
+                                                                                                                                <div class="form-item roww">
+                                                                                                                                    <label for="enable_holidays_${last}">Enable Holidays</label>
+                                                                                                                                    <input type="checkbox" id="enable_holidays_${last}" name="enable_holidays_${last}" class="ml10" />
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-12 col-md-2">
+                                                                                                                                <div class="form-item roww">
+                                                                                                                                    <label for="invert_${last}">Invert</label>
+                                                                                                                                    <input type="checkbox" id="invert_${last}" name="invert_${last}" class="ml10" />
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-12 col-md-2"><button type="button" onclick="javascript:addTimeslot(${last})">
+                                                                                                                                <i class="fa-solid fa-minus 5x"></i> Remove
+                                                                                                                            </button></div>
                                                                                                                         </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-12 col-md-3">
-                                                                                                                        <div class="form-item roww">
-                                                                                                                            <label for="begin_time_${last}">End Time</label>
-                                                                                                                            <input class="ml10"
-                                                                                                                                   type="time"
-                                                                                                                                   id="begin_time_${last}"
-                                                                                                                                   name="begin_time_${last}"
-                                                                                                                                   value="23:59" />
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-12 col-md-2">
-                                                                                                                        <div class="form-item roww">
-                                                                                                                            <label for="enable_holidays_${last}">Enable Holidays</label>
-                                                                                                                            <input type="checkbox" id="enable_holidays_${last}" name="enable_holidays_${last}" class="ml10" />
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-12 col-md-2">
-                                                                                                                        <div class="form-item roww">
-                                                                                                                            <label for="invert_${last}">Invert</label>
-                                                                                                                            <input type="checkbox" id="invert_${last}" name="invert_${last}" class="ml10" />
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-12 col-md-2"><button type="button" onclick="javascript:addTimeslot(${last})">
-                                                                                                                        <i class="fa-solid fa-minus 5x"></i> Remove
-                                                                                                                    </button></div>
-                                                                                                                </div>
 
-                                                                                                                <fieldset>
-                                                                                                                    <legend>Week Days</legend>
+                                                                                                                        <fieldset>
+                                                                                                                            <legend>Week Days</legend>
 
-                                                                                                                    <div class="row align-items-center mr-1">
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="monday_${last}">Monday</label>
-                                                                                                                                <input type="checkbox" id="monday_${last}" name="monday_${last}" class="ml10" checked />
+                                                                                                                            <div class="row align-items-center mr-1">
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="monday_${last}">Monday</label>
+                                                                                                                                        <input type="checkbox" id="monday_${last}" name="monday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="tuesday_${last}">Tuesday</label>
+                                                                                                                                        <input type="checkbox" id="tuesday_${last}" name="tuesday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="wednesday_${last}">Wednesday</label>
+                                                                                                                                        <input type="checkbox" id="wednesday_${last}" name="wednesday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="thusday_${last}">Thusday</label>
+                                                                                                                                        <input type="checkbox" id="thusday_${last}" name="thusday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="friday_${last}">Friday</label>
+                                                                                                                                        <input type="checkbox" id="friday_${last}" name="friday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="saturday_${last}">Saturday</label>
+                                                                                                                                        <input type="checkbox" id="saturday_${last}" name="saturday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col">
+                                                                                                                                    <div class="form-item roww">
+                                                                                                                                        <label for="sunday_${last}">Sunday</label>
+                                                                                                                                        <input type="checkbox" id="sunday_${last}" name="sunday_${last}" class="ml10" checked />
+                                                                                                                                    </div>
+                                                                                                                                </div>
                                                                                                                             </div>
-                                                                                                                        </div>
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="tuesday_${last}">Tuesday</label>
-                                                                                                                                <input type="checkbox" id="tuesday_${last}" name="tuesday_${last}" class="ml10" checked />
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="wednesday_${last}">Wednesday</label>
-                                                                                                                                <input type="checkbox" id="wednesday_${last}" name="wednesday_${last}" class="ml10" checked />
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="thusday_${last}">Thusday</label>
-                                                                                                                                <input type="checkbox" id="thusday_${last}" name="thusday_${last}" class="ml10" checked />
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="friday_${last}">Friday</label>
-                                                                                                                                <input type="checkbox" id="friday_${last}" name="friday_${last}" class="ml10" checked />
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="saturday_${last}">Saturday</label>
-                                                                                                                                <input type="checkbox" id="saturday_${last}" name="saturday_${last}" class="ml10" checked />
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                        <div class="col">
-                                                                                                                            <div class="form-item roww">
-                                                                                                                                <label for="sunday_${last}">Sunday</label>
-                                                                                                                                <input type="checkbox" id="sunday_${last}" name="sunday_${last}" class="ml10" checked />
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                </fieldset>
-                                                                                                            </div>`;
+                                                                                                                        </fieldset>
+                                                                                                                    </div>`;
                     var element = document.getElementById("new_timeslot");
                     var new_inner = `
-                                                                                                        ${element.innerHTML}
-                                                                                                        ${newUserElement}
-                                                                                                    `;
+                                                                                                                ${element.innerHTML}
+                                                                                                                ${newUserElement}
+                                                                                                            `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -325,27 +319,27 @@
                     if (last === 0 || periodLst.includes(last)) return;
 
                     const newUserElement = `
-                            <div class="row align-items-center m-2" id="period_${last}">
-                                <div class="col-12 col-md-8" style="text-align:end;">
-                                    <div class="form-item roww input-group input-daterange">
-                                        <label>Date Period:  <span style="font-weight: 400;">from</span></label>
-                                        <input type="text" class="period_range" value="01/01" />
-                                        <div class="input-group-addon">to</div>
-                                        <input type="text" class="period_range" value="31/12">
-                                    </div>
-                                </div>
+                                    <div class="row align-items-center m-2" id="period_${last}">
+                                        <div class="col-12 col-md-8" style="text-align:end;">
+                                            <div class="form-item roww input-group input-daterange">
+                                                <label>Date Period:  <span style="font-weight: 400;">from</span></label>
+                                                <input type="text" class="period_range" value="01/01" />
+                                                <div class="input-group-addon">to</div>
+                                                <input type="text" class="period_range" value="31/12">
+                                            </div>
+                                        </div>
 
-                                <div class="col-12 col-md-4">
-                                    <button type="button" onclick="javascript:addPeriod('period_${last}')">
-                                        <i class="fa-solid fa-minus 5x"></i> Remove Period
-                                    </button>
-                                </div>
-                            </div>`;
+                                        <div class="col-12 col-md-4">
+                                            <button type="button" onclick="javascript:addPeriod('period_${last}')">
+                                                <i class="fa-solid fa-minus 5x"></i> Remove Period
+                                            </button>
+                                        </div>
+                                    </div>`;
                     var element = document.getElementById("new_period");
                     var new_inner = `
-                                            ${element.innerHTML}
-                                            ${newUserElement}
-                                        `;
+                                                    ${element.innerHTML}
+                                                    ${newUserElement}
+                                                `;
                     periodLst.push(last);
                     element.innerHTML = new_inner;
 
@@ -385,25 +379,19 @@
         </script>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>-->
-    <script src="https://kit.fontawesome.com/da39e5d130.js" crossorigin="anonymous"></script>
-    <!-- DatePicker Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
     <script>
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-            //$(document).ready(() => {
-            //    sendMessage("Devices|ECLIPSE|Timeslots");
-            //});
+                //$(document).ready(() => {
+                //    sendMessage("Devices|ECLIPSE|Timeslots");
+                //});
     </script>
-    <script src="../mainfuncs.js"></script>
 </body>
 </html>
