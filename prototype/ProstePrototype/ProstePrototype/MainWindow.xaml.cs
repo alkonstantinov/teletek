@@ -34,6 +34,8 @@ namespace ProstePrototype
         public MainWindow()
         {
             InitializeComponent();
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
             Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/html/Icon.ico", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
