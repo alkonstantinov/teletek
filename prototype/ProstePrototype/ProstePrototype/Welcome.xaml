@@ -25,7 +25,7 @@
             </LinearGradientBrush>
         </Border.OpacityMask>
         <StackPanel VerticalAlignment="Bottom">
-            <Image Source="pack://application:,,,/Images/teletek_logo.png" Width="400" Height="60" AutomationProperties.IsOffscreenBehavior="Onscreen" StretchDirection="UpOnly">
+            <Image Source="pack://application:,,,/Images/teletek_logo_m.png" Width="400" Height="80" Margin="0, 0, 0, -20" AutomationProperties.IsOffscreenBehavior="Onscreen" >
                 <Image.Effect>
                     <DropShadowEffect/>
                 </Image.Effect>

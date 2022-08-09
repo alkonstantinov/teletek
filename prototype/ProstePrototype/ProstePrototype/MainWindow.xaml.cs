@@ -101,8 +101,8 @@ namespace ProstePrototype
             }
             mainGrid.Background = new SolidColorBrush(bgd);
             mainPanel.Background = new SolidColorBrush(bgd);
-            title.Background = new SolidColorBrush(bgd);
-            title.Foreground = new SolidColorBrush(fgd);
+            //title.Background = new SolidColorBrush(bgd);
+            //title.Foreground = new SolidColorBrush(fgd);
             topMenu.Background = new SolidColorBrush(bgd);
             topMenu.Foreground = new SolidColorBrush(fgd);
             changeTheme_btn.Background = new SolidColorBrush(bgd);

@@ -18,6 +18,20 @@
     <None Remove="Images\ProsTE.ico" />
     <None Remove="Images\ProsTE.png" />
     <None Remove="Images\teletek_logo.png" />
+    <None Remove="Images\teletek_logo_m.png" />
+    <None Remove="Images\teletek_manager.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\teletek_manager.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\teletek_logo_m.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

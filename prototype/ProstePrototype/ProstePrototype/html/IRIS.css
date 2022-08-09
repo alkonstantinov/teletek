@@ -4,6 +4,9 @@ body {
 
 h5 {
     color: #eed;
+    display: inline;
+    margin-left: 0.5rem;
+    font-size: 1.15rem;
 }
 
 a, a:hover {
@@ -165,11 +168,6 @@ i:hover {
 }
 a, a:hover {
     text-decoration: none;
-}
-
-h5 {
-    display: inline;
-    margin-left: 0.5rem;
 }
 
 form{

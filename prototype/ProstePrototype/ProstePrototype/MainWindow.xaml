@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="ProsTE 6.1" Height="768" Width="1300"
+        Title="T-Manager 6.1" Height="768" Width="1300"
         WindowStyle="None"        
         >
     <!-- WindowState="Maximized" -->
@@ -59,8 +59,8 @@
             </Grid.ColumnDefinitions>
             <StackPanel x:Name="mainPanel" Background="{Binding Background}">
                 <DockPanel  Height="50" HorizontalAlignment="Left" >
-                    <Image Source="/html/Icon.ico"/>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>
+                    <Image Source="/Images/teletek_logo_m.png" Margin="15,0,0,-15" Width="180" VerticalAlignment="Center"/>
+                    <!--<TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>-->
                     <Menu x:Name="topMenu" DockPanel.Dock="Top" FontSize="16" VerticalAlignment="Center" Margin="10, 0, 0, 0" Background="{Binding Background}" Foreground="{Binding Foreground}">
                         <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
                             <MenuItem.Header >
@@ -93,14 +93,14 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Click="Read_Clicked"  >
+                        <!--<MenuItem Margin="10,0,0,0" Click="Read_Clicked"  >
                             <MenuItem.Header>
                                 <DockPanel>
                                     <TextBlock Text="&#xf02a;" Margin="5, 3, 5, 0" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Center"></TextBlock>
                                     <TextBlock Text="Scan"/>
                                 </DockPanel>
                             </MenuItem.Header>
-                        </MenuItem>
+                        </MenuItem>-->
                         <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
                             <MenuItem.Header>
                                 <DockPanel>
