@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullHeight">
     <head>
         <!-- Required meta tags -->
         <meta charset="UTF-8" />
@@ -12,13 +12,13 @@
         <link rel="stylesheet" href="../IRIS.css" />
         <title>Teletek Manager</title>
     </head>
-    <body>
+    <body class="fullHeight">
 
-        <div class="container" id="divMain">
-            <form action="">
+        <div class="container fullHeight" id="divMain">
+            <form action="" class="shortHeight">
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-                <div class="row mt-2 pt-2">
-                    <div class="col-3 bl scroll500">
+                <div class="row mt-2 pt-2 fullHeight">
+                    <div class="col-3 bl scroll">
                         <div id="new_evac_zone" class="row">
                             <div class="col-11 pr-1">
                                 <a href="javascript:showEvacZone('1')" onclick="javascript:addActive()">
@@ -32,12 +32,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-9">
-                        <div id="selected_area"></div>
+                    <div class="col-9 fullHeight">
+                        <div id="selected_area" class="fullHeight"></div>
                     </div>
 
                 </div>
-                <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+                <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                     <!--<button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>-->
                     <button style="display: inline-flex;" type="button" onclick="javascript:addEvacZone('evac_zone')" id="evac_zone_btn" class="btn-round btn-border-black">

@@ -1,15 +1,18 @@
 ﻿let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json) {
-
     CefSharp.PostMessage(JSON.stringify(json));
 }
 
-function addActive() {
-    $(document).on('click', '.btnStyle', function () {
-        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-        $(this).addClass('active');// here apply selected class on clicked btnStyle
-    });
-}
+$(document).ready(() => {
+    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+    let searchParams = new URLSearchParams(window.location.search)
+    if (searchParams.has('highlight')) {
+        elem = document.getElementById(searchParams.get('highlight')).children[0];
+        if (elem) {
+            $(elem).addClass('active');
+        }
+    }
+});
 
 function toggleDarkMode(show, filename) {
     if (show) {

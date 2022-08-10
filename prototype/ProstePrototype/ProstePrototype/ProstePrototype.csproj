@@ -20,6 +20,13 @@
     <None Remove="Images\teletek_logo.png" />
     <None Remove="Images\teletek_logo_m.png" />
     <None Remove="Images\teletek_manager.png" />
+    <None Remove="Images\t_m_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\t_m_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

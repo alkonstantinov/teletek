@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8" />
@@ -13,18 +13,18 @@
 
     <title>Teletek Manager</title>
 </head>
-<body>
-    <div class="container" id="divMain">
+<body class="fullHeight">
+    <div class="container fullHeight" id="divMain">
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
-        <div class="row">
-            <div class="col-3 bl scroll500">
+        <div class="row fullHeight">
+            <div class="col-3 bl scroll">
                 <div id="new_device" class="row">
                     <p>Add up to 4 loops</p>
                 </div>
             </div>
-            <div class="col-9">
-                <div id="selected_device">
+            <div class="col-9 fullHeight">
+                <div id="selected_device" class="fullHeight">
 
                 </div>
             </div>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
             <button type="button" class="btn-round btn-border-black">Back</button>-->
             <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
@@ -114,8 +114,8 @@
             function showDevice(id) {
                 var el = document.getElementById("selected_device");
 
-                var target = `<div class="row">
-                                    <div class="col-3 bl scroll400">
+                var target = `<div class="row shortHeight">
+                                    <div class="col-3 bl scroll">
                                         <div id="new_device_${id}" class="row">
 
                                         </div>
@@ -714,15 +714,15 @@
                                     </div>
                                 </div>
 
-                                <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
-                                    <button type="button" class="btn-round btn-blue">Save</button>
+                                <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
+                                    
                                     <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList_${id}" id="device_btn_${id}" class="btn-round btn-border-black">
                                         <i class="fa-solid fa-plus 5x"></i> Add New Device in ${id.replaceAll("_", " ")}
                                     </button>
                                 </div>`;
 
-                var proxy_target = `<div class="row">
-                                    <div class="col-3 bl scroll400">
+                var proxy_target = `<div class="row shortHeight">
+                                    <div class="col-3 bl scroll">
                                         <p>Sensors</p>
                                         <div id="new_sensor_${id}" class="row">
 
@@ -1120,7 +1120,7 @@
                                 </div>
 
                                 <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
-                                    <button type="button" class="btn-round btn-blue">Save</button>
+                                    
                                     <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#sensorList_${id}" id="sensor_btn_${id}" class="btn-round btn-border-black">
                                         <i class="fa-solid fa-plus 5x"></i> Add New Sensor in ${id.replaceAll("_", " ")}
                                     </button>
@@ -1276,8 +1276,7 @@
                                         </fieldset>
 
                                         <div class="buttons-row mt15">
-                                            <button type="button" class="btn-round btn-blue">Save</button>
-                                            <button type="button" class="btn-round btn-border-black">Back</button>
+                                            
                                         </div>`;
                 var proxy_target = `<fieldset>
                                     <legend>Device</legend>
@@ -1331,8 +1330,7 @@
                                 </fieldset>
 
                                 <div class="buttons-row mt15">
-                                    <button type="button" class="btn-round btn-blue">Save</button>
-                                    <button type="button" class="btn-round btn-border-black">Back</button>
+                                    
                                 </div>`;
                 if (type === 'sensor') {
                     el.innerHTML = target;
@@ -1355,7 +1353,7 @@
 
                 if (sensorsLst2.includes(parseInt(+id))) {
                     // if function called from concrete sensor, it removes the sensor
-                    var elem = document.querySelector(`[id $= ${loop_id}_${+id}]`);
+                    var elem = document.querySelector(`[id $= ${loop_id}_${type}_${+id}]`);
                     if (elem) elem.parentNode.removeChild(elem);
                     sensorsLst2 = sensorsLst2.filter(function (item) {
                         return item !== +id
@@ -1456,7 +1454,12 @@
                     }
                 }
                 if (lst.includes(parseInt(+id))) {
-                    var elem = document.querySelector(`[id $= _${+id}]`);
+                    var elems = document.querySelectorAll(`[id $= 'loop_${id}']`);
+                    if (elems.length > 0) {
+                        var selected_device = document.getElementById("selected_device");
+                        selected_device.innerHTML = "";
+                    }
+                    var elem = document.querySelector(`[id $= '${id}']`);
                     if (elem) elem.parentNode.removeChild(elem);
                     lst = lst.filter(function (item) {
                         return item !== +id
@@ -1688,8 +1691,7 @@
                                         </fieldset>` : ''}
 
                                         <div class="buttons-row mt15">
-                                            <button type="button" class="btn-round btn-blue">Save</button>
-                                            <button type="button" class="btn-round btn-border-black">Back</button>
+                                            
                                         </div>`;
                 var proxy_target = `<fieldset>
                                             <legend>Device</legend>
@@ -1885,8 +1887,7 @@
 
 
                                         <div class="buttons-row mt15">
-                                            <button type="button" class="btn-round btn-blue">Save</button>
-                                            <button type="button" class="btn-round btn-border-black">Back</button>
+                                            
                                         </div>`;
                 var ttarget = `<fieldset>
                                             <legend>Device</legend>
@@ -2013,8 +2014,7 @@
                                         </fieldset>
 
                                         <div class="buttons-row mt15">
-                                            <button type="button" class="btn-round btn-blue">Save</button>
-                                            <button type="button" class="btn-round btn-border-black">Back</button>
+                                            
                                         </div>`;
                 switch (true) {
                     case id.includes("sensoIRIS_bstr_is"):

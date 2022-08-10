@@ -18,7 +18,7 @@
 <body>
 
     <div class="row m15 no-gutter">
-        <a href="javascript: sendMessageWPF({'Command': 'LoadPage','Params':'iris_access_code'})" onclick="javascript: addActive()" class="col-sm-3">
+        <a href="javascript: sendMessageWPF({'Command': 'LoadPage','Params':'iris_access_code', 'Highlight':'iris_access_code'})" onclick="javascript: addActive()" class="col-sm-3" id="iris_access_code">
             <div class="btnStyle">
                 <i class="fa-solid fa-fingerprint fa-3x colored p15 p15"></i>
                 <div class="someS">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_network'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_network', 'Highlight':'iris_network'})"  class="col-sm-3" id="iris_network">
             <div class="btnStyle">
                 <i class="fa-solid fa-diagram-project fa-3x colored p15"></i>
                 <div class="someS">
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_panels_in_network'})" onclick="addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_panels_in_network', 'Highlight':'iris_panels_in_network'})" onclick="addActive()" class="col-sm-3" id="iris_panels_in_network">
             <div class="btnStyle">
                 <i class="fa-solid fa-network-wired fa-3x colored p15"></i>
                 <div class="someS">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_inputs'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_inputs', 'Highlight':'iris_inputs'})"  class="col-sm-3" id="iris_inputs">
             <div class="btnStyle">
                 <i class="fa-solid fa-arrow-down-1-9 fa-3x colored p15"></i>
                 <div class="someS">
@@ -52,7 +52,7 @@
         </a>
     </div>
     <div class="row m15">
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_inputs_group'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_inputs_group', 'Highlight':'iris_inputs_group'})"  class="col-sm-3" id="iris_inputs_group">
             <div class="btnStyle">
                 <i class="fa-solid fa-arrow-down-wide-short fa-3x colored p15"></i>
                 <div class="someS">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_outputs'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_outputs', 'Highlight':'iris_outputs'})"  class="col-sm-3" id="iris_outputs">
             <div class="btnStyle">
                 <i class="fa-solid fa-arrow-up-9-1 fa-3x colored p15"></i>
                 <div class="someS">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_fat_fbf'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_fat_fbf', 'Highlight':'iris_fat_fbf'})"  class="col-sm-3" id="iris_fat_fbf">
             <div class="btnStyle">
                 <i class="fa-solid fa-laptop-file fa-3x colored p15"></i>
                 <div class="someS">
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_zones'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_zones', 'Highlight':'iris_zones'})"  class="col-sm-3" id="iris_zones">
             <div class="btnStyle">
                 <i class="fa-solid fa-clone fa-3x colored p15"></i>
                 <div class="someS">
@@ -86,7 +86,7 @@
         </a>
     </div>
     <div class="row m15">
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_evac_zones'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_evac_zones', 'Highlight':'iris_evac_zones'})"  class="col-sm-3" id="iris_evac_zones">
             <div class="btnStyle">
                 <i class="fa-solid fa-house-medical-flag fa-3x colored p15"></i>
                 <div class="someS">
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_peripherial_devices'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_peripherial_devices', 'Highlight':'iris_peripherial_devices'})"  class="col-sm-3" id="iris_peripherial_devices">
             <div class="btnStyle">
                 <i class="fa-solid fa-hard-drive fa-3x colored p15"></i>
                 <div class="someS">
@@ -102,7 +102,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_loop_devices'})" onclick="javascript:addActive()" class="col-sm-3">
+        <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris_loop_devices', 'Highlight':'iris_loop_devices'})"  class="col-sm-3" id="iris_loop_devices">
             <div class="btnStyle">
                 <i class="fa-solid fa-compact-disc fa-3x colored p15"></i>
                 <div class="someS">

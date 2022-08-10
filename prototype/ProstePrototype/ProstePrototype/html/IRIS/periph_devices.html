@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8" />
@@ -13,12 +13,12 @@
 
     <title>Teletek Manager</title>
 </head>
-<body>
-    <div class="container" id="divMain">
+<body class="fullHeight">
+    <div class="container fullHeight" id="divMain">
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
-        <div class="row">
-            <div class="col-3 bl scroll400">
+        <div class="row fullHeight">
+            <div class="col-3 bl scroll">
                 <div id="new_device" class="row">
                     <div class="col-12" id="id_1">
                         <div class="row">
@@ -56,8 +56,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-9">
-                <div id="selected_device">
+            <div class="col-9 fullHeight">
+                <div id="selected_device" class="fullHeight">
 
                 </div>
             </div>
@@ -230,7 +230,7 @@
             </div>
         </div>
 
-        <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
             <button type="button" class="btn-round btn-border-black">Back</button>-->
             <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
