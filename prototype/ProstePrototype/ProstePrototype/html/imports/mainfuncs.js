@@ -11,7 +11,7 @@ $(document).ready(() => {
         if (elem) {
             $(elem).addClass('active');
         }
-        elem.scrollIntoView();
+        elem.scrollIntoView({ behavior: 'auto', block: 'center' });
     }
 });
 
