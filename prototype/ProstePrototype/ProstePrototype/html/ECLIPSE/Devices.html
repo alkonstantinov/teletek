@@ -220,7 +220,7 @@
             </div>
         </div>
 
-        <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
             <button type="button" class="btn-round btn-border-black">Back</button>-->
             <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
@@ -1371,6 +1371,8 @@
                     lst = lst.filter(function (item) {
                         return item !== +id
                     })
+                    var el = document.getElementById("selected_device");
+                    el.innerHTML = '';
 
                     let button = document.getElementById("device_btn");
                     if (lst.length < devices && button.style.display === "none") {

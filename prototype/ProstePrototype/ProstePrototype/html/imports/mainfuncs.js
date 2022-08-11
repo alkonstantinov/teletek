@@ -11,6 +11,7 @@ $(document).ready(() => {
         if (elem) {
             $(elem).addClass('active');
         }
+        elem.scrollIntoView();
     }
 });
 

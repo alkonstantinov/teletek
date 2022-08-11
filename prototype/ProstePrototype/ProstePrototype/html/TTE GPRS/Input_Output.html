@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8" />
@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="../IRIS.css" />
     <title>Teletek Manager</title>
 </head>
-<body>
-    <div class="container" id="divMain">
-        <form action="">
+<body class="fullHeight">
+    <div class="container fullHeight" id="divMain">
+        <form action="" class="fullHeight">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <div class="row mt-2 pt-2">
-                <div class="col-3 bl">
+            <div class="row pt-2 fullHeight">
+                <div class="col-3 bl scroll">
                     <div id="new_io" class="row">
                         <div class="col-11 pr-1">
                             <a href="javascript:showIO('1')" onclick="javascript:addActive()">
@@ -37,7 +37,7 @@
 
             </div>
 
-            <div style="bottom: 10px; position: sticky;" class="buttons-row mt15">
+            <div style="bottom: 10px; position: absolute;" class="buttons-row mt15">
                 <!--<button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>-->
                 <button style="display: inline-flex;" type="button" onclick="javascript:addIO('io')" id="io_btn" class="btn-round btn-border-black">

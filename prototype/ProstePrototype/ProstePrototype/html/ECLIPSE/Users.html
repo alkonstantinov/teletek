@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="shortHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8" />
@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../IRIS.css" />
     <title>Teletek Manager</title>
 </head>
-<body>
-    <div class="container mt-2" id="divMain">
-        <form action="">
+<body class="fullHeight">
+    <div class="container fullHeight" id="divMain">
+        <form action="" class="fullHeight">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="form-item roww">
                 <label for="code_size">Code Size</label>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="row mt-2 pt-2 bt">
+            <div class="row pt-2 bt fullHeight">
                 <div class="col-3 bl scroll">
                     <div id="new_user" class="row">
                         <div class="col-11 pr-1">
@@ -48,7 +48,7 @@
 
             </div>
 
-            <div style="bottom: 10px; position: sticky;" class="buttons-row mt15">
+            <div style="bottom: 10px; position: absolute;" class="buttons-row mt15">
                 <!--<button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>-->
                 <button style="display: inline-flex;" type="button" onclick="javascript:addUser('user')" id="user_btn" class="btn-round btn-border-black">

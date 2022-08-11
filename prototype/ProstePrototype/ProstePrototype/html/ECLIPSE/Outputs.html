@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  class="shortHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8" />
@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../IRIS.css" />
     <title>Teletek Manager</title>
 </head>
-<body>
-    <div class="container" id="divMain">
-        <form action="">
+<body class="fullHeight">
+    <div class="container fullHeight" id="divMain">
+        <form action="" class="fullHeight">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="form-item roww">
                 <label for="pgm4_mode">PGM4 Mode</label>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="row mt-2 pt-2 bt">
+            <div class="row pt-2 bt fullHeight">
                 <div class="col-3 bl scroll">
                     <div id="new_pgm" class="row">
                         <div class="col-11 pr-1">
@@ -470,7 +470,7 @@
             <div id="remote_control" style="display: none;"></div>
             <div id="alarm_or_entry_time" style="display: none;"></div>
 
-            <div style="bottom: 10px; position: sticky;" class="buttons-row mt15">
+            <div style="bottom: 10px; position: absolute;" class="buttons-row mt15">
                 <!--<button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>-->
                 <button style="display: inline-flex;" type="button" onclick="javascript:addPGM('pgm')" id="output_btn" class="btn-round btn-border-black">

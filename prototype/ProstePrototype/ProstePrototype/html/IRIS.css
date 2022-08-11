@@ -14,7 +14,15 @@ h5 {
 }
 
 .shortHeight {
-    height: calc(100% - 1px);
+    height: calc(100% - 20px);
+}
+
+.shortestHeight {
+    height: calc(100% - 180px);
+}
+
+.shorterHeight {
+    height: calc(100% - 120px);
 }
 
 a, a:hover {
