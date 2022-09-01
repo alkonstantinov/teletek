@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,16 +32,33 @@ namespace ProstePrototype
         private SettingsDialog settings;
 
         public bool DarkMode { get; set; }
+
+        private double tempLeft { get; set; }
+        private double tempTop { get; set; }
+        private double tempHeight { get; set; }
+        private double tempWidth { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
+            #region temporary params
+            // temporaty params initializing
+            tempHeight = this.Height;
+            tempWidth = this.Width;
+            tempLeft = this.Left;
+            tempTop = this.Top;
+            #endregion
             Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
             rw = new ReadWindow();
             //rw.LostFocus += _child_LostFocus;
+            
+            //// binding Column1 and wb1 Width trial
+            //Binding binding = new Binding("Width");
+            //binding.Source = Column1.DataContext;
+            //wb1.SetBinding(DataGridColumn.WidthProperty, binding);
 
             applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
@@ -238,11 +256,14 @@ namespace ProstePrototype
                 wb1.Load(url);
                 this.Dispatcher.Invoke(() =>
                 {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
-                    wb2.Margin = new Thickness(0);
-                    wb1.Width = this.Width / 6;
-                    Splitter1.Width = 5;
-                    gsp3.Height = 3;
+                    if (Splitter1.Width == 0)
+                    {
+                        gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
+                        wb2.Margin = new Thickness(0);
+                        wb1.MinWidth = this.Width / 6;
+                        Splitter1.Width = 5;
+                        gsp3.Height = 3;
+                    }
                 });
 
             }
@@ -262,6 +283,12 @@ namespace ProstePrototype
             ApplyTheme();
         }
         #endregion
+
+        private void GridSplitter1_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            wb1.Width = Column1.Width.Value;
+            //MessageBox.Show("Column1 : " + Column1.Width + "(type: "+ Column1.Width.GetType() + ")" + "\n" + "GridSplitter: " + Splitter1.Width + "\n" + "wb1: " + wb1.Width + "\n" + "wb2: " + wb2.Width);
+        }
 
         #region mainDropdownMenusButtonsClicked
         private void Open_Clicked(object sender, RoutedEventArgs e)
@@ -337,11 +364,12 @@ namespace ProstePrototype
                     Splitter1.Width = 0; //if index.html is loaded
                     gsp3.Height = 0;
                 }
-                else
+                else if (Splitter1.Width == 0)
                 {
                     gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
                     wb2.Margin = new Thickness(0);
-                    wb1.Width = this.Width / 6;
+                    wb1.MinWidth = this.Width / 6;
+                    Splitter1.Width = 5;
                     gsp3.Height = 3;
                 }
                 wb2.Load("file:///" + myFile);
@@ -371,42 +399,27 @@ namespace ProstePrototype
         {
             this.WindowState = WindowState.Minimized;
         }
-        protected override void OnStateChanged(EventArgs e)
-        {
-            //if (WindowState == WindowState.Maximized)
-            //{
-            //    if (WindowStyle.None != WindowStyle)
-            //        WindowStyle = WindowStyle.None;
-            //}
-            //else if (WindowStyle != WindowStyle.SingleBorderWindow)
-            //    WindowStyle = WindowStyle.SingleBorderWindow;
-
-            base.OnStateChanged(e);
-        }
+        
         private void Button_Maximize_Click(object sender, RoutedEventArgs e)
         {
             if (this.WindowState != WindowState.Maximized)
             {
-                var a = SystemParameters.VirtualScreenTop;
-                var b = SystemParameters.VirtualScreenLeft;
+                tempHeight = this.Height;
+                tempWidth = this.Width;
+                tempLeft = this.Left;
+                tempTop = this.Top;
                 this.Left = SystemParameters.VirtualScreenLeft;
                 this.Top = SystemParameters.VirtualScreenTop;
                 this.Width = SystemParameters.VirtualScreenWidth;
                 this.Height = SystemParameters.VirtualScreenHeight;
 
-                //var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
-                //if (this.CurrentScreen < allScreens.Count - 1)
-                //{
-                //    this.CurrentScreen++;
-                //}
-                //else { this.CurrentScreen = 0; }
-
-                //this.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
-                //this.Left = screen.WorkingArea.Left;
-                //this.Top = screen.WorkingArea.Top;
                 this.WindowState = WindowState.Maximized;
             } else
             {
+                this.Left = tempLeft;
+                this.Top = tempTop;
+                this.Width = tempWidth;
+                this.Height = tempHeight;
                 this.WindowState = WindowState.Normal;
             }
         }
@@ -414,7 +427,9 @@ namespace ProstePrototype
         private void mainPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
-                this.WindowState = (this.WindowState != WindowState.Maximized) ? WindowState.Maximized : WindowState.Normal;
+            {
+                Button_Maximize_Click(sender, e);
+            }
         }
         #endregion
 

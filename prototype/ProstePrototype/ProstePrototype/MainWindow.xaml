@@ -3,8 +3,9 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-		xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
-		mc:Ignorable="d"
+		xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf" 
+        xmlns:local="clr-namespace:ProstePrototype"
+        mc:Ignorable="d"
 		Title="T-Manager 6.1" Height="768" Width="1300"
 		WindowStyle="None"        
 		>
@@ -13,6 +14,7 @@
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
     </Window.CommandBindings>
     <Window.Resources>
+        <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
         <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -38,6 +40,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -251,24 +254,25 @@
         <GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
         <Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="216*" />
+                <ColumnDefinition x:Name="Column1" Width="216*" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="1079*" />
             </Grid.ColumnDefinitions>
             <wpf:ChromiumWebBrowser
 				Grid.Column="0"
 				x:Name="wb1"
-				Width="{Binding Width}"
+                MinWidth="{Binding MinWidth}"
 				Background="Transparent"
 				Margin="0, 0, 0, 0"
 				Padding="0, 0, 0, 50"
 				JavascriptMessageReceived="wb_PostMessage"
 				/>
-            <GridSplitter x:Name="Splitter1" Grid.Column="1" ResizeBehavior="PreviousAndNext"/>
+                <!--Width="{Binding ElementName=Column1, Path=Width, Converter={StaticResource gridLengthConverter}}"--> 
+            <GridSplitter x:Name="Splitter1" Grid.Column="1" DragCompleted="GridSplitter1_DragCompleted" HorizontalAlignment="Left" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
             <wpf:ChromiumWebBrowser
 				Grid.Column="2"
 				x:Name="wb2"
-				Margin="{Binding Margin}"
+				Margin="{Binding Margin}"                
 				JavascriptMessageReceived="wb_PostMessage"
 				Background="Transparent"
 			/>

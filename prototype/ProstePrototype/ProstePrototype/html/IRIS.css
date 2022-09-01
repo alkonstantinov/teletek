@@ -155,6 +155,31 @@ mb5r {
     margin-bottom: 5rem;
 }
 
+.minh {
+    min-height: 51.51px;
+}
+
+@media (min-width: 450px) {
+    .minw {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 620px) {
+    .minw {
+        flex: 0 0 33%;
+        max-width: 33%;
+    }
+}
+
+@media (min-width: 750px) {
+    .minw {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
 i {
     color: #0c2b90;
 }
@@ -162,7 +187,7 @@ i {
     color: #b4210a;
 }
 .grasse i {
-    color: #055423;
+    color: #08893a;
 }
 
 i:hover {
@@ -172,18 +197,13 @@ i:hover {
     color: #e4600d;
 }
 .grasse i:hover {
-    color: #099c42;
+    color: #0bc152;
 }
-
-.minh {
-    min-height: 51.51px;
-}
-
 .someS {
     margin-top: 0;
     padding-bottom: 0.15em;
     background-color: #0c2b90;
-    border-radius: 6px;
+    border-radius: 4px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
 }
@@ -191,7 +211,7 @@ i:hover {
     background-color: #b4210a;
 }
 .grasse .someS {
-    background-color: #055423;
+    background-color: #08893a;
 }
 
 .someS:hover {
@@ -201,7 +221,7 @@ i:hover {
     background-color: #e4600d;
 }
 .grasse .someS:hover {
-    background-color: #099c42;
+    background-color: #0bc152;
 }
 
 .btnStyle:hover {
@@ -218,7 +238,7 @@ i:hover {
     border-width: 4px;
 }
 .btnStyle.grasse.active {
-    border-color: #099c42;
+    border-color: #0bc152;
     border-width: 4px;
 }
 
