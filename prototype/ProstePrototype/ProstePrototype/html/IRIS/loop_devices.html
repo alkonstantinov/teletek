@@ -18,7 +18,7 @@
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
         <div class="row fullHeight">
-            <div class="col-3 bl scroll">
+            <div class="col-3 bl fire scroll">
                 <div id="new_device" class="row">
                     <p>Add up to 4 loops</p>
                 </div>
@@ -106,8 +106,8 @@
 
             function addActive(id) {
                 $(id).on('click', '.btnStyle', function () {
-                    $(id).find('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                    $(id).find('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle fire
                 });
             }
 
@@ -115,7 +115,7 @@
                 var el = document.getElementById("selected_device");
 
                 var target = `<div class="row fullHeight">
-                                    <div class="col-3 bl scroll">
+                                    <div class="col-3 bl fire scroll">
                                         <div id="new_device_${id}" class="row">
 
                                         </div>
@@ -722,7 +722,7 @@
                                 </div>`;
 
                 var proxy_target = `<div class="row fullHeight">
-                                    <div class="col-3 bl scroll">
+                                    <div class="col-3 bl fire scroll">
                                         <p>Sensors</p>
                                         <div id="new_sensor_${id}" class="row">
 
@@ -1401,7 +1401,7 @@
                                                                         <div class="row">
                                                                             <div class="col-11 pr-1">
                                                                                 <a href="javascript:showSensor('${link}_${last}', '${loop_id}', '${type}')" onclick="javascript:addActive('#selected_device')" >
-                                                                                    <div class="btnStyle">
+                                                                                    <div class="btnStyle fire">
                                                                                         <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                                                         <div class="someS">
                                                                                             <h5>${title}</h5>
@@ -1482,7 +1482,7 @@
                                                                         <div class="row">
                                                                             <div class="col-11 pr-1">
                                                                                 <a href="javascript:showDevice('${link}_${last}')" onclick="javascript:addActive('#new_device')" >
-                                                                                    <div class="btnStyle">
+                                                                                    <div class="btnStyle fire">
                                                                                         <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                                                         <div class="someS">
                                                                                             <h5>${title + ' ' + last}</h5>
@@ -2125,7 +2125,7 @@
                                                                         <div class="row">
                                                                             <div class="col-11 pr-1">
                                                                                 <a href="javascript:showDevice2('${link}_${last}', '${loop_id}')" onclick="javascript:addActive('#selected_device')" >
-                                                                                    <div class="btnStyle">
+                                                                                    <div class="btnStyle fire">
                                                                                         <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                                                         <div class="someS">
                                                                                             <h5>${last + '. ' + title}</h5>

@@ -18,11 +18,11 @@
             <form action="" class="fullHeight">
                 <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
                 <div class="row pt-2 fullHeight">
-                    <div class="col-3 bl scroll">
+                    <div class="col-3 bl fire scroll">
                         <div id="new_evac_zone" class="row">
                             <div class="col-11 pr-1">
                                 <a href="javascript:showEvacZone('1')" onclick="javascript:addActive()">
-                                    <div class="btnStyle">
+                                    <div class="btnStyle fire">
                                         <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
                                         <div class="someS">
                                             <h5>Evac Zone 1</h5>
@@ -59,8 +59,8 @@
 
                 function addActive() {
                     $(document).on('click', '.btnStyle', function () {
-                        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-                        $(this).addClass('active');// here apply selected class on clicked btnStyle
+                        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
+                        $(this).addClass('active');// here apply selected class on clicked btnStyle fire
                     });
                 }
 
@@ -421,7 +421,7 @@
                                                             <div class="row">
                                                                 <div class="col-11 pr-1">
                                                                     <a href="javascript:showEvacZone('${last}')" onclick="javascript:addActive()">
-                                                                        <div class="btnStyle">
+                                                                        <div class="btnStyle fire">
                                                                             <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
                                                                             <div class="someS">
                                                                                 <h5>Evac Zone ${last}</h5>

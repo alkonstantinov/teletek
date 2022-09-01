@@ -159,8 +159,12 @@ namespace ProstePrototype
             maximize_btn.Foreground = new SolidColorBrush(fgd);
             exit_btn.Background = new SolidColorBrush(bgd);
             exit_btn.Foreground = new SolidColorBrush(fgd);
-            grid2.Background = new SolidColorBrush(bgd);
+            breadCrumbsField.Background = new SolidColorBrush(bgd);
             lvBreadCrumbs.Background = new SolidColorBrush(bgd);
+            foreach (var item in lvBreadCrumbs.Items)
+            {
+                ((Button)item).Foreground = new SolidColorBrush(fgd);
+            }
             grid6.Background = new SolidColorBrush(bgd);
             textblock_bottom.Background = new SolidColorBrush(bgd);
             textblock_bottom.Foreground = new SolidColorBrush(fgd);
@@ -367,11 +371,51 @@ namespace ProstePrototype
         {
             this.WindowState = WindowState.Minimized;
         }
+        protected override void OnStateChanged(EventArgs e)
+        {
+            //if (WindowState == WindowState.Maximized)
+            //{
+            //    if (WindowStyle.None != WindowStyle)
+            //        WindowStyle = WindowStyle.None;
+            //}
+            //else if (WindowStyle != WindowStyle.SingleBorderWindow)
+            //    WindowStyle = WindowStyle.SingleBorderWindow;
+
+            base.OnStateChanged(e);
+        }
         private void Button_Maximize_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = (this.WindowState != WindowState.Maximized) ? WindowState.Maximized : WindowState.Normal;
+            if (this.WindowState != WindowState.Maximized)
+            {
+                var a = SystemParameters.VirtualScreenTop;
+                var b = SystemParameters.VirtualScreenLeft;
+                this.Left = SystemParameters.VirtualScreenLeft;
+                this.Top = SystemParameters.VirtualScreenTop;
+                this.Width = SystemParameters.VirtualScreenWidth;
+                this.Height = SystemParameters.VirtualScreenHeight;
+
+                //var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
+                //if (this.CurrentScreen < allScreens.Count - 1)
+                //{
+                //    this.CurrentScreen++;
+                //}
+                //else { this.CurrentScreen = 0; }
+
+                //this.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+                //this.Left = screen.WorkingArea.Left;
+                //this.Top = screen.WorkingArea.Top;
+                this.WindowState = WindowState.Maximized;
+            } else
+            {
+                this.WindowState = WindowState.Normal;
+            }
         }
         // exit button is available in the mainMenuButtonsClicked
+        private void mainPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+                this.WindowState = (this.WindowState != WindowState.Maximized) ? WindowState.Maximized : WindowState.Normal;
+        }
         #endregion
 
         #region breadcrumb
@@ -383,7 +427,8 @@ namespace ProstePrototype
                 Tag = page,
                 Content = title,
                 Background = Brushes.Transparent,
-                Foreground = new SolidColorBrush(Color.FromRgb(13, 145, 228)),
+                Foreground = DarkMode ? new SolidColorBrush(Color.FromRgb(238, 238, 221)) : new SolidColorBrush(Color.FromRgb(124, 124, 125)),
+                //Foreground = new SolidColorBrush(Color.FromRgb(238, 238, 221)),
                 BorderBrush = Brushes.Transparent
             };
             btn.Click += breadCrumbItemClick;

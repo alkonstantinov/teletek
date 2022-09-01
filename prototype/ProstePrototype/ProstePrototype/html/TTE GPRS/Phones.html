@@ -172,12 +172,12 @@
                 </div>
             </fieldset>
 
-            <div class="row pt-2 bt fullHeight">
-                <div class="col-3 bl scroll">
+            <div class="row pt-2 bt grasse fullHeight">
+                <div class="col-3 bl grasse scroll">
                     <div id="new_phone" class="row">
                         <div class="col-11 pr-1">
                             <a href="javascript:showPhone('1')" onclick="javascript:addActive()">
-                                <div class="btnStyle">
+                                <div class="btnStyle grasse">
                                     <img src="../../Images/2041.DigiComm.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
                                         <h5>Phone Number 1</h5>
@@ -241,8 +241,8 @@
 
             function addActive() {
                 $(document).on('click', '.btnStyle', function () {
-                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle grasse
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle grasse
                 });
             }
 
@@ -466,7 +466,7 @@
                                                     <div class="row">
                                                         <div class="col-11 pr-1">
                                                             <a href="javascript:showPhone('${last}')" onclick="javascript: addActive()">
-                                                                <div class="btnStyle">
+                                                                <div class="btnStyle grasse">
                                                                     <img src="../../Images/2041.DigiComm.ico" alt="" width="25" height="25" class="m15" />
                                                                     <div class="someS">
                                                                         <h5>Phone Number ${last}</h5>

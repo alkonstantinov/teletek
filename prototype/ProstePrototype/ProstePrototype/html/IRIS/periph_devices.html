@@ -18,13 +18,13 @@
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
         <div class="row fullHeight">
-            <div class="col-3 bl scroll">
+            <div class="col-3 bl fire scroll">
                 <div id="new_device" class="row">
                     <div class="col-12" id="id_1">
                         <div class="row">
                             <div class="col-11 pr-1">
                                 <a href="javascript:showDevice('power_supply')" onclick="javascript:addActive()">
-                                    <div class="btnStyle">
+                                    <div class="btnStyle fire">
                                         <img src="../../Images/1024.Module.ico" alt="" width="25" height="25" class="m15" />
                                         <div class="someS">
                                             <h5>Power Supply</h5>
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-11 pr-1">
                                 <a href="javascript:showDevice('input0_outrel4_outmon4')" onclick="javascript:addActive()">
-                                    <div class="btnStyle">
+                                    <div class="btnStyle fire">
                                         <img src="../../Images/1024.Module.ico" alt="" width="25" height="25" class="m15" />
                                         <div class="someS">
                                             <h5>INPUT0 OUTREL4 OUTMON4</h5>
@@ -265,8 +265,8 @@
 
             function addActive() {
                 $(document).on('click', '.btnStyle', function () {
-                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle fire
                 });
             }
 
@@ -336,7 +336,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-11 pr-1">
                                                                                     <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
-                                                                                        <div class="btnStyle">
+                                                                                        <div class="btnStyle fire">
                                                                                             <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                                                             <div class="someS">
                                                                                                 <h5>${title}</h5>

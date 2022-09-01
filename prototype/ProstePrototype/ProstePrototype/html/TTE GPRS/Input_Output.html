@@ -17,11 +17,11 @@
         <form action="" class="fullHeight">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="row pt-2 fullHeight">
-                <div class="col-3 bl scroll">
+                <div class="col-3 bl grasse scroll">
                     <div id="new_io" class="row">
                         <div class="col-11 pr-1">
                             <a href="javascript:showIO('1')" onclick="javascript:addActive()">
-                                <div class="btnStyle">
+                                <div class="btnStyle grasse">
                                     <img src="../../Images/2051.InOut.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
                                         <h5>Input/Output 1</h5>
@@ -84,8 +84,8 @@
 
             function addActive() {
                 $(document).on('click', '.btnStyle', function () {
-                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-                    $(this).addClass('active');// here apply selected class on clicked btnStyle
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle grasse
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle grasse
                 });
             }
 
@@ -487,7 +487,7 @@
                                                     <div class="row">
                                                         <div class="col-11 pr-1">
                                                             <a href="javascript:showIO('${last}')" onclick="javascript:addActive()">
-                                                                <div class="btnStyle">
+                                                                <div class="btnStyle grasse">
                                                                     <img src="../../Images/2051.InOut.ico" alt="" width="25" height="25" class="m15" />
                                                                     <div class="someS">
                                                                         <h5>Input/Output ${last}</h5>
