@@ -529,3 +529,57 @@ flexicol {
     display: flex !important;
     flex-flow: column;
 }
+
+/* context menu */
+#ctxMenu {
+    display: none;
+    z-index: 100;
+}
+
+menu {
+    position: absolute;
+    display: block;
+    left: 0px;
+    top: 0px;
+    width: calc(10px + 10em);
+    padding: 0;
+    margin: 0;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: normal;
+    white-space: nowrap;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+    menu > menuitem {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+        align-items: center;        
+    }
+
+menuitem {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    min-width: 130px;
+    width: auto;
+    max-width: 200px;
+    margin: 2px 0;
+    padding: 5px 10px;
+    border-bottom: 1px solid;
+}
+    menuitem:last-of-type {
+        border-bottom: none;
+    }
+    menuitem[title]:after {
+        content: attr(title);
+    }
+
+    menuitem:hover {
+        background-color: #eef;
+        font-weight: bold;
+    }

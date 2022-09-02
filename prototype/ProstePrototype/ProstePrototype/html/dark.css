@@ -58,3 +58,12 @@ input, select, input[type="checkbox" i] {
     -webkit-filter: invert(82%);
     filter: invert(82%);
 }
+
+#ctxMenu {
+    background-color: #332 !important;
+    color: #eed;
+}
+
+menuitem:hover {
+    background-color: #555 !important;
+}

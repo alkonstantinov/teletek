@@ -3,6 +3,40 @@ function sendMessageWPF(json) {
     CefSharp.PostMessage(JSON.stringify(json));
 }
 
+// searching for menu context menu on the page - beginning of contextMenu part
+menuEl = document.getElementById("ctxMenu");
+if (menuEl) {
+    var elems = document.querySelectorAll('a');
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].oncontextmenu = function (e) {
+            return showContextMenu(this);
+        }
+    }
+}
+
+function showContextMenu(el) {
+    event.preventDefault();
+    let s = JSON.parse(el.href.slice(26, -1).replaceAll('\'', '\"'));
+    s.Command = "MainMenuBtn";
+    var ctxMenu = document.getElementById("ctxMenu");
+    ctxMenu.setAttribute('sendMessage', JSON.stringify(s));
+    ctxMenu.className = el.children[0].className.split(" ")[1];
+    ctxMenu.style.display = "block";
+    ctxMenu.style.left = (event.pageX - 10) + "px";
+    ctxMenu.style.top = (event.pageY - 10) + "px";
+    ctxMenu.onmouseleave = () => ctxMenu.style.display = "none";
+    return false;
+}
+
+function sendMsg(el) {
+    //console.log('event', event);
+    var json = JSON.parse(el.parentNode.getAttribute("sendMessage"));
+    json["Function"] = el.title;
+    sendMessageWPF(json);
+
+}
+// finish of the contextMenu part
+
 $(document).ready(() => {
     $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
     let searchParams = new URLSearchParams(window.location.search)

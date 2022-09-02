@@ -220,6 +220,19 @@ namespace ProstePrototype
                     string highlight = json["Highlight"] == null ? null : json["Highlight"].Value<string>();
                     LoadPage(json["Params"].Value<string>(), highlight);
                     break;
+                case "MainMenuBtn":
+                    switch (json["Function"].ToString())
+                    {
+                        case "Firmware update": break;
+                        case "Read": 
+                        case "Write": 
+                        case "Verify": 
+                        case "Help": 
+                        default:
+                            // Read_Clicked(new object(), new RoutedEventArgs()); // not working!
+                            break;
+                    }
+                    break;
             }
         }
 
