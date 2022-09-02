@@ -60,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="103.0.120" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="104.4.240" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
@@ -497,15 +497,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="103.0.12" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="104.4.24" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="103.0.12" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="104.4.24" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="103.0.12" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="104.4.24" />
   </ItemGroup>
 
 </Project>

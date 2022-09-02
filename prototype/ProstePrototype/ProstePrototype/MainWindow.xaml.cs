@@ -37,17 +37,19 @@ namespace ProstePrototype
         private double tempTop { get; set; }
         private double tempHeight { get; set; }
         private double tempWidth { get; set; }
+        private double tempMaxHeight { get; set; }
+        private double tempMaxWidth { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
-            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
+            //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
+            //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
             #region temporary params
-            // temporaty params initializing
-            tempHeight = this.Height;
-            tempWidth = this.Width;
-            tempLeft = this.Left;
-            tempTop = this.Top;
+            //// temporaty params initializing
+            //tempHeight = Height;
+            //tempWidth = Width;
+            //tempLeft = Left;
+            //tempTop = Top;
             #endregion
             Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
@@ -67,19 +69,7 @@ namespace ProstePrototype
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
             DataContext = this;
-            //wb1.Load("file:///" + firstFile);
-            //if (myFile == firstFile)
-            //{
-            //    wb1.Width = 0; //if index.html is loaded
-            //    Splitter1.Width = 0; //if index.html is loaded
-            //    gsp3.Height = 0;
-            //}
-            //else
-            //{
-            //    wb1.Width = this.Width / 6;
-            //    gsp3.Height = 3;
-            //}
-            //wb2.Load("file:///" + myFile);
+            
             DarkMode = false;
             ChangeTheme(DarkMode);
         }
@@ -101,7 +91,11 @@ namespace ProstePrototype
             // Begin dragging the window
             this.DragMove();
         }
-
+        private void GridSplitter1_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            wb1.Width = Column1.Width.Value;
+            //MessageBox.Show("Column1 : " + Column1.Width + "(type: "+ Column1.Width.GetType() + ")" + "\n" + "GridSplitter: " + Splitter1.Width + "\n" + "wb1: " + wb1.Width + "\n" + "wb2: " + wb2.Width);
+        }
         private void _child_LostFocus(object sender, RoutedEventArgs e)
         {
             rw.Hide();
@@ -284,11 +278,6 @@ namespace ProstePrototype
         }
         #endregion
 
-        private void GridSplitter1_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            wb1.Width = Column1.Width.Value;
-            //MessageBox.Show("Column1 : " + Column1.Width + "(type: "+ Column1.Width.GetType() + ")" + "\n" + "GridSplitter: " + Splitter1.Width + "\n" + "wb1: " + wb1.Width + "\n" + "wb2: " + wb2.Width);
-        }
 
         #region mainDropdownMenusButtonsClicked
         private void Open_Clicked(object sender, RoutedEventArgs e)
@@ -399,28 +388,32 @@ namespace ProstePrototype
         {
             this.WindowState = WindowState.Minimized;
         }
-        
+
         private void Button_Maximize_Click(object sender, RoutedEventArgs e)
         {
+            
             if (this.WindowState != WindowState.Maximized)
             {
                 tempHeight = this.Height;
                 tempWidth = this.Width;
                 tempLeft = this.Left;
                 tempTop = this.Top;
-                this.Left = SystemParameters.VirtualScreenLeft;
-                this.Top = SystemParameters.VirtualScreenTop;
-                this.Width = SystemParameters.VirtualScreenWidth;
-                this.Height = SystemParameters.VirtualScreenHeight;
-
-                this.WindowState = WindowState.Maximized;
+                tempMaxHeight = this.MaxHeight;
+                tempMaxWidth = this.MaxWidth;
+                WindowStyle = WindowStyle.SingleBorderWindow;
+                WindowState = WindowState.Maximized;
+                WindowStyle = WindowStyle.None;
             } else
             {
                 this.Left = tempLeft;
                 this.Top = tempTop;
                 this.Width = tempWidth;
                 this.Height = tempHeight;
-                this.WindowState = WindowState.Normal;
+                this.MaxHeight = tempMaxHeight;
+                this.MaxWidth = tempMaxWidth;
+                WindowStyle = WindowStyle.SingleBorderWindow;
+                WindowState = WindowState.Normal;
+                WindowStyle = WindowStyle.None;
             }
         }
         // exit button is available in the mainMenuButtonsClicked
