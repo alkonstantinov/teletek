@@ -67,3 +67,8 @@ input, select, input[type="checkbox" i] {
 menuitem:hover {
     background-color: #555 !important;
 }
+
+.collapsible-content {
+    background-color: #555 !important;
+    color: #eed;
+}

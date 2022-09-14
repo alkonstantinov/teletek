@@ -15,114 +15,116 @@
 
 <body>
     <div class="container" id="divMain">
-        <form action="">
-            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <fieldset>
-                <legend>Code 1</legend>
-                <div class="row align-items-center m-1">
-                    <div class="col-6">
-                        <div class="form-item roww flex">
-                            <label for="code">Code</label>
-                            <input type="text" id="code" name="code" maxlength="4" value="0000" placeholder="0000" />
-                        </div>
+
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <button class="fire collapsible">Code 1</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center m-1">
+                <div class="col-6">
+                    <div class="form-item roww flex">
+                        <label for="code">Code</label>
+                        <input type="text" id="code" name="code" maxlength="4" value="0000" placeholder="0000" />
                     </div>
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="level">Level</label>
-                            <div class="select ml10">
-                                <select id="level" name="level">
-                                    <option value="loc">1(Disable)</option>
-                                    <option value="loc">2</option>
-                                    <option value="loc">3</option>
-                                </select>
-                            </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-item roww">
+                        <label for="level">Level</label>
+                        <div class="select ml10">
+                            <select id="level" name="level">
+                                <option value="loc">1(Disable)</option>
+                                <option value="loc">2</option>
+                                <option value="loc">3</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Code 2</legend>
-                <div class="row align-items-center m-1">
-                    <div class="col-6">
-                        <div class="form-item roww flex">
-                            <label for="code">Code</label>
-                            <input type="text" id="code" name="code" maxlength="4" value="1111" placeholder="0000" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="level">Level</label>
-                            <div class="select ml10">
-                                <select id="level" name="level">
-                                    <option value="loc">1(Disable)</option>
-                                    <option value="loc">2</option>
-                                    <option value="loc">3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Code 3</legend>
-                <div class="row align-items-center m-1">
-                    <div class="col-6">
-                        <div class="form-item roww flex">
-                            <label for="code">Code</label>
-                            <input type="text" id="code" name="code" maxlength="4" value="2222" placeholder="0000" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="level">Level</label>
-                            <div class="select ml10">
-                                <select id="level" name="level">
-                                    <option value="loc">1(Disable)</option>
-                                    <option value="loc">2</option>
-                                    <option value="loc">3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Code 4</legend>
-                <div class="row align-items-center m-1">
-                    <div class="col-6">
-                        <div class="form-item roww flex">
-                            <label for="code">Code</label>
-                            <input type="text" id="code" name="code" maxlength="4" value="3333" placeholder="0000" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="level">Level</label>
-                            <div class="select ml10">
-                                <select id="level" name="level">
-                                    <option value="loc">1(Disable)</option>
-                                    <option value="loc">2</option>
-                                    <option value="loc">3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="form-item roww disabled ">
-                <label for="access-level">You cannot change this access level</label>
-                <input type="number" id="access-level" name="access-level" value="3" min="1" />
             </div>
+        </div>
 
-            <!--<div class="buttons-row mt15">
-                <button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>
-            </div>-->
-        </form>
+        <button class="collapsible fire">
+            Code 2
+        </button>
+        <div class="collapsible-content">
+            <div class="row align-items-center m-1">
+                <div class="col-6">
+                    <div class="form-item roww flex">
+                        <label for="code">Code</label>
+                        <input type="text" id="code" name="code" maxlength="4" value="1111" placeholder="0000" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-item roww">
+                        <label for="level">Level</label>
+                        <div class="select ml10">
+                            <select id="level" name="level">
+                                <option value="loc">1(Disable)</option>
+                                <option value="loc">2</option>
+                                <option value="loc">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Code 3</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center m-1">
+                <div class="col-6">
+                    <div class="form-item roww flex">
+                        <label for="code">Code</label>
+                        <input type="text" id="code" name="code" maxlength="4" value="2222" placeholder="0000" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-item roww">
+                        <label for="level">Level</label>
+                        <div class="select ml10">
+                            <select id="level" name="level">
+                                <option value="loc">1(Disable)</option>
+                                <option value="loc">2</option>
+                                <option value="loc">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Code 4</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center m-1">
+                <div class="col-6">
+                    <div class="form-item roww flex">
+                        <label for="code">Code</label>
+                        <input type="text" id="code" name="code" maxlength="4" value="3333" placeholder="0000" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-item roww">
+                        <label for="level">Level</label>
+                        <div class="select ml10">
+                            <select id="level" name="level">
+                                <option value="loc">1(Disable)</option>
+                                <option value="loc">2</option>
+                                <option value="loc">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-item roww disabled ">
+            <label for="access-level">You cannot change this access level</label>
+            <input type="number" id="access-level" name="access-level" value="3" min="1" />
+        </div>
+
+        <!--<div class="buttons-row mt15">
+            <button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>
+        </div>-->
+
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -135,9 +137,9 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-                //$(document).ready(() => {
-                //    sendMessage("Devices|IRIS|Access");
-                //});
+                                    //$(document).ready(() => {
+                                    //    sendMessage("Devices|IRIS|Access");
+                                    //});
     </script>
 </body>
 </html>
