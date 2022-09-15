@@ -5,7 +5,6 @@ function sendMessageWPF(json) {
 
 // collapsible part
 var coll = document.getElementsByClassName("collapsible");
-console.log('coll', coll);
 var i;
 
 for (i = 0; i < coll.length; i++) {

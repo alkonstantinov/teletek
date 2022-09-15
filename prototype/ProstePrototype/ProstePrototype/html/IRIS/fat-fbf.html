@@ -15,625 +15,623 @@
 <body>
 
     <div class="container" id="divMain">
-        <form action="">
-            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <fieldset>
-                <legend>Door switch input</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('doorSwitchInput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1dsi">LOOP_DEVICE</option>
-                        </select>
-                    </div>
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <button class="fire collapsible">Door switch input</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'doorSwitchInput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1dsi">LOOP_DEVICE</option>
+                    </select>
                 </div>
+            </div>
 
-                <div id="doorSwitchInput"></div>
+            <div id="doorSwitchInput"></div>
 
-                <div style="display: none" id="1dsi">
-                    <fieldset>
-                        <legend>Loop Type</legend>
+            <div style="display: none" id="1dsi">
+                <fieldset>
+                    <legend>Loop Type</legend>
 
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Dialer ACK input</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('dialerACKinput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1dacki">LOOP_DEVICE</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="dialerACKinput"></div>
-
-                <div style="display: none" id="1dacki">
-                    <fieldset>
-                        <legend>Loop Type</legend>
-
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Dialer fault input</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('dialerFaultInput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1dfi">LOOP_DEVICE</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="dialerFaultInput"></div>
-
-                <div style="display: none" id="1dfi">
-                    <fieldset>
-                        <legend>Loop Type</legend>
-
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Door unlock output</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('doorUnlockOutput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1pdduo">PERIPHERY DEVICE</option>
-                            <option value="1ldduo">LOOP DEVICE</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="doorUnlockOutput"></div>
-
-                <div style="display: none" id="1ldduo">
-                    <fieldset>
-                        <legend>Loop Type</legend>
-
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div style="display: none" id="1pdduo">
-                    <div class="row align-items-center">
+                    <div id="showLoop" class="row align-items-center">
                         <div class="col">
                             <div class="form-item roww">
-                                <label for="peripherial_device_address">Peripherial device address</label>
+                                <label for="dev_addr_loop">Loop</label>
                                 <input type="number"
-                                       id="peripherial_device_address"
-                                       name="peripherial_device_address"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
                                        data-maxlength="1"
                                        oninput="javascript: myFunction(this.id)"
                                        onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="6" />
+                                       value="1"
+                                       min="1"
+                                       max="4" />
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-item roww">
-                                <label for="peripherial_device_output">Peripherial device output</label>
+                                <label for="dev_channel">Channel</label>
                                 <input type="number"
-                                       id="peripherial_device_output"
-                                       name="peripherial_device_output"
-                                       data-maxlength="2"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="24" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Fire alarm output</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('fireAlarmOutput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1pdfao">PERIPHERY DEVICE</option>
-                            <option value="1ldfao">LOOP DEVICE</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="fireAlarmOutput"></div>
-
-                <div style="display: none" id="1ldfao">
-                    <fieldset>
-                        <legend>Loop Type</legend>
-
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div style="display: none" id="1pdfao">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="peripherial_device_address">Peripherial device address</label>
-                                <input type="number"
-                                       id="peripherial_device_address"
-                                       name="peripherial_device_address"
+                                       id="dev_channel"
+                                       name="dev_channel"
                                        data-maxlength="1"
                                        oninput="javascript: myFunction(this.id)"
                                        onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="6" />
+                                       value="1"
+                                       min="1"
+                                       max="4" />
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-item roww">
-                                <label for="peripherial_device_output">Peripherial device output</label>
+                                <label for="dev_addr">Device address</label>
                                 <input type="number"
-                                       id="peripherial_device_output"
-                                       name="peripherial_device_output"
-                                       data-maxlength="2"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
                                        oninput="javascript: myFunction(this.id)"
                                        onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="24" />
+                                       value="1"
+                                       min="1"
+                                       max="250" />
                             </div>
                         </div>
                     </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Dialer ACK input</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'dialerACKinput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1dacki">LOOP_DEVICE</option>
+                    </select>
                 </div>
-            </fieldset>
+            </div>
 
-            <fieldset>
-                <legend>Panel fault output</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('panelFaultOutput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1pdpfo">PERIPHERY DEVICE</option>
-                            <option value="1ldpfo">LOOP DEVICE</option>
-                        </select>
-                    </div>
-                </div>
+            <div id="dialerACKinput"></div>
 
-                <div id="panelFaultOutput"></div>
+            <div style="display: none" id="1dacki">
+                <fieldset>
+                    <legend>Loop Type</legend>
 
-                <div style="display: none" id="1ldpfo">
-                    <fieldset>
-                        <legend>Loop Type</legend>
-
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div style="display: none" id="1pdpfo">
-                    <div class="row align-items-center">
+                    <div id="showLoop" class="row align-items-center">
                         <div class="col">
                             <div class="form-item roww">
-                                <label for="peripherial_device_address">Peripherial device address</label>
+                                <label for="dev_addr_loop">Loop</label>
                                 <input type="number"
-                                       id="peripherial_device_address"
-                                       name="peripherial_device_address"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
                                        data-maxlength="1"
                                        oninput="javascript: myFunction(this.id)"
                                        onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="6" />
+                                       value="1"
+                                       min="1"
+                                       max="4" />
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-item roww">
-                                <label for="peripherial_device_output">Peripherial device output</label>
+                                <label for="dev_channel">Channel</label>
                                 <input type="number"
-                                       id="peripherial_device_output"
-                                       name="peripherial_device_output"
-                                       data-maxlength="2"
-                                       oninput="javascript: myFunction(this.id)"
-                                       onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="24" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Sabotage output</legend>
-                <div class="form-item roww p-0">
-                    <label for="state">State</label>
-                    <div class="select">
-                        <select id="state"
-                                name="state"
-                                onchange="javascript: loadDiv('sabotageOutput', this.value)">
-                            <option value="0">NONE</option>
-                            <option value="1pdso">PERIPHERY DEVICE</option>
-                            <option value="1ldso">LOOP DEVICE</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="sabotageOutput"></div>
-
-                <div style="display: none" id="1ldso">
-                    <fieldset>
-                        <legend>Loop Type</legend>
-
-                        <div id="showLoop" class="row align-items-center">
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr_loop">Loop</label>
-                                    <input type="number"
-                                           id="dev_addr_loop"
-                                           name="dev_addr_loop"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_channel">Channel</label>
-                                    <input type="number"
-                                           id="dev_channel"
-                                           name="dev_channel"
-                                           data-maxlength="1"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="4" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-item roww">
-                                    <label for="dev_addr">Device address</label>
-                                    <input type="number"
-                                           id="dev_addr"
-                                           name="dev_addr"
-                                           data-maxlength="3"
-                                           oninput="javascript: myFunction(this.id)"
-                                           onblur="javascript: myFunction2(this.id)"
-                                           value="1"
-                                           min="1"
-                                           max="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div style="display: none" id="1pdso">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="peripherial_device_address">Peripherial device address</label>
-                                <input type="number"
-                                       id="peripherial_device_address"
-                                       name="peripherial_device_address"
+                                       id="dev_channel"
+                                       name="dev_channel"
                                        data-maxlength="1"
                                        oninput="javascript: myFunction(this.id)"
                                        onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="6" />
+                                       value="1"
+                                       min="1"
+                                       max="4" />
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-item roww">
-                                <label for="peripherial_device_output">Peripherial device output</label>
+                                <label for="dev_addr">Device address</label>
                                 <input type="number"
-                                       id="peripherial_device_output"
-                                       name="peripherial_device_output"
-                                       data-maxlength="2"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
                                        oninput="javascript: myFunction(this.id)"
                                        onblur="javascript: myFunction2(this.id)"
-                                       value="0"
-                                       min="0"
-                                       max="24" />
+                                       value="1"
+                                       min="1"
+                                       max="250" />
                             </div>
                         </div>
                     </div>
-                </div>
-            </fieldset>
+                </fieldset>
+            </div>
+        </div>
 
-            <!--<div class="buttons-row mt15">
-                <button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>
-            </div>-->
-        </form>
+        <button class="fire collapsible">Dialer fault input</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'dialerFaultInput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1dfi">LOOP_DEVICE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="dialerFaultInput"></div>
+
+            <div style="display: none" id="1dfi">
+                <fieldset>
+                    <legend>Loop Type</legend>
+
+                    <div id="showLoop" class="row align-items-center">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr_loop">Loop</label>
+                                <input type="number"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_channel">Channel</label>
+                                <input type="number"
+                                       id="dev_channel"
+                                       name="dev_channel"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr">Device address</label>
+                                <input type="number"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="250" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Door unlock output</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'doorUnlockOutput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1pdduo">PERIPHERY DEVICE</option>
+                        <option value="1ldduo">LOOP DEVICE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="doorUnlockOutput"></div>
+
+            <div style="display: none" id="1ldduo">
+                <fieldset>
+                    <legend>Loop Type</legend>
+
+                    <div id="showLoop" class="row align-items-center">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr_loop">Loop</label>
+                                <input type="number"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_channel">Channel</label>
+                                <input type="number"
+                                       id="dev_channel"
+                                       name="dev_channel"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr">Device address</label>
+                                <input type="number"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="250" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div style="display: none" id="1pdduo">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_address">Peripherial device address</label>
+                            <input type="number"
+                                   id="peripherial_device_address"
+                                   name="peripherial_device_address"
+                                   data-maxlength="1"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="6" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_output">Peripherial device output</label>
+                            <input type="number"
+                                   id="peripherial_device_output"
+                                   name="peripherial_device_output"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="24" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Fire alarm output</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'fireAlarmOutput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1pdfao">PERIPHERY DEVICE</option>
+                        <option value="1ldfao">LOOP DEVICE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="fireAlarmOutput"></div>
+
+            <div style="display: none" id="1ldfao">
+                <fieldset>
+                    <legend>Loop Type</legend>
+
+                    <div id="showLoop" class="row align-items-center">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr_loop">Loop</label>
+                                <input type="number"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_channel">Channel</label>
+                                <input type="number"
+                                       id="dev_channel"
+                                       name="dev_channel"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr">Device address</label>
+                                <input type="number"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="250" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div style="display: none" id="1pdfao">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_address">Peripherial device address</label>
+                            <input type="number"
+                                   id="peripherial_device_address"
+                                   name="peripherial_device_address"
+                                   data-maxlength="1"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="6" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_output">Peripherial device output</label>
+                            <input type="number"
+                                   id="peripherial_device_output"
+                                   name="peripherial_device_output"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="24" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Panel fault output</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'panelFaultOutput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1pdpfo">PERIPHERY DEVICE</option>
+                        <option value="1ldpfo">LOOP DEVICE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="panelFaultOutput"></div>
+
+            <div style="display: none" id="1ldpfo">
+                <fieldset>
+                    <legend>Loop Type</legend>
+
+                    <div id="showLoop" class="row align-items-center">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr_loop">Loop</label>
+                                <input type="number"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_channel">Channel</label>
+                                <input type="number"
+                                       id="dev_channel"
+                                       name="dev_channel"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr">Device address</label>
+                                <input type="number"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="250" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div style="display: none" id="1pdpfo">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_address">Peripherial device address</label>
+                            <input type="number"
+                                   id="peripherial_device_address"
+                                   name="peripherial_device_address"
+                                   data-maxlength="1"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="6" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_output">Peripherial device output</label>
+                            <input type="number"
+                                   id="peripherial_device_output"
+                                   name="peripherial_device_output"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="24" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible">Sabotage output</button>
+        <div class="collapsible-content">
+            <div class="form-item roww p-0">
+                <label for="state">State</label>
+                <div class="select">
+                    <select id="state"
+                            name="state"
+                            onchange="javascript: loadDiv(this, 'sabotageOutput', this.value)">
+                        <option value="0">NONE</option>
+                        <option value="1pdso">PERIPHERY DEVICE</option>
+                        <option value="1ldso">LOOP DEVICE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="sabotageOutput"></div>
+
+            <div style="display: none" id="1ldso">
+                <fieldset>
+                    <legend>Loop Type</legend>
+
+                    <div id="showLoop" class="row align-items-center">
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr_loop">Loop</label>
+                                <input type="number"
+                                       id="dev_addr_loop"
+                                       name="dev_addr_loop"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_channel">Channel</label>
+                                <input type="number"
+                                       id="dev_channel"
+                                       name="dev_channel"
+                                       data-maxlength="1"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="4" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-item roww">
+                                <label for="dev_addr">Device address</label>
+                                <input type="number"
+                                       id="dev_addr"
+                                       name="dev_addr"
+                                       data-maxlength="3"
+                                       oninput="javascript: myFunction(this.id)"
+                                       onblur="javascript: myFunction2(this.id)"
+                                       value="1"
+                                       min="1"
+                                       max="250" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div style="display: none" id="1pdso">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_address">Peripherial device address</label>
+                            <input type="number"
+                                   id="peripherial_device_address"
+                                   name="peripherial_device_address"
+                                   data-maxlength="1"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="6" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="peripherial_device_output">Peripherial device output</label>
+                            <input type="number"
+                                   id="peripherial_device_output"
+                                   name="peripherial_device_output"
+                                   data-maxlength="2"
+                                   oninput="javascript: myFunction(this.id)"
+                                   onblur="javascript: myFunction2(this.id)"
+                                   value="0"
+                                   min="0"
+                                   max="24" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="buttons-row mt15">
+            <button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>
+        </div>-->
         <script>
             function myFunction(id) {
                 var element = document.getElementById(id);
@@ -645,17 +643,26 @@
                     element.value = element.max;
                 }
             }
-            function loadDiv(id, value) {
+            function loadDiv(it, id, value) {
                 var element = document.getElementById(value);
-                console.log(id, value);
+                var addElement = document.getElementById(id);
+                
                 switch (value) {
                     case "0":
-                        document.getElementById(id).innerHTML = "";
+                        addElement.innerHTML = "";
                         break;
                     default:
-                        document.getElementById(id).innerHTML = element.innerHTML;
+                        addElement.innerHTML = element.innerHTML;
                         break;
                 }
+                var addElementHeight = addElement.scrollHeight;
+                var content = it.parentNode.parentNode.parentNode;
+                content.clientHeight = content.clientHeight + 10 + "px";
+                content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
+
+                //console.log(id, value, //'element', element.innerHTML, 
+                //    'document.getElementById(id)', addElement,
+                //    'addElementHeight', addElementHeight, 'content', content);
             }
         </script>
     </div>
@@ -671,9 +678,9 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-                //$(document).ready(() => {
-                //    sendMessage("Devices|IRIS|FAT - FBF");
-                //});
+                    //$(document).ready(() => {
+                    //    sendMessage("Devices|IRIS|FAT - FBF");
+                    //});
     </script>
 </body>
 </html>
