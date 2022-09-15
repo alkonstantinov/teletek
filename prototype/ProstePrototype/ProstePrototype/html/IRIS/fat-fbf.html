@@ -657,8 +657,9 @@
                 }
                 var addElementHeight = addElement.scrollHeight;
                 var content = it.parentNode.parentNode.parentNode;
-                content.clientHeight = content.clientHeight + 10 + "px";
-                content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
+                if (content.classList.contains("collapsible-content")) {
+                    content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
+                }
 
                 //console.log(id, value, //'element', element.innerHTML, 
                 //    'document.getElementById(id)', addElement,

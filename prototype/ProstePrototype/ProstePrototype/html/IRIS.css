@@ -188,10 +188,19 @@ mb5r {
         max-width: 25%;
     }
 }
-/*, div[class^="col"]*/
+
 a[class^="col"] {
     padding-left: 2px;
     padding-right: 2px;
+}
+
+div[class^="someS"] {
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 0.9em;
 }
 
 .btnStyle {
@@ -202,7 +211,6 @@ a[class^="col"] {
     border-right: solid 3px #dfd9d9d2;*/
     margin-bottom: 0.25em;
     line-height: normal;
-    /*height: 98%;*/
     cursor: pointer;
     background-color: #0c2b90;
 }
@@ -247,15 +255,15 @@ i {
     color: white; /* #0c2b90;*/
 }
 
-#ctxMenu i {
+#ctxMenu i, .fa-xmark {
     color: #0c2b90;
 }
 
-#ctxMenu.fire i {
+#ctxMenu.fire i, .fa-xmark.fire {
     color: #b4210a;
 }
 
-#ctxMenu.grasse i {
+#ctxMenu.grasse i, fa-xmark.grasse {
     color: #08893a;
 }
 
@@ -353,6 +361,14 @@ fieldset {
     fieldset fieldset legend {
         font-size: 1rem;
     }
+
+        fieldset fieldset legend:before {
+            top: 0.3rem;
+        }
+
+        fieldset fieldset legend:after {
+            top: 0.8rem;
+        }
 
 .wrapper {
     position: relative;
@@ -707,9 +723,9 @@ button:focus {
     position: absolute;
     bottom: -10px;
     left: 0px;
-    height: 35px;
+    height: 15px;
     width: 100%;
-    border-bottom: 3px solid;
+    /*border-bottom: 3px solid;*/
     border-right: 4px solid;
     -webkit-transform: skew(-45deg);
     -moz-transform: skew(-45deg);

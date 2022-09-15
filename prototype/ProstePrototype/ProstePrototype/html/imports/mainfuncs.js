@@ -4,20 +4,23 @@ function sendMessageWPF(json) {
 }
 
 // collapsible part
-var coll = document.getElementsByClassName("collapsible");
-var i;
+function collapsible() {
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("cactive");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-        }
-    });
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("cactive");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
 }
+collapsible();
 
 // searching for menu context menu on the page - beginning of contextMenu part
 menuEl = document.getElementById("ctxMenu");
