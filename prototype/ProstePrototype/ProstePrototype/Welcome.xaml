@@ -11,7 +11,7 @@
         Title="Welcome" Height="320" Width="610" ShowInTaskbar="False">
 
     <!--Background="#8090aa"-->
-    <Border BorderBrush="#0c2b90" BorderThickness="1, 1, 4, 4" CornerRadius="2" Opacity="0.85">
+    <Border BorderBrush="#8090aa" BorderThickness="1" CornerRadius="0" Opacity="0.85">
         <Border.Background>
             <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.7,0">
                 <GradientStop Color="White" Offset="0.7"/>

@@ -822,7 +822,7 @@ label {
 p.fire {
     display: inline-flex;
     align-items: center;
-    /*font-weight: 700;*/
+    font-weight: 700;
     margin-left: 1rem;
 }
 

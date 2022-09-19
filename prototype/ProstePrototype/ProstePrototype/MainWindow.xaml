@@ -220,7 +220,7 @@
                     </Button>
                 </DockPanel>
                 <StackPanel Grid.Column="8" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
-                    <DockPanel Height="100" HorizontalAlignment="Left" >
+                    <DockPanel Height="100" HorizontalAlignment="Right" >
                         <Menu x:Name="languagesMenu" DockPanel.Dock="Top" VerticalAlignment="Center" Background="{Binding Background}" Foreground="{Binding Foreground}">
                             <MenuItem Margin="10,0,0,0" Height="100" Style="{StaticResource MenuItemStyle}">
                                 <MenuItem.Header >

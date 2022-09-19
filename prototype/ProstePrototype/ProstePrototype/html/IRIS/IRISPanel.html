@@ -14,1144 +14,1146 @@
 </head>
 <body>
     <div class="container" id="divMain">
-        <form action="">
-            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <div class="form-item roww disabled">
-                <label for="version">Ver.</label>
-                <input type="text" id="version" name="version" />
-            </div>
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <div class="form-item roww disabled">
+            <label for="version">Ver.</label>
+            <input type="text" id="version" name="version" />
+        </div>
 
+        <button class="fire collapsible ml-1">Delay Mode</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center">
+                <div class="col-3">
+                    <div class="form-item">
+                        <label for="sounder">Sounder</label>
+                        <div class="select">
+                            <select id="sounder"
+                                    name="sounder"
+                                    onchange="javascript: changeStyleDisplay('sounder')">
+                                <option value="off">OFF</option>
+                                <option value="on">ON</option>
+                                <option value="schedule">SCHEDULE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-item">
+                        <label for="fire-brigade">Fire Brigade</label>
+                        <div class="select">
+                            <select id="fire-brigade"
+                                    name="fire-brigade"
+                                    onchange="javascript: changeStyleDisplay('fire-brigade')">
+                                <option value="off">OFF</option>
+                                <option value="on">ON</option>
+                                <option value="schedule">SCHEDULE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-item">
+                        <label for="fire-protection">Fire Protection</label>
+                        <div class="select">
+                            <select id="fire-protection"
+                                    name="fire-protection"
+                                    onchange="javascript: changeStyleDisplay('fire-protection')">
+                                <option value="off">OFF</option>
+                                <option value="on">ON</option>
+                                <option value="schedule">SCHEDULE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-item">
+                        <label for="day-mode">Day Mode</label>
+                        <div class="select">
+                            <select id="day-mode"
+                                    name="day-mode"
+                                    onchange="javascript: changeStyleDisplay('day-mode')">
+                                <option value="off">OFF</option>
+                                <option value="on">ON</option>
+                                <option value="schedule">SCHEDULE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: none" id="sounder-schedule">
             <fieldset>
-                <legend>Delay Mode</legend>
-                <div class="row align-items-center">
-                    <div class="col-3">
-                        <div class="form-item">
-                            <label for="sounder">Sounder</label>
-                            <div class="select">
-                                <select id="sounder"
-                                        name="sounder"
-                                        onchange="javascript: changeStyleDisplay('sounder')">
-                                    <option value="off">OFF</option>
-                                    <option value="on">ON</option>
-                                    <option value="schedule">SCHEDULE</option>
-                                </select>
-                            </div>
+                <legend>Sounder Delay Schedule</legend>
+                <div class="row">
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Monday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-m-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-m-s"
+                                   name="activate-m-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item">
-                            <label for="fire-brigade">Fire Brigade</label>
-                            <div class="select">
-                                <select id="fire-brigade"
-                                        name="fire-brigade"
-                                        onchange="javascript: changeStyleDisplay('fire-brigade')">
-                                    <option value="off">OFF</option>
-                                    <option value="on">ON</option>
-                                    <option value="schedule">SCHEDULE</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item">
-                            <label for="fire-protection">Fire Protection</label>
-                            <div class="select">
-                                <select id="fire-protection"
-                                        name="fire-protection"
-                                        onchange="javascript: changeStyleDisplay('fire-protection')">
-                                    <option value="off">OFF</option>
-                                    <option value="on">ON</option>
-                                    <option value="schedule">SCHEDULE</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-item">
-                            <label for="day-mode">Day Mode</label>
-                            <div class="select">
-                                <select id="day-mode"
-                                        name="day-mode"
-                                        onchange="javascript: changeStyleDisplay('day-mode')">
-                                    <option value="off">OFF</option>
-                                    <option value="on">ON</option>
-                                    <option value="schedule">SCHEDULE</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <div style="display: none" id="sounder-schedule">
-                <fieldset>
-                    <legend>Sounder Delay Schedule</legend>
-                    <div class="row">
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Monday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-m-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-m-s"
-                                       name="activate-m-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-m-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-m-s"
-                                       name="deactivate-m-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thuesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-t-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-t-s"
-                                       name="activate-t-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-t-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-t-s"
-                                       name="deactivate-t-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Wednesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-w-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-w-s"
-                                       name="activate-w-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-w-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-w-s"
-                                       name="deactivate-w-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thursday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-th-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-th-s"
-                                       name="activate-th-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-th-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-th-s"
-                                       name="deactivate-th-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Friday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-f-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-f-s"
-                                       name="activate-f-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-f-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-f-s"
-                                       name="deactivate-f-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Saturday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-s-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-s-s"
-                                       name="activate-s-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-s-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-s-s"
-                                       name="deactivate-s-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Sunday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-su-s">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-su-s"
-                                       name="activate-su-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-su-s">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-su-s"
-                                       name="deactivate-su-s"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                    </div>
-                </fieldset>
-            </div>
-
-            <div style="display: none" id="fire-brigade-schedule">
-                <fieldset>
-                    <legend>Fire Brigade Delay Schedule</legend>
-                    <div class="row">
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Monday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-m-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-m-fb"
-                                       name="activate-m-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-m-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-m-fb"
-                                       name="deactivate-m-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thuesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-t-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-t-fb"
-                                       name="activate-t-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-t-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-t-fb"
-                                       name="deactivate-t-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Wednesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-w-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-w-fb"
-                                       name="activate-w-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-w-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-w-fb"
-                                       name="deactivate-w-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thursday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-th-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-th-fb"
-                                       name="activate-th-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-th-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-th-fb"
-                                       name="deactivate-th-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Friday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-f-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-f-fb"
-                                       name="activate-f-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-f-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-f-fb"
-                                       name="deactivate-f-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Saturday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-s-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-s-fb"
-                                       name="activate-s-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-s-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-s-fb"
-                                       name="deactivate-s-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Sunday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-su-fb">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-su-fb"
-                                       name="activate-su-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-su-fb">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-su-fb"
-                                       name="deactivate-su-fb"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                    </div>
-                </fieldset>
-            </div>
-
-            <div style="display: none" id="fire-protection-schedule">
-                <fieldset>
-                    <legend>Fire Protection Delay Schedule</legend>
-                    <div class="row">
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Monday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-m-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-m-fp"
-                                       name="activate-m-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-m-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-m-fp"
-                                       name="deactivate-m-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thuesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-t-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-t-fp"
-                                       name="activate-t-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-t-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-t-fp"
-                                       name="deactivate-t-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Wednesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-w-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-w-fp"
-                                       name="activate-w-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-w-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-w-fp"
-                                       name="deactivate-w-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thursday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-th-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-th-fp"
-                                       name="activate-th-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-th-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-th-fp"
-                                       name="deactivate-th-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Friday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-f-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-f-fp"
-                                       name="activate-f-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-f-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-f-fp"
-                                       name="deactivate-f-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Saturday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-s-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-s-fp"
-                                       name="activate-s-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-s-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-s-fp"
-                                       name="deactivate-s-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Sunday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-su-fp">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-su-fp"
-                                       name="activate-su-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-su-fp">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-su-fp"
-                                       name="deactivate-su-fp"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                    </div>
-                </fieldset>
-            </div>
-
-            <div style="display: none" id="day-mode-schedule">
-                <fieldset>
-                    <legend>Day/Night Schedule</legend>
-                    <div class="row">
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Monday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-m-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-m-dn"
-                                       name="activate-m-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-m-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-m-dn"
-                                       name="deactivate-m-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thuesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-t-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-t-dn"
-                                       name="activate-t-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-t-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-t-dn"
-                                       name="deactivate-t-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Wednesday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-w-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-w-dn"
-                                       name="activate-w-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-w-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-w-dn"
-                                       name="deactivate-w-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                            <legend>Thursday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-th-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-th-dn"
-                                       name="activate-th-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-th-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-th-dn"
-                                       name="deactivate-th-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Friday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-f-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-f-dn"
-                                       name="activate-f-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-f-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-f-dn"
-                                       name="deactivate-f-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Saturday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-s-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-s-dn"
-                                       name="activate-s-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-s-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-s-dn"
-                                       name="deactivate-s-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                            <legend>Sunday</legend>
-                            <div class="form-item roww mw">
-                                <label for="activate-su-dn">Activate</label>
-                                <input class="ml10p"
-                                       type="text"
-                                       id="activate-su-dn"
-                                       name="activate-su-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                            <div class="form-item roww mw">
-                                <label for="deactivate-su-dn">Deactivate</label>
-                                <input class="ml10"
-                                       type="text"
-                                       id="deactivate-su-dn"
-                                       name="deactivate-su-dn"
-                                       data-maxlength="5"
-                                       pattern="[0-9]{2}:[0-9]{2}"
-                                       oninput="javascript: myFunction3(this.id)"
-                                       placeholder="00:00" />
-                            </div>
-                        </fieldset>
-                    </div>
-                </fieldset>
-            </div>
-
-            <fieldset>
-                <legend>Parameters</legend>
-
-                <div class="row align-items-center m-1">
-                    <div class="col">
-                        <div class="form-item roww">
-                            <label for="sounders-mode">Sounders Mode</label>
-                            <div class="select">
-                                <select id="sounders-mode"
-                                        name="sounders-mode">
-                                    <option value="common">COMMON</option>
-                                    <option value="zonal">ZONAL</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="form-item roww">
-                            <label for="call-point-mode">Call Point Mode</label>
-                            <div class="select">
-                                <select id="call-point-mode"
-                                        name="call-point-mode">
-                                    <option value="common">COMMON</option>
-                                    <option value="zonal">ZONAL</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row align-items-center m-1">
-                    <div class="col">
-                        <div class="form-item roww">
-                            <label for="printer">Printer</label>
-                            <div class="select">
-                                <select id="printer"
-                                        name="printer">
-                                    <option value="kafka">KAFKA</option>
-                                    <option value="ep1000">EP1000</option>
-                                    <option value="iris_printer">IRIS printer</option>
-                                    <option value="fat_fbf">FAT/FBF</option>
-                                    <option value="espa_444">ESPA 444</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row align-items-center m-1">
-                    <div class="col">
-                        <div class="form-item roww">
-                            <label for="delay-t1">Delay (T1) [sec]</label>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-m-s">Deactivate</label>
                             <input class="ml10"
-                                   type="number"
-                                   id="delay-t1"
-                                   name="delay-t1"
-                                   data-maxlength="2"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   placeholder="0"
-                                   min="1"
-                                   max="60" />
+                                   type="text"
+                                   id="deactivate-m-s"
+                                   name="deactivate-m-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-item roww">
-                            <label for="evacuation_timeout">Evacuation Timeout (T3) [min]</label>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thuesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-t-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-t-s"
+                                   name="activate-t-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-t-s">Deactivate</label>
                             <input class="ml10"
-                                   type="number"
-                                   id="evacuation_timeout"
-                                   name="evacuation_timeout"
-                                   data-maxlength="2"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   placeholder="0"
-                                   min="1"
-                                   max="10" />
+                                   type="text"
+                                   id="deactivate-t-s"
+                                   name="deactivate-t-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Tone Settings</legend>
-                <div class="row align-items-center m-1">
-                    <div class="col-12 col-lg-4">
-                        <div class="form-item">
-                            <label for="tone_alarm">Tone Alarm</label>
-                            <div class="select">
-                                <select id="tone_alarm"
-                                        name="tone_alarm">
-                                    <option value="1">800 Hz - 970 Hz @ 1Hz</option>
-                                    <option value="2">970 Hz 1s OFF / 1s ON</option>
-                                    <option value="3">970 Hz 0.5s / 630 Hz, 0.5s</option>
-                                    <option value="4">554 Hz 0.1s / 440 Hz, 0.4s</option>
-                                    <option value="5">500-1200 Hz, 3.5s / 0.5s OFF</option>
-                                    <option value="6">420 Hz 0.625s ON / 0.625s OFF</option>
-                                    <option value="7">500-1200 Hz, 0.5s / OFF x 3/1.5s OFF</option>
-                                    <option value="8">550 Hz / 440 Hz @ 0.5 Hz</option>
-                                    <option value="9">970 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
-                                    <option value="10">2850 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
-                                    <option value="11">1200 Hz - 500 Hz @ 1 Hz</option>
-                                    <option value="12">400 Hz</option>
-                                    <option value="13">550 Hz, 0.7s / 1000 Hz, 0.33s</option>
-                                    <option value="14">1550 Hz - 2700 Hz @ 3 Hz</option>
-                                    <option value="15">750 Hz</option>
-                                    <option value="16">2400 Hz</option>
-                                    <option value="17">660 Hz</option>
-                                    <option value="18">660 Hz 1.8s ON / 1.8s OFF</option>
-                                    <option value="19">660 Hz 0.15s ON / 0.15s OFF</option>
-                                    <option value="20">510 Hz, 0.25s / 610 Hz, 0.25s</option>
-                                    <option value="21">800 / 1000 Hz 0.5s each (1 Hz)</option>
-                                    <option value="22">250 Hz - 1200 Hz @ 12 Hz</option>
-                                    <option value="23">500 Hz - 1200 Hz @ 0.33 Hz</option>
-                                    <option value="24">2400 Hz - 2900 Hz @ 9 Hz</option>
-                                    <option value="25" selected>2400 Hz - 2900 Hz @ 3 Hz</option>
-                                    <option value="26">800 Hz - 970 Hz @ 100 Hz</option>
-                                    <option value="27">800 Hz - 970 Hz @ 9 Hz</option>
-                                    <option value="28">800 Hz - 970 Hz @ 3 Hz</option>
-                                    <option value="29">800 Hz, 0.25s ON / 1s OFF</option>
-                                    <option value="30">500 Hz - 1200 Hz, 3.75s / 0.25s OFF</option>
-                                </select>
-                            </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Wednesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-w-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-w-s"
+                                   name="activate-w-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                        <div class="form-item">
-                            <label for="tone_evacuate">Tone Evacuate</label>
-                            <div class="select">
-                                <select id="tone_evacuate"
-                                        name="tone_evacuate">
-                                    <option value="1">800 Hz - 970 Hz @ 1Hz</option>
-                                    <option value="2">970 Hz 1s OFF / 1s ON</option>
-                                    <option value="3">970 Hz 0.5s / 630 Hz, 0.5s</option>
-                                    <option value="4">554 Hz 0.1s / 440 Hz, 0.4s</option>
-                                    <option value="5">500-1200 Hz, 3.5s / 0.5s OFF</option>
-                                    <option value="6">420 Hz 0.625s ON / 0.625s OFF</option>
-                                    <option value="7">500-1200 Hz, 0.5s / OFF x 3/1.5s OFF</option>
-                                    <option value="8">550 Hz / 440 Hz @ 0.5 Hz</option>
-                                    <option value="9">970 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
-                                    <option value="10">2850 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
-                                    <option value="11">1200 Hz - 500 Hz @ 1 Hz</option>
-                                    <option value="12">400 Hz</option>
-                                    <option value="13">550 Hz, 0.7s / 1000 Hz, 0.33s</option>
-                                    <option value="14">1550 Hz - 2700 Hz @ 3 Hz</option>
-                                    <option value="15">750 Hz</option>
-                                    <option value="16">2400 Hz</option>
-                                    <option value="17">660 Hz</option>
-                                    <option value="18">660 Hz 1.8s ON / 1.8s OFF</option>
-                                    <option value="19">660 Hz 0.15s ON / 0.15s OFF</option>
-                                    <option value="20">510 Hz, 0.25s / 610 Hz, 0.25s</option>
-                                    <option value="21">800 / 1000 Hz 0.5s each (1 Hz)</option>
-                                    <option value="22">250 Hz - 1200 Hz @ 12 Hz</option>
-                                    <option value="23">500 Hz - 1200 Hz @ 0.33 Hz</option>
-                                    <option value="24">2400 Hz - 2900 Hz @ 9 Hz</option>
-                                    <option value="25" selected>2400 Hz - 2900 Hz @ 3 Hz</option>
-                                    <option value="26">800 Hz - 970 Hz @ 100 Hz</option>
-                                    <option value="27">800 Hz - 970 Hz @ 9 Hz</option>
-                                    <option value="28">800 Hz - 970 Hz @ 3 Hz</option>
-                                    <option value="29">800 Hz, 0.25s ON / 1s OFF</option>
-                                    <option value="30">500 Hz - 1200 Hz, 3.75s / 0.25s OFF</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                        <div class="form-item">
-                            <label for="class_change_tone">Class Change Tone</label>
-                            <div class="select">
-                                <select id="class_change_tone"
-                                        name="class_change_tone">
-                                    <option value="1">800 Hz - 970 Hz @ 1Hz</option>
-                                    <option value="2">970 Hz 1s OFF / 1s ON</option>
-                                    <option value="3">970 Hz 0.5s / 630 Hz, 0.5s</option>
-                                    <option value="4">554 Hz 0.1s / 440 Hz, 0.4s</option>
-                                    <option value="5">500-1200 Hz, 3.5s / 0.5s OFF</option>
-                                    <option value="6">420 Hz 0.625s ON / 0.625s OFF</option>
-                                    <option value="7">500-1200 Hz, 0.5s / OFF x 3/1.5s OFF</option>
-                                    <option value="8">550 Hz / 440 Hz @ 0.5 Hz</option>
-                                    <option value="9" selected>970 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
-                                    <option value="10">2850 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
-                                    <option value="11">1200 Hz - 500 Hz @ 1 Hz</option>
-                                    <option value="12">400 Hz</option>
-                                    <option value="13">550 Hz, 0.7s / 1000 Hz, 0.33s</option>
-                                    <option value="14">1550 Hz - 2700 Hz @ 3 Hz</option>
-                                    <option value="15">750 Hz</option>
-                                    <option value="16">2400 Hz</option>
-                                    <option value="17">660 Hz</option>
-                                    <option value="18">660 Hz 1.8s ON / 1.8s OFF</option>
-                                    <option value="19">660 Hz 0.15s ON / 0.15s OFF</option>
-                                    <option value="20">510 Hz, 0.25s / 610 Hz, 0.25s</option>
-                                    <option value="21">800 / 1000 Hz 0.5s each (1 Hz)</option>
-                                    <option value="22">250 Hz - 1200 Hz @ 12 Hz</option>
-                                    <option value="23">500 Hz - 1200 Hz @ 0.33 Hz</option>
-                                    <option value="24">2400 Hz - 2900 Hz @ 9 Hz</option>
-                                    <option value="25">2400 Hz - 2900 Hz @ 3 Hz</option>
-                                    <option value="26">800 Hz - 970 Hz @ 100 Hz</option>
-                                    <option value="27">800 Hz - 970 Hz @ 9 Hz</option>
-                                    <option value="28">800 Hz - 970 Hz @ 3 Hz</option>
-                                    <option value="29">800 Hz, 0.25s ON / 1s OFF</option>
-                                    <option value="30">500 Hz - 1200 Hz, 3.75s / 0.25s OFF</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Auto Log Off</legend>
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="auto_log_off">Enabled</label>
-                            <input type="checkbox" id="auto_log_off" class="ml10" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-item roww">
-                            <label for="time_auto_log_off">Time Auto Log Off Installer [min]</label>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-w-s">Deactivate</label>
                             <input class="ml10"
-                                   type="number"
-                                   id="time_auto_log_off"
-                                   name="time_auto_log_off"
-                                   data-maxlength="2"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   placeholder="30"
-                                   min="1"
-                                   max="60" />
+                                   type="text"
+                                   id="deactivate-w-s"
+                                   name="deactivate-w-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Settings</legend>
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <div class="form-item">
-                            <label for="alarm_settings">Alarm Settings</label>
-                            <div class="select">
-                                <select id="alarm_settings"
-                                        name="alarm_settings">
-                                    <option value="sound_strobe">Sound / Strobe</option>
-                                    <option value="sound">Sound</option>
-                                    <option value="strobe">Strobe</option>
-                                    <option value="individual" selected>Individual</option>
-                                </select>
-                            </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thursday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-th-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-th-s"
+                                   name="activate-th-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-item">
-                            <label for="evacuate_settings">Evacuate Settings</label>
-                            <div class="select">
-                                <select id="evacuate_settings"
-                                        name="evacuate_settings">
-                                    <option value="sound_strobe" selected>Sound / Strobe</option>
-                                    <option value="sound">Sound</option>
-                                    <option value="strobe">Strobe</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Alert/EVAC Voice Cycle</legend>
-                <div class="row align-items-center">
-                    <div class="col-4">
-                        <div class="form-item">
-                            <label for="alert_evac_coice_cycle_on">ON [sec]</label>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-th-s">Deactivate</label>
                             <input class="ml10"
-                                   type="number"
-                                   id="alert_evac_coice_cycle_on"
-                                   name="alert_evac_coice_cycle_on"
-                                   data-maxlength="3"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   placeholder="0"
-                                   min="1"
-                                   max="600" />
+                                   type="text"
+                                   id="deactivate-th-s"
+                                   name="deactivate-th-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-item">
-                            <label for="alert_evac_coice_cycle_off">OFF [sec]</label>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Friday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-f-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-f-s"
+                                   name="activate-f-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-f-s">Deactivate</label>
                             <input class="ml10"
-                                   type="number"
-                                   id="alert_evac_coice_cycle_off"
-                                   name="alert_evac_coice_cycle_off"
-                                   data-maxlength="3"
-                                   oninput="javascript: myFunction(this.id)"
-                                   onblur="javascript: myFunction2(this.id)"
-                                   placeholder="0"
-                                   min="1"
-                                   max="600" />
+                                   type="text"
+                                   id="deactivate-f-s"
+                                   name="deactivate-f-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-item row roww pb10 align-items-center">
-                            <label for="on_off_inverted">ON/OFF Inverted</label>
-                            <input type="checkbox" id="on_off_inverted" class="ml10" />
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Saturday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-s-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-s-s"
+                                   name="activate-s-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                        <div class="form-item row roww pb10">
-                            <label for="resound_alarm">Resound Alarm</label>
-                            <input type="checkbox" id="resound_alarm" class="ml10" />
+                        <div class="form-item roww mw">
+                            <label for="deactivate-s-s">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-s-s"
+                                   name="deactivate-s-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
                         </div>
-                    </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Sunday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-su-s">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-su-s"
+                                   name="activate-su-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-su-s">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-su-s"
+                                   name="deactivate-su-s"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
                 </div>
             </fieldset>
+        </div>
 
+        <div style="display: none" id="fire-brigade-schedule">
             <fieldset>
-                <legend>Company Info</legend>
-                <div class="form-item p0">
-                    <input type="text" maxlength="40" name="row1" id="company name" placeholder="row1" />
-                </div>
-                <div class="form-item p0">
-                    <input type="text" maxlength="40" name="row2" id="address" placeholder="row2" />
-                </div>
-                <div class="form-item p0">
-                    <input type="text" maxlength="40" name="row3" id="contact person" placeholder="row3" />
-                </div>
-                <div class="form-item p0">
-                    <input type="text" maxlength="40" name="row4" id="contact details" placeholder="row4" />
+                <legend>Fire Brigade Delay Schedule</legend>
+                <div class="row">
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Monday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-m-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-m-fb"
+                                   name="activate-m-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-m-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-m-fb"
+                                   name="deactivate-m-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thuesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-t-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-t-fb"
+                                   name="activate-t-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-t-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-t-fb"
+                                   name="deactivate-t-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Wednesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-w-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-w-fb"
+                                   name="activate-w-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-w-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-w-fb"
+                                   name="deactivate-w-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thursday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-th-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-th-fb"
+                                   name="activate-th-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-th-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-th-fb"
+                                   name="deactivate-th-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Friday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-f-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-f-fb"
+                                   name="activate-f-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-f-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-f-fb"
+                                   name="deactivate-f-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Saturday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-s-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-s-fb"
+                                   name="activate-s-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-s-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-s-fb"
+                                   name="deactivate-s-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Sunday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-su-fb">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-su-fb"
+                                   name="activate-su-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-su-fb">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-su-fb"
+                                   name="deactivate-su-fb"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
                 </div>
             </fieldset>
-            <div class="buttons-row mt15">
-                <!--<button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>-->
+        </div>
+
+        <div style="display: none" id="fire-protection-schedule">
+            <fieldset>
+                <legend>Fire Protection Delay Schedule</legend>
+                <div class="row">
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Monday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-m-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-m-fp"
+                                   name="activate-m-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-m-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-m-fp"
+                                   name="deactivate-m-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thuesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-t-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-t-fp"
+                                   name="activate-t-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-t-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-t-fp"
+                                   name="deactivate-t-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Wednesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-w-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-w-fp"
+                                   name="activate-w-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-w-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-w-fp"
+                                   name="deactivate-w-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thursday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-th-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-th-fp"
+                                   name="activate-th-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-th-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-th-fp"
+                                   name="deactivate-th-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Friday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-f-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-f-fp"
+                                   name="activate-f-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-f-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-f-fp"
+                                   name="deactivate-f-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Saturday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-s-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-s-fp"
+                                   name="activate-s-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-s-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-s-fp"
+                                   name="deactivate-s-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Sunday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-su-fp">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-su-fp"
+                                   name="activate-su-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-su-fp">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-su-fp"
+                                   name="deactivate-su-fp"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+        </div>
+
+        <div style="display: none" id="day-mode-schedule">
+            <fieldset>
+                <legend>Day/Night Schedule</legend>
+                <div class="row">
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Monday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-m-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-m-dn"
+                                   name="activate-m-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-m-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-m-dn"
+                                   name="deactivate-m-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thuesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-t-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-t-dn"
+                                   name="activate-t-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-t-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-t-dn"
+                                   name="deactivate-t-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Wednesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-w-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-w-dn"
+                                   name="activate-w-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-w-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-w-dn"
+                                   name="deactivate-w-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thursday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-th-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-th-dn"
+                                   name="activate-th-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-th-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-th-dn"
+                                   name="deactivate-th-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Friday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-f-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-f-dn"
+                                   name="activate-f-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-f-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-f-dn"
+                                   name="deactivate-f-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Saturday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-s-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-s-dn"
+                                   name="activate-s-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-s-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-s-dn"
+                                   name="deactivate-s-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Sunday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-su-dn">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-su-dn"
+                                   name="activate-su-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-su-dn">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-su-dn"
+                                   name="deactivate-su-dn"
+                                   data-maxlength="5"
+                                   pattern="[0-9]{2}:[0-9]{2}"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+        </div>
+
+        <button class="fire collapsible ml-1">Parameters</button>
+        <div class="collapsible-content">
+
+            <div class="row align-items-center m-1">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="sounders-mode">Sounders Mode</label>
+                        <div class="select">
+                            <select id="sounders-mode"
+                                    name="sounders-mode">
+                                <option value="common">COMMON</option>
+                                <option value="zonal">ZONAL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="call-point-mode">Call Point Mode</label>
+                        <div class="select">
+                            <select id="call-point-mode"
+                                    name="call-point-mode">
+                                <option value="common">COMMON</option>
+                                <option value="zonal">ZONAL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
+
+            <div class="row align-items-center m-1">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="printer">Printer</label>
+                        <div class="select">
+                            <select id="printer"
+                                    name="printer">
+                                <option value="kafka">KAFKA</option>
+                                <option value="ep1000">EP1000</option>
+                                <option value="iris_printer">IRIS printer</option>
+                                <option value="fat_fbf">FAT/FBF</option>
+                                <option value="espa_444">ESPA 444</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center m-1">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="delay-t1">Delay (T1) [sec]</label>
+                        <input class="ml10"
+                               type="number"
+                               id="delay-t1"
+                               name="delay-t1"
+                               data-maxlength="2"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               placeholder="0"
+                               min="1"
+                               max="60" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="evacuation_timeout">Evacuation Timeout (T3) [min]</label>
+                        <input class="ml10"
+                               type="number"
+                               id="evacuation_timeout"
+                               name="evacuation_timeout"
+                               data-maxlength="2"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               placeholder="0"
+                               min="1"
+                               max="10" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible ml-1">Tone Settings</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center m-1">
+                <div class="col-12 col-lg-4">
+                    <div class="form-item">
+                        <label for="tone_alarm">Tone Alarm</label>
+                        <div class="select">
+                            <select id="tone_alarm"
+                                    name="tone_alarm">
+                                <option value="1">800 Hz - 970 Hz @ 1Hz</option>
+                                <option value="2">970 Hz 1s OFF / 1s ON</option>
+                                <option value="3">970 Hz 0.5s / 630 Hz, 0.5s</option>
+                                <option value="4">554 Hz 0.1s / 440 Hz, 0.4s</option>
+                                <option value="5">500-1200 Hz, 3.5s / 0.5s OFF</option>
+                                <option value="6">420 Hz 0.625s ON / 0.625s OFF</option>
+                                <option value="7">500-1200 Hz, 0.5s / OFF x 3/1.5s OFF</option>
+                                <option value="8">550 Hz / 440 Hz @ 0.5 Hz</option>
+                                <option value="9">970 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
+                                <option value="10">2850 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
+                                <option value="11">1200 Hz - 500 Hz @ 1 Hz</option>
+                                <option value="12">400 Hz</option>
+                                <option value="13">550 Hz, 0.7s / 1000 Hz, 0.33s</option>
+                                <option value="14">1550 Hz - 2700 Hz @ 3 Hz</option>
+                                <option value="15">750 Hz</option>
+                                <option value="16">2400 Hz</option>
+                                <option value="17">660 Hz</option>
+                                <option value="18">660 Hz 1.8s ON / 1.8s OFF</option>
+                                <option value="19">660 Hz 0.15s ON / 0.15s OFF</option>
+                                <option value="20">510 Hz, 0.25s / 610 Hz, 0.25s</option>
+                                <option value="21">800 / 1000 Hz 0.5s each (1 Hz)</option>
+                                <option value="22">250 Hz - 1200 Hz @ 12 Hz</option>
+                                <option value="23">500 Hz - 1200 Hz @ 0.33 Hz</option>
+                                <option value="24">2400 Hz - 2900 Hz @ 9 Hz</option>
+                                <option value="25" selected>2400 Hz - 2900 Hz @ 3 Hz</option>
+                                <option value="26">800 Hz - 970 Hz @ 100 Hz</option>
+                                <option value="27">800 Hz - 970 Hz @ 9 Hz</option>
+                                <option value="28">800 Hz - 970 Hz @ 3 Hz</option>
+                                <option value="29">800 Hz, 0.25s ON / 1s OFF</option>
+                                <option value="30">500 Hz - 1200 Hz, 3.75s / 0.25s OFF</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="form-item">
+                        <label for="tone_evacuate">Tone Evacuate</label>
+                        <div class="select">
+                            <select id="tone_evacuate"
+                                    name="tone_evacuate">
+                                <option value="1">800 Hz - 970 Hz @ 1Hz</option>
+                                <option value="2">970 Hz 1s OFF / 1s ON</option>
+                                <option value="3">970 Hz 0.5s / 630 Hz, 0.5s</option>
+                                <option value="4">554 Hz 0.1s / 440 Hz, 0.4s</option>
+                                <option value="5">500-1200 Hz, 3.5s / 0.5s OFF</option>
+                                <option value="6">420 Hz 0.625s ON / 0.625s OFF</option>
+                                <option value="7">500-1200 Hz, 0.5s / OFF x 3/1.5s OFF</option>
+                                <option value="8">550 Hz / 440 Hz @ 0.5 Hz</option>
+                                <option value="9">970 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
+                                <option value="10">2850 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
+                                <option value="11">1200 Hz - 500 Hz @ 1 Hz</option>
+                                <option value="12">400 Hz</option>
+                                <option value="13">550 Hz, 0.7s / 1000 Hz, 0.33s</option>
+                                <option value="14">1550 Hz - 2700 Hz @ 3 Hz</option>
+                                <option value="15">750 Hz</option>
+                                <option value="16">2400 Hz</option>
+                                <option value="17">660 Hz</option>
+                                <option value="18">660 Hz 1.8s ON / 1.8s OFF</option>
+                                <option value="19">660 Hz 0.15s ON / 0.15s OFF</option>
+                                <option value="20">510 Hz, 0.25s / 610 Hz, 0.25s</option>
+                                <option value="21">800 / 1000 Hz 0.5s each (1 Hz)</option>
+                                <option value="22">250 Hz - 1200 Hz @ 12 Hz</option>
+                                <option value="23">500 Hz - 1200 Hz @ 0.33 Hz</option>
+                                <option value="24">2400 Hz - 2900 Hz @ 9 Hz</option>
+                                <option value="25" selected>2400 Hz - 2900 Hz @ 3 Hz</option>
+                                <option value="26">800 Hz - 970 Hz @ 100 Hz</option>
+                                <option value="27">800 Hz - 970 Hz @ 9 Hz</option>
+                                <option value="28">800 Hz - 970 Hz @ 3 Hz</option>
+                                <option value="29">800 Hz, 0.25s ON / 1s OFF</option>
+                                <option value="30">500 Hz - 1200 Hz, 3.75s / 0.25s OFF</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="form-item">
+                        <label for="class_change_tone">Class Change Tone</label>
+                        <div class="select">
+                            <select id="class_change_tone"
+                                    name="class_change_tone">
+                                <option value="1">800 Hz - 970 Hz @ 1Hz</option>
+                                <option value="2">970 Hz 1s OFF / 1s ON</option>
+                                <option value="3">970 Hz 0.5s / 630 Hz, 0.5s</option>
+                                <option value="4">554 Hz 0.1s / 440 Hz, 0.4s</option>
+                                <option value="5">500-1200 Hz, 3.5s / 0.5s OFF</option>
+                                <option value="6">420 Hz 0.625s ON / 0.625s OFF</option>
+                                <option value="7">500-1200 Hz, 0.5s / OFF x 3/1.5s OFF</option>
+                                <option value="8">550 Hz / 440 Hz @ 0.5 Hz</option>
+                                <option value="9" selected>970 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
+                                <option value="10">2850 Hz, 0.5s ON / 0.5s OFF x 3/1.5s OFF</option>
+                                <option value="11">1200 Hz - 500 Hz @ 1 Hz</option>
+                                <option value="12">400 Hz</option>
+                                <option value="13">550 Hz, 0.7s / 1000 Hz, 0.33s</option>
+                                <option value="14">1550 Hz - 2700 Hz @ 3 Hz</option>
+                                <option value="15">750 Hz</option>
+                                <option value="16">2400 Hz</option>
+                                <option value="17">660 Hz</option>
+                                <option value="18">660 Hz 1.8s ON / 1.8s OFF</option>
+                                <option value="19">660 Hz 0.15s ON / 0.15s OFF</option>
+                                <option value="20">510 Hz, 0.25s / 610 Hz, 0.25s</option>
+                                <option value="21">800 / 1000 Hz 0.5s each (1 Hz)</option>
+                                <option value="22">250 Hz - 1200 Hz @ 12 Hz</option>
+                                <option value="23">500 Hz - 1200 Hz @ 0.33 Hz</option>
+                                <option value="24">2400 Hz - 2900 Hz @ 9 Hz</option>
+                                <option value="25">2400 Hz - 2900 Hz @ 3 Hz</option>
+                                <option value="26">800 Hz - 970 Hz @ 100 Hz</option>
+                                <option value="27">800 Hz - 970 Hz @ 9 Hz</option>
+                                <option value="28">800 Hz - 970 Hz @ 3 Hz</option>
+                                <option value="29">800 Hz, 0.25s ON / 1s OFF</option>
+                                <option value="30">500 Hz - 1200 Hz, 3.75s / 0.25s OFF</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible ml-1">Auto Log Off</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center">
+                <div class="col-6 align-items-center">
+                    <p class="fire m-0">
+                        Enabled
+                        <label class="switch">
+                            <input type="checkbox" id="gr_input_logic_1" />
+                            <span class="slider"></span>
+                        </label>
+                        Disabled
+                    </p>
+                </div>
+                <div class="col-6">
+                    <div class="form-item roww">
+                        <label for="time_auto_log_off">Time Auto Log Off Installer [min]</label>
+                        <input class="ml10"
+                               type="number"
+                               id="time_auto_log_off"
+                               name="time_auto_log_off"
+                               data-maxlength="2"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               placeholder="30"
+                               min="1"
+                               max="60" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible ml-1">Settings</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <div class="form-item">
+                        <label for="alarm_settings">Alarm Settings</label>
+                        <div class="select">
+                            <select id="alarm_settings"
+                                    name="alarm_settings">
+                                <option value="sound_strobe">Sound / Strobe</option>
+                                <option value="sound">Sound</option>
+                                <option value="strobe">Strobe</option>
+                                <option value="individual" selected>Individual</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-item">
+                        <label for="evacuate_settings">Evacuate Settings</label>
+                        <div class="select">
+                            <select id="evacuate_settings"
+                                    name="evacuate_settings">
+                                <option value="sound_strobe" selected>Sound / Strobe</option>
+                                <option value="sound">Sound</option>
+                                <option value="strobe">Strobe</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fire collapsible ml-1">Alert/EVAC Voice Cycle</button>
+        <div class="collapsible-content">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="form-item">
+                        <label for="alert_evac_coice_cycle_on">ON [sec]</label>
+                        <input class="ml10"
+                               type="number"
+                               id="alert_evac_coice_cycle_on"
+                               name="alert_evac_coice_cycle_on"
+                               data-maxlength="3"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               placeholder="0"
+                               min="1"
+                               max="600" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-item">
+                        <label for="alert_evac_coice_cycle_off">OFF [sec]</label>
+                        <input class="ml10"
+                               type="number"
+                               id="alert_evac_coice_cycle_off"
+                               name="alert_evac_coice_cycle_off"
+                               data-maxlength="3"
+                               oninput="javascript: myFunction(this.id)"
+                               onblur="javascript: myFunction2(this.id)"
+                               placeholder="0"
+                               min="1"
+                               max="600" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-item row roww pb10 align-items-center">
+                        <label for="on_off_inverted">ON/OFF Inverted</label>
+                        <input type="checkbox" id="on_off_inverted" class="ml10" />
+                    </div>
+                    <div class="form-item row roww pb10">
+                        <label for="resound_alarm">Resound Alarm</label>
+                        <input type="checkbox" id="resound_alarm" class="ml10" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <fieldset>
+            <legend>Company Info</legend>
+            <div class="form-item p0">
+                <input type="text" maxlength="40" name="row1" id="company name" placeholder="row1" />
+            </div>
+            <div class="form-item p0">
+                <input type="text" maxlength="40" name="row2" id="address" placeholder="row2" />
+            </div>
+            <div class="form-item p0">
+                <input type="text" maxlength="40" name="row3" id="contact person" placeholder="row3" />
+            </div>
+            <div class="form-item p0">
+                <input type="text" maxlength="40" name="row4" id="contact details" placeholder="row4" />
+            </div>
+        </fieldset>
+        <div class="buttons-row mt15">
+            <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+        </div>
         <script>
             function myFunction(id) {
                 var element = document.getElementById(id);
