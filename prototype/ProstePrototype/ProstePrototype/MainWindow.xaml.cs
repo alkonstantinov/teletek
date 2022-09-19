@@ -159,12 +159,30 @@ namespace ProstePrototype
             }
             mainGrid.Background = new SolidColorBrush(bgd);
             mainPanel.Background = new SolidColorBrush(bgd);
-            //title.Background = new SolidColorBrush(bgd);
-            //title.Foreground = new SolidColorBrush(fgd);
-            topMenu.Background = new SolidColorBrush(bgd);
-            topMenu.Foreground = new SolidColorBrush(fgd);
+            fileMenu.Background = new SolidColorBrush(bgd);
+            fileMenu.Foreground = new SolidColorBrush(fgd);
+            languagesMenu.Background = new SolidColorBrush(bgd);
+            languagesMenu.Foreground = new SolidColorBrush(fgd);
+            log_btn.Background = new SolidColorBrush(bgd);
+            log_btn.Foreground = new SolidColorBrush(fgd);
+            clock_btn.Background = new SolidColorBrush(bgd);
+            clock_btn.Foreground = new SolidColorBrush(fgd);
+            verify_btn.Background = new SolidColorBrush(bgd);
+            verify_btn.Foreground = new SolidColorBrush(fgd);
+            //save_as_btn.Background = new SolidColorBrush(bgd);
+            //save_as_btn.Foreground = new SolidColorBrush(fgd);
+            scan_btn.Background = new SolidColorBrush(bgd);
+            scan_btn.Foreground = new SolidColorBrush(fgd);
+            export_btn.Background = new SolidColorBrush(bgd);
+            export_btn.Foreground = new SolidColorBrush(fgd);
+            settings_btn.Background = new SolidColorBrush(bgd);
+            settings_btn.Foreground = new SolidColorBrush(fgd);
             changeTheme_btn.Background = new SolidColorBrush(bgd);
             changeTheme_btn.Foreground = new SolidColorBrush(fgd);
+            update_btn.Background = new SolidColorBrush(bgd);
+            update_btn.Foreground = new SolidColorBrush(fgd);
+            help_btn.Background = new SolidColorBrush(bgd);
+            help_btn.Foreground = new SolidColorBrush(fgd);
             minimize_btn.Background = new SolidColorBrush(bgd);
             minimize_btn.Foreground = new SolidColorBrush(fgd);
             maximize_btn.Background = new SolidColorBrush(bgd);
@@ -265,9 +283,9 @@ namespace ProstePrototype
                 {
                     if (Splitter1.Width == 0)
                     {
-                        gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
+                        gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 4);
                         wb2.Margin = new Thickness(0);
-                        wb1.MinWidth = this.Width / 6;
+                        wb1.MinWidth = this.Width / 4;
                         Splitter1.Width = 5;
                         gsp3.Height = 3;
                     }
@@ -279,7 +297,7 @@ namespace ProstePrototype
                 this.Dispatcher.Invoke(() =>
                 {
                     gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-                    wb2.Margin = new Thickness(this.Width / 5, 0, 0, 0);
+                    wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
                     wb1.Width = 0;
                     Splitter1.Width = 0;
                     gsp3.Height = 0;
@@ -361,16 +379,16 @@ namespace ProstePrototype
                 if (myFile == firstFile)
                 {
                     gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-                    wb2.Margin = new Thickness(this.Width / 5, 0, 0, 0);
+                    wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
                     wb1.Width = 0; //if index.html is loaded
                     Splitter1.Width = 0; //if index.html is loaded
                     gsp3.Height = 0;
                 }
                 else if (Splitter1.Width == 0)
                 {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 6);
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 4);
                     wb2.Margin = new Thickness(0);
-                    wb1.MinWidth = this.Width / 6;
+                    wb1.MinWidth = this.Width / 4;
                     Splitter1.Width = 5;
                     gsp3.Height = 3;
                 }
@@ -379,7 +397,7 @@ namespace ProstePrototype
             else
             {
                 gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-                wb2.Margin = new Thickness(this.Width / 5, 0, 0, 0);
+                wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
                 wb1.Width = 0; //if index.html is loaded
                 Splitter1.Width = 0; //if index.html is loaded
                 gsp3.Height = 0;

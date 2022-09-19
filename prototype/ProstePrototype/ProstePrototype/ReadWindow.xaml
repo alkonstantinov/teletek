@@ -62,7 +62,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type TabItem}">
-                                    <Border Name="Border" BorderBrush="#777" BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" Margin="0,0,0,-1">
+                                    <Border Name="Border" BorderBrush="#777" BorderThickness="1,1,1,0" CornerRadius="2,2,0,0" Margin="0,0,0,-1">
                                         <ContentPresenter x:Name="ContentSite"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
@@ -282,7 +282,7 @@
                             <TextBlock Text="Connect" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="8"/>
+                                    <Setter Property="CornerRadius" Value="2"/>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -292,7 +292,7 @@
                             <TextBlock Text="Close" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="8"/>
+                                    <Setter Property="CornerRadius" Value="2"/>
                                 </Style>
                             </Button.Resources>
                         </Button>                            

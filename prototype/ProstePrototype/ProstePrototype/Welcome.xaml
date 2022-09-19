@@ -8,10 +8,10 @@
         ResizeMode="NoResize"
         WindowState="Normal" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Topmost="True"
-        Title="Welcome" Height="300" Width="600" ShowInTaskbar="False">
+        Title="Welcome" Height="320" Width="610" ShowInTaskbar="False">
 
     <!--Background="#8090aa"-->
-    <Border BorderBrush="#8090aa" BorderThickness="0" CornerRadius="2" Opacity="0.85">
+    <Border BorderBrush="#0c2b90" BorderThickness="1, 1, 4, 4" CornerRadius="2" Opacity="0.85">
         <Border.Background>
             <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.7,0">
                 <GradientStop Color="White" Offset="0.7"/>
@@ -24,15 +24,47 @@
                 <GradientStop Color="White" Offset="0"/>
             </LinearGradientBrush>
         </Border.OpacityMask>
-        <StackPanel VerticalAlignment="Bottom">
-            <Image Source="pack://application:,,,/Images/teletek_logo_m.png" Width="400" Height="80" Margin="0, 0, 0, -20" AutomationProperties.IsOffscreenBehavior="Onscreen" >
+        <StackPanel>            
+            <!--<TextBlock FontSize="18" Foreground="#eee" TextAlignment="Center" Margin="0, 4, 0, 0"><Run Text="Teletek Electronics"/></TextBlock>
+            <TextBlock FontSize="18" Foreground="#eee" TextAlignment="Center"><Run Text="Programming Software ver 6.1"/></TextBlock>-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.1*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="200" Height="100" Fill="#ec454e" Margin="10, 10, 0, 0"/>
+                    <Image Grid.Column="0" Source="/Images/Addressables-resized.png" Width="200" Height="100"/>
+                    <Rectangle Grid.Column="1" Width="176" Height="100" Fill="#1e73be" Margin="10, 10, 0, 0"/>
+                    <Image Grid.Column="1" Source="/Images/SOT_Bravo_7-resized.png" Width="200" Height="100" />
+                    <Rectangle Grid.Column="2" Width="175" Height="100" Fill="#08893a" Margin="10, 10, 0, 0"/>
+                    <Image Grid.Column="2" Source="/Images/TTE_Combo-resized.png" Width="200" Height="100"/>
+
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.1*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="200" Height="100" Fill="#ec454e" Margin="10, 10, 0, 0"/>
+                    <Image Grid.Column="0" Source="/Images/convectional_5-resized.png" Width="200" Height="100"/>
+                    <Rectangle Grid.Column="1" Width="175" Height="100" Fill="#1e73be" Margin="10, 10, 0, 0"/>
+                    <Image Grid.Column="1" Source="/Images/SOT_Eclipse_5-resized.png" Width="200" Height="100" />
+                    <Rectangle Grid.Column="2" Width="175" Height="100" Fill="#08893a" Margin="10, 10, 0, 0"/>
+                    <Image Grid.Column="2" Source="/Images/TTE-GPRS-Standard-resized.png" Width="200" Height="100"/>
+                </Grid>
+            </Grid>
+            <Image Source="pack://application:,,,/Images/teletek_logo_m.png" Width="400" Height="80" Margin="0, 10, 0, -20" AutomationProperties.IsOffscreenBehavior="Onscreen" >
                 <Image.Effect>
                     <DropShadowEffect/>
                 </Image.Effect>
             </Image>
-            <TextBlock FontSize="20" Foreground="#eee" TextAlignment="Center" Margin="0, 15, 0, 0"><Run Text="Teletek Electronics"/></TextBlock>
-            <TextBlock FontSize="20" Foreground="#eee" TextAlignment="Center"><Run Text="Programming Software version 6.1"/></TextBlock>
-            <Image Source="/Images/ProsTE.png" Width="80" Height="80" Margin="0, 35, 0, 0"/>
             <TextBlock FontSize="12" Foreground="#332" TextAlignment="Center" Margin="0, 10, 0, 0"><Run Text="© Teletek Electronics JSC., 2022"/></TextBlock>
         </StackPanel>
     </Border>

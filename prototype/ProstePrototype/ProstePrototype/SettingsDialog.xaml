@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="SettingsDialog" Height="350" Width="400"
         WindowStyle="None" WindowStartupLocation ="CenterScreen">
+    
     <Grid x:Name="mainGrid" Background="{Binding Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -45,7 +46,7 @@
                             <TextBlock Text="OK" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="8"/>
+                                    <Setter Property="CornerRadius" Value="2"/>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -55,7 +56,7 @@
                             <TextBlock Text="Close" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="8"/>
+                                    <Setter Property="CornerRadius" Value="2"/>
                                 </Style>
                             </Button.Resources>
                         </Button>
@@ -65,7 +66,7 @@
                             <TextBlock Text="Help" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="8"/>
+                                    <Setter Property="CornerRadius" Value="2"/>
                                 </Style>
                             </Button.Resources>
                         </Button>

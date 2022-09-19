@@ -16,21 +16,22 @@
     <div class="container fullHeight" id="divMain">
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
         <div class="row pt-2 fullHeight">
-            <div class="col-2 bl fire scroll">
+            <div class="col-3 bl fire scroll">
                 <div id="new_input" class="row">
                     <div class="col-11 pr-1">
                         <a href="javascript:showInput('1')" onclick="javascript:addActive()">
                             <div class="btnStyle fire">
-                                <img src="../../Images/1010.Inputs.ico" alt="" width="35" height="35" class="m15" />
-                                <div class="someS">
-                                    <h5>Input 1</h5>
-                                </div>
+                                <i class="fa fa-arrow-down fa-3x colored p15" aria-hidden="true">
+                                    <br /><span class="someS">
+                                        <span class="h5">Input 1</span>
+                                    </span>
+                                </i>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <div id="selected_area"></div>
             </div>
 
@@ -525,6 +526,7 @@
                 if (content.classList.contains("collapsible-content")) {
                     content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
                 }
+                addVisitedBackground();
             }
 
             function changeStyleDisplay(id) {
@@ -812,6 +814,7 @@
                                         </div>`;
                 el.innerHTML = target;
                 collapsible();
+                addVisitedBackground();
             }
 
             var lst = [1];
@@ -834,10 +837,11 @@
                                                                         <div class="col-11 pr-1">
                                                                             <a href="javascript:showInput('${last}')" onclick="javascript:addActive()">
                                                                                 <div class="btnStyle fire">
-                                                                                    <img src="../../Images/1010.Inputs.ico" alt="" width="35" height="35" class="m15" />
-                                                                                    <div class="someS">
-                                                                                        <h5>Input ${last}</h5>
-                                                                                    </div>
+                                                                                    <i class="fa fa-arrow-down fa-3x colored p15" aria-hidden="true">
+                                                                                        <br /><span class="someS">
+                                                                                            <span class="h5">Input ${last}</span>
+                                                                                        </span>
+                                                                                    </i>
                                                                                 </div>
                                                                             </a>
                                                                         </div>

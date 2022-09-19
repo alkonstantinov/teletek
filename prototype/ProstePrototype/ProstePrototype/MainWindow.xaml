@@ -6,64 +6,253 @@
 		xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf" 
         xmlns:local="clr-namespace:ProstePrototype"
         mc:Ignorable="d"
-		Title="T-Manager 6.1" Height="768" Width="1300"
-		WindowStyle="None"        
+		Title="T-Manager 6.1" Height="768" Width="1400"
+		WindowStyle="None"
 		>
     <!-- WindowState="Maximized" -->
-    <Window.CommandBindings>
-        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
-    </Window.CommandBindings>
-    <Window.Resources>
-        <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
-        <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type MenuItem}">
-                        <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <Grid VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
+    
+        <Window.CommandBindings>
+            <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+        </Window.CommandBindings>
+        <Window.Resources>
+            <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
+            <Style x:Key="FileStyle" TargetType="{x:Type MenuItem}">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type MenuItem}">
+                            <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <Grid VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
 									   HorizontalOffset="1" VerticalOffset="-1">
-                                    <Border Background="{Binding ElementName=topMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
-                                        <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                        </ScrollViewer>
-                                    </Border>
-                                </Popup>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-    </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="29" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
-        <Grid x:Name="mainGrid" Background="{Binding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="45" />
-            </Grid.ColumnDefinitions>
-            <StackPanel x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
+                                        <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+                                            <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </ScrollViewer>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Languages"/>
+                                <!--!!!Hardcoded Tooltip-->
+                            </StackPanel>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="FileMainStyle" TargetType="{x:Type MenuItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type MenuItem}">
+                            <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <Grid VerticalAlignment="Center">
+                                    <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
+									   HorizontalOffset="1" VerticalOffset="-1">
+                                        <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+                                            <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </ScrollViewer>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="File"/>
+                                <!--!!!Hardcoded Tooltip-->
+                            </StackPanel>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Window.Resources>
+    <Border BorderBrush="#8090aa" BorderThickness="0" CornerRadius="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="29" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="mainGrid" Background="{Binding Background}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Image Source="/Images/teletek_logo_m.png" Margin="10,0,0,-25" Width="380" Height="75" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown"/>
+
+                <DockPanel Grid.Column="1" >
+                    <Button x:Name="scan_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Scan</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+
+                <DockPanel Grid.Column="2">
+                    <Button x:Name="export_btn" Click="Export_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Export</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+
+                <StackPanel Grid.Column="3" x:Name="filePanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
+                    <DockPanel Height="100">
+                        <Menu x:Name="fileMenu" DockPanel.Dock="Top" Height="100" VerticalAlignment="Center" Background="{Binding Background}" Foreground="{Binding Foreground}">
+                            <Menu.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </Menu.ItemsPanel>
+                            <MenuItem Style="{StaticResource FileMainStyle}">
+                                <MenuItem.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </MenuItem.ItemsPanel>
+                                <MenuItem.Header >
+                                    <DockPanel>
+                                        <TextBlock Text="&#xe185;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+                                    </DockPanel>
+                                </MenuItem.Header>
+                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="New">
+                                    <MenuItem.Header>
+                                        <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom" Padding="0, 20"></TextBlock>
+                                    </MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Click="Open_Clicked" Style="{StaticResource FileStyle}" ToolTip="Open">
+                                    <MenuItem.Header>
+                                        <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                    </MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="Save">
+                                    <MenuItem.Header>
+                                        <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                    </MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Click="SaveAs_Clicked" Style="{StaticResource FileStyle}" ToolTip="Save As">
+                                    <MenuItem.Header>
+                                        <TextBlock Text="&#xf570;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                    </MenuItem.Header>
+                                </MenuItem>
+                            </MenuItem>
+                        </Menu>
+                    </DockPanel>
+                </StackPanel>
+
+                <DockPanel Grid.Column="4">
+                    <Button x:Name="log_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Log</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+                <DockPanel Grid.Column="5">
+                    <Button x:Name="clock_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Clock/Date</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+                <DockPanel Grid.Column="6">
+                    <Button x:Name="verify_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Verify</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+
+                <DockPanel Grid.Column="7">
+                    <Button x:Name="settings_btn" Click="SettingsClicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Settings</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+                <StackPanel Grid.Column="8" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
+                    <DockPanel Height="100" HorizontalAlignment="Left" >
+                        <Menu x:Name="languagesMenu" DockPanel.Dock="Top" VerticalAlignment="Center" Background="{Binding Background}" Foreground="{Binding Foreground}">
+                            <MenuItem Margin="10,0,0,0" Height="100" Style="{StaticResource MenuItemStyle}">
+                                <MenuItem.Header >
+                                    <DockPanel>
+                                        <TextBlock Text="&#xf1ab;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+                                    </DockPanel>
+                                </MenuItem.Header>
+                                <MenuItem Header="_English">
+                                    <MenuItem.Icon>
+                                        <Image Source="/html/gb-eng.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="_German">
+                                    <MenuItem.Icon>
+                                        <Image Source="/html/de.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="_Bulgarian">
+                                    <MenuItem.Icon>
+                                        <Image Source="/html/bg.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
+                        </Menu>
+                    </DockPanel>
+                </StackPanel>
+                <!--<StackPanel x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
                 <DockPanel  Height="50" HorizontalAlignment="Left" >
-                    <Image Source="/Images/teletek_logo_m.png" Margin="15,0,0,-15" Width="180" VerticalAlignment="Center"/>
-                    <!--<TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>-->
+                    -->
+                <!--<TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>-->
+                <!--
                     <Menu x:Name="topMenu" DockPanel.Dock="Top" FontSize="16" VerticalAlignment="Center" Margin="10, 0, 0, 0" Background="{Binding Background}" Foreground="{Binding Foreground}">
                         <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
                             <MenuItem.Header >
@@ -89,12 +278,14 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Save _As" Click="SaveAs_Clicked"/>
-                            <Separator Background="{StaticResource DefaultColor}"/>
+                            -->
+                <!--<Separator Background="{StaticResource DefaultColor}"/>
                             <MenuItem Header="_Exit" Click="Exit_Clicked" >
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
-                            </MenuItem>
+                            </MenuItem>-->
+                <!--
                         </MenuItem>
                         <MenuItem Margin="10,0,0,0" Click="Read_Clicked"  >
                             <MenuItem.Header>
@@ -191,74 +382,112 @@
                         </MenuItem>
                     </Menu>
                 </DockPanel>
-            </StackPanel>
-            <DockPanel Grid.Column="1">
-                <Button x:Name="changeTheme_btn" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="2">
-                <Button x:Name="minimize_btn" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="3">
-                <Button x:Name="maximize_btn" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger 
+            </StackPanel>-->
+
+                <Grid Grid.Column="9">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="minimize_btn" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="1, 0, 0, 1">
+                        <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Minimize to Tray</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <DockPanel Grid.Row="1">
+                        <Button x:Name="changeTheme_btn" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                            <TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="36"/>
+                            <Button.ToolTip>
+                                <ToolTip>Change Theme</ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </DockPanel>
+                </Grid>
+                <Grid Grid.Column="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="maximize_btn" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger 
 									Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
 									Value="Maximized">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <TextBlock Text="&#xf2d0;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                                <DataTrigger 
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <TextBlock Text="&#xf2d0;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger 
 									Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
 									Value="Normal">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <TextBlock Text="&#xf2d2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <Button.ToolTip>
-                        <ToolTip>Maximize or Restore</ToolTip>
-                    </Button.ToolTip>
-
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="4">
-                <Button x:Name="exit_btn" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                    <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
-                </Button>
-            </DockPanel>
-        </Grid>
-        <GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" />
-        <StackPanel Grid.Row="2" x:Name="breadCrumbsField" Background="{Binding Background}">
-            <ListView x:Name="lvBreadCrumbs" Margin="20, 0" 
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <TextBlock Text="&#xf2d2;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.ToolTip>
+                            <ToolTip>Maximize or Restore</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <DockPanel Grid.Row="1">
+                        <Button x:Name="update_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                            <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                            <Button.ToolTip>
+                                <ToolTip>Update</ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </DockPanel>
+                </Grid>
+                <Grid Grid.Column="11">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="exit_btn" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
+                        <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
+                        <!--<TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"/>-->
+                        <Button.ToolTip>
+                            <ToolTip>Exit</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <DockPanel Grid.Row="1">
+                        <Button x:Name="help_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                            <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                            <Button.ToolTip>
+                                <ToolTip>Help</ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </DockPanel>
+                </Grid>
+            </Grid>
+            <GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" />
+            <StackPanel Grid.Row="2" x:Name="breadCrumbsField" Background="{Binding Background}">
+                <ListView x:Name="lvBreadCrumbs" Margin="20, 0" 
 				FontSize="14" BorderThickness="0" VerticalContentAlignment="Center">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"></StackPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </StackPanel>
-        <GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
-        <Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="Column1" Width="216*" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="1079*" />
-            </Grid.ColumnDefinitions>
-            <wpf:ChromiumWebBrowser
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </StackPanel>
+            <GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
+            <Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="Column1" Width="216*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="1079*" />
+                </Grid.ColumnDefinitions>
+                <wpf:ChromiumWebBrowser
 				Grid.Column="0"
 				x:Name="wb1"
                 MinWidth="{Binding MinWidth}"
@@ -267,22 +496,23 @@
 				Padding="0, 0, 0, 50"
 				JavascriptMessageReceived="wb_PostMessage"
 				/>
-                <!--Width="{Binding ElementName=Column1, Path=Width, Converter={StaticResource gridLengthConverter}}"--> 
-            <GridSplitter x:Name="Splitter1" Grid.Column="1" DragCompleted="GridSplitter1_DragCompleted" HorizontalAlignment="Left" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
-            <wpf:ChromiumWebBrowser
+                <!--Width="{Binding ElementName=Column1, Path=Width, Converter={StaticResource gridLengthConverter}}"-->
+                <GridSplitter x:Name="Splitter1" Grid.Column="1" DragCompleted="GridSplitter1_DragCompleted" HorizontalAlignment="Left" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
+                <wpf:ChromiumWebBrowser
 				Grid.Column="2"
 				x:Name="wb2"
 				Margin="{Binding Margin}"                
 				JavascriptMessageReceived="wb_PostMessage"
 				Background="Transparent"
 			/>
-        </Grid>
-        <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
-        <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
-            <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            </Grid>
+            <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
+            <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
+                <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
 				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}">
 				© 2022 Copyright: <Bold>Teletek Electroincs</Bold>
-            </TextBlock>
-        </StackPanel>
-    </Grid>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

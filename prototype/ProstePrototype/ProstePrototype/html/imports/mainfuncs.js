@@ -19,6 +19,9 @@ function collapsible() {
             }
         });
     }
+    for (i = 0; i < coll.length; i++) {
+        coll[i].click();
+    }
 }
 collapsible();
 
@@ -57,6 +60,7 @@ function sendMsg(el) {
 // finish of the contextMenu part
 
 $(document).ready(() => {
+    addVisitedBackground();
     $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
     let searchParams = new URLSearchParams(window.location.search)
     console.log('searchParams', searchParams);
@@ -89,4 +93,11 @@ function toggleDarkMode(show, filename) {
         let ss = document.getElementById(darkModeStylesheetId);
         ss.parentNode.removeChild(ss);
     }
+}
+
+// hsow changed articles
+function addVisitedBackground() {
+    $('.form-item input, .form-item select').change(function () {
+        this.classList.add('visited-bgd');
+    });
 }

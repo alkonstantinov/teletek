@@ -14,12 +14,18 @@
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
     <None Remove="html\imports\webfonts\fa-v4compatibility.ttf" />
+    <None Remove="Images\Addressables-resized.png" />
+    <None Remove="Images\convectional_5-resized.png" />
     <None Remove="Images\de.png" />
     <None Remove="Images\ProsTE.ico" />
     <None Remove="Images\ProsTE.png" />
+    <None Remove="Images\SOT_Bravo_7-resized.png" />
+    <None Remove="Images\SOT_Eclipse_5-resized.png" />
     <None Remove="Images\teletek_logo.png" />
     <None Remove="Images\teletek_logo_m.png" />
     <None Remove="Images\teletek_manager.png" />
+    <None Remove="Images\TTE-GPRS-Standard-resized.png" />
+    <None Remove="Images\TTE_Combo-resized.png" />
     <None Remove="Images\t_m_icon.png" />
   </ItemGroup>
 
@@ -35,6 +41,24 @@
     </Resource>
     <Resource Include="html\imports\webfonts\fa-v4compatibility.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Addressables-resized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\convectional_5-resized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SOT_Bravo_7-resized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SOT_Eclipse_5-resized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TTE-GPRS-Standard-resized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TTE_Combo-resized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\t_m_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
