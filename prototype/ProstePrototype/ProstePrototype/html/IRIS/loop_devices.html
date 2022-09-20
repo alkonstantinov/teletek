@@ -47,7 +47,8 @@
                                         <h2>Teletek Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />
+                                        <i class="fa-solid fa-circle-notch fire fa-3x"></i>
+                                        <!--<img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />-->
                                     </div>
                                     <div class="row m-1 justify-content-end">
                                         <button type="button" class="btn-round" id="teletek_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
@@ -58,7 +59,8 @@
                                         <h2>System Sensor Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />
+                                        <i class="fa-solid fa-circle-notch fire fa-3x"></i>
+                                        <!--<img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />-->
                                     </div>
                                     <div class="row m-1 justify-content-end">
                                         <button type="button" class="btn-round" id="system_sensor_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
@@ -73,8 +75,8 @@
 
         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
-            <button type="button" class="btn-round btn-border-black">Back</button>-->
-            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
+            <button type="button" class="btn-round btn-bordered-black">Back</button>-->
+            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-bordered-black">
                 <i class="fa-solid fa-plus 5x"></i> Add New Device
             </button>
         </div>
@@ -716,7 +718,7 @@
 
                                 <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                                     
-                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList_${id}" id="device_btn_${id}" class="btn-round btn-border-black">
+                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList_${id}" id="device_btn_${id}" class="btn-round btn-bordered-black">
                                         <i class="fa-solid fa-plus 5x"></i> Add New Device in ${id.replaceAll("_", " ")}
                                     </button>
                                 </div>`;
@@ -1121,7 +1123,7 @@
 
                                 <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
                                     
-                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#sensorList_${id}" id="sensor_btn_${id}" class="btn-round btn-border-black">
+                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#sensorList_${id}" id="sensor_btn_${id}" class="btn-round btn-bordered-black">
                                         <i class="fa-solid fa-plus 5x"></i> Add New Sensor in ${id.replaceAll("_", " ")}
                                     </button>
                                 </div>`;
@@ -1192,7 +1194,14 @@
                                                 <div class="col">
                                                     <div class="form-item roww">
                                                         <label for="led">LED</label>
-                                                        <input type="checkbox" id="led" name="led" class="ml10" checked />
+                                                        <p class="fire bordered">
+                                                            OFF
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="led" checked/>
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                            ON
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1323,7 +1332,14 @@
                                         <div class="col">
                                             <div class="form-item roww">
                                                 <label for="led">LED</label>
-                                                <input type="checkbox" id="led" name="led" class="ml10" checked />
+                                                <p class="fire bordered">
+                                                    OFF
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="led" checked/>
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                    ON
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1409,7 +1425,7 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col-1 p-0 m-0" onclick="javascript:addSensor(${last}, '${loop_id}', '${type}')">
+                                                                            <div class="col-1 p-0 mb-0" onclick="javascript:addSensor(${last}, '${loop_id}', '${type}')">
                                                                                 <i class="fa-solid fa-xmark"></i>
                                                                             </div>
                                                                         </div>
@@ -1483,10 +1499,24 @@
                                                                             <div class="col-11 pr-1">
                                                                                 <a href="javascript:showDevice('${link}_${last}')" onclick="javascript:addActive('#new_device')" >
                                                                                     <div class="btnStyle fire">
-                                                                                        <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
-                                                                                        <div class="someS">
-                                                                                            <h5>${title + ' ' + last}</h5>
-                                                                                        </div>
+                                                                                        ${imgSource.includes("1013") ? (
+                                                                                        `<div class="btnStyle fire">
+                                                                                            <i class="fa-solid fa-circle-notch fa-3x p15">
+                                                                                                <br /><span class="someS">
+                                                                                                    <span class="h5">
+                                                                                                        ${title + ' ' + last}
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                            </i>
+                                                                                        </div>`
+                                                                                        ) : (
+                                                                                        `<div class="btnStyle fire">
+                                                                                            <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                                                            <div class="someS">
+                                                                                                <h5>${title + ' ' + last}</h5>
+                                                                                            </div>
+                                                                                        </div>`
+                                                                                        )}
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
@@ -1620,7 +1650,14 @@
                                                     ${i ? `
                                                         <div class="form-item roww">
                                                             <label for="sounder_on">SOUNDER ON</label>
-                                                            <input type="checkbox" id="sounder_on" name="sounder_on" class="ml10" ${c ? '' : 'checked'} />
+                                                            <p class="fire bordered">
+                                                                OFF
+                                                                <label class="switch">
+                                                                    <input type="checkbox" id="sounder_on" name="sounder_on" ${c ? '' : 'checked'}/>
+                                                                    <span class="slider"></span>
+                                                                </label>
+                                                                ON
+                                                            </p>
                                                         </div>` : ''}
                                                     ${st ? `<div class="form-item roww">
                                                             <label for="evacuate">Evacuate</label>
@@ -1629,7 +1666,14 @@
                                                 </div>
                                                 ${c ? `<div class="col"><div class="form-item roww">
                                                             <label for="led">LED</label>
-                                                            <input type="checkbox" id="led" name="led" class="ml10" checked />
+                                                            <p class="fire bordered">
+                                                                OFF
+                                                                <label class="switch">
+                                                                    <input type="checkbox" id="led" checked/>
+                                                                    <span class="slider"></span>
+                                                                </label>
+                                                                ON
+                                                            </p>
                                                     </div></div>` : ''}
                                             </div>
                                             ${p ? `<div class="row align-items-center mt-1">
@@ -1648,7 +1692,14 @@
                                                 <div class="col-6">
                                                     <div class="form-item roww">
                                                         <label for="led">LED</label>
-                                                        <input type="checkbox" id="led" class="ml10" checked />
+                                                        <p class="fire bordered">
+                                                            OFF
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="led" checked/>
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                            ON
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>` : ''}
@@ -1781,7 +1832,14 @@
                                                 </div>` : `<div class="col">
                                                     <div class="form-item roww">
                                                         <label for="led">LED</label>
-                                                        <input type="checkbox" id="led" class="ml10" checked />
+                                                        <p class="fire bordered">
+                                                            OFF
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="led" checked/>
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                            ON
+                                                        </p>
                                                     </div>`}`}
                                                 </div>
                                             </div>
@@ -1972,10 +2030,15 @@
                                                     </div>
                                                 </div>` : ''}
                                                 <div class="${i ? 'col-12 mt-2' : 'col'}">
-                                                    <div class="form-item roww">
-                                                        <label for="led">LED</label>
-                                                        <input type="checkbox" id="led" class="ml10" checked />
-                                                    </div>
+                                                    <label for="led">LED</label>
+                                                     <p class="fire bordered">
+                                                        OFF
+                                                        <label class="switch">
+                                                            <input type="checkbox" id="led" checked/>
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                        ON
+                                                    </p>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -2014,7 +2077,7 @@
                                         </fieldset>
 
                                         <div class="buttons-row mt15">
-                                            
+
                                         </div>`;
                 switch (true) {
                     case id.includes("sensoIRIS_bstr_is"):
@@ -2051,6 +2114,8 @@
 
                     default: el.innerHTML = ttarget; break;
                 }
+                collapsible();
+                addVisitedBackground();
             }
 
             var lst2 = [];
@@ -2162,6 +2227,7 @@
                         button.style.display = "none";
                     }
                     $(`#deviceList_${loop_id}`).modal('toggle');
+                    
                 }
             }
         </script>

@@ -153,7 +153,7 @@ button {
 }
 
 .ml10 {
-    margin-left: 10px;
+    margin-left: 10px !important;
 }
 
 .mr10 {
@@ -254,6 +254,19 @@ div[class^="someS"] {
 i {
     color: white; /* #1e73be;*/
 }
+
+    i.normal {
+        background-color: #1e73be;
+        padding: 5px;
+    }
+    i.fire {
+        background-color: #df613e;
+        padding: 5px;
+    }
+    i.grasse {
+        background-color: #8dc658;
+        padding: 5px;
+    }
 
 #ctxMenu i, .fa-xmark {
     color: #1e73be;
@@ -688,17 +701,22 @@ button:focus {
 }
 
 .collapsible:hover {
-    text-decoration-line: underline;
+    /*text-decoration-line: underline;
     text-decoration-thickness: 2px;
-    text-decoration-color: #1e73be;
+    text-decoration-color: #1e73be;*/
+    font-weight: 700;
+    color: #1e73be;
 }
 
 .fire.collapsible:hover {
-    text-decoration-color: #df613e;
+    /*text-decoration-color: #df613e;*/
+    color: #df613e;
+    
 }
 
 .grasse.collapsible:hover {
-    text-decoration-color: #8dc658;
+    /*text-decoration-color: #8dc658;*/
+    color: #8dc658;
 }
 
 .collapsible-content {
@@ -817,13 +835,18 @@ label {
     font-weight: 700;
 }
 
-
-
 p.fire {
     display: inline-flex;
     align-items: center;
     font-weight: 700;
-    margin-left: 1rem;
+    /*margin-left: 1rem;*/
+    margin-bottom: 0;
+}
+p.bordered {
+    /*background: lightgray;
+    border: 1px solid rgba(118, 118, 118);*/
+    border-radius: 2px;
+    padding-left: 10px;
 }
 
 .slider {
@@ -833,7 +856,7 @@ p.fire {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(128, 128, 128, .6);
+    /*background: rgba(128, 128, 128, .6);*/
     border: 1px solid rgba(128, 128, 128, .6);
     -webkit-transition: 0.4s;
     border-radius: 5px;
