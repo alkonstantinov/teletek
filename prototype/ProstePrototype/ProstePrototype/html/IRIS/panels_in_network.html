@@ -14,19 +14,21 @@
 </head>
 <body class="fullHeight">
     <div class="container fullHeight" id="divMain">
-        <form action="" class="fullHeight">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-
             <div class="row pt-2 fullHeight">
                 <div class="col-3 bl fire scroll">
                     <div id="new_panel" class="row">
                         <div class="col-11 pr-1">
                             <a href="javascript:showPanel('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle fire">
-                                    <img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />
-                                    <div class="someS">
-                                        <h5>Panel 1</h5>
-                                    </div>
+                                    <!--<img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />-->
+                                    <i class="fa-solid fa-display fa-3x p15">
+                                        <br /><span class="someS">
+                                            <span class="h5">
+                                                Panel 1
+                                            </span>
+                                        </span>
+                                    </i>
                                 </div>
                             </a>
                         </div>
@@ -44,8 +46,6 @@
                     <i class="fa-solid fa-plus 5x"></i> Add New Panel
                 </button>
             </div>
-
-        </form>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -77,14 +77,14 @@
                                                             minlength="7"
                                                             maxlength="15"
                                                             size="15"
-                                                            pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                                            pattern="^(\s*(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*\.){3}(\s*\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*$"
                                                             value=" 0 . 0 . 0 . 0 " />
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <fieldset>
-                                            <legend>Parameters</legend>
+                                        <button class="fire collapsible ml-1">Parameters</button>
+                                        <div class="collapsible-content">
                                             <div class="row align-items-center m-1">
                                                 <div class="col-6">
                                                     <div class="form-item roww disabled">
@@ -130,10 +130,10 @@
                                                 </div>
                                             </div>
 
-                                        </fieldset>
+                                        </div>
 
-                                        <fieldset>
-                                            <legend>Panel Outputs</legend>
+                                        <button class="fire collapsible ml-1">Panel Outputs</button>
+                                        <div class="collapsible-content">
                                             <div class="row align-items-center m-1">
                                                 <div class="col">
                                                     <div class="form-item roww">
@@ -160,9 +160,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </fieldset>
+                                        </div>
                                     </fieldset>`;
             el.innerHTML = target;
+            collapsible();
+            addVisitedBackground();
         }
 
         var lst = [1];
@@ -185,10 +187,14 @@
                                                 <div class="col-11 pr-1">
                                                     <a href="javascript:showPanel('${last}')" onclick="javascript:addActive()">
                                                         <div class="btnStyle fire">
-                                                            <img src="../../Images/1003.PanelsInNetwork.ico" alt="" width="25" height="25" class="m15" />
-                                                            <div class="someS">
-                                                                <h5>Panel ${last}</h5>
-                                                            </div>
+                                                            <i class="fa-solid fa-display fa-3x p15">
+                                                                <br /><span class="someS">
+                                                                    <span class="h5">
+                                                                       Panel ${last}
+                                                                    </span>
+                                                                </span>
+                                                            </i>
+                                                            
                                                         </div>
                                                     </a>
                                                 </div>
