@@ -8,17 +8,24 @@ function collapsible() {
     var coll = document.getElementsByClassName("collapsible");
     var i;
 
+    function handleClick() {
+        this.classList.toggle("cactive");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + 54 + "px";
+        }
+    };
+
     for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
-            this.classList.toggle("cactive");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
+        //if (coll[i].getAttribute('click') == 'true') {
+        //    coll[i].removeEventListener("click", handleClick);
+        //}
+        coll[i].addEventListener("click", handleClick);
+        //coll[i].setAttribute('click', 'true');
     }
+
     for (i = 0; i < coll.length; i++) {
         coll[i].click();
     }
@@ -63,7 +70,6 @@ $(document).ready(() => {
     addVisitedBackground();
     $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
     let searchParams = new URLSearchParams(window.location.search)
-    console.log('searchParams', searchParams);
     if (searchParams.has('highlight')) {
         elem = document.getElementById(searchParams.get('highlight')).children[0];
         console.log('elem', elem);

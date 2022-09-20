@@ -1,496 +1,502 @@
 <!DOCTYPE html>
 <html lang="en" class="fullHeight">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../boostrap.css" />
-        <link rel="stylesheet" href="../imports/css/all.css" />
-        <link rel="stylesheet" href="../IRIS.css" />
-        <title>Teletek Manager</title>
-    </head>
-    <body class="fullHeight">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../imports/css/all.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <title>Teletek Manager</title>
+</head>
+<body class="fullHeight">
 
-        <div class="container fullHeight" id="divMain">
-            <form action="" class="fullHeight">
-                <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-                <div class="row pt-2 fullHeight">
-                    <div class="col-3 bl fire scroll">
-                        <div id="new_evac_zone" class="row">
-                            <div class="col-11 pr-1">
-                                <a href="javascript:showEvacZone('1')" onclick="javascript:addActive()">
-                                    <div class="btnStyle fire">
-                                        <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
-                                        <div class="someS">
-                                            <h5>Evac Zone 1</h5>
+    <div class="container fullHeight" id="divMain">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <div class="row pt-2 fullHeight">
+            <div class="col-3 bl fire scroll">
+                <div id="new_evac_zone" class="row">
+                    <div class="col-11 pr-1">
+                        <a href="javascript:showEvacZone('1')" onclick="javascript:addActive()">
+                            <div class="btnStyle fire">
+                                <i class="fa-solid fa-arrows-to-circle fa-3x colored p15">
+                                    <br /><span class="someS">
+                                        <span class="h5">
+                                            EVAC Zone 1
+                                        </span>
+                                    </span>
+                                </i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div id="selected_area" class="fullHeight"></div>
+            </div>
+
+        </div>
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
+            <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+            <button style="display: inline-flex;" type="button" onclick="javascript:addEvacZone('evac_zone')" id="evac_zone_btn" class="btn-round btn-border-black">
+                <i class="fa-solid fa-plus 5x"></i> Add New Evac Zone
+            </button>
+        </div>
+        <script>
+            function myFunction(id) {
+                var element = document.getElementById(id);
+                element.value = element.value.slice(0, element.dataset.maxlength);
+            }
+            function myFunction2(id) {
+                var element = document.getElementById(id);
+                if (element.value > element.max) {
+                    element.value = element.max;
+                }
+            }
+
+            function addActive() {
+                $(document).on('click', '.btnStyle', function () {
+                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
+                    $(this).addClass('active');// here apply selected class on clicked btnStyle fire
+                });
+            }
+
+            function showEvacZone(id) {
+                var el = document.getElementById("selected_area");
+                id = parseInt(id);
+                var target = `<fieldset id="id_${id}">
+                                <legend>Zone group ${id}</legend>
+                                    <button class="fire collapsible ml-1">Evacuation Panel 0</button>
+                                    <div class="collapsible-content">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone01_${id}">Zone 1</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone01_${id}" name="evac_zone01_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone02_${id}">Zone 2</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone02_${id}" name="evac_zone02_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone03_${id}">Zone 3</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone03_${id}" name="evac_zone03_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone04_${id}">Zone 4</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone04_${id}" name="evac_zone04_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone05_${id}">Zone 5</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone05_${id}" name="evac_zone05_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div id="selected_area" class="fullHeight"></div>
-                    </div>
 
-                </div>
-                <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
-                    <!--<button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>-->
-                    <button style="display: inline-flex;" type="button" onclick="javascript:addEvacZone('evac_zone')" id="evac_zone_btn" class="btn-round btn-border-black">
-                        <i class="fa-solid fa-plus 5x"></i> Add New Evac Zone
-                    </button>
-                </div>
-            </form>
-            <script>
-                function myFunction(id) {
-                    var element = document.getElementById(id);
-                    element.value = element.value.slice(0, element.dataset.maxlength);
-                }
-                function myFunction2(id) {
-                    var element = document.getElementById(id);
-                    if (element.value > element.max) {
-                        element.value = element.max;
-                    }
-                }
+                                    <button class="fire collapsible ml-1">Evacuation Panel 1</button>
+                                    <div class="collapsible-content">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone11_${id}">Zone 1</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone11_${id}" name="evac_zone11_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone12_${id}">Zone 2</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone12_${id}" name="evac_zone12_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone13_${id}">Zone 3</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone13_${id}" name="evac_zone13_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone14_${id}">Zone 4</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone14_${id}" name="evac_zone14_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone15_${id}">Zone 5</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone15_${id}" name="evac_zone15_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                function addActive() {
-                    $(document).on('click', '.btnStyle', function () {
-                        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
-                        $(this).addClass('active');// here apply selected class on clicked btnStyle fire
-                    });
-                }
+                                    <button class="fire collapsible ml-1">Evacuation Panel 2</button>
+                                    <div class="collapsible-content">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone21_${id}">Zone 1</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone21_${id}" name="evac_zone21_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone22_${id}">Zone 2</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone22_${id}" name="evac_zone22_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone23_${id}">Zone 3</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone23_${id}" name="evac_zone23_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone24_${id}">Zone 4</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone24_${id}" name="evac_zone24_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone25_${id}">Zone 5</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone25_${id}" name="evac_zone25_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                function showEvacZone(id) {
-                    var el = document.getElementById("selected_area");
-                    id = parseInt(id);
-                    var target = `<fieldset id="id_${id}">
-                                                        <legend>Zone group ${id}</legend>
-                                                            <fieldset>
-                                                                <legend>Evacuation Panel 0</legend>
-                                                                <div class="row">
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone01_${id}">Zone 1</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone01_${id}" name="evac_zone01_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone02_${id}">Zone 2</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone02_${id}" name="evac_zone02_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone03_${id}">Zone 3</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone03_${id}" name="evac_zone03_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone04_${id}">Zone 4</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone04_${id}" name="evac_zone04_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone05_${id}">Zone 5</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone05_${id}" name="evac_zone05_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
+                                    <button class="fire collapsible ml-1">Evacuation Panel 3</button>
+                                    <div class="collapsible-content">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone31_${id}">Zone 1</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone31_${id}" name="evac_zone31_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone32_${id}">Zone 2</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone32_${id}" name="evac_zone32_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone33_${id}">Zone 3</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone33_${id}" name="evac_zone33_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone34_${id}">Zone 4</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone34_${id}" name="evac_zone34_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone35_${id}">Zone 5</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone35_${id}" name="evac_zone35_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                            <fieldset>
-                                                                <legend>Evacuation Panel 1</legend>
-                                                                <div class="row">
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone11_${id}">Zone 1</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone11_${id}" name="evac_zone11_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone12_${id}">Zone 2</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone12_${id}" name="evac_zone12_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone13_${id}">Zone 3</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone13_${id}" name="evac_zone13_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone14_${id}">Zone 4</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone14_${id}" name="evac_zone14_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone15_${id}">Zone 5</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone15_${id}" name="evac_zone15_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
+                                    <button class="fire collapsible ml-1">Evacuation Panel 4</button>
+                                    <div class="collapsible-content">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone41_${id}">Zone 1</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone41_${id}" name="evac_zone41_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone42_${id}">Zone 2</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone42_${id}" name="evac_zone42_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone43_${id}">Zone 3</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone43_${id}" name="evac_zone43_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone44_${id}">Zone 4</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone44_${id}" name="evac_zone44_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm">
+                                                <div class="form-item roww">
+                                                    <label for="evac_zone45_${id}">Zone 5</label>
+                                                    <div class="select">
+                                                        <select id="evac_zone45_${id}" name="evac_zone45_${id}">
+                                                            <option value="off" selected>OFF</option>
+                                                            <option value="a">A</option>
+                                                            <option value="e">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </fieldset>`;
+                el.innerHTML = target;
+                collapsible();
+                addVisitedBackground();
+            }
 
-                                                            <fieldset>
-                                                                <legend>Evacuation Panel 2</legend>
-                                                                <div class="row">
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone21_${id}">Zone 1</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone21_${id}" name="evac_zone21_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone22_${id}">Zone 2</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone22_${id}" name="evac_zone22_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone23_${id}">Zone 3</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone23_${id}" name="evac_zone23_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone24_${id}">Zone 4</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone24_${id}" name="evac_zone24_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone25_${id}">Zone 5</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone25_${id}" name="evac_zone25_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
-
-                                                            <fieldset>
-                                                                <legend>Evacuation Panel 3</legend>
-                                                                <div class="row">
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone31_${id}">Zone 1</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone31_${id}" name="evac_zone31_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone32_${id}">Zone 2</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone32_${id}" name="evac_zone32_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone33_${id}">Zone 3</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone33_${id}" name="evac_zone33_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone34_${id}">Zone 4</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone34_${id}" name="evac_zone34_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone35_${id}">Zone 5</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone35_${id}" name="evac_zone35_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
-
-                                                            <fieldset>
-                                                                <legend>Evacuation Panel 4</legend>
-                                                                <div class="row">
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone41_${id}">Zone 1</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone41_${id}" name="evac_zone41_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone42_${id}">Zone 2</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone42_${id}" name="evac_zone42_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone43_${id}">Zone 3</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone43_${id}" name="evac_zone43_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone44_${id}">Zone 4</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone44_${id}" name="evac_zone44_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-sm">
-                                                                        <div class="form-item roww">
-                                                                            <label for="evac_zone45_${id}">Zone 5</label>
-                                                                            <div class="select">
-                                                                                <select id="evac_zone45_${id}" name="evac_zone45_${id}">
-                                                                                    <option value="off" selected>OFF</option>
-                                                                                    <option value="a">A</option>
-                                                                                    <option value="e">E</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
-                                                    </fieldset>`;
-                    el.innerHTML = target;
-                }
-
-                var lst = [1];
-                const zones = 48;
-                function addEvacZone(id) {
-                    if (id === "evac_zone") {
-                        var last = 0;
-                        for (i = 2; i <= zones; i++) {
-                            if (lst.includes(i)) {
-                                continue;
-                            } else {
-                                last = i;
-                                break;
-                            }
+            var lst = [1];
+            const zones = 48;
+            function addEvacZone(id) {
+                if (id === "evac_zone") {
+                    var last = 0;
+                    for (i = 2; i <= zones; i++) {
+                        if (lst.includes(i)) {
+                            continue;
+                        } else {
+                            last = i;
+                            break;
                         }
-                        if (last === 0 || lst.includes(last)) return;
+                    }
+                    if (last === 0 || lst.includes(last)) return;
 
-                        const newUserElement = `<div class="col-12" id=${last}>
-                                                            <div class="row">
-                                                                <div class="col-11 pr-1">
-                                                                    <a href="javascript:showEvacZone('${last}')" onclick="javascript:addActive()">
-                                                                        <div class="btnStyle fire">
-                                                                            <img src="../../Images/1012.Zones.ico" alt="" width="25" height="25" class="m15" />
-                                                                            <div class="someS">
-                                                                                <h5>Evac Zone ${last}</h5>
-                                                                            </div>
+                    const newUserElement = `<div class="col-12" id=${last}>
+                                                                    <div class="row">
+                                                                        <div class="col-11 pr-1">
+                                                                            <a href="javascript:showEvacZone('${last}')" onclick="javascript:addActive()">
+                                                                                <div class="btnStyle fire">
+                                                                                    <i class="fa-solid fa-arrows-to-circle fa-3x colored p15">
+                                                                                        <br /><span class="someS">
+                                                                                            <span class="h5">
+                                                                                                EVAC Zone ${last}
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </i>
+                                                                                </div>
+                                                                            </a>
                                                                         </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-1 p-0 m-0" onclick="javascript:addEvacZone(${last})">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>`;
-                        var element = document.getElementById("new_evac_zone");
-                        var new_inner = `
-                                                                ${element.innerHTML}
-                                                                ${newUserElement}
-                                                            `;
-                        lst.push(last);
-                        element.innerHTML = new_inner;
+                                                                        <div class="col-1 p-0 m-0" onclick="javascript:addEvacZone(${last})">
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>`;
+                    var element = document.getElementById("new_evac_zone");
+                    var new_inner = `
+                                                                        ${element.innerHTML}
+                                                                        ${newUserElement}
+                                                                    `;
+                    lst.push(last);
+                    element.innerHTML = new_inner;
 
-                        // reordering
-                        var main = document.getElementById('new_evac_zone');
+                    // reordering
+                    var main = document.getElementById('new_evac_zone');
 
-                        [].map.call(main.children, Object).sort(function (a, b) {
-                            return +a.id.match(/\d+/) - +b.id.match(/\d+/);
-                        }).forEach(function (elem) {
-                            main.appendChild(elem);
-                        });
+                    [].map.call(main.children, Object).sort(function (a, b) {
+                        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+                    }).forEach(function (elem) {
+                        main.appendChild(elem);
+                    });
 
-                        // button display check
-                        if (lst.length === zones) {
-                            let button = document.getElementById("evac_zone_btn");
-                            button.style.display = "none";
+                    // button display check
+                    if (lst.length === zones) {
+                        let button = document.getElementById("evac_zone_btn");
+                        button.style.display = "none";
+                    }
+                } else {
+                    if (lst.includes(id)) {
+                        var elem = document.getElementById(`${id}`);
+                        elem.parentNode.removeChild(elem);
+                        lst = lst.filter(function (item) {
+                            return item !== id
+                        })
+                        var el = document.getElementById(`id_${id}`);
+                        if (el) el.parentNode.removeChild(el);
+
+                        let button = document.getElementById("evac_zone_btn");
+                        if (lst.length < zones && button.style.display === "none") {
+                            button.style.display = "block";
                         }
                     } else {
-                        if (lst.includes(id)) {
-                            var elem = document.getElementById(`${id}`);
-                            elem.parentNode.removeChild(elem);
-                            lst = lst.filter(function (item) {
-                                return item !== id
-                            })
-                            var el = document.getElementById(`id_${id}`);
-                            if (el) el.parentNode.removeChild(el);
-
-                            let button = document.getElementById("evac_zone_btn");
-                            if (lst.length < zones && button.style.display === "none") {
-                                button.style.display = "block";
-                            }
-                        } else {
-                            return;
-                        }
+                        return;
                     }
                 }
-            </script>
-        </div>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../imports/jquery-3.6.0.js"></script>
-        <script src="../imports/popper.min.js"></script>
-        <script src="../imports/boostrap@4.3.1.min.js"></script>
-        <script src="../imports/bootstrap-datepicker.min.js"></script>
-        <script src="../imports/font-awesome.js"></script>
-        <script src="../imports/mainfuncs.js"></script>
-        <script>
-            function sendMessage(bc) {
-                CefSharp.PostMessage(bc);
             }
-                            //$(document).ready(() => {
-                            //    sendMessage("Devices|IRIS|EVAC Zones");
-                            //});
         </script>
-    </body>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+                                //$(document).ready(() => {
+                                //    sendMessage("Devices|IRIS|EVAC Zones");
+                                //});
+    </script>
+</body>
 </html>

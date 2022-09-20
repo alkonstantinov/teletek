@@ -270,14 +270,17 @@ i {
 
 #ctxMenu i, .fa-xmark {
     color: #1e73be;
+    background-color: transparent;
 }
 
     #ctxMenu.fire i, .fa-xmark.fire {
         color: #df613e;
+        background-color: transparent;
     }
 
 #ctxMenu.grasse i, fa-xmark.grasse {
     color: #8dc658;
+    background-color: transparent;
 }
 
 #ctxMenu i:hover {
