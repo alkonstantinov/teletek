@@ -15,7 +15,7 @@
 
 <body>
     <div class="container" id="divMain">
-        <form action="">
+        <fieldset>
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="row align-items-center m-2">
                 <div class="col-xs-12 col-md-6">
@@ -32,20 +32,30 @@
                 </div>
             </div>
 
-            <fieldset>
-                <legend>Parameters</legend>
-                <div class="row align-items-center">
+            <button class="fire collapsible ml-1">Parameters</button>
+            <div class="collapsible-content">
+                <div class="row align-items-center mt-1 mb-1">
                     <div class="col">
-                        <div class="form-item roww">
-                            <label for="enabled">Enabled</label>
-                            <input class="ml10" type="checkbox" id="enabled" />
-                        </div>
+                        <p class="fire">
+                            Disabled
+                            <label class="switch">
+                                <input type="checkbox" id="enabled" />
+                                <span class="slider"></span>
+                            </label>
+                            Enabled
+                        </p>
+
                     </div>
                     <div class="col">
-                        <div class="form-item roww">
-                            <label for="redundancy">Redundancy ON</label>
-                            <input class="ml10" type="checkbox" id="redundancy" />
-                        </div>
+                        <p class="fire">
+                            Redundancy OFF
+                            <label class="switch">
+                                <input type="checkbox" id="redundancy" />
+                                <span class="slider"></span>
+                            </label>
+                            ON
+                        </p>
+
                     </div>
                 </div>
                 <div class="row align-items-center">
@@ -77,41 +87,44 @@
                     </div>
                 </div>
 
-            </fieldset>
-
-            <div class="row align-items-center m-2">
-                <div class="col">
-                    <div class="form-item roww flex">
-                        <label for="hostip">Host IP</label>
-                        <!-- <input type="text" class="form-input" id="hostip" name="hostip" placeholder="xxx.xxx.xxx.xxx"/> -->
-                        <input type="text" class="form-input" id="hostip" name="hostip" minlength="7" maxlength="15" size="15"
-                               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                               placeholder=" 0 . 0 . 0 . 0 " />
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-item roww">
-                        <label for="port">Port</label>
-                        <input type="number" id="port" name="port" data-maxlength="5"
-                               oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="7000" min="1" />
-                    </div>
-                </div>
             </div>
-            <div class="row align-items-center m-2">
-                <div class="col">
-                    <div class="form-item roww flex">
-                        <label for="netmask">Net Mask</label>
-                        <input type="text" id="netmask" name="netmask" minlength="7" maxlength="15" size="15"
-                               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                               placeholder=" 0 . 0 . 0 . 0 " />
+
+            <button class="fire collapsible ml-1">Network Settings</button>
+            <div class="collapsible-content">
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww flex">
+                            <label for="hostip">Host IP</label>
+                            <!-- <input type="text" class="form-input" id="hostip" name="hostip" placeholder="xxx.xxx.xxx.xxx"/> -->
+                            <input type="text" class="form-input" id="hostip" name="hostip" minlength="7" maxlength="15" size="15"
+                                   pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                   placeholder=" 0 . 0 . 0 . 0 " />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <label for="port">Port</label>
+                            <input type="number" id="port" name="port" data-maxlength="5"
+                                   oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="7000" min="1" />
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-item roww flex">
-                        <label for="gateway">Gateway</label>
-                        <input type="text" id="gateway" name="gateway" minlength="7" maxlength="15" size="15"
-                               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                               placeholder=" 0 . 0 . 0 . 0 " />
+                <div class="row align-items-center m-2">
+                    <div class="col">
+                        <div class="form-item roww flex">
+                            <label for="netmask">Net Mask</label>
+                            <input type="text" id="netmask" name="netmask" minlength="7" maxlength="15" size="15"
+                                   pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                   placeholder=" 0 . 0 . 0 . 0 " />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww flex">
+                            <label for="gateway">Gateway</label>
+                            <input type="text" id="gateway" name="gateway" minlength="7" maxlength="15" size="15"
+                                   pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                   placeholder=" 0 . 0 . 0 . 0 " />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,7 +201,7 @@
                 <!--<button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>-->
             </div>
-        </form>
+        </fieldset>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -201,9 +214,9 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-                        //$(document).ready(() => {
-                        //    sendMessage("Devices|IRIS|Access");
-                        //});
+                                            //$(document).ready(() => {
+                                            //    sendMessage("Devices|IRIS|Access");
+                                            //});
     </script>
 </body>
 </html>
