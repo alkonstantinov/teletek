@@ -5,7 +5,7 @@ function sendMessageWPF(json) {
 
 // collapsible part
 function collapsible(param) {
-    var coll = param ? document.getElementsByClassName("collapsible_add") : document.getElementsByClassName("collapsible");
+    var coll = param ? document.getElementsByClassName(param) : document.getElementsByClassName("collapsible");
     var i;
 
     function handleClick() {
