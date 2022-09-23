@@ -34,20 +34,20 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-8">
                             <div class="list-group" id="list-tab" role="tablist">
                                 <button type="button" class="list-group-item list-group-item-action active show" id="list-teletek_loop-list" data-toggle="tab" href="#list-teletek_loop" role="tab" aria-controls="list-teletek_loop" aria-selected="false">Teletek Loop</button>
                                 <button type="button" class="list-group-item list-group-item-action" id="list-system_sensor_loop-list" data-toggle="tab" href="#list-system_sensor_loop" role="tab" aria-controls="list-system_sensor_loop" aria-selected="false">System Sensor Loop</button>
                             </div>
                         </div>
-                        <div class="col-8">
+                        <div class="col-4">
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade active show" id="list-teletek_loop" role="tabpanel" aria-labelledby="list-teletek_loop-list">
                                     <div class="row m-1 justify-content-center">
                                         <h2>Teletek Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
-                                        <i class="fa-solid fa-circle-notch fire fa-3x"></i>
+                                        <i class="fa-solid fa-arrows-spin fire fa-3x"></i>
                                         <!--<img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />-->
                                     </div>
                                     <div class="row m-1 justify-content-end">
@@ -59,7 +59,7 @@
                                         <h2>System Sensor Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
-                                        <i class="fa-solid fa-circle-notch fire fa-3x"></i>
+                                        <i class="fa-solid fa-arrows-spin fire fa-3x"></i>
                                         <!--<img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />-->
                                     </div>
                                     <div class="row m-1 justify-content-end">
@@ -76,7 +76,7 @@
         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
             <button type="button" class="btn-round btn-bordered-black">Back</button>-->
-            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-bordered-black">
+            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
                 <i class="fa-solid fa-plus 5x"></i> Add New Device
             </button>
         </div>
@@ -132,585 +132,843 @@
                                 <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList_${id}" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <div class="list-group" id="list-tab" role="tablist">
-                                                        <button type="button" class="list-group-item list-group-item-action active show" id="list-sensoIRIS_mio40-list" data-toggle="tab" href="#list-sensoIRIS_mio40" role="tab" aria-controls="list-sensoIRIS_mio40" aria-selected="false">SensoIRIS MIO40</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio04-list" data-toggle="tab" href="#list-sensoIRIS_mio04" role="tab" aria-controls="list-sensoIRIS_mio04" aria-selected="false">SensoIRIS MIO04</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio22-list" data-toggle="tab" href="#list-sensoIRIS_mio22" role="tab" aria-controls="list-sensoIRIS_mio22" aria-selected="false">SensoIRIS MIO22</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mio22m-list" data-toggle="tab" href="#list-sensoIRIS_mio22m" role="tab" aria-controls="list-sensoIRIS_mio22m" aria-selected="false">SensoIRIS MIO22M</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp-list" data-toggle="tab" href="#list-sensoIRIS_minp" role="tab" aria-controls="list-sensoIRIS_minp" aria-selected="false">SensoIRIS MINP</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp_fire-list" data-toggle="tab" href="#list-sensoIRIS_minp_fire" role="tab" aria-controls="list-sensoIRIS_minp_fire" aria-selected="false">SensoIRIS MINP (FIRE)</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp_gas-list" data-toggle="tab" href="#list-sensoIRIS_minp_gas" role="tab" aria-controls="list-sensoIRIS_minp_gas" aria-selected="false">SensoIRIS MINP (GAS)</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_minp_panic-list" data-toggle="tab" href="#list-sensoIRIS_minp_panic" role="tab" aria-controls="list-sensoIRIS_minp_panic" aria-selected="false">SensoIRIS MINP (PANIC)</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mout-list" data-toggle="tab" href="#list-sensoIRIS_mout" role="tab" aria-controls="list-sensoIRIS_mout" aria-selected="false">SensoIRIS MOUT</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mout2401-list" data-toggle="tab" href="#list-sensoIRIS_mout2401" role="tab" aria-controls="list-sensoIRIS_mout2401" aria-selected="false">SensoIRIS MOUT240/1</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mout2402-list" data-toggle="tab" href="#list-sensoIRIS_mout2402" role="tab" aria-controls="list-sensoIRIS_mout2402" aria-selected="false">SensoIRIS MOUT240/2</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mcz-list" data-toggle="tab" href="#list-sensoIRIS_mcz" role="tab" aria-controls="list-sensoIRIS_mcz" aria-selected="false">SensoIRIS MCZ</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mcp150-list" data-toggle="tab" href="#list-sensoIRIS_mcp150" role="tab" aria-controls="list-sensoIRIS_mcp150" aria-selected="false">SensoIRIS MCP150</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_t110-list" data-toggle="tab" href="#list-sensoIRIS_t110" role="tab" aria-controls="list-sensoIRIS_t110" aria-selected="false">SensoIRIS T110</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_t110_is-list" data-toggle="tab" href="#list-sensoIRIS_t110_is" role="tab" aria-controls="list-sensoIRIS_t110_is" aria-selected="false">SensoIRIS T110 IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_s130-list" data-toggle="tab" href="#list-sensoIRIS_s130" role="tab" aria-controls="list-sensoIRIS_s130" aria-selected="false">SensoIRIS S130</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_s130_is-list" data-toggle="tab" href="#list-sensoIRIS_s130_is" role="tab" aria-controls="list-sensoIRIS_s130_is" aria-selected="false">SensoIRIS S130 IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_m140-list" data-toggle="tab" href="#list-sensoIRIS_m140" role="tab" aria-controls="list-sensoIRIS_m140" aria-selected="false">SensoIRIS M140</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_m140_is-list" data-toggle="tab" href="#list-sensoIRIS_m140_is" role="tab" aria-controls="list-sensoIRIS_m140_is" aria-selected="false">SensoIRIS M140 IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsou-list" data-toggle="tab" href="#list-sensoIRIS_wsou" role="tab" aria-controls="list-sensoIRIS_wsou" aria-selected="false">SensoIRIS WSOU</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsou_is-list" data-toggle="tab" href="#list-sensoIRIS_wsou_is" role="tab" aria-controls="list-sensoIRIS_wsou_is" aria-selected="false">SensoIRIS WSOU IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsst-list" data-toggle="tab" href="#list-sensoIRIS_wsst" role="tab" aria-controls="list-sensoIRIS_wsst" aria-selected="false">SensoIRIS WSST</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wsst_is-list" data-toggle="tab" href="#list-sensoIRIS_wsst_is" role="tab" aria-controls="list-sensoIRIS_wsst_is" aria-selected="false">SensoIRIS WSST IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wstr-list" data-toggle="tab" href="#list-sensoIRIS_wstr" role="tab" aria-controls="list-sensoIRIS_wstr" aria-selected="false">SensoIRIS WSTR</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_wstr_is-list" data-toggle="tab" href="#list-sensoIRIS_wstr_is" role="tab" aria-controls="list-sensoIRIS_wstr_is" aria-selected="false">SensoIRIS WSTR IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsou-list" data-toggle="tab" href="#list-sensoIRIS_bsou" role="tab" aria-controls="list-sensoIRIS_bsou" aria-selected="false">SensoIRIS BSOU</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsou_is-list" data-toggle="tab" href="#list-sensoIRIS_bsou_is" role="tab" aria-controls="list-sensoIRIS_bsou_is" aria-selected="false">SensoIRIS BSOU IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsst-list" data-toggle="tab" href="#list-sensoIRIS_bsst" role="tab" aria-controls="list-sensoIRIS_bsst" aria-selected="false">SensoIRIS BSST</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bsst_is-list" data-toggle="tab" href="#list-sensoIRIS_bsst_is" role="tab" aria-controls="list-sensoIRIS_bsst_is" aria-selected="false">SensoIRIS BSST IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bstr-list" data-toggle="tab" href="#list-sensoIRIS_bstr" role="tab" aria-controls="list-sensoIRIS_bstr" aria-selected="false">SensoIRIS BSTR</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_bstr_is-list" data-toggle="tab" href="#list-sensoIRIS_bstr_is" role="tab" aria-controls="list-sensoIRIS_bstr_is" aria-selected="false">SensoIRIS BSTR IS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_gas-list" data-toggle="tab" href="#list-sensoIRIS_gas" role="tab" aria-controls="list-sensoIRIS_gas" aria-selected="false">SensoIRIS GAS</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_gas_sense-list" data-toggle="tab" href="#list-sensoIRIS_gas_sense" role="tab" aria-controls="list-sensoIRIS_gas_sense" aria-selected="false">SensoIRIS GAS SENSE</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mc-d-list" data-toggle="tab" href="#list-sensoIRIS_mc-d" role="tab" aria-controls="list-sensoIRIS_mc-d" aria-selected="false">SensoIRIS MC-D</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-callpoint_mcp50-list" data-toggle="tab" href="#list-callpoint_mcp50" role="tab" aria-controls="list-callpoint_mcp50" aria-selected="false">CALLPOINT MCP50</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m22-list" data-toggle="tab" href="#list-m22" role="tab" aria-controls="list-m22" aria-selected="false">M22</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sounder_wsou-list" data-toggle="tab" href="#list-sounder_wsou" role="tab" aria-controls="list-sounder_wsou" aria-selected="false">SOUNDER WSOU</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sensoIRIS_mimic-list" data-toggle="tab" href="#list-sensoIRIS_mimic" role="tab" aria-controls="list-sensoIRIS_mimic" aria-selected="false">SensoIRIS MIMIC</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-8 flexicol" >
-                                                    <div class="tab-content stick" id="nav-tabContent">
-                                                        <div class="tab-pane fade active show" id="list-sensoIRIS_mio40" role="tabpanel" aria-labelledby="list-sensoIRIS_mio40-list" >
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MIO40</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mio40_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mio04" role="tabpanel" aria-labelledby="list-sensoIRIS_mio04-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MIO04</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mio04_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mio22" role="tabpanel" aria-labelledby="list-sensoIRIS_mio22-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MIO22</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mio22_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mio22m" role="tabpanel" aria-labelledby="list-sensoIRIS_mio22m-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MIO22M</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mio22m_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_minp" role="tabpanel" aria-labelledby="list-sensoIRIS_minp-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MINP</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_minp_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_minp_fire" role="tabpanel" aria-labelledby="list-sensoIRIS_minp_fire-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MINP (FIRE)</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_minp_fire_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_minp_gas" role="tabpanel" aria-labelledby="list-sensoIRIS_minp_gas-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MINP (GAS)</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_minp_gas_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_minp_panic" role="tabpanel" aria-labelledby="list-sensoIRIS_minp_panic-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MINP (PANIC)</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1080.MINP.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_minp_panic_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mout" role="tabpanel" aria-labelledby="list-sensoIRIS_mout-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MOUT</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mout_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mout2401" role="tabpanel" aria-labelledby="list-sensoIRIS_mout2401-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MOUT240/1</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mout2401_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mout2402" role="tabpanel" aria-labelledby="list-sensoIRIS_mout2402-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MOUT240/2</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mout2402_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mcz" role="tabpanel" aria-labelledby="list-sensoIRIS_mcz-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MCZ</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mcz_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mcp150" role="tabpanel" aria-labelledby="list-sensoIRIS_mcp150-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MCP150</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1027. Call Point (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mcp150_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_t110" role="tabpanel" aria-labelledby="list-sensoIRIS_t110-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS T110</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_t110_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_t110_is" role="tabpanel" aria-labelledby="list-sensoIRIS_t110_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS T110 IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_t110_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_s130" role="tabpanel" aria-labelledby="list-sensoIRIS_s130-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS S130</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_s130_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_s130_is" role="tabpanel" aria-labelledby="list-sensoIRIS_s130_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS S130 IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_s130_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_m140" role="tabpanel" aria-labelledby="list-sensoIRIS_m140-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS M140</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/71.SensoIRIS_M140.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_m140_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_m140_is" role="tabpanel" aria-labelledby="list-sensoIRIS_m140_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS M140 IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/71.SensoIRIS_M140.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_m140_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_wsou" role="tabpanel" aria-labelledby="list-sensoIRIS_wsou-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS WSOU</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_wsou_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_wsou_is" role="tabpanel" aria-labelledby="list-sensoIRIS_wsou_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS WSOU IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_wsou_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_wsst" role="tabpanel" aria-labelledby="list-sensoIRIS_wsst-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS WSST</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/75.SensoIRIS_wsst.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_wsst_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_wsst_is" role="tabpanel" aria-labelledby="list-sensoIRIS_wsst_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS WSST IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/75.SensoIRIS_wsst.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_wsst_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_wstr" role="tabpanel" aria-labelledby="list-sensoIRIS_wstr-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS WSTR</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_wstr_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_wstr_is" role="tabpanel" aria-labelledby="list-sensoIRIS_wstr_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS WSTR IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_wstr_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_bsou" role="tabpanel" aria-labelledby="list-sensoIRIS_bsou-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS BSOU</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_bsou_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_bsou_is" role="tabpanel" aria-labelledby="list-sensoIRIS_bsou_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS BSOU IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_bsou_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_bsst" role="tabpanel" aria-labelledby="list-sensoIRIS_bsst-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS BSST</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_bsst_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_bsst_is" role="tabpanel" aria-labelledby="list-sensoIRIS_bsst_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS BSST IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_bsst_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_bstr" role="tabpanel" aria-labelledby="list-sensoIRIS_bstr-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS BSTR</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_bstr_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_bstr_is" role="tabpanel" aria-labelledby="list-sensoIRIS_bstr_is-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS BSTR IS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/BSOU-600x460.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_bstr_is_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_gas" role="tabpanel" aria-labelledby="list-sensoIRIS_gas-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS GAS</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1081.SensoIRIS_GAS.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_gas_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_gas_sense" role="tabpanel" aria-labelledby="list-sensoIRIS_gas_sense-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS GAS SENSE</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1081.SensoIRIS_GAS.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_gas_sense_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mc-d" role="tabpanel" aria-labelledby="list-sensoIRIS_mc-d-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MC-D</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/68.SensoIRIS_address_base.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mc-d_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-callpoint_mcp50" role="tabpanel" aria-labelledby="list-callpoint_mcp50-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>CALLPOINT MCP50</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/27. Call Point (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="callpoint_mcp50_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m22" role="tabpanel" aria-labelledby="list-m22-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M22</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1058. IRIS M22_IRIS Zone.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m22_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sounder_wsou" role="tabpanel" aria-labelledby="list-sounder_wsou-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SOUNDER WSOU</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/1059. Sounder WSOU.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sounder_wsou_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sensoIRIS_mimic" role="tabpanel" aria-labelledby="list-sensoIRIS_mimic-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SensoIRIS MIMIC</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sensoIRIS_mimic_btn" onclick="javascript: addConcreteDevice2(this.id, '${id}')">Add</button>
-                                                            </div>
+                                            <div class="row list-group fire justify-content-center" id="list-tab" role="tablist">
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col active"
+                                                    id="list-sensoIRIS_mio40_btn"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    data-toggle="tab"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MIO40</h5>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mio04_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MIO04</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mio22_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MIO22</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mio22m_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MIO22M</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_minp_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MINP</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_minp_fire_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MINP (FIRE)</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_minp_gas_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MINP (GAS)</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_minp_panic_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MINP (PANIC)</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mout_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MOUT</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mout2401_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MOUT240/1</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mout2402_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MOUT240/2</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mcz_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MCZ</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mcp150_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MCP150</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_t110_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS T110</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_t110_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS T110 IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_s130_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS S130</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_s130_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS S130 IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_m140_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS M140</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_m140_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS M140 IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_wsou_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS WSOU</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_wsou_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS WSOU IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_wsst_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS WSST</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_wsst_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS WSST IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_wstr_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS WSTR</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_wstr_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS WSTR IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_bsou_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS BSOU</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_bsou_is_btn"
+                                                    data-toggle="tab"
+                                                    honclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS BSOU IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_bsst_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS BSST</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_bsst_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS BSST IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_bstr_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS BSTR</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_bstr_is_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS BSTR IS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_gas_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS GAS</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_gas_sense_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS GAS SENSE</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mc-d_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MC-D</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-callpoint_mcp50_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>CALLPOINT MCP50</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-m22_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>M22</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sounder_wsou_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SOUNDER WSOU</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="list-group-item col"
+                                                    id="list-sensoIRIS_mimic_btn"
+                                                    data-toggle="tab"
+                                                    onclick="javascript: addConcreteDevice2(this.id, '${id}')"
+                                                    role="tab"
+                                                    aria-selected="false"
+                                                >
+                                                    <div class="btnStyle fire">
+                                                        <img
+                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            alt=""
+                                                            width="50"
+                                                            height="50"
+                                                            class="m15"
+                                                        />
+                                                        <div class="someS">
+                                                            <h5>SensoIRIS MIMIC</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -718,7 +976,7 @@
 
                                 <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                                     
-                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList_${id}" id="device_btn_${id}" class="btn-round btn-bordered-black">
+                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList_${id}" id="device_btn_${id}" class="btn-round btn-border-black">
                                         <i class="fa-solid fa-plus 5x"></i> Add New Device in ${id.replaceAll("_", " ")}
                                     </button>
                                 </div>`;
@@ -1353,6 +1611,7 @@
                 } else {
                     el.innerHTML = proxy_target;
                 }
+                addVisitedBackground();
             }
 
             var sensorsLst2 = [];
@@ -1501,7 +1760,7 @@
                                                                                     <div class="btnStyle fire">
                                                                                         ${imgSource.includes("1013") ? (
                                                                                         `<div class="btnStyle fire">
-                                                                                            <i class="fa-solid fa-circle-notch fa-3x p15">
+                                                                                            <i class="fa-solid fa-arrows-spin fa-3x p15">
                                                                                                 <br /><span class="someS">
                                                                                                     <span class="h5">
                                                                                                         ${title + ' ' + last}
@@ -2130,6 +2389,7 @@
                     }
                 }
                 if (lst2.includes(parseInt(+id))) {
+
                     var elem = document.querySelector(`[id $= ${loop_id}_${+id}]`);
                     if (elem) elem.parentNode.removeChild(elem);
                     lst2 = lst2.filter(function (item) {
@@ -2143,7 +2403,7 @@
                 }
                 else {
                     let imgSource = "../../Images/";
-                    let link = id.split("_");
+                    let link = id.substr(5).split("_");
                     let curr = link.splice(link.length - 1)[0];
                     link = link.join("_");
                     let title = link.toUpperCase().replaceAll("_", " ");
@@ -2206,9 +2466,9 @@
                                                                                 `;
                     var element = document.getElementById(`new_device_${loop_id}`);
                     var new_inner = `
-                                                                    ${element.innerHTML}
-                                                                    ${newUserElement}
-                                                                `;
+                                        ${element.innerHTML}
+                                        ${newUserElement}
+                                    `;
                     lst2.push(last);
                     element.innerHTML = new_inner;
 

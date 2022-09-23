@@ -283,9 +283,9 @@ namespace ProstePrototype
                 {
                     if (Splitter1.Width == 0)
                     {
-                        gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 4);
+                        gridBrowsers.ColumnDefinitions[0].Width = new GridLength(350, GridUnitType.Pixel);
                         wb2.Margin = new Thickness(0);
-                        wb1.MinWidth = this.Width / 4;
+                        wb1.MinWidth = 350;
                         Splitter1.Width = 5;
                         gsp3.Height = 3;
                     }
@@ -386,9 +386,9 @@ namespace ProstePrototype
                 }
                 else if (Splitter1.Width == 0)
                 {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(this.Width / 4);
+                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(350, GridUnitType.Pixel);
                     wb2.Margin = new Thickness(0);
-                    wb1.MinWidth = this.Width / 4;
+                    wb1.MinWidth = 350;
                     Splitter1.Width = 5;
                     gsp3.Height = 3;
                 }

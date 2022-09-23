@@ -14,10 +14,9 @@
 </head>
 <body>
     <div class="container" id="divMain">
-        <form action="">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <fieldset>
-                <legend>Codes</legend>
+            <button class="normal collapsible ml-1">Codes</button>
+            <div class="collapsible-content">
 
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -35,23 +34,44 @@
                 </div>
                 <div class="form-item roww">
                     <label for="ambush_code_pass">Ambush Code</label>
-                    <input type="checkbox" id="ambush_code_pass" name="ambush_code_pass" class="ml10" />
+                    <p class="normal bordered">
+                        OFF
+                        <label class="switch">
+                            <input type="checkbox" id="ambush_code_pass" />
+                            <span class="slider"></span>
+                        </label>
+                        ON
+                    </p>
                 </div>
-            </fieldset>
+            </div>
 
-            <fieldset>
-                <legend>System Settings</legend>
+            <button class="normal collapsible ml-1">System Settings</button>
+            <div class="collapsible-content">
                 <div class="row mt-2">
                     <div class="col">
                         <div class="form-item roww">
                             <label for="keyboard_blocking">Keyboard blocking</label>
-                            <input type="checkbox" id="keyboard_blocking" name="keyboard_blocking" class="ml10" />
+                            <p class="normal bordered">
+                                OFF
+                                <label class="switch">
+                                    <input type="checkbox" id="keyboard_blocking" />
+                                    <span class="slider"></span>
+                                </label>
+                                ON
+                            </p>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-item roww">
-                            <label for="trouble_sounds">Enable Trouble Sounds</label>
-                            <input type="checkbox" id="trouble_sounds" name="trouble_sounds" class="ml10" checked />
+                            <label for="trouble_sounds">Trouble Sounds</label>
+                            <p class="normal bordered">
+                                Disabled
+                                <label class="switch">
+                                    <input type="checkbox" id="trouble_sounds" checked/>
+                                    <span class="slider"></span>
+                                </label>
+                                Enabled
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -92,13 +112,14 @@
                     <div class="col">
                         <div class="form-item roww">
                             <label for="io_settings_1">Tamper Alarm Type</label>
-                            <div class="select">
-                                <select id="io_settings_1"
-                                        name="io_settings_1">
-                                    <option value="silent">Silent</option>
-                                    <option value="audible" selected>Audible</option>
-                                </select>
-                            </div>
+                            <p class="normal bordered">
+                                Silent
+                                <label class="switch">
+                                    <input type="checkbox" id="io_settings_1" />
+                                    <span class="slider"></span>
+                                </label>
+                                Audible
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -106,13 +127,27 @@
                     <div class="col">
                         <div class="form-item roww">
                             <label for="entry_delayed_time">Entry delayed alarm</label>
-                            <input type="checkbox" id="entry_delayed_time" name="entry_delayed_time" class="ml10" />
+                            <p class="normal bordered">
+                                OFF
+                                <label class="switch">
+                                    <input type="checkbox" id="entry_delayed_time" />
+                                    <span class="slider"></span>
+                                </label>
+                                ON
+                            </p>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-item roww disabled">
-                            <label for="harware_reset">Hardware reset</label>
-                            <input type="checkbox" id="harware_reset" name="harware_reset" class="ml10" checked />
+                            <label for="hardware_reset">Hardware reset</label>
+                            <p class="normal bordered">
+                                OFF
+                                <label class="switch">
+                                    <input type="checkbox" id="hardware_reset" checked />
+                                    <span class="slider"></span>
+                                </label>
+                                ON
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -158,13 +193,12 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </div>
 
             <div class="buttons-row mt15">
                 <!--<button type="button" class="btn-round btn-blue">Save</button>
                 <button type="button" class="btn-round btn-border-black">Back</button>-->
             </div>
-        </form>
         <script>
             function myFunction(id) {
                 var element = document.getElementById(id);
@@ -216,9 +250,9 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-                //$(document).ready(() => {
-                //    sendMessage("Devices|ECLIPSE|General Settings");
-                //});
+                    //$(document).ready(() => {
+                    //    sendMessage("Devices|ECLIPSE|General Settings");
+                    //});
     </script>
 </body>
 </html>

@@ -4,8 +4,8 @@ function sendMessageWPF(json) {
 }
 
 // collapsible part
-function collapsible() {
-    var coll = document.getElementsByClassName("collapsible");
+function collapsible(param) {
+    var coll = param ? document.getElementsByClassName("collapsible_add") : document.getElementsByClassName("collapsible");
     var i;
 
     function handleClick() {
@@ -19,11 +19,11 @@ function collapsible() {
     };
 
     for (i = 0; i < coll.length; i++) {
-        //if (coll[i].getAttribute('click') == 'true') {
+        //if (coll[i].getAttribute('isclick') == 'true') {
         //    coll[i].removeEventListener("click", handleClick);
         //}
         coll[i].addEventListener("click", handleClick);
-        //coll[i].setAttribute('click', 'true');
+        //coll[i].setAttribute('isclick', 'true');
     }
 
     for (i = 0; i < coll.length; i++) {
