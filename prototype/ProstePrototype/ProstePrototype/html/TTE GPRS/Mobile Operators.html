@@ -1,102 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../boostrap.css" />
-        <link rel="stylesheet" href="../imports/css/all.css" />
-        <link rel="stylesheet" href="../IRIS.css" />
-        <title>Teletek Manager</title>
-    </head>
-    <body>
-        <div class="container" id="divMain">
-            <form action="">
-                <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-                <fieldset>
-                    <legend>GPRS Settings</legend>
-                    <div class="row justify-content-center">
-                        <div class="form-item roww">
-                            <label for="apn">Net Settings APN</label>
-                            <input type="text" id="apn" name="apn" maxlength="32" />
-                        </div>
-                    </div>
-                    <div class="row justify-content-center m-1">
-                        <div class="form-item roww">
-                            <label for="username">User Name</label>
-                            <input type="text" id="username" name="username" maxlength="32" style="margin-left: 48px" />
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="form-item roww">
-                            <label for="password">Password</label>
-                            <input type="text" id="password" name="password" maxlength="32" style="margin-left: 58px" />
-                        </div>
-                    </div>
-                </fieldset>
-
-                <div class="buttons-row mt15">
-                    <!--<button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../imports/css/all.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <title>Teletek Manager</title>
+</head>
+<body>
+    <div class="container" id="divMain">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <button class="collapsible grasse ml-1">GPRS Settings</button>
+        <div class="collapsible-content">
+            <div class="row justify-content-center">
+                <div class="form-item roww">
+                    <label for="apn">Net Settings APN</label>
+                    <input type="text" id="apn" name="apn" maxlength="32" />
                 </div>
-            </form>
-            <script>
-                function myFunction(id) {
-                    var element = document.getElementById(id);
-                    element.value = element.value.slice(0, element.dataset.maxlength);
-                }
-                function myFunction2(id) {
-                    var element = document.getElementById(id);
-                    if (element.value > element.max) {
-                        element.value = element.max;
-                    }
-                }
-                function myFunction3(id) {
-                    var element = document.getElementById(id);
-                    if (!element.value.includes(":")) {
-                        console.log('before:', element.value);
-                        element.value += ":";
-                        console.log('after:', element.value);
-                    }
-                    const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
-                    console.log('test', regex.test(element.value));
-                    element.value = regex.exec(element.value);
-                    console.log(element.value);
-                }
-
-                function changeStyleDisplay(id) {
-                    var val = document.getElementById(id).value;
-                    var divId = id + "-schedule";
-                    var element = document.getElementById(divId);
-                    if (val === "schedule") {
-                        if (element.style.display === "block") {
-                            element.style.display = "none";
-                        } else {
-                            element.style.display = "block";
-                        }
-                    } else {
-                        element.style.display = "none";
-                    }
-                }
-            </script>
+            </div>
+            <div class="row justify-content-center m-1">
+                <div class="form-item roww">
+                    <label for="username">User Name</label>
+                    <input type="text" id="username" name="username" maxlength="32" style="margin-left: 48px" />
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-item roww">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password" maxlength="32" style="margin-left: 58px" />
+                </div>
+            </div>
         </div>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../imports/jquery-3.6.0.js"></script>
-        <script src="../imports/popper.min.js"></script>
-        <script src="../imports/boostrap@4.3.1.min.js"></script>
-        <script src="../imports/bootstrap-datepicker.min.js"></script>
-        <script src="../imports/font-awesome.js"></script>
-        <script src="../imports/mainfuncs.js"></script>
+
+        <div class="buttons-row mt15">
+            <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+        </div>
         <script>
-            function sendMessage(bc) {
-                CefSharp.PostMessage(bc);
+            function myFunction(id) {
+                var element = document.getElementById(id);
+                element.value = element.value.slice(0, element.dataset.maxlength);
             }
-                            //$(document).ready(() => {
-                            //    sendMessage("Devices|TTE GPRS|Mobile Operators");
-                            //});
+            function myFunction2(id) {
+                var element = document.getElementById(id);
+                if (element.value > element.max) {
+                    element.value = element.max;
+                }
+            }
+            function myFunction3(id) {
+                var element = document.getElementById(id);
+                if (!element.value.includes(":")) {
+                    console.log('before:', element.value);
+                    element.value += ":";
+                    console.log('after:', element.value);
+                }
+                const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
+                console.log('test', regex.test(element.value));
+                element.value = regex.exec(element.value);
+                console.log(element.value);
+            }
+
+            function changeStyleDisplay(id) {
+                var val = document.getElementById(id).value;
+                var divId = id + "-schedule";
+                var element = document.getElementById(divId);
+                if (val === "schedule") {
+                    if (element.style.display === "block") {
+                        element.style.display = "none";
+                    } else {
+                        element.style.display = "block";
+                    }
+                } else {
+                    element.style.display = "none";
+                }
+            }
         </script>
-    </body>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+                                            //$(document).ready(() => {
+                                            //    sendMessage("Devices|TTE GPRS|Mobile Operators");
+                                            //});
+    </script>
+</body>
 </html>
