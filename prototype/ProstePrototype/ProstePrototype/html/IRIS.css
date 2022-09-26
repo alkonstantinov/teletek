@@ -670,6 +670,40 @@ fieldset {
     text-align: center;
 }
 
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: white;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid var(--normal);
+}
+
+input[type='radio'].fire:after {
+    border: 2px solid var(--fire);
+}
+
+input[type='radio'].grasse:after {
+    border: 2px solid var(--grasse);
+}
+
+input[type='radio']:checked:after {
+    background-color: var(--normal);
+}
+
+input[type='radio'].fire:checked:after {
+    background-color: var(--fire);
+}
+
+input[type='radio'].grasse:checked:after {
+    background-color: var(--grasse);
+}
+
 .select {
     display: grid;
     grid-template-areas: "select";
@@ -983,3 +1017,11 @@ input:checked + .slider:before {
         width: 0;
         height: 0;
     }
+
+.fire input[type='checkbox'] {
+    filter:hue-rotate();
+}
+
+.grasse input[type='checkbox'] {
+    filter:brightness(140%) hue-rotate(240deg);
+}
