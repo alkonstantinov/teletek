@@ -14,7 +14,6 @@
 </head>
 <body class="fullHeight">
     <div class="container fullHeight" id="divMain">
-        <form action="" class="fullHeight">
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
             <div class="form-item roww">
                 <label for="code_size">Code Size</label>
@@ -33,10 +32,15 @@
                         <div class="col-11 pr-1">
                             <a href="javascript:showUser('1')" onclick="javascript:addActive()">
                                 <div class="btnStyle">
-                                    <img src="../../Images/33.User.ico" alt="" width="25" height="25" class="m15" />
+                                    <i class="fa-solid fa-id-card-clip fa-3x p15" aria-hidden="true">
+                                        <br /><span class="someS">
+                                            <span class="h5">User 1</span>
+                                        </span>
+                                    </i>
+                                    <!--<img src="../../Images/33.User.ico" alt="" width="25" height="25" class="m15" />
                                     <div class="someS">
                                         <h5>User 1</h5>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </a>
                         </div>
@@ -55,7 +59,6 @@
                     <i class="fa-solid fa-plus 5x"></i> Add New User
                 </button>
             </div>
-        </form>
         <script>
             function myFunction(id) {
                 var element = document.getElementById(id);
@@ -102,8 +105,8 @@
                                             </div>
                                         </div>
 
-                                        <fieldset>
-                                            <legend>Codes</legend>
+                                        <button class="collapsible ml-1">Codes</button>
+                                        <div class="collapsible-content">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Code</span>
@@ -115,10 +118,10 @@
                                                 <label for="proximity_code">Proximity Code</label>
                                                 <input type="text" id="proximity_code${id}" name="proximity_code${id}" value="ffffffffffff" maxlength="12" />
                                             </div>
-                                        </fieldset>
+                                        </div>
 
-                                        <fieldset>
-                                            <legend>Attributes</legend>
+                                        <button class="collapsible ml-1">Attributes</button>
+                                        <div class="collapsible-content">
                                             <div class="row align-items-center m-1">
                                                 <div class="col">
                                                     <div class="form-item roww">
@@ -151,15 +154,22 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </fieldset>
+                                        </div>
 
-                                        <fieldset>
-                                            <legend>Proxy Attributes</legend>
+                                        <button class="collapsible ml-1">Proxy Attributes</button>
+                                        <div class="collapsible-content">
                                             <div class="row m-1">
                                                 <div class="col-xs-12 col-md-6">
                                                     <div class="form-item roww">
                                                         <label for="disarm${id}${id}">Disarm</label>
-                                                        <input type="checkbox" id="disarm${id}${id}" name="disarm${id}${id}" class="ml10" checked />
+                                                        <p class="normal bordered">
+                                                            OFF
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="disarm${id}${id}" name="disarm${id}${id}" checked/>
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                            ON
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -177,10 +187,52 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </fieldset>
+                                        </div>
+                                        
+                                        <button class="collapsible ml-1">RC</button>
+                                        <div class="collapsible-content">
 
-                                        <fieldset>
-                                            <legend>Areas</legend>
+                                            <div class="row mt-2">
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="rc_A${id}">RC A (*)</label>
+                                                        <div class="select">
+                                                            <select id="rc_A${id}"
+                                                                    name="rc_A${id}">
+                                                                <option value="not_used">Not Used</option>
+                                                                <option value="sleep_arm">Sleep Arm</option>
+                                                                <option value="stay_arm">Stay Arm</option>
+                                                                <option value="fire_alarm">Fire Alarm</option>
+                                                                <option value="medical_alarm">Medical Alarm</option>
+                                                                <option value="police_alarm">Police Alarm</option>
+                                                                <option value="pgm_switch">PGM Switch</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="rc_B${id}">RC B</label>
+                                                        <div class="select">
+                                                            <select id="rc_B${id}"
+                                                                    name="rc_B${id}">
+                                                                <option value="not_used">Not Used</option>
+                                                                <option value="sleep_arm">Sleep Arm</option>
+                                                                <option value="stay_arm">Stay Arm</option>
+                                                                <option value="fire_alarm">Fire Alarm</option>
+                                                                <option value="medical_alarm">Medical Alarm</option>
+                                                                <option value="police_alarm">Police Alarm</option>
+                                                                <option value="pgm_switch">PGM Switch</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <button class="collapsible ml-1">Areas</button>
+                                        <div class="collapsible-content">
                                             <div class="row align-items-center">
                                                 <div class="col">
                                                     <div class="form-item roww">
@@ -281,7 +333,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </fieldset>
+                                        </div>
                                         <div class="form-item roww">
                                             <label for="time_slot${id}">Time slot</label>
                                             <input class="ml10"
@@ -295,49 +347,11 @@
                                                    min="0"
                                                    max="16" />
                                         </div>
-                                        <fieldset>
-                                            <legend>RC</legend>
-
-                                            <div class="row mt-2">
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="rc_A${id}">RC A (*)</label>
-                                                        <div class="select">
-                                                            <select id="rc_A${id}"
-                                                                    name="rc_A${id}">
-                                                                <option value="not_used">Not Used</option>
-                                                                <option value="sleep_arm">Sleep Arm</option>
-                                                                <option value="stay_arm">Stay Arm</option>
-                                                                <option value="fire_alarm">Fire Alarm</option>
-                                                                <option value="medical_alarm">Medical Alarm</option>
-                                                                <option value="police_alarm">Police Alarm</option>
-                                                                <option value="pgm_switch">PGM Switch</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="rc_B${id}">RC B</label>
-                                                        <div class="select">
-                                                            <select id="rc_B${id}"
-                                                                    name="rc_B${id}">
-                                                                <option value="not_used">Not Used</option>
-                                                                <option value="sleep_arm">Sleep Arm</option>
-                                                                <option value="stay_arm">Stay Arm</option>
-                                                                <option value="fire_alarm">Fire Alarm</option>
-                                                                <option value="medical_alarm">Medical Alarm</option>
-                                                                <option value="police_alarm">Police Alarm</option>
-                                                                <option value="pgm_switch">PGM Switch</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </fieldset>
+                                        
                                     </fieldset>`;
                 el.innerHTML = target;
+                collapsible();
+                addVisitedBackground();
             }
 
             var lst = [1];
@@ -360,15 +374,16 @@
                                                         <div class="col-11 pr-1">
                                                             <a href="javascript:showUser('${last}')" onclick="javascript:addActive()">
                                                                 <div class="btnStyle">
-                                                                    <img src="../../Images/33.User.ico" alt="" width="25" height="25" class="m15" />
-                                                                    <div class="someS">
-                                                                        <h5>User ${last}</h5>
-                                                                    </div>
+                                                                    <i class="fa-solid fa-id-card-clip fa-3x p15" aria-hidden="true">
+                                                                        <br /><span class="someS">
+                                                                            <span class="h5">User ${last}</span>
+                                                                        </span>
+                                                                    </i>
                                                                 </div>
                                                             </a>
                                                         </div>
                                                         <div class="col-1 p-0 m-0" onclick="javascript:addUser(${last})">
-                                                            <i class="fa-solid fa-xmark"></i>
+                                                            <i class="fa-solid fa-xmark normal"></i>
                                                         </div>
                                                     </div>
                                                 </div>`;
