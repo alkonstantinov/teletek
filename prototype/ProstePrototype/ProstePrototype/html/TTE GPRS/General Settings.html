@@ -1,197 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../boostrap.css" />
-        <link rel="stylesheet" href="../imports/css/all.css" />
-        <link rel="stylesheet" href="../IRIS.css" />
-        <title>Teletek Manager</title>
-    </head>
-    <body>
-        <div class="container" id="divMain">
-            <form action="">
-                <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-                <div class="form-item roww disabled">
-                    <label for="software_version">Software Version</label>
-                    <input type="text" id="software_version" name="software_version" />
-                </div>
-
-                <div class="form-item roww">
-                    <label for="control_panel_size">Control Panel Type</label>
-                    <div class="select">
-                        <select id="control_panel_size"
-                                name="control_panel_size">
-                            <option value="none">Stand Alone / NONE</option>
-                            <option value="auto">Panel Auto Detect</option>
-                        </select>
-                    </div>
-                </div>
-
-                <fieldset>
-                    <legend>Account</legend>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="account_number">Account Number</label>
-                                <input type="text" id="account_number" name="account_number" maxlength="6" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="use_panel_account">Use Panel Accounts for SIA</label>
-                                <input type="checkbox" id="use_panel_account" name="use_panel_account" class="ml10" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>ID data</legend>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="system_id">System ID</label>
-                                <input type="text" id="system_id" name="system_id" maxlength="16" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <label for="pc_id">PC ID</label>
-                                <input type="text" id="pc_id" name="pc_id" maxlength="4" value="1234" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>User Code</legend>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-item roww">
-                                <input type="password" id="user" name="user" maxlength="4" value="1234" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-item roww">
-                                <input type="password" id="pass" name="pass" maxlength="4" value="1234" />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <div class="form-item roww">
-                    <label for="ac_delay">AC delay (minutes)</label>
-                    <input class="ml10"
-                           type="number"
-                           id="ac_delay"
-                           name="ac_delay"
-                           data-maxlength="3"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="1"
-                           min="1"
-                           max="255" />
-                </div>
-
-                <div class="form-item roww">
-                    <label for="low_dc_power_supply">Low DC Power Supply .x10 mV</label>
-                    <input class="ml10"
-                           type="number"
-                           id="low_dc_power_supply"
-                           name="low_dc_power_supply"
-                           data-maxlength="4"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="1140"
-                           value="1140"
-                           min="1"
-                           max="3000" />
-                </div>
-
-                <div class="form-item roww">
-                    <label for="test_msg">Test message (minutes)</label>
-                    <input class="ml10"
-                           type="number"
-                           id="test_msg"
-                           name="test_msg"
-                           data-maxlength="5"
-                           oninput="javascript: myFunction(this.id)"
-                           onblur="javascript: myFunction2(this.id)"
-                           placeholder="20"
-                           value="20"
-                           min="1"
-                           max="10080" />
-                </div>
-
-                <div class="form-item roww">
-                    <label for="sms_backup_phone">SMS Backup Phone Number</label>
-                    <input type="tel" id="sms_backup_phone" name="sms_backup_phone" class="ml10" pattern="[+]{1}[0-9]{11,14}">
-                </div>
-
-                <div class="buttons-row mt15">
-                    <!--<button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>-->
-                </div>
-            </form>
-            <script>
-                function myFunction(id) {
-                    var element = document.getElementById(id);
-                    element.value = element.value.slice(0, element.dataset.maxlength);
-                }
-                function myFunction2(id) {
-                    var element = document.getElementById(id);
-                    if (element.value > element.max) {
-                        element.value = element.max;
-                    }
-                }
-                function myFunction3(id) {
-                    var element = document.getElementById(id);
-                    if (!element.value.includes(":")) {
-                        console.log('before:', element.value);
-                        element.value += ":";
-                        console.log('after:', element.value);
-                    }
-                    const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
-                    console.log('test', regex.test(element.value));
-                    element.value = regex.exec(element.value);
-                    console.log(element.value);
-                }
-
-                function changeStyleDisplay(id) {
-                    var val = document.getElementById(id).value;
-                    var divId = id + "-schedule";
-                    var element = document.getElementById(divId);
-                    if (val === "schedule") {
-                        if (element.style.display === "block") {
-                            element.style.display = "none";
-                        } else {
-                            element.style.display = "block";
-                        }
-                    } else {
-                        element.style.display = "none";
-                    }
-                }
-            </script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../imports/css/all.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <title>Teletek Manager</title>
+</head>
+<body>
+    <div class="container" id="divMain">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <div class="form-item roww disabled">
+            <label for="software_version">Software Version</label>
+            <input type="text" id="software_version" name="software_version" />
         </div>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../imports/jquery-3.6.0.js"></script>
-        <script src="../imports/popper.min.js"></script>
-        <script src="../imports/boostrap@4.3.1.min.js"></script>
-        <script src="../imports/bootstrap-datepicker.min.js"></script>
-        <script src="../imports/font-awesome.js"></script>
-        <script src="../imports/mainfuncs.js"></script>
+
+        <div class="form-item roww">
+            <label for="control_panel_size">Control Panel Type</label>
+            <div class="select">
+                <select id="control_panel_size"
+                        name="control_panel_size">
+                    <option value="none">Stand Alone / NONE</option>
+                    <option value="auto">Panel Auto Detect</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="collapsible ml-1">Account</button>
+        <div class="collapsible-content">
+            <div class="row">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="account_number">Account Number</label>
+                        <input type="text" id="account_number" name="account_number" maxlength="6" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="use_panel_account">Panel Accounts for SIA Usage</label>
+                        <p class="bordered grasse">
+                            OFF
+                            <label class="switch">
+                                <input type="checkbox" id="use_panel_account" name="use_panel_account" />
+                                <span class="slider"></span>
+                            </label>
+                            ON
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="collapsible ml-1">ID data</button>
+        <div class="collapsible-content">
+            <div class="row">
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="system_id">System ID</label>
+                        <input type="text" id="system_id" name="system_id" maxlength="16" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww">
+                        <label for="pc_id">PC ID</label>
+                        <input type="text" id="pc_id" name="pc_id" maxlength="4" value="1234" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="collapsible ml-1">User Code</button>
+        <div class="collapsible-content">
+            <div class="row">
+                <div class="col">
+                    <div class="form-item roww">
+                        <input type="password" id="user" name="user" maxlength="4" value="1234" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-item roww">
+                        <input type="password" id="pass" name="pass" maxlength="4" value="1234" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="collapsible ml-1">Other Settings</button>
+        <div class="collapsible-content">
+            <div class="form-item roww">
+                <label for="ac_delay">AC delay (minutes)</label>
+                <input class="ml10"
+                       type="number"
+                       id="ac_delay"
+                       name="ac_delay"
+                       data-maxlength="3"
+                       oninput="javascript: myFunction(this.id)"
+                       onblur="javascript: myFunction2(this.id)"
+                       placeholder="1"
+                       min="1"
+                       max="255" />
+            </div>
+
+            <div class="form-item roww">
+                <label for="low_dc_power_supply">Low DC Power Supply .x10 mV</label>
+                <input class="ml10"
+                       type="number"
+                       id="low_dc_power_supply"
+                       name="low_dc_power_supply"
+                       data-maxlength="4"
+                       oninput="javascript: myFunction(this.id)"
+                       onblur="javascript: myFunction2(this.id)"
+                       placeholder="1140"
+                       value="1140"
+                       min="1"
+                       max="3000" />
+            </div>
+
+            <div class="form-item roww">
+                <label for="test_msg">Test message (minutes)</label>
+                <input class="ml10"
+                       type="number"
+                       id="test_msg"
+                       name="test_msg"
+                       data-maxlength="5"
+                       oninput="javascript: myFunction(this.id)"
+                       onblur="javascript: myFunction2(this.id)"
+                       placeholder="20"
+                       value="20"
+                       min="1"
+                       max="10080" />
+            </div>
+
+            <div class="form-item roww">
+                <label for="sms_backup_phone">SMS Backup Phone Number</label>
+                <input type="tel" id="sms_backup_phone" name="sms_backup_phone" class="ml10" pattern="[+]{1}[0-9]{11,14}">
+            </div>
+        </div>
+
+        <div class="buttons-row mt15">
+            <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+        </div>
         <script>
-            function sendMessage(bc) {
-                CefSharp.PostMessage(bc);
+            function myFunction(id) {
+                var element = document.getElementById(id);
+                element.value = element.value.slice(0, element.dataset.maxlength);
             }
-                            //$(document).ready(() => {
-                            //    sendMessage("Devices|TTE GPRS|General Settings");
-                            //});
+            function myFunction2(id) {
+                var element = document.getElementById(id);
+                if (element.value > element.max) {
+                    element.value = element.max;
+                }
+            }
+            function myFunction3(id) {
+                var element = document.getElementById(id);
+                if (!element.value.includes(":")) {
+                    console.log('before:', element.value);
+                    element.value += ":";
+                    console.log('after:', element.value);
+                }
+                const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
+                console.log('test', regex.test(element.value));
+                element.value = regex.exec(element.value);
+                console.log(element.value);
+            }
+
+            function changeStyleDisplay(id) {
+                var val = document.getElementById(id).value;
+                var divId = id + "-schedule";
+                var element = document.getElementById(divId);
+                if (val === "schedule") {
+                    if (element.style.display === "block") {
+                        element.style.display = "none";
+                    } else {
+                        element.style.display = "block";
+                    }
+                } else {
+                    element.style.display = "none";
+                }
+            }
         </script>
-    </body>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+                                                                                //$(document).ready(() => {
+                                                                                //    sendMessage("Devices|TTE GPRS|General Settings");
+                                                                                //});
+    </script>
+</body>
 </html>
