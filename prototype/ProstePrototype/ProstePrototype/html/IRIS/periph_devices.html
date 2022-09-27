@@ -23,7 +23,7 @@
                     <div class="col-12" id="id_1">
                         <div class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('power_supply')" onclick="javascript:addActive()">
+                                <a href="javascript:showDevice('power_supply', 'id_1')" onclick="javascript:addActive()">
                                     <div class="btnStyle fire">
                                         <i class="fa-solid fa-plug fa-3x p15" aria-hidden="true">
                                             <br /><span class="someS">
@@ -41,7 +41,7 @@
                     <div class="col-12" id="id_2">
                         <div class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('input0_outrel4_outmon4')" onclick="javascript:addActive()">
+                                <a href="javascript:showDevice('input0_outrel4_outmon4', 'id_2')" onclick="javascript:addActive()">
                                     <div class="btnStyle fire">
                                         <i class="fa-solid fa-arrow-down-up-across-line fa-3x p15" aria-hidden="true">
                                             <br /><span class="someS">
@@ -51,7 +51,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(1)">
+                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(2)">
                                 <i class="fa-solid fa-xmark fire"></i>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
             }
             function myFunction2(id) {
                 var element = document.getElementById(id);
-                if (element.value > element.max) {
+                if (+element.value > +element.max) {
                     element.value = element.max;
                 }
             }
@@ -282,7 +282,8 @@
                 });
             }
 
-            function showDevice(id) {
+            function showDevice(id, currentId) {
+                console.log('curr', currentId);
                 var el = document.getElementById("selected_device");
                 let ver = false;
                 switch (id) {
@@ -291,7 +292,7 @@
 
                     default: break; //pwer_supply, inputs, loops
                 }
-                var target = `<div class="row mt-2">
+                var target = `<div class="row mt-2" id="${currentId}">
                                     ${ver ? `<div class="col-xs-12 col-md-6">
                                     <div class="form-item roww flex disabled">
                                         <label for="ver_${id}">Ver</label>
@@ -313,7 +314,7 @@
             var lst = [1, 2];
             const devices = 6;
             function addConcreteDevice(id) {
-                for (i = 0; i <= devices; i++) {
+                for (i = 1; i <= devices; i++) {
                     if (lst.includes(i)) {
                         continue;
                     } else {
@@ -327,6 +328,9 @@
                     lst = lst.filter(function (item) {
                         return item !== +id
                     })
+
+                    var el = document.getElementById(`id_${id}`);
+                    if (el) el.parentNode.removeChild(el);
 
                     let button = document.getElementById("device_btn");
                     if (lst.length < devices && button.style.display === "none") {
@@ -349,7 +353,7 @@
                                             <div class="col-12" id=${id + '_' + last}>
                                                 <div class="row">
                                                     <div class="col-11 pr-1">
-                                                        <a href="javascript:showDevice('${link}')" onclick="javascript:addActive()">
+                                                        <a href="javascript:showDevice('${link}', 'id_${last}' )" onclick="javascript:addActive()">
                                                             <div class="btnStyle fire">
                                                                 <i class="fa-solid fa-${imgSource} fa-3x p15" aria-hidden="true">
                                                                     <br /><span class="someS">

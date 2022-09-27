@@ -51,7 +51,7 @@
             }
             function myFunction2(id) {
                 var element = document.getElementById(id);
-                if (element.value > element.max) {
+                if (+element.value > +element.max) {
                     element.value = element.max;
                 }
             }
@@ -70,6 +70,18 @@
                     case (value.includes('ORschema')):
                     case (value.includes('ANDschema')):
                         addElement.innerHTML = element.innerHTML;
+                        if (value.includes('ORschema')) {
+                            addElement.style.marginLeft = 'auto';
+                        }
+                        if (value.includes('ANDschema')) {
+                            addElement.style.marginLeft = 'unset';
+                        }
+                        if (value.includes('ORschema') || value.includes('ANDschema')) {
+                            var elToInsert = document.getElementById(`${value}_inputs`);
+                            console.log(elToInsert);
+                            var elToShow = document.getElementById(`showGroup_${id}`);
+                            elToShow.innerHTML = elToInsert.innerHTML;
+                        }
                         break;
                     default:
                         addElement.innerHTML = "";
@@ -93,7 +105,7 @@
             function showOutput(id) {
                 var el = document.getElementById("selected_area");
                 id = parseInt(id);
-                var style = "max-height:100px;max-width:100%;";
+                var style = ""; // "max-height:100px;max-width:100%;";
                 var target = `<fieldset id="id_${id}">
                                                     <legend>Output ${id}</legend>
                                                         <div class="row align-items-center">
@@ -140,72 +152,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <button class="fire collapsible ml-1">Parameters</button>
-                                                        <div class="collapsible-content">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <div class="form-item roww">
-                                                                        <label for="latched_${id}">Latched</label>
-                                                                        <input type="checkbox" id="latched_${id}" class="ml10" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <div class="form-item roww">
-                                                                        <label for="inverted_${id}">Inverted</label>
-                                                                        <input type="checkbox" id="inverted_${id}" class="ml10" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-6">
-                                                                    <fieldset>
-                                                                        <legend>Logic</legend>
-                                                                        <div class="row m-0">
-                                                                            <div class="form-item col-3">
-                                                                                <div class="select">
-                                                                                    <select id="logic-select_${id}"
-                                                                                            name="logic-select_${id}"
-                                                                                            onchange="javascript: loadDiv(this,'showSchema_${id}', this.value)">
-                                                                                        <option value="ORschema" selected>OR</option>
-                                                                                        <option value="ANDschema">AND</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div id="showSchema_${id}" class="txt-ctr col-9">
-                                                                                <img src="../../Images/ORFunction.png" alt="ORschema" style=${style} />
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div style="display: none" id="ORschema">
-                                                                            <img src="../../Images/ORFunction.png" alt="ORschema" style=${style} />
-                                                                        </div>
-
-                                                                        <div style="display: none" id="ANDschema">
-                                                                            <img src="../../Images/ANDFunction.png" alt="ANDschema" style=${style} />
-                                                                        </div>
-                                                                    </fieldset>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <fieldset>
-                                                                        <legend>Signal type</legend>
-                                                                        <div class="form-item">
-                                                                            <div class="select">
-                                                                                <select id="signal-type_${id}"
-                                                                                        name="signal-type_${id}">
-                                                                                    <option value="one_pulsed" selected>ONE PULSED</option>
-                                                                                    <option value="pulsed">PULSED</option>
-                                                                                    <option value="continious">CONTINIOUS</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <button class="fire collapsible ml-1">Input Type</button>
+<button class="fire collapsible ml-1">Input Type</button>
                                                         <div class="collapsible-content">
                                                             <div class="form-item roww">
                                                                 <label for="state">State</label>
@@ -452,55 +399,187 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
+
+                                                        <button class="fire collapsible ml-1">Parameters</button>
+                                                        <div class="collapsible-content">
+                                                            <div class="row align-items-center">
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="latched_${id}">Latched</label>
+                                                                        <input type="checkbox" id="latched_${id}" class="ml10" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-item roww">
+                                                                        <label for="inverted_${id}">Inverted</label>
+                                                                        <input type="checkbox" id="inverted_${id}" class="ml10" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
 
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <fieldset>
+                                                                        <legend>Logic</legend>
+                                                                        <div class="form-item">
+                                                                            <div class="select">
+                                                                                <select id="logic-select_${id}"
+                                                                                        name="logic-select_${id}"
+                                                                                        onchange="javascript: loadDiv(this,'showSchema_${id}', this.value)">
+                                                                                    <option value="ORschema" selected>OR</option>
+                                                                                    <option value="ANDschema">AND</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
 
+                                                                        <div id="showSchema_${id}" class="col-9" style="margin-left: auto; margin-right: auto">
+                                                                            <img src="../../Images/ORFunction.png" alt="ORschema" style=${style} />
+                                                                        </div>
 
-                                                            <button class="fire collapsible ml-1">OR group inputs</button>
-                                                        <div class="collapsible-content">
-                                                            <div class="form-item roww">
-                                                                <input type="number"
-                                                                        id="or_group1_${id}"
-                                                                        name="or_group1_${id}"
-                                                                        data-maxlength="3"
-                                                                        oninput="javascript: myFunction(this.id)"
-                                                                        onblur="javascript: myFunction2(this.id)"
-                                                                        placeholder="0"
-                                                                        min="1"
-                                                                        max="250" />
-                                                                <input type="number"
-                                                                        id="or_group2_${id}"
-                                                                        name="or_group2_${id}"
-                                                                        data-maxlength="3"
-                                                                        oninput="javascript: myFunction(this.id)"
-                                                                        onblur="javascript: myFunction2(this.id)"
-                                                                        placeholder="0"
-                                                                        min="1"
-                                                                        max="250" />
-                                                                <input type="number"
-                                                                        id="or_group3_${id}"
-                                                                        name="or_group3_${id}"
-                                                                        data-maxlength="3"
-                                                                        oninput="javascript: myFunction(this.id)"
-                                                                        onblur="javascript: myFunction2(this.id)"
-                                                                        placeholder="0"
-                                                                        min="1"
-                                                                        max="250" />
-                                                                <input type="number"
-                                                                        id="or_group4_${id}"
-                                                                        name="or_group4_${id}"
-                                                                        data-maxlength="3"
-                                                                        oninput="javascript: myFunction(this.id)"
-                                                                        onblur="javascript: myFunction2(this.id)"
-                                                                        placeholder="0"
-                                                                        min="1"
-                                                                        max="250" />
+                                                                        <div style="display: none" id="ORschema">
+                                                                            <img src="../../Images/ORFunction.png" alt="ORschema" style=${style} />
+                                                                        </div>
+
+                                                                        <div style="display: none" id="ANDschema">
+                                                                            <img src="../../Images/ANDFunction.png" alt="ANDschema" style=${style} />
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="row">
+<div class="col-12">
+                                                                        <fieldset>
+                                                                            <legend>Signal type</legend>
+                                                                            <div class="form-item">
+                                                                                <div class="select">
+                                                                                    <select id="signal-type_${id}"
+                                                                                            name="signal-type_${id}">
+                                                                                        <option value="one_pulsed" selected>ONE PULSED</option>
+                                                                                        <option value="pulsed">PULSED</option>
+                                                                                        <option value="continious">CONTINIOUS</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div id="showGroup_showSchema_${id}" class="col-12">
+                                                                            <fieldset>
+                                                                                <legend>OR input group</legend>
+                                                                                <div class="form-item roww row mr-1">
+<div class="col-3 p-0">
+                                                                                    <input type="number"
+                                                                                            id="or_group1_${id}"
+                                                                                            name="or_group1_${id}"
+                                                                                            data-maxlength="3"
+                                                                                            oninput="javascript: myFunction(this.id)"
+                                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                                            placeholder="0"
+                                                                                            min="1"
+                                                                                            max="250" />
+</div>
+<div class="col-3 p-0">
+                                                                                    <input type="number"
+                                                                                            id="or_group2_${id}"
+                                                                                            name="or_group2_${id}"
+                                                                                            data-maxlength="3"
+                                                                                            oninput="javascript: myFunction(this.id)"
+                                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                                            placeholder="0"
+                                                                                            min="1"
+                                                                                            max="250" />
+</div>
+<div class="col-3 p-0">
+                                                                                    <input type="number"
+                                                                                            id="or_group3_${id}"
+                                                                                            name="or_group3_${id}"
+                                                                                            data-maxlength="3"
+                                                                                            oninput="javascript: myFunction(this.id)"
+                                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                                            placeholder="0"
+                                                                                            min="1"
+                                                                                            max="250" />
+</div>
+<div class="col-3 p-0">
+                                                                                    <input type="number"
+                                                                                            id="or_group4_${id}"
+                                                                                            name="or_group4_${id}"
+                                                                                            data-maxlength="3"
+                                                                                            oninput="javascript: myFunction(this.id)"
+                                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                                            placeholder="0"
+                                                                                            min="1"
+                                                                                            max="250" />
+</div>
+                                                                                </div>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <button class="fire collapsible ml-1">AND group inputs</button>
-                                                        <div class="collapsible-content">
-                                                            <div class="form-item roww">
+                                                       <div style="display:none" id="ORschema_inputs">
+                                                            <fieldset>
+                                                            <legend>OR input group</legend>
+                                                                <div class="form-item roww row mr-1">
+<div class="col-3 p-0">
+                                                                    <input type="number"
+                                                                            id="or_group1_${id}"
+                                                                            name="or_group1_${id}"
+                                                                            data-maxlength="3"
+                                                                            oninput="javascript: myFunction(this.id)"
+                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                            placeholder="0"
+                                                                            min="1"
+                                                                            max="250" />
+</div>
+<div class="col-3 p-0">
+                                                                    <input type="number"
+                                                                            id="or_group2_${id}"
+                                                                            name="or_group2_${id}"
+                                                                            data-maxlength="3"
+                                                                            oninput="javascript: myFunction(this.id)"
+                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                            placeholder="0"
+                                                                            min="1"
+                                                                            max="250" />
+</div>
+<div class="col-3 p-0">
+                                                                    <input type="number"
+                                                                            id="or_group3_${id}"
+                                                                            name="or_group3_${id}"
+                                                                            data-maxlength="3"
+                                                                            oninput="javascript: myFunction(this.id)"
+                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                            placeholder="0"
+                                                                            min="1"
+                                                                            max="250" />
+</div>
+<div class="col-3 p-0">
+                                                                    <input type="number"
+                                                                            id="or_group4_${id}"
+                                                                            name="or_group4_${id}"
+                                                                            data-maxlength="3"
+                                                                            oninput="javascript: myFunction(this.id)"
+                                                                            onblur="javascript: myFunction2(this.id)"
+                                                                            placeholder="0"
+                                                                            min="1"
+                                                                            max="250" />
+</div>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+
+                                                        
+
+                                                        <div style="display:none" id="ANDschema_inputs">
+                                                            <fieldset>
+                                                            <legend>AND input group</legend>
+                                                            <div class="form-item roww row mr-1">
+<div class="col-3 p-0">
                                                                 <input type="number"
                                                                         id="and_group1_${id}"
                                                                         name="and_group1_${id}"
@@ -510,6 +589,8 @@
                                                                         placeholder="0"
                                                                         min="1"
                                                                         max="250" />
+</div>
+<div class="col-3 p-0">
                                                                 <input type="number"
                                                                         id="and_group2_${id}"
                                                                         name="and_group2_${id}"
@@ -519,6 +600,8 @@
                                                                         placeholder="0"
                                                                         min="1"
                                                                         max="250" />
+</div>
+<div class="col-3 p-0">
                                                                 <input type="number"
                                                                         id="and_group3_${id}"
                                                                         name="and_group3_${id}"
@@ -528,6 +611,8 @@
                                                                         placeholder="0"
                                                                         min="1"
                                                                         max="250" />
+</div>
+<div class="col-3 p-0">
                                                                 <input type="number"
                                                                         id="and_group4_${id}"
                                                                         name="and_group4_${id}"
@@ -537,7 +622,9 @@
                                                                         placeholder="0"
                                                                         min="1"
                                                                         max="250" />
+</div>
                                                             </div>
+                                                            </fieldset>
                                                         </div>
                                                         </fieldset>
                                                     </div>`;

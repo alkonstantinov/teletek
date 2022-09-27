@@ -33,23 +33,56 @@
         <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="list-group" id="list-tab" role="tablist">
-                                <button type="button" class="list-group-item list-group-item-action active show" id="list-teletek_loop-list" data-toggle="tab" href="#list-teletek_loop" role="tab" aria-controls="list-teletek_loop" aria-selected="false">Teletek Loop</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-system_sensor_loop-list" data-toggle="tab" href="#list-system_sensor_loop" role="tab" aria-controls="list-system_sensor_loop" aria-selected="false">System Sensor Loop</button>
+                    <!--<div class="row">
+                        <div class="col-8">-->
+                            <div class="row list-group fire" id="list-tab" role="tablist">
+                                <button 
+                                    type="button"
+                                    class="list-group-item col-6 active show"
+                                    id="list-teletek_loop" data-toggle="tab"
+                                    onclick="javascript: addConcreteDevice(this.id)"
+                                    role="tab"
+                                    aria-controls="list-teletek_loop"
+                                    aria-selected="false">
+                                    <div class="btnStyle fire">
+                                        <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
+                                            <br /><span class="someS">
+                                                <span class="h5">Teletek Loop</span>
+                                            </span>
+                                        </i>                                        
+                                    </div>
+                                </button>
+
+
+                                <button 
+                                    type="button" 
+                                    class="list-group-item col-6" 
+                                    id="list-system_sensor_loop" 
+                                    data-toggle="tab" 
+                                    onclick="javascript: addConcreteDevice(this.id)" 
+                                    role="tab" 
+                                    aria-controls="list-system_sensor_loop" 
+                                    aria-selected="false">
+                                    <div class="btnStyle fire">
+                                        <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
+                                            <br /><span class="someS">
+                                                <span class="h5">System Sensor Loop</span>
+                                            </span>
+                                        </i>
+                                    </div>
+                                </button>
                             </div>
-                        </div>
-                        <div class="col-4">
+                        <!--</div>-->
+                        <!--<div class="col-4">
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade active show" id="list-teletek_loop" role="tabpanel" aria-labelledby="list-teletek_loop-list">
                                     <div class="row m-1 justify-content-center">
                                         <h2>Teletek Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
-                                        <i class="fa-solid fa-arrows-spin fire fa-3x"></i>
+                                        <i class="fa-solid fa-arrows-spin fire fa-3x"></i>-->
                                         <!--<img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />-->
-                                    </div>
+                                    <!--</div>
                                     <div class="row m-1 justify-content-end">
                                         <button type="button" class="btn-round" id="teletek_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
                                     </div>
@@ -59,23 +92,23 @@
                                         <h2>System Sensor Loop</h2>
                                     </div>
                                     <div class="row m-1 justify-content-center">
-                                        <i class="fa-solid fa-arrows-spin fire fa-3x"></i>
+                                        <i class="fa-solid fa-arrows-spin fire fa-3x"></i>-->
                                         <!--<img src="../../Images/1013.LoopDecices.ico" alt="" width="100" height="100" class="m15" />-->
-                                    </div>
+                                    <!--</div>
                                     <div class="row m-1 justify-content-end">
                                         <button type="button" class="btn-round" id="system_sensor_loop_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
 
         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
-            <button type="button" class="btn-round btn-bordered-black">Back</button>-->
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
             <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
                 <i class="fa-solid fa-plus 5x"></i> Add New Device
             </button>
@@ -89,7 +122,7 @@
             }
             function myFunction2(id) {
                 var element = document.getElementById(id);
-                if (element.value > element.max) {
+                if (+element.value > +element.max) {
                     element.value = element.max;
                 }
             }
@@ -122,8 +155,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-9">
-                                        <div id="selected_device_${id}">
+                                    <div class="col-9" style="z-index: 1;height: fit-content;">
+                                        <div id="selected_device_${id}" style="background: white;">
 
                                         </div>
                                     </div>
@@ -232,7 +265,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1080.MINP.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -254,7 +287,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1080.MINP.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -276,7 +309,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1080.MINP.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -298,7 +331,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1080.MINP.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -408,7 +441,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1027. Call Point (IRIS).ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -430,7 +463,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/70.SensoIRIS_T110_S130.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -452,7 +485,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/70.SensoIRIS_T110_S130.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -474,7 +507,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/70.SensoIRIS_T110_S130.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -496,7 +529,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/70.SensoIRIS_T110_S130.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -518,7 +551,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/71.SensoIRIS_M140.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -540,7 +573,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/71.SensoIRIS_M140.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -562,7 +595,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/72.SensoIRIS_WSOU.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -584,7 +617,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/72.SensoIRIS_WSOU.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -606,7 +639,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/75.SensoIRIS_wsst.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -628,7 +661,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/75.SensoIRIS_wsst.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -650,7 +683,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/72.SensoIRIS_WSOU.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -672,7 +705,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/72.SensoIRIS_WSOU.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -694,7 +727,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/BSOU-600x460.png"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -716,7 +749,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/BSOU-600x460.png"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -738,7 +771,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/BSOU-600x460.png"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -760,7 +793,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/BSOU-600x460.png"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -782,7 +815,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/BSOU-600x460.png"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -804,7 +837,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/BSOU-600x460.png"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -826,7 +859,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1081.SensoIRIS_GAS.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -848,7 +881,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1081.SensoIRIS_GAS.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -870,7 +903,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/68.SensoIRIS_address_base.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -892,7 +925,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/27. Call Point (IRIS).ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -914,7 +947,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1058. IRIS M22_IRIS Zone.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -936,7 +969,7 @@
                                                 >
                                                     <div class="btnStyle fire">
                                                         <img
-                                                            src="../../Images/69.SensoIRIS_Module_box.ico"
+                                                            src="../../Images/1059. Sounder WSOU.ico"
                                                             alt=""
                                                             width="50"
                                                             height="50"
@@ -992,396 +1025,459 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-9">
-                                        <div id="selected_sensor_${id}">
+                                    <div class="col-9" style="z-index: 1;height: fit-content;">
+                                        <div id="selected_sensor_${id}" style="background: white;">
 
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="modal fade bd-example" tabindex="-1" role="dialog" id="sensorList_${id}" aria-hidden="true">
+                               <div class="modal fade bd-example" tabindex="-1" role="dialog" id="sensorList_${id}" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <div class="list-group" id="list-tab" role="tablist">
-                                                        <div>Sensors</div>
-                                                        <button type="button" class="list-group-item list-group-item-action active show" id="list-1251е-list" data-toggle="tab" href="#list-1251е" role="tab" aria-controls="list-1251е" aria-selected="true">1251Е</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-22051e-list" data-toggle="tab" href="#list-22051e" role="tab" aria-controls="list-22051e" aria-selected="false">22051E</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-22051eise-list" data-toggle="tab" href="#list-22051eise" role="tab" aria-controls="list-22051eise" aria-selected="false">22051EISE</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-6200-list" data-toggle="tab" href="#list-6200" role="tab" aria-controls="list-6200" aria-selected="false">6200</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-ftxp1-list" data-toggle="tab" href="#list-ftxp1" role="tab" aria-controls="list-ftxp1" aria-selected="false">FTXP1</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-6500-list" data-toggle="tab" href="#list-6500" role="tab" aria-controls="list-6500" aria-selected="false">6500</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-52051e-list" data-toggle="tab" href="#list-52051e" role="tab" aria-controls="list-52051e" aria-selected="false">52051E</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-52051re-list" data-toggle="tab" href="#list-52051re" role="tab" aria-controls="list-52051re" aria-selected="false">52051RE</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-52051hte-list" data-toggle="tab" href="#list-52051hte" role="tab" aria-controls="list-52051hte" aria-selected="false">52051HTE</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-52051te_tle_ctle-list" data-toggle="tab" href="#list-52051te_tle_ctle" role="tab" aria-controls="list-52051te_tle_ctle" aria-selected="false">52051TE / TLE / CTLE</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-lzr1m-list" data-toggle="tab" href="#list-lzr1m" role="tab" aria-controls="list-lzr1m" aria-selected="false">LZR1M</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-7251-list" data-toggle="tab" href="#list-7251" role="tab" aria-controls="list-7251" aria-selected="false">7251</button>
-                                                        <div>Modules</div>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m210e-list" data-toggle="tab" href="#list-m210e" role="tab" aria-controls="list-m210e" aria-selected="false">M210E</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m220e-list" data-toggle="tab" href="#list-m220e" role="tab" aria-controls="list-m220e" aria-selected="false">M220E</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m221einput-list" data-toggle="tab" href="#list-m221einput" role="tab" aria-controls="list-m221einput" aria-selected="false">M221EINPUT</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m221eoutput-list" data-toggle="tab" href="#list-m221eoutput" role="tab" aria-controls="list-m221eoutput" aria-selected="false">M221EOUTPUT</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m201e_supervized-list" data-toggle="tab" href="#list-m201e_supervized" role="tab" aria-controls="list-m201e_supervized" aria-selected="false">M201E SUPERVIZED</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m501me-list" data-toggle="tab" href="#list-m501me" role="tab" aria-controls="list-m501me" aria-selected="false">M501ME</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m503me-list" data-toggle="tab" href="#list-m503me" role="tab" aria-controls="list-m503me" aria-selected="false">M503ME</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-callpoint-list" data-toggle="tab" href="#list-callpoint" role="tab" aria-controls="list-callpoint" aria-selected="false">CALL POINT</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m512me-list" data-toggle="tab" href="#list-m512me" role="tab" aria-controls="list-m512me" aria-selected="false">M512ME (ZONE MONITOR)</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m201e_unsupervized-list" data-toggle="tab" href="#list-m201e_unsupervized" role="tab" aria-controls="list-m201e_unsupervized" aria-selected="false">M201E UNSUPERVIZED</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-sounder_strobe-list" data-toggle="tab" href="#list-sounder_strobe" role="tab" aria-controls="list-sounder_strobe" aria-selected="false">SOUNDER / STROBE</button>
-                                                        <button type="button" class="list-group-item list-group-item-action" id="list-m210e_cz-list" data-toggle="tab" href="#list-m210e_cz" role="tab" aria-controls="list-m210e_cz" aria-selected="false">M210E-CZ (ZONE MONITOR)</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-8 flexicol" >
-                                                    <div class="tab-content stick" id="nav-tabContent">
-                                                        <div class="tab-pane fade active show" id="list-1251е" role="tabpanel" aria-labelledby="list-1251е-list" >
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>1251Е</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/17.1251E.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="1251е_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="tab-pane fade" id="list-22051e" role="tabpanel" aria-labelledby="list-22051e-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>22051E</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/22. 22051TE (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="22051e_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-22051eise" role="tabpanel" aria-labelledby="list-22051eise-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>22051EISE</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/22. 22051TE (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="22051eise_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-6200" role="tabpanel" aria-labelledby="list-6200-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>6200</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/18. 6200 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="6200_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-ftxp1" role="tabpanel" aria-labelledby="list-ftxp1-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>FTXP1</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/19. Filtrex (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="ftxp1_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-6500" role="tabpanel" aria-labelledby="list-6500-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>6500</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/20. 6500 (IRIS).png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="6500_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-52051e" role="tabpanel" aria-labelledby="list-52051e-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>52051E</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/22. 22051TE (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="52051e_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-52051re" role="tabpanel" aria-labelledby="list-52051re-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>52051RE</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/22. 22051TE (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="52051re_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-52051hte" role="tabpanel" aria-labelledby="list-52051hte-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>52051HTE</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/22. 22051TE (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="52051hte_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-52051te_tle_ctle" role="tabpanel" aria-labelledby="list-52051te_tle_ctle-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>52051TE / TLE / CTLE</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/22. 22051TE (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="52051te/tle/ctle_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-lzr1m" role="tabpanel" aria-labelledby="list-lzr1m-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>LZR1M</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/17.1251E.png" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="lzr1m_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-7251" role="tabpanel" aria-labelledby="list-7251-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>LZR1M</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/23. 7251 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="7251_btn" onclick="javascript: addSensor(this.id, '${id}', 'sensor')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m210e" role="tabpanel" aria-labelledby="list-m210e-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M210E</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m210e_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m220e" role="tabpanel" aria-labelledby="list-m220e-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M220E</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m220e_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m221einput" role="tabpanel" aria-labelledby="list-m221einput-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M221EINPUT</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m221einput_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m221eoutput" role="tabpanel" aria-labelledby="list-m221eoutput-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M221EOUTPUT</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m221eoutput_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m201e_supervized" role="tabpanel" aria-labelledby="list-m201e_supervized-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M201E SUPERVIZED</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m201e_supervized_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m501me" role="tabpanel" aria-labelledby="list-m501me-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M501ME</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/26. M503ME (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m501me_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m503me" role="tabpanel" aria-labelledby="list-m503me-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M503ME</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/26. M503ME (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m503me_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-callpoint" role="tabpanel" aria-labelledby="list-callpoint-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>CALL POINT</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/27. Call Point (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="call_point_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m512me" role="tabpanel" aria-labelledby="list-m512me-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M512ME (ZONE MONITOR)</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/29. M512 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m512me_(zone_monitor)_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m201e_unsupervized" role="tabpanel" aria-labelledby="list-m201e_unsupervized-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M201E UNSUPERVIZED</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m201e_unsupervized_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-sounder_strobe" role="tabpanel" aria-labelledby="list-sounder_strobe-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>SOUNDER / STROBE</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/28. Sounder_Strobe (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="sounder_/_strobe_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="list-m210e_cz" role="tabpanel" aria-labelledby="list-m210e_cz-list">
-                                                            <div class="row m-1 justify-content-center">
-                                                                <h2>M210E-CZ (ZONE MONiTOR)</h2>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <img src="../../Images/25. M201_M221 (IRIS).ico" alt="" width="100" height="100" class="m15" />
-                                                            </div>
-                                                            <div class="row m-1 justify-content-center">
-                                                                <p>Additional text - device description...</p>
-                                                            </div>
-                                                            <div class="row m-1 justify-content-end">
-                                                                <button type="button" class="btn-round" id="m210e-cz_(zone_monitor)_btn" onclick="javascript: addSensor(this.id, '${id}', 'module')">Add</button>
-                                                            </div>
+                                            <div class="row list-group fire" id="list-tab" role="tablist">
+                                                <div class="col-12">Sensors</div>
+                                                <button type="button"
+                                                        class="list-group-item col active"
+                                                        id="1251е_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/17.1251E.png"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>1251Е</h5>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="22051e_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/22. 22051TE (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>22051E</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="22051eise_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/22. 22051TE (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>22051EISE</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="6200_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/18. 6200 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>6200</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="ftxp1_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/19. Filtrex (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>FTXP1</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="6500_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/20. 6500 (IRIS).png"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>6500</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="52051e_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/22. 22051TE (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>52051E</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="52051re_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/22. 22051TE (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>52051RE</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="52051hte_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/22. 22051TE (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>52051HTE</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="52051te/tle/ctle_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/22. 22051TE (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>52051TE / TLE / CTLE</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="lzr1m_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/17.1251E.png"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>LZR1M</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="7251_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'sensor')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/23. 7251 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>7251</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <div class="col-12">Modules</div>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m210e_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M210E</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m220e_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M220E</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m221einput_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M221EINPUT</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m221eoutput_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M221EOUTPUT</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m201e_supervized_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M201E SUPERVIZED</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m501me_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/26. M503ME (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M501ME</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m503me_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/26. M503ME (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M503ME</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="call_point_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/27. Call Point (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>CALL POINT</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m512me_(zone_monitor)_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/29. M512 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M512ME (ZONE MONITOR)</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m201e_unsupervized_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M201E UNSUPERVIZED</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="sounder_/_strobe_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/28. Sounder_Strobe (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>SOUNDER / STROBE</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <button type="button"
+                                                        class="list-group-item col"
+                                                        id="m210e-cz_(zone_monitor)_btn"
+                                                        onclick="javascript: addSensor(this.id, '${id}', 'module')"
+                                                        data-toggle="tab"
+                                                        role="tab"
+                                                        aria-selected="false">
+                                                    <div class="btnStyle fire">
+                                                        <img src="../../Images/25. M201_M221 (IRIS).ico"
+                                                                alt=""
+                                                                width="50"
+                                                                height="50"
+                                                                class="m15" />
+                                                        <div class="someS">
+                                                            <h5>M210E-CZ (ZONE MONiTOR)</h5>
+                                                        </div>
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div style="bottom: 10px; position: sticky;" class="buttons-row mt-5">
-                                    
-                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#sensorList_${id}" id="sensor_btn_${id}" class="btn-round btn-bordered-black">
+                                <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
+
+                                    <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#sensorList_${id}" id="sensor_btn_${id}" class="btn-round btn-border-black">
                                         <i class="fa-solid fa-plus 5x"></i> Add New Sensor in ${id.replaceAll("_", " ")}
                                     </button>
                                 </div>`;
@@ -1407,7 +1503,8 @@
 
                     default: break;
                 }
-                var target = `<fieldset>
+                var idNum = id.split('_')[id.split('_').length - 1];
+                var target = `<fieldset id="id_${idNum}">
                                             <legend>Device</legend>
                                             <div class="row">
                                                 <div class="col">
@@ -1430,41 +1527,6 @@
                                                 </div>
                                             </div>
                                         </fieldset>
-
-                                        <fieldset>
-                                            <legend>Parameters</legend>
-                                            <div class="row align-items-center">
-                                                <div class="col-xs-12 col-lg-6">
-                                                    <div class="form-item roww">
-                                                        <label for="zone">Zone</label>
-                                                        <input class="ml10"
-                                                               type="number"
-                                                               id="zone"
-                                                               name="zone"
-                                                               data-maxlength="2"
-                                                               oninput="javascript: myFunction(this.id)"
-                                                               onblur="javascript: myFunction2(this.id)"
-                                                               placeholder="1"
-                                                               min="1"
-                                                               max="96" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="led">LED</label>
-                                                        <p class="fire bordered">
-                                                            OFF
-                                                            <label class="switch">
-                                                                <input type="checkbox" id="led" checked/>
-                                                                <span class="slider"></span>
-                                                            </label>
-                                                            ON
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
 
                                         ${alarm_level ? `<fieldset>
                                             <legend>Alarm Level</legend>
@@ -1505,6 +1567,40 @@
                                         </fieldset>` : ''}
 
                                         <fieldset>
+                                            <legend>Parameters</legend>
+                                            <div class="row align-items-center">
+                                                <div class="col-xs-12 col-lg-6">
+                                                    <div class="form-item roww">
+                                                        <label for="zone">Zone</label>
+                                                        <input class="ml10"
+                                                               type="number"
+                                                               id="zone"
+                                                               name="zone"
+                                                               data-maxlength="2"
+                                                               oninput="javascript: myFunction(this.id)"
+                                                               onblur="javascript: myFunction2(this.id)"
+                                                               placeholder="1"
+                                                               min="1"
+                                                               max="96" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="led">LED</label>
+                                                        <p class="fire bordered">
+                                                            OFF
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="led" checked/>
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                            ON
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset>
                                             <legend>Verify Time</legend>
                                             <div class="row">
                                                 <div class="col">
@@ -1543,9 +1639,9 @@
                                         </fieldset>
 
                                         <div class="buttons-row mt15">
-                                            
+
                                         </div>`;
-                var proxy_target = `<fieldset>
+                var proxy_target = `<fieldset id="id_${idNum}">
                                     <legend>Device</legend>
                                     <div class="row">
                                         <div class="col">
@@ -1604,7 +1700,7 @@
                                 </fieldset>
 
                                 <div class="buttons-row mt15">
-                                    
+
                                 </div>`;
                 if (type === 'sensor') {
                     el.innerHTML = target;
@@ -1633,6 +1729,10 @@
                     sensorsLst2 = sensorsLst2.filter(function (item) {
                         return item !== +id
                     })
+
+                    // delete the current visible settings if shown
+                    var el = document.getElementById(`id_${id}`);
+                    if (el) el.parentNode.innerHTML = '';
 
                     // should add new sensor button be shown in case it is hidden
                     let button = document.getElementById(`sensor_btn_${loop_id}`);
@@ -1674,7 +1774,7 @@
                     const newUserElement = `
                                                                     <div class="col-12" id='${loop_id}_${type}_${last}'>
                                                                         <div class="row">
-                                                                            <div class="col-11 pr-1">
+                                                                            <div class="col-10 pr-1">
                                                                                 <a href="javascript:showSensor('${link}_${last}', '${loop_id}', '${type}')" onclick="javascript:addActive('#selected_device')" >
                                                                                     <div class="btnStyle fire">
                                                                                         <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
@@ -1747,49 +1847,49 @@
                 }
                 else {
                     let imgSource = "../../Images/";
-                    let link = id.substr(0, id.length - 4);
+                    let link = id.substr(5); //.substr(0, id.length - 4);
                     let title = link.toUpperCase().replaceAll("_", " ");
                     switch (link) {
                         default: imgSource += "1013.LoopDecices.ico";
                     }
                     const newUserElement = `
-                                                                    <div class="col-12" id='${last}'>
-                                                                        <div class="row">
-                                                                            <div class="col-11 pr-1">
-                                                                                <a href="javascript:showDevice('${link}_${last}')" onclick="javascript:addActive('#new_device')" >
-                                                                                    <div class="btnStyle fire">
-                                                                                        ${imgSource.includes("1013") ? (
-                                                                                        `<div class="btnStyle fire">
-                                                                                            <i class="fa-solid fa-arrows-spin fa-3x p15">
-                                                                                                <br /><span class="someS">
-                                                                                                    <span class="h5">
-                                                                                                        ${title + ' ' + last}
-                                                                                                    </span>
-                                                                                                </span>
-                                                                                            </i>
-                                                                                        </div>`
-                                                                                        ) : (
-                                                                                        `<div class="btnStyle fire">
-                                                                                            <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
-                                                                                            <div class="someS">
-                                                                                                <h5>${title + ' ' + last}</h5>
-                                                                                            </div>
-                                                                                        </div>`
-                                                                                        )}
-                                                                                    </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
-                                                                                <i class="fa-solid fa-xmark fire"></i>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                                `;
+                        <div class="col-12" id='${last}'>
+                            <div class="row">
+                                <div class="col-10 pr-1">
+                                    <a href="javascript:showDevice('${link}_${last}')" onclick="javascript:addActive('#new_device')" >
+                                        <div class="btnStyle fire">
+                                            ${imgSource.includes("1013") ? (
+                                            `<div class="btnStyle fire">
+                                                <i class="fa-solid fa-arrows-spin fa-3x p15">
+                                                    <br /><span class="someS">
+                                                        <span class="h5">
+                                                            ${title + ' ' + last}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                            </div>`
+                                            ) : (
+                                            `<div class="btnStyle fire">
+                                                <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
+                                                <div class="someS">
+                                                    <h5>${title + ' ' + last}</h5>
+                                                </div>
+                                            </div>`
+                                            )}
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
+                                    <i class="fa-solid fa-xmark fire"></i>
+                                </div>
+                            </div>
+                        </div>
+                                    `;
                     var element = document.getElementById("new_device");
                     var new_inner = `
-                                                        ${element.innerHTML}
-                                                        ${newUserElement}
-                                                    `;
+                                        ${element.innerHTML}
+                                        ${newUserElement}
+                                    `;
                     lst.push(last);
                     element.innerHTML = new_inner;
 
@@ -1843,7 +1943,8 @@
                     case id.includes('callpoint_mcp50'): st = true; break;
                     default: break;
                 }
-                var target = `<fieldset>
+                var idNum = id.split('_')[id.split('_').length - 1];
+                var target = `<fieldset id="id_${idNum}">
                                             <legend>Device</legend>
                                             <div class="row">
                                                 <div class="col-12">
@@ -2003,7 +2104,7 @@
                                         <div class="buttons-row mt15">
                                             
                                         </div>`;
-                var proxy_target = `<fieldset>
+                var proxy_target = `<fieldset id="id_${idNum}">
                                             <legend>Device</legend>
                                             <div class="row">
                                                 <div class="col-12">
@@ -2206,7 +2307,7 @@
                                         <div class="buttons-row mt15">
                                             
                                         </div>`;
-                var ttarget = `<fieldset>
+                var ttarget = `<fieldset id="id_${idNum}">
                                             <legend>Device</legend>
                                             <div class="row">
                                                 <div class="col-12">
@@ -2265,6 +2366,38 @@
                                         </fieldset>
 
                                         <fieldset>
+                                            <legend>Alarm Level</legend>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-item roww">
+                                                        <label for="day">Day</label>
+                                                        <div class="select">
+                                                            <select id="day"
+                                                                    name="day">
+                                                                <option value="a1r">A1R</option>
+                                                                <option value="a2s">A2S</option>
+                                                                <option value="bs">BS</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-item roww">
+                                                        <label for="night">Night</label>
+                                                        <div class="select">
+                                                            <select id="night"
+                                                                    name="night">
+                                                                <option value="a1r">A1R</option>
+                                                                <option value="a2s">A2S</option>
+                                                                <option value="bs">BS</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset>
                                             <legend>Parameters</legend>
                                             <div class="row align-items-center">
                                                 <div class="${i ? 'col-xs-12 col-lg-4' : 'col-xs-12 col-lg-6'}">
@@ -2300,40 +2433,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                        </fieldset>
-
-
-                                        <fieldset>
-                                            <legend>Alarm Level</legend>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-item roww">
-                                                        <label for="day">Day</label>
-                                                        <div class="select">
-                                                            <select id="day"
-                                                                    name="day">
-                                                                <option value="a1r">A1R</option>
-                                                                <option value="a2s">A2S</option>
-                                                                <option value="bs">BS</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-item roww">
-                                                        <label for="night">Night</label>
-                                                        <div class="select">
-                                                            <select id="night"
-                                                                    name="night">
-                                                                <option value="a1r">A1R</option>
-                                                                <option value="a2s">A2S</option>
-                                                                <option value="bs">BS</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
+                                        </fieldset>                                        
 
                                         <div class="buttons-row mt15">
 
@@ -2396,6 +2496,9 @@
                         return item !== +id
                     })
 
+                    var el = document.getElementById(`id_${id}`);
+                    if (el) el.parentNode.innerHTML = '';
+
                     let button = document.getElementById(`device_btn_${loop_id}`);
                     if (lst2.length < devices2 && button.style.display === "none") {
                         button.style.display = "inline-flex";
@@ -2448,12 +2551,12 @@
                     const newUserElement = `
                                                                     <div class="col-12" id='${loop_id}_${last}'>
                                                                         <div class="row">
-                                                                            <div class="col-11 pr-1">
+                                                                            <div class="col-10 pr-1">
                                                                                 <a href="javascript:showDevice2('${link}_${last}', '${loop_id}')" onclick="javascript:addActive('#selected_device')" >
                                                                                     <div class="btnStyle fire">
                                                                                         <img src="${imgSource}" alt="" width="25" height="25" class="m15" />
                                                                                         <div class="someS">
-                                                                                            <h5>${last + '. ' + title}</h5>
+                                                                                            <div class="h5">${last + '. ' + title}</div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </a>

@@ -236,7 +236,7 @@
         <div style="display: none" id="7_1">
             <fieldset>
                 <legend>Days of week</legend>
-                <div class="row align-items-center">
+                <div class="row align-items-center fire">
                     <div class="col">
                         <div class="form-item roww">
                             <label for="monday">Monday</label>
@@ -262,7 +262,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center mt-2">
+                <div class="row align-items-center mt-2 fire">
                     <div class="col">
                         <div class="form-item roww">
                             <label for="friday">Friday</label>
@@ -491,7 +491,7 @@
             }
             function myFunction2(id) {
                 var element = document.getElementById(id);
-                if (element.value > element.max) {
+                if (+element.value > +element.max) {
                     element.value = element.max;
                 }
             }
@@ -597,7 +597,7 @@
                                             </div>
 
                                             <button class="fire collapsible ml-1">Parameters</button>
-                                            <div class="collapsible-content">
+                                            <div class="collapsible-content fire">
                                                 <div class="row align-items-center">
                                                     <div class="col-6">
                                                         <div class="form-item roww">

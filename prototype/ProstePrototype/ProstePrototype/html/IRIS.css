@@ -113,7 +113,7 @@ button {
     }
 
 .scroll {
-    overflow-y: auto;
+    overflow-x: auto;
     height: calc(100% - 98px); /* - 98px*/
 }
 
@@ -151,21 +151,25 @@ button {
         background-color: var(--white);
     }
 
-    .row.list-group .btnStyle.fire .someS h5 {
-        color: var(--fire);
-    }
+        .row.list-group .btnStyle.fire .someS h5 {
+            color: var(--fire);
+        }
 
-    .row.list-group .btnStyle.normal .someS h5 {
-        color: var(--normal);
-    }
+        .row.list-group .btnStyle.normal .someS h5 {
+            color: var(--normal);
+        }
 
-    .row.list-group .btnStyle.grasse .someS h5 {
-        color: var(--grasse);
-    }
+        .row.list-group .btnStyle.grasse .someS h5 {
+            color: var(--grasse);
+        }
+
+        .row.list-group .btnStyle.active {
+            border: none;
+        }
 
 .list-group-item {
     border: none;
-    max-width: 120px;
+    /*max-width: 120px;*/
     max-height: 120px;
     background-color: var(--white);
 }
@@ -291,6 +295,7 @@ div[class^="someS"] {
     cursor: pointer;
     background-color: var(--grey);
     color: var(--normal);
+    border: solid 2px var(--grey);
 }
 
     .btnStyle:hover {
@@ -315,14 +320,17 @@ div[class^="someS"] {
 
     .btnStyle.active {
         color: var(--normal-hov);
+        border: 2px solid var(--normal-hov);
     }
 
     .btnStyle.fire.active {
         color: var(--fire-hov);
+        border: 2px solid var(--fire-hov);
     }
 
     .btnStyle.grasse.active {
-        color: #0a9440;
+        color: var(--grasse-hov);
+        border: 2px solid var(--grasse-hov);
     }
 
 i.normal {
@@ -1019,9 +1027,9 @@ input:checked + .slider:before {
     }
 
 .fire input[type='checkbox'] {
-    filter:hue-rotate();
+    filter: brightness(90%) hue-rotate(160deg);
 }
 
 .grasse input[type='checkbox'] {
-    filter:brightness(140%) hue-rotate(240deg);
+    filter: brightness(120%) hue-rotate(240deg);
 }
