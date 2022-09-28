@@ -20,6 +20,18 @@ h5 {
     font-size: 0.75rem;
 }
 
+.fire h5 {
+    color: var(--fire);
+}
+
+.normal h5 {
+    color: var(--normal);
+}
+
+.grasse h5 {
+    color: var(--grasse);
+}
+
 .h5 {
     display: inline;
     /*margin-left: 1rem;*/
