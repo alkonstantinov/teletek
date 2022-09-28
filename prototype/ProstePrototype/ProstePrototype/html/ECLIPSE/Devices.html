@@ -41,180 +41,162 @@
         <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="list-group" id="list-tab" role="tablist">
-                                <button type="button" class="list-group-item list-group-item-action active show" id="list-lcd32s-list" data-toggle="tab" href="#list-lcd32s" role="tab" aria-controls="list-lcd32s" aria-selected="false">LCD 32S</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-lcd32-list" data-toggle="tab" href="#list-lcd32" role="tab" aria-controls="list-lcd32" aria-selected="false">LCD 32</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-led32-list" data-toggle="tab" href="#list-led32" role="tab" aria-controls="list-led32" aria-selected="false">LED 32</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-led16-list" data-toggle="tab" href="#list-led16" role="tab" aria-controls="list-led16" aria-selected="false">LED 16</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-led16a-list" data-toggle="tab" href="#list-led16a" role="tab" aria-controls="list-led16a" aria-selected="false">LED 16A</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-led8-list" data-toggle="tab" href="#list-led8" role="tab" aria-controls="list-led8" aria-selected="false">LED 8</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-pgm8_expander-list" data-toggle="tab" href="#list-pgm8_expander" role="tab" aria-controls="list-pgm8_expander" aria-selected="false">PGM 8 Expander</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-zone8_expander-list" data-toggle="tab" href="#list-zone8_expander" role="tab" aria-controls="list-zone8_expander" aria-selected="false">Zone 8 Expander</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-wireless_expander-list" data-toggle="tab" href="#list-wireless_expander" role="tab" aria-controls="list-wireless_expander" aria-selected="false">Wireless Expander</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-proxy_card_reader_it-list" data-toggle="tab" href="#list-proxy_card_reader_it" role="tab" aria-controls="list-proxy_card_reader_it" aria-selected="false">Proxy card Reader IT</button>
-                                <button type="button" class="list-group-item list-group-item-action" id="list-proxy_card_reader-list" data-toggle="tab" href="#list-proxy_card_reader" role="tab" aria-controls="list-proxy_card_reader" aria-selected="false">Proxy card Reader</button>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade active show" id="list-lcd32s" role="tabpanel" aria-labelledby="list-lcd32s-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>lcd 32s</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/43. KeyboardNum (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="lcd32s_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-lcd32" role="tabpanel" aria-labelledby="list-lcd32-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>lcd 32</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="lcd32_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-led32" role="tabpanel" aria-labelledby="list-led32-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>led 32</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="led32_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-led16" role="tabpanel" aria-labelledby="list-led16-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>led 16</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="led16_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-led16a" role="tabpanel" aria-labelledby="list-led16a-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>led 16A</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="led16a_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-led8" role="tabpanel" aria-labelledby="list-led8-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>led 8</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="led8_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-pgm8_expander" role="tabpanel" aria-labelledby="list-pgm8_expander-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>pgm 8 Expander</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/03.PanelsInNetwork.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="pgm8_expander_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-zone8_expander" role="tabpanel" aria-labelledby="list-zone8_expander-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>zone 8 Expander</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/03.PanelsInNetwork.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="zone8_expander_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-wireless_expander" role="tabpanel" aria-labelledby="list-wireless_expander-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>wireless Expander</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/03.PanelsInNetwork.ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="wireless_expander_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-proxy_card_reader_it" role="tabpanel" aria-labelledby="list-proxy_card_reader_it-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>Proxy card Reader IT</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/44. Proxi (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 justify-content-end">
-                                        <button type="button" class="btn-round" id="proxy_card_reader_it_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-proxy_card_reader" role="tabpanel" aria-labelledby="list-proxy_card_reader-list">
-                                    <div class="row m-1 justify-content-center">
-                                        <h2>Proxy card Reader</h2>
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <img src="../../Images/44. Proxi (CA62).ico" alt="" width="100" height="100" class="m15" />
-                                    </div>
-                                    <div class="row m-1 justify-content-center">
-                                        <p>Additional text - device description...</p>
-                                    </div>
-                                    <div class="row m-1 align-self-end justify-content-end">
-                                        <button type="button" class="btn-round" id="proxy_card_reader_btn" onclick="javascript: addConcreteDevice(this.id)">Add</button>
-                                    </div>
+                    <div class="row list-group" id="list-tab" role="tablist">
+                        <button type="button"
+                                class="list-group-item col active"
+                                id="lcd32s_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/43. KeyboardNum (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>lcd 32s</h5>
                                 </div>
                             </div>
-                        </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="lcd32_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>lcd 32</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="led32_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>led 32</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="led16_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>led 16</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="led16a_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>led 16A</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="led8_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/42. Keyboard (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>led 8</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="pgm8_expander_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/03.PanelsInNetwork.ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>pgm 8 Expander</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="zone8_expander_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/03.PanelsInNetwork.ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>zone 8 Expander</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="wireless_expander_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/03.PanelsInNetwork.ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>wireless Expander</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="proxy_card_reader_it_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/44. Proxi (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>Proxy card Reader IT</h5>
+                                </div>
+                            </div>
+                        </button>
+                        <button type="button"
+                                class="list-group-item col"
+                                id="proxy_card_reader_btn"
+                                onclick="javascript: addConcreteDevice(this.id)"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle normal">
+                                <img src="../../Images/44. Proxi (CA62).ico" alt="" width="50" height="50" class="m-2" />
+                                <div class="someS">
+                                    <h5>Proxy card Reader</h5>
+                                </div>
+                            </div>
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -1352,6 +1334,7 @@
                     default: break;
                 }
                 el.innerHTML = target;
+                addVisitedBackground();
             }
 
             var lst = [];
@@ -1409,7 +1392,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
-                                                            <i class="fa-solid fa-xmark"></i>
+                                                            <i class="fa-solid fa-xmark normal"></i>
                                                         </div>
                                                     </div>
                                                 </div>
