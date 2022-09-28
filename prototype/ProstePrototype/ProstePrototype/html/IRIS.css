@@ -295,7 +295,7 @@ div[class^="someS"] {
     cursor: pointer;
     background-color: var(--grey);
     color: var(--normal);
-    border: solid 2px var(--grey);
+    border: solid 2px var(--white);
 }
 
     .btnStyle:hover {
