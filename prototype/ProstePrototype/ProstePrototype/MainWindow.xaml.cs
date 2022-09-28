@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -163,6 +165,8 @@ namespace ProstePrototype
             fileMenu.Foreground = new SolidColorBrush(fgd);
             languagesMenu.Background = new SolidColorBrush(bgd);
             languagesMenu.Foreground = new SolidColorBrush(fgd);
+            write_btn.Background = new SolidColorBrush(bgd);
+            write_btn.Foreground = new SolidColorBrush(fgd);
             log_btn.Background = new SolidColorBrush(bgd);
             log_btn.Foreground = new SolidColorBrush(fgd);
             clock_btn.Background = new SolidColorBrush(bgd);
@@ -408,6 +412,14 @@ namespace ProstePrototype
             rw = new ReadWindow();
         }
 
+        private void Write_Clicked(object sender, RoutedEventArgs e)
+        {
+            Duration duration = new Duration(TimeSpan.FromSeconds(2));
+            DoubleAnimation doubleanimation = new DoubleAnimation(100.00, 0, duration); // progressBar1.Value + 10
+            progressBar1.BeginAnimation(ProgressBar.ValueProperty, doubleanimation);
+            progressBar1.FlowDirection = FlowDirection.RightToLeft;
+        }
+
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
@@ -494,5 +506,10 @@ namespace ProstePrototype
             }
         }
         #endregion
+
+        private void progressBar1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

@@ -10,91 +10,91 @@
 		WindowStyle="None"
 		>
     <!-- WindowState="Maximized" -->
-    
-        <Window.CommandBindings>
-            <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
-        </Window.CommandBindings>
-        <Window.Resources>
-            <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
-            <Style x:Key="FileStyle" TargetType="{x:Type MenuItem}">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <ToolTip>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Name}"/>
-                            </StackPanel>
-                        </ToolTip>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type MenuItem}">
-                            <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                <Grid VerticalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
-									   HorizontalOffset="1" VerticalOffset="-1">
-                                        <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
-                                            <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                            </ScrollViewer>
-                                        </Border>
-                                    </Popup>
-                                </Grid>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <ToolTip>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Languages"/>
-                                <!--!!!Hardcoded Tooltip-->
-                            </StackPanel>
-                        </ToolTip>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="FileMainStyle" TargetType="{x:Type MenuItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type MenuItem}">
-                            <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                <Grid VerticalAlignment="Center">
-                                    <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
-									   HorizontalOffset="1" VerticalOffset="-1">
-                                        <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
-                                            <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                            </ScrollViewer>
-                                        </Border>
-                                    </Popup>
-                                </Grid>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <ToolTip>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="File"/>
-                                <!--!!!Hardcoded Tooltip-->
-                            </StackPanel>
-                        </ToolTip>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
-        </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+    </Window.CommandBindings>
+    <Window.Resources>
+        <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
+        <Style x:Key="FileStyle" TargetType="{x:Type MenuItem}">
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <ToolTip>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
+									   HorizontalOffset="1" VerticalOffset="-1">
+                                    <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+                                        <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <ToolTip>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Languages"/>
+                            <!--!!!Hardcoded Tooltip-->
+                        </StackPanel>
+                    </ToolTip>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FileMainStyle" TargetType="{x:Type MenuItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <Grid VerticalAlignment="Center">
+                                <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
+									   HorizontalOffset="1" VerticalOffset="-1">
+                                    <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+                                        <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <ToolTip>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="File"/>
+                            <!--!!!Hardcoded Tooltip-->
+                        </StackPanel>
+                    </ToolTip>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
     <Border BorderBrush="#8090aa" BorderThickness="0" CornerRadius="2">
         <Grid>
             <Grid.RowDefinitions>
@@ -112,6 +112,7 @@
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="60" />
@@ -187,6 +188,14 @@
                 </StackPanel>
 
                 <DockPanel Grid.Column="4">
+                    <Button x:Name="write_btn" Click="Write_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                        <Button.ToolTip>
+                            <ToolTip>Write</ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </DockPanel>
+                <DockPanel Grid.Column="5">
                     <Button x:Name="log_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
@@ -194,7 +203,7 @@
                         </Button.ToolTip>
                     </Button>
                 </DockPanel>
-                <DockPanel Grid.Column="5">
+                <DockPanel Grid.Column="6">
                     <Button x:Name="clock_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
@@ -202,7 +211,7 @@
                         </Button.ToolTip>
                     </Button>
                 </DockPanel>
-                <DockPanel Grid.Column="6">
+                <DockPanel Grid.Column="7">
                     <Button x:Name="verify_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
@@ -211,7 +220,7 @@
                     </Button>
                 </DockPanel>
 
-                <DockPanel Grid.Column="7">
+                <DockPanel Grid.Column="8">
                     <Button x:Name="settings_btn" Click="SettingsClicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
@@ -219,7 +228,7 @@
                         </Button.ToolTip>
                     </Button>
                 </DockPanel>
-                <StackPanel Grid.Column="8" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
+                <StackPanel Grid.Column="9" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
                     <DockPanel Height="100" HorizontalAlignment="Right" >
                         <Menu x:Name="languagesMenu" DockPanel.Dock="Top" VerticalAlignment="Center" Background="{Binding Background}" Foreground="{Binding Foreground}">
                             <MenuItem Margin="10,0,0,0" Height="100" Style="{StaticResource MenuItemStyle}">
@@ -384,7 +393,7 @@
                 </DockPanel>
             </StackPanel>-->
 
-                <Grid Grid.Column="9">
+                <Grid Grid.Column="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
@@ -404,7 +413,7 @@
                         </Button>
                     </DockPanel>
                 </Grid>
-                <Grid Grid.Column="10">
+                <Grid Grid.Column="11">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
@@ -447,7 +456,7 @@
                         </Button>
                     </DockPanel>
                 </Grid>
-                <Grid Grid.Column="11">
+                <Grid Grid.Column="12">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
@@ -509,9 +518,8 @@
             <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
             <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
                 <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
-				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}">
-				© 2022 Copyright: <Bold>Teletek Electroincs</Bold>
-                </TextBlock>
+				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}"><Run Text="© 2022 Copyright: "/><Bold><Run Text="Teletek Electroincs"/></Bold></TextBlock>
+                <ProgressBar x:Name="progressBar1" HorizontalAlignment="Right" Width="400" Height="20" Panel.ZIndex="2" Background="Transparent" BorderThickness="0"/>
             </StackPanel>
         </Grid>
     </Border>
