@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NewTeletekSW": {
+      "commandName": "Project",
+      "commandLineArgs": "-f \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\Configuration\\IRIS\\ReadWrite\\ReadConfig_iris.xml\"\r\n-p read"
+    }
+  }
+}

@@ -805,19 +805,7 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset>
-                                <legend>Options</legend>
-                                <div class="row m-1">
-                                    <div class="col">
-                                        <div class="form-item roww">
-                                            <label for="chime_${id}">Chime</label>
-                                            <input type="checkbox" id="chime_${id}" name="chime_${id}" class="ml10" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset>
+<fieldset>
                                 <legend>Arm Type</legend>
                                 <div class="row m-1">
                                     <div class="col-12 col-sm-6 col-lg-3">
@@ -1323,7 +1311,21 @@
                                         </fieldset>
                                     </div>
                                 </div>
-                            </fieldset>`;
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Options</legend>
+                                <div class="row m-1">
+                                    <div class="col">
+                                        <div class="form-item roww">
+                                            <label for="chime_${id}">Chime</label>
+                                            <input type="checkbox" id="chime_${id}" name="chime_${id}" class="ml10" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            `;
                 switch (id) {
                     case "main_board":
                     case "pgm8_expander":

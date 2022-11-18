@@ -513,6 +513,7 @@
 				Margin="{Binding Margin}"                
 				JavascriptMessageReceived="wb_PostMessage"
 				Background="Transparent"
+                Panel.ZIndex="99"
 			/>
             </Grid>
             <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
