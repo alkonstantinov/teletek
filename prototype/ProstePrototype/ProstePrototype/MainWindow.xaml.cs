@@ -1,25 +1,17 @@
 ﻿using CefSharp;
+using CefSharp.Wpf;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProstePrototype
 {
@@ -41,6 +33,13 @@ namespace ProstePrototype
         private double tempWidth { get; set; }
         private double tempMaxHeight { get; set; }
         private double tempMaxWidth { get; set; }
+
+        private class BrowserParams
+        {
+            public string Name { get; set; }
+            public string JSfunc { get; set; }
+            public string Params { get; set; }
+        }
         public MainWindow()
         {
             InitializeComponent();
@@ -58,7 +57,7 @@ namespace ProstePrototype
 
             rw = new ReadWindow();
             //rw.LostFocus += _child_LostFocus;
-            
+
             //// binding Column1 and wb1 Width trial
             //Binding binding = new Binding("Width");
             //binding.Source = Column1.DataContext;
@@ -71,9 +70,13 @@ namespace ProstePrototype
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
             DataContext = this;
-            
+
             DarkMode = false;
             ChangeTheme(DarkMode);
+            wb1.Tag = new BrowserParams { Name = "wb1", JSfunc = "receiveMessageWPF" };
+            wb2.Tag = new BrowserParams { Name = "wb2", JSfunc = "receiveMessageWPF" };
+            wb1.LoadingStateChanged += OnStateChanged;
+            wb2.LoadingStateChanged += OnStateChanged;
         }
 
 
@@ -246,10 +249,10 @@ namespace ProstePrototype
                     switch (json["Function"].ToString())
                     {
                         case "Firmware update": break;
-                        case "Read": 
-                        case "Write": 
-                        case "Verify": 
-                        case "Help": 
+                        case "Read":
+                        case "Write":
+                        case "Verify":
+                        case "Help":
                         default:
                             // Read_Clicked(new object(), new RoutedEventArgs()); // not working!
                             break;
@@ -282,6 +285,11 @@ namespace ProstePrototype
                 {
                     url += "?highlight=" + highlight;
                 }
+                this.Dispatcher.Invoke(() =>
+                {
+                    ((BrowserParams)wb1.Tag).Params = $@"{{ ""pageName"": ""wb1: {data.LeftBrowserUrl}"" }}";
+                });
+                
                 wb1.Load(url);
                 this.Dispatcher.Invoke(() =>
                 {
@@ -308,11 +316,37 @@ namespace ProstePrototype
                 });
             }
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
+            this.Dispatcher.Invoke(() =>
+            {
+                ((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {data.RightBrowserUrl}"" }}";
+            });
             wb2.Load(wb2UrlAddress);
             ApplyTheme();
         }
         #endregion
+        #region sendJavaScriptToBrowsers
 
+        private void OnStateChanged(object sender, LoadingStateChangedEventArgs args)
+        {
+            if (args.IsLoading == false)
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    ChromiumWebBrowser b = (ChromiumWebBrowser)sender;
+                    object btag = b.Tag;
+                    string jsFunc = ((BrowserParams)btag).JSfunc;
+                    string jsParams = ((BrowserParams)btag).Params;
+                    string browserName = ((BrowserParams)btag).Name;
+                    ChromiumWebBrowser bCall = (browserName == "wb1") ? wb1 : wb2;
+                    Send_JSCommand(bCall, jsParams);                    
+                });
+            }
+        }
+        private void Send_JSCommand(ChromiumWebBrowser browser, string jsonTxt, string jsFuncName = "receiveMessageWPF")
+        {
+            browser.ExecuteScriptAsync(jsFuncName, new object[] { jsonTxt });
+        }
+        #endregion
 
         #region mainDropdownMenusButtonsClicked
         private void Open_Clicked(object sender, RoutedEventArgs e)
@@ -375,11 +409,13 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
+            string index = "index.html";
             if ((bool)c)
             {
-                string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-                string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+                string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
+                string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
                 wb1.Load("file:///" + firstFile);
+
                 if (myFile == firstFile)
                 {
                     gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
@@ -396,6 +432,10 @@ namespace ProstePrototype
                     Splitter1.Width = 5;
                     gsp3.Height = 3;
                 }
+                this.Dispatcher.Invoke(() =>
+                {
+                    ((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";
+                });
                 wb2.Load("file:///" + myFile);
             }
             else
@@ -406,6 +446,7 @@ namespace ProstePrototype
                 Splitter1.Width = 0; //if index.html is loaded
                 gsp3.Height = 0;
                 wb2.Load("file:///");
+
             }
             lvBreadCrumbs.Items.Clear();
             ApplyTheme();
@@ -434,7 +475,7 @@ namespace ProstePrototype
 
         private void Button_Maximize_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (this.WindowState != WindowState.Maximized)
             {
                 tempHeight = this.Height;
@@ -446,7 +487,8 @@ namespace ProstePrototype
                 WindowStyle = WindowStyle.SingleBorderWindow;
                 WindowState = WindowState.Maximized;
                 WindowStyle = WindowStyle.None;
-            } else
+            }
+            else
             {
                 this.Left = tempLeft;
                 this.Top = tempTop;

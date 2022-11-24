@@ -3,6 +3,21 @@ function sendMessageWPF(json) {
     CefSharp.PostMessage(JSON.stringify(json));
 }
 
+function receiveMessageWPF(jsonTxt) {
+    var json = JSON.parse(jsonTxt);
+    switch (true) {
+        case Object.keys(json).includes("alert"):
+            alert(json.alert);
+            break;
+        case Object.keys(json).includes("pageName"):
+            alert(`current pageName ${json.pageName}`);
+            break;
+        default:
+            alert("No recognised keys in the json");
+            break;
+    }
+}
+
 // collapsible part
 function collapsible(param) {
     var coll = param ? document.getElementsByClassName(param) : document.getElementsByClassName("collapsible");
