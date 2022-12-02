@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../boostrap.css" />
     <link rel="stylesheet" href="../imports/css/all.css" />
     <link rel="stylesheet" href="../IRIS.css" />
+    <link rel="stylesheet" href="../IRISdyn.css" />
     <title>Teletek Manager</title>
 </head>
 
@@ -17,18 +18,21 @@
     <div class="container" id="divMain">
         <fieldset>
             <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-            <div class="row align-items-center m-2">
+            <div class="row align-items-center m-2" id="title_part">
                 <div class="col-xs-12 col-md-6">
                     <div class="form-item roww flex">
                         <label for="panel">Panel name</label>
-                        <input type="text" id="panel" name="panel" placeholder="Enter the panel name" onblur="javascript: alert(this.value)"/>
+                        <input type="text" id="panel" name="panel" placeholder="Enter the panel name" onblur="javascript: alert(this.value)" />
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-item roww">
                         <label for="panel-number">Panel Number</label>
-                        <input type="number" id="panel-number" name="panel-number" placeholder="Enter panel number" min="1" onchange="javascript: alert(this.value)"/>
+                        <input type="number" id="panel-number" name="panel-number" placeholder="Enter panel number" min="1" onchange="javascript: alert(this.value)" />
                     </div>
+                </div>
+                <div class="col">
+                    <button type="button" data-toggle="modal" data-target="#initModal" data-whatever="title_part" name="title_part" class="none" onclick="javascript: clearInputType()"><i class="fa-solid fa-square-plus fa-2x"></i></button>
                 </div>
             </div>
 
@@ -39,7 +43,7 @@
                         <p class="fire">
                             Disabled
                             <label class="switch">
-                                <input type="checkbox" id="enabled" onblur="javascript: alert(this.value)"/>
+                                <input type="checkbox" id="enabled" onblur="javascript: alert(this.value)" />
                                 <span class="slider"></span>
                             </label>
                             Enabled
@@ -50,7 +54,7 @@
                         <p class="fire">
                             Redundancy OFF
                             <label class="switch">
-                                <input type="checkbox" id="redundancy" onchange="javascript: alert(this.value)"/>
+                                <input type="checkbox" id="redundancy" onchange="javascript: alert(this.value)" />
                                 <span class="slider"></span>
                             </label>
                             ON
@@ -199,9 +203,118 @@
 
             <div class="buttons-row mt15">
                 <!--<button type="button" class="btn-round btn-blue">Save</button>
-                <button type="button" class="btn-round btn-border-black">Back</button>-->
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
             </div>
         </fieldset>
+
+        <!-- Modal Input type part -->
+        <div class="modal fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="initModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="none" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="none">Collapsible group field</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="textInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="textInput">Text Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="checkbox" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="checkbox">Checkbox Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="slider" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="slider">Slider Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="select" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="select">Select Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="number" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="number">Number Input</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary" id="send_button" data-dismiss="modal">Next</button>-->
+                        <button type="button" id="nextButton" data-toggle="modal" data-target="#nextModal" data-dismiss="modal" class="btn btn-primary" disabled="true">Next</button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Input Type part end -->
+
+        <!-- Modal Input type part -->
+        <div class="modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="nextModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3"  id="labelName">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Label name:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Input name" aria-label="labelName" name="labelName"/>
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="inputNameOn">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" >Input name ON:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Input name ON" aria-label="inputNameOn" name="inputNameOn">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="inputNameOff">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" >Input name OFF:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Input name OFF" aria-label="inputNameOff" name="inputNameOff">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="selectList">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" >Enumerate the options:</span>
+                            </div>
+                            <input type="text" style="width: 100%" class="form-control" placeholder="write the select options separated by comma" aria-label="selectList" name="selectList">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="min">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Minimum value:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0" aria-label="min" name="min">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="max">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Max value:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0" aria-label="max" name="max">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-secondary" id="getValues">Done</button>-->
+                        <button type="button" class="btn btn-primary" id="send_button" data-dismiss="modal">Add element</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal part end -->
+
+
+
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -210,13 +323,16 @@
     <script src="../imports/bootstrap-datepicker.min.js"></script>
     <script src="../imports/font-awesome.js"></script>
     <script src="../imports/mainfuncs.js"></script>
+    <script src="../imports/dynamicFuncs.js"></script>
     <script>
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-                                            //$(document).ready(() => {
-                                            //    sendMessage("Devices|IRIS|Access");
-                                            //});
+
+        $('#initModal').on('show.bs.modal', chooseInputTypeModal)
+
+        $('#nextModal').on('show.bs.modal', setInputData)
+        
     </script>
 </body>
 </html>

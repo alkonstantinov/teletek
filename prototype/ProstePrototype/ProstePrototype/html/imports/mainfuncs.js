@@ -7,7 +7,7 @@ function receiveMessageWPF(jsonTxt) {
     var json = JSON.parse(jsonTxt);
     switch (true) {
         case Object.keys(json).includes("alert"):
-            alert(json.alert);
+            alert(`alerting json ${json.alert}`);
             break;
         case Object.keys(json).includes("pageName"):
             alert(`current pageName ${json.pageName}`);

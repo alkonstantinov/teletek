@@ -69,6 +69,7 @@ namespace ProstePrototype
 
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
+            //pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages-dynamic.json")));
             DataContext = this;
 
             DarkMode = false;
