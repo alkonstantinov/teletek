@@ -13,3 +13,10 @@
     border: none;
     background: transparent;
 }
+
+
+.none-inherit {
+    display: inherit;
+    border: none;
+    background: transparent;
+}

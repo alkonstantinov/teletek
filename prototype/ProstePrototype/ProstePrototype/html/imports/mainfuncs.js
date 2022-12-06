@@ -7,13 +7,13 @@ function receiveMessageWPF(jsonTxt) {
     var json = JSON.parse(jsonTxt);
     switch (true) {
         case Object.keys(json).includes("alert"):
-            alert(`alerting json ${json.alert}`);
+            //alert(`alerting json ${json.alert}`);
             break;
         case Object.keys(json).includes("pageName"):
-            alert(`current pageName ${json.pageName}`);
+            //alert(`current pageName ${json.pageName}`);
             break;
         default:
-            alert("No recognised keys in the json");
+            //alert("No recognised keys in the json");
             break;
     }
 }
