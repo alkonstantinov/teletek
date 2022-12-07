@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../imports/css/all.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <link rel="stylesheet" href="../IRISdyn.css" />
+    <title>Teletek Manager</title>
+</head>
+
+<body>
+    <div class="container" id="divMain">
+        <fieldset>
+            <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+            <div class="row align-items-center mt-2" id="title_part">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-item roww flex">
+                        <button type="button" id="panel_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                        <label for="panel">Panel name</label>
+                        <input type="text" id="panel" name="panel" placeholder="Enter the panel name" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-item roww">
+                        <button type="button" id="panel-number_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                        <label for="panel-number">Panel Number</label>
+                        <input type="number" id="panel-number" name="panel-number" placeholder="Enter panel number" min="1" />
+                    </div>
+                </div>
+                <div class="col">
+                    <button type="button" data-toggle="modal" data-target="#initModal" data-whatever="title_part" name="title_part" class="none" onclick="javascript: clearInputType()">
+                        <i class="fa-solid fa-square-plus fa-2x"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button class="fire collapsible ml-1 collapsible_parameters">Parameters</button>
+            <div class="collapsible-content col-12">
+                <button type="button" id="parameters_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                <div class="row align-items-center mt-1 mb-1" id="parameters">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item roww fire">
+                            <button type="button" id="enabled_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <p class="fire">
+                                Disabled
+                                <label class="switch">
+                                    <input type="checkbox" id="enabled" />
+                                    <span class="slider"></span>
+                                </label>
+                                Enabled
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item roww fire">
+                            <button type="button" id="redundancy_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <p class="fire">
+                                Redundancy OFF
+                                <label class="switch">
+                                    <input type="checkbox" id="redundancy" />
+                                    <span class="slider"></span>
+                                </label>
+                                ON
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item roww">
+                            <button type="button" id="network-type_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <label for="network-type">Network Type</label>
+                            <div class="select ml10">
+                                <select id="network-type" name="network-type">
+                                    <option value="title">Choose network type</option>
+                                    <option value="loc">LAN</option>
+                                    <option value="loc">RS 485</option>
+                                    <option value="loc">Voice EVAC</option>
+                                    <option value="loc">Voice EVAC + LAN</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww">
+                            <button type="button" id="protocol_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <label for="protocol">Protocol</label>
+                            <div class="select ml10">
+                                <select id="protocol" name="protocol">
+                                    <option value="title">Choose protocol</option>
+                                    <option value="loc">Modbus RTU over TCP/IP</option>
+                                    <option value="loc">Modbus TCP/IP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button type="button" data-toggle="modal" data-target="#initModal" data-whatever="parameters" name="parameters" class="none" onclick="javascript: clearInputType()"><i class="fa-solid fa-square-plus fa-2x"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="fire collapsible ml-1 collapsible_network_settings">Network Settings</button>
+            <div class="collapsible-content col-12">
+                <button type="button" id="network_settings_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                <div class="row align-items-center m-2" id="network_settings">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item roww flex">
+                            <button type="button" id="hostip_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <label for="hostip">Host IP</label>
+                            <!-- <input type="text" class="form-input" id="hostip" name="hostip" placeholder="xxx.xxx.xxx.xxx"/> -->
+                            <input type="text" class="form-input" id="hostip" name="hostip" minlength="7" maxlength="15" size="15"
+                                   pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                   placeholder=" 0 . 0 . 0 . 0 " />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item roww">
+                            <button type="button" id="port_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <label for="port">Port</label>
+                            <input type="number" id="port" name="port" data-maxlength="5"
+                                   oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="7000" min="1" />
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item roww flex">
+                            <button type="button" id="netmask_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <label for="netmask">Net Mask</label>
+                            <input type="text" id="netmask" name="netmask" minlength="7" maxlength="15" size="15"
+                                   pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                   placeholder=" 0 . 0 . 0 . 0 " />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-item roww flex">
+                            <button type="button" id="gateway_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                            <label for="gateway">Gateway</label>
+                            <input type="text" id="gateway" name="gateway" minlength="7" maxlength="15" size="15"
+                                   pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                   placeholder=" 0 . 0 . 0 . 0 " />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button type="button" data-toggle="modal" data-target="#initModal" data-whatever="network_settings" name="network_settings" class="none" onclick="javascript: clearInputType()"><i class="fa-solid fa-square-plus fa-2x"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center m-2" id="bottom-part">
+                <div class="col-12">
+                    <div class="form-item roww">
+                        <button type="button" id="evac-panel-number_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                        <label for="evac-panel-number">EVAC Panel number</label>
+                        <input type="number" id="evac-panel-number" name="evac-panel-number" data-maxlength="5"
+                               oninput="this.value=this.value.slice(0,this.dataset.maxlength)" placeholder="1" min="1" />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-item roww">
+                        <button type="button" id="mac_address_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                        <label for="mac_address">MAC Address</label>
+                        <div class="row m0" id="mac_address">
+                            <input class="col-1"
+                                   type="text"
+                                   id="emacETHADDR0"
+                                   name="emacETHADDR0"
+                                   placeholder="00"
+                                   disabled />
+
+                            <div>:</div>
+                            <input class="col-1"
+                                   type="text"
+                                   id="emacETHADDR1"
+                                   name="emacETHADDR1"
+                                   placeholder="00"
+                                   disabled />
+
+                            <div>:</div>
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR2"
+                                   name="emacETHADDR2"
+                                   placeholder="00"
+                                   disabled />
+
+                            <div>:</div>
+
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR3"
+                                   name="emacETHADDR3"
+                                   placeholder="00"
+                                   disabled />
+
+                            <div>:</div>
+
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR4"
+                                   name="emacETHADDR4"
+                                   placeholder="00"
+                                   disabled />
+
+                            <div>:</div>
+
+                            <input type="text"
+                                   class="col-1"
+                                   id="emacETHADDR5"
+                                   name="emacETHADDR5"
+                                   placeholder="00"
+                                   disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <button type="button" data-toggle="modal" data-target="#initModal" data-whatever="bottom-part" name="bottom-part" class="none" onclick="javascript: clearInputType()"><i class="fa-solid fa-square-plus fa-2x"></i></button>
+                </div>
+            </div>
+
+            <div class="buttons-row mt15">
+                <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+            </div>
+        </fieldset>
+
+        <!-- Modal Input type part -->
+        <div class="modal fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="initModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="none" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="none">Collapsible group field</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="textInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="textInput">Text Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="checkboxInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="checkboxInput">Checkbox Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="sliderInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="sliderInput">Slider Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="selectInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="selectInput">Select Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="numberInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="numberInput">Number Input</label>
+                        </div>
+                        <div>
+                            <h6 style="color: red; margin-top: 0.5rem;">Specific types:</h6>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="tabInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="tabInput">Tab Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="passInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="passInput">Password Input</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="macInput" name="customRadio" class="custom-control-input" onchange="javascript: defineInputType(this.id)">
+                            <label class="custom-control-label" for="macInput">MAC address</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary" id="send_button" data-dismiss="modal">Next</button>-->
+                        <button type="button" id="nextButton" data-toggle="modal" data-target="#nextModal" data-dismiss="modal" class="btn btn-primary" disabled="true">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Input Type part end -->
+        <!-- Modal Input Settings part -->
+        <div class="modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="nextModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3" id="labelName">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Label name:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Input name" aria-label="labelName" name="labelName" oninput="javascript: undisable(this.value)" />
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="maxTextLength">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Text maximum length:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Text maximum length" aria-label="maxTextLength" name="maxTextLength">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="placeHolderText">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Placeholder:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Insert the default text" aria-label="placeHolderText" name="placeHolderText">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="inputNameOn">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Input name ON:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Input name ON" aria-label="inputNameOn" name="inputNameOn">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="inputNameOff">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Input name OFF:</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Input name OFF" aria-label="inputNameOff" name="inputNameOff">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="selectList">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Enumerate the options:</span>
+                            </div>
+                            <input type="text" style="width: 100%" class="form-control" placeholder="write the select options separated by comma" aria-label="selectList" name="selectList">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="min">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Minimum value:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0" aria-label="min" name="min">
+                        </div>
+                        <div class="input-group mb-3" style="display: none" id="max">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Max value:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0" aria-label="max" name="max">
+                        </div>
+                        <div class="input-group mb-3" style="display: flex" id="readOnly">
+                            
+                        </div>
+                        <div class="input-group mb-3" style="display: flex" id="bytesData">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Offset value:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0" aria-label="bytesData" name="bytesData"
+                                   min="0" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Length:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="1" aria-label="lengthData" name="lengthData"
+                                   min="1" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Read-only</span>
+                            </div>
+                            <input type="checkbox" aria-label="readOnly" name="readOnly">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-secondary" id="getValues">Done</button>-->
+                        <button type="button" class="btn btn-primary" id="send_button" data-dismiss="modal" disabled="true">Add element</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Input Settings part end -->
+
+
+
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script src="../imports/dynamicFuncs.js"></script>
+    <script>
+        function sendMessage(bc) {
+            CefSharp.PostMessage(bc);
+        }
+
+        $('#initModal').on('show.bs.modal', chooseInputTypeModal)
+
+        $('#nextModal').on('show.bs.modal', setInputData)
+        
+    </script>
+</body>
+</html>

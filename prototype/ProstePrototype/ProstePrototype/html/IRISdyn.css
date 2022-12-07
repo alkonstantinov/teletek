@@ -1,0 +1,22 @@
+﻿:root {
+    --toph: 0;
+    --grasse: #439809;
+    --grasse-hov: #08893a;
+    --fire: #db3232;
+    --fire-hov: #b4210a;
+    --normal: #1e73be;
+    --normal-hov: #0d91e4;
+    --grey: #a4a9ad;
+}
+
+.none {
+    border: none;
+    background: transparent;
+}
+
+
+.none-inherit {
+    display: inherit;
+    border: none;
+    background: transparent;
+}
