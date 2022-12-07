@@ -191,6 +191,16 @@ namespace ljson
             //
             json["iris"]["PROPERTIES"]["OLD"] = o;
         }
+
+        private static void ConvertMainArraysLeft(JObject json)
+        {
+            JObject o = cXml.Array2Object(json["ELEMENTS"]["iris"]["MEDIA"]["ITEMS"]);
+            if (o != null)
+                json["ELEMENTS"]["iris"]["MEDIA"] = o;
+            o = cXml.Array2Object(json["ELEMENTS"]["iris"]["ADDITIONALPARAMS"]["PARAM"]);
+            if (o != null)
+                json["ELEMENTS"]["iris"]["ADDITIONALPARAMS"] = o;
+        }
         #endregion
 
         #region accesscode
@@ -244,6 +254,10 @@ namespace ljson
             ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/access.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            //
+            JObject o = cXml.Array2Object(json["ELEMENTS"]["iris_access_code"]["RULES"]["RULE"]);
+            if (o != null)
+                json["ELEMENTS"]["iris_access_code"]["RULES"] = o;
         }
         #endregion
 
@@ -473,7 +487,7 @@ namespace ljson
                 string key = p.Name.ToString();
                 CreateInputGroups((JObject)json["ELEMENTS"], key);
             }
-            
+
         }
         #endregion
 
@@ -746,6 +760,7 @@ namespace ljson
                 }
 
             }
+            ConvertMainArraysLeft(o1);
             ConvertAccessCode(o1);
             ConvertPanelsInNetwork(o1);
             ConvertNetwork(o1);
@@ -764,6 +779,9 @@ namespace ljson
             ConvertEvacZoneGroup(o1);
             ConvertPreripherialDevicesContentNodes(o1);
             ConvertPanelInNetwork(o1);
+            //
+            cXml.Arrays2Objects(o1);
+            //
             return o1.ToString();
         }
     }
