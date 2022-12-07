@@ -301,11 +301,19 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="input-group mb-3" id="labelName">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Label name:</span>
+                        <div class="row align-items-center" >
+                            <div class="input-group mb-3 col" id="labelName">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Label name:</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Input name" aria-label="labelName" name="labelName" oninput="javascript: undisable(this.value)" />
                             </div>
-                            <input type="text" class="form-control" placeholder="Input name" aria-label="labelName" name="labelName" oninput="javascript: undisable(this.value)" />
+                            <div class="input-group mb-3 col-3" id="colWidth">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Col:</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="colWidth" name="colWidth" maxlength="2" min="1" max="12" style="display: flex"/>
+                            </div>
                         </div>
                         <div class="input-group mb-3" style="display: none" id="maxTextLength">
                             <div class="input-group-prepend">

@@ -12,7 +12,7 @@ function undisable(value) {
         btn.disabled = false;
     } else {
         btn.disabled = true;
-    } 
+    }
 }
 
 function checkHexRegex(event) {
@@ -27,6 +27,7 @@ function checkHexRegex(event) {
 function clearInputType() {
     type = '';
     document.getElementsByName('labelName')[0].value = '';
+    document.getElementsByName('colWidth')[0].value = '';
     document.getElementsByName('placeHolderText')[0].value = '';
     document.getElementsByName('maxTextLength')[0].value = '';
     document.getElementsByName('inputNameOn')[0].value = '';
@@ -37,6 +38,7 @@ function clearInputType() {
     document.getElementsByName('bytesData')[0].value = '0';
     document.getElementsByName('lengthData')[0].value = '1';
     $('input[name="readOnly"]').prop("checked", false);
+    document.getElementById('colWidth').style.display = 'flex';
     document.getElementById('placeHolderText').style.display = 'none';
     document.getElementById('maxTextLength').style.display = 'none';
     document.getElementById('inputNameOn').style.display = 'none';
@@ -49,7 +51,7 @@ function clearInputType() {
 
 function defineNewChildToInsert(type) {
     let input_name = document.getElementsByName('labelName')[0].value;
-    if (!type || !input_name) return;   
+    if (!type || !input_name) return;
     let input_id = input_name.toLowerCase().replaceAll(' ', '_')
     let placeHolderText = document.getElementsByName('placeHolderText')[0].value || '';
     let bytesData = document.getElementsByName('bytesData')[0].value || '0';
@@ -68,7 +70,7 @@ function defineNewChildToInsert(type) {
                     <div class="form-item roww flex">
                         <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
                         <label for="${input_id}">${input_name}</label>
-                        <input type="${type === 'passInput' ? 'password' : 'text'}" id="${input_id}" name="${input_id}" maxlength="${maxTextLength}" placeholder="${placeHolderText}" onblur="javascript: alert(this.value)" bytes="${bytesData}" length="${lengthData}" disabled="${readOnly}"/>
+                        <input type="${type === 'passInput' ? 'password' : 'text'}" id="${input_id}" name="${input_id}" maxlength="${maxTextLength}" placeholder="${placeHolderText}" onblur="javascript: alert(this.value)" bytes="${bytesData}" length="${lengthData}" ${readOnly ? "disabled" : ''}/>
                     </div>
                 `;
 
@@ -77,7 +79,7 @@ function defineNewChildToInsert(type) {
                     <div class="form-item roww">
                         <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
                         <label for="${input_id}">${input_name}</label>
-                        <input type="checkbox" id="${input_id}" class="ml10" bytes="${bytesData}" length="${lengthData}" disabled="${readOnly}"/>
+                        <input type="checkbox" id="${input_id}" class="ml10" bytes="${bytesData}" length="${lengthData}" ${readOnly ? "disabled" : ''}/>
                     </div>
                 `;
 
@@ -90,7 +92,7 @@ function defineNewChildToInsert(type) {
                         <p class="fire bordered">
                             ${input_name_off}
                             <label class="switch">
-                                <input type="checkbox" id="${input_id}" name="${input_id}" bytes="${bytesData}" length="${lengthData}" disabled="${readOnly}"/>
+                                <input type="checkbox" id="${input_id}" name="${input_id}" bytes="${bytesData}" length="${lengthData}" ${readOnly ? "disabled" : ''}/>
                                 <span class="slider"></span>
                             </label>
                             ${input_name_on}
@@ -100,19 +102,18 @@ function defineNewChildToInsert(type) {
         case 'selectInput':
             let selectList = document.getElementsByName('selectList')[0].value;
             selectList = selectList.split(',');
-            return `
-                    <div class="form-item roww mt-1">
+            let str = `<div class="form-item roww mt-1">
                         <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
                         <label for="${input_id}">${input_name}</label>
                         <div class="select">
-                            <select id="${input_id}" disabled="${readOnly}"
+                            <select id="${input_id}"  ${readOnly ? "disabled" : ''}
                                     name="${input_id}" bytes="${bytesData}" length="${lengthData}">
-                                <option value="" disabled selected>${placeHolderText || "Select your option"}</option>
-                                ${selectList.map(o => `<option value="${o.trim()}">${o.trim().charAt(0).toUpperCase() + o.trim().slice(1)}</option>`)}
-                            </select>
+                                <option value="" disabled selected>${placeHolderText || "Select your option"}</option>`;
+            selectList.map(o => str += `<option value="${o.trim()}">${o.trim().charAt(0).toUpperCase() + o.trim().slice(1)}</option>`);
+            str += `</select>
                         </div>
-                    </div>
-                `;
+                    </div>`
+            return str;
 
         case 'numberInput':
             let max = document.getElementsByName('max')[0].value;
@@ -128,11 +129,38 @@ function defineNewChildToInsert(type) {
                                data-maxlength="${`${max}`.length}"
                                oninput="javascript: myFunction(this.id)"
                                onblur="javascript: myFunction2(this.id)""
-                               min="${min}" max="${max}" disabled="${readOnly}"
+                               min="${min}" max="${max}" ${readOnly ? "disabled" : ''}
                                bytes="${bytesData}" length="${lengthData}"/>
                     </div>
                 `;
-        case 'tabInput': break;
+        case 'tabInput':
+            let tabs = document.getElementsByName('selectList')[0].value;
+            tabList = tabs.split(',').map(o => o.trim());
+            let tabStr = `
+                    <div class="form-item roww mt-1" tabInput>
+                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
+                        <label for="${input_id}">${input_name}</label>
+                        <div class="select">
+                            <select id="${input_id}" ${readOnly ? "disabled" : ''}
+                                    name="${input_id}" bytes="${bytesData}" length="${lengthData}">
+                                <option value="" disabled selected>${placeHolderText || "Select your option"}</option>`;
+            tabList.map(o => tabStr += `<option value="${o}">${o.charAt(0).toUpperCase() + o.trim().slice(1)}</option>`);
+            tabStr += `</select>
+                        </div>
+                    </div>
+                    <nav>
+                      <div class="nav nav-tabs" id="nav-tab-${input_id}" role="tablist">`;
+            tabList.map(o => tabStr += `<a class="nav-item nav-link" id="nav-${o}-tab" data-toggle="tab" href="#nav-${o}" role="tab" aria-controls="nav-${o}" aria-selected="false">${o.charAt(0).toUpperCase() + o.slice(1)}</a >`);
+            tabStr += `</div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">`;
+            tabList.map(o => tabStr += `<div class="tab-pane fade" id="nav-${o}" role="tabpanel" aria-labelledby="nav-${o}-tab">
+                                <div class="col">
+                                    <button type="button" data-toggle="modal" data-target="#initModal" data-whatever="nav-${o}" name="nav-${o}" class="none" onclick="javascript: clearInputType()"><i class="fa-solid fa-square-plus fa-2x"></i></button>
+                                </div>
+                        </div>`);
+            tabStr += "</div>";
+            return tabStr;
         case 'macInput':
             return `<div class="form-item roww" macInput>
                         <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
@@ -142,7 +170,7 @@ function defineNewChildToInsert(type) {
                                    type="text"
                                    id="${input_id}_ETHADDR0"
                                    name="${input_id}_ETHADDR0"
-                                   placeholder="00" disabled="${readOnly}"
+                                   placeholder="00" ${readOnly ? "disabled" : ''}
                                    oninput="javascript: checkHexRegex(event)" maxlength="2"
                                    />
                             <div>:</div>
@@ -150,7 +178,7 @@ function defineNewChildToInsert(type) {
                                    type="text"
                                    id="${input_id}_ETHADDR1"
                                    name="${input_id}_ETHADDR1"
-                                   placeholder="00" disabled="${readOnly}"
+                                   placeholder="00" ${readOnly ? "disabled" : ''}
                                    oninput="javascript: checkHexRegex(event)" maxlength="2"
                                    />
                             <div>:</div>
@@ -158,7 +186,7 @@ function defineNewChildToInsert(type) {
                                    class="col-1 mr-1"
                                    id="${input_id}_ETHADDR2"
                                    name="${input_id}_ETHADDR2"
-                                   placeholder="00" disabled="${readOnly}"
+                                   placeholder="00" ${readOnly ? "disabled" : ''}
                                    oninput="javascript: checkHexRegex(event)" maxlength="2"
                                    />
                             <div>:</div>
@@ -174,7 +202,7 @@ function defineNewChildToInsert(type) {
                                    class="col-1 mr-1"
                                    id="${input_id}_ETHADDR4"
                                    name="${input_id}_ETHADDR4"
-                                   placeholder="00" disabled="${readOnly}"
+                                   placeholder="00" ${readOnly ? "disabled" : ''}
                                    oninput="javascript: checkHexRegex(event)" maxlength="2"
                                    />
                             <div>:</div>
@@ -182,7 +210,7 @@ function defineNewChildToInsert(type) {
                                    class="col-1 mr-1"
                                    id="${input_id}_ETHADDR5"
                                    name="${input_id}_ETHADDR5"
-                                   placeholder="00" disabled="${readOnly}"
+                                   placeholder="00" ${readOnly ? "disabled" : ''}
                                    oninput="javascript: checkHexRegex(event)" maxlength="2"
                                    />
                         </div>
@@ -236,6 +264,8 @@ function setInputData(event) {
             on.style.display = 'flex';
             off.style.display = 'flex';
             break;
+        case 'tabInput':
+            modal.find('.modal-body #colWidth')[0].style.display = 'none';
         case 'selectInput':
             select.style.display = 'block';
             placeHolderText.style.display = 'flex';
@@ -244,11 +274,12 @@ function setInputData(event) {
             min.style.display = 'flex';
             max.style.display = 'flex';
             break;
-        case 'tabInput': break;
         case 'passInput':
             maxTextLength.style.display = 'flex';
             break;
-        case 'macInput': break;
+        case 'none':
+            modal.find('.modal-body #colWidth')[0].style.display = 'none';
+            break;
         default: break;
     }
 
@@ -259,51 +290,44 @@ function setInputData(event) {
 function addItem(elementName) {
     // create the element to insert
     let parent = !!elementName ? document.getElementById(elementName) : document.getElementById('divMain');
-        let newChildToInsert = document.createElement('div');
-        newChildToInsert.innerHTML = defineNewChildToInsert(type);
+    let newChildToInsert = document.createElement('div');
+    newChildToInsert.innerHTML = defineNewChildToInsert(type);
     if (type !== 'none') {
         if (!parent) return;
-        newChildToInsert.classList.value = 'col';
-        let insertClass = parent.firstElementChild.classList.value;
-        if (newChildToInsert.firstElementChild.hasAttribute('macInput')) {
-            newChildToInsert.classList.value = 'col-12';
-        } else if (parent.lastElementChild.previousElementSibling === null) {
-            console.log(parent.lastElementChild.classList)
-        } else if (parent.lastElementChild.previousElementSibling !== null && parent.lastElementChild.previousElementSibling.previousElementSibling === null) {
-            parent.lastElementChild.previousElementSibling.classList = "col-xs-12 col-md-6 col-4"
-        } else if (
-            parent.lastElementChild.previousElementSibling !== null &&
-            parent.lastElementChild.previousElementSibling.previousElementSibling !== null &&
-            !parent.lastElementChild.previousElementSibling.previousElementSibling.classList.contains('collapsible')
-        ) {
-            parent.lastElementChild.previousElementSibling.classList.value = insertClass;
-        } else if (insertClass.includes('collapsible')) {
-            newChildToInsert.classList.value = 'col-xs-12 col-md-6 col-4';
+        let colWidth = document.getElementsByName("colWidth")[0].value;
+        let newChildClass = 'col-xs-12 col-md-' + colWidth;
+        console.log('class before', newChildClass)
+        if (!colWidth) {
+            console.log('no colWidth')
+            newChildClass = 'col'
         }
+        newChildToInsert.classList.value = newChildClass;
+        console.log('class', newChildClass)
+        if (newChildToInsert.firstElementChild.hasAttribute('macInput') || newChildToInsert.firstElementChild.hasAttribute('tabInput')) {
+            newChildToInsert.classList.value = 'col-12';
+        }
+        console.log('parent.lastElementChild.previousElementSibling.classList', parent.lastElementChild.previousElementSibling.classList.value, 'parent.childNodes.length', parent.childElementCount)
+        if (parent.childElementCount > 1 && parent.lastElementChild.previousElementSibling.classList.value === 'col') {
+            let insertClass = parent.firstElementChild.classList.value;
+            console.log('insertClass', insertClass);
+            if (parent.childElementCount === 2 || insertClass.includes('collapsible')) {
+                parent.lastElementChild.previousElementSibling.classList = "col-xs-12 col-md-6 col-4"
+            } else {
+                parent.lastElementChild.previousElementSibling.classList.value = insertClass;
+            }
+        }
+
         parent.insertBefore(newChildToInsert, parent.lastElementChild);
-    } else {     // when we make a button
+    } else {     // when we make a collapsible button
         parent.insertBefore(newChildToInsert.firstChild, parent.lastElementChild);
         parent.insertBefore(newChildToInsert.lastChild, parent.lastElementChild);
         let input_name = document.getElementsByName('labelName')[0].value;
         let input_id = input_name.toLowerCase().replaceAll(' ', '_')
         if (document.getElementsByClassName(`collapsible_${input_id}`)) {
-            console.log('addItem inside')
             collapsible(`collapsible_${input_id}`);
         }
     }
-    //console.log(parent)
-    
-    
-    //resetModal();
 }
-
-//function resetModal() {
-//    document.getElementById('inputNameOn').style.display = 'none';
-//    document.getElementById('inputNameOff').style.display = 'none';
-//    document.getElementById('selectList').style.display = 'none';
-//    document.getElementById('max').style.display = 'none';
-//    document.getElementById('min').style.display = 'none';
-//}
 
 function removeItem(id_btn) {
     let parentEl = document.getElementById(id_btn).parentNode;
