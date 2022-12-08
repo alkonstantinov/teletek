@@ -3,16 +3,16 @@
 ################################################################################
 
 /prototype/ProstePrototype/.vs/ProstePrototype
-/prototype/ProstePrototype/ProstePrototype/bin/Debug/netcoreapp3.1
+/prototype/ProstePrototype/ProstePrototype/bin
 /prototype/ProstePrototype/ProstePrototype/obj
 /prototype/ProstePrototype/ProstePrototype/ProstePrototype.csproj.user
-/prototype/ProstePrototype/ProstePrototype/bin/Release/netcoreapp3.1
-doc/Func spec_v2  (1).docx
-doc/Func spec_v2  highlighted.docx
-doc/Teletek_Manager_func.docx
+/prototype/ProstePrototype/ProstePrototype/bin
 NewTeletekSW/.vscode
 NewTeletekSW/.vs
 NewTeletekSW/obj
 NewTeletekSW/bin
-/doc/protocols/UDL_Protocol_Iris v_1_2.doc
-/doc/Teletek_Manager_func (1).docx
+/doc
+/prototype/ProstePrototype/ljson/bin
+/prototype/ProstePrototype/ljson/obj
+/prototype/ProstePrototype/ljtest/bin
+/prototype/ProstePrototype/ljtest/obj

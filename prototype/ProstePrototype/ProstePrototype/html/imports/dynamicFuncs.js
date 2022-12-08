@@ -63,76 +63,36 @@ function defineNewChildToInsert(type) {
     ////////////////////////////////// END OF JSON MODIFICATION PART 
 
     switch (type) {
+        case 'ipInput':
+            return getTextInput(type, input_name, input_id, 15, placeHolderText, bytesData, lengthData, readOnly, true, true);
         case 'passInput':
         case 'textInput':
             let maxTextLength = document.getElementsByName('maxTextLength')[0].value || 'undefined';
-            return `
-                    <div class="form-item roww flex">
-                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
-                        <label for="${input_id}">${input_name}</label>
-                        <input type="${type === 'passInput' ? 'password' : 'text'}" id="${input_id}" name="${input_id}" maxlength="${maxTextLength}" placeholder="${placeHolderText}" onblur="javascript: alert(this.value)" bytes="${bytesData}" length="${lengthData}" ${readOnly ? "disabled" : ''}/>
-                    </div>
-                `;
+            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, true);
 
         case 'checkboxInput':
-            return `
-                    <div class="form-item roww">
-                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
-                        <label for="${input_id}">${input_name}</label>
-                        <input type="checkbox" id="${input_id}" class="ml10" bytes="${bytesData}" length="${lengthData}" ${readOnly ? "disabled" : ''}/>
-                    </div>
-                `;
+            return getCheckboxInput(input_name, input_id, bytesData, lengthData, readOnly, false, true);
 
         case 'sliderInput':
             let input_name_on = document.getElementsByName('inputNameOn')[0].value || 'ON';
             let input_name_off = document.getElementsByName('inputNameOff')[0].value || 'OFF';
-            return `<div class="form-item roww fire">
-                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
-                        ${input_name && `<label for="${input_id}">${input_name}</label>`}
-                        <p class="fire bordered">
-                            ${input_name_off}
-                            <label class="switch">
-                                <input type="checkbox" id="${input_id}" name="${input_id}" bytes="${bytesData}" length="${lengthData}" ${readOnly ? "disabled" : ''}/>
-                                <span class="slider"></span>
-                            </label>
-                            ${input_name_on}
-                        </p>
-                    </div>`;
+            return getSliderInput(input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, false, true);
 
         case 'selectInput':
             let selectList = document.getElementsByName('selectList')[0].value;
-            selectList = selectList.split(',');
-            let str = `<div class="form-item roww mt-1">
-                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
-                        <label for="${input_id}">${input_name}</label>
-                        <div class="select">
-                            <select id="${input_id}"  ${readOnly ? "disabled" : ''}
-                                    name="${input_id}" bytes="${bytesData}" length="${lengthData}">
-                                <option value="" disabled selected>${placeHolderText || "Select your option"}</option>`;
-            selectList.map(o => str += `<option value="${o.trim()}">${o.trim().charAt(0).toUpperCase() + o.trim().slice(1)}</option>`);
-            str += `</select>
-                        </div>
-                    </div>`
-            return str;
+            selectList = selectList.split(',').map(o => {
+                return {
+                    value: o.trim(),
+                    label: o.trim().charAt(0).toUpperCase() + o.trim().slice(1)
+                }
+            });
+            return getSelectInput(input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, true);
 
         case 'numberInput':
             let max = document.getElementsByName('max')[0].value;
             let min = document.getElementsByName('min')[0].value;
-            return `
-                    <div class="form-item roww">
-                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
-                        <label for="${input_id}">${input_name}</label>
-                        <input class="ml10"
-                               type="number"
-                               id="${input_id}"
-                               name="${input_id}"
-                               data-maxlength="${`${max}`.length}"
-                               oninput="javascript: myFunction(this.id)"
-                               onblur="javascript: myFunction2(this.id)""
-                               min="${min}" max="${max}" ${readOnly ? "disabled" : ''}
-                               bytes="${bytesData}" length="${lengthData}"/>
-                    </div>
-                `;
+            return getNumberInput(input_name, input_id, max, min, bytesData, lengthData, readOnly, true);
+
         case 'tabInput':
             let tabs = document.getElementsByName('selectList')[0].value;
             tabList = tabs.split(',').map(o => o.trim());
@@ -162,59 +122,7 @@ function defineNewChildToInsert(type) {
             tabStr += "</div>";
             return tabStr;
         case 'macInput':
-            return `<div class="form-item roww" macInput>
-                        <button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)"><i class="fa-solid fa-square-minus fa-2x"></i></button>
-                        <label for="${input_id}">${input_name}</label>
-                        <div class="row m0" id="${input_id}">
-                            <input class="col-1 mr-1"
-                                   type="text"
-                                   id="${input_id}_ETHADDR0"
-                                   name="${input_id}_ETHADDR0"
-                                   placeholder="00" ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: checkHexRegex(event)" maxlength="2"
-                                   />
-                            <div>:</div>
-                            <input class="col-1 mr-1"
-                                   type="text"
-                                   id="${input_id}_ETHADDR1"
-                                   name="${input_id}_ETHADDR1"
-                                   placeholder="00" ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: checkHexRegex(event)" maxlength="2"
-                                   />
-                            <div>:</div>
-                            <input type="text"
-                                   class="col-1 mr-1"
-                                   id="${input_id}_ETHADDR2"
-                                   name="${input_id}_ETHADDR2"
-                                   placeholder="00" ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: checkHexRegex(event)" maxlength="2"
-                                   />
-                            <div>:</div>
-                            <input type="text"
-                                   class="col-1 mr-1"
-                                   id="${input_id}_ETHADDR3"
-                                   name="${input_id}_ETHADDR3"
-                                   placeholder="00" disabled="${readOnly}"
-                                   oninput="javascript: checkHexRegex(event)" maxlength="2"
-                                   />
-                            <div>:</div>
-                            <input type="text"
-                                   class="col-1 mr-1"
-                                   id="${input_id}_ETHADDR4"
-                                   name="${input_id}_ETHADDR4"
-                                   placeholder="00" ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: checkHexRegex(event)" maxlength="2"
-                                   />
-                            <div>:</div>
-                            <input type="text"
-                                   class="col-1 mr-1"
-                                   id="${input_id}_ETHADDR5"
-                                   name="${input_id}_ETHADDR5"
-                                   placeholder="00" ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: checkHexRegex(event)" maxlength="2"
-                                   />
-                        </div>
-                    </div>`;
+            return getEmacInput(input_id, input_name, readOnly, true);
         default:
             return `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
         <div class="collapsible-content col-12">
@@ -280,6 +188,13 @@ function setInputData(event) {
         case 'none':
             modal.find('.modal-body #colWidth')[0].style.display = 'none';
             break;
+        case 'ipInput':
+            src = "../imports/jquery.inputmask.min.js";
+            const found_in_script_tags = document.querySelectorAll(`script[src*="${src}"]`).length > 0;
+            if (!found_in_script_tags) {
+                loadScript(ipMaskActivation);                
+            }
+            break;
         default: break;
     }
 
@@ -291,25 +206,24 @@ function addItem(elementName) {
     // create the element to insert
     let parent = !!elementName ? document.getElementById(elementName) : document.getElementById('divMain');
     let newChildToInsert = document.createElement('div');
+    console.log('defineNewChildToInsert(type)', defineNewChildToInsert(type));
     newChildToInsert.innerHTML = defineNewChildToInsert(type);
     if (type !== 'none') {
         if (!parent) return;
         let colWidth = document.getElementsByName("colWidth")[0].value;
         let newChildClass = 'col-xs-12 col-md-' + colWidth;
-        console.log('class before', newChildClass)
         if (!colWidth) {
             console.log('no colWidth')
             newChildClass = 'col'
         }
         newChildToInsert.classList.value = newChildClass;
-        console.log('class', newChildClass)
+        console.log('newChildToInsert', newChildToInsert)
         if (newChildToInsert.firstElementChild.hasAttribute('macInput') || newChildToInsert.firstElementChild.hasAttribute('tabInput')) {
             newChildToInsert.classList.value = 'col-12';
         }
-        console.log('parent.lastElementChild.previousElementSibling.classList', parent.lastElementChild.previousElementSibling.classList.value, 'parent.childNodes.length', parent.childElementCount)
+
         if (parent.childElementCount > 1 && parent.lastElementChild.previousElementSibling.classList.value === 'col') {
             let insertClass = parent.firstElementChild.classList.value;
-            console.log('insertClass', insertClass);
             if (parent.childElementCount === 2 || insertClass.includes('collapsible')) {
                 parent.lastElementChild.previousElementSibling.classList = "col-xs-12 col-md-6 col-4"
             } else {
@@ -318,6 +232,8 @@ function addItem(elementName) {
         }
 
         parent.insertBefore(newChildToInsert, parent.lastElementChild);
+
+        if (type === 'ipInput') ipMaskActivation();
     } else {     // when we make a collapsible button
         parent.insertBefore(newChildToInsert.firstChild, parent.lastElementChild);
         parent.insertBefore(newChildToInsert.lastChild, parent.lastElementChild);
