@@ -4,8 +4,11 @@ function sendMessageWPF(json) {
 }
 
 function receiveMessageWPF(jsonTxt) {
-    //var json = JSON.parse(jsonTxt);
-
+    var json = JSON.parse(jsonTxt);
+    
+    var fs = require('fs');
+    fs.writeFile('myjsonfile.json', jsonTxt, 'utf8', callback);
+    alert(jsonTxt)
     // setting the body element
     let body = document.getElementById('divMain');
     if (body.firstElementChild.tagName === 'FIELDSET') {

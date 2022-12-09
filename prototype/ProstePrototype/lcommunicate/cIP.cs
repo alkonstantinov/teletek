@@ -11,7 +11,7 @@ namespace lcommunicate
         internal override object Connect(object o)
         {
             cIPParams ip = (cIPParams)o;
-            TcpClient c = new TcpClient(ip.address, ip.port);
+            //TcpClient c = new TcpClient(ip.address, ip.port);
             return null;
         }
     }
