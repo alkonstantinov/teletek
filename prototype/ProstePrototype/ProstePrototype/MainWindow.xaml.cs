@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Wpf;
+using ljson;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
@@ -264,10 +265,19 @@ namespace ProstePrototype
 
         private void LoadPage(string page, string highlight)
         {
+            //var lpd = new LoadPageData()
+            //{
+            //    RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
+            //    LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
+            //};
+            JObject jnode = cJson.GetNode(page);
             var lpd = new LoadPageData()
             {
-                RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
-                LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
+                //RightBrowserUrl = jnode["right"].ToString(),
+                //LeftBrowserUrl = jnode["left"].ToString(),
+                RightBrowserUrl = cJson.htmlRight(jnode),
+                LeftBrowserUrl = cJson.htmlLeft(jnode),
+                key = page
             };
             LoadBrowsers(lpd, highlight);
             this.Dispatcher.Invoke(() =>
@@ -288,7 +298,8 @@ namespace ProstePrototype
                 }
                 this.Dispatcher.Invoke(() =>
                 {
-                    ((BrowserParams)wb1.Tag).Params = $@"{{ ""pageName"": ""wb1: {data.LeftBrowserUrl}"" }}";
+                    //((BrowserParams)wb1.Tag).Params = $@"{{ ""pageName"": ""wb1: {data.LeftBrowserUrl}"" }}";
+                    ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
                 });
                 
                 wb1.Load(url);
@@ -319,7 +330,8 @@ namespace ProstePrototype
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
             this.Dispatcher.Invoke(() =>
             {
-                ((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {data.RightBrowserUrl}"" }}";
+                //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {data.RightBrowserUrl}"" }}";
+                ((BrowserParams)wb2.Tag).Params = cJson.GroupsBrowserParam(data.key);
             });
             wb2.Load(wb2UrlAddress);
             ApplyTheme();
@@ -415,6 +427,7 @@ namespace ProstePrototype
             {
                 string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
                 string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
+
                 wb1.Load("file:///" + firstFile);
 
                 if (myFile == firstFile)
@@ -435,7 +448,12 @@ namespace ProstePrototype
                 }
                 this.Dispatcher.Invoke(() =>
                 {
-                    ((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";
+                    JObject jparam = new JObject();
+                    jparam["pageName"] = new JObject();
+                    JToken arr = lcommunicate.cComm.Scan();
+                    jparam["pageName"]["wb2"] = arr;
+                    ((BrowserParams)wb2.Tag).Params = jparam.ToString();
+                    //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";
                 });
                 wb2.Load("file:///" + myFile);
             }

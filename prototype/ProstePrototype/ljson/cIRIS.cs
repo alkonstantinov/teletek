@@ -266,7 +266,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_panels_in_network"];
             ac["title"] = "Panels in network";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/panels_in_network.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"]);
@@ -333,7 +333,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_inputs"];
             ac["title"] = "Inputs";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/input.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_inputs"]["CONTAINS"]);
@@ -346,7 +346,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_fat_fbf"];
             ac["title"] = "FAT FBF";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/fat-fbf.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_fat_fbf"]["CONTAINS"]);
@@ -359,7 +359,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_inputs_group"];
             ac["title"] = "Input Groups";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/inputs_group.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_inputs_group"]["CONTAINS"]);
@@ -372,7 +372,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_outputs"];
             ac["title"] = "Output";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/output.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_outputs"]["CONTAINS"]);
@@ -385,7 +385,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_zones"];
             ac["title"] = "Zones";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/zone.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_zones"]["CONTAINS"]);
@@ -398,7 +398,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_evac_zones"];
             ac["title"] = "Evac zones";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/zone_evac.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_evac_zones"]["CONTAINS"]);
@@ -411,7 +411,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_peripheral_devices"];
             ac["title"] = "Peripheral devices";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/periph_devices.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_peripheral_devices"]["CONTAINS"]);
@@ -424,7 +424,7 @@ namespace ljson
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_loop_devices"];
             ac["title"] = "Loop devices";
-            ac["left"] = "RIS/divIRIS.html";
+            ac["left"] = "IRIS/divIRIS.html";
             ac["right"] = "IRIS/loop_devices.html";
             ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_loop_devices"]["CONTAINS"]);
