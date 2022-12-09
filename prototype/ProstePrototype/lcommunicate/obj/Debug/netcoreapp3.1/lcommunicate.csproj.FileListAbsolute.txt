@@ -1,0 +1,13 @@
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\bin\Debug\netcoreapp3.1\lcommunicate.deps.json
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\bin\Debug\netcoreapp3.1\lcommunicate.dll
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\bin\Debug\netcoreapp3.1\lcommunicate.pdb
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.csproj.AssemblyReference.cache
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.GeneratedMSBuildEditorConfig.editorconfig
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.AssemblyInfoInputs.cache
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.AssemblyInfo.cs
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.csproj.CoreCompileInputs.cache
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.dll
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.pdb
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\bin\Debug\netcoreapp3.1\common.dll
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\bin\Debug\netcoreapp3.1\common.pdb
+C:\work\teletek\prototype\ProstePrototype\lcommunicate\obj\Debug\netcoreapp3.1\lcommunicate.csproj.CopyComplete

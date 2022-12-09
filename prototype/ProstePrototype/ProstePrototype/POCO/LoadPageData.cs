@@ -10,6 +10,6 @@ namespace ProstePrototype.POCO
 
         public string RightBrowserUrl { get; set; }
 
-
+        public string key { get; set; }
     }
 }

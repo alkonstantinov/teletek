@@ -89,6 +89,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\lcommunicate\lcommunicate.csproj" />
+    <ProjectReference Include="..\ljson\ljson.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="html\bg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

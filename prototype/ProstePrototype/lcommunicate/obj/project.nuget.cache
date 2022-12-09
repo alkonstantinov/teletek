@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DDtvrm0+YalJGYAAxiohA+RTIoM2AjI7Bw2jGR0XATHE00uHTkjaYUBTUUmWUdp5EWqYFl3EeOlI14Pp5WzfKA==",
+  "success": true,
+  "projectFilePath": "C:\\work\\teletek\\prototype\\ProstePrototype\\lcommunicate\\lcommunicate.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pavel\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
