@@ -209,7 +209,7 @@
     <None Update="html\IRIS\loop_devices.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\IRIS\network - automatic.html">
+    <None Update="html\IRIS\network-automatic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\IRIS\network-dynamic.html">
