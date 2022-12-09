@@ -15,15 +15,6 @@ function undisable(value) {
     }
 }
 
-function checkHexRegex(event) {
-    let val = event.target.value;
-    let regEx = /^([0-9A-Fa-f]{1,2})$/;
-    let isHex = regEx.test(val);
-    if (!isHex) {
-        document.getElementById(event.target.id).value = val.slice(0, -1);
-    }
-}
-
 function clearInputType() {
     type = '';
     document.getElementsByName('labelName')[0].value = '';

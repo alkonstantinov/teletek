@@ -1,14 +1,12 @@
 ﻿let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json) {
-    CefSharp.PostMessage(JSON.stringify(json));
+    alert(JSON.stringify(json));
+    //CefSharp.PostMessage(JSON.stringify(json));
 }
 
 function receiveMessageWPF(jsonTxt) {
-    var json = JSON.parse(jsonTxt);
+    //var json = JSON.parse(jsonTxt);
     
-    var fs = require('fs');
-    fs.writeFile('myjsonfile.json', jsonTxt, 'utf8', callback);
-    alert(jsonTxt)
     // setting the body element
     let body = document.getElementById('divMain');
     if (body.firstElementChild.tagName === 'FIELDSET') {
@@ -16,6 +14,7 @@ function receiveMessageWPF(jsonTxt) {
     }
     // getting keys and creating element for each
     keys = Object.keys(json);
+
     keys.forEach(k => {
         let divLevel = json[k];
         if (k.includes('~')) {
@@ -47,7 +46,14 @@ function receiveMessageWPF(jsonTxt) {
 // creating elements on div level
 const elementsCreationHandler = (div, jsonAtLevel) => {
     var elementKeys = Object.keys(jsonAtLevel);
-    elementKeys.forEach(field => {
+    const pathStr = "~path";
+    const cleanKeys = elementKeys.filter(x => x !== pathStr);
+    
+    cleanKeys.forEach(field => {
+        if (jsonAtLevel[field]['@TYPE'] === "AND") {
+            elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
+            return;
+        }
         const innerString = transformGroupElement(jsonAtLevel[field]);
         const newElement = document.createElement('div');
         let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
@@ -59,8 +65,8 @@ const elementsCreationHandler = (div, jsonAtLevel) => {
 
 // transforming object function
 const transformGroupElement = (elementJson) => {
-    
-    let { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked } = {
+    console.log('elementJson', elementJson);
+    let { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked, path } = {
         type: elementJson['@TYPE'],
         input_name: elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
@@ -70,18 +76,19 @@ const transformGroupElement = (elementJson) => {
         placeHolderText: elementJson['@PLACEHOLDER'],
         bytesData: elementJson['@BYTE'],
         lengthData: elementJson['@LEN'],
-        readOnly: !!elementJson['@READONLY'],
+        readOnly: !!(+elementJson['@READONLY']),
         input_name_on: elementJson['@YESVAL'],
         input_name_off: elementJson['@NOVAL'],
-        checked: elementJson['@CHECKED']
+        checked: elementJson['@CHECKED'],
+        path: elementJson['~path'],
     };
-    console.log('ttt', type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked)
+    //console.log('ttt', type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked)
     switch (type) {
         case 'INT':
-            return getNumberInput(input_name, input_id, max, min, bytesData, lengthData, readOnly);
+            return getNumberInput(input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path);
 
         case 'TEXT':
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly);
+            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path);
 
         case 'SLIDER':
             if (/\bon\b/i.test(input_name)) {
@@ -94,10 +101,10 @@ const transformGroupElement = (elementJson) => {
                 input_name_on = 'Enabled';
                 input_name_off = 'Disabled';
             }
-            return getSliderInput(input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false);
+            return getSliderInput(input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path);
 
         case 'CHECK':
-            return getCheckboxInput(input_name, input_id, bytesData, lengthData, readOnly, checked = false);
+            return getCheckboxInput(input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path);
 
         case 'LIST':
             let selectList = elementJson.ITEMS.ITEM.map(o => {
@@ -106,7 +113,7 @@ const transformGroupElement = (elementJson) => {
                     label: o['@NAME'],
                 };
             });
-            return getSelectInput(input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly)
+            return getSelectInput(input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path)
 
         case 'IP':
             src = "../imports/jquery.inputmask.min.js";
@@ -114,9 +121,9 @@ const transformGroupElement = (elementJson) => {
             if (!found_in_script_tags) {
                 loadScript(() => ipMaskActivation());
             }
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, false, ip = true);
+            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = true, path);
         case 'EMAC':
-            return getEmacInput(input_id, input_name, readOnly);
+            return getEmacInput(input_id, input_name, readOnly, RmBtn = false, path);
         default: break;
     }
 }
@@ -194,6 +201,16 @@ $(document).ready(() => {
     }
 });
 
+// checking a hex value function
+function checkHexRegex(event) {
+    let val = event.target.value;
+    let regEx = /^([0-9A-Fa-f]{1,2})$/;
+    let isHex = regEx.test(val);
+    if (!isHex) {
+        document.getElementById(event.target.id).value = val.slice(0, -1);
+    }
+}
+
 // activate dark mode
 function toggleDarkMode(show, filename) {
     if (show) {
@@ -245,7 +262,7 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
 }
 
 /////////////////////----- COMMON Funcs -----////////////////////////////////////////////
-const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false) => {
+const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '') => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -256,14 +273,14 @@ const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText
                        ${maxTextLength ? `maxlength="${maxTextLength}"` : (ip ? `maxlength = "15"` : "")}
                        ${ip ? `ip="yes"` : ""}
                        ${placeHolderText ? `placeholder="${placeHolderText}"` : (ip ? `placeholder = " 0 . 0 . 0 . 0 "` : "")} 
-                       onblur="javascript: alert(this.value)"
+                       onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
                        ${bytesData ? `bytes="${bytesData}"` : ""} 
                        ${lengthData ? `length="${lengthData}"` : ""} 
                        ${readOnly ? "disabled" : ''}/>
             </div>`
 }
 
-const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false) => {
+const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '') => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -273,24 +290,26 @@ const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly,
                     ${bytesData ? `bytes="${bytesData}"` : ""} 
                     ${lengthData ? `length="${lengthData}"` : ""} 
                     ${readOnly ? "disabled" : ''}
-                    ${checked ? "checked" : ''} />
+                    ${checked ? "checked" : ''}
+                    onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" />
             </div>`
 }
 
-const getSliderInput = (input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false) => {
+const getSliderInput = (input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '') => {
     return `<div class="form-item roww fire">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
                 ${input_name && `<label for="${input_id}">${input_name}</label>`}
-                <p class="fire bordered">
+                <p class="fire${input_name ? ' bordered' : ''}">
                     ${input_name_off}
                     <label class="switch">
                         <input type="checkbox" id="${input_id}" name="${input_id}" 
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
-                            ${checked ? "checked" : ''} />
+                            ${checked ? "checked" : ''} 
+                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"/>
                         <span class="slider"></span>
                     </label>
                     ${input_name_on}
@@ -298,7 +317,7 @@ const getSliderInput = (input_name, input_name_off, input_name_on, input_id, byt
             </div>`
 }
 
-const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false) => {
+const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path = "") => {
     let str = `<div class="form-item roww mt-1">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -308,14 +327,15 @@ const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytes
                         <select id="${input_id}" name="${input_id}"
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
-                            ${readOnly ? "disabled" : ''} >
+                            ${readOnly ? "disabled" : ''} 
+                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" >
                             <option value="" disabled selected>${placeHolderText || "Select your option"}</option>`;
     if (selectList.length > 0) selectList.map(o => str += `<option value="${o.value}">${o.label}</option>`);
     str += `</select></div></div>`
     return str;
 }
 
-const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false) => {
+const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "") => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -327,7 +347,7 @@ const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, r
                         name="${input_id}"
                         ${max ? `data-maxlength="${`${max}`.length}"` : ""}
                         oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
-                        onblur="javascript: myFunction2(this.id)""
+                        onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
                         ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
                         ${bytesData ? `bytes="${bytesData}"` : ""} 
                         ${lengthData ? `length="${lengthData}"` : ""} 
@@ -335,19 +355,20 @@ const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, r
             </div>`;
 }
 
-const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
+const getEmacInput = (input_id, input_name, readOnly, RmBtn = false, path = "") => {
     return `<div class="form-item roww" macInput>
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
                 <label for="${input_id}">${input_name}</label>
-                <div class="row m0" id="${input_id}">
+                <div class="row m0" id="${input_id}" >
                     <input class="col-1 mr-1"
                             type="text"
                             id="${input_id}0"
                             name="${input_id}0"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input class="col-1 mr-1"
@@ -356,6 +377,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}1"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -364,6 +386,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}2"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -372,6 +395,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}3"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -380,6 +404,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}4"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -388,6 +413,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}5"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                 </div>
             </div>`;

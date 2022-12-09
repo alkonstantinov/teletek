@@ -357,6 +357,7 @@ namespace ProstePrototype
         }
         private void Send_JSCommand(ChromiumWebBrowser browser, string jsonTxt, string jsFuncName = "receiveMessageWPF")
         {
+            File.WriteAllTextAsync("WriteText.json", jsonTxt);
             browser.ExecuteScriptAsync(jsFuncName, new object[] { jsonTxt });
         }
         #endregion
