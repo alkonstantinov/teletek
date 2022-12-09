@@ -16,3 +16,7 @@ NewTeletekSW/bin
 /prototype/ProstePrototype/ljson/obj
 /prototype/ProstePrototype/ljtest/bin
 /prototype/ProstePrototype/ljtest/obj
+/prototype/ProstePrototype/jtest/obj/Debug/netcoreapp3.1/jtest.GeneratedMSBuildEditorConfig.editorconfig
+/prototype/ProstePrototype/ljson/obj/Debug/netcoreapp3.1/ljson.csproj.AssemblyReference.cache
+/prototype/ProstePrototype/lcommunicate/obj/Debug/netcoreapp3.1/lcommunicate.csproj.AssemblyReference.cache
+/prototype/ProstePrototype/ljson/obj/Debug/netcoreapp3.1/ljson.GeneratedMSBuildEditorConfig.editorconfig
