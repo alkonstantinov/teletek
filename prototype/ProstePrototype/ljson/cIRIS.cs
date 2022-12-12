@@ -312,7 +312,7 @@ namespace ljson
             //f2["emacETHADDR3"] = o["emacETHADDR3"];
             //f2["emacETHADDR4"] = o["emacETHADDR4"];
             //f2["emacETHADDR5"] = o["emacETHADDR5"];
-            //grp2["fields"] = f2;
+            grp2["fields"] = f2;
             json["iris_network"]["PROPERTIES"]["Groups"]["NetworkSettings"] = grp2;
             //not grouped params
             json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"] = new JObject();
@@ -786,7 +786,7 @@ namespace ljson
             ConvertPreripherialDevicesContentNodes(o1);
             ConvertPanelInNetwork(o1);
             //
-            cXml.Arrays2Objects(o1);
+            cXml.Arrays2Objects(o1, true);
             //
             return o1.ToString();
         }
