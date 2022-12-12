@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ljson
 {
@@ -57,64 +58,64 @@ namespace ljson
         #endregion
 
         #region main
-        private static void ChangeContent(JObject content)
+        private static void ChangeContent(JObject content, JObject _pages)
         {
             TranslateObjectsKeys(content);
             //
-            content["iris_access_code"]["title"] = "Access codes";
-            content["iris_access_code"]["left"] = "IRIS/divIRIS.html";
-            content["iris_access_code"]["right"] = "IRIS/access.html";
-            content["iris_access_code"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_access_code"]["title"] = _pages["iris_access_code"]["title"];//"Access codes";
+            content["iris_access_code"]["left"] = _pages["iris_access_code"]["left"]; //"IRIS/divIRIS.html";
+            content["iris_access_code"]["right"] = _pages["iris_access_code"]["right"];// "IRIS/access.html";
+            content["iris_access_code"]["breadcrumbs"] = _pages["iris_access_code"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_network"]["title"] = "Network";
-            content["iris_network"]["left"] = "IRIS/divIRIS.html";
-            content["iris_network"]["right"] = "IRIS/network.html";
-            content["iris_network"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_network"]["title"] = _pages["iris_network"]["title"];// "Network";
+            content["iris_network"]["left"] = _pages["iris_network"]["left"];// "IRIS/divIRIS.html";
+            content["iris_network"]["right"] = _pages["iris_network"]["right"];// "IRIS/network.html";
+            content["iris_network"]["breadcrumbs"] = _pages["iris_network"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_panels_in_network"]["title"] = "Panels in network";
-            content["iris_panels_in_network"]["left"] = "IRIS/divIRIS.html";
-            content["iris_panels_in_network"]["right"] = "IRIS/panels_in_network.html";
-            content["iris_panels_in_network"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_panels_in_network"]["title"] = _pages["iris_panels_in_network"]["title"];// "Panels in network";
+            content["iris_panels_in_network"]["left"] = _pages["iris_panels_in_network"]["left"];//"IRIS/divIRIS.html";
+            content["iris_panels_in_network"]["right"] = _pages["iris_panels_in_network"]["right"];//"IRIS/panels_in_network.html";
+            content["iris_panels_in_network"]["breadcrumbs"] = _pages["iris_panels_in_network"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_inputs"]["title"] = "Inputs";
-            content["iris_inputs"]["left"] = "IRIS/divIRIS.html";
-            content["iris_inputs"]["right"] = "IRIS/input.html";
-            content["iris_inputs"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_inputs"]["title"] = _pages["iris_inputs"]["title"];// "Inputs";
+            content["iris_inputs"]["left"] = _pages["iris_inputs"]["left"];//"IRIS/divIRIS.html";
+            content["iris_inputs"]["right"] = _pages["iris_inputs"]["right"];//"IRIS/input.html";
+            content["iris_inputs"]["breadcrumbs"] = _pages["iris_inputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_inputs_group"]["title"] = "Input Groups";
-            content["iris_inputs_group"]["left"] = "IRIS/divIRIS.html";
-            content["iris_inputs_group"]["right"] = "IRIS/inputs_group.html";
-            content["iris_inputs_group"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_inputs_group"]["title"] = _pages["iris_inputs_group"]["title"];// "Input Groups";
+            content["iris_inputs_group"]["left"] = _pages["iris_inputs_group"]["left"];//"IRIS/divIRIS.html";
+            content["iris_inputs_group"]["right"] = _pages["iris_inputs_group"]["right"];//"IRIS/inputs_group.html";
+            content["iris_inputs_group"]["breadcrumbs"] = _pages["iris_inputs_group"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_outputs"]["title"] = "Output";
-            content["iris_outputs"]["left"] = "IRIS/divIRIS.html";
-            content["iris_outputs"]["right"] = "IRIS/output.html";
-            content["iris_outputs"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_outputs"]["title"] = _pages["iris_outputs"]["title"];// "Output";
+            content["iris_outputs"]["left"] = _pages["iris_outputs"]["left"];//"IRIS/divIRIS.html";
+            content["iris_outputs"]["right"] = _pages["iris_outputs"]["right"];//"IRIS/output.html";
+            content["iris_outputs"]["breadcrumbs"] = _pages["iris_outputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_fat_fbf"]["title"] = "FAT FBF";
-            content["iris_fat_fbf"]["left"] = "IRIS/divIRIS.html";
-            content["iris_fat_fbf"]["right"] = "IRIS/fat-fbf.html";
-            content["iris_fat_fbf"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_fat_fbf"]["title"] = _pages["iris_fat_fbf"]["title"];// "FAT FBF";
+            content["iris_fat_fbf"]["left"] = _pages["iris_fat_fbf"]["left"];//"IRIS/divIRIS.html";
+            content["iris_fat_fbf"]["right"] = _pages["iris_fat_fbf"]["right"];//"IRIS/fat-fbf.html";
+            content["iris_fat_fbf"]["breadcrumbs"] = _pages["iris_fat_fbf"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_zones"]["title"] = "Zones";
-            content["iris_zones"]["left"] = "IRIS/divIRIS.html";
-            content["iris_zones"]["right"] = "IRIS/zone.html";
-            content["iris_zones"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_zones"]["title"] = _pages["iris_zones"]["title"];// "Zones";
+            content["iris_zones"]["left"] = _pages["iris_zones"]["left"];//"IRIS/divIRIS.html";
+            content["iris_zones"]["right"] = _pages["iris_zones"]["right"];//"IRIS/zone.html";
+            content["iris_zones"]["breadcrumbs"] = _pages["iris_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_evac_zones"]["title"] = "Evac zones";
-            content["iris_evac_zones"]["left"] = "IRIS/divIRIS.html";
-            content["iris_evac_zones"]["right"] = "IRIS/zone_evac.html";
-            content["iris_evac_zones"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_evac_zones"]["title"] = _pages["iris_evac_zones"]["title"];// "Evac zones";
+            content["iris_evac_zones"]["left"] = _pages["iris_evac_zones"]["left"];//"IRIS/divIRIS.html";
+            content["iris_evac_zones"]["right"] = _pages["iris_evac_zones"]["right"];//"IRIS/zone_evac.html";
+            content["iris_evac_zones"]["breadcrumbs"] = _pages["iris_evac_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_peripheral_devices"]["title"] = "Peripheral devices";
-            content["iris_peripheral_devices"]["left"] = "IRIS/divIRIS.html";
-            content["iris_peripheral_devices"]["right"] = "IRIS/periph_devices.html";
-            content["iris_peripheral_devices"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_peripheral_devices"]["title"] = _pages["iris_peripheral_devices"]["title"];// "Peripheral devices";
+            content["iris_peripheral_devices"]["left"] = _pages["iris_peripheral_devices"]["left"];//"IRIS/divIRIS.html";
+            content["iris_peripheral_devices"]["right"] = _pages["iris_peripheral_devices"]["right"];//"IRIS/periph_devices.html";
+            content["iris_peripheral_devices"]["breadcrumbs"] = _pages["iris_peripheral_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_loop_devices"]["title"] = "Loop devices";
-            content["iris_loop_devices"]["left"] = "IRIS/divIRIS.html";
-            content["iris_loop_devices"]["right"] = "IRIS/loop_devices.html";
-            content["iris_loop_devices"]["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            content["iris_loop_devices"]["title"] = _pages["iris_loop_devices"]["title"];// "Loop devices";
+            content["iris_loop_devices"]["left"] = _pages["iris_loop_devices"]["left"];//"IRIS/divIRIS.html";
+            content["iris_loop_devices"]["right"] = _pages["iris_loop_devices"]["right"];//"IRIS/loop_devices.html";
+            content["iris_loop_devices"]["breadcrumbs"] = _pages["iris_loop_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
         }
 
         private static void CreateMainGroups(JObject json)
@@ -718,7 +719,7 @@ namespace ljson
         }
         #endregion
 
-        public static string Convert(string json)
+        public static string Convert(string json, JObject _pages)
         {
             JObject o = JObject.Parse(json);
             JObject o1 = new JObject();
@@ -741,7 +742,7 @@ namespace ljson
                         {
                             first = (JProperty)ct.First;
                             JObject content = Array2Object((JArray)first.Value);
-                            ChangeContent(content);
+                            ChangeContent(content, _pages);
                             ((JObject)fo)["CONTAINS"] = content;
                         }
                     }
@@ -752,10 +753,10 @@ namespace ljson
                     if (elements.Count > 0)
                     {
                         cIRIS.TranslateObjectsKeys(elements);
-                        elements["iris"]["title"] = "Iris";
-                        elements["iris"]["left"] = "IRIS/divIRIS.html";
-                        elements["iris"]["right"] = "IRIS/IRISPANEL.html";
-                        elements["iris"]["breadcrumbs"] = JArray.Parse("[\"index\"]");
+                        elements["iris"]["title"] = _pages["iris"]["title"];// "Iris";
+                        elements["iris"]["left"] = _pages["iris"]["left"];//"IRIS/divIRIS.html";
+                        elements["iris"]["right"] = _pages["iris"]["right"];//"IRIS/IRISPANEL.html";
+                        elements["iris"]["breadcrumbs"] = _pages["iris"]["breadcrumbs"];//JArray.Parse("[\"index\"]");
                         cIRIS.CreateMainGroups(elements);
                         //
                         if (p.Name != "ELEMENT")
