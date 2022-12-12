@@ -88,7 +88,54 @@ namespace ljson
             return res;
         }
 
-        public static void Arrays2Objects(JObject root)
+        private static List<string> ObjectTypes(JObject o)
+        {
+            List<string> res = new List<string>();
+            foreach (JToken t in o.SelectTokens("$.*"))
+            {
+                if (t.Type == JTokenType.Object)
+                {
+                    List<string> subs = ObjectTypes((JObject)t);
+                    foreach (string typ in subs)
+                        res.Add(typ);
+                }
+                else if (t.Parent.Type == JTokenType.Property)
+                {
+                    JProperty p = (JProperty)t.Parent;
+                    if (p.Value.Type == JTokenType.String && p.Name == "@TYPE")
+                        res.Add(p.Value.ToString());
+                    else if (p.Value.Type == JTokenType.Object)
+                    {
+                        List<string> subs = ObjectTypes((JObject)p.Value);
+                        foreach (string typ in subs)
+                            res.Add(typ);
+                    }
+                }
+            }
+            //
+            return res;
+        }
+
+        private static bool OnlyChecksInGroup(JObject grp)
+        {
+            List<string> _object_types = ObjectTypes(grp);
+            if (_object_types == null || _object_types.Count == 0)
+                return false;
+            foreach (string val in _object_types)
+                if (val != "CHECK")
+                    return false;
+            return true;
+        }
+
+        private static JObject FieldsParent(JObject o)
+        {
+            JContainer res = o;
+            while (res != null && (res.Type != JTokenType.Object || ((JObject)res)["fields"] == null))
+                res = res.Parent;
+            return (res != null) ? (JObject)res["fields"] : null;
+        }
+
+        public static void Arrays2Objects(JObject root, bool _convert_checks)
         {
             foreach (JToken t in root.SelectTokens("$.*"))
             {
@@ -119,7 +166,7 @@ namespace ljson
                                 //JProperty tparent = (JProperty)parent;
                                 JObject tpo = Array2Object((JToken)parent.Value);
                                 parent.Value = tpo;
-                                Arrays2Objects((JObject)(parent.Value));
+                                Arrays2Objects((JObject)(parent.Value), _convert_checks);
                             }
                             else
                             {
@@ -135,7 +182,17 @@ namespace ljson
                 {
                     JObject o = (JObject)t;
                     o["~path"] = t.Path;
-                    Arrays2Objects(o);
+                    if (_convert_checks && o["@TYPE"] != null && o["@TYPE"].ToString() == "CHECK")
+                    {
+                        JObject fo = FieldsParent(o);
+                        if (fo != null)
+                        {
+                            bool _checks_only = OnlyChecksInGroup(fo);
+                            if (!_checks_only)
+                                o["@TYPE"] = "SLIDER";
+                        }
+                    }
+                    Arrays2Objects(o, _convert_checks);
                 }
             }
         }
