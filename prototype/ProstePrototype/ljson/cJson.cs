@@ -93,9 +93,14 @@ namespace ljson
         private static JObject SchemaJSON(string schema)
         {
             string filename = FilePathFromSchema(schema);
+            string path = Directory.GetCurrentDirectory();
+            if (path[path.Length - 1] != '\\')
+                path += @"\";
+            path += @"html\pages.json";
+            JObject _pages = JObject.Parse(File.ReadAllText(path));
             if (filename != null)
             {
-                JObject res = JObject.Parse(ConvertXML(File.ReadAllText(filename)));
+                JObject res = JObject.Parse(ConvertXML(File.ReadAllText(filename), _pages));
                 return res;
             }
             return null;
@@ -133,7 +138,7 @@ namespace ljson
             Monitor.Exit(_cs_current_panel);
             return (JObject)_panel["ELEMENTS"][name];
         }
-        public static string ConvertXML(string xml)
+        public static string ConvertXML(string xml, JObject _pages)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
@@ -143,7 +148,7 @@ namespace ljson
             o = (JObject)t;
             string prod = o["@PRODUCTNAME"].ToString();
             if (Regex.IsMatch(prod, @"iris", RegexOptions.IgnoreCase))
-                return cIRIS.Convert(json);
+                return cIRIS.Convert(json, _pages);
             return "";
         }
 

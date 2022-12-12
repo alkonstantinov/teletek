@@ -115,6 +115,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Configs\XML\Templates\ECLIPSE99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Templates\IRIS8.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\dark.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
