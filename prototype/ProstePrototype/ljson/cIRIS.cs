@@ -305,15 +305,21 @@ namespace ljson
             f2["NetMask"] = o["NetMask"];
             f2["Gateway"] = o["Router"];
             f2["Port"] = o["Port"];
-            f2["PanelEvacNumber"] = o["PanelEvacNumber"];
-            f2["emacETHADDR0"] = o["emacETHADDR0"];
-            f2["emacETHADDR1"] = o["emacETHADDR1"];
-            f2["emacETHADDR2"] = o["emacETHADDR2"];
-            f2["emacETHADDR3"] = o["emacETHADDR3"];
-            f2["emacETHADDR4"] = o["emacETHADDR4"];
-            f2["emacETHADDR5"] = o["emacETHADDR5"];
-            grp2["fields"] = f2;
+            //f2["PanelEvacNumber"] = o["PanelEvacNumber"];
+            //f2["emacETHADDR0"] = o["emacETHADDR0"];
+            //f2["emacETHADDR1"] = o["emacETHADDR1"];
+            //f2["emacETHADDR2"] = o["emacETHADDR2"];
+            //f2["emacETHADDR3"] = o["emacETHADDR3"];
+            //f2["emacETHADDR4"] = o["emacETHADDR4"];
+            //f2["emacETHADDR5"] = o["emacETHADDR5"];
+            //grp2["fields"] = f2;
             json["iris_network"]["PROPERTIES"]["Groups"]["NetworkSettings"] = grp2;
+            //not grouped params
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"] = new JObject();
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["PanelEvacNumber"] = o["PanelEvacNumber"];
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"] = o["emacETHADDR0"];
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TYPE"] = "EMAC";
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TEXT"] = "EMAC";
             //
             json["iris_network"]["PROPERTIES"]["OLD"] = o;
         }
