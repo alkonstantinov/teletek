@@ -65,7 +65,6 @@ const elementsCreationHandler = (div, jsonAtLevel) => {
 
 // transforming object function
 const transformGroupElement = (elementJson) => {
-    console.log('elementJson', elementJson);
     let { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked, path } = {
         type: elementJson['@TYPE'],
         input_name: elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
@@ -79,41 +78,44 @@ const transformGroupElement = (elementJson) => {
         readOnly: !!(+elementJson['@READONLY']),
         input_name_on: elementJson['@YESVAL'],
         input_name_off: elementJson['@NOVAL'],
-        checked: elementJson['@CHECKED'],
+        checked: !!(+elementJson['@CHECKED']),
         path: elementJson['~path'],
     };
+
+    let attributes = { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked, path };
+    console.log(attributes.type,'attributes.type' )
     //console.log('ttt', type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked)
     switch (type) {
         case 'INT':
-            return getNumberInput(input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path);
+            return getNumberInput({ ...attributes });
 
         case 'TEXT':
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path);
+            return getTextInput({ ...attributes });
 
         case 'SLIDER':
             if (/\bon\b/i.test(input_name)) {
-                input_name_on = 'ON';
-                input_name_off = 'OFF';
-                input_name = input_name.replace(/\bon\b/ig, "").trim();
+                attributes.input_name_on = 'ON';
+                attributes.input_name_off = 'OFF';
+                attributes.input_name = input_name.replace(/\bon\b/ig, "").trim();
             }
-            if (input_name.toLowerCase().includes('enable')) {
-                input_name = '';
-                input_name_on = 'Enabled';
-                input_name_off = 'Disabled';
+            if (attributes.input_name.toLowerCase().includes('enable')) {
+                attributes.input_name = '';
+                attributes.input_name_on = 'Enabled';
+                attributes.input_name_off = 'Disabled';
             }
-            return getSliderInput(input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path);
+            return getSliderInput({ ...attributes });
 
         case 'CHECK':
-            return getCheckboxInput(input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path);
+            return getCheckboxInput({ ...attributes });
 
         case 'LIST':
-            let selectList = elementJson.ITEMS.ITEM.map(o => {
+            attributes.selectList = elementJson.ITEMS.ITEM.map(o => {
                 return {
                     value: o['@VALUE'],
                     label: o['@NAME'],
                 };
             });
-            return getSelectInput(input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path)
+            return getSelectInput({ ...attributes })
 
         case 'IP':
             src = "../imports/jquery.inputmask.min.js";
@@ -121,9 +123,10 @@ const transformGroupElement = (elementJson) => {
             if (!found_in_script_tags) {
                 loadScript(() => ipMaskActivation());
             }
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = true, path);
+            attributes.ip = true;
+            return getTextInput({ ...attributes });
         case 'EMAC':
-            return getEmacInput(input_id, input_name, readOnly, RmBtn = false, path);
+            return getEmacInput({ ...attributes });
         default: break;
     }
 }
@@ -262,7 +265,7 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
 }
 
 /////////////////////----- COMMON Funcs -----////////////////////////////////////////////
-const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '') => {
+const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '' }) => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -280,7 +283,7 @@ const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText
             </div>`
 }
 
-const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '') => {
+const getCheckboxInput = ({ input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -295,7 +298,7 @@ const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly,
             </div>`
 }
 
-const getSliderInput = (input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '') => {
+const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     return `<div class="form-item roww fire">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -317,7 +320,7 @@ const getSliderInput = (input_name, input_name_off, input_name_on, input_id, byt
             </div>`
 }
 
-const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path = "") => {
+const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path = "" }) => {
     let str = `<div class="form-item roww mt-1">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -335,7 +338,7 @@ const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytes
     return str;
 }
 
-const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "") => {
+const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "" }) => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -355,7 +358,7 @@ const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, r
             </div>`;
 }
 
-const getEmacInput = (input_id, input_name, readOnly, RmBtn = false, path = "") => {
+const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = "" }) => {
     return `<div class="form-item roww" macInput>
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
