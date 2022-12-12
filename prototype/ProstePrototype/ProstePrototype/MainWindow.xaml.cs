@@ -70,7 +70,7 @@ namespace ProstePrototype
 
             //wb0.Load("file:///" + navigation);
             //pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
-            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages-dynamic.json")));
+            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages-automatic.json")));
             DataContext = this;
 
             DarkMode = false;
@@ -357,7 +357,7 @@ namespace ProstePrototype
         }
         private void Send_JSCommand(ChromiumWebBrowser browser, string jsonTxt, string jsFuncName = "receiveMessageWPF")
         {
-            File.WriteAllTextAsync("WriteText.json", jsonTxt);
+            File.WriteAllTextAsync("WriteText.json", browser.Name + jsonTxt);
             browser.ExecuteScriptAsync(jsFuncName, new object[] { jsonTxt });
         }
         #endregion
@@ -423,12 +423,13 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
-            string index = "index.html";
+            //string index = "index.html";
+            string index = "index-automatic.html";
             if ((bool)c)
             {
                 string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
                 string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
-
+                
                 wb1.Load("file:///" + firstFile);
 
                 if (myFile == firstFile)

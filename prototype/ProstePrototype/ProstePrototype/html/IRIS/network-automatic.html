@@ -34,7 +34,7 @@
         //});
 
         var json = {
-            "~noname1": {
+            "~noname": {
                 "Name": {
                     "@TYPE": "TEXT",
                     "@LENGTH": "39",
@@ -42,7 +42,7 @@
                     "@TEXT": "Panel Name",
                     "@REQUIRED": "1",
                     "@LNGID": "74c87940-6dfc-40b3-bffe-10adaddf030d",
-                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname1.Name"
+                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname.Name"
                 },
                 "PanelNumber": {
                     "@TYPE": "INT",
@@ -51,9 +51,9 @@
                     "@MAX": "64",
                     "@TEXT": "Panel Number",
                     "@LNGID": "43f437f0-6fa2-40da-b8f3-5c75666ee82e",
-                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname1.PanelNumber"
+                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname.PanelNumber"
                 },
-                "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname1"
+                "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname"
             },
             "Parameters": {
                 "name": "Parameters",
@@ -65,7 +65,7 @@
                         "@LNGID": "991c8e8e-9afb-47a2-8a67-f4d4e14e85d6",
                         "PROPERTIES": {
                             "IsNetwork": {
-                                "@TYPE": "SLIDER",
+                                "@TYPE": "CHECK",
                                 "@SIZE": "1",
                                 "@TEXT": "Enabled",
                                 "@AND": "1",
@@ -127,7 +127,7 @@
                                 "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.Parameters.fields.IsNetworkEnabled.PROPERTIES.Protocol"
                             },
                             "Redundancy_En": {
-                                "@TYPE": "SLIDER",
+                                "@TYPE": "CHECK",
                                 "@SIZE": "1",
                                 "@TEXT": "Redundancy ON",
                                 "@AND": "8",
@@ -147,42 +147,9 @@
             },
             "NetworkSettings": {
                 "name": "Network Settings",
-                "fields": {
-                    "HostIP": {
-                        "@TYPE": "IP",
-                        "@SIZE": "4",
-                        "@TEXT": "Host IP",
-                        "@LNGID": "ce61e84b-9de5-482d-b964-cbdef8cc0e1d",
-                        "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings.fields.HostIP"
-                    },
-                    "NetMask": {
-                        "@TYPE": "IP",
-                        "@SIZE": "4",
-                        "@TEXT": "Net Mask",
-                        "@LNGID": "ab7521db-2f7e-4e54-ad5b-fe2f0c875821",
-                        "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings.fields.NetMask"
-                    },
-                    "Gateway": {
-                        "@TYPE": "IP",
-                        "@SIZE": "4",
-                        "@TEXT": "Gateway",
-                        "@LNGID": "42422f9d-330e-4967-9893-ee725af3969b",
-                        "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings.fields.Gateway"
-                    },
-                    "Port": {
-                        "@TYPE": "INT",
-                        "@SIZE": "2",
-                        "@MIN": "1",
-                        "@MAX": "99999",
-                        "@TEXT": "Port",
-                        "@LNGID": "38f263ae-b68f-451c-9ae0-44d9781edf65",
-                        "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings.fields.Port"
-                    },
-                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings.fields",
-                },
-                "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings",
+                "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.NetworkSettings"
             },
-            "~noname2": {
+            "~noname1": {
                 "PanelEvacNumber": {
                     "@TYPE": "INT",
                     "@SIZE": "1",
@@ -190,37 +157,20 @@
                     "@MAX": "5",
                     "@TEXT": "EVAC Panel Number",
                     "@LNGID": "3224077e-6d0e-4716-bb25-187991b62c74",
-                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname2.PanelEvacNumber",
+                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname1.PanelEvacNumber"
                 },
                 "emacETHADDR": {
                     "@TYPE": "EMAC",
-                    "@TEXT": "emacETHADDR",
-                    "@READONLY": "1",
+                    "@LENGTH": "50",
                     "@SIZE": "1",
-                    "ITEMS": [
-                        {
-                            "@LNGID": "99954633-ed5c-4d03-b2a5-83be9df34333"
-                        },
-                        {
-                            "@LNGID": "a1a157a8-a24e-43ed-954f-06985ac11e05"
-                        },
-                        {
-                            "@LNGID": "6e7f2221-6ab8-4778-9c9c-740069f1fb75"
-                        },
-                        {
-                            "@LNGID": "c595866b-c793-463d-8591-d50a74c9827f"
-                        },
-                        {
-                            "@LNGID": "84b06dfe-23dc-487c-8071-29d750dcc5c2"
-                        },
-                        {
-                            "@LNGID": "b35f5708-28d9-461d-8470-db3714b248c2"
-                        }
-                    ],
-                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname2.emacETHADDR",
+                    "@READONLY": "1",
+                    "@TEXT": "EMAC",
+                    "@LNGID": "99954633-ed5c-4d03-b2a5-83be9df34333",
+                    "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname1.emacETHADDR"
                 },
-                "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname2",
-            }
+                "~path": "ELEMENTS.iris_network.PROPERTIES.Groups.~noname1"
+            },
+            "~path": "ELEMENTS.iris_network.PROPERTIES.Groups"
         };
 
         receiveMessageWPF();

@@ -1,67 +1,132 @@
 ﻿let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json) {
-    alert(JSON.stringify(json));
-    //CefSharp.PostMessage(JSON.stringify(json));
+    //alert(JSON.stringify(json));
+    CefSharp.PostMessage(JSON.stringify(json));
 }
 
 function receiveMessageWPF(jsonTxt) {
-    //var json = JSON.parse(jsonTxt);
-    
-    // setting the body element
-    let body = document.getElementById('divMain');
-    if (body.firstElementChild.tagName === 'FIELDSET') {
-        body = body.firstElementChild;
-    }
-    // getting keys and creating element for each
-    keys = Object.keys(json);
+    var json = JSON.parse(jsonTxt);
 
-    keys.forEach(k => {
-        let divLevel = json[k];
-        if (k.includes('~')) {
-            let div = document.createElement('div');
-            div.classList = "row align-items-center m-2";                    
-
-            elementsCreationHandler(div, divLevel);
-                    
-            body.appendChild(div);
-        } else {
-            const { input_name, input_id } = {
-                input_name: divLevel.name,
-                input_id: divLevel.name.toLowerCase().replaceAll(' ', '_')
+    let body; // Main, Devices, Menu
+    switch (true) {
+        case !!document.getElementById('divMain'): // setting the body element
+            body = document.getElementById('divMain');
+            if (body.firstElementChild.tagName === 'FIELDSET') {
+                body = body.firstElementChild;
             }
-            var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+            // getting keys and creating element for each
+            keys = Object.keys(json);
+            console.log(keys)
+            keys.filter(k => k !== '~path').forEach(k => {
+                let divLevel = json[k];
+                if (k.includes('~')) {
+                    let div = document.createElement('div');
+                    div.classList = "row align-items-center m-2";
+                    console.log('diclevel', divLevel);
+                    elementsCreationHandler(div, divLevel);
+
+                    body.appendChild(div);
+                } else {
+                    console.log('k', k, 'divlevel', divLevel)
+                    const { input_name, input_id } = {
+                        input_name: divLevel.name,
+                        input_id: divLevel.name.toLowerCase().replaceAll(' ', '_')
+                    }
+                    var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
                 <div class="collapsible-content col-12">
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
-            body.insertAdjacentHTML('beforeend', inside);
-                    
-            let div = body.querySelector(`#${input_id}`);
-            elementsCreationHandler(div, divLevel.fields);
-                   
-            collapsible(`collapsible_${input_id}`)
-        }
-    });
+                    body.insertAdjacentHTML('beforeend', inside);
+
+                    let div = body.querySelector(`#${input_id}`);
+                    elementsCreationHandler(div, divLevel.fields);
+
+                    collapsible(`collapsible_${input_id}`)
+                }
+            });
+            break;
+        case !!document.getElementById('divDevices'):
+            body = document.getElementById('divDevices');
+            let divD = document.createElement('div');
+            divD.classList = "row m2 no-gutter";
+            devices = json["pageName"]["wb2"];
+            for (let i = 0; i < devices.length; i++) {
+                const src = "pages-dynamic.js";
+                if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
+                    loadScript(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), src);
+                } else {
+                    window.setTimeout(() => addButton(devices.title, devices.title.toLowerCase(), divD, devices[i]), 50);
+                }
+                body.appendChild(divD);
+            }
+            break;
+        default:
+            // case divIRIS, divTTE, divECLIPSE
+            body = document.body;
+            let div = document.createElement('div');
+            div.classList = "row m2 no-gutter";
+
+            elementsCreationHandler(div, json);
+
+            body.appendChild(div);
+            break;
+
+    }
+
 }
 
 // creating elements on div level
 const elementsCreationHandler = (div, jsonAtLevel) => {
+    if (!jsonAtLevel) return;
     var elementKeys = Object.keys(jsonAtLevel);
     const pathStr = "~path";
     const cleanKeys = elementKeys.filter(x => x !== pathStr);
-    
+
     cleanKeys.forEach(field => {
-        if (jsonAtLevel[field]['@TYPE'] === "AND") {
-            elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
-            return;
+        if (jsonAtLevel[field]['@TYPE']) {
+            if (jsonAtLevel[field]['@TYPE'] === "AND") {
+                elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
+                return;
+            }
+
+            const innerString = transformGroupElement(jsonAtLevel[field]);
+            const newElement = document.createElement('div');
+            let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
+            newElement.classList = className;
+            newElement.innerHTML = innerString;
+            div.appendChild(newElement);
+        } else if (jsonAtLevel[field].title) {
+            let title = jsonAtLevel[field].title;
+            const src = "pages-dynamic.js";
+            if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
+                loadScript(() => addButton(title, field, div), src);
+            } else {
+                window.setTimeout(() => addButton(title, field, div), 50);
+            }
         }
-        const innerString = transformGroupElement(jsonAtLevel[field]);
-        const newElement = document.createElement('div');
-        let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
-        newElement.classList = className;
-        newElement.innerHTML = innerString;
-        div.appendChild(newElement);
     });
 }
+
+const addButton = (title, fieldKey, div, localJSON = {}) => {
+    let indexFlag = Object.keys(localJSON).length > 0;
+    let color = indexFlag ? localJSON.deviceType : "";
+    if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
+    else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
+    console.log(CONFIG_CONST);
+    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? ", 'Highlight':'${fieldKey}'" : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
+                <div class="btnStyle ${color} active">
+                    <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
+                        <br /><span class="someS">
+                            <span class="h5">
+                                ${title}
+                            </span>
+                            ${indexFlag ? localJSON.interface : ""}
+                        </span>
+                    </i>
+                </div>
+            </a>`;
+    div.insertAdjacentHTML('afterbegin', el);
+};
 
 // transforming object function
 const transformGroupElement = (elementJson) => {
@@ -83,8 +148,7 @@ const transformGroupElement = (elementJson) => {
     };
 
     let attributes = { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked, path };
-    console.log(attributes.type,'attributes.type' )
-    //console.log('ttt', type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked)
+
     switch (type) {
         case 'INT':
             return getNumberInput({ ...attributes });
