@@ -6,19 +6,22 @@ function sendMessageWPF(json) {
 
 function receiveMessageWPF(jsonTxt) {
     var json = JSON.parse(jsonTxt);
+    if (Object.keys(json) === 0) return; // guard for empty json
 
     let body; // Main, Devices, Menu
     switch (true) {
         case !!document.getElementById('divMain'): // setting the body element
+            alert('divMain')
             body = document.getElementById('divMain');
             if (body.firstElementChild.tagName === 'FIELDSET') {
                 body = body.firstElementChild;
             }
             // getting keys and creating element for each
             keys = Object.keys(json);
-            console.log(keys)
+            
             keys.filter(k => k !== '~path').forEach(k => {
                 let divLevel = json[k];
+
                 if (k.includes('~')) {
                     let div = document.createElement('div');
                     div.classList = "row align-items-center m-2";
@@ -46,6 +49,7 @@ function receiveMessageWPF(jsonTxt) {
             });
             break;
         case !!document.getElementById('divDevices'):
+            alert('divDevices')
             body = document.getElementById('divDevices');
             let divD = document.createElement('div');
             divD.classList = "row m2 no-gutter";
@@ -62,6 +66,7 @@ function receiveMessageWPF(jsonTxt) {
             break;
         default:
             // case divIRIS, divTTE, divECLIPSE
+            alert('default')
             body = document.body;
             let div = document.createElement('div');
             div.classList = "row m2 no-gutter";
@@ -72,7 +77,6 @@ function receiveMessageWPF(jsonTxt) {
             break;
 
     }
-
 }
 
 // creating elements on div level
@@ -112,7 +116,7 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
     let color = indexFlag ? localJSON.deviceType : "";
     if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
     else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
-    console.log(CONFIG_CONST);
+
     let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? ", 'Highlight':'${fieldKey}'" : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
                 <div class="btnStyle ${color} active">
                     <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
