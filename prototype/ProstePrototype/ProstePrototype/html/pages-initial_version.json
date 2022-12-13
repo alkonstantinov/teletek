@@ -1,181 +1,181 @@
 {
   "eclipse": {
-    "title": "Eclipse",
-    "left": "menu-automatic.html",
+    "title":  "Eclipse",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/General Settings.html",
     "breadcrumbs": [ "index" ]
   },
   "eclipse_areas": {
     "title": "Areas",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Areas.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_gen_settings": {
     "title": "Settings",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/General Settings.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_outputs": {
     "title": "Outputs",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Outputs.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_timeslots": {
     "title": "Timeslots",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Timeslots.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_users": {
     "title": "Users",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Users.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_zones": {
     "title": "Zones",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Zones.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_communicator": {
     "title": "Communicator",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Communicator.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "eclipse_devices": {
     "title": "Devices",
-    "left": "menu-automatic.html",
+    "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Devices.html",
     "breadcrumbs": [ "index", "eclipse" ]
   },
   "index": {
     "title": "Start",
     "left": null,
-    "right": "index-automatic.html",
+    "right": "index.html",
     "breadcrumbs": []
   },
   "iris": {
     "title": "Iris",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/IRISPANEL.html",
     "breadcrumbs": [ "index" ]
   },
   "iris_access_code": {
     "title": "Access codes",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/access.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_network": {
     "title": "Network",
-    "left": "menu-automatic.html",
-    "right": "IRIS/network-automatic.html",
+    "left": "IRIS/divIRIS.html",
+    "right": "IRIS/network.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_panels_in_network": {
     "title": "Panels in network",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/panels_in_network.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_inputs": {
     "title": "Inputs",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/input.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_inputs_group": {
     "title": "Input Groups",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/inputs_group.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_outputs": {
     "title": "Output",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/output.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_fat_fbf": {
     "title": "FAT FBF",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/fat-fbf.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_zones": {
     "title": "Zones",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/zone.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_evac_zones": {
     "title": "Evac zones",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/zone_evac.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_peripheral_devices": {
     "title": "Peripheral devices",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/periph_devices.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_loop_devices": {
     "title": "Loop devices",
-    "left": "menu-automatic.html",
+    "left": "IRIS/divIRIS.html",
     "right": "IRIS/loop_devices.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "loop_devices_system_sensor_loop": {
     "title": "Snesor loop",
-    "left": "menu-automatic.html",
+    "left": "IRIS/loop_devices.html",
     "right": "IRIS/loop_devices_system_sensor.html",
     "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
   },
   "loop_devices_teletek_loop": {
     "title": "Teletek loop",
-    "left": "menu-automatic.html",
+    "left": "IRIS/loop_devices.html",
     "right": "IRIS/loop_devices_teletek.html",
     "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
   },
   "tte": {
     "title": "tte",
-    "left": "menu-automatic.html",
+    "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/General Settings.html",
     "breadcrumbs": [ "index" ]
   },
   "tte_gen_settings": {
     "title": "Gen settings",
-    "left": "menu-automatic.html",
+    "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/General Settings.html",
     "breadcrumbs": [ "index", "tte" ]
   },
   "tte_phones": {
     "title": "Phones",
-    "left": "menu-automatic.html",
+    "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Phones.html",
     "breadcrumbs": [ "index", "tte" ]
   },
   "tte_inputs_outputs": {
     "title": "I/O",
-    "left": "menu-automatic.html",
+    "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Input_Output.html",
     "breadcrumbs": [ "index", "tte" ]
   },
   "tte_mobile_operators": {
     "title": "Mobile operators",
-    "left": "menu-automatic.html",
+    "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Mobile Operators.html",
     "breadcrumbs": [ "index", "tte" ]
   },
   "tte_receiver_settings": {
     "title": "Receiver settings",
-    "left": "menu-automatic.html",
+    "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Receiver Settings.html",
     "breadcrumbs": [ "index", "tte" ]
   }

@@ -247,7 +247,7 @@
     <None Update="html\imports\mainfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-automatic.json">
+    <None Update="html\pages-initial_version.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\pages-dynamic.js">

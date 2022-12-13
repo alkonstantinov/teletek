@@ -11,7 +11,7 @@ function receiveMessageWPF(jsonTxt) {
     let body; // Main, Devices, Menu
     switch (true) {
         case !!document.getElementById('divMain'): // setting the body element
-            alert('divMain')
+            //alert('divMain')
             body = document.getElementById('divMain');
             if (body.firstElementChild.tagName === 'FIELDSET') {
                 body = body.firstElementChild;
@@ -25,12 +25,10 @@ function receiveMessageWPF(jsonTxt) {
                 if (k.includes('~')) {
                     let div = document.createElement('div');
                     div.classList = "row align-items-center m-2";
-                    console.log('diclevel', divLevel);
                     elementsCreationHandler(div, divLevel);
 
                     body.appendChild(div);
                 } else {
-                    console.log('k', k, 'divlevel', divLevel)
                     const { input_name, input_id } = {
                         input_name: divLevel.name,
                         input_id: divLevel.name.toLowerCase().replaceAll(' ', '_')
@@ -49,7 +47,7 @@ function receiveMessageWPF(jsonTxt) {
             });
             break;
         case !!document.getElementById('divDevices'):
-            alert('divDevices')
+            //alert('divDevices')
             body = document.getElementById('divDevices');
             let divD = document.createElement('div');
             divD.classList = "row m2 no-gutter";
@@ -66,25 +64,29 @@ function receiveMessageWPF(jsonTxt) {
             break;
         default:
             // case divIRIS, divTTE, divECLIPSE
-            alert('default')
+            //alert('default')
             body = document.body;
             let div = document.createElement('div');
             div.classList = "row m2 no-gutter";
 
-            elementsCreationHandler(div, json);
+            elementsCreationHandler(div, json, reverse = true);
 
             body.appendChild(div);
+            
             break;
-
     }
+    pagePreparation();
 }
 
 // creating elements on div level
-const elementsCreationHandler = (div, jsonAtLevel) => {
+const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
     if (!jsonAtLevel) return;
     var elementKeys = Object.keys(jsonAtLevel);
     const pathStr = "~path";
-    const cleanKeys = elementKeys.filter(x => x !== pathStr);
+    let cleanKeys = elementKeys.filter(x => x !== pathStr);
+    
+    if (reverse)
+        cleanKeys = cleanKeys.reverse();
 
     cleanKeys.forEach(field => {
         if (jsonAtLevel[field]['@TYPE']) {
@@ -118,7 +120,7 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
     else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
 
     let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? ", 'Highlight':'${fieldKey}'" : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
-                <div class="btnStyle ${color} active">
+                <div class="btnStyle ${color}">
                     <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
                         <br /><span class="someS">
                             <span class="h5">
@@ -258,19 +260,22 @@ function sendMsg(el) {
 }
 // finish of the contextMenu part
 
-$(document).ready(() => {
-    addVisitedBackground();
-    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-    let searchParams = new URLSearchParams(window.location.search)
-    // position the selected btn and selecting it
-    if (searchParams.has('highlight')) {
-        elem = document.getElementById(searchParams.get('highlight')).children[0];
-        if (elem) {
-            $(elem).addClass('active');
+const pagePreparation = () => {
+    $(document).ready(() => {
+        addVisitedBackground();
+        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+
+        let searchParams = new URLSearchParams(window.location.search)
+        // position the selected btn and selecting it
+        if (searchParams.has('highlight')) {
+            elem = document.getElementById(searchParams.get('highlight')).children[0];
+            if (elem) {
+                $(elem).addClass('active');
+            }
+            elem.scrollIntoView({ behavior: 'auto', block: 'center' });
         }
-        elem.scrollIntoView({ behavior: 'auto', block: 'center' });
-    }
-});
+    });
+}
 
 // checking a hex value function
 function checkHexRegex(event) {
