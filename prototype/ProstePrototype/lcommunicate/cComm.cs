@@ -27,7 +27,7 @@ namespace lcommunicate
         {
             cTransport t = new cIP();
             object conn = t.Connect(new cIPParams("212.36.21.86", 7000));
-            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris8', title: 'IRIS', interface: 'IP', address: '212.36.21.86:7000'}]");
+            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris8', title: 'IRIS', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse99', title: 'ECLIPSE', interface: 'COM', address: 'COM1'}]");
         }
     }
 }

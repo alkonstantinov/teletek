@@ -129,9 +129,29 @@ namespace ljson
             grp1["name"] = "Delay Mode";
             JObject f1 = new JObject();
             f1["SounderDelayMode"] = o["SounderDelayMode"];
+            f1["SounderDelaySchedule"] = o["SounderDelaySchedule"];
+            JArray jarr = (JArray)f1["SounderDelayMode"]["ITEMS"]["ITEM"];
+            foreach (JToken t in jarr)
+                if (t.Type == JTokenType.Object && ((JObject)t)["@NAME"].ToString() == "SCHEDULE")
+                    ((JObject)t)["ScheduleKey"] = "SounderDelaySchedule";
             f1["FireBrigadeDelayMode"] = o["FireBrigadeDelayMode"];
+            f1["FireBrigadeDelaySchedule"] = o["FireBrigadeDelaySchedule"];
+            jarr = (JArray)f1["FireBrigadeDelayMode"]["ITEMS"]["ITEM"];
+            foreach (JToken t in jarr)
+                if (t.Type == JTokenType.Object && ((JObject)t)["@NAME"].ToString() == "SCHEDULE")
+                    ((JObject)t)["ScheduleKey"] = "FireBrigadeDelaySchedule";
             f1["FireProtectionDelayMode"] = o["FireProtectionDelayMode"];
+            f1["FireProtectionDelaySchedule"] = o["FireProtectionDelaySchedule"];
+            jarr = (JArray)f1["FireProtectionDelayMode"]["ITEMS"]["ITEM"];
+            foreach (JToken t in jarr)
+                if (t.Type == JTokenType.Object && ((JObject)t)["@NAME"].ToString() == "SCHEDULE")
+                    ((JObject)t)["ScheduleKey"] = "FireProtectionDelaySchedule";
             f1["DayMode"] = o["DayMode"];
+            f1["DayNightSchedule"] = o["DayNightSchedule"];
+            jarr = (JArray)f1["DayMode"]["ITEMS"]["ITEM"];
+            foreach (JToken t in jarr)
+                if (t.Type == JTokenType.Object && ((JObject)t)["@NAME"].ToString() == "SCHEDULE")
+                    ((JObject)t)["ScheduleKey"] = "DayNightSchedule";
             grp1["fields"] = f1;
             json["iris"]["PROPERTIES"]["Groups"]["DelayMode"] = grp1;
             //
@@ -248,14 +268,14 @@ namespace ljson
             json["iris_access_code"]["PROPERTIES"]["OLD"] = o;
         }
 
-        private static void ConvertAccessCode(JObject json)
+        private static void ConvertAccessCode(JObject json, JObject _pages)
         {
             CreateAccessCodeGroups((JObject)json["ELEMENTS"]);
             JObject ac = (JObject)json["ELEMENTS"]["iris_access_code"];
-            ac["title"] = "Access codes";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/access.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_access_code"]["title"];
+            ac["left"] = _pages["iris_access_code"]["left"];
+            ac["right"] = _pages["iris_access_code"]["right"];
+            ac["breadcrumbs"] = _pages["iris_access_code"]["breadcrumbs"];
             //
             JObject o = cXml.Array2Object(json["ELEMENTS"]["iris_access_code"]["RULES"]["RULE"]);
             if (o != null)
@@ -264,13 +284,13 @@ namespace ljson
         #endregion
 
         #region panels in network
-        private static void ConvertPanelsInNetwork(JObject json)
+        private static void ConvertPanelsInNetwork(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_panels_in_network"];
-            ac["title"] = "Panels in network";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/panels_in_network.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_panels_in_network"]["title"];
+            ac["left"] = _pages["iris_panels_in_network"]["left"];
+            ac["right"] = _pages["iris_panels_in_network"]["right"];
+            ac["breadcrumbs"] = _pages["iris_panels_in_network"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"]);
             json["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"] = contains;
         }
@@ -325,116 +345,116 @@ namespace ljson
             //
             json["iris_network"]["PROPERTIES"]["OLD"] = o;
         }
-        private static void ConvertNetwork(JObject json)
+        private static void ConvertNetwork(JObject json, JObject _pages)
         {
             CreateNetworkGroups((JObject)json["ELEMENTS"]);
             JObject ac = (JObject)json["ELEMENTS"]["iris_network"];
-            ac["title"] = "Network";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/network.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_network"]["title"];
+            ac["left"] = _pages["iris_network"]["left"];
+            ac["right"] = _pages["iris_network"]["right"];
+            ac["breadcrumbs"] = _pages["iris_network"]["breadcrumbs"];
         }
         #endregion
 
         #region inputs
-        private static void ConvertInputs(JObject json)
+        private static void ConvertInputs(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_inputs"];
-            ac["title"] = "Inputs";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/input.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_inputs"]["title"];
+            ac["left"] = _pages["iris_inputs"]["left"];
+            ac["right"] = _pages["iris_inputs"]["right"];
+            ac["breadcrumbs"] = _pages["iris_inputs"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_inputs"]["CONTAINS"]);
             json["ELEMENTS"]["iris_inputs"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region FAT FBF
-        private static void ConvertFATFBF(JObject json)
+        private static void ConvertFATFBF(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_fat_fbf"];
-            ac["title"] = "FAT FBF";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/fat-fbf.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_fat_fbf"]["title"];
+            ac["left"] = _pages["iris_fat_fbf"]["left"];
+            ac["right"] = _pages["iris_fat_fbf"]["right"];
+            ac["breadcrumbs"] = _pages["iris_fat_fbf"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_fat_fbf"]["CONTAINS"]);
             json["ELEMENTS"]["iris_fat_fbf"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region input groups
-        private static void ConvertInputGroups(JObject json)
+        private static void ConvertInputGroups(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_inputs_group"];
-            ac["title"] = "Input Groups";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/inputs_group.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_inputs_group"]["title"];
+            ac["left"] = _pages["iris_inputs_group"]["left"];
+            ac["right"] = _pages["iris_inputs_group"]["right"];
+            ac["breadcrumbs"] = _pages["iris_inputs_group"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_inputs_group"]["CONTAINS"]);
             json["ELEMENTS"]["iris_inputs_group"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region outputs
-        private static void ConvertOutputs(JObject json)
+        private static void ConvertOutputs(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_outputs"];
-            ac["title"] = "Output";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/output.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_outputs"]["title"];
+            ac["left"] = _pages["iris_outputs"]["left"];
+            ac["right"] = _pages["iris_outputs"]["right"];
+            ac["breadcrumbs"] = _pages["iris_outputs"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_outputs"]["CONTAINS"]);
             json["ELEMENTS"]["iris_outputs"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region zones
-        private static void ConvertZones(JObject json)
+        private static void ConvertZones(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_zones"];
-            ac["title"] = "Zones";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/zone.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_zones"]["title"];
+            ac["left"] = _pages["iris_zones"]["left"];
+            ac["right"] = _pages["iris_zones"]["right"];
+            ac["breadcrumbs"] = _pages["iris_zones"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_zones"]["CONTAINS"]);
             json["ELEMENTS"]["iris_zones"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region evac zones
-        private static void ConvertEvacZones(JObject json)
+        private static void ConvertEvacZones(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_evac_zones"];
-            ac["title"] = "Evac zones";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/zone_evac.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_evac_zones"]["title"];
+            ac["left"] = _pages["iris_evac_zones"]["left"];
+            ac["right"] = _pages["iris_evac_zones"]["right"];
+            ac["breadcrumbs"] = _pages["iris_evac_zones"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_evac_zones"]["CONTAINS"]);
             json["ELEMENTS"]["iris_evac_zones"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region peripheral devices
-        private static void ConvertPeripheralDevices(JObject json)
+        private static void ConvertPeripheralDevices(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_peripheral_devices"];
-            ac["title"] = "Peripheral devices";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/periph_devices.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_peripheral_devices"]["title"];
+            ac["left"] = _pages["iris_peripheral_devices"]["left"];
+            ac["right"] = _pages["iris_peripheral_devices"]["right"];
+            ac["breadcrumbs"] = _pages["iris_peripheral_devices"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_peripheral_devices"]["CONTAINS"]);
             json["ELEMENTS"]["iris_peripheral_devices"]["CONTAINS"] = contains;
         }
         #endregion
 
         #region loop devices
-        private static void ConvertLoopDevices(JObject json)
+        private static void ConvertLoopDevices(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_loop_devices"];
-            ac["title"] = "Loop devices";
-            ac["left"] = "IRIS/divIRIS.html";
-            ac["right"] = "IRIS/loop_devices.html";
-            ac["breadcrumbs"] = JArray.Parse("[\"index\", \"iris\"]");
+            ac["title"] = _pages["iris_loop_devices"]["title"];
+            ac["left"] = _pages["iris_loop_devices"]["left"];
+            ac["right"] = _pages["iris_loop_devices"]["right"];
+            ac["breadcrumbs"] = _pages["iris_loop_devices"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_loop_devices"]["CONTAINS"]);
             json["ELEMENTS"]["iris_loop_devices"]["CONTAINS"] = contains;
         }
@@ -769,17 +789,17 @@ namespace ljson
 
             }
             ConvertMainArraysLeft(o1);
-            ConvertAccessCode(o1);
-            ConvertPanelsInNetwork(o1);
-            ConvertNetwork(o1);
-            ConvertInputs(o1);
-            ConvertFATFBF(o1);
-            ConvertInputGroups(o1);
-            ConvertOutputs(o1);
-            ConvertZones(o1);
-            ConvertEvacZones(o1);
-            ConvertPeripheralDevices(o1);
-            ConvertLoopDevices(o1);
+            ConvertAccessCode(o1, _pages);
+            ConvertPanelsInNetwork(o1, _pages);
+            ConvertNetwork(o1, _pages);
+            ConvertInputs(o1, _pages);
+            ConvertFATFBF(o1, _pages);
+            ConvertInputGroups(o1, _pages);
+            ConvertOutputs(o1, _pages);
+            ConvertZones(o1, _pages);
+            ConvertEvacZones(o1, _pages);
+            ConvertPeripheralDevices(o1, _pages);
+            ConvertLoopDevices(o1, _pages);
             ConvertInputsGroup(o1);
             ConvertInput(o1);
             ConvertOutput(o1);
