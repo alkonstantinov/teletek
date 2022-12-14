@@ -67,7 +67,7 @@
   },
   "iris_access_code": {
     "title": "Access codes",
-    "left": "IRIS/divIRIS.html",
+    "left": "IRIS/divIRIS-9.html",
     "right": "IRIS/access.html",
     "breadcrumbs": [ "index", "iris" ]
   },
