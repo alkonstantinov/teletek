@@ -41,6 +41,7 @@ namespace ProstePrototype
             public string JSfunc { get; set; }
             public string Params { get; set; }
         }
+
         public MainWindow()
         {
             InitializeComponent();
