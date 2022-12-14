@@ -1,4 +1,6 @@
-﻿let darkModeStylesheetId = "ssDarkMode";
+﻿boundAsync.showMessage("me").then(text => alert(text));
+
+let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json) {
     //alert(JSON.stringify(json));
     CefSharp.PostMessage(JSON.stringify(json));
@@ -13,7 +15,7 @@ function receiveMessageWPF(jsonTxt) {
         case !!document.getElementById('divMain'): // setting the body element
             //alert('divMain')
             body = document.getElementById('divMain');
-            if (body.firstElementChild.tagName === 'FIELDSET') {
+            if (body.firstElementChild?.tagName === 'FIELDSET') {
                 body = body.firstElementChild;
             }
             // getting keys and creating element for each
@@ -31,14 +33,14 @@ function receiveMessageWPF(jsonTxt) {
                 } else {
                     const { input_name, input_id } = {
                         input_name: divLevel.name,
-                        input_id: divLevel.name.toLowerCase().replaceAll(' ', '_')
+                        input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
                     }
                     var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
                 <div class="collapsible-content col-12">
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
                     body.insertAdjacentHTML('beforeend', inside);
-
+                    console.log('clean data', input_id)
                     let div = body.querySelector(`#${input_id}`);
                     elementsCreationHandler(div, divLevel.fields);
 
@@ -87,9 +89,9 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
     
     if (reverse)
         cleanKeys = cleanKeys.reverse();
-
     cleanKeys.forEach(field => {
-        if (jsonAtLevel[field]['@TYPE']) {
+        // guard for null value of jsonAtLevel[field]
+        if (jsonAtLevel[field] && jsonAtLevel[field]['@TYPE']) {
             if (jsonAtLevel[field]['@TYPE'] === "AND") {
                 elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
                 return;
@@ -101,7 +103,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             newElement.classList = className;
             newElement.innerHTML = innerString;
             div.appendChild(newElement);
-        } else if (jsonAtLevel[field].title) {
+        } else if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;
             const src = "pages-dynamic.js";
             if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
@@ -138,7 +140,7 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
 const transformGroupElement = (elementJson) => {
     let { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked, path } = {
         type: elementJson['@TYPE'],
-        input_name: elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: elementJson['@ID'] ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -164,14 +166,15 @@ const transformGroupElement = (elementJson) => {
 
         case 'SLIDER':
             if (/\bon\b/i.test(input_name)) {
-                attributes.input_name_on = 'ON';
-                attributes.input_name_off = 'OFF';
                 attributes.input_name = input_name.replace(/\bon\b/ig, "").trim();
             }
             if (attributes.input_name.toLowerCase().includes('enable')) {
                 attributes.input_name = '';
                 attributes.input_name_on = 'Enabled';
                 attributes.input_name_off = 'Disabled';
+            } else {
+                attributes.input_name_on = 'ON';
+                attributes.input_name_off = 'OFF';
             }
             return getSliderInput({ ...attributes });
 
@@ -183,6 +186,7 @@ const transformGroupElement = (elementJson) => {
                 return {
                     value: o['@VALUE'],
                     label: o['@NAME'],
+                    selected: !!(+o['@DEFAULT'])
                 };
             });
             return getSelectInput({ ...attributes })
@@ -276,7 +280,7 @@ const pagePreparation = () => {
         }
     });
 }
-
+pagePreparation();
 // checking a hex value function
 function checkHexRegex(event) {
     let val = event.target.value;
@@ -404,9 +408,12 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
-                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" >
-                            <option value="" disabled selected>${placeHolderText || "Select your option"}</option>`;
-    if (selectList.length > 0) selectList.map(o => str += `<option value="${o.value}">${o.label}</option>`);
+                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" >`;
+    if (selectList.length > 0) {
+        let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
+        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || "Select your option"}</option>`;
+        selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
+    }
     str += `</select></div></div>`
     return str;
 }

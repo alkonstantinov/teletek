@@ -41,9 +41,14 @@ namespace ProstePrototype
             public string JSfunc { get; set; }
             public string Params { get; set; }
         }
+        private CallbackObjectForJs _callBackObjectForJs;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _callBackObjectForJs = new CallbackObjectForJs();
+            
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
             //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
             #region temporary params
@@ -78,6 +83,11 @@ namespace ProstePrototype
             wb2.Tag = new BrowserParams { Name = "wb2", JSfunc = "receiveMessageWPF" };
             wb1.LoadingStateChanged += OnStateChanged;
             wb2.LoadingStateChanged += OnStateChanged;
+
+            wb1.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            wb1.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
+            wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
         }
 
 

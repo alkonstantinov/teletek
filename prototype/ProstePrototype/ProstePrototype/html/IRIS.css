@@ -1045,3 +1045,11 @@ input:checked + .slider:before {
 .grasse input[type='checkbox'] {
     filter: brightness(120%) hue-rotate(240deg);
 }
+
+.without::-webkit-datetime-edit-ampm-field {
+    display: none;
+}
+
+.without:after {
+    content: '',
+}
