@@ -67,16 +67,32 @@ namespace ljson
             }
         }
 
+        private static object _cs_last_content = new object();
+        private static string _last_content = null;
+
+        private static string LastContent
+        {
+            get
+            {
+                Monitor.Enter(_cs_last_content);
+                string res = _last_content;
+                Monitor.Exit(_cs_last_content);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_last_content);
+                _last_content = value;
+                Monitor.Exit(_cs_last_content);
+            }
+        }
+
         private static string FilePathFromSchema(string schema)
         {
             string path = Directory.GetCurrentDirectory();
-            DirectoryInfo di = Directory.GetParent(path);
-            for (int i = 1; i < 6; i++)
-                di = di.Parent;
-            path = di.ToString();
             if (path[path.Length - 1] != '\\')
-                path += '\\';
-            path += @"Configs\XML\Templates";
+                path += @"\";
+            path += @"Configs\XML\Templates\";
             string[] files = Directory.GetFiles(path);
             for (int i = 0; i < files.Length; i++)
             {
@@ -149,6 +165,8 @@ namespace ljson
             string prod = o["@PRODUCTNAME"].ToString();
             if (Regex.IsMatch(prod, @"iris", RegexOptions.IgnoreCase))
                 return cIRIS.Convert(json, _pages);
+            else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))
+                return cEclipse.Convert(json, _pages);
             return "";
         }
 
@@ -157,9 +175,13 @@ namespace ljson
             JObject json = CurrentPanel;
             JToken t = json["ELEMENTS"][key]["CONTAINS"];
             if (t != null)
-                return t.ToString();
+            {
+                string lc = t.ToString();
+                LastContent = lc;
+                return lc;
+            }
             else
-                return "{}";
+                return LastContent;
         }
 
         public static string GroupsBrowserParam(string key)
@@ -178,7 +200,13 @@ namespace ljson
                         return "{}";
                 }
                 else
-                    return "{}";
+                {
+                    JObject jcontains = (JObject)jkey["CONTAINS"];
+                    if (jcontains != null)
+                        return jcontains.ToString();
+                    else
+                        return "{}";
+                }
             }
             else
                 return "{}";

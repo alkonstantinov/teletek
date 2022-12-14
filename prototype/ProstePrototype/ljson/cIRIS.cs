@@ -140,7 +140,7 @@ namespace ljson
             JObject f2 = new JObject();
             f2["SoundersMode"] = o["SoundersMode"];
             f2["CallPointMode"] = o["CallPointMode"];
-            f2["Protocol"] = o["Protocol"];
+            f2["PRINTER"] = o["PRINTER"];
             f2["T1DELAY"] = o["T1DELAY"];
             f2["EVACUATION_TIMEOUT"] = o["EVACUATION_TIMEOUT"];
             grp2["fields"] = f2;
@@ -166,8 +166,8 @@ namespace ljson
             JObject grp5 = new JObject();
             grp5["name"] = "Settings";
             JObject f5 = new JObject();
-            f5["AUTOLOGOFFENABLED"] = o["AUTOLOGOFFENABLED"];
-            f5["TIMEAUTOLOGOFFINSTALLER"] = o["TIMEAUTOLOGOFFINSTALLER"];
+            f5["ALARM_SETTINGS"] = o["ALARM_SETTINGS"];
+            f5["EVACUATE_SETTINGS"] = o["EVACUATE_SETTINGS"];
             grp5["fields"] = f5;
             json["iris"]["PROPERTIES"]["Groups"]["Settings"] = grp5;
             //
@@ -184,9 +184,10 @@ namespace ljson
             JObject grp7 = new JObject();
             grp7["name"] = "Company Info";
             JObject f7 = new JObject();
-            f7["TONEALARM"] = o["TONEALARM"];
-            f7["TONEEVACUATE"] = o["TONEEVACUATE"];
-            f7["TONECLASSCHANGE"] = o["TONECLASSCHANGE"];
+            f7["LOGO1"] = o["LOGO1"];
+            f7["LOGO2"] = o["LOGO2"];
+            f7["LOGO3"] = o["LOGO3"];
+            f7["LOGO4"] = o["LOGO4"];
             grp7["fields"] = f7;
             json["iris"]["PROPERTIES"]["Groups"]["CompanyInfo"] = grp7;
             //
@@ -752,12 +753,12 @@ namespace ljson
                     //}
                     if (elements.Count > 0)
                     {
-                        cIRIS.TranslateObjectsKeys(elements);
+                        TranslateObjectsKeys(elements);
                         elements["iris"]["title"] = _pages["iris"]["title"];// "Iris";
                         elements["iris"]["left"] = _pages["iris"]["left"];//"IRIS/divIRIS.html";
                         elements["iris"]["right"] = _pages["iris"]["right"];//"IRIS/IRISPANEL.html";
                         elements["iris"]["breadcrumbs"] = _pages["iris"]["breadcrumbs"];//JArray.Parse("[\"index\"]");
-                        cIRIS.CreateMainGroups(elements);
+                        CreateMainGroups(elements);
                         //
                         if (p.Name != "ELEMENT")
                             o1[p.Name] = elements;
