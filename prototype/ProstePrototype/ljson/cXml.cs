@@ -60,9 +60,12 @@ namespace ljson
             JArray jarr = null;
             if (arr.Type == JTokenType.Array)
                 jarr = (JArray)arr;
-            JProperty f = (JProperty)arr.First;
-            if (f.Value.Type == JTokenType.Array)
-                jarr = (JArray)f.Value;
+            else
+            {
+                JProperty f = (JProperty)arr.First;
+                if (f.Value.Type == JTokenType.Array)
+                    jarr = (JArray)f.Value;
+            }
             if (jarr != null)
                 return Array2Object(jarr);
             string id = GetID(arr);
