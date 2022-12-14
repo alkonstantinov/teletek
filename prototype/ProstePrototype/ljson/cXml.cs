@@ -31,6 +31,14 @@ namespace ljson
                 o.Remove("@ID");
         }
 
+        public static void RemoveProp(JObject o, string name)
+        {
+            if (o[name] != null)
+                o.Remove(name);
+            else if (o["@" + name] != null)
+                o.Remove("@" + name);
+        }
+
         public static JObject Array2Object(JArray arr)
         {
             JObject res = new JObject();
