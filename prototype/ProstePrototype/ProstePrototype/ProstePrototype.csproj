@@ -214,6 +214,9 @@
     <None Update="html\imports\webfonts\fa-v4compatibility.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\IRIS\IRISPanel-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\menu-automatic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

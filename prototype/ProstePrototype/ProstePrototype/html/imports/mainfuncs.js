@@ -8,7 +8,7 @@ let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
         try {
-            eval(`${comm['funcName']}(${comm['params']})`);
+            eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
         } catch (e) {
             console.log('error', e);
         }
@@ -37,13 +37,27 @@ function receiveMessageWPF(jsonTxt) {
             keys.filter(k => k !== '~path').forEach(k => {
                 let divLevel = json[k];
 
-                if (k.includes('~')) {
+                if (k.includes('~')) { // ~noname cases
                     let div = document.createElement('div');
                     div.classList = "row align-items-center m-2";
                     elementsCreationHandler(div, divLevel);
 
                     body.appendChild(div);
-                } else {
+                } else if (divLevel.name === "Company Info") { // unique case "Company Info"
+                    let fieldset = document.createElement('fieldset');
+                    var insideRows = `<legend>${divLevel.name}</legend>`;
+                    for (field in divLevel.fields) {
+                        if (field.includes("~")) continue;
+                        let pl = divLevel.fields[field]["@TEXT"];
+                        let id = pl.replaceAll(" ", "_");
+                        let m = divLevel.fields[field]["@LENGTH"];
+                        insideRows += `<div class="form-item p0">
+                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}">
+                        </div>`
+                    }
+                    fieldset.insertAdjacentHTML('afterbegin', insideRows);
+                    body.appendChild(fieldset);
+                } else { // collapsoble parts
                     const { input_name, input_id } = {
                         input_name: divLevel.name,
                         input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
@@ -111,6 +125,10 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             }
 
             const innerString = transformGroupElement(jsonAtLevel[field]);
+            if (jsonAtLevel[field]['@TYPE'] === "WEEK") {
+                div.parentNode.parentNode.insertAdjacentHTML('beforeend', innerString);
+                return;
+            }
             const newElement = document.createElement('div');
             let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
             newElement.classList = className;
@@ -198,7 +216,8 @@ const transformGroupElement = (elementJson) => {
                 return {
                     value: o['@VALUE'],
                     label: o['@NAME'],
-                    selected: !!(+o['@DEFAULT'])
+                    selected: !!(+o['@DEFAULT']),
+                    link: o['ScheduleKey'],
                 };
             });
             return getSelectInput({ ...attributes })
@@ -214,6 +233,7 @@ const transformGroupElement = (elementJson) => {
         case 'EMAC':
             return getEmacInput({ ...attributes });
         case 'WEEK':
+            attributes.input_id = attributes.input_name.replaceAll(' ', '');
             return getWeekInput({ ...attributes });
         default: break;
     }
@@ -412,6 +432,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
 }
 
 const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path = "" }) => {
+    let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let str = `<div class="form-item roww mt-1">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -422,7 +443,10 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
-                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" >`;
+                            onchange="javascript:sendMessageWPF(
+                                {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
+                                ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""}
+                            )" >`;
     if (selectList.length > 0) {
         let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
         str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || "Select your option"}</option>`;
@@ -516,8 +540,9 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                 </div>
             </div>`;
 }
+
 const getWeekInput = ({ input_id, input_name, readOnly, RmBtn = false, path = "" }) => {
-    return `<div style="display: 'block'" id="${input_id}-schedule">
+    return `<div style="display: none" id="${input_id}-schedule">
             <fieldset>
                 <legend>${input_name}</legend>
                 <div class="row">
@@ -698,4 +723,50 @@ const getWeekInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                 </div>
             </fieldset>
         </div>`
+}
+
+/////////////////////----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
+
+function myFunction(id) {
+    var element = document.getElementById(id);
+    element.value = element.value.slice(0, element.dataset.maxlength);
+}
+function myFunction2(id) {
+    var element = document.getElementById(id);
+    if (+element.value > +element.max) {
+        element.value = element.max;
+    }
+}
+function myFunction3(id) {
+    var element = document.getElementById(id);
+    let len = element.value.length;
+    let regex;
+    if (len < 2) {
+        regex = new RegExp("^([0-1]?[0-9]|2[0-3]):?");
+    }
+    else if (!element.value.includes(":")) {
+        element.value += ":";
+        regex = new RegExp("^([0-1]?[0-9]|2[0-3]):([0-5][0-9]?)?$");
+    } else {
+        regex = new RegExp("^([0-1]?[0-9]|2[0-3]):([0-5][0-9]?)?$");
+    }
+    if (!regex.test(element.value)) {
+        if (element.value.includes(":") && len == 2) element.value = element.value.slice(0, -2);
+        else element.value = element.value.slice(0, -1);
+    }
+}
+
+function changeStyleDisplay(goToId, id) {
+    var val = document.getElementById(id).value;
+    var divId = goToId + "-schedule";
+    var element = document.getElementById(divId);
+    if (val === "2") {
+        if (element.style.display === "block") {
+            element.style.display = "none";
+        } else {
+            element.style.display = "block";
+        }
+    } else {
+        element.style.display = "none";
+    }
 }

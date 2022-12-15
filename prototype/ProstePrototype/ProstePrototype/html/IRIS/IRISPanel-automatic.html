@@ -12,11 +12,9 @@
     <link rel="stylesheet" href="../IRIS.css" />
     <title>Teletek Manager</title>
 </head>
-
 <body>
     <div class="container" id="divMain">
-        <fieldset>
-        </fieldset>
+       
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -29,10 +27,12 @@
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-        //$(document).ready(() => {
-        //    sendMessage("Devices|IRIS|Access");
-        //});
+        $(document).ready(() => {
+            //sendMessage("Devices|IRIS");
+        });
 
+        var js = ``;
+        //receiveMessageWPF(js);
     </script>
 </body>
 </html>

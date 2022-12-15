@@ -62,13 +62,13 @@
   "iris": {
     "title": "Iris",
     "left": "menu-automatic.html",
-    "right": "IRIS/IRISPANEL.html",
+    "right": "IRIS/IRISPanel-automatic.html",
     "breadcrumbs": [ "index" ]
   },
   "iris_access_code": {
     "title": "Access codes",
     "left": "menu-automatic.html",
-    "right": "IRIS/access.html",
+    "right": "IRIS/IRISPanel-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_network": {
