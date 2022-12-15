@@ -67,6 +67,15 @@ namespace ljson
             }
         }
 
+        public static string CurrentPanelID
+        {
+            get
+            {
+                JObject _panel = CurrentPanel;
+                return _panel["@LNGID"].ToString();
+            }
+        }
+
         private static object _cs_last_content = new object();
         private static string _last_content = null;
 
@@ -142,6 +151,7 @@ namespace ljson
                 return (JObject)_panel["ELEMENTS"][name];
             Monitor.Enter(_cs_current_panel);
             Monitor.Enter(_cs_panel_templates);
+            Monitor.Enter(_cs_main_content_key);
             _panel = _current_panel;
             if (_panel == null)
                 _panel = SchemaJSON(name);
@@ -150,6 +160,8 @@ namespace ljson
             else
                 _panel_temlates[filename] = _panel;
             _current_panel = _panel;
+            _main_content_key = name;
+            Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
             return (JObject)_panel["ELEMENTS"][name];
@@ -170,9 +182,38 @@ namespace ljson
             return "";
         }
 
+        private static string _main_content_key = null;
+        private static object _cs_main_content_key = new object();
+        public static string MainContentKey
+        {
+            get
+            {
+                Monitor.Enter(_cs_main_content_key);
+                string res = _main_content_key;
+                Monitor.Exit(_cs_main_content_key);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_main_content_key);
+                _main_content_key = value;
+                Monitor.Exit(_cs_main_content_key);
+            }
+        }
+
         public static string ContentBrowserParam(string key)
         {
             JObject json = CurrentPanel;
+            string content_key = MainContentKey;
+            if (content_key != null)
+            {
+                JToken tc = json["ELEMENTS"][content_key]["CONTAINS"];
+                if (tc != null)
+                {
+                    string lc = tc.ToString();
+                    return lc;
+                }
+            }
             JToken t = json["ELEMENTS"][key]["CONTAINS"];
             if (t != null)
             {

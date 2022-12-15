@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -23,6 +23,39 @@ namespace lcommunicate
     }
     public class cComm
     {
+        /// <summary>
+        /// Dictionary с ключ ID на панел и съдържание Dictionary<~path, value>
+        /// </summary>
+        private static Dictionary<string, Dictionary<string, string>> _cache_panels;
+        private static object _cs_cache;
+
+        public static void SetPathValue(string panel_id, string path, string value)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels == null)
+                _cache_panels = new Dictionary<string, Dictionary<string, string>>();
+            if (!_cache_panels.ContainsKey(panel_id))
+                _cache_panels.Add(panel_id, new Dictionary<string, string>());
+            Dictionary<string, string> panel = _cache_panels[panel_id];
+            if (panel.ContainsKey(path))
+                panel[path] = value;
+            else
+                panel.Add(path, value);
+            Monitor.Exit(_cs_cache);
+        }
+
+        public static string GetPathValue(string panel_id, string path)
+        {
+            Monitor.Enter(_cs_cache);
+            if (!_cache_panels.ContainsKey(panel_id))
+                return null;
+            Dictionary<string, string> panel = _cache_panels[panel_id];
+            if (!panel.ContainsKey(path))
+                return null;
+            string val = panel[path];
+            Monitor.Exit(_cs_cache);
+            return val;
+        }
         public static JArray Scan()
         {
             cTransport t = new cIP();

@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Wpf;
+using lcommunicate;
 using ljson;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
@@ -260,6 +261,9 @@ namespace ProstePrototype
                             // Read_Clicked(new object(), new RoutedEventArgs()); // not working!
                             break;
                     }
+                    break;
+                case "changedValue":
+                    cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
                     break;
             }
         }

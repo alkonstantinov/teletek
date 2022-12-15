@@ -50,6 +50,58 @@ namespace ljson
             for (int i = 0; i < from.Count; i++)
                 from[i].Replace(to[i]);
         }
+
+        private static JObject UniqueGroups(JObject node)
+        {
+            JObject g = (JObject)node["UNIQUEGROUPS"]["UNIQUEGROUP"];
+            JObject g1 = new JObject();
+            foreach (JProperty p in (JToken)g)
+                if (p.Name != "IGNOREVALUES")
+                    g1[p.Name] = p.Value;
+            JObject ugi = new JObject();
+            foreach (JObject o in (JArray)g1["UNIQUEGROUPITEM"])
+            {
+                string prop = o["@PROPERTYNAME"].ToString();
+                cXml.RemoveProp(o, "@PROPERTYNAME");
+                ugi[prop] = o;
+            }
+            g1["Properties"] = ugi;
+            cXml.RemoveProp(g1, "UNIQUEGROUPITEM");
+            return g1;
+        }
+
+        private static JObject CombineUniqueGroups(JObject ug, JObject json)
+        {
+            JObject res = new JObject();
+            foreach (JToken t in (JToken)ug)
+            {
+                if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type != JTokenType.Object)
+                    res[((JProperty)t).Name] = ((JProperty)t).Value;
+            }
+            Dictionary<string, JObject> keys = new Dictionary<string, JObject>();
+            JObject props = (JObject)ug["Properties"];
+            res["Properties"] = new JObject();
+            foreach (JToken t in (JToken)props)
+            {
+                JProperty p = (JProperty)t;
+                string pname = p.Name;
+                string key = ((JObject)p.Value)["@ELEMENTNAME"].ToString();
+                JObject node = null;
+                if (keys.ContainsKey(key))
+                    node = keys[key];
+                else
+                {
+                    node = cXml.Array2Object(json[key]["PROPERTIES"]);
+                    keys.Add(key, node);
+                }
+                if (node == null)
+                    continue;
+                JObject attr = (JObject)node[pname];
+                attr["@ELEMENTNAME"] = key;
+                res["Properties"][pname] = attr;
+            }
+            return res;
+        }
         #endregion
 
         #region main
@@ -57,49 +109,57 @@ namespace ljson
         {
             TranslateObjectsKeys(content);
             //
-            content["eclipse_areas"]["title"] = _pages["eclipse_areas"]["title"];//"Access codes";
-            content["eclipse_areas"]["left"] = _pages["eclipse_areas"]["left"]; //"IRIS/divIRIS.html";
-            content["eclipse_areas"]["right"] = _pages["eclipse_areas"]["right"];// "IRIS/access.html";
-            content["eclipse_areas"]["breadcrumbs"] = _pages["eclipse_areas"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_areas"]["title"] = _pages["eclipse_areas"]["title"];
+            content["eclipse_areas"]["left"] = _pages["eclipse_areas"]["left"];
+            content["eclipse_areas"]["right"] = _pages["eclipse_areas"]["right"];
+            content["eclipse_areas"]["breadcrumbs"] = _pages["eclipse_areas"]["breadcrumbs"];
             //
-            content["eclipse_gen_settings"]["title"] = _pages["eclipse_gen_settings"]["title"];// "Network";
-            content["eclipse_gen_settings"]["left"] = _pages["eclipse_gen_settings"]["left"];// "IRIS/divIRIS.html";
-            content["eclipse_gen_settings"]["right"] = _pages["eclipse_gen_settings"]["right"];// "IRIS/network.html";
-            content["eclipse_gen_settings"]["breadcrumbs"] = _pages["eclipse_gen_settings"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_gen_settings"]["title"] = _pages["eclipse_gen_settings"]["title"];
+            content["eclipse_gen_settings"]["left"] = _pages["eclipse_gen_settings"]["left"];
+            content["eclipse_gen_settings"]["right"] = _pages["eclipse_gen_settings"]["right"];
+            content["eclipse_gen_settings"]["breadcrumbs"] = _pages["eclipse_gen_settings"]["breadcrumbs"];
             //
-            content["eclipse_outputs"]["title"] = _pages["eclipse_outputs"]["title"];// "Panels in network";
-            content["eclipse_outputs"]["left"] = _pages["eclipse_outputs"]["left"];//"IRIS/divIRIS.html";
-            content["eclipse_outputs"]["right"] = _pages["eclipse_outputs"]["right"];//"IRIS/panels_in_network.html";
-            content["eclipse_outputs"]["breadcrumbs"] = _pages["eclipse_outputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_outputs"]["title"] = _pages["eclipse_outputs"]["title"];
+            content["eclipse_outputs"]["left"] = _pages["eclipse_outputs"]["left"];
+            content["eclipse_outputs"]["right"] = _pages["eclipse_outputs"]["right"];
+            content["eclipse_outputs"]["breadcrumbs"] = _pages["eclipse_outputs"]["breadcrumbs"];
             //
-            content["eclipse_timeslots"]["title"] = _pages["eclipse_timeslots"]["title"];// "Inputs";
-            content["eclipse_timeslots"]["left"] = _pages["eclipse_timeslots"]["left"];//"IRIS/divIRIS.html";
-            content["eclipse_timeslots"]["right"] = _pages["eclipse_timeslots"]["right"];//"IRIS/input.html";
-            content["eclipse_timeslots"]["breadcrumbs"] = _pages["eclipse_timeslots"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_timeslots"]["title"] = _pages["eclipse_timeslots"]["title"];
+            content["eclipse_timeslots"]["left"] = _pages["eclipse_timeslots"]["left"];
+            content["eclipse_timeslots"]["right"] = _pages["eclipse_timeslots"]["right"];
+            content["eclipse_timeslots"]["breadcrumbs"] = _pages["eclipse_timeslots"]["breadcrumbs"];
             //
-            content["eclipse_users"]["title"] = _pages["eclipse_users"]["title"];// "Input Groups";
-            content["eclipse_users"]["left"] = _pages["eclipse_users"]["left"];//"IRIS/divIRIS.html";
-            content["eclipse_users"]["right"] = _pages["eclipse_users"]["right"];//"IRIS/inputs_group.html";
-            content["eclipse_users"]["breadcrumbs"] = _pages["eclipse_users"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_users"]["title"] = _pages["eclipse_users"]["title"];
+            content["eclipse_users"]["left"] = _pages["eclipse_users"]["left"];
+            content["eclipse_users"]["right"] = _pages["eclipse_users"]["right"];
+            content["eclipse_users"]["breadcrumbs"] = _pages["eclipse_users"]["breadcrumbs"];
             //
-            content["eclipse_zones"]["title"] = _pages["eclipse_zones"]["title"];// "Output";
-            content["eclipse_zones"]["left"] = _pages["eclipse_zones"]["left"];//"IRIS/divIRIS.html";
-            content["eclipse_zones"]["right"] = _pages["eclipse_zones"]["right"];//"IRIS/output.html";
-            content["eclipse_zones"]["breadcrumbs"] = _pages["eclipse_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_zones"]["title"] = _pages["eclipse_zones"]["title"];
+            content["eclipse_zones"]["left"] = _pages["eclipse_zones"]["left"];
+            content["eclipse_zones"]["right"] = _pages["eclipse_zones"]["right"];
+            content["eclipse_zones"]["breadcrumbs"] = _pages["eclipse_zones"]["breadcrumbs"];
             //
-            content["eclipse_communicator"]["title"] = _pages["eclipse_communicator"]["title"];// "FAT FBF";
-            content["eclipse_communicator"]["left"] = _pages["eclipse_communicator"]["left"];//"IRIS/divIRIS.html";
-            content["eclipse_communicator"]["right"] = _pages["eclipse_communicator"]["right"];//"IRIS/fat-fbf.html";
-            content["eclipse_communicator"]["breadcrumbs"] = _pages["eclipse_communicator"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_communicator"]["title"] = _pages["eclipse_communicator"]["title"];
+            content["eclipse_communicator"]["left"] = _pages["eclipse_communicator"]["left"];
+            content["eclipse_communicator"]["right"] = _pages["eclipse_communicator"]["right"];
+            content["eclipse_communicator"]["breadcrumbs"] = _pages["eclipse_communicator"]["breadcrumbs"];
             //
-            content["eclipse_devices"]["title"] = _pages["eclipse_devices"]["title"];// "Zones";
-            content["eclipse_devices"]["left"] = _pages["eclipse_devices"]["left"];//"IRIS/divIRIS.html";
-            content["eclipse_devices"]["right"] = _pages["eclipse_devices"]["right"];//"IRIS/zone.html";
-            content["eclipse_devices"]["breadcrumbs"] = _pages["eclipse_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            content["eclipse_devices"]["title"] = _pages["eclipse_devices"]["title"];
+            content["eclipse_devices"]["left"] = _pages["eclipse_devices"]["left"];
+            content["eclipse_devices"]["right"] = _pages["eclipse_devices"]["right"];
+            content["eclipse_devices"]["breadcrumbs"] = _pages["eclipse_devices"]["breadcrumbs"];
         }
 
         private static void CreateMainGroups(JObject json)
         {
+            JObject ug = UniqueGroups((JObject)json["eclipse"]);
+            JObject combined = CombineUniqueGroups(ug, json);
+            json["eclipse"]["PROPERTIES"] = new JObject();
+            json["eclipse"]["PROPERTIES"]["CombinedFields"] = combined["Properties"];
+            json["eclipse"]["PROPERTIES"]["Groups"] = new JObject();
+            json["eclipse"]["PROPERTIES"]["Groups"]["Codes"] = new JObject();
+            json["eclipse"]["PROPERTIES"]["Groups"]["Codes"]["Name"] = "Codes";
+            json["eclipse"]["PROPERTIES"]["Groups"]["Codes"]["Fields"] = json["eclipse"]["PROPERTIES"]["CombinedFields"];
             //JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
             //JObject o = Array2Object(proparr);
             ////groups
@@ -243,6 +303,40 @@ namespace ljson
             //    json["ELEMENTS"]["iris_access_code"]["RULES"] = o;
         }
         #endregion
+
+        #region users
+        private static void CreateUsersGroups(JObject json)
+        {
+            //JArray proparr = (JArray)json["iris_access_code"]["PROPERTIES"]["PROPERTY"];
+            //JObject o = Array2Object(proparr);
+            //groups
+            //json["iris_access_code"]["PROPERTIES"]["Groups"] = new JObject();
+            ////
+            //JObject grp1 = new JObject();
+            //grp1["name"] = "Code 1";
+            //JObject f1 = new JObject();
+            //f1["Code1"] = o["Code1"];
+            //f1["Level1"] = o["Level1"];
+            //grp1["fields"] = f1;
+            //json["iris_access_code"]["PROPERTIES"]["Groups"]["Code1"] = grp1;
+            ////
+            //json["iris_access_code"]["PROPERTIES"]["OLD"] = o;
+        }
+
+        private static void ConvertUsers(JObject json, JObject _pages)
+        {
+            CreateUsersGroups((JObject)json["ELEMENTS"]);
+            JObject ac = (JObject)json["ELEMENTS"]["eclipse_users"];
+            ac["title"] = _pages["eclipse_users"]["title"];
+            ac["left"] = _pages["eclipse_users"]["left"];
+            ac["right"] = _pages["eclipse_users"]["right"];
+            ac["breadcrumbs"] = _pages["eclipse_users"]["breadcrumbs"];
+            //
+            //JObject o = cXml.Array2Object(json["ELEMENTS"]["iris_access_code"]["RULES"]["RULE"]);
+            //if (o != null)
+            //    json["ELEMENTS"]["iris_access_code"]["RULES"] = o;
+        }
+        #endregion
         public static string Convert(string json, JObject _pages)
         {
             JObject o = JObject.Parse(json);
@@ -294,6 +388,7 @@ namespace ljson
             //
             ConvertMainArraysLeft(o1);
             ConvertGenSettingsCode(o1, _pages);
+            ConvertUsers(o1, _pages);
             //
             return o1.ToString();
         }
