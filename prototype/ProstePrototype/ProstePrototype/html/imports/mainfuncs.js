@@ -376,7 +376,7 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
 }
 
 /////////////////////----- COMMON Funcs -----////////////////////////////////////////////
-const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '' }) => {
+const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '', value }) => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -388,6 +388,7 @@ const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderTe
                        ${ip ? `ip="yes"` : ""}
                        ${placeHolderText ? `placeholder="${placeHolderText}"` : (ip ? `placeholder = " 0 . 0 . 0 . 0 "` : "")} 
                        onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
+                       ${value ? `value="${value}"` : ""}
                        ${bytesData ? `bytes="${bytesData}"` : ""} 
                        ${lengthData ? `length="${lengthData}"` : ""} 
                        ${readOnly ? "disabled" : ''}/>
