@@ -11,56 +11,56 @@ const CONFIG_CONST = {
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Areas.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-object-group"
   },
   "eclipse_gen_settings": {
     "title": "Settings",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/General Settings.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-gear"
   },
   "eclipse_outputs": {
     "title": "Outputs",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Outputs.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-arrow-up-9-1"
   },
   "eclipse_timeslots": {
     "title": "Timeslots",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Timeslots.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-hourglass"
   },
   "eclipse_users": {
     "title": "Users",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Users.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-users"
   },
   "eclipse_zones": {
     "title": "Zones",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Zones.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-clone"
   },
   "eclipse_communicator": {
     "title": "Communicator",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Communicator.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-teamspeak"
   },
   "eclipse_devices": {
     "title": "Devices",
     "left": "ECLIPSE/divECLIPSE.html",
     "right": "ECLIPSE/Devices.html",
     "breadcrumbs": [ "index", "eclipse" ],
-    "picture": ""
+    "picture": "fa-tablet-screen-button"
   },
   "index": {
     "title": "Start",
@@ -179,34 +179,34 @@ const CONFIG_CONST = {
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/General Settings.html",
     "breadcrumbs": [ "index", "tte" ],
-    "picture": ""
+    "picture": "fa-gear"
   },
   "tte_phones": {
     "title": "Phones",
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Phones.html",
     "breadcrumbs": [ "index", "tte" ],
-    "picture": ""
+    "picture": "fa-phone"
   },
   "tte_inputs_outputs": {
     "title": "I/O",
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Input_Output.html",
     "breadcrumbs": [ "index", "tte" ],
-    "picture": ""
+    "picture": "fa-arrow-down-up-across-line"
   },
   "tte_mobile_operators": {
     "title": "Mobile operators",
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Mobile Operators.html",
     "breadcrumbs": [ "index", "tte" ],
-    "picture": ""
+    "picture": "fa-tower-broadcast"
   },
   "tte_receiver_settings": {
     "title": "Receiver settings",
     "left": "TTE GPRS/divTTE.html",
     "right": "TTE GPRS/Receiver Settings.html",
     "breadcrumbs": [ "index", "tte" ],
-    "picture": ""
+    "picture": "fa-gears"
   }
 }
