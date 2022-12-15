@@ -15,15 +15,6 @@ function undisable(value) {
     }
 }
 
-function checkHexRegex(event) {
-    let val = event.target.value;
-    let regEx = /^([0-9A-Fa-f]{1,2})$/;
-    let isHex = regEx.test(val);
-    if (!isHex) {
-        document.getElementById(event.target.id).value = val.slice(0, -1);
-    }
-}
-
 function clearInputType() {
     type = '';
     document.getElementsByName('labelName')[0].value = '';
@@ -64,19 +55,19 @@ function defineNewChildToInsert(type) {
 
     switch (type) {
         case 'ipInput':
-            return getTextInput(type, input_name, input_id, 15, placeHolderText, bytesData, lengthData, readOnly, true, true);
+            return getTextInput({ type, input_name, input_id, maxTextLength: 15, placeHolderText, bytesData, lengthData, readOnly, RmBtn: true, ip: true });
         case 'passInput':
         case 'textInput':
             let maxTextLength = document.getElementsByName('maxTextLength')[0].value || 'undefined';
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, true);
+            return getTextInput({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn: true });
 
         case 'checkboxInput':
-            return getCheckboxInput(input_name, input_id, bytesData, lengthData, readOnly, false, true);
+            return getCheckboxInput({ input_name, input_id, bytesData, lengthData, readOnly, checked: false, RmBtn: true });
 
         case 'sliderInput':
             let input_name_on = document.getElementsByName('inputNameOn')[0].value || 'ON';
             let input_name_off = document.getElementsByName('inputNameOff')[0].value || 'OFF';
-            return getSliderInput(input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, false, true);
+            return getSliderInput({ input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked: false, RmBtn: true });
 
         case 'selectInput':
             let selectList = document.getElementsByName('selectList')[0].value;
@@ -86,12 +77,12 @@ function defineNewChildToInsert(type) {
                     label: o.trim().charAt(0).toUpperCase() + o.trim().slice(1)
                 }
             });
-            return getSelectInput(input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, true);
+            return getSelectInput({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn: true });
 
         case 'numberInput':
             let max = document.getElementsByName('max')[0].value;
             let min = document.getElementsByName('min')[0].value;
-            return getNumberInput(input_name, input_id, max, min, bytesData, lengthData, readOnly, true);
+            return getNumberInput({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn: true });
 
         case 'tabInput':
             let tabs = document.getElementsByName('selectList')[0].value;
@@ -122,7 +113,7 @@ function defineNewChildToInsert(type) {
             tabStr += "</div>";
             return tabStr;
         case 'macInput':
-            return getEmacInput(input_id, input_name, readOnly, true);
+            return getEmacInput({ input_id, input_name, readOnly, RmBtn: true });
         default:
             return `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
         <div class="collapsible-content col-12">

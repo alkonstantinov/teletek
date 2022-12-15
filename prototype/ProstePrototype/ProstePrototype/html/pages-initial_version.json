@@ -74,7 +74,7 @@
   "iris_network": {
     "title": "Network",
     "left": "IRIS/divIRIS.html",
-    "right": "IRIS/network-dynamic.html",
+    "right": "IRIS/network.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_panels_in_network": {

@@ -16,47 +16,7 @@
 </head>
 
 <body>
-    <div id="divDevices">
-        <div class="row m2 no-gutter">
-            <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'iris'})"
-               onclick="javascript:addActive()" class="col-sm-2 minw">
-                <div class="btnStyle fire">
-                    <i class="fa-solid fa-house-fire fa-3x colored p15" aria-hidden="true">
-                        <br /><span class="someS">
-                            <span class="h5">Iris</span>
-                            USB
-                        </span>
-                    </i>
-                    
-                </div>
-            </a>
-            <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'eclipse'})"
-               onclick="javascript:addActive()" class="col-sm-2 minw">
-                <div class="btnStyle">
-                    <i class="fa fa-volume-up fa-3x colored p15" aria-hidden="true">
-                        <br /><span class="someS">
-                            <span class="h5">Eclipse</span>
-                            Com-3
-                        </span>
-                    </i>
-                    
-                </div>
-            </a>
-            <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'tte'})"
-               onclick="javascript:addActive()" class="col-sm-2 minw">
-                <div class="btnStyle grasse">
-                    <i class="fa fa-signal fa-3x colored p15" aria-hidden="true">
-                        <br /><span class="someS">
-                            <span class="h5">TTE GPRS</span>
-                            4G
-                        </span>
-                    </i>
-                    
-                </div>
-            </a>
-
-        </div>
-    </div>
+    
 
     <menu type="context" id="ctxMenu">
         <menuitem title="Read" onclick="javascript: sendMsg(this)" icon=""><i class="fa-solid fa-book-open pr-1"></i></menuitem>
@@ -81,6 +41,7 @@
             //$("#olBC").empty();
             //bc.split('|').forEach(x => $("#olBC").append($("<li class='breadcrumb-item active' aria-current='page'>" + x + "</li>")));
         }
+
     </script>
 </body>
 

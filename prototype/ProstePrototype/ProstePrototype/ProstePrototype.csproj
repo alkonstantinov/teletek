@@ -214,6 +214,15 @@
     <None Update="html\imports\webfonts\fa-v4compatibility.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\IRIS\IRISPanel-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\menu-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\index-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\IRISdyn.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -241,7 +250,10 @@
     <None Update="html\imports\mainfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-dynamic.json">
+    <None Update="html\pages-initial_version.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\pages-dynamic.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\pages.json">

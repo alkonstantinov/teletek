@@ -73,3 +73,5 @@ NewTeletekSW/bin
 /prototype/ProstePrototype/ljson/obj/project.assets.json
 /prototype/ProstePrototype/ljson/obj/project.nuget.cache
 /teletekWPF/obj/Release/net6.0-windows
+*.cache
+*.props

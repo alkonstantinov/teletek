@@ -1,65 +1,177 @@
-﻿let darkModeStylesheetId = "ssDarkMode";
-function sendMessageWPF(json) {
-    CefSharp.PostMessage(JSON.stringify(json));
+﻿try {
+    boundAsync.showMessage("me").then(text => alert(text));
+} catch (e) {
+    alert(e);
+}
+
+let darkModeStylesheetId = "ssDarkMode";
+function sendMessageWPF(json, comm = {}) {
+    if (Object.keys(comm).length > 0) {
+        try {
+            eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
+        } catch (e) {
+            console.log('error', e);
+        }
+    }
+    //alert(JSON.stringify(json));
+    try {
+        CefSharp.PostMessage(JSON.stringify(json));
+    } catch (e) { console.log('CefSharp error', e); }
 }
 
 function receiveMessageWPF(jsonTxt) {
-    //var json = JSON.parse(jsonTxt);
+    var json = JSON.parse(jsonTxt);
+    if (Object.keys(json) === 0) return; // guard for empty json
 
-    // setting the body element
-    let body = document.getElementById('divMain');
-    if (body.firstElementChild.tagName === 'FIELDSET') {
-        body = body.firstElementChild;
-    }
-    // getting keys and creating element for each
-    keys = Object.keys(json);
-    keys.forEach(k => {
-        let divLevel = json[k];
-        if (k.includes('~')) {
-            let div = document.createElement('div');
-            div.classList = "row align-items-center m-2";                    
-
-            elementsCreationHandler(div, divLevel);
-                    
-            body.appendChild(div);
-        } else {
-            const { input_name, input_id } = {
-                input_name: divLevel.name,
-                input_id: divLevel.name.toLowerCase().replaceAll(' ', '_')
+    let body; // Main, Devices, Menu
+    switch (true) {
+        case !!document.getElementById('divMain'): // setting the body element
+            //alert('divMain')
+            body = document.getElementById('divMain');
+            if (body.firstElementChild?.tagName === 'FIELDSET') {
+                body = body.firstElementChild;
             }
-            var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+            // getting keys and creating element for each
+            keys = Object.keys(json);
+            
+            keys.filter(k => k !== '~path').forEach(k => {
+                let divLevel = json[k];
+
+                if (k.includes('~')) { // ~noname cases
+                    let div = document.createElement('div');
+                    div.classList = "row align-items-center m-2";
+                    elementsCreationHandler(div, divLevel);
+
+                    body.appendChild(div);
+                } else if (divLevel.name === "Company Info") { // unique case "Company Info"
+                    let fieldset = document.createElement('fieldset');
+                    var insideRows = `<legend>${divLevel.name}</legend>`;
+                    for (field in divLevel.fields) {
+                        if (field.includes("~")) continue;
+                        let pl = divLevel.fields[field]["@TEXT"];
+                        let id = pl.replaceAll(" ", "_");
+                        let m = divLevel.fields[field]["@LENGTH"];
+                        insideRows += `<div class="form-item p0">
+                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}">
+                        </div>`
+                    }
+                    fieldset.insertAdjacentHTML('afterbegin', insideRows);
+                    body.appendChild(fieldset);
+                } else { // collapsoble parts
+                    const { input_name, input_id } = {
+                        input_name: divLevel.name,
+                        input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
+                    }
+                    var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
                 <div class="collapsible-content col-12">
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
-            body.insertAdjacentHTML('beforeend', inside);
-                    
-            let div = body.querySelector(`#${input_id}`);
-            elementsCreationHandler(div, divLevel.fields);
-                   
-            collapsible(`collapsible_${input_id}`)
+                    body.insertAdjacentHTML('beforeend', inside);
+                    console.log('clean data', input_id)
+                    let div = body.querySelector(`#${input_id}`);
+                    elementsCreationHandler(div, divLevel.fields);
+
+                    collapsible(`collapsible_${input_id}`)
+                }
+            });
+            break;
+        case !!document.getElementById('divDevices'):
+            //alert('divDevices')
+            body = document.getElementById('divDevices');
+            let divD = document.createElement('div');
+            divD.classList = "row m2 no-gutter";
+            devices = json["pageName"]["wb2"];
+            for (let i = 0; i < devices.length; i++) {
+                const src = "pages-dynamic.js";
+                if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
+                    loadScript(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), src);
+                } else {
+                    window.setTimeout(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), 50);
+                }
+                body.appendChild(divD);
+            }
+            break;
+        default:
+            // case divIRIS, divTTE, divECLIPSE
+            //alert('default')
+            body = document.body;
+            let div = document.createElement('div');
+            div.classList = "row m2 no-gutter";
+
+            elementsCreationHandler(div, json, reverse = false);
+
+            body.appendChild(div);
+            
+            break;
+    }
+    pagePreparation();
+}
+
+// creating elements on div level
+const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
+    if (!jsonAtLevel) return;
+    var elementKeys = Object.keys(jsonAtLevel);
+    const pathStr = "~path";
+    let cleanKeys = elementKeys.filter(x => x !== pathStr);
+    
+    if (reverse)
+        cleanKeys = cleanKeys.reverse();
+    cleanKeys.forEach(field => {
+        // guard for null value of jsonAtLevel[field]
+        if (jsonAtLevel[field] && jsonAtLevel[field]['@TYPE']) {
+            if (jsonAtLevel[field]['@TYPE'] === "AND") {
+                elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
+                return;
+            }
+
+            const innerString = transformGroupElement(jsonAtLevel[field]);
+            if (jsonAtLevel[field]['@TYPE'] === "WEEK") {
+                div.parentNode.parentNode.insertAdjacentHTML('beforeend', innerString);
+                return;
+            }
+            const newElement = document.createElement('div');
+            let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
+            newElement.classList = className;
+            newElement.innerHTML = innerString;
+            div.appendChild(newElement);
+        } else if (jsonAtLevel[field] && jsonAtLevel[field].title) {
+            let title = jsonAtLevel[field].title;
+            const src = "pages-dynamic.js";
+            if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
+                loadScript(() => addButton(title, field, div), src);
+            } else {
+                window.setTimeout(() => addButton(title, field, div), 50);
+            }
         }
     });
 }
 
-// creating elements on div level
-const elementsCreationHandler = (div, jsonAtLevel) => {
-    var elementKeys = Object.keys(jsonAtLevel);
-    elementKeys.forEach(field => {
-        const innerString = transformGroupElement(jsonAtLevel[field]);
-        const newElement = document.createElement('div');
-        let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
-        newElement.classList = className;
-        newElement.innerHTML = innerString;
-        div.appendChild(newElement);
-    });
-}
+const addButton = (title, fieldKey, div, localJSON = {}) => {
+    let indexFlag = Object.keys(localJSON).length > 0;
+    let color = indexFlag ? localJSON.deviceType : "";
+    if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
+    else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
+
+    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? ", 'Highlight':'${fieldKey}'" : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
+                <div class="btnStyle ${color}">
+                    <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
+                        <br /><span class="someS">
+                            <span class="h5">
+                                ${title}
+                            </span>
+                            ${indexFlag ? localJSON.interface : ""}
+                        </span>
+                    </i>
+                </div>
+            </a>`;
+    div.insertAdjacentHTML('beforeend', el);
+};
 
 // transforming object function
 const transformGroupElement = (elementJson) => {
-    
-    let { type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked } = {
+    let attributes = {
         type: elementJson['@TYPE'],
-        input_name: elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: elementJson['@ID'] ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -67,43 +179,48 @@ const transformGroupElement = (elementJson) => {
         placeHolderText: elementJson['@PLACEHOLDER'],
         bytesData: elementJson['@BYTE'],
         lengthData: elementJson['@LEN'],
-        readOnly: !!elementJson['@READONLY'],
+        readOnly: !!(+elementJson['@READONLY']),
         input_name_on: elementJson['@YESVAL'],
         input_name_off: elementJson['@NOVAL'],
-        checked: elementJson['@CHECKED']
+        checked: !!(+elementJson['@CHECKED']),
+        path: elementJson['~path'],
+        value: elementJson['@VALUE'],
     };
-    console.log('ttt', type, input_name, input_id, max, min, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, input_name_on, input_name_off, checked)
-    switch (type) {
+
+    switch (attributes.type) {
         case 'INT':
-            return getNumberInput(input_name, input_id, max, min, bytesData, lengthData, readOnly);
+            return getNumberInput({ ...attributes });
 
         case 'TEXT':
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly);
+            return getTextInput({ ...attributes });
 
         case 'SLIDER':
-            if (/\bon\b/i.test(input_name)) {
-                input_name_on = 'ON';
-                input_name_off = 'OFF';
-                input_name = input_name.replace(/\bon\b/ig, "").trim();
+            if (/\bon\b/i.test(attributes.input_name)) {
+                attributes.input_name = attributes.input_name.replace(/\bon\b/ig, "").trim();
             }
-            if (input_name.toLowerCase().includes('enable')) {
-                input_name = '';
-                input_name_on = 'Enabled';
-                input_name_off = 'Disabled';
+            if (attributes.input_name.toLowerCase().includes('enable')) {
+                attributes.input_name = '';
+                attributes.input_name_on = 'Enabled';
+                attributes.input_name_off = 'Disabled';
+            } else {
+                attributes.input_name_on = 'ON';
+                attributes.input_name_off = 'OFF';
             }
-            return getSliderInput(input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false);
+            return getSliderInput({ ...attributes });
 
         case 'CHECK':
-            return getCheckboxInput(input_name, input_id, bytesData, lengthData, readOnly, checked = false);
+            return getCheckboxInput({ ...attributes });
 
         case 'LIST':
-            let selectList = elementJson.ITEMS.ITEM.map(o => {
+            attributes.selectList = elementJson.ITEMS.ITEM.map(o => {
                 return {
                     value: o['@VALUE'],
                     label: o['@NAME'],
+                    selected: !!(+o['@DEFAULT']),
+                    link: o['ScheduleKey'],
                 };
             });
-            return getSelectInput(input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly)
+            return getSelectInput({ ...attributes })
 
         case 'IP':
             src = "../imports/jquery.inputmask.min.js";
@@ -111,9 +228,13 @@ const transformGroupElement = (elementJson) => {
             if (!found_in_script_tags) {
                 loadScript(() => ipMaskActivation());
             }
-            return getTextInput(type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, false, ip = true);
+            attributes.ip = true;
+            return getTextInput({ ...attributes });
         case 'EMAC':
-            return getEmacInput(input_id, input_name, readOnly);
+            return getEmacInput({ ...attributes });
+        case 'WEEK':
+            attributes.input_id = attributes.input_name.replaceAll(' ', '');
+            return getWeekInput({ ...attributes });
         default: break;
     }
 }
@@ -177,19 +298,32 @@ function sendMsg(el) {
 }
 // finish of the contextMenu part
 
-$(document).ready(() => {
-    addVisitedBackground();
-    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-    let searchParams = new URLSearchParams(window.location.search)
-    // position the selected btn and selecting it
-    if (searchParams.has('highlight')) {
-        elem = document.getElementById(searchParams.get('highlight')).children[0];
-        if (elem) {
-            $(elem).addClass('active');
+const pagePreparation = () => {
+    $(document).ready(() => {
+        addVisitedBackground();
+        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+
+        let searchParams = new URLSearchParams(window.location.search)
+        // position the selected btn and selecting it
+        if (searchParams.has('highlight')) {
+            elem = document.getElementById(searchParams.get('highlight')).children[0];
+            if (elem) {
+                $(elem).addClass('active');
+            }
+            elem.scrollIntoView({ behavior: 'auto', block: 'center' });
         }
-        elem.scrollIntoView({ behavior: 'auto', block: 'center' });
+    });
+}
+pagePreparation();
+// checking a hex value function
+function checkHexRegex(event) {
+    let val = event.target.value;
+    let regEx = /^([0-9A-Fa-f]{1,2})$/;
+    let isHex = regEx.test(val);
+    if (!isHex) {
+        document.getElementById(event.target.id).value = val.slice(0, -1);
     }
-});
+}
 
 // activate dark mode
 function toggleDarkMode(show, filename) {
@@ -242,7 +376,7 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
 }
 
 /////////////////////----- COMMON Funcs -----////////////////////////////////////////////
-const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false) => {
+const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '', value }) => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -253,14 +387,15 @@ const getTextInput = (type, input_name, input_id, maxTextLength, placeHolderText
                        ${maxTextLength ? `maxlength="${maxTextLength}"` : (ip ? `maxlength = "15"` : "")}
                        ${ip ? `ip="yes"` : ""}
                        ${placeHolderText ? `placeholder="${placeHolderText}"` : (ip ? `placeholder = " 0 . 0 . 0 . 0 "` : "")} 
-                       onblur="javascript: alert(this.value)"
+                       onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
+                       ${value ? `value="${value}"` : ""}
                        ${bytesData ? `bytes="${bytesData}"` : ""} 
                        ${lengthData ? `length="${lengthData}"` : ""} 
                        ${readOnly ? "disabled" : ''}/>
             </div>`
 }
 
-const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false) => {
+const getCheckboxInput = ({ input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -270,24 +405,26 @@ const getCheckboxInput = (input_name, input_id, bytesData, lengthData, readOnly,
                     ${bytesData ? `bytes="${bytesData}"` : ""} 
                     ${lengthData ? `length="${lengthData}"` : ""} 
                     ${readOnly ? "disabled" : ''}
-                    ${checked ? "checked" : ''} />
+                    ${checked ? "checked" : ''}
+                    onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" />
             </div>`
 }
 
-const getSliderInput = (input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false) => {
+const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     return `<div class="form-item roww fire">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
                 ${input_name && `<label for="${input_id}">${input_name}</label>`}
-                <p class="fire bordered">
+                <p class="fire${input_name ? ' bordered' : ''}">
                     ${input_name_off}
                     <label class="switch">
                         <input type="checkbox" id="${input_id}" name="${input_id}" 
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
-                            ${checked ? "checked" : ''} />
+                            ${checked ? "checked" : ''} 
+                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"/>
                         <span class="slider"></span>
                     </label>
                     ${input_name_on}
@@ -295,7 +432,8 @@ const getSliderInput = (input_name, input_name_off, input_name_on, input_id, byt
             </div>`
 }
 
-const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false) => {
+const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path = "" }) => {
+    let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let str = `<div class="form-item roww mt-1">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -305,14 +443,21 @@ const getSelectInput = (input_name, input_id, selectList, placeHolderText, bytes
                         <select id="${input_id}" name="${input_id}"
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
-                            ${readOnly ? "disabled" : ''} >
-                            <option value="" disabled selected>${placeHolderText || "Select your option"}</option>`;
-    if (selectList.length > 0) selectList.map(o => str += `<option value="${o.value}">${o.label}</option>`);
+                            ${readOnly ? "disabled" : ''} 
+                            onchange="javascript:sendMessageWPF(
+                                {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
+                                ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""}
+                            )" >`;
+    if (selectList.length > 0) {
+        let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
+        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || "Select your option"}</option>`;
+        selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
+    }
     str += `</select></div></div>`
     return str;
 }
 
-const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false) => {
+const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "", value }) => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -324,27 +469,29 @@ const getNumberInput = (input_name, input_id, max, min, bytesData, lengthData, r
                         name="${input_id}"
                         ${max ? `data-maxlength="${`${max}`.length}"` : ""}
                         oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
-                        onblur="javascript: myFunction2(this.id)""
+                        onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
                         ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
+                        ${value ? `value="${value}"` : ""}
                         ${bytesData ? `bytes="${bytesData}"` : ""} 
                         ${lengthData ? `length="${lengthData}"` : ""} 
                         ${readOnly ? "disabled" : ''} />
             </div>`;
 }
 
-const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
+const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = "" }) => {
     return `<div class="form-item roww" macInput>
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
                 <label for="${input_id}">${input_name}</label>
-                <div class="row m0" id="${input_id}">
+                <div class="row m0" id="${input_id}" >
                     <input class="col-1 mr-1"
                             type="text"
                             id="${input_id}0"
                             name="${input_id}0"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input class="col-1 mr-1"
@@ -353,6 +500,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}1"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -361,6 +509,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}2"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -369,6 +518,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}3"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -377,6 +527,7 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}4"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -385,7 +536,238 @@ const getEmacInput = (input_id, input_name, readOnly, RmBtn = false) => {
                             name="${input_id}5"
                             placeholder="00" ${readOnly ? "disabled" : ''}
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                 </div>
             </div>`;
+}
+
+const getWeekInput = ({ input_id, input_name, readOnly, RmBtn = false, path = "" }) => {
+    return `<div style="display: none" id="${input_id}-schedule">
+            <fieldset>
+                <legend>${input_name}</legend>
+                <div class="row">
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Monday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-m-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-m-${input_id}"
+                                   name="activate-m-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-m-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-m-${input_id}"
+                                   name="deactivate-m-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thuesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-t-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-t-${input_id}"
+                                   name="activate-t-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-t-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-t-${input_id}"
+                                   name="deactivate-t-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Wednesday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-w-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-w-${input_id}"
+                                   name="activate-w-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-w-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-w-${input_id}"
+                                   name="deactivate-w-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
+                        <legend>Thursday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-th-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-th-${input_id}"
+                                   name="activate-th-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-th-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-th-${input_id}"
+                                   name="deactivate-th-${input_id}"
+                                   data-maxlength="5"
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Friday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-f-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-f-${input_id}"
+                                   name="activate-f-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-f-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-f-${input_id}"
+                                   name="deactivate-f-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Saturday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-s-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-s-${input_id}"
+                                   name="activate-s-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-s-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-s-${input_id}"
+                                   name="deactivate-s-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
+                        <legend>Sunday</legend>
+                        <div class="form-item roww mw">
+                            <label for="activate-su-${input_id}">Activate</label>
+                            <input class="ml10p"
+                                   type="text"
+                                   id="activate-su-${input_id}"
+                                   name="activate-su-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                        <div class="form-item roww mw">
+                            <label for="deactivate-su-${input_id}">Deactivate</label>
+                            <input class="ml10"
+                                   type="text"
+                                   id="deactivate-su-${input_id}"
+                                   name="deactivate-su-${input_id}"
+                                   data-maxlength="5"
+                                   ${readOnly ? "disabled" : ''}
+                                   oninput="javascript: myFunction3(this.id)"
+                                   placeholder="00:00" />
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+        </div>`
+}
+
+/////////////////////----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
+
+function myFunction(id) {
+    var element = document.getElementById(id);
+    element.value = element.value.slice(0, element.dataset.maxlength);
+}
+function myFunction2(id) {
+    var element = document.getElementById(id);
+    if (+element.value > +element.max) {
+        element.value = element.max;
+    }
+}
+function myFunction3(id) {
+    var element = document.getElementById(id);
+    let len = element.value.length;
+    let regex;
+    if (len < 2) {
+        regex = new RegExp("^([0-1]?[0-9]|2[0-3]):?");
+    }
+    else if (!element.value.includes(":")) {
+        element.value += ":";
+        regex = new RegExp("^([0-1]?[0-9]|2[0-3]):([0-5][0-9]?)?$");
+    } else {
+        regex = new RegExp("^([0-1]?[0-9]|2[0-3]):([0-5][0-9]?)?$");
+    }
+    if (!regex.test(element.value)) {
+        if (element.value.includes(":") && len == 2) element.value = element.value.slice(0, -2);
+        else element.value = element.value.slice(0, -1);
+    }
+}
+
+function changeStyleDisplay(goToId, id) {
+    var val = document.getElementById(id).value;
+    var divId = goToId + "-schedule";
+    var element = document.getElementById(divId);
+    if (val === "2") {
+        if (element.style.display === "block") {
+            element.style.display = "none";
+        } else {
+            element.style.display = "block";
+        }
+    } else {
+        element.style.display = "none";
+    }
 }

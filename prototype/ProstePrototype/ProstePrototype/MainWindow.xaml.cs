@@ -42,10 +42,14 @@ namespace ProstePrototype
             public string JSfunc { get; set; }
             public string Params { get; set; }
         }
+        private CallbackObjectForJs _callBackObjectForJs;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _callBackObjectForJs = new CallbackObjectForJs();
+            
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
             //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
             #region temporary params
@@ -71,8 +75,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
 
             //wb0.Load("file:///" + navigation);
-            //pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
-            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages-dynamic.json")));
+            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
             DataContext = this;
 
             DarkMode = false;
@@ -81,6 +84,11 @@ namespace ProstePrototype
             wb2.Tag = new BrowserParams { Name = "wb2", JSfunc = "receiveMessageWPF" };
             wb1.LoadingStateChanged += OnStateChanged;
             wb2.LoadingStateChanged += OnStateChanged;
+
+            wb1.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            wb1.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
+            wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
         }
 
 
@@ -362,6 +370,7 @@ namespace ProstePrototype
         }
         private void Send_JSCommand(ChromiumWebBrowser browser, string jsonTxt, string jsFuncName = "receiveMessageWPF")
         {
+            File.WriteAllTextAsync("WriteText.json", browser.Name + jsonTxt);
             browser.ExecuteScriptAsync(jsFuncName, new object[] { jsonTxt });
         }
         #endregion
@@ -427,12 +436,13 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
-            string index = "index.html";
+            //string index = "index.html";
+            string index = "index-automatic.html";
             if ((bool)c)
             {
                 string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
                 string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
-
+                
                 wb1.Load("file:///" + firstFile);
 
                 if (myFile == firstFile)
