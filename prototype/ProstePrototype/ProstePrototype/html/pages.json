@@ -80,7 +80,7 @@
   "iris_panels_in_network": {
     "title": "Panels in network",
     "left": "menu-automatic.html",
-    "right": "IRIS/panels_in_network.html",
+    "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_inputs": {

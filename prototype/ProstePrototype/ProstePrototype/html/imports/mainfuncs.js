@@ -1,14 +1,24 @@
-﻿try {
-    boundAsync.showMessage("me").then(text => alert(text));
-} catch (e) {
-    alert(e);
-}
+﻿//try {
+//    boundAsync.showMessage("me").then(text => alert(text));
+//} catch (e) {
+//    alert(e);
+//}
 
 let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
         try {
-            eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
+            switch (comm['funcName']) {
+                case 'changeStyleDisplay':
+                    eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
+                    break;
+                case 'addElement':                    
+                    eval(`${comm['funcName']}("${comm['params']['id']}", "${ comm['params']['elementType']}")`);
+                    break;
+                default:
+                    eval(`${comm['funcName']}("${comm['params']}")`);
+                    break;
+            }
         } catch (e) {
             console.log('error', e);
         }
@@ -36,7 +46,7 @@ function receiveMessageWPF(jsonTxt) {
             
             keys.filter(k => k !== '~path').forEach(k => {
                 let divLevel = json[k];
-
+                
                 if (k.includes('~')) { // ~noname cases
                     let div = document.createElement('div');
                     div.classList = "row align-items-center m-2";
@@ -57,7 +67,21 @@ function receiveMessageWPF(jsonTxt) {
                     }
                     fieldset.insertAdjacentHTML('afterbegin', insideRows);
                     body.appendChild(fieldset);
-                } else { // collapsoble parts
+                } else if (!divLevel["@TYPE"] && !divLevel.name) {
+                    for (let i = 0; i < divLevel["@MIN"]; i++) lst.push(i + 1);
+                    elements = divLevel["@MAX"] && divLevel["@MAX"];
+                    console.log('divLevel', divLevel, 'k', k, 'lst', lst, 'elements', elements);
+                    let btnDiv = document.getElementById("buttons");
+                    // adding the button
+                    btnDiv.insertAdjacentHTML(
+                        'afterbegin',
+                        `<button style="display: inline-flex;" 
+                            type="button"
+                            onclick="javascript:addElement('element', '${k}')" 
+                            id="_btn" class="btn-round btn-border-black">
+                            <i class="fa-solid fa-plus 5x"></i> Add New ${k.split('_')[1]}
+                        </button>`);
+                } else { // collapsible parts
                     const { input_name, input_id } = {
                         input_name: divLevel.name,
                         input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
@@ -93,7 +117,7 @@ function receiveMessageWPF(jsonTxt) {
             break;
         default:
             // case divIRIS, divTTE, divECLIPSE
-            //alert('default')
+            /*alert('default')*/
             body = document.body;
             let div = document.createElement('div');
             div.classList = "row m2 no-gutter";
@@ -230,11 +254,14 @@ const transformGroupElement = (elementJson) => {
             }
             attributes.ip = true;
             return getTextInput({ ...attributes });
+
         case 'EMAC':
             return getEmacInput({ ...attributes });
+
         case 'WEEK':
             attributes.input_id = attributes.input_name.replaceAll(' ', '');
             return getWeekInput({ ...attributes });
+
         default: break;
     }
 }
@@ -769,5 +796,208 @@ function changeStyleDisplay(goToId, id) {
         }
     } else {
         element.style.display = "none";
+    }
+}
+
+function addActive() {
+    $(document).on('click', '.btnStyle', function () {
+        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
+        $(this).addClass('active');// here apply selected class on clicked btnStyle fire
+    });
+}
+
+// adding button elements function
+function addElement(id, elementType = "") {
+    if (id === "element") {
+        var last = 0;
+        for (i = 1; i <= elements; i++) {
+            if (lst.includes(i)) {
+                continue;
+            } else {
+                last = i;
+                break;
+            }
+        }
+        if (last === 0 || lst.includes(last)) return;
+
+        sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
+        const newUserElement = `<div class="col-12" id=${last}>
+                                            <div class="row">
+                                                <div class="col-11 pr-1">
+                                                    <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
+                                                        <div class="btnStyle fire">
+                                                            <i class="fa-solid fa-display fa-3x p15">
+                                                                <br /><span class="someS">
+                                                                    <span class="h5">
+                                                                       Panel ${last}
+                                                                    </span>
+                                                                </span>
+                                                            </i>
+                                                            
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                                                    <i class="fa-solid fa-xmark fire"></i>
+                                                </div>
+                                            </div>
+                                        </div>`;
+        var element = document.getElementById("new");
+        var new_inner = `
+                            ${element.innerHTML}
+                            ${newUserElement}
+                        `;
+        lst.push(last);
+        element.innerHTML = new_inner;
+
+        // reordering
+        var main = document.getElementById('new');
+
+        [].map.call(main.children, Object).sort(function (a, b) {
+            return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+        }).forEach(function (elem) {
+            main.appendChild(elem);
+        });
+
+        // button display check
+        if (lst.length === elements) {
+            let button = document.getElementById("_btn");
+            button.style.display = "none";
+        }
+    } else {
+        if (lst.includes(+id)) {
+            var elem = document.getElementById(`${id}`);
+            elem.parentNode.removeChild(elem);
+            lst = lst.filter(function (item) {
+                return item !== +id
+            })
+            var el = document.getElementById(`id_${id}`);
+            if (el) el.parentNode.removeChild(el);
+
+            let button = document.getElementById("_btn");
+            if (lst.length < element && button.style.display === "none") {
+                button.style.display = "block";
+            }
+        } else {
+            return;
+        }
+    }
+}
+
+// showing element function
+function showElement(id, elementType) {
+    let returnedJson;
+    try {
+        boundAsync.getJsonForElement(elementType, +id).then(res => {
+            if (res.length > 0) {
+                returnedJson = JSON.parse(res);
+                if (Object.keys(returnedJson).length > 0) {
+                    var el = document.getElementById("selected_area");
+                    id = parseInt(id);
+                    var target = `<fieldset id="id_${id}">
+                                        <legend>Panel ${id}</legend>
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <div class="form-item roww flex">
+                                                        <label for="panelip_${id}">Panel IP</label>
+                                                        <input type="text"
+                                                                id="panelip_${id}"
+                                                                name="panelip_${id}"
+                                                                minlength="7"
+                                                                maxlength="15"
+                                                                size="15"
+                                                                pattern="^(\s*(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*\.){3}(\s*\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*$"
+                                                                value=" 0 . 0 . 0 . 0 " />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button class="fire collapsible ml-1">Parameters</button>
+                                            <div class="collapsible-content fire">
+                                                <div class="row align-items-center m-1">
+                                                    <div class="col-6">
+                                                        <div class="form-item roww disabled">
+                                                            <label for="state_${id}">State</label>
+                                                            <div class="select">
+                                                                <select id="state_${id}" name="state">
+                                                                    <option value="loc">Normal</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <div class="form-item roww disabled">
+                                                            <label for="status_${id}">Status</label>
+                                                            <div class="select">
+                                                                <select id="status_${id}" name="status">
+                                                                    <option value="loc">none</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row align-items-center m-1">
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="receive_msg_${id}">Receive messages</label>
+                                                            <input type="checkbox" id="receive_msg_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="receive_cmd_${id}">Receive commands</label>
+                                                            <input type="checkbox" id="receive_cmd_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="send_commands_${id}">Send commands</label>
+                                                            <input type="checkbox" id="send_commands_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <button class="fire collapsible ml-1">Panel Outputs</button>
+                                            <div class="collapsible-content fire">
+                                                <div class="row align-items-center m-1">
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="r_sounder_${id}">Repeat sounder</label>
+                                                            <input type="checkbox" id="r_sounder_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="r_fire_brigade_${id}">Repeat Fire bigrade</label>
+                                                            <input type="checkbox" id="r_fire_brigade_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="r_fault_output_${id}">Repeat Fault output</label>
+                                                            <input type="checkbox" id="r_fault_output_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-item roww">
+                                                            <label for="r_fire_protection_${id}">Repeat Fire protection</label>
+                                                            <input type="checkbox" id="r_fire_protection_${id}" class="ml10" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>`;
+                    el.innerHTML = target;
+                    collapsible();
+                    addVisitedBackground();
+                }
+            }
+        })
+    } catch (e) {
+        console.log('Error', e);
     }
 }
