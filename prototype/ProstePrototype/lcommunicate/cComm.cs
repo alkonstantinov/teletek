@@ -27,7 +27,7 @@ namespace lcommunicate
         /// Dictionary с ключ ID на панел и съдържание Dictionary<~path, value>
         /// </summary>
         private static Dictionary<string, Dictionary<string, string>> _cache_panels;
-        private static object _cs_cache;
+        private static object _cs_cache = new object();
 
         public static void SetPathValue(string panel_id, string path, string value)
         {

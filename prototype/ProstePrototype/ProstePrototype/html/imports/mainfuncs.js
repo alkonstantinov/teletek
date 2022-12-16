@@ -1,8 +1,8 @@
-﻿try {
-    boundAsync.showMessage("me").then(text => alert(text));
-} catch (e) {
-    alert(e);
-}
+﻿//try {
+//    boundAsync.showMessage("me").then(text => alert(text));
+//} catch (e) {
+//    alert(e);
+//}
 
 let darkModeStylesheetId = "ssDarkMode";
 function sendMessageWPF(json, comm = {}) {
