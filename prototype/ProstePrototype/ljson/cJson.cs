@@ -20,6 +20,8 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
+using System.Printing;
+using lcommunicate;
 
 namespace ljson
 {
@@ -285,6 +287,91 @@ namespace ljson
             s = _last_html_right;
             Monitor.Exit(_cs_html_right);
             return (s != null) ? s : "";
+        }
+
+        public static JObject ChangeGroupsElementsPath(JObject groups, string idx)
+        {
+            JObject res = new JObject(groups);
+            foreach (JProperty pgrp in (JToken)res)
+                if (pgrp.Value.Type == JTokenType.Object)
+                {
+                    JObject grp = (JObject)pgrp.Value;
+                    JObject fields = (JObject)grp["fields"];
+                    if (fields == null)
+                    {
+                        foreach (JProperty nnp in (JToken)grp)
+                        {
+                            if (nnp.Value.Type != JTokenType.Object)
+                                continue;
+                            JObject nnf = (JObject)nnp.Value;
+                            if (nnf != null)
+                                nnf["~path"] += ".~index~" + idx;
+                        }
+                        continue;
+                    }
+                    foreach (JProperty fprop in (JToken)fields)
+                    {
+                        if (fprop.Value.Type != JTokenType.Object)
+                            continue;
+                        JObject oprop = (JObject)fprop.Value;
+                        oprop["~path"] += ".~index~" + idx;
+                    }
+                }
+            //
+            return res;
+        }
+
+        private static void ObjectsWithPath(JObject root, List<JObject> lst)
+        {
+            if (root == null || lst == null)
+                return;
+            foreach (JToken t in (JToken)root)
+            {
+                if (t.Type == JTokenType.Object)
+                {
+                    string path = ((JObject)t)["~path"].ToString();
+                    if (path != null)
+                        lst.Add((JObject)t);
+                    ObjectsWithPath((JObject)t, lst);
+                }
+                else if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
+                {
+                    JProperty p = (JProperty)t;
+                    JObject o = (JObject)p.Value;
+                    ObjectsWithPath(o, lst);
+                }
+                else if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.String)
+                {
+                    JProperty p = (JProperty)t;
+                    if (p.Name == "~path" && p.Parent.Type == JTokenType.Object)
+                        lst.Add((JObject)p.Parent);
+                }
+                else
+                {
+                    string s = "";
+                }
+            }
+        }
+
+        public static JObject GroupsWithValues(JObject grp)
+        {
+            List<JObject> lst = new List<JObject>();
+            JObject res = new JObject(grp);
+            ObjectsWithPath(res, lst);
+            string panel_id = CurrentPanelID;
+            foreach (JObject o in lst)
+            {
+                string path = o["~path"].ToString();
+                string val = cComm.GetPathValue(panel_id, path);
+                if (val != null)
+                    o["~value"] = val;
+            }
+            return res;
+        }
+
+        public static JObject GroupsWithValues(string grp)
+        {
+            return GroupsWithValues(JObject.Parse(grp));
         }
     }
 }

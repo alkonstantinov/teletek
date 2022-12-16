@@ -8,6 +8,7 @@ using ProstePrototype.POCO;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -49,7 +50,7 @@ namespace ProstePrototype
             InitializeComponent();
 
             _callBackObjectForJs = new CallbackObjectForJs();
-            
+
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
             //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
             #region temporary params
@@ -273,6 +274,16 @@ namespace ProstePrototype
                 case "changedValue":
                     cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
                     break;
+                case "AddingElement":
+                    string elementType = json["Params"]["elementType"].ToString();
+                    elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
+                    string elementNumber = json["Params"]["elementNumber"].ToString();
+                    JObject el = cJson.GetNode(elementType);
+                    el = (JObject)el["PROPERTIES"]["Groups"];
+                    JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
+                    string _template = newpaths.ToString();
+                    cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
+                    break;
             }
         }
 
@@ -283,7 +294,14 @@ namespace ProstePrototype
             //    RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
             //    LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
             //};
-            JObject jnode = cJson.GetNode(page);
+            JObject jnode = new JObject(cJson.GetNode(page));
+            JToken t = jnode["PROPERTIES"];
+            if (t != null)
+            {
+                t = ((JObject)t)["Groups"];
+                if (t != null)
+                    jnode["PROPERTIES"]["Groups"] = cJson.GroupsWithValues(jnode["PROPERTIES"]["Groups"].ToString());
+            }
             var lpd = new LoadPageData()
             {
                 //RightBrowserUrl = jnode["right"].ToString(),
@@ -314,7 +332,7 @@ namespace ProstePrototype
                     //((BrowserParams)wb1.Tag).Params = $@"{{ ""pageName"": ""wb1: {data.LeftBrowserUrl}"" }}";
                     ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
                 });
-                
+
                 wb1.Load(url);
                 this.Dispatcher.Invoke(() =>
                 {
@@ -364,7 +382,7 @@ namespace ProstePrototype
                     string jsParams = ((BrowserParams)btag).Params;
                     string browserName = ((BrowserParams)btag).Name;
                     ChromiumWebBrowser bCall = (browserName == "wb1") ? wb1 : wb2;
-                    Send_JSCommand(bCall, jsParams);                    
+                    Send_JSCommand(bCall, jsParams);
                 });
             }
         }
@@ -443,7 +461,7 @@ namespace ProstePrototype
             {
                 string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
                 string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
-                
+
                 wb1.Load("file:///" + firstFile);
 
                 if (myFile == firstFile)

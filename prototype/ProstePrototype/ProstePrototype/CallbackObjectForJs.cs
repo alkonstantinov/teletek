@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Markup;
+using ljson;
+using lcommunicate;
+using System.Windows.Controls;
 
 namespace ProstePrototype
 {
@@ -19,7 +22,10 @@ namespace ProstePrototype
         public string getJsonForElement(string elementType, int elementNumber) {
 
             var e = elementType;
-            return @"{ ""pageName"": ""wb1"" }";
+            //return @"{ ""pageName"": ""wb1"" }";
+            string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
+            res = cJson.GroupsWithValues(res).ToString();
+            return res;
         }
     }
 }
