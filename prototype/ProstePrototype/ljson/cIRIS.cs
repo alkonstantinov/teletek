@@ -711,7 +711,7 @@ namespace ljson
             //not grouped params
             json[key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
             json[key]["PROPERTIES"]["Groups"]["~noname"]["IP"] = o["IP"];
-            json[key]["PROPERTIES"]["Groups"]["~noname"]["Panel_name"] = o["Panel_name"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["Panel_Name"] = o["Panel_Name"];
             //
             JObject grp1 = new JObject();
             grp1["name"] = "Parameters";

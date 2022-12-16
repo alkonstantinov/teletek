@@ -238,7 +238,7 @@ namespace ljson
                 {
                     JObject jgrp = (JObject)jprop["Groups"];
                     if (jgrp != null)
-                        return jgrp.ToString();
+                        return GroupsWithValues(jgrp).ToString();
                     else
                         return "{}";
                 }
