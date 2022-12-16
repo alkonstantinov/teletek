@@ -102,6 +102,23 @@ namespace ljson
             }
             return res;
         }
+
+        private static JObject GroupsFromContent(JObject json, string key)
+        {
+            JObject groups = new JObject();
+            JObject content = new JObject((JObject)json[key]["CONTAINS"]);
+            if (content["ELEMENT"] != null)
+                content = Array2Object(content["ELEMENT"]);
+            foreach (JProperty c in (JToken)content)
+            {
+                string ckey = c.Name;
+                groups[ckey] = new JObject();
+                JObject cnode = new JObject((JObject)json[ckey]);
+                groups[ckey]["name"] = cnode["@PRODUCTNAME"].ToString();
+                groups[ckey]["fields"] = Array2Object(cnode["PROPERTIES"]["PROPERTY"]);
+            }
+            return groups;
+        }
         #endregion
 
         #region main

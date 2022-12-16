@@ -68,8 +68,8 @@ function receiveMessageWPF(jsonTxt) {
                     fieldset.insertAdjacentHTML('afterbegin', insideRows);
                     body.appendChild(fieldset);
                 } else if (!divLevel["@TYPE"] && !divLevel.name) {
-                    for (let i = 0; i < divLevel["@MIN"]; i++) lst.push(i + 1);
-                    elements = divLevel["@MAX"] && divLevel["@MAX"];
+                    for (let i = 0; i < +divLevel["@MIN"]; i++) lst.push(i + 1);
+                    elements = divLevel["@MAX"] && (+divLevel["@MAX"] + 1);
                     console.log('divLevel', divLevel, 'k', k, 'lst', lst, 'elements', elements);
                     let btnDiv = document.getElementById("buttons");
                     // adding the button
@@ -79,8 +79,28 @@ function receiveMessageWPF(jsonTxt) {
                             type="button"
                             onclick="javascript:addElement('element', '${k}')" 
                             id="_btn" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> Add New ${k.split('_')[1]}
+                            <i class="fa-solid fa-plus 5x"></i> Add New ${k.split('_').slice(1).join(' ')}
                         </button>`);
+                    if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                        let divCol9 = document.getElementsByClassName("col-9")[0];
+                        console.log('divCol9', divCol9)
+                        divCol9.classList = 'col-7';
+                        divCol9.insertAdjacentHTML(
+                            'beforebegin',
+                            `<div class="col-2 bl fire scroll">
+                                Devices:
+                                <div id="attached_devices"></div>
+                            </div>`
+                        );
+                    }
+                    if (k.toUpperCase().includes('INPUT_GROUP')) {
+                        const oldEl = document.querySelector('.row.pt-2.fullHeight');
+                        console.log(oldEl)
+                        const newEl = document.createElement("div");
+                        newEl.id = 'new';
+                        newEl.classList = "row scroll";
+                        oldEl.replaceWith(newEl);
+                    }
                 } else { // collapsible parts
                     const { input_name, input_id } = {
                         input_name: divLevel.name,
@@ -820,28 +840,52 @@ function addElement(id, elementType = "") {
         }
         if (last === 0 || lst.includes(last)) return;
 
+        let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
+        let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
+        
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
-        const newUserElement = `<div class="col-12" id=${last}>
-                                            <div class="row">
-                                                <div class="col-11 pr-1">
-                                                    <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
-                                                        <div class="btnStyle fire">
-                                                            <i class="fa-solid fa-display fa-3x p15">
-                                                                <br /><span class="someS">
-                                                                    <span class="h5">
-                                                                       Panel ${last}
-                                                                    </span>
-                                                                </span>
-                                                            </i>
+        const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
+            `<div class="col-12" id=${last}>
+                <div class="row">
+                    <div class="col-11 pr-1">
+                        <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
+                            <div class="btnStyle ${BUTTON_COLORS[color]}">
+                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">
+                                    <br /><span class="someS">
+                                        <span class="h5">
+                                            ${BUTTON_IMAGES[elType].sign} ${last}
+                                        </span>
+                                    </span>
+                                </i>
                                                             
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
-                                                    <i class="fa-solid fa-xmark fire"></i>
-                                                </div>
-                                            </div>
-                                        </div>`;
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                        <i class="fa-solid fa-xmark fire"></i>
+                    </div>
+                </div>
+            </div>`) : ( //if the element is INPUT_GROUP
+                `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="row">
+                        <fieldset style="min-width: 200px;">
+                            <legend>Input Group ${last}</legend>
+                                <label for="gr_input_logic_${last}">Input logic</label>:
+                                <p class="fire">
+                                    AND
+                                    <label class="switch">
+                                        <input type="checkbox" id="gr_input_logic_${last}"/>
+                                        <span class="slider"></span>
+                                    </label>
+                                    OR
+                                </p>
+
+                        </fieldset>
+                        <div onclick="javascript:addInputGroup(${last})" class="mt-2 ml-1">
+                            <i class="fa-solid fa-xmark fire"></i>
+                        </div>
+                    </div>
+                </div>`);
         var element = document.getElementById("new");
         var new_inner = `
                             ${element.innerHTML}
@@ -895,102 +939,102 @@ function showElement(id, elementType) {
                     var el = document.getElementById("selected_area");
                     id = parseInt(id);
                     var target = `<fieldset id="id_${id}">
-                                        <legend>Panel ${id}</legend>
-                                            <div class="row align-items-center">
+                                    <legend>Panel ${id}</legend>
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <div class="form-item roww flex">
+                                                    <label for="panelip_${id}">Panel IP</label>
+                                                    <input type="text"
+                                                            id="panelip_${id}"
+                                                            name="panelip_${id}"
+                                                            minlength="7"
+                                                            maxlength="15"
+                                                            size="15"
+                                                            pattern="^(\s*(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*\.){3}(\s*\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*$"
+                                                            value=" 0 . 0 . 0 . 0 " />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button class="fire collapsible ml-1">Parameters</button>
+                                        <div class="collapsible-content fire">
+                                            <div class="row align-items-center m-1">
+                                                <div class="col-6">
+                                                    <div class="form-item roww disabled">
+                                                        <label for="state_${id}">State</label>
+                                                        <div class="select">
+                                                            <select id="state_${id}" name="state">
+                                                                <option value="loc">Normal</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col">
-                                                    <div class="form-item roww flex">
-                                                        <label for="panelip_${id}">Panel IP</label>
-                                                        <input type="text"
-                                                                id="panelip_${id}"
-                                                                name="panelip_${id}"
-                                                                minlength="7"
-                                                                maxlength="15"
-                                                                size="15"
-                                                                pattern="^(\s*(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*\.){3}(\s*\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*$"
-                                                                value=" 0 . 0 . 0 . 0 " />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <button class="fire collapsible ml-1">Parameters</button>
-                                            <div class="collapsible-content fire">
-                                                <div class="row align-items-center m-1">
-                                                    <div class="col-6">
-                                                        <div class="form-item roww disabled">
-                                                            <label for="state_${id}">State</label>
-                                                            <div class="select">
-                                                                <select id="state_${id}" name="state">
-                                                                    <option value="loc">Normal</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="form-item roww disabled">
-                                                            <label for="status_${id}">Status</label>
-                                                            <div class="select">
-                                                                <select id="status_${id}" name="status">
-                                                                    <option value="loc">none</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row align-items-center m-1">
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="receive_msg_${id}">Receive messages</label>
-                                                            <input type="checkbox" id="receive_msg_${id}" class="ml10" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="receive_cmd_${id}">Receive commands</label>
-                                                            <input type="checkbox" id="receive_cmd_${id}" class="ml10" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="send_commands_${id}">Send commands</label>
-                                                            <input type="checkbox" id="send_commands_${id}" class="ml10" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <button class="fire collapsible ml-1">Panel Outputs</button>
-                                            <div class="collapsible-content fire">
-                                                <div class="row align-items-center m-1">
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="r_sounder_${id}">Repeat sounder</label>
-                                                            <input type="checkbox" id="r_sounder_${id}" class="ml10" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="r_fire_brigade_${id}">Repeat Fire bigrade</label>
-                                                            <input type="checkbox" id="r_fire_brigade_${id}" class="ml10" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="r_fault_output_${id}">Repeat Fault output</label>
-                                                            <input type="checkbox" id="r_fault_output_${id}" class="ml10" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-item roww">
-                                                            <label for="r_fire_protection_${id}">Repeat Fire protection</label>
-                                                            <input type="checkbox" id="r_fire_protection_${id}" class="ml10" />
+                                                    <div class="form-item roww disabled">
+                                                        <label for="status_${id}">Status</label>
+                                                        <div class="select">
+                                                            <select id="status_${id}" name="status">
+                                                                <option value="loc">none</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </fieldset>`;
+
+                                            <div class="row align-items-center m-1">
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="receive_msg_${id}">Receive messages</label>
+                                                        <input type="checkbox" id="receive_msg_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="receive_cmd_${id}">Receive commands</label>
+                                                        <input type="checkbox" id="receive_cmd_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="send_commands_${id}">Send commands</label>
+                                                        <input type="checkbox" id="send_commands_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <button class="fire collapsible ml-1">Panel Outputs</button>
+                                        <div class="collapsible-content fire">
+                                            <div class="row align-items-center m-1">
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="r_sounder_${id}">Repeat sounder</label>
+                                                        <input type="checkbox" id="r_sounder_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="r_fire_brigade_${id}">Repeat Fire bigrade</label>
+                                                        <input type="checkbox" id="r_fire_brigade_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="r_fault_output_${id}">Repeat Fault output</label>
+                                                        <input type="checkbox" id="r_fault_output_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-item roww">
+                                                        <label for="r_fire_protection_${id}">Repeat Fire protection</label>
+                                                        <input type="checkbox" id="r_fire_protection_${id}" class="ml10" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>`;
                     el.innerHTML = target;
                     collapsible();
                     addVisitedBackground();

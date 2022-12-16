@@ -36,6 +36,20 @@
         // 'constants' declaration
         let lst = [];
         let elements;
+        const BUTTON_COLORS = {
+            IRIS: 'fire',
+            ECLIPSE: '',
+            TTE: 'grasse',
+        };
+        const BUTTON_IMAGES = {
+            PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
+            INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
+            OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
+            EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
+            ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
+            //: { im: '', sign: '' },
+            //: { im: '', sign: '' },
+        };
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -44,5 +58,17 @@
     <script src="../imports/bootstrap-datepicker.min.js"></script>
     <script src="../imports/font-awesome.js"></script>
     <script src="../imports/mainfuncs.js"></script>
+    <script>
+//        var js = `{
+//  "IRIS8_INPUT_GROUP": {
+//    "@MIN": "0",
+//    "@MAX": "250",
+//    "@LNGID": "f0f2885c-a61b-410a-b5dd-27c2acab68e2",
+//    "~path": "ELEMENTS.iris_inputs_group.CONTAINS.IRIS8_INPUT_GROUP"
+//  },
+//  "~path": "ELEMENTS.iris_inputs_group.CONTAINS"
+//}`;
+//        receiveMessageWPF(js)
+    </script>
 </body>
 </html>
