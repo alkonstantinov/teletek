@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ljson
 {
@@ -121,6 +122,19 @@ namespace ljson
                 groups[ckey]["fields"] = Array2Object(cnode["PROPERTIES"]["PROPERTY"]);
             }
             return groups;
+        }
+
+        private static JObject GetPropertiesByContent(JObject elements, string key)
+        {
+            JObject o = (JObject)elements[key];
+            o = Array2Object(o["CONTAINS"]["ELEMENT"]);
+            o["CONTAINS"] = o;
+            JProperty p = (JProperty)o.First;
+            o = new JObject((JObject)elements[p.Name]);
+            if (o["PROPERTIES"] != null)
+                return Array2Object(o["PROPERTIES"]["PROPERTY"]);
+            //
+            return null;
         }
         #endregion
 
@@ -340,12 +354,14 @@ namespace ljson
             groups["Attachment"]["fields"] = new JObject();
             f = (JObject)groups["Attachment"]["fields"];
             f["ATTDEVICENUMBER"] = o["ATTDEVICENUMBER"];
-            f["ATTTERMINALNUMBER"] = o["ATTTERMINALNUMBER"];
+            f["ATTTERMINALNUMBER"] = o["ATTTERMINALNMBER"];
             //
             groups["Attributes"] = new JObject();
             groups["Attributes"]["name"] = "Attributes";
             groups["Attributes"]["fields"] = new JObject();
             f = (JObject)groups["Attributes"]["fields"];
+            f["ATTRIBUTES1"] = o["ATTRIBUTES1"];
+            f["ATTRIBUTES2"] = o["ATTRIBUTES2"];
             //
             groups["AttributesAux"] = new JObject();
             groups["AttributesAux"]["name"] = "Attributes Aux";
@@ -358,6 +374,14 @@ namespace ljson
             groups["AttributesKeySwitch"]["name"] = "Attributes Key Switch";
             groups["AttributesKeySwitch"]["fields"] = new JObject();
             f = (JObject)groups["AttributesKeySwitch"]["fields"];
+            f["ATTRIBUTESKEYSWITCH"] = o["ATTRIBUTESKEYSWITCH"];
+            //
+            groups["Areas"] = new JObject();
+            groups["Areas"]["name"] = "Areas";
+            groups["Areas"]["fields"] = new JObject();
+            f = (JObject)groups["Areas"]["fields"];
+            f["AREAS1"] = o["AREAS1"];
+            f["AREAS2"] = o["AREAS2"];
             //
             json[key]["PROPERTIES"]["Groups"] = groups;
         }
@@ -370,6 +394,396 @@ namespace ljson
             CreateZoneGroups((JObject)json["ELEMENTS"], zonekey);
         }
         #endregion
+
+        #region outputs
+        private static void ConvertOutputs(JObject json, JObject _pages)
+        {
+            JObject ac = (JObject)json["ELEMENTS"]["eclipse_outputs"];
+            ac["title"] = _pages["eclipse_outputs"]["title"];
+            ac["left"] = _pages["eclipse_outputs"]["left"];
+            ac["right"] = _pages["eclipse_outputs"]["right"];
+            ac["breadcrumbs"] = _pages["eclipse_outputs"]["breadcrumbs"];
+            JObject contains = Contains2Object((JObject)json["ELEMENTS"]["eclipse_outputs"]["CONTAINS"]);
+            json["ELEMENTS"]["eclipse_outputs"]["CONTAINS"] = contains;
+        }
+        #endregion
+
+        #region output
+        private static void CreateOutputGroups(JObject json, string key)
+        {
+            JObject o = new JObject((JObject)json[key]["PROPERTIES"]);
+            o = Array2Object(o["PROPERTY"]);
+            JObject groups = new JObject();
+            groups["Attachment"] = new JObject();
+            groups["Attachment"]["name"] = "Attachment";
+            groups["Attachment"]["fields"] = new JObject();
+            JObject f = (JObject)groups["Attachment"]["fields"];
+            f["ATTDEVICENUMBER"] = o["ATTDEVICENUMBER"];
+            f["ATTTERMINALNUMBER"] = o["ATTTERMINALNUMBER"];
+            //
+            groups["ActivationEvent"] = new JObject();
+            groups["ActivationEvent"]["name"] = "Activation Event";
+            groups["ActivationEvent"]["fields"] = new JObject();
+            f = (JObject)groups["ActivationEvent"]["fields"];
+            f["ATTDEVICENUMBER"] = o["ATTDEVICENUMBER"];
+            f["ATTTERMINALNUMBER"] = o["ATTTERMINALNMBER"];
+            //
+            groups["Options"] = new JObject();
+            groups["Options"]["name"] = "Options";
+            groups["Options"]["fields"] = new JObject();
+            f = (JObject)groups["Options"]["fields"];
+            f["ATTRIBUTES1"] = o["ATTRIBUTES1"];
+            //
+            groups["Areas"] = new JObject();
+            groups["Areas"]["name"] = "Areas";
+            groups["Areas"]["fields"] = new JObject();
+            f = (JObject)groups["Areas"]["fields"];
+            f["AREAS1"] = o["AREAS1"];
+            f["AREAS2"] = o["AREAS2"];
+            //
+            groups["Tabs&etc"] = new JObject();
+            groups["Tabs&etc"]["name"] = "PROPERTY ACTEVENT/type TAB, DEACTIVATION_TIMER/type INT, DELAY/type INT: какво ги правим? Определено са стойности към \"Options\"";
+            groups["Tabs&etc"]["fields"] = new JObject();
+            f = (JObject)groups["Tabs&etc"]["fields"];
+            f["ACTEVENT"] = o["ACTEVENT"];
+            f["DEACTIVATION_TIMER"] = o["DEACTIVATION_TIMER"];
+            f["DELAY"] = o["DELAY"];
+            json[key]["PROPERTIES"]["Groups"] = groups;
+        }
+
+        private static void ConvertOutput(JObject json)
+        {
+            JObject oc = (JObject)json["ELEMENTS"]["eclipse_outputs"]["CONTAINS"];
+            JProperty f = (JProperty)oc.First;
+            string outputkey = f.Name;
+            CreateOutputGroups((JObject)json["ELEMENTS"], outputkey);
+        }
+        #endregion
+
+        #region areas
+        private static void CreateAreasGroups(JObject json)
+        {
+            JObject o = new JObject((JObject)json["eclipse_areas"]["PROPERTIES"]);
+            o = Array2Object(o["PROPERTY"]);
+            JObject groups = new JObject();
+            groups["Settings"] = new JObject();
+            groups["Settings"]["name"] = "Settings";
+            groups["Settings"]["fields"] = new JObject();
+            JObject f = (JObject)groups["Settings"]["fields"];
+            f["ACCLEN"] = o["ACCLEN"];
+            f["DBLKNOCKTIME"] = o["DBLKNOCKTIME"];
+            f["AUTOARMNOMOV"] = o["AUTOARMNOMOV"];
+            f["POSTPONEALARM"] = o["POSTPONEALARM"];
+            json["eclipse_areas"]["PROPERTIES"]["Groups"] = groups;
+        }
+
+        private static void ConvertAreas(JObject json, JObject _pages)
+        {
+            CreateAreasGroups((JObject)json["ELEMENTS"]);
+            JObject ac = (JObject)json["ELEMENTS"]["eclipse_areas"];
+            ac["title"] = _pages["eclipse_areas"]["title"];
+            ac["left"] = _pages["eclipse_areas"]["left"];
+            ac["right"] = _pages["eclipse_areas"]["right"];
+            ac["breadcrumbs"] = _pages["eclipse_areas"]["breadcrumbs"];
+            JObject contains = Contains2Object((JObject)json["ELEMENTS"]["eclipse_areas"]["CONTAINS"]);
+            json["ELEMENTS"]["eclipse_areas"]["CONTAINS"] = contains;
+        }
+        #endregion
+
+        #region area
+        private static void CreateAreaGroups(JObject json, string key)
+        {
+            JObject o = new JObject((JObject)json[key]["PROPERTIES"]);
+            o = Array2Object(o["PROPERTY"]);
+            JObject groups = new JObject();
+            groups["~noname"] = new JObject();
+            groups["~noname"]["name"] = "";
+            groups["~noname"]["fields"] = new JObject();
+            JObject f = (JObject)groups["~noname"]["fields"];
+            f["NAME"] = o["NAME"];
+            f["TIMESLOT"] = o["TIMESLOT"];
+            f["ACCCODE"] = o["ACCCODE"];
+            //
+            groups["OnOffSettings"] = new JObject();
+            groups["OnOffSettings"]["name"] = "On / Off Settings";
+            groups["OnOffSettings"]["fields"] = new JObject();
+            f = (JObject)groups["OnOffSettings"]["fields"];
+            f["ENTRYTIME"] = o["ENTRYTIME"];
+            f["ENTRYTIME2"] = o["ENTRYTIME2"];
+            f["EXITTIME"] = o["EXITTIME"];
+            f["ATTR2"] = o["ATTR2"];
+            f["ATTR2"] = o["ATTR2"];
+            //
+            groups["BellSettings"] = new JObject();
+            groups["BellSettings"]["name"] = "Bell Settings";
+            groups["BellSettings"]["fields"] = new JObject();
+            f = (JObject)groups["BellSettings"]["fields"];
+            f["BELLTIME"] = o["BELLTIME"];
+            f["BELLDELAY"] = o["BELLDELAY"];
+            f["ATTR1"] = o["ATTR1"];
+            //
+            groups["PanicAlarmTypes"] = new JObject();
+            groups["PanicAlarmTypes"]["name"] = "Panic Alarm Types";
+            groups["PanicAlarmTypes"]["fields"] = new JObject();
+            f = (JObject)groups["PanicAlarmTypes"]["fields"];
+            f["PANICS"] = o["PANICS"];
+            //
+            json[key]["PROPERTIES"]["Groups"] = groups;
+        }
+
+        private static void ConvertArea(JObject json)
+        {
+            JObject oc = (JObject)json["ELEMENTS"]["eclipse_areas"]["CONTAINS"];
+            JProperty f = (JProperty)oc.First;
+            string areakey = f.Name;
+            CreateAreaGroups((JObject)json["ELEMENTS"], areakey);
+        }
+        #endregion
+
+        #region timeslots
+        private static void CreateTimeslotsGroups(JObject json)
+        {
+            if (json["eclipse_timeslots"]["PROPERTIES"] == null)
+                json["eclipse_timeslots"]["PROPERTIES"] = new JObject();
+            JObject o = (JObject)json["eclipse_timeslots"]["CONTAINS"];
+            string slotsettings_key = null;
+            string holidays_key = null;
+            foreach (JProperty p in (JToken)o)
+            {
+                string s = p.Name;
+                if (Regex.IsMatch(s, @"timeslot", RegexOptions.IgnoreCase))
+                    slotsettings_key = s;
+                else if (Regex.IsMatch(s, @"holiday", RegexOptions.IgnoreCase))
+                    holidays_key = s;
+            }
+            //JObject o = new JObject((JObject)json["eclipse_timeslots"]["PROPERTIES"]);
+            //o = Array2Object(o["PROPERTY"]);
+            JObject groups = new JObject();
+            groups["TimeslotSettings"] = new JObject();
+            groups["TimeslotSettings"]["name"] = "Timeslot Settings";
+            groups["TimeslotSettings"]["fields"] = new JObject();
+            JObject f = (JObject)groups["TimeslotSettings"]["fields"];
+            f[slotsettings_key] = new JObject((JObject)o[slotsettings_key]);
+            f[slotsettings_key]["@TYPE"] = "CONTENT_KEY";
+            f["ADDBUTTON"] = new JObject();
+            f["ADDBUTTON"]["@TYPE"] = "ADDCONTENTITEMBUTTON";
+            f["ADDBUTTON"]["@TEXT"] = "+ Add New Timeslot";
+            f["ADDBUTTON"]["@ALIGN"] = "BOTTOM";
+            //
+            groups["HolidaysSettings"] = new JObject();
+            groups["HolidaysSettings"]["name"] = "Holidays Settings";
+            groups["HolidaysSettings"]["fields"] = new JObject();
+            f = (JObject)groups["HolidaysSettings"]["fields"];
+            f[holidays_key] = new JObject((JObject)o[holidays_key]);
+            f[holidays_key]["@TYPE"] = "CONTENT_KEY";
+            f["ADDBUTTON"] = new JObject();
+            f["ADDBUTTON"]["@TYPE"] = "ADDCONTENTITEMBUTTON";
+            f["ADDBUTTON"]["@TEXT"] = "+ Add New Holidays";
+            f["ADDBUTTON"]["@ALIGN"] = "BOTTOM";
+            json["eclipse_timeslots"]["PROPERTIES"]["Groups"] = groups;
+        }
+        private static void ConvertTimeslots(JObject json, JObject _pages)
+        {
+            JObject ac = (JObject)json["ELEMENTS"]["eclipse_timeslots"];
+            ac["title"] = _pages["eclipse_timeslots"]["title"];
+            ac["left"] = _pages["eclipse_timeslots"]["left"];
+            ac["right"] = _pages["eclipse_timeslots"]["right"];
+            ac["breadcrumbs"] = _pages["eclipse_timeslots"]["breadcrumbs"];
+            JObject contains = Contains2Object((JObject)json["ELEMENTS"]["eclipse_timeslots"]["CONTAINS"]);
+            json["ELEMENTS"]["eclipse_timeslots"]["CONTAINS"] = contains;
+            CreateTimeslotsGroups((JObject)json["ELEMENTS"]);
+        }
+        #endregion
+
+        #region timeslot
+        private static void CreateTimeslotGroups(JObject json, string key)
+        {
+            JObject c = Contains2Object((JObject)json[key]["CONTAINS"]);
+            json[key]["CONTAINS"] = c;
+            JProperty first = (JProperty)c.First;
+            string skey = first.Name;
+            //
+            if (json[key]["PROPERTIES"] == null)
+                json[key]["PROPERTIES"] = new JObject();
+            JObject o = new JObject((JObject)json[skey]["PROPERTIES"]);
+            if (o["PROPERTY"] != null)
+                o = Array2Object(o["PROPERTY"]);
+            JObject groups = new JObject();
+            groups["~noname"] = new JObject();
+            groups["~noname"]["name"] = "";
+            groups["~noname"]["fields"] = new JObject();
+            JObject f = (JObject)groups["~noname"]["fields"];
+            f["BEGINTIME"] = o["BEGINTIME"];
+            f["ENDTIME"] = o["ENDTIME"];
+            f["WEEKDAYS"] = o["WEEKDAYS"];
+            f["ENABLEHOLIDAYS"] = o["ENABLEHOLIDAYS"];
+            //
+            json[key]["PROPERTIES"]["Groups"] = groups;
+        }
+
+        private static void CreateHolidaysGroups(JObject json, string key)
+        {
+            //JObject c = Contains2Object((JObject)json[skey]["CONTAINS"]);
+            //json[skey]["CONTAINS"] = c;
+            //JProperty first = (JProperty)c.First;
+            //string key = first.Name;
+            //
+            if (json[key]["PROPERTIES"] == null)
+                json[key]["PROPERTIES"] = new JObject();
+            JObject o = new JObject((JObject)json[key]["PROPERTIES"]);
+            if (o["PROPERTY"] != null)
+                o = Array2Object(o["PROPERTY"]);
+            JObject groups = new JObject();
+            groups["~noname"] = new JObject();
+            groups["~noname"]["name"] = "";
+            groups["~noname"]["fields"] = new JObject();
+            JObject f = (JObject)groups["~noname"]["fields"];
+            f["From"] = new JObject();
+            f["From"]["@TYPE"] = "DATE";
+            f["From"]["@TEXT"] = "from";
+            f["To"] = new JObject();
+            f["To"]["@TYPE"] = "DATE";
+            f["To"]["@TEXT"] = "to";
+            //
+            json[key]["PROPERTIES"]["Groups"] = groups;
+        }
+        private static void ConvertTimeslot(JObject json)
+        {
+            JObject o = (JObject)json["ELEMENTS"]["eclipse_timeslots"]["CONTAINS"];
+            string skey = null;
+            string hkey = null;
+            foreach (JProperty p in (JToken)o)
+            {
+                string s = p.Name;
+                if (Regex.IsMatch(s, @"timeslot", RegexOptions.IgnoreCase))
+                    skey = s;
+                else if (Regex.IsMatch(s, @"holiday", RegexOptions.IgnoreCase))
+                    hkey = s;
+            }
+            if (skey != null)
+                CreateTimeslotGroups((JObject)json["ELEMENTS"], skey);
+            if (hkey != null)
+                CreateHolidaysGroups((JObject)json["ELEMENTS"], hkey);
+        }
+        #endregion
+
+        #region communicator
+        private static void CreateCommunicatorGroups(JObject json)
+        {
+            JObject o = new JObject((JObject)json["eclipse_communicator"]["PROPERTIES"]);
+            o = Array2Object(o["PROPERTY"]);
+            //
+            JObject groups = new JObject();
+            groups["DialerOptions"] = new JObject();
+            groups["DialerOptions"]["name"] = "Dialer options";
+            groups["DialerOptions"]["fields"] = new JObject();
+            JObject f = (JObject)groups["DialerOptions"]["fields"];
+            f["DIALEROPT"] = o["DIALEROPT"];
+            //
+            groups["CommunicatorSettings"] = new JObject();
+            groups["CommunicatorSettings"]["name"] = "Communicator Settings";
+            groups["CommunicatorSettings"]["fields"] = new JObject();
+            f = (JObject)groups["CommunicatorSettings"]["fields"];
+            f["COMMATT"] = o["COMMATT"];
+            f["TMPERIOD"] = o["TMPERIOD"];
+            f["TMSTARTTIME"] = o["TMSTARTTIME"];
+            f["ALARMDELAY"] = o["ALARMDELAY"];
+            //
+            JObject content = (JObject)json["eclipse_communicator"]["CONTAINS"];
+            string pn = null;
+            string vd = null;
+            string udl = null;
+            foreach (JProperty cp in (JToken)content)
+            {
+                if (Regex.IsMatch(cp.Name, @"phonenumber", RegexOptions.IgnoreCase))
+                    pn = cp.Name;
+                if (Regex.IsMatch(cp.Name, @"voicedialer", RegexOptions.IgnoreCase))
+                    vd = cp.Name;
+                if (Regex.IsMatch(cp.Name, @"udlsettings", RegexOptions.IgnoreCase))
+                    udl = cp.Name;
+            }
+            //
+            groups["PhoneNumberSettings"] = new JObject();
+            groups["PhoneNumberSettings"]["name"] = "Phone Number Settings";
+            groups["PhoneNumberSettings"]["fields"] = new JObject();
+            f = (JObject)groups["PhoneNumberSettings"]["fields"];
+            f[pn] = new JObject((JObject)content[pn]);
+            f[pn]["@TYPE"] = "CONTENT_KEY";
+            f["ADDBUTTON"] = new JObject();
+            f["ADDBUTTON"]["@TYPE"] = "ADDCONTENTITEMBUTTON";
+            f["ADDBUTTON"]["@TEXT"] = "+ Add New Phone";
+            f["ADDBUTTON"]["@ALIGN"] = "BOTTOM";
+            //phone number groups
+            JObject props = GetPropertiesByContent(json, pn);
+            if (json[pn]["PROPERTIES"] == null)
+                json[pn]["PROPERTIES"] = new JObject();
+            JObject cgroups = new JObject();
+            cgroups["~noname"] = new JObject();
+            cgroups["~noname"]["name"] = "";
+            cgroups["~noname"]["fields"] = new JObject();
+            f = (JObject)cgroups["~noname"]["fields"];
+            f["NUMBER"] = props["NUMBER"];
+            f["PROTOCOL"] = props["PROTOCOL"];
+            f["MSGTYPES"] = props["MSGTYPES"];
+            f["CAREAS1"] = props["CAREAS1"];
+            f["CAREAS2"] = props["CAREAS2"];
+            json[pn]["PROPERTIES"]["Groups"] = cgroups;
+            //
+            //
+            groups["VoiceDialerSettings"] = new JObject();
+            groups["VoiceDialerSettings"]["name"] = "Phone Dialer Settings";
+            groups["VoiceDialerSettings"]["fields"] = new JObject();
+            f = (JObject)groups["VoiceDialerSettings"]["fields"];
+            f[vd] = new JObject((JObject)content[vd]);
+            f[vd]["@TYPE"] = "CONTENT_KEY";
+            f["ADDBUTTON"] = new JObject();
+            f["ADDBUTTON"]["@TYPE"] = "ADDCONTENTITEMBUTTON";
+            f["ADDBUTTON"]["@TEXT"] = "+ Add New Phone Number";
+            f["ADDBUTTON"]["@ALIGN"] = "BOTTOM";
+            //voice dialer groups
+            props = Array2Object(json[vd]["PROPERTIES"]["PROPERTY"]);//GetPropertiesByContent(json, vd);
+            //if (json[vd]["PROPERTIES"] == null)
+            //    json[vd]["PROPERTIES"] = new JObject();
+            cgroups = new JObject();
+            cgroups["~noname"] = new JObject();
+            cgroups["~noname"]["name"] = "";
+            cgroups["~noname"]["fields"] = props;
+            json[vd]["PROPERTIES"]["Groups"] = cgroups;
+            //
+            //
+            groups["UDLSettings"] = new JObject();
+            groups["UDLSettings"]["name"] = "UDL Settings";
+            groups["UDLSettings"]["fields"] = new JObject();
+            f = (JObject)groups["UDLSettings"]["fields"];
+            f[udl] = new JObject((JObject)content[udl]);
+            f[udl]["@TYPE"] = "CONTENT_KEY";
+            //UDL groups
+            props = Array2Object(json[udl]["PROPERTIES"]["PROPERTY"]);//GetPropertiesByContent(json, udl);
+            //if (json[udl]["PROPERTIES"] == null)
+            //    json[udl]["PROPERTIES"] = new JObject();
+            cgroups = new JObject();
+            cgroups["~noname"] = new JObject();
+            cgroups["~noname"]["name"] = "";
+            cgroups["~noname"]["fields"] = props;
+            json[udl]["PROPERTIES"]["Groups"] = cgroups;
+            //
+            //
+            json["eclipse_communicator"]["PROPERTIES"]["Groups"] = groups;
+        }
+
+        private static void ConvertCommunicator(JObject json, JObject _pages)
+        {
+            JObject ac = (JObject)json["ELEMENTS"]["eclipse_communicator"];
+            ac["title"] = _pages["eclipse_communicator"]["title"];
+            ac["left"] = _pages["eclipse_communicator"]["left"];
+            ac["right"] = _pages["eclipse_communicator"]["right"];
+            ac["breadcrumbs"] = _pages["eclipse_communicator"]["breadcrumbs"];
+            JObject contains = Contains2Object((JObject)json["ELEMENTS"]["eclipse_communicator"]["CONTAINS"]);
+            json["ELEMENTS"]["eclipse_communicator"]["CONTAINS"] = contains;
+            CreateCommunicatorGroups((JObject)json["ELEMENTS"]);
+        }
+        #endregion
+
         public static string Convert(string json, JObject _pages)
         {
             JObject o = JObject.Parse(json);
@@ -425,6 +839,13 @@ namespace ljson
             ConvertUser(o1, _pages);
             ConvertZones(o1, _pages);
             ConvertZone(o1);
+            ConvertOutputs(o1, _pages);
+            ConvertOutput(o1);
+            ConvertAreas(o1, _pages);
+            ConvertArea(o1);
+            ConvertTimeslots(o1, _pages);
+            ConvertTimeslot(o1);
+            ConvertCommunicator(o1, _pages);
             //
             return o1.ToString();
         }
