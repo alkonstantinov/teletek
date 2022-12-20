@@ -22,11 +22,36 @@ using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
 using System.Printing;
 using lcommunicate;
+using common;
+using System.Windows.Shapes;
 
 namespace ljson
 {
     public class cJson
     {
+        private static Dictionary<string, cXmlConfigs> _panel_xmls = new Dictionary<string, cXmlConfigs>();
+        private static object _cs_panel_xmls = new object();
+
+        private static cXmlConfigs GetPanelXMLConfigs(string key)
+        {
+            cXmlConfigs cfg = null;
+            Monitor.Enter(_cs_panel_xmls);
+            if (_panel_xmls.ContainsKey(key))
+                cfg = _panel_xmls[key];
+            Monitor.Exit(_cs_panel_xmls);
+            return cfg;
+        }
+
+        private static void SetPanelXMLConfigs(string key, cXmlConfigs cfg)
+        {
+            Monitor.Enter(_cs_panel_xmls);
+            if (_panel_xmls.ContainsKey(key))
+                _panel_xmls[key] = cfg;
+            else
+                _panel_xmls.Add(key, cfg);
+            Monitor.Exit(_cs_panel_xmls);
+        }
+
         private static Dictionary<string, JObject> _panel_temlates = new Dictionary<string, JObject>();
         private static object _cs_panel_templates = new object();
 
@@ -107,7 +132,7 @@ namespace ljson
             string[] files = Directory.GetFiles(path);
             for (int i = 0; i < files.Length; i++)
             {
-                string f = Path.GetFileName(files[i]);
+                string f = System.IO.Path.GetFileName(files[i]);
                 if (Regex.IsMatch(f, "^" + schema, RegexOptions.IgnoreCase))
                 {
                     string filename = files[i];
@@ -127,7 +152,8 @@ namespace ljson
             JObject _pages = JObject.Parse(File.ReadAllText(path));
             if (filename != null)
             {
-                JObject res = JObject.Parse(ConvertXML(File.ReadAllText(filename), _pages));
+                string xml = File.ReadAllText(filename);
+                JObject res = JObject.Parse(ConvertXML(xml, _pages, filename));
                 return res;
             }
             return null;
@@ -168,10 +194,58 @@ namespace ljson
             Monitor.Exit(_cs_current_panel);
             return (JObject)_panel["ELEMENTS"][name];
         }
-        public static string ConvertXML(string xml, JObject _pages)
+        public static string ConvertXML(string xml, JObject _pages, string filename)
         {
+            string schema = Regex.Replace(System.IO.Path.GetFileName(filename), @"\.\w+$", "");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
+            cXmlConfigs cfg = new cXmlConfigs();
+            cfg.ConfigPath = filename;
+            cfg.Config = doc;
+            string xmldir = Directory.GetParent(Directory.GetParent(filename).ToString()).ToString();
+            if (xmldir[xmldir.Length - 1] != '\\')
+                xmldir += "\\";
+            if (Directory.Exists(xmldir + "Read"))
+            {
+                string dir = xmldir + "Read";
+                string f = null;
+                string[] files = Directory.GetFiles(dir);
+                for (int i = 0; i < files.Length; i++)
+                    if (Regex.IsMatch(System.IO.Path.GetFileName(files[i]), @"^Read[\w\W]+?" + schema, RegexOptions.IgnoreCase))
+                    {
+                        f = files[i];
+                        break; ;
+                    }
+                if (f != null)
+                {
+                    cfg.ReadConfigPath = f;
+                    doc = new XmlDocument();
+                    doc.LoadXml(File.ReadAllText(f));
+                    cfg.ReadConfig = doc;
+                }
+            }
+            if (Directory.Exists(xmldir + "Write"))
+            {
+                string dir = xmldir + "Write";
+                string f = null;
+                string[] files = Directory.GetFiles(dir);
+                for (int i = 0; i < files.Length; i++)
+                    if (Regex.IsMatch(System.IO.Path.GetFileName(files[i]), @"^Write[\w\W]+?" + schema, RegexOptions.IgnoreCase))
+                    {
+                        f = files[i];
+                        break; ;
+                    }
+                if (f != null)
+                {
+                    cfg.WriteConfigPath = f;
+                    doc = new XmlDocument();
+                    doc.LoadXml(File.ReadAllText(f));
+                    cfg.WriteConfig = doc;
+                }
+            }
+            doc = (XmlDocument)cfg.Config;
+            SetPanelXMLConfigs(filename, cfg);
+            //
             string json = JsonConvert.SerializeXmlNode(doc);
             JObject o = JObject.Parse(json);
             JToken t = o["ELEMENTS"]["ELEMENT"][0];
@@ -238,7 +312,7 @@ namespace ljson
                 {
                     JObject jgrp = (JObject)jprop["Groups"];
                     if (jgrp != null)
-                        return jgrp.ToString();
+                        return GroupsWithValues(jgrp).ToString();
                     else
                         return "{}";
                 }

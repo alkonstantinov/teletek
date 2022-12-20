@@ -19,6 +19,11 @@ namespace lcommunicate
 {
     internal class cTransport
     {
+        //private byte[] _ver_cmd = new byte[] { 0x07, 0x51, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        internal byte[] _ver_cmd = new byte[] { 0x03, 0x51, 0x11, 0x00, 0x00, 0x07 };
+        internal byte[] _cmd = new byte[] { 0x03, 0x51, 0x0F, 0x00, 0x00, 0x89 };
+        internal byte[] _time_cmd = new byte[] { 0x00, 0x23, 0xFF };
+        internal byte[] _panel_in_nework_0_cmd = new byte[] { 0x03, 0x51, 0x16, 0x00, 0x00, 0x60 };
         internal virtual object Connect(object o) { return null; }
         internal virtual void Close(object o) { }
         internal virtual byte[] SendCommand(object _connection, byte[] _command) { return null; }
@@ -110,6 +115,8 @@ namespace lcommunicate
         {
             cTransport t = new cIP();
             //object conn = t.Connect(new cIPParams("92.247.2.162", 7000));
+            ////byte[] res = t.SendCommand(conn, t._ver_cmd);
+            //byte[] res = t.SendCommand(conn, t._panel_in_nework_0_cmd);
             //t.Close(conn);
             return JArray.Parse("[{ deviceType: 'fire', schema: 'iris8', title: 'IRIS', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse99', title: 'ECLIPSE', interface: 'COM', address: 'COM1'}]");
         }
