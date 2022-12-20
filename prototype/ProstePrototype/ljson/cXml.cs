@@ -166,10 +166,18 @@ namespace ljson
                                 Regex.IsMatch(path, @"PROPERTIES\.OLD", RegexOptions.IgnoreCase)
                                )
                             {
+                                if (Regex.IsMatch(prop.Path, @"^ELEMENTS\.IRIS8_INPUT\.PROPERTIES\.Groups\.InputType\.fields\.Type\.TABS\.d076749b-3d30-4cb2-8785-fd82145fd7dd\.PROPERTIES"))
+                                {
+                                    JToken ttt = t;
+                                }
                                 foreach (JToken tarr in t)
                                     if (tarr.Type == JTokenType.Object)
+                                    {
                                         ((JObject)tarr)["~path"] = tarr.Path;
-                                continue;
+                                        Arrays2Objects((JObject)(tarr), _convert_checks);
+                                    }
+
+                                //continue;
                             }
                             else if (Regex.IsMatch(path, @"TABS\.TAB$"))
                             {
@@ -186,6 +194,11 @@ namespace ljson
                                         ((JObject)tarr)["~path"] = tarr.Path;
                                 continue;
                             }
+                        }
+                        else
+                        {
+                            string hhh = "";
+                            continue;
                         }
                     }
                 }
@@ -206,6 +219,7 @@ namespace ljson
                     Arrays2Objects(o, _convert_checks);
                 }
             }
+            //root["~path"] = root.Path;
         }
     }
 }

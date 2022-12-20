@@ -4,15 +4,12 @@ using System.Text;
 using System.Net.Sockets;
 using common;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace lcommunicate
 {
     internal class cIP : cTransport
     {
-        private byte[] _ver_cmd = new byte[] { 0x07, 0x51, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        private byte[] _cmd = new byte[] { 0x03, 0x51, 0x0F, 0x00, 0x00, 0x89 };
-        private byte[] _time_cmd = new byte[] { 0x00, 0x23, 0xFF };
-        //
         //
         private cIPParams _last_ip = null;
         internal override object Connect(object o)
@@ -20,13 +17,26 @@ namespace lcommunicate
             cIPParams ip = (cIPParams)o;
             TcpClient c = new TcpClient(ip.address, ip.port);
             _last_ip = ip;
-            byte[] ver = SendCommand(c, _time_cmd);
+            //byte[] ver = SendCommand(c, _time_cmd);
             return c;
         }
 
         internal override void Close(object o)
         {
             ((TcpClient)o).Close();
+        }
+
+        private byte[] GetBytes(NetworkStream ns)
+        {
+            byte[] data = new byte[1024];
+            int readed = 0;
+            MemoryStream ms = new MemoryStream();
+            do
+            {
+                readed = ns.Read(data, 0, data.Length);
+                ms.Write(data, 0, readed);
+            } while (ns.DataAvailable);
+            return ms.GetBuffer();
         }
 
         internal override byte[] SendCommand(object _connection, byte[] _command)
@@ -40,7 +50,9 @@ namespace lcommunicate
             NetworkStream netstr = _conn.GetStream();
             StreamReader r = new StreamReader(netstr);
             netstr.Write(_command, 0, _command.Length);
-            string res = r.ReadToEnd();
+            byte[] res = GetBytes(netstr);
+            return res;
+                //Encoder. r.ReadToEnd();
             //
             return base.SendCommand(_conn, _command);
         }

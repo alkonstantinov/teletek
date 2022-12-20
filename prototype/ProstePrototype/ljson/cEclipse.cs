@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -784,6 +785,31 @@ namespace ljson
         }
         #endregion
 
+        #region devices
+        private static void CreateDeviceGroups(JObject json)
+        {
+            JObject c = (JObject)json["eclipse_devices"]["CONTAINS"];
+            JToken t = c.First;
+            string devkey = ((JProperty)t).Name;
+            JObject d = new JObject((JObject)json[devkey]["PROPERTIES"]);
+            JObject o = Array2Object(d["PROPERTY"]);
+            //
+            d["Groups"] = new JObject();
+        }
+
+        private static void ConvertDevices(JObject json, JObject _pages)
+        {
+            JObject ac = (JObject)json["ELEMENTS"]["eclipse_devices"];
+            ac["title"] = _pages["eclipse_devices"]["title"];
+            ac["left"] = _pages["eclipse_devices"]["left"];
+            ac["right"] = _pages["eclipse_devices"]["right"];
+            ac["breadcrumbs"] = _pages["eclipse_devices"]["breadcrumbs"];
+            JObject contains = Contains2Object((JObject)json["ELEMENTS"]["eclipse_devices"]["CONTAINS"]);
+            json["ELEMENTS"]["eclipse_devices"]["CONTAINS"] = contains;
+            CreateDeviceGroups((JObject)json["ELEMENTS"]);
+        }
+        #endregion
+
         public static string Convert(string json, JObject _pages)
         {
             JObject o = JObject.Parse(json);
@@ -846,6 +872,7 @@ namespace ljson
             ConvertTimeslots(o1, _pages);
             ConvertTimeslot(o1);
             ConvertCommunicator(o1, _pages);
+            ConvertDevices(o1, _pages);
             //
             return o1.ToString();
         }
