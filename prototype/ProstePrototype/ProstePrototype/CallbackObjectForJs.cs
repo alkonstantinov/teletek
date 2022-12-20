@@ -8,6 +8,7 @@ using System.Windows.Markup;
 using ljson;
 using lcommunicate;
 using System.Windows.Controls;
+using System.IO;
 
 namespace ProstePrototype
 {
@@ -21,10 +22,11 @@ namespace ProstePrototype
 
         public string getJsonForElement(string elementType, int elementNumber) {
 
-            var e = elementType;
+            // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
             string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
             res = cJson.GroupsWithValues(res).ToString();
+            File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
     }

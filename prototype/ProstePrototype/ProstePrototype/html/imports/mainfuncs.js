@@ -12,8 +12,8 @@ function sendMessageWPF(json, comm = {}) {
                 case 'changeStyleDisplay':
                     eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
                     break;
-                case 'addElement':                    
-                    eval(`${comm['funcName']}("${comm['params']['id']}", "${ comm['params']['elementType']}")`);
+                case 'addElement':
+                    eval(`${comm['funcName']}("${comm['params']['id']}", "${comm['params']['elementType']}")`);
                     break;
                 default:
                     eval(`${comm['funcName']}("${comm['params']}")`);
@@ -41,83 +41,7 @@ function receiveMessageWPF(jsonTxt) {
             if (body.firstElementChild?.tagName === 'FIELDSET') {
                 body = body.firstElementChild;
             }
-            // getting keys and creating element for each
-            keys = Object.keys(json);
-            
-            keys.filter(k => k !== '~path').forEach(k => {
-                let divLevel = json[k];
-                
-                if (k.includes('~')) { // ~noname cases
-                    let div = document.createElement('div');
-                    div.classList = "row align-items-center m-2";
-                    elementsCreationHandler(div, divLevel);
-
-                    body.appendChild(div);
-                } else if (divLevel.name === "Company Info") { // unique case "Company Info"
-                    let fieldset = document.createElement('fieldset');
-                    var insideRows = `<legend>${divLevel.name}</legend>`;
-                    for (field in divLevel.fields) {
-                        if (field.includes("~")) continue;
-                        let pl = divLevel.fields[field]["@TEXT"];
-                        let id = pl.replaceAll(" ", "_");
-                        let m = divLevel.fields[field]["@LENGTH"];
-                        insideRows += `<div class="form-item p0">
-                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}">
-                        </div>`
-                    }
-                    fieldset.insertAdjacentHTML('afterbegin', insideRows);
-                    body.appendChild(fieldset);
-                } else if (!divLevel["@TYPE"] && !divLevel.name) {
-                    for (let i = 0; i < +divLevel["@MIN"]; i++) lst.push(i + 1);
-                    elements = divLevel["@MAX"] && (+divLevel["@MAX"] + 1);
-                    console.log('divLevel', divLevel, 'k', k, 'lst', lst, 'elements', elements);
-                    let btnDiv = document.getElementById("buttons");
-                    // adding the button
-                    btnDiv.insertAdjacentHTML(
-                        'afterbegin',
-                        `<button style="display: inline-flex;" 
-                            type="button"
-                            onclick="javascript:addElement('element', '${k}')" 
-                            id="_btn" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> Add New ${k.split('_').slice(1).join(' ')}
-                        </button>`);
-                    if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
-                        let divCol9 = document.getElementsByClassName("col-9")[0];
-                        console.log('divCol9', divCol9)
-                        divCol9.classList = 'col-7';
-                        divCol9.insertAdjacentHTML(
-                            'beforebegin',
-                            `<div class="col-2 bl fire scroll">
-                                Devices:
-                                <div id="attached_devices"></div>
-                            </div>`
-                        );
-                    }
-                    if (k.toUpperCase().includes('INPUT_GROUP')) {
-                        const oldEl = document.querySelector('.row.pt-2.fullHeight');
-                        console.log(oldEl)
-                        const newEl = document.createElement("div");
-                        newEl.id = 'new';
-                        newEl.classList = "row scroll";
-                        oldEl.replaceWith(newEl);
-                    }
-                } else { // collapsible parts
-                    const { input_name, input_id } = {
-                        input_name: divLevel.name,
-                        input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
-                    }
-                    var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
-                <div class="collapsible-content col-12">
-                    <div class="row align-items-center m-2" id="${input_id}"></div>
-                </div>`;
-                    body.insertAdjacentHTML('beforeend', inside);
-                    console.log('clean data', input_id)
-                    let div = body.querySelector(`#${input_id}`);
-                    elementsCreationHandler(div, divLevel.fields);
-
-                    collapsible(`collapsible_${input_id}`)
-                }
-            });
+            drawFields(body, json);
             break;
         case !!document.getElementById('divDevices'):
             //alert('divDevices')
@@ -145,10 +69,86 @@ function receiveMessageWPF(jsonTxt) {
             elementsCreationHandler(div, json, reverse = false);
 
             body.appendChild(div);
-            
+
             break;
     }
     pagePreparation();
+}
+
+const drawFields = (body, json) => {
+    // getting keys and creating element for each
+    keys = Object.keys(json);
+
+    keys.filter(k => k !== '~path').forEach(k => {
+        let divLevel = json[k];
+
+        if (k.includes('~')) { // ~noname cases
+            let div = document.createElement('div');
+            div.classList = "row align-items-center m-2";
+            elementsCreationHandler(div, divLevel);
+
+            body.appendChild(div);
+        } else if (divLevel.name === "Company Info") { // unique case "Company Info"
+            let fieldset = document.createElement('fieldset');
+            var insideRows = `<legend>${divLevel.name}</legend>`;
+            for (field in divLevel.fields) {
+                if (field.includes("~")) continue;
+                let pl = divLevel.fields[field]["@TEXT"];
+                let id = pl.replaceAll(" ", "_");
+                let m = divLevel.fields[field]["@LENGTH"];
+                insideRows += `<div class="form-item p0">
+                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}">
+                        </div>`
+            }
+            fieldset.insertAdjacentHTML('afterbegin', insideRows);
+            body.appendChild(fieldset);
+        } else if (!divLevel["@TYPE"] && !divLevel.name) {
+            for (let i = 0; i < +divLevel["@MIN"]; i++) lst.push(i + 1);
+            elements = divLevel["@MAX"] && (+divLevel["@MAX"] + 1);
+            let btnDiv = document.getElementById("buttons");
+            // adding the button
+            btnDiv.insertAdjacentHTML(
+                'afterbegin',
+                `<button style="display: inline-flex;" 
+                            type="button"
+                            onclick="javascript:addElement('element', '${k}')" 
+                            id="_btn" class="btn-round btn-border-black">
+                            <i class="fa-solid fa-plus 5x"></i> Add New ${k.split('_').slice(1).join(' ')}
+                        </button>`);
+            if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                let divCol9 = document.getElementsByClassName("col-9")[0];
+                divCol9.classList = 'col-7';
+                divCol9.insertAdjacentHTML(
+                    'beforebegin',
+                    `<div class="col-2 bl fire scroll">
+                                Devices:
+                                <div id="attached_devices"></div>
+                            </div>`
+                );
+            }
+            if (k.toUpperCase().includes('INPUT_GROUP')) {
+                const oldEl = document.querySelector('.row.pt-2.fullHeight');
+                const newEl = document.createElement("div");
+                newEl.id = 'new';
+                newEl.classList = "row scroll";
+                oldEl.replaceWith(newEl);
+            }
+        } else { // collapsible parts
+            const { input_name, input_id } = {
+                input_name: divLevel.name,
+                input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
+            }
+            var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+                <div class="collapsible-content col-12">
+                    <div class="row align-items-center m-2" id="${input_id}"></div>
+                </div>`;
+            body.insertAdjacentHTML('beforeend', inside);
+            let div = body.querySelector(`#${input_id}`);
+            elementsCreationHandler(div, divLevel.fields);
+
+            collapsible(`collapsible_${input_id}`)
+        }
+    });
 }
 
 // creating elements on div level
@@ -157,7 +157,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
     var elementKeys = Object.keys(jsonAtLevel);
     const pathStr = "~path";
     let cleanKeys = elementKeys.filter(x => x !== pathStr);
-    
+
     if (reverse)
         cleanKeys = cleanKeys.reverse();
     cleanKeys.forEach(field => {
@@ -174,7 +174,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 return;
             }
             const newElement = document.createElement('div');
-            let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" ? "12" : "6"} mt-1`;
+            let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" || jsonAtLevel[field]['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
             newElement.classList = className;
             newElement.innerHTML = innerString;
             div.appendChild(newElement);
@@ -211,12 +211,24 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
     div.insertAdjacentHTML('beforeend', el);
 };
 
+const appendInnerToElement = (innerString, element, elementJSON) => {
+    if (!Array.isArray(elementJSON)) return;
+    const newElement = document.createElement('div');
+    let andArray = elementJSON.filter(f => f["@TYPE"] === "AND").map(e => e["PROPERTIES"]["PROPERTY"]).flatMap(el => el);
+    let len2 = andArray.filter(f => f["@TYPE"] !== "HIDDEN").length || 0;
+    let len1 = elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length;
+    let className = innerString.slice(0, 9) === '<fieldset' ? "col-12 mt-2 mb-2" : `col-xs-12 col-md-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
+    newElement.classList = className;
+    newElement.innerHTML = innerString;
+    element.appendChild(newElement);
+}
+
 // transforming object function
 const transformGroupElement = (elementJson) => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: elementJson['@ID'] ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
-        input_id: elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
+        input_name: (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_id: elementJson['@TEXT'] && elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
         maxTextLength: elementJson['@LENGTH'],
@@ -228,10 +240,111 @@ const transformGroupElement = (elementJson) => {
         input_name_off: elementJson['@NOVAL'],
         checked: !!(+elementJson['@CHECKED']),
         path: elementJson['~path'],
-        value: elementJson['@VALUE'],
+        value: elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : ""),
     };
 
     switch (attributes.type) {
+        case 'AND':
+            let andElementsList = elementJson["PROPERTIES"] && elementJson["PROPERTIES"]["PROPERTY"];
+            if (!Array.isArray(andElementsList)) return '';
+            let fs = document.createElement('fieldset');
+            fs.id = attributes.input_id;
+            fs.insertAdjacentHTML('afterbegin', `<legend>${attributes.input_name}</legend>`);
+            let ds = document.createElement('div');
+            ds.classList = 'row align-items-center';
+
+            for (el in andElementsList) {
+                let andElDiv = document.createElement('div');
+                andElDiv.classList = 'col-xs-12 col-md-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
+                andElDiv.insertAdjacentHTML('beforeend', transformGroupElement(andElementsList[el]));
+                ds.appendChild(andElDiv);
+            }
+            fs.appendChild(ds);
+            return fs.outerHTML;
+        case 'HIDDEN': return '';
+        case 'TAB':
+            let tabs = elementJson['TABS'];
+            if (tabs["TAB"]) tabs = tabs["TAB"];
+            // input_name = "Input Type", input_id = "input_name"
+            let tabsKeys = Object.keys(tabs);
+            //console.log('tabsKeys', tabsKeys, 'tabs', tabs);
+            // create selectField and append it
+            let inner = `<div class="form-item roww">
+                            <label for="${attributes.input_id}">${attributes.input_name}</label>
+                            <div class="select">
+                                <select id="${attributes.input_id}" name="${attributes.input_id}" onchange="javascript: loadDiv(this, 'showDiv_${attributes.input_id}', this.value);" >`;
+            //let isDefaultValue = tabsKeys.map(v => !!(+tabs[v]['@DEFAULT'])).reduce((prevValue, currValue) => (prevValue || currValue), false);
+            //inner += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>Select your option</option>`;
+            tabsKeys.map(o => inner += `<option value="${tabs[o]['@VALUE']}_${attributes.input_id}_${o}" ${!!(+tabs[o]['@DEFAULT']) ? "selected" : ""}>${tabs[o]['@NAME']}</option>`)
+            inner += `</select>
+                            </div>
+                        </div>
+                        <div id="showDiv_${attributes.input_id}"></div>`;
+
+            let addOnChangeCommand = "";
+            // add additional div with display=none
+            tabsKeys.forEach(key => {
+                let tabDiv = document.createElement('div');
+                tabDiv.id = tabs[key]['@VALUE'] + '_' + attributes.input_id + '_' + key;
+                tabDiv.style.display = 'none';
+
+                let tabFlag = (tabs[key]["PROPERTIES"] && Array.isArray(tabs[key]["PROPERTIES"]["PROPERTY"]));
+
+                let fieldsetDiv = document.createElement(tabFlag ? 'div' : 'fieldset');
+                fieldsetDiv.classList = 'row align-items-center';
+
+                let elementJSON;
+                if (tabs[key]["PROPERTIES"]) {
+                    if (!tabFlag) {
+                        fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${tabs[key]["PROPERTIES"]["PROPERTY"]["@TEXT"]}</legend>`);
+                    }
+                    elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
+
+                    for (elIndex in elementJSON) {
+                        if (!isNaN(elIndex)) {
+                            if (elementJSON[elIndex]['@TYPE'] === 'HIDDEN') continue;
+                            let innerString;
+                            if (elementJSON[elIndex]['@TYPE'] === "AND") {
+                                let andElements = elementJSON[elIndex]["PROPERTIES"]["PROPERTY"];
+                                if (Array.isArray(andElements)) {
+                                    for (andEl in andElements) {
+                                        innerString = transformGroupElement(andElements[andEl]);
+                                        if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                        innerString = '';
+                                    }
+                                } else {
+                                    innerString = transformGroupElement(andElements);
+                                }
+                            } else {
+                                innerString = transformGroupElement(elementJSON[elIndex]);
+                            }
+                            if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                            if (elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length === 0) {
+                                fieldsetDiv.classList.add('justify-content-around');
+                            }
+                        }
+                        else {
+                            if (elementJSON['@TYPE'] === 'HIDDEN') continue;
+                            const innerString = transformGroupElement(elementJSON);
+                            const newElement = document.createElement('div');
+                            let className = `col-xs-12 col-md-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
+                            newElement.classList = className;
+                            newElement.innerHTML = innerString;
+                            fieldsetDiv.appendChild(newElement);
+                            break;
+                        }
+                    }
+                    tabDiv.appendChild(fieldsetDiv);
+                } else { // tabs[key] without properties but with tabs, so the select must inpude the sendMessageWPF funcitonality 
+                    addOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}})`;
+                }                
+                inner += tabDiv.outerHTML;
+            })
+            if (addOnChangeCommand) {
+                inner = inner.substring(0, inner.indexOf('" ><option value="0')) +
+                    addOnChangeCommand + inner.substring(inner.indexOf('" ><option value="0'));
+            }
+            return inner;
         case 'INT':
             return getNumberInput({ ...attributes });
 
@@ -516,6 +629,7 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                         name="${input_id}"
                         ${max ? `data-maxlength="${`${max}`.length}"` : ""}
                         oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+                        onchange"javascript: myFunction2(this.id)"
                         onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
                         ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
                         ${value ? `value="${value}"` : ""}
@@ -842,7 +956,7 @@ function addElement(id, elementType = "") {
 
         let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
         let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
-        
+
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
         const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
             `<div class="col-12" id=${last}>
@@ -866,7 +980,7 @@ function addElement(id, elementType = "") {
                     </div>
                 </div>
             </div>`) : ( //if the element is INPUT_GROUP
-                `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="row">
                         <fieldset style="min-width: 200px;">
                             <legend>Input Group ${last}</legend>
@@ -881,7 +995,7 @@ function addElement(id, elementType = "") {
                                 </p>
 
                         </fieldset>
-                        <div onclick="javascript:addInputGroup(${last})" class="mt-2 ml-1">
+                        <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
                             <i class="fa-solid fa-xmark fire"></i>
                         </div>
                     </div>
@@ -930,6 +1044,7 @@ function addElement(id, elementType = "") {
 
 // showing element function
 function showElement(id, elementType) {
+    let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
     let returnedJson;
     try {
         boundAsync.getJsonForElement(elementType, +id).then(res => {
@@ -938,104 +1053,13 @@ function showElement(id, elementType) {
                 if (Object.keys(returnedJson).length > 0) {
                     var el = document.getElementById("selected_area");
                     id = parseInt(id);
-                    var target = `<fieldset id="id_${id}">
-                                    <legend>Panel ${id}</legend>
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <div class="form-item roww flex">
-                                                    <label for="panelip_${id}">Panel IP</label>
-                                                    <input type="text"
-                                                            id="panelip_${id}"
-                                                            name="panelip_${id}"
-                                                            minlength="7"
-                                                            maxlength="15"
-                                                            size="15"
-                                                            pattern="^(\s*(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*\.){3}(\s*\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*$"
-                                                            value=" 0 . 0 . 0 . 0 " />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <button class="fire collapsible ml-1">Parameters</button>
-                                        <div class="collapsible-content fire">
-                                            <div class="row align-items-center m-1">
-                                                <div class="col-6">
-                                                    <div class="form-item roww disabled">
-                                                        <label for="state_${id}">State</label>
-                                                        <div class="select">
-                                                            <select id="state_${id}" name="state">
-                                                                <option value="loc">Normal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
-                                                    <div class="form-item roww disabled">
-                                                        <label for="status_${id}">Status</label>
-                                                        <div class="select">
-                                                            <select id="status_${id}" name="status">
-                                                                <option value="loc">none</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center m-1">
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="receive_msg_${id}">Receive messages</label>
-                                                        <input type="checkbox" id="receive_msg_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="receive_cmd_${id}">Receive commands</label>
-                                                        <input type="checkbox" id="receive_cmd_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="send_commands_${id}">Send commands</label>
-                                                        <input type="checkbox" id="send_commands_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <button class="fire collapsible ml-1">Panel Outputs</button>
-                                        <div class="collapsible-content fire">
-                                            <div class="row align-items-center m-1">
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="r_sounder_${id}">Repeat sounder</label>
-                                                        <input type="checkbox" id="r_sounder_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="r_fire_brigade_${id}">Repeat Fire bigrade</label>
-                                                        <input type="checkbox" id="r_fire_brigade_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="r_fault_output_${id}">Repeat Fault output</label>
-                                                        <input type="checkbox" id="r_fault_output_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-item roww">
-                                                        <label for="r_fire_protection_${id}">Repeat Fire protection</label>
-                                                        <input type="checkbox" id="r_fire_protection_${id}" class="ml10" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>`;
-                    el.innerHTML = target;
+                    const fieldset = document.createElement('fieldset');
+                    fieldset.id = `id_${id}`;
+                    fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign} ${id}</legend>`);
+                    drawFields(fieldset, returnedJson);
+                    var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
+                    if (oldFieldset) oldFieldset.replaceWith(fieldset);
+                    else el.appendChild(fieldset);
                     collapsible();
                     addVisitedBackground();
                 }
@@ -1044,4 +1068,50 @@ function showElement(id, elementType) {
     } catch (e) {
         console.log('Error', e);
     }
+}
+
+// loadDiv function required for TABs
+function loadDiv(it, id, value) {
+    var element = document.getElementById(value);
+    console.log('element.innerHTML', element, ' value ', value)
+    var addElement = document.getElementById(id);
+    console.log(it, "value -> element", value, "->", element, "id", id);
+    switch (true) {
+        case value.substr(0, 2) === "0_":
+        case value.substr(0, 2) === "1_":
+        case value.substr(0, 2) === "2_":
+        case value.substr(0, 2) === "3_":
+        case value.substr(0, 2) === "4_":
+        case value.substr(0, 2) === "5_":
+        case value.substr(0, 2) === "6_":
+        case value.substr(0, 2) === "7_":
+        case value.substr(0, 2) === "8_":
+        case value.substr(0, 2) === "9_":
+        case value.substr(0, 3) === "10_":
+        case value.substr(0, 3) === "11_":
+        case value.includes("Teletek"):
+        case value.includes("System"):
+        case value.includes("sounder_zonal"):
+        case value.includes("common_fire"):
+            addElement.innerHTML = element.innerHTML;
+            var execute = addElement.querySelector('select');
+            if (execute && execute.onchange.toLocaleString().includes("loadDiv")) {
+                execute.onchange();
+            }
+            break;
+        default:
+            addElement.innerHTML = "";
+            break;
+    }
+    var addElementHeight = element.scrollHeight;
+    var content = it.parentNode;
+    while (!content.classList.contains("collapsible-content")) {
+        content = content.parentNode;
+        if (content === document.body)
+            break;
+    }
+    if (content.classList.contains("collapsible-content")) {
+        content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
+    }
+    addVisitedBackground();
 }
