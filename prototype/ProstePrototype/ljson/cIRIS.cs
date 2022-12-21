@@ -467,7 +467,14 @@ namespace ljson
             {
                 string key = p.Name.ToString();
                 JObject prop = Contains2Object((JObject)json["ELEMENTS"][key]["PROPERTIES"]);
-                json["ELEMENTS"][key]["PROPERTIES"] = prop;
+                if (json["ELEMENTS"][key]["PROPERTIES"] == null)
+                    json["ELEMENTS"][key]["PROPERTIES"] = new JObject();
+                if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"] == null)
+                    json["ELEMENTS"][key]["PROPERTIES"]["Groups"] = new JObject();
+                if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] == null)
+                    json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["name"] = "";
+                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["fields"] = prop;
             }
         }
         #endregion
@@ -696,7 +703,14 @@ namespace ljson
                 json["ELEMENTS"][key]["OLD"]["CHANGE"] = oldchange;
                 json["ELEMENTS"][key]["OLD"]["PROPERTIES"] = oldprops;
                 json["ELEMENTS"][key]["CHANGE"] = ConvertPreripherialDevicesContentNodeChange(dev);
-                json["ELEMENTS"][key]["PROPERTIES"] = ConvertPreripherialDevicesContentNodeProps(dev);
+                if (json["ELEMENTS"][key]["PROPERTIES"] == null)
+                    json["ELEMENTS"][key]["PROPERTIES"] = new JObject();
+                if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"] == null)
+                    json["ELEMENTS"][key]["PROPERTIES"]["Groups"] = new JObject();
+                if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] == null)
+                    json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["name"] = "";
+                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["fields"] = ConvertPreripherialDevicesContentNodeProps(dev);
             }
         }
         #endregion
