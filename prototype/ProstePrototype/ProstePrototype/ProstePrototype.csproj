@@ -115,10 +115,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Configs\XML\Read\ReadConfig_eclipse99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Read\ReadConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Templates\ECLIPSE99.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Templates\IRIS8.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Write\WriteConfig_eclipse99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Write\WriteConfig_iris8_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\dark.css">
@@ -574,6 +586,11 @@
 
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="104.4.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configs\XML\Write\" />
+    <Folder Include="Configs\XML\Read\" />
   </ItemGroup>
 
 </Project>
