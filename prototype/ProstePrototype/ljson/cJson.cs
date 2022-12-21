@@ -24,11 +24,15 @@ using System.Printing;
 using lcommunicate;
 using common;
 using System.Windows.Shapes;
+using System.Windows.Markup;
 
 namespace ljson
 {
     public class cJson
     {
+        #region old xml configs
+        private static JObject _write_relations = new JObject();
+
         private static Dictionary<string, cXmlConfigs> _panel_xmls = new Dictionary<string, cXmlConfigs>();
         private static object _cs_panel_xmls = new object();
 
@@ -42,6 +46,89 @@ namespace ljson
             return cfg;
         }
 
+        private static void SetLNGID(cXmlConfigs cfg)
+        {
+            //
+            Dictionary<string, Dictionary<string, cWriteField>> ids = cfg.WriteXpaths;
+            XmlDocument xml = (XmlDocument)cfg.Config;
+            if (ids == null || xml == null)
+                return;
+            string[] keys = new string[ids.Count];
+            ids.Keys.CopyTo(keys, 0);
+            //
+            StringBuilder err = new StringBuilder();
+            //Dictionary<string, StringBuilder> lists = new Dictionary<string, StringBuilder>();
+            //
+            foreach (string key in keys)
+            {
+                Dictionary<string, cWriteField> flds = ids[key];
+                string[] fldkeys = new string[flds.Count];
+                flds.Keys.CopyTo(fldkeys, 0);
+                foreach (string fkey in fldkeys)
+                {
+                    string xpath = flds[fkey].path;
+                    //
+                    //Match m = Regex.Match(xpath, @"ELEMENTS/ELEMENT[\w\W]*?(\[\s*?@ID\s*?=[\w\W]+?\])([\w\W]*?)(/ELEMENTS/ELEMENT[\w\W]*?)\[(\d+?)\D", RegexOptions.IgnoreCase);
+                    //Match m = Regex.Match(xpath, @"(\[\s*?@ID\s*?=[\w\W]+?\])([\w\W]*?)(/ELEMENTS/ELEMENT[\w\W]*?)", RegexOptions.IgnoreCase);
+                    //if (m.Success)
+                    //{
+                    //    string grp = m.Groups[1].Value + m.Groups[2].Value + m.Groups[3].Value;
+                    //    //int idx = Convert.ToInt32(m.Groups[4].Value);
+                    //    //if (idx <= 1)
+                    //    //{
+                    //        if (!lists.ContainsKey(grp))
+                    //            lists.Add(grp, new StringBuilder());
+                    //        lists[grp].Append(xpath + "\n");
+                    //    //}
+                    //    continue;
+                    //}
+                    //
+                    //if (Regex.IsMatch(xpath, @"^properties", RegexOptions.IgnoreCase))
+                    //    xpath = "ELEMENTS/ELEMENT[1]/" + xpath;
+                    //if (Regex.IsMatch(xpath, @"ELEMENTS/ELEMENT[\w\W]*?/ELEMENTS/ELEMENT", RegexOptions.IgnoreCase))
+                    //    xpath = Regex.Replace(xpath, @"^ELEMENTS/ELEMENT[\w\W]*?/", "", RegexOptions.IgnoreCase);
+                    //xpath = Regex.Replace(xpath, @"^([\w\W]+?/ELEMENT\[[\w\W]+?=[\w\W]+?\])\[\d+?\](/[\w\W]+$)", "$1$2", RegexOptions.IgnoreCase);
+                    XmlNode node = null;
+                    try
+                    {
+                        node = xml.SelectSingleNode(xpath);
+                    }
+                    catch { }
+                    if (node != null)
+                    {
+                        string propid = null;
+                        string proppath = Regex.Replace(xpath, @"^([\w\W]+?PROPERTY)\[[\w\W]+$", "$1", RegexOptions.IgnoreCase);
+                        XmlNode propnode = xml.SelectSingleNode(proppath);
+                        if (propnode != null)
+                            propid = propnode.Attributes["LNGID"].Value;
+                        //
+                        string lngid = node.Attributes["LNGID"].Value;
+                        ids[key][fkey].lngid = lngid;
+                    }
+                    else
+                        err.Append(xpath + "\n");
+                }
+            }
+            //foreach (string key in lists.Keys)
+            //{
+            //    string el = Regex.Replace(key, @"[\w\W]+?(/ELEMENTS[\w\W]+$)", "$1", RegexOptions.IgnoreCase);
+            //    string keyid = null;
+            //    XmlNode keynode = xml.SelectSingleNode(el);
+            //    if (keynode != null)
+            //        keyid = keynode.Attributes["LNGID"].Value;
+            //    string[] paths = lists[key].ToString().Split('\n');
+            //    string propkey = null;
+            //    foreach (string xpath in paths)
+            //    {
+            //        string dkey = xpath;
+            //        string proppath = Regex.Replace(xpath, @"[\w\W]+?(/ELEMENTS[\w\W]+$)", "$1", RegexOptions.IgnoreCase);
+            //    }
+            //}
+            //int cnt = lists.Count;
+            //
+            //string s = "";
+        }
+
         private static void SetPanelXMLConfigs(string key, cXmlConfigs cfg)
         {
             Monitor.Enter(_cs_panel_xmls);
@@ -49,8 +136,11 @@ namespace ljson
                 _panel_xmls[key] = cfg;
             else
                 _panel_xmls.Add(key, cfg);
+            SetLNGID(cfg);
+            Dictionary<string, cWriteField> lngids = cfg.WriteFieldsByLNGID;
             Monitor.Exit(_cs_panel_xmls);
         }
+        #endregion
 
         private static Dictionary<string, JObject> _panel_temlates = new Dictionary<string, JObject>();
         private static object _cs_panel_templates = new object();
