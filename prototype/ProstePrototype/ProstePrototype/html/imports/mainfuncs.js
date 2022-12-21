@@ -1,4 +1,10 @@
-﻿//try {
+﻿const BUTTON_COLORS = {
+    IRIS: 'fire',
+    ECLIPSE: '',
+    TTE: 'grasse',
+};
+
+//try {
 //    boundAsync.showMessage("me").then(text => alert(text));
 //} catch (e) {
 //    alert(e);
@@ -59,6 +65,12 @@ function receiveMessageWPF(jsonTxt) {
                 body.appendChild(divD);
             }
             break;
+        case !!document.getElementById("divAddDevices"):
+            console.log('divAdd');
+            body = document.getElementById('divAddDevices');
+
+            drawWithModal(body, json);
+            break;
         default:
             // case divIRIS, divTTE, divECLIPSE
             /*alert('default')*/
@@ -73,6 +85,40 @@ function receiveMessageWPF(jsonTxt) {
             break;
     }
     pagePreparation();
+}
+
+const drawWithModal = (body, json) => {
+    // getting keys and adding elements to modal for each
+    keys = Object.keys(json).filter(k => k !== '~path');
+
+    lst = [0];
+    elements = keys.length + 1;
+
+    var deviceList = body.querySelector('#deviceList');
+    var modalList = deviceList.querySelector('#list-tab');
+    console.log('deviceList', deviceList)
+    for (k of keys)
+    {
+        if (k.split('_').pop() === 'NONE') continue;
+        console.log('key', k);
+        let elType = Object.keys(BUTTON_IMAGES).find(x => k.includes(x));
+
+        console.log('elType', elType)
+        modalList.insertAdjacentHTML('beforeend', `<button type="button"
+                                class="list-group-item col"
+                                id="${k.toLowerCase()}_btn"
+                                onclick="javascript: addElement('element', '${k}')"
+                                data-toggle="tab"
+                                role="tab"
+                                aria-selected="false">
+                            <div class="btnStyle fire">
+                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p-2"></i>
+                                <div class="someS">
+                                    <h5>${k.split('_').slice(1).join(' ').toUpperCase()}</h5>
+                                </div>
+                            </div>
+                        </button>`)
+    };
 }
 
 const drawFields = (body, json) => {
@@ -103,7 +149,7 @@ const drawFields = (body, json) => {
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
             body.appendChild(fieldset);
         } else if (!divLevel["@TYPE"] && !divLevel.name) {
-            for (let i = 0; i < +divLevel["@MIN"]; i++) lst.push(i + 1);
+            for (let i = 0; i < +divLevel["@MIN"]; i++) if (!lst.includes(i + 1)) lst.push(i + 1);
             elements = divLevel["@MAX"] && (+divLevel["@MAX"] + 1);
             let btnDiv = document.getElementById("buttons");
             // adding the button
@@ -942,6 +988,7 @@ function addActive() {
 
 // adding button elements function
 function addElement(id, elementType = "") {
+    console.log('DONE', elementType)
     if (id === "element") {
         var last = 0;
         for (i = 1; i <= elements; i++) {
@@ -953,7 +1000,6 @@ function addElement(id, elementType = "") {
             }
         }
         if (last === 0 || lst.includes(last)) return;
-
         let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
         let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
 
@@ -967,7 +1013,7 @@ function addElement(id, elementType = "") {
                                 <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">
                                     <br /><span class="someS">
                                         <span class="h5">
-                                            ${BUTTON_IMAGES[elType].sign} ${last}
+                                            ${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}
                                         </span>
                                     </span>
                                 </i>
@@ -1073,9 +1119,9 @@ function showElement(id, elementType) {
 // loadDiv function required for TABs
 function loadDiv(it, id, value) {
     var element = document.getElementById(value);
-    console.log('element.innerHTML', element, ' value ', value)
+    //console.log('element.innerHTML', element, ' value ', value)
     var addElement = document.getElementById(id);
-    console.log(it, "value -> element", value, "->", element, "id", id);
+    //console.log(it, "value -> element", value, "->", element, "id", id);
     switch (true) {
         case value.substr(0, 2) === "0_":
         case value.substr(0, 2) === "1_":
