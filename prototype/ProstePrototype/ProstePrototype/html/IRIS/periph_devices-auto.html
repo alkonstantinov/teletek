@@ -14,52 +14,17 @@
     <title>Teletek Manager</title>
 </head>
 <body class="fullHeight">
-    <div class="container fullHeight" id="divAddDevices">
+    <div class="container fullHeight" id="divPDevices">
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
         <div class="row fullHeight">
             <div class="col-3 bl fire scroll">
-                <div id="new_device" class="row">
-                    <!--<div class="col-12" id="id_1">
-                        <div class="row">
-                            <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('power_supply', 'id_1')" onclick="javascript:addActive()">
-                                    <div class="btnStyle fire">
-                                        <i class="fa-solid fa-plug fa-3x p15" aria-hidden="true">
-                                            <br /><span class="someS">
-                                                <span class="h5">Power Supply</span>
-                                            </span>
-                                        </i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(1)">
-                                <i class="fa-solid fa-xmark fire"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12" id="id_2">
-                        <div class="row">
-                            <div class="col-11 pr-1">
-                                <a href="javascript:showDevice('input0_outrel4_outmon4', 'id_2')" onclick="javascript:addActive()">
-                                    <div class="btnStyle fire">
-                                        <i class="fa-solid fa-arrow-down-up-across-line fa-3x p15" aria-hidden="true">
-                                            <br /><span class="someS">
-                                                  <span class="h5">INPUT0 OUTREL4 OUTMON4</span>
-                                            </span>
-                                        </i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(2)">
-                                <i class="fa-solid fa-xmark fire"></i>
-                            </div>
-                        </div>
-                    </div>-->
+                <div id="new" class="row">
+
                 </div>
             </div>
             <div class="col-9 fullHeight">
-                <div id="selected_device" class="fullHeight">
+                <div id="selected_area" class="fullHeight">
 
                 </div>
             </div>
@@ -80,7 +45,7 @@
         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5" id="buttons">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
             <button type="button" class="btn-round btn-border-black">Back</button>-->
-            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
+            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="_btn" class="btn-round btn-border-black">
                 <i class="fa-solid fa-plus 5x"></i> Add New Device
             </button>
         </div>
@@ -92,6 +57,7 @@
             const BUTTON_IMAGES = {
                 LOOP: { im: 'fa-solid fa-arrows-spin', sign: '' },
                 OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+                OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
                 POWER: { im: 'fa-solid fa-plug', sign: '' },
                 PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
                 INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
@@ -100,142 +66,7 @@
                 ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
             };
         </script>
-
-        <!--<script>
-            function myFunction(id) {
-                var element = document.getElementById(id);
-                element.value = element.value.slice(0, element.dataset.maxlength);
-            }
-            function myFunction2(id) {
-                var element = document.getElementById(id);
-                if (+element.value > +element.max) {
-                    element.value = element.max;
-                }
-            }
-            function myFunction3(id) {
-                var element = document.getElementById(id);
-                if (!element.value.includes(":")) {
-                    console.log('before:', element.value);
-                    element.value += ":";
-                    console.log('after:', element.value);
-                }
-                const regex = new RegExp("[0-9]{1,2}:[0-9]{0,2}");
-                console.log('test', regex.test(element.value));
-                element.value = regex.exec(element.value);
-                console.log(element.value);
-            }
-
-            function addActive() {
-                $(document).on('click', '.btnStyle', function () {
-                    $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
-                    $(this).addClass('active');// here apply selected class on clicked btnStyle fire
-                });
-            }
-
-            function showDevice(id, currentId) {
-                console.log('curr', currentId);
-                var el = document.getElementById("selected_device");
-                let ver = false;
-                switch (id) {
-                    case "system_sensor_loop":
-                    case "tte_loop": ver = true; break
-
-                    default: break; //pwer_supply, inputs, loops
-                }
-                var target = `<div class="row mt-2" id="${currentId}">
-                                    ${ver ? `<div class="col-xs-12 col-md-6">
-                                    <div class="form-item roww flex disabled">
-                                        <label for="ver_${id}">Ver</label>
-                                        <input type = "text" id = "ver_${id}" name = "ver_${id}" />
-                                        </div >
-                                    </div >` : ''}
-                                    <div class="${ver ? 'col-xs-12 col-md-6' : 'col-12'}"><div class="form-item roww flex disabled">
-                                    <label for="device_state_${id}">Device State</label>
-                                    <div class="select">
-                                        <select id="device_state_${id}" name="device_state_${id}">
-                                            <option value="normal" selected>NORMAL</option>
-                                        </select>
-                                    </div></div></div>
-                                </div>`;
-                el.innerHTML = target;
-                addVisitedBackground();
-            }
-
-            //var lst = [1, 2];
-            const devices = 6;
-            function addConcreteDevice(id) {
-                for (i = 1; i <= devices; i++) {
-                    if (lst.includes(i)) {
-                        continue;
-                    } else {
-                        var last = i;
-                        break;
-                    }
-                }
-                if (lst.includes(parseInt(+id))) {
-                    var elem = document.querySelector(`[id $= _${+id}]`);
-                    if (elem) elem.parentNode.removeChild(elem);
-                    lst = lst.filter(function (item) {
-                        return item !== +id
-                    })
-
-                    var el = document.getElementById(`id_${id}`);
-                    if (el) el.parentNode.removeChild(el);
-
-                    let button = document.getElementById("device_btn");
-                    if (lst.length < devices && button.style.display === "none") {
-                        button.style.display = "inline-flex";
-                    }
-                }
-                else {
-                    let imgSource = "";
-                    let link = id.substr(0, id.length - 4);
-                    let title = link.toUpperCase().replaceAll("_", " ");
-                    switch (link) {
-                        case "power_supply": imgSource += "plug";  break;
-                        case "loop1_input4":
-                        case "loop1_outrel4":
-                        case "system_sensor_loop":
-                        case "tte_loop": imgSource += "arrows-spin"; break;
-                        default: imgSource += "arrow-down-up-across-line";
-                    }
-                    const newUserElement = `
-                                            <div class="col-12" id=${id + '_' + last}>
-                                                <div class="row">
-                                                    <div class="col-11 pr-1">
-                                                        <a href="javascript:showDevice('${link}', 'id_${last}' )" onclick="javascript:addActive()">
-                                                            <div class="btnStyle fire">
-                                                                <i class="fa-solid fa-${imgSource} fa-3x p15" aria-hidden="true">
-                                                                    <br /><span class="someS">
-                                                                        <span class="h5">${title}</span>
-                                                                    </span>
-                                                                </i>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-1 p-0 m-0" onclick="javascript:addConcreteDevice(${last})">
-                                                        <i class="fa-solid fa-xmark fire"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        `;
-                    var element = document.getElementById("new_device");
-                    var new_inner = `
-                                        ${element.innerHTML}
-                                        ${newUserElement}
-                                    `;
-                    lst.push(last);
-                    element.innerHTML = new_inner;
-
-                    // button display check
-                    if (lst.length === devices) {
-                        let button = document.getElementById("device_btn");
-                        button.style.display = "none";
-                    }
-                    $('#deviceList').modal('toggle');
-                }
-            }
-        </script>-->
+        
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>

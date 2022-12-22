@@ -122,13 +122,13 @@
   "iris_peripheral_devices": {
     "title": "Peripheral devices",
     "left": "menu-automatic.html",
-    "right": "IRIS/periph_devices.html",
+    "right": "IRIS/periph_devices-auto.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_loop_devices": {
     "title": "Loop devices",
     "left": "menu-automatic.html",
-    "right": "IRIS/loop_devices.html",
+    "right": "IRIS/loop_devices-auto.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "loop_devices_system_sensor_loop": {

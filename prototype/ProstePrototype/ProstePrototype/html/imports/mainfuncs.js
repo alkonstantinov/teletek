@@ -65,11 +65,19 @@ function receiveMessageWPF(jsonTxt) {
                 body.appendChild(divD);
             }
             break;
-        case !!document.getElementById("divAddDevices"):
-            console.log('divAdd');
-            body = document.getElementById('divAddDevices');
+        case !!document.getElementById("divPDevices"):
+            body = document.getElementById('divPDevices');
 
             drawWithModal(body, json);
+            break;
+        case !!document.getElementById("divLDevices"):
+            if (!elements && Object.keys(json)) {
+                elements = Object.keys(json).length - 1; // -1 for ~path
+            }
+            body = document.getElementById('divLDevices');
+            body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>Add up to ${elements} loops</p>`)
+
+            //drawWithModal(body, json);
             break;
         default:
             // case divIRIS, divTTE, divECLIPSE
@@ -100,14 +108,13 @@ const drawWithModal = (body, json) => {
     for (k of keys)
     {
         if (k.split('_').pop() === 'NONE') continue;
-        console.log('key', k);
+
         let elType = Object.keys(BUTTON_IMAGES).find(x => k.includes(x));
 
-        console.log('elType', elType)
         modalList.insertAdjacentHTML('beforeend', `<button type="button"
                                 class="list-group-item col"
                                 id="${k.toLowerCase()}_btn"
-                                onclick="javascript: addElement('element', '${k}')"
+                                onclick="javascript: addElement('element', '${k}'); $('#deviceList').modal('toggle');"
                                 data-toggle="tab"
                                 role="tab"
                                 aria-selected="false">
@@ -127,12 +134,11 @@ const drawFields = (body, json) => {
 
     keys.filter(k => k !== '~path').forEach(k => {
         let divLevel = json[k];
-
+        
         if (k.includes('~')) { // ~noname cases
             let div = document.createElement('div');
             div.classList = "row align-items-center m-2";
             elementsCreationHandler(div, divLevel);
-
             body.appendChild(div);
         } else if (divLevel.name === "Company Info") { // unique case "Company Info"
             let fieldset = document.createElement('fieldset');
@@ -199,6 +205,7 @@ const drawFields = (body, json) => {
 
 // creating elements on div level
 const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
+
     if (!jsonAtLevel) return;
     var elementKeys = Object.keys(jsonAtLevel);
     const pathStr = "~path";
@@ -206,7 +213,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 
     if (reverse)
         cleanKeys = cleanKeys.reverse();
-    cleanKeys.forEach(field => {
+    cleanKeys.forEach(field => {    
         // guard for null value of jsonAtLevel[field]
         if (jsonAtLevel[field] && jsonAtLevel[field]['@TYPE']) {
             if (jsonAtLevel[field]['@TYPE'] === "AND") {
@@ -215,6 +222,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             }
 
             const innerString = transformGroupElement(jsonAtLevel[field]);
+            if (!innerString) return;
             if (jsonAtLevel[field]['@TYPE'] === "WEEK") {
                 div.parentNode.parentNode.insertAdjacentHTML('beforeend', innerString);
                 return;
@@ -232,6 +240,8 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             } else {
                 window.setTimeout(() => addButton(title, field, div), 50);
             }
+        } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0){
+            elementsCreationHandler(div, jsonAtLevel[field])
         }
     });
 }
@@ -242,7 +252,7 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
     if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
     else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
 
-    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? ", 'Highlight':'${fieldKey}'" : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
+    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? `, 'Highlight':'${fieldKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
                 <div class="btnStyle ${color}">
                     <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
                         <br /><span class="someS">
@@ -988,7 +998,7 @@ function addActive() {
 
 // adding button elements function
 function addElement(id, elementType = "") {
-    console.log('DONE', elementType)
+
     if (id === "element") {
         var last = 0;
         for (i = 1; i <= elements; i++) {
@@ -1000,9 +1010,9 @@ function addElement(id, elementType = "") {
             }
         }
         if (last === 0 || lst.includes(last)) return;
+        
         let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
         let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
-
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
         const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
             `<div class="col-12" id=${last}>
@@ -1034,7 +1044,8 @@ function addElement(id, elementType = "") {
                                 <p class="fire">
                                     AND
                                     <label class="switch">
-                                        <input type="checkbox" id="gr_input_logic_${last}"/>
+                                        <input type="checkbox" id="gr_input_logic_${last}"
+                                              onchange="javascript: inputGroupHandler('${ elementType }','${last}', this.checked );"/>
                                         <span class="slider"></span>
                                     </label>
                                     OR
@@ -1088,6 +1099,15 @@ function addElement(id, elementType = "") {
     }
 }
 
+const inputGroupHandler = (elementType, id, isOR) => {
+    let newValue = isOR ? "0": "255";
+    boundAsync.getJsonForElement(elementType, +id).then(res => {
+        let returnedJson = JSON.parse(res)
+        let returnedJsonPath = returnedJson[Object.keys(returnedJson)[0]]["fields"]["Input_Logic"]["~path"];
+        sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${returnedJsonPath}` ,'newValue': newValue}})
+    });
+};
+
 // showing element function
 function showElement(id, elementType) {
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
@@ -1101,7 +1121,7 @@ function showElement(id, elementType) {
                     id = parseInt(id);
                     const fieldset = document.createElement('fieldset');
                     fieldset.id = `id_${id}`;
-                    fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign} ${id}</legend>`);
+                    fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ') } ${id}</legend>`);
                     drawFields(fieldset, returnedJson);
                     var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
                     if (oldFieldset) oldFieldset.replaceWith(fieldset);

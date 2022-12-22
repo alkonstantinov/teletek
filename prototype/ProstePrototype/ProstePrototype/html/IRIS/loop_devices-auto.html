@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" class="fullHeight">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../imports/css/all.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+
+    <title>Teletek Manager</title>
+</head>
+<body class="fullHeight">
+    <div class="container fullHeight" id="divLDevices">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+
+        <div class="row fullHeight">
+            <div class="col-3 bl fire scroll">
+                <div id="new" class="row">
+                </div>
+            </div>
+            <div class="col-9 fullHeight">
+                <div id="selected_area" class="fullHeight">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="row list-group fire" id="list-tab" role="tablist">
+                        <button 
+                            type="button"
+                            class="list-group-item col-6 active show"
+                            id="list-teletek_loop" data-toggle="tab"
+                            onclick="javascript: addElement('element', 'IRIS_TELETEK_LOOP'); $('#deviceList').modal('toggle');"
+                            role="tab"
+                            aria-controls="list-teletek_loop"
+                            aria-selected="false">
+                            <div class="btnStyle fire">
+                                <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
+                                    <br /><span class="someS">
+                                        <span class="h5">Teletek Loop</span>
+                                    </span>
+                                </i>                                        
+                            </div>
+                        </button>
+                        <button 
+                            type="button" 
+                            class="list-group-item col-6" 
+                            id="list-system_sensor_loop" 
+                            data-toggle="tab" 
+                            onclick="javascript: addElement('element', 'IRIS_SYSTEM_SENSOR_LOOP'); $('#deviceList').modal('toggle');" 
+                            role="tab" 
+                            aria-controls="list-system_sensor_loop" 
+                            aria-selected="false">
+                            <div class="btnStyle fire">
+                                <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
+                                    <br /><span class="someS">
+                                        <span class="h5">System Sensor Loop</span>
+                                    </span>
+                                </i>
+                            </div>
+                        </button>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
+            <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="_btn" class="btn-round btn-border-black">
+                <i class="fa-solid fa-plus 5x"></i> Add New Device
+            </button>
+        </div>
+
+
+        <script>
+            let elements;
+            let lst = [0];
+
+            const BUTTON_IMAGES = {
+                LOOP: { im: 'fa-solid fa-arrows-spin', sign: '' },
+                OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+                OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+                POWER: { im: 'fa-solid fa-plug', sign: '' },
+                PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
+                INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
+                OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
+                EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
+                ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
+            };
+        </script>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script>
+
+//        wb2 = `{
+//  "IRIS8_NO_LOOP1": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "cfeb8166-73d9-4c1e-a894-cde3d4cb92eb",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP1"
+//  },
+//  "IRIS8_NO_LOOP2": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "9e599e0b-297e-4fc3-bb07-c598aba46f52",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP2"
+//  },
+//  "IRIS8_NO_LOOP3": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "c32c40ad-3604-446c-b4ed-a584da0c4ed4",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP3"
+//  },
+//  "IRIS8_NO_LOOP4": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "9d618f86-160b-4794-9a81-ab141c91c9d1",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP4"
+//  },
+//  "IRIS8_NO_LOOP5": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "b6ff0609-af94-477e-aaa8-2cd14e4678eb",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP5"
+//  },
+//  "IRIS8_NO_LOOP6": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "44ab8cfc-a7e2-48e8-b541-97f6f9a401b8",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP6"
+//  },
+//  "IRIS8_NO_LOOP7": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "54fc5d92-282a-45db-9786-4bcfd206ef44",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP7"
+//  },
+//  "IRIS8_NO_LOOP8": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "a1137b78-9ad8-4d42-9308-62db4dbdbc86",
+//    "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP8"
+//  },
+//  "~path": "ELEMENTS.iris_loop_devices.CONTAINS"
+//}`;
+//        receiveMessageWPF(wb2);
+    </script>
+</body>
+</html>
