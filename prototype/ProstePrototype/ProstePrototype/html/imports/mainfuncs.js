@@ -1,6 +1,6 @@
 ﻿const BUTTON_COLORS = {
     IRIS: 'fire',
-    ECLIPSE: '',
+    ECLIPSE: 'normal',
     TTE: 'grasse',
 };
 
@@ -190,7 +190,9 @@ const drawFields = (body, json) => {
                 input_name: divLevel.name,
                 input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
             }
-            var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+
+            var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
+            var inside = `<button class="${colors ? BUTTON_COLORS[colors] : '' } collapsible ml-1 collapsible_${input_id}">${input_name}</button>
                 <div class="collapsible-content col-12">
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
