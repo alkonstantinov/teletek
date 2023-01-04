@@ -58,9 +58,7 @@ function receiveMessageWPF(jsonTxt) {
             for (let i = 0; i < devices.length; i++) {
                 const src = "pages-dynamic.js";
                 if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
-                    loadScript(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), src);
-                    //await new Promise(r => setTimeout(r, 50));
-                    
+                    loadScript(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), src);                    
                 } else {
                     window.setTimeout(() =>
                         addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i])
@@ -247,7 +245,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             const src = "pages-dynamic.js";
             if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
                 loadScript(() => addButton(title, field, div), src);
-                alert(title + ' wait finished ' + document.querySelectorAll(`script[src*="${src}"]`).length)
+                //doSleep(50);
             } else {
                 //window.setTimeout(() =>
                     addButton(title, field, div)
@@ -258,6 +256,11 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
         }
     });
 }
+
+//async function doSleep(time) {
+//    // Sleep for 0.05 seconds
+//    await new Promise(r => setTimeout(r, time));
+//}
 
 const addButton = (title, fieldKey, div, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
