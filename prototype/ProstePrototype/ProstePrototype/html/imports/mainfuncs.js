@@ -4,13 +4,8 @@
     TTE: 'grasse',
 };
 
-//try {
-//    boundAsync.showMessage("me").then(text => alert(text));
-//} catch (e) {
-//    alert(e);
-//}
-
 let darkModeStylesheetId = "ssDarkMode";
+
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
         try {
@@ -47,7 +42,12 @@ function receiveMessageWPF(jsonTxt) {
             if (body.firstElementChild?.tagName === 'FIELDSET') {
                 body = body.firstElementChild;
             }
-            drawFields(body, json);
+
+            let path = json["~path"];
+            let color;
+            if (path) color = Object.keys(BUTTON_COLORS).find(x => path.toUpperCase().includes(x));
+
+            drawFields(body, json, color ? BUTTON_COLORS[color] : '');
             break;
         case !!document.getElementById('divDevices'):
             //alert('divDevices')
@@ -59,8 +59,12 @@ function receiveMessageWPF(jsonTxt) {
                 const src = "pages-dynamic.js";
                 if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
                     loadScript(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), src);
+                    //await new Promise(r => setTimeout(r, 50));
+                    
                 } else {
-                    window.setTimeout(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), 50);
+                    window.setTimeout(() =>
+                        addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i])
+                        , 50);
                 }
                 body.appendChild(divD);
             }
@@ -89,10 +93,13 @@ function receiveMessageWPF(jsonTxt) {
             elementsCreationHandler(div, json, reverse = false);
 
             body.appendChild(div);
-
+            
             break;
     }
-    pagePreparation();
+    $(function () {
+        // DOM Ready - do your stuff
+        pagePreparation();
+    }); 
 }
 
 const drawWithModal = (body, json) => {
@@ -104,7 +111,7 @@ const drawWithModal = (body, json) => {
 
     var deviceList = body.querySelector('#deviceList');
     var modalList = deviceList.querySelector('#list-tab');
-    console.log('deviceList', deviceList)
+
     for (k of keys)
     {
         if (k.split('_').pop() === 'NONE') continue;
@@ -128,10 +135,10 @@ const drawWithModal = (body, json) => {
     };
 }
 
-const drawFields = (body, json) => {
+function drawFields (body, json, inheritedColor = '') {
     // getting keys and creating element for each
     keys = Object.keys(json);
-
+    
     keys.filter(k => k !== '~path').forEach(k => {
         let divLevel = json[k];
         
@@ -192,7 +199,8 @@ const drawFields = (body, json) => {
             }
 
             var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
-            var inside = `<button class="${colors ? BUTTON_COLORS[colors] : '' } collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+
+            var inside = `<button class="${inheritedColor || (colors ? BUTTON_COLORS[colors] : '') } collapsible ml-1 collapsible_${input_id}">${input_name}</button>
                 <div class="collapsible-content col-12">
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
@@ -239,8 +247,11 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             const src = "pages-dynamic.js";
             if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
                 loadScript(() => addButton(title, field, div), src);
+                alert(title + ' wait finished ' + document.querySelectorAll(`script[src*="${src}"]`).length)
             } else {
-                window.setTimeout(() => addButton(title, field, div), 50);
+                //window.setTimeout(() =>
+                    addButton(title, field, div)
+                    //, 50);
             }
         } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0){
             elementsCreationHandler(div, jsonAtLevel[field])
@@ -482,17 +493,45 @@ function collapsible(param) {
 }
 collapsible();
 
-// searching for menu context menu on the page - beginning of contextMenu part
-menuEl = document.getElementById("ctxMenu");
-if (menuEl) {
-    var elems = document.querySelectorAll('a');
-    for (var i = 0; i < elems.length; i++) {
-        elems[i].oncontextmenu = function (e) {
-            return showContextMenu(this);
-        }
-    }
-}
+function sendMsg(el) {
+    //console.log('event', event);
+    var json = JSON.parse(el.parentNode.getAttribute("sendMessage"));
+    json["Function"] = el.title;
+    sendMessageWPF(json);
 
+}
+// finish of the contextMenu part
+
+function pagePreparation () {
+    $(document).ready(() => {
+        addVisitedBackground();
+        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+
+        let searchParams = new URLSearchParams(window.location.search)
+
+        // position the selected btn and selecting it
+        if (searchParams.has('highlight')) {
+            elem = document.getElementById(searchParams.get('highlight')).children[0];
+            if (elem) {
+                $(elem).addClass('active');
+            }
+            elem.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+
+        // searching for menu context menu on the page - beginning of contextMenu part
+        menuEl = document.getElementById("ctxMenu");
+        if (menuEl) {
+            var elems = document.querySelectorAll('a');
+            for (var i = 0; i < elems.length; i++) {
+                elems[i].oncontextmenu = function (e) {
+                    return showContextMenu(this);
+                }
+            }
+        }
+               
+    });
+}
+//pagePreparation();
 function showContextMenu(el) {
     event.preventDefault();
     let s = JSON.parse(el.href.slice(26, -1).replaceAll('\'', '\"'));
@@ -507,32 +546,6 @@ function showContextMenu(el) {
     return false;
 }
 
-function sendMsg(el) {
-    //console.log('event', event);
-    var json = JSON.parse(el.parentNode.getAttribute("sendMessage"));
-    json["Function"] = el.title;
-    sendMessageWPF(json);
-
-}
-// finish of the contextMenu part
-
-const pagePreparation = () => {
-    $(document).ready(() => {
-        addVisitedBackground();
-        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
-
-        let searchParams = new URLSearchParams(window.location.search)
-        // position the selected btn and selecting it
-        if (searchParams.has('highlight')) {
-            elem = document.getElementById(searchParams.get('highlight')).children[0];
-            if (elem) {
-                $(elem).addClass('active');
-            }
-            elem.scrollIntoView({ behavior: 'auto', block: 'center' });
-        }
-    });
-}
-pagePreparation();
 // checking a hex value function
 function checkHexRegex(event) {
     let val = event.target.value;
@@ -1113,6 +1126,7 @@ const inputGroupHandler = (elementType, id, isOR) => {
 // showing element function
 function showElement(id, elementType) {
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
+    let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
     let returnedJson;
     try {
         boundAsync.getJsonForElement(elementType, +id).then(res => {
@@ -1124,7 +1138,7 @@ function showElement(id, elementType) {
                     const fieldset = document.createElement('fieldset');
                     fieldset.id = `id_${id}`;
                     fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ') } ${id}</legend>`);
-                    drawFields(fieldset, returnedJson);
+                    drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
                     var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
                     if (oldFieldset) oldFieldset.replaceWith(fieldset);
                     else el.appendChild(fieldset);

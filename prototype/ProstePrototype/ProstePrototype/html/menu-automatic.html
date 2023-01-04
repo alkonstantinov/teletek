@@ -31,16 +31,11 @@
     <script src="imports/popper.min.js"></script>
     <script src="imports/boostrap@4.3.1.min.js"></script>
     <script src="imports/bootstrap-datepicker.min.js"></script>
+    <script src="pages-dynamic.js"></script>
     <script src="imports/font-awesome.js"></script>
     <script src="imports/mainfuncs.js"></script>
 
     <script>
-        function loadDiv(id, bc) {
-            $("#divMain").html($('#' + id).html());
-            CefSharp.PostMessage(bc);
-            //$("#olBC").empty();
-            //bc.split('|').forEach(x => $("#olBC").append($("<li class='breadcrumb-item active' aria-current='page'>" + x + "</li>")));
-        }
 
     </script>
 </body>

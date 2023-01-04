@@ -128,7 +128,7 @@
   "iris_loop_devices": {
     "title": "Loop devices",
     "left": "menu-automatic.html",
-    "right": "IRIS/loop_devices-auto.html",
+    "right": "IRIS/loop_devices.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "loop_devices_system_sensor_loop": {
