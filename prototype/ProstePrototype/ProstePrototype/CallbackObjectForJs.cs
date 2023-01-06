@@ -20,7 +20,8 @@ namespace ProstePrototype
             return "Hi from " + msg;
         }
 
-        public string getJsonForElement(string elementType, int elementNumber) {
+        public string getJsonForElement(string elementType, int elementNumber)
+        {
 
             // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
@@ -28,6 +29,11 @@ namespace ProstePrototype
             res = cJson.GroupsWithValues(res).ToString();
             File.WriteAllTextAsync("wb3.json", res);
             return res;
+        }
+
+        public string getJsonNodeForElement(string elementType, int elementNumber, string key)
+        {
+            return "{}";
         }
     }
 }
