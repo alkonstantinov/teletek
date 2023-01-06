@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Wpf;
+using lcommunicate;
 using ljson;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
@@ -7,6 +8,7 @@ using ProstePrototype.POCO;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -41,9 +43,14 @@ namespace ProstePrototype
             public string JSfunc { get; set; }
             public string Params { get; set; }
         }
+        private CallbackObjectForJs _callBackObjectForJs;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _callBackObjectForJs = new CallbackObjectForJs();
+
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
             //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
             #region temporary params
@@ -69,8 +76,7 @@ namespace ProstePrototype
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
 
             //wb0.Load("file:///" + navigation);
-            //pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
-            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages-dynamic.json")));
+            pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
             DataContext = this;
 
             DarkMode = false;
@@ -79,6 +85,11 @@ namespace ProstePrototype
             wb2.Tag = new BrowserParams { Name = "wb2", JSfunc = "receiveMessageWPF" };
             wb1.LoadingStateChanged += OnStateChanged;
             wb2.LoadingStateChanged += OnStateChanged;
+
+            wb1.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            wb1.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
+            wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
         }
 
 
@@ -260,6 +271,19 @@ namespace ProstePrototype
                             break;
                     }
                     break;
+                case "changedValue":
+                    cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
+                    break;
+                case "AddingElement":
+                    string elementType = json["Params"]["elementType"].ToString();
+                    elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
+                    string elementNumber = json["Params"]["elementNumber"].ToString();
+                    JObject el = cJson.GetNode(elementType);
+                    el = (JObject)el["PROPERTIES"]["Groups"];
+                    JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
+                    string _template = newpaths.ToString();
+                    cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
+                    break;
             }
         }
 
@@ -270,7 +294,14 @@ namespace ProstePrototype
             //    RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
             //    LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
             //};
-            JObject jnode = cJson.GetNode(page);
+            JObject jnode = new JObject(cJson.GetNode(page));
+            JToken t = jnode["PROPERTIES"];
+            if (t != null)
+            {
+                t = ((JObject)t)["Groups"];
+                if (t != null)
+                    jnode["PROPERTIES"]["Groups"] = cJson.GroupsWithValues(jnode["PROPERTIES"]["Groups"].ToString());
+            }
             var lpd = new LoadPageData()
             {
                 //RightBrowserUrl = jnode["right"].ToString(),
@@ -301,7 +332,7 @@ namespace ProstePrototype
                     //((BrowserParams)wb1.Tag).Params = $@"{{ ""pageName"": ""wb1: {data.LeftBrowserUrl}"" }}";
                     ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
                 });
-                
+
                 wb1.Load(url);
                 this.Dispatcher.Invoke(() =>
                 {
@@ -351,12 +382,14 @@ namespace ProstePrototype
                     string jsParams = ((BrowserParams)btag).Params;
                     string browserName = ((BrowserParams)btag).Name;
                     ChromiumWebBrowser bCall = (browserName == "wb1") ? wb1 : wb2;
-                    Send_JSCommand(bCall, jsParams);                    
+                    Send_JSCommand(bCall, jsParams);
                 });
             }
         }
         private void Send_JSCommand(ChromiumWebBrowser browser, string jsonTxt, string jsFuncName = "receiveMessageWPF")
         {
+            if (browser.Name == "wb2") File.WriteAllTextAsync("wb2.json", jsonTxt);
+            if (browser.Name == "wb1") File.WriteAllTextAsync("wb1.json", jsonTxt);
             browser.ExecuteScriptAsync(jsFuncName, new object[] { jsonTxt });
         }
         #endregion
@@ -422,7 +455,8 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
-            string index = "index.html";
+            //string index = "index.html";
+            string index = "index-automatic.html";
             if ((bool)c)
             {
                 string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);

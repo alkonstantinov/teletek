@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="fullHeight">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../boostrap.css" />
+    <link rel="stylesheet" href="../imports/css/all.css" />
+    <link rel="stylesheet" href="../IRIS.css" />
+    <title>Teletek Manager</title>
+</head>
+<body class="fullHeight">
+    <div class="container fullHeight" id="divMain">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <div class="row pt-2 fullHeight">
+            <div class="col-3 bl fire scroll">
+                <div id="new" class="row">
+
+                </div>
+            </div>
+            <div class="col-9">
+                <div id="selected_area"></div>
+            </div>
+        </div>
+
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt15" id="buttons">
+
+        </div>
+    </div>
+    <script>
+        // 'constants' declaration
+        let lst = [];
+        let elements;
+        
+        const BUTTON_IMAGES = {
+            PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
+            INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
+            OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
+            EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
+            ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
+            //: { im: '', sign: '' },
+            //: { im: '', sign: '' },
+        };
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/popper.min.js"></script>
+    <script src="../imports/boostrap@4.3.1.min.js"></script>
+    <script src="../imports/bootstrap-datepicker.min.js"></script>
+    <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script>
+//        var js = `{
+//  "IRIS8_INPUT_GROUP": {
+//    "@MIN": "0",
+//    "@MAX": "250",
+//    "@LNGID": "f0f2885c-a61b-410a-b5dd-27c2acab68e2",
+//    "~path": "ELEMENTS.iris_inputs_group.CONTAINS.IRIS8_INPUT_GROUP"
+//  },
+//  "~path": "ELEMENTS.iris_inputs_group.CONTAINS"
+//}`;
+        receiveMessageWPF(js)
+    </script>
+</body>
+</html>

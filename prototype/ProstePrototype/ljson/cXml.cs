@@ -31,6 +31,14 @@ namespace ljson
                 o.Remove("@ID");
         }
 
+        public static void RemoveProp(JObject o, string name)
+        {
+            if (o[name] != null)
+                o.Remove(name);
+            else if (o["@" + name] != null)
+                o.Remove("@" + name);
+        }
+
         public static JObject Array2Object(JArray arr)
         {
             JObject res = new JObject();
@@ -60,9 +68,12 @@ namespace ljson
             JArray jarr = null;
             if (arr.Type == JTokenType.Array)
                 jarr = (JArray)arr;
-            JProperty f = (JProperty)arr.First;
-            if (f.Value.Type == JTokenType.Array)
-                jarr = (JArray)f.Value;
+            else
+            {
+                JProperty f = (JProperty)arr.First;
+                if (f.Value.Type == JTokenType.Array)
+                    jarr = (JArray)f.Value;
+            }
             if (jarr != null)
                 return Array2Object(jarr);
             string id = GetID(arr);
@@ -88,7 +99,54 @@ namespace ljson
             return res;
         }
 
-        public static void Arrays2Objects(JObject root)
+        private static List<string> ObjectTypes(JObject o)
+        {
+            List<string> res = new List<string>();
+            foreach (JToken t in o.SelectTokens("$.*"))
+            {
+                if (t.Type == JTokenType.Object)
+                {
+                    List<string> subs = ObjectTypes((JObject)t);
+                    foreach (string typ in subs)
+                        res.Add(typ);
+                }
+                else if (t.Parent.Type == JTokenType.Property)
+                {
+                    JProperty p = (JProperty)t.Parent;
+                    if (p.Value.Type == JTokenType.String && p.Name == "@TYPE")
+                        res.Add(p.Value.ToString());
+                    else if (p.Value.Type == JTokenType.Object)
+                    {
+                        List<string> subs = ObjectTypes((JObject)p.Value);
+                        foreach (string typ in subs)
+                            res.Add(typ);
+                    }
+                }
+            }
+            //
+            return res;
+        }
+
+        private static bool OnlyChecksInGroup(JObject grp)
+        {
+            List<string> _object_types = ObjectTypes(grp);
+            if (_object_types == null || _object_types.Count == 0)
+                return false;
+            foreach (string val in _object_types)
+                if (val != "CHECK")
+                    return false;
+            return true;
+        }
+
+        private static JObject FieldsParent(JObject o)
+        {
+            JContainer res = o;
+            while (res != null && (res.Type != JTokenType.Object || ((JObject)res)["fields"] == null))
+                res = res.Parent;
+            return (res != null) ? (JObject)res["fields"] : null;
+        }
+
+        public static void Arrays2Objects(JObject root, bool _convert_checks)
         {
             foreach (JToken t in root.SelectTokens("$.*"))
             {
@@ -108,10 +166,18 @@ namespace ljson
                                 Regex.IsMatch(path, @"PROPERTIES\.OLD", RegexOptions.IgnoreCase)
                                )
                             {
+                                if (Regex.IsMatch(prop.Path, @"^ELEMENTS\.IRIS8_INPUT\.PROPERTIES\.Groups\.InputType\.fields\.Type\.TABS\.d076749b-3d30-4cb2-8785-fd82145fd7dd\.PROPERTIES"))
+                                {
+                                    JToken ttt = t;
+                                }
                                 foreach (JToken tarr in t)
                                     if (tarr.Type == JTokenType.Object)
+                                    {
                                         ((JObject)tarr)["~path"] = tarr.Path;
-                                continue;
+                                        Arrays2Objects((JObject)(tarr), _convert_checks);
+                                    }
+
+                                //continue;
                             }
                             else if (Regex.IsMatch(path, @"TABS\.TAB$"))
                             {
@@ -119,7 +185,7 @@ namespace ljson
                                 //JProperty tparent = (JProperty)parent;
                                 JObject tpo = Array2Object((JToken)parent.Value);
                                 parent.Value = tpo;
-                                Arrays2Objects((JObject)(parent.Value));
+                                Arrays2Objects((JObject)(parent.Value), _convert_checks);
                             }
                             else
                             {
@@ -129,15 +195,31 @@ namespace ljson
                                 continue;
                             }
                         }
+                        else
+                        {
+                            string hhh = "";
+                            continue;
+                        }
                     }
                 }
                 else if (t.Type == JTokenType.Object)
                 {
                     JObject o = (JObject)t;
                     o["~path"] = t.Path;
-                    Arrays2Objects(o);
+                    if (_convert_checks && o["@TYPE"] != null && o["@TYPE"].ToString() == "CHECK")
+                    {
+                        JObject fo = FieldsParent(o);
+                        if (fo != null)
+                        {
+                            bool _checks_only = OnlyChecksInGroup(fo);
+                            if (!_checks_only)
+                                o["@TYPE"] = "SLIDER";
+                        }
+                    }
+                    Arrays2Objects(o, _convert_checks);
                 }
             }
+            //root["~path"] = root.Path;
         }
     }
 }

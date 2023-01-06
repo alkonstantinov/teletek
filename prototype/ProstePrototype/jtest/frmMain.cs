@@ -25,7 +25,7 @@ namespace jtest
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string xml = File.ReadAllText(dlg.FileName);
-                string json = cJson.ConvertXML(xml);
+                string json = cJson.ConvertXML(xml, null, "");
                 MessageBox.Show(json);
             }
         }

@@ -115,6 +115,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Configs\XML\Read\ReadConfig_eclipse99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Read\ReadConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Templates\ECLIPSE99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Templates\IRIS8.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Write\WriteConfig_eclipse99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Write\WriteConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\dark.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -208,6 +226,24 @@
     <None Update="html\imports\webfonts\fa-v4compatibility.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\IRIS\IRISPanel-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\IRIS\io-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\IRIS\loop_devices-auto.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\IRIS\periph_devices-auto.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\menu-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\index-automatic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\IRISdyn.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -235,7 +271,10 @@
     <None Update="html\imports\mainfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-dynamic.json">
+    <None Update="html\pages-initial_version.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\pages-dynamic.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\pages.json">
@@ -553,6 +592,11 @@
 
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="104.4.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configs\XML\Write\" />
+    <Folder Include="Configs\XML\Read\" />
   </ItemGroup>
 
 </Project>
