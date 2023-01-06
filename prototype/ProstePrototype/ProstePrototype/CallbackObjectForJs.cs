@@ -20,13 +20,20 @@ namespace ProstePrototype
             return "Hi from " + msg;
         }
 
-        public string getJsonForElement(string elementType, int elementNumber) {
+        public string getJsonForElement(string elementType, int elementNumber)
+        {
 
             // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
             string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
             res = cJson.GroupsWithValues(res).ToString();
             File.WriteAllTextAsync("wb3.json", res);
+            return res;
+        }
+
+        public string getJsonNodeForElement(string elementType, int elementNumber, string key)
+        {
+            string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
             return res;
         }
     }

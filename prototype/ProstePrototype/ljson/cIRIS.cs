@@ -771,9 +771,9 @@ namespace ljson
                 ((JObject)c).Remove(pname);
             ((JObject)c)[key] = co;
             if (Regex.IsMatch(key, "8"))
-                ((JObject)c)[key]["MAX"] = 8;
+                ((JObject)c)[key]["@MAX"] = 8;
             else
-                ((JObject)c)[key]["MAX"] = 4;
+                ((JObject)c)[key]["@MAX"] = 4;
             ((JObject)c)[key]["~path"] = Regex.Replace(((JObject)c)[key]["~path"].ToString(), @"\d+$", "");
             return;
             //

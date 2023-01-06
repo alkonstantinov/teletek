@@ -40,6 +40,12 @@ namespace lcommunicate
         /// </summary>
         private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> _cache_list_panels;
         private static object _cs_cache = new object();
+        /// <summary>
+        /// Dictionary с ключ ID на панел и съдържание Dictionary<~path, Dictionary с шаблони>.
+        /// Dictionary с шаблони е с ключ индекса и елемент псевдо-списъчни елементи(NO_LOOP за IRIS).
+        /// </summary>
+        private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> _cache_pseudo_element_panels;
+        private static object _cs_pseudo_element_cache = new object();
 
         public static void SetPathValue(string panel_id, string path, string value)
         {
@@ -94,6 +100,37 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
         }
 
+        /// <summary>
+        /// Добавя в кеша шаблон на псевдо-списъчен елемент(NO_LOOP1, 2, 3...).
+        /// В последствие този шаблон се ползва за пренасочване към физическото устройство.
+        /// </summary>
+        /// <param name="panel_id">ID на панела
+        /// <param name="key">ID на елемента(напр. "IRIS8_NO_LOOP")</param>
+        /// <param name="idx">Индекс, на който се добавя елемента</param>
+        /// <param name="_template">Шаблон на елемента.</param>
+        public static void AddPseudoElement(string panel_id, string key, string idx, string _template)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+                _cache_pseudo_element_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+                _cache_pseudo_element_panels.Add(panel_id, new Dictionary<string, Dictionary<string, string>>());
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+                el.Add(key, new Dictionary<string, string>());
+            Dictionary<string, string> lst = el[key];
+            if (!lst.ContainsKey(idx))
+                lst.Add(idx, _template);
+            Monitor.Exit(_cs_pseudo_element_cache);
+        }
+
+        /// <summary>
+        /// Връща кеширана структура със стойности за списъчни обекти. Съответния обект е добавен с AddListElement.
+        /// </summary>
+        /// <param name="panel_id">ID на панела
+        /// <param name="key">ID на елемента(напр. "IRIS8_PANELINNETWORK")</param>
+        /// <param name="idx">Индекс, на който се добавя елемента</param>
+        /// <returns>Попълнена със стойности кеширана структура</returns>
         public static string GetListElement(string panel_id, string key, string idx)
         {
             string res = null;
@@ -111,6 +148,57 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return (res != null) ? res : "{}";
         }
+
+        /// <summary>
+        /// Връща елемент от кеширана структура със стойности за списъчни обекти или от псевдо-елементите. Съответния обект е добавен с AddListElement или AddPseudoElement.
+        /// </summary>
+        /// <param name="panel_id">ID на панела
+        /// <param name="key">ID на елемента(напр. "IRIS8_PANELINNETWORK")</param>
+        /// <param name="idx">Индекс, на който се добавя елемента</param>
+        /// <param name="node">Entity ключ</param>
+        /// <returns>Entity  по ключ "node"</returns>
+        public static string GetListElementNode(string panel_id, string key, string idx, string node)
+        {
+            string res = null;
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+                if (el.ContainsKey(key))
+                {
+                    Dictionary<string, string> lst = el[key];
+                    if (lst.ContainsKey(idx))
+                        res = lst[idx];
+                }
+            }
+            Monitor.Exit(_cs_cache);
+            if (res == null)
+            {
+                Monitor.Enter(_cs_pseudo_element_cache);
+                if (_cache_pseudo_element_panels.ContainsKey(panel_id))
+                {
+                    Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+                    if (el.ContainsKey(key))
+                    {
+                        Dictionary<string, string> lst = el[key];
+                        if (lst.ContainsKey(idx))
+                            res = lst[idx];
+                    }
+                }
+                Monitor.Exit(_cs_pseudo_element_cache);
+            }
+            if (res != null)
+            {
+                JObject obj = new JObject(res);
+                JToken t = obj[node];
+                if (t == null)
+                    t = obj[node.ToUpper()];
+                if (t != null)
+                    res = t.ToString();
+            }
+            return (res != null) ? res : "{}";
+        }
+
         public static JArray Scan()
         {
             cTransport t = new cIP();
