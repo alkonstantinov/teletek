@@ -754,6 +754,100 @@ namespace ljson
         }
         #endregion
 
+        #region change loops
+        private static void ChangeLoops(JObject json)
+        {
+            JToken c = json.SelectToken("ELEMENTS.iris_loop_devices.CONTAINS");
+            List<string> loop = new List<string>();
+            foreach (JToken t in c.Children())
+            {
+                JProperty p = (JProperty)t;
+                if (!Regex.IsMatch(p.Name, "^~"))
+                    loop.Add(p.Name);
+            }
+            string key = Regex.Replace(loop[0], @"\d+$", "");
+            JObject co = new JObject((JObject)c[loop[0]]);
+            foreach (string pname in loop)
+                ((JObject)c).Remove(pname);
+            ((JObject)c)[key] = co;
+            if (Regex.IsMatch(key, "8"))
+                ((JObject)c)[key]["MAX"] = 8;
+            else
+                ((JObject)c)[key]["MAX"] = 4;
+            ((JObject)c)[key]["~path"] = Regex.Replace(((JObject)c)[key]["~path"].ToString(), @"\d+$", "");
+            return;
+            //
+            //IRISx_NO_LOOP nodes
+            JObject lo = new JObject((JObject)json["ELEMENTS"][loop[0]]);
+            foreach (string lname in loop)
+            {
+                JObject tmpo = new JObject((JObject)json["ELEMENTS"][lname]);
+                JProperty element = ((JObject)json["ELEMENTS"]).Property(lname);
+                if (lname != loop[0])
+                {
+                    ((JObject)json["ELEMENTS"]).Remove(lname);
+                    json["ELEMENTS"][lname] = tmpo;
+                }
+                else
+                {
+                    element.Replace(new JProperty(key, tmpo));
+                    tmpo["~path"] = tmpo.Path;
+                }
+            }
+            //
+            //IRISx_NO_LOOP changes
+            string no_loop = loop[0];
+            JToken tchg = json["ELEMENTS"][key]["CHANGE"];
+            foreach (JToken t in tchg)
+            {
+                JProperty p = (JProperty)t;
+                JToken tt = json["ELEMENTS"][p.Name]["CONTAINS"]["ELEMENT"];
+                if (tt.Type == JTokenType.Array)
+                {
+                    tt = Contains2Object(tt);
+                    json["ELEMENTS"][p.Name]["CONTAINS"] = tt;
+                }
+                else if (tt.Type == JTokenType.Object)
+                {
+                    string id = null;
+                    string idkey = null;
+                    if (tt["ID"] != null)
+                    {
+                        id = tt["ID"].ToString();
+                        idkey = "ID";
+                    }
+                    else if (tt["@ID"] != null)
+                    {
+                        id = tt["@ID"].ToString();
+                        idkey = "@ID";
+                    }
+                    if (id != null)
+                    {
+                        JObject content = new JObject((JObject)tt);
+                        content.Remove(idkey);
+                        ((JObject)json["ELEMENTS"][p.Name]["CONTAINS"]).Remove("ELEMENT");
+                        json["ELEMENTS"][p.Name]["CONTAINS"][id] = content;
+                    }
+                }
+                tt = json["ELEMENTS"][p.Name]["CHANGE"];
+                JProperty newprop = null;
+                JProperty proptochange = null;
+                foreach (JToken tch in tt)
+                {
+                    JProperty pch = (JProperty)tch;
+                    string chname = pch.Name;
+                    if (Regex.IsMatch(chname, @"NO_LOOP\d+$"))
+                    {
+                        newprop = new JProperty(Regex.Replace(chname, @"\d+$", ""), pch.Value);
+                        proptochange = pch;
+                    }
+                }
+                if (proptochange != null && newprop != null)
+                    proptochange.Replace(newprop);
+            }
+        }
+        #endregion
+
         public static string Convert(string json, JObject _pages)
         {
             JObject o = JObject.Parse(json);
@@ -823,6 +917,8 @@ namespace ljson
             ConvertPanelInNetwork(o1);
             //
             cXml.Arrays2Objects(o1, true);
+            //
+            ChangeLoops(o1);
             //
             return o1.ToString();
         }

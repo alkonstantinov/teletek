@@ -51,8 +51,8 @@ namespace ljson
                     string id = GetID(t);
                     if (id != null)
                     {
-                        RemoveID(t);
                         res[id] = t;
+                        RemoveID(res[id]);
                     }
                     else
                         return null;
@@ -152,6 +152,10 @@ namespace ljson
             {
                 if (t.Type == JTokenType.Array)
                 {
+                    if (Regex.IsMatch(t.Path, @"^ELEMENTS\.IRIS8_NO_LOOP"))
+                    {
+                        JToken ttt = t;
+                    }
                     JObject o = Contains2Object(t);
                     if (o != null)
                     {
@@ -166,7 +170,7 @@ namespace ljson
                                 Regex.IsMatch(path, @"PROPERTIES\.OLD", RegexOptions.IgnoreCase)
                                )
                             {
-                                if (Regex.IsMatch(prop.Path, @"^ELEMENTS\.IRIS8_INPUT\.PROPERTIES\.Groups\.InputType\.fields\.Type\.TABS\.d076749b-3d30-4cb2-8785-fd82145fd7dd\.PROPERTIES"))
+                                if (Regex.IsMatch(prop.Path, @"^ELEMENTS\.IRIS8_NO_LOOP"))
                                 {
                                     JToken ttt = t;
                                 }
@@ -180,6 +184,14 @@ namespace ljson
                                 //continue;
                             }
                             else if (Regex.IsMatch(path, @"TABS\.TAB$"))
+                            {
+                                JProperty parent = (JProperty)prop.Parent.Parent;
+                                //JProperty tparent = (JProperty)parent;
+                                JObject tpo = Array2Object((JToken)parent.Value);
+                                parent.Value = tpo;
+                                Arrays2Objects((JObject)(parent.Value), _convert_checks);
+                            }
+                            else if (Regex.IsMatch(path, @"CHANGE\.ELEMENT$"))
                             {
                                 JProperty parent = (JProperty)prop.Parent.Parent;
                                 //JProperty tparent = (JProperty)parent;
