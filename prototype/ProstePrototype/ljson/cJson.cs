@@ -265,8 +265,8 @@ namespace ljson
                 if (_elements != null)
                 {
                     JObject _res = (JObject)_elements[name];
-                    if (_res != null)
-                        return _res;
+                    //if (_res != null)
+                    return _res;
                 }
             }
             //

@@ -33,7 +33,8 @@ namespace ProstePrototype
 
         public string getJsonNodeForElement(string elementType, int elementNumber, string key)
         {
-            return "{}";
+            string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
+            return res;
         }
     }
 }

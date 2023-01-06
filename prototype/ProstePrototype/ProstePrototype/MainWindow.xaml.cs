@@ -279,10 +279,19 @@ namespace ProstePrototype
                     elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
                     string elementNumber = json["Params"]["elementNumber"].ToString();
                     JObject el = cJson.GetNode(elementType);
-                    el = (JObject)el["PROPERTIES"]["Groups"];
-                    JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
-                    string _template = newpaths.ToString();
-                    cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
+                    if (el == null)
+                    {
+                        elementType += elementNumber;
+                        el = cJson.GetNode(elementType);
+                        cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
+                    }
+                    else
+                    {
+                        el = (JObject)el["PROPERTIES"]["Groups"];
+                        JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
+                        string _template = newpaths.ToString();
+                        cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
+                    }
                     break;
             }
         }
