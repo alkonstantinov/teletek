@@ -48,6 +48,7 @@ namespace ljson
 
         private static void SetLNGID(cXmlConfigs cfg)
         {
+            Dictionary<string, string> _lngids_set = new Dictionary<string, string>();
             //
             Dictionary<string, Dictionary<string, cWriteField>> ids = cfg.WriteXpaths;
             XmlDocument xml = (XmlDocument)cfg.Config;
@@ -103,7 +104,13 @@ namespace ljson
                             propid = propnode.Attributes["LNGID"].Value;
                         //
                         string lngid = node.Attributes["LNGID"].Value;
-                        ids[key][fkey].lngid = lngid;
+                        if (!_lngids_set.ContainsKey(lngid))
+                        {
+                            ids[key][fkey].lngid = lngid;
+                            _lngids_set.Add(lngid, null);
+                        }
+                        else
+                            err.Append(xpath + "\n");
                     }
                     else
                         err.Append(xpath + "\n");
@@ -126,7 +133,7 @@ namespace ljson
             //}
             //int cnt = lists.Count;
             //
-            //string s = "";
+            string s = "";
         }
 
         private static void SetPanelXMLConfigs(string key, cXmlConfigs cfg)
@@ -284,12 +291,22 @@ namespace ljson
             Monitor.Exit(_cs_current_panel);
             return (JObject)_panel["ELEMENTS"][name];
         }
+
+        public static string jobj2string(object o)
+        {
+            return JsonConvert.SerializeObject(o);
+        }
+
+        public static object jstring2obj(string s, System.Type typ)
+        {
+            return JsonConvert.DeserializeObject(s, typ);
+        }
         public static string ConvertXML(string xml, JObject _pages, string filename)
         {
             string schema = Regex.Replace(System.IO.Path.GetFileName(filename), @"\.\w+$", "");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            cXmlConfigs cfg = new cXmlConfigs();
+            cXmlConfigs cfg = new cXmlConfigs(jobj2string, jstring2obj);
             cfg.ConfigPath = filename;
             cfg.Config = doc;
             string xmldir = Directory.GetParent(Directory.GetParent(filename).ToString()).ToString();
@@ -334,6 +351,7 @@ namespace ljson
                 }
             }
             doc = (XmlDocument)cfg.Config;
+            Dictionary<string, object> rwmerge = cfg.RWMerged();
             SetPanelXMLConfigs(filename, cfg);
             //
             string json = JsonConvert.SerializeXmlNode(doc);
