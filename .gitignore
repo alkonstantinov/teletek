@@ -75,3 +75,17 @@ NewTeletekSW/bin
 /teletekWPF/obj/Release/net6.0-windows
 *.cache
 *.props
+/prototype/ProstePrototype/common/obj/project.nuget.cache
+/prototype/ProstePrototype/common/obj/common.csproj.nuget.dgspec.json
+/prototype/ProstePrototype/common/obj/project.assets.json
+/prototype/ProstePrototype/jtest/obj/Debug/netcoreapp3.1/apphost.exe
+/prototype/ProstePrototype/jtest/obj/Debug/netcoreapp3.1/jtest.csproj.AssemblyReference.cache
+/prototype/ProstePrototype/jtest/obj/jtest.csproj.nuget.dgspec.json
+/prototype/ProstePrototype/jtest/obj/project.assets.json
+/prototype/ProstePrototype/jtest/obj/project.nuget.cache
+/prototype/ProstePrototype/lcommunicate/obj/lcommunicate.csproj.nuget.dgspec.json
+/prototype/ProstePrototype/lcommunicate/obj/project.assets.json
+/prototype/ProstePrototype/lcommunicate/obj/project.nuget.cache
+/prototype/ProstePrototype/ljson/obj/ljson.csproj.nuget.dgspec.json
+/prototype/ProstePrototype/ljson/obj/project.assets.json
+/prototype/ProstePrototype/ljson/obj/project.nuget.cache

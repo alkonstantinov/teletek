@@ -676,12 +676,52 @@
     <script src="../imports/font-awesome.js"></script>
     <script src="../imports/mainfuncs.js"></script>
     <script>
-        function sendMessage(bc) {
-            CefSharp.PostMessage(bc);
-        }
-                    //$(document).ready(() => {
-                    //    sendMessage("Devices|IRIS|FAT - FBF");
-                    //});
+        var js = `{
+  "IRIS8_FAT_FBF_IN1": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "e691bb18-d98c-40eb-b3d9-cf82ab964e41",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_IN1"
+  },
+  "IRIS8_FAT_FBF_IN2": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "3177872e-5e97-4904-afa8-10b6e7fa3866",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_IN2"
+  },
+  "IRIS8_FAT_FBF_IN3": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "98e40b13-cec2-4967-8f1c-383534219423",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_IN3"
+  },
+  "IRIS8_FAT_FBF_OUT1": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "3bbcf70f-aa11-4262-8b44-ebeaa3abfcde",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_OUT1"
+  },
+  "IRIS8_FAT_FBF_OUT2": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "ac99804b-35e6-40ac-b655-ee398c29e400",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_OUT2"
+  },
+  "IRIS8_FAT_FBF_OUT3": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "622e2f19-ee13-49bd-b6e6-824d64a36dbb",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_OUT3"
+  },
+  "IRIS8_FAT_FBF_OUT4": {
+    "@MIN": "1",
+    "@MAX": "1",
+    "@LNGID": "1f7502d3-8881-4aae-a72b-6aa9c53522d2",
+    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.IRIS8_FAT_FBF_OUT4"
+  },
+  "~path": "ELEMENTS.iris_fat_fbf.CONTAINS"
+}`;
+        receiveMessageWPF(js)
     </script>
 </body>
 </html>

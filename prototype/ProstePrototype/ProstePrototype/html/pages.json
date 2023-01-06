@@ -86,19 +86,19 @@
   "iris_inputs": {
     "title": "Inputs",
     "left": "menu-automatic.html",
-    "right": "IRIS/input.html",
+    "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_inputs_group": {
     "title": "Input Groups",
     "left": "menu-automatic.html",
-    "right": "IRIS/inputs_group.html",
+    "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_outputs": {
     "title": "Output",
     "left": "menu-automatic.html",
-    "right": "IRIS/output.html",
+    "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_fat_fbf": {
@@ -110,19 +110,19 @@
   "iris_zones": {
     "title": "Zones",
     "left": "menu-automatic.html",
-    "right": "IRIS/zone.html",
+    "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_evac_zones": {
     "title": "Evac zones",
     "left": "menu-automatic.html",
-    "right": "IRIS/zone_evac.html",
+    "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_peripheral_devices": {
     "title": "Peripheral devices",
     "left": "menu-automatic.html",
-    "right": "IRIS/periph_devices.html",
+    "right": "IRIS/periph_devices-auto.html",
     "breadcrumbs": [ "index", "iris" ]
   },
   "iris_loop_devices": {

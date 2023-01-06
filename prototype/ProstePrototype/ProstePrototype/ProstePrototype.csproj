@@ -232,6 +232,12 @@
     <None Update="html\IRIS\io-automatic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\IRIS\loop_devices-auto.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\IRIS\periph_devices-auto.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\menu-automatic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

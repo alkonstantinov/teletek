@@ -519,7 +519,7 @@
             <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
             <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
                 <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
-				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}"><Run Text="© 2022 Copyright: "/><Bold><Run Text="Teletek Electroincs"/></Bold></TextBlock>
+				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}"><Run Text="© 2022 Copyright: "/><Bold><Run Text="Teletek Electronics"/></Bold></TextBlock>
                 <ProgressBar x:Name="progressBar1" HorizontalAlignment="Right" Width="400" Height="20" Panel.ZIndex="2" Background="Transparent" BorderThickness="0"/>
             </StackPanel>
         </Grid>
