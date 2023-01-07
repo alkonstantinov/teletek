@@ -796,10 +796,11 @@ namespace common
             string dir = Path.GetDirectoryName(_read_path);
             if (!Regex.IsMatch(dir, "\\$"))
                 dir += "\\";
+            string fn = Path.GetFileNameWithoutExtension(_read_path);
             //res.Add("serias", dir + "_serias.json");
             //res.Add("read_xml_no_serias", dir + "_read_xml_no_serias.txt");
             //res.Add("property_groups", dir + "_property_groups.json");
-            res.Add("_dread_prop", dir + "_dread_prop.json");
+            res.Add("_dread_prop", dir + fn + "_dread_prop.json");
             //
             return res;
         }
@@ -1225,9 +1226,10 @@ namespace common
             string dir = Path.GetDirectoryName(_write_path);
             if (!Regex.IsMatch(dir, "\\$"))
                 dir += "\\";
+            string fn = Path.GetFileNameWithoutExtension(_write_path);
             //res.Add("wserias", dir + "_wserias.json");
             //res.Add("write_property_groups", dir + "_write_property_groups.json");
-            res.Add("write_properties", dir + "_dwrite_prop.json");
+            res.Add("write_properties", dir + fn + "_dwrite_prop.json");
             //
             return res;
         }
@@ -1325,9 +1327,9 @@ namespace common
                     if (Regex.IsMatch(key, s + "$"))
                         return key;
                 }
-                if (Regex.IsMatch(key, wkey + "$"))
+                if (wkey != "" && Regex.IsMatch(key, wkey + "$"))
                     return key;
-                if (Regex.IsMatch(key, "^" + wkey))
+                if (wkey != "" && Regex.IsMatch(key, "^" + wkey))
                     return key;
                 if (Regex.IsMatch(wkey, @"EVAC_ZONES*_GROUPS*") && Regex.IsMatch(key, @"EVAC_ZONES*_GROUPS*"))
                     return key;

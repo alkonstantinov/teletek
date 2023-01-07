@@ -755,6 +755,30 @@ namespace ljson
         #endregion
 
         #region change loops
+        private static void SetLooDevsContent(JObject json)
+        {
+            foreach (JProperty p in json.SelectToken("ELEMENTS").Children())
+            {
+                string s = "";
+                if (Regex.IsMatch(p.Name, @"(MODULES|SENSORS)$"))
+                {
+                    JObject c = (JObject)p.Value;
+                    c = new JObject((JObject)c["CONTAINS"]);
+                    c = Array2Object(c["ELEMENT"]);
+                    json["ELEMENTS"][p.Name]["CONTAINS"] = c;
+                    foreach (JProperty pp in c.Children())
+                    {
+                        JObject oprops = (JObject)json["ELEMENTS"][pp.Name]["PROPERTIES"];
+                        oprops = Array2Object(oprops["PROPERTY"]);
+                        JObject grp = new JObject();
+                        grp["name"] = "";
+                        grp["fields"] = oprops;
+                        json["ELEMENTS"][pp.Name]["PROPERTIES"]["Groups"] = new JObject();
+                        json["ELEMENTS"][pp.Name]["PROPERTIES"]["Groups"]["~noname"] = grp;
+                    }
+                }
+            }
+        }
         private static void ChangeLoops(JObject json)
         {
             JToken c = json.SelectToken("ELEMENTS.iris_loop_devices.CONTAINS");
@@ -775,76 +799,8 @@ namespace ljson
             else
                 ((JObject)c)[key]["@MAX"] = 4;
             ((JObject)c)[key]["~path"] = Regex.Replace(((JObject)c)[key]["~path"].ToString(), @"\d+$", "");
-            return;
             //
-            //IRISx_NO_LOOP nodes
-            JObject lo = new JObject((JObject)json["ELEMENTS"][loop[0]]);
-            foreach (string lname in loop)
-            {
-                JObject tmpo = new JObject((JObject)json["ELEMENTS"][lname]);
-                JProperty element = ((JObject)json["ELEMENTS"]).Property(lname);
-                if (lname != loop[0])
-                {
-                    ((JObject)json["ELEMENTS"]).Remove(lname);
-                    json["ELEMENTS"][lname] = tmpo;
-                }
-                else
-                {
-                    element.Replace(new JProperty(key, tmpo));
-                    tmpo["~path"] = tmpo.Path;
-                }
-            }
-            //
-            //IRISx_NO_LOOP changes
-            string no_loop = loop[0];
-            JToken tchg = json["ELEMENTS"][key]["CHANGE"];
-            foreach (JToken t in tchg)
-            {
-                JProperty p = (JProperty)t;
-                JToken tt = json["ELEMENTS"][p.Name]["CONTAINS"]["ELEMENT"];
-                if (tt.Type == JTokenType.Array)
-                {
-                    tt = Contains2Object(tt);
-                    json["ELEMENTS"][p.Name]["CONTAINS"] = tt;
-                }
-                else if (tt.Type == JTokenType.Object)
-                {
-                    string id = null;
-                    string idkey = null;
-                    if (tt["ID"] != null)
-                    {
-                        id = tt["ID"].ToString();
-                        idkey = "ID";
-                    }
-                    else if (tt["@ID"] != null)
-                    {
-                        id = tt["@ID"].ToString();
-                        idkey = "@ID";
-                    }
-                    if (id != null)
-                    {
-                        JObject content = new JObject((JObject)tt);
-                        content.Remove(idkey);
-                        ((JObject)json["ELEMENTS"][p.Name]["CONTAINS"]).Remove("ELEMENT");
-                        json["ELEMENTS"][p.Name]["CONTAINS"][id] = content;
-                    }
-                }
-                tt = json["ELEMENTS"][p.Name]["CHANGE"];
-                JProperty newprop = null;
-                JProperty proptochange = null;
-                foreach (JToken tch in tt)
-                {
-                    JProperty pch = (JProperty)tch;
-                    string chname = pch.Name;
-                    if (Regex.IsMatch(chname, @"NO_LOOP\d+$"))
-                    {
-                        newprop = new JProperty(Regex.Replace(chname, @"\d+$", ""), pch.Value);
-                        proptochange = pch;
-                    }
-                }
-                if (proptochange != null && newprop != null)
-                    proptochange.Replace(newprop);
-            }
+            SetLooDevsContent(json);
         }
         #endregion
 
