@@ -121,7 +121,13 @@
     <None Update="Configs\XML\Read\ReadConfig_iris8_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Read\ReadConfig_iris_version24.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Templates\ECLIPSE99.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Templates\IRIS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Templates\IRIS8.xml">
@@ -131,6 +137,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Write\WriteConfig_iris_version24.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\dark.css">
