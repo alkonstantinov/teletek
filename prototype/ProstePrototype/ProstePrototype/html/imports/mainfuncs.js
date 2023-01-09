@@ -27,6 +27,7 @@ function sendMessageWPF(json, comm = {}) {
     //alert(JSON.stringify(json));
     try {
         CefSharp.PostMessage(JSON.stringify(json));
+        
     } catch (e) { console.log('CefSharp error', e); }
 }
 
@@ -74,8 +75,15 @@ function receiveMessageWPF(jsonTxt) {
             break;
         case !!document.getElementById("divLDevices"):
             if (!elements && Object.keys(json)) {
-                elements = Object.keys(json).length - 1; // -1 for ~path
+                mainKey = Object.keys(json).reduce((key, curKey) => {
+                    if (curKey !== '~path') {
+                        return curKey;
+                    }
+                }, ""); // currKey should not be ~path
+
+                elements = json[mainKey]['@MAX'];
             }
+
             body = document.getElementById('divLDevices');
             body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>Add up to ${elements} loops</p>`)
 
@@ -98,6 +106,48 @@ function receiveMessageWPF(jsonTxt) {
         // DOM Ready - do your stuff
         pagePreparation();
     }); 
+}
+
+const loopFunc = () => {
+    if (lst.length - 1 === elements) {
+        alert("Max number of loops created already");
+        $("#deviceList").modal('hide'); //.hide();
+        return;
+    } else {    
+        sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': mainKey, 'elementNumber': lst.length } });
+        boundAsync.getJsonNodeForElement(mainKey, lst.length, 'CHANGE').then(res => {
+            var changeJson = JSON.parse(res);
+            if (!Object.keys(changeJson).length) { // guard that the res is full
+                var i = 0;
+                do {
+                    loopFunc(); i++;
+                } while (i === 3); // up to 3 trials
+                if (i === 3) {
+                    alert("Error 3 occurred. Please, connect your software providers!"); return;
+                }
+            }
+            var listTab = document.getElementById('list-tab');
+            Object.keys(changeJson).forEach(k => {
+                let tabListButton = `<button type="button"
+                                class="list-group-item col-6"
+                                id="list-${k}" data-toggle="tab"
+                                onclick="javascript: addLoopElement('${k}');"
+                                role="tab"
+                                aria-controls="list-${k}"
+                                aria-selected="false">
+                            <div class="btnStyle fire">
+                                <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
+                                    <br /><span class="someS">
+                                        <span class="h5">${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop</span>
+                                    </span>
+                                </i>
+                            </div>
+                        </button>`
+                listTab.insertAdjacentHTML('beforeend', tabListButton);
+            });
+        }).catch(err => alert(err));
+        $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
+    }
 }
 
 const drawWithModal = (body, json) => {
@@ -1014,6 +1064,67 @@ function addActive() {
     });
 }
 
+//adding loop elements function
+function addLoopElement(elementType) {
+    if (!elementType) return;
+
+    var last = parseInt(elementType.charAt(elementType.length - 1)); // get the index of the loop
+    if (lst.includes(last)) {
+        alert("Error with index");
+        return;
+    }
+    //sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'` } });
+    let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
+    let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
+
+    const newLoopElement = `<div class="col-12" id=${elementType}>
+                <div class="row">
+                    <div class="col-11 pr-1">
+                        <a href="javascript:showLoop('${last}', '${elementType}')" onclick="javascript:addActive()">
+                            <div class="btnStyle ${BUTTON_COLORS[color]}">
+                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">
+                                    <br /><span class="someS">
+                                        <span class="h5">
+                                            ${BUTTON_IMAGES[elType].sign} ${last}
+                                        </span>
+                                    </span>
+                                </i>
+                                                            
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-1 p-0 m-0" onclick="javascript: exchangingLoop('${elementType}')">
+                        <i class="fa-solid fa-right-left fire"></i>
+                    </div>
+                </div>
+            </div>`;
+
+    var element = document.getElementById("new");
+    var new_inner = `
+                            ${element.innerHTML}
+                            ${newLoopElement}
+                        `;
+    element.innerHTML = new_inner;
+
+    // adding remove button
+    if (last === 1 && !document.getElementById("rvmBtn")) {
+        let btnGroup = document.getElementById("btnGroup");
+        btnGroup.insertAdjacentHTML('beforeend', `<button onclick="javasript: removeLoop()" class="btn-round btn-blue" id="rvmBtn"><i class="fa-solid fa-minus"></i>Remove Loop</button>`);
+    }
+
+    // reordering
+    var main = document.getElementById('new');
+
+    [].map.call(main.children, Object).sort(function (a, b) {
+        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+    }).forEach(function (elem) {
+        main.appendChild(elem);
+    });
+
+    lst.push(last);
+    $('#deviceList').modal('toggle');
+}
+
 // adding button elements function
 function addElement(id, elementType = "") {
 
@@ -1199,4 +1310,22 @@ function loadDiv(it, id, value) {
         content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
     }
     addVisitedBackground();
+}
+
+function showLoop(last, elementType) {
+    alert(`showLoop elementType: ${elementType}', last: ${last}'`)
+}
+
+function exchangingLoop(elementType) {
+    alert(`exchanging ${elementType}`)
+}
+
+function removeLoop() {
+    let parent = document.getElementById("new");
+    parent.removeChild(parent.lastChild);
+    let pos = lst.pop();
+
+    if (pos === 1) {
+        document.getElementById("rvmBtn").remove();
+    }
 }

@@ -281,8 +281,8 @@ namespace ProstePrototype
                     JObject el = cJson.GetNode(elementType);
                     if (el == null)
                     {
-                        elementType += elementNumber;
-                        el = cJson.GetNode(elementType);
+                        //elementType += elementNumber;
+                        el = cJson.GetNode(elementType + elementNumber);
                         cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
                     }
                     else

@@ -161,7 +161,7 @@ namespace lcommunicate
         {
             string res = null;
             Monitor.Enter(_cs_cache);
-            if (_cache_list_panels.ContainsKey(panel_id))
+            if (_cache_list_panels != null && _cache_list_panels.ContainsKey(panel_id))
             {
                 Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
                 if (el.ContainsKey(key))
@@ -178,6 +178,8 @@ namespace lcommunicate
                 if (_cache_pseudo_element_panels.ContainsKey(panel_id))
                 {
                     Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+                    if (!el.ContainsKey(key))
+                        key += idx;
                     if (el.ContainsKey(key))
                     {
                         Dictionary<string, string> lst = el[key];
@@ -189,7 +191,7 @@ namespace lcommunicate
             }
             if (res != null)
             {
-                JObject obj = new JObject(res);
+                JObject obj = JObject.Parse(res);
                 JToken t = obj[node];
                 if (t == null)
                     t = obj[node.ToUpper()];
