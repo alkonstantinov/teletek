@@ -89,3 +89,9 @@ NewTeletekSW/bin
 /prototype/ProstePrototype/ljson/obj/ljson.csproj.nuget.dgspec.json
 /prototype/ProstePrototype/ljson/obj/project.assets.json
 /prototype/ProstePrototype/ljson/obj/project.nuget.cache
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/common.dll
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/common.pdb
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/jtest.exe
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/jtest.runtimeconfig.dev.json
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/lcommunicate.dll
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/lcommunicate.pdb
