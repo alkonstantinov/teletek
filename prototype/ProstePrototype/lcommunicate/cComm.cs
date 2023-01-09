@@ -175,11 +175,6 @@ namespace lcommunicate
             if (res == null)
             {
                 Monitor.Enter(_cs_pseudo_element_cache);
-                if (_cache_pseudo_element_panels == null)
-                {
-                    Monitor.Exit(_cs_pseudo_element_cache);
-                    return null;
-                }
                 if (_cache_pseudo_element_panels.ContainsKey(panel_id))
                 {
                     Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
