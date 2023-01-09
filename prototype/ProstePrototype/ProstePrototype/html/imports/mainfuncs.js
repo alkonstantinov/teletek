@@ -26,8 +26,9 @@ function sendMessageWPF(json, comm = {}) {
     }
     //alert(JSON.stringify(json));
     try {
+        //alert(`1`);
         CefSharp.PostMessage(JSON.stringify(json));
-        
+        //alert(`2`);
     } catch (e) { console.log('CefSharp error', e); }
 }
 
@@ -108,27 +109,38 @@ function receiveMessageWPF(jsonTxt) {
     }); 
 }
 
+
+
 const loopFunc = () => {
     if (lst.length - 1 === elements) {
         alert("Max number of loops created already");
         $("#deviceList").modal('hide'); //.hide();
         return;
-    } else {    
-        sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': mainKey, 'elementNumber': lst.length } });
-        boundAsync.getJsonNodeForElement(mainKey, lst.length, 'CHANGE').then(res => {
-            var changeJson = JSON.parse(res);
-            if (!Object.keys(changeJson).length) { // guard that the res is full
-                var i = 0;
-                do {
-                    loopFunc(); i++;
-                } while (i === 3); // up to 3 trials
-                if (i === 3) {
-                    alert("Error 3 occurred. Please, connect your software providers!"); return;
-                }
+    } else {   
+        let massive = [mainKey, lst.length, 'CHANGE'];
+        sendMessageWPF({
+            'Command': 'AddingElement', 'Params': { 'elementType': mainKey, 'elementNumber': lst.length }, 'Callback': "loopCallback"
+            , "CallBackParams": massive });
+        
+        $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
+    }
+}
+
+function loopCallback() {
+    boundAsync.getJsonNodeForElement(mainKey, lst.length, 'CHANGE').then(res => {
+        var changeJson = JSON.parse(res);
+        if (!Object.keys(changeJson).length) { // guard that the res is full
+            var i = 0;
+            do {
+                loopFunc(); i++;
+            } while (i === 3); // up to 3 trials
+            if (i === 3) {
+                alert("Error 3 occurred. Please, connect your software providers!"); return;
             }
-            var listTab = document.getElementById('list-tab');
-            Object.keys(changeJson).forEach(k => {
-                let tabListButton = `<button type="button"
+        }
+        var listTab = document.getElementById('list-tab');
+        Object.keys(changeJson).forEach(k => {
+            let tabListButton = `<button type="button"
                                 class="list-group-item col-6"
                                 id="list-${k}" data-toggle="tab"
                                 onclick="javascript: addLoopElement('${k}');"
@@ -143,11 +155,9 @@ const loopFunc = () => {
                                 </i>
                             </div>
                         </button>`
-                listTab.insertAdjacentHTML('beforeend', tabListButton);
-            });
-        }).catch(err => alert(err));
-        $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
-    }
+            listTab.insertAdjacentHTML('beforeend', tabListButton);
+        });
+    }).catch(err => alert(err));
 }
 
 const drawWithModal = (body, json) => {
@@ -318,7 +328,7 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
     if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
     else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
 
-    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params':'${fieldKey}'${!indexFlag ? `, 'Highlight':'${fieldKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
+    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${fieldKey}'${!indexFlag ? `, 'Highlight':'${fieldKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
                 <div class="btnStyle ${color}">
                     <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
                         <br /><span class="someS">
@@ -458,7 +468,7 @@ const transformGroupElement = (elementJson) => {
                     }
                     tabDiv.appendChild(fieldsetDiv);
                 } else { // tabs[key] without properties but with tabs, so the select must inpude the sendMessageWPF funcitonality 
-                    addOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}})`;
+                    addOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params': {'path':'${attributes.path}','newValue': this.value}})`;
                 }                
                 inner += tabDiv.outerHTML;
             })
@@ -1317,7 +1327,7 @@ function showLoop(last, elementType) {
 }
 
 function exchangingLoop(elementType) {
-    alert(`exchanging ${elementType}`)
+    alert(`exchanging ${elementType}, 'mainKey': ${mainKey}, 'lst.length': ${lst.length}`)
 }
 
 function removeLoop() {
