@@ -451,7 +451,7 @@ namespace common
                 if (path != "")
                     path = path.Substring(0, path.Length - 1);
             }
-            if (Regex.IsMatch(path, @"(IRIS8_SENSORS|IRIS8_MODULES)"))
+            if (Regex.IsMatch(path, @"(IRIS\d*_SENSORS|IRIS\d*_MODULES)"))
             {
                 string[] path_arr = Regex.Split(path, @"[\\/]");
                 string[] last_path_arr = Regex.Split(last_path, @"[\\/]");
@@ -490,9 +490,14 @@ namespace common
                     string element = path;
                     if (!Regex.IsMatch(path, "/" + m.Groups[1].Value + "/"))
                     {
-                        string[] sarr = path.Split('/');
-                        sarr[sarr.Length - 1] = m.Groups[1].Value;
-                        element = String.Join('/', sarr);
+                        if (Regex.IsMatch(path, "IRIS_SENSORS") && Regex.IsMatch(m.Groups[1].Value, "(MODULES|IRIS_MNONE)"))
+                            element = Regex.Replace(path, @"IRIS_SENSORS[\w\W]*$", "IRIS_MODULES/IRIS_MNONE");
+                        else
+                        {
+                            string[] sarr = path.Split('/');
+                            sarr[sarr.Length - 1] = m.Groups[1].Value;
+                            element = String.Join('/', sarr);
+                        }
                     }
                     //string element = path;
                     m = Regex.Match(el, @"<COMMANDS>([\w\W]*?)</COMMANDS>");

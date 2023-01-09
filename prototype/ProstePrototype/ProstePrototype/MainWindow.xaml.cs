@@ -293,6 +293,22 @@ namespace ProstePrototype
                         cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
                     }
                     break;
+                case "RemovingElement":
+                    break;
+                case "AddingLoop":
+                    break;
+                case "AddingLoopElement":
+                    break;
+                case "RemovingLoop":
+                    break;
+                case "RemovingLoopElement":
+                    break;
+
+            }
+            if (json["callback"] != null)
+            {
+                ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
+                browser.ExecuteScriptAsync(json["callback"].ToString());
             }
         }
 
