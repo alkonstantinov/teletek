@@ -19,7 +19,7 @@
 
         <div class="row fullHeight">
             <div class="col-3 bl fire scroll">
-                <div id="new" class="row">
+                <div id="new">
                 </div>
             </div>
             <div class="col-9 fullHeight">
@@ -33,20 +33,40 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="row list-group fire" id="list-tab" role="tablist">
-                        
+
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
 
         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5" id="btnGroup">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
-            <button type="button" class="btn-round btn-border-black">Back</button>-->
+        <button type="button" class="btn-round btn-border-black">Back</button>-->
             <button style="display: inline-flex;" type="button" id="_btn" class="btn-round btn-border-black" onclick="javascript: loopFunc(); return false">
                 <i class="fa-solid fa-plus 5x"></i> Add New Loop
             </button>
         </div>
 
+        <!-- showDevicesListModal -->
+        <div class="modal fade" id="showDevicesListModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <script>
             let elements;
@@ -74,9 +94,14 @@
     <script src="../imports/bootstrap-datepicker.min.js"></script>
     <script src="../imports/font-awesome.js"></script>
     <script src="../imports/mainfuncs.js"></script>
+    <script src="../imports/loopfuncs.js"></script>
     <script>
         $("#deviceList").on('hidden.bs.modal', function () {
-            $("#list-tab").empty();
+            $("#deviceList").find("#list-tab").empty();
+        });
+
+        $("#showDevicesListModal").on('hidden.bs.modal', function () {
+            $("#showDevicesListModal").find(".modal-body").empty();
         });
 
       //wb2 = `{

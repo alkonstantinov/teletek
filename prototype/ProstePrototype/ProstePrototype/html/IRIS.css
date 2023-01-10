@@ -630,6 +630,77 @@ fieldset {
     padding: 8px 0;
 }
 
+
+.br {
+    border-left: 1px solid #181717d2;
+}
+/*.br:first-child {
+    border-left: none;
+}*/
+
+.btn-blue {
+    background-color: var(--normal);
+    border: 1px solid #ffffff;
+    color: #f4f4f4;
+}
+
+    .btn-blue:hover {
+        background-color: #0c91e4;
+        color: #ffffff;
+    }
+
+
+.multi-button .btn-border-black {
+    height: 50px;
+    width: fit-content;
+    background-color: #ffffff;
+    align-items: center;
+    border: 1px solid #42485a;
+    color: #42485a;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    min-height: 50px;
+    margin: -5px;
+    position: relative;
+}
+
+.multi-button .btn-border-black:nth-child(1) {
+    border-radius: 10px 0 0 10px;
+    padding-left: 35px;
+    margin-top: -8px;
+}
+.multi-button :nth-child(2) {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    z-index: 99;
+}
+.multi-button :nth-child(3) {
+    border-radius: 0 10px 10px 0;
+    padding-right: 35px;
+    margin-top: -8px;
+}
+
+.btn-border-black {
+    background-color: #ffffff;
+    border: 1px solid #42485a;
+    color: #42485a;
+}
+
+    .btn-border-black:hover {
+        background-color: rgba(118, 118, 118, .6);
+        color: #c6cad5;
+    }
+
+    .btn-border-black i {
+        color: #42485a;
+    }
+
+.btn-border-black i {
+    padding: 0;
+}
+
 .btn-round {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
@@ -666,39 +737,6 @@ fieldset {
     margin: 0 auto;
     margin-bottom: 1rem;
 }
-
-.br {
-    border-left: 1px solid #181717d2;
-}
-/*.br:first-child {
-    border-left: none;
-}*/
-
-.btn-blue {
-    background-color: var(--normal);
-    border: 1px solid #ffffff;
-    color: #f4f4f4;
-}
-
-    .btn-blue:hover {
-        background-color: #0c91e4;
-        color: #ffffff;
-    }
-
-.btn-border-black {
-    background-color: #ffffff;
-    border: 1px solid #42485a;
-    color: #42485a;
-}
-
-    .btn-border-black:hover {
-        background-color: rgba(118, 118, 118, .6);
-        color: #c6cad5;
-    }
-
-    .btn-border-black i {
-        color: #42485a;
-    }
 
 .mt15 {
     margin-top: 15px;

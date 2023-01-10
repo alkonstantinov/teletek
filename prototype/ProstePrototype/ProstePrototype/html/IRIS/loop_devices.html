@@ -104,11 +104,11 @@
             </div>
         </div>
 
-        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5" id="btnGroup">
             <!--<button type="button" class="btn-round btn-blue">Save</button>
         <button type="button" class="btn-round btn-border-black">Back</button>-->
             <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="device_btn" class="btn-round btn-border-black">
-                <i class="fa-solid fa-plus 5x"></i> Add New Device
+                <i class="fa-solid fa-plus 5x"></i> Add New Loop
             </button>
         </div>
 
@@ -1842,7 +1842,6 @@
                 }
             }
 
-
             var lst = [];
             const devices = 4;
             function addConcreteDevice(id) {
@@ -1865,6 +1864,14 @@
                     lst = lst.filter(function (item) {
                         return item !== +id
                     })
+
+                    if (lst.length === 0) {
+                        let btnGroup = document.getElementById("btnGroup");
+                        btnGroup.classList.remove('multi-button');
+                        let firstEl = btnGroup.firstElementChild;
+                        firstEl.insertAdjacentHTML('beforeend', " Add New Loop");
+                        btnGroup.replaceChildren(firstEl);
+                    }
 
                     let button = document.getElementById("device_btn");
                     if (lst.length < devices && button.style.display === "none") {
@@ -1919,9 +1926,17 @@
                     lst.push(last);
                     element.innerHTML = new_inner;
 
+                    if (last === 1 && !document.getElementById("rvmBtn")) {
+                        let btnGroup = document.getElementById("btnGroup");
+                        btnGroup.classList += ' multi-button';
+                        let len = btnGroup.firstElementChild.childNodes.length;
+                        btnGroup.firstElementChild.childNodes[len - 1].textContent = "";
+                        btnGroup.insertAdjacentHTML('beforeend', `<button class="btn-border-black">Loop</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>`);
+                    }
+
                     // button display check
                     if (lst.length === devices) {
-                        let button = document.getElementById("device_btn");
+                        let button = document.getElementById("btnGroup");
                         button.style.display = "none";
                     }
                     $('#deviceList').modal('toggle');

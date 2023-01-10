@@ -220,6 +220,9 @@
     <None Update="html\imports\jquery.inputmask.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\imports\loopfuncs.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\imports\popper.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
