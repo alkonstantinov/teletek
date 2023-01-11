@@ -1,4 +1,11 @@
-﻿let deviceNmbr = 0;
+﻿// REGION VARIABLES
+let elements;
+let lst = [0];
+let mainKey;
+let deviceNmbr = 0;
+let attachedDevicesList = [];
+let maxDevicesAllowed = 99;
+// END REGION VARIABLES
 
 const loopFunc = () => {
     if (lst.length - 1 === elements) {
@@ -50,30 +57,30 @@ function loopCallback(key, len, command) {
     }).catch(err => alert(err));
 }
 
-const getArrayToModal = (id, loopType, operation) => {
+const getArrayToModal = (id, loopNumber, loopType, operation) => {
     boundAsync.getJsonNode(id, operation).then(res => {
         var listJson = JSON.parse(res);
-        alert('loopType' + loopType);
         let deviceList = document.getElementById(`${loopType}_modal`).querySelector('#list-tab');
         let deviceListName = id.includes('NONE') ? "Devices" : id.split('_').slice(1).join(' ');
         deviceList.insertAdjacentHTML('beforeend', `<div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">${deviceListName}</div>`)
         Object.keys(listJson).forEach(deviceName => {
+            let key = getKey(deviceName);
             deviceList.insertAdjacentHTML('beforeend', `
                 <button type="button"
                         class="list-group-item col"
                         id="${deviceName}"
-                        onclick="javascript: addLoopElement(this.id, '${loopType}')"
+                        onclick="javascript: addLoopElement(this.id, '${loopNumber}', '${loopType}' )"
                         data-toggle="tab"
                         role="tab"
                         aria-selected="false">
                     <div class="btnStyle fire">
-                        <img src="../../Images/17.1251E.png"
+                        <img src="${DEVICES_CONSTS[key].im}"
                                 alt=""
                                 width="50"
                                 height="50"
                                 class="m15" />
                         <div class="someS">
-                            <h5>${deviceName.split('_').slice(1).join(' ')}</h5>
+                            <h5>${DEVICES_CONSTS[key].sign}</h5>
                         </div>
                     </div>
                 </button>
@@ -82,8 +89,6 @@ const getArrayToModal = (id, loopType, operation) => {
     });
 }
 
-let lst2 = [];
-let devices2 = 99;
 const loopElementFunc = (loopNumber, loopType) => {
     boundAsync.getJsonNode(loopType, 'CONTAINS').then(res => {
         var changeJson = JSON.parse(res)["ELEMENT"];
@@ -95,34 +100,83 @@ const loopElementFunc = (loopNumber, loopType) => {
                 max: +(changeJson["@MAX"])
             };
             if (min !== max) {
-                devices2 = max;
+                maxDevicesAllowed = max;
             }
             if (id) {
-                getArrayToModal(id, loopType, 'CHANGE');
+                getArrayToModal(id, loopNumber, loopType, 'CHANGE');
             }
         } else {
             Object.keys(changeJson).forEach(idx => {
-                getArrayToModal(changeJson[idx]["@ID"], loopType, 'CONTAINS');
+                getArrayToModal(changeJson[idx]["@ID"], loopNumber, loopType, 'CONTAINS');
             });
         }
-    });
-
-    //if (lst.length - 1 === elements) {
-    //    alert("Max number of loops created already");
-    //    $("#deviceList").modal('hide'); //.hide();
-    //    return;
-    //} else {
-    //    sendMessageWPF({
-    //        'Command': 'AddingLoopElement', 'Params': { 'elementType': mainKey, 'elementNumber': loopNumber }, 'Callback': "loopCallback"
-    //        , "CallBackParams": [mainKey, lst.length, 'CHANGE']
-    //    });
-
-    //    $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
-    //}
+    });    
 }
 
-const addLoopElement = (loopNumber, loopType) => {
-    alert(loopType + ' ' + loopNumber)
+const addLoopElement = (deviceName, loopNumber, loopType) => {
+    
+    for (i = 1; i <= maxDevicesAllowed; i++) {
+        if (attachedDevicesList.includes(i)) {
+            continue;
+        } else {
+            var address = i;
+            break;
+        }
+    }
+ 
+    sendMessageWPF({
+        'Command': 'AddingLoopElement', 
+        'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'deviceName': deviceName, 'deviceAddress': address }
+    });
+
+    let key = getKey(deviceName);
+
+    const newDeviceInner = `<div class="col-12" id='${loopType}_${address}'>
+                                <div class="row">
+                                    <div class="col-10 pr-1">
+                                        <a href="javascript:showDevice('${loopType}', '${deviceName}', '${address}')" onclick="javascript:addActive('#selected_area')" >
+                                            <div class="btnStyle fire">
+                                                <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
+                                                <div class="someS">
+                                                    <div class="h5">${address + '. ' + DEVICES_CONSTS[key].sign}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-1 p-0 m-0" onclick="javascript:removeDevice('${loopType}', '${loopNumber}', '${deviceName}', '${address}')">
+                                        <i class="fa-solid fa-xmark fire"></i>
+                                    </div>
+                                </div>
+                            </div>`;
+
+    var el = document.getElementById(`new_${DEVICES_CONSTS[key].type}_${loopType}`);
+
+    if (el) { // inserting
+        el.insertAdjacentHTML('beforeend', newDeviceInner)
+    }
+    // reordering
+    [].map.call(el.children, Object).sort(function (a, b) {
+        return +a.id.match(/\d+$/) - +b.id.match(/\d+$/);
+    }).forEach(function (elem) {
+        el.appendChild(elem);
+    });
+
+    if (attachedDevicesList.length === maxDevicesAllowed) {
+        let button = document.getElementById(`btn_${loopType}`);
+        button.style.display = "none";
+    }
+    $(`#${loopType}_modal`).modal('toggle');
+}
+
+const showDevice = (loopType, deviceName, address) => {
+
+}
+
+const removeDevice = (loopType, loopNumber, deviceName, address) => {
+    sendMessageWPF({
+        'Command': 'RemovingLoopElement',
+        'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'deviceName': deviceName, 'deviceAddress': address }
+    });
 }
 
 
@@ -163,9 +217,9 @@ function addLoop(loopType) {
 
     var element = document.getElementById("new");
     var new_inner = `
-                            ${element.innerHTML}
-                            ${newLoop}
-                        `;
+                        ${element.innerHTML}
+                        ${newLoop}
+                    `;
     element.innerHTML = new_inner;
 
     // adding remove button
@@ -304,4 +358,8 @@ function calculateLoopDevices() {
     let modal = $(document.getElementById("showDevicesListModal"));
     let modalContent = modal.find('.modal-body')[0];
     modalContent.innerHTML = `<p>"Setting the new modal list"</p>`;
+}
+
+function getKey(deviceName) {
+    return Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k));
 }

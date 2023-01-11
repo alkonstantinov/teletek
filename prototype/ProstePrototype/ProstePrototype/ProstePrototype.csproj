@@ -223,6 +223,9 @@
     <None Update="html\imports\loopfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="html\imports\loop_constants.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="html\imports\popper.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

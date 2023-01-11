@@ -68,24 +68,6 @@
             </div>
         </div>
 
-        <script>
-            let elements;
-            let lst = [0];
-            let mainKey;
-
-            const BUTTON_IMAGES = {
-                TTELOOP: { im: 'fa-solid fa-arrows-spin', sign: 'Teletek Loop' },
-                LOOP: { im: 'fa-solid fa-arrows-spin', sign: 'System Sensors Loop' },
-                OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-                OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-                POWER: { im: 'fa-solid fa-plug', sign: '' },
-                PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
-                INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
-                OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
-                EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
-                ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
-            };
-        </script>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -93,6 +75,7 @@
     <script src="../imports/boostrap@4.3.1.min.js"></script>
     <script src="../imports/bootstrap-datepicker.min.js"></script>
     <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/loop_constants.js"></script>
     <script src="../imports/mainfuncs.js"></script>
     <script src="../imports/loopfuncs.js"></script>
     <script>
@@ -103,17 +86,6 @@
         $("#showDevicesListModal").on('hidden.bs.modal', function () {
             $("#showDevicesListModal").find(".modal-body").empty();
         });
-
-      //wb2 = `{
-      //  "~path": "ELEMENTS.iris_loop_devices.CONTAINS",
-      //  "IRIS8_NO_LOOP": {
-      //      "@MIN": "1",
-      //      "@MAX": 8,
-      //      "@LNGID": "cfeb8166-73d9-4c1e-a894-cde3d4cb92eb",
-      //      "~path": "ELEMENTS.iris_loop_devices.CONTAINS.IRIS8_NO_LOOP"
-      //  }
-      //}`;
-      //  receiveMessageWPF(wb2);
     </script>
 </body>
 </html>
