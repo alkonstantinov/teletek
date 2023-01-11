@@ -300,6 +300,7 @@ namespace ProstePrototype
                 browser.ExecuteScriptAsync(json["Callback"].ToString(), JArray.Parse(json["CallBackParams"].ToString()).ToObject<object[]>());
             }
         }
+        }
 
         private void LoadPage(string page, string highlight)
         {
@@ -620,5 +621,17 @@ namespace ProstePrototype
         {
 
         }
+    }
+
+    public class ClassWithJSFunc
+    {
+        public string Command { get; set; }
+        public string Function { get; set; }
+        public string Params { get; set; }
+        public JObject Paramz {
+            get { return JObject.Parse(Params.ToString()); }   // get method available if Params ExpondoObject
+        }
+        public string Highlight { get; set; }
+        public IJavascriptCallback Callback { get; set; }
     }
 }
