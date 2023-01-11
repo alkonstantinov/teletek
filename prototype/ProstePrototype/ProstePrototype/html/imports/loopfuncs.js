@@ -1,76 +1,31 @@
-﻿// REGION VARIABLES
+﻿//#region VARIABLES
 let elements;
+let minDevicesAllowed = 1;
 let lst = [0];
 let mainKey;
 let deviceNmbr = 0;
 let attachedDevicesList = [];
-let maxDevicesAllowed = 99;
-// END REGION VARIABLES
+let maxDevicesAllowed = 100;
+//#endregion VARIABLES
 
-const loopFunc = () => {
-    if (lst.length - 1 === elements) {
-        alert("Max number of loops created already");
-        $("#deviceList").modal('hide'); //.hide();
-        return;
-    } else {        
-        sendMessageWPF({
-            'Command': 'AddingElement',
-            'Params': { 'elementType': mainKey, 'elementNumber': lst.length },
-            'Callback': 'loopCallback',
-            'CallBackParams': [mainKey, lst.length, 'CHANGE']
-        });    // 'CallBackParams' mandatory with 'Callback'
-        $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
-    }
-}
-
-function loopCallback(key, len, command) {    
-    boundAsync.getJsonNodeForElement(key, len, command).then(res => {
-        var changeJson = JSON.parse(res);
-        if (!Object.keys(changeJson).length) { // guard that the res is full
-            var i = 0;
-            do {
-                loopFunc(); i++;
-            } while (i === 3); // up to 3 trials
-            if (i === 3) {
-                alert("Error 3 occurred. Please, connect your software providers!"); return;
-            }
-        }
-        var listTab = document.getElementById('deviceList').querySelector("#list-tab"); // $("#deviceList").find("#list-tab")[0];
-        Object.keys(changeJson).forEach(k => {
-            let tabListButton = `<button type="button"
-                                class="list-group-item col-6"
-                                id="list-${k}" data-toggle="tab"
-                                onclick="javascript: addLoop('${k}');"
-                                role="tab"
-                                aria-controls="list-${k}"
-                                aria-selected="false">
-                            <div class="btnStyle fire">
-                                <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
-                                    <br /><span class="someS">
-                                        <span class="h5">${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop</span>
-                                    </span>
-                                </i>
-                            </div>
-                        </button>`
-            listTab.insertAdjacentHTML('beforeend', tabListButton);
-        });
-    }).catch(err => alert(err));
-}
-
+//#region LOOP ELEMENT
 const getArrayToModal = (id, loopNumber, loopType, operation) => {
     boundAsync.getJsonNode(id, operation).then(res => {
-        var listJson = JSON.parse(res);
+        var listJson = Object.keys(JSON.parse(res));
         let deviceList = document.getElementById(`${loopType}_modal`).querySelector('#list-tab');
         let deviceListName = id.includes('NONE') ? "Devices" : id.split('_').slice(1).join(' ');
         deviceList.insertAdjacentHTML('beforeend', `<div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">${deviceListName}</div>`)
 
-        Object.keys(listJson).filter(k => !k.includes('NONE')).forEach(deviceName => {
+        let noneElement = listJson.find(e => e.includes("NONE"));
+        if (!noneElement) noneElement = id;
+
+        listJson.filter(k => !k.includes('NONE')).forEach(deviceName => {
             let key = getKey(deviceName);
             deviceList.insertAdjacentHTML('beforeend', `
                 <button type="button"
                         class="list-group-item col"
                         id="${deviceName}"
-                        onclick="javascript: addLoopElement(this.id, '${loopNumber}', '${loopType}' )"
+                        onclick="javascript: addLoopElement(this.id, '${loopNumber}', '${loopType}', '${noneElement}' )"
                         data-toggle="tab"
                         role="tab"
                         aria-selected="false">
@@ -114,9 +69,10 @@ const loopElementFunc = (loopNumber, loopType) => {
     });    
 }
 
-const addLoopElement = (deviceName, loopNumber, loopType) => {
-    
-    for (i = 1; i <= maxDevicesAllowed; i++) {
+const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
+    let { key, minDevices, maxDevices } = getConfig(deviceName);
+
+    for (i = minDevices; i <= maxDevices; i++) {
         if (attachedDevicesList.includes(i)) {
             continue;
         } else {
@@ -124,13 +80,16 @@ const addLoopElement = (deviceName, loopNumber, loopType) => {
             break;
         }
     }
- 
+
+    if (!address) {
+        alert("It is not possible to add more devices of type " + DEVICES_CONSTS[key].type + " in loop " + loopNumber + "!")
+    }
+
     sendMessageWPF({
         'Command': 'AddingLoopElement', 
-        'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'deviceName': deviceName, 'deviceAddress': address }
+        'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'noneElement': noneElement, 'deviceName': deviceName, 'deviceAddress': address }
     });
     attachedDevicesList.push(address);
-    let key = getKey(deviceName);
 
     const newDeviceInner = `<div class="col-12" id='${loopType}_${address}'>
                                 <div class="row">
@@ -162,7 +121,7 @@ const addLoopElement = (deviceName, loopNumber, loopType) => {
         el.appendChild(elem);
     });
 
-    if (attachedDevicesList.length === maxDevicesAllowed) {
+    if (attachedDevicesList.length === maxDevicesAllowed && DEVICES_CONSTS[key].type === "device") {
         let button = document.getElementById(`btn_${loopType}`);
         button.style.display = "none";
     }
@@ -178,10 +137,66 @@ const removeDevice = (loopType, loopNumber, deviceName, address) => {
         'Command': 'RemovingLoopElement',
         'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'deviceName': deviceName, 'deviceAddress': address }
     });
+
+    if (attachedDevicesList.length < maxDevicesAllowed && document.getElementById(`btn_${loopType}`).style.display === "none") {
+        document.getElementById(`btn_${loopType}`).style.display = "inline-flex";
+    }
+}
+//#endregion LOOP ELEMENT
+
+//#region LOOP
+// initial loop function for adding a loop;
+const loopFunc = () => {
+    if (lst.length - 1 === elements) {
+        alert("Max number of loops created already");
+        $("#deviceList").modal('hide'); //.hide();
+        return;
+    } else {
+        sendMessageWPF({
+            'Command': 'AddingLoop',
+            'Params': { 'elementType': mainKey, 'elementNumber': lst.length },
+            'Callback': 'loopCallback'
+            //, 'CallBackParams': [mainKey, lst.length, 'CHANGE']
+        });
+        $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
+    }
 }
 
+function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
+    boundAsync.getJsonNodeForElement(key, len, command).then(res => {
+        var changeJson = JSON.parse(res);
+        if (!Object.keys(changeJson).length) { // guard that the res is full
+            var i = 0;
+            do {
+                loopFunc(); i++;
+            } while (i === 3); // up to 3 trials
+            if (i === 3) {
+                alert("Error 3 occurred. Please, connect your software providers!"); return;
+            }
+        }
+        var listTab = document.getElementById('deviceList').querySelector("#list-tab"); // $("#deviceList").find("#list-tab")[0];
+        Object.keys(changeJson).forEach(k => {
+            let tabListButton = `<button type="button"
+                                class="list-group-item col-6"
+                                id="list-${k}" data-toggle="tab"
+                                onclick="javascript: addLoop('${k}');"
+                                role="tab"
+                                aria-controls="list-${k}"
+                                aria-selected="false">
+                            <div class="btnStyle fire">
+                                <i class="fa-solid fa-arrows-spin fa-3x fire p15" aria-hidden="true">
+                                    <br /><span class="someS">
+                                        <span class="h5">${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop</span>
+                                    </span>
+                                </i>
+                            </div>
+                        </button>`
+            listTab.insertAdjacentHTML('beforeend', tabListButton);
+        });
+    }).catch(err => alert(err));
+}
 
-//adding loop elements function
+//actual adding loop elements function
 function addLoop(loopType) {
     if (!loopType) return;
 
@@ -354,6 +369,7 @@ function removeLoop() {
         btnGroup.replaceChildren(firstEl);
     }
 }
+//#endregion LOOP
 
 function calculateLoopDevices() {
     let modal = $(document.getElementById("showDevicesListModal"));
@@ -361,6 +377,24 @@ function calculateLoopDevices() {
     modalContent.innerHTML = `<p>"Setting the new modal list"</p>`;
 }
 
+
+//#region UTILS
 function getKey(deviceName) {
     return Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k));
 }
+
+function getConfig(deviceName) {
+    let maxDevices = maxDevicesAllowed;
+    let minDevices = minDevicesAllowed;
+
+    let key = getKey(deviceName);
+    // module check
+    if (DEVICES_CONSTS[key].type === "module") {
+        minDevices += 100;
+        maxDevices += 100;
+    }
+
+    return { key, minDevices, maxDevices };
+}
+
+//#endregion UTILS

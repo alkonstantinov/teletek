@@ -1,10 +1,13 @@
-﻿const BUTTON_COLORS = {
+﻿//#region VARIABLES
+
+const BUTTON_COLORS = {
     IRIS: 'fire',
     ECLIPSE: 'normal',
     TTE: 'grasse',
 };
 
 let darkModeStylesheetId = "ssDarkMode";
+//#endregion VARIABLES
 
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
@@ -480,7 +483,7 @@ const transformGroupElement = (elementJson) => {
     }
 }
 
-// collapsible part
+//#region collapsible part
 function collapsible(param) {
     var coll = param ? document.getElementsByClassName(param) : document.getElementsByClassName("collapsible");
     var i;
@@ -504,16 +507,9 @@ function collapsible(param) {
     }
 }
 collapsible();
+//#endregion
 
-function sendMsg(el) {
-    //console.log('event', event);
-    var json = JSON.parse(el.parentNode.getAttribute("sendMessage"));
-    json["Function"] = el.title;
-    sendMessageWPF(json);
-
-}
-// finish of the contextMenu part
-
+//#region pagePreparation, contextMenu, toggleDarkMode
 function pagePreparation () {
     $(document).ready(() => {
         addVisitedBackground();
@@ -557,16 +553,7 @@ function showContextMenu(el) {
     ctxMenu.onmouseleave = () => ctxMenu.style.display = "none";
     return false;
 }
-
-// checking a hex value function
-function checkHexRegex(event) {
-    let val = event.target.value;
-    let regEx = /^([0-9A-Fa-f]{1,2})$/;
-    let isHex = regEx.test(val);
-    if (!isHex) {
-        document.getElementById(event.target.id).value = val.slice(0, -1);
-    }
-}
+// finish of the contextMenu part
 
 // activate dark mode
 function toggleDarkMode(show, filename) {
@@ -587,6 +574,18 @@ function toggleDarkMode(show, filename) {
     else {
         let ss = document.getElementById(darkModeStylesheetId);
         ss.parentNode.removeChild(ss);
+    }
+}
+//#endregion
+
+//#region UTILS
+// checking a hex value function
+function checkHexRegex(event) {
+    let val = event.target.value;
+    let regEx = /^([0-9A-Fa-f]{1,2})$/;
+    let isHex = regEx.test(val);
+    if (!isHex) {
+        document.getElementById(event.target.id).value = val.slice(0, -1);
     }
 }
 
@@ -618,7 +617,16 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
     body.appendChild(script);
 }
 
-/////////////////////----- COMMON Funcs -----////////////////////////////////////////////
+function sendMsg(el) {
+    //console.log('event', event);
+    var json = JSON.parse(el.parentNode.getAttribute("sendMessage"));
+    json["Function"] = el.title;
+    sendMessageWPF(json);
+
+}
+//#endregion
+
+//#region //----- COMMON Funcs -----////////////////////////////////////////////
 const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '', value }) => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
@@ -969,8 +977,9 @@ const getWeekInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
             </fieldset>
         </div>`
 }
+//#endregion
 
-/////////////////////----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
+//#region //----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
 
 function myFunction(id) {
     var element = document.getElementById(id);
@@ -1209,3 +1218,4 @@ function loadDiv(it, id, value) {
     }
     addVisitedBackground();
 }
+//#endregion

@@ -1,4 +1,4 @@
-﻿DEVICES_CONSTS = {
+﻿const DEVICES_CONSTS = {
     MM210E: { im: "../../Images/17.1251E.png", sign: "MM210E", type: "module" },
     MM220E: { im: "../../Images/17.1251E.png", sign: "MM220E", type: "module" },
     MM221EINPUT: { im: "../../Images/17.1251E.png", sign: "MM221EINPUT", type: "module" },
@@ -63,14 +63,14 @@
 };
 
 const BUTTON_IMAGES = {
-                TTELOOP: { im: 'fa-solid fa-arrows-spin', sign: 'Teletek Loop' }, // NB! последователността е важна
-                LOOP: { im: 'fa-solid fa-arrows-spin', sign: 'System Sensors Loop' },
-                OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-                OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-                POWER: { im: 'fa-solid fa-plug', sign: '' },
-                PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
-                INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
-                OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
-                EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
-                ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
-            };
+    TTELOOP: { im: 'fa-solid fa-arrows-spin', sign: 'Teletek Loop' }, // NB! последователността е важна
+    LOOP: { im: 'fa-solid fa-arrows-spin', sign: 'System Sensors Loop' },
+    OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+    OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+    POWER: { im: 'fa-solid fa-plug', sign: '' },
+    PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
+    INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
+    OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
+    EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
+    ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
+};

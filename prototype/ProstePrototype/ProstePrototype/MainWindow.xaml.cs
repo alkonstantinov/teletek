@@ -299,6 +299,11 @@ namespace ProstePrototype
                 case "RemovingElement":
                     break;
                 case "AddingLoop":
+                    elementType = json["Params"]["elementType"].ToString();
+                    elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
+                    elementNumber = json["Params"]["elementNumber"].ToString();
+                    el = cJson.GetNode(elementType + elementNumber);
+                    cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
                     break;
                 case "AddingLoopElement":
                     break;
@@ -311,7 +316,14 @@ namespace ProstePrototype
             if (json["Callback"] != null)
             {
                 ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
-                browser.ExecuteScriptAsync(json["Callback"].ToString(), JArray.Parse(json["CallBackParams"].ToString()).ToObject<object[]>());
+                if (json["CallBackParams"] != null)
+                {
+                    browser.ExecuteScriptAsync(json["Callback"].ToString(), JArray.Parse(json["CallBackParams"].ToString()).ToObject<object[]>());
+                }
+                else
+                {
+                    browser.ExecuteScriptAsync(json["Callback"].ToString(), new object[] {});
+                }
             }
         }
 
@@ -636,15 +648,4 @@ namespace ProstePrototype
         }
     }
 
-    public class ClassWithJSFunc
-    {
-        public string Command { get; set; }
-        public string Function { get; set; }
-        public string Params { get; set; }
-        public JObject Paramz {
-            get { return JObject.Parse(Params.ToString()); }   // get method available if Params ExpondoObject
-        }
-        public string Highlight { get; set; }
-        public IJavascriptCallback Callback { get; set; }
-    }
 }
