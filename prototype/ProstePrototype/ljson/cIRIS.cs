@@ -6,11 +6,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
+using common;
 
 namespace ljson
 {
     public class cIRIS : cXml
     {
+        #region read/write
+
+        #endregion
+
         #region common
         private static string TranslateKey(string name)
         {

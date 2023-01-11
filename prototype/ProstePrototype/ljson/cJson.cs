@@ -220,6 +220,26 @@ namespace ljson
             }
         }
 
+        private static object _cs_write_read_merge = new object();
+        private static Dictionary<string, cRWPath> _write_read_merge = null;
+
+        private static Dictionary<string, cRWPath> WriteReadMerge
+        {
+            get
+            {
+                Monitor.Enter(_cs_write_read_merge);
+                Dictionary<string, cRWPath> res = _write_read_merge;
+                Monitor.Exit(_cs_write_read_merge);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_write_read_merge);
+                _write_read_merge = value;
+                Monitor.Exit(_cs_write_read_merge);
+            }
+        }
+
         private static string FilePathFromSchema(string schema)
         {
             string path = Directory.GetCurrentDirectory();
@@ -306,7 +326,7 @@ namespace ljson
             string schema = Regex.Replace(System.IO.Path.GetFileName(filename), @"\.\w+$", "");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            cXmlConfigs cfg = new cXmlConfigs(jobj2string, jstring2obj);
+            cXmlConfigs cfg = new cXmlConfigs(schema, jobj2string, jstring2obj);
             cfg.ConfigPath = filename;
             cfg.Config = doc;
             string xmldir = Directory.GetParent(Directory.GetParent(filename).ToString()).ToString();
@@ -351,7 +371,7 @@ namespace ljson
                 }
             }
             doc = (XmlDocument)cfg.Config;
-            Dictionary<string, object> rwmerge = cfg.RWMerged();
+            WriteReadMerge = cfg.RWMerged();
             SetPanelXMLConfigs(filename, cfg);
             //
             string json = JsonConvert.SerializeXmlNode(doc);

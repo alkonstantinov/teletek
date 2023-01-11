@@ -12,11 +12,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace ProstePrototype
 {
@@ -253,7 +251,6 @@ namespace ProstePrototype
         #region PostMessage&LoadPage
         private void wb_PostMessage(object sender, JavascriptMessageReceivedEventArgs e)
         {
-            //var msg = e.ConvertMessageTo<ClassWithJSFunc>();
             JObject json = JObject.Parse(e.Message.ToString());
             switch (json["Command"].ToString())
             {
@@ -296,18 +293,7 @@ namespace ProstePrototype
                         cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
                     }
                     break;
-                case "RemovingElement":
-                    break;
-                case "AddingLoop":
-                    break;
-                case "AddingLoopElement":
-                    break;
-                case "RemovingLoop":
-                    break;
-                case "RemovingLoopElement":
-                    break;
             }
-
             if (json["Callback"] != null)
             {
                 ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
@@ -634,17 +620,5 @@ namespace ProstePrototype
         {
 
         }
-    }
-
-    public class ClassWithJSFunc
-    {
-        public string Command { get; set; }
-        public string Function { get; set; }
-        public string Params { get; set; }
-        public JObject Paramz {
-            get { return JObject.Parse(Params.ToString()); }   // get method available if Params ExpondoObject
-        }
-        public string Highlight { get; set; }
-        public IJavascriptCallback Callback { get; set; }
     }
 }

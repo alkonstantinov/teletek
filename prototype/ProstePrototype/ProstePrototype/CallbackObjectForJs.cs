@@ -36,5 +36,17 @@ namespace ProstePrototype
             string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
             return res;
         }
+
+        public string getJsonNode(string elementName, string key)
+        {
+            JObject jnode = new JObject(cJson.GetNode(elementName));
+            if (jnode != null)
+            {
+                JToken t = jnode[key];
+                if (t != null)
+                    return t.ToString();
+            }
+            return null;
+        }
     }
 }
