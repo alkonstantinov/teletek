@@ -63,7 +63,8 @@ const getArrayToModal = (id, loopNumber, loopType, operation) => {
         let deviceList = document.getElementById(`${loopType}_modal`).querySelector('#list-tab');
         let deviceListName = id.includes('NONE') ? "Devices" : id.split('_').slice(1).join(' ');
         deviceList.insertAdjacentHTML('beforeend', `<div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">${deviceListName}</div>`)
-        Object.keys(listJson).forEach(deviceName => {
+
+        Object.keys(listJson).filter(k => !k.includes('NONE')).forEach(deviceName => {
             let key = getKey(deviceName);
             deviceList.insertAdjacentHTML('beforeend', `
                 <button type="button"
@@ -128,7 +129,7 @@ const addLoopElement = (deviceName, loopNumber, loopType) => {
         'Command': 'AddingLoopElement', 
         'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'deviceName': deviceName, 'deviceAddress': address }
     });
-
+    attachedDevicesList.push(address);
     let key = getKey(deviceName);
 
     const newDeviceInner = `<div class="col-12" id='${loopType}_${address}'>
