@@ -238,17 +238,17 @@
                                         <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                     </DockPanel>
                                 </MenuItem.Header>
-                                <MenuItem Header="_English">
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_English">
                                     <MenuItem.Icon>
                                         <Image Source="/html/gb-eng.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="_German">
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_German">
                                     <MenuItem.Icon>
                                         <Image Source="/html/de.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="_Bulgarian">
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Bulgarian">
                                     <MenuItem.Icon>
                                         <Image Source="/html/bg.png" />
                                     </MenuItem.Icon>

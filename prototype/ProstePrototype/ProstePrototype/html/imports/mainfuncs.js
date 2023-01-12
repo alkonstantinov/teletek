@@ -279,13 +279,14 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
     let color = indexFlag ? localJSON.deviceType : "";
     if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
     else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
+    var titleTranslated = new T().t(localStorage.getItem('lang'), title.toLowerCase().replaceAll(' ', '_'));
 
     let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${fieldKey}'${!indexFlag ? `, 'Highlight':'${fieldKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
                 <div class="btnStyle ${color}">
                     <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
                         <br /><span class="someS">
                             <span class="h5">
-                                ${title}
+                                ${titleTranslated}
                             </span>
                             ${indexFlag ? localJSON.interface : ""}
                         </span>
@@ -575,6 +576,40 @@ function toggleDarkMode(show, filename) {
         let ss = document.getElementById(darkModeStylesheetId);
         ss.parentNode.removeChild(ss);
     }
+}
+//#endregion
+
+//#region Language Funcs
+class T {
+    getLangs = () => {
+        return Translations.languages;
+    }
+
+    t = (lang, key) => {
+        let k = Translations.translations[key];
+        if (!k) {
+            return "Not found translation key";
+        }
+        let t = k[lang];
+        if (!t) {
+            return "Not found translation language";
+        }
+        return t;
+    }
+}
+
+function toggleLang(key) {
+    if (Translations.languages.map(x => x.key).includes(key)) {
+        localStorage.setItem('lang', Translations.languages.find(x => x.key === key).id);
+    } else {
+        localStorage.setItem('lang', 'en');
+    }
+    alert('lang ' + localStorage.getItem('lang'));
+    document.location.reload();
+}
+
+if (!localStorage.getItem('lang')) {
+    localStorage.setItem('lang', 'en');
 }
 //#endregion
 

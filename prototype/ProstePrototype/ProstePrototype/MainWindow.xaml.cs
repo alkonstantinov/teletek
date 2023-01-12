@@ -250,6 +250,17 @@ namespace ProstePrototype
         }
         #endregion
 
+        #region Language
+        private void ChangeLanguage_Clicked(object sender, RoutedEventArgs e)
+        {
+            string lang = (string)((HeaderedItemsControl)sender).Header;
+
+            var script = $"toggleLang('{lang}');";
+            wb1.ExecuteScriptAsync(script);
+            wb2.ExecuteScriptAsync(script);
+        }
+        #endregion
+
         #region PostMessage&LoadPage
         private void wb_PostMessage(object sender, JavascriptMessageReceivedEventArgs e)
         {
