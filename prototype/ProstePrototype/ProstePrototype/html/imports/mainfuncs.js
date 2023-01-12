@@ -607,7 +607,7 @@ function ipMaskActivation(src = "../imports/jquery.inputmask.min.js") {
 }
 
 function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
-    var body = document.getElementsByTagName('body')[0];
+    var body = document.body;
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = src;

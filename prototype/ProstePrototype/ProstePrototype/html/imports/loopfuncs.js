@@ -13,7 +13,9 @@ const getArrayToModal = (id, loopNumber, loopType, operation) => {
     boundAsync.getJsonNode(id, operation).then(res => {
         var listJson = Object.keys(JSON.parse(res));
         let deviceList = document.getElementById(`${loopType}_modal`).querySelector('#list-tab');
-        let deviceListName = id.includes('NONE') ? "Devices" : id.split('_').slice(1).join(' ');
+        let deviceListName = id.includes('NONE') ? "DEVICES" : id.split('_').slice(1).join(' ');
+        let { minDevices, maxDevices } = getConfig('', deviceListName); // set minDevices and maxDevices depending on Sensors or Modules
+        if (attachedDevicesList.filter(x => x >= minDevices && x <= maxDevices).length === maxDevicesAllowed) return; // in case of full list of Sensors or Modules
         deviceList.insertAdjacentHTML('beforeend', `<div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">${deviceListName}</div>`)
 
         let noneElement = listJson.find(e => e.includes("NONE"));
@@ -81,7 +83,7 @@ const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
         }
     }
 
-    if (!address) {
+    if (!address) { // guard, but should never get here
         alert("It is not possible to add more devices of type " + DEVICES_CONSTS[key].type + " in loop " + loopNumber + "!")
     }
 
@@ -339,6 +341,16 @@ function showLoop(loopNumber, loopType) {
     } else {
         el.innerHTML = targetSSL;
     }
+
+    var script = document.getElementById("script_modal");
+    if (!script) {
+        script = document.createElement('script');
+        script.id = "script_modal";
+        document.body.appendChild(script);
+    }
+    script.innerHTML = `$("#${loopType}_modal").on('hidden.bs.modal', function () {
+            $("#${loopType}_modal").find("#list-tab").empty();
+        });`;    
 }
 
 function exchangingLoop(loopType) {
@@ -383,9 +395,17 @@ function getKey(deviceName) {
     return Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k));
 }
 
-function getConfig(deviceName) {
+function getConfig(deviceName, device = '') {
     let maxDevices = maxDevicesAllowed;
     let minDevices = minDevicesAllowed;
+
+    if (device) {
+        if (device.toLowerCase() === "modules") {
+            minDevices += 100;
+            maxDevices += 100;
+        }
+        return { minDevices, maxDevices }
+    }
 
     let key = getKey(deviceName);
     // module check
