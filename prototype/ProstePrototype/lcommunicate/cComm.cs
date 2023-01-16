@@ -124,6 +124,89 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
         }
 
+        public static string GetPseudoElement(string panel_id, string key, string idx)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, string> lst = el[key];
+            if (!lst.ContainsKey(idx))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            string _template = lst[idx];
+            Monitor.Exit(_cs_pseudo_element_cache);
+            return _template;
+        }
+
+        public static Dictionary<string, string> GetPseudoElementsList(string panel_id, string key)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, string> lst = el[key];
+            Monitor.Exit(_cs_pseudo_element_cache);
+            return lst;
+        }
+
+        public static void SetPseudoElement(string panel_id, string key, string idx, string _template)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            Dictionary<string, string> lst = el[key];
+            if (!lst.ContainsKey(idx))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            lst[idx] = _template;
+            Monitor.Exit(_cs_pseudo_element_cache);
+        }
+
         /// <summary>
         /// Връща кеширана структура със стойности за списъчни обекти. Съответния обект е добавен с AddListElement.
         /// </summary>

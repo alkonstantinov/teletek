@@ -159,15 +159,18 @@ const fillLoopElement = (loopNumber, loopType) => {
 
 //#region LOOP
 // chacking for created loops
-const getLoops = () => {
-
+function getLoops() {
     boundAsync.getLoops(mainKey).then(r => {
         if (!r) return;
         let loopsList = JSON.parse(r);
         // creating the founded loops
-        alert(r);
+        Object.keys(loopsList).forEach(key => {
+            addLoop(loopsList[key], "old");
+        });
     }).catch(err => alert(err));
+    $("#deviceList").modal('hide')
 }
+
 // initial loop function for adding a loop;
 const loopFunc = () => {
     if (lst.length - 1 === elements) {
@@ -220,7 +223,7 @@ function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
 }
 
 //actual adding loop elements function
-function addLoop(loopType) {
+function addLoop(loopType, newFlag = "new") {
     if (!loopType) return;
 
     var last = parseInt(loopType.charAt(loopType.length - 1)); // get the index of the loop
@@ -261,9 +264,10 @@ function addLoop(loopType) {
                     `;
     element.innerHTML = new_inner;
 
-    // sending data about the choosen loopType
-    boundAsync.setLoopType(mainKey, last, loopType).then().catch(err => console.log(err));
-
+    // sending data about the choosen loopType if newly created
+    if (newFlag === "new") {
+        boundAsync.setLoopType(mainKey, last, loopType).then().catch(err => console.log(err));
+    }
     // adding remove button
     if (last === 1 && !document.getElementById("rvmBtn")) {
         let btnGroup = document.getElementById("btnGroup");
@@ -283,7 +287,7 @@ function addLoop(loopType) {
     });
 
     lst.push(last);
-    $('#deviceList').modal('toggle');
+    $('#deviceList').modal('hide');
 }
 
 function showLoop(loopNumber, loopType) {

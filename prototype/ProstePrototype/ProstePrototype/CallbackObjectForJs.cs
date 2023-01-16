@@ -36,8 +36,22 @@ namespace ProstePrototype
         public string getJsonNodeForElement(string elementType, int elementNumber, string key)
         {
             string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
-            File.WriteAllTextAsync("wb3.json", res);
+            //File.WriteAllTextAsync("wb3.json", res);
             return res;
+        }
+
+        public string getLoops(string elementType/*NO_LOOP*/)
+        {
+            Dictionary<string, string> dres = cComm.GetPseudoElementsList(cJson.CurrentPanelID, elementType);
+            if (dres == null)
+                return null;
+            JObject o = new JObject();
+            foreach (string key in dres.Keys)
+            {
+                JObject ok = JObject.Parse(dres[key]);
+                o[key] = ok["~loop_type"];
+            }
+            return o.ToString(); ;
         }
 
         public string getLoopDevices(string elementType/*NO_LOOP*/, int elementNumber)
@@ -45,14 +59,11 @@ namespace ProstePrototype
             return null;
         }
 
-        public string getLoops(string elementType/*NO_LOOP*/)
+        public void setLoopType(string elementType/*NO_LOOP*/, int elementNumber, string typ)
         {
-            return null;
-        }
-
-        public void setLoopType(string elementType/*NO_LOOP*/, int elementNumber, string type)
-        {
-
+            JObject o = JObject.Parse(cComm.GetPseudoElement(cJson.CurrentPanelID, elementType, elementNumber.ToString()));
+            o["~loop_type"] = typ;
+            cComm.SetPseudoElement(cJson.CurrentPanelID, elementType, elementNumber.ToString(), o.ToString());
         }
 
         public string getJsonNode(string elementName, string key)

@@ -91,6 +91,7 @@ function receiveMessageWPF(jsonTxt) {
             body = document.getElementById('divLDevices');
             body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>Add up to ${elements} loops</p>`)
 
+            getLoops();
             //drawWithModal(body, json);
             break;
         default:
