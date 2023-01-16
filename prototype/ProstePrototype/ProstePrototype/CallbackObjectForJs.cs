@@ -9,6 +9,7 @@ using ljson;
 using lcommunicate;
 using System.Windows.Controls;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ProstePrototype
 {
@@ -27,7 +28,8 @@ namespace ProstePrototype
             //return @"{ ""pageName"": ""wb1"" }";
             string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
             res = cJson.GroupsWithValues(res).ToString();
-            File.WriteAllTextAsync("wb3.json", res);
+            res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
+            //File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
@@ -36,6 +38,21 @@ namespace ProstePrototype
             string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
             File.WriteAllTextAsync("wb3.json", res);
             return res;
+        }
+
+        public string getLoopDevices(string elementType/*NO_LOOP*/, int elementNumber)
+        {
+            return null;
+        }
+
+        public string getLoops(string elementType/*NO_LOOP*/)
+        {
+            return null;
+        }
+
+        public void setLoopType(string elementType/*NO_LOOP*/, int elementNumber, string type)
+        {
+
         }
 
         public string getJsonNode(string elementName, string key)

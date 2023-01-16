@@ -6,11 +6,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
+using common;
 
 namespace ljson
 {
     public class cIRIS : cXml
     {
+        #region read/write
+
+        #endregion
+
         #region common
         private static string TranslateKey(string name)
         {
@@ -760,12 +765,17 @@ namespace ljson
             foreach (JProperty p in json.SelectToken("ELEMENTS").Children())
             {
                 string s = "";
-                if (Regex.IsMatch(p.Name, @"(MODULES|SENSORS)$"))
+                if (Regex.IsMatch(p.Name, @"(MODULES|SENSORS|TTENONE)$"))
                 {
                     JObject c = (JObject)p.Value;
-                    c = new JObject((JObject)c["CONTAINS"]);
-                    c = Array2Object(c["ELEMENT"]);
-                    json["ELEMENTS"][p.Name]["CONTAINS"] = c;
+                    if (c["CONTAINS"] != null)
+                    {
+                        c = new JObject((JObject)c["CONTAINS"]);
+                        c = Array2Object(c["ELEMENT"]);
+                        json["ELEMENTS"][p.Name]["CONTAINS"] = c;
+                    }
+                    else
+                        c = new JObject((JObject)c["CHANGE"]);
                     foreach (JProperty pp in c.Children())
                     {
                         JObject oprops = (JObject)json["ELEMENTS"][pp.Name]["PROPERTIES"];

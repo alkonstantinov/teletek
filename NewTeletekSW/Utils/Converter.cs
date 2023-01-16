@@ -104,10 +104,22 @@ namespace NewTeletekSW.Utils
                 jsonObject.Add(node.Name.ToString(), childs);
             }
         }
-        public static void WriteXML(string folder)
+        public static JObject WriteXML(string filename, string key = "en")
         {
+            XDocument xml = XDocument.Load(filename);
+            JObject json = new JObject();
 
+            foreach (var xmlEl in xml.Elements())
+            {
+                JObject jsonTemp = new JObject();
+                ConvertElements(xmlEl, jsonTemp);
+                Checker(xmlEl, json, jsonTemp);
+                //json.Add(xmlEl.Name.ToString(), json);
+            }
 
+            //Console.WriteLine(json);
+            //System.IO.File.WriteAllText(Directory.GetCurrentDirectory() + "path.txt", json.ToString());
+            return json;
         }
     }
 }

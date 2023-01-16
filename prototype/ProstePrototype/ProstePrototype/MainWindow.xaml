@@ -240,17 +240,77 @@
                                 </MenuItem.Header>
                                 <MenuItem Click="ChangeLanguage_Clicked" Header="_English">
                                     <MenuItem.Icon>
-                                        <Image Source="/html/gb-eng.png" />
+                                        <Image Source="/languages/gb-eng.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Click="ChangeLanguage_Clicked" Header="_German">
                                     <MenuItem.Icon>
-                                        <Image Source="/html/de.png" />
+                                        <Image Source="/languages/de.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Click="ChangeLanguage_Clicked" Header="_Bulgarian">
                                     <MenuItem.Icon>
-                                        <Image Source="/html/bg.png" />
+                                        <Image Source="/languages/bg.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Greek">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/EL.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_French">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/FR.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Hungarian">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/HU.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Italian">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/IT.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Netherlands">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/NL.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Polish">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/PL.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Protuguese">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/PT.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Romanian">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/RO.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Russian">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/RU.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Spanish">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/SP.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Serbian">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/SR.jpg" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Turkish">
+                                    <MenuItem.Icon>
+                                        <Image Source="/languages/TR.jpg" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>

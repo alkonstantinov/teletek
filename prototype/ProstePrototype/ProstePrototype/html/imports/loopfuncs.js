@@ -144,9 +144,30 @@ const removeDevice = (loopType, loopNumber, deviceName, address) => {
         document.getElementById(`btn_${loopType}`).style.display = "inline-flex";
     }
 }
+
+const fillLoopElement = (loopNumber, loopType) => {
+
+    boundAsync.getLoopDevices(mainKey, loopNumber).then(res => {
+        if (res) {
+            let type = loopType.includes("TTE") ? "device" : "sensor";
+            let el = document.getElementById(`selected_${type}_${loopType}`);
+            // addLoopElement(deviceName, loopNumber, loopType, noneElement)
+        }
+    }).catch(err => alert(err));
+}
 //#endregion LOOP ELEMENT
 
 //#region LOOP
+// chacking for created loops
+const getLoops = () => {
+
+    boundAsync.getLoops(mainKey).then(r => {
+        if (!r) return;
+        let loopsList = JSON.parse(r);
+        // creating the founded loops
+        alert(r);
+    }).catch(err => alert(err));
+}
 // initial loop function for adding a loop;
 const loopFunc = () => {
     if (lst.length - 1 === elements) {
@@ -207,7 +228,7 @@ function addLoop(loopType) {
         alert("Error with index");
         return;
     }
-    //sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'loopType': `'${loopType}'` } });
+
     let color = Object.keys(BUTTON_COLORS).find(c => loopType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => loopType.toUpperCase().includes(im));
 
@@ -239,6 +260,9 @@ function addLoop(loopType) {
                         ${newLoop}
                     `;
     element.innerHTML = new_inner;
+
+    // sending data about the choosen loopType
+    boundAsync.setLoopType(mainKey, last, loopType).then().catch(err => console.log(err));
 
     // adding remove button
     if (last === 1 && !document.getElementById("rvmBtn")) {
@@ -350,7 +374,9 @@ function showLoop(loopNumber, loopType) {
     }
     script.innerHTML = `$("#${loopType}_modal").on('hidden.bs.modal', function () {
             $("#${loopType}_modal").find("#list-tab").empty();
-        });`;    
+        });`;
+
+    fillLoopElements(loopNumber, loopType);
 }
 
 function exchangingLoop(loopType) {

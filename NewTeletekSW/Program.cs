@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.SqlTypes;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using System.Xml;
 using NewTeletekSW.Utils;
+using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace XMLDocument
@@ -49,6 +51,11 @@ namespace XMLDocument
             }
             #endregion
             var file = args[pathIndex];
+            string[] fileArgs = new string[] { };
+            if (file.Contains(",")) 
+            {
+                fileArgs = file.Split(",");
+            }
             switch (args[operationIndex])
             {
                 case "r":
@@ -66,6 +73,35 @@ namespace XMLDocument
                     break;
                 case "time":
                     // write XML
+                    break;
+                case "t":
+                case "transform":
+                    JObject json = new JObject();
+
+                    var mergeSettings = new JsonMergeSettings
+                    {
+                        MergeArrayHandling = MergeArrayHandling.Merge
+                    };
+
+                    if (fileArgs.Length > 0) 
+                    {
+                        foreach (string fileName in fileArgs)
+                        {
+                            var arr = fileName.Split("_");
+                            string key = "en";
+                            if (arr[arr.Length - 1].Length == 2)
+                            {
+                                key= arr[arr.Length - 1];
+                            }
+
+
+                            json.Merge(Converter.WriteXML(fileName, key), mergeSettings);
+                        }
+                        if (json.ToString() != null)
+                        {
+                            Console.WriteLine(json.ToString());
+                        }
+                    }
                     break;
                 default:
                     // do not know

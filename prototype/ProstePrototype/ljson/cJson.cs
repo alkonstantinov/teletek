@@ -220,6 +220,26 @@ namespace ljson
             }
         }
 
+        private static object _cs_write_read_merge = new object();
+        private static Dictionary<string, cRWPath> _write_read_merge = null;
+
+        private static Dictionary<string, cRWPath> WriteReadMerge
+        {
+            get
+            {
+                Monitor.Enter(_cs_write_read_merge);
+                Dictionary<string, cRWPath> res = _write_read_merge;
+                Monitor.Exit(_cs_write_read_merge);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_write_read_merge);
+                _write_read_merge = value;
+                Monitor.Exit(_cs_write_read_merge);
+            }
+        }
+
         private static string FilePathFromSchema(string schema)
         {
             string path = Directory.GetCurrentDirectory();
@@ -256,6 +276,131 @@ namespace ljson
             return null;
         }
 
+        private static cRWPath RWLoopPath(Dictionary<string, cRWPath> _merge, string path)
+        {
+            cRWPath rw = null;
+            string pathext = null;
+            if (Regex.IsMatch(path, "/"))
+            {
+                string[] sarr = path.Split('/');
+                path = sarr[0];
+                pathext = sarr[1];
+            }
+            path = Regex.Replace(path, @"^NO_", "", RegexOptions.IgnoreCase);
+            foreach (string key in _merge.Keys)
+            {
+                if (Regex.IsMatch(key, path + "$") || Regex.IsMatch(_merge[key].ReadPath, path + "$") || Regex.IsMatch(key, path + "[\\/]") || Regex.IsMatch(_merge[key].ReadPath, path + "[\\/]"))
+                {
+                    if (pathext == null)
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    else if (Regex.IsMatch(key, pathext + "$") || Regex.IsMatch(_merge[key].ReadPath, pathext + "$"))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                }
+            }
+            //
+            return rw;
+        }
+        private static void RWData(JObject _node)
+        {
+            Dictionary<string, cRWPath> _merge = WriteReadMerge;
+            if (_merge == null)
+                return;
+            JToken t = _node["~path"];
+            if (t == null)
+                return;
+            string path = t.ToString();
+            path = Regex.Replace(path, @"^ELEMENTS\.", "", RegexOptions.IgnoreCase);
+            if (path == "iris_peripheral_devices")
+                path = "iris_peripherial_devices";
+            cRWPath rw = null;
+            if (!Regex.IsMatch(path, "_"))
+            {
+                if (_merge.ContainsKey(""))
+                    rw = _merge[""];
+                else
+                    foreach (string key in _merge.Keys)
+                        if (Regex.IsMatch(_merge[key].ReadPath, "PANEL$", RegexOptions.IgnoreCase))
+                        {
+                            rw = _merge[key];
+                            break;
+                        }
+            }
+            else if (Regex.IsMatch(path, @"loop\d", RegexOptions.IgnoreCase))
+                rw = RWLoopPath(_merge, path);
+            else
+            {
+                foreach (string key in _merge.Keys)
+                {
+                    if (key.ToLower() == path.ToLower() || _merge[key].ReadPath.ToLower() == path.ToLower())
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    string path1 = Regex.Replace(path, @"(^[\w\W]+?)_([^_]+$)", "$1$2", RegexOptions.IgnoreCase);
+                    if (key.ToLower() == path1.ToLower() || _merge[key].ReadPath.ToLower() == path1.ToLower())
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(key, "^" + path1, RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, "^" + path1, RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(key, path1 + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path1 + "$", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    path1 = Regex.Replace(path, @"(^[\w\W]+?)_([^_]+$)", "$1$2", RegexOptions.IgnoreCase);
+                    path1 = Regex.Replace(path1, @"(^[\w\W]+?)_([^_]+$)", "$1$2", RegexOptions.IgnoreCase);
+                    if (key.ToLower() == path1.ToLower() || _merge[key].ReadPath.ToLower() == path1.ToLower())
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(key, "^" + path1, RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, "^" + path1, RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(key, path1 + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path1 + "$", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(key, "^" + path, RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, "^" + path, RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(key, path + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path + "$", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    path1 = Regex.Replace(path, @"^\w+?_", "");
+                    if (Regex.IsMatch(key, path1 + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path1 + "$", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    path = path + "";
+                }
+            }
+            if (rw != null)
+            {
+                JObject o = JObject.FromObject(rw);
+                _node["~rw"] = o;
+            }
+        }
+
         public static JObject GetNode(string name)
         {
             JObject _panel = CurrentPanel;
@@ -264,8 +409,25 @@ namespace ljson
                 JObject _elements = (JObject)_panel["ELEMENTS"];
                 if (_elements != null)
                 {
-                    JObject _res = (JObject)_elements[name];
-                    //if (_res != null)
+                    JObject _res = null;
+                    JToken jbyname = _elements[name];
+                    if (jbyname != null)
+                    {
+                        _res = new JObject((JObject)_elements[name]);
+                        //if (_res != null)
+                        RWData(_res);
+                    }
+                    else
+                    {
+                        string[] names = name.Split('/');
+                        _res = new JObject((JObject)_elements[names[0]]);
+                        cRWPath rw = RWLoopPath(WriteReadMerge, name);
+                        if (rw != null)
+                        {
+                            JObject o = JObject.FromObject(rw);
+                            _res["~rw"] = o;
+                        }
+                    }
                     return _res;
                 }
             }
@@ -289,7 +451,9 @@ namespace ljson
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
-            return (JObject)_panel["ELEMENTS"][name];
+            JObject _res1 = new JObject((JObject)_panel["ELEMENTS"][name]);
+            RWData(_res1);
+            return _res1;
         }
 
         public static string jobj2string(object o)
@@ -306,7 +470,7 @@ namespace ljson
             string schema = Regex.Replace(System.IO.Path.GetFileName(filename), @"\.\w+$", "");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            cXmlConfigs cfg = new cXmlConfigs(jobj2string, jstring2obj);
+            cXmlConfigs cfg = new cXmlConfigs(schema, jobj2string, jstring2obj);
             cfg.ConfigPath = filename;
             cfg.Config = doc;
             string xmldir = Directory.GetParent(Directory.GetParent(filename).ToString()).ToString();
@@ -351,7 +515,7 @@ namespace ljson
                 }
             }
             doc = (XmlDocument)cfg.Config;
-            Dictionary<string, object> rwmerge = cfg.RWMerged();
+            WriteReadMerge = cfg.RWMerged();
             SetPanelXMLConfigs(filename, cfg);
             //
             string json = JsonConvert.SerializeXmlNode(doc);

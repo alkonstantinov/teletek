@@ -221,6 +221,95 @@ namespace common
     }
 
     public enum ePanelType { ptIRIS = 1, ptEclipse = 2 };
+    public enum eIO { ioNull = 0, ioRead = 1, ioWrite = 2 };
+    public enum eWriteOperation { woBytes = 1, woProperty = 2 };
+
+    #region read/write
+    public class cRWProperty
+    {
+        public string id = null;
+        public string xmltag = "";
+        public int offset;
+        public byte bytescnt;
+
+        internal string xml_tag_quote()
+        {
+            Match m = Regex.Match(xmltag, @"\w\s*?=\s*?(['""])");
+            if (m.Success)
+                return m.Groups[1].Value;
+            return "\"";
+        }
+        public virtual string PropertyValue(eIO rw, string PropertyName) { return null; }
+    }
+
+    public class cRWCommand
+    {
+        public eIO io;
+        public byte? DataType = null;
+        public byte? index = null;
+        public byte? buffoffset = null;
+        public byte? len = null;
+        //
+        public string sio = null;
+        public string sDataType = null;
+        public string sindex = null;
+        public string sbuffoffset = null;
+        public string slen = null;
+
+        public virtual int CommandLength() { return 0; }
+    }
+
+    public class cWriteOperation
+    {
+        public eWriteOperation operation;
+        public string value;
+    }
+
+    public class cRWPath
+    {
+        public string ReadPath = null;
+        public List<cRWCommand> ReadCommands = new List<cRWCommand>();
+        public Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
+        public string WritePath = null;
+        public List<cRWCommand> WriteCommands = new List<cRWCommand>();
+        public Dictionary<string, cRWProperty> WriteProperties = new Dictionary<string, cRWProperty>();
+        public List<cWriteOperation> WriteOperationOrder = new List<cWriteOperation>();
+    }
+
+    internal class cRW
+    {
+        #region command analysis
+        internal virtual string CommandIO(string _cmd) { return null; }
+        internal virtual string CommandDataType(string _cmd) { return null; }
+        internal virtual string CommandKey(string _cmd) { return null; }
+        internal virtual string CommandIndexS(string _cmd) { return null; }
+        internal virtual byte CommandIndexB(string _cmd) { return 0; }
+        internal virtual string CommandBytesOffset(string _cmd) { return null; }
+        internal virtual string CommandBytesCnt(string _cmd) { return null; }
+        internal virtual cRWCommand CommandObject(string _cmd) { return null; }
+        #endregion
+        #region command synthesis
+        internal virtual string SynCMD(string io, string datatype, string idx, string bytesoffset, string bytescnt) { return null; }
+        internal virtual string SynCMD(cRWCommand _cmd) { return null; }
+        #endregion
+
+        //
+        internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+        internal string _read_xml_no_serias = null;
+        internal object _cs_ = new object();
+        internal List<cSeria> _wserias = null;
+        internal Dictionary<string, Dictionary<string, List<cSeriaProperty>>> _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
+        internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+        //
+        internal virtual void ParseReadSeriaIRIS(string elements, ref string last_path) { }
+        internal virtual List<cSeria> cfgReadSeries(string xml) { return null; }
+        internal virtual void ParseWriteProperties(string write_operation) { }
+        internal virtual List<cSeria> cfgWriteSerias(string xml) { return null; }
+        #region merge
+        internal virtual Dictionary<string, cRWPath> RWMerged() { return null; }
+        #endregion
+    }
+    #endregion
 
     /// <summary>
     /// Съдържа XML-конфигурации(template, read, write)
@@ -229,51 +318,17 @@ namespace common
     {
         public ePanelType PanelType = ePanelType.ptIRIS;
 
-        private string CommandIO(string _cmd)
-        {
-            if (PanelType == ePanelType.ptIRIS)
-                return _cmd.Substring(0, 4);
-            else
-                return _cmd;
-        }
-
-        private string CommandDataType(string _cmd)
-        {
-            if (PanelType == ePanelType.ptIRIS)
-                return (_cmd.Length >= 6) ? _cmd.Substring(4, 2) : null;
-            else
-                return _cmd;
-        }
-
-        private string CommandKey(string _cmd)
-        {
-            if (PanelType == ePanelType.ptIRIS)
-                return CommandIO(_cmd) + CommandDataType(_cmd);
-            else
-                return _cmd;
-        }
-
-        private string CommandIndexS(string _cmd)
-        {
-            if (PanelType == ePanelType.ptIRIS)
-                return (_cmd.Length >= 8) ? _cmd.Substring(6, 2) : null;
-            else
-                return _cmd;
-        }
-
-        private byte CommandIndexB(string _cmd)
-        {
-            if (PanelType == ePanelType.ptIRIS)
-                return Convert.ToByte(CommandIndexS(_cmd), 16);
-            else
-                return 0;
-        }
-
+        private cRW _readwriter = null;
         private dObject2JSONString _serialyzer = null;
         private dJSONString2Object _deserialyzer = null;
 
-        public cXmlConfigs(dObject2JSONString serialyzer, dJSONString2Object deserialyzer)
+        public cXmlConfigs(string _s_panel_type, dObject2JSONString serialyzer, dJSONString2Object deserialyzer)
         {
+            if (Regex.IsMatch(_s_panel_type, "iris", RegexOptions.IgnoreCase))
+            {
+                _readwriter = new cRWIRIS();
+                PanelType = ePanelType.ptIRIS;
+            }
             _serialyzer = serialyzer;
             _deserialyzer = deserialyzer;
         }
@@ -326,7 +381,7 @@ namespace common
 
         private Dictionary<string, object> _read_structure = null;
         private List<cSeria> _serias = null;
-        private string _read_xml_no_serias = null;
+
         private Dictionary<string, cPropertyGroup> _property_groups;
         private object _cs_read_structure = new object();
 
@@ -410,314 +465,23 @@ namespace common
             return res;
         }
 
-        private Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+        //private Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
         public Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> ReadProperties
         {
             get
             {
                 Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> res = null;
                 Monitor.Enter(_cs_read_structure);
-                res = _dread_prop;
+                res = _readwriter._dread_prop;
                 Monitor.Exit(_cs_read_structure);
                 return res;
             }
             set
             {
                 Monitor.Enter(_cs_read_structure);
-                _dread_prop = value;
+                _readwriter._dread_prop = value;
                 Monitor.Exit(_cs_read_structure);
             }
-        }
-
-        private void ParseReadSeriaIRIS(string elements, ref string last_path)
-        {
-            string element_root = "";
-            Match m = Regex.Match(elements, @"^\s*?<ELEMENT[\w\W]+?>");
-            if (m.Success)
-            {
-                m = Regex.Match(m.Value, @"ID\s*?=\s*?""([\w\W]*?)""");
-                if (m.Success)
-                    element_root = m.Groups[1].Value;
-            }
-            //
-            string path = "";
-            Match mstart = Regex.Match(elements, @"<COMMANDS");
-            if (mstart.Success)
-            {
-                string start = elements.Substring(0, mstart.Index);
-                foreach (Match mp in Regex.Matches(start, @"<ELEMENT\sID\s*?=\s*?""([\w\W]*?)"""))
-                    if (mp.Groups[1].Value != "")
-                        path += mp.Groups[1].Value + "/";
-                if (path != "")
-                    path = path.Substring(0, path.Length - 1);
-            }
-            if (Regex.IsMatch(path, @"(IRIS\d*_SENSORS|IRIS\d*_MODULES)"))
-            {
-                string[] path_arr = Regex.Split(path, @"[\\/]");
-                string[] last_path_arr = Regex.Split(last_path, @"[\\/]");
-                if (last_path_arr == null)
-                {
-                    last_path = path;
-                }
-                else
-                {
-                    if (last_path_arr.Length > path_arr.Length)
-                    {
-                        List<string> lpath = new List<string>();
-                        for (int i = 0; i < last_path_arr.Length - path_arr.Length; i++)
-                            lpath.Add(last_path_arr[i]);
-                        for (int i = 0; i < path_arr.Length; i++)
-                            lpath.Add(path_arr[i]);
-                        path = String.Join('/', lpath.ToArray());
-                        last_path = path;
-                    }
-                    else if (last_path_arr.Length < path_arr.Length)
-                        last_path = path;
-                    //else
-                    //    last_path = "";
-                }
-            }
-            //
-            elements = Regex.Replace(elements, @"^\s*?<ELEMENT[\w\W]*?>\s*?<ELEMENTS>", "");
-            elements = Regex.Replace(elements, @"</ELEMENTS>\s*?</ELEMENT>\s*$", "").Trim();
-            foreach (Match mel in Regex.Matches(elements, @"<ELEMENT[\w\W]*?</ELEMENT>"))
-            {
-                string el = mel.Value;
-                m = Regex.Match(el, @"ID\s*?=\s*?""([\w\W]+?)""");
-                if (m.Success)
-                {
-                    //string element = ((element_root != "") ? element_root + "/" : "") + m.Groups[1].Value;
-                    string element = path;
-                    if (!Regex.IsMatch(path, "/" + m.Groups[1].Value + "/"))
-                    {
-                        if (Regex.IsMatch(path, "IRIS_SENSORS") && Regex.IsMatch(m.Groups[1].Value, "(MODULES|IRIS_MNONE)"))
-                            element = Regex.Replace(path, @"IRIS_SENSORS[\w\W]*$", "IRIS_MODULES/IRIS_MNONE");
-                        else
-                        {
-                            string[] sarr = path.Split('/');
-                            sarr[sarr.Length - 1] = m.Groups[1].Value;
-                            element = String.Join('/', sarr);
-                        }
-                    }
-                    //string element = path;
-                    m = Regex.Match(el, @"<COMMANDS>([\w\W]*?)</COMMANDS>");
-                    if (m.Success)
-                    {
-                        foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\s+?BYTES\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>"))
-                        {
-                            string cmdkey = CommandKey(mc.Groups[1].Value);
-                            string cmdidxs = CommandIndexS(mc.Groups[1].Value);
-                            if (cmdkey == null || cmdidxs == null)
-                                continue;
-                            if (!_dread_prop.ContainsKey(element))
-                                _dread_prop.Add(element, new Dictionary<string, Dictionary<string, List<string>>>());
-                            Dictionary<string, Dictionary<string, List<string>>> dcmd = _dread_prop[element];
-                            if (!dcmd.ContainsKey(cmdkey))
-                                dcmd.Add(cmdkey, new Dictionary<string, List<string>>());
-                            Dictionary<string, List<string>> didx = dcmd[cmdkey];
-                            if (!didx.ContainsKey(cmdidxs))
-                                didx.Add(cmdidxs, new List<string>());
-                            didx[cmdidxs].Add(el);
-                        }
-                    }
-                }
-            }
-        }
-
-        private List<cSeria> cfgReadSeries(string xml)
-        {
-            if (_dread_prop == null)
-                _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-            else
-                _dread_prop.Clear();
-            //
-            string last_path = "";
-            List<cSeria> res = new List<cSeria>();
-            xml = Regex.Replace(xml, @"<!\-+?[\w\W]*?\-+?>", "");
-            MatchCollection matches = Regex.Matches(xml, @"(<ELEMENT[^<]*?>\s*?<ELEMENTS[\w\W]*?<ELEMENT[\w\W]*?</ELEMENT>\s*?</ELEMENTS>\s*?</ELEMENT>)", RegexOptions.IgnoreCase);
-            foreach (Match m in matches)
-            {
-                if (PanelType == ePanelType.ptIRIS)
-                {
-                    ParseReadSeriaIRIS(m.Groups[1].Value, ref last_path);
-                    continue;
-                }
-                //
-                cSeria seria = new cSeria();
-                seria._txt = m.Groups[1].Value;
-                List<List<cPanelCommand>> clst = new List<List<cPanelCommand>>();
-                foreach (Match cm in Regex.Matches(seria._txt, @"<COMMANDS([\w\W]+?)</COMMANDS", RegexOptions.IgnoreCase))
-                {
-                    List<cPanelCommand> cmdl = new List<cPanelCommand>();
-                    string cmds = cm.Groups[1].Value;
-                    foreach (Match mcmd in Regex.Matches(cmds, @"BYTES\s*?=\s*?""([\w\W]*?)""", RegexOptions.IgnoreCase))
-                    {
-                        cPanelCommand pc = new cPanelCommand();
-                        pc.scmd = mcmd.Groups[1].Value;
-                        pc._bcmd = new byte[pc.scmd.Length / 2];
-                        for (int i = 0; i < pc.scmd.Length / 2; i++)
-                            pc._bcmd[i] = byte.Parse(pc.scmd.Substring(i * 2, 2), System.Globalization.NumberStyles.HexNumber);
-                        cmdl.Add(pc);
-                    }
-                    clst.Add(cmdl);
-                }
-                if (clst.Count > 0)
-                {
-                    List<cPanelCommand> zlst = clst[0];
-                    for (int j = 0; j < clst[0].Count; j++)
-                    {
-                        List<byte[]> lstidx = new List<byte[]>();
-                        byte[] bbase = null;
-                        byte[] bmask = null;
-                        for (int i = 0; i < clst.Count; i++)
-                        {
-                            if (i == 0)
-                            {
-                                bbase = new byte[clst[i][j]._bcmd.Length];
-                                clst[i][j]._bcmd.CopyTo(bbase, 0);
-                                bmask = new byte[clst[i][j]._bcmd.Length];
-                                for (int k = 0; k < bmask.Length; k++)
-                                    bmask[k] = 0;
-                            }
-                            byte[] b = new byte[bbase.Length];
-                            clst[i][j]._bcmd.CopyTo(b, 0);
-                            lstidx.Add(b);
-                            byte[] bxor = new byte[bbase.Length];
-                            for (int k = 0; k < bbase.Length; k++)
-                            {
-                                bxor[k] = (byte)(bbase[k] ^ b[k]);
-                                bmask[k] = (byte)(bmask[k] | bxor[k]);
-                            }
-                        }
-                        cPanelCommand _cmd = new cPanelCommand();
-                        _cmd.scmd = clst[0][j].scmd;
-                        _cmd._bcmd = clst[0][j]._bcmd;
-                        _cmd._bidxmask = new byte[bmask.Length];
-                        bmask.CopyTo(_cmd._bidxmask, 0);
-                        List<byte> lprefix = new List<byte>();
-                        _cmd._idxbytescnt = 0;
-                        List<byte> lsufix = new List<byte>();
-                        bool idx = false;
-                        for (int k = 0; k < bmask.Length; k++)
-                        {
-                            if (bmask[k] == 0)
-                                if (!idx)
-                                    lprefix.Add(_cmd._bcmd[k]);
-                                else lsufix.Add(_cmd._bcmd[k]);
-                            else
-                            {
-                                idx = true;
-                                _cmd._idxbytescnt++;
-                            }
-                        }
-                        _cmd._prefix = new byte[lprefix.Count];
-                        lprefix.CopyTo(_cmd._prefix);
-                        _cmd._sufix = new byte[lsufix.Count];
-                        lsufix.CopyTo(_cmd._sufix);
-                        //
-                        for (int k = 0; k < lstidx.Count; k++)
-                            for (int l = 0; l < lstidx[k].Length; l++)
-                                lstidx[k][l] = (byte)(lstidx[k][l] & bmask[l]);
-                        if (_cmd._idxbytes == null)
-                            _cmd._idxbytes = new List<byte[]>();
-                        _cmd._idxbytes.Clear();
-                        for (int k = 0; k < lstidx.Count; k++)
-                        {
-                            byte[] b = new byte[_cmd._idxbytescnt];
-                            int iidx = 0;
-                            for (int l = 0; l < lstidx[k].Length; l++)
-                                if (lstidx[k][l] != 0)
-                                {
-                                    b[iidx] = lstidx[k][l];
-                                    iidx++;
-                                }
-                            _cmd._idxbytes.Add(b);
-                        }
-                        lstidx.Clear();
-                        seria._commands.Add(_cmd);
-                    }
-                }
-                //
-                string firstelement = Regex.Replace(seria._txt, @"^\s*?<ELEMENT[\w\W]+?>", "", RegexOptions.IgnoreCase);
-                firstelement = Regex.Replace(firstelement, @"^\s*?<ELEMENTS[\w\W]*?>", "", RegexOptions.IgnoreCase);
-                Match mf = Regex.Match(firstelement, @"^[\w\W]*?</ELEMENT[\w\W]*?>", RegexOptions.IgnoreCase);
-                if (mf.Success)
-                {
-                    seria._element = Regex.Replace(mf.Value, @"^[\r\n]+", "");
-                    Match em = Regex.Match(seria._element, @"^\s*?<ELEMENT[\w\W]*?>", RegexOptions.IgnoreCase);
-                    if (em.Success)
-                    {
-                        em = Regex.Match(em.Value, @"ID\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
-                        if (em.Success)
-                            seria.element_id = em.Groups[1].Value;
-                    }
-                    seria.properties = new Dictionary<string, cSeriaProperty>();
-                    foreach (Match mp in Regex.Matches(seria._element, @"<PROPERTY[\w\W]+?/>"))
-                    {
-                        string sp = mp.Value;
-                        string pid = null;
-                        string pbyte = null;
-                        string plen = null;
-                        Match pvm = Regex.Match(sp, @"ID\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
-                        if (pvm.Success)
-                            pid = pvm.Groups[1].Value;
-                        pvm = Regex.Match(sp, @"BYTE\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
-                        if (pvm.Success)
-                            pbyte = pvm.Groups[1].Value;
-                        pvm = Regex.Match(sp, @"LENGTH\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
-                        if (pvm.Success)
-                            plen = pvm.Groups[1].Value;
-                        if (pid != null && pbyte != null && plen != null)
-                        {
-                            cSeriaProperty prop = new cSeriaProperty();
-                            prop.id = pid;
-                            prop.byteidx = Convert.ToInt32(pbyte);
-                            prop.len = Convert.ToInt32(plen);
-                            seria.properties.Add(prop.id, prop);
-                        }
-                    }
-                    string start = "";
-                    //MatchCollection mc = Regex.Matches(seria._txt, @"^[\w\W]*?<ELEMENT[\w\W]+?<ELEMENTS[\w\W]+?\s*");
-                    //Match mstart = Regex.Match(seria._txt, @"^[\w\W]*?<ELEMENT[\w\W]+?<ELEMENTS[\w\W]+?\s*");
-                    //if (false/* && mstart.Success*/)
-                    //{
-                    //    //start = mstart.Value;
-                    //}
-                    //else
-                    //{
-                    //    Match mstart = Regex.Match(seria._txt, @"(^[\w\W]+?)<ELEMENT\W[\w\W]+?ID\s*?=\s*?""" + seria.element_id + @"""");
-                    //    //Match mstart = Regex.Match(seria._txt, @"<ELEMENT\W[\w\W]+?ID\s*?=\s*?""" + seria.element_id + @"""");
-                    //    if (mstart.Success)
-                    //    {
-                    //        start = mstart.Groups[1].Value;
-                    //        //start = mstart.Value.Substring(0, mstart.Index);
-                    //    }
-                    //    else
-                    //    {
-                    //        start = "";
-                    //    }
-                    //}
-                    //seria._txt_noelements = Regex.Replace(seria._txt, @"<ELEMENT[\w\W]+?ID\s*?=\s*?""" + seria.element_id + @"""[\w\W]*?</ELEMENT[\w\W]*?>", "", RegexOptions.IgnoreCase);
-                    //seria._txt_noelements = start + "\r\n" + seria._txt_noelements.Trim();
-                }
-                //
-                res.Add(seria);
-            }
-            if (matches != null && matches.Count > 0)
-            {
-                int istart = matches[0].Index;
-                int iend = matches[matches.Count - 1].Index + matches[matches.Count - 1].Length;
-                _read_xml_no_serias = xml.Substring(0, istart) + "\r\n" + xml.Substring(iend, xml.Length - iend);
-                last_path = "";
-                foreach (Match m in Regex.Matches(_read_xml_no_serias, @"<ELEMENT\s+?ID[\w\W]+?(</ELEMENT>|<ELEMENTS>)"))
-                {
-                    string s = Regex.Replace(m.Value, @"<ELEMENTS>\s*$", "</ELEMENT>");
-                    s = "<ELEMENT ID=\"\">\r\n<ELEMENTS>\r\n" + s + "\r\n</ELEMENTS>\r\n</ELEMENT>";
-                    ParseReadSeriaIRIS(s, ref last_path);
-                }
-            }
-            //
-            return res;
         }
 
         private string RemoveSerias(string xml)
@@ -835,7 +599,7 @@ namespace common
             //File.WriteAllText(f, s);
             //
             f = files["_dread_prop"];
-            s = _serialyzer(_dread_prop);
+            s = _serialyzer(_readwriter._dread_prop);
             File.WriteAllText(f, s);
         }
 
@@ -861,9 +625,9 @@ namespace common
             //
             f = files["_dread_prop"];
             s = File.ReadAllText(f);
-            if (_dread_prop == null)
-                _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-            _dread_prop = (Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>)_deserialyzer(s, _dread_prop.GetType());
+            if (_readwriter._dread_prop == null)
+                _readwriter._dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+            _readwriter._dread_prop = (Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>)_deserialyzer(s, _readwriter._dread_prop.GetType());
         }
 
         private void CreateReadStructure()
@@ -884,7 +648,7 @@ namespace common
             Monitor.Enter(_cs_read_structure);
             if (!JSONStructReadFilesExists(_read_json_files))
             {
-                _serias = cfgReadSeries(rxml);
+                _serias = _readwriter.cfgReadSeries(rxml);
                 //_read_xml_no_serias = RemoveSerias(rxml);
                 //_property_groups = PropertyGroups(_read_xml_no_serias);
                 ////_read_structure = ReadNode(rxml);
@@ -944,286 +708,24 @@ namespace common
         }
 
         private object _cs_write_structure = new object();
-        private List<cSeria> _wserias = null;
-        private Dictionary<string, Dictionary<string, List<cSeriaProperty>>> _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
 
-        private Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-
-        public Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> WriteProperties
-        {
-            get
-            {
-                Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> res = null;
-                Monitor.Enter(_cs_write_structure);
-                res = _dwrite_prop;
-                Monitor.Exit(_cs_write_structure);
-                return res;
-            }
-            set
-            {
-                Monitor.Enter(_cs_write_structure);
-                _dwrite_prop = value;
-                Monitor.Exit(_cs_write_structure);
-            }
-        }
-
-        private void ParseWriteProperties(string write_operation)
-        {
-            if (_write_property_groups == null)
-                _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
-            Match m = Regex.Match(write_operation, @"<BYTE\W[\w\W]*?PATH\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>");
-            if (m.Success)
-            {
-                string path = m.Groups[1].Value;
-                m = Regex.Match(path, @"([\w\W]*?)PROPERTIES/PROPERTY([\w\W]+$)");
-                if (m.Success)
-                {
-                    string key = Regex.Replace(m.Groups[1].Value, @"/$", "");
-                    if (key != "")
-                    {
-                        m = Regex.Match(key, @"\[\s*?@ID\s*?=\s*?\W(\w+?)\W[\w\W]*?\]$");
-                        if (m.Success)
-                            key = m.Groups[1].Value;
-                    }
-                    m = Regex.Match(write_operation, @"<BYTE\W[\w\W]*?VALUE\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>");
-                    if (m.Success)
-                    {
-                        string cmd = m.Groups[1].Value;
-                        List<cSeriaProperty> lstp = new List<cSeriaProperty>();
-                        foreach (Match mp in Regex.Matches(write_operation, @"<BYTE[\w\W]+?/>"))
-                        {
-                            string sb = mp.Value;
-                            m = Regex.Match(sb, @"\WXPATH\s*?=\s*?""([\w\W]+?)""");
-                            if (m.Success)
-                            {
-                                m = Regex.Match(m.Groups[1].Value, @"PROPERTY\s*?\[\s*?@ID\s*?=\s*?\W(\w+?)\W", RegexOptions.IgnoreCase);
-                                if (m.Success)
-                                {
-                                    cSeriaProperty sp = new cSeriaProperty();
-                                    sp.id = m.Groups[1].Value;
-                                    m = Regex.Match(sb, @"\WLENGTH\s*?=\s*?""(\d+?)""");
-                                    if (m.Success)
-                                        sp.len = Convert.ToInt32(m.Groups[1].Value);
-                                    lstp.Add(sp);
-                                }
-                            }
-                        }
-                        if (!_write_property_groups.ContainsKey(key))
-                            _write_property_groups.Add(key, new Dictionary<string, List<cSeriaProperty>>());
-                        Dictionary<string, List<cSeriaProperty>> cmdict = _write_property_groups[key];
-                        if (!cmdict.ContainsKey(cmd))
-                            cmdict.Add(cmd, lstp);
-                        else
-                            cmdict[cmd] = lstp;
-                    }
-                }
-            }
-        }
-
-        private string write_element_from_path(string wo)
-        {
-            Match m = Regex.Match(wo, @"<BYTE\s+?XPATH\s*?=\s*?([\w\W]+?)""");
-            if (m.Success)
-            {
-                string path = m.Groups[1].Value;
-                m = Regex.Match(path, @"^([\w\W]+?)/PROPERTIES");
-                if (m.Success)
-                {
-                    string start = Regex.Replace(m.Groups[1].Value, @"\[\d+\]$", "");
-                    string res = "";
-                    foreach (Match match in Regex.Matches(start, @"\[[\w\W]+?\]"))
-                    {
-                        m = Regex.Match(match.Value, @"@ID\s*?=\s*?[""']([\w\W]+?)[""']");
-                        if (m.Success)
-                            res += ((res != "") ? "/" : "") + m.Groups[1].Value; ;
-                    }
-                    return res;
-                    //MatchCollection matches = Regex.Matches(start, @"\[[\w\W]+?\]");
-                    //if (matches.Count > 0)
-                    //{
-                    //    m = matches[matches.Count - 1];
-                    //    m = Regex.Match(m.Value, @"@ID\s*?=\s*?[""']([\w\W]+?)[""']");
-                    //    if (m.Success)
-                    //        return m.Groups[1].Value;
-                    //    else
-                    //        return "";
-                    //}
-                    //else
-                    //    return "";
-                }
-                else
-                    return "";
-            }
-            return "";
-        }
-
-        private List<cSeria> cfgWriteSerias(string xml)
-        {
-            List<cSeria> res = new List<cSeria>();
-            Dictionary<string, List<string>> dserias = new Dictionary<string, List<string>>();
-            Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> dcmdop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-            if (_dwrite_prop == null)
-                _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-            else
-                _dwrite_prop.Clear();
-            string inputscmd = null;
-            string outputscmd = null;
-            int inidx = 1;
-            int outidx = 1;
-            foreach (Match mwo in Regex.Matches(xml, @"<WRITEOPERATION[\w\W]+?</WRITEOPERATION[\w\W]*?>", RegexOptions.IgnoreCase))
-            {
-                string swo = mwo.Value;
-                //
-                Match mcmd = Regex.Match(swo, @"<BYTE\s+?VALUE\s*?=\s*?""([\w\W]+?)""");
-                if (mcmd.Success)
-                {
-                    string cmdkey = CommandKey(mcmd.Groups[1].Value);
-                    string cmdidxs = CommandIndexS(mcmd.Groups[1].Value);
-                    string element = write_element_from_path(swo);
-                    if (PanelType == ePanelType.ptIRIS)
-                    {
-                        if (inputscmd == null)
-                        {
-                            if (Regex.IsMatch(element, @"INPUTS$"))
-                                inputscmd = cmdkey;
-                        }
-                        if (outputscmd == null)
-                            if (Regex.IsMatch(element, @"OUTPUTS$"))
-                                outputscmd = cmdkey;
-                        //
-                        if (cmdkey == inputscmd && !Regex.IsMatch(element, @"INPUTS$"))
-                        {
-                            element += "_IN" + inidx.ToString();
-                            inidx++;
-                        }
-                        if (cmdkey == outputscmd && !Regex.IsMatch(element, @"OUTPUTS$"))
-                        {
-                            element += "_OUT" + outidx.ToString();
-                            outidx++;
-                        }
-                    }
-                    //if (!dcmdop.ContainsKey(cmdkey))
-                    //    dcmdop.Add(cmdkey, new Dictionary<string, Dictionary<string, List<string>>>());
-                    //Dictionary<string, Dictionary<string, List<string>>> delement = dcmdop[cmdkey];
-                    //if (!delement.ContainsKey(element))
-                    //    delement.Add(element, new Dictionary<string, List<string>>());
-                    //Dictionary<string, List<string>> dcmdidx = delement[element];
-                    //if (!dcmdidx.ContainsKey(cmdidxs))
-                    //    dcmdidx.Add(cmdidxs, new List<string>());
-                    //dcmdidx[cmdidxs].Add(Regex.Replace(swo, @"<!\-\-[\w\W]*?\-\->", ""));
-                    //
-                    if (!_dwrite_prop.ContainsKey(element))
-                        _dwrite_prop.Add(element, new Dictionary<string, Dictionary<string, List<string>>>());
-                    Dictionary<string, Dictionary<string, List<string>>> dpropcmdkey = _dwrite_prop[element];
-                    if (!dpropcmdkey.ContainsKey(cmdkey))
-                        dpropcmdkey.Add(cmdkey, new Dictionary<string, List<string>>());
-                    Dictionary<string, List<string>> dcmdidx = dpropcmdkey[cmdkey];
-                    if (!dcmdidx.ContainsKey(cmdidxs))
-                        dcmdidx.Add(cmdidxs, new List<string>());
-                    dcmdidx[cmdidxs].Add(Regex.Replace(swo, @"<!\-\-[\w\W]*?\-\->", ""));
-                }
-                //
-                if (!Regex.IsMatch(swo, @"\[\d+\]/PROPERTIES/PROPERTY", RegexOptions.IgnoreCase))
-                {
-                    ParseWriteProperties(swo);
-                    continue;
-                }
-                Match m = Regex.Match(swo, @"<BYTE\W[\w\W]*?XPATH\s*?=\s*?""([\w\W]+?)\[\d+\]/PROPERTIES/PROPERTY");
-                if (m.Success)
-                {
-                    string key = m.Groups[1].Value;
-                    if (!dserias.ContainsKey(key))
-                        dserias.Add(key, new List<string>());
-                    dserias[key].Add(swo);
-                }
-            }
-            foreach (string key in dserias.Keys)
-            {
-                List<string> lst = dserias[key];
-                cSeria seria = new cSeria();
-                seria.element_id = key;
-                seria._commands = new List<cPanelCommand>();
-                byte[] bbase = null;
-                byte[] bmask = null;
-                List<byte[]> lstcommands = new List<byte[]>();
-                cPanelCommand _cmd = new cPanelCommand();
-                //StringBuilder regexdel = new StringBuilder();
-                for (int i = 0; i < lst.Count; i++)
-                {
-                    //regexdel.Append(@"[\w\W]*?" + lst[i]);
-                    Match m = Regex.Match(lst[i], @"<BYTE\W[\w\W]*?VALUE\s*?=\s*?""([\w\W]+?)""");
-                    if (!m.Success)
-                        continue;
-                    string scmd = m.Groups[1].Value;
-                    byte[] bcmd = new byte[scmd.Length / 2];
-                    for (int j = 0; j < scmd.Length / 2; j++)
-                        bcmd[j] = byte.Parse(scmd.Substring(j * 2, 2), System.Globalization.NumberStyles.HexNumber);
-                    if (i == 0)
-                    {
-                        _cmd.scmd = scmd;
-                        _cmd._bcmd = new byte[bcmd.Length];
-                        bcmd.CopyTo(_cmd._bcmd, 0);
-                        bbase = new byte[_cmd._bcmd.Length];
-                        _cmd._bcmd.CopyTo(bbase, 0);
-                        bmask = new byte[_cmd.bcmd.Length];
-                        for (int j = 0; j < bmask.Length; j++)
-                            bmask[j] = 0;
-                    }
-                    byte[] bxor = new byte[_cmd.bcmd.Length];
-                    for (int j = 0; j < bbase.Length; j++)
-                    {
-                        bxor[j] = (byte)(bcmd[j] ^ bbase[j]);
-                        bmask[j] = (byte)(bxor[j] | bmask[j]);
-                    }
-                    lstcommands.Add(bcmd);
-                }
-                //
-                //xml = Regex.Replace(xml, regexdel.ToString(), "");
-                //regexdel.Clear();
-                //
-                int prefcnt = 0;
-                byte idxcnt = 0;
-                int sufcnt = 0;
-                bool isidx = false;
-                for (int i = 0; i < bmask.Length; i++)
-                    if (bmask[i] == 0)
-                        if (!isidx)
-                            prefcnt++;
-                        else
-                            sufcnt++;
-                    else
-                    {
-                        idxcnt++;
-                        isidx = true;
-                    }
-                _cmd._idxbytescnt = idxcnt;
-                _cmd._bidxmask = new byte[bmask.Length];
-                bmask.CopyTo(_cmd._bidxmask, 0);
-                _cmd._idxbytes = new List<byte[]>();
-                for (int i = 0; i < lstcommands.Count; i++)
-                {
-                    int idx = 0;
-                    byte[] idxbytes = new byte[idxcnt];
-                    for (int j = 0; j < bmask.Length; j++)
-                        if (bmask[j] != 0)
-                        {
-                            idxbytes[idx] = (byte)(lstcommands[i][j] & bmask[j]);
-                            idx++;
-                        }
-                    _cmd._idxbytes.Add(idxbytes);
-                }
-                _cmd._prefix = new byte[prefcnt];
-                for (int i = 0; i < prefcnt; i++)
-                    _cmd._prefix[i] = _cmd._bcmd[i];
-                _cmd._sufix = new byte[_cmd.bcmd.Length - prefcnt - idxcnt];
-                for (int i = prefcnt + idxcnt; i < _cmd.bcmd.Length; i++)
-                    _cmd._sufix[i - prefcnt - idxcnt] = _cmd._bcmd[i];
-                seria._commands.Add(_cmd);
-                res.Add(seria);
-            }
-            //
-            return res;
-        }
+        //public Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> WriteProperties
+        //{
+        //    get
+        //    {
+        //        Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> res = null;
+        //        Monitor.Enter(_cs_write_structure);
+        //        res = _readwriter._dwrite_prop;
+        //        Monitor.Exit(_cs_write_structure);
+        //        return res;
+        //    }
+        //    set
+        //    {
+        //        Monitor.Enter(_cs_write_structure);
+        //        _readwriter._dwrite_prop = value;
+        //        Monitor.Exit(_cs_write_structure);
+        //    }
+        //}
 
         private Dictionary<string, string> WriteStructuresJSONFiles()
         {
@@ -1260,7 +762,7 @@ namespace common
             //File.WriteAllText(f, s);
             //
             f = files["write_properties"];
-            s = _serialyzer(_dwrite_prop);
+            s = _serialyzer(_readwriter._dwrite_prop);
             File.WriteAllText(f, s);
         }
 
@@ -1283,9 +785,9 @@ namespace common
             //
             f = files["write_properties"];
             s = File.ReadAllText(f);
-            if (_dwrite_prop == null)
-                _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-            _dwrite_prop = (Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>)_deserialyzer(s, _dwrite_prop.GetType());
+            if (_readwriter._dwrite_prop == null)
+                _readwriter._dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+            _readwriter._dwrite_prop = (Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>)_deserialyzer(s, _readwriter._dwrite_prop.GetType());
         }
 
         private void CreateWriteStructure()
@@ -1302,7 +804,7 @@ namespace common
             Dictionary<string, string> files = WriteStructuresJSONFiles();
             if (!JSONStructWriteFilesExists(files))
             {
-                _wserias = cfgWriteSerias(wxml);
+                _readwriter._wserias = _readwriter.cfgWriteSerias(wxml);
                 SerializeJSONWriteStructs(files);
             }
             else
@@ -1310,82 +812,9 @@ namespace common
             Monitor.Exit(_cs_write_structure);
         }
 
-        private string FindReadKeyIRIS(string wkey)
+        public Dictionary<string, cRWPath> RWMerged()
         {
-            string loop = "abcd";
-            string tteloop = "abcd";
-            Match m = Regex.Match(wkey, @"(\w+?_LOOP\d[\w\W]+)");
-            if (m.Success)
-                loop = m.Groups[1].Value;
-            m = Regex.Match(wkey, @"(\w+?_TTELOOP\d)");
-            if (m.Success)
-                tteloop = m.Groups[1].Value;
-            foreach (string key in _dread_prop.Keys)
-            {
-                if (key == wkey)
-                    return key;
-                if (wkey == "" && Regex.IsMatch(key, @"_PANEL$"))
-                    return key;
-                if (Regex.IsMatch(wkey, @"PUTS$"))
-                {
-                    string s = wkey.Substring(0, wkey.Length - 1);
-                    if (Regex.IsMatch(key, s + "$"))
-                        return key;
-                }
-                if (wkey != "" && Regex.IsMatch(key, wkey + "$"))
-                    return key;
-                if (wkey != "" && Regex.IsMatch(key, "^" + wkey))
-                    return key;
-                if (Regex.IsMatch(wkey, @"EVAC_ZONES*_GROUPS*") && Regex.IsMatch(key, @"EVAC_ZONES*_GROUPS*"))
-                    return key;
-                if (Regex.IsMatch(key, "^" + loop))
-                    return key;
-                if (Regex.IsMatch(key, loop + "$"))
-                    return key;
-                if (Regex.IsMatch(key, "^" + tteloop))
-                    return key;
-                if (Regex.IsMatch(key, tteloop + "$"))
-                    return key;
-                //m = Regex.Match(wkey, @"[\w\W]+?[\\/]([\w_]+)$");
-                //if (m.Success && Regex.IsMatch(key, m.Groups[1].Value))
-                //    return key;
-            }
-            //
-            return null;
-        }
-
-        public Dictionary<string, object> RWMerged()
-        {
-            //Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> dread = null;
-            //Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> dwrite = null;
-            Monitor.Enter(_cs_read_structure);
-            Monitor.Enter(_cs_write_structure);
-            if (_dread_prop == null || _dwrite_prop == null/* || _dread_prop.Count != _dwrite_prop.Count*/)
-            {
-                Monitor.Exit(_cs_write_structure);
-                Monitor.Exit(_cs_read_structure);
-                return null;
-            }
-            Dictionary<string, object> res = new Dictionary<string, object>();
-            //
-            Dictionary<string, string> wrkeys = new Dictionary<string, string>();
-            foreach (string wkey in _dwrite_prop.Keys)
-            {
-                string rkey = null;
-                if (PanelType == ePanelType.ptIRIS)
-                    rkey = FindReadKeyIRIS(wkey);
-                if (rkey == null)
-                {
-                    Monitor.Exit(_cs_write_structure);
-                    Monitor.Exit(_cs_read_structure);
-                    return null;
-                }
-                wrkeys.Add(wkey, rkey);
-            }
-            //
-            Monitor.Exit(_cs_write_structure);
-            Monitor.Exit(_cs_read_structure);
-            return res;
+            return _readwriter.RWMerged();
         }
 
         private Dictionary<string, Dictionary<string, cWriteField>> _xpaths = null;

@@ -155,8 +155,6 @@ button {
 }
 
     .row.list-group .btnStyle {
-        /*padding-left: 4px;
-    padding-right: 4px*/;
         font-family: "Font Awesome 6 Free";
         max-width: 120px;
         max-height: 120px;
@@ -298,10 +296,7 @@ div[class^="someS"] {
 
 .btnStyle {
     text-align: center;
-    /*border: solid 1px #dfd9d9d2;
-    border-radius: 8px;
-    border-bottom: solid 3px #dfd9d9d2;
-    border-right: solid 3px #dfd9d9d2;*/
+    text-transform: uppercase;
     margin-bottom: 0.25em;
     line-height: normal;
     cursor: pointer;
@@ -667,8 +662,8 @@ fieldset {
 
 .multi-button .btn-border-black:nth-child(1) {
     border-radius: 10px 0 0 10px;
-    padding-left: 35px;
-    margin-top: -8px;
+    padding-left: 2rem;
+    /*margin-top: -8px;*/
 }
 .multi-button :nth-child(2) {
     border-radius: 0;
@@ -678,8 +673,8 @@ fieldset {
 }
 .multi-button :nth-child(3) {
     border-radius: 0 10px 10px 0;
-    padding-right: 35px;
-    margin-top: -8px;
+    padding-right: 2rem;
+    /*margin-top: -8px;*/
 }
 
 .btn-border-black {
