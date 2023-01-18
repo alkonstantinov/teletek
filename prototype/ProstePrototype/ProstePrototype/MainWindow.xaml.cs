@@ -307,6 +307,7 @@ namespace ProstePrototype
                         el = (JObject)el["PROPERTIES"]["Groups"];
                         JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
                         newpaths["~rw"] = rw;
+                        cJson.SetNodeFilters(newpaths);
                         string _template = newpaths.ToString();
                         cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
                     }

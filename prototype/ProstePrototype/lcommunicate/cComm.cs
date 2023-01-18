@@ -124,6 +124,56 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
         }
 
+        public static bool PseudoElementExists(string panel_id)
+        {
+            bool res = false;
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels != null)
+            {
+                if (_cache_pseudo_element_panels.ContainsKey(panel_id))
+                {
+                    Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+                    res = el.Count > 0;
+                }
+            }
+            Monitor.Exit(_cs_pseudo_element_cache);
+            //
+            return res;
+        }
+
+        public static bool PseudoElementExists(string panel_id, string typ, string re_mask)
+        {
+            bool res = false;
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels != null)
+            {
+                if (_cache_pseudo_element_panels.ContainsKey(panel_id))
+                {
+                    Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+                    if (el.ContainsKey(typ))
+                    {
+                        Dictionary<string, string> lst = el[typ];
+                        foreach (string key in lst.Keys)
+                        {
+                            string val = lst[key];
+                            Match m = Regex.Match(val, @"""~loop_type""\s*?:\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
+                            if (m.Success)
+                            {
+                                bool f = Regex.IsMatch(m.Groups[1].Value, re_mask, RegexOptions.IgnoreCase);
+                                if (f)
+                                {
+                                    res = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Monitor.Exit(_cs_pseudo_element_cache);
+            //
+            return res;
+        }
         public static string GetPseudoElement(string panel_id, string key, string idx)
         {
             Monitor.Enter(_cs_pseudo_element_cache);
@@ -241,16 +291,14 @@ namespace lcommunicate
         {
             Dictionary<string, string> res = null;
             Monitor.Enter(_cs_cache);
-            if (_cache_list_panels == null)
+            if (_cache_list_panels != null)
             {
-                Monitor.Exit(_cs_cache);
-                return null;
-            }
-            if (_cache_list_panels.ContainsKey(panel_id))
-            {
-                Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
-                if (el.ContainsKey(key))
-                    res = el[key];
+                if (_cache_list_panels.ContainsKey(panel_id))
+                {
+                    Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+                    if (el.ContainsKey(key))
+                        res = el[key];
+                }
             }
             Monitor.Exit(_cs_cache);
             return res;

@@ -379,8 +379,12 @@ const transformGroupElement = (elementJson) => {
                                         onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
                                                               loadDiv(this, 'showDiv_${attributes.input_id}', this.value);" >`;
             tabsKeys.map(o => {
+                
                 let disabled = false; // todo
-                if (!!(+tabs[o]['~enabled'])) disabled = true; // TODO!!
+                if (tabs[o].hasOwnProperty("~enabled")) {// if exists such field ["~enabled"]
+                    //alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
+                    disabled = !tabs[o]["~enabled"];
+                }
                 let value = `${tabs[o]['@VALUE']}_${attributes.input_id}_${o}`;
                 let selected;
                 if (attributes.value) {
@@ -388,7 +392,7 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     selected = !!(+tabs[o]['@DEFAULT']) ? "selected" : "";
                 }
-                inner += `<option value="${value}" ${selected} ${disabled ? "disbled" : ""}>${tabs[o]['@NAME']} </option>`
+                inner += `<option value="${value}" ${selected} ${disabled ? "disabled" : ""}>${tabs[o]['@NAME']} </option>`
             });
             inner += `</select>
                             </div>
@@ -1280,6 +1284,7 @@ async function showElement(id, elementType) {
 
 // loadDiv function required for TABs
 function loadDiv(it, id, value) {
+    if (!value) return;
     var element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)
     var addElement = document.getElementById(id);
@@ -1319,7 +1324,7 @@ function loadDiv(it, id, value) {
             break;
     }
     if (content.classList.contains("collapsible-content")) {
-        content.style.maxHeight = content.scrollHeight + addElementHeight + "px";
+        content.style.maxHeight = (content.scrollHeight + addElementHeight) + "px";
     }
     addVisitedBackground();
 }

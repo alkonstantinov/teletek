@@ -25,6 +25,7 @@ using lcommunicate;
 using common;
 using System.Windows.Shapes;
 using System.Windows.Markup;
+using System.Data;
 
 namespace ljson
 {
@@ -456,6 +457,14 @@ namespace ljson
             return _res1;
         }
 
+        #region internal relations operations
+        private static cInternalRel _internal_relations_operator = null;
+        public static void SetNodeFilters(JObject _node)
+        {
+            _internal_relations_operator.SetNodeFilters(CurrentPanelID, _node);
+        }
+        #endregion
+
         public static string jobj2string(object o)
         {
             return JsonConvert.SerializeObject(o);
@@ -524,7 +533,10 @@ namespace ljson
             o = (JObject)t;
             string prod = o["@PRODUCTNAME"].ToString();
             if (Regex.IsMatch(prod, @"iris", RegexOptions.IgnoreCase))
+            {
+                _internal_relations_operator = new cInternalrelIRIS();
                 return cIRIS.Convert(json, _pages);
+            }
             else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))
                 return cEclipse.Convert(json, _pages);
             return "";
@@ -634,7 +646,7 @@ namespace ljson
             Monitor.Exit(_cs_html_right);
             return (s != null) ? s : "";
         }
-
+        #region paths
         public static void MakeRelativePath(JToken token, string from)
         {
             if (from == null || from.Trim() == "")
@@ -870,7 +882,9 @@ namespace ljson
                 }
             }
         }
+        #endregion
 
+        #region values
         public static JObject GroupsWithValues(JObject grp)
         {
             List<JObject> lst = new List<JObject>();
@@ -891,5 +905,6 @@ namespace ljson
         {
             return GroupsWithValues(JObject.Parse(grp));
         }
+        #endregion
     }
 }
