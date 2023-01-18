@@ -91,12 +91,20 @@ const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
         'Command': 'AddingLoopElement', 
         'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'noneElement': noneElement, 'deviceName': deviceName, 'deviceAddress': address }
     });
+
+    visualizeLoopElement(deviceName, +address, loopType, +loopNumber, key);
+}
+
+function visualizeLoopElement(deviceName, address, loopType, loopNumber, key) {
     attachedDevicesList.push(address);
+
+    // update deviceNmbr button
+    updateDeviceNmbr();
 
     const newDeviceInner = `<div class="col-12" id='${loopType}_${address}'>
                                 <div class="row">
                                     <div class="col-10 pr-1">
-                                        <a href="javascript:showDevice('${loopType}', '${deviceName}', '${address}')" onclick="javascript:addActive('#selected_area')" >
+                                        <a href="javascript:showDevice('${loopType}', '${deviceName}', '${loopNumber}', '${address}')" onclick="javascript:addActive('#selected_area')" >
                                             <div class="btnStyle fire">
                                                 <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
                                                 <div class="someS">
@@ -127,31 +135,66 @@ const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
         let button = document.getElementById(`btn_${loopType}`);
         button.style.display = "none";
     }
-    $(`#${loopType}_modal`).modal('toggle');
+    $(`#${loopType}_modal`).modal('hide');
 }
 
-const showDevice = (loopType, deviceName, address) => {
-
+const showDevice = (loopType, deviceName, loopNumber, address) => {
+    boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
+        if (res) {
+            let { key } = getConfig(deviceName);
+            let resJSONList = JSON.parse(res);
+            let deviceData = resJSONList.find(dd => dd["~address"] === address && dd["~device"] === deviceName)["Groups"];
+            let elem = document.getElementById(`selected_${loopType.includes("TTE") ? "device" : "sensor"}_${loopType}`);
+            let fieldset = document.createElement("fieldset");
+            fieldset.id = `selected_${loopType}_${deviceName}_${address}`;
+            fieldset.className = "deviceClass";
+            fieldset.insertAdjacentHTML("afterbegin", `<legend>${DEVICES_CONSTS[key].sign} ${address}</legend>`);
+            drawFields(fieldset, deviceData, inheritedColor = '')
+            if (elem && elem.innerHTML !== "") { elem.replaceChildren() } 
+            elem.insertAdjacentElement('afterbegin', fieldset);
+            collapsible();
+            addVisitedBackground();
+        }
+    }).catch(err => alert(err));
 }
 
 const removeDevice = (loopType, loopNumber, deviceName, address) => {
+    let { key } = getConfig(deviceName);
+
     sendMessageWPF({
         'Command': 'RemovingLoopElement',
         'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'deviceName': deviceName, 'deviceAddress': address }
     });
+
+    let parent = document.getElementById(`new_${DEVICES_CONSTS[key].type}_${loopType}`);
+    let childNode = document.getElementById(`${loopType}_${address}`);
+    parent.removeChild(childNode);
+    let shownDevice = document.getElementById(`selected_${loopType}_${deviceName}_${address}`);
+    if (shownDevice) {
+        shownDevice.parentNode.removeChild(shownDevice);
+    }
+
+    attachedDevicesList = attachedDevicesList.filter(x => x !== +address);
+
+    // update deviceNmbr button
+    updateDeviceNmbr();
 
     if (attachedDevicesList.length < maxDevicesAllowed && document.getElementById(`btn_${loopType}`).style.display === "none") {
         document.getElementById(`btn_${loopType}`).style.display = "inline-flex";
     }
 }
 
-const fillLoopElement = (loopNumber, loopType) => {
-
-    boundAsync.getLoopDevices(mainKey, loopNumber).then(res => {
+const fillLoopElements = (loopNumber, loopType) => {
+    boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
         if (res) {
-            let type = loopType.includes("TTE") ? "device" : "sensor";
-            let el = document.getElementById(`selected_${type}_${loopType}`);
-            // addLoopElement(deviceName, loopNumber, loopType, noneElement)
+            attachedDevicesList = [];
+            let resJSONList = JSON.parse(res);
+            resJSONList.forEach(deviceData => {
+                let address = deviceData["~address"];
+                let deviceName = deviceData["~device"];
+                let { key } = getConfig(deviceName);
+                visualizeLoopElement(deviceName, +address, loopType, +loopNumber, key)
+            })
         }
     }).catch(err => alert(err));
 }
@@ -292,10 +335,12 @@ function addLoop(loopType, newFlag = "new") {
 
 function showLoop(loopNumber, loopType) {
     let el = document.getElementById("selected_area");
+    attachedDevicesList = [];
+    deviceNmbr = attachedDevicesList.length;
     let targetTTE =`<div class="row fullHeight">
                     <div class="col-3 bl fire scroll">
                         <div id="new_device_${loopType}" class="row">
-                            <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices()" id="calculateDevices"
+                            <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices"
                                 data-toggle="modal" data-target="#showDevicesListModal" >
                                     Number of devices: ${deviceNmbr}
                             </button>
@@ -413,10 +458,37 @@ function removeLoop() {
 }
 //#endregion LOOP
 
-function calculateLoopDevices() {
+function calculateLoopDevices(loopNumber) {
     let modal = $(document.getElementById("showDevicesListModal"));
     let modalContent = modal.find('.modal-body')[0];
-    modalContent.innerHTML = `<p>"Setting the new modal list"</p>`;
+
+    const deviceMap = new Map();
+    boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
+        if (res) {
+            let deviceListJSON = JSON.parse(res);
+            deviceListJSON.forEach(e => {
+                if (deviceMap.has(e["~device"])) {
+                    deviceMap.set(e["~device"], deviceMap.get(e["~device"]) + 1)
+                } else {
+                    deviceMap.set(e["~device"], 1)
+                }
+            });
+
+            let innerModalContent = `<div class="table-responsive"><table class="table table-striped"><thead><tr>
+                                <th scope="col">Device Type</th>
+                                <th scope="col">Counts</th>
+                              </tr></thead><tbody>`;
+            deviceMap.forEach((value, key, map) => {
+                innerModalContent += `<tr>
+                                <td >${key}</td>
+                                <td>${value}</td>
+                              </tr>`;
+            })
+            innerModalContent += `</tbody></table></div>`;
+            alert(innerModalContent);
+            modalContent.innerHTML = innerModalContent;
+        }
+    }).catch(err => alert(err));    
 }
 
 
@@ -447,4 +519,9 @@ function getConfig(deviceName, device = '') {
     return { key, minDevices, maxDevices };
 }
 
+function updateDeviceNmbr() {
+    deviceNmbr = attachedDevicesList.length;
+    let showBtn = document.getElementById("calculateDevices");
+    showBtn.innerHTML = `Number of sensors: ${deviceNmbr}`;
+}
 //#endregion UTILS

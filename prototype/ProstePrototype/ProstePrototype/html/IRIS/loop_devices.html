@@ -123,7 +123,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -2641,7 +2641,20 @@
             function calculateDevices() {
                 let modal = $(document.getElementById("showDevicesListModal"));
                 let modalContent = modal.find('.modal-body')[0];
-                modalContent.innerHTML = `<p>"Setting the new modal list"</p>`;
+                modalContent.innerHTML = `<div class="table-responsive"><table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Device Type</th>
+                                    <th scope="col">Counts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bla-bla</td>
+                                    <td>Gu-gu</td>
+                                </tr>
+                            </tbody>
+                        </table></div>`;
             }
         </script>
     </div>

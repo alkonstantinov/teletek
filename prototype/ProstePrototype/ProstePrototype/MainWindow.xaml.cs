@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -287,6 +288,7 @@ namespace ProstePrototype
                     break;
                 case "changedValue":
                     cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
+                    Dictionary<string, Dictionary<string, string>> analysis = cJson.AnalysePath(json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
                     break;
                 case "AddingElement":
                     string elementType = json["Params"]["elementType"].ToString();
@@ -301,8 +303,10 @@ namespace ProstePrototype
                     }
                     else
                     {
+                        JObject rw = (JObject)el["~rw"];
                         el = (JObject)el["PROPERTIES"]["Groups"];
                         JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
+                        newpaths["~rw"] = rw;
                         string _template = newpaths.ToString();
                         cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
                     }
@@ -317,7 +321,52 @@ namespace ProstePrototype
                     cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
                     break;
                 case "AddingLoopElement":
+                    //"noneElement": "IRIS_MNONE"
+                    el = cJson.GetNode(json["Params"]["loopType"].ToString() + "/" + json["Params"]["noneElement"].ToString());
+                    JObject _rw = (JObject)el["~rw"];
+                    if (el["PROPERTIES"] != null)
+                    {
+                        if (el["PROPERTIES"]["Groups"] != null)
+                            el = (JObject)el["PROPERTIES"]["Groups"];
+                        else
+                            el = (JObject)el["PROPERTIES"];
+                        el["~rw"] = _rw;
+                    }
+                    elementNumber = json["Params"]["deviceAddress"].ToString();
+                    string loopNumber = json["Params"]["loopNumber"].ToString();
+                    string loopType = json["Params"]["loopType"].ToString();
+                    string noneElement = json["Params"]["noneElement"].ToString();
+                    string deviceName = json["Params"]["deviceName"].ToString();
+                    string key = loopType + "/" + noneElement + "#" + deviceName;
+                    JObject jdev = new JObject(cJson.GetNode(json["Params"]["deviceName"].ToString()));
+                    //"deviceName": "IRIS_MIO04",
+                    if (jdev != null)
+                    {
+                        jdev = (JObject)jdev["PROPERTIES"]["Groups"];
+                        el = cJson.ChangeGroupsElementsPath(jdev, elementNumber);
+                        cJson.MakeRelativePath(el, key);
+                    }
+                    el["~rw"] = _rw;
+                    el["~device"] = deviceName;
+                    cComm.AddListElement(cJson.CurrentPanelID, key, elementNumber, el.ToString());
+                    //
+                    //CallbackObjectForJs cb = new CallbackObjectForJs();
+                    //string devs = cb.getLoopDevices("NO_LOOP", Convert.ToInt32(loopNumber));
+                    //
                     break;
+                /*
+{
+    "Command": "AddingLoopElement",
+    "Params": {
+        "NO_LOOP": "NO_LOOP",
+        "loopType": "IRIS_LOOP1",
+        "loopNumber": "1",
+        "noneElement": "IRIS_SNONE",
+        "deviceName": "IRIS_S2251EM",
+        "deviceAddress": 1
+    }
+}
+                 */
                 case "RemovingLoop":
                     break;
                 case "RemovingLoopElement":

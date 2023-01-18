@@ -2,7 +2,7 @@
   "profiles": {
     "NewTeletekSW": {
       "commandName": "Project",
-      "commandLineArgs": "-f \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\translation\\InterfaceTexts_TR.xml\"\r\n-p read"
+      "commandLineArgs": "-f \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\translation\\InterfaceTexts.xml,C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\translation\\InterfaceTexts_BG.xml,C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\translation\\InterfaceTexts_EL.xml,C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\translation\\InterfaceTexts_FR.xml\"\r\n-p transform"
     }
   }
 }

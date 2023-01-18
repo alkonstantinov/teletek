@@ -53,6 +53,7 @@ function receiveMessageWPF(jsonTxt) {
             if (path) color = Object.keys(BUTTON_COLORS).find(x => path.toUpperCase().includes(x));
 
             drawFields(body, json, color ? BUTTON_COLORS[color] : '');
+
             break;
         case !!document.getElementById('divDevices'):
             //alert('divDevices')
@@ -203,6 +204,8 @@ function drawFields (body, json, inheritedColor = '') {
                 newEl.classList = "row scroll";
                 oldEl.replaceWith(newEl);
             }
+
+            getAvailableElements(k.toUpperCase());
         } else { // collapsible parts
             const { input_name, input_id } = {
                 input_name: divLevel.name,
@@ -251,8 +254,22 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             const newElement = document.createElement('div');
             let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" || jsonAtLevel[field]['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
             newElement.classList = className;
-            newElement.innerHTML = innerString;
-            div.appendChild(newElement);
+            
+            if (typeof (innerString) !== "string") {
+                const [inner, jsFunc] = innerString;
+                newElement.innerHTML = inner;
+                div.appendChild(newElement);
+                const [el1, el2, el3] = jsFunc();
+                
+                setTimeout(() => {
+                    let el = document.getElementById(el1);
+                    loadDiv(el, el2, el3);
+                }, 200);
+            } else {
+                newElement.innerHTML = innerString;
+                div.appendChild(newElement);
+            }            
+
         } else if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;
             const src = "pages-dynamic.js";
@@ -326,9 +343,9 @@ const transformGroupElement = (elementJson) => {
         input_name_off: elementJson['@NOVAL'],
         checked: !!(+elementJson['@CHECKED']),
         path: elementJson['~path'],
-        value: elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : ""),
+        value: elementJson["~value"] ? elementJson["~value"] : (elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : "")),
     };
-
+    
     switch (attributes.type) {
         case 'AND':
             let andElementsList = elementJson["PROPERTIES"] && elementJson["PROPERTIES"]["PROPERTY"];
@@ -358,10 +375,21 @@ const transformGroupElement = (elementJson) => {
             let inner = `<div class="form-item roww">
                             <label for="${attributes.input_id}">${attributes.input_name}</label>
                             <div class="select">
-                                <select id="${attributes.input_id}" name="${attributes.input_id}" onchange="javascript: loadDiv(this, 'showDiv_${attributes.input_id}', this.value);" >`;
-            //let isDefaultValue = tabsKeys.map(v => !!(+tabs[v]['@DEFAULT'])).reduce((prevValue, currValue) => (prevValue || currValue), false);
-            //inner += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>Select your option</option>`;
-            tabsKeys.map(o => inner += `<option value="${tabs[o]['@VALUE']}_${attributes.input_id}_${o}" ${!!(+tabs[o]['@DEFAULT']) ? "selected" : ""}>${tabs[o]['@NAME']}</option>`)
+                                <select id="${attributes.input_id}" name="${attributes.input_id}" 
+                                        onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_${attributes.input_id}', this.value);" >`;
+            tabsKeys.map(o => {
+                let disabled = false; // todo
+                if (!!(+tabs[o]['~enabled'])) disabled = true; // TODO!!
+                let value = `${tabs[o]['@VALUE']}_${attributes.input_id}_${o}`;
+                let selected;
+                if (attributes.value) {
+                    selected = attributes.value === value ? "selected" : "";
+                } else {
+                    selected = !!(+tabs[o]['@DEFAULT']) ? "selected" : "";
+                }
+                inner += `<option value="${value}" ${selected} ${disabled ? "disbled" : ""}>${tabs[o]['@NAME']} </option>`
+            });
             inner += `</select>
                             </div>
                         </div>
@@ -421,14 +449,19 @@ const transformGroupElement = (elementJson) => {
                         }
                     }
                     tabDiv.appendChild(fieldsetDiv);
-                } else { // tabs[key] without properties but with tabs, so the select must inpude the sendMessageWPF funcitonality 
+                } else { // tabs[key] without properties but with tabs, so the select must incude the sendMessageWPF funcitonality 
                     addOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params': {'path':'${attributes.path}','newValue': this.value}})`;
-                }                
+                }
                 inner += tabDiv.outerHTML;
             })
             if (addOnChangeCommand) {
                 inner = inner.substring(0, inner.indexOf('" ><option value="0')) +
                     addOnChangeCommand + inner.substring(inner.indexOf('" ><option value="0'));
+            }
+            if (attributes.value && (!elementJson["@ID"] || elementJson["@ID"] !== "SUBTYPE")) {
+                const jsFunc = () => [`${attributes.input_id}`, `showDiv_${attributes.input_id}`, `${attributes.value}`];
+
+                return [inner, jsFunc];
             }
             return inner;
         case 'INT':
@@ -449,17 +482,27 @@ const transformGroupElement = (elementJson) => {
                 attributes.input_name_on = 'ON';
                 attributes.input_name_off = 'OFF';
             }
+            if (attributes.value === "True") attributes.checked = true;
+            else if (attributes.value === "False") attributes.checked = false;
             return getSliderInput({ ...attributes });
 
         case 'CHECK':
+            if (attributes.value === "True") attributes.checked = true;
+            else if (attributes.value === "False") attributes.checked = false;
             return getCheckboxInput({ ...attributes });
 
         case 'LIST':
-            attributes.selectList = elementJson.ITEMS.ITEM.map(o => {
+            attributes.selectList = elementJson.ITEMS.ITEM.map((o, idx) => {
+                let sel;
+                if (attributes.value) {
+                    sel = (parseInt(attributes.value) === idx + 1)
+                } else {
+                    sel = !!(o['@DEFAULT']);
+                }
                 return {
                     value: o['@VALUE'],
                     label: o['@NAME'],
-                    selected: !!(+o['@DEFAULT']),
+                    selected: sel,
                     link: o['ScheduleKey'],
                 };
             });
@@ -605,7 +648,6 @@ function toggleLang(key) {
     } else {
         localStorage.setItem('lang', 'en');
     }
-    alert('lang ' + localStorage.getItem('lang'));
     document.location.reload();
 }
 
@@ -693,7 +735,7 @@ const getCheckboxInput = ({ input_name, input_id, bytesData, lengthData, readOnl
                     ${lengthData ? `length="${lengthData}"` : ""} 
                     ${readOnly ? "disabled" : ''}
                     ${checked ? "checked" : ''}
-                    onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})" />
+                    onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.checked}})" />
             </div>`
 }
 
@@ -711,7 +753,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
                             ${checked ? "checked" : ''} 
-                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"/>
+                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.checked}})"/>
                         <span class="slider"></span>
                     </label>
                     ${input_name_on}
@@ -1068,6 +1110,27 @@ function addActive() {
     });
 }
 
+const getAvailableElements = (elementType) => {
+    boundAsync.getElements(elementType).then(r => {
+        if (!r) return;
+        let elementList = JSON.parse(r);
+        // creating the founded elements
+        Object.keys(elementList).forEach(key => {
+            addConcreteElement(key, elementType);
+        });
+    }).catch(err => alert(err));
+}
+
+// adding pre-defined elements function
+function addConcreteElement(id, elementType = "") {
+    if (lst.includes(+id)) {
+        return;
+    } else {
+        last = parseInt(id);
+        createElementButton(last, elementType);
+    }
+}
+
 // adding button elements function
 function addElement(id, elementType = "") {
 
@@ -1082,75 +1145,9 @@ function addElement(id, elementType = "") {
             }
         }
         if (last === 0 || lst.includes(last)) return;
-        
-        let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
-        let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
+
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
-        const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
-            `<div class="col-12" id=${last}>
-                <div class="row">
-                    <div class="col-11 pr-1">
-                        <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
-                            <div class="btnStyle ${BUTTON_COLORS[color]}">
-                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">
-                                    <br /><span class="someS">
-                                        <span class="h5">
-                                            ${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}
-                                        </span>
-                                    </span>
-                                </i>
-                                                            
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
-                        <i class="fa-solid fa-xmark fire"></i>
-                    </div>
-                </div>
-            </div>`) : ( //if the element is INPUT_GROUP
-            `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="row">
-                        <fieldset style="min-width: 200px;">
-                            <legend>Input Group ${last}</legend>
-                                <label for="gr_input_logic_${last}">Input logic</label>:
-                                <p class="fire">
-                                    AND
-                                    <label class="switch">
-                                        <input type="checkbox" id="gr_input_logic_${last}"
-                                              onchange="javascript: inputGroupHandler('${ elementType }','${last}', this.checked );"/>
-                                        <span class="slider"></span>
-                                    </label>
-                                    OR
-                                </p>
-
-                        </fieldset>
-                        <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
-                            <i class="fa-solid fa-xmark fire"></i>
-                        </div>
-                    </div>
-                </div>`);
-        var element = document.getElementById("new");
-        var new_inner = `
-                            ${element.innerHTML}
-                            ${newUserElement}
-                        `;
-        lst.push(last);
-        element.innerHTML = new_inner;
-
-        // reordering
-        var main = document.getElementById('new');
-
-        [].map.call(main.children, Object).sort(function (a, b) {
-            return +a.id.match(/\d+/) - +b.id.match(/\d+/);
-        }).forEach(function (elem) {
-            main.appendChild(elem);
-        });
-
-        // button display check
-        if (lst.length === elements) {
-            let button = document.getElementById("_btn");
-            button.style.display = "none";
-        }
+        createElementButton(last, elementType);
     } else {
         if (lst.includes(+id)) {
             var elem = document.getElementById(`${id}`);
@@ -1171,6 +1168,77 @@ function addElement(id, elementType = "") {
     }
 }
 
+function createElementButton(last, elementType) {
+    let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
+    let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
+    
+    const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
+        `<div class="col-12" id=${last}>
+                <div class="row">
+                    <div class="col-11 pr-1">
+                        <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
+                            <div class="btnStyle ${BUTTON_COLORS[color]}">
+                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">
+                                    <br /><span class="someS">
+                                        <span class="h5">
+                                            ${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}
+                                        </span>
+                                    </span>
+                                </i>
+                                                            
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                        <i class="fa-solid fa-xmark fire"></i>
+                    </div>
+                </div>
+            </div>`) : ( //if the element is INPUT_GROUP
+        `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="row">
+                        <fieldset style="min-width: 200px;">
+                            <legend>Input Group ${last}</legend>
+                                <label for="gr_input_logic_${last}">Input logic</label>:
+                                <p class="fire">
+                                    AND
+                                    <label class="switch">
+                                        <input type="checkbox" id="gr_input_logic_${last}"
+                                              onchange="javascript: inputGroupHandler('${elementType}','${last}', this.checked );"/>
+                                        <span class="slider"></span>
+                                    </label>
+                                    OR
+                                </p>
+
+                        </fieldset>
+                        <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
+                            <i class="fa-solid fa-xmark fire"></i>
+                        </div>
+                    </div>
+                </div>`);
+    var element = document.getElementById("new");
+    var new_inner = `
+                        ${element.innerHTML}
+                        ${newUserElement}
+                    `;
+    lst.push(last);
+    element.innerHTML = new_inner;
+
+    // reordering
+    var main = document.getElementById('new');
+
+    [].map.call(main.children, Object).sort(function (a, b) {
+        return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+    }).forEach(function (elem) {
+        main.appendChild(elem);
+    });
+
+    // button display check
+    if (lst.length === elements) {
+        let button = document.getElementById("_btn");
+        button.style.display = "none";
+    }
+}
+
 const inputGroupHandler = (elementType, id, isOR) => {
     let newValue = isOR ? "0": "255";
     boundAsync.getJsonForElement(elementType, +id).then(res => {
@@ -1181,29 +1249,30 @@ const inputGroupHandler = (elementType, id, isOR) => {
 };
 
 // showing element function
-function showElement(id, elementType) {
+async function showElement(id, elementType) {
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
     let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
     let returnedJson;
     try {
-        boundAsync.getJsonForElement(elementType, +id).then(res => {
-            if (res.length > 0) {
-                returnedJson = JSON.parse(res);
-                if (Object.keys(returnedJson).length > 0) {
-                    var el = document.getElementById("selected_area");
-                    id = parseInt(id);
-                    const fieldset = document.createElement('fieldset');
-                    fieldset.id = `id_${id}`;
-                    fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ') } ${id}</legend>`);
-                    drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
-                    var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
-                    if (oldFieldset) oldFieldset.replaceWith(fieldset);
-                    else el.appendChild(fieldset);
-                    collapsible();
-                    addVisitedBackground();
-                }
-            }
-        })
+        let result = await boundAsync.getJsonForElement(elementType, +id);
+        returnedJson = JSON.parse(result);
+        if (!returnedJson) {
+            alert("Error happened! Please contact your software provider!");
+            return;
+        }
+        if (Object.keys(returnedJson).length > 0) {
+            var el = document.getElementById("selected_area");
+            id = parseInt(id);
+            const fieldset = document.createElement('fieldset');
+            fieldset.id = `id_${id}`;
+            fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>`);
+            drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
+            var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
+            if (oldFieldset) oldFieldset.replaceWith(fieldset);
+            else el.appendChild(fieldset);
+            collapsible();
+            addVisitedBackground();
+        }
     } catch (e) {
         console.log('Error', e);
     }

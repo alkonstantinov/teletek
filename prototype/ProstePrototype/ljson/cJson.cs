@@ -635,6 +635,61 @@ namespace ljson
             return (s != null) ? s : "";
         }
 
+        public static void MakeRelativePath(JToken token, string from)
+        {
+            if (from == null || from.Trim() == "")
+                return;
+            if (token.Type == JTokenType.Object)
+            {
+                JObject o = (JObject)token;
+                JToken tp = o["~path"];
+                if (tp != null)
+                {
+                    string path = from + "." + tp.ToString();
+                    o["~path"] = path;
+                }
+                foreach (JToken t in token)
+                    MakeRelativePath(t, from);
+            }
+            else if (token.Type == JTokenType.Array)
+            {
+                JArray jarr = (JArray)token;
+                foreach (JToken t in jarr)
+                    MakeRelativePath(t, from);
+            }
+            else if (token.Type == JTokenType.Property)
+            {
+                JProperty p = (JProperty)token;
+                MakeRelativePath(p.Value, from);
+            }
+        }
+
+        public static void ChangePath(JToken token, string idx)
+        {
+            if (token.Type == JTokenType.Object)
+            {
+                JObject o = (JObject)token;
+                JToken tp = o["~path"];
+                if (tp != null)
+                {
+                    string path = tp.ToString() + ".~index~" + idx;
+                    o["~path"] = path;
+                }
+                foreach (JToken t in token)
+                    ChangePath(t, idx);
+            }
+            else if (token.Type == JTokenType.Array)
+            {
+                JArray jarr = (JArray)token;
+                foreach (JToken t in jarr)
+                    ChangePath(t, idx);
+            }
+            else if (token.Type == JTokenType.Property)
+            {
+                JProperty p = (JProperty)token;
+                ChangePath(p.Value, idx);
+            }
+        }
         public static JObject ChangeGroupsElementsPath(JObject groups, string idx)
         {
             JObject res = new JObject(groups);
@@ -647,11 +702,8 @@ namespace ljson
                     {
                         foreach (JProperty nnp in (JToken)grp)
                         {
-                            if (nnp.Value.Type != JTokenType.Object)
-                                continue;
-                            JObject nnf = (JObject)nnp.Value;
-                            if (nnf != null)
-                                nnf["~path"] += ".~index~" + idx;
+                            ChangePath(nnp.Value, idx);
+                            continue;
                         }
                         continue;
                     }
@@ -659,10 +711,130 @@ namespace ljson
                     {
                         if (fprop.Value.Type != JTokenType.Object)
                             continue;
-                        JObject oprop = (JObject)fprop.Value;
-                        oprop["~path"] += ".~index~" + idx;
+                        ChangePath(fprop.Value, idx);
                     }
                 }
+            //
+            return res;
+        }
+
+        public static Dictionary<string, Dictionary<string, string>> AnalysePath(string _path, string _newval)
+        {
+            Dictionary<string, Dictionary<string, string>> res = new Dictionary<string, Dictionary<string, string>>();
+            JObject panel = new JObject(CurrentPanel);
+            string p = "";
+            Match mpath = Regex.Match(_path, @"^([\w\W]+?)\.(ELEMENTS\.[\w\W]+)$");
+            if (mpath.Success)
+            {
+                _path = mpath.Groups[2].Value;
+                //
+                string prepath = mpath.Groups[1].Value;
+                mpath = Regex.Match(prepath, @"([\w\W]+?)#([\w\W]+)$");
+                if (mpath.Success)
+                {
+                    string dev = mpath.Groups[2].Value;
+                    prepath = mpath.Groups[1].Value;
+                    mpath = Regex.Match(prepath, @"([\w\W]+?)/([\w\W]+)$");
+                    if (mpath.Success)
+                    {
+                        p = mpath.Groups[1].Value;
+                        res.Add(p, new Dictionary<string, string>());
+                        res[p].Add("LOOPTYPE", mpath.Groups[1].Value);
+                        p += "." + mpath.Groups[2].Value;
+                        res.Add(p, new Dictionary<string, string>());
+                        res[p].Add("NOELEMENT", mpath.Groups[2].Value);
+                    }
+                    p += ((p != "") ? "." : "") + dev;
+                    res.Add(p, new Dictionary<string, string>());
+                    res[p].Add("DEVICE", dev);
+                }
+            }
+            p = "";
+            string[] _patharr = _path.Split('.');
+            for (int i = 0; i < _patharr.Length; i++)
+            {
+                p += ((p != "") ? "." : "") + _patharr[i];
+                Match m = Regex.Match(_patharr[i], @"~index~(\d+)", RegexOptions.IgnoreCase);
+                if (m.Success)
+                {
+                    Dictionary<string, string> didx = new Dictionary<string, string>();
+                    didx.Add("INDEX", m.Groups[1].Value);
+                    res.Add(p, didx);
+                    continue;
+                }
+                if (p == "ELEMENTS")
+                    continue;
+                if (Regex.IsMatch(_patharr[i], "(INPUT|OUTPUT|SNONE|MNONE|TTENONE)"))
+                {
+                    Dictionary<string, string> dio = new Dictionary<string, string>();
+                    string typ = Regex.Replace(_patharr[i], @"^[\w\W]*?_", "");
+                    dio.Add("TYPE", typ);
+                    JToken tlst = panel.SelectToken(p);
+                    if (tlst.Type == JTokenType.Object)
+                    {
+                        JObject olst = (JObject)tlst;
+                        JToken rules = olst["RULES"];
+                        if (rules != null)
+                            dio.Add("RULES", rules.ToString());
+                    }
+                    res.Add(p, dio);
+                }
+                JToken t = panel.SelectToken(p);
+                Dictionary<string, string> d = null;
+                if (res.ContainsKey(p))
+                    d = res[p];
+                if (t != null && t.Type == JTokenType.Object)
+                {
+                    JObject o = (JObject)t;
+                    JToken tprop = o["@ID"];
+                    if (tprop != null)
+                    {
+                        if (d == null)
+                            d = new Dictionary<string, string>();
+                        if (!d.ContainsKey("@ID"))
+                            d.Add("@ID", tprop.ToString());
+                    }
+                    tprop = o["@NAME"];
+                    if (tprop != null)
+                    {
+                        if (d == null)
+                            d = new Dictionary<string, string>();
+                        if (!d.ContainsKey("@NAME"))
+                            d.Add("@NAME", tprop.ToString());
+                    }
+                    if (i == _patharr.Length - 2 && Regex.IsMatch(_patharr[i + 1], "~index~", RegexOptions.IgnoreCase))
+                        if (!Regex.IsMatch(_newval, @"\D"))
+                        {
+                            JToken titems = o["ITEMS"];
+                            if (titems != null)
+                            {
+                                JToken titem = panel.SelectToken(p + ".ITEMS.ITEM[" + _newval + "]");
+                                if (titem != null)
+                                {
+                                    JObject oitem = (JObject)titem;
+                                    tprop = oitem["@NAME"];
+                                    if (tprop != null)
+                                    {
+                                        if (d == null)
+                                            d = new Dictionary<string, string>();
+                                        if (!d.ContainsKey("ITEM/@NAME"))
+                                            d.Add("ITEM/@NAME", tprop.ToString());
+                                    }
+                                    tprop = oitem["@ID"];
+                                    if (tprop != null)
+                                    {
+                                        if (d == null)
+                                            d = new Dictionary<string, string>();
+                                        if (!d.ContainsKey("ITEM/@ID"))
+                                            d.Add("ITEM/@ID", tprop.ToString());
+                                    }
+                                }
+                            }
+                        }
+                }
+                if (!res.ContainsKey(p) && d != null)
+                    res.Add(p, d);
+            }
             //
             return res;
         }

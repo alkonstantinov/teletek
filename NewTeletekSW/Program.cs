@@ -66,7 +66,7 @@ namespace XMLDocument
                 case "w":
                 case "write":
                     // write XML
-                    Converter.WriteXML(file);
+                    //Converter.WriteXML(file);
                     break;
                 case "log":
                     // write XML
@@ -87,15 +87,15 @@ namespace XMLDocument
                     {
                         foreach (string fileName in fileArgs)
                         {
-                            var arr = fileName.Split("_");
+                            string purFileName = (fileName.Split("."))[0];
+                            string[] arr = purFileName.Split("_");
                             string key = "en";
-                            if (arr[arr.Length - 1].Length == 2)
+                            if (arr.GetType() == typeof(string[]) && arr[arr.Length - 1].Length == 2)
                             {
                                 key= arr[arr.Length - 1];
                             }
 
-
-                            json.Merge(Converter.WriteXML(fileName, key), mergeSettings);
+                            json.Merge(Converter.WriteXML(fileName, json, key), mergeSettings);
                         }
                         if (json.ToString() != null)
                         {

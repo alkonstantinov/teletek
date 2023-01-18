@@ -207,6 +207,55 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
         }
 
+        public static Dictionary<string, string> GetPseudoElementDevices(string panel_id, string key, string idx)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels == null)
+            {
+                Monitor.Exit(_cs_cache);
+                return null;
+            }
+            if (!_cache_list_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_cache);
+                return null;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            string loopkey = Regex.Replace(key, @"^[^_]*?_", "");
+            while (Regex.IsMatch(loopkey, "_"))
+                loopkey = Regex.Replace(loopkey, @"^[^_]*?_", "");
+            loopkey += idx;
+            foreach (string elkey in el.Keys)
+            {
+                string loop = Regex.Replace(elkey, @"/[\w\W]+$", "");
+                if (Regex.IsMatch(loop, loopkey + "$"))
+                    foreach (string addr in el[elkey].Keys)
+                        res.Add(addr, el[elkey][addr]);
+            }
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
+
+        public static Dictionary<string, string> GetElements(string panel_id, string key)
+        {
+            Dictionary<string, string> res = null;
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels == null)
+            {
+                Monitor.Exit(_cs_cache);
+                return null;
+            }
+            if (_cache_list_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+                if (el.ContainsKey(key))
+                    res = el[key];
+            }
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
+
         /// <summary>
         /// Връща кеширана структура със стойности за списъчни обекти. Съответния обект е добавен с AddListElement.
         /// </summary>

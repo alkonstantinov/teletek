@@ -20,7 +20,21 @@ namespace ProstePrototype
             // MessageBox.Show(msg);
             return "Hi from " + msg;
         }
-
+        public string getElements(string elementType)
+        {
+            Dictionary<string, string> dres = cComm.GetElements(cJson.CurrentPanelID, elementType);
+            if (dres == null)
+                return null;
+            JObject o = new JObject();
+            foreach (string key in dres.Keys)
+            {
+                JObject ok = JObject.Parse(dres[key]);
+                ok.Remove("~rw");
+                o[key] = ok;
+            }
+            File.WriteAllTextAsync("wb3.json", o.ToString());
+            return o.ToString();
+        }
         public string getJsonForElement(string elementType, int elementNumber)
         {
 
@@ -29,18 +43,18 @@ namespace ProstePrototype
             string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
-            //File.WriteAllTextAsync("wb3.json", res);
+            File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
         public string getJsonNodeForElement(string elementType, int elementNumber, string key)
         {
             string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
-            //File.WriteAllTextAsync("wb3.json", res);
+            File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
-        public string getLoops(string elementType/*NO_LOOP*/)
+        public string getLoops(string elementType)
         {
             Dictionary<string, string> dres = cComm.GetPseudoElementsList(cJson.CurrentPanelID, elementType);
             if (dres == null)
@@ -51,12 +65,32 @@ namespace ProstePrototype
                 JObject ok = JObject.Parse(dres[key]);
                 o[key] = ok["~loop_type"];
             }
-            return o.ToString(); ;
+            return o.ToString();
         }
 
-        public string getLoopDevices(string elementType/*NO_LOOP*/, int elementNumber)
+        public string getLoopDevices(string elementType, int elementNumber)
         {
-            return null;
+            Dictionary<string, string> d = cComm.GetPseudoElementDevices(cJson.CurrentPanelID, elementType, elementNumber.ToString());
+            if (d == null)
+                return null;
+            //string[] akeys = new string[d.Count];
+            //d.Keys.CopyTo(akeys);
+            //akeys.so
+            JArray res = new JArray();
+            foreach (string addr in d.Keys)
+            {
+                JObject jdev = JObject.Parse(d[addr]);
+                string devname = jdev["~device"].ToString();
+                jdev.Remove("~rw");
+                jdev.Remove("~device");
+                JObject onew = new JObject();
+                onew["Groups"] = jdev;
+                onew["~device"] = devname;
+                onew["~address"] = addr;
+                res.Add(onew);
+            }
+            File.WriteAllTextAsync("wb3.json", res.ToString());
+            return res.ToString();
         }
 
         public void setLoopType(string elementType/*NO_LOOP*/, int elementNumber, string typ)
