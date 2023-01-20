@@ -287,7 +287,7 @@ namespace ProstePrototype
                     }
                     break;
                 case "changedValue":
-                    cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
+                    cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString(), cJson.FilterValueChanged);
                     Dictionary<string, Dictionary<string, string>> analysis = cJson.AnalysePath(json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
                     break;
                 case "AddingElement":
@@ -349,6 +349,7 @@ namespace ProstePrototype
                     }
                     el["~rw"] = _rw;
                     el["~device"] = deviceName;
+                    el["~device_type"] = noneElement;
                     cComm.AddListElement(cJson.CurrentPanelID, key, elementNumber, el.ToString());
                     //
                     //CallbackObjectForJs cb = new CallbackObjectForJs();

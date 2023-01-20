@@ -9,6 +9,12 @@
     --grey: #a4a9ad;
 }
 
+/* debugging*/
+/**{
+    box-sizing: border-box;
+    background: rgb(0 100 0 / 0.05) !important;
+}*/
+
 body {
     font-size: 0.8rem;
 }
@@ -39,19 +45,19 @@ h5 {
 }
 
 .fullHeight {
-    height: 100%;
+    height: 100vh;
 }
 
 .shortHeight {
-    height: calc(100% - 25px);
+    height: calc(100vh - 25px);
 }
 
 .shortestHeight {
-    height: calc(100% - 180px);
+    height: calc(100vh - 180px);
 }
 
 .shorterHeight {
-    height: calc(100% - 120px);
+    height: calc(100vh - 120px);
 }
 
 a, a:hover {
@@ -126,7 +132,7 @@ button {
 
 .scroll {
     overflow-x: auto;
-    height: calc(100% - 98px); /* - 98px*/
+    height: calc(100vh - 98px); /* - 98px*/
 }
 
 .scroll400 {
@@ -391,7 +397,7 @@ i.grasse {
     position: fixed;
     padding: 10px 10px 0px 10px;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
     /* Height of the footer*/
     height: 40px;
     background: #f8f9fa !important;

@@ -10,11 +10,30 @@ using System.Text.Encodings;
 using System.Xml.Linq;
 using System.Text.Json.Serialization;
 using System.Linq;
+using System.Threading.Channels;
 
 namespace common
 {
     public delegate string dObject2JSONString(object o);
     public delegate object dJSONString2Object(string s, System.Type typ);
+    public delegate void dFilterValueChanged(string path, string _new_val);
+
+    public static class constants
+    {
+        public static string NO_LOOP = "NO_LOOP";
+    }
+
+    public class cLoopChannelInfo
+    {
+        public string loop;
+        public string device;
+        public string uname;
+        public string channel;
+        public string Name
+        {
+            get { return ((uname != null) ? uname : "") + "/" + channel; }
+        }
+    }
 
     public enum eCommuncationType { IP = 1, COM = 2, USB = 3 };
 

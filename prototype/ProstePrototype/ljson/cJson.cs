@@ -26,6 +26,7 @@ using common;
 using System.Windows.Shapes;
 using System.Windows.Markup;
 using System.Data;
+using System.Windows.Media.Animation;
 
 namespace ljson
 {
@@ -463,8 +464,70 @@ namespace ljson
         {
             _internal_relations_operator.SetNodeFilters(CurrentPanelID, _node);
         }
+
+        private static void AddLoopIOPaths(JObject o, string path)
+        {
+            foreach (JProperty p1 in (JToken)o)
+            {
+                JObject o1 = (JObject)p1.Value;
+                foreach (JProperty p2 in (JToken)o1)
+                {
+                    JObject o2 = (JObject)p2.Value;
+                    foreach (JProperty p3 in (JToken)o2)
+                    {
+                        string ch = p3.Name;
+                        string chpath = p3.Value.ToString();
+                        JObject o3 = new JObject();
+                        o3["path"] = path;
+                        o3["channel_path"] = chpath;
+                        o2[ch] = o3;
+                    }
+                }
+            }
+        }
+        private static void AddUses(JObject o, string path)
+        {
+            foreach (JProperty p1 in (JToken)o)
+            {
+                JObject o1 = (JObject)p1.Value;
+                foreach (JProperty p2 in (JToken)o1)
+                {
+                    JObject o2 = (JObject)p2.Value;
+                    foreach (JProperty p3 in (JToken)o2)
+                    {
+                        string ch = p3.Name;
+                        JObject o3 = (JObject)p3.Value;
+                        string chpath = o3["channel_path"].ToString();
+                        List<string> lst = _internal_relations_operator.ChannelUsedIn(chpath, path);
+                        JArray jarr = (lst != null) ? JArray.FromObject(lst) : null;
+                        o3["uses"] = jarr;
+                        //JObject o3 = new JObject();
+                        //o3["path"] = path;
+                        //o3["channel_path"] = chpath;
+                        //o2[ch] = o3;
+                    }
+                }
+            }
+        }
+        public static JObject LoopsInputs(string path)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, string>>> dres = _internal_relations_operator.UnionInOuts(CurrentPanelID, "input");
+            JObject res = JObject.FromObject(dres);
+            AddLoopIOPaths(res, path);
+            AddUses(res, path);
+            return res;
+        }
+        public static JObject LoopsOutputs(string path)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, string>>> dres = _internal_relations_operator.UnionInOuts(CurrentPanelID, "output");
+            JObject res = JObject.FromObject(dres);
+            AddLoopIOPaths(res, path);
+            AddUses(res, path);
+            return res;
+        }
         #endregion
 
+        #region serialisation
         public static string jobj2string(object o)
         {
             return JsonConvert.SerializeObject(o);
@@ -473,6 +536,27 @@ namespace ljson
         public static object jstring2obj(string s, System.Type typ)
         {
             return JsonConvert.DeserializeObject(s, typ);
+        }
+        #endregion
+
+        #region XML to JSON initialization
+        private static string NoLoopKey(string sj)
+        {
+            string res = constants.NO_LOOP;
+            JObject o = JObject.Parse(sj);
+            o = (JObject)o["ELEMENTS"];
+            foreach (JProperty p in (JToken)o)
+            {
+                string pname = p.Name;
+                if (Regex.IsMatch(pname, @"NO_LOOP\d*$", RegexOptions.IgnoreCase))
+                {
+                    pname = Regex.Replace(pname, @"\d*$", "");
+                    res = pname;
+                    break;
+                }
+            }
+            //
+            return res;
         }
         public static string ConvertXML(string xml, JObject _pages, string filename)
         {
@@ -532,16 +616,22 @@ namespace ljson
             JToken t = o["ELEMENTS"]["ELEMENT"][0];
             o = (JObject)t;
             string prod = o["@PRODUCTNAME"].ToString();
+            string sj = "{}";
             if (Regex.IsMatch(prod, @"iris", RegexOptions.IgnoreCase))
             {
                 _internal_relations_operator = new cInternalrelIRIS();
-                return cIRIS.Convert(json, _pages);
+                sj = cIRIS.Convert(json, _pages);
             }
             else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))
-                return cEclipse.Convert(json, _pages);
-            return "";
+            {
+                sj = cEclipse.Convert(json, _pages);
+            }
+            constants.NO_LOOP = NoLoopKey(sj);
+            return sj;
         }
+        #endregion
 
+        #region Browser content
         private static string _main_content_key = null;
         private static object _cs_main_content_key = new object();
         public static string MainContentKey
@@ -646,6 +736,8 @@ namespace ljson
             Monitor.Exit(_cs_html_right);
             return (s != null) ? s : "";
         }
+        #endregion
+
         #region paths
         public static void MakeRelativePath(JToken token, string from)
         {
@@ -885,6 +977,10 @@ namespace ljson
         #endregion
 
         #region values
+        public static void FilterValueChanged(string path, string _new_val)
+        {
+            _internal_relations_operator.FilterValueChanged(path, _new_val);
+        }
         public static JObject GroupsWithValues(JObject grp)
         {
             List<JObject> lst = new List<JObject>();

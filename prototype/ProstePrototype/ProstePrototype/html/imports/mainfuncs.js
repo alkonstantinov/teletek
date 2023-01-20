@@ -7,6 +7,8 @@ const BUTTON_COLORS = {
 };
 
 let darkModeStylesheetId = "ssDarkMode";
+
+let CONFIGURED_IO = {};
 //#endregion VARIABLES
 
 function sendMessageWPF(json, comm = {}) {
@@ -326,6 +328,158 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
     element.appendChild(newElement);
 }
 
+function showLoopType(level, type, key, showDivId, selectDivId) {
+    alert(level);
+    const showDiv = document.getElementById(showDivId);
+    const selectDiv = document.getElementById(selectDivId);
+    let title = "Loop";
+    let nextFunc = `showLoopType(2, '${type}', this.value, '${showDivId}', '${selectDivId}')`;
+    let dataUsed = Object.keys(CONFIGURED_IO);
+
+    let firstDiv = document.getElementById(`${showDivId + "-Loop"}`);
+    let lowerDiv = document.getElementById(`${showDivId + "-Device"}`);
+    let lowestDiv = document.getElementById(`${showDivId + "-" + type}`);
+    switch (level) {
+        case 1:
+            // remove lower menus if any
+            if (firstDiv) showDiv.removeChild(firstDiv);
+            if (lowerDiv) showDiv.removeChild(lowerDiv);
+            if (lowestDiv) showDiv.removeChild(lowestDiv);
+            break;
+        case 2:
+            title = "Device";
+            // remove lower menus if any
+            if (lowerDiv) showDiv.removeChild(lowerDiv.parentNode.parentNode);
+            if (lowestDiv) showDiv.removeChild(lowestDiv.parentNode.parentNode);
+
+            nextFunc = `showLoopType(3, '${type}', '${key}' + '+' + this.value, '${showDivId}', '${selectDivId}')`;
+            dataUsed = Object.keys(CONFIGURED_IO[key]);
+            break;
+        case 3:
+            title = type;
+            // remove lower menus if any
+            if (lowestDiv) lowestDiv.parentNode.parentNode.parentNode.removeChild(lowestDiv.parentNode.parentNode);
+            let jsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
+            dataUsed = Object.keys(jsonAtLevel3).map(ch => {
+                let nameLst = ch.split('/');
+                let name = nameLst[0] ? nameLst[0] : nameLst[1];
+                if (jsonAtLevel3[ch]["uses"] && Array.isArray(jsonAtLevel3[ch]["uses"]) && jsonAtLevel3[ch]["uses"].length > 0) {
+                    return { value: ch, label: `${name}` + " - used" };
+                }
+                return { value: ch, label: name };
+            });
+            nextFunc = `showLoopType(4, '${type}', '${key}' + '+' + this.value, '${showDivId}', '${selectDivId}')`;
+            break;
+        case 4:
+            alert(key.split("+"));
+            alert(level + ' ' + CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["path"] + ' ' + CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["channel_path"]);
+            sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["path"], 'newValue': CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["channel_path"] } });
+            return;
+    }
+
+    let selectId = showDivId + "-" + title;
+    let inner = `
+            <div class="form-item roww">
+                <label for="${selectId}">${title}</label>
+                <div class="select">
+                    <select id="${selectId}" name="${selectId}"
+                        onchange="javascript: ${nextFunc}" >
+                        <option value="" disabled selected>Select your option</option>`;
+    dataUsed.map(o => {
+        if (level === 3) {
+            let disabled = ""; let tooltip = "";
+            if (type.toLowerCase() === "output" && o["label"].includes(" - used")) {
+                disabled = "disabled"
+            }
+            if (o["label"].includes(" - used")) {
+                let againJsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
+                tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
+            }
+        
+            inner += `<option value="${o["value"]}" ${disabled} ${tooltip}>${o["label"]}</option>`
+        } else {
+            inner += `<option value="${o}">${o}</option>`;
+        }
+    });
+    inner += `</select>
+                </div>`;
+
+    showDiv.insertAdjacentHTML('beforeend', inner);
+
+    adjustCollapsibleHeight(selectDiv);
+    addVisitedBackground();
+}
+
+//createLoopTypeMenu
+function createLoopTypeMenu(selectDiv, showDiv, path) {
+    let fieldset = document.createElement("fieldset");
+    fieldset.id = "loop_type-" + showDiv.id;
+    fieldset.insertAdjacentHTML('afterbegin', "<legend>Loop Type</legend>");
+    let type = path.split(".").find(e => e.includes("putType"));
+    switch (type) {
+        case "OutputType":
+            boundAsync.loopsOutputs(path).then(result => {
+                CONFIGURED_IO = JSON.parse(result);
+
+                showLoopType(1, "Output", "", fieldset.id, selectDiv.id);
+
+            }).catch(err => alert("Error" + err)); break;
+        case "InputType":
+            boundAsync.loopsInputs(path).then(result => {
+                CONFIGURED_IO = JSON.parse(result);
+
+                showLoopType(1, "Input", "", fieldset.id, selectDiv.id);
+            
+            }).catch(err => alert("Error" + err)); break;
+        default:
+            alert("something is wrong");
+    }
+
+    showDiv.replaceChildren(fieldset);
+    /*{
+  {
+  "IRIS8_TTELOOP1": {
+    "IRIS8_MIO40/1": {
+      "/TYPECHANNEL1": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[6].~index~1",
+        "uses": [
+          "IRIS8_INPUT1"
+        ]
+      },
+      "/TYPECHANNEL2": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[8].~index~1",
+        "uses": null
+      },
+      "/TYPECHANNEL3": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[10].~index~1",
+        "uses": null
+      },
+      "/TYPECHANNEL4": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[12].~index~1",
+        "uses": null
+      }
+    },
+    "IRIS8_MIO22M/2": {
+      "/TYPECHANNEL1": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.PROPERTY[7].~index~2",
+        "uses": null
+      },
+      "/TYPECHANNEL2": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.PROPERTY[9].~index~2",
+        "uses": null
+      }
+    }
+  }
+}
+} */
+}
+
 // transforming object function
 const transformGroupElement = (elementJson) => {
     let attributes = {
@@ -377,13 +531,17 @@ const transformGroupElement = (elementJson) => {
                             <div class="select">
                                 <select id="${attributes.input_id}" name="${attributes.input_id}" 
                                         onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_${attributes.input_id}', this.value);" >`;
+                                                              loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checkType'));" >`;
             tabsKeys.map(o => {
                 
                 let disabled = false; // todo
+                let checkType = "";
                 if (tabs[o].hasOwnProperty("~enabled")) {// if exists such field ["~enabled"]
-                    //alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
+                    // alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
                     disabled = !tabs[o]["~enabled"];
+                    if (tabs[o]["~enabled"]) {                        
+                        checkType = `checkType='${attributes.path}'`;
+                    }
                 }
                 let value = `${tabs[o]['@VALUE']}_${attributes.input_id}_${o}`;
                 let selected;
@@ -392,7 +550,7 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     selected = !!(+tabs[o]['@DEFAULT']) ? "selected" : "";
                 }
-                inner += `<option value="${value}" ${selected} ${disabled ? "disabled" : ""}>${tabs[o]['@NAME']} </option>`
+                inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${tabs[o]['@NAME']} </option>`
             });
             inner += `</select>
                             </div>
@@ -1283,41 +1441,49 @@ async function showElement(id, elementType) {
 }
 
 // loadDiv function required for TABs
-function loadDiv(it, id, value) {
+function loadDiv(it, id, value, type) {
     if (!value) return;
     var element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)
     var addElement = document.getElementById(id);
     //console.log(it, "value -> element", value, "->", element, "id", id);
-    switch (true) {
-        case value.substr(0, 2) === "0_":
-        case value.substr(0, 2) === "1_":
-        case value.substr(0, 2) === "2_":
-        case value.substr(0, 2) === "3_":
-        case value.substr(0, 2) === "4_":
-        case value.substr(0, 2) === "5_":
-        case value.substr(0, 2) === "6_":
-        case value.substr(0, 2) === "7_":
-        case value.substr(0, 2) === "8_":
-        case value.substr(0, 2) === "9_":
-        case value.substr(0, 3) === "10_":
-        case value.substr(0, 3) === "11_":
-        case value.includes("Teletek"):
-        case value.includes("System"):
-        case value.includes("sounder_zonal"):
-        case value.includes("common_fire"):
-            addElement.innerHTML = element.innerHTML;
-            var execute = addElement.querySelector('select');
-            if (execute && execute.onchange.toLocaleString().includes("loadDiv")) {
-                execute.onchange();
-            }
-            break;
-        default:
-            addElement.innerHTML = "";
-            break;
+    if (!type) {
+        switch (true) {
+            case value.substr(0, 2) === "0_":
+            case value.substr(0, 2) === "1_":
+            case value.substr(0, 2) === "2_":
+            case value.substr(0, 2) === "3_":
+            case value.substr(0, 2) === "4_":
+            case value.substr(0, 2) === "5_":
+            case value.substr(0, 2) === "6_":
+            case value.substr(0, 2) === "7_":
+            case value.substr(0, 2) === "8_":
+            case value.substr(0, 2) === "9_":
+            case value.substr(0, 3) === "10_":
+            case value.substr(0, 3) === "11_":
+            case value.includes("Teletek"):
+            case value.includes("System"):
+            case value.includes("sounder_zonal"):
+            case value.includes("common_fire"):
+                addElement.innerHTML = element.innerHTML;
+                var execute = addElement.querySelector('select');
+                if (execute && execute.onchange.toLocaleString().includes("loadDiv")) {
+                    execute.onchange();
+                }
+                break;
+            default:
+                addElement.innerHTML = "";
+                break;
+        }
+    } else {
+        createLoopTypeMenu(it, addElement, type); return;
     }
-    var addElementHeight = element.scrollHeight;
-    var content = it.parentNode;
+    adjustCollapsibleHeight(it, element.scrollHeight)
+    addVisitedBackground();
+}
+
+function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {
+    var content = selectElement.parentNode;
     while (!content.classList.contains("collapsible-content")) {
         content = content.parentNode;
         if (content === document.body)
@@ -1326,6 +1492,5 @@ function loadDiv(it, id, value) {
     if (content.classList.contains("collapsible-content")) {
         content.style.maxHeight = (content.scrollHeight + addElementHeight) + "px";
     }
-    addVisitedBackground();
 }
 //#endregion

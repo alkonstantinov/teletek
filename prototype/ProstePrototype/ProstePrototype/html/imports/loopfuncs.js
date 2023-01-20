@@ -68,7 +68,7 @@ const loopElementFunc = (loopNumber, loopType) => {
                 getArrayToModal(changeJson[idx]["@ID"], loopNumber, loopType, 'CONTAINS');
             });
         }
-    });    
+    });
 }
 
 const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
@@ -88,7 +88,7 @@ const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
     }
 
     sendMessageWPF({
-        'Command': 'AddingLoopElement', 
+        'Command': 'AddingLoopElement',
         'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'noneElement': noneElement, 'deviceName': deviceName, 'deviceAddress': address }
     });
 
@@ -141,21 +141,66 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key) {
 const showDevice = (loopType, deviceName, loopNumber, address) => {
     boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
         if (res) {
-            let { key } = getConfig(deviceName);
             let resJSONList = JSON.parse(res);
-            let deviceData = resJSONList.find(dd => dd["~address"] === address && dd["~device"] === deviceName)["Groups"];
+            let deviceData = resJSONList.find(dd => dd["~address"] === address && dd["~device"] === deviceName)["Groups"]["~noname"]["fields"];
             let elem = document.getElementById(`selected_${loopType.includes("TTE") ? "device" : "sensor"}_${loopType}`);
-            let fieldset = document.createElement("fieldset");
-            fieldset.id = `selected_${loopType}_${deviceName}_${address}`;
-            fieldset.className = "deviceClass";
-            fieldset.insertAdjacentHTML("afterbegin", `<legend>${DEVICES_CONSTS[key].sign} ${address}</legend>`);
-            drawFields(fieldset, deviceData, inheritedColor = '')
-            if (elem && elem.innerHTML !== "") { elem.replaceChildren() } 
-            elem.insertAdjacentElement('afterbegin', fieldset);
+            showOrderedDevices(loopType, deviceName, address, elem, deviceData)
             collapsible();
             addVisitedBackground();
         }
     }).catch(err => alert(err));
+}
+
+function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
+    let { key } = getConfig(deviceName);
+    let fieldsetDevice = createFieldset(`selected_${loopType}_${deviceName}_${address}`, `${DEVICES_CONSTS[key].sign} ${address}`);
+    let fieldsetParameters;
+    let fieldsetChannels;
+    let fieldsetAlarmLevel;
+    let fieldsetVerifyTime;
+    //alert(Object.keys(deviceData))
+    for (let key of Object.keys(deviceData)) { //Object.keys(deviceData).forEach(key => {
+        let inner;
+        switch (true) {
+            case (key.includes("STATE")):
+            case (key === "SERIAL_ID"):
+            case (key === "NAME"):
+                inner = transformGroupElement(deviceData[key]);
+                if (inner) fieldsetDevice.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
+                break;
+            case (key === "ZONE"):
+            case (key === "LED"):
+            case (key.includes("SOUND")):
+            case (key.includes("DUST")):
+                if (!fieldsetParameters) fieldsetParameters = createFieldset(`params_${loopType}_${deviceName}_${address}`, "Parameters");
+                inner = transformGroupElement(deviceData[key]);
+                if (inner) fieldsetParameters.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
+                break;
+            case (key.includes("TYPECHANNEL")):
+            case (key.includes("NAME_I")):
+                if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Channels");
+                inner = transformGroupElement(deviceData[key]);
+                if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
+                break;
+            case (key.includes("ALARMLEVEL")):
+                if (!fieldsetAlarmLevel) fieldsetAlarmLevel = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Levels");
+                inner = transformGroupElement(deviceData[key]);
+                if (inner) fieldsetAlarmLevel.insertAdjacentHTML('beforeend', `<div class="col-12">${inner}</div>`);
+                break;
+            case (key.includes("VERIFYTIME")):
+                if (!fieldsetVerifyTime) fieldsetVerifyTime = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Verification");
+                inner = transformGroupElement(deviceData[key]);
+                if (inner) fieldsetVerifyTime.insertAdjacentHTML('beforeend', `<div class="col-12">${inner}</div>`);
+                break;
+            default: break;
+        }
+    } //);
+    if (elem && elem.innerHTML !== "") { elem.replaceChildren() }
+    elem.insertAdjacentElement('afterbegin', fieldsetDevice);
+    if (fieldsetParameters) elem.insertAdjacentElement('beforeend', fieldsetParameters);
+    if (fieldsetChannels) elem.insertAdjacentElement('beforeend', fieldsetChannels);
+    if (fieldsetAlarmLevel) elem.insertAdjacentElement('beforeend', fieldsetAlarmLevel);
+    if (fieldsetVerifyTime) elem.insertAdjacentElement('beforeend', fieldsetVerifyTime);
 }
 
 const removeDevice = (loopType, loopNumber, deviceName, address) => {
@@ -337,7 +382,7 @@ function showLoop(loopNumber, loopType) {
     let el = document.getElementById("selected_area");
     attachedDevicesList = [];
     deviceNmbr = attachedDevicesList.length;
-    let targetTTE =`<div class="row fullHeight">
+    let targetTTE = `<div class="row fullHeight">
                     <div class="col-3 bl fire scroll">
                         <div id="new_device_${loopType}" class="row">
                             <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices"
@@ -485,10 +530,9 @@ function calculateLoopDevices(loopNumber) {
                               </tr>`;
             })
             innerModalContent += `</tbody></table></div>`;
-            alert(innerModalContent);
             modalContent.innerHTML = innerModalContent;
         }
-    }).catch(err => alert(err));    
+    }).catch(err => alert(err));
 }
 
 
@@ -522,6 +566,15 @@ function getConfig(deviceName, device = '') {
 function updateDeviceNmbr() {
     deviceNmbr = attachedDevicesList.length;
     let showBtn = document.getElementById("calculateDevices");
-    showBtn.innerHTML = `Number of sensors: ${deviceNmbr}`;
+    showBtn.innerHTML = `Number of devices: ${deviceNmbr}`;
+}
+
+// creating a fieldset
+function createFieldset(id, legendName) {
+    let fieldset = document.createElement("fieldset");
+    fieldset.id = id;
+    fieldset.className = "row align-items-center";
+    fieldset.insertAdjacentHTML("afterbegin", `<legend>${legendName}</legend>`);
+    return fieldset;
 }
 //#endregion UTILS

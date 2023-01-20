@@ -38,5 +38,8 @@ namespace ljson
             return null;
         }
         internal virtual void SetNodeFilters(string _panel_id, JObject _node) { }
+        public virtual Dictionary<string, Dictionary<string, Dictionary<string, string>>> UnionInOuts(string _panel_id, string io) { return null; }
+        public virtual void FilterValueChanged(string path, string _new_val) { }
+        public virtual List<string> ChannelUsedIn(string channel_path, string myIOPath) { return null; }
     }
 }
