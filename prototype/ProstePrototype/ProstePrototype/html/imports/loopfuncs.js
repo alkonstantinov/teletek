@@ -177,6 +177,8 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
                 if (inner) fieldsetParameters.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
                 break;
             case (key.includes("TYPECHANNEL")):
+                //deviceData[key]["ITEMS"]["ITEM"][ParseInt(deviceData[key]["value"])]["@NAME"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@NAME"]
+                deviceData[key]["openModalFirst"] = `openChannelModal(this.id, '${deviceData[key]["~path"]}', '${deviceData[key]["@TEXT"]}', '${deviceData[key]["value"] ? deviceData[key]["value"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@DEFAULT"]}', '${deviceData[key]["ITEMS"]["ITEM"].map(x => x["@NAME"])}', this.value)`;
             case (key.includes("NAME_I")):
                 if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Channels");
                 inner = transformGroupElement(deviceData[key]);
@@ -201,6 +203,25 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
     if (fieldsetChannels) elem.insertAdjacentElement('beforeend', fieldsetChannels);
     if (fieldsetAlarmLevel) elem.insertAdjacentElement('beforeend', fieldsetAlarmLevel);
     if (fieldsetVerifyTime) elem.insertAdjacentElement('beforeend', fieldsetVerifyTime);
+}
+
+function openChannelModal(id, path, channelName, oldValue, allNames, newValue) {
+    let values = JSON.parse(JSON.stringify(allNames)).split(',');
+
+    $('#showConfirmationModal .modal-body').html(`<p>Please confirm the change of the {${channelName}}'s option from "${values[+oldValue]}" to "${values[+newValue]}"</p>`);
+
+    $("#bigClose, #xClose").on("click", function () {
+        document.getElementById(id).value = oldValue;
+        $("#showConfirmationModal").modal("hide");
+    });
+    $("#yesBtn").on("click", function () {
+        sendMessageWPF(
+            { 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': newValue } }
+        );
+        $("#showConfirmationModal").modal("hide");
+    });
+
+    $("#showConfirmationModal").modal("show");
 }
 
 const removeDevice = (loopType, loopNumber, deviceName, address) => {

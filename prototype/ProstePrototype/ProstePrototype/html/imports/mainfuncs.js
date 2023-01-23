@@ -711,6 +711,7 @@ const transformGroupElement = (elementJson) => {
                     link: o['ScheduleKey'],
                 };
             });
+            attributes.modal = elementJson["openModalFirst"];
             return getSelectInput({ ...attributes })
 
         case 'IP':
@@ -985,7 +986,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
             </div>`
 }
 
-const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, path = "" }) => {
+const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, modal, RmBtn = false, path = "" }) => {
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let str = `<div class="form-item roww mt-1">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
@@ -997,10 +998,10 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
-                            onchange="javascript:sendMessageWPF(
+                            onchange="javascript: ${modal ? modal : `sendMessageWPF(
                                 {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
                                 ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""}
-                            )" >`;
+                            )`}" >`;
     if (selectList.length > 0) {
         let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
         str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || "Select your option"}</option>`;
