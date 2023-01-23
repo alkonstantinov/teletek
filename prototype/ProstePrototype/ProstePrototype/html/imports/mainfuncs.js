@@ -261,11 +261,11 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 const [inner, jsFunc] = innerString;
                 newElement.innerHTML = inner;
                 div.appendChild(newElement);
-                const [el1, el2, el3] = jsFunc();
+                const [el1, el2, el3, el4] = jsFunc();
                 
                 setTimeout(() => {
                     let el = document.getElementById(el1);
-                    loadDiv(el, el2, el3);
+                    loadDiv(el, el2, el3, el4);
                 }, 200);
             } else {
                 newElement.innerHTML = innerString;
@@ -329,12 +329,11 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
 }
 
 function showLoopType(level, type, key, showDivId, selectDivId) {
-    alert(level);
     const showDiv = document.getElementById(showDivId);
     const selectDiv = document.getElementById(selectDivId);
     let title = "Loop";
     let nextFunc = `showLoopType(2, '${type}', this.value, '${showDivId}', '${selectDivId}')`;
-    let dataUsed = Object.keys(CONFIGURED_IO);
+    let dataUsed = [];
 
     let firstDiv = document.getElementById(`${showDivId + "-Loop"}`);
     let lowerDiv = document.getElementById(`${showDivId + "-Device"}`);
@@ -345,6 +344,10 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
             if (firstDiv) showDiv.removeChild(firstDiv);
             if (lowerDiv) showDiv.removeChild(lowerDiv);
             if (lowestDiv) showDiv.removeChild(lowestDiv);
+
+            dataUsed = Object.keys(CONFIGURED_IO).map(loop => {
+                return { value: loop, label: loop.split("_").slice(1).join("_"), selected: CONFIGURED_IO[loop]["selected"] }
+            });
             break;
         case 2:
             title = "Device";
@@ -353,26 +356,43 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
             if (lowestDiv) showDiv.removeChild(lowestDiv.parentNode.parentNode);
 
             nextFunc = `showLoopType(3, '${type}', '${key}' + '+' + this.value, '${showDivId}', '${selectDivId}')`;
-            dataUsed = Object.keys(CONFIGURED_IO[key]);
+            dataUsed = Object.keys(CONFIGURED_IO[key])
+                .filter(deviceName => deviceName !== "selected")
+                .map(deviceName => {
+                    let nameLst = deviceName.split('/');
+                    let name = nameLst[0].split("_").slice(1).join("_");
+                    let address = nameLst[1];
+                    let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
+                    let checkedJson = Object.keys(currentDeviceNameObject)
+                        .map(channel => currentDeviceNameObject[channel]["uses"])
+                        .filter(uses => uses === null || (Array.isArray(uses) && uses.length === 0));
+                    if (checkedJson.length === 0)
+                    {
+                        return {
+                            value: deviceName, label: address + '. ' + name + " - all channels used", selected: CONFIGURED_IO[key][deviceName]["selected"]
+                        };
+                    }
+                    return { value: deviceName, label: address + '. ' + name, selected: CONFIGURED_IO[key][deviceName]["selected"] };
+                });
             break;
         case 3:
             title = type;
             // remove lower menus if any
             if (lowestDiv) lowestDiv.parentNode.parentNode.parentNode.removeChild(lowestDiv.parentNode.parentNode);
             let jsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
-            dataUsed = Object.keys(jsonAtLevel3).map(ch => {
-                let nameLst = ch.split('/');
-                let name = nameLst[0] ? nameLst[0] : nameLst[1];
-                if (jsonAtLevel3[ch]["uses"] && Array.isArray(jsonAtLevel3[ch]["uses"]) && jsonAtLevel3[ch]["uses"].length > 0) {
-                    return { value: ch, label: `${name}` + " - used" };
-                }
-                return { value: ch, label: name };
-            });
+            dataUsed = Object.keys(jsonAtLevel3)
+                .filter(ch => ch !== "selected")
+                .map(ch => {
+                    let nameLst = ch.split('/');
+                    let name = nameLst[0] ? nameLst[0] : nameLst[1];
+                    if (jsonAtLevel3[ch]["uses"] && Array.isArray(jsonAtLevel3[ch]["uses"]) && jsonAtLevel3[ch]["uses"].length > 0) {
+                        return { value: ch, label: `${name}` + " - used", selected: jsonAtLevel3[ch]["selected"] };
+                    }
+                    return { value: ch, label: name, selected: jsonAtLevel3[ch]["selected"] };
+                });
             nextFunc = `showLoopType(4, '${type}', '${key}' + '+' + this.value, '${showDivId}', '${selectDivId}')`;
             break;
         case 4:
-            alert(key.split("+"));
-            alert(level + ' ' + CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["path"] + ' ' + CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["channel_path"]);
             sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["path"], 'newValue': CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]][key.split("+")[2]]["channel_path"] } });
             return;
     }
@@ -384,22 +404,28 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 <div class="select">
                     <select id="${selectId}" name="${selectId}"
                         onchange="javascript: ${nextFunc}" >
-                        <option value="" disabled selected>Select your option</option>`;
+                        <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >Select your option</option>`;
     dataUsed.map(o => {
-        if (level === 3) {
-            let disabled = ""; let tooltip = "";
-            if (type.toLowerCase() === "output" && o["label"].includes(" - used")) {
-                disabled = "disabled"
+        let disabled = ""; let tooltip = "";
+        if (level >= 2) {
+            if (type.toLowerCase() === "output" && (o["label"].includes(" - used") || o["label"].includes(" - all channels used"))) {
+                disabled = 'disabled style="color: red"'
             }
             if (o["label"].includes(" - used")) {
                 let againJsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
                 tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
             }
-        
-            inner += `<option value="${o["value"]}" ${disabled} ${tooltip}>${o["label"]}</option>`
-        } else {
-            inner += `<option value="${o}">${o}</option>`;
+            if (o["label"].includes(" - all channels used")) {
+                let jsonAtLevel2 = CONFIGURED_IO[key][o];
+                tooltip += "{";
+                for (channel in jsonAtLevel2) {
+                    tooltip += `{ ${channel} -> ${channel[uses]} }`;
+                }
+                tooltip += "}";
+            }
         }
+        
+        inner += `<option value="${o["value"]}" ${disabled} ${tooltip} ${o["selected"] ? "selected": ""}>${o["label"]}</option>`
     });
     inner += `</select>
                 </div>`;
@@ -408,6 +434,14 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 
     adjustCollapsibleHeight(selectDiv);
     addVisitedBackground();
+
+    if (dataUsed.some(x => x["selected"])) {
+        if (level + 1 === 3) {
+            showLoopType(level + 1, type, `${key}+${dataUsed.find(x => x["selected"]).value}`, showDivId, selectDivId)
+        } else if (level + 1 < 3) {
+            showLoopType(level + 1, type, dataUsed.find(x => x["selected"]).value, showDivId, selectDivId)
+        }
+    }
 }
 
 //createLoopTypeMenu
@@ -415,18 +449,34 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     let fieldset = document.createElement("fieldset");
     fieldset.id = "loop_type-" + showDiv.id;
     fieldset.insertAdjacentHTML('afterbegin', "<legend>Loop Type</legend>");
-    let type = path.split(".").find(e => e.includes("putType"));
+    let pathFound = path, channel_path = "", loop_number = "", device = "";
+    /*  value reading: the whole is the channel path
+     * "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1"
+     * --------loop number----------#--device---.-----------------channel-------------------.-address-
+     * */
+    
+    if (Array.isArray(path)) {
+        pathFound = path[0];
+        channel_path = path[1];
+    }
+    if (channel_path) {
+        loop_number = channel_path.split("/")[0];
+        device = channel_path.split("#")[1].split(".")[0] + "/" + channel_path.split("~").pop();
+    }
+    let type = pathFound.split(".").find(e => e.includes("putType"));
     switch (type) {
         case "OutputType":
-            boundAsync.loopsOutputs(path).then(result => {
+            boundAsync.loopsOutputs(pathFound).then(result => {
                 CONFIGURED_IO = JSON.parse(result);
+                addElementToCONFIGURED_IO(loop_number, device, channel_path);
 
                 showLoopType(1, "Output", "", fieldset.id, selectDiv.id);
 
             }).catch(err => alert("Error" + err)); break;
         case "InputType":
-            boundAsync.loopsInputs(path).then(result => {
+            boundAsync.loopsInputs(pathFound).then(result => {
                 CONFIGURED_IO = JSON.parse(result);
+                addElementToCONFIGURED_IO(loop_number, device, channel_path);
 
                 showLoopType(1, "Input", "", fieldset.id, selectDiv.id);
             
@@ -436,47 +486,34 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     }
 
     showDiv.replaceChildren(fieldset);
-    /*{
-  {
+    /* CONFIGURED_IO example:
+{
   "IRIS8_TTELOOP1": {
-    "IRIS8_MIO40/1": {
+    "IRIS8_MIO22/1": {
       "/TYPECHANNEL1": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[6].~index~1",
-        "uses": [
-          "IRIS8_INPUT1"
-        ]
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[7].~index~1",
+        "uses": null
       },
       "/TYPECHANNEL2": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[8].~index~1",
-        "uses": null
-      },
-      "/TYPECHANNEL3": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[10].~index~1",
-        "uses": null
-      },
-      "/TYPECHANNEL4": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO40.ELEMENTS.IRIS8_MIO40.PROPERTIES.PROPERTY[12].~index~1",
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1",
         "uses": null
       }
     },
     "IRIS8_MIO22M/2": {
       "/TYPECHANNEL1": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
         "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.PROPERTY[7].~index~2",
         "uses": null
       },
       "/TYPECHANNEL2": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~2",
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
         "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.PROPERTY[9].~index~2",
-        "uses": null
+        "uses": []
       }
     }
   }
-}
 } */
 }
 
@@ -540,7 +577,7 @@ const transformGroupElement = (elementJson) => {
                     // alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
                     disabled = !tabs[o]["~enabled"];
                     if (tabs[o]["~enabled"]) {                        
-                        checkType = `checkType='${attributes.path}'`;
+                        checkType = `checkType='${tabs[o]["~path"]}'`;
                     }
                 }
                 let value = `${tabs[o]['@VALUE']}_${attributes.input_id}_${o}`;
@@ -557,71 +594,77 @@ const transformGroupElement = (elementJson) => {
                         </div>
                         <div id="showDiv_${attributes.input_id}"></div>`;
 
-            let addOnChangeCommand = "";
+            let additionalOnChangeCommand = "";
+            let loopTypePath = "";
             // add additional div with display=none
             tabsKeys.forEach(key => {
-                let tabDiv = document.createElement('div');
-                tabDiv.id = tabs[key]['@VALUE'] + '_' + attributes.input_id + '_' + key;
-                tabDiv.style.display = 'none';
+                if (!tabs[key]["~enabled"]) {
+                    let tabDiv = document.createElement('div');
+                    tabDiv.id = tabs[key]['@VALUE'] + '_' + attributes.input_id + '_' + key;
+                    tabDiv.style.display = 'none';
 
-                let tabFlag = (tabs[key]["PROPERTIES"] && Array.isArray(tabs[key]["PROPERTIES"]["PROPERTY"]));
+                    let tabFlag = (tabs[key]["PROPERTIES"] && Array.isArray(tabs[key]["PROPERTIES"]["PROPERTY"]));
 
-                let fieldsetDiv = document.createElement(tabFlag ? 'div' : 'fieldset');
-                fieldsetDiv.classList = 'row align-items-center';
+                    let fieldsetDiv = document.createElement(tabFlag ? 'div' : 'fieldset');
+                    fieldsetDiv.classList = 'row align-items-center';
 
-                let elementJSON;
-                if (tabs[key]["PROPERTIES"]) {
-                    if (!tabFlag) {
-                        fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${tabs[key]["PROPERTIES"]["PROPERTY"]["@TEXT"]}</legend>`);
-                    }
-                    elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
+                    let elementJSON;
+                    if (tabs[key]["PROPERTIES"]) {
+                        if (!tabFlag) {
+                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${tabs[key]["PROPERTIES"]["PROPERTY"]["@TEXT"]}</legend>`);
+                        }
+                        elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
 
-                    for (elIndex in elementJSON) {
-                        if (!isNaN(elIndex)) {
-                            if (elementJSON[elIndex]['@TYPE'] === 'HIDDEN') continue;
-                            let innerString;
-                            if (elementJSON[elIndex]['@TYPE'] === "AND") {
-                                let andElements = elementJSON[elIndex]["PROPERTIES"]["PROPERTY"];
-                                if (Array.isArray(andElements)) {
-                                    for (andEl in andElements) {
-                                        innerString = transformGroupElement(andElements[andEl]);
-                                        if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
-                                        innerString = '';
+                        for (elIndex in elementJSON) {
+                            if (!isNaN(elIndex)) {
+                                if (elementJSON[elIndex]['@TYPE'] === 'HIDDEN') continue;
+                                let innerString;
+                                if (elementJSON[elIndex]['@TYPE'] === "AND") {
+                                    let andElements = elementJSON[elIndex]["PROPERTIES"]["PROPERTY"];
+                                    if (Array.isArray(andElements)) {
+                                        for (andEl in andElements) {
+                                            innerString = transformGroupElement(andElements[andEl]);
+                                            if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                            innerString = '';
+                                        }
+                                    } else {
+                                        innerString = transformGroupElement(andElements);
                                     }
                                 } else {
-                                    innerString = transformGroupElement(andElements);
+                                    innerString = transformGroupElement(elementJSON[elIndex]);
                                 }
-                            } else {
-                                innerString = transformGroupElement(elementJSON[elIndex]);
+                                if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                if (elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length === 0) {
+                                    fieldsetDiv.classList.add('justify-content-around');
+                                }
                             }
-                            if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
-                            if (elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length === 0) {
-                                fieldsetDiv.classList.add('justify-content-around');
+                            else {
+                                if (elementJSON['@TYPE'] === 'HIDDEN') continue;
+                                const innerString = transformGroupElement(elementJSON);
+                                const newElement = document.createElement('div');
+                                let className = `col-xs-12 col-md-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
+                                newElement.classList = className;
+                                newElement.innerHTML = innerString;
+                                fieldsetDiv.appendChild(newElement);
+                                break;
                             }
                         }
-                        else {
-                            if (elementJSON['@TYPE'] === 'HIDDEN') continue;
-                            const innerString = transformGroupElement(elementJSON);
-                            const newElement = document.createElement('div');
-                            let className = `col-xs-12 col-md-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
-                            newElement.classList = className;
-                            newElement.innerHTML = innerString;
-                            fieldsetDiv.appendChild(newElement);
-                            break;
-                        }
+                        tabDiv.appendChild(fieldsetDiv);
+                    } else { // tabs[key] without properties but with tabs, so the select must incude the sendMessageWPF funcitonality 
+                        additionalOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params': {'path':'${attributes.path}','newValue': this.value}})`;
                     }
-                    tabDiv.appendChild(fieldsetDiv);
-                } else { // tabs[key] without properties but with tabs, so the select must incude the sendMessageWPF funcitonality 
-                    addOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params': {'path':'${attributes.path}','newValue': this.value}})`;
+                    inner += tabDiv.outerHTML;
+                } else if (tabs[key]["~value"]) {
+                    loopTypePath = [tabs[key]["~path"], tabs[key]["~value"]];
                 }
-                inner += tabDiv.outerHTML;
-            })
-            if (addOnChangeCommand) {
+            });
+            if (additionalOnChangeCommand) {
                 inner = inner.substring(0, inner.indexOf('" ><option value="0')) +
-                    addOnChangeCommand + inner.substring(inner.indexOf('" ><option value="0'));
+                    additionalOnChangeCommand + inner.substring(inner.indexOf('" ><option value="0'));
             }
             if (attributes.value && (!elementJson["@ID"] || elementJson["@ID"] !== "SUBTYPE")) {
-                const jsFunc = () => [`${attributes.input_id}`, `showDiv_${attributes.input_id}`, `${attributes.value}`];
+                // elementJson and attributes are those of Input Type
+                const jsFunc = () => [`${attributes.input_id}`, `showDiv_${attributes.input_id}`, `${attributes.value}`, loopTypePath];
 
                 return [inner, jsFunc];
             }
@@ -657,7 +700,7 @@ const transformGroupElement = (elementJson) => {
             attributes.selectList = elementJson.ITEMS.ITEM.map((o, idx) => {
                 let sel;
                 if (attributes.value) {
-                    sel = (parseInt(attributes.value) === idx + 1)
+                    sel = (parseInt(attributes.value) === idx)
                 } else {
                     sel = !!(o['@DEFAULT']);
                 }
@@ -863,6 +906,25 @@ function sendMsg(el) {
     json["Function"] = el.title;
     sendMessageWPF(json);
 
+}
+
+function addElementToCONFIGURED_IO(loop_number, device, channel_path) {
+    if (!channel_path || !CONFIGURED_IO) return; 
+    for (let loopProp in CONFIGURED_IO) {
+        if (loopProp === loop_number) {
+            CONFIGURED_IO[loopProp]["selected"] = true;
+            for (let deviceProp in CONFIGURED_IO[loopProp]) {
+                if (deviceProp === device) {
+                    CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
+                    for (let channelProp in CONFIGURED_IO[loopProp][deviceProp]) {
+                        if (CONFIGURED_IO[loopProp][deviceProp][channelProp]["channel_path"] === channel_path) {
+                            CONFIGURED_IO[loopProp][deviceProp][channelProp]["selected"] = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 //#endregion
 

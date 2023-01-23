@@ -42,14 +42,14 @@ namespace ProstePrototype
             string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
-            //File.WriteAllTextAsync("wb3.json", res);
+            File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
         public string getJsonNodeForElement(string elementType, int elementNumber, string key)
         {
             string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
-            //File.WriteAllTextAsync("wb3.json", res);
+            File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
@@ -90,6 +90,7 @@ namespace ProstePrototype
                 onew["~address"] = addr;
                 res.Add(onew);
             }
+            File.WriteAllTextAsync("wb3.json", res.ToString());
             return res.ToString();
         }
 
@@ -106,7 +107,7 @@ namespace ProstePrototype
             if (jnode != null)
             {
                 JToken t = jnode[key];
-                //File.WriteAllTextAsync("wb3.json", t.ToString());
+                File.WriteAllTextAsync("wb3.json", t.ToString());
                 if (t != null)
                     return t.ToString();
             }
