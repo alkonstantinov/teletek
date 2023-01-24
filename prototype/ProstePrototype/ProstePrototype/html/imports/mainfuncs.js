@@ -901,12 +901,12 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
     body.appendChild(script);
 }
 
-function sendMsg(el) {
-    //console.log('event', event);
-    var json = JSON.parse(el.parentNode.getAttribute("sendMessage"));
-    json["Function"] = el.title;
-    sendMessageWPF(json);
-
+function weekChangedValueHandler(scheduleId, index, newValue, path) {
+    let oldValues = document.getElementById(`${scheduleId}`).getAttribute("value").split(" ");
+    let newValues = [...oldValues];
+    newValues[+index] = newValue;
+    //console.log(newValues.join(" "));
+    sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': newValues.join(" ") } });
 }
 
 function addElementToCONFIGURED_IO(loop_number, device, channel_path) {
@@ -1097,188 +1097,33 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
             </div>`;
 }
 
-const getWeekInput = ({ input_id, input_name, readOnly, RmBtn = false, path = "" }) => {
-    return `<div style="display: none" id="${input_id}-schedule">
+const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, path = "" }) => {
+    //value = "04:04 03:03 01:00 00:01 01:02 02:01 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00"; // for test purposes
+    let fields = [["Sunday", "-su-"], ["Moday", "-m-"], ["Thuesday", "-t-"], ["Wednesday", "-w-"], ["Thursday", "-th-"], ["Friday", "-f-"], ["Saturday", "-s-"]];
+    let data = value.split(" ");
+    let inner = `<div style="display: none" id="${input_id}-schedule" value="${value}">
             <fieldset>
                 <legend>${input_name}</legend>
-                <div class="row">
-                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                        <legend>Monday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-m-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-m-${input_id}"
-                                   name="activate-m-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-m-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-m-${input_id}"
-                                   name="deactivate-m-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                        <legend>Thuesday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-t-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-t-${input_id}"
-                                   name="activate-t-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-t-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-t-${input_id}"
-                                   name="deactivate-t-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                        <legend>Wednesday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-w-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-w-${input_id}"
-                                   name="activate-w-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-w-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-w-${input_id}"
-                                   name="deactivate-w-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                    <fieldset class="col-xs-12 col-md-3 col-lg bn">
-                        <legend>Thursday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-th-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-th-${input_id}"
-                                   name="activate-th-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-th-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-th-${input_id}"
-                                   name="deactivate-th-${input_id}"
-                                   data-maxlength="5"
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                        <legend>Friday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-f-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-f-${input_id}"
-                                   name="activate-f-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-f-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-f-${input_id}"
-                                   name="deactivate-f-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                        <legend>Saturday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-s-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-s-${input_id}"
-                                   name="activate-s-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-s-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-s-${input_id}"
-                                   name="deactivate-s-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                    <fieldset class="col-xs-12 col-md-4 col-lg bn">
-                        <legend>Sunday</legend>
-                        <div class="form-item roww mw">
-                            <label for="activate-su-${input_id}">Activate</label>
-                            <input class="ml10p"
-                                   type="text"
-                                   id="activate-su-${input_id}"
-                                   name="activate-su-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                        <div class="form-item roww mw">
-                            <label for="deactivate-su-${input_id}">Deactivate</label>
-                            <input class="ml10"
-                                   type="text"
-                                   id="deactivate-su-${input_id}"
-                                   name="deactivate-su-${input_id}"
-                                   data-maxlength="5"
-                                   ${readOnly ? "disabled" : ''}
-                                   oninput="javascript: myFunction3(this.id)"
-                                   placeholder="00:00" />
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
-        </div>`
+                <div class="row">`;
+    for (let i = 0; i < data.length; i++) {
+        if (i % 2 === 0) inner += `<fieldset class="col-xs-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
+        inner += ` <div class="form-item roww mw">
+                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? "Activate" : "Deactivate"}</label>
+                        <input class="ml10${i % 2 === 0 ? 'p' : ''}"
+                                type="text"
+                                id="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
+                                name="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
+                                data-maxlength="5"
+                                ${readOnly ? "disabled" : ''}
+                                value="${data[i]}"
+                                oninput="javascript: myFunction3(this.id)"
+                                onblur="javascript: weekChangedValueHandler('${input_id}-schedule', ${i}, this.value, '${path}')"
+                                placeholder="00:00" />
+                    </div>`
+        if (i % 2 !== 0) inner += `</fieldset>`;
+    }
+    inner += "</div></fieldset></div>"
+    return inner;
 }
 //#endregion
 
