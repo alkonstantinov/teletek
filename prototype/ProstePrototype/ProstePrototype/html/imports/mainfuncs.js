@@ -658,7 +658,7 @@ const transformGroupElement = (elementJson) => {
                     loopTypePath = [tabs[key]["~path"], tabs[key]["~value"]];
                 }
             });
-            if (additionalOnChangeCommand) {
+            if (additionalOnChangeCommand && inner.indexOf('" ><option value="0') !== -1) {
                 inner = inner.substring(0, inner.indexOf('" ><option value="0')) +
                     additionalOnChangeCommand + inner.substring(inner.indexOf('" ><option value="0'));
             }
