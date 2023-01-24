@@ -416,12 +416,13 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
             }
             if (o["label"].includes(" - all channels used")) {
-                let jsonAtLevel2 = CONFIGURED_IO[key][o];
-                tooltip += "{";
-                for (channel in jsonAtLevel2) {
-                    tooltip += `{ ${channel} -> ${channel[uses]} }`;
+                let jsonAtLevel2 = CONFIGURED_IO[key][o["value"]];
+                tooltip += `title="Used in: {`;
+                for (let channel in jsonAtLevel2) {
+                    let channelInfo = channel.split("/");
+                    tooltip += `{ ${channelInfo[0] ? channelInfo[0] : channelInfo[1]} -> ${jsonAtLevel2[channel]["uses"]} }`;
                 }
-                tooltip += "}";
+                tooltip += `}"`;
             }
         }
         
