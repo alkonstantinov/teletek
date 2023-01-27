@@ -165,7 +165,7 @@ namespace ljson
             JObject f2 = new JObject();
             f2["SoundersMode"] = o["SoundersMode"];
             f2["CallPointMode"] = o["CallPointMode"];
-            f2["PRINTER"] = o["PRINTER"];
+            f2["PRINTER"] = o["Protocol"];
             f2["T1DELAY"] = o["T1DELAY"];
             f2["EVACUATION_TIMEOUT"] = o["EVACUATION_TIMEOUT"];
             grp2["fields"] = f2;
@@ -560,10 +560,21 @@ namespace ljson
             JObject grp3 = new JObject();
             grp3["name"] = "Parameters";
             JObject f3 = new JObject();
-            JObject props = Array2Object((JArray)o["PARAMETERS"]["PROPERTIES"]["PROPERTY"]);
-            //f2["parameters"] = props;
-            grp3["fields"] = props;
+            //JObject props = Array2Object((JArray)o["PARAMETERS"]["PROPERTIES"]["PROPERTY"]);
+            ////f2["parameters"] = props;
+            //grp3["fields"] = props;
+            grp3["fields"] = new JObject();
+            grp3["fields"]["Parameters"] = o["PARAMETERS"];
+            grp3["fields"]["ORINPUTS"] = o["ORINPUTS"];
+            grp3["fields"]["ANDINPUTS"] = o["ANDINPUTS"];
             json[key]["PROPERTIES"]["Groups"]["Parameters"] = grp3;
+            //
+            //JObject grp4 = new JObject();
+            //grp4["name"] = "OR/AND inputs";
+            //grp4["fields"] = new JObject();
+            //grp4["fields"]["ORINPUTS"] = o["ORINPUTS"];
+            //grp4["fields"]["ANDINPUTS"] = o["ANDINPUTS"];
+            //json[key]["PROPERTIES"]["Groups"]["ANDORInputs"] = grp4;
             //
             json[key]["PROPERTIES"]["OLD"] = o;
         }
@@ -737,7 +748,7 @@ namespace ljson
             JObject f1 = new JObject();
             f1["ReceiveMessages"] = o["panel"];
             f1["ReceiveCommands"] = o["repeater"];
-            f1["SendCommands"] = o["SendCommand"];
+            f1["SendCommand"] = o["SendCommand"];
             grp1["fields"] = f1;
             json[key]["PROPERTIES"]["Groups"]["Parameters"] = grp1;
             //
@@ -746,6 +757,14 @@ namespace ljson
             JObject props = Array2Object((JArray)o["panel_flags"]["PROPERTIES"]["PROPERTY"]);
             grp2["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["Panel Outputs"] = grp2;
+            //
+            JObject grp3 = new JObject();
+            grp3["name"] = "Missed";
+            JObject f3 = new JObject();
+            f3["status"] = o["status"];
+            f3["state"] = o["state"];
+            grp3["fields"] = f3;
+            json[key]["PROPERTIES"]["Groups"]["~noname1"] = grp3;
             //
             json[key]["PROPERTIES"]["OLD"] = o;
         }

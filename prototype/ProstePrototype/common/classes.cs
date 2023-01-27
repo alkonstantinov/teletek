@@ -276,6 +276,7 @@ namespace common
         public string slen = null;
 
         public virtual int CommandLength() { return 0; }
+        public virtual string CommandString() { return null; }
     }
 
     public class cWriteOperation

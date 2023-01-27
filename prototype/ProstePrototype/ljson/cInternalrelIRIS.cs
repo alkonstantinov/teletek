@@ -37,9 +37,22 @@ namespace ljson
                 foreach (string dkey in d.Keys)
                 {
                     string dev = d[dkey];
-                    m = Regex.Match(dev, @"""~device""\s*?:\s*?""([\w\W]+?)""");
-                    if (m.Success)
-                        device_name = m.Groups[1].Value;
+                    //
+                    JObject nameprop = GetDeviceGroupsNode(dev, "NAME");
+                    string name_path = null;
+                    if (nameprop != null && nameprop["~path"] != null)
+                        name_path = nameprop["~path"].ToString();
+                    string saved_name = cComm.GetPathValue(_panel_id, name_path);
+                    //
+                    if (saved_name == null)
+                    {
+                        m = Regex.Match(dev, @"""~device""\s*?:\s*?""([\w\W]+?)""");
+                        if (m.Success)
+                            device_name = m.Groups[1].Value;
+                    }
+                    else
+                        device_name = saved_name;
+                    //
                     m = Regex.Match(dev, @"""~device_type""\s*?:\s*?""([\w\W]+?)""");
                     if (m.Success)
                         device_type = m.Groups[1].Value;
@@ -302,15 +315,33 @@ namespace ljson
 
         #region path values
         private Dictionary<string, Dictionary<string, string>> _used_channels = new Dictionary<string, Dictionary<string, string>>();
-        public override void FilterValueChanged(string path, string _new_val)
+        private Dictionary<string, string> _io_channels = new Dictionary<string, string>();
+        public override void FilterValueChanged(string path, string _new_val, ref bool remove_value)
         {
             Match m = Regex.Match(_new_val, @"([0-9a-fA-f]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})$");
             if (m.Success)
             {
                 string tab = m.Groups[1].Value;
+                remove_value = true;
             }
             else if (Regex.IsMatch(_new_val, @"^[\w\W]+?/[\w\W]+?#[\w\W]+?\.ELEMENTS", RegexOptions.IgnoreCase))
             {
+                if (!_io_channels.ContainsKey(path))
+                    _io_channels.Add(path, _new_val);
+                else if (_io_channels[path] != _new_val)
+                {
+                    string _old_val = _io_channels[path];
+                    _io_channels[path] = _new_val;
+                    if (_used_channels.ContainsKey(_old_val))
+                    {
+                        Dictionary<string, string> dch = _used_channels[_old_val];
+                        if (dch.ContainsKey(path))
+                            dch.Remove(path);
+                        if (_used_channels[_old_val].Count == 0)
+                            _used_channels.Remove(_old_val);
+                    }
+                }
+                //
                 if (!_used_channels.ContainsKey(_new_val))
                     _used_channels.Add(_new_val, new Dictionary<string, string>());
                 Dictionary<string, string> dpath = _used_channels[_new_val];
@@ -340,6 +371,52 @@ namespace ljson
             }
             //
             return res;
+        }
+        public override Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val)
+        {
+            JObject prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);
+            if (prop == null)
+            {
+                if (Regex.IsMatch(PropertyName, "router", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "Gateway");
+                else if (Regex.IsMatch(PropertyName, "protocol", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "PRINTER");
+                else if (Regex.IsMatch(PropertyName, "devicestate", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "DEVICE_STATE");
+                else if (Regex.IsMatch(PropertyName, "panel", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "ReceiveMessages");
+                else if (Regex.IsMatch(PropertyName, "repeater", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "ReceiveCommands");
+                else if (Regex.IsMatch(PropertyName, "zonegroup$", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "ZoneGroupA");
+                else if (Regex.IsMatch(PropertyName, "zonegroup2$", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "ZoneGroupB");
+                else if (Regex.IsMatch(PropertyName, "zonegroup3$", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "ZoneGroupC");
+                else if (Regex.IsMatch(PropertyName, "soundergroup$", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "SounderGroupA");
+                else if (Regex.IsMatch(PropertyName, "soundergroup2$", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "SounderGroupB");
+                else if (Regex.IsMatch(PropertyName, "soundergroup3$", RegexOptions.IgnoreCase))
+                    prop = GetDeviceGroupsNode(groups.ToString(), "SounderGroupC");
+                if (prop == null)
+                    return null;
+            }
+            string path = prop["~path"].ToString();
+            string sval = null;
+            if (val.Length == 1)
+                sval = val[0].ToString();
+            else
+            {
+                if (prop["@TYPE"].ToString().ToLower() == "week")
+                {
+                    sval = GetWeekValue(val);
+                    return new Tuple<string, string>(path, sval);
+                }
+                sval = val[0].ToString() + val[1].ToString();
+            }
+            //
+            return new Tuple<string, string>(path, sval);
         }
         #endregion
     }

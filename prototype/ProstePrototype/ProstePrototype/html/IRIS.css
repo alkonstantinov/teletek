@@ -346,6 +346,14 @@ div[class^="someS"] {
         border: 2px solid var(--grasse-hov);
     }
 
+.image img {
+    max-width: 100%;
+    height: 166px;
+    /*aspect-ratio: 1/1;*/
+    object-fit: none;
+    mix-blend-mode: color-burn;
+}
+
 i.normal {
     color: var(--normal);
     padding: 5px;
@@ -652,7 +660,7 @@ fieldset {
 
 
 .multi-button .btn-border-black {
-    height: 50px;
+    height: 3.125em;
     width: fit-content;
     background-color: #ffffff;
     align-items: center;
@@ -661,7 +669,7 @@ fieldset {
     text-transform: uppercase;
     font-weight: 700;
     text-align: center;
-    min-height: 50px;
+    min-height: 3.125em;
     margin: -5px;
     position: relative;
 }
@@ -712,13 +720,40 @@ fieldset {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    height: 50px;
+    height: 3.125em;
     border-radius: 10px;
-    padding: 0 35px;
+    padding: 0 3.2rem;
     text-transform: uppercase;
     font-weight: 700;
+    /*font-size: clamp(0.8rem, 0.1rem + 6vw , 1.2rem);*/
     text-align: center;
-    min-height: 50px;
+    min-height: 3.125em;
+}
+
+@media only screen and (max-width: 992px) {
+    .btn-round {
+        padding: 0 1.5rem;
+        font-weight: 500;
+    }
+
+    .multi-button .btn-border-black:nth-child(1) {
+        padding-left: 0.75rem;
+    }
+
+    .multi-button :nth-child(3) {
+        padding-right: 0.75rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .btn-round {
+        padding: 0 0;
+        font-weight: 300;
+    }
+
+    .multi-button .btn-border-black:nth-child(1), .multi-button :nth-child(3) {
+        padding: 0 0.3rem;
+    }
 }
 
 .btn-small {
@@ -732,7 +767,7 @@ fieldset {
     -ms-flex-align: center;
     align-items: center;
     border-radius: 10px;
-    padding: 0 5px;
+    padding: 0 0.3125em;
     font-weight: 700;
     text-align: center;
     margin: 0 auto;
@@ -868,7 +903,7 @@ button:focus {
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-size: 1em;
 }
 
     .collapsible:before, .collapsible_add:before, .collapsible:after, .collapsible_add:after {
@@ -905,16 +940,25 @@ button:focus {
 }
 
 .collapsible-content {
-    padding: 0 18px;
+    padding: 0 1em;
     max-height: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: max-height 0.2s ease-out;
     background-color: #f1f1f1;
 }
 
+    .collapsible-content:last-child:has(select:focus) {
+        margin-bottom: 4em;
+    }
+
+/*    .collapsible-content:not(has(select:focus)) {
+        margin-bottom: 4px;
+    }*/
+
 .collapsible:before, .collapsible_add:before {
     content: '\027A4'; /* Unicode character for "arrow" sign (➤) */
-    font-size: 13px;
+    font-size: 0.9em;
     color: #777;
     float: left;
     margin-right: 5px;

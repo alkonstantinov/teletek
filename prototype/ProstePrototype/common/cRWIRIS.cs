@@ -15,7 +15,7 @@ namespace common
         {
             if (sio == null || sio == "")
             {
-                string sio = "0000";
+                sio = "0000";
                 if (io == eIO.ioRead)
                     sio = "0351";
                 else if (io == eIO.ioWrite)
@@ -25,6 +25,18 @@ namespace common
         }
 
         public override int CommandLength() { return 12; }
+        public override string CommandString()
+        {
+            if (sio == null || sio == "")
+            {
+                sio = "0000";
+                if (io == eIO.ioRead)
+                    sio = "0351";
+                else if (io == eIO.ioWrite)
+                    sio = "0072";
+            }
+            return sio + sDataType + sindex + sbuffoffset + slen;
+        }
     }
     public class cRWPropertyIRIS : cRWProperty
     {
@@ -53,6 +65,14 @@ namespace common
             return null;
         }
     }
+    public class cRWPathIRIS : cRWPath
+    {
+        public List<cRWCommandIRIS> ReadCommands = new List<cRWCommandIRIS>();
+        public Dictionary<string, cRWPropertyIRIS> ReadProperties = new Dictionary<string, cRWPropertyIRIS>();
+        public List<cRWCommandIRIS> WriteCommands = new List<cRWCommandIRIS>();
+        public Dictionary<string, cRWPropertyIRIS> WriteProperties = new Dictionary<string, cRWPropertyIRIS>();
+    }
+
     internal class cRWIRIS : cRW
     {
         #region command analysis

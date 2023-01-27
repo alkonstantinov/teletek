@@ -222,6 +222,7 @@ namespace ljson
             }
         }
 
+        #region read/write
         private static object _cs_write_read_merge = new object();
         private static Dictionary<string, cRWPath> _write_read_merge = null;
 
@@ -240,42 +241,6 @@ namespace ljson
                 _write_read_merge = value;
                 Monitor.Exit(_cs_write_read_merge);
             }
-        }
-
-        private static string FilePathFromSchema(string schema)
-        {
-            string path = Directory.GetCurrentDirectory();
-            if (path[path.Length - 1] != '\\')
-                path += @"\";
-            path += @"Configs\XML\Templates\";
-            string[] files = Directory.GetFiles(path);
-            for (int i = 0; i < files.Length; i++)
-            {
-                string f = System.IO.Path.GetFileName(files[i]);
-                if (Regex.IsMatch(f, "^" + schema, RegexOptions.IgnoreCase))
-                {
-                    string filename = files[i];
-                    return filename;
-                }
-            }
-            return null;
-        }
-
-        private static JObject SchemaJSON(string schema)
-        {
-            string filename = FilePathFromSchema(schema);
-            string path = Directory.GetCurrentDirectory();
-            if (path[path.Length - 1] != '\\')
-                path += @"\";
-            path += @"html\pages.json";
-            JObject _pages = JObject.Parse(File.ReadAllText(path));
-            if (filename != null)
-            {
-                string xml = File.ReadAllText(filename);
-                JObject res = JObject.Parse(ConvertXML(xml, _pages, filename));
-                return res;
-            }
-            return null;
         }
 
         private static cRWPath RWLoopPath(Dictionary<string, cRWPath> _merge, string path)
@@ -403,6 +368,152 @@ namespace ljson
             }
         }
 
+        private static bool readed = false;
+        public static void ReadDevice()
+        {
+            if (readed)
+                return;
+            Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
+            Dictionary<string, JObject> dnodes = new Dictionary<string, JObject>();
+            Dictionary<string, string> missedkeys = new Dictionary<string, string>();
+            JObject o = new JObject(CurrentPanel);
+            JObject _elements = (JObject)o["ELEMENTS"];
+            Type trw = typeof(cRWPath);
+            string panel_type = null;
+            foreach (JToken t in (JToken)_elements)
+                if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
+                {
+                    JObject _node = new JObject((JObject)((JProperty)t).Value);
+                    string nodename = ((JProperty)t).Name;
+                    if (Regex.IsMatch(nodename, "loop", RegexOptions.IgnoreCase))
+                        continue;
+                    if (Regex.IsMatch(nodename, "snone", RegexOptions.IgnoreCase))
+                        panel_type = panel_type;
+                    RWData(_node);
+                    if (_node["~rw"] != null)
+                    {
+                        JObject jrw = (JObject)_node["~rw"];
+                        if (!drw.ContainsKey(((JProperty)t).Name))
+                        {
+                            cRWPath rw = null;
+                            string tname = ((JProperty)t).Name;
+                            if (panel_type == null && Regex.IsMatch(tname, "^iris", RegexOptions.IgnoreCase))
+                            {
+                                panel_type = "iris";
+                                trw = typeof(cRWPathIRIS);
+                            }
+                            if (panel_type == "iris")
+                                rw = jrw.ToObject<cRWPathIRIS>();
+                            //cRWPath rw = jrw.ToObject(trw);
+                            drw.Add(((JProperty)t).Name, rw);
+                            dnodes.Add(((JProperty)t).Name, _node);
+                        }
+                    }
+                }
+            if (drw.Count > 0)
+            {
+                cTransport conn = cComm.ConnectIP();
+                foreach (string key in drw.Keys)
+                {
+                    cRWPathIRIS p = (cRWPathIRIS)drw[key];
+                    JObject _node = dnodes[key];
+                    JObject groups = null;
+                    if (_node["PROPERTIES"] != null)
+                        groups = (JObject)_node["PROPERTIES"]["Groups"];
+                    else
+                        continue;
+                    //
+                    if (groups == null)
+                        continue;
+                    List<string> lstCmd = new List<string>();
+                    foreach (cRWCommandIRIS cmd in p.ReadCommands)
+                        lstCmd.Add(cmd.ToString());
+                    List<byte[]> lstRes = new List<byte[]>();
+                    int len = 0;
+                    foreach (string cmd in lstCmd)
+                    {
+                        lstRes.Add(cComm.SendCommand(conn, cmd));
+                        len += lstRes[lstRes.Count - 1].Length;
+                    }
+                    byte[] result = new byte[len];
+                    int idx = 0;
+                    foreach (byte[] arr in lstRes)
+                    {
+                        arr.CopyTo(result, idx);
+                        idx += arr.Length;
+                    }
+                    string _panel_id = CurrentPanelID;
+                    bool emacexists = false;
+                    string[] emaca = new string[6];
+                    ////////////////
+                    if (Regex.IsMatch(key, "LOOP"))
+                    {
+                        _panel_id = _panel_id + "";
+                    }
+                    //
+                    if (Regex.IsMatch(key, "SNONE$", RegexOptions.IgnoreCase))
+                    {
+                        _panel_id = _panel_id + "";
+                    }
+                    /////////////////////
+                    foreach (string propname in p.ReadProperties.Keys)
+                    {
+                        //if (Regex.IsMatch(propname, "ORINPUTS", RegexOptions.IgnoreCase))
+                        //{
+                        //    emacexists = false;
+                        //}
+                        cRWPropertyIRIS prop = p.ReadProperties[propname];
+                        byte[] pbytes = new byte[prop.bytescnt];
+                        for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
+                            pbytes[i - prop.offset] = result[i];
+                        Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes);
+                        if (path_val == null)
+                        {
+                            if (!missedkeys.ContainsKey(key + "/" + propname))
+                                missedkeys.Add(key + "/" + propname, "");
+                            JObject _panel = CurrentPanel;
+                            JObject _element = (JObject)_panel["ELEMENTS"][key];
+                            if (_element["PROPERTIES"] != null && _element["PROPERTIES"]["Groups"] != null)
+                            {
+                                JObject jgrp = (JObject)_element["PROPERTIES"]["Groups"];
+                                if (jgrp["~invisible"] == null)
+                                    jgrp["~invisible"] = new JObject();
+                                jgrp["~invisible"][propname] = JObject.FromObject(p.ReadProperties[propname]);
+                                JObject pp = (JObject)jgrp["~invisible"][propname];
+                                pp["~path"] = pp.Path;
+                                pp["@TYPE"] = "MISSED";
+                                JObject groups1 = new JObject(jgrp);
+                                path_val = _internal_relations_operator.GroupPropertyVal(groups1, propname, pbytes);
+                                Match m = Regex.Match(propname, @"emacETHADDR(\d)", RegexOptions.IgnoreCase);
+                                if (m.Success)
+                                {
+                                    emaca[Convert.ToInt32(m.Groups[1].Value)] = pbytes[0].ToString("X2");
+                                    emacexists = true;
+                                }
+                            }
+                        }
+                        if (path_val != null)
+                            cComm.SetPathValue(_panel_id, path_val.Item1, path_val.Item2, FilterValueChanged);
+                        else
+                            continue;
+                    }
+                    if (emacexists)
+                    {
+                        string emac = "";
+                        for (int i = 0; i < emaca.Length; i++)
+                            emac += ((emac != "") ? ":" : "") + emaca[i];
+                        JObject emaco = _internal_relations_operator.GetDeviceGroupsNode(groups.ToString(), "emacETHADDR");
+                        string emacpath = emaco["~path"].ToString();
+                        cComm.SetPathValue(_panel_id, emacpath, emac, FilterValueChanged);
+                    }
+                }
+                //
+                cComm.CloseConnection(conn);
+                readed = true;
+            }
+        }
+        #endregion
+
         public static JObject GetNode(string name)
         {
             JObject _panel = CurrentPanel;
@@ -430,6 +541,9 @@ namespace ljson
                             _res["~rw"] = o;
                         }
                     }
+                    //
+                    //ReadDevice();
+                    //
                     return _res;
                 }
             }
@@ -540,6 +654,40 @@ namespace ljson
         #endregion
 
         #region XML to JSON initialization
+        private static string FilePathFromSchema(string schema)
+        {
+            string path = Directory.GetCurrentDirectory();
+            if (path[path.Length - 1] != '\\')
+                path += @"\";
+            path += @"Configs\XML\Templates\";
+            string[] files = Directory.GetFiles(path);
+            for (int i = 0; i < files.Length; i++)
+            {
+                string f = System.IO.Path.GetFileName(files[i]);
+                if (Regex.IsMatch(f, "^" + schema, RegexOptions.IgnoreCase))
+                {
+                    string filename = files[i];
+                    return filename;
+                }
+            }
+            return null;
+        }
+        private static JObject SchemaJSON(string schema)
+        {
+            string filename = FilePathFromSchema(schema);
+            string path = Directory.GetCurrentDirectory();
+            if (path[path.Length - 1] != '\\')
+                path += @"\";
+            path += @"html\pages.json";
+            JObject _pages = JObject.Parse(File.ReadAllText(path));
+            if (filename != null)
+            {
+                string xml = File.ReadAllText(filename);
+                JObject res = JObject.Parse(ConvertXML(xml, _pages, filename));
+                return res;
+            }
+            return null;
+        }
         private static string NoLoopKey(string sj)
         {
             string res = constants.NO_LOOP;
@@ -979,7 +1127,10 @@ namespace ljson
         #region values
         public static void FilterValueChanged(string path, string _new_val)
         {
-            _internal_relations_operator.FilterValueChanged(path, _new_val);
+            bool remove_path = false;
+            _internal_relations_operator.FilterValueChanged(path, _new_val, ref remove_path);
+            if (remove_path)
+                cComm.RemovePathValue(CurrentPanelID, path);
         }
         public static JObject GroupsWithValues(JObject grp)
         {

@@ -149,7 +149,8 @@ const drawWithModal = (body, json) => {
     };
 }
 
-function drawFields (body, json, inheritedColor = '') {
+function drawFields(body, json, inheritedColor = '') {
+    if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
     
@@ -200,7 +201,7 @@ function drawFields (body, json, inheritedColor = '') {
                 );
             }
             if (k.toUpperCase().includes('INPUT_GROUP')) {
-                const oldEl = document.querySelector('.row.pt-2.fullHeight');
+                const oldEl = document.querySelector('.row.pt-2');
                 const newEl = document.createElement("div");
                 newEl.id = 'new';
                 newEl.classList = "row scroll";
@@ -239,7 +240,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 
     if (reverse)
         cleanKeys = cleanKeys.reverse();
-    cleanKeys.forEach(field => {    
+    cleanKeys.forEach(field => {
         // guard for null value of jsonAtLevel[field]
         if (jsonAtLevel[field] && jsonAtLevel[field]['@TYPE']) {
             if (jsonAtLevel[field]['@TYPE'] === "AND") {
@@ -252,17 +253,22 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             if (jsonAtLevel[field]['@TYPE'] === "WEEK") {
                 div.parentNode.parentNode.insertAdjacentHTML('beforeend', innerString);
                 return;
+            } else if (jsonAtLevel[field]['@TYPE'] === "INTLIST") {
+                // inserting in the div of the last element of the collapsible div
+                div.lastElementChild.insertAdjacentHTML('beforeend', innerString);
+                return;
             }
             const newElement = document.createElement('div');
-            let className = `col-xs-12 col-md-${jsonAtLevel[field]['@TYPE'] === "EMAC" || jsonAtLevel[field]['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
+            let className = `col-xs-12 col-lg-${jsonAtLevel[field]['@TYPE'] === "EMAC" || jsonAtLevel[field]['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
             newElement.classList = className;
-            
+            if (jsonAtLevel[field]['@TYPE'] === "TAB") newElement.style.minHeight = "6em";
+
             if (typeof (innerString) !== "string") {
                 const [inner, jsFunc] = innerString;
                 newElement.innerHTML = inner;
                 div.appendChild(newElement);
                 const [el1, el2, el3, el4] = jsFunc();
-                
+
                 setTimeout(() => {
                     let el = document.getElementById(el1);
                     loadDiv(el, el2, el3, el4);
@@ -270,7 +276,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             } else {
                 newElement.innerHTML = innerString;
                 div.appendChild(newElement);
-            }            
+            }
 
         } else if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;
@@ -280,10 +286,10 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 //doSleep(50);
             } else {
                 //window.setTimeout(() =>
-                    addButton(title, field, div)
-                    //, 50);
+                addButton(title, field, div)
+                //, 50);
             }
-        } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0){
+        } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0 && typeof(jsonAtLevel[field]) !== 'string') {
             elementsCreationHandler(div, jsonAtLevel[field])
         }
     });
@@ -322,7 +328,7 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
     let andArray = elementJSON.filter(f => f["@TYPE"] === "AND").map(e => e["PROPERTIES"]["PROPERTY"]).flatMap(el => el);
     let len2 = andArray.filter(f => f["@TYPE"] !== "HIDDEN").length || 0;
     let len1 = elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length;
-    let className = innerString.slice(0, 9) === '<fieldset' ? "col-12 mt-2 mb-2" : `col-xs-12 col-md-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
+    let className = innerString.slice(0, 9) === '<fieldset' ? "col-12 mt-2 mb-2" : `col-xs-12 col-lg-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
     newElement.classList = className;
     newElement.innerHTML = innerString;
     element.appendChild(newElement);
@@ -435,6 +441,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 
     adjustCollapsibleHeight(selectDiv);
     addVisitedBackground();
+    setupSelFixer();
 
     if (dataUsed.some(x => x["selected"])) {
         if (level + 1 === 3) {
@@ -522,7 +529,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 const transformGroupElement = (elementJson) => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] && elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -535,6 +542,7 @@ const transformGroupElement = (elementJson) => {
         input_name_off: elementJson['@NOVAL'],
         checked: !!(+elementJson['@CHECKED']),
         path: elementJson['~path'],
+        size: elementJson['@SIZE'],
         value: elementJson["~value"] ? elementJson["~value"] : (elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : "")),
     };
     
@@ -550,7 +558,7 @@ const transformGroupElement = (elementJson) => {
 
             for (el in andElementsList) {
                 let andElDiv = document.createElement('div');
-                andElDiv.classList = 'col-xs-12 col-md-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
+                andElDiv.classList = 'col-xs-12 col-lg-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
                 andElDiv.insertAdjacentHTML('beforeend', transformGroupElement(andElementsList[el]));
                 ds.appendChild(andElDiv);
             }
@@ -643,7 +651,7 @@ const transformGroupElement = (elementJson) => {
                                 if (elementJSON['@TYPE'] === 'HIDDEN') continue;
                                 const innerString = transformGroupElement(elementJSON);
                                 const newElement = document.createElement('div');
-                                let className = `col-xs-12 col-md-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
+                                let className = `col-xs-12 col-lg-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
                                 newElement.classList = className;
                                 newElement.innerHTML = innerString;
                                 fieldsetDiv.appendChild(newElement);
@@ -705,13 +713,20 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     sel = !!(o['@DEFAULT']);
                 }
-                return {
+                let tmp = {
                     value: o['@VALUE'],
                     label: o['@NAME'],
-                    selected: sel,
-                    link: o['ScheduleKey'],
+                    selected: sel
                 };
+                if (o['ScheduleKey']) tmp.link = o['ScheduleKey'];
+                if (o['@IMAGE']) tmp.imageKey = o['@IMAGE'].split('.')[0];
+                return tmp;
             });
+            if (!attributes.selectList.map(e => e.selected).some(e => !!e)
+                && elementJson['@AND']
+                && attributes.selectList.map(e => e.value).some(e => e === elementJson['@AND'])) {
+                attributes.selectList.find(e => e.value === elementJson['@AND']).selected = true;
+            };
             attributes.modal = elementJson["openModalFirst"];
             return getSelectInput({ ...attributes })
 
@@ -731,6 +746,8 @@ const transformGroupElement = (elementJson) => {
             attributes.input_id = attributes.input_name.replaceAll(' ', '');
             return getWeekInput({ ...attributes });
 
+        case 'INTLIST':
+            return getIntListInput({ ...attributes });
         default: break;
     }
 }
@@ -788,7 +805,7 @@ function pagePreparation () {
                 }
             }
         }
-               
+        setupSelFixer();
     });
 }
 //pagePreparation();
@@ -864,6 +881,49 @@ if (!localStorage.getItem('lang')) {
 //#endregion
 
 //#region UTILS
+// select dropdownmenu limitation to 5 rows
+function setupSelFixer(contain = $("body")) {
+    if (!window.IsLocal) {
+        contain.find("select").on("mousedown", function (ev) {
+            //console.log("selFixer mouseDown.");
+            var _this = $(this);
+            var size = 5;
+            if (_this.hasClass("sf6")) {
+                size = 6;
+            } else if (_this.hasClass("sf3")) {
+                size = 3;
+            } else if (_this.hasClass("sf8")) {
+                size = 8;
+            } else if (_this.hasClass("sf12")) {
+                size = 12;
+            }
+            //console.log("ht:", this.style.height);
+            if (this.options.length > size) {
+                this.size = size;
+                this.style.height = (21.2 * size) + "px";
+                //this.style.marginBottom = (-21.2 * (size - 1)) + "px";
+                this.style.position = "relative";
+                this.style.zIndex = 10009;
+            }
+        });
+        //onchange
+        contain.find("select").on("change select", function () {
+            //console.log("selFixer Change.");
+            resetSelFixer(this);
+        });
+        //onblur
+        contain.find("select").on("blur", function () {
+            resetSelFixer(this);
+        });
+        function resetSelFixer(el) {
+            el.size = 0;
+            el.style.height = "";
+            el.style.marginBottom = "0px";
+            el.style.zIndex = 1;
+        }
+    }
+}
+
 // checking a hex value function
 function checkHexRegex(event) {
     let val = event.target.value;
@@ -975,7 +1035,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
                     ${input_name_off}
                     <label class="switch">
                         <input type="checkbox" id="${input_id}" name="${input_id}" 
-                            ${bytesData ? `bytes="${bytesData}"` : ""} 
+                            ${bytesData ? `bytes="${bytesData}"` : ""}  
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
                             ${checked ? "checked" : ''} 
@@ -989,11 +1049,13 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
 
 const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, modal, RmBtn = false, path = "" }) => {
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
-    let str = `<div class="form-item roww mt-1">
+    let image = selectList.filter(x => x.imageKey).length > 0;
+    let str = `<${image ? "fieldset" : "div"} class="form-item roww mt-1">
+                    ${image ? `<legend>${input_name}</legend>` : ""}
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
                     </button>` : ""}
-                    <label for="${input_id}">${input_name}</label>
+                    ${image ? "" : `<label for="${input_id}">${input_name}</label>`}
                     <div class="select">
                         <select id="${input_id}" name="${input_id}"
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
@@ -1001,14 +1063,28 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                             ${readOnly ? "disabled" : ''} 
                             onchange="javascript: ${modal ? modal : `sendMessageWPF(
                                 {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
-                                ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""}
-                            )`}" >`;
+                                ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""})
+                                ${image ? `; loadDiv(this,'showSchema_${input_id}', this.value + '_function');` : "" }
+                            `}" >`;
     if (selectList.length > 0) {
         let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
         str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || "Select your option"}</option>`;
         selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
     }
-    str += `</select></div></div>`
+    str += `</select></div>${image ? "" : "</div>"}`;
+    if (image) {
+        str += `<div id="showSchema_${input_id}" class="image col-9" style="margin-left: auto; margin-right: auto">`
+        let selectedImageEl = selectList.find(o => o.selected);
+        if (selectedImageEl) {
+            str += `<img src="${BUTTON_IMAGES[selectedImageEl.imageKey].im}" alt="${selectedImageEl.imageKey}" />`
+        }
+        str += `</div>`;
+
+        selectList.map(o => str += `<div style="display: none" id="${ o["value"] + "_function" }">
+            <img src="${BUTTON_IMAGES[o.imageKey].im}" alt="${o.imageKey}" />
+        </div>`);
+        str+="</fieldset>"
+    }
     return str;
 }
 
@@ -1124,6 +1200,20 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
         if (i % 2 !== 0) inner += `</fieldset>`;
     }
     inner += "</div></fieldset></div>"
+    return inner;
+}
+
+const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path = "", value, size  }) => {
+    let inner = `<fieldset id="${input_id}">
+                <legend>${input_name}</legend>
+                <div class="form-item roww row mr-1">`;
+    for (let i = 1; i <= size; i++) {
+        inner += `<div class="col-3 p-0">
+                        <input type="number" id="${input_id}_${i}" name="${input_id}_${i}" data-maxlength="${max.length}" oninput="javascript: myFunction(this.id); myFunction2(this.id);" onblur="javascript: " value="${value}" min="${min}" max="${max}">
+                    </div>`;
+    }                    
+    inner += `</div>
+            </fieldset >`;
     return inner;
 }
 //#endregion
@@ -1325,7 +1415,7 @@ async function showElement(id, elementType) {
     let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
     let returnedJson;
     try {
-        let result = await boundAsync.getJsonForElement(elementType, +id);
+        let result = await boundAsync.getJsonForElement(elementType, +id); // ret for test////////////////////////////////////////////////////////////////
         returnedJson = JSON.parse(result);
         if (!returnedJson) {
             alert("Error happened! Please contact your software provider!");
@@ -1343,6 +1433,7 @@ async function showElement(id, elementType) {
             else el.appendChild(fieldset);
             collapsible();
             addVisitedBackground();
+            setupSelFixer()
         }
     } catch (e) {
         console.log('Error', e);
@@ -1389,6 +1480,7 @@ function loadDiv(it, id, value, type) {
     }
     adjustCollapsibleHeight(it, element.scrollHeight)
     addVisitedBackground();
+    setupSelFixer();
 }
 
 function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {

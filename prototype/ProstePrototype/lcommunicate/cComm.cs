@@ -17,16 +17,23 @@ using common;
 
 namespace lcommunicate
 {
-    internal class cTransport
+    public class cTransport
     {
         //private byte[] _ver_cmd = new byte[] { 0x07, 0x51, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
         internal byte[] _ver_cmd = new byte[] { 0x03, 0x51, 0x11, 0x00, 0x00, 0x07 };
         internal byte[] _cmd = new byte[] { 0x03, 0x51, 0x0F, 0x00, 0x00, 0x89 };
         internal byte[] _time_cmd = new byte[] { 0x00, 0x23, 0xFF };
         internal byte[] _panel_in_nework_0_cmd = new byte[] { 0x03, 0x51, 0x16, 0x00, 0x00, 0x60 };
+        //
+        internal object _conn = null;
+        //
         internal virtual object Connect(object o) { return null; }
         internal virtual void Close(object o) { }
+        internal virtual void Close() { }
         internal virtual byte[] SendCommand(object _connection, byte[] _command) { return null; }
+        internal virtual byte[] SendCommand(object _connection, string _command) { return null; }
+        internal virtual byte[] SendCommand(byte[] _command) { return null; }
+        internal virtual byte[] SendCommand(string _command) { return null; }
     }
     public class cComm
     {
@@ -75,6 +82,18 @@ namespace lcommunicate
             }
             Monitor.Exit(_cs_cache);
             return res;
+        }
+
+        public static void RemovePathValue(string panel_id, string path)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel = _cache_panels[panel_id];
+                if (panel != null && panel.ContainsKey(path))
+                    panel.Remove(path);
+            }
+            Monitor.Exit(_cs_cache);
         }
 
         /// <summary>
@@ -382,6 +401,23 @@ namespace lcommunicate
             return (res != null) ? res : "{}";
         }
 
+        public static cTransport ConnectIP()
+        {
+            cTransport t = new cIP();
+            object conn = t.Connect(new cIPParams("192.168.17.17", 7000));
+            return t;
+        }
+
+        public static byte[] SendCommand(cTransport conn, string cmd)
+        {
+            byte[] res = conn.SendCommand(cmd);
+            return res;
+        }
+
+        public static void CloseConnection(cTransport conn)
+        {
+            conn.Close();
+        }
         public static JArray Scan()
         {
             cTransport t = new cIP();

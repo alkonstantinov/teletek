@@ -17,13 +17,22 @@ namespace lcommunicate
             cIPParams ip = (cIPParams)o;
             TcpClient c = new TcpClient(ip.address, ip.port);
             _last_ip = ip;
+            c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, 1);
+            c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, 2);
+            c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, 2);
+            c.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
             //byte[] ver = SendCommand(c, _time_cmd);
+            _conn = c;
             return c;
         }
 
         internal override void Close(object o)
         {
             ((TcpClient)o).Close();
+        }
+        internal override void Close()
+        {
+            ((TcpClient)_conn).Close();
         }
 
         private byte[] GetBytes(NetworkStream ns)
@@ -44,7 +53,9 @@ namespace lcommunicate
             TcpClient _conn = (TcpClient)_connection;
             if (!_conn.Connected)
                 if (_last_ip != null)
+                {
                     _conn.Connect(_last_ip.address, _last_ip.port);
+                }
                 else return base.SendCommand(_conn, _command);
             //
             NetworkStream netstr = _conn.GetStream();
@@ -52,9 +63,34 @@ namespace lcommunicate
             netstr.Write(_command, 0, _command.Length);
             byte[] res = GetBytes(netstr);
             return res;
-                //Encoder. r.ReadToEnd();
+        }
+        internal override byte[] SendCommand(object _connection, string _command)
+        {
+            byte[] cmd = new byte[_command.Length / 2];
+            for (int i = 0; i < cmd.Length; i++)
+                cmd[i] = Convert.ToByte(_command.Substring(i * 2, 2), 16);
+            return SendCommand(_connection, cmd);
+        }
+        internal override byte[] SendCommand(byte[] _command)
+        {
+            TcpClient _tcpconn = (TcpClient)_conn;
+            if (!_tcpconn.Connected)
+                if (_last_ip != null)
+                    _tcpconn.Connect(_last_ip.address, _last_ip.port);
+                else return base.SendCommand(_command);
             //
-            return base.SendCommand(_conn, _command);
+            NetworkStream netstr = _tcpconn.GetStream();
+            StreamReader r = new StreamReader(netstr);
+            netstr.Write(_command, 0, _command.Length);
+            byte[] res = GetBytes(netstr);
+            return res;
+        }
+        internal override byte[] SendCommand(string _command)
+        {
+            byte[] cmd = new byte[_command.Length / 2];
+            for (int i = 0; i < cmd.Length; i++)
+                cmd[i] = Convert.ToByte(_command.Substring(i * 2, 2), 16);
+            return SendCommand(cmd);
         }
     }
 }
