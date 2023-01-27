@@ -887,6 +887,7 @@ function setupSelFixer(contain = $("body")) {
         contain.find("select").on("mousedown", function (ev) {
             //console.log("selFixer mouseDown.");
             var _this = $(this);
+            //this.focus();
             var size = 5;
             if (_this.hasClass("sf6")) {
                 size = 6;
@@ -900,8 +901,8 @@ function setupSelFixer(contain = $("body")) {
             //console.log("ht:", this.style.height);
             if (this.options.length > size) {
                 this.size = size;
-                this.style.height = (21.2 * size) + "px";
-                //this.style.marginBottom = (-21.2 * (size - 1)) + "px";
+                this.style.height = `${size}rem`;
+                this.style.marginBottom = (-(size - 1)) + "rem";
                 this.style.position = "relative";
                 this.style.zIndex = 10009;
             }
@@ -917,8 +918,8 @@ function setupSelFixer(contain = $("body")) {
         });
         function resetSelFixer(el) {
             el.size = 0;
-            el.style.height = "";
-            el.style.marginBottom = "0px";
+            el.style.height = "auto";
+            el.style.marginBottom = "0rem";
             el.style.zIndex = 1;
         }
     }
