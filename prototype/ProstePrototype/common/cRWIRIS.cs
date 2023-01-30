@@ -37,6 +37,11 @@ namespace common
             }
             return sio + sDataType + sindex + sbuffoffset + slen;
         }
+
+        public override int idxPosition()
+        {
+            return 3;
+        }
     }
     public class cRWPropertyIRIS : cRWProperty
     {

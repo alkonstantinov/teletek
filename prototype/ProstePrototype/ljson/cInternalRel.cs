@@ -128,5 +128,6 @@ namespace ljson
         public virtual void FilterValueChanged(string path, string _new_val, ref bool remove_value) { }
         public virtual List<string> ChannelUsedIn(string channel_path, string myIOPath) { return null; }
         public virtual Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val) { return null; }
+        public virtual bool AddSerialDevice(string key, JObject node, byte[] val, byte address) { return true; }
     }
 }

@@ -3,133 +3,155 @@
     "title": "Eclipse",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/General Settings.html",
-    "breadcrumbs": [ "index" ]
+    "breadcrumbs": [ "index" ],
+    "picture": "fa-volume-up"
   },
   "eclipse_areas": {
     "title": "Areas",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Areas.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-object-group"
   },
   "eclipse_gen_settings": {
     "title": "Settings",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/General Settings.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-gear"
   },
   "eclipse_outputs": {
     "title": "Outputs",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Outputs.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-arrow-up-9-1"
   },
   "eclipse_timeslots": {
     "title": "Timeslots",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Timeslots.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-hourglass"
   },
   "eclipse_users": {
     "title": "Users",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Users.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-users"
   },
   "eclipse_zones": {
     "title": "Zones",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Zones.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-clone"
   },
   "eclipse_communicator": {
     "title": "Communicator",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Communicator.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-teamspeak"
   },
   "eclipse_devices": {
     "title": "Devices",
     "left": "menu-automatic.html",
     "right": "ECLIPSE/Devices.html",
-    "breadcrumbs": [ "index", "eclipse" ]
+    "breadcrumbs": [ "index", "eclipse" ],
+    "picture": "fa-tablet-screen-button"
   },
   "index": {
     "title": "Start",
     "left": null,
     "right": "index-automatic.html",
-    "breadcrumbs": []
+    "breadcrumbs": [],
+    "picture": ""
   },
   "iris": {
     "title": "Iris",
     "left": "menu-automatic.html",
     "right": "IRIS/IRISPanel-automatic.html",
-    "breadcrumbs": [ "index" ]
+    "breadcrumbs": [ "index" ],
+    "picture": "fa-house-fire"
   },
   "iris_access_code": {
     "title": "Access codes",
     "left": "menu-automatic.html",
     "right": "IRIS/IRISPanel-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-fingerprint"
   },
   "iris_network": {
     "title": "Network",
     "left": "menu-automatic.html",
     "right": "IRIS/network-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-diagram-project"
   },
   "iris_panels_in_network": {
     "title": "Panels in network",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-network-wired"
   },
   "iris_inputs": {
     "title": "Inputs",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-arrow-down-1-9"
   },
   "iris_inputs_group": {
     "title": "Input Groups",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-arrow-down-wide-short"
   },
   "iris_outputs": {
     "title": "Output",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-arrow-up-9-1"
   },
   "iris_fat_fbf": {
     "title": "FAT FBF",
     "left": "menu-automatic.html",
     "right": "IRIS/fat-fbf.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-laptop-file"
   },
   "iris_zones": {
     "title": "Zones",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-clone"
   },
   "iris_evac_zones": {
     "title": "Evac zones",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-arrows-to-circle"
   },
   "iris_peripheral_devices": {
     "title": "Peripheral devices",
     "left": "menu-automatic.html",
     "right": "IRIS/periph_devices-auto.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-hard-drive"
   },
   "iris_loop_devices": {
     "title": "Loop devices",
     "left": "menu-automatic.html",
     "right": "IRIS/loop_devices-auto.html",
-    "breadcrumbs": [ "index", "iris" ]
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-compact-disc"
   },
   "loop_devices_system_sensor_loop": {
     "title": "Snesor loop",
@@ -141,42 +163,49 @@
     "title": "Teletek loop",
     "left": "menu-automatic.html",
     "right": "IRIS/loop_devices_teletek.html",
-    "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
+    "breadcrumbs": [ "index", "iris", "iris_loop_devices" ],
+    "picture": ""
   },
   "tte": {
     "title": "tte",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/General Settings.html",
-    "breadcrumbs": [ "index" ]
+    "breadcrumbs": [ "index" ],
+    "picture": "fa-signal"
   },
   "tte_gen_settings": {
     "title": "Gen settings",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/General Settings.html",
-    "breadcrumbs": [ "index", "tte" ]
+    "breadcrumbs": [ "index", "tte" ],
+    "picture": "fa-gear"
   },
   "tte_phones": {
     "title": "Phones",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/Phones.html",
-    "breadcrumbs": [ "index", "tte" ]
+    "breadcrumbs": [ "index", "tte" ],
+    "picture": "fa-phone"
   },
   "tte_inputs_outputs": {
     "title": "I/O",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/Input_Output.html",
-    "breadcrumbs": [ "index", "tte" ]
+    "breadcrumbs": [ "index", "tte" ],
+    "picture": "fa-arrow-down-up-across-line"
   },
   "tte_mobile_operators": {
     "title": "Mobile operators",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/Mobile Operators.html",
-    "breadcrumbs": [ "index", "tte" ]
+    "breadcrumbs": [ "index", "tte" ],
+    "picture": "fa-tower-broadcast"
   },
   "tte_receiver_settings": {
     "title": "Receiver settings",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/Receiver Settings.html",
-    "breadcrumbs": [ "index", "tte" ]
+    "breadcrumbs": [ "index", "tte" ],
+    "picture": "fa-gears"
   }
 }

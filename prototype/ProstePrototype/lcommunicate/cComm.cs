@@ -144,6 +144,24 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
         }
 
+        public static void AddPseudoElement(string panel_id, string key, string _template)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+                _cache_pseudo_element_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+                _cache_pseudo_element_panels.Add(panel_id, new Dictionary<string, Dictionary<string, string>>());
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+                el.Add(key, new Dictionary<string, string>());
+            Dictionary<string, string> lst = el[key];
+            string idx = (lst.Count > 0) ? lst.Keys.Last() : "0";
+            idx = (Convert.ToInt32(idx) + 1).ToString();
+            if (!lst.ContainsKey(idx))
+                lst.Add(idx, _template);
+            Monitor.Exit(_cs_pseudo_element_cache);
+        }
+
         public static bool PseudoElementExists(string panel_id)
         {
             bool res = false;
@@ -223,6 +241,36 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
             return _template;
         }
+        public static string GetPseudoElement(string panel_id, string key)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, string> lst = el[key];
+            string idx = lst.Keys.Last();
+            if (!lst.ContainsKey(idx))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            string _template = lst[idx];
+            Monitor.Exit(_cs_pseudo_element_cache);
+            return _template;
+        }
 
         public static Dictionary<string, string> GetPseudoElementsList(string panel_id, string key)
         {
@@ -247,7 +295,6 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
             return lst;
         }
-
         public static void SetPseudoElement(string panel_id, string key, string idx, string _template)
         {
             Monitor.Enter(_cs_pseudo_element_cache);
@@ -268,6 +315,35 @@ namespace lcommunicate
                 return;
             }
             Dictionary<string, string> lst = el[key];
+            if (!lst.ContainsKey(idx))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            lst[idx] = _template;
+            Monitor.Exit(_cs_pseudo_element_cache);
+        }
+        public static void SetPseudoElement(string panel_id, string key, string _template)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            Dictionary<string, string> lst = el[key];
+            string idx = lst.Keys.Last();
             if (!lst.ContainsKey(idx))
             {
                 Monitor.Exit(_cs_pseudo_element_cache);
@@ -405,9 +481,29 @@ namespace lcommunicate
         {
             cTransport t = new cIP();
             object conn = t.Connect(new cIPParams("192.168.17.17", 7000));
-            return t;
+            if (conn != null)
+                return t;
+            else
+                return null;
         }
-
+        public static cTransport ConnectIP(string ip, int port)
+        {
+            cTransport t = new cIP();
+            object conn = t.Connect(new cIPParams(ip, port));
+            if (conn != null)
+                return t;
+            else
+                return null;
+        }
+        public static cTransport ConnectFile(string filename)
+        {
+            cTransport t = new cFile();
+            object conn = t.Connect(filename);
+            if (conn != null)
+                return t;
+            else
+                return null;
+        }
         public static byte[] SendCommand(cTransport conn, string cmd)
         {
             byte[] res = conn.SendCommand(cmd);
@@ -425,7 +521,7 @@ namespace lcommunicate
             ////byte[] res = t.SendCommand(conn, t._ver_cmd);
             //byte[] res = t.SendCommand(conn, t._panel_in_nework_0_cmd);
             //t.Close(conn);
-            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris8', title: 'IRIS', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse99', title: 'ECLIPSE', interface: 'COM', address: 'COM1'}]");
+            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, { deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}]");
         }
     }
 }

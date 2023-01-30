@@ -11,6 +11,8 @@ using System.Xml.Linq;
 using System.Text.Json.Serialization;
 using System.Linq;
 using System.Threading.Channels;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace common
 {
@@ -22,7 +24,34 @@ namespace common
     {
         public static string NO_LOOP = "NO_LOOP";
     }
-
+    public static class settings
+    {
+        private static object _cs_ = new object();
+        private static JObject _settings = null;
+        private static JObject Settings
+        {
+            get
+            {
+                JObject _res = null;
+                Monitor.Enter(_cs_);
+                if (_settings == null)
+                {
+                    string s = File.ReadAllText("settings.json");
+                    _settings = JObject.Parse(s);
+                }
+                _res = _settings;
+                Monitor.Exit(_cs_);
+                return _res;
+            }
+        }
+        public static bool logreads
+        {
+            get
+            {
+                return Convert.ToBoolean(Settings["logreads"].ToString());
+            }
+        }
+    }
     public class cLoopChannelInfo
     {
         public string loop;
@@ -277,6 +306,7 @@ namespace common
 
         public virtual int CommandLength() { return 0; }
         public virtual string CommandString() { return null; }
+        public virtual int idxPosition() { return -1; }
     }
 
     public class cWriteOperation

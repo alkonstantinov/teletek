@@ -27,6 +27,8 @@ using System.Windows.Shapes;
 using System.Windows.Markup;
 using System.Data;
 using System.Windows.Media.Animation;
+using System.Windows.Input;
+using System.Security.Cryptography;
 
 namespace ljson
 {
@@ -369,16 +371,403 @@ namespace ljson
         }
 
         private static bool readed = false;
-        public static void ReadDevice()
+        private static bool reading = false;
+        private static Dictionary<string, byte[]> _log_bytesreaded = new Dictionary<string, byte[]>();
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            List<cRWCommand> cmds = new List<cRWCommand>();
+            //Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
+            if (_panel_type == "iris")
+            {
+                cRWPathIRIS pi = (cRWPathIRIS)p;
+                foreach (cRWCommandIRIS cmd in pi.ReadCommands)
+                    cmds.Add(cmd);
+            }
+            else
+            {
+                foreach (cRWCommand cmd in p.ReadCommands)
+                    cmds.Add(cmd);
+            }
+            //
+            Match m = Regex.Match(read_path, @"LOOP(\d+)", RegexOptions.IgnoreCase);
+            if (!m.Success)
+                return res;
+            string num = m.Groups[1].Value;
+            JObject panel = CurrentPanel;
+            string panel_id = CurrentPanelID;
+            string[] apath = read_path.Split('/');
+            string dev_path = "";
+            string none_element = "";
+            string loop_type = "";
+            JObject groups = null;
+            for (int i = 0; i < apath.Length; i++)
+                if (Regex.IsMatch(apath[i], @"(LOOP\d+|NONE)$"))
+                {
+                    if (Regex.IsMatch(apath[i], @"LOOP\d+$"))
+                        loop_type = apath[i];
+                    dev_path += ((dev_path != "") ? "/" : "") + apath[i];
+                    if (Regex.IsMatch(apath[i], @"NONE$"))
+                        none_element = apath[i];
+                }
+            string loopkey = null;
+            string nonekey = null;
+            m = Regex.Match(read_path, @"([\w\W]*?" + loop_type + @")/([\w\W]+)$");
+            if (m.Success)
+            {
+                loopkey = m.Groups[1].Value;
+                nonekey = m.Groups[2].Value;
+            }
+            if (!res.ContainsKey(loopkey))
+                res.Add(loopkey, new Dictionary<string, Dictionary<string, byte[]>>());
+            Dictionary<string, Dictionary<string, byte[]>> dnone = res[loopkey];
+            if (!dnone.ContainsKey(nonekey))
+                dnone.Add(nonekey, new Dictionary<string, byte[]>());
+            Dictionary<string, byte[]> didx = dnone[nonekey];
+            //
+            string jnode = "{}";
+            JToken t = panel["ELEMENTS"]["NO_LOOP" + num];
+            if (t != null)
+                jnode = t.ToString();
+            dev_path = apath[apath.Length - 1];
+            //
+            JObject el = GetNode(dev_path);
+            if (el != null && el["PROPERTIES"] != null && el["PROPERTIES"]["Groups"] != null)
+                groups = (JObject)el["PROPERTIES"]["Groups"];
+            JObject _rw = (JObject)el["~rw"];
+            int typeidx = -1;
+            if (_rw["ReadProperties"] != null)
+            {
+                JToken trp = _rw["ReadProperties"];
+                foreach (JProperty tprop in trp)
+                    if (tprop.Name.ToLower() == "type")
+                    {
+                        JObject otype = (JObject)tprop.Value;
+                        if (otype["offset"] != null)
+                            typeidx = Convert.ToInt32(otype["offset"].ToString());
+                        break;
+                    }
+            }
+            int idxinc = 0;
+            if (min == 1)
+            {
+                min--;
+                max--;
+                idxinc = 1;
+            }
+            for (byte idx = min; idx <= max; idx++)
+            {
+                int reslen = 0;
+                List<byte[]> cmdresults = new List<byte[]>();
+                foreach (cRWCommand cmd in cmds)
+                {
+                    string scmd = cmd.CommandString();
+                    scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                    byte[] cmdres = cComm.SendCommand(conn, scmd);
+                    if (settings.logreads)
+                    {
+                        if (!_log_bytesreaded.ContainsKey(scmd))
+                            _log_bytesreaded.Add(scmd, cmdres);
+                    }
+                    reslen += cmdres.Length;
+                    cmdresults.Add(cmdres);
+                }
+                byte[] bcmdres = new byte[reslen];
+                int bidx = 0;
+                foreach (byte[] b in cmdresults)
+                {
+                    b.CopyTo(bcmdres, bidx);
+                    bidx += b.Length;
+                }
+                string devtype = Regex.Replace(nonekey, @"/[\w\W]*$", "");
+                JObject devbytype = null;
+                if (devtypes[devtype] != null)
+                    devbytype = (JObject)devtypes[devtype];
+                string sdevname = null;
+                if (devbytype[bcmdres[typeidx].ToString()] != null)
+                    sdevname = devbytype[bcmdres[typeidx].ToString()].ToString();
+                if (typeidx >= 0 && bcmdres[typeidx] != 0 && sdevname != null)
+                {
+                    didx.Add((idx + idxinc).ToString(), bcmdres);
+                }
+            }
+            //
+            if (didx.Count == 0)
+                res.Clear();
+            return res;
+        }
+        private static void SetLoopDevicesValues(string loopkey, Dictionary<string, Dictionary<string, byte[]>> dreaded, JObject devtypes, Dictionary<string, string> missedkeys, Dictionary<string, string> foundkeys, Dictionary<string, string> dloopdevs)
+        {
+            if (dreaded == null || dreaded.Count <= 0)
+                return;
+            Dictionary<string, cRWPath> merge = WriteReadMerge;
+            JObject panel = CurrentPanel;
+            string panel_id = CurrentPanelID;
+            Dictionary<string, string> dres = cComm.GetPseudoElementsList(panel_id, constants.NO_LOOP);
+            int num = ((dres != null) ? dres.Count : 0) + 1;
+            string read_path = loopkey + "/" + dreaded.Keys.First();
+            string[] apath = read_path.Split('/');
+            string dev_path = "";
+            string none_element = "";
+            string loop_type = "";
+            bool loopadded = false;
+            JObject groups = null;
+            //
+            for (int i = 0; i < apath.Length; i++)
+                if (Regex.IsMatch(apath[i], @"(LOOP\d+|NONE)$"))
+                {
+                    if (Regex.IsMatch(apath[i], @"LOOP\d+$"))
+                        loop_type = apath[i];
+                    dev_path += ((dev_path != "") ? "/" : "") + apath[i];
+                }
+            loop_type = Regex.Replace(loop_type, @"\d+$", num.ToString());
+            //
+            foreach (string snone in dreaded.Keys)
+            {
+                string nonekey = loopkey + "/" + snone;
+                if (!merge.ContainsKey(nonekey))
+                    nonekey = Regex.Replace(nonekey, @"/[^/]+$", "");
+                if (!merge.ContainsKey(nonekey))
+                    nonekey = "IRIS_LOOPDEVICES/" + nonekey;
+                if (merge.ContainsKey(nonekey))
+                {
+                    Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
+                    cRWPath p = merge[nonekey];
+                    int typeidx = -1;
+                    foreach (string k in p.ReadProperties.Keys)
+                    {
+                        cRWProperty prop = p.ReadProperties[k];
+                        ReadProperties.Add(k, prop);
+                        if (typeidx <= 0 && Regex.IsMatch(k, "^type$", RegexOptions.IgnoreCase))
+                            typeidx = prop.offset;
+                    }
+                    //
+                    if (!loopadded)
+                    {
+                        string jnode = "{}";
+                        JToken t = panel["ELEMENTS"]["NO_LOOP" + num.ToString()];
+                        if (t != null)
+                            jnode = t.ToString();
+                        cComm.AddPseudoElement(panel_id, "NO_LOOP", jnode);
+                        JObject o = JObject.Parse(cComm.GetPseudoElement(panel_id, constants.NO_LOOP));
+                        o["~loop_type"] = loop_type;
+                        cComm.SetPseudoElement(panel_id, constants.NO_LOOP, o.ToString());
+                        loopadded = true;
+                    }
+                    dev_path = Regex.Replace(snone, @"^[\w\W]*?/", "");// apath[apath.Length - 1];
+                    none_element = dev_path;
+                    //
+                    JObject el = GetNode(dev_path);
+                    if (el != null && el["PROPERTIES"] != null && el["PROPERTIES"]["Groups"] != null)
+                        groups = (JObject)el["PROPERTIES"]["Groups"];
+                    JObject _rw = (JObject)el["~rw"];
+                    //
+                    Dictionary<string, byte[]> didx = dreaded[snone];
+                    foreach (string idx in didx.Keys)
+                    {
+                        byte btype = didx[idx][typeidx];
+                        string devname = devtypes[btype.ToString()].ToString();
+                        el["~device"] = devname;
+                        el["~device_type"] = none_element;
+                        string dev_save_path = loop_type + "/" + none_element + "#" + devname;
+                        //IRIS_LOOP1/IRIS_MNONE#IRIS_MM220E
+                        //
+                        JObject el1 = GetNode(devname);// new JObject(el);
+                        el1 = (JObject)el1["PROPERTIES"]["Groups"];
+                        el1 = cJson.ChangeGroupsElementsPath(el1, Regex.Replace(idx, "^0+", ""));
+                        cJson.MakeRelativePath(el1, dev_save_path);
+                        el1["~rw"] = _rw;
+                        el1["~device"] = devname;
+                        el1["~device_type"] = none_element;
+                        groups = el1;
+                        //
+                        cComm.AddListElement(panel_id, dev_save_path, Regex.Replace(idx, "^0+", ""), el1.ToString());
+                        //
+                        byte[] devbytes = didx[idx];
+                        foreach (string propname in ReadProperties.Keys)
+                        {
+                            cRWProperty prop = ReadProperties[propname];
+                            byte[] pbytes = new byte[prop.bytescnt];
+                            for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
+                                pbytes[i - prop.offset] = devbytes[i];
+                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes);
+                            if (path_val == null)
+                            {
+                                if (!missedkeys.ContainsKey(dev_save_path + "/" + propname))
+                                    missedkeys.Add(dev_save_path + "/" + propname, "");
+                            }
+                            else
+                            {
+                                cComm.SetPathValue(panel_id, path_val.Item1, path_val.Item2, FilterValueChanged);
+                                if (!foundkeys.ContainsKey(dev_save_path + "/" + propname))
+                                    foundkeys.Add(dev_save_path + "/" + propname, "");
+                            }
+                        }
+                    }
+                    //
+                }
+            }
+        }
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSeriaDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        {
+            if (Regex.IsMatch(read_path, @"LOOP"))
+                return ReadLoopDevices(conn, p, min, max, read_path, devtypes);
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            //if (Regex.IsMatch(read_path, @"(INPUTS_GR|INPUTS/|OUTPUTS|PERIPHER)"))
+            //{
+            List<cRWCommand> cmds = new List<cRWCommand>();
+            if (_panel_type == "iris")
+            {
+                cRWPathIRIS pi = (cRWPathIRIS)p;
+                foreach (cRWCommandIRIS cmd in pi.ReadCommands)
+                    cmds.Add(cmd);
+            }
+            else
+            {
+                foreach (cRWCommand cmd in p.ReadCommands)
+                    cmds.Add(cmd);
+            }
+            //
+            string[] apath = read_path.Split('/');
+            res.Add(apath[0], new Dictionary<string, Dictionary<string, byte[]>>());
+            Dictionary<string, Dictionary<string, byte[]>> droot = res[apath[0]];
+            droot.Add(apath[1], new Dictionary<string, byte[]>());
+            Dictionary<string, byte[]> didx = droot[apath[1]];
+            //
+            int idxinc = 0;
+            if (min == 1)
+            {
+                min--;
+                max--;
+                idxinc = 1;
+            }
+            //
+            for (byte idx = min; idx <= max; idx++)
+            {
+                int reslen = 0;
+                List<byte[]> cmdresults = new List<byte[]>();
+                foreach (cRWCommand cmd in cmds)
+                {
+                    string scmd = cmd.CommandString();
+                    scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                    byte[] cmdres = cComm.SendCommand(conn, scmd);
+                    if (settings.logreads)
+                    {
+                        if (!_log_bytesreaded.ContainsKey(scmd))
+                            _log_bytesreaded.Add(scmd, cmdres);
+                    }
+                    reslen += cmdres.Length;
+                    cmdresults.Add(cmdres);
+                }
+                byte[] bcmdres = new byte[reslen];
+                int bidx = 0;
+                foreach (byte[] b in cmdresults)
+                {
+                    b.CopyTo(bcmdres, bidx);
+                    bidx += b.Length;
+                }
+                //
+                JObject node = GetNode(apath[1]);
+                if (_internal_relations_operator.AddSerialDevice(apath[1], node, bcmdres, (byte)(idx + idxinc)))
+                    didx.Add((idx + idxinc).ToString(), bcmdres);
+            }
+            //if (Regex.IsMatch(read_path, @"(PERIPHER)"))
+            //{
+            //    string first = res.Keys.First();
+            //}
+            //
+            if (didx.Count == 0)
+                res.Clear();
+            return res;
+            //}
+            //
+            //return res;
+        }
+        private static void SetSeriaDevicesValues(Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dreaded, JObject devtypes, Dictionary<string, string> missedkeys, Dictionary<string, string> foundkeys, Dictionary<string, string> dloopdevs)
+        {
+            if (dreaded == null || dreaded.Count <= 0)
+                return;
+            foreach (string loopkey in dreaded.Keys)
+            {
+                if (Regex.IsMatch(loopkey, @"LOOP"))
+                {
+                    SetLoopDevicesValues(loopkey, dreaded[loopkey], devtypes, missedkeys, foundkeys, dloopdevs);
+                    continue;
+                }
+                Dictionary<string, cRWPath> merge = WriteReadMerge;
+                string readkey = loopkey;
+                string readsubkey = dreaded[readkey].Keys.First();
+                cRWPath rwpath = null;
+                if (merge.ContainsKey(readkey))
+                    rwpath = merge[readkey];
+                else if (merge.ContainsKey(readsubkey))
+                    rwpath = merge[readsubkey];
+                else if (merge.ContainsKey(readkey + "/" + readsubkey))
+                    rwpath = merge[readkey + "/" + readsubkey];
+                Dictionary<string, cRWProperty> ReadProperties = rwpath.ReadProperties;
+                JObject panel = CurrentPanel;
+                string panel_id = CurrentPanelID;
+                JObject groups = null;
+                JObject node = GetNode(readsubkey);
+                if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null)
+                {
+                    groups = (JObject)node["PROPERTIES"]["Groups"];
+                    JObject rw = (JObject)node["~rw"];
+                    JObject el = (JObject)node["PROPERTIES"]["Groups"];
+                    Dictionary<string, byte[]> didx = dreaded[readkey][readsubkey];
+                    foreach (string sidx in didx.Keys)
+                    {
+                        JObject newpaths = cJson.ChangeGroupsElementsPath(el, sidx);
+                        newpaths["~rw"] = rw;
+                        SetNodeFilters(newpaths);
+                        string _template = newpaths.ToString();
+                        cComm.AddListElement(cJson.CurrentPanelID, readsubkey, sidx, _template);
+                        //
+                        byte[] devbytes = didx[sidx];
+                        foreach (string propname in ReadProperties.Keys)
+                        {
+                            cRWProperty prop = ReadProperties[propname];
+                            byte[] pbytes = new byte[prop.bytescnt];
+                            for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
+                                pbytes[i - prop.offset] = devbytes[i];
+                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(newpaths, propname, pbytes);
+                            if (path_val == null)
+                            {
+                                if (!missedkeys.ContainsKey(readsubkey + "/" + propname))
+                                    missedkeys.Add(readsubkey + "/" + propname, "");
+                            }
+                            else
+                            {
+                                cComm.SetPathValue(panel_id, path_val.Item1, path_val.Item2, FilterValueChanged);
+                                if (!foundkeys.ContainsKey(readsubkey + "/" + propname))
+                                    foundkeys.Add(readsubkey + "/" + propname, "");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public static void ReadDevice(string ip, int port)
         {
             if (readed)
                 return;
+            if (reading)
+                return;
+            reading = true;
+            if (settings.logreads)
+                _log_bytesreaded.Clear();
+            string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
             Dictionary<string, JObject> dnodes = new Dictionary<string, JObject>();
             Dictionary<string, string> missedkeys = new Dictionary<string, string>();
+            Dictionary<string, string> foundkeys = new Dictionary<string, string>();
+            Dictionary<string, string> dloopdevs = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dserias = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             JObject o = new JObject(CurrentPanel);
+            JObject devtypes = (JObject)o["~devtypes"];
+            JObject devtypes_bynone = (JObject)o["~devtypes_bynone"];
             JObject _elements = (JObject)o["ELEMENTS"];
-            Type trw = typeof(cRWPath);
+            //Type trw = typeof(cRWPath);
             string panel_type = null;
             foreach (JToken t in (JToken)_elements)
                 if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
@@ -386,7 +775,8 @@ namespace ljson
                     JObject _node = new JObject((JObject)((JProperty)t).Value);
                     string nodename = ((JProperty)t).Name;
                     if (Regex.IsMatch(nodename, "loop", RegexOptions.IgnoreCase))
-                        continue;
+                        panel_type = panel_type;
+                    //continue;
                     if (Regex.IsMatch(nodename, "snone", RegexOptions.IgnoreCase))
                         panel_type = panel_type;
                     RWData(_node);
@@ -395,44 +785,143 @@ namespace ljson
                         JObject jrw = (JObject)_node["~rw"];
                         if (!drw.ContainsKey(((JProperty)t).Name))
                         {
-                            cRWPath rw = null;
                             string tname = ((JProperty)t).Name;
                             if (panel_type == null && Regex.IsMatch(tname, "^iris", RegexOptions.IgnoreCase))
-                            {
                                 panel_type = "iris";
-                                trw = typeof(cRWPathIRIS);
-                            }
                             if (panel_type == "iris")
-                                rw = jrw.ToObject<cRWPathIRIS>();
-                            //cRWPath rw = jrw.ToObject(trw);
-                            drw.Add(((JProperty)t).Name, rw);
+                            {
+                                cRWPathIRIS rwi = jrw.ToObject<cRWPathIRIS>();
+                                drw.Add(((JProperty)t).Name, rwi);
+                            }
+                            else
+                            {
+                                cRWPath rw = jrw.ToObject<cRWPath>();
+                                drw.Add(((JProperty)t).Name, rw);
+                            }
+                            //if (panel_type == "iris")
+                            //    rw = jrw.ToObject<cRWPathIRIS>();
+                            //rw = jrw.ToObject<cRWPath>();
                             dnodes.Add(((JProperty)t).Name, _node);
                         }
                     }
                 }
             if (drw.Count > 0)
             {
-                cTransport conn = cComm.ConnectIP();
+                Dictionary<string, Tuple<byte, byte>> dpath_minmax = new Dictionary<string, Tuple<byte, byte>>();
+                Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
+                cTransport conn = cComm.ConnectIP(ip, port);
+                if (conn == null)
+                    conn = cComm.ConnectFile("read.log");
+                if (conn == null)
+                    return;
                 foreach (string key in drw.Keys)
                 {
-                    cRWPathIRIS p = (cRWPathIRIS)drw[key];
+                    cRWPath p = null;
+                    List<cRWCommand> read_commands = null;
+                    if (panel_type == "iris")
+                    {
+                        cRWPathIRIS pi = (cRWPathIRIS)drw[key];
+                        List<cRWCommandIRIS> read_commandsi = pi.ReadCommands;
+                        read_commands = new List<cRWCommand>();
+                        foreach (cRWCommandIRIS c in read_commandsi)
+                            read_commands.Add(c);
+                        p = pi;
+                    }
+                    else
+                    {
+                        p = (cRWPath)drw[key];
+                        read_commands = p.ReadCommands;
+                    }
                     JObject _node = dnodes[key];
+                    string read_path = p.ReadPath;
                     JObject groups = null;
                     if (_node["PROPERTIES"] != null)
                         groups = (JObject)_node["PROPERTIES"]["Groups"];
                     else
+                    {
+                        JObject contains = (JObject)_node["CONTAINS"];
+                        if (contains != null)
+                        {
+                            JToken tfirs = null;// contains.First;
+                            foreach (JProperty cp in (JToken)contains)
+                                if (cp.Value.Type == JTokenType.Object)
+                                {
+                                    tfirs = (JToken)cp;
+                                    break;
+                                }
+                            if (tfirs != null && tfirs.Type == JTokenType.Property)
+                            {
+                                string fname = ((JProperty)tfirs).Name;
+                                //if (Regex.IsMatch(read_path, @"sensor", RegexOptions.IgnoreCase))
+                                //    fname += "";
+                                JObject ofirst = (JObject)((JProperty)tfirs).Value;
+                                JToken tmin = ofirst["@MIN"];
+                                JToken tmax = ofirst["@MAX"];
+                                if (tmin != null && tmax != null)
+                                {
+                                    byte min = Convert.ToByte(tmin.ToString());
+                                    byte max = Convert.ToByte(tmax.ToString());
+                                    if (!dpath_minmax.ContainsKey(read_path))
+                                        dpath_minmax.Add(read_path, new Tuple<byte, byte>(min, max));
+                                    else
+                                        dpath_minmax[read_path] = new Tuple<byte, byte>(min, max);
+                                }
+                            }
+                        }
                         continue;
+                    }
                     //
                     if (groups == null)
                         continue;
-                    List<string> lstCmd = new List<string>();
-                    foreach (cRWCommandIRIS cmd in p.ReadCommands)
-                        lstCmd.Add(cmd.ToString());
+                    if (Regex.IsMatch(key, "TTENONE"))
+                        groups = groups;
+                    List<string> lstCmdS = new List<string>();
+                    List<cRWCommand> lstCmd = new List<cRWCommand>();
+                    foreach (cRWCommand cmd in read_commands)
+                    {
+                        if (panel_type == "iris")
+                            lstCmdS.Add(((cRWCommandIRIS)cmd).CommandString());
+                        else
+                            lstCmdS.Add(cmd.CommandString());
+                        lstCmd.Add(cmd);
+                    }
+                    ///////////////////////
+                    if (dpath_minmax.ContainsKey(read_path))
+                        dpath_log.Add(read_path, dpath_minmax[read_path]);
+                    ///////////////////////
+                    if (dpath_minmax.ContainsKey(read_path))
+                    {
+                        Tuple<byte, byte> tminmax = dpath_minmax[read_path];
+                        Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dread = ReadSeriaDevices(conn, p, tminmax.Item1, tminmax.Item2, read_path, devtypes_bynone);
+                        foreach (string loopkey in dread.Keys)
+                        {
+                            if (!dserias.ContainsKey(loopkey))
+                                dserias.Add(loopkey, new Dictionary<string, Dictionary<string, byte[]>>());
+                            Dictionary<string, Dictionary<string, byte[]>> snoel = dserias[loopkey];
+                            Dictionary<string, Dictionary<string, byte[]>> rnoel = dread[loopkey];
+                            foreach (string nonekey in rnoel.Keys)
+                            {
+                                if (!snoel.ContainsKey(nonekey))
+                                    snoel.Add(nonekey, new Dictionary<string, byte[]>());
+                                Dictionary<string, byte[]> sidx = snoel[nonekey];
+                                Dictionary<string, byte[]> ridx = rnoel[nonekey];
+                                foreach (string idxkey in ridx.Keys)
+                                    if (!sidx.ContainsKey(idxkey))
+                                        sidx.Add(idxkey, ridx[idxkey]);
+                            }
+                        }
+                    }
                     List<byte[]> lstRes = new List<byte[]>();
                     int len = 0;
-                    foreach (string cmd in lstCmd)
+                    foreach (string cmd in lstCmdS)
                     {
-                        lstRes.Add(cComm.SendCommand(conn, cmd));
+                        byte[] cmdres = cComm.SendCommand(conn, cmd);
+                        lstRes.Add(cmdres);
+                        if (settings.logreads)
+                        {
+                            if (!_log_bytesreaded.ContainsKey(cmd))
+                                _log_bytesreaded.Add(cmd, cmdres);
+                        }
                         len += lstRes[lstRes.Count - 1].Length;
                     }
                     byte[] result = new byte[len];
@@ -442,27 +931,15 @@ namespace ljson
                         arr.CopyTo(result, idx);
                         idx += arr.Length;
                     }
-                    string _panel_id = CurrentPanelID;
                     bool emacexists = false;
                     string[] emaca = new string[6];
-                    ////////////////
-                    if (Regex.IsMatch(key, "LOOP"))
-                    {
-                        _panel_id = _panel_id + "";
-                    }
-                    //
-                    if (Regex.IsMatch(key, "SNONE$", RegexOptions.IgnoreCase))
-                    {
-                        _panel_id = _panel_id + "";
-                    }
-                    /////////////////////
                     foreach (string propname in p.ReadProperties.Keys)
                     {
                         //if (Regex.IsMatch(propname, "ORINPUTS", RegexOptions.IgnoreCase))
                         //{
                         //    emacexists = false;
                         //}
-                        cRWPropertyIRIS prop = p.ReadProperties[propname];
+                        cRWProperty prop = p.ReadProperties[propname];
                         byte[] pbytes = new byte[prop.bytescnt];
                         for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                             pbytes[i - prop.offset] = result[i];
@@ -509,7 +986,23 @@ namespace ljson
                 }
                 //
                 cComm.CloseConnection(conn);
+                SetSeriaDevicesValues(dserias, devtypes, missedkeys, foundkeys, dloopdevs);
                 readed = true;
+                reading = false;
+                if (settings.logreads)
+                {
+                    string log = "";
+                    foreach (string cmdkey in _log_bytesreaded.Keys)
+                    {
+                        string sbytes = "";
+                        byte[] cmdres = _log_bytesreaded[cmdkey];
+                        for (int i = 0; i < cmdres.Length; i++)
+                            sbytes += cmdres[i].ToString("X2");
+                        string ln = cmdkey + ":" + sbytes;
+                        log += ((log != "") ? "\r\n" : "") + ln;
+                    }
+                    File.WriteAllText("read.log", log);
+                }
             }
         }
         #endregion
@@ -542,7 +1035,7 @@ namespace ljson
                         }
                     }
                     //
-                    //ReadDevice();
+                    //ReadDevice("192.168.17.17", 7000);
                     //
                     return _res;
                 }
@@ -563,11 +1056,12 @@ namespace ljson
             else
                 _panel_temlates[filename] = _panel;
             _current_panel = _panel;
-            _main_content_key = name;
+            string _clean_name = Regex.Replace(name, @"[\d-]", string.Empty); // added by Viktor
+            _main_content_key = _clean_name; // replaced name by _clean_name by Viktor
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
-            Monitor.Exit(_cs_current_panel);
-            JObject _res1 = new JObject((JObject)_panel["ELEMENTS"][name]);
+            Monitor.Exit(_cs_current_panel);            
+            JObject _res1 = new JObject((JObject)_panel["ELEMENTS"][_clean_name]); // replaced name by _clean_name by Viktor
             RWData(_res1);
             return _res1;
         }
@@ -706,6 +1200,8 @@ namespace ljson
             //
             return res;
         }
+
+        private static string _panel_type = null;
         public static string ConvertXML(string xml, JObject _pages, string filename)
         {
             string schema = Regex.Replace(System.IO.Path.GetFileName(filename), @"\.\w+$", "");
@@ -768,6 +1264,7 @@ namespace ljson
             if (Regex.IsMatch(prod, @"iris", RegexOptions.IgnoreCase))
             {
                 _internal_relations_operator = new cInternalrelIRIS();
+                _panel_type = "iris";
                 sj = cIRIS.Convert(json, _pages);
             }
             else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))

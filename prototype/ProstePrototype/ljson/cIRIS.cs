@@ -479,6 +479,16 @@ namespace ljson
                 if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] == null)
                     json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
                 json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["name"] = "";
+                if (prop["Input_Logic"] != null && prop["Input_Logic"]["ITEMS"] != null && prop["Input_Logic"]["ITEMS"]["ITEM"] != null)
+                {
+                    JArray item = (JArray)prop["Input_Logic"]["ITEMS"]["ITEM"];
+                    foreach (JObject o in item)
+                        if (o["@DEFAULT"] != null)
+                        {
+                            o["@DEFAULT"] = "0";
+                            break;
+                        }
+                }
                 json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["fields"] = prop;
             }
         }
@@ -781,11 +791,15 @@ namespace ljson
         #region change loops
         private static void SetLooDevsContent(JObject json)
         {
+            JObject otypes = new JObject();
+            JObject otypes_byloop = new JObject();
             foreach (JProperty p in json.SelectToken("ELEMENTS").Children())
             {
                 string s = "";
                 if (Regex.IsMatch(p.Name, @"(MODULES|SENSORS|TTENONE)$"))
                 {
+                    if (otypes_byloop[p.Name] == null)
+                        otypes_byloop[p.Name] = new JObject();
                     JObject c = (JObject)p.Value;
                     if (c["CONTAINS"] != null)
                     {
@@ -795,6 +809,8 @@ namespace ljson
                     }
                     else
                         c = new JObject((JObject)c["CHANGE"]);
+                    if (((JProperty)c.First).Value.Type == JTokenType.Array)
+                        c = Array2Object(((JProperty)c.First).Value);
                     foreach (JProperty pp in c.Children())
                     {
                         JObject oprops = (JObject)json["ELEMENTS"][pp.Name]["PROPERTIES"];
@@ -802,11 +818,41 @@ namespace ljson
                         JObject grp = new JObject();
                         grp["name"] = "";
                         grp["fields"] = oprops;
+                        JObject otype = (JObject)oprops["TYPE"];
+                        byte btype = 0;
+                        if (otype != null && otype["@VALUE"] != null)
+                            btype = System.Convert.ToByte(otype["@VALUE"].ToString());
+                        if (btype != 0)
+                        {
+                            otypes[btype.ToString()] = pp.Name;
+                            ((JObject)otypes_byloop[p.Name])[btype.ToString()] = pp.Name;
+                        }
                         json["ELEMENTS"][pp.Name]["PROPERTIES"]["Groups"] = new JObject();
                         json["ELEMENTS"][pp.Name]["PROPERTIES"]["Groups"]["~noname"] = grp;
+                        JObject grpnew = (JObject)json["ELEMENTS"][pp.Name]["PROPERTIES"]["Groups"]["~noname"];
+                        grpnew["fields"]["~path"] = grpnew["fields"].Path;
+                        foreach (JProperty field in grpnew["fields"].Children())
+                            if (field.Value.Type == JTokenType.Object)
+                            {
+                                JObject ofield = (JObject)field.Value;
+                                ofield["~path"] = ofield.Path;
+                            }
+                    }
+                    c = (JObject)p.Value;
+                    if (c["PROPERTIES"] != null && c["PROPERTIES"]["Groups"] == null)
+                    {
+                        JObject cprops = (JObject)c["PROPERTIES"];
+                        cprops = Array2Object(cprops["PROPERTY"]);
+                        JObject grp = new JObject();
+                        grp["name"] = "";
+                        grp["fields"] = cprops;
+                        c["PROPERTIES"]["Groups"] = new JObject();
+                        c["PROPERTIES"]["Groups"]["~noname"] = grp;
                     }
                 }
             }
+            json["~devtypes"] = otypes;
+            json["~devtypes_bynone"] = otypes_byloop;
         }
         private static void ChangeLoops(JObject json)
         {
@@ -827,6 +873,8 @@ namespace ljson
                 ((JObject)c)[key]["@MAX"] = 8;
             else
                 ((JObject)c)[key]["@MAX"] = 4;
+            if (((JObject)c)[key]["~path"] == null)
+                ((JObject)c)[key]["~path"] = ((JObject)c)[key].Path;
             ((JObject)c)[key]["~path"] = Regex.Replace(((JObject)c)[key]["~path"].ToString(), @"\d+$", "");
             //
             SetLooDevsContent(json);

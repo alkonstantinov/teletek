@@ -9,6 +9,8 @@ namespace NewTeletekSW.Utils
     {
         public static string keyH = "";
         public static int count = 0;
+
+        #region Read
         public static void ReadXML(string filename)
         {
             XDocument xml = XDocument.Load(filename);
@@ -107,6 +109,7 @@ namespace NewTeletekSW.Utils
                 jsonObject.Add(node.Name.ToString(), childs);
             }
         }
+        #endregion
         public static JObject WriteXML(string filename, JObject json, string key = "en")
         {
             keyH = key.ToLower();
@@ -166,22 +169,28 @@ namespace NewTeletekSW.Utils
                  */
                 if (attribute.Name == "TEXT")
                 {
+                    count += 1;
                     string value = attribute.Value;
                     if (keyH == "en")
                     {
                         keyJ = value.ToLower().Replace(" ", "_").Trim(new Char[] { ' ', '*', '.', '?', '!' });
                         if (childs.ContainsKey(keyJ))
-                        {
+                        {                            
                             var prevValue = childs[keyJ];
                             if (prevValue != null)
+                            {
                                 ((JObject)prevValue).Merge(new JObject { { keyH, value } });
+                                prevValue["countLst"]?.Append(count);
+                            }
 
                         }
                         else
                         {
-                            JObject newValue = new JObject
+                            var countLst = new int[] { count };
+                            JObject newValue = new()
                             {
-                                { keyH, value }
+                                [ keyH ] = value, 
+                                ["countLst"] = new JArray { countLst }
                             };
                             newValue.Merge(JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(idMemo)));
                             childs.Add(keyJ, newValue);
@@ -197,6 +206,10 @@ namespace NewTeletekSW.Utils
                             {
                                 keyJ = kk.Name;
                             }
+                            else if(childs[kk.Name]?["countLst"] != null && ((JArray)childs[kk.Name]?["countLst"]).Contains(count))
+                            {
+                                keyJ = kk.Name;
+                            }
                         }
                         if (keyJ != "") 
                         { 
@@ -204,7 +217,6 @@ namespace NewTeletekSW.Utils
                             if (prevValue != null)
                                 ((JObject)prevValue).TryAdd(keyH, value);
                         }
-                        count += 1;
                     }
                     
                 } else if (attribute.Name == "ID")
@@ -218,29 +230,6 @@ namespace NewTeletekSW.Utils
                         currentId = idValue;
                     }
                 }
-            }
-        }
-
-        private static void CheckerText(XElement node, JObject jsonObject, JObject childs)
-        {
-            if (jsonObject.ContainsKey(node.Name.ToString()))
-            {
-                var prevValue = jsonObject.GetValue(node.Name.ToString());
-                JArray series = new JArray();
-                if (prevValue != null)
-                {
-                    if (prevValue.Type == JTokenType.Array)
-                    {
-                        ((JArray)prevValue).Add(childs);
-                        series = (JArray)prevValue;
-                    }
-                    else
-                    {
-                        series.Add(prevValue);
-                        series.Add(childs);
-                    }
-                }
-                jsonObject[node.Name.ToString()] = series;
             }
         }
     }

@@ -125,7 +125,7 @@
                 <Image Source="/Images/teletek_logo_m.png" Margin="10,0,0,-25" Width="380" Height="75" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown"/>
 
                 <DockPanel Grid.Column="1" >
-                    <Button x:Name="scan_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="scan_btn" Click="Scan_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
                             <ToolTip>Scan</ToolTip>
@@ -162,7 +162,7 @@
                                         <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                     </DockPanel>
                                 </MenuItem.Header>
-                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="New">
+                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="New" Click="New_Clicked">
                                     <MenuItem.Header>
                                         <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom" Padding="0, 20"></TextBlock>
                                     </MenuItem.Header>
@@ -196,7 +196,7 @@
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="5">
-                    <Button x:Name="log_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="log_btn" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
                             <ToolTip>Log</ToolTip>
@@ -204,7 +204,7 @@
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="6">
-                    <Button x:Name="clock_btn" Click="Read_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="clock_btn" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         <Button.ToolTip>
                             <ToolTip>Clock/Date</ToolTip>
@@ -356,7 +356,7 @@
                             </MenuItem>-->
                 <!--
                         </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Click="Read_Clicked"  >
+                        <MenuItem Margin="10,0,0,0" Click="New_Clicked"  >
                             <MenuItem.Header>
                                 <DockPanel>
                                     <TextBlock Text="&#xf02a;" Margin="5, 3, 5, 0" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Center"></TextBlock>
@@ -371,7 +371,7 @@
                                     <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </DockPanel>
                             </MenuItem.Header>
-                            <MenuItem Header="_Read" Click="Read_Clicked">
+                            <MenuItem Header="_Read" Click="New_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
@@ -381,12 +381,12 @@
                                     <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="_Log" Click="Read_Clicked">
+                            <MenuItem Header="_Log" Click="New_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="_Clock/Date" Click="Read_Clicked">
+                            <MenuItem Header="_Clock/Date" Click="New_Clicked">
                                 <MenuItem.Icon>
                                     <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                 </MenuItem.Icon>

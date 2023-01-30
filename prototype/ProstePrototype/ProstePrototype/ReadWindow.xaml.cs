@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -43,17 +44,21 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 this.DialogResult = false;
-                this.Hide();
+                this.Visibility = Visibility.Hidden;
+                e.Handled = true;
+                //this.Hide();
             });
         }
 
         private void Connect_Clicked(object sender, RoutedEventArgs e)
         {
-            
+
             this.Dispatcher.Invoke(() =>
             {
-                this.DialogResult= true;
-                this.Hide();
+                this.DialogResult = true;
+                this.Visibility = Visibility.Hidden;
+                e.Handled = true;
+                //this.Hide();
             });
         }
 
@@ -83,7 +88,8 @@ namespace ProstePrototype
                 var i = 0;
                 foreach (var segment in text.Split('.'))
                 {
-                    ipTextBox._segments[i].Text = segment;
+                    if (ipTextBox._segments.Count > i)
+                        ipTextBox._segments[i].Text = segment;
                     i++;
                 }
                 ipTextBox._suppressAddressUpdate = false;
@@ -94,6 +100,13 @@ namespace ProstePrototype
         {
             get { return (string)GetValue(AddressProperty); }
             set { SetValue(AddressProperty, value); }
+        }
+        public int Port
+        {
+            get
+            {
+                return Convert.ToInt32(txtPort.Text);
+            }
         }
 
         private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -161,7 +174,7 @@ namespace ProstePrototype
         {
             if (!_suppressAddressUpdate)
             {
-                Address = string.Format("{0}.{1}.{2}.{3}", FirstSegment.Text, SecondSegment.Text, ThirdSegment.Text, LastSegment.Text);
+                Address = string.Format("{0}.{1}.{2}.{3}", (FirstSegment != null) ? FirstSegment.Text : "0", (SecondSegment != null) ? SecondSegment.Text : "0", (ThirdSegment != null) ? ThirdSegment.Text : "0", (LastSegment != null) ? LastSegment.Text : "0");
             }
 
             var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;

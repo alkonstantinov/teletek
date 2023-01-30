@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -282,7 +283,7 @@ namespace ProstePrototype
                         case "Verify":
                         case "Help":
                         default:
-                            // Read_Clicked(new object(), new RoutedEventArgs()); // not working!
+                            // New_Clicked(new object(), new RoutedEventArgs()); // not working!
                             break;
                     }
                     break;
@@ -384,7 +385,7 @@ namespace ProstePrototype
                 }
                 else
                 {
-                    browser.ExecuteScriptAsync(json["Callback"].ToString(), new object[] {});
+                    browser.ExecuteScriptAsync(json["Callback"].ToString(), new object[] { });
                 }
             }
         }
@@ -404,18 +405,19 @@ namespace ProstePrototype
                 if (t != null)
                     jnode["PROPERTIES"]["Groups"] = cJson.GroupsWithValues(jnode["PROPERTIES"]["Groups"].ToString());
             }
+            string _clean_key = Regex.Replace(page, @"[\d-]", string.Empty);
             var lpd = new LoadPageData()
             {
                 //RightBrowserUrl = jnode["right"].ToString(),
                 //LeftBrowserUrl = jnode["left"].ToString(),
                 RightBrowserUrl = cJson.htmlRight(jnode),
                 LeftBrowserUrl = cJson.htmlLeft(jnode),
-                key = page
+                key = _clean_key
             };
             LoadBrowsers(lpd, highlight);
             this.Dispatcher.Invoke(() =>
             {
-                initBreadCrumbs(pages[page].Value<JObject>()["breadcrumbs"].Value<JArray>());
+                initBreadCrumbs(pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>());
             });
         }
 
@@ -467,6 +469,8 @@ namespace ProstePrototype
                 ((BrowserParams)wb2.Tag).Params = cJson.GroupsBrowserParam(data.key);
             });
             wb2.Load(wb2UrlAddress);
+
+            AddPagesConstant();
             ApplyTheme();
         }
         #endregion
@@ -497,6 +501,23 @@ namespace ProstePrototype
         #endregion
 
         #region mainDropdownMenusButtonsClicked
+
+        private void Scan_Clicked(object sender, RoutedEventArgs e)
+        {
+            rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            rw.Owner = this;
+            ChangeThemeRW(DarkMode);
+            rw.DarkMode = DarkMode;
+            rw.ShowDialog();
+            var c = rw.DialogResult;
+            if ((bool)c)
+            {
+                string ip = rw.Address;
+                int port = rw.Port;
+                cJson.ReadDevice(ip, port);
+            }
+            
+        }
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -549,17 +570,18 @@ namespace ProstePrototype
             settings.changeTheme(DarkMode);
             settings.ShowDialog();
         }
-        private void Read_Clicked(object sender, RoutedEventArgs e)
+        private void New_Clicked(object sender, RoutedEventArgs e)
         {
-            rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            rw.Owner = this;
-            ChangeThemeRW(DarkMode);
-            rw.DarkMode = DarkMode;
-            rw.ShowDialog();
-            var c = rw.DialogResult;
-            //string index = "index.html";
+            //rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            //rw.Owner = this;
+            //ChangeThemeRW(DarkMode);
+            //rw.DarkMode = DarkMode;
+            //rw.ShowDialog();
+            //var c = rw.DialogResult;
+            ////string index = "index.html";
             string index = "index-automatic.html";
-            if ((bool)c)
+            //if ((bool)c)
+            if (true)
             {
                 string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
                 string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
@@ -604,6 +626,9 @@ namespace ProstePrototype
 
             }
             lvBreadCrumbs.Items.Clear();
+
+            AddPagesConstant();
+
             ApplyTheme();
             rw = new ReadWindow();
         }
@@ -704,10 +729,32 @@ namespace ProstePrototype
         }
         #endregion
 
+        private void AddPagesConstant()
+        {
+            //string addConstScript = $"const CONFIG_CONST = {pages}";
+            string script = $"setConfigConst({pages.ToString()})";
+            wb1.LoadingStateChanged += (sender, args) =>
+            {
+                //Wait for the Page to finish loading
+                if (args.IsLoading == false)
+                {
+                    wb1.ExecuteScriptAsync(script);
+                }
+            };
+            wb2.LoadingStateChanged += (sender, args) =>
+            {
+                //Wait for the Page to finish loading
+                if (args.IsLoading == false)
+                {
+                    wb2.ExecuteScriptAsync(script);
+                }
+            };
+        }
         private void progressBar1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
         }
+
     }
 
 }

@@ -15,15 +15,19 @@ namespace lcommunicate
         internal override object Connect(object o)
         {
             cIPParams ip = (cIPParams)o;
-            TcpClient c = new TcpClient(ip.address, ip.port);
-            _last_ip = ip;
-            c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, 1);
-            c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, 2);
-            c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, 2);
-            c.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-            //byte[] ver = SendCommand(c, _time_cmd);
-            _conn = c;
-            return c;
+            try
+            {
+                TcpClient c = new TcpClient(ip.address, ip.port);
+                _last_ip = ip;
+                c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, 1);
+                c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, 2);
+                c.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, 2);
+                c.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+                //byte[] ver = SendCommand(c, _time_cmd);
+                _conn = c;
+                return c;
+            }
+            catch { return null; }
         }
 
         internal override void Close(object o)
@@ -39,13 +43,19 @@ namespace lcommunicate
         {
             byte[] data = new byte[1024];
             int readed = 0;
+            int allreaded = 0;
             MemoryStream ms = new MemoryStream();
             do
             {
                 readed = ns.Read(data, 0, data.Length);
+                allreaded += readed;
                 ms.Write(data, 0, readed);
             } while (ns.DataAvailable);
-            return ms.GetBuffer();
+            byte[] res = new byte[allreaded];
+            ms.Seek(0, SeekOrigin.Begin);
+            ms.Read(res, 0, (int)ms.Length);
+            //byte[] buff = ms.GetBuffer();
+            return res;
         }
 
         internal override byte[] SendCommand(object _connection, byte[] _command)

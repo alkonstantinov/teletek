@@ -54,7 +54,7 @@ namespace XMLDocument
             string[] fileArgs = new string[] { };
             if (file.Contains(",")) 
             {
-                fileArgs = file.Split(",");
+                fileArgs = file.Split(",").Select(f => f.Trim()).ToArray();
             }
             switch (args[operationIndex])
             {

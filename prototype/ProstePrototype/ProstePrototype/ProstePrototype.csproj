@@ -341,10 +341,10 @@
     <None Update="html\imports\mainfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-initial_version.json">
+    <None Update="html\pages-dynamic.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-dynamic.js">
+    <None Update="html\pages-initial_version.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\pages.json">
@@ -611,6 +611,9 @@
     <None Update="languages\IR.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -623,11 +626,6 @@
 
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="109.1.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configs\XML\Write\" />
-    <Folder Include="Configs\XML\Read\" />
   </ItemGroup>
 
 </Project>

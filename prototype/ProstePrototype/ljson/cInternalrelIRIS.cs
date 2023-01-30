@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using lcommunicate;
 using common;
 using System.Windows.Input;
+using System.Text.Encodings;
 
 namespace ljson
 {
@@ -413,10 +414,107 @@ namespace ljson
                     sval = GetWeekValue(val);
                     return new Tuple<string, string>(path, sval);
                 }
+                else if (prop["@TYPE"].ToString().ToLower() == "text")
+                {
+                    sval = Encoding.Unicode.GetString(val).TrimEnd((Char)0);
+                    return new Tuple<string, string>(path, sval);
+                }
+                else if (prop["@TYPE"].ToString().ToLower() == "int" && val.Length == 2)
+                {
+                    sval = (val[1] * 16 + val[0]).ToString();
+                    return new Tuple<string, string>(path, sval);
+                }
+                else if (val.Length == 2 && prop["@VALUE"] != null && !Regex.IsMatch(prop["@VALUE"].ToString(), @"\D"))
+                {
+                    sval = (val[1] * 16 + val[0]).ToString();
+                    return new Tuple<string, string>(path, sval);
+                }
                 sval = val[0].ToString() + val[1].ToString();
             }
             //
             return new Tuple<string, string>(path, sval);
+        }
+        public override bool AddSerialDevice(string key, JObject node, byte[] val, byte address)
+        {
+            if (Regex.IsMatch(key, @"input[\w\W]+?group", RegexOptions.IgnoreCase))
+            {
+                if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["~noname"] != null)
+                {
+                    JObject grp = (JObject)node["PROPERTIES"]["Groups"]["~noname"];
+                    if (grp["fields"] != null && grp["fields"]["Input_Logic"] != null)
+                    {
+                        JObject field = (JObject)grp["fields"]["Input_Logic"];
+                        JArray item = (JArray)field["ITEMS"]["ITEM"];
+                        int defaultidx = -1;
+                        foreach (JObject o in item)
+                            if (o["@DEFAULT"] != null)
+                            {
+                                defaultidx = Convert.ToInt32(o["@DEFAULT"].ToString());
+                                break;
+                            }
+                        if (defaultidx >= 0)
+                        {
+                            JObject odef = (JObject)item[defaultidx];
+                            if (odef["@VALUE"] != null)
+                                return Convert.ToByte(odef["@VALUE"].ToString()) != val[2];
+                        }
+                    }
+                }
+            }
+            else if (Regex.IsMatch(key, @"input$", RegexOptions.IgnoreCase))
+            {
+                if (val[12] != address + 1)
+                    return true;
+                for (int i = 2; i < val.Length; i++)
+                    if (i == 12)
+                        continue;
+                    else
+                    {
+                        if (val[i] != 0)
+                            return true;
+                    }
+                return false;
+            }
+            else if (Regex.IsMatch(key, @"output$", RegexOptions.IgnoreCase))
+            {
+                if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["Parameters"] != null)
+                {
+                    JObject grp = (JObject)node["PROPERTIES"]["Groups"]["Parameters"];
+                    if (grp["fields"] != null && grp["fields"]["Parameters"] != null)
+                    {
+                        JObject field = (JObject)grp["fields"]["Parameters"];
+                        if (field["@VALUE"] != null)
+                            return val[9] != Convert.ToByte(field["@VALUE"].ToString());
+                    }
+                }
+            }
+            else if (Regex.IsMatch(key, @"panel", RegexOptions.IgnoreCase))
+            {
+                for (int i = 2; i <= 5; i++)
+                    if (val[i] != 0)
+                        return true;
+                for (int i = 86; i < val.Length; i++)
+                    if (val[i] != 0)
+                        return true;
+                return false;
+            }
+            else if (Regex.IsMatch(key, @"zone$", RegexOptions.IgnoreCase))
+            {
+                if (val[2] != 60 || val[4] != 60)
+                    return true;
+                for (int i = 5; i < val.Length; i++)
+                    if (val[i] != 0)
+                        return true;
+                return false;
+            }
+            else if (Regex.IsMatch(key, @"evac[\w\W]+?zone[\w\W]+?group$", RegexOptions.IgnoreCase))
+            {
+                for (int i = 2; i < val.Length; i++)
+                    if (val[i] != 0)
+                        return true;
+                return false;
+            }
+            return base.AddSerialDevice(key, node, val, address);
         }
         #endregion
     }

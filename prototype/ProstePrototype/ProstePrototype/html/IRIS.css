@@ -72,6 +72,30 @@ button {
     margin-left: 10px;
 }
 
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: calc(1 - 30px);
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: calc(1 - 30px);
+    }
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: calc(1 - 30px);
+    }
+}
+
 .pb10 {
     padding: 0 !important;
     padding-bottom: 10px !important;
@@ -248,10 +272,10 @@ button {
 mb5r {
     margin-bottom: 5rem;
 }
-
+/*
 .minh {
     min-height: 51.51px;
-}
+}*/
 
 @media (min-width: 350px) {
     .minw {
@@ -309,6 +333,7 @@ div[class^="someS"] {
     background-color: var(--grey);
     color: var(--normal);
     border: solid 2px var(--white);
+    min-width: 77px;
 }
 
     .btnStyle:hover {
@@ -695,6 +720,8 @@ fieldset {
     background-color: #ffffff;
     border: 1px solid #42485a;
     color: #42485a;
+    max-width: 25vw;
+    min-width: 103.75px;
 }
 
     .btn-border-black:hover {

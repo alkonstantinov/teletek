@@ -9,7 +9,13 @@ const BUTTON_COLORS = {
 let darkModeStylesheetId = "ssDarkMode";
 
 let CONFIGURED_IO = {};
+
+let CONFIG_CONST = {};
 //#endregion VARIABLES
+
+function setConfigConst(config_const) {
+    CONFIG_CONST = config_const;
+}
 
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
@@ -64,14 +70,7 @@ function receiveMessageWPF(jsonTxt) {
             divD.classList = "row m2 no-gutter";
             devices = json["pageName"]["wb2"];
             for (let i = 0; i < devices.length; i++) {
-                const src = "pages-dynamic.js";
-                if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
-                    loadScript(() => addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i]), src);                    
-                } else {
-                    window.setTimeout(() =>
-                        addButton(devices[i].title, devices[i].title.toLowerCase(), divD, devices[i])
-                        , 50);
-                }
+                addButton(devices[i].title, devices[i].schema.toLowerCase(), divD, devices[i]);
                 body.appendChild(divD);
             }
             break;
@@ -99,7 +98,6 @@ function receiveMessageWPF(jsonTxt) {
             break;
         default:
             // case divIRIS, divTTE, divECLIPSE
-            /*alert('default')*/
             body = document.body;
             let div = document.createElement('div');
             div.classList = "row m2 no-gutter";
@@ -135,7 +133,7 @@ const drawWithModal = (body, json) => {
         modalList.insertAdjacentHTML('beforeend', `<button type="button"
                                 class="list-group-item col"
                                 id="${k.toLowerCase()}_btn"
-                                onclick="javascript: addElement('element', '${k}'); $('#deviceList').modal('toggle');"
+                                onclick="javascript: addElement('element', '${k}'); $('#deviceList').modal('hide');"
                                 data-toggle="tab"
                                 role="tab"
                                 aria-selected="false">
@@ -145,7 +143,7 @@ const drawWithModal = (body, json) => {
                                     <h5>${k.split('_').slice(1).join(' ').toUpperCase()}</h5>
                                 </div>
                             </div>
-                        </button>`)
+                        </button>`);
     };
 }
 
@@ -280,15 +278,15 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 
         } else if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;
-            const src = "pages-dynamic.js";
-            if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
-                loadScript(() => addButton(title, field, div), src);
-                //doSleep(50);
-            } else {
-                //window.setTimeout(() =>
-                addButton(title, field, div)
-                //, 50);
-            }
+            //const src = "pages-dynamic.js";
+            //if (document.querySelectorAll(`script[src*="${src}"]`).length === 0) {
+            //    loadScript(() => addButton(title, field, div), src);
+            //    //doSleep(50);
+            //} else {
+            //    //window.setTimeout(() =>
+            addButton(title, field, div);
+            //    //, 50);
+            //}
         } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0 && typeof(jsonAtLevel[field]) !== 'string') {
             elementsCreationHandler(div, jsonAtLevel[field])
         }
@@ -297,19 +295,25 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 
 //async function doSleep(time) {
 //    // Sleep for 0.05 seconds
-//    await new Promise(r => setTimeout(r, time));
+//    await new Promise(r => setTimeout(() => { r(); }, time));
 //}
 
-const addButton = (title, fieldKey, div, localJSON = {}) => {
+const addButton = (title, schemaKey, div, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
-    let color = indexFlag ? localJSON.deviceType : "";
-    if (CONFIG_CONST[fieldKey].breadcrumbs.includes('iris')) { color = "fire"; }
-    else if (CONFIG_CONST[fieldKey].breadcrumbs.includes('tte')) { color = "grasse"; }
-    var titleTranslated = new T().t(localStorage.getItem('lang'), title.toLowerCase().replaceAll(' ', '_'));
+    // clean all digits from used schema
+    let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
 
-    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${fieldKey}'${!indexFlag ? `, 'Highlight':'${fieldKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${fieldKey}">
+    // button color definition
+    let color = indexFlag ? localJSON.deviceType : ""; 
+    if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
+    else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
+
+    // title definition
+    var titleTranslated = new T().t(localStorage.getItem('lang'), title.trim().toLowerCase().replaceAll(' ', '_'));
+
+    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${schemaKey}'${!indexFlag ? `, 'Highlight':'${schemaKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
                 <div class="btnStyle ${color}">
-                    <i class="fa-solid ${CONFIG_CONST[fieldKey].picture} fa-3x p15">
+                    <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
                         <br /><span class="someS">
                             <span class="h5">
                                 ${titleTranslated}
@@ -319,6 +323,7 @@ const addButton = (title, fieldKey, div, localJSON = {}) => {
                     </i>
                 </div>
             </a>`;
+
     div.insertAdjacentHTML('beforeend', el);
 };
 
