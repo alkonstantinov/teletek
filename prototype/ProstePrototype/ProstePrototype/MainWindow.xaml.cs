@@ -516,7 +516,8 @@ namespace ProstePrototype
                 int port = rw.Port;
                 cJson.ReadDevice(ip, port);
             }
-            
+            rw = new ReadWindow();
+
         }
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {

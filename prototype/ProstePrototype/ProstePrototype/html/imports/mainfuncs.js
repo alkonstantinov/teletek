@@ -144,6 +144,8 @@ const drawWithModal = (body, json) => {
                                 </div>
                             </div>
                         </button>`);
+        
+        getAvailableElements(k.toUpperCase());
     };
 }
 

@@ -44,9 +44,7 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 this.DialogResult = false;
-                this.Visibility = Visibility.Hidden;
-                e.Handled = true;
-                //this.Hide();
+                this.Hide();
             });
         }
 
@@ -56,9 +54,7 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 this.DialogResult = true;
-                this.Visibility = Visibility.Hidden;
-                e.Handled = true;
-                //this.Hide();
+                this.Hide();
             });
         }
 
