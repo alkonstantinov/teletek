@@ -208,7 +208,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
 function openChannelModal(id, path, channelName, oldValue, allNames, newValue) {
     let values = JSON.parse(JSON.stringify(allNames)).split(',');
 
-    $('#showConfirmationModal .modal-body').html(`<p>Please confirm the change of the {${channelName}}'s option from "${values[+oldValue]}" to "${values[+newValue]}"</p>`);
+    $('#showConfirmationModal .modal-body').html(`<p>${new T().t(localStorage.getItem('lang'), "please_confirm_the_change_of")} {${channelName}}: "${values[+oldValue]}" -> "${values[+newValue]}"</p>`);
 
     $("#bigClose, #xClose").on("click", function () {
         document.getElementById(id).value = oldValue;
@@ -283,7 +283,7 @@ function getLoops() {
 // initial loop function for adding a loop;
 const loopFunc = () => {
     if (lst.length - 1 === elements) {
-        alert("Max number of loops created already");
+        alert(new T().t(localStorage.getItem('lang'), "max_number_of_loops_created_already"));
         $("#deviceList").modal('hide'); //.hide();
         return;
     } else {
@@ -383,7 +383,7 @@ function addLoop(loopType, newFlag = "new") {
         btnGroup.classList += ' multi-button';
         let len = btnGroup.firstElementChild.childNodes.length;
         btnGroup.firstElementChild.childNodes[len - 1].textContent = "";
-        btnGroup.insertAdjacentHTML('beforeend', `<button class="btn-border-black">Loop</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>`);
+        btnGroup.insertAdjacentHTML('beforeend', `<button class="btn-border-black">${new T().t(localStorage.getItem('lang'), "loop") }</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>`);
     }
 
     // reordering
@@ -408,7 +408,7 @@ function showLoop(loopNumber, loopType) {
                         <div id="new_device_${loopType}" class="row">
                             <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices"
                                 data-toggle="modal" data-target="#showDevicesListModal" >
-                                    Number of devices: ${deviceNmbr}
+                                    ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
                             </button>
                         </div>
                     </div>
@@ -432,7 +432,7 @@ function showLoop(loopNumber, loopType) {
                 <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                     <button style="display: inline-flex; margin: -5px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;" 
                         data-toggle="modal" data-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> Add New Device in Loop ${loopNumber}
+                            <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "device_in_loop")} ${loopNumber}
                     </button>
                 </div>`;
 
@@ -440,13 +440,13 @@ function showLoop(loopNumber, loopType) {
                             <div class="col-3 bl fire scroll">
                                 <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices()" id="calculateDevices"
                                     data-toggle="modal" data-target="#showDevicesListModal">
-                                        Number of devices: ${deviceNmbr}
+                                        ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
                                 </button>
-                                <p>Sensors</p>
+                                <p>${new T().t(localStorage.getItem('lang'), "sensors")}</p>
                                 <div id="new_sensor_${loopType}" class="row">
 
                                 </div>
-                                <p>Modules</p>
+                                <p>${new T().t(localStorage.getItem('lang'), "modules")}</p>
                                 <div id="new_module_${loopType}" class="row">
 
                                 </div>
@@ -471,7 +471,7 @@ function showLoop(loopNumber, loopType) {
                         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                             <button style="display: inline-flex; margin: -5px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;"
                                 data-toggle="modal" data-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
-                                    <i class="fa-solid fa-plus 5x"></i> Add New Sensor/Module in Loop ${loopNumber}
+                                    <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "sensor/module_in_loop")} ${loopNumber}
                             </button>
                         </div>`;
 
@@ -518,7 +518,7 @@ function removeLoop() {
         let btnGroup = document.getElementById("btnGroup");
         btnGroup.classList.remove('multi-button');
         let firstEl = btnGroup.firstElementChild;
-        firstEl.insertAdjacentHTML('beforeend', " Add New Loop");
+        firstEl.insertAdjacentHTML('beforeend', ` ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "loop")}`);
         btnGroup.replaceChildren(firstEl);
     }
 }
@@ -541,8 +541,8 @@ function calculateLoopDevices(loopNumber) {
             });
 
             let innerModalContent = `<div class="table-responsive"><table class="table table-striped"><thead><tr>
-                                <th scope="col">Device Type</th>
-                                <th scope="col">Counts</th>
+                                <th scope="col">${new T().t(localStorage.getItem('lang'), "device_type")}</th>
+                                <th scope="col">${new T().t(localStorage.getItem('lang'), "count")}</th>
                               </tr></thead><tbody>`;
             deviceMap.forEach((value, key, map) => {
                 innerModalContent += `<tr>
@@ -587,7 +587,7 @@ function getConfig(deviceName, device = '') {
 function updateDeviceNmbr() {
     deviceNmbr = attachedDevicesList.length;
     let showBtn = document.getElementById("calculateDevices");
-    showBtn.innerHTML = `Number of devices: ${deviceNmbr}`;
+    showBtn.innerHTML = `${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}`;
 }
 
 // creating a fieldset

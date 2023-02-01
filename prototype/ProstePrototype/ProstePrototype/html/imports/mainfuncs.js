@@ -91,7 +91,7 @@ function receiveMessageWPF(jsonTxt) {
             }
 
             body = document.getElementById('divLDevices');
-            body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>Add up to ${elements} loops</p>`)
+            body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>${new T().t(localStorage.getItem('lang'), "add_up_to")} ${elements} ${new T().t(localStorage.getItem('lang'), 'loops') }</p>`)
 
             getLoops();
             //drawWithModal(body, json);
@@ -187,7 +187,7 @@ function drawFields(body, json, inheritedColor = '') {
                             type="button"
                             onclick="javascript:addElement('element', '${k}')" 
                             id="_btn" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> Add New ${k.split('_').slice(1).join(' ')}
+                            <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new") } ${k.split('_').slice(1).join(' ')}
                         </button>`);
             if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
                 let divCol9 = document.getElementsByClassName("col-9")[0];
@@ -195,7 +195,7 @@ function drawFields(body, json, inheritedColor = '') {
                 divCol9.insertAdjacentHTML(
                     'beforebegin',
                     `<div class="col-2 bl fire scroll">
-                                Devices:
+                                ${new T().t(localStorage.getItem('lang'), "devices")}:
                                 <div id="attached_devices"></div>
                             </div>`
                 );
@@ -311,7 +311,7 @@ const addButton = (title, schemaKey, div, localJSON = {}) => {
     else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
 
     // title definition
-    var titleTranslated = new T().t(localStorage.getItem('lang'), title.trim().toLowerCase().replaceAll(' ', '_'));
+    var titleTranslated = new T().t(localStorage.getItem('lang'), title.trim().toLowerCase().replace(/[\s*.?!#_]/g, ''));
 
     let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${schemaKey}'${!indexFlag ? `, 'Highlight':'${schemaKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
                 <div class="btnStyle ${color}">
@@ -382,7 +382,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                     if (checkedJson.length === 0)
                     {
                         return {
-                            value: deviceName, label: address + '. ' + name + " - all channels used", selected: CONFIGURED_IO[key][deviceName]["selected"]
+                            value: deviceName, label: `${address}. ${name} - ${new T().t(localStorage.getItem('lang'), 'all_channels_used') }`, selected: CONFIGURED_IO[key][deviceName]["selected"]
                         };
                     }
                     return { value: deviceName, label: address + '. ' + name, selected: CONFIGURED_IO[key][deviceName]["selected"] };
@@ -399,7 +399,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                     let nameLst = ch.split('/');
                     let name = nameLst[0] ? nameLst[0] : nameLst[1];
                     if (jsonAtLevel3[ch]["uses"] && Array.isArray(jsonAtLevel3[ch]["uses"]) && jsonAtLevel3[ch]["uses"].length > 0) {
-                        return { value: ch, label: `${name}` + " - used", selected: jsonAtLevel3[ch]["selected"] };
+                        return { value: ch, label: `${name} - ${new T().t(localStorage.getItem('lang'), 'used')}`, selected: jsonAtLevel3[ch]["selected"] };
                     }
                     return { value: ch, label: name, selected: jsonAtLevel3[ch]["selected"] };
                 });
@@ -417,20 +417,20 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 <div class="select">
                     <select id="${selectId}" name="${selectId}"
                         onchange="javascript: ${nextFunc}" >
-                        <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >Select your option</option>`;
+                        <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${new T().t(localStorage.getItem('lang'), 'select_an_option') }</option>`;
     dataUsed.map(o => {
         let disabled = ""; let tooltip = "";
         if (level >= 2) {
-            if (type.toLowerCase() === "output" && (o["label"].includes(" - used") || o["label"].includes(" - all channels used"))) {
+            if (type.toLowerCase() === "output" && (o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'used')}`) || o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'all_channels_used')}`))) {
                 disabled = 'disabled style="color: red"'
             }
-            if (o["label"].includes(" - used")) {
+            if (o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'used')}`)) {
                 let againJsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
                 tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
             }
-            if (o["label"].includes(" - all channels used")) {
+            if (o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'all_channels_used')}`)) {
                 let jsonAtLevel2 = CONFIGURED_IO[key][o["value"]];
-                tooltip += `title="Used in: {`;
+                tooltip += `title="${new T().t(localStorage.getItem('lang'), 'used_in')}: {`;
                 for (let channel in jsonAtLevel2) {
                     let channelInfo = channel.split("/");
                     tooltip += `{ ${channelInfo[0] ? channelInfo[0] : channelInfo[1]} -> ${jsonAtLevel2[channel]["uses"]} }`;
@@ -463,7 +463,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 function createLoopTypeMenu(selectDiv, showDiv, path) {
     let fieldset = document.createElement("fieldset");
     fieldset.id = "loop_type-" + showDiv.id;
-    fieldset.insertAdjacentHTML('afterbegin', "<legend>Loop Type</legend>");
+    fieldset.insertAdjacentHTML('afterbegin', `<legend>${new T().t(localStorage.getItem('lang'), 'loop_type')}</legend>`);
     let pathFound = path, channel_path = "", loop_number = "", device = "";
     /*  value reading: the whole is the channel path
      * "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1"
@@ -536,7 +536,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 const transformGroupElement = (elementJson) => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT'], //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: new T().t(localStorage.getItem('lang'), (elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().toLowerCase().replace(/[\s*.?!#_]/g, '')) , //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] && elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -1076,7 +1076,7 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                             `}" >`;
     if (selectList.length > 0) {
         let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
-        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || "Select your option"}</option>`;
+        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || new T().t(localStorage.getItem('lang'), 'select_an_option') }</option>`;
         selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
     }
     str += `</select></div>${image ? "" : "</div>"}`;
@@ -1193,7 +1193,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
     for (let i = 0; i < data.length; i++) {
         if (i % 2 === 0) inner += `<fieldset class="col-xs-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
         inner += ` <div class="form-item roww mw">
-                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? "Activate" : "Deactivate"}</label>
+                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? new T().t(localStorage.getItem('lang'), 'activate') : new T().t(localStorage.getItem('lang'), 'deactivate') }</label>
                         <input class="ml10${i % 2 === 0 ? 'p' : ''}"
                                 type="text"
                                 id="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
@@ -1426,7 +1426,7 @@ async function showElement(id, elementType) {
         let result = await boundAsync.getJsonForElement(elementType, +id); // ret for test////////////////////////////////////////////////////////////////
         returnedJson = JSON.parse(result);
         if (!returnedJson) {
-            alert("Error happened! Please contact your software provider!");
+            alert(new T().t(localStorage.getItem('lang'), 'error_happened'));
             return;
         }
         if (Object.keys(returnedJson).length > 0) {

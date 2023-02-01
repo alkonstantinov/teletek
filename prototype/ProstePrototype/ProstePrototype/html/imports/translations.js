@@ -124,6 +124,30 @@
         loop_devices: {
             'bg': 'Устройства в кръга', 'en': 'Loop devices', 'ge': 'Loop devices'
         },
+        loop_type: {
+            'bg': 'Тип кръг', 'en': 'Loop type', 'ge': 'Loop type'
+        },
+        devices: {
+            'bg': 'Устройства', 'en': 'Devices', 'ge': 'Devices'
+        },
+        add_new: {
+            'bg': 'Добавете нов', 'en': 'Add New', 'ge': 'Add New'
+        },
+        add_up_to: {
+            'bg': 'Добавете до', 'en': 'Add up to', 'ge': 'Add up to'
+        },
+        all_channels_used: {
+            'bg': 'всички канали са използвани', 'en': 'all channels used', 'ge': 'all channels used'
+        },
+        used: {
+            'bg': 'използван', 'en': 'used', 'ge': 'used'
+        },
+        select_an_option: {
+            'bg': 'Изберете опция', 'en': 'Select an option', 'ge': 'Select an option'
+        },
+        used_in: {
+            'bg': 'Използвано в', 'en': 'Used in', 'ge': 'Used in'
+        },
         "pc_id": {
             "en": "PC ID",
             "id": "48df2e83-120c-432b-b88e-60b2112a6b52",
@@ -26551,6 +26575,17 @@
             "no": "Sløyfe",
             "pt": "Loop"
         },
+        "loops": {
+            "en": "Loops",
+            "id": "05d3a90e-d202-419d-aa51-6cb3b88ee5ee",
+            "bg": "Кръгове",
+            "fr": "Boucles",
+            "ge": "Rings",
+            "it": "Loops",
+            "nl": "Lus",
+            "no": "Sløyfe",
+            "pt": "Loops"
+        },
         "address": {
             "en": "Address",
             "id": "6ab59707-288a-4ed8-b4d4-e760836e688f",
@@ -26838,6 +26873,15 @@
             "sr": "Aktiviraj",
             "4g": "Activate"
         },
+        "deactivate": {
+            "en": "Deactivate",
+            "id": "",
+            "el": " ",
+            "fr": "Deactivation",
+            "ge": "Deactivate",
+            "sr": "Deaktiviraj",
+            "4g": "Deactivate"
+        },
         "priority": {
             "en": "Priority",
             "id": "d9c41124-a566-4b91-9547-4188acdd63bb",
@@ -26846,6 +26890,106 @@
             "ge": "Priorität",
             "sr": "Prioritet",
             "4g": "Priority"
+        },
+        "error_happened": {
+            "en": "Error happened - no response for element! Please contact your software provider!",
+            "bg": "Грешка - няма отговор за елемента! Моля, свържете се с доставчика на софтуера!",
+            "id": "",
+            "el": "Error happened - no response for element! Please contact your software provider!",
+            "fr": "Error happened - no response for element! Please contact your software provider!",
+            "ge": "Error happened - no response for element! Please contact your software provider!",
+            "sr": "Error happened - no response for element! Please contact your software provider!",
+            "4g": "Error happened - no response for element! Please contact your software provider!"
+        },
+        "please_confirm_the_change_of": {
+            "en": "Please confirm the change of",
+            "bg": "Моля потвърдете промяната на",
+            "id": "",
+            "el": "Please confirm the change of",
+            "fr": "Please confirm the change of",
+            "ge": "Please confirm the change of",
+            "sr": "Please confirm the change of",
+            "4g": "Please confirm the change of"
+        },
+        "max_number_of_loops_created_already": {
+            "en": "Max number of loops created already",
+            "bg": "Достигнат е максималният брой създадени кръгове",
+            "id": "",
+            "el": "Max number of loops created already",
+            "fr": "Max number of loops created already",
+            "ge": "Max number of loops created already",
+            "sr": "Max number of loops created already",
+            "4g": "Max number of loops created already"
+        },
+        "number_of_devices": {
+            "en": "Number of devices",
+            "bg": "Брой устройства",
+            "id": "",
+            "el": "Number of devices",
+            "fr": "Number of devices",
+            "ge": "Number of devices",
+            "sr": "Number of devices",
+            "4g": "Number of devices"
+        },
+        "sensors": {
+            "en": "Sensors",
+            "bg": "Сензори",
+            "id": "",
+            "el": "Sensors",
+            "fr": "Sensors",
+            "ge": "Sensors",
+            "sr": "Sensors",
+            "4g": "Sensors"
+        },
+        "modules": {
+            "en": "Modules",
+            "bg": "Модули",
+            "id": "",
+            "el": "Modules",
+            "fr": "Modules",
+            "ge": "Modules",
+            "sr": "Modules",
+            "4g": "Modules"
+        },
+        "device_in_loop": {
+            "en": "Device in Loop",
+            "bg": "устройство в кръг",
+            "id": "",
+            "el": "Device in Loop",
+            "fr": "Device in Loop",
+            "ge": "Device in Loop",
+            "sr": "Device in Loop",
+            "4g": "Device in Loop"
+        },
+        "sensor/module_in_loop": {
+            "en": "Sensor/Module in Loop",
+            "bg": "сензор/модул в кръг",
+            "id": "",
+            "el": "Sensor/Module in Loop",
+            "fr": "Sensor/Module in Loop",
+            "ge": "Sensor/Module in Loop",
+            "sr": "Sensor/Module in Loop",
+            "4g": "Sensor/Module in Loop"
+        },
+        "device_type": {
+            "en": "Device Type",
+            "bg": "Вид устройство",
+            "id": "",
+            "el": "Device Type",
+            "fr": "Device Type",
+            "ge": "Device Type",
+            "sr": "Device Type",
+            "4g": "Device Type"
+        },
+        "count": {
+            "en": "Count",
+            "bg": "Брой",
+            "id": "",
+            "el": "Count",
+            "fr": "Count",
+            "ge": "Count",
+            "sr": "Count",
+            "4g": "Count"
         },
     }
 }
