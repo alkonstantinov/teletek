@@ -2,7 +2,7 @@
   "profiles": {
     "NewTeletekSW": {
       "commandName": "Project",
-      "commandLineArgs": "-f \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\Configuration\\IRIS\\Config\\IRIS.xml,\r\nC:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\Configuration\\IRIS\\Config\\IRIS_BG.xml\"\r\n-p transform"
+      "commandLineArgs": "-d \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\Configuration\"\r\n-p dowhatever"
     }
   }
 }

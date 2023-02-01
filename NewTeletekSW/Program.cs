@@ -20,17 +20,23 @@ namespace XMLDocument
                 return;
             }
             int pathIndex;
-            if (!args.Contains("-f"))
+            if (!args.Contains("-f") && !args.Contains("-d"))
             {
-                Console.WriteLine("Filename parameter -f is required");
+                Console.WriteLine("Parameter -f or -d is required");
                 return;
             }
             else
             {
-                pathIndex = Array.IndexOf(args, "-f") + 1;
+                if (args.Contains("-f")) 
+                { 
+                    pathIndex = Array.IndexOf(args, "-f") + 1;
+                } else 
+                {
+                    pathIndex = Array.IndexOf(args, "-d") + 1;
+                };
                 if (string.IsNullOrEmpty(args[pathIndex]) || args[pathIndex].StartsWith("-"))
                 {
-                    Console.WriteLine("Filename is required right after the parameter -f");
+                    Console.WriteLine(args.Contains("-f") ? "Filename is required right after the parameter -f" : "Folder name is required right after the parameter -d");
                     return;
                 }
             }
@@ -50,18 +56,34 @@ namespace XMLDocument
                 }
             }
             #endregion
-            var file = args[pathIndex];
-            string[] fileArgs = new string[] { };
-            if (file.Contains(",")) 
+            #region getFiles
+            var fileOrDirectory = args[pathIndex];
+            List<string> fileArgs = new List<string>();
+            if (fileOrDirectory.Contains(","))
             {
-                fileArgs = file.Split(",").Select(f => f.Trim()).ToArray();
+                fileArgs = fileOrDirectory.Split(",").Select(f => f.Trim()).ToList();
+            } else if (args.Contains("-f")) 
+            {
+                fileArgs.Append<string>(fileOrDirectory);                
+            } else
+            {
+                string[] directoriesAtLevel1 = Directory.GetDirectories(fileOrDirectory); // Configuration
+                foreach (string directory in directoriesAtLevel1)
+                {
+                    if (!directory.Contains(" - No")) 
+                    {
+                        FnDProcessors.ProcessDirectory(directory, fileArgs);
+                    }
+                }
             }
+            #endregion
+
             switch (args[operationIndex])
             {
                 case "r":
                 case "read":
                     // open XML
-                    Converter.ReadXML(file);
+                    Converter.ReadXML(fileArgs[0]);
                     break;
                 case "w":
                 case "write":
@@ -83,7 +105,7 @@ namespace XMLDocument
                         MergeArrayHandling = MergeArrayHandling.Merge
                     };
 
-                    if (fileArgs.Length > 0) 
+                    if (fileArgs.Count > 0) 
                     {
                         foreach (string fileName in fileArgs)
                         {
@@ -103,8 +125,63 @@ namespace XMLDocument
                         }
                     }
                     break;
+                case "tr":
+                case "translate":
+                    json = new JObject();
+
+                    mergeSettings = new JsonMergeSettings
+                    {
+                        MergeArrayHandling = MergeArrayHandling.Merge
+                    };
+
+                    if (fileArgs.Count > 0)
+                    {
+                        foreach (string fileName in fileArgs)
+                        {
+                            string purFileName = (fileName.Split("."))[0];
+                            string[] arr = purFileName.Split("_");
+                            string key = "en";
+                            if (arr.GetType() == typeof(string[]) && arr[arr.Length - 1].Length == 2)
+                            {
+                                key = arr[arr.Length - 1];
+                            }
+
+                            json.Merge(Converter.TranslateXML(fileName, json, key), mergeSettings);
+                        }
+                        if (json.ToString() != null)
+                        {
+                            Console.WriteLine(json.ToString());
+                        }
+                    }
+                    break;
                 default:
-                    // do not know
+                    // using LNGID
+                    json = new JObject();
+
+                    mergeSettings = new JsonMergeSettings
+                    {
+                        MergeArrayHandling = MergeArrayHandling.Merge
+                    };
+
+                    if (fileArgs.Count > 0)
+                    {
+                        foreach (string fileName in fileArgs)
+                        {
+                            string purFileName = (fileName.Split("."))[0];
+                            string[] arr = purFileName.Split("_");
+                            string key = "en";
+                            if (arr.GetType() == typeof(string[]) && arr[arr.Length - 1].Length == 2)
+                            {
+                                key = arr[arr.Length - 1];
+                            }
+
+                            json.Merge(Converter.ToXML(fileName, json, key), mergeSettings);
+                        }
+                        if (json.ToString() != null)
+                        {
+                            Console.WriteLine(json.ToString());
+                        }
+                    }
                     break;
             }
         }

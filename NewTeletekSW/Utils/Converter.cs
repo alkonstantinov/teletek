@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Xml;
 // using System.Xml;
 using System.Xml.Linq;
 
@@ -111,10 +112,14 @@ namespace NewTeletekSW.Utils
         }
         #endregion
         public static JObject WriteXML(string filename, JObject json, string key = "en")
-        {
+        { // working based on ID
             keyH = key.ToLower();
             count = 0;
             XDocument xml = XDocument.Load(filename);
+
+            var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
+            removeMe.Count();
+            removeMe.Remove();
 
             foreach (var xmlEl in xml.Elements())
             {
@@ -167,7 +172,7 @@ namespace NewTeletekSW.Utils
                  * ...
                  * }
                  */
-                if (attribute.Name == "TEXT")
+                if (attribute.Name == "TEXT" || attribute.Name == "NAME")
                 {
                     count += 1;
                     string value = attribute.Value;
@@ -180,7 +185,7 @@ namespace NewTeletekSW.Utils
                             if (prevValue != null)
                             {
                                 ((JObject)prevValue).Merge(new JObject { { keyH, value } });
-                                prevValue["countLst"]?.Append(count);
+                                (prevValue["countLst"] as JArray)?.Add((JToken)count);
                             }
 
                         }
@@ -206,31 +211,245 @@ namespace NewTeletekSW.Utils
                             {
                                 keyJ = kk.Name;
                             }
-                            else if(childs[kk.Name]?["countLst"] != null && ((JArray)childs[kk.Name]?["countLst"]).Contains(count))
+                            else
+                            if (childs[kk.Name]?["countLst"] != null && Array.Exists<JToken>(childs[kk.Name]["countLst"].ToArray(), el => (int)el == count))
                             {
                                 keyJ = kk.Name;
+                                break;
                             }
                         }
                         if (keyJ != "") 
                         { 
                             var prevValue = childs[keyJ];
-                            if (prevValue != null)
+                            if (prevValue != null && !((JObject)prevValue).Properties().Select(p => p.Name).Contains(keyH))
                                 ((JObject)prevValue).TryAdd(keyH, value);
                         }
                     }
                     
-                } else if (attribute.Name == "ID")
+                }
+                else if (attribute.Name == "ID")
                 {
                     string idValue = attribute.Value;
                     if (keyH == "en")
                     {
                         idMemo.Add("id", new JArray { idValue });
-                    } else
+                    }
+                    else
                     {
                         currentId = idValue;
                     }
                 }
             }
         }
+
+        public static JObject TranslateXML(string filename, JObject json, string key = "en")
+        { // working for IRIS
+            keyH = key.ToLower();
+            count = 0;
+            XDocument xml = XDocument.Load(filename);
+
+            Console.WriteLine(xml.DescendantNodes().ToArray().Length);
+            var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
+            removeMe.Count();
+            removeMe.Remove();
+            Console.WriteLine(xml.DescendantNodes().ToArray().Length);
+
+            foreach (var xmlEl in xml.Elements())
+            {
+                TranslateElementsText(xmlEl, json);
+
+                //JObject jsonTemp = new JObject();
+                //CheckerText(xmlEl, json, jsonTemp);
+                //json.Add(xmlEl.Name.ToString(), json);
+            }
+
+            //Console.WriteLine(json);
+            //System.IO.File.WriteAllText(Directory.GetCurrentDirectory() + "path.txt", json.ToString());
+            return json;
+        }
+
+        private static void TranslateElementsText(XElement node, JObject jsonObject)
+        {
+            if (node.HasElements)
+            {
+                if (node.HasAttributes)
+                {
+                    TranslateAttributesText(node, jsonObject);
+                }
+                foreach (var element in node.Elements())
+                {
+                    //Console.WriteLine(childs);
+                    TranslateElementsText(element, jsonObject);
+                }
+                // CheckerText(node, jsonObject, jsonObject);
+                //jsonObject.Add(node.Name.ToString(), childs);
+            }
+            else if (node.HasAttributes)
+            {
+                TranslateAttributesText(node, jsonObject);
+                //CheckerText(node, jsonObject, jsonObject);
+            }
+        }
+
+        private static void TranslateAttributesText(XElement node, JObject childs)
+        {
+            //JObject idMemo = new JObject();
+            //string currentId = "";
+            string keyJ = "";
+            foreach (var attribute in node.Attributes())
+            {
+                /*
+                 * { 
+                 * keyJ1: { en: "dscsdcsd", bg:"dsfsdf", id: "weewwe"}, 
+                 * keyJ2: { en: "csdcdsc", bg:"brgb", id: "revg"},
+                 * ...
+                 * }
+                 */
+                if (attribute.Name == "TEXT" || attribute.Name == "NAME")
+                {
+                    count += 1;
+                    string value = attribute.Value;
+                    if (keyH == "en")
+                    {
+                        keyJ = value.ToLower().Replace(" ", "_").Trim(new Char[] { ' ', '*', '.', '?', '!' });
+                        if (childs.ContainsKey(keyJ))
+                        {
+                            var prevValue = childs[keyJ];
+                            if (prevValue != null)
+                            {
+                                //((JObject)prevValue).Merge(new JObject { { keyH, value } });
+                                (prevValue["countLst"] as JArray)?.Add((JToken)count);
+                            }
+
+                        }
+                        else
+                        {
+                            var countLst = new int[] { count };
+                            JObject newValue = new()
+                            {
+                                [keyH] = value,
+                                ["countLst"] = new JArray { countLst }
+                            };
+                            //newValue.Merge(JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(idMemo)));
+                            childs.Add(keyJ, newValue);
+                            // childs[keyJ]?.Concat(JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(idMemo))); // deep copy of idMemo-rized)
+                            //idMemo = new JObject();
+                        }
+                    }
+                    else
+                    {
+                        var allKeys = childs.Properties();
+                        foreach (var kk in allKeys)
+                        {
+                            //if (childs[kk.Name]?["id"] != null && childs[kk.Name]["id"].ToString() == new JArray { currentId }.ToString())
+                            //{
+                            //    keyJ = kk.Name;
+                            //}
+                            //else 
+                            if (childs[kk.Name]?["countLst"] != null && Array.Exists<JToken>(childs[kk.Name]["countLst"].ToArray(), el => (int)el == count))
+                            {
+                                keyJ = kk.Name;
+                                break;
+                            }
+                        }
+                        if (keyJ != "")
+                        {
+                            var prevValue = childs[keyJ];
+                            if (prevValue != null && !((JObject)prevValue).Properties().Select(p => p.Name).Contains(keyH))
+                                ((JObject)prevValue).TryAdd(keyH, value);
+                        }
+                    }
+
+                }
+                //else if (attribute.Name == "ID")
+                //{
+                //    string idValue = attribute.Value;
+                //    if (keyH == "en")
+                //    {
+                //        idMemo.Add("id", new JArray { idValue });
+                //    } else
+                //    {
+                //        currentId = idValue;
+                //    }
+                //}
+            }
+        }
+
+        public static JObject ToXML(string filename, JObject json, string key = "en")
+        { // working for IRIS
+            keyH = key.ToLower();
+            XDocument xml = XDocument.Load(filename);
+
+            Console.WriteLine(xml.DescendantNodes().ToArray().Length);
+            var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
+            removeMe.Count();
+            removeMe.Remove();
+            Console.WriteLine(xml.DescendantNodes().ToArray().Length);
+
+            foreach (var xmlEl in xml.Elements())
+            {
+                ToElementsText(xmlEl, json);
+            }
+
+            return json;
+        }
+
+        private static void ToElementsText(XElement node, JObject json)
+        {
+            if (node.Attribute("TEXT") != null || node.Attribute("NAME") != null)
+            {
+                string keyJ = "";
+                string? value = node.Attribute("TEXT")?.Value;
+                if (String.IsNullOrEmpty(value))
+                {
+                    _ = node.Attribute("NAME")?.Value; // get value of "value"
+                }
+                string? id = node.Attribute("LNGID")?.Value;
+
+                if (keyH == "en")
+                {
+                    keyJ = value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { ' ', '*', '.', '?', '!' }) : "";
+
+                    if (!String.IsNullOrEmpty(keyJ))
+                    {
+                        JObject newValue = new()
+                        {
+                            [keyH] = value,
+                            ["id"] = id
+                        };
+                        json.TryAdd(keyJ, newValue);
+                    }
+                } else
+                {                   
+                    var allKeys = json.Properties();
+                    //string smtg  = allKeys.Select(x => x.Name).FirstOrDefault(el => (string)json[el]["id"] == id).ToString();
+                    foreach (var kk in allKeys)
+                    {
+                        if (json[kk.Name]?["id"] != null && (string)json[kk.Name]["id"] == id)
+                        {
+                            keyJ = kk.Name;
+                            break;
+                        }
+                    }
+                    //if (smtg == keyJ)
+                    //{
+                    //    Console.WriteLine("uhu");
+                    //}
+                    if (!String.IsNullOrEmpty(keyJ))
+                    {
+                        var prevValue = json[keyJ];
+                        if (prevValue != null && !((JObject)prevValue).Properties().Select(p => p.Name).Contains(keyH))
+                            ((JObject)prevValue).TryAdd(keyH, value);
+                    }
+                }
+            } else if (node.HasElements)
+            {
+                foreach (var element in node.Elements())
+                {
+                    ToElementsText(element, json);
+                }
+                
+            }
+        }        
     }
 }

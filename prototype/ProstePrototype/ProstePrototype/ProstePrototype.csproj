@@ -170,7 +170,7 @@
     <None Update="Configs\XML\Read\ReadConfig_eclipse99.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Configs\XML\Read\ReadConfig_iris8_version01.xml">
+    <None Update="Configs\XML\Read\ReadConfig_ris8_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Read\ReadConfig_iris_version24.xml">
@@ -182,13 +182,13 @@
     <None Update="Configs\XML\Templates\IRIS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Configs\XML\Templates\IRIS8.xml">
+    <None Update="Configs\XML\Templates\RIS8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_eclipse99.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Configs\XML\Write\WriteConfig_iris8_version01.xml">
+    <None Update="Configs\XML\Write\WriteConfig_ris8_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_iris_version24.xml">
