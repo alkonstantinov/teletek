@@ -92,6 +92,52 @@
         }
     ],
     translations: {
+        MainMenuNew: { 'en': 'New', 'bg': 'Нов' },
+        MainMenuScan: { 'en': 'Scan', 'bg': 'Сканирай' },
+        MainMenuExport: { 'en': 'Export', 'bg': 'Експорт' },
+        MainMenuFile: { 'en': 'File', 'bg': 'Файл' },
+        MainMenuOpen: { 'en': 'Open', 'bg': 'Отваряне' },
+        MainMenuSave: { 'en': 'Save', 'bg': 'Запомни' },
+        MainMenuSaveas: { 'en': 'Save as', 'bg': 'Запомни като' },
+        MainMenuWrite: { 'en': 'Write', 'bg': 'Запис' },
+        MainMenuLog: { 'en': 'Log', 'bg': 'Лог' },
+        MainMenuClock: { 'en': 'Clock/Date', 'bg': 'Час/Дата' },
+        MainMenuVerify: { 'en': 'Verify', 'bg': 'Проверка' },
+        MainMenuSettings: { 'en': 'Settings', 'bg': 'Настройки' },
+        MainMenuLanguages: { 'en': 'Languages', 'bg': 'Езици' },
+        MainMenuTheme: { 'en': 'Change Theme', 'bg': 'Промяна на темата' },
+        MainMenuUpdate: { 'en': 'Update', 'bg': 'Обновяване' },
+        MainMenuHelp: { 'en': 'Help', 'bg': 'Помощ' },
+        MainMenuToTray: { 'en': 'Minimize to Tray', 'bg': 'Минимизиране в трея' },
+        MainMenuRestore: { 'en': 'Maximize or Restore', 'bg': 'Максимизиране или Възстановяване' },
+        MainMenuExit: { 'en': 'Exit', 'bg': 'Изход' },
+        MainMenuCopyright: { 'en': '© 2022 Copyright: ', 'bg': '© 2022 Copyright: ' },
+        MainMenuTE: { 'en': 'Teletek Electronics', 'bg': 'Teletek Electronics' },
+        SettingsMenuSettings: { 'en': 'Settings', 'bg': 'Настройки' },
+        SettingsMenuAuto: { 'en': 'Automatic check for updates', 'bg': 'Автоматична проверка за обновления' },
+        SettingsMenuOK: { 'en': 'OK', 'bg': 'OK' },
+        MenuClose: { 'en': 'Close', 'bg': 'Изход' },
+        ScanMenuHeader: { 'en': 'Read from device', 'bg': 'Четене от устройството чрез' },
+        ScanMenuTCP: { 'en': 'TCP', 'bg': 'TCP' },
+        ScanMenuHostIp: { 'en': '_Host IP:', 'bg': '_Host IP:' },
+        ScanMenuPort: { 'en': '_Port:', 'bg': '_Port:' },
+        ScanMenuUSB: { 'en': 'USB', 'bg': 'USB' },
+        ScanMenuRS: { 'en': 'RS 232', 'bg': 'RS 232' },
+        ScanMenuRSCom: { 'en': '_COM Port', 'bg': '_COM Port' },
+        ScanMenuRSComChoice: { 'en': 'Choose COM Port', 'bg': 'Изберете COM Port' },
+        ScanMenuRSParity: { 'en': '_Parity', 'bg': '_Parity' },
+        ScanMenuRSParityChoice: { 'en': 'Choose Parity', 'bg': 'Изберете Parity' },
+        ScanMenuRSParityChoiceNone: { 'en': 'None', 'bg': 'Няма' },
+        ScanMenuRSParityChoiceEven: { 'en': 'Even', 'bg': 'Четен' },
+        ScanMenuRSParityChoiceMark: { 'en': 'Mark', 'bg': 'Mark' },
+        ScanMenuRSParityChoiceOdd: { 'en': 'Odd', 'bg': 'Нечетен' },
+        ScanMenuRSParityChoiceSpace: { 'en': 'Space', 'bg': 'Space' },
+        ScanMenuRSBaudRate: { 'en': '_Baud Rate', 'bg': '_Baud Rate' },
+        ScanMenuRSBaudRateChoice: { 'en': 'Choose Baud Rate', 'bg': 'Изберете Baud Rate' },
+        ScanMenuRSStopBits: { 'en': '_Stop Bits', 'bg': '_Stop Bits' },
+        ScanMenuRSStopBitsChoice: { 'en': 'Choose Stop Bits', 'bg': 'Изберете Stop Bits' },
+        ScanMenuRSDataBits: { 'en': '_Data Bits', 'bg': '_Data Bits' },
+        ScanMenuConnect: { 'en': 'Connect', 'bg': 'Свързване' },
         logout: { 'bg': 'Изход' },
         login: { 'bg': 'Вход' },
         iris: { 'bg': 'IRIS', 'en': 'IRIS', 'ge': 'IRIS' },
@@ -105,6 +151,9 @@
         },
         inputs: {
             'bg': 'Входове', 'en': 'Inputs', 'ge': 'Inputs'
+        },
+        input: {
+            'bg': 'Вход', 'en': 'Input', 'ge': 'Input'
         },
         input_groups: {
             'bg': 'Входни групи', 'en': 'Input Groups', 'ge': 'Input Groups'
@@ -147,6 +196,490 @@
         },
         used_in: {
             'bg': 'Използвано в', 'en': 'Used in', 'ge': 'Used in'
+        },
+        enabled: {
+            "en": "Enabled",
+            "id": "",
+            "el": "Ενεργοποίηση",
+            "ge": "Aktivieren",
+            "hu": "Engedélyezés",
+            "it": "Abilita",
+            "ro": "Activat",
+            "bg": "Разрешено",
+            "sr": "Omoguci"
+        },
+        disable: {
+            "en": "Disable",
+            "bg": "Забранено",
+        },
+        disabled: {
+            "en": "Disabled",
+            "bg": "Забранено",
+        },
+        on: {
+            "en": "ON",
+            "bg": "Вкл.",
+        },
+        off: {
+            "en": "OFF",
+            "bg": "Изкл.",
+        },
+        schedule: {
+            "en": "Schedule",
+            "bg": "График",
+        },
+        common: {
+            "en": "Common",
+            "bg": "Общ",
+        },
+        zonal: {
+            "en": "Zonal",
+            "bg": "Зонов",
+        },
+        kafka: {
+            "en": "Kafka",
+            "bg": "Kafka",
+        },
+        strobe: {
+            "en": "Strobe",
+            "bg": "Strobe",
+        },
+        sound__strobe: {
+            "en": "Sound/Strobe",
+            "bg": "Sound/Strobe",
+        },
+        sound: {
+            "en": "Sound",
+            "bg": "Звук",
+        },
+        "1(disable)": {
+            "en": "1(Disable)",
+            "bg": "1(Забранен)",
+        },
+        individual: {
+            "en": "Individual",
+            "bg": "Отделен",
+        },
+        none: {
+            "en": "None",
+            "bg": "Не",
+        },
+        new: {
+            "en": "New",
+            "bg": "Нов",
+        },
+        present: {
+            "en": "Present",
+            "bg": "Наличен",
+        },
+        fault: {
+            "en": "Fault",
+            "bg": "Fault",
+        },
+        normal: {
+            "en": "Normal",
+            "bg": "Normal",
+        },
+        panel_fault: {
+            "en": "Panel fault",
+            "bg": "Panel fault",
+        },
+        type_error: {
+            "en": "Type error",
+            "bg": "Type error",
+        },
+        double: {
+            "en": "Double",
+            "bg": "Double",
+        },
+        two_devices: {
+            "en": "Two devices",
+            "bg": "Две устройства",
+        },
+        double_ip_address: {
+            "en": "Double IP Address",
+            "bg": "Double IP Address",
+        },
+        double_address: {
+            "en": "Double Address",
+            "bg": "Double Address",
+        },
+        chamber_fault: {
+            "en": "Chamber fault",
+            "bg": "Chamber fault",
+        },
+        clean_me_now: {
+            "en": "Clean me now",
+            "bg": "Clean me now",
+        },
+        drift_alert: {
+            "en": "Drift alert",
+            "bg": "Drift alert",
+        },
+        signal_blockage: {
+            "en": "Signal blockage",
+            "bg": "Signal blockage",
+        },
+        hi_signal: {
+            "en": "Hi Signal",
+            "bg": "Hi Signal",
+        },
+        input_fault: {
+            "en": "Input fault",
+            "bg": "Input fault",
+        },
+        output_fault: {
+            "en": "Output fault",
+            "bg": "Output fault",
+        },
+        power_supply_fault: {
+            "en": "Power Supply fault",
+            "bg": "Power Supply fault",
+        },
+        gas_alarm: {
+            "en": "Gas alarm",
+            "bg": "Gas alarm",
+        },
+        gas_alarm_: {
+            "en": "Gas alarm",
+            "bg": "Gas alarm",
+        },
+        panic_: {
+            "en": "Panic",
+            "bg": "Panic",
+        },
+        sounder_mode: {
+            "en": "Sounder mode",
+            "bg": "Sounder mode",
+        },
+        panic_alarm: {
+            "en": "Panic alarm",
+            "bg": "Panic alarm",
+        },
+        double_panel_number: {
+            "en": "Double Panel Number",
+            "bg": "Double Panel Number",
+        },
+        double_ip_address_and_panel_number: {
+            "en": "Double IP Address and Panel Number",
+            "bg": "Double IP Address and Panel Number",
+        },
+        lan: {
+            "en": "LAN",
+            "bg": "LAN",
+        },
+        rs_485: {
+            "en": "RS 485",
+            "bg": "RS 485",
+        },
+        voice_evac: {
+            "en": "Voice evac",
+            "bg": "Voice evac",
+        },
+        "voice_evac_+_lan" : {
+            "en": "Voice evac + LAN",
+            "bg": "Voice evac + LAN",
+        },
+        network_type: {
+            "en": "Network type",
+            "bg": "Тип мрежа",
+        },
+        redundancy_on: {
+            "en": "Redundancy on",
+            "bg": "Redundancy on",
+        },
+        emac: {
+            "en": "MAC Address",
+            "bg": "MAC адрес",
+        },
+        repeat_sounder: {
+            "en": "Repeat sounder",
+            "bg": "Повторение на сирени",
+        },
+        repeat_fire_brigade: {
+            "en": "Repeat fire brigade",
+            "bg": "Повторение на пожароизвестяване",
+        },
+        repeat_fire_protection: {
+            "en": "Repeat fire protection",
+            "bg": "Повторение на пожарозащита",
+        },
+        repeat_fault_output: {
+            "en": "Repeat fault output",
+            "bg": "Повторение на ",
+        },
+        latched: {
+            "en": "Latched",
+            "bg": "Latched",
+        },
+        inverted: {
+            "en": "Inverted",
+            "bg": "Обръщане",
+        },
+        periphery_device: {
+            "en": "Periphery device",
+            "bg": "Периферно у-во",
+        },
+        loop_device: {
+            "en": "Loop device",
+            "bg": "Кръгово у-во",
+        },
+        peripherial_device_address: {
+            "en": "Peripherial device address",
+            "bg": "Адрес на периферното у-во",
+        },
+        peripherial_device_input: {
+            "en": "Peripherial device input",
+            "bg": "Вход на периферното у-во",
+        },
+        peripherial_device_output: {
+            "en": "Peripherial device output",
+            "bg": "Изход на периферното у-во",
+        },
+        device_address: {
+            "en": "Device address",
+            "bg": "Вход на у-во",
+        },
+        function: {
+            "en": "Function",
+            "bg": "Функция",
+        },
+        zone_number: {
+            "en": "Zone number",
+            "bg": "Зона",
+        },
+        zone_group_number: {
+            "en": "Zone group number",
+            "bg": "Зона",
+        },
+        zone_group: {
+            "en": "Zone group",
+            "bg": "Зонова група",
+        },
+        device_group: {
+            "en": "Device group",
+            "bg": "Група у-ва",
+        },
+        group_number: {
+            "en": "Group number",
+            "bg": "Номер на група",
+        },
+        input_number: {
+            "en": "Input number",
+            "bg": "Номер на вход",
+        },
+        alarms: {
+            "en": "Alarms",
+            "bg": "Аларма",
+        },
+        action: {
+            "en": "Action",
+            "bg": "Действие",
+        },
+        general: {
+            "en": "General",
+            "bg": "Общо",
+        },
+        sensor: {
+            "en": "Sensor",
+            "bg": "Сензор",
+        },
+        module: {
+            "en": "Module",
+            "bg": "Модул",
+        },
+        prealarm: {
+            "en": "Prealarm",
+            "bg": "Предварително сигнализиране",
+        },
+        sillence_buzzer: {
+            "en": "Silence buzzer",
+            "bg": "Silence buzzer",
+        },
+        sillence_sounder: {
+            "en": "Silence sounder",
+            "bg": "Silence sounder",
+        },
+        sillence_sounder: {
+            "en": "Silence sounder",
+            "bg": "Silence sounder",
+        },
+        "sillence_sounder_(strobe_on)": {
+            "en": "Silence sounder (Strobe on)",
+            "bg": "Silence sounder (Strobe on)",
+        },
+        fire_brigade_on: {
+            "en": "Fire brigade on",
+            "bg": "Вкл. пожароизвестяване",
+        },
+        fault_output_on: {
+            "en": "Fault output on",
+            "bg": "Fault output on",
+        },
+        fire_protection_on: {
+            "en": "Fire protection on",
+            "bg": "Fire protection on",
+        },
+        "sounder_on(zonal)": {
+            "en": "Sounder ON (Zonal)",
+            "bg": "Sounder ON (Zonal)",
+        },
+        night: {
+            "en": "Night",
+            "bg": "Нощ",
+        },
+        common_fire: {
+            "en": "Common fire",
+            "bg": "Common fire",
+        },
+        common_prealarm: {
+            "en": "Common prealarm",
+            "bg": "Common prealarm",
+        },
+        common_fault: {
+            "en": "Common fault",
+            "bg": "Common fault",
+        },
+        common_evacuate: {
+            "en": "Common evacuate",
+            "bg": "Обща евакуация",
+        },
+        voice_evacuation_cycle: {
+            "en": "Voice evacuation cycle",
+            "bg": "Гласова евакуация",
+        },
+        system_fault: {
+            "en": "System fault",
+            "bg": "System fault",
+        },
+        test: {
+            "en": "Test",
+            "bg": "Тест",
+        },
+        logic: {
+            "en": "Logic",
+            "bg": "Логика",
+        },
+        alarms_counter: {
+            "en": "Alarms counter",
+            "bg": "Брояч на аларми",
+        },
+        days_of_week: {
+            "en": "Days of week",
+            "bg": "Дни от седмицата",
+        },
+        sunday: {
+            "en": "sunday",
+            "bg": "неделя",
+        },
+        monday: {
+            "en": "monday",
+            "bg": "понеделник",
+        },
+        tuesday: {
+            "en": "tuesday",
+            "bg": "вторник",
+        },
+        wednesday: {
+            "en": "wednesday",
+            "bg": "сряда",
+        },
+        thursday: {
+            "en": "thursday",
+            "bg": "четвъртък",
+        },
+        friday: {
+            "en": "friday",
+            "bg": "петък",
+        },
+        saturday: {
+            "en": "saturday",
+            "bg": "събота",
+        },
+        hour: {
+            "en": "hour",
+            "bg": "час",
+        },
+        minutes: {
+            "en": "minutes",
+            "bg": "минути",
+        },
+        year: {
+            "en": "year",
+            "bg": "година",
+        },
+        month: {
+            "en": "month",
+            "bg": "месец",
+        },
+        day: {
+            "en": "day",
+            "bg": "ден",
+        },
+        output_number: {
+            "en": "Output number",
+            "bg": "Изход",
+        },
+        delay_override: {
+            "en": "Delay override",
+            "bg": "Delay override",
+        },
+        class_change: {
+            "en": "Class change",
+            "bg": "Class change",
+        },
+        one_pulse: {
+            "en": "One pulse",
+            "bg": "Едниничен импулс",
+        },
+        pulsed: {
+            "en": "Pulse",
+            "bg": "Пулсиращо",
+        },
+        continious: {
+            "en": "Continious",
+            "bg": "Continious",
+        },
+        input_logic: {
+            "en": "Input logic",
+            "bg": "Логика за вход",
+        },
+        signal_type: {
+            "en": "Signal type",
+            "bg": "Тип на сигнала",
+        },
+        evac_zone_1: {
+            "en": "Еvac zone 1",
+            "bg": "Зона за евак. 1",
+        },
+        evac_zone_2: {
+            "en": "Еvac zone 2",
+            "bg": "Зона за евак. 2",
+        },
+        evac_zone_3: {
+            "en": "Еvac zone 3",
+            "bg": "Зона за евак. 3",
+        },
+        evac_zone_4: {
+            "en": "Еvac zone 4",
+            "bg": "Зона за евак. 4",
+        },
+        evac_zone_5: {
+            "en": "Еvac zone 5",
+            "bg": "Зона за евак. 5",
+        },
+        evac_zone_6: {
+            "en": "Еvac zone 6",
+            "bg": "Зона за евак. 6",
+        },
+        channels: {
+            'bg': 'Канали', 'en': 'Channels',
+        },
+        levels: {
+            'bg': 'Нива', 'en': 'Levels',
+        },
+        verification: {
+            'bg': 'Проверка', 'en': 'Verification',
         },
         "pc_id": {
             "en": "PC ID",
@@ -4589,7 +5122,7 @@
             "bg": "Групи",
             "sr": "Grupe"
         },
-        "zone/user/device/ts": {
+        "zoneuserdevicets": {
             "en": "Zone/User/Device/TS",
             "id": "92c863c6-1988-4cc2-8f41-49e2af2ffded",
             "el": "Ζώνη / Χρήστης / Συσκευή/TS",
@@ -5685,7 +6218,7 @@
             "sr": "Atributi 1 \"Opcije zvona\"",
             "tr": "Öznitelik 1 \"Siren Seçenekleri\""
         },
-        "attributes_2_'on/off_options'": {
+        "attributes_2_'onoff_options'": {
             "en": "Attributes 2 'On/Off Options'",
             "id": "56a9fe5e-d5be-4318-b53f-05cdc9e40a81",
             "bg": "Атрибути 2 'Опции вкл./изкл.'",
@@ -7652,7 +8185,7 @@
             "en": "Groups",
             "id": "3ebe0ea3-9ac5-4588-a218-cd3f460c1133"
         },
-        "zone/user/device": {
+        "zoneuserdevice": {
             "en": "Zone/User/Device",
             "id": "92c863c6-1988-4cc2-8f41-49e2af2ffded"
         },
@@ -10884,7 +11417,7 @@
             "sr": "138 DEV%d OPT       ",
             "tr": "138 DEV%d OPT       "
         },
-        "139_dev%d_i/o": {
+        "139_dev%d_io": {
             "en": "139 DEV%d I/O       ",
             "id": "422590f1-10fc-452c-b40c-10aa115ea8b2",
             "bg": "139 DEV%d I/O       ",
@@ -12884,7 +13417,7 @@
             "sr": "263 DEVICE %d OPT.  ",
             "tr": "263 DEVICE %d OPT.  "
         },
-        "264_device_%d_in/out": {
+        "264_device_%d_inout": {
             "en": "264 DEVICE %d In/Out",
             "id": "b095de2c-cf7d-4c54-971d-a9b9b9128969",
             "bg": "264 DEVICE %d In/Out",
@@ -13524,7 +14057,7 @@
             "sr": "303 %02d.USER       ",
             "tr": "303 %02d.USER       "
         },
-        "304_stay/sleep": {
+        "304_staysleep": {
             "en": "304 STAY/SLEEP      ",
             "id": "3752741d-89ba-4ae0-9545-f8fcc3c46609",
             "bg": "304 STAY/SLEEP      ",
@@ -13892,7 +14425,7 @@
             "sr": "326 UNUSED          ",
             "tr": "326 UNUSED          "
         },
-        "327_entry/exit": {
+        "327_entryexit": {
             "en": "327 ENTRY/EXIT      ",
             "id": "f3a14f1d-3689-4483-8d43-e3ae72397eab",
             "bg": "327 ENTRY/EXIT      ",
@@ -14420,7 +14953,7 @@
             "sr": "359 TIMESLOT DISARM ",
             "tr": "359 TIMESLOT DISARM "
         },
-        "360_auto_arm_f/s": {
+        "360_auto_arm_fs": {
             "en": "360 AUTO ARM F/S    ",
             "id": "4ea45fa2-a030-48aa-b424-11959738e0ab",
             "bg": "360 AUTO ARM F/S    ",
@@ -16660,7 +17193,7 @@
             "sr": "499 Double knock    ",
             "tr": "499 Double knock    "
         },
-        "500_e/e_final": {
+        "500_ee_final": {
             "en": "500 E/E Final       ",
             "id": "7bdd0be3-04a1-45e2-b79f-534bdfe35763",
             "bg": "500 E/E Final       ",
@@ -16676,7 +17209,7 @@
             "sr": "500 E/E Final       ",
             "tr": "500 E/E Final       "
         },
-        "501_fast/regular": {
+        "501_fastregular": {
             "en": "501 Fast/Regular    ",
             "id": "ee4ff84d-d638-461c-802e-17af9544adf1",
             "bg": "501 Fast/Regular    ",
@@ -16820,7 +17353,7 @@
             "sr": "509 PowerUp Delay   ",
             "tr": "509 PowerUp Delay   "
         },
-        "510_pulse/latch": {
+        "510_pulselatch": {
             "en": "510 PULSE/LATCH     ",
             "id": "986f1aec-9be8-4087-8e7d-8752a04c62ad",
             "bg": "510 PULSE/LATCH     ",
@@ -16900,7 +17433,7 @@
             "sr": "514 DEACT.TIM.UNIT  ",
             "tr": "514 DEACT.TIM.UNIT  "
         },
-        "515_normal/invert": {
+        "515_normalinvert": {
             "en": "515 NORMAL/INVERT   ",
             "id": "7fce4e60-2b81-4152-87de-862579d51391",
             "bg": "515 NORMAL/INVERT   ",
@@ -17012,7 +17545,7 @@
             "sr": "521 BELL OPTIONS    ",
             "tr": "521 BELL OPTIONS    "
         },
-        "522_on/off_options": {
+        "522_onoff_options": {
             "en": "522 ON/OFF OPTIONS  ",
             "id": "99f72da6-e1e1-44ef-b8a3-c7613ff14a75",
             "bg": "522 ON/OFF OPTIONS  ",
@@ -18788,7 +19321,7 @@
             "sr": "632 Reserved        ",
             "tr": "632 Reserved        "
         },
-        "633_entry/exit_2": {
+        "633_entryexit_2": {
             "en": "633 ENTRY/EXIT 2    ",
             "id": "41e8c308-5e63-4632-bbb6-d8f7326a1180",
             "bg": "633 ENTRY/EXIT 2    ",
@@ -18804,7 +19337,7 @@
             "sr": "633 ENTRY/EXIT 2    ",
             "tr": "633 ENTRY/EXIT 2    "
         },
-        "634_entry1/entry2": {
+        "634_entry1entry2": {
             "en": "634 Entry1/Entry2   ",
             "id": "b95840e9-86cf-4fe1-8b3b-fb4ad0490884",
             "bg": "634 Entry1/Entry2   ",
@@ -21764,7 +22297,7 @@
             "sr": "070   Trouble [TRBL]",
             "tr": "070   Trouble [TRBL]"
         },
-        "071_eng_menu_/_enter": {
+        "071_eng_menu__enter": {
             "en": "071 ENG MENU / ENTER",
             "id": "0cc667d5-44d6-4e23-bb45-588fe45e6333",
             "bg": "071 ENG MENU / ENTER",
@@ -22084,7 +22617,7 @@
             "sr": "090 area       [   ]",
             "tr": "090 area       [   ]"
         },
-        "091_mng_menu_/_enter": {
+        "091_mng_menu__enter": {
             "en": "091 MNG MENU / ENTER",
             "id": "358ae3df-8c0f-477b-b797-9292cffad3b7",
             "bg": "091 MNG MENU / ENTER",
@@ -22116,7 +22649,7 @@
             "sr": "092 Operation     [ MAX 13 CHARACTERS ]",
             "tr": "092 Operation     [ MAX 13 CHARACTERS ]"
         },
-        "093_user_menu/enter": {
+        "093_user_menuenter": {
             "en": "093 USER MENU/ENTER",
             "id": "329c3b0f-6f40-488d-932b-31debb6098f5",
             "bg": "093 USER MENU/ENTER",
@@ -22148,7 +22681,7 @@
             "sr": "094 Operation      [ MAX 14 CHARACTERS ]",
             "tr": "094 Operation      [ MAX 14 CHARACTERS ]"
         },
-        "095_eng_menu_/_enter": {
+        "095_eng_menu__enter": {
             "en": "095 ENG MENU / ENTER",
             "id": "e67994ec-18b4-4e1f-ae3a-9c884cb3cc81",
             "bg": "095 ENG MENU / ENTER",
@@ -24580,7 +25113,7 @@
             "sr": "Raspored Odlaganja Požarne Zaštite",
             "tr": "Fire Protection Delay Schedule"
         },
-        "day/night_schedule": {
+        "daynight_schedule": {
             "en": "Day/Night Schedule",
             "id": "160ef63a-fe47-4836-87c5-50ed6e20915e",
             "bg": "График ден/нощ",
@@ -24818,7 +25351,7 @@
             "sr": "Podesavanja Evakuacije",
             "tr": "Evacuate Settings"
         },
-        "alert/evac_voice_cycle_on,_[sec]": {
+        "alertevac_voice_cycle_on,_[sec]": {
             "en": "Alert/EVAC Voice Cycle ON, [sec]",
             "id": "ef746bfc-c4eb-4487-871a-3658340eb21d",
             "bg": "Alert/EVAC Гласов цикъл включен, [сек]",
@@ -24835,7 +25368,7 @@
             "sr": "Alert/EVAC Voice Ciklus ON, [sec]",
             "tr": "Alert/EVAC Voice Cycle ON, [sec]"
         },
-        "alert/evac_voice_cycle_off,_[sec]": {
+        "alertevac_voice_cycle_off,_[sec]": {
             "en": "Alert/EVAC Voice Cycle OFF, [sec]",
             "id": "b3b38ccd-4b70-478c-bf98-39ff77b3e5e7",
             "bg": "Alert/EVAC Гласов цикъл изключен, [сек]",
@@ -24852,7 +25385,7 @@
             "sr": "Alert/EVAC Voice Ciklus OFF, [sec]",
             "tr": "Alert/EVAC Voice Cycle OFF, [sec]"
         },
-        "alert/evac_voice_cycle_off/on_inverted": {
+        "alertevac_voice_cycle_offon_inverted": {
             "en": "Alert/EVAC Voice Cycle OFF/ON Inverted",
             "id": "f28ecacd-a019-4dd2-88bc-76f2433efc7f",
             "bg": "Инвертиран Alert/EVAC Гласов цикъл OFF/ON ",
@@ -26093,7 +26626,7 @@
             "sr": "Sounder Group",
             "tr": "Sounder Group"
         },
-        "ri_output/group": {
+        "ri_outputgroup": {
             "en": "RI Output/Group",
             "id": "725bf4d1-1989-4024-b7e0-1fe73fe24b5c",
             "bg": "RI Изход/Група",
@@ -26144,7 +26677,7 @@
             "sr": "UKLJUČENA SIRENA",
             "tr": "SOUNDER ON"
         },
-        "fat/fbf": {
+        "fatfbf": {
             "en": "FAT/FBF",
             "id": "bc63b71e-acd2-4f05-a728-67587a405c68",
             "bg": "FAT/FBF"
@@ -26432,7 +26965,7 @@
             "no": "Evakuering timeout [min]",
             "pt": "Evacuação Timeout [min]"
         },
-        "voice_evacuation_cycle_off/on_inverted": {
+        "voice_evacuation_cycle_offon_inverted": {
             "en": "Voice evacuation cycle off/on inverted",
             "id": "8fb145cc-4336-3441-97b9-04ba4bd2f7ff",
             "bg": "Евакуационен цикъл вкл./изкл. Инвертиран",
@@ -26837,7 +27370,7 @@
             "sr": "Prioritet Servera 2",
             "4g": "Server 2 Priority"
         },
-        "enable_input/output_(number)": {
+        "enable_inputoutput_(number)": {
             "en": "Enable Input/Output (number)",
             "id": "068904e9-1d68-432c-9bd1-c00f0807d087",
             "el": "Ενεργοποίηση εισόδου / εξόδου ",
@@ -26855,7 +27388,7 @@
             "sr": "Balansirani Ulaz (broj)",
             "4g": "Balanced Input(number)"
         },
-        "i/o_settings": {
+        "io_settings": {
             "en": "I/O Settings",
             "id": "1d0d917d-265d-4f34-88f5-bfb241fa8294",
             "el": "Ρυθμίσεις Εισόδου /  Εξόδου ",
@@ -26961,7 +27494,7 @@
             "sr": "Device in Loop",
             "4g": "Device in Loop"
         },
-        "sensor/module_in_loop": {
+        "sensormodule_in_loop": {
             "en": "Sensor/Module in Loop",
             "bg": "сензор/модул в кръг",
             "id": "",

@@ -11,11 +11,46 @@ let darkModeStylesheetId = "ssDarkMode";
 let CONFIGURED_IO = {};
 
 let CONFIG_CONST = {};
-//#endregion VARIABLES
 
 function setConfigConst(config_const) {
     CONFIG_CONST = config_const;
 }
+//#endregion VARIABLES
+
+//#region Language Funcs
+class T {
+    getLangs = () => {
+        return Translations.languages;
+    }
+
+    t = (lang, key) => {
+        let k = Translations.translations[key];
+        if (!k) {
+            return "Not found translation key";
+        }
+        let t = k[lang];
+        if (!t) {
+            return "Not found translation language";
+        }
+        return t;
+    }
+}
+
+const newT = new T();
+
+function toggleLang(key) {
+    setLang(key);
+    document.location.reload();
+}
+
+function setLang(key) {
+    if (Translations.languages.map(x => x.key).includes(key)) {
+        localStorage.setItem('lang', Translations.languages.find(x => x.key === key).id);
+    } else {
+        localStorage.setItem('lang', 'en');
+    }
+}
+//#endregion
 
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
@@ -91,7 +126,7 @@ function receiveMessageWPF(jsonTxt) {
             }
 
             body = document.getElementById('divLDevices');
-            body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>${new T().t(localStorage.getItem('lang'), "add_up_to")} ${elements} ${new T().t(localStorage.getItem('lang'), 'loops') }</p>`)
+            body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>${newT.t(localStorage.getItem('lang'), "add_up_to")} ${elements} ${newT.t(localStorage.getItem('lang'), 'loops')}</p>`)
 
             getLoops();
             //drawWithModal(body, json);
@@ -105,13 +140,13 @@ function receiveMessageWPF(jsonTxt) {
             elementsCreationHandler(div, json, reverse = false);
 
             body.appendChild(div);
-            
+
             break;
     }
     $(function () {
         // DOM Ready - do your stuff
         pagePreparation();
-    }); 
+    });
 }
 
 const drawWithModal = (body, json) => {
@@ -124,8 +159,7 @@ const drawWithModal = (body, json) => {
     var deviceList = body.querySelector('#deviceList');
     var modalList = deviceList.querySelector('#list-tab');
 
-    for (k of keys)
-    {
+    for (k of keys) {
         if (k.split('_').pop() === 'NONE') continue;
 
         let elType = Object.keys(BUTTON_IMAGES).find(x => k.includes(x));
@@ -144,7 +178,7 @@ const drawWithModal = (body, json) => {
                                 </div>
                             </div>
                         </button>`);
-        
+
         getAvailableElements(k.toUpperCase());
     };
 }
@@ -153,10 +187,10 @@ function drawFields(body, json, inheritedColor = '') {
     if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
-    
+
     keys.filter(k => k !== '~path').forEach(k => {
         let divLevel = json[k];
-        
+
         if (k.includes('~')) { // ~noname cases
             let div = document.createElement('div');
             div.classList = "row align-items-center m-2";
@@ -187,7 +221,7 @@ function drawFields(body, json, inheritedColor = '') {
                             type="button"
                             onclick="javascript:addElement('element', '${k}')" 
                             id="_btn" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new") } ${k.split('_').slice(1).join(' ')}
+                            <i class="fa-solid fa-plus 5x"></i> ${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}
                         </button>`);
             if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
                 let divCol9 = document.getElementsByClassName("col-9")[0];
@@ -195,7 +229,7 @@ function drawFields(body, json, inheritedColor = '') {
                 divCol9.insertAdjacentHTML(
                     'beforebegin',
                     `<div class="col-2 bl fire scroll">
-                                ${new T().t(localStorage.getItem('lang'), "devices")}:
+                                ${newT.t(localStorage.getItem('lang'), "devices")}:
                                 <div id="attached_devices"></div>
                             </div>`
                 );
@@ -212,17 +246,19 @@ function drawFields(body, json, inheritedColor = '') {
         } else { // collapsible parts
             const { input_name, input_id } = {
                 input_name: divLevel.name,
-                input_id: divLevel.name.toLowerCase().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replaceAll('/', '_')
+                input_id: divLevel.name.toLowerCase().trim().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replace(/[/]/g, '')
             }
 
             var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
 
-            var inside = `<button class="${inheritedColor || (colors ? BUTTON_COLORS[colors] : '') } collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+            var inside = `<button class="${inheritedColor || (colors ? BUTTON_COLORS[colors] : '')} collapsible ml-1 collapsible_${input_id}">${input_name}</button>
                 <div class="collapsible-content col-12">
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
+
             body.insertAdjacentHTML('beforeend', inside);
             let div = body.querySelector(`#${input_id}`);
+
             elementsCreationHandler(div, divLevel.fields);
 
             collapsible(`collapsible_${input_id}`)
@@ -289,7 +325,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             addButton(title, field, div);
             //    //, 50);
             //}
-        } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0 && typeof(jsonAtLevel[field]) !== 'string') {
+        } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0 && typeof (jsonAtLevel[field]) !== 'string') {
             elementsCreationHandler(div, jsonAtLevel[field])
         }
     });
@@ -306,12 +342,12 @@ const addButton = (title, schemaKey, div, localJSON = {}) => {
     let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
 
     // button color definition
-    let color = indexFlag ? localJSON.deviceType : ""; 
+    let color = indexFlag ? localJSON.deviceType : "";
     if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
     else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
 
     // title definition
-    var titleTranslated = new T().t(localStorage.getItem('lang'), title.trim().toLowerCase().replace(/[\s*.?!#_]/g, ''));
+    var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
 
     let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${schemaKey}'${!indexFlag ? `, 'Highlight':'${schemaKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
                 <div class="btnStyle ${color}">
@@ -379,10 +415,9 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                     let checkedJson = Object.keys(currentDeviceNameObject)
                         .map(channel => currentDeviceNameObject[channel]["uses"])
                         .filter(uses => uses === null || (Array.isArray(uses) && uses.length === 0));
-                    if (checkedJson.length === 0)
-                    {
+                    if (checkedJson.length === 0) {
                         return {
-                            value: deviceName, label: `${address}. ${name} - ${new T().t(localStorage.getItem('lang'), 'all_channels_used') }`, selected: CONFIGURED_IO[key][deviceName]["selected"]
+                            value: deviceName, label: `${address}. ${name} - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`, selected: CONFIGURED_IO[key][deviceName]["selected"]
                         };
                     }
                     return { value: deviceName, label: address + '. ' + name, selected: CONFIGURED_IO[key][deviceName]["selected"] };
@@ -399,7 +434,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                     let nameLst = ch.split('/');
                     let name = nameLst[0] ? nameLst[0] : nameLst[1];
                     if (jsonAtLevel3[ch]["uses"] && Array.isArray(jsonAtLevel3[ch]["uses"]) && jsonAtLevel3[ch]["uses"].length > 0) {
-                        return { value: ch, label: `${name} - ${new T().t(localStorage.getItem('lang'), 'used')}`, selected: jsonAtLevel3[ch]["selected"] };
+                        return { value: ch, label: `${name} - ${newT.t(localStorage.getItem('lang'), 'used')}`, selected: jsonAtLevel3[ch]["selected"] };
                     }
                     return { value: ch, label: name, selected: jsonAtLevel3[ch]["selected"] };
                 });
@@ -417,20 +452,20 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 <div class="select">
                     <select id="${selectId}" name="${selectId}"
                         onchange="javascript: ${nextFunc}" >
-                        <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${new T().t(localStorage.getItem('lang'), 'select_an_option') }</option>`;
+                        <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
     dataUsed.map(o => {
         let disabled = ""; let tooltip = "";
         if (level >= 2) {
-            if (type.toLowerCase() === "output" && (o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'used')}`) || o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'all_channels_used')}`))) {
+            if (type.toLowerCase() === "output" && (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`) || o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`))) {
                 disabled = 'disabled style="color: red"'
             }
-            if (o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'used')}`)) {
+            if (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`)) {
                 let againJsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
                 tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
             }
-            if (o["label"].includes(` - ${new T().t(localStorage.getItem('lang'), 'all_channels_used')}`)) {
+            if (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)) {
                 let jsonAtLevel2 = CONFIGURED_IO[key][o["value"]];
-                tooltip += `title="${new T().t(localStorage.getItem('lang'), 'used_in')}: {`;
+                tooltip += `title="${newT.t(localStorage.getItem('lang'), 'used_in')}: {`;
                 for (let channel in jsonAtLevel2) {
                     let channelInfo = channel.split("/");
                     tooltip += `{ ${channelInfo[0] ? channelInfo[0] : channelInfo[1]} -> ${jsonAtLevel2[channel]["uses"]} }`;
@@ -438,8 +473,8 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 tooltip += `}"`;
             }
         }
-        
-        inner += `<option value="${o["value"]}" ${disabled} ${tooltip} ${o["selected"] ? "selected": ""}>${o["label"]}</option>`
+
+        inner += `<option value="${o["value"]}" ${disabled} ${tooltip} ${o["selected"] ? "selected" : ""}>${o["label"]}</option>`
     });
     inner += `</select>
                 </div>`;
@@ -463,13 +498,13 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 function createLoopTypeMenu(selectDiv, showDiv, path) {
     let fieldset = document.createElement("fieldset");
     fieldset.id = "loop_type-" + showDiv.id;
-    fieldset.insertAdjacentHTML('afterbegin', `<legend>${new T().t(localStorage.getItem('lang'), 'loop_type')}</legend>`);
+    fieldset.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), 'loop_type')}</legend>`);
     let pathFound = path, channel_path = "", loop_number = "", device = "";
     /*  value reading: the whole is the channel path
      * "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1"
      * --------loop number----------#--device---.-----------------channel-------------------.-address-
      * */
-    
+
     if (Array.isArray(path)) {
         pathFound = path[0];
         channel_path = path[1];
@@ -494,7 +529,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
                 addElementToCONFIGURED_IO(loop_number, device, channel_path);
 
                 showLoopType(1, "Input", "", fieldset.id, selectDiv.id);
-            
+
             }).catch(err => alert("Error" + err)); break;
         default:
             alert("something is wrong");
@@ -536,7 +571,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 const transformGroupElement = (elementJson) => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: new T().t(localStorage.getItem('lang'), (elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().toLowerCase().replace(/[\s*.?!#_]/g, '')) , //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: newT.t(localStorage.getItem('lang'), (elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] && elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -552,7 +587,7 @@ const transformGroupElement = (elementJson) => {
         size: elementJson['@SIZE'],
         value: elementJson["~value"] ? elementJson["~value"] : (elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : "")),
     };
-    
+
     switch (attributes.type) {
         case 'AND':
             let andElementsList = elementJson["PROPERTIES"] && elementJson["PROPERTIES"]["PROPERTY"];
@@ -586,13 +621,13 @@ const transformGroupElement = (elementJson) => {
                                         onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
                                                               loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checkType'));" >`;
             tabsKeys.map(o => {
-                
+
                 let disabled = false; // todo
                 let checkType = "";
                 if (tabs[o].hasOwnProperty("~enabled")) {// if exists such field ["~enabled"]
                     // alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
                     disabled = !tabs[o]["~enabled"];
-                    if (tabs[o]["~enabled"]) {                        
+                    if (tabs[o]["~enabled"]) {
                         checkType = `checkType='${tabs[o]["~path"]}'`;
                     }
                 }
@@ -603,7 +638,7 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     selected = !!(+tabs[o]['@DEFAULT']) ? "selected" : "";
                 }
-                inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${tabs[o]['@NAME']} </option>`
+                inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${newT.t(localStorage.getItem('lang'), tabs[o]['@NAME'].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, ''))} </option>`
             });
             inner += `</select>
                             </div>
@@ -627,7 +662,7 @@ const transformGroupElement = (elementJson) => {
                     let elementJSON;
                     if (tabs[key]["PROPERTIES"]) {
                         if (!tabFlag) {
-                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${tabs[key]["PROPERTIES"]["PROPERTY"]["@TEXT"]}</legend>`);
+                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), tabs[key]["PROPERTIES"]["PROPERTY"]["@TEXT"].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, ''))}</legend>`);
                         }
                         elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
 
@@ -697,11 +732,11 @@ const transformGroupElement = (elementJson) => {
             }
             if (attributes.input_name.toLowerCase().includes('enable')) {
                 attributes.input_name = '';
-                attributes.input_name_on = 'Enabled';
-                attributes.input_name_off = 'Disabled';
+                attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'enabled');
+                attributes.input_name_off = newT.t(localStorage.getItem('lang'), 'disabled');
             } else {
-                attributes.input_name_on = 'ON';
-                attributes.input_name_off = 'OFF';
+                attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'on');
+                attributes.input_name_off = newT.t(localStorage.getItem('lang'), 'off');
             }
             if (attributes.value === "True") attributes.checked = true;
             else if (attributes.value === "False") attributes.checked = false;
@@ -720,9 +755,12 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     sel = !!(o['@DEFAULT']);
                 }
+                let label = newT.t(localStorage.getItem('lang'), o['@NAME'].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, '')) === "Not found translation key" ?
+                                o['@NAME'] :
+                                newT.t(localStorage.getItem('lang'), o['@NAME'].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, ''));
                 let tmp = {
                     value: o['@VALUE'],
-                    label: o['@NAME'],
+                    label: label,
                     selected: sel
                 };
                 if (o['ScheduleKey']) tmp.link = o['ScheduleKey'];
@@ -786,7 +824,7 @@ collapsible();
 //#endregion
 
 //#region pagePreparation, contextMenu, toggleDarkMode
-function pagePreparation () {
+function pagePreparation() {
     $(document).ready(() => {
         addVisitedBackground();
         $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
@@ -851,39 +889,6 @@ function toggleDarkMode(show, filename) {
         let ss = document.getElementById(darkModeStylesheetId);
         ss.parentNode.removeChild(ss);
     }
-}
-//#endregion
-
-//#region Language Funcs
-class T {
-    getLangs = () => {
-        return Translations.languages;
-    }
-
-    t = (lang, key) => {
-        let k = Translations.translations[key];
-        if (!k) {
-            return "Not found translation key";
-        }
-        let t = k[lang];
-        if (!t) {
-            return "Not found translation language";
-        }
-        return t;
-    }
-}
-
-function toggleLang(key) {
-    if (Translations.languages.map(x => x.key).includes(key)) {
-        localStorage.setItem('lang', Translations.languages.find(x => x.key === key).id);
-    } else {
-        localStorage.setItem('lang', 'en');
-    }
-    document.location.reload();
-}
-
-if (!localStorage.getItem('lang')) {
-    localStorage.setItem('lang', 'en');
 }
 //#endregion
 
@@ -979,7 +984,7 @@ function weekChangedValueHandler(scheduleId, index, newValue, path) {
 }
 
 function addElementToCONFIGURED_IO(loop_number, device, channel_path) {
-    if (!channel_path || !CONFIGURED_IO) return; 
+    if (!channel_path || !CONFIGURED_IO) return;
     for (let loopProp in CONFIGURED_IO) {
         if (loopProp === loop_number) {
             CONFIGURED_IO[loopProp]["selected"] = true;
@@ -1072,11 +1077,11 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                             onchange="javascript: ${modal ? modal : `sendMessageWPF(
                                 {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
                                 ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""})
-                                ${image ? `; loadDiv(this,'showSchema_${input_id}', this.value + '_function');` : "" }
+                                ${image ? `; loadDiv(this,'showSchema_${input_id}', this.value + '_function');` : ""}
                             `}" >`;
     if (selectList.length > 0) {
         let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
-        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || new T().t(localStorage.getItem('lang'), 'select_an_option') }</option>`;
+        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
         selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
     }
     str += `</select></div>${image ? "" : "</div>"}`;
@@ -1088,10 +1093,10 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
         }
         str += `</div>`;
 
-        selectList.map(o => str += `<div style="display: none" id="${ o["value"] + "_function" }">
+        selectList.map(o => str += `<div style="display: none" id="${o["value"] + "_function"}">
             <img src="${BUTTON_IMAGES[o.imageKey].im}" alt="${o.imageKey}" />
         </div>`);
-        str+="</fieldset>"
+        str += "</fieldset>"
     }
     return str;
 }
@@ -1193,7 +1198,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
     for (let i = 0; i < data.length; i++) {
         if (i % 2 === 0) inner += `<fieldset class="col-xs-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
         inner += ` <div class="form-item roww mw">
-                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? new T().t(localStorage.getItem('lang'), 'activate') : new T().t(localStorage.getItem('lang'), 'deactivate') }</label>
+                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? newT.t(localStorage.getItem('lang'), 'activate') : newT.t(localStorage.getItem('lang'), 'deactivate')}</label>
                         <input class="ml10${i % 2 === 0 ? 'p' : ''}"
                                 type="text"
                                 id="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
@@ -1211,7 +1216,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
     return inner;
 }
 
-const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path = "", value, size  }) => {
+const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path = "", value, size }) => {
     let inner = `<fieldset id="${input_id}">
                 <legend>${input_name}</legend>
                 <div class="form-item roww row mr-1">`;
@@ -1219,7 +1224,7 @@ const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path =
         inner += `<div class="col-3 p-0">
                         <input type="number" id="${input_id}_${i}" name="${input_id}_${i}" data-maxlength="${max.length}" oninput="javascript: myFunction(this.id); myFunction2(this.id);" onblur="javascript: " value="${value}" min="${min}" max="${max}">
                     </div>`;
-    }                    
+    }
     inner += `</div>
             </fieldset >`;
     return inner;
@@ -1340,7 +1345,7 @@ function addElement(id, elementType = "") {
 function createElementButton(last, elementType) {
     let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
-    
+
     const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
         `<div class="col-12" id=${last}>
                 <div class="row">
@@ -1367,7 +1372,7 @@ function createElementButton(last, elementType) {
                     <div class="row">
                         <fieldset style="min-width: 200px;">
                             <legend>Input Group ${last}</legend>
-                                <label for="gr_input_logic_${last}">Input logic</label>:
+                                <label for="gr_input_logic_${last}">${newT.t(localStorage.getItem('lang'), "input_logic")}</label>:
                                 <p class="fire">
                                     AND
                                     <label class="switch">
@@ -1409,11 +1414,11 @@ function createElementButton(last, elementType) {
 }
 
 const inputGroupHandler = (elementType, id, isOR) => {
-    let newValue = isOR ? "0": "255";
+    let newValue = isOR ? "0" : "255";
     boundAsync.getJsonForElement(elementType, +id).then(res => {
         let returnedJson = JSON.parse(res)
         let returnedJsonPath = returnedJson[Object.keys(returnedJson)[0]]["fields"]["Input_Logic"]["~path"];
-        sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${returnedJsonPath}` ,'newValue': newValue}})
+        sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${returnedJsonPath}`, 'newValue': newValue } })
     });
 };
 
@@ -1426,7 +1431,7 @@ async function showElement(id, elementType) {
         let result = await boundAsync.getJsonForElement(elementType, +id); // ret for test////////////////////////////////////////////////////////////////
         returnedJson = JSON.parse(result);
         if (!returnedJson) {
-            alert(new T().t(localStorage.getItem('lang'), 'error_happened'));
+            alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
             return;
         }
         if (Object.keys(returnedJson).length > 0) {

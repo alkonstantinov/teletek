@@ -765,10 +765,12 @@ fieldset {
 
     .multi-button .btn-border-black:nth-child(1) {
         padding-left: 0.75rem;
+        padding-right: 0;
     }
 
     .multi-button :nth-child(3) {
         padding-right: 0.75rem;
+        padding-left: 0;
     }
 }
 
@@ -779,7 +781,7 @@ fieldset {
     }
 
     .multi-button .btn-border-black:nth-child(1), .multi-button :nth-child(3) {
-        padding: 0 0.3rem;
+        padding: 0 0.2rem;
     }
 }
 

@@ -21,7 +21,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="mainTbl" Text="Settings" Margin="25, 0" FontSize="18" VerticalAlignment="Center" Foreground="{Binding Foreground}"/>
+                    <TextBlock x:Name="mainTbl" Text="{DynamicResource SettingsMenuSettings}" Margin="25, 0" FontSize="18" VerticalAlignment="Center" Foreground="{Binding Foreground}"/>
                     <Button Name="exit_btn" Grid.Column="1" Click="ExitSettings_Clicked" Background="Transparent" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xF00D;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Center"/>
                     </Button>
@@ -30,7 +30,8 @@
         </Border>
         <Grid Grid.Row="1" Margin="15,2">
             <StackPanel Margin="10">
-                <CheckBox Name="autoCheck" FontSize="14" VerticalContentAlignment="Center" Foreground="{Binding Foreground}">Automatic check for updates</CheckBox>
+                <CheckBox Name="autoCheck" FontSize="14" VerticalContentAlignment="Center" Foreground="{Binding Foreground}">
+                    <TextBlock Text="{DynamicResource SettingsMenuAuto}"></TextBlock></CheckBox>
             </StackPanel>
         </Grid>
         <Border Grid.Row="2" BorderBrush="#e8e9ea" BorderThickness="0 2 0 0" >
@@ -43,7 +44,7 @@
                     </Grid.ColumnDefinitions>
                     <DockPanel Margin="10, 10, 10, 10" Height="50">
                         <Button Click="OKSettings_Clicked" Background="#0d91e4" Foreground="#eee" BorderThickness="0">
-                            <TextBlock Text="OK" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBlock Text="{DynamicResource SettingsMenuOK}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>
@@ -53,7 +54,7 @@
                     </DockPanel>
                     <DockPanel Grid.Column="1" Margin="10, 10, 10, 10" Height="50">
                         <Button Click="ExitSettings_Clicked" Background="#777" Foreground="#eee" BorderThickness="0">
-                            <TextBlock Text="Close" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBlock Text="{DynamicResource MenuClose}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>
@@ -63,7 +64,7 @@
                     </DockPanel>
                     <DockPanel Grid.Column="2" Margin="10, 10, 10, 10">
                         <Button Click="Help_Clicked" Background="#0c2b90" Foreground="#ccc" BorderThickness="0">
-                            <TextBlock Text="Help" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBlock Text="{DynamicResource MainMenuHelp}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>

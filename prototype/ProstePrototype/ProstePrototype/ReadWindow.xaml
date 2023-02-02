@@ -48,7 +48,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="txtBlk" Text="Read from device" Margin="25, 10" FontSize="18" VerticalAlignment="Stretch" Foreground="{Binding Foreground}"></TextBlock>
+                    <TextBlock x:Name="txtBlk" Text="{DynamicResource ScanMenuHeader}" Margin="25, 10" FontSize="18" VerticalAlignment="Stretch" Foreground="{Binding Foreground}"></TextBlock>
                     <Button Grid.Column="1" Click="Exit_Clicked" Background="Transparent" Foreground="#7c7c7d" BorderThickness="0" VerticalContentAlignment="Center">
                         <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Bottom"></TextBlock>
                     </Button>
@@ -104,10 +104,10 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem Header="TCP" FontSize="14">
+                <TabItem Header="{DynamicResource ScanMenuTCP}" FontSize="14">
                     <StackPanel Margin="30">
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label x:Name="lbHost" Content="_Host IP:" Target="{Binding ElementName=txtHostIp}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                            <Label x:Name="lbHost" Content="{DynamicResource ScanMenuHostIp}" Target="{Binding ElementName=txtHostIp}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
                             <!--<TextBox Name="txtHostIp" Padding="2" FontSize="14" Margin="10, 0" VerticalAlignment="Center" Width="300" />-->
                             <Grid Name="txtHostIp" Margin="10, 0" VerticalAlignment="Center" Width="390">
                                 <Grid.ColumnDefinitions>
@@ -158,7 +158,7 @@
                             </Grid>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label x:Name="lbPort" Content="_Port:" Target="{Binding ElementName=txtPort}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                            <Label x:Name="lbPort" Content="{DynamicResource ScanMenuPort}" Target="{Binding ElementName=txtPort}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
                             <!--<muxc:NumberBox Value="{x:Bind Path=ViewModel.NumberBoxValue, Mode=TwoWay}"
                             SmallChange="1"
                             LargeChange="10"
@@ -170,7 +170,7 @@
                         </StackPanel>
                     </StackPanel>
                 </TabItem>
-                <TabItem Header="USB" FontSize="14">
+                <TabItem Header="{DynamicResource ScanMenuUSB}" FontSize="14">
                     <ListBox x:Name="listBox" Padding="0, 20" BorderThickness="0, 0, 0, 0" Foreground="{Binding Foreground}" Background="{Binding Background}">
                         <ListBoxItem FontSize="16" Padding="30, 15" 
                                      BorderThickness="0, 0, 0, 1" BorderBrush="#777" 
@@ -189,7 +189,7 @@
                         </ListBoxItem>
                     </ListBox>
                 </TabItem>
-                <TabItem Header="RS232" FontSize="14">
+                <TabItem Header="{DynamicResource ScanMenuRS}" FontSize="14">
                     <StackPanel Margin="10">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -203,23 +203,23 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label x:Name="lbComPort" Content="_COM Port" Target="{Binding ElementName=comPort}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <ComboBox Name="comPort" Margin="29, 0"  VerticalContentAlignment="Center" >
-                                        <ComboBoxItem IsSelected="True">Choose COM Port</ComboBoxItem>
+                                    <Label x:Name="lbComPort" Content="{DynamicResource ScanMenuRSCom}" Target="{Binding ElementName=comPort}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                                    <ComboBox Name="comPort" Margin="17, 0"  VerticalContentAlignment="Center" >
+                                        <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSComChoice}"></ComboBoxItem>
                                         <ComboBoxItem>1</ComboBoxItem>
                                         <ComboBoxItem>3</ComboBoxItem>
                                         <ComboBoxItem>9</ComboBoxItem>
                                     </ComboBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
-                                    <Label x:Name="lbParity" Content="_Parity" Target="{Binding ElementName=parity}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                                    <Label x:Name="lbParity" Content="{DynamicResource ScanMenuRSParity}" Target="{Binding ElementName=parity}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
                                     <ComboBox Name="parity" Margin="30, 0" VerticalContentAlignment="Center" >
-                                        <ComboBoxItem IsSelected="True">Choose Parity</ComboBoxItem>
-                                        <ComboBoxItem>None</ComboBoxItem>
-                                        <ComboBoxItem>Even</ComboBoxItem>
-                                        <ComboBoxItem>Mark</ComboBoxItem>
-                                        <ComboBoxItem>Odd</ComboBoxItem>
-                                        <ComboBoxItem>Space</ComboBoxItem>
+                                        <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSParityChoice}"></ComboBoxItem>
+                                        <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceNone}"></ComboBoxItem>
+                                        <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceEven}"></ComboBoxItem>
+                                        <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceMark}"></ComboBoxItem>
+                                        <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceOdd}"></ComboBoxItem>
+                                        <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceSpace}"></ComboBoxItem>
                                     </ComboBox>
                                 </StackPanel>
                             </Grid>
@@ -229,9 +229,9 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label x:Name="lbBaudRate" Content="_Baud Rate" Target="{Binding ElementName=baudRate}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <ComboBox Name="baudRate" Margin="27, 0"  VerticalContentAlignment="Center" >
-                                        <ComboBoxItem IsSelected="True">Choose Baud Rate</ComboBoxItem>
+                                    <Label x:Name="lbBaudRate" Content="{DynamicResource ScanMenuRSBaudRate}" Target="{Binding ElementName=baudRate}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                                    <ComboBox Name="baudRate" Margin="14, 0"  VerticalContentAlignment="Center" >
+                                        <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSBaudRateChoice}"></ComboBoxItem>
                                         <ComboBoxItem>2400</ComboBoxItem>
                                         <ComboBoxItem>4800</ComboBoxItem>
                                         <ComboBoxItem>9600</ComboBoxItem>
@@ -241,9 +241,9 @@
                                 </StackPanel>
                                 
                                 <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
-                                    <Label x:Name="lbStopBits" Content="_Stop Bits" Target="{Binding ElementName=stopBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                                    <Label x:Name="lbStopBits" Content="{DynamicResource ScanMenuRSStopBits}" Target="{Binding ElementName=stopBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
                                     <ComboBox Name="stopBits" Margin="10, 0"  VerticalContentAlignment="Center" >
-                                        <ComboBoxItem IsSelected="True">Choose Stop Bits</ComboBoxItem>
+                                        <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSStopBitsChoice}"></ComboBoxItem>
                                         <ComboBoxItem>0</ComboBoxItem>
                                         <ComboBoxItem>1</ComboBoxItem>
                                         <ComboBoxItem>1.5</ComboBoxItem>
@@ -257,8 +257,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label x:Name="lbDataBits" Content="_Data Bits:" Target="{Binding ElementName=dataBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <TextBox Name="dataBits" Padding="2" FontSize="14" Margin="31, 0"
+                                    <Label x:Name="lbDataBits" Content="{DynamicResource ScanMenuRSDataBits}" Target="{Binding ElementName=dataBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                                    <TextBox Name="dataBits" Padding="2" FontSize="14" Margin="21, 0"
                                      TextAlignment="Right" 
                                      PreviewTextInput="NumericOnly" 
                                      VerticalAlignment="Center" Width="100"/>
@@ -279,7 +279,7 @@
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="1" Margin="0, 10, 10, 10" Height="50">
                         <Button Click="Connect_Clicked" Background="#0d91e4" Foreground="#eee" BorderThickness="0">
-                            <TextBlock Text="Connect" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBlock Text="{DynamicResource ScanMenuConnect}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>
@@ -289,7 +289,7 @@
                     </DockPanel>
                     <DockPanel Grid.Column="2" Margin="0, 10, 10, 10">
                         <Button Click="Exit_Clicked" Background="#777" Foreground="#ccc" BorderThickness="0">
-                            <TextBlock Text="Close" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBlock Text="{DynamicResource MenuClose}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="2"/>

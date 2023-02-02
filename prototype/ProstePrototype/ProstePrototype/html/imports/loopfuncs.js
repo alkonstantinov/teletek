@@ -172,7 +172,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
             case (key === "LED"):
             case (key.includes("SOUND")):
             case (key.includes("DUST")):
-                if (!fieldsetParameters) fieldsetParameters = createFieldset(`params_${loopType}_${deviceName}_${address}`, "Parameters");
+                if (!fieldsetParameters) fieldsetParameters = createFieldset(`params_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "parameters"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetParameters.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
                 break;
@@ -180,17 +180,17 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
                 //deviceData[key]["ITEMS"]["ITEM"][ParseInt(deviceData[key]["value"])]["@NAME"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@NAME"]
                 deviceData[key]["openModalFirst"] = `openChannelModal(this.id, '${deviceData[key]["~path"]}', '${deviceData[key]["@TEXT"]}', '${deviceData[key]["value"] ? deviceData[key]["value"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@DEFAULT"]}', '${deviceData[key]["ITEMS"]["ITEM"].map(x => x["@NAME"])}', this.value)`;
             case (key.includes("NAME_I")):
-                if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Channels");
+                if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "channels"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
                 break;
             case (key.includes("ALARMLEVEL")):
-                if (!fieldsetAlarmLevel) fieldsetAlarmLevel = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Levels");
+                if (!fieldsetAlarmLevel) fieldsetAlarmLevel = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "levels"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetAlarmLevel.insertAdjacentHTML('beforeend', `<div class="col-12">${inner}</div>`);
                 break;
             case (key.includes("VERIFYTIME")):
-                if (!fieldsetVerifyTime) fieldsetVerifyTime = createFieldset(`channels_${loopType}_${deviceName}_${address}`, "Verification");
+                if (!fieldsetVerifyTime) fieldsetVerifyTime = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "verification"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetVerifyTime.insertAdjacentHTML('beforeend', `<div class="col-12">${inner}</div>`);
                 break;
@@ -471,7 +471,7 @@ function showLoop(loopNumber, loopType) {
                         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                             <button style="display: inline-flex; margin: -5px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;"
                                 data-toggle="modal" data-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
-                                    <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "sensor/module_in_loop")} ${loopNumber}
+                                    <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}
                             </button>
                         </div>`;
 

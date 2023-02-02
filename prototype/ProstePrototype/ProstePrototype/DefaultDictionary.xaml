@@ -1,0 +1,52 @@
+﻿<ResourceDictionary x:Class="ProstePrototype.DefaultDictionary"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ProstePrototype"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="MainMenuNew">New</system:String>
+    <system:String x:Key="MainMenuScan">Scan</system:String>
+    <system:String x:Key="MainMenuExport">Export</system:String>
+    <system:String x:Key="MainMenuFile">File</system:String>
+    <system:String x:Key="MainMenuOpen">Open</system:String>
+    <system:String x:Key="MainMenuSave">Save</system:String>
+    <system:String x:Key="MainMenuSaveas">Save As</system:String>
+    <system:String x:Key="MainMenuWrite">Write</system:String>
+    <system:String x:Key="MainMenuLog">Log</system:String>
+    <system:String x:Key="MainMenuClock">Clock/Date</system:String>
+    <system:String x:Key="MainMenuVerify">Verify</system:String>
+    <system:String x:Key="MainMenuSettings">Settings</system:String>
+    <system:String x:Key="MainMenuLanguages">Languages</system:String>
+    <system:String x:Key="MainMenuTheme">Change Theme</system:String>
+    <system:String x:Key="MainMenuUpdate">Update</system:String>
+    <system:String x:Key="MainMenuHelp">Help</system:String>
+    <system:String x:Key="MainMenuToTray">Minimize to Tray</system:String>
+    <system:String x:Key="MainMenuRestore">Maximize or Restore</system:String>
+    <system:String x:Key="MainMenuExit">Exit</system:String>
+    <system:String xml:space="preserve" x:Key="MainMenuCopyright">© 2022 Copyright: </system:String>
+    <system:String xml:space="preserve" x:Key="MainMenuTE">Teletek Electronics</system:String>
+    <system:String x:Key="SettingsMenuSettings">Settings</system:String>
+    <system:String x:Key="SettingsMenuAuto">Automatic check for updates</system:String>
+    <system:String x:Key="SettingsMenuOK">OK</system:String>
+    <system:String x:Key="MenuClose">Close</system:String>
+    <system:String x:Key="ScanMenuHeader">Read from device</system:String>
+    <system:String x:Key="ScanMenuTCP">TCP</system:String>
+    <system:String x:Key="ScanMenuHostIp">_Host IP:</system:String>
+    <system:String x:Key="ScanMenuPort">_Port:</system:String>
+    <system:String x:Key="ScanMenuUSB">USB</system:String>
+    <system:String x:Key="ScanMenuRS">RS 232</system:String>
+    <system:String x:Key="ScanMenuRSCom">_COM Port</system:String>
+    <system:String x:Key="ScanMenuRSComChoice">Choose COM Port</system:String>
+    <system:String x:Key="ScanMenuRSParity">_Parity</system:String>
+    <system:String x:Key="ScanMenuRSParityChoice">Choose Parity</system:String>
+    <system:String x:Key="ScanMenuRSParityChoiceNone">None</system:String>
+    <system:String x:Key="ScanMenuRSParityChoiceEven">Even</system:String>
+    <system:String x:Key="ScanMenuRSParityChoiceMark">Mark</system:String>
+    <system:String x:Key="ScanMenuRSParityChoiceOdd">Odd</system:String>
+    <system:String x:Key="ScanMenuRSParityChoiceSpace">Space</system:String>
+    <system:String x:Key="ScanMenuRSBaudRate">_Baud Rate</system:String>
+    <system:String x:Key="ScanMenuRSBaudRateChoice">Choose Baud Rate</system:String>
+    <system:String x:Key="ScanMenuRSStopBits">_Stop Bits</system:String>
+    <system:String x:Key="ScanMenuRSStopBitsChoice">Choose Stop Bits</system:String>
+    <system:String x:Key="ScanMenuRSDataBits">_Data Bits</system:String>
+    <system:String x:Key="ScanMenuConnect">Connect</system:String>
+</ResourceDictionary>

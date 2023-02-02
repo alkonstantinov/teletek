@@ -55,8 +55,7 @@
                 <Setter.Value>
                     <ToolTip>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Languages"/>
-                            <!--!!!Hardcoded Tooltip-->
+                            <TextBlock Text="{DynamicResource MainMenuLanguages}"/>
                         </StackPanel>
                     </ToolTip>
                 </Setter.Value>
@@ -86,8 +85,7 @@
                 <Setter.Value>
                     <ToolTip>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="File"/>
-                            <!--!!!Hardcoded Tooltip-->
+                            <TextBlock Text="{DynamicResource MainMenuFile}"/>
                         </StackPanel>
                     </ToolTip>
                 </Setter.Value>
@@ -125,20 +123,14 @@
                 <Image Source="/Images/teletek_logo_m.png" Margin="10,0,0,-25" Width="380" Height="75" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown"/>
 
                 <DockPanel Grid.Column="1" >
-                    <Button x:Name="scan_btn" Click="Scan_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="scan_btn" ToolTip="{DynamicResource MainMenuScan}" Click="Scan_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Scan</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
 
                 <DockPanel Grid.Column="2">
-                    <Button x:Name="export_btn" Click="Export_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="export_btn" ToolTip="{DynamicResource MainMenuExport}" Click="Export_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Export</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
 
@@ -162,22 +154,22 @@
                                         <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
                                     </DockPanel>
                                 </MenuItem.Header>
-                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="New" Click="New_Clicked">
+                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuNew}" Click="New_Clicked">
                                     <MenuItem.Header>
                                         <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom" Padding="0, 20"></TextBlock>
                                     </MenuItem.Header>
                                 </MenuItem>
-                                <MenuItem Click="Open_Clicked" Style="{StaticResource FileStyle}" ToolTip="Open">
+                                <MenuItem Click="Open_Clicked" Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuOpen}">
                                     <MenuItem.Header>
                                         <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                                     </MenuItem.Header>
                                 </MenuItem>
-                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="Save">
+                                <MenuItem Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuSave}">
                                     <MenuItem.Header>
                                         <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                                     </MenuItem.Header>
                                 </MenuItem>
-                                <MenuItem Click="SaveAs_Clicked" Style="{StaticResource FileStyle}" ToolTip="Save As">
+                                <MenuItem Click="SaveAs_Clicked" Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuSaveas}">
                                     <MenuItem.Header>
                                         <TextBlock Text="&#xf570;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                                     </MenuItem.Header>
@@ -188,44 +180,29 @@
                 </StackPanel>
 
                 <DockPanel Grid.Column="4">
-                    <Button x:Name="write_btn" Click="Write_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="write_btn" ToolTip="{DynamicResource MainMenuWrite}" Click="Write_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Write</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="5">
-                    <Button x:Name="log_btn" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="log_btn" ToolTip="{DynamicResource MainMenuLog}" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Log</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="6">
-                    <Button x:Name="clock_btn" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="clock_btn" ToolTip="{DynamicResource MainMenuClock}" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Clock/Date</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="7">
-                    <Button x:Name="verify_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="verify_btn" ToolTip="{DynamicResource MainMenuVerify}" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Verify</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
 
                 <DockPanel Grid.Column="8">
-                    <Button x:Name="settings_btn" Click="SettingsClicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="settings_btn" ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Settings</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                 </DockPanel>
                 <StackPanel Grid.Column="9" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
@@ -458,18 +435,12 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button x:Name="minimize_btn" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="1, 0, 0, 1">
+                    <Button x:Name="minimize_btn" ToolTip="{DynamicResource MainMenuToTray}" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="1, 0, 0, 1">
                         <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
-                        <Button.ToolTip>
-                            <ToolTip>Minimize to Tray</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                     <DockPanel Grid.Row="1">
-                        <Button x:Name="changeTheme_btn" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <Button x:Name="changeTheme_btn" ToolTip="{DynamicResource MainMenuTheme}" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                             <TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="36"/>
-                            <Button.ToolTip>
-                                <ToolTip>Change Theme</ToolTip>
-                            </Button.ToolTip>
                         </Button>
                     </DockPanel>
                 </Grid>
@@ -478,7 +449,7 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" x:Name="maximize_btn" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
+                    <Button Grid.Row="0" x:Name="maximize_btn" ToolTip="{DynamicResource MainMenuRestore}" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
@@ -503,16 +474,10 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-                        <Button.ToolTip>
-                            <ToolTip>Maximize or Restore</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                     <DockPanel Grid.Row="1">
-                        <Button x:Name="update_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <Button x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                             <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                            <Button.ToolTip>
-                                <ToolTip>Update</ToolTip>
-                            </Button.ToolTip>
                         </Button>
                     </DockPanel>
                 </Grid>
@@ -521,19 +486,12 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button x:Name="exit_btn" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
+                    <Button x:Name="exit_btn" ToolTip="{DynamicResource MainMenuExit}" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
                         <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
-                        <!--<TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"/>-->
-                        <Button.ToolTip>
-                            <ToolTip>Exit</ToolTip>
-                        </Button.ToolTip>
                     </Button>
                     <DockPanel Grid.Row="1">
-                        <Button x:Name="help_btn" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <Button x:Name="help_btn" ToolTip="{DynamicResource MainMenuHelp}" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
                             <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                            <Button.ToolTip>
-                                <ToolTip>Help</ToolTip>
-                            </Button.ToolTip>
                         </Button>
                     </DockPanel>
                 </Grid>
@@ -579,7 +537,7 @@
             <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
             <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
                 <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
-				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}"><Run Text="© 2022 Copyright: "/><Bold><Run Text="Teletek Electronics"/></Bold></TextBlock>
+				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}"><Run Text="{DynamicResource MainMenuCopyright}"/><Run FontWeight="Bold" Text="{DynamicResource MainMenuTE}"/></TextBlock>
                 <ProgressBar x:Name="progressBar1" HorizontalAlignment="Right" Width="400" Height="20" Panel.ZIndex="2" Background="Transparent" BorderThickness="0"/>
             </StackPanel>
         </Grid>

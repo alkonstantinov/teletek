@@ -408,7 +408,7 @@ namespace NewTeletekSW.Utils
 
                 if (keyH == "en")
                 {
-                    keyJ = value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { ' ', '*', '.', '?', '!' }) : "";
+                    keyJ = value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { '/', '*', '.', '?', '!' }) : "";
 
                     if (!String.IsNullOrEmpty(keyJ))
                     {

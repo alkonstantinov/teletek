@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace ProstePrototype
 {
@@ -33,6 +35,7 @@ namespace ProstePrototype
         private SettingsDialog settings;
 
         public bool DarkMode { get; set; }
+        public string language { get; set; }
 
         private double tempLeft { get; set; }
         private double tempTop { get; set; }
@@ -68,6 +71,7 @@ namespace ProstePrototype
             this.Icon = BitmapFrame.Create(iconUri);
 
             rw = new ReadWindow();
+            rw.Resources= this.Resources;
             //rw.LostFocus += _child_LostFocus;
 
             //// binding Column1 and wb1 Width trial
@@ -94,6 +98,9 @@ namespace ProstePrototype
             wb1.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
             wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
             wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
+
+            // add the language settings
+            HandleRessources(null);
         }
 
 
@@ -255,11 +262,58 @@ namespace ProstePrototype
         #region Language
         private void ChangeLanguage_Clicked(object sender, RoutedEventArgs e)
         {
-            string lang = (string)((HeaderedItemsControl)sender).Header;
+            language = (string)((HeaderedItemsControl)sender).Header;
+            HandleRessources(language);
 
-            var script = $"toggleLang('{lang}');";
-            wb1.ExecuteScriptAsync(script);
-            wb2.ExecuteScriptAsync(script);
+            SetWebBrowsersLang(language);
+        }
+
+        private void HandleRessources(string langKey)
+        {
+            string translationLocation = Path.Combine(applicationDirectory, "html/imports/translations.js").Replace(@"\", "/");
+            string translations = Regex.Replace(File.ReadAllText(translationLocation), @"^const Translations = ", "", RegexOptions.IgnoreCase);
+            JObject TransJson = JObject.Parse(translations.ToString());
+            JObject translationJson = (JObject)TransJson["translations"];
+            JArray languages = (JArray)TransJson["languages"];
+            string lang = "en";
+            ResourceDictionary dictionary = new ResourceDictionary();
+            dictionary.Source = new Uri("..\\DefaultDictionary.xaml", UriKind.Relative);
+
+            if (langKey != null)
+            {
+                foreach (var language in languages)
+                {
+                    if ((string)language["key"] == langKey)
+                    {
+                        lang = (string)language["id"];
+                        break;
+                    }
+                }
+
+                foreach (var dictKey in dictionary.Keys)
+                {
+                    dictionary[dictKey] = (string)translationJson[dictKey][lang];
+                }
+            }
+
+            this.Resources.MergedDictionaries.Add(dictionary);
+        }
+
+        private void SetWebBrowsersLang(string langKey)
+        {
+            if (langKey != null)
+            {
+                var script = $"toggleLang('{langKey}');";
+                wb1.ExecuteScriptAsync(script);
+                wb2.ExecuteScriptAsync(script);
+            }
+        }
+
+        private void ApplyLang()
+        {
+            string script = $"setLang('{language}');";
+            wb1.ExecuteScriptAsyncWhenPageLoaded(script);
+            wb2.ExecuteScriptAsyncWhenPageLoaded(script);
         }
         #endregion
 
@@ -517,7 +571,7 @@ namespace ProstePrototype
                 cJson.ReadDevice(ip, port);
             }
             rw = new ReadWindow();
-
+            rw.Resources = this.Resources;
         }
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {
@@ -568,6 +622,7 @@ namespace ProstePrototype
         private void SettingsClicked(object sender, RoutedEventArgs e)
         {
             settings = new SettingsDialog();
+            settings.Resources = this.Resources;
             settings.changeTheme(DarkMode);
             settings.ShowDialog();
         }
@@ -629,9 +684,10 @@ namespace ProstePrototype
             lvBreadCrumbs.Items.Clear();
 
             AddPagesConstant();
-
             ApplyTheme();
+            ApplyLang();
             rw = new ReadWindow();
+            rw.Resources = this.Resources;
         }
 
         private void Write_Clicked(object sender, RoutedEventArgs e)
