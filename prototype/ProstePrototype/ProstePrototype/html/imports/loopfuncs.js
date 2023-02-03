@@ -430,7 +430,7 @@ function showLoop(loopNumber, loopType) {
                 </div>
 
                 <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
-                    <button style="display: inline-flex; margin: -5px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;" 
+                    <button style="display: inline-flex; margin: -3px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;" 
                         data-toggle="modal" data-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
                             <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "device_in_loop")} ${loopNumber}
                     </button>

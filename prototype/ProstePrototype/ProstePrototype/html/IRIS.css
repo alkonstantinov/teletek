@@ -695,12 +695,13 @@ fieldset {
     font-weight: 700;
     text-align: center;
     min-height: 3.125em;
-    margin: -5px;
+    margin: -3px;
     position: relative;
 }
 
 .multi-button .btn-border-black:nth-child(1) {
     border-radius: 10px 0 0 10px;
+    border-right: none;
     padding-left: 2rem;
     /*margin-top: -8px;*/
 }
@@ -708,11 +709,11 @@ fieldset {
     border-radius: 0;
     border-left: none;
     border-right: none;
-    z-index: 99;
 }
 .multi-button :nth-child(3) {
     border-radius: 0 10px 10px 0;
     padding-right: 2rem;
+    border-left: none;
     /*margin-top: -8px;*/
 }
 
@@ -721,7 +722,7 @@ fieldset {
     border: 1px solid #42485a;
     color: #42485a;
     max-width: 25vw;
-    min-width: 103.75px;
+    min-width: 5vw;
 }
 
     .btn-border-black:hover {
