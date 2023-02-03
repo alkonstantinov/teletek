@@ -203,8 +203,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label x:Name="lbComPort" Content="{DynamicResource ScanMenuRSCom}" Target="{Binding ElementName=comPort}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <ComboBox Name="comPort" Margin="17, 0"  VerticalContentAlignment="Center" >
+                                    <Label x:Name="lbComPort" Content="{DynamicResource ScanMenuRSCom}" Target="{Binding ElementName=comPort}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}" MaxWidth="77"/>
+                                    <ComboBox Name="comPort" Margin="17, 0"  VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="150">
                                         <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSComChoice}"></ComboBoxItem>
                                         <ComboBoxItem>1</ComboBoxItem>
                                         <ComboBoxItem>3</ComboBoxItem>
@@ -212,8 +212,8 @@
                                     </ComboBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
-                                    <Label x:Name="lbParity" Content="{DynamicResource ScanMenuRSParity}" Target="{Binding ElementName=parity}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <ComboBox Name="parity" Margin="30, 0" VerticalContentAlignment="Center" >
+                                    <Label x:Name="lbParity" Content="{DynamicResource ScanMenuRSParity}" Target="{Binding ElementName=parity}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}" MaxWidth="77"/>
+                                    <ComboBox Name="parity" Margin="30, 0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="150">
                                         <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSParityChoice}"></ComboBoxItem>
                                         <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceNone}"></ComboBoxItem>
                                         <ComboBoxItem Content="{DynamicResource ScanMenuRSParityChoiceEven}"></ComboBoxItem>
@@ -229,8 +229,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label x:Name="lbBaudRate" Content="{DynamicResource ScanMenuRSBaudRate}" Target="{Binding ElementName=baudRate}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <ComboBox Name="baudRate" Margin="14, 0"  VerticalContentAlignment="Center" >
+                                    <Label x:Name="lbBaudRate" Content="{DynamicResource ScanMenuRSBaudRate}" Target="{Binding ElementName=baudRate}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}" MaxWidth="77"/>
+                                    <ComboBox Name="baudRate" Margin="14, 0"  VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="150">
                                         <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSBaudRateChoice}"></ComboBoxItem>
                                         <ComboBoxItem>2400</ComboBoxItem>
                                         <ComboBoxItem>4800</ComboBoxItem>
@@ -241,8 +241,8 @@
                                 </StackPanel>
                                 
                                 <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
-                                    <Label x:Name="lbStopBits" Content="{DynamicResource ScanMenuRSStopBits}" Target="{Binding ElementName=stopBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
-                                    <ComboBox Name="stopBits" Margin="10, 0"  VerticalContentAlignment="Center" >
+                                    <Label x:Name="lbStopBits" Content="{DynamicResource ScanMenuRSStopBits}" Target="{Binding ElementName=stopBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}" MaxWidth="77"/>
+                                    <ComboBox Name="stopBits" Margin="10, 0"  VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="150">
                                         <ComboBoxItem IsSelected="True" Content="{DynamicResource ScanMenuRSStopBitsChoice}"></ComboBoxItem>
                                         <ComboBoxItem>0</ComboBoxItem>
                                         <ComboBoxItem>1</ComboBoxItem>
@@ -257,7 +257,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label x:Name="lbDataBits" Content="{DynamicResource ScanMenuRSDataBits}" Target="{Binding ElementName=dataBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}"/>
+                                    <Label x:Name="lbDataBits" Content="{DynamicResource ScanMenuRSDataBits}" Target="{Binding ElementName=dataBits}" FontSize="14" FontWeight="Bold" Foreground="{Binding Foreground}" MaxWidth="77"/>
                                     <TextBox Name="dataBits" Padding="2" FontSize="14" Margin="21, 0"
                                      TextAlignment="Right" 
                                      PreviewTextInput="NumericOnly" 
