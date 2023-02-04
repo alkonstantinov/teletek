@@ -274,26 +274,25 @@ namespace ProstePrototype
             string translations = Regex.Replace(File.ReadAllText(translationLocation), @"^const Translations = ", "", RegexOptions.IgnoreCase);
             JObject TransJson = JObject.Parse(translations.ToString());
             JObject translationJson = (JObject)TransJson["translations"];
-            JArray languages = (JArray)TransJson["languages"];
+            JArray allLanguages = (JArray)TransJson["languages"];
             string lang = "en";
+            language = (langKey == null) ? TransJson["initial"].Value<string>() : language = langKey; 
+            
             ResourceDictionary dictionary = new ResourceDictionary();
             dictionary.Source = new Uri("..\\DefaultDictionary.xaml", UriKind.Relative);
-
-            if (langKey != null)
+                        
+            foreach (var langObj in allLanguages)
             {
-                foreach (var language in languages)
+                if ((string)langObj["key"] == language)
                 {
-                    if ((string)language["key"] == langKey)
-                    {
-                        lang = (string)language["id"];
-                        break;
-                    }
+                    lang = (string)langObj["id"];
+                    break;
                 }
+            }
 
-                foreach (var dictKey in dictionary.Keys)
-                {
-                    dictionary[dictKey] = (string)translationJson[dictKey][lang];
-                }
+            foreach (var dictKey in dictionary.Keys)
+            {
+                dictionary[dictKey] = (string)translationJson[dictKey][lang];
             }
 
             this.Resources.MergedDictionaries.Add(dictionary);
