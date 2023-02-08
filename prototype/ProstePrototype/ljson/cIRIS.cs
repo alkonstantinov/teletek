@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
 using common;
+using System.ComponentModel;
 
 namespace ljson
 {
@@ -719,6 +720,7 @@ namespace ljson
 
         private static void ConvertPreripherialDevicesContentNodes(JObject json)
         {
+            JObject pdtypes = new JObject();
             foreach (JProperty p in json["ELEMENTS"]["iris_peripheral_devices"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
@@ -733,11 +735,18 @@ namespace ljson
                     json["ELEMENTS"][key]["PROPERTIES"] = new JObject();
                 if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"] == null)
                     json["ELEMENTS"][key]["PROPERTIES"]["Groups"] = new JObject();
-                if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] == null)
-                    json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
-                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["name"] = "";
-                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["fields"] = ConvertPreripherialDevicesContentNodeProps(dev);
+                json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] = ConvertPreripherialDevicesContentNodeProps(dev);
+                //if (json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] == null)
+                //    json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+                //json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["name"] = "";
+                //json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["fields"] = ConvertPreripherialDevicesContentNodeProps(dev);
+                //
+                //JObject fields = (JObject)json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"]["fields"];
+                JObject fields = (JObject)json["ELEMENTS"][key]["PROPERTIES"]["Groups"]["~noname"];
+                string val = fields["TYPE"]["@VALUE"].ToString();
+                pdtypes[val] = key;
             }
+            json["~pdtypes"] = pdtypes;
         }
         #endregion
 

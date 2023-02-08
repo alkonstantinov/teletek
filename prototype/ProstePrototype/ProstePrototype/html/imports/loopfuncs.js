@@ -166,7 +166,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
             case (key === "SERIAL_ID"):
             case (key === "NAME"):
                 inner = transformGroupElement(deviceData[key]);
-                if (inner) fieldsetDevice.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
+                if (inner) fieldsetDevice.insertAdjacentHTML('beforeend', `<div class="${key.includes("STATE") ? "col-12" : "col-xs-12 col-lg-6"}">${inner}</div>`);
                 break;
             case (key === "ZONE"):
             case (key === "LED"):
@@ -174,7 +174,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
             case (key.includes("DUST")):
                 if (!fieldsetParameters) fieldsetParameters = createFieldset(`params_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "parameters"));
                 inner = transformGroupElement(deviceData[key]);
-                if (inner) fieldsetParameters.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
+                if (inner) fieldsetParameters.insertAdjacentHTML('beforeend', `<div class="${deviceData[key]["@TYPE"] === "AND" ? 'col-12' : 'col-xs-12 col-lg-6'} pr-1">${inner}</div>`);
                 break;
             case (key.includes("TYPECHANNEL")):
                 //deviceData[key]["ITEMS"]["ITEM"][ParseInt(deviceData[key]["value"])]["@NAME"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@NAME"]
@@ -413,7 +413,7 @@ function showLoop(loopNumber, loopType) {
                         </div>
                     </div>
                     <div class="col-9" style="z-index: 1;height: fit-content;">
-                        <div id="selected_device_${loopType}" style="background: white;">
+                        <div id="selected_device_${loopType}" style="background: white; margin-right: -1rem">
 
                         </div>
                     </div>
@@ -452,7 +452,7 @@ function showLoop(loopNumber, loopType) {
                                 </div>
                             </div>
                             <div class="col-9" style="z-index: 1;height: fit-content;">
-                                <div id="selected_sensor_${loopType}" style="background: white;">
+                                <div id="selected_sensor_${loopType}" style="background: white; margin-right: -1rem">
 
                                 </div>
                             </div>

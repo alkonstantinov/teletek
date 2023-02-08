@@ -424,6 +424,11 @@ namespace ljson
                     sval = (val[1] * 16 + val[0]).ToString();
                     return new Tuple<string, string>(path, sval);
                 }
+                else if (val.Length == 4 && prop["@TYPE"].ToString().ToLower() == "ip")
+                {
+                    sval = val[0].ToString() + "." + val[1].ToString() + "." + val[2].ToString() + "." + val[3].ToString();
+                    return new Tuple<string, string>(path, sval);
+                }
                 else if (val.Length == 2 && prop["@VALUE"] != null && !Regex.IsMatch(prop["@VALUE"].ToString(), @"\D"))
                 {
                     sval = (val[1] * 16 + val[0]).ToString();

@@ -14,9 +14,11 @@
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
     <None Remove="html\imports\webfonts\fa-v4compatibility.ttf" />
+    <None Remove="Images\7dxU.mp4" />
     <None Remove="Images\Addressables-resized.png" />
     <None Remove="Images\convectional_5-resized.png" />
     <None Remove="Images\de.png" />
+    <None Remove="Images\giphy.gif" />
     <None Remove="Images\ProsTE.ico" />
     <None Remove="Images\ProsTE.png" />
     <None Remove="Images\SOT_Bravo_7-resized.png" />
@@ -585,6 +587,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\IRIS.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\barcode-scan.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\BSOU-600x460.png">

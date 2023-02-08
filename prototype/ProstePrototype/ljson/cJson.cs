@@ -646,19 +646,32 @@ namespace ljson
             {
                 int reslen = 0;
                 List<byte[]> cmdresults = new List<byte[]>();
-                foreach (cRWCommand cmd in cmds)
-                {
-                    string scmd = cmd.CommandString();
-                    scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
-                    byte[] cmdres = cComm.SendCommand(conn, scmd);
-                    if (settings.logreads)
+                if (!p.ReadCommandsReplacement.ContainsKey(idx.ToString("X2")))
+                    foreach (cRWCommand cmd in cmds)
                     {
-                        if (!_log_bytesreaded.ContainsKey(scmd))
-                            _log_bytesreaded.Add(scmd, cmdres);
+                        string scmd = cmd.CommandString();
+                        scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                        byte[] cmdres = cComm.SendCommand(conn, scmd);
+                        if (settings.logreads)
+                        {
+                            if (!_log_bytesreaded.ContainsKey(scmd))
+                                _log_bytesreaded.Add(scmd, cmdres);
+                        }
+                        reslen += cmdres.Length;
+                        cmdresults.Add(cmdres);
                     }
-                    reslen += cmdres.Length;
-                    cmdresults.Add(cmdres);
-                }
+                else
+                    foreach (string scmd in p.ReadCommandsReplacement[idx.ToString("X2")])
+                    {
+                        byte[] cmdres = cComm.SendCommand(conn, scmd);
+                        if (settings.logreads)
+                        {
+                            if (!_log_bytesreaded.ContainsKey(scmd))
+                                _log_bytesreaded.Add(scmd, cmdres);
+                        }
+                        reslen += cmdres.Length;
+                        cmdresults.Add(cmdres);
+                    }
                 byte[] bcmdres = new byte[reslen];
                 int bidx = 0;
                 foreach (byte[] b in cmdresults)
@@ -697,6 +710,7 @@ namespace ljson
                 Dictionary<string, cRWPath> merge = WriteReadMerge;
                 string readkey = loopkey;
                 string readsubkey = dreaded[readkey].Keys.First();
+                string key2adddev = readsubkey;
                 cRWPath rwpath = null;
                 if (merge.ContainsKey(readkey))
                     rwpath = merge[readkey];
@@ -709,25 +723,56 @@ namespace ljson
                 string panel_id = CurrentPanelID;
                 JObject groups = null;
                 JObject node = GetNode(readsubkey);
-                if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null)
+                Dictionary<string, byte[]> didx = dreaded[readkey][readsubkey];
+                int typeidx = -1;
+                if (Regex.IsMatch(rwpath.ReadPath, "peripher", RegexOptions.IgnoreCase))
                 {
-                    groups = (JObject)node["PROPERTIES"]["Groups"];
-                    JObject rw = (JObject)node["~rw"];
-                    JObject el = (JObject)node["PROPERTIES"]["Groups"];
-                    Dictionary<string, byte[]> didx = dreaded[readkey][readsubkey];
-                    foreach (string sidx in didx.Keys)
+                    foreach (string k in rwpath.ReadProperties.Keys)
                     {
+                        cRWProperty prop = rwpath.ReadProperties[k];
+                        //ReadProperties.Add(k, prop);
+                        if (typeidx <= 0 && Regex.IsMatch(k, "^type$", RegexOptions.IgnoreCase))
+                        {
+                            typeidx = prop.offset;
+                            break;
+                        }
+                    }
+                }
+                foreach (string sidx in didx.Keys)
+                {
+                    byte[] devbytes = didx[sidx];
+                    if (Regex.IsMatch(rwpath.ReadPath, "peripher", RegexOptions.IgnoreCase))
+                    {
+                        if (typeidx >= 0)
+                        {
+                            byte typebyte = devbytes[typeidx];
+                            string devclass = null;
+                            if (panel["~pdtypes"][typebyte.ToString()] != null)
+                            {
+                                devclass = panel["~pdtypes"][typebyte.ToString()].ToString();
+                                key2adddev = devclass;
+                                node = (JObject)panel["ELEMENTS"][devclass];
+                            }
+                        }
+                    }
+                    if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null)
+                    {
+                        groups = (JObject)node["PROPERTIES"]["Groups"];
+                        JObject rw = (JObject)node["~rw"];
+                        JObject el = (JObject)node["PROPERTIES"]["Groups"];
+
                         JObject newpaths = cJson.ChangeGroupsElementsPath(el, sidx);
                         newpaths["~rw"] = rw;
                         SetNodeFilters(newpaths);
                         string _template = newpaths.ToString();
-                        cComm.AddListElement(cJson.CurrentPanelID, readsubkey, sidx, _template);
+                        cComm.AddListElement(cJson.CurrentPanelID, key2adddev, sidx, _template);
                         //
-                        byte[] devbytes = didx[sidx];
                         foreach (string propname in ReadProperties.Keys)
                         {
                             cRWProperty prop = ReadProperties[propname];
                             byte[] pbytes = new byte[prop.bytescnt];
+                            if (prop.offset + prop.bytescnt > devbytes.Length)
+                                continue;
                             for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                                 pbytes[i - prop.offset] = devbytes[i];
                             Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(newpaths, propname, pbytes);
@@ -1060,7 +1105,7 @@ namespace ljson
             _main_content_key = _clean_name; // replaced name by _clean_name by Viktor
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
-            Monitor.Exit(_cs_current_panel);            
+            Monitor.Exit(_cs_current_panel);
             JObject _res1 = new JObject((JObject)_panel["ELEMENTS"][_clean_name]); // replaced name by _clean_name by Viktor
             RWData(_res1);
             return _res1;
@@ -1219,11 +1264,16 @@ namespace ljson
                 string f = null;
                 string[] files = Directory.GetFiles(dir);
                 for (int i = 0; i < files.Length; i++)
-                    if (Regex.IsMatch(System.IO.Path.GetFileName(files[i]), @"^Read[\w\W]+?" + schema, RegexOptions.IgnoreCase))
+                {
+                    string fname = System.IO.Path.GetFileName(files[i]);
+                    if (!Regex.IsMatch(fname, @"\.xml$", RegexOptions.IgnoreCase))
+                        continue;
+                    if (Regex.IsMatch(fname, @"^Read[\w\W]+?" + schema + @"[_\.]", RegexOptions.IgnoreCase))
                     {
                         f = files[i];
                         break; ;
                     }
+                }
                 if (f != null)
                 {
                     cfg.ReadConfigPath = f;
@@ -1238,11 +1288,16 @@ namespace ljson
                 string f = null;
                 string[] files = Directory.GetFiles(dir);
                 for (int i = 0; i < files.Length; i++)
-                    if (Regex.IsMatch(System.IO.Path.GetFileName(files[i]), @"^Write[\w\W]+?" + schema, RegexOptions.IgnoreCase))
+                {
+                    string fname = System.IO.Path.GetFileName(files[i]);
+                    if (!Regex.IsMatch(fname, @"\.xml$", RegexOptions.IgnoreCase))
+                        continue;
+                    if (Regex.IsMatch(fname, @"^Write[\w\W]+?" + schema + @"[_\.]", RegexOptions.IgnoreCase))
                     {
                         f = files[i];
                         break; ;
                     }
+                }
                 if (f != null)
                 {
                     cfg.WriteConfigPath = f;

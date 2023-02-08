@@ -1507,4 +1507,11 @@ function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {
         content.style.maxHeight = (content.scrollHeight + addElementHeight) + "px";
     }
 }
+
+function alertScanFinished(show) {
+    if (show === 'alert') {
+        alert("scan finished!");
+        document.location.reload();
+    }
+}
 //#endregion

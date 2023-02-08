@@ -12,6 +12,8 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -563,14 +565,34 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
+            ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
             if ((bool)c)
             {
+                //popUpWindow.Show();
                 string ip = rw.Address;
                 int port = rw.Port;
-                cJson.ReadDevice(ip, port);
+                Thread funcThread = new Thread(() => ReadDevice(ip, port, popUpWindow));
+                funcThread.Start();
+
+                popUpWindow.ShowDialog();
+
+                funcThread.Join();
+
+                popUpWindow.Close();
             }
+            
             rw = new ReadWindow();
             rw.Resources = this.Resources;
+        }
+
+        private void ReadDevice(string ip, int port, ScanPopUpWindow popUpWindow)
+        {
+            cJson.ReadDevice(ip, port);
+            wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
+            //set a flag
+            Application.Current.Dispatcher.Invoke(() => {
+                popUpWindow._functionFinished = true;
+            });
         }
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Http.Headers;
 
 namespace common
 {
@@ -36,6 +37,30 @@ namespace common
                     sio = "0072";
             }
             return sio + sDataType + sindex + sbuffoffset + slen;
+        }
+        public override string NoIdxCommandString()
+        {
+            if (sio == null || sio == "")
+            {
+                sio = "0000";
+                if (io == eIO.ioRead)
+                    sio = "0351";
+                else if (io == eIO.ioWrite)
+                    sio = "0072";
+            }
+            return sio + sDataType + sbuffoffset + slen;
+        }
+        public override string CommandKey()
+        {
+            if (sio == null || sio == "")
+            {
+                sio = "0000";
+                if (io == eIO.ioRead)
+                    sio = "0351";
+                else if (io == eIO.ioWrite)
+                    sio = "0072";
+            }
+            return sio + sDataType;
         }
 
         public override int idxPosition()
@@ -254,6 +279,7 @@ namespace common
                     m = Regex.Match(el, @"<COMMANDS>([\w\W]*?)</COMMANDS>");
                     if (m.Success)
                     {
+                        string lastidx = null;
                         foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\s+?BYTES\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>"))
                         {
                             string cmdkey = CommandKey(mc.Groups[1].Value);
@@ -266,9 +292,19 @@ namespace common
                             if (!dcmd.ContainsKey(cmdkey))
                                 dcmd.Add(cmdkey, new Dictionary<string, List<string>>());
                             Dictionary<string, List<string>> didx = dcmd[cmdkey];
-                            if (!didx.ContainsKey(cmdidxs))
-                                didx.Add(cmdidxs, new List<string>());
-                            didx[cmdidxs].Add(el);
+                            if (Regex.IsMatch(element_root, @"peripher", RegexOptions.IgnoreCase) && lastidx != null &&  cmdidxs != lastidx)
+                            {
+                                if (!didx.ContainsKey(cmdidxs + "/" + lastidx))
+                                    didx.Add(cmdidxs + "/" + lastidx, new List<string>());
+                                didx[cmdidxs + "/" + lastidx].Add(el);
+                            }
+                            else
+                            {
+                                if (!didx.ContainsKey(cmdidxs))
+                                    didx.Add(cmdidxs, new List<string>());
+                                didx[cmdidxs].Add(el);
+                            }
+                            lastidx = cmdidxs;
                         }
                     }
                 }
@@ -649,16 +685,57 @@ namespace common
                 firstkey = dr1.Keys.First();
                 List<string> lXml = dr1[firstkey];
                 string xml = lXml[0];
+                string lastcommand = null;
+                Dictionary<string, string> firstcommands = new Dictionary<string, string>();
                 Match m = Regex.Match(xml, @"<COMMANDS([\w\W]+?)</COMMANDS");
                 if (m.Success)
                     foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\W[\w\W]*?BYTES\s*?=\s*?""(\w+?)"""))
                     {
                         string cmd = mc.Groups[1].Value;
                         cRWCommand rwc = CommandObject(cmd);
+                        string cmdkey = rwc.CommandKey();
                         if (cmd.Length < rwc.CommandLength())
                             continue;
                         rwpath.ReadCommands.Add(rwc);
+                        lastcommand = cmd;
+                        if (!firstcommands.ContainsKey(cmdkey))
+                            firstcommands.Add(cmdkey, null);
                     }
+                if (Regex.IsMatch(wpath, "peripher", RegexOptions.IgnoreCase))
+                {
+                    foreach (string pdkey in dr1.Keys)
+                    {
+                        lXml = dr1[pdkey];
+                        xml = lXml[0];
+                        m = Regex.Match(xml, @"<COMMANDS([\w\W]+?)</COMMANDS");
+                        if (m.Success)
+                        {
+                            List<string> lastcommands = new List<string>();
+                            string sidx = "00";
+                            foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\W[\w\W]*?BYTES\s*?=\s*?""(\w+?)"""))
+                            {
+                                string cmd = mc.Groups[1].Value;
+                                cRWCommand rwc = CommandObject(cmd);
+                                if (!firstcommands.ContainsKey(rwc.CommandKey()))
+                                {
+                                    if (!rwpath.ReadCommandsReplacement.ContainsKey(sidx))
+                                        rwpath.ReadCommandsReplacement.Add(sidx, new List<string>());
+                                    List<string> addcmds = rwpath.ReadCommandsReplacement[sidx];
+                                    foreach (string s in lastcommands)
+                                        addcmds.Add(s);
+                                    lastcommands.Clear();
+                                    addcmds.Add(cmd);
+                                }
+                                else
+                                {
+                                    sidx = rwc.sindex;
+                                    lastcommand = cmd;
+                                    lastcommands.Add(cmd);
+                                }
+                            }
+                        }
+                    }
+                }
                 m = Regex.Match(xml, @"<PROPERTIES([\w\W]+?)</PROPERTIES");
                 if (m.Success)
                     foreach (Match mp in Regex.Matches(m.Groups[1].Value, @"<PROPERTY[\w\W]+?/>"))

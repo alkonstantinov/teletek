@@ -5162,9 +5162,9 @@
             "el": "Ζώνη ",
             "ge": "Zone ",
             "hu": "Zóna",
-            "it": "Zona/Utente/Dispositivo",
+            "it": "Zona",
             "ro": "Zone ",
-            "bg": "Зона/Потребител/Устройство",
+            "bg": "Зона",
             "sr": "Zona"
         },
         "area": {
@@ -6981,22 +6981,27 @@
         },
         "out": {
             "en": "Out",
+            "bg": "Out",
             "id": ""
         },
         "buzzer_level": {
             "en": "Buzzer Level",
+            "bg": "Buzzer Level",
             "id": ""
         },
         "brightness": {
             "en": "Brightness",
+            "bg": "Brightness",
             "id": ""
         },
         "scroll_speed": {
             "en": "Scroll Speed",
+            "bg": "Scroll Speed",
             "id": ""
         },
         "backlight_enabled": {
             "en": "Backlight Enabled",
+            "bg": "Backlight Enabled",
             "id": ""
         },
         "arm_type_area_1": {
@@ -8180,18 +8185,23 @@
         },
         "event": {
             "en": "Event",
-            "id": "fee0a4b6-44cf-4303-85b3-fb602ce83b68"
+            "id": "fee0a4b6-44cf-4303-85b3-fb602ce83b68",
+            "bg": "Събитие",
         },
         "groups": {
             "en": "Groups",
-            "id": "3ebe0ea3-9ac5-4588-a218-cd3f460c1133"
+            "id": "3ebe0ea3-9ac5-4588-a218-cd3f460c1133",
+            "bg": "Групи",
         },
         "zoneuserdevice": {
             "en": "Zone/User/Device",
-            "id": "92c863c6-1988-4cc2-8f41-49e2af2ffded"
+            "id": "92c863c6-1988-4cc2-8f41-49e2af2ffded",
+            "it": "Zona/Utente/Dispositivo",
+            "bg": "Зона/Потребител/Устройство",
         },
         "wlfire": {
             "en": "WLFire ",
+            "bg": "WLFire ",
             "id": "8cc9d99d-8d6d-4882-8688-eb4a3e469a08"
         },
         "u##_prevent_arm_[cd]_[**]": {
@@ -8207,6 +8217,7 @@
         },
         "ead16_tamper": {
             "en": "EAD16_TAMPER",
+            "bg": "EAD16_TAMPER",
             "id": "7100cf48-0e80-42ce-bfc4-e2ff861bd285"
         },
         "unsuccessful_validation_of_written_data": {
@@ -25644,14 +25655,14 @@
         "parameters": {
             "en": "Parameters",
             "id": "130789f2-211d-4251-8a69-6a25c8ede1be",
-            "bg": "Състояние на мрежата",
+            "bg": "Параметри",
             "fr": "Paramètres",
             "ge": "Einstellungen ",
             "it": "Parametri",
             "nl": "Parameters",
             "no": "Parametere",
             "pl": "Parametry",
-            "pt": "Network Status",
+            "pt": "Parámetros",
             "ro": "Parametri",
             "ru": "Параметры",
             "sp": "Parámetros ",
@@ -26018,7 +26029,7 @@
         "device_state": {
             "en": "Device state",
             "id": "edee6938-1600-4c7a-9d1b-9f6b8218441d",
-            "bg": "Състояние на устройство",
+            "bg": "Състояние на у-вото",
             "fr": "État du dispositif",
             "ge": "Status",
             "it": "Stato Dispositivo",
@@ -26511,7 +26522,7 @@
         "serial_id": {
             "en": "Serial ID",
             "id": "c62377c3-fbb1-4411-8913-34794ce786b3",
-            "bg": "Идентификационен номер",
+            "bg": "Сериен ID",
             "fr": "ID Série",
             "ge": "Seriennummer",
             "it": "Serial ID",
@@ -26524,6 +26535,23 @@
             "sp": "Serial ID",
             "sr": "Serial ID",
             "tr": "Serial ID"
+        },
+        "reset": {
+            "en": "Reset",
+            "id": "910c3012-8122-458e-b236-d22235264880",
+            "bg": "Ресетиране",
+            "fr": "Reset",
+            "ge": "Reset",
+            "it": "Reset",
+            "nl": "Reset",
+            "no": "Reset",
+            "pl": "Reset",
+            "pt": "Reset",
+            "ro": "Reset",
+            "ru": "Reset",
+            "sp": "Reset",
+            "sr": "Reset",
+            "tr": "Reset"
         },
         "evacuate": {
             "en": "Evacuate",

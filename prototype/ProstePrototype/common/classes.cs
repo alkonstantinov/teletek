@@ -306,8 +306,16 @@ namespace common
 
         public virtual int CommandLength() { return 0; }
         public virtual string CommandString() { return null; }
+        public virtual string NoIdxCommandString() { return null; }
+        public virtual string CommandKey() { return null; }
         public virtual int idxPosition() { return -1; }
     }
+
+    //public class cAdditionalRWCommands
+    //{
+    //    public string AfterCommand = null;
+    //    public List<string> commands = new List<string>();
+    //}
 
     public class cWriteOperation
     {
@@ -319,6 +327,7 @@ namespace common
     {
         public string ReadPath = null;
         public List<cRWCommand> ReadCommands = new List<cRWCommand>();
+        public Dictionary<string, List<string>> ReadCommandsReplacement = new Dictionary<string, List<string>>();
         public Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
         public string WritePath = null;
         public List<cRWCommand> WriteCommands = new List<cRWCommand>();
