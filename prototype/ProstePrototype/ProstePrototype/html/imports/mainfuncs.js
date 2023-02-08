@@ -187,7 +187,6 @@ function drawFields(body, json, inheritedColor = '') {
     if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
-
     keys.filter(k => k !== '~path').forEach(k => {
         let divLevel = json[k];
 
@@ -283,6 +282,8 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
                 return;
             }
+
+            if (jsonAtLevel[field]["@TYPE"] === "PAD") return; // another guard
 
             const innerString = transformGroupElement(jsonAtLevel[field]);
             if (!innerString) return;
@@ -1510,7 +1511,6 @@ function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {
 
 function alertScanFinished(show) {
     if (show === 'alert') {
-        alert("scan finished!");
         document.location.reload();
     }
 }
