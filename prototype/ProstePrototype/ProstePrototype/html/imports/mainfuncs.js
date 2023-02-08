@@ -410,7 +410,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 .filter(deviceName => deviceName !== "selected")
                 .map(deviceName => {
                     let nameLst = deviceName.split('/');
-                    let name = nameLst[0].split("_").slice(1).join("_");
+                    let name = (nameLst[0].startsWith("IRIS") || nameLst[0].startsWith("ECLIPSE")) ? nameLst[0].split("_").slice(1).join("_") : nameLst[0];
                     let address = nameLst[1];
                     let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
                     let checkedJson = Object.keys(currentDeviceNameObject)
