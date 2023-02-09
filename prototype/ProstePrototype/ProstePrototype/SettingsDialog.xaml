@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SettingsDialog" Height="350" Width="400"
         WindowStyle="None" WindowStartupLocation ="CenterScreen">
-    
+
     <Grid x:Name="mainGrid" Background="{Binding Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -31,7 +31,8 @@
         <Grid Grid.Row="1" Margin="15,2">
             <StackPanel Margin="10">
                 <CheckBox Name="autoCheck" FontSize="14" VerticalContentAlignment="Center" Foreground="{Binding Foreground}">
-                    <TextBlock Text="{DynamicResource SettingsMenuAuto}"></TextBlock></CheckBox>
+                    <TextBlock Text="{DynamicResource SettingsMenuAuto}"></TextBlock>
+                </CheckBox>
             </StackPanel>
         </Grid>
         <Border Grid.Row="2" BorderBrush="#e8e9ea" BorderThickness="0 2 0 0" >

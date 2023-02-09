@@ -305,7 +305,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 newElement.innerHTML = inner;
                 div.appendChild(newElement);
                 const [el1, el2, el3, el4] = jsFunc();
-
+                // alert(`el1 -> ${el1}, el2 -> ${el2}, el3 -> ${el3}, el4 -> ${el4}`)
                 setTimeout(() => {
                     let el = document.getElementById(el1);
                     loadDiv(el, el2, el3, el4);
@@ -449,7 +449,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
     let selectId = showDivId + "-" + title;
     let inner = `
             <div class="form-item roww">
-                <label for="${selectId}">${title}</label>
+                <label for="${selectId}">${newT(localStorage.getItem('lang'), title.toLowerCase())}</label>
                 <div class="select">
                     <select id="${selectId}" name="${selectId}"
                         onchange="javascript: ${nextFunc}" >
@@ -622,11 +622,10 @@ const transformGroupElement = (elementJson) => {
                                         onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
                                                               loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checkType'));" >`;
             tabsKeys.map(o => {
-
                 let disabled = false; // todo
                 let checkType = "";
                 if (tabs[o].hasOwnProperty("~enabled")) {// if exists such field ["~enabled"]
-                    // alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
+                    //alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
                     disabled = !tabs[o]["~enabled"];
                     if (tabs[o]["~enabled"]) {
                         checkType = `checkType='${tabs[o]["~path"]}'`;
@@ -724,8 +723,7 @@ const transformGroupElement = (elementJson) => {
         case 'INT':
             return getNumberInput({ ...attributes });
 
-        case 'TEXT':
-            if (elementJson["addChannelHelp"]) attributes.addButton = true;
+        case 'TEXT':            
             return getTextInput({ ...attributes });
 
         case 'SLIDER':
@@ -750,6 +748,7 @@ const transformGroupElement = (elementJson) => {
             return getCheckboxInput({ ...attributes });
 
         case 'LIST':
+            if (elementJson["addChannelHelp"]) attributes.addButton = true;
             attributes.selectList = elementJson.ITEMS.ITEM.map((o, idx) => {
                 let sel;
                 if (attributes.value) {
@@ -1006,19 +1005,12 @@ function addElementToCONFIGURED_IO(loop_number, device, channel_path) {
 //#endregion
 
 //#region //----- COMMON Funcs -----////////////////////////////////////////////
-const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, addButton = false, RmBtn = false, ip = false, path = '', value }) => {
+const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '', value }) => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
                 <label for="${input_id}">${input_name}</label>
-                ${addButton ? `<button 
-                                    id="popoverData_${input_id}" class="btn"
-                                    data-content="Popover with data - trigger"
-                                    onmouseover="javascript: showChannelInfo(this, '${path}');"
-                                    data-placement="top" data-original-title="Used in:">
-                                        <i class="fa-solid fa-circle-question"></i>
-                                </button>`: ""}
                 <input type="${type === 'passInput' ? 'password' : 'text'}" 
                        id="${input_id}" name="${input_id}" 
                        ${maxTextLength ? `maxlength="${maxTextLength}"` : (ip ? `maxlength = "15"` : "")}
@@ -1069,7 +1061,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
             </div>`
 }
 
-const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, modal, RmBtn = false, path = "" }) => {
+const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, modal, addButton = false, RmBtn = false, path = "" }) => {
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let image = selectList.filter(x => x.imageKey).length > 0;
     let str = `<${image ? "fieldset" : "div"} class="form-item roww mt-1">
@@ -1078,6 +1070,13 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                         <i class="fa-solid fa-square-minus fa-2x"></i>
                     </button>` : ""}
                     ${image ? "" : `<label for="${input_id}">${input_name}</label>`}
+                    ${addButton ? `<button 
+                                        id="popoverData_${input_id}" class="btn"
+                                        data-content="Popover with data - trigger"
+                                        onmouseover="javascript: showChannelInfo(this, '${path}');"
+                                        data-placement="top" data-original-title="Used in:">
+                                            <i class="fa-solid fa-circle-question"></i>
+                                    </button>`: ""}
                     <div class="select">
                         <select id="${input_id}" name="${input_id}"
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
@@ -1094,6 +1093,7 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
         selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
     }
     str += `</select></div>${image ? "" : "</div>"}`;
+
     if (image) {
         str += `<div id="showSchema_${input_id}" class="image col-9" style="margin-left: auto; margin-right: auto">`
         let selectedImageEl = selectList.find(o => o.selected);
@@ -1464,6 +1464,7 @@ async function showElement(id, elementType) {
 
 // loadDiv function required for TABs
 function loadDiv(it, id, value, type) {
+    // alert(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
     if (!value) return;
     var element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)
@@ -1471,18 +1472,18 @@ function loadDiv(it, id, value, type) {
     //console.log(it, "value -> element", value, "->", element, "id", id);
     if (!type) {
         switch (true) {
-            case value.substr(0, 2) === "0_":
-            case value.substr(0, 2) === "1_":
-            case value.substr(0, 2) === "2_":
-            case value.substr(0, 2) === "3_":
-            case value.substr(0, 2) === "4_":
-            case value.substr(0, 2) === "5_":
-            case value.substr(0, 2) === "6_":
-            case value.substr(0, 2) === "7_":
-            case value.substr(0, 2) === "8_":
-            case value.substr(0, 2) === "9_":
-            case value.substr(0, 3) === "10_":
-            case value.substr(0, 3) === "11_":
+            case value.startsWith("0_"):
+            case value.startsWith("1_"):
+            case value.startsWith("2_"):
+            case value.startsWith("3_"):
+            case value.startsWith("4_"):
+            case value.startsWith("5_"):
+            case value.startsWith("6_"):
+            case value.startsWith("7_"):
+            case value.startsWith("8_"):
+            case value.startsWith("9_"):
+            case value.startsWith("10_"):
+            case value.startsWith("11_"):
             case value.includes("Teletek"):
             case value.includes("System"):
             case value.includes("sounder_zonal"):

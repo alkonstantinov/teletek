@@ -69,6 +69,8 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
             Monitor.Exit(_cs_cache);
         }
+
+        #region path values
         public static void SetPathValue(string panel_id, string path, string value, dFilterValueChanged filter)
         {
             Monitor.Enter(_cs_cache);
@@ -110,31 +112,9 @@ namespace lcommunicate
             }
             Monitor.Exit(_cs_cache);
         }
+        #endregion
 
-        /// <summary>
-        /// Добавя в кеша шаблон на списъчен елемент(панел в мрежата, вход, изход...).
-        /// В последствие този шаблон се ползва за съхраняване на стойности за съответния елемент.
-        /// </summary>
-        /// <param name="panel_id">ID на панела
-        /// <param name="key">ID на елемента(напр. "IRIS8_PANELINNETWORK")</param>
-        /// <param name="idx">Индекс, на който се добавя елемента</param>
-        /// <param name="_template">Шаблон на елемента. Пътищата в него трябва да се преправят</param>
-        public static void AddListElement(string panel_id, string key, string idx, string _template)
-        {
-            Monitor.Enter(_cs_cache);
-            if (_cache_list_panels == null)
-                _cache_list_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
-            if (!_cache_list_panels.ContainsKey(panel_id))
-                _cache_list_panels.Add(panel_id, new Dictionary<string, Dictionary<string, string>>());
-            Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
-            if (!el.ContainsKey(key))
-                el.Add(key, new Dictionary<string, string>());
-            Dictionary<string, string> lst = el[key];
-            if (!lst.ContainsKey(idx))
-                lst.Add(idx, _template);
-            Monitor.Exit(_cs_cache);
-        }
-
+        #region pseudo elements
         /// <summary>
         /// Добавя в кеша шаблон на псевдо-списъчен елемент(NO_LOOP1, 2, 3...).
         /// В последствие този шаблон се ползва за пренасочване към физическото устройство.
@@ -158,7 +138,6 @@ namespace lcommunicate
                 lst.Add(idx, _template);
             Monitor.Exit(_cs_pseudo_element_cache);
         }
-
         public static void AddPseudoElement(string panel_id, string key, string _template)
         {
             Monitor.Enter(_cs_pseudo_element_cache);
@@ -176,7 +155,6 @@ namespace lcommunicate
                 lst.Add(idx, _template);
             Monitor.Exit(_cs_pseudo_element_cache);
         }
-
         public static bool PseudoElementExists(string panel_id)
         {
             bool res = false;
@@ -193,7 +171,6 @@ namespace lcommunicate
             //
             return res;
         }
-
         public static bool PseudoElementExists(string panel_id, string typ, string re_mask)
         {
             bool res = false;
@@ -286,7 +263,6 @@ namespace lcommunicate
             Monitor.Exit(_cs_pseudo_element_cache);
             return _template;
         }
-
         public static Dictionary<string, string> GetPseudoElementsList(string panel_id, string key)
         {
             Monitor.Enter(_cs_pseudo_element_cache);
@@ -367,7 +343,6 @@ namespace lcommunicate
             lst[idx] = _template;
             Monitor.Exit(_cs_pseudo_element_cache);
         }
-
         public static Dictionary<string, string> GetPseudoElementDevices(string panel_id, string key, string idx)
         {
             Monitor.Enter(_cs_cache);
@@ -397,7 +372,32 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
+        #endregion
 
+        #region list elements
+        /// <summary>
+        /// Добавя в кеша шаблон на списъчен елемент(панел в мрежата, вход, изход...).
+        /// В последствие този шаблон се ползва за съхраняване на стойности за съответния елемент.
+        /// </summary>
+        /// <param name="panel_id">ID на панела
+        /// <param name="key">ID на елемента(напр. "IRIS8_PANELINNETWORK")</param>
+        /// <param name="idx">Индекс, на който се добавя елемента</param>
+        /// <param name="_template">Шаблон на елемента. Пътищата в него трябва да се преправят</param>
+        public static void AddListElement(string panel_id, string key, string idx, string _template)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels == null)
+                _cache_list_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            if (!_cache_list_panels.ContainsKey(panel_id))
+                _cache_list_panels.Add(panel_id, new Dictionary<string, Dictionary<string, string>>());
+            Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+            if (!el.ContainsKey(key))
+                el.Add(key, new Dictionary<string, string>());
+            Dictionary<string, string> lst = el[key];
+            if (!lst.ContainsKey(idx))
+                lst.Add(idx, _template);
+            Monitor.Exit(_cs_cache);
+        }
         public static Dictionary<string, string> GetElements(string panel_id, string key)
         {
             Dictionary<string, string> res = null;
@@ -414,7 +414,6 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
-
         /// <summary>
         /// Връща кеширана структура със стойности за списъчни обекти. Съответния обект е добавен с AddListElement.
         /// </summary>
@@ -439,7 +438,21 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return (res != null) ? res : "{}";
         }
-
+        public static void SetListElementJson(string panel_id, string key, string idx, string _template)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+                if (el.ContainsKey(key))
+                {
+                    Dictionary<string, string> lst = el[key];
+                    if (lst.ContainsKey(idx))
+                        lst[idx] = _template;
+                }
+            }
+            Monitor.Exit(_cs_cache);
+        }
         /// <summary>
         /// Връща елемент от кеширана структура със стойности за списъчни обекти или от псевдо-елементите. Съответния обект е добавен с AddListElement или AddPseudoElement.
         /// </summary>
@@ -491,7 +504,9 @@ namespace lcommunicate
             }
             return (res != null) ? res : "{}";
         }
+        #endregion
 
+        #region trensport
         public static cTransport ConnectIP()
         {
             cTransport t = new cIP();
@@ -529,6 +544,8 @@ namespace lcommunicate
         {
             conn.Close();
         }
+        #endregion
+
         public static JArray Scan()
         {
             cTransport t = new cIP();

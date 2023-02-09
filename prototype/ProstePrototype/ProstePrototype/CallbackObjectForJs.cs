@@ -117,6 +117,7 @@ namespace ProstePrototype
         public string loopsInputs(string path)
         {
             JObject o = cJson.LoopsInputs(path);
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
@@ -128,7 +129,8 @@ namespace ProstePrototype
 
         public string channelUses(string path)
         {
-            return "[]";
+            JArray a = cJson.ChannelUses(path);
+            return (a != null) ? a.ToString() : "[]";
         }
     }
 }

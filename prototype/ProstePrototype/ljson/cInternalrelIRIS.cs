@@ -313,7 +313,36 @@ namespace ljson
             else if (Regex.IsMatch(path, @"OUTPUT", RegexOptions.IgnoreCase))
                 SetIOFilters(_panel_id, _node, eIO.Output);
         }
-
+        public override void AfterDevicesChanged(string _panel_id, JObject panel, dGetNode _get_node)
+        {
+            foreach (JProperty p in panel["ELEMENTS"])
+            {
+                if (p.Value.Type == JTokenType.Object && Regex.IsMatch(p.Name, @"_(INPUT|OUTPUT)$", RegexOptions.IgnoreCase))
+                {
+                    Dictionary<string, string> cached_ios_tmp = cComm.GetElements(_panel_id, p.Name);
+                    if (cached_ios_tmp != null)
+                    {
+                        Dictionary<string, string> cached_ios = new Dictionary<string, string>();
+                        foreach (string k in cached_ios_tmp.Keys)
+                            cached_ios.Add(k, cached_ios_tmp[k]);
+                        foreach (string idx in cached_ios.Keys)
+                        {
+                            string _template = cComm.GetListElement(_panel_id, p.Name, idx);
+                            JObject jo = JObject.Parse(_template);
+                            SetNodeFilters(_panel_id, jo);
+                            cComm.SetListElementJson(_panel_id, p.Name, idx, jo.ToString());
+                        }
+                    }
+                    JObject jio = (JObject)p.Value;
+                    if (jio["PROPERTIES"] != null && jio["PROPERTIES"]["Groups"] != null)
+                        SetNodeFilters(_panel_id, (JObject)jio["PROPERTIES"]["Groups"]);
+                }
+            }
+        }
+        public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node)
+        {
+            AfterDevicesChanged(_panel_id, panel, _get_node);
+        }
         #region path values
         private Dictionary<string, Dictionary<string, string>> _used_channels = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _io_channels = new Dictionary<string, string>();
@@ -376,20 +405,37 @@ namespace ljson
         public override List<string> ChannelUsedIn(string channel_path)
         {
             List<string> res = null;
+            Dictionary<string, string> ios = null;
             if (_used_channels.ContainsKey(channel_path))
+                ios = _used_channels[channel_path];
+            else
             {
-                Dictionary<string, string> ios = _used_channels[channel_path];
-                if (ios != null && ios.Count > 0)
+                Match m = Regex.Match(channel_path, @"([\w\W]+?)(\.~index~\d+$)", RegexOptions.IgnoreCase);
+                if (m.Success)
                 {
-                    res = new List<string>();
-                    foreach (string io in ios.Keys)
+                    string basepath = m.Groups[1].Value;
+                    string idx = m.Groups[2].Value;
+                    m = Regex.Match(basepath, @"\d+$");
+                    if (m.Success)
                     {
-                        Match m = Regex.Match(io, @"^ELEMENTS\.([\w\W]+?)\.[\w\W]+?~index~(\d+)$", RegexOptions.IgnoreCase);
-                        if (m.Success)
-                            res.Add(m.Groups[1].Value + m.Groups[2].Value);
-                        else
-                            res.Add(io);
+                        string chidx = m.Groups[0].Value;
+                        basepath = Regex.Replace(basepath, @"[^.]+$", "");
+                        channel_path = basepath + "TYPECHANNEL" + chidx + idx;
+                        if (_used_channels.ContainsKey(channel_path))
+                            ios = _used_channels[channel_path];
                     }
+                }
+            }
+            if (ios != null && ios.Count > 0)
+            {
+                res = new List<string>();
+                foreach (string io in ios.Keys)
+                {
+                    Match m = Regex.Match(io, @"^ELEMENTS\.([\w\W]+?)\.[\w\W]+?~index~(\d+)$", RegexOptions.IgnoreCase);
+                    if (m.Success)
+                        res.Add(m.Groups[1].Value + m.Groups[2].Value);
+                    else
+                        res.Add(io);
                 }
             }
             //

@@ -3,7 +3,10 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using System.Xml;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Drawing;
 using NewTeletekSW.Utils;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -81,8 +84,8 @@ namespace XMLDocument
             switch (args[operationIndex])
             {
                 case "r":
-                case "read":
-                    // open XML
+                case "read": 
+                    // open XML and read it as json
                     Converter.ReadXML(fileArgs[0]);
                     break;
                 case "w":
@@ -97,7 +100,7 @@ namespace XMLDocument
                     // write XML
                     break;
                 case "t":
-                case "transform":
+                case "transform": // read xml and transform it to json based on @ID
                     JObject json = new JObject();
 
                     var mergeSettings = new JsonMergeSettings
@@ -154,8 +157,17 @@ namespace XMLDocument
                         }
                     }
                     break;
+                case "excel":
+                    // read json file and transform it to Excel
+                    var jsonString = File.ReadAllText(fileArgs[0]); // fileArgs[0] should be a JSON file
+                    var jsonData = JObject.Parse(jsonString);
+
+                    var toWrite = new ExcelExporter(r, h, "").WriteFile(jsonData), "application/octet-stream", fnm)
+                    break;
                 default:
-                    // using LNGID
+                    // read xml and translate it to JSON using LNGID
+                    // Command line:
+                    // "-d \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\Configuration\"\r\n-p dowhatever"
                     json = new JObject();
 
                     mergeSettings = new JsonMergeSettings

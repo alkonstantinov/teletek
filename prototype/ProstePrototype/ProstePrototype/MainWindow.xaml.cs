@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Wpf;
+using common;
 using lcommunicate;
 using ljson;
 using Microsoft.Win32;
@@ -568,10 +569,15 @@ namespace ProstePrototype
             if ((bool)c)
             {
                 int tabIdx = rw.tabControl.SelectedIndex;
-                cTransport t = null;
+                //cTransport t = null;
                 string ip = rw.Address;
                 int port = rw.Port;
-                Thread funcThread = new Thread(() => ReadDevice(tabIdx, t, ip, port, popUpWindow));
+                object conn_params = null;
+                if (tabIdx == 0)
+                    conn_params = new cIPParams(ip, port);
+                else if (tabIdx == 3)
+                    conn_params = "read.log";
+                Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));
                 funcThread.Start();
 
                 popUpWindow.ShowDialog();
@@ -584,16 +590,9 @@ namespace ProstePrototype
             rw = new ReadWindow();
             rw.Resources = this.Resources;
         }
-        private void ReadDevice(int tabIdx, cTransport t, string ip, int port, ScanPopUpWindow popUpWindow)
+        private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow)
         {
-            if (tabIdx == 0)
-            {
-                t = cComm.ConnectIP(ip, port);
-                cJson.ReadDevice(t);
-            }
-            else if (tabIdx == 3)
-                t = cComm.ConnectFile("read.log");
-            cJson.ReadDevice(t);
+            cJson.ReadDevice(conn_params);
             wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
             //set a flag
             Application.Current.Dispatcher.Invoke(() => {

@@ -7,18 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="html\bg.png" />
-    <None Remove="html\de.png" />
-    <None Remove="html\gb-eng.png" />
     <None Remove="html\imports\webfonts\fa-brands-400.ttf" />
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
     <None Remove="html\imports\webfonts\fa-v4compatibility.ttf" />
-    <None Remove="Images\7dxU.mp4" />
     <None Remove="Images\Addressables-resized.png" />
     <None Remove="Images\convectional_5-resized.png" />
     <None Remove="Images\de.png" />
-    <None Remove="Images\giphy.gif" />
     <None Remove="Images\ProsTE.ico" />
     <None Remove="Images\ProsTE.png" />
     <None Remove="Images\SOT_Bravo_7-resized.png" />
@@ -29,9 +24,17 @@
     <None Remove="Images\TTE-GPRS-Standard-resized.png" />
     <None Remove="Images\TTE_Combo-resized.png" />
     <None Remove="Images\t_m_icon.png" />
+    <None Remove="languages\BG.jpg" />
+    <None Remove="languages\bg.png" />
+    <None Remove="languages\BH.jpg" />
+    <None Remove="languages\de.png" />
     <None Remove="languages\EL.jpg" />
+    <None Remove="languages\EN.jpg" />
     <None Remove="languages\FR.JPG" />
+    <None Remove="languages\gb-eng.png" />
+    <None Remove="languages\GE.jpg" />
     <None Remove="languages\HU.jpg" />
+    <None Remove="languages\IR.png" />
     <None Remove="languages\IT.jpg" />
     <None Remove="languages\NL.jpg" />
     <None Remove="languages\NO.jpg" />
@@ -93,12 +96,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="languages\de.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="109.1.110" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
@@ -109,18 +106,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="languages\bg.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="languages\EL.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="languages\FR.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="languages\gb-eng.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\de.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -133,7 +118,37 @@
     <Resource Include="Images\teletek_logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="languages\BG.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\BH.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\de.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\EL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\EN.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\FR.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\gb-eng.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\GE.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="languages\HU.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="languages\IR.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="languages\IT.jpg">
@@ -172,7 +187,7 @@
     <None Update="Configs\XML\Read\ReadConfig_eclipse99.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Configs\XML\Read\ReadConfig_ris8_version01.xml">
+    <None Update="Configs\XML\Read\ReadConfig_iris8_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Read\ReadConfig_iris_version24.xml">
@@ -184,13 +199,13 @@
     <None Update="Configs\XML\Templates\IRIS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Configs\XML\Templates\RIS8.xml">
+    <None Update="Configs\XML\Templates\IRIS8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_eclipse99.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Configs\XML\Write\WriteConfig_ris8_version01.xml">
+    <None Update="Configs\XML\Write\WriteConfig_iris8_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_iris_version24.xml">
@@ -278,9 +293,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\loop_constants.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="html\imports\mainfuncs - Copy.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\popper.min.js">
@@ -346,10 +358,10 @@
     <None Update="html\imports\mainfuncs.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-dynamic.js">
+    <None Update="html\pages-initial_version.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\pages-initial_version.json">
+    <None Update="html\pages-dynamic.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\pages.json">
@@ -604,21 +616,6 @@
     <None Update="Images\1102. motherboard.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="languages\BG.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="languages\BH.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="languages\EN.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="languages\GE.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="languages\IR.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -634,6 +631,11 @@
 
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="109.1.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configs\XML\Write\" />
+    <Folder Include="Configs\XML\Read\" />
   </ItemGroup>
 
 </Project>

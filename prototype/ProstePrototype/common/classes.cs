@@ -19,6 +19,7 @@ namespace common
     public delegate string dObject2JSONString(object o);
     public delegate object dJSONString2Object(string s, System.Type typ);
     public delegate void dFilterValueChanged(string path, string _new_val);
+    public delegate JObject dGetNode(string name);
 
     public static class constants
     {

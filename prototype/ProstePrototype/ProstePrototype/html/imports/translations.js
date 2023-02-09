@@ -189,6 +189,9 @@
         devices: {
             'bg': 'Устройства', 'en': 'Devices', 'ge': 'Devices'
         },
+        device: {
+            'bg': 'Устройство', 'en': 'Device', 'ge': 'Device'
+        },
         add_new: {
             'bg': 'Добавете нов', 'en': 'Add New', 'ge': 'Add New' 
         },
@@ -354,6 +357,42 @@
             "ge": "Count",
             "sr": "Count",
             "4g": "Count"
+        },
+        "parameters": { 
+            "en": "Parameters",
+            "bg": "Параметри",
+            "el": "Parameters",
+            "fr": "Parameters",
+            "ge": "Parameters",
+            "sr": "Parameters",
+            "4g": "Parameters"
+        },
+        "channels": { 
+            "en": "Channels",
+            "bg": "Параметри",
+            "el": "Channels",
+            "fr": "Channels",
+            "ge": "Channels",
+            "sr": "Channels",
+            "4g": "Channels"
+        },
+        "levels": { 
+            "en": "Levels",
+            "bg": "Нива",
+            "el": "Levels",
+            "fr": "Levels",
+            "ge": "Levels",
+            "sr": "Levels",
+            "4g": "Levels"
+        },
+        "verification": { 
+            "en": "Verification",
+            "bg": "Верификация",
+            "el": "Verification",
+            "fr": "Verification",
+            "ge": "Verification",
+            "sr": "Verification",
+            "4g": "Verification"
         },
 
         "48df2e83-120c-432b-b88e-60b2112a6b52": {

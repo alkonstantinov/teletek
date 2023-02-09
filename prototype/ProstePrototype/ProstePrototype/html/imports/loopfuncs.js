@@ -179,9 +179,9 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
             case (key.includes("TYPECHANNEL")):
                 //deviceData[key]["ITEMS"]["ITEM"][ParseInt(deviceData[key]["value"])]["@NAME"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@NAME"]
                 deviceData[key]["openModalFirst"] = `openChannelModal(this.id, '${deviceData[key]["~path"]}', '${deviceData[key]["@TEXT"]}', '${deviceData[key]["value"] ? deviceData[key]["value"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@DEFAULT"]}', '${deviceData[key]["ITEMS"]["ITEM"].map(x => x["@NAME"])}', this.value)`;
+                deviceData[key]["addChannelHelp"] = true;
             case (key.includes("NAME_I")):
                 if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "channels"));
-                if (key.includes("NAME_I")) deviceData[key]["addChannelHelp"] = true;
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
                 break;

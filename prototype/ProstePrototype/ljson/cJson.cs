@@ -792,7 +792,7 @@ namespace ljson
                 }
             }
         }
-        public static void ReadDevice(cTransport conn)
+        public static void ReadDevice(object conn_params)
         {
             //if (readed)
             //    return;
@@ -855,9 +855,11 @@ namespace ljson
             {
                 Dictionary<string, Tuple<byte, byte>> dpath_minmax = new Dictionary<string, Tuple<byte, byte>>();
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
-                //cTransport conn = cComm.ConnectIP(ip, port);
-                //if (conn == null)
-                //    conn = cComm.ConnectFile("read.log");
+                cTransport conn = null;
+                if (conn_params is cIPParams)
+                    conn = cComm.ConnectIP(((cIPParams)conn_params).address, ((cIPParams)conn_params).port);
+                else if (conn_params is string)
+                    conn = cComm.ConnectFile((string)conn_params);
                 if (conn == null)
                     return;
                 foreach (string key in drw.Keys)
@@ -1033,6 +1035,7 @@ namespace ljson
                 //
                 cComm.CloseConnection(conn);
                 SetSeriaDevicesValues(dserias, devtypes, missedkeys, foundkeys, dloopdevs);
+                _internal_relations_operator.AfterRead(CurrentPanelID, CurrentPanel, GetNode);
                 readed = true;
                 reading = false;
                 if (settings.logreads)
@@ -1162,6 +1165,13 @@ namespace ljson
                     }
                 }
             }
+        }
+        public static JArray ChannelUses(string path)
+        {
+            List<string> lst = _internal_relations_operator.ChannelUsedIn(path);
+            JArray jarr = (lst != null) ? JArray.FromObject(lst) : null;
+            //
+            return jarr;
         }
         public static JObject LoopsInputs(string path)
         {
