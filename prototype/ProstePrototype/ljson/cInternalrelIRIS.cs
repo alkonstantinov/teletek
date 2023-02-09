@@ -373,6 +373,28 @@ namespace ljson
             //
             return res;
         }
+        public override List<string> ChannelUsedIn(string channel_path)
+        {
+            List<string> res = null;
+            if (_used_channels.ContainsKey(channel_path))
+            {
+                Dictionary<string, string> ios = _used_channels[channel_path];
+                if (ios != null && ios.Count > 0)
+                {
+                    res = new List<string>();
+                    foreach (string io in ios.Keys)
+                    {
+                        Match m = Regex.Match(io, @"^ELEMENTS\.([\w\W]+?)\.[\w\W]+?~index~(\d+)$", RegexOptions.IgnoreCase);
+                        if (m.Success)
+                            res.Add(m.Groups[1].Value + m.Groups[2].Value);
+                        else
+                            res.Add(io);
+                    }
+                }
+            }
+            //
+            return res;
+        }
         public override Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val)
         {
             JObject prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);

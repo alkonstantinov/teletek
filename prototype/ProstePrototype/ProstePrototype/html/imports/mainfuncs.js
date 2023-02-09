@@ -572,7 +572,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 const transformGroupElement = (elementJson) => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: newT.t(localStorage.getItem('lang'), (elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: newT.t(localStorage.getItem('lang'), elementJson['@LNGID']), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] && elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -639,7 +639,7 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     selected = !!(+tabs[o]['@DEFAULT']) ? "selected" : "";
                 }
-                inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${newT.t(localStorage.getItem('lang'), tabs[o]['@NAME'].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, ''))} </option>`
+                inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${newT.t(localStorage.getItem('lang'), tabs[o]['@LNGID'])} </option>`
             });
             inner += `</select>
                             </div>
@@ -663,7 +663,7 @@ const transformGroupElement = (elementJson) => {
                     let elementJSON;
                     if (tabs[key]["PROPERTIES"]) {
                         if (!tabFlag) {
-                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), tabs[key]["PROPERTIES"]["PROPERTY"]["@TEXT"].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, ''))}</legend>`);
+                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), tabs[key]["PROPERTIES"]["PROPERTY"]["@LNGID"])}</legend>`);
                         }
                         elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
 
@@ -725,6 +725,7 @@ const transformGroupElement = (elementJson) => {
             return getNumberInput({ ...attributes });
 
         case 'TEXT':
+            if (elementJson["addChannelHelp"]) attributes.addButton = true;
             return getTextInput({ ...attributes });
 
         case 'SLIDER':
@@ -756,9 +757,9 @@ const transformGroupElement = (elementJson) => {
                 } else {
                     sel = !!(o['@DEFAULT']);
                 }
-                let label = newT.t(localStorage.getItem('lang'), o['@NAME'].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, '')) === "Not found translation key" ?
+                let label = newT.t(localStorage.getItem('lang'), o['@LNGID']) === "Not found translation key" ?
                                 o['@NAME'] :
-                                newT.t(localStorage.getItem('lang'), o['@NAME'].trim().toLowerCase().replaceAll(" ", "_").replace(/[/*.?!#]/g, ''));
+                                newT.t(localStorage.getItem('lang'), o['@LNGID']);
                 let tmp = {
                     value: o['@VALUE'],
                     label: label,
@@ -1005,12 +1006,19 @@ function addElementToCONFIGURED_IO(loop_number, device, channel_path) {
 //#endregion
 
 //#region //----- COMMON Funcs -----////////////////////////////////////////////
-const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '', value }) => {
+const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, addButton = false, RmBtn = false, ip = false, path = '', value }) => {
     return `<div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
                 <label for="${input_id}">${input_name}</label>
+                ${addButton ? `<button 
+                                    id="popoverData_${input_id}" class="btn"
+                                    data-content="Popover with data - trigger"
+                                    onmouseover="javascript: showChannelInfo(this, '${path}');"
+                                    data-placement="top" data-original-title="Used in:">
+                                        <i class="fa-solid fa-circle-question"></i>
+                                </button>`: ""}
                 <input type="${type === 'passInput' ? 'password' : 'text'}" 
                        id="${input_id}" name="${input_id}" 
                        ${maxTextLength ? `maxlength="${maxTextLength}"` : (ip ? `maxlength = "15"` : "")}

@@ -54,6 +54,21 @@ namespace lcommunicate
         private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> _cache_pseudo_element_panels;
         private static object _cs_pseudo_element_cache = new object();
 
+        public static void ClearCache()
+        {
+            Monitor.Enter(_cs_cache);
+            Monitor.Enter(_cs_pseudo_element_cache);
+            //
+            if (_cache_panels != null)
+                _cache_panels.Clear();
+            if (_cache_list_panels != null)
+                _cache_list_panels.Clear();
+            if (_cache_pseudo_element_panels != null)
+                _cache_pseudo_element_panels.Clear();
+            //
+            Monitor.Exit(_cs_pseudo_element_cache);
+            Monitor.Exit(_cs_cache);
+        }
         public static void SetPathValue(string panel_id, string path, string value, dFilterValueChanged filter)
         {
             Monitor.Enter(_cs_cache);

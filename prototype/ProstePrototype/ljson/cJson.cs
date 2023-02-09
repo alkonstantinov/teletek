@@ -792,13 +792,14 @@ namespace ljson
                 }
             }
         }
-        public static void ReadDevice(string ip, int port)
+        public static void ReadDevice(cTransport conn)
         {
-            if (readed)
-                return;
-            if (reading)
-                return;
-            reading = true;
+            //if (readed)
+            //    return;
+            //if (reading)
+            //    return;
+            //reading = true;
+            cComm.ClearCache();
             if (settings.logreads)
                 _log_bytesreaded.Clear();
             string _panel_id = CurrentPanelID;
@@ -854,9 +855,9 @@ namespace ljson
             {
                 Dictionary<string, Tuple<byte, byte>> dpath_minmax = new Dictionary<string, Tuple<byte, byte>>();
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
-                cTransport conn = cComm.ConnectIP(ip, port);
-                if (conn == null)
-                    conn = cComm.ConnectFile("read.log");
+                //cTransport conn = cComm.ConnectIP(ip, port);
+                //if (conn == null)
+                //    conn = cComm.ConnectFile("read.log");
                 if (conn == null)
                     return;
                 foreach (string key in drw.Keys)

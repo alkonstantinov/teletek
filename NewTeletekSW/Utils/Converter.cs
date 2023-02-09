@@ -380,11 +380,9 @@ namespace NewTeletekSW.Utils
             keyH = key.ToLower();
             XDocument xml = XDocument.Load(filename);
 
-            Console.WriteLine(xml.DescendantNodes().ToArray().Length);
-            var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
-            removeMe.Count();
-            removeMe.Remove();
-            Console.WriteLine(xml.DescendantNodes().ToArray().Length);
+            //var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
+            //removeMe.Count();
+            //removeMe.Remove();
 
             foreach (var xmlEl in xml.Elements())
             {
@@ -399,47 +397,50 @@ namespace NewTeletekSW.Utils
             if (node.Attribute("TEXT") != null || node.Attribute("NAME") != null)
             {
                 string keyJ = "";
-                string? value = node.Attribute("TEXT")?.Value;
+                string? value = node.Attribute("TEXT")?.Value.Trim();
                 if (String.IsNullOrEmpty(value))
                 {
-                    _ = node.Attribute("NAME")?.Value; // get value of "value"
+                    value = node.Attribute("NAME")?.Value.Trim(); // get value of "value"
                 }
-                string? id = node.Attribute("LNGID")?.Value;
+                string? id = node.Attribute("LNGID")?.Value.Trim();
 
                 if (keyH == "en")
                 {
-                    keyJ = value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { '/', '*', '.', '?', '!' }) : "";
+                    keyJ = id; // value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { '/', '*', '.', '?', '!' }) : "";
 
                     if (!String.IsNullOrEmpty(keyJ))
                     {
                         JObject newValue = new()
                         {
-                            [keyH] = value,
-                            ["id"] = id
+                            [keyH] = value
                         };
                         json.TryAdd(keyJ, newValue);
                     }
                 } else
-                {                   
-                    var allKeys = json.Properties();
-                    //string smtg  = allKeys.Select(x => x.Name).FirstOrDefault(el => (string)json[el]["id"] == id).ToString();
-                    foreach (var kk in allKeys)
-                    {
-                        if (json[kk.Name]?["id"] != null && (string)json[kk.Name]["id"] == id)
-                        {
-                            keyJ = kk.Name;
-                            break;
-                        }
-                    }
-                    //if (smtg == keyJ)
+                {
+                    //var allKeys = json.Properties();
+                    ////string smtg  = allKeys.Select(x => x.Name).FirstOrDefault(el => (string)json[el]["id"] == id).ToString();
+                    //foreach (var kk in allKeys)
                     //{
-                    //    Console.WriteLine("uhu");
+                    //    if (json[kk.Name] != null && (string)kk.Name == id)
+                    //    {
+                    //        keyJ = kk.Name;
+                    //        break;
+                    //    }
                     //}
-                    if (!String.IsNullOrEmpty(keyJ))
+                    //if (!String.IsNullOrEmpty(keyJ))
+                    //{
+                    //    var prevValue = json[keyJ];
+                    var prevValue = !String.IsNullOrEmpty(id) ? json[id] : null;
+                    if (prevValue != null && !((JObject)prevValue).Properties().Select(p => p.Name).Contains(keyH))
+                        ((JObject)prevValue).TryAdd(keyH, value);
+                    //}
+                }
+                if (node.HasElements)
+                {
+                    foreach (var element in node.Elements())
                     {
-                        var prevValue = json[keyJ];
-                        if (prevValue != null && !((JObject)prevValue).Properties().Select(p => p.Name).Contains(keyH))
-                            ((JObject)prevValue).TryAdd(keyH, value);
+                        ToElementsText(element, json);
                     }
                 }
             } else if (node.HasElements)

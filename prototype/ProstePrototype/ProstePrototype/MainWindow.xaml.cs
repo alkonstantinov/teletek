@@ -13,7 +13,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -565,13 +564,14 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
-            ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+            ScanPopUpWindow popUpWindow= new ScanPopUpWindow();
             if ((bool)c)
             {
-                //popUpWindow.Show();
+                int tabIdx = rw.tabControl.SelectedIndex;
+                cTransport t = null;
                 string ip = rw.Address;
                 int port = rw.Port;
-                Thread funcThread = new Thread(() => ReadDevice(ip, port, popUpWindow));
+                Thread funcThread = new Thread(() => ReadDevice(tabIdx, t, ip, port, popUpWindow));
                 funcThread.Start();
 
                 popUpWindow.ShowDialog();
@@ -579,15 +579,21 @@ namespace ProstePrototype
                 funcThread.Join();
 
                 popUpWindow.Close();
+
             }
-            
             rw = new ReadWindow();
             rw.Resources = this.Resources;
         }
-
-        private void ReadDevice(string ip, int port, ScanPopUpWindow popUpWindow)
+        private void ReadDevice(int tabIdx, cTransport t, string ip, int port, ScanPopUpWindow popUpWindow)
         {
-            cJson.ReadDevice(ip, port);
+            if (tabIdx == 0)
+            {
+                t = cComm.ConnectIP(ip, port);
+                cJson.ReadDevice(t);
+            }
+            else if (tabIdx == 3)
+                t = cComm.ConnectFile("read.log");
+            cJson.ReadDevice(t);
             wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
             //set a flag
             Application.Current.Dispatcher.Invoke(() => {

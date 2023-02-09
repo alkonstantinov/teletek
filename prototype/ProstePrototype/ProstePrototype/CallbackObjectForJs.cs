@@ -125,5 +125,10 @@ namespace ProstePrototype
             JObject o = cJson.LoopsOutputs(path);
             return o.ToString();
         }
+
+        public string channelUses(string path)
+        {
+            return "[]";
+        }
     }
 }

@@ -181,6 +181,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
                 deviceData[key]["openModalFirst"] = `openChannelModal(this.id, '${deviceData[key]["~path"]}', '${deviceData[key]["@TEXT"]}', '${deviceData[key]["value"] ? deviceData[key]["value"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@DEFAULT"]}', '${deviceData[key]["ITEMS"]["ITEM"].map(x => x["@NAME"])}', this.value)`;
             case (key.includes("NAME_I")):
                 if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "channels"));
+                if (key.includes("NAME_I")) deviceData[key]["addChannelHelp"] = true;
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
                 break;
@@ -222,6 +223,15 @@ function openChannelModal(id, path, channelName, oldValue, allNames, newValue) {
     });
 
     $("#showConfirmationModal").modal("show");
+}
+
+function showChannelInfo(it, path) {
+    boundAsync.channelUses(path).then(r => {
+        if (r) {
+            it.dataset.content = r;
+        }
+    });
+    $(it).popover({ trigger: "hover" });
 }
 
 const removeDevice = (loopType, loopNumber, deviceName, address) => {
