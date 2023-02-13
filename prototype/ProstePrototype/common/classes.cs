@@ -20,6 +20,7 @@ namespace common
     public delegate object dJSONString2Object(string s, System.Type typ);
     public delegate void dFilterValueChanged(string path, string _new_val);
     public delegate JObject dGetNode(string name);
+    public delegate JObject dFindObjectByProperty(JToken _node, string prop_name, string val);
 
     public static class constants
     {
@@ -272,6 +273,7 @@ namespace common
     public enum ePanelType { ptIRIS = 1, ptEclipse = 2 };
     public enum eIO { ioNull = 0, ioRead = 1, ioWrite = 2 };
     public enum eWriteOperation { woBytes = 1, woProperty = 2 };
+    public enum eInOut { Input = 1, Output = 2};
 
     #region read/write
     public class cRWProperty

@@ -1,8 +1,18 @@
 {
   "profiles": {
-    "NewTeletekSW": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "fromJStoXLS": {
       "commandName": "Project",
-      "commandLineArgs": "-d \"C:\\Users\\vbb12\\GitHub\\Teletek\\Programming Software Teletek Electronics\\Configuration\"\r\n-p dowhatever"
+      "commandLineArgs": "-f \"C:\\Users\\vbb12\\GitHub\\Teletek\\teletek\\prototype\\ProstePrototype\\ProstePrototype\\html\\imports\\translations.js\"\r\n-p toXLS",
+      "jsWebView2Debugging": false
+    },
+    "fromXLStoJSON": {
+      "commandName": "Project",
+      "commandLineArgs": "-f \"C:\\Users\\vbb12\\GitHub\\Teletek\\teletek\\prototype\\ProstePrototype\\ProstePrototype\\html\\imports\\translations.xlsx\"\r\n-p fromXLS",
+      "jsWebView2Debugging": false
     }
   }
 }

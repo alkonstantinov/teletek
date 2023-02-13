@@ -792,6 +792,11 @@ namespace ljson
                 }
             }
         }
+        public static void ClearCache()
+        {
+            cComm.ClearCache();
+            _internal_relations_operator.ClearCache();
+        }
         public static void ReadDevice(object conn_params)
         {
             //if (readed)
@@ -799,7 +804,7 @@ namespace ljson
             //if (reading)
             //    return;
             //reading = true;
-            cComm.ClearCache();
+            ClearCache();
             if (settings.logreads)
                 _log_bytesreaded.Clear();
             string _panel_id = CurrentPanelID;
@@ -1035,7 +1040,7 @@ namespace ljson
                 //
                 cComm.CloseConnection(conn);
                 SetSeriaDevicesValues(dserias, devtypes, missedkeys, foundkeys, dloopdevs);
-                _internal_relations_operator.AfterRead(CurrentPanelID, CurrentPanel, GetNode);
+                _internal_relations_operator.AfterRead(CurrentPanelID, CurrentPanel, GetNode, FilterValueChanged);
                 readed = true;
                 reading = false;
                 if (settings.logreads)
@@ -1658,32 +1663,46 @@ namespace ljson
         {
             if (root == null || lst == null)
                 return;
-            foreach (JToken t in (JToken)root)
+            if (root["~path"] != null)
+                lst.Add(root);
+            foreach (JProperty p in root.Properties())
             {
-                if (t.Type == JTokenType.Object)
+                if (p.Value.Type == JTokenType.Object)
+                    ObjectsWithPath((JObject)p.Value, lst);
+                else if (p.Value.Type == JTokenType.Array)
                 {
-                    string path = ((JObject)t)["~path"].ToString();
-                    if (path != null)
-                        lst.Add((JObject)t);
-                    ObjectsWithPath((JObject)t, lst);
-                }
-                else if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
-                {
-                    JProperty p = (JProperty)t;
-                    JObject o = (JObject)p.Value;
-                    ObjectsWithPath(o, lst);
-                }
-                else if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.String)
-                {
-                    JProperty p = (JProperty)t;
-                    if (p.Name == "~path" && p.Parent.Type == JTokenType.Object)
-                        lst.Add((JObject)p.Parent);
-                }
-                else
-                {
-                    string s = "";
+                    JArray a = (JArray)p.Value;
+                    foreach (JToken t in a)
+                        if (t.Type == JTokenType.Object)
+                            ObjectsWithPath((JObject)t, lst);
                 }
             }
+            //foreach (JToken t in (JToken)root)
+            //{
+            //    if (t.Type == JTokenType.Object)
+            //    {
+            //        string path = ((JObject)t)["~path"].ToString();
+            //        if (path != null)
+            //            lst.Add((JObject)t);
+            //        ObjectsWithPath((JObject)t, lst);
+            //    }
+            //    else if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
+            //    {
+            //        JProperty p = (JProperty)t;
+            //        JObject o = (JObject)p.Value;
+            //        ObjectsWithPath(o, lst);
+            //    }
+            //    else if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.String)
+            //    {
+            //        JProperty p = (JProperty)t;
+            //        if (p.Name == "~path" && p.Parent.Type == JTokenType.Object)
+            //            lst.Add((JObject)p.Parent);
+            //    }
+            //    else
+            //    {
+            //        string s = "";
+            //    }
+            //}
         }
         #endregion
 
@@ -1704,6 +1723,10 @@ namespace ljson
             foreach (JObject o in lst)
             {
                 string path = o["~path"].ToString();
+                if (Regex.IsMatch(path, @"1ef9a\."))
+                {
+                    string s = "";
+                }
                 string val = cComm.GetPathValue(panel_id, path);
                 if (val != null)
                     o["~value"] = val;

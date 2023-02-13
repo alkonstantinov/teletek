@@ -210,8 +210,10 @@ function drawFields(body, json, inheritedColor = '') {
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
             body.appendChild(fieldset);
         } else if (!divLevel["@TYPE"] && !divLevel.name) {
-            for (let i = 0; i < +divLevel["@MIN"]; i++) if (!lst.includes(i + 1)) lst.push(i + 1);
-            elements = divLevel["@MAX"] && (+divLevel["@MAX"] + 1);
+            for (let i = 0; i < +divLevel["@MIN"]; i++) {
+                if (!lst.includes(i)) lst.push(i);
+            }
+            elements = +divLevel["@MAX"];
             let btnDiv = document.getElementById("buttons");
             // adding the button
             btnDiv.insertAdjacentHTML(
@@ -410,8 +412,8 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 .filter(deviceName => deviceName !== "selected")
                 .map(deviceName => {
                     let nameLst = deviceName.split('/');
-                    let name = (nameLst[0].startsWith("IRIS") || nameLst[0].startsWith("ECLIPSE")) ? nameLst[0].split("_").slice(1).join("_") : nameLst[0];
-                    let address = nameLst[1];
+                    let name = nameLst.length === 2 ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
+                    let address = nameLst.at(-1);
                     let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
                     let checkedJson = Object.keys(currentDeviceNameObject)
                         .map(channel => currentDeviceNameObject[channel]["uses"])
@@ -449,7 +451,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
     let selectId = showDivId + "-" + title;
     let inner = `
             <div class="form-item roww">
-                <label for="${selectId}">${newT(localStorage.getItem('lang'), title.toLowerCase())}</label>
+                <label for="${selectId}">${newT.t(localStorage.getItem('lang'), title.toLowerCase())}</label>
                 <div class="select">
                     <select id="${selectId}" name="${selectId}"
                         onchange="javascript: ${nextFunc}" >
@@ -500,7 +502,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     let fieldset = document.createElement("fieldset");
     fieldset.id = "loop_type-" + showDiv.id;
     fieldset.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), 'loop_type')}</legend>`);
-    let pathFound = path, channel_path = "", loop_number = "", device = "";
+    let pathFound = path, channel_path = "", loop_number = "", device = "", address = "";
     /*  value reading: the whole is the channel path
      * "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1"
      * --------loop number----------#--device---.-----------------channel-------------------.-address-
@@ -512,14 +514,15 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     }
     if (channel_path) {
         loop_number = channel_path.split("/")[0];
-        device = channel_path.split("#")[1].split(".")[0] + "/" + channel_path.split("~").pop();
+        device = channel_path.split("#")[1].split(".")[0];
+        address = channel_path.split("~").pop();
     }
     let type = pathFound.split(".").find(e => e.includes("putType"));
     switch (type) {
         case "OutputType":
             boundAsync.loopsOutputs(pathFound).then(result => {
                 CONFIGURED_IO = JSON.parse(result);
-                addElementToCONFIGURED_IO(loop_number, device, channel_path);
+                addElementToCONFIGURED_IO(loop_number, device, address, channel_path);
 
                 showLoopType(1, "Output", "", fieldset.id, selectDiv.id);
 
@@ -527,7 +530,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
         case "InputType":
             boundAsync.loopsInputs(pathFound).then(result => {
                 CONFIGURED_IO = JSON.parse(result);
-                addElementToCONFIGURED_IO(loop_number, device, channel_path);
+                addElementToCONFIGURED_IO(loop_number, device, address, channel_path);
 
                 showLoopType(1, "Input", "", fieldset.id, selectDiv.id);
 
@@ -566,6 +569,25 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     }
   }
 } */
+}
+// adding ["selected"] flag to CONFIGURED_IO for pre-configured Loop Type based on predefined loop, device, deviceAddress and channel
+function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_path) {
+    if (!channel_path || !CONFIGURED_IO) return;
+    for (let loopProp in CONFIGURED_IO) {
+        if (loopProp === loop_number) {
+            CONFIGURED_IO[loopProp]["selected"] = true;
+            for (let deviceProp in CONFIGURED_IO[loopProp]) {
+                if (deviceProp.includes(device) && deviceProp.endsWith(deviceAddress)) {
+                    CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
+                    for (let channelProp in CONFIGURED_IO[loopProp][deviceProp]) {
+                        if (CONFIGURED_IO[loopProp][deviceProp][channelProp]["channel_path"] === channel_path) {
+                            CONFIGURED_IO[loopProp][deviceProp][channelProp]["selected"] = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 // transforming object function
@@ -631,7 +653,7 @@ const transformGroupElement = (elementJson) => {
                         checkType = `checkType='${tabs[o]["~path"]}'`;
                     }
                 }
-                let value = `${tabs[o]['@VALUE']}_${attributes.input_id}_${o}`;
+                let value = (tabs[o].hasOwnProperty("~enabled")) ? tabs[o]['@VALUE'] : `${tabs[o]['@VALUE']}_${o}`;
                 let selected;
                 if (attributes.value) {
                     selected = attributes.value === value ? "selected" : "";
@@ -651,7 +673,7 @@ const transformGroupElement = (elementJson) => {
             tabsKeys.forEach(key => {
                 if (!tabs[key]["~enabled"]) {
                     let tabDiv = document.createElement('div');
-                    tabDiv.id = tabs[key]['@VALUE'] + '_' + attributes.input_id + '_' + key;
+                    tabDiv.id = tabs[key]['@VALUE'] + '_' + key;
                     tabDiv.style.display = 'none';
 
                     let tabFlag = (tabs[key]["PROPERTIES"] && Array.isArray(tabs[key]["PROPERTIES"]["PROPERTY"]));
@@ -667,7 +689,7 @@ const transformGroupElement = (elementJson) => {
                         elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
 
                         for (elIndex in elementJSON) {
-                            if (!isNaN(elIndex)) {
+                            if (tabFlag) { // if it is an array => tabFlag
                                 if (elementJSON[elIndex]['@TYPE'] === 'HIDDEN') continue;
                                 let innerString;
                                 if (elementJSON[elIndex]['@TYPE'] === "AND") {
@@ -675,7 +697,8 @@ const transformGroupElement = (elementJson) => {
                                     if (Array.isArray(andElements)) {
                                         for (andEl in andElements) {
                                             innerString = transformGroupElement(andElements[andEl]);
-                                            if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                            if (innerString && typeof (innerString) === "string") //NB!! Might lead to bug
+                                                appendInnerToElement(innerString, fieldsetDiv, elementJSON);
                                             innerString = '';
                                         }
                                     } else {
@@ -684,19 +707,38 @@ const transformGroupElement = (elementJson) => {
                                 } else {
                                     innerString = transformGroupElement(elementJSON[elIndex]);
                                 }
-                                if (innerString) appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                if (innerString && typeof (innerString) === "string") {
+                                    appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                } else if (innerString && typeof (innerString) !== "string") {
+                                    const [inner, jsFunc] = innerString;
+                                    appendInnerToElement(inner, fieldsetDiv, elementJSON);
+                                    console.log("should've reached reached the end of the three"); //NB!! Might lead to bug
+                                }
                                 if (elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length === 0) {
                                     fieldsetDiv.classList.add('justify-content-around');
                                 }
                             }
                             else {
                                 if (elementJSON['@TYPE'] === 'HIDDEN') continue;
-                                const innerString = transformGroupElement(elementJSON);
                                 const newElement = document.createElement('div');
                                 let className = `col-xs-12 col-lg-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
                                 newElement.classList = className;
-                                newElement.innerHTML = innerString;
-                                fieldsetDiv.appendChild(newElement);
+
+                                const innerString = transformGroupElement(elementJSON);
+                                if (typeof (innerString) !== "string") {
+                                    const [inner, jsFunc] = innerString;
+                                    newElement.innerHTML = inner;
+                                    fieldsetDiv.appendChild(newElement);
+                                    const [el1, el2, el3, el4] = jsFunc();
+                                    // alert(`el1 -> ${el1}, el2 -> ${el2}, el3 -> ${el3}, el4 -> ${el4}`)
+                                    setTimeout(() => {
+                                        let el = document.getElementById(el1);
+                                        loadDiv(el, el2, el3, el4);
+                                    }, 200);
+                                } else {
+                                    newElement.innerHTML = innerString;
+                                    fieldsetDiv.appendChild(newElement);
+                                }
                                 break;
                             }
                         }
@@ -984,24 +1026,6 @@ function weekChangedValueHandler(scheduleId, index, newValue, path) {
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': newValues.join(" ") } });
 }
 
-function addElementToCONFIGURED_IO(loop_number, device, channel_path) {
-    if (!channel_path || !CONFIGURED_IO) return;
-    for (let loopProp in CONFIGURED_IO) {
-        if (loopProp === loop_number) {
-            CONFIGURED_IO[loopProp]["selected"] = true;
-            for (let deviceProp in CONFIGURED_IO[loopProp]) {
-                if (deviceProp === device) {
-                    CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
-                    for (let channelProp in CONFIGURED_IO[loopProp][deviceProp]) {
-                        if (CONFIGURED_IO[loopProp][deviceProp][channelProp]["channel_path"] === channel_path) {
-                            CONFIGURED_IO[loopProp][deviceProp][channelProp]["selected"] = true;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 //#endregion
 
 //#region //----- COMMON Funcs -----////////////////////////////////////////////
@@ -1318,8 +1342,8 @@ function addConcreteElement(id, elementType = "") {
 function addElement(id, elementType = "") {
 
     if (id === "element") {
-        var last = 0;
-        for (i = 1; i <= elements; i++) {
+        var last = -1;
+        for (i = 0; i <= elements; i++) {
             if (lst.includes(i)) {
                 continue;
             } else {
@@ -1327,7 +1351,7 @@ function addElement(id, elementType = "") {
                 break;
             }
         }
-        if (last === 0 || lst.includes(last)) return;
+        if (last === -1 || lst.includes(last)) return;
 
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
         createElementButton(last, elementType);

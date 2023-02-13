@@ -8,20 +8,102 @@ using lcommunicate;
 using common;
 using System.Windows.Input;
 using System.Text.Encodings;
+using System.Linq;
 
 namespace ljson
 {
+    internal class cIOChannel
+    {
+        private JObject _tab = null;
+        private string _sidx = null;
+        private eInOut _io;
+        private JObject _panel = null;
+        private string _panel_id = null;
+        private dFindObjectByProperty FindObjectByProperty = null;
+        internal cIOChannel(JObject tab, string idx, eInOut io, JObject panel, string panelID, dFindObjectByProperty _find)
+        {
+            _tab = tab;
+            if (!Regex.IsMatch(idx, @"\.~index~"))
+                idx = ".~index~" + idx;
+            _sidx = idx;
+            _io = io;
+            _panel = panel;
+            _panel_id = panelID;
+            FindObjectByProperty = _find;
+        }
+
+        internal string ChannelValue
+        {
+            get
+            {
+                JObject odevaddr = FindObjectByProperty(_tab, "@ID", "P1");
+                if (odevaddr == null || odevaddr["~path"] == null)
+                    return null;
+                string devaddr_path = odevaddr["~path"].ToString() + _sidx;
+                string devaddr = cComm.GetPathValue(_panel_id, devaddr_path);
+                if (devaddr == null || devaddr == "")
+                    return null;
+                JObject oloop = FindObjectByProperty(_tab, "@ID", "P2");
+                if (oloop == null || oloop["~path"] == null)
+                    return null;
+                string loop_path = oloop["~path"].ToString() + _sidx;
+                string loop = cComm.GetPathValue(_panel_id, loop_path);
+                if (loop == null || loop == "")
+                    return null;
+                Dictionary<string, string> dloops = cComm.GetPseudoElementsList(_panel_id, constants.NO_LOOP);
+                if (!dloops.ContainsKey(loop))
+                    return null;
+                string loop_template = dloops[loop];
+                if (loop_template == null)
+                    return null;
+                oloop = JObject.Parse(loop_template);
+                if (oloop["~loop_type"] == null)
+                    return null;
+                string looptype = oloop["~loop_type"].ToString();
+                //IRIS_TTELOOP1
+                JObject ol = (JObject)_panel["ELEMENTS"][looptype];
+                JToken tel = ol["CONTAINS"]["ELEMENT"];
+                if (tel["@ID"] == null)
+                    return null;
+                string loopsubtype = tel["@ID"].ToString();
+                //IRIS_TTENONE
+                Dictionary<string, string> d = cComm.GetPseudoElementDevices(_panel_id, constants.NO_LOOP, loop);
+                if (!d.ContainsKey(devaddr))
+                    return null;
+                string sdev = d[devaddr];
+                JObject odev = JObject.Parse(sdev);
+                if (odev["~device"] == null)
+                    return null;
+                sdev = odev["~device"].ToString();
+                //IRIS_MIO22
+                JObject ochannel = FindObjectByProperty(_tab, "@ID", "CHANNEL");
+                if (ochannel == null || ochannel["~path"] == null)
+                    return null;
+                string channel_path = ochannel["~path"].ToString() + _sidx;
+                string channel = cComm.GetPathValue(_panel_id, channel_path);
+                if (channel == null || channel == "")
+                    return null;
+                string chidx = ".~index~" + channel;
+                channel = "TYPECHANNEL" + channel;
+                //TYPECHANNEL1
+                string newval = looptype + "/" + loopsubtype + "#" + sdev;
+                odev = (JObject)_panel["ELEMENTS"][sdev]["PROPERTIES"]["Groups"];
+                ochannel = (JObject)odev["~noname"]["fields"][channel];
+                if (ochannel == null)
+                    return null;
+                channel_path = ochannel["~path"].ToString() + chidx;
+                //ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL1
+                newval += "." + channel_path;
+                return newval;
+                //IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL1.~index~0
+            }
+        }
+    }
     internal class cInternalrelIRIS : cInternalRel
     {
         private enum eIO { Input = 1, Output = 2 };
-        private void SetInputFilters(string _panel_id, JObject _node)
-        {
 
-        }
-        private void SetOutputFilters(string _panel_id, JObject _node)
-        {
-
-        }
+        #region io&loops
         private Dictionary<string, Dictionary<string, Dictionary<string, string>>> LoopsInOuuts(string _panel_id, Dictionary<string, string> loops, string io, bool firstonly)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, string>>> res = null;
@@ -45,14 +127,12 @@ namespace ljson
                         name_path = nameprop["~path"].ToString();
                     string saved_name = cComm.GetPathValue(_panel_id, name_path);
                     //
-                    if (saved_name == null)
-                    {
-                        m = Regex.Match(dev, @"""~device""\s*?:\s*?""([\w\W]+?)""");
-                        if (m.Success)
-                            device_name = m.Groups[1].Value;
-                    }
-                    else
-                        device_name = saved_name;
+
+                    m = Regex.Match(dev, @"""~device""\s*?:\s*?""([\w\W]+?)""");
+                    if (m.Success)
+                        device_name = m.Groups[1].Value;
+                    if (saved_name != null)
+                        device_name += "/" + saved_name;
                     //
                     m = Regex.Match(dev, @"""~device_type""\s*?:\s*?""([\w\W]+?)""");
                     if (m.Success)
@@ -76,6 +156,8 @@ namespace ljson
                             dsm.Add(device_name + "/" + dkey, new Dictionary<string, string>());
                         Dictionary<string, string> dsmch = dsm[device_name + "/" + dkey];
                         dsmch.Add("device", "ELEMENTS." + device_name);
+                        //if (saved_name != null && saved_name.Trim() != "")
+                        //    dsmch.Add("name", saved_name);
                         if (firstonly)
                             return res;
                         continue;
@@ -131,6 +213,8 @@ namespace ljson
                                                 Dictionary<string, string> dchname = ddev[device_name + "/" + dkey];
                                                 if (!dchname.ContainsKey(chname))
                                                     dchname.Add(chname, path_noidx + jidx);
+                                                //if (saved_name != null && saved_name.Trim() != "" && !dchname.ContainsKey("name"))
+                                                //    dchname.Add("name", saved_name);
                                             }
                                             //
                                             if (firstonly)
@@ -194,19 +278,16 @@ namespace ljson
             //
             return res;
         }
-
         private bool HaveInputs(string _panel_id, Dictionary<string, string> loops)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, string>>> res = LoopsInOuuts(_panel_id, loops, "input", true);
             return res != null && res.Count > 0;
         }
-
         private bool HaveOutputs(string _panel_id, Dictionary<string, string> loops)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, string>>> res = LoopsInOuuts(_panel_id, loops, "output", true);
             return res != null && res.Count > 0;
         }
-
         public override Dictionary<string, Dictionary<string, Dictionary<string, string>>> UnionInOuts(string _panel_id, string io)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, string>>> dres = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
@@ -259,6 +340,17 @@ namespace ljson
             }
             return loopsbytype;
         }
+        #endregion
+
+        #region filters
+        private void SetInputFilters(string _panel_id, JObject _node)
+        {
+
+        }
+        private void SetOutputFilters(string _panel_id, JObject _node)
+        {
+
+        }
         private void SetIOFilters(string _panel_id, JObject _node, eIO io)
         {
             //Dictionary<string, Dictionary<string, Dictionary<string, string>>> dunion = UnionInOuts(_panel_id, "input");
@@ -304,7 +396,6 @@ namespace ljson
                 }
             }
         }
-
         internal override void SetNodeFilters(string _panel_id, JObject _node)
         {
             string path = _node["~path"].ToString();
@@ -313,6 +404,9 @@ namespace ljson
             else if (Regex.IsMatch(path, @"OUTPUT", RegexOptions.IgnoreCase))
                 SetIOFilters(_panel_id, _node, eIO.Output);
         }
+        #endregion
+
+        #region after changes
         public override void AfterDevicesChanged(string _panel_id, JObject panel, dGetNode _get_node)
         {
             foreach (JProperty p in panel["ELEMENTS"])
@@ -339,13 +433,207 @@ namespace ljson
                 }
             }
         }
-        public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node)
+        private string ChangeIncorrectPaths(string _panel_id, JObject panel, Dictionary<string, string> _old_paths, Dictionary<string, Dictionary<string, string>> _old_byio, Dictionary<string, string> tabindexes)
+        {
+            string res = null;
+            foreach (string sio in _old_byio.Keys)
+            {
+                Dictionary<string, string> diovalues = _old_byio[sio];
+                string tabpath = diovalues.Keys.First();
+                Match m = Regex.Match(tabpath, @"^([\w\W]+?\.TABS)");
+                if (m.Success)
+                    tabpath = m.Groups[1].Value;
+                else
+                    continue;
+                JToken t = panel.SelectToken(tabpath);
+                if (t == null)
+                    continue;
+                //int i = Convert.ToInt32(tabindexes[sio]);
+                string stab = null;
+                foreach (JProperty p in t)
+                {
+                    if (p.Value.Type != JTokenType.Object)
+                        continue;
+                    JObject pval = (JObject)p.Value;
+                    if (pval["@VALUE"] != null && pval["@VALUE"].ToString() == tabindexes[sio])
+                    {
+                        stab = p.Name;
+                        break;
+                    }
+                }
+                //foreach (JProperty p in t)
+                //{
+                //    if (i == 0)
+                //    {
+                //        stab = p.Name;
+                //        break;
+                //    }
+                //    i--;
+                //}
+                if (stab == null)
+                    continue;
+                //
+                Dictionary<string, string> drepl = new Dictionary<string, string>();
+                Dictionary<string, string> back = new Dictionary<string, string>();
+                foreach (string opath in diovalues.Keys)
+                {
+                    m = Regex.Match(opath, @"^([\w\W]+?\.TABS\.)([\w\W]+?)(\.[\w\W]+)$");
+                    if (!m.Success || m.Groups[2].Value == stab)
+                        continue;
+                    string npath = m.Groups[1].Value + stab + m.Groups[3].Value;
+                    drepl.Add(opath, npath);
+                    back.Add(npath, opath);
+                }
+                foreach (string opath in drepl.Keys)
+                {
+                    string oval = diovalues[opath];
+                    string opath_idx = "";
+                    //
+                    m = Regex.Match(opath, @"[\w\W]+?(\.~index~\d+)$");
+                    if (m.Success)
+                        opath_idx = m.Groups[1].Value;
+                    string new_path = Regex.Replace(drepl[opath], @"\.~index~\d+$", "");
+                    new_path = Regex.Replace(new_path, stab + @"\.[\w\W]+$", stab);
+                    //new_path = Regex.Replace(new_path, @""
+                    JObject newfield = cPanelField.FieldByWrongPath(panel, Regex.Replace(opath, @"\.~index~\d+$", ""), new_path, FindObjectByProperty);
+                    if (newfield != null)
+                    {
+                        new_path = newfield["~path"].ToString() + opath_idx;
+                        diovalues.Remove(opath);
+                        cComm.RemovePathValue(_panel_id, opath);
+                        diovalues.Add(new_path, oval);
+                        Dictionary<string, string> new_values = cPanelField.ValuesDependedOnType(panel, new_path, oval);
+                        foreach (string np in new_values.Keys)
+                            cComm.SetPathValue(_panel_id, np, new_values[np]);
+                        if (res == null)
+                        {
+                            m = Regex.Match(new_path, @"^([\w\W]+?\.TABS\.[\w\W]+?)\.");
+                            if (m.Success)
+                                res = m.Groups[1].Value;
+                        }
+                    }
+                    else
+                    {
+                        JObject grp = cPanelField.FindGroup(panel, Regex.Replace(opath, @"\.~index~\d+$", ""));
+                        Dictionary<string, string> pathvals = cPanelField.GroupPathValues(grp, oval, opath_idx);
+                        diovalues.Remove(opath);
+                        cComm.RemovePathValue(_panel_id, opath);
+                        if (pathvals != null)
+                            foreach (string key in pathvals.Keys)
+                            {
+                                diovalues.Add(key, pathvals[key]);
+                                Dictionary<string, string> new_values = cPanelField.ValuesDependedOnType(panel, key, pathvals[key]);
+                                foreach (string np in new_values.Keys)
+                                    cComm.SetPathValue(_panel_id, np, new_values[np]);
+                                //cComm.SetPathValue(_panel_id, key, cPanelField.ValueTypeDepend(panel, key, pathvals[key]));
+                            }
+                    }
+                }
+            }
+            return res;
+        }
+        private string GetChannelValue(string _panel_id, JObject panel, JObject tab, string sidx)
+        {
+            cIOChannel io_channel = new cIOChannel(tab, sidx, eInOut.Input, panel, _panel_id, FindObjectByProperty);
+            return io_channel.ChannelValue;
+        }
+        private void SetIOTabsAfterRead(string _panel_id, JObject panel, Dictionary<string, string> _old_paths)
+        {
+            Dictionary<string, Dictionary<string, string>> _old_byio = new Dictionary<string, Dictionary<string, string>>();
+            Dictionary<string, string> tabindexes = new Dictionary<string, string>();
+            foreach (string path in _old_paths.Keys)
+            {
+                if (!Regex.IsMatch(path, @"^ELEMENTS\.[^\.]+?(INPUT|OUTPUT)\.", RegexOptions.IgnoreCase))
+                    continue;
+                string ioidx = "";
+                Match m = Regex.Match(path, @"^(ELEMENTS\.[\w\W]+?)\.[\w\W]+?~index~(\d+)", RegexOptions.IgnoreCase);
+                if (m.Success)
+                {
+                    string iokey = m.Groups[1].Value + m.Groups[2].Value;
+                    ioidx = m.Groups[2].Value;
+                    if (!_old_byio.ContainsKey(iokey))
+                        _old_byio.Add(iokey, new Dictionary<string, string>());
+                    Dictionary<string, string> dio = _old_byio[iokey];
+                    Match mt = Regex.Match(path, @"^[\w\W]+?Groups\.(Input|Output)Type\.fields\.Type", RegexOptions.IgnoreCase);
+                    if (mt.Success)
+                    {
+                        string typekey = mt.Value;
+                        if (!Regex.IsMatch(path, @"\.TABS\.", RegexOptions.IgnoreCase))
+                        {
+                            string tabidx = _old_paths[path];
+                            if (!tabindexes.ContainsKey(iokey))
+                                tabindexes.Add(iokey, tabidx);
+                        }
+                        if (!Regex.IsMatch(path, @"\.TABS\."))
+                            continue;
+                        if (!dio.ContainsKey(typekey))
+                            dio.Add(path, _old_paths[path]);
+                    }
+                }
+            }
+            //
+            string tab_path = ChangeIncorrectPaths(_panel_id, panel, _old_paths, _old_byio, tabindexes);
+            foreach (string key in _old_byio.Keys)
+            {
+                Dictionary<string, string> dold = _old_byio[key];
+                string sidx = "";
+                string oldpath = dold.Keys.First();
+                Match m = Regex.Match(oldpath, @"([\w\W]+?\.TABS\.[\w\W]+?)\.");
+                if (m.Success)
+                    tab_path = m.Groups[1].Value;
+                m = Regex.Match(oldpath, @"(\.~index~\d+$)");
+                if (m.Success)
+                    sidx = m.Groups[1].Value;
+                else
+                    continue;
+                if (tab_path != null)
+                {
+                    JToken jttab = panel.SelectToken(tab_path);
+                    if (jttab != null && jttab.Type == JTokenType.Object)
+                    {
+                        JObject otab = (JObject)jttab;
+                        string channel_value = GetChannelValue(_panel_id, panel, otab, sidx);
+                        if (channel_value != null && channel_value != "")
+                        {
+                            string channel_key = otab["~path"].ToString() + sidx;
+                            cComm.SetPathValue(_panel_id, channel_key, channel_value);
+                            bool remove_value = false;
+                            FilterValueChanged(channel_key, channel_value, ref remove_value);
+                        }
+                        else
+                        {
+                            m = Regex.Match(tab_path, @"^([\w\W]+?)\.TABS\.([\w\W]+)$");
+                            if (m.Success)
+                            {
+                                string s = m.Groups[1].Value + sidx;
+                                string orgval = cComm.GetPathValue(_panel_id, s);
+                                //if (Regex.IsMatch(key, "input", RegexOptions.IgnoreCase))
+                                //    orgval += "_input_type_";
+                                //else
+                                //    orgval += "_output_type_";
+                                string tab = m.Groups[2].Value;
+                                cComm.SetPathValue(_panel_id, s, orgval + "_" + tab);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func)
         {
             AfterDevicesChanged(_panel_id, panel, _get_node);
+            Dictionary<string, string> path_values = cComm.GetPathValues(_panel_id);
+            SetIOTabsAfterRead(_panel_id, panel, path_values);
         }
+        #endregion
+
         #region path values
         private Dictionary<string, Dictionary<string, string>> _used_channels = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _io_channels = new Dictionary<string, string>();
+        public override void ClearCache()
+        {
+            _used_channels.Clear();
+        }
         public override void FilterValueChanged(string path, string _new_val, ref bool remove_value)
         {
             Match m = Regex.Match(_new_val, @"([0-9a-fA-f]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})$");

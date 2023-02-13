@@ -32,6 +32,7 @@ namespace ProstePrototype
                 ok.Remove("~rw");
                 o[key] = ok;
             }
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
         public string getJsonForElement(string elementType, int elementNumber)

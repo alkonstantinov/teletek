@@ -172,7 +172,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
             case (key === "LED"):
             case (key.includes("SOUND")):
             case (key.includes("DUST")):
-                if (!fieldsetParameters) fieldsetParameters = createFieldset(`params_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "parameters"));
+                if (!fieldsetParameters) fieldsetParameters = createFieldset(`params_${loopType}_${deviceName}_${address}`, new T().t(localStorage.getItem('lang'), "parameters"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetParameters.insertAdjacentHTML('beforeend', `<div class="${deviceData[key]["@TYPE"] === "AND" ? 'col-12' : 'col-xs-12 col-lg-6'} pr-1">${inner}</div>`);
                 break;
@@ -181,17 +181,17 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
                 deviceData[key]["openModalFirst"] = `openChannelModal(this.id, '${deviceData[key]["~path"]}', '${deviceData[key]["@TEXT"]}', '${deviceData[key]["value"] ? deviceData[key]["value"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@DEFAULT"]}', '${deviceData[key]["ITEMS"]["ITEM"].map(x => x["@NAME"])}', this.value)`;
                 deviceData[key]["addChannelHelp"] = true;
             case (key.includes("NAME_I")):
-                if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "channels"));
+                if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, new T().t(localStorage.getItem('lang'), "channels"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
                 break;
             case (key.includes("ALARMLEVEL")):
-                if (!fieldsetAlarmLevel) fieldsetAlarmLevel = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "levels"));
+                if (!fieldsetAlarmLevel) fieldsetAlarmLevel = createFieldset(`channels_${loopType}_${deviceName}_${address}`, new T().t(localStorage.getItem('lang'), "levels"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetAlarmLevel.insertAdjacentHTML('beforeend', `<div class="col-12">${inner}</div>`);
                 break;
             case (key.includes("VERIFYTIME")):
-                if (!fieldsetVerifyTime) fieldsetVerifyTime = createFieldset(`channels_${loopType}_${deviceName}_${address}`, newT.t(localStorage.getItem('lang'), "verification"));
+                if (!fieldsetVerifyTime) fieldsetVerifyTime = createFieldset(`channels_${loopType}_${deviceName}_${address}`, new T().t(localStorage.getItem('lang'), "verification"));
                 inner = transformGroupElement(deviceData[key]);
                 if (inner) fieldsetVerifyTime.insertAdjacentHTML('beforeend', `<div class="col-12">${inner}</div>`);
                 break;

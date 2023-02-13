@@ -520,6 +520,7 @@ namespace ljson
             JObject props = Array2Object((JArray)o["PARAMETERS"]["PROPERTIES"]["PROPERTY"]);
             //f2["parameters"] = props;
             grp2["fields"] = props;
+            grp2["~type"] = "AND";
             json[key]["PROPERTIES"]["Groups"]["Parameters"] = grp2;
             //
             JObject grp3 = new JObject();

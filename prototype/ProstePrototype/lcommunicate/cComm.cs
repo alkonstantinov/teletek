@@ -86,6 +86,20 @@ namespace lcommunicate
                 panel.Add(path, value);
             Monitor.Exit(_cs_cache);
         }
+        public static void SetPathValue(string panel_id, string path, string value)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels == null)
+                _cache_panels = new Dictionary<string, Dictionary<string, string>>();
+            if (!_cache_panels.ContainsKey(panel_id))
+                _cache_panels.Add(panel_id, new Dictionary<string, string>());
+            Dictionary<string, string> panel = _cache_panels[panel_id];
+            if (panel.ContainsKey(path))
+                panel[path] = value;
+            else
+                panel.Add(path, value);
+            Monitor.Exit(_cs_cache);
+        }
 
         public static string GetPathValue(string panel_id, string path)
         {
@@ -100,7 +114,19 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
-
+        public static Dictionary<string, string> GetPathValues(string panel_id)
+        {
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel_paths = _cache_panels[panel_id];
+                foreach (string key in panel_paths.Keys)
+                    res.Add(key, panel_paths[key]);
+            }
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
         public static void RemovePathValue(string panel_id, string path)
         {
             Monitor.Enter(_cs_cache);
