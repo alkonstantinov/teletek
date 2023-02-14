@@ -433,6 +433,15 @@ namespace ljson
                 }
             }
         }
+        private void SetPathValuesDependedOnType(string _panel_id, JObject panel, Dictionary<string, string> paths_left)
+        {
+            foreach (string path in paths_left.Keys)
+            {
+                Dictionary<string, string> dvalues = cPanelField.ValuesDependedOnType(panel, path, paths_left[path]);
+                foreach (string valpath in dvalues.Keys)
+                    cComm.SetPathValue(_panel_id, valpath, dvalues[valpath]);
+            }
+        }
         private string ChangeIncorrectPaths(string _panel_id, JObject panel, Dictionary<string, string> _old_paths, Dictionary<string, Dictionary<string, string>> _old_byio, Dictionary<string, string> tabindexes)
         {
             string res = null;
@@ -448,7 +457,6 @@ namespace ljson
                 JToken t = panel.SelectToken(tabpath);
                 if (t == null)
                     continue;
-                //int i = Convert.ToInt32(tabindexes[sio]);
                 string stab = null;
                 foreach (JProperty p in t)
                 {
@@ -461,15 +469,6 @@ namespace ljson
                         break;
                     }
                 }
-                //foreach (JProperty p in t)
-                //{
-                //    if (i == 0)
-                //    {
-                //        stab = p.Name;
-                //        break;
-                //    }
-                //    i--;
-                //}
                 if (stab == null)
                     continue;
                 //
@@ -482,7 +481,8 @@ namespace ljson
                         continue;
                     string npath = m.Groups[1].Value + stab + m.Groups[3].Value;
                     drepl.Add(opath, npath);
-                    back.Add(npath, opath);
+                    if (!back.ContainsKey(npath))
+                        back.Add(npath, opath);
                 }
                 foreach (string opath in drepl.Keys)
                 {
@@ -494,7 +494,6 @@ namespace ljson
                         opath_idx = m.Groups[1].Value;
                     string new_path = Regex.Replace(drepl[opath], @"\.~index~\d+$", "");
                     new_path = Regex.Replace(new_path, stab + @"\.[\w\W]+$", stab);
-                    //new_path = Regex.Replace(new_path, @""
                     JObject newfield = cPanelField.FieldByWrongPath(panel, Regex.Replace(opath, @"\.~index~\d+$", ""), new_path, FindObjectByProperty);
                     if (newfield != null)
                     {
@@ -525,7 +524,6 @@ namespace ljson
                                 Dictionary<string, string> new_values = cPanelField.ValuesDependedOnType(panel, key, pathvals[key]);
                                 foreach (string np in new_values.Keys)
                                     cComm.SetPathValue(_panel_id, np, new_values[np]);
-                                //cComm.SetPathValue(_panel_id, key, cPanelField.ValueTypeDepend(panel, key, pathvals[key]));
                             }
                     }
                 }
@@ -539,12 +537,17 @@ namespace ljson
         }
         private void SetIOTabsAfterRead(string _panel_id, JObject panel, Dictionary<string, string> _old_paths)
         {
+            Dictionary<string, string> paths_left = new Dictionary<string, string>();
+            //
             Dictionary<string, Dictionary<string, string>> _old_byio = new Dictionary<string, Dictionary<string, string>>();
             Dictionary<string, string> tabindexes = new Dictionary<string, string>();
             foreach (string path in _old_paths.Keys)
             {
                 if (!Regex.IsMatch(path, @"^ELEMENTS\.[^\.]+?(INPUT|OUTPUT)\.", RegexOptions.IgnoreCase))
+                {
+                    paths_left.Add(path, _old_paths[path]);
                     continue;
+                }
                 string ioidx = "";
                 Match m = Regex.Match(path, @"^(ELEMENTS\.[\w\W]+?)\.[\w\W]+?~index~(\d+)", RegexOptions.IgnoreCase);
                 if (m.Success)
@@ -569,8 +572,12 @@ namespace ljson
                         if (!dio.ContainsKey(typekey))
                             dio.Add(path, _old_paths[path]);
                     }
+                    else
+                        paths_left.Add(path, _old_paths[path]);
                 }
             }
+            //
+            SetPathValuesDependedOnType(_panel_id, panel, paths_left);
             //
             string tab_path = ChangeIncorrectPaths(_panel_id, panel, _old_paths, _old_byio, tabindexes);
             foreach (string key in _old_byio.Keys)
@@ -602,18 +609,26 @@ namespace ljson
                         }
                         else
                         {
-                            m = Regex.Match(tab_path, @"^([\w\W]+?)\.TABS\.([\w\W]+)$");
-                            if (m.Success)
-                            {
-                                string s = m.Groups[1].Value + sidx;
-                                string orgval = cComm.GetPathValue(_panel_id, s);
-                                //if (Regex.IsMatch(key, "input", RegexOptions.IgnoreCase))
-                                //    orgval += "_input_type_";
-                                //else
-                                //    orgval += "_output_type_";
-                                string tab = m.Groups[2].Value;
-                                cComm.SetPathValue(_panel_id, s, orgval + "_" + tab);
-                            }
+                            //m = Regex.Match(tab_path, @"^([\w\W]+?)\.TABS\.([\w\W]+)$");
+                            //if (m.Success)
+                            //{
+                            //    string s = m.Groups[1].Value + sidx;
+                            //    string orgval = cComm.GetPathValue(_panel_id, s);
+                            //    //if (Regex.IsMatch(key, "input", RegexOptions.IgnoreCase))
+                            //    //    orgval += "_input_type_";
+                            //    //else
+                            //    //    orgval += "_output_type_";
+                            //    string tab = m.Groups[2].Value;
+                            //    cComm.SetPathValue(_panel_id, s, orgval + "_" + tab);
+                            //}
+                        }
+                        m = Regex.Match(tab_path, @"^([\w\W]+?)\.TABS\.([\w\W]+)$");
+                        if (m.Success)
+                        {
+                            string s = m.Groups[1].Value + sidx;
+                            string orgval = cComm.GetPathValue(_panel_id, s);
+                            string tab = m.Groups[2].Value;
+                            cComm.SetPathValue(_panel_id, s, orgval + "_" + tab);
                         }
                     }
                 }
@@ -790,12 +805,19 @@ namespace ljson
                     sval = (val[1] * 16 + val[0]).ToString();
                     return new Tuple<string, string>(path, sval);
                 }
+                else if (prop["@TYPE"].ToString().ToLower() == "intlist")
+                {
+                    sval = "";
+                    for (int i = 0; i < val.Length; i++)
+                        sval += ((sval != "") ? "," : "") + val[i].ToString();
+                    return new Tuple<string, string>(path, sval);
+                }
                 sval = val[0].ToString() + val[1].ToString();
             }
             //
             return new Tuple<string, string>(path, sval);
         }
-        public override bool AddSerialDevice(string key, JObject node, byte[] val, byte address)
+        public override bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props)
         {
             if (Regex.IsMatch(key, @"input[\w\W]+?group", RegexOptions.IgnoreCase))
             {
@@ -838,16 +860,22 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"output$", RegexOptions.IgnoreCase))
             {
-                if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["Parameters"] != null)
+                if (read_props.ContainsKey("Type"))
                 {
-                    JObject grp = (JObject)node["PROPERTIES"]["Groups"]["Parameters"];
-                    if (grp["fields"] != null && grp["fields"]["Parameters"] != null)
-                    {
-                        JObject field = (JObject)grp["fields"]["Parameters"];
-                        if (field["@VALUE"] != null)
-                            return val[9] != Convert.ToByte(field["@VALUE"].ToString());
-                    }
+                    cRWPropertyIRIS prop = (cRWPropertyIRIS)read_props["Type"];
+                    int type_byte = prop.offset;
+                    return val[type_byte] != 0;
                 }
+                //if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["Parameters"] != null)
+                //{
+                //    JObject grp = (JObject)node["PROPERTIES"]["Groups"]["Parameters"];
+                //    if (grp["fields"] != null && grp["fields"]["Parameters"] != null)
+                //    {
+                //        JObject field = (JObject)grp["fields"]["Parameters"];
+                //        if (field["@VALUE"] != null)
+                //            return val[9] != Convert.ToByte(field["@VALUE"].ToString());
+                //    }
+                //}
             }
             else if (Regex.IsMatch(key, @"panel", RegexOptions.IgnoreCase))
             {
@@ -875,7 +903,7 @@ namespace ljson
                         return true;
                 return false;
             }
-            return base.AddSerialDevice(key, node, val, address);
+            return base.AddSerialDevice(key, node, val, address, read_props);
         }
         #endregion
     }

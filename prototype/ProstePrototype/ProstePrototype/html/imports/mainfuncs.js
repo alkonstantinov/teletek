@@ -642,7 +642,7 @@ const transformGroupElement = (elementJson) => {
                             <div class="select">
                                 <select id="${attributes.input_id}" name="${attributes.input_id}" 
                                         onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checkType'));" >`;
+                                                              loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" >`;
             tabsKeys.map(o => {
                 let disabled = false; // todo
                 let checkType = "";
@@ -650,10 +650,10 @@ const transformGroupElement = (elementJson) => {
                     //alert(attributes.input_name + ' - ' + tabs[o]["@NAME"] + ' - showing only if exists: ' + tabs[o].hasOwnProperty("~enabled") + ' and the data is ' + tabs[o]["~enabled"]);
                     disabled = !tabs[o]["~enabled"];
                     if (tabs[o]["~enabled"]) {
-                        checkType = `checkType='${tabs[o]["~path"]}'`;
+                        checkType = `checktype='${tabs[o]["~path"]}'`;
                     }
                 }
-                let value = (tabs[o].hasOwnProperty("~enabled")) ? tabs[o]['@VALUE'] : `${tabs[o]['@VALUE']}_${o}`;
+                let value = `${tabs[o]['@VALUE']}_${o}`;  // (tabs[o].hasOwnProperty("~enabled")) ? tabs[o]['@VALUE'] : `${tabs[o]['@VALUE']}_${o}`;
                 let selected;
                 if (attributes.value) {
                     selected = attributes.value === value ? "selected" : "";
@@ -835,6 +835,7 @@ const transformGroupElement = (elementJson) => {
             return getWeekInput({ ...attributes });
 
         case 'INTLIST':
+            attributes.value = attributes.value.split(',');
             return getIntListInput({ ...attributes });
         default: break;
     }
@@ -1026,6 +1027,10 @@ function weekChangedValueHandler(scheduleId, index, newValue, path) {
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': newValues.join(" ") } });
 }
 
+function intListChangedValueHandler(valueArray, index, newValue, path) {
+    valueArray.splice(index, 1, +newValue);
+    sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': valueArray.join(',') } });
+}
 //#endregion
 
 //#region //----- COMMON Funcs -----////////////////////////////////////////////
@@ -1253,9 +1258,14 @@ const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path =
     let inner = `<fieldset id="${input_id}">
                 <legend>${input_name}</legend>
                 <div class="form-item roww row mr-1">`;
-    for (let i = 1; i <= size; i++) {
+    for (let i = 0; i < size; i++) {
         inner += `<div class="col-3 p-0">
-                        <input type="number" id="${input_id}_${i}" name="${input_id}_${i}" data-maxlength="${max.length}" oninput="javascript: myFunction(this.id); myFunction2(this.id);" onblur="javascript: " value="${value}" min="${min}" max="${max}">
+                        <input
+                            type="number" id="${input_id}_${i}" name="${input_id}_${i}" 
+                            data-maxlength="${max.length}" 
+                            oninput="javascript: myFunction(this.id); myFunction2(this.id);"
+                            onblur="javascript: intListChangedValueHandler([${value}], ${i}, this.value, '${path}');"
+                            value="${value[i]}" min="${min}" max="${max}">
                     </div>`;
     }
     inner += `</div>

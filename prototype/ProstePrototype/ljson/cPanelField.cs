@@ -171,6 +171,10 @@ namespace ljson
                 }
             else if (jtype == "AND")
                 AddAndValues(res, ofield, sval, sidx);
+            else if (jtype == "LIST" || jtype == "INT" || jtype == "TEXT" || jtype == "INTLIST" || jtype == "HIDDEN" || jtype == "IP" || jtype == "SLIDER")
+                return res;
+            else
+                return res;
             //
             return res;
         }

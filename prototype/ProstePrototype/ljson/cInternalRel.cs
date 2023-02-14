@@ -130,7 +130,7 @@ namespace ljson
         public virtual List<string> ChannelUsedIn(string channel_path, string myIOPath) { return null; }
         public virtual List<string> ChannelUsedIn(string channel_path) { return null; }
         public virtual Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val) { return null; }
-        public virtual bool AddSerialDevice(string key, JObject node, byte[] val, byte address) { return true; }
+        public virtual bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props) { return true; }
         public virtual void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func) { }
         public virtual void AfterDevicesChanged(string _panel_id, JObject panel, dGetNode _get_node) { }
         public virtual void ClearCache() { }

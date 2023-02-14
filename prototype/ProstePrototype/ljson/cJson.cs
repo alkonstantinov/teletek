@@ -616,16 +616,21 @@ namespace ljson
             //if (Regex.IsMatch(read_path, @"(INPUTS_GR|INPUTS/|OUTPUTS|PERIPHER)"))
             //{
             List<cRWCommand> cmds = new List<cRWCommand>();
+            Dictionary<string, cRWProperty> read_props = new Dictionary<string, cRWProperty>();
             if (_panel_type == "iris")
             {
                 cRWPathIRIS pi = (cRWPathIRIS)p;
                 foreach (cRWCommandIRIS cmd in pi.ReadCommands)
                     cmds.Add(cmd);
+                foreach (string rpk in pi.ReadProperties.Keys)
+                    read_props.Add(rpk, (cRWPropertyIRIS)pi.ReadProperties[rpk]);
             }
             else
             {
                 foreach (cRWCommand cmd in p.ReadCommands)
                     cmds.Add(cmd);
+                foreach (string rpk in p.ReadProperties.Keys)
+                    read_props.Add(rpk, p.ReadProperties[rpk]);
             }
             //
             string[] apath = read_path.Split('/');
@@ -652,6 +657,12 @@ namespace ljson
                         string scmd = cmd.CommandString();
                         scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
                         byte[] cmdres = cComm.SendCommand(conn, scmd);
+                        ////
+                        //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
+                        //{
+                        //    string first = res.Keys.First();
+                        //}
+                        ////
                         if (settings.logreads)
                         {
                             if (!_log_bytesreaded.ContainsKey(scmd))
@@ -664,6 +675,12 @@ namespace ljson
                     foreach (string scmd in p.ReadCommandsReplacement[idx.ToString("X2")])
                     {
                         byte[] cmdres = cComm.SendCommand(conn, scmd);
+                        ////
+                        //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
+                        //{
+                        //    string first = res.Keys.First();
+                        //}
+                        ////
                         if (settings.logreads)
                         {
                             if (!_log_bytesreaded.ContainsKey(scmd))
@@ -681,10 +698,14 @@ namespace ljson
                 }
                 //
                 JObject node = GetNode(apath[1]);
-                if (_internal_relations_operator.AddSerialDevice(apath[1], node, bcmdres, (byte)(idx + idxinc)))
+                //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
+                //{
+                //    string first = res.Keys.First();
+                //}
+                if (_internal_relations_operator.AddSerialDevice(apath[1], node, bcmdres, (byte)(idx + idxinc), read_props))
                     didx.Add((idx + idxinc).ToString(), bcmdres);
             }
-            //if (Regex.IsMatch(read_path, @"(PERIPHER)"))
+            //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
             //{
             //    string first = res.Keys.First();
             //}
