@@ -412,7 +412,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 .filter(deviceName => deviceName !== "selected")
                 .map(deviceName => {
                     let nameLst = deviceName.split('/');
-                    let name = nameLst.length === 2 ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
+                    let name = !(nameLst[1]) ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
                     let address = nameLst.at(-1);
                     let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
                     let checkedJson = Object.keys(currentDeviceNameObject)
@@ -1027,8 +1027,17 @@ function weekChangedValueHandler(scheduleId, index, newValue, path) {
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': newValues.join(" ") } });
 }
 
-function intListChangedValueHandler(valueArray, index, newValue, path) {
-    valueArray.splice(index, 1, +newValue);
+function intListChangedValueHandler(index, newValue, path, input_id, size) {
+    let valueArray = [];
+    for (var i = 0; i < +size; i++) {
+        var e = document.getElementById(`${input_id}_${i}`);
+        if (i === index) {
+            valueArray.push(+newValue);
+            e.value = +newValue;
+        } else {
+            valueArray.push(e.value ? e.value : 0);
+        }
+    }
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': valueArray.join(',') } });
 }
 //#endregion
@@ -1255,6 +1264,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
 }
 
 const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path = "", value, size }) => {
+    attributes = [ input_id, input_name, max, min, RmBtn, path, value, size ];
     let inner = `<fieldset id="${input_id}">
                 <legend>${input_name}</legend>
                 <div class="form-item roww row mr-1">`;
@@ -1264,7 +1274,7 @@ const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path =
                             type="number" id="${input_id}_${i}" name="${input_id}_${i}" 
                             data-maxlength="${max.length}" 
                             oninput="javascript: myFunction(this.id); myFunction2(this.id);"
-                            onblur="javascript: intListChangedValueHandler([${value}], ${i}, this.value, '${path}');"
+                            onblur="javascript: intListChangedValueHandler(${i}, this.value, '${path}', '${input_id}', ${size});"
                             value="${value[i]}" min="${min}" max="${max}">
                     </div>`;
     }

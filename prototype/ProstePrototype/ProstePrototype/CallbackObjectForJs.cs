@@ -125,6 +125,7 @@ namespace ProstePrototype
         public string loopsOutputs(string path)
         {
             JObject o = cJson.LoopsOutputs(path);
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
