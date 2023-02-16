@@ -532,7 +532,6 @@ function removeLoop() {
         btnGroup.replaceChildren(firstEl);
     }
 }
-//#endregion LOOP
 
 function calculateLoopDevices(loopNumber) {
     let modal = $(document.getElementById("showDevicesListModal"));
@@ -543,10 +542,11 @@ function calculateLoopDevices(loopNumber) {
         if (res) {
             let deviceListJSON = JSON.parse(res);
             deviceListJSON.forEach(e => {
-                if (deviceMap.has(e["~device"])) {
-                    deviceMap.set(e["~device"], deviceMap.get(e["~device"]) + 1)
+                let device = e["~device"].split('_').slice(1).join('_');
+                if (deviceMap.has(device)) {
+                    deviceMap.set(device, deviceMap.get(device) + 1)
                 } else {
-                    deviceMap.set(e["~device"], 1)
+                    deviceMap.set(device, 1)
                 }
             });
 
@@ -565,6 +565,7 @@ function calculateLoopDevices(loopNumber) {
         }
     }).catch(err => alert(err));
 }
+//#endregion LOOP
 
 
 //#region UTILS

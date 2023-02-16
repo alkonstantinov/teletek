@@ -197,14 +197,15 @@ function drawFields(body, json, inheritedColor = '') {
             body.appendChild(div);
         } else if (divLevel.name === "Company Info") { // unique case "Company Info"
             let fieldset = document.createElement('fieldset');
-            var insideRows = `<legend>${divLevel.name}</legend>`;
+            var insideRows = `<legend>${newT.t(localStorage.getItem('lang'), "company_info")}</legend>`;
             for (field in divLevel.fields) {
                 if (field.includes("~")) continue;
-                let pl = divLevel.fields[field]["@TEXT"];
-                let id = pl.replaceAll(" ", "_");
+                let pl = newT.t(localStorage.getItem('lang'), divLevel.fields[field]["@LNGID"]);
+                let id = divLevel.fields[field]["@LNGID"];
                 let m = divLevel.fields[field]["@LENGTH"];
+                let value = divLevel.fields[field]["~value"];
                 insideRows += `<div class="form-item p0">
-                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}">
+                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}" value="${value || ''}">
                         </div>`
             }
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
@@ -225,13 +226,17 @@ function drawFields(body, json, inheritedColor = '') {
                             <i class="fa-solid fa-plus 5x"></i> ${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}
                         </button>`);
             if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                deviceNmbr = 0;
                 let divCol9 = document.getElementsByClassName("col-9")[0];
                 divCol9.classList = 'col-7';
+
+                var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
+
                 divCol9.insertAdjacentHTML(
                     'beforebegin',
-                    `<div class="col-2 bl fire scroll">
-                                ${newT.t(localStorage.getItem('lang'), "devices")}:
-                                <div id="attached_devices"></div>
+                    `<div class="col-2 bl ${inheritedColor || (colors ? BUTTON_COLORS[colors] : '')} scroll">
+                        <div id="attached_device" class="row">                            
+                        </div>
                             </div>`
                 );
             }
@@ -380,6 +385,92 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
     element.appendChild(newElement);
 }
 
+//#region Zone Device functions
+function getZoneDevices(elementNumber) {
+    var el = document.getElementById('attached_device');
+    if (!el) return;
+    el.innerHTML = `<button class="btn-small btn-border-black" onclick="javacript: calculateZoneDevices(${elementNumber})" id="calculateDevices"
+                        data-toggle="modal" data-target="#showDevicesListModal" >
+                            ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
+                    </button>`; // reset of the attached to the zone device list
+
+    boundAsync.zoneDevices(elementNumber).then(r => {
+        if (!r) return;        
+        let zoneDevicesJson = JSON.parse(r);
+
+        //update the nuber of devices in zone
+        deviceNmbr = zoneDevicesJson.length;
+        let showBtn = document.getElementById("calculateDevices");
+        showBtn.innerHTML = `${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}`;        
+
+        zoneDevicesJson.forEach(device => {
+            let address = device["~devaddr"];
+            let deviceName = device["~device"];
+            let loopType = device["~device_type"];
+            let loopNumber = device["~device_type"];
+            let key = device["~device"].split("_").slice(1).join("_");
+            let showName = device["~devname"] || DEVICES_CONSTS[key].sign;
+            //('${loopType}', '${deviceName}', '${loopNumber}', '${address}')
+            // create a new button
+            const newDeviceInner = `<div class="col-12" id='${deviceName}_${address}'>
+                                        <a href="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopType}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });" > 
+                                            <div class="btnStyle ${BUTTON_COLORS[deviceName.split("_")[0]]}">
+                                                <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
+                                                <div class="someS">
+                                                    <div class="h5">${address + '. ' + showName}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>`;          
+
+            // inserting
+            el.insertAdjacentHTML('beforeend', newDeviceInner);
+            
+            // reordering
+            [].map.call(el.children, Object).sort(function (a, b) {
+                return +a.id.match(/\d+$/) - +b.id.match(/\d+$/);
+            }).forEach(function (elem) {
+                el.appendChild(elem);
+            });
+        });
+    }).catch(e => console.log('e', e));
+};
+
+function calculateZoneDevices(elementNumber) {
+    let modal = $(document.getElementById("showDevicesListModal"));
+    let modalContent = modal.find('.modal-body')[0];
+
+    const deviceMap = new Map();
+    boundAsync.zoneDevices(elementNumber).then(res => {
+        if (res) {
+            let deviceListJSON = JSON.parse(res);
+            deviceListJSON.forEach(e => {
+                let device = e["~device"].split('_').slice(1).join('_');
+                if (deviceMap.has(device)) {
+                    deviceMap.set(device, deviceMap.get(device) + 1)
+                } else {
+                    deviceMap.set(device, 1)
+                }
+            });
+
+            let innerModalContent = `<div class="table-responsive"><table class="table table-striped"><thead><tr>
+                                <th scope="col">${new T().t(localStorage.getItem('lang'), "device_type")}</th>
+                                <th scope="col">${new T().t(localStorage.getItem('lang'), "count")}</th>
+                              </tr></thead><tbody>`;
+            deviceMap.forEach((value, key, map) => {
+                innerModalContent += `<tr>
+                                <td >${key}</td>
+                                <td>${value}</td>
+                              </tr>`;
+            })
+            innerModalContent += `</tbody></table></div>`;
+            modalContent.innerHTML = innerModalContent;
+        }
+    }).catch(err => alert(err));
+}
+//#endregion
+
+//#region Loop Type
 function showLoopType(level, type, key, showDivId, selectDivId) {
     const showDiv = document.getElementById(showDivId);
     const selectDiv = document.getElementById(selectDivId);
@@ -589,7 +680,7 @@ function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_p
         }
     }
 }
-
+//#endregion
 // transforming object function
 const transformGroupElement = (elementJson) => {
     let attributes = {
@@ -780,21 +871,21 @@ const transformGroupElement = (elementJson) => {
                 attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'on');
                 attributes.input_name_off = newT.t(localStorage.getItem('lang'), 'off');
             }
-            if (attributes.value === "True") attributes.checked = true;
-            else if (attributes.value === "False") attributes.checked = false;
+            if (attributes.value === "1" || attributes.value === "True") attributes.checked = true;
+            else if (attributes.value === "0" || attributes.value === "False") attributes.checked = false;
             return getSliderInput({ ...attributes });
 
         case 'CHECK':
-            if (attributes.value === "True") attributes.checked = true;
-            else if (attributes.value === "False") attributes.checked = false;
+            if (attributes.value === "1" || attributes.value === "True") attributes.checked = true;
+            else if (attributes.value === "0" || attributes.value === "False") attributes.checked = false;
             return getCheckboxInput({ ...attributes });
 
         case 'LIST':
             if (elementJson["addChannelHelp"]) attributes.addButton = true;
-            attributes.selectList = elementJson.ITEMS.ITEM.map((o, idx) => {
+            attributes.selectList = elementJson.ITEMS.ITEM.map((o) => {
                 let sel;
                 if (attributes.value) {
-                    sel = (parseInt(attributes.value) === idx)
+                    sel = (attributes.value === o['@VALUE'])
                 } else {
                     sel = !!(o['@DEFAULT']);
                 }
@@ -828,10 +919,11 @@ const transformGroupElement = (elementJson) => {
             return getTextInput({ ...attributes });
 
         case 'EMAC':
+            attributes.value = attributes.value.split(':');
             return getEmacInput({ ...attributes });
 
         case 'WEEK':
-            attributes.input_id = attributes.input_name.replaceAll(' ', '');
+            attributes.input_id = elementJson['@TEXT'].replaceAll(' ', '');
             return getWeekInput({ ...attributes });
 
         case 'INTLIST':
@@ -1091,7 +1183,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
                             ${checked ? "checked" : ''} 
-                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.checked}})"/>
+                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.checked }})"/>
                         <span class="slider"></span>
                     </label>
                     ${input_name_on}
@@ -1119,7 +1211,7 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
                         <select id="${input_id}" name="${input_id}"
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
-                            ${readOnly ? "disabled" : ''} 
+                            ${readOnly ? "disabled" : ''}                            
                             onchange="javascript: ${modal ? modal : `sendMessageWPF(
                                 {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
                                 ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""})
@@ -1130,7 +1222,10 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
         str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
         selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
     }
-    str += `</select></div>${image ? "" : "</div>"}`;
+    str += '</select>';
+    if (link.length > 0)
+        str += `<img src onerror="javascript: changeStyleDisplay('${link}', '${input_id}')" />`; // dirty workaround
+    str += `</div>${image ? "" : "</div>"}`;
 
     if (image) {
         str += `<div id="showSchema_${input_id}" class="image col-9" style="margin-left: auto; margin-right: auto">`
@@ -1170,7 +1265,7 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
             </div>`;
 }
 
-const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = "" }) => {
+const getEmacInput = ({ input_id, input_name, readOnly, value, RmBtn = false, path = "" }) => {
     return `<div class="form-item roww" macInput>
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -1182,8 +1277,9 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                             id="${input_id}0"
                             name="${input_id}0"
                             placeholder="00" ${readOnly ? "disabled" : ''}
+                            value="${value[0]}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}0','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input class="col-1 mr-1"
@@ -1191,8 +1287,9 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                             id="${input_id}1"
                             name="${input_id}1"
                             placeholder="00" ${readOnly ? "disabled" : ''}
+                            value="${value[1]}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}1','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -1200,8 +1297,9 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                             id="${input_id}2"
                             name="${input_id}2"
                             placeholder="00" ${readOnly ? "disabled" : ''}
+                            value="${value[2]}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}2','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -1209,8 +1307,9 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                             id="${input_id}3"
                             name="${input_id}3"
                             placeholder="00" ${readOnly ? "disabled" : ''}
+                            value="${value[3]}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}3','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -1218,8 +1317,9 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                             id="${input_id}4"
                             name="${input_id}4"
                             placeholder="00" ${readOnly ? "disabled" : ''}
+                            value="${value[4]}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}4','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                     <div>:</div>
                     <input type="text"
@@ -1227,14 +1327,15 @@ const getEmacInput = ({ input_id, input_name, readOnly, RmBtn = false, path = ""
                             id="${input_id}5"
                             name="${input_id}5"
                             placeholder="00" ${readOnly ? "disabled" : ''}
+                            value="${value[5]}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}5','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
                 </div>
             </div>`;
 }
 
-const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, path = "" }) => {
+const getWeekInput = ({ input_id, input_name, readOnly, value, size, RmBtn = false, path = "" }) => {
     //value = "04:04 03:03 01:00 00:01 01:02 02:01 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00"; // for test purposes
     let fields = [["Sunday", "-su-"], ["Moday", "-m-"], ["Thuesday", "-t-"], ["Wednesday", "-w-"], ["Thursday", "-th-"], ["Friday", "-f-"], ["Saturday", "-s-"]];
     let data = value.split(" ");
@@ -1242,7 +1343,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
             <fieldset>
                 <legend>${input_name}</legend>
                 <div class="row">`;
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < size / 2; i++) {
         if (i % 2 === 0) inner += `<fieldset class="col-xs-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
         inner += ` <div class="form-item roww mw">
                         <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? newT.t(localStorage.getItem('lang'), 'activate') : newT.t(localStorage.getItem('lang'), 'deactivate')}</label>
@@ -1252,7 +1353,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
                                 name="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
                                 data-maxlength="5"
                                 ${readOnly ? "disabled" : ''}
-                                value="${data[i]}"
+                                value="${data[i] || ''}"
                                 oninput="javascript: myFunction3(this.id)"
                                 onblur="javascript: weekChangedValueHandler('${input_id}-schedule', ${i}, this.value, '${path}')"
                                 placeholder="00:00" />
@@ -1417,7 +1518,7 @@ function createElementButton(last, elementType) {
                         </a>
                     </div>
                     <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
-                        <i class="fa-solid fa-xmark fire"></i>
+                        <i class="fa-solid fa-xmark ${BUTTON_COLORS[color]}"></i>
                     </div>
                 </div>
             </div>`) : ( //if the element is INPUT_GROUP
@@ -1426,7 +1527,7 @@ function createElementButton(last, elementType) {
                         <fieldset style="min-width: 200px;">
                             <legend>Input Group ${last}</legend>
                                 <label for="gr_input_logic_${last}">${newT.t(localStorage.getItem('lang'), "input_logic")}</label>:
-                                <p class="fire">
+                                <p class="${BUTTON_COLORS[color]}">
                                     AND
                                     <label class="switch">
                                         <input type="checkbox" id="gr_input_logic_${last}"
@@ -1438,7 +1539,7 @@ function createElementButton(last, elementType) {
 
                         </fieldset>
                         <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
-                            <i class="fa-solid fa-xmark fire"></i>
+                            <i class="fa-solid fa-xmark ${BUTTON_COLORS[color]}"></i>
                         </div>
                     </div>
                 </div>`);
@@ -1500,6 +1601,9 @@ async function showElement(id, elementType) {
             collapsible();
             addVisitedBackground();
             setupSelFixer()
+        }
+        if (elementType.endsWith("ZONE")) {
+            getZoneDevices(+id);
         }
     } catch (e) {
         console.log('Error', e);

@@ -60,9 +60,14 @@ namespace ljson
                 sidx = "." + sidx;
             //
             Dictionary<string, string> res = new Dictionary<string, string>();
+            string gpath = grp["~path"].ToString() + sidx;
+            if (val != null)
+                res.Add(gpath, val);
+            else
+                return res;
             if (grp["fields"] != null)
                 grp = (JObject)grp["fields"];
-            byte bval = Convert.ToByte(val);
+            ushort bval = Convert.ToUInt16(val);
             foreach (JProperty p in grp.Properties())
             {
                 if (p.Value.Type != JTokenType.Object)
@@ -73,16 +78,16 @@ namespace ljson
                 if (o["@AND"] == null)
                     continue;
                 string ftype = o["@TYPE"].ToString().ToUpper();
-                byte band = Convert.ToByte(o["@AND"].ToString(), 16);
-                byte bres = (byte)(bval & band);
+                ushort band = Convert.ToUInt16(o["@AND"].ToString(), 16);
+                ushort bres = (ushort)(bval & band);
                 string sval = null;
                 if (ftype == "CHECK")
                 {
-                    sval = (bres != 0) ? "1" : "0";
+                    sval = (bres != 0) ? "True" : "False";
                 }
                 else
                 {
-                    sval = (bres != 0) ? "1" : "0";//ako ne e check
+                    sval = bres.ToString();//ako ne e check
                 }
                 string path = o["~path"].ToString() + sidx;
                 if (sval != null)

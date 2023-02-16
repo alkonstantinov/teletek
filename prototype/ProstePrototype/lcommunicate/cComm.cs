@@ -398,6 +398,35 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
+        public static Dictionary<string, string> GetPseudoElementsDevices(string panel_id)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels == null)
+            {
+                Monitor.Exit(_cs_cache);
+                return null;
+            }
+            if (!_cache_list_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_cache);
+                return null;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            string key = constants.NO_LOOP;
+            string loopkey = Regex.Replace(key, @"^[^_]*?_", "");
+            while (Regex.IsMatch(loopkey, "_"))
+                loopkey = Regex.Replace(loopkey, @"^[^_]*?_", "");
+            foreach (string elkey in el.Keys)
+            {
+                string loop = Regex.Replace(elkey, @"/[\w\W]+$", "");
+                if (Regex.IsMatch(loop, loopkey + @"\d+$"))
+                    foreach (string addr in el[elkey].Keys)
+                        res.Add(addr, el[elkey][addr]);
+            }
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
         #endregion
 
         #region list elements

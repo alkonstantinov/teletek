@@ -83,7 +83,7 @@ namespace ljson
                 string channel = cComm.GetPathValue(_panel_id, channel_path);
                 if (channel == null || channel == "")
                     return null;
-                string chidx = ".~index~" + channel;
+                string chidx = ".~index~" + devaddr;/////////////
                 channel = "TYPECHANNEL" + channel;
                 //TYPECHANNEL1
                 string newval = looptype + "/" + loopsubtype + "#" + sdev;
@@ -532,7 +532,15 @@ namespace ljson
         }
         private string GetChannelValue(string _panel_id, JObject panel, JObject tab, string sidx)
         {
-            cIOChannel io_channel = new cIOChannel(tab, sidx, eInOut.Input, panel, _panel_id, FindObjectByProperty);
+            eInOut io = eInOut.Input;
+            if (tab["~path"] != null)
+            {
+                string tabpath = tab["~path"].ToString();
+                Match m = Regex.Match(tabpath, @"ELEMENTS\.([\w\W]+?)\.");
+                if (m.Success && Regex.IsMatch(m.Groups[1].Value, "OUTPUT"))
+                    io = eInOut.Output;
+            }
+            cIOChannel io_channel = new cIOChannel(tab, sidx, io, panel, _panel_id, FindObjectByProperty);
             return io_channel.ChannelValue;
         }
         private void SetIOTabsAfterRead(string _panel_id, JObject panel, Dictionary<string, string> _old_paths)
@@ -634,11 +642,52 @@ namespace ljson
                 }
             }
         }
+        private void EvacZones(string _panel_id, JObject panel, dGetNode _get_node)
+        {
+            JObject _elements = (JObject)panel["ELEMENTS"];
+            JObject _evacz_group = null;
+            foreach (JProperty p in _elements.Properties())
+                if (Regex.IsMatch(p.Name, @"evac[\w\W]*?group", RegexOptions.IgnoreCase))
+                {
+                    _evacz_group = (JObject)p.Value;
+                    break;
+                }
+            if (_evacz_group == null)
+                return;
+            JObject groups = (JObject)_evacz_group["PROPERTIES"]["Groups"];
+            if (groups["~invisible"] == null)
+                return;
+            JObject invisible = (JObject)groups["~invisible"];
+            foreach (JProperty pidx in invisible.Properties())
+            {
+                string sidx = pidx.Name;
+                JObject oidx = (JObject)pidx.Value;
+                foreach (JProperty ppanel in oidx.Properties())
+                {
+                    JObject opanel = (JObject)ppanel.Value;
+                    JObject grp = null;
+                    foreach (JProperty pgrp in groups.Properties())
+                        if (pgrp.Name.ToLower() == ppanel.Name.ToLower())
+                        {
+                            grp = (JObject)pgrp.Value;
+                            break;
+                        }
+                    if (grp == null)
+                        continue;
+                    JArray aval = (JArray)opanel["~value"];
+                    ushort uval = (ushort)(Convert.ToUInt16(aval[1]) * 16 + Convert.ToUInt16(aval[0]));
+                    Dictionary<string, string> paths = cPanelField.GroupPathValues(grp, uval.ToString(), "~index~" + sidx);
+                    foreach (string path in paths.Keys)
+                        cComm.SetPathValue(_panel_id, path, paths[path]);
+                }
+            }
+        }
         public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func)
         {
             AfterDevicesChanged(_panel_id, panel, _get_node);
             Dictionary<string, string> path_values = cComm.GetPathValues(_panel_id);
             SetIOTabsAfterRead(_panel_id, panel, path_values);
+            EvacZones(_panel_id, panel, _get_node);
         }
         #endregion
 
@@ -821,6 +870,7 @@ namespace ljson
         {
             if (Regex.IsMatch(key, @"input[\w\W]+?group", RegexOptions.IgnoreCase))
             {
+                //return true;
                 if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["~noname"] != null)
                 {
                     JObject grp = (JObject)node["PROPERTIES"]["Groups"]["~noname"];

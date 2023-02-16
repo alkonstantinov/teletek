@@ -246,18 +246,20 @@ namespace ProstePrototype
             }
 
             rw.ReadWindowMain.Background = new SolidColorBrush(bgd);
-            rw.tabControl.Background = new SolidColorBrush(bgd);
-            rw.tabControl.Foreground = new SolidColorBrush(fgd);
-            rw.listBox.Background = new SolidColorBrush(bgd);
-            rw.listBox.Foreground = new SolidColorBrush(fgd);
+            //rw.tabControl.Background = new SolidColorBrush(bgd);
+            //rw.tabControl.Foreground = new SolidColorBrush(fgd);
+            //rw.listBox.Background = new SolidColorBrush(bgd);
+            //rw.listBox.Foreground = new SolidColorBrush(fgd);
             rw.txtBlk.Foreground = new SolidColorBrush(fgd);
-            rw.lbHost.Foreground = new SolidColorBrush(fgd);
-            rw.lbPort.Foreground = new SolidColorBrush(fgd);
-            rw.lbComPort.Foreground = new SolidColorBrush(fgd);
-            rw.lbParity.Foreground = new SolidColorBrush(fgd);
-            rw.lbBaudRate.Foreground = new SolidColorBrush(fgd);
-            rw.lbStopBits.Foreground = new SolidColorBrush(fgd);
-            rw.lbDataBits.Foreground = new SolidColorBrush(fgd);
+            //rw.lbHost.Foreground = new SolidColorBrush(fgd);
+            //rw.lbPort.Foreground = new SolidColorBrush(fgd);
+            //rw.lbComPort.Foreground = new SolidColorBrush(fgd);
+            //rw.lbParity.Foreground = new SolidColorBrush(fgd);
+            //rw.lbBaudRate.Foreground = new SolidColorBrush(fgd);
+            //rw.lbStopBits.Foreground = new SolidColorBrush(fgd);
+            //rw.lbDataBits.Foreground = new SolidColorBrush(fgd);
+            rw.ContentArea.Foreground= new SolidColorBrush(fgd);
+            rw.ContentArea.Background= new SolidColorBrush(bgd);
         }
         #endregion
 
@@ -346,10 +348,20 @@ namespace ProstePrototype
                     cComm.SetPathValue(cJson.CurrentPanelID, json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString(), cJson.FilterValueChanged);
                     Dictionary<string, Dictionary<string, string>> analysis = cJson.AnalysePath(json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
                     break;
-                case "AddingElement":
+                case "GoToDeviceInLoop":
+                    string loopType = json["Params"]["loopType"].ToString();
+                    loopType = Regex.Replace(Regex.Replace(loopType, @"^'", ""), @"'$", "");
+                    string loopNumber = json["Params"]["loopNumber"].ToString();
                     string elementType = json["Params"]["elementType"].ToString();
                     elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
                     string elementNumber = json["Params"]["elementNumber"].ToString();
+                    // TODO loadPage "iris_loop_devices" with highlight "iris_loop_devices"
+
+                    break;
+                case "AddingElement":
+                    elementType = json["Params"]["elementType"].ToString();
+                    elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
+                    elementNumber = json["Params"]["elementNumber"].ToString();
                     JObject el = cJson.GetNode(elementType);
                     if (el == null)
                     {
@@ -390,8 +402,8 @@ namespace ProstePrototype
                         el["~rw"] = _rw;
                     }
                     elementNumber = json["Params"]["deviceAddress"].ToString();
-                    string loopNumber = json["Params"]["loopNumber"].ToString();
-                    string loopType = json["Params"]["loopType"].ToString();
+                    loopNumber = json["Params"]["loopNumber"].ToString();
+                    loopType = json["Params"]["loopType"].ToString();
                     string noneElement = json["Params"]["noneElement"].ToString();
                     string deviceName = json["Params"]["deviceName"].ToString();
                     string key = loopType + "/" + noneElement + "#" + deviceName;
@@ -568,10 +580,10 @@ namespace ProstePrototype
             ScanPopUpWindow popUpWindow= new ScanPopUpWindow();
             if ((bool)c)
             {
-                int tabIdx = rw.tabControl.SelectedIndex;
+                int tabIdx = rw.selectedIndex;
                 //cTransport t = null;
-                string ip = rw.Address;
-                int port = rw.Port;
+                string ip = rw.uc1.Address;
+                int port = rw.uc1.Port;
                 object conn_params = null;
                 if (tabIdx == 0)
                     conn_params = new cIPParams(ip, port);

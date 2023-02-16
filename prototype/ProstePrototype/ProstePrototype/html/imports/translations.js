@@ -251,9 +251,13 @@
             "en": "Input logic",
             "bg": "Логика за вход",
         },
+        company_info: { 
+            "en": "Company Info",
+            "bg": "Информация за фирмата",
+        },
         "activate": { 
             "en": "Activate",
-            "id": "e00252af-a8b6-40fb-9a24-11fee8aaef27",
+            "bg": "Активен",
             "el": "Ενεργό",
             "fr": "Activation",
             "ge": "Activate",
@@ -261,6 +265,7 @@
         },
         "deactivate": { 
             "en": "Deactivate",
+            "bg": "Неактивен",
             "id": "",
             "el": " ",
             "fr": "Deactivation",

@@ -799,12 +799,33 @@ namespace ljson
                             Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(newpaths, propname, pbytes);
                             if (path_val == null)
                             {
+                                JObject _element = (JObject)CurrentPanel["ELEMENTS"][readsubkey];
+                                JObject jgrp = (JObject)_element["PROPERTIES"]["Groups"];
+                                if (jgrp["~invisible"] == null)
+                                    jgrp["~invisible"] = new JObject();
+                                if (jgrp["~invisible"][sidx] == null)
+                                    jgrp["~invisible"][sidx] = new JObject();
+                                jgrp["~invisible"][sidx][propname] = JObject.FromObject(ReadProperties[propname]);
+                                JObject pp = (JObject)jgrp["~invisible"][sidx][propname];
+                                pp["~path"] = pp.Path;
+                                JArray jbytes = new JArray();
+                                for (int bi = 0; bi < pbytes.Length; bi++)
+                                    jbytes.Add(pbytes[bi]);
+                                pp["~value"] = jbytes;
+                                pp["@TYPE"] = "MISSED";
                                 if (!missedkeys.ContainsKey(readsubkey + "/" + propname))
                                     missedkeys.Add(readsubkey + "/" + propname, "");
                             }
                             else
                             {
-                                cComm.SetPathValue(panel_id, path_val.Item1, path_val.Item2, FilterValueChanged);
+                                string xml = prop.xmltag;
+                                Match m = Regex.Match(xml, @"INC\s*?=\s*?""(\d+?)""");
+                                string sval = path_val.Item2;
+                                //
+                                if (m.Success)
+                                    sval = (Convert.ToInt32(sval) + Convert.ToInt32(m.Groups[1].Value)).ToString();
+                                //
+                                cComm.SetPathValue(panel_id, path_val.Item1, sval, FilterValueChanged);
                                 if (!foundkeys.ContainsKey(readsubkey + "/" + propname))
                                     foundkeys.Add(readsubkey + "/" + propname, "");
                             }
@@ -892,6 +913,7 @@ namespace ljson
                 {
                     cRWPath p = null;
                     List<cRWCommand> read_commands = null;
+                    Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
                     if (panel_type == "iris")
                     {
                         cRWPathIRIS pi = (cRWPathIRIS)drw[key];
@@ -899,12 +921,18 @@ namespace ljson
                         read_commands = new List<cRWCommand>();
                         foreach (cRWCommandIRIS c in read_commandsi)
                             read_commands.Add(c);
+                        foreach (string pkey in pi.ReadProperties.Keys)
+                        {
+                            cRWPropertyIRIS propi = pi.ReadProperties[pkey];
+                            ReadProperties.Add(pkey, propi);
+                        }
                         p = pi;
                     }
                     else
                     {
                         p = (cRWPath)drw[key];
                         read_commands = p.ReadCommands;
+                        ReadProperties = p.ReadProperties;
                     }
                     JObject _node = dnodes[key];
                     string read_path = p.ReadPath;
@@ -984,6 +1012,7 @@ namespace ljson
                                         sidx.Add(idxkey, ridx[idxkey]);
                             }
                         }
+                        continue;
                     }
                     List<byte[]> lstRes = new List<byte[]>();
                     int len = 0;
@@ -1007,13 +1036,13 @@ namespace ljson
                     }
                     bool emacexists = false;
                     string[] emaca = new string[6];
-                    foreach (string propname in p.ReadProperties.Keys)
+                    foreach (string propname in ReadProperties.Keys)
                     {
                         //if (Regex.IsMatch(propname, "ORINPUTS", RegexOptions.IgnoreCase))
                         //{
                         //    emacexists = false;
                         //}
-                        cRWProperty prop = p.ReadProperties[propname];
+                        cRWProperty prop = ReadProperties[propname];
                         byte[] pbytes = new byte[prop.bytescnt];
                         for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                             pbytes[i - prop.offset] = result[i];
@@ -1029,7 +1058,7 @@ namespace ljson
                                 JObject jgrp = (JObject)_element["PROPERTIES"]["Groups"];
                                 if (jgrp["~invisible"] == null)
                                     jgrp["~invisible"] = new JObject();
-                                jgrp["~invisible"][propname] = JObject.FromObject(p.ReadProperties[propname]);
+                                jgrp["~invisible"][propname] = JObject.FromObject(ReadProperties[propname]);
                                 JObject pp = (JObject)jgrp["~invisible"][propname];
                                 pp["~path"] = pp.Path;
                                 pp["@TYPE"] = "MISSED";
@@ -1044,7 +1073,15 @@ namespace ljson
                             }
                         }
                         if (path_val != null)
+                        {
+                            Match m = Regex.Match(propname, @"emacETHADDR(\d)", RegexOptions.IgnoreCase);
+                            if (m.Success)
+                            {
+                                emaca[Convert.ToInt32(m.Groups[1].Value)] = pbytes[0].ToString("X2");
+                                emacexists = true;
+                            }
                             cComm.SetPathValue(_panel_id, path_val.Item1, path_val.Item2, FilterValueChanged);
+                        }
                         else
                             continue;
                     }
@@ -1213,6 +1250,47 @@ namespace ljson
             JObject res = JObject.FromObject(dres);
             AddLoopIOPaths(res, path);
             AddUses(res, path);
+            return res;
+        }
+        public static JArray ZoneDevices(string zone_key)
+        {
+            JArray res = new JArray();
+            Dictionary<string, string> devall = cComm.GetPseudoElementsDevices(cJson.CurrentPanelID);
+            foreach (string key in devall.Keys)
+            {
+                JObject odev = JObject.Parse(devall[key]);
+                if (odev["~device"] == null)
+                    continue;
+                odev.Remove("~rw");
+                JToken first = odev.First;
+                if (first == null || first.Type != JTokenType.Property)
+                    continue;
+                JProperty pfirst = (JProperty)first;
+                JObject grp = (JObject)pfirst.Value;
+                if (grp == null || grp["fields"] == null || grp["fields"]["ZONE"] == null)
+                    continue;
+                JObject zone = (JObject)grp["fields"]["ZONE"];
+                if (zone["~path"] == null)
+                    continue;
+                string path = zone["~path"].ToString();
+                string val = cComm.GetPathValue(CurrentPanelID, path);
+                if (val == null || val != zone_key)
+                    continue;
+                //
+                string devname = "";
+                JObject oname = (JObject)grp["fields"]["NAME"];
+                if (oname["~path"] == null)
+                    continue;
+                path = oname["~path"].ToString();
+                val = cComm.GetPathValue(CurrentPanelID, path);
+                if (val != null)
+                    devname = val;
+                odev["~devname"] = devname;
+                odev["~devaddr"] = key;
+                odev = GroupsWithValues(odev);
+                odev.Remove("~noname");
+                res.Add(odev);
+            }
             return res;
         }
         #endregion

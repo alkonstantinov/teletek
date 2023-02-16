@@ -30,25 +30,32 @@
 
         </div>
     </div>
+
+    <!-- showDevicesListModal required for Zones -->
+    <div class="modal fade" id="showDevicesListModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <script>
         // 'constants' declaration
         let lst = [];
         let elements;
-        
-        const BUTTON_IMAGES = {
-            TTELOOP: { im: 'fa-solid fa-arrows-spin', sign: 'Teletek Loop' }, // NB! последователността е важна
-            LOOP: { im: 'fa-solid fa-arrows-spin', sign: 'System Sensors Loop' },
-            OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-            OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-            POWER: { im: 'fa-solid fa-plug', sign: '' },
-            PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
-            INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
-            OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
-            EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
-            ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
-            ORFunction: { im: "../../Images/ORFunction.png", sign: '' },
-            ANDFunction: { im: "../../Images/ANDFunction.png", sign: 'Zone' },
-        };
+        let deviceNmbr;
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
@@ -56,6 +63,7 @@
     <script src="../imports/boostrap@4.3.1.min.js"></script>
     <script src="../imports/bootstrap-datepicker.min.js"></script>
     <script src="../imports/font-awesome.js"></script>
+    <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
     <script>
@@ -1068,7 +1076,7 @@
 //  "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups"
 //}`;
 
-/*        receiveMessageWPF(js)*/
+        /*        receiveMessageWPF(js)*/
     </script>
 </body>
 </html>

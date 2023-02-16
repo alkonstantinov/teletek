@@ -73,4 +73,6 @@ const BUTTON_IMAGES = {
     OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
     EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
     ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
+    ORFunction: { im: "../../Images/ORFunction.png", sign: '' },
+    ANDFunction: { im: "../../Images/ANDFunction.png", sign: 'Zone' },
 };

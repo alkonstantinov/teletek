@@ -662,30 +662,35 @@ namespace ljson
             //
             JObject grp1 = new JObject();
             grp1["name"] = "Evacuation Panel 0";
+            grp1["~type"] = "AND";
             JObject props = Array2Object((JArray)o["EVACPANEL0"]["PROPERTIES"]["PROPERTY"]);
             grp1["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["EvacPanel0"] = grp1;
             //
             JObject grp2 = new JObject();
             grp2["name"] = "Evacuation Panel 1";
+            grp2["~type"] = "AND";
             props = Array2Object((JArray)o["EVACPANEL1"]["PROPERTIES"]["PROPERTY"]);
             grp2["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["EvacPanel1"] = grp2;
             //
             JObject grp3 = new JObject();
             grp3["name"] = "Evacuation Panel 2";
+            grp3["~type"] = "AND";
             props = Array2Object((JArray)o["EVACPANEL2"]["PROPERTIES"]["PROPERTY"]);
             grp3["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["EvacPanel2"] = grp3;
             //
             JObject grp4 = new JObject();
             grp4["name"] = "Evacuation Panel 3";
+            grp4["~type"] = "AND";
             props = Array2Object((JArray)o["EVACPANEL3"]["PROPERTIES"]["PROPERTY"]);
             grp4["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["EvacPanel3"] = grp4;
             //
             JObject grp5 = new JObject();
             grp5["name"] = "Evacuation Panel 4";
+            grp5["~type"] = "AND";
             props = Array2Object((JArray)o["EVACPANEL4"]["PROPERTIES"]["PROPERTY"]);
             grp5["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["EvacPanel4"] = grp5;

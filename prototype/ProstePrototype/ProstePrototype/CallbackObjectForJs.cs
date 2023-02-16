@@ -71,6 +71,7 @@ namespace ProstePrototype
         public string getLoopDevices(string elementType, int elementNumber)
         {
             Dictionary<string, string> d = cComm.GetPseudoElementDevices(cJson.CurrentPanelID, elementType, elementNumber.ToString());
+            //string zdevs = zoneDevices(1);
             if (d == null)
                 return null;
             //string[] akeys = new string[d.Count];
@@ -91,7 +92,6 @@ namespace ProstePrototype
                 onew["~address"] = addr;
                 res.Add(onew);
             }
-            File.WriteAllTextAsync("wb3.json", res.ToString());
             return res.ToString();
         }
 
@@ -108,7 +108,7 @@ namespace ProstePrototype
             if (jnode != null)
             {
                 JToken t = jnode[key];
-                File.WriteAllTextAsync("wb3.json", t.ToString());
+                //File.WriteAllTextAsync("wb3.json", t.ToString());
                 if (t != null)
                     return t.ToString();
             }
@@ -118,14 +118,12 @@ namespace ProstePrototype
         public string loopsInputs(string path)
         {
             JObject o = cJson.LoopsInputs(path);
-            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
         public string loopsOutputs(string path)
         {
             JObject o = cJson.LoopsOutputs(path);
-            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
@@ -133,6 +131,12 @@ namespace ProstePrototype
         {
             JArray a = cJson.ChannelUses(path);
             return (a != null) ? a.ToString() : "[]";
+        }
+
+        public string zoneDevices(int elementNumber)
+        {
+            JArray zdevs = cJson.ZoneDevices(elementNumber.ToString());
+            return (zdevs != null) ? zdevs.ToString() : "[]";
         }
     }
 }
