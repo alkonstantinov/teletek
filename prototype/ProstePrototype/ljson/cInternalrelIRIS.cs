@@ -681,6 +681,7 @@ namespace ljson
                         cComm.SetPathValue(_panel_id, path, paths[path]);
                 }
             }
+            groups.Remove("~invisible");
         }
         public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func)
         {

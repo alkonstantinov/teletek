@@ -1258,6 +1258,11 @@ namespace ljson
             Dictionary<string, string> devall = cComm.GetPseudoElementsDevices(cJson.CurrentPanelID);
             foreach (string key in devall.Keys)
             {
+                string[] keys = Regex.Split(key, "~~~");
+                string loop_nom = "1";
+                Match m = Regex.Match(keys[0], @"(\d+)$");
+                if (m.Success)
+                    loop_nom = m.Groups[1].Value;
                 JObject odev = JObject.Parse(devall[key]);
                 if (odev["~device"] == null)
                     continue;
@@ -1286,7 +1291,10 @@ namespace ljson
                 if (val != null)
                     devname = val;
                 odev["~devname"] = devname;
-                odev["~devaddr"] = key;
+                odev["~devaddr"] = keys[1];
+                odev["~loop"] = keys[0];
+                odev["~loop_nom"] = loop_nom;
+                odev["~loop_type"] = constants.NO_LOOP;
                 odev = GroupsWithValues(odev);
                 odev.Remove("~noname");
                 res.Add(odev);

@@ -406,14 +406,14 @@ function getZoneDevices(elementNumber) {
         zoneDevicesJson.forEach(device => {
             let address = device["~devaddr"];
             let deviceName = device["~device"];
-            let loopType = device["~device_type"];
-            let loopNumber = device["~device_type"];
+            let loopType = device["~loop"];
+            let loopNumber = device["~loop_nom"];
             let key = device["~device"].split("_").slice(1).join("_");
             let showName = device["~devname"] || DEVICES_CONSTS[key].sign;
             //('${loopType}', '${deviceName}', '${loopNumber}', '${address}')
             // create a new button
             const newDeviceInner = `<div class="col-12" id='${deviceName}_${address}'>
-                                        <a href="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopType}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });" > 
+                                        <a href="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopNumber}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });" > 
                                             <div class="btnStyle ${BUTTON_COLORS[deviceName.split("_")[0]]}">
                                                 <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
                                                 <div class="someS">
@@ -987,6 +987,22 @@ function pagePreparation() {
             }
         }
         setupSelFixer();
+
+        // URLSearchParams: loopType, loopNumber, elementType, elementNumber (address)
+        // etape 1: showLoop('1', 'IRIS_TTELOOP1')
+        if (searchParams.has('loopNumber') && searchParams.has('loopType')) {
+            let loopNumber = searchParams.get('loopNumber');
+            let loopType = searchParams.get('loopType');
+            showLoop(loopNumber, loopType);
+
+            //etape 2: showDevice('IRIS_TTELOOP1', 'IRIS_MIO22', '1', '1')
+            if (searchParams.has('elementType') && searchParams.has('elementNumber')) {
+                let address = searchParams.get('elementNumber');;
+                let deviceName = searchParams.get('elementType');;
+                showDevice(loopType, deviceName, loopNumber, address);
+                setTimeout(() => $(`#${address}_${deviceName}`).addClass('active'), 200);
+            }
+        }
     });
 }
 //pagePreparation();
@@ -1431,8 +1447,8 @@ function changeStyleDisplay(goToId, id) {
     }
 }
 
-function addActive() {
-    $(document).on('click', '.btnStyle', function () {
+function addActive(doc = document) {
+    $(doc).on('click', '.btnStyle', function () {
         $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
         $(this).addClass('active');// here apply selected class on clicked btnStyle fire
     });

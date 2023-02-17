@@ -105,7 +105,7 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key) {
                                 <div class="row">
                                     <div class="col-10 pr-1">
                                         <a href="javascript:showDevice('${loopType}', '${deviceName}', '${loopNumber}', '${address}')" onclick="javascript:addActive('#selected_area')" >
-                                            <div class="btnStyle fire">
+                                            <div class="btnStyle fire" id='${address}_${deviceName}'>
                                                 <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
                                                 <div class="someS">
                                                     <div class="h5">${address + '. ' + DEVICES_CONSTS[key].sign}</div>

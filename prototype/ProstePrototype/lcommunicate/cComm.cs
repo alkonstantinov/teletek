@@ -422,7 +422,7 @@ namespace lcommunicate
                 string loop = Regex.Replace(elkey, @"/[\w\W]+$", "");
                 if (Regex.IsMatch(loop, loopkey + @"\d+$"))
                     foreach (string addr in el[elkey].Keys)
-                        res.Add(addr, el[elkey][addr]);
+                        res.Add(loop + "~~~" + addr, el[elkey][addr]);
             }
             Monitor.Exit(_cs_cache);
             return res;

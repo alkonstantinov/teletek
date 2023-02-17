@@ -349,19 +349,20 @@ namespace ProstePrototype
                     Dictionary<string, Dictionary<string, string>> analysis = cJson.AnalysePath(json["Params"]["path"].ToString(), json["Params"]["newValue"].ToString());
                     break;
                 case "GoToDeviceInLoop":
-                    string loopType = json["Params"]["loopType"].ToString();
-                    loopType = Regex.Replace(Regex.Replace(loopType, @"^'", ""), @"'$", "");
-                    string loopNumber = json["Params"]["loopNumber"].ToString();
-                    string elementType = json["Params"]["elementType"].ToString();
-                    elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
-                    string elementNumber = json["Params"]["elementNumber"].ToString();
+                    string query_string = "";
+                    JObject parms = (JObject)json["Params"];
+                    foreach (JProperty prop in parms.Properties())
+                        query_string += ((query_string != "") ? "&" : "") + prop.Name + "=" + prop.Value.ToString();
+                    if (query_string != "")
+                        query_string = "?" + query_string;
+                    LoadPage("iris_loop_devices" + query_string, "iris_loop_devices");
                     // TODO loadPage "iris_loop_devices" with highlight "iris_loop_devices"
 
                     break;
                 case "AddingElement":
-                    elementType = json["Params"]["elementType"].ToString();
+                    string elementType = json["Params"]["elementType"].ToString();
                     elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
-                    elementNumber = json["Params"]["elementNumber"].ToString();
+                    string elementNumber = json["Params"]["elementNumber"].ToString();
                     JObject el = cJson.GetNode(elementType);
                     if (el == null)
                     {
@@ -402,8 +403,8 @@ namespace ProstePrototype
                         el["~rw"] = _rw;
                     }
                     elementNumber = json["Params"]["deviceAddress"].ToString();
-                    loopNumber = json["Params"]["loopNumber"].ToString();
-                    loopType = json["Params"]["loopType"].ToString();
+                    string loopNumber = json["Params"]["loopNumber"].ToString();
+                    string loopType = json["Params"]["loopType"].ToString();
                     string noneElement = json["Params"]["noneElement"].ToString();
                     string deviceName = json["Params"]["deviceName"].ToString();
                     string key = loopType + "/" + noneElement + "#" + deviceName;
@@ -464,6 +465,8 @@ namespace ProstePrototype
             //    RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
             //    LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
             //};
+            string rightBrowsersURLParams = page.Split('?').Length > 1 ? page.Split('?')[1] : "";
+            page = page.Split('?')[0];
             JObject jnode = new JObject(cJson.GetNode(page));
             JToken t = jnode["PROPERTIES"];
             if (t != null)
@@ -477,7 +480,7 @@ namespace ProstePrototype
             {
                 //RightBrowserUrl = jnode["right"].ToString(),
                 //LeftBrowserUrl = jnode["left"].ToString(),
-                RightBrowserUrl = cJson.htmlRight(jnode),
+                RightBrowserUrl = cJson.htmlRight(jnode) + "?" + rightBrowsersURLParams,
                 LeftBrowserUrl = cJson.htmlLeft(jnode),
                 key = _clean_key
             };
