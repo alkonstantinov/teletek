@@ -469,6 +469,20 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
+        public static void RemoveElements(string panel_id, string key)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels != null)
+            {
+                if (_cache_list_panels.ContainsKey(panel_id))
+                {
+                    Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+                    if (el.ContainsKey(key))
+                        el.Remove(key);
+                }
+            }
+            Monitor.Exit(_cs_cache);
+        }
         /// <summary>
         /// Връща кеширана структура със стойности за списъчни обекти. Съответния обект е добавен с AddListElement.
         /// </summary>
@@ -492,6 +506,21 @@ namespace lcommunicate
             }
             Monitor.Exit(_cs_cache);
             return (res != null) ? res : "{}";
+        }
+        public static void RemoveListElement(string panel_id, string key, string idx)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+                if (el.ContainsKey(key))
+                {
+                    Dictionary<string, string> lst = el[key];
+                    if (lst.ContainsKey(idx))
+                        lst.Remove(idx);
+                }
+            }
+            Monitor.Exit(_cs_cache);
         }
         public static void SetListElementJson(string panel_id, string key, string idx, string _template)
         {

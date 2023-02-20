@@ -590,7 +590,7 @@ namespace ljson
                             byte[] pbytes = new byte[prop.bytescnt];
                             for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                                 pbytes[i - prop.offset] = devbytes[i];
-                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes);
+                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes, prop.xmltag);
                             if (path_val == null)
                             {
                                 if (!missedkeys.ContainsKey(dev_save_path + "/" + propname))
@@ -796,7 +796,7 @@ namespace ljson
                                 continue;
                             for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                                 pbytes[i - prop.offset] = devbytes[i];
-                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(newpaths, propname, pbytes);
+                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(newpaths, propname, pbytes, prop.xmltag);
                             if (path_val == null)
                             {
                                 JObject _element = (JObject)CurrentPanel["ELEMENTS"][readsubkey];
@@ -818,13 +818,7 @@ namespace ljson
                             }
                             else
                             {
-                                string xml = prop.xmltag;
-                                Match m = Regex.Match(xml, @"INC\s*?=\s*?""(\d+?)""");
                                 string sval = path_val.Item2;
-                                //
-                                if (m.Success)
-                                    sval = (Convert.ToInt32(sval) + Convert.ToInt32(m.Groups[1].Value)).ToString();
-                                //
                                 cComm.SetPathValue(panel_id, path_val.Item1, sval, FilterValueChanged);
                                 if (!foundkeys.ContainsKey(readsubkey + "/" + propname))
                                     foundkeys.Add(readsubkey + "/" + propname, "");
@@ -1046,7 +1040,7 @@ namespace ljson
                         byte[] pbytes = new byte[prop.bytescnt];
                         for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                             pbytes[i - prop.offset] = result[i];
-                        Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes);
+                        Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes, prop.xmltag);
                         if (path_val == null)
                         {
                             if (!missedkeys.ContainsKey(key + "/" + propname))
@@ -1063,7 +1057,7 @@ namespace ljson
                                 pp["~path"] = pp.Path;
                                 pp["@TYPE"] = "MISSED";
                                 JObject groups1 = new JObject(jgrp);
-                                path_val = _internal_relations_operator.GroupPropertyVal(groups1, propname, pbytes);
+                                path_val = _internal_relations_operator.GroupPropertyVal(groups1, propname, pbytes, prop.xmltag);
                                 Match m = Regex.Match(propname, @"emacETHADDR(\d)", RegexOptions.IgnoreCase);
                                 if (m.Success)
                                 {

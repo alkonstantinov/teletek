@@ -1,5 +1,6 @@
 ﻿//#region VARIABLES
 let elements;
+let minElements;
 let minDevicesAllowed = 1;
 let lst = [0];
 let mainKey;

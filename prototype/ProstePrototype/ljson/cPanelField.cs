@@ -6,12 +6,96 @@ using System.Text.RegularExpressions;
 using common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using lcommunicate;
 
 namespace ljson
 {
     internal class cPanelField
     {
         #region static
+        internal static void ReverseArray(byte[] val)
+        {
+            if (val.Length == 2)
+            {
+                byte _val1 = val[0];
+                val[0] = val[1];
+                val[1] = _val1;
+            }
+            else if (val.Length == 4)
+            {
+                ushort _val23 = (ushort)((ushort)(val[0] * 16) + val[1]);
+                val[0] = val[2];
+                val[1] = val[3];
+                val[2] = (byte)(_val23 / 16);
+                val[3] = (byte)(_val23 % 16);
+            }
+        }
+        internal static void ProcessByteArrayByField(byte[] val, JObject _field)
+        {
+            string _sfield = _field.ToString();
+            Match m = Regex.Match(_sfield, @"REVERSE""\s*?:\s*?""(\d+?)""", RegexOptions.IgnoreCase);
+            bool reverse = m.Success && Convert.ToInt32(m.Groups[1].Value) != 0;
+            if (!reverse)
+            {
+                m = Regex.Match(_sfield, @"REVERSE""\s*?:\s*?""(true|false)""", RegexOptions.IgnoreCase);
+                reverse = m.Success && m.Groups[1].ToString().ToLower() == "true";
+            }
+            if (reverse)
+                ReverseArray(val);
+        }
+        internal static void BytesByXmlTag(byte[] val, string _read_xml, JObject _field)
+        {
+            Match m = Regex.Match(_read_xml, @"INC\s*?=\s*?""(\d+?)""");
+            //
+            if (m.Success)
+            {
+                byte inc = Convert.ToByte(m.Groups[1].Value);
+                for (int i = 0; i < val.Length; i++)
+                    val[i] += inc;
+            }
+            ProcessByteArrayByField(val, _field);
+        }
+        internal static uint Array2UVal(byte[] val)
+        {
+            uint u = 0;
+            for (int i = 0; i < val.Length; i++)
+                u += ((uint)val[i] << i * 8);
+            return u;
+        }
+        internal static string SValByArray(byte[] val, JObject _field)
+        {
+            ProcessByteArrayByField(val, _field);
+            uint u = Array2UVal(val);
+            return u.ToString();
+        }
+        internal static string SValByArray(JArray jval, JObject _field)
+        {
+            List<byte> lst = new List<byte>();
+            foreach (JToken t in jval)
+                lst.Add(Convert.ToByte(t.ToString()));
+            byte[] val = lst.ToArray();
+            return SValByArray(val, _field);
+        }
+        internal static byte[] BValByArray(JArray jval, JObject _field)
+        {
+            List<byte> lst = new List<byte>();
+            foreach (JToken t in jval)
+                lst.Add(Convert.ToByte(t.ToString()));
+            byte[] val = lst.ToArray();
+            ProcessByteArrayByField(val, _field);
+            return val;
+        }
+        public static void SetPathValue(string panel_id, string path, byte[] bval, JToken _field)
+        {
+            if (_field.Type != JTokenType.Object)
+            {
+                //cComm.SetPathValue(panel_id, path, value, "");
+                return;
+            }
+            JObject _ofield = (JObject)_field;
+            //
+            //cComm.SetPathValue(panel_id, path, value, "");
+        }
         internal static JObject FieldByWrongPath(JObject panel, string wrong_path, string new_path, dFindObjectByProperty _find)
         {
             JToken t = panel.SelectToken(wrong_path);
@@ -52,7 +136,7 @@ namespace ljson
                 }
             return null;
         }
-        internal static Dictionary<string, string> GroupPathValuesAND(JObject grp, string val, string sidx)
+        internal static Dictionary<string, string> GroupPathValuesAND(JObject grp, byte[] val, string sidx)
         {
             if (!Regex.IsMatch(sidx, "~index"))
                 sidx = ".~index~" + sidx;
@@ -62,12 +146,12 @@ namespace ljson
             Dictionary<string, string> res = new Dictionary<string, string>();
             string gpath = grp["~path"].ToString() + sidx;
             if (val != null)
-                res.Add(gpath, val);
+                res.Add(gpath, SValByArray(val, grp));
             else
                 return res;
             if (grp["fields"] != null)
                 grp = (JObject)grp["fields"];
-            ushort bval = Convert.ToUInt16(val);
+            ushort bval = (ushort)Array2UVal(val);// Convert.ToUInt16(val);
             foreach (JProperty p in grp.Properties())
             {
                 if (p.Value.Type != JTokenType.Object)
@@ -96,7 +180,7 @@ namespace ljson
             //
             return res;
         }
-        internal static Dictionary<string, string> GroupPathValues(JObject grp, string val, string sidx)
+        internal static Dictionary<string, string> GroupPathValues(JObject grp, byte[] val, string sidx)
         {
             if (grp == null || grp["~type"] == null)
                 return null;
@@ -105,6 +189,18 @@ namespace ljson
                 return GroupPathValuesAND(grp, val, sidx);
             //
             return null;
+        }
+        internal static Dictionary<string, string> GroupPathValues(JObject grp, string sval, string sidx)
+        {
+            uint ival = Convert.ToUInt32(sval);
+            int i = 1;
+            while (Math.Pow(256, 1) < ival)
+                i++;
+            byte[] val = new byte[i];
+            for (int j = 0; j < val.Length; j++)
+                val[j] = (byte)(((255 << j * 8) & ival) >> j * 8);
+            return GroupPathValues(grp, val, sidx);
+
         }
         private static string ANDValue(JObject o, string sval)
         {

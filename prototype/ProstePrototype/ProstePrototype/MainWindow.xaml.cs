@@ -361,25 +361,8 @@ namespace ProstePrototype
                     break;
                 case "AddingElement":
                     string elementType = json["Params"]["elementType"].ToString();
-                    elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
                     string elementNumber = json["Params"]["elementNumber"].ToString();
-                    JObject el = cJson.GetNode(elementType);
-                    if (el == null)
-                    {
-                        //elementType += elementNumber;
-                        el = cJson.GetNode(elementType + elementNumber);
-                        cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
-                    }
-                    else
-                    {
-                        JObject rw = (JObject)el["~rw"];
-                        el = (JObject)el["PROPERTIES"]["Groups"];
-                        JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
-                        newpaths["~rw"] = rw;
-                        cJson.SetNodeFilters(newpaths);
-                        string _template = newpaths.ToString();
-                        cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
-                    }
+                    AddingElement(elementType, elementNumber);
                     break;
                 case "RemovingElement":
                     break;
@@ -387,7 +370,7 @@ namespace ProstePrototype
                     elementType = json["Params"]["elementType"].ToString();
                     elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
                     elementNumber = json["Params"]["elementNumber"].ToString();
-                    el = cJson.GetNode(elementType + elementNumber);
+                    JObject el = cJson.GetNode(elementType + elementNumber);
                     cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
                     break;
                 case "AddingLoopElement":
@@ -455,6 +438,28 @@ namespace ProstePrototype
                 {
                     browser.ExecuteScriptAsync(json["Callback"].ToString(), new object[] { });
                 }
+            }
+        }
+
+        public static void AddingElement(string elementType, string elementNumber)
+        {
+            elementType = Regex.Replace(Regex.Replace(elementType, @"^'", ""), @"'$", "");
+            JObject el = cJson.GetNode(elementType);
+            if (el == null)
+            {
+                //elementType += elementNumber;
+                el = cJson.GetNode(elementType + elementNumber);
+                cComm.AddPseudoElement(cJson.CurrentPanelID, elementType, elementNumber, el.ToString());
+            }
+            else
+            {
+                JObject rw = (JObject)el["~rw"];
+                el = (JObject)el["PROPERTIES"]["Groups"];
+                JObject newpaths = cJson.ChangeGroupsElementsPath(el, elementNumber);
+                newpaths["~rw"] = rw;
+                cJson.SetNodeFilters(newpaths);
+                string _template = newpaths.ToString();
+                cComm.AddListElement(cJson.CurrentPanelID, elementType, elementNumber, _template);
             }
         }
 
@@ -585,8 +590,8 @@ namespace ProstePrototype
             {
                 int tabIdx = rw.selectedIndex;
                 //cTransport t = null;
-                string ip = rw.uc1.Address;
-                int port = rw.uc1.Port;
+                string ip = rw.uc0.Address;
+                int port = rw.uc0.Port;
                 object conn_params = null;
                 if (tabIdx == 0)
                     conn_params = new cIPParams(ip, port);

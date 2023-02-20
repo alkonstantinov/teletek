@@ -37,7 +37,6 @@ namespace ProstePrototype
         }
         public string getJsonForElement(string elementType, int elementNumber)
         {
-
             // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
             string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
@@ -45,6 +44,12 @@ namespace ProstePrototype
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
             File.WriteAllTextAsync("wb3.json", res);
             return res;
+        }
+
+        public string addingElementSync(string elementType, int elementNumber)
+        {
+            MainWindow.AddingElement(elementType, elementNumber.ToString());
+            return "added";
         }
 
         public string getJsonNodeForElement(string elementType, int elementNumber, string key)
@@ -92,6 +97,7 @@ namespace ProstePrototype
                 onew["~address"] = addr;
                 res.Add(onew);
             }
+            File.WriteAllTextAsync("wb3.json", res.ToString());
             return res.ToString();
         }
 

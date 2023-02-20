@@ -122,7 +122,8 @@ function receiveMessageWPF(jsonTxt) {
                     }
                 }, ""); // currKey should not be ~path
 
-                elements = json[mainKey]['@MAX'];
+                elements = json[mainKey]['@MAX']; // case of LDevices
+                minElements = 0;
             }
 
             body = document.getElementById('divLDevices');
@@ -154,7 +155,8 @@ const drawWithModal = (body, json) => {
     keys = Object.keys(json).filter(k => k !== '~path');
 
     lst = [0];
-    elements = keys.length + 1;
+    elements = keys.length + 1; // for the case of PDevices
+    minElements = 0;
 
     var deviceList = body.querySelector('#deviceList');
     var modalList = deviceList.querySelector('#list-tab');
@@ -211,10 +213,11 @@ function drawFields(body, json, inheritedColor = '') {
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
             body.appendChild(fieldset);
         } else if (!divLevel["@TYPE"] && !divLevel.name) {
-            for (let i = 0; i < +divLevel["@MIN"]; i++) {
+            minElements = +divLevel["@MIN"];
+            for (let i = 0; i < minElements; i++) {
                 if (!lst.includes(i)) lst.push(i);
             }
-            elements = +divLevel["@MAX"];
+            elements = +divLevel["@MAX"]; // case of divMain
             let btnDiv = document.getElementById("buttons");
             // adding the button
             btnDiv.insertAdjacentHTML(
@@ -1480,7 +1483,7 @@ function addElement(id, elementType = "") {
 
     if (id === "element") {
         var last = -1;
-        for (i = 0; i <= elements; i++) {
+        for (i = minElements; i <= elements; i++) {
             if (lst.includes(i)) {
                 continue;
             } else {
@@ -1490,8 +1493,16 @@ function addElement(id, elementType = "") {
         }
         if (last === -1 || lst.includes(last)) return;
 
-        sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
-        createElementButton(last, elementType);
+        if (elementType === "INPUT_GROUP") {
+            boundAsync.addingElementSync(`${elementType}`, last).then(r => {
+                if (r === "added") {
+                    createElementButton(last, elementType);
+                }
+            }).catch((e) => console.log(e));
+        } else {
+            sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
+            createElementButton(last, elementType);
+        }
     } else {
         if (lst.includes(+id)) {
             var elem = document.getElementById(`${id}`);
@@ -1512,12 +1523,14 @@ function addElement(id, elementType = "") {
     }
 }
 
-function createElementButton(last, elementType) {
+async function createElementButton(last, elementType) {
     let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
 
-    const newUserElement = !elementType.toUpperCase().includes('INPUT_GROUP') ? ( //if the element is not INPUT_GROUP
-        `<div class="col-12" id=${last}>
+    let newUserElement;
+    if (!elementType.toUpperCase().includes('INPUT_GROUP')) {
+        //if the element is not INPUT_GROUP
+        newUserElement = `<div class="col-12" id=${last}>
                 <div class="row">
                     <div class="col-11 pr-1">
                         <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
@@ -1537,28 +1550,10 @@ function createElementButton(last, elementType) {
                         <i class="fa-solid fa-xmark ${BUTTON_COLORS[color]}"></i>
                     </div>
                 </div>
-            </div>`) : ( //if the element is INPUT_GROUP
-        `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="row">
-                        <fieldset style="min-width: 200px;">
-                            <legend>Input Group ${last}</legend>
-                                <label for="gr_input_logic_${last}">${newT.t(localStorage.getItem('lang'), "input_logic")}</label>:
-                                <p class="${BUTTON_COLORS[color]}">
-                                    AND
-                                    <label class="switch">
-                                        <input type="checkbox" id="gr_input_logic_${last}"
-                                              onchange="javascript: inputGroupHandler('${elementType}','${last}', this.checked );"/>
-                                        <span class="slider"></span>
-                                    </label>
-                                    OR
-                                </p>
-
-                        </fieldset>
-                        <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
-                            <i class="fa-solid fa-xmark ${BUTTON_COLORS[color]}"></i>
-                        </div>
-                    </div>
-                </div>`);
+            </div>`;
+    } else { //if the element is INPUT_GROUP
+        newUserElement = await inputGroupTextGenerator(last, elementType);       
+    }
     var element = document.getElementById("new");
     var new_inner = `
                         ${element.innerHTML}
@@ -1583,14 +1578,48 @@ function createElementButton(last, elementType) {
     }
 }
 
-const inputGroupHandler = (elementType, id, isOR) => {
-    let newValue = isOR ? "0" : "255";
-    boundAsync.getJsonForElement(elementType, +id).then(res => {
-        let returnedJson = JSON.parse(res)
-        let returnedJsonPath = returnedJson[Object.keys(returnedJson)[0]]["fields"]["Input_Logic"]["~path"];
-        sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${returnedJsonPath}`, 'newValue': newValue } })
-    });
+//#region Input Group Handlers
+const inputGroupHandler = (checked, trueValue, falseValue, path) => {
+    let newValue = checked ? trueValue : falseValue;
+    sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${path}`, 'newValue': newValue } })
 };
+
+async function inputGroupTextGenerator(last, elementType) {
+    let result;
+    try {
+        result = await boundAsync.getJsonForElement(elementType, +last);
+        if (result) {
+            let returnedJson = JSON.parse(result);
+            let currentJSON = returnedJson["~noname"]["fields"]["Input_Logic"];
+            let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
+            let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
+            let legend = (trans.length + `${last}`.length) > 15 ? trans.substring(0, 12) + '...' : trans;
+            return `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="row">
+                            <fieldset style="min-width: 200px;">
+                                <legend>${legend} ${last}</legend>                                
+                                    <p class="fire">
+                                    ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
+                                    <label class="switch">
+                                        <input type="checkbox" id="gr_input_logic_${last}"
+                                                ${isChecked ? "checked" : ""}
+                                                onchange="javascript: inputGroupHandler(this.checked, ${currentJSON["ITEMS"]["ITEM"][1]["@VALUE"]}, ${currentJSON["ITEMS"]["ITEM"][0]["@VALUE"]}, '${currentJSON["~path"]}' );"/>
+                                        <span class="slider"></span>
+                                    </label>
+                                    ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}
+                                </p>
+                        </fieldset>
+                        <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
+                            <i class="fa-solid fa-xmark fire"></i>
+                        </div>
+                    </div>
+                </div>`;
+        }
+        return '';
+    } catch (e) { console.log('Error', e) }
+}
+
+//#endregion
 
 // showing element function
 async function showElement(id, elementType) {

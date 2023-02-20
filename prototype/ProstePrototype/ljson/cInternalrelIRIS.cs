@@ -9,6 +9,8 @@ using common;
 using System.Windows.Input;
 using System.Text.Encodings;
 using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace ljson
 {
@@ -675,13 +677,45 @@ namespace ljson
                     if (grp == null)
                         continue;
                     JArray aval = (JArray)opanel["~value"];
-                    ushort uval = (ushort)(Convert.ToUInt16(aval[1]) * 16 + Convert.ToUInt16(aval[0]));
-                    Dictionary<string, string> paths = cPanelField.GroupPathValues(grp, uval.ToString(), "~index~" + sidx);
+                    string sval = cPanelField.SValByArray(aval, grp);
+                    byte[] bval = cPanelField.BValByArray(aval, grp/*_evacz_group*/);
+                    //ushort uval = (ushort)(Convert.ToUInt16(aval[1]) * 16 + Convert.ToUInt16(aval[0]));
+                    Dictionary<string, string> paths = cPanelField.GroupPathValues(grp, bval /*uval.ToString()*/, "~index~" + sidx);
                     foreach (string path in paths.Keys)
                         cComm.SetPathValue(_panel_id, path, paths[path]);
                 }
             }
             groups.Remove("~invisible");
+        }
+        private void FilterINGroups(string _panel_id, Dictionary<string, string> path_values)
+        {
+            //ELEMENTS.IRIS_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~1
+            //ELEMENTS.INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~17
+            Dictionary<string, string> inputs = cComm.GetElements(_panel_id, "IRIS_INPUT");
+            Dictionary<string, string> groups_used = new Dictionary<string, string>();
+            foreach (string inkey in inputs.Keys)
+            {
+                JObject io = JObject.Parse(inputs[inkey]);
+                string gpath = io["Settings"]["fields"]["Group"]["~path"].ToString();
+                string sgrp = path_values[gpath];
+                if (sgrp != null && !groups_used.ContainsKey((Convert.ToInt32(sgrp) - 1).ToString()))
+                    groups_used.Add((Convert.ToInt32(sgrp) - 1).ToString(), inkey);
+            }
+            //if (Regex.IsMatch(inkey, @"^ELEMENTS\.IRIS_INPUT\.PROPERTIES\.Groups\.Settings\.fields\.Group"))
+            //    groups_used.Add((Convert.ToInt32(inputs[inkey]) - 1).ToString(), inkey);
+            foreach (string pathkey in path_values.Keys)
+            {
+                Match m = Regex.Match(pathkey, @"^ELEMENTS\.INPUT_GROUP\.PROPERTIES\.Groups\.~noname\.fields\.Input_Logic\.~index~(\d+)", RegexOptions.IgnoreCase);
+                if (m.Success && !groups_used.ContainsKey(m.Groups[1].Value))
+                    cComm.RemovePathValue(_panel_id, pathkey);
+            }
+            Dictionary<string, string> ingroups = cComm.GetElements(_panel_id, "INPUT_GROUP");
+            List<string> grp2del = new List<string>();
+            foreach (string g in ingroups.Keys)
+                if (!groups_used.ContainsKey(g))
+                    grp2del.Add(g);
+            foreach (string del in grp2del)
+                cComm.RemoveListElement(_panel_id, "INPUT_GROUP", del);
         }
         public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func)
         {
@@ -689,6 +723,7 @@ namespace ljson
             Dictionary<string, string> path_values = cComm.GetPathValues(_panel_id);
             SetIOTabsAfterRead(_panel_id, panel, path_values);
             EvacZones(_panel_id, panel, _get_node);
+            FilterINGroups(_panel_id, path_values);
         }
         #endregion
 
@@ -794,7 +829,7 @@ namespace ljson
             //
             return res;
         }
-        public override Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val)
+        public override Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val, string _xmltag)
         {
             JObject prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);
             if (prop == null)
@@ -824,6 +859,8 @@ namespace ljson
                 if (prop == null)
                     return null;
             }
+            cPanelField.BytesByXmlTag(val, _xmltag, prop);
+            //
             string path = prop["~path"].ToString();
             string sval = null;
             if (val.Length == 1)
@@ -842,7 +879,7 @@ namespace ljson
                 }
                 else if (prop["@TYPE"].ToString().ToLower() == "int" && val.Length == 2)
                 {
-                    sval = (val[1] * 16 + val[0]).ToString();
+                    sval = (val[1] * 256 + val[0]).ToString();
                     return new Tuple<string, string>(path, sval);
                 }
                 else if (val.Length == 4 && prop["@TYPE"].ToString().ToLower() == "ip")
@@ -877,6 +914,7 @@ namespace ljson
                     JObject grp = (JObject)node["PROPERTIES"]["Groups"]["~noname"];
                     if (grp["fields"] != null && grp["fields"]["Input_Logic"] != null)
                     {
+                        return true;
                         JObject field = (JObject)grp["fields"]["Input_Logic"];
                         JArray item = (JArray)field["ITEMS"]["ITEM"];
                         int defaultidx = -1;

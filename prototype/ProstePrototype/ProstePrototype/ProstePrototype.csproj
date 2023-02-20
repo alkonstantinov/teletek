@@ -642,10 +642,4 @@
     <Folder Include="Configs\XML\Read\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="ReadWindowOld.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>

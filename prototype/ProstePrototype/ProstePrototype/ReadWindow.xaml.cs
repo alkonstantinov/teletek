@@ -20,24 +20,26 @@ namespace ProstePrototype
     public partial class ReadWindow : Window
     {
         public int selectedIndex = 3;
+        public int prevIndex = 3;
 
         public bool DarkMode { get; set; }
-        public UserControl1 uc1 { get; set; }
-        public UserControl2 uc2 { get; set; }
-        public UserControl3 uc3 { get; set; }
-        public UserControl uc4 { get; set; }
-        private Color selectedColor = Color.FromRgb(30, 115, 190);
+        public UserControl1 uc0 { get; set; }
+        public UserControl2 uc1 { get; set; }
+        public UserControl3 uc2 { get; set; }
+        public UserControl uc3 { get; set; }
+        public BitmapImage imgsource = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
         public ReadWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            uc1 = new UserControl1();
-            uc2 = new UserControl2();
-            uc3 = new UserControl3();
-            uc4 = new UserControl();
-            uc4.Resources = this.Resources;
-            ContentArea.Content = uc4;
-            Button4.Background = new SolidColorBrush(this.selectedColor);
+            uc0 = new UserControl1();
+            uc1 = new UserControl2();
+            uc2 = new UserControl3();
+            uc3 = new UserControl();
+            uc3.Resources = this.Resources;
+            img3.Source = imgsource;
+            ContentArea.Content = uc3;
+            Button3.Focus();
         }
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
@@ -58,55 +60,63 @@ namespace ProstePrototype
             });
         }
         
-        private void removeHoverColor()
+        private void Button_LostFocus(object sender, RoutedEventArgs e)
         {
-            switch (this.selectedIndex)
+            string img = "img3";
+            switch (prevIndex)
             {
-                case 0:
-                    Button1.Background = this.Background; break; 
-                case 1:
-                    Button2.Background = this.Background; break;
-                case 2:
-                    Button3.Background = this.Background; break;
-                default: 
-                    Button4.Background= this.Background; break;
+                case 0: img = "img0"; break;
+                case 1: img = "img1"; break;
+                case 2: img = "img2"; break;
+                default: break;
+            }
+            var a = sender as Button;
+            object im = a.FindName(img);
+            if (im is Image)
+            {
+                // Following executed if Text element was found.
+                Image image = im as Image;
+                var b = imgsource as BitmapImage;
+                image.Source = (ImageSource)(new FormatConvertedBitmap(b, PixelFormats.Gray8, null, 0));
             }
         }
 
+        private void Button0_Click(object sender, RoutedEventArgs e)
+        {
+            selectedIndex = 0;
+            Button_LostFocus(sender, e);
+            uc0.Resources = this.Resources;
+            img0.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            ContentArea.Content = uc0;
+            prevIndex= 0;
+        }
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            removeHoverColor();
-            selectedIndex = 0;            
+            selectedIndex = 1;
+            Button_LostFocus(sender, e);
             uc1.Resources = this.Resources;
+            img1.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc1;
-            Button1.Background = new SolidColorBrush(this.selectedColor);
-
+            prevIndex= 1;
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            removeHoverColor();
-            selectedIndex = 1;
-            uc2.Resources = this.Resources;
-            ContentArea.Content = uc2;
-            Button2.Background = new SolidColorBrush(this.selectedColor);
-
-        }
-        private void Button3_Click(object sender, RoutedEventArgs e)
-        {
-            removeHoverColor();
             selectedIndex = 2;
-            uc3.Resources = this.Resources;
-            ContentArea.Content = uc3;
-            Button3.Background = new SolidColorBrush(this.selectedColor);
+            Button_LostFocus(sender, e);
+            uc2.Resources = this.Resources;
+            img2.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            ContentArea.Content = uc2;
+            prevIndex= 2;
         }
         
-        private void Button4_Click(object sender, RoutedEventArgs e)
+        private void Button3_Click(object sender, RoutedEventArgs e)
         {
-            removeHoverColor();
             selectedIndex = 3;
-            uc4.Resources = this.Resources;
-            ContentArea.Content = uc4;
-            Button4.Background = new SolidColorBrush(this.selectedColor);
+            Button_LostFocus(sender, e);
+            uc3.Resources = this.Resources;
+            img3.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            ContentArea.Content = uc3;
+            prevIndex= 3;
         }
     }
 }
