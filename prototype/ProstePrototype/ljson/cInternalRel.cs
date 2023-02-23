@@ -133,6 +133,9 @@ namespace ljson
         public virtual bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props) { return true; }
         public virtual void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func) { }
         public virtual void AfterDevicesChanged(string _panel_id, JObject panel, dGetNode _get_node) { }
+        public virtual void AfterDeviceRemoved(string _panel_id, JObject panel, string loop_type, string dev_addr) { }
+        public virtual void AfterInputRemoved(string _panel_id) { }
         public virtual void ClearCache() { }
+        public virtual void RemoveTABCache(string tab, string idx) { }
     }
 }

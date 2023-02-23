@@ -138,6 +138,154 @@ namespace lcommunicate
             }
             Monitor.Exit(_cs_cache);
         }
+        public static void RemovePathValues(string panel_id, string path)
+        {
+            string idx = "";
+            Match m = Regex.Match(path, @"~index~(\d+)$");
+            if (m.Success)
+                idx = m.Groups[1].Value;
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel = _cache_panels[panel_id];
+                if (panel != null && panel.ContainsKey(path))
+                {
+                    Dictionary<string, string> todel = new Dictionary<string, string>();
+                    todel.Add(path, "");
+                    string pathval = panel[path];
+                    m = Regex.Match(pathval, @"([0-9a-fA-f]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})$");
+                    if (m.Success)
+                    {
+                        string tab = m.Groups[1].Value;
+                        foreach (string pkey in panel.Keys)
+                            if (Regex.IsMatch(pkey, @"\.TABS\." + tab + @"[\w\W]*?~index~" + idx, RegexOptions.IgnoreCase) && !todel.ContainsKey(pkey))
+                                todel.Add(pkey, "");
+                    }
+                    //
+                    foreach (string del in todel.Keys)
+                        panel.Remove(del);
+                }
+            }
+            Monitor.Exit(_cs_cache);
+        }
+        public static void RemoveElementPaths(string panel_id, string element, string idx, ref string tab)
+        {
+            string path_prefix = "ELEMENTS." + element;
+            string path_sufix = "~index~" + idx;
+            tab = null;
+            //string grp = null;
+            List<string> lstdel = new List<string>();
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel = _cache_panels[panel_id];
+                foreach (string path in panel.Keys)
+                    if (Regex.IsMatch(path, @"^" + path_prefix + @"[\w\W]+?" + path_sufix + "$"))
+                    {
+                        if (tab == null && Regex.IsMatch(element, @"(INPUT|OUTPUT)$"))
+                        {
+                            string val = panel[path];
+                            Match m = Regex.Match(val, @"([0-9a-fA-f]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})$");
+                            if (m.Success)
+                                tab = m.Groups[1].Value;
+                            //if (grp == null && Regex.IsMatch(element, "INPUT$") && Regex.IsMatch(val, @"\.Settings\.fields\.Group\." + path_sufix + "$", RegexOptions.IgnoreCase))
+                            //    grp = val;
+                        }
+                        lstdel.Add(path);
+                    }
+            }
+            //
+            Monitor.Exit(_cs_cache);
+            //
+            foreach (string todel in lstdel)
+                RemovePathValue(panel_id, todel);
+            //
+            RemoveListElement(panel_id, element, idx);
+            //if (grp != null)
+            //    RemoveListElement(panel_id, "INPUT_GROUP", grp);
+        }
+        public static void RemoveLoopDevice(string _panel_id, string loop_type, string loop_nom, string dev_name, string dev_addr)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_list_panels.ContainsKey(_panel_id))
+            {
+                Dictionary<string, Dictionary<string, string>> panel = _cache_list_panels[_panel_id];
+                Dictionary<string, Dictionary<string, string>> loops = new Dictionary<string, Dictionary<string, string>>();
+                foreach (string pkey in panel.Keys)
+                    if (Regex.IsMatch(pkey, "^" + loop_type + "/"))
+                        loops.Add(pkey, panel[pkey]);
+                List<string> loop2del = new List<string>();
+                foreach (string lkey in loops.Keys)
+                {
+                    Dictionary<string, string> ddev = panel[lkey];
+                    if (ddev.ContainsKey(dev_addr))
+                        ddev.Remove(dev_addr);
+                    if (ddev.Count == 0)
+                        loop2del.Add(lkey);
+                }
+                foreach (string delkey in loop2del)
+                    panel.Remove(delkey);
+            }
+            Monitor.Exit(_cs_pseudo_element_cache);
+        }
+        public static void RemoveLoopDevicePathValues(string _panel_id, string loop_type, string loop_nom, string dev_name, string dev_addr)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels == null || !_cache_panels.ContainsKey(_panel_id))
+            {
+                Monitor.Exit(_cs_cache);
+                return;
+            }
+            Dictionary<string, string> dpaths = _cache_panels[_panel_id];
+            List<string> lstdel = new List<string>();
+            string del_pattern = "^" + loop_type + @"[\w\W]+?#" + dev_name + @"[\w\W]+?~index~" + dev_addr + "$";
+            foreach (string path in dpaths.Keys)
+                if (Regex.IsMatch(path, del_pattern))
+                    lstdel.Add(path);
+            foreach (string sdel in lstdel)
+                dpaths.Remove(sdel);
+            Monitor.Exit(_cs_cache);
+        }
+        public static Dictionary<string, List<string>> ReversePaths(string panel_id)
+        {
+            Dictionary<string, List<string>> res = new Dictionary<string, List<string>>();
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel = _cache_panels[panel_id];
+                foreach (string path in panel.Keys)
+                {
+                    if (!res.ContainsKey(panel[path]))
+                        res.Add(panel[path], new List<string>());
+                    List<string> lst = res[panel[path]];
+                    lst.Add(path);
+                }
+            }
+            //
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
+        public static Dictionary<string, List<string>> ReversePaths(string panel_id, string filter)
+        {
+            Dictionary<string, List<string>> res = new Dictionary<string, List<string>>();
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel = _cache_panels[panel_id];
+                foreach (string path in panel.Keys)
+                {
+                    if (!Regex.IsMatch(panel[path], filter, RegexOptions.IgnoreCase))
+                        continue;
+                    if (!res.ContainsKey(panel[path]))
+                        res.Add(panel[path], new List<string>());
+                    List<string> lst = res[panel[path]];
+                    lst.Add(path);
+                }
+            }
+            //
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
         #endregion
 
         #region pseudo elements
@@ -340,6 +488,32 @@ namespace lcommunicate
             lst[idx] = _template;
             Monitor.Exit(_cs_pseudo_element_cache);
         }
+        public static void RemovePseudoElement(string panel_id, string key, string idx)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return;
+            }
+            Dictionary<string, string> lst = el[key];
+            if (lst.ContainsKey(idx))
+                lst.Remove(idx);
+            if (el[key].Count == 0)
+                el.Remove(key);
+            Monitor.Exit(_cs_pseudo_element_cache);
+        }
         public static void SetPseudoElement(string panel_id, string key, string _template)
         {
             Monitor.Enter(_cs_pseudo_element_cache);
@@ -469,16 +643,20 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
-        public static void RemoveElements(string panel_id, string key)
+        public static void RemoveListElement(string panel_id, string element, string idx)
         {
             Monitor.Enter(_cs_cache);
             if (_cache_list_panels != null)
             {
                 if (_cache_list_panels.ContainsKey(panel_id))
                 {
-                    Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
-                    if (el.ContainsKey(key))
-                        el.Remove(key);
+                    Dictionary<string, Dictionary<string, string>> panel = _cache_list_panels[panel_id];
+                    if (panel.ContainsKey(element))
+                    {
+                        Dictionary<string, string> el = panel[element];
+                        if (el.ContainsKey(idx))
+                            el.Remove(idx);
+                    }
                 }
             }
             Monitor.Exit(_cs_cache);
@@ -506,21 +684,6 @@ namespace lcommunicate
             }
             Monitor.Exit(_cs_cache);
             return (res != null) ? res : "{}";
-        }
-        public static void RemoveListElement(string panel_id, string key, string idx)
-        {
-            Monitor.Enter(_cs_cache);
-            if (_cache_list_panels.ContainsKey(panel_id))
-            {
-                Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
-                if (el.ContainsKey(key))
-                {
-                    Dictionary<string, string> lst = el[key];
-                    if (lst.ContainsKey(idx))
-                        lst.Remove(idx);
-                }
-            }
-            Monitor.Exit(_cs_cache);
         }
         public static void SetListElementJson(string panel_id, string key, string idx, string _template)
         {

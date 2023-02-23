@@ -441,6 +441,10 @@ function getZoneDevices(elementNumber) {
 
 function calculateZoneDevices(elementNumber) {
     let modal = $(document.getElementById("showDevicesListModal"));
+
+    let modalTitle = modal.find('.modal-title')[0];
+    modalTitle.innerHTML = `${new T().t(localStorage.getItem('lang'), 'number_of_devices_per_zone')}:`;
+
     let modalContent = modal.find('.modal-body')[0];
 
     const deviceMap = new Map();

@@ -1230,6 +1230,35 @@ namespace ljson
             //
             return jarr;
         }
+        public static JObject LoopRelations(string noloop, int loopnom)
+        {
+            Dictionary<string, List<string>> reverse = cComm.ReversePaths(CurrentPanelID, @"^[^/]+?LOOP\d+?/[\w\W]+?#");
+            Dictionary<string, List<string>> dres = new Dictionary<string, List<string>>();
+            foreach (string key in reverse.Keys)
+            {
+                Match m = Regex.Match(key, @"^[^/]+?LOOP" + loopnom.ToString() + @"/[\w\W]+?#([\w\W]+?)\.[\w\W]+?~index~(\d+)", RegexOptions.IgnoreCase);
+                if (!m.Success)
+                    continue;
+                string dev = m.Groups[1].Value;
+                string idx = m.Groups[2].ToString();
+                string reskey = idx + ". " + dev;
+                if (!dres.ContainsKey(reskey))
+                    dres.Add(reskey, new List<string>());
+                List<string> revlst = reverse[key];
+                List<string> reslst = dres[reskey];
+                foreach (string iopath in revlst)
+                {
+                    m = Regex.Match(iopath, @"\.([^\.]+?)(INPUT|OUTPUT)[\w\W]+?~index~(\d+)");
+                    if (!m.Success)
+                        continue;
+                    string io = m.Groups[1].Value + m.Groups[2].Value + m.Groups[3].Value;
+                    reslst.Add(io);
+                }
+            }
+            return JObject.FromObject(dres);
+            //Dictionary<string, string> d = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, loopnom.ToString());
+            //Dictionary<string, Dictionary<string, Dictionary<string, string>>> dres = _internal_relations_operator.UnionInOuts(CurrentPanelID, "input");
+        }
         public static JObject LoopsInputs(string path)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, string>>> dres = _internal_relations_operator.UnionInOuts(CurrentPanelID, "input");
@@ -1808,12 +1837,68 @@ namespace ljson
         #endregion
 
         #region values
+        public static void RemoveElement(string element, string idx)
+        {
+            string tab = null;
+            cComm.RemoveElementPaths(CurrentPanelID, element, idx, ref tab);
+            if (Regex.IsMatch(element, "INPUT$", RegexOptions.IgnoreCase))
+                _internal_relations_operator.AfterInputRemoved(CurrentPanelID);
+            if (tab != null)
+                _internal_relations_operator.RemoveTABCache(tab, idx);
+        }
+        public static void RemoveLoopElement(string loop_type, string loop_nom, string dev_name, string dev_addr)
+        {
+            cComm.RemoveLoopDevice(CurrentPanelID, loop_type, loop_nom, dev_name, dev_addr);
+            _internal_relations_operator.AfterDevicesChanged(CurrentPanelID, CurrentPanel, GetNode);
+            _internal_relations_operator.AfterDeviceRemoved(CurrentPanelID, CurrentPanel, loop_type, dev_addr);
+            cComm.RemoveLoopDevicePathValues(CurrentPanelID, loop_type, loop_nom, dev_name, dev_addr);
+        }
+        public static void RemoveLoop(string loop_none, string loop_nom)
+        {
+            string loop = cComm.GetPseudoElement(CurrentPanelID, loop_none, loop_nom);
+            if (loop == null)
+                return;
+            JObject o = JObject.Parse(loop);
+            if (o["~loop_type"] == null)
+                return;
+            string loop_type = o["~loop_type"].ToString();
+            //"~loop_type": "IRIS_TTELOOP1"
+            Dictionary<string, string> devs = cComm.GetPseudoElementDevices(CurrentPanelID, loop_none, loop_nom);
+            if (devs == null)
+                return;
+            foreach (string dev_addr in devs.Keys)
+            {
+                o = JObject.Parse(devs[dev_addr]);
+                if (o["~device"] == null)
+                    continue;
+                string dev_name = o["~device"].ToString();
+                RemoveLoopElement(loop_type, loop_nom, dev_name, dev_addr);
+            }
+            cComm.RemovePseudoElement(CurrentPanelID, loop_none, loop_nom);
+        }
         public static void FilterValueChanged(string path, string _new_val)
         {
             bool remove_path = false;
             _internal_relations_operator.FilterValueChanged(path, _new_val, ref remove_path);
             if (remove_path)
-                cComm.RemovePathValue(CurrentPanelID, path);
+            {
+                Match m = Regex.Match(path, @"~index~(\d+)");
+                if (m.Success)
+                {
+                    string idx = m.Groups[1].Value;
+                    string val = cComm.GetPathValue(CurrentPanelID, path);
+                    string tab = "";
+                    if (val != null)
+                    {
+                        m = Regex.Match(val, @"_([\w\W]+)$");
+                        if (m.Success)
+                            tab = m.Groups[1].Value;
+                        _internal_relations_operator.RemoveTABCache(tab, idx);
+                    }
+                }
+                //
+                cComm.RemovePathValues(CurrentPanelID, path);
+            }
         }
         public static JObject GroupsWithValues(JObject grp)
         {

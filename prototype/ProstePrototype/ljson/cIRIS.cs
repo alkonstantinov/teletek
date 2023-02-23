@@ -896,6 +896,22 @@ namespace ljson
         }
         #endregion
 
+        #region INC
+        private static void doINC(JObject json)
+        {
+            string[] paths = settings.Paths2INC;
+            foreach (string path in paths)
+            {
+                JToken t = json.SelectToken(path);
+                if (t == null || t.Type != JTokenType.Object)
+                    continue;
+                JObject o = (JObject)t;
+                o["@MIN"] = (System.Convert.ToInt32(o["@MIN"].ToString()) + 1).ToString();
+                o["@MAX"] = (System.Convert.ToInt32(o["@MAX"].ToString()) + 1).ToString();
+            }
+        }
+        #endregion
+
         public static string Convert(string json, JObject _pages)
         {
             JObject o = JObject.Parse(json);
@@ -967,6 +983,7 @@ namespace ljson
             cXml.Arrays2Objects(o1, true);
             //
             ChangeLoops(o1);
+            doINC(o1);
             //
             return o1.ToString();
         }

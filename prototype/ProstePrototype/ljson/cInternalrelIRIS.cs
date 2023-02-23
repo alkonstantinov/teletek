@@ -435,6 +435,70 @@ namespace ljson
                 }
             }
         }
+        public override void AfterDeviceRemoved(string _panel_id, JObject panel, string loop_type, string dev_addr)
+        {
+            List<string> channels2del = new List<string>();
+            Dictionary<string, string> newpathvals = new Dictionary<string, string>();
+            Dictionary<string, string> path_values = cComm.GetPathValues(_panel_id);
+            foreach (string uc in _used_channels.Keys)
+            {
+                if (Regex.IsMatch(uc, "^" + loop_type + @"[\w\W]+?~index~" + dev_addr, RegexOptions.IgnoreCase))
+                {
+                    channels2del.Add(uc);
+                    Dictionary<string, string> ios = _used_channels[uc];
+                    foreach (string io in ios.Keys)
+                    {
+                        Match m = Regex.Match(io, @"^([\w\W]+?\.fields\.Type)(\.TABS\.[\w\W]+?)\.[\w\W]*?(~index~\d+)$", RegexOptions.IgnoreCase);
+                        if (m.Success)
+                        {
+                            string type_path = m.Groups[1].Value;
+                            string oldpath = m.Groups[1].Value + m.Groups[2].Value;
+                            string idx = m.Groups[3].Value;
+                            //
+                            List<string> pv2del = new List<string>();
+                            foreach (string oldkey in path_values.Keys)
+                                if (Regex.IsMatch(oldkey, "^" + oldpath, RegexOptions.IgnoreCase))
+                                {
+                                    cComm.RemovePathValue(_panel_id, oldkey);
+                                    pv2del.Add(oldkey);
+                                }
+                            foreach (string pathdel in pv2del)
+                                path_values.Remove(pathdel);
+                            //
+                            JObject otabs = (JObject)panel.SelectToken(type_path + ".TABS");
+                            string none_tab = null;
+                            string none_val = null;
+                            foreach (JProperty p in otabs.Properties())
+                                if (p.Value.Type == JTokenType.Object)
+                                {
+                                    JObject otab = (JObject)p.Value;
+                                    if (otab["@NAME"] != null && otab["@NAME"].ToString().ToUpper() == "NONE")
+                                    {
+                                        none_tab = p.Name;
+                                        none_val = otab["@VALUE"].ToString();
+                                        break;
+                                    }
+                                }
+                            if (none_tab != null && none_val != null)
+                                newpathvals.Add(type_path + "." + idx, none_val + "_" + none_tab);
+                        }
+                    }
+                }
+            }
+            List<string> io2del = new List<string>();
+            foreach (string chdel in channels2del)
+            {
+                _used_channels.Remove(chdel);
+                foreach (string iokey in _io_channels.Keys)
+                    if (_io_channels[iokey] == chdel)
+                        io2del.Add(iokey);
+            }
+            foreach (string pv in newpathvals.Keys)
+                cComm.SetPathValue(_panel_id, pv, newpathvals[pv]);
+            foreach (string iodel in io2del)
+                if (_io_channels.ContainsKey(iodel))
+                    _io_channels.Remove(iodel);
+        }
         private void SetPathValuesDependedOnType(string _panel_id, JObject panel, Dictionary<string, string> paths_left)
         {
             foreach (string path in paths_left.Keys)
@@ -610,7 +674,7 @@ namespace ljson
                     {
                         JObject otab = (JObject)jttab;
                         string channel_value = GetChannelValue(_panel_id, panel, otab, sidx);
-                        if (channel_value != null && channel_value != "")
+                        if (channel_value != null && channel_value != "" && otab["@NAME"] != null && Regex.IsMatch(otab["@NAME"].ToString(), @"^LOOP[\w\W]*?DEVICE$", RegexOptions.IgnoreCase))
                         {
                             string channel_key = otab["~path"].ToString() + sidx;
                             cComm.SetPathValue(_panel_id, channel_key, channel_value);
@@ -725,6 +789,11 @@ namespace ljson
             EvacZones(_panel_id, panel, _get_node);
             FilterINGroups(_panel_id, path_values);
         }
+        public override void AfterInputRemoved(string _panel_id)
+        {
+            Dictionary<string, string> path_values = cComm.GetPathValues(_panel_id);
+            FilterINGroups(_panel_id, path_values);
+        }
         #endregion
 
         #region path values
@@ -733,6 +802,32 @@ namespace ljson
         public override void ClearCache()
         {
             _used_channels.Clear();
+            _io_channels.Clear();
+        }
+        public override void RemoveTABCache(string tab, string idx)
+        {
+            List<string> uc2del = new List<string>();
+            foreach (string uckey in _used_channels.Keys)
+            {
+                Dictionary<string, string> d = _used_channels[uckey];
+                List<string> ucio2del = new List<string>();
+                foreach (string k in d.Keys)
+                    if (Regex.IsMatch(k, @"\.TABS\." + tab + @"[\w\W]*?~index~" + idx))
+                        ucio2del.Add(k);
+                foreach (string k in ucio2del)
+                    d.Remove(k);
+                if (d.Count == 0)
+                    uc2del.Add(uckey);
+            }
+            foreach (string ucdel in uc2del)
+                _used_channels.Remove(ucdel);
+            //
+            List<string> io2del = new List<string>();
+            foreach (string k in _io_channels.Keys)
+                if (Regex.IsMatch(k, @"\.TABS\." + tab + @"[\w\W]*?~index~" + idx))
+                    io2del.Add(k);
+            foreach (string iodel in io2del)
+                _io_channels.Remove(iodel);
         }
         public override void FilterValueChanged(string path, string _new_val, ref bool remove_value)
         {

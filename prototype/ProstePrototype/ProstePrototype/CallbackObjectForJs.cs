@@ -133,6 +133,16 @@ namespace ProstePrototype
             return o.ToString();
         }
 
+        public string checkLoopConnection(string noLoop, int loopNumber)
+        {
+            JObject o = cJson.LoopRelations(noLoop, loopNumber);
+            //JObject o = new JObject() { 
+            //    ["1. IRIS_MIO22"] = new JArray { "IRIS_INPUT1", "IRIS_INPUT2" }, 
+            //    ["2. IRIS_MIO04"] = new JArray { "IRIS_OUTPUT1", "IRIS_OUTPUT2" } 
+            //};
+            return o.ToString();
+        }
+
         public string channelUses(string path)
         {
             JArray a = cJson.ChannelUses(path);

@@ -53,6 +53,18 @@ namespace common
                 return Convert.ToBoolean(Settings["logreads"].ToString());
             }
         }
+        public static string[] Paths2INC
+        {
+            get
+            {
+                JObject set = Settings;
+                JArray ja = (JArray)set["paths2inc"];
+                List<string> lst = new List<string>();
+                foreach (JToken t in ja)
+                    lst.Add(t.ToString());
+                return lst.ToArray();
+            }
+        }
     }
     public class cLoopChannelInfo
     {
@@ -273,7 +285,7 @@ namespace common
     public enum ePanelType { ptIRIS = 1, ptEclipse = 2 };
     public enum eIO { ioNull = 0, ioRead = 1, ioWrite = 2 };
     public enum eWriteOperation { woBytes = 1, woProperty = 2 };
-    public enum eInOut { Input = 1, Output = 2};
+    public enum eInOut { Input = 1, Output = 2 };
 
     #region read/write
     public class cRWProperty

@@ -365,6 +365,7 @@ namespace ProstePrototype
                     AddingElement(elementType, elementNumber);
                     break;
                 case "RemovingElement":
+                    cJson.RemoveElement(json["Params"]["elementType"].ToString(), json["Params"]["elementNumber"].ToString());
                     break;
                 case "AddingLoop":
                     elementType = json["Params"]["elementType"].ToString();
@@ -422,8 +423,17 @@ namespace ProstePrototype
 }
                  */
                 case "RemovingLoop":
+                    cJson.RemoveLoop(json["Params"]["elementType"].ToString().Replace("'", ""), json["Params"]["elementNumber"].ToString().Replace("'", ""));
+                    //{
+                    //    "Command": "RemovingLoop",
+                    //    "Params": {
+                    //        "elementType": "'NO_LOOP'",
+                    //        "elementNumber": "'1'"
+                    //    }
+                    //}
                     break;
                 case "RemovingLoopElement":
+                    cJson.RemoveLoopElement(json["Params"]["loopType"].ToString(), json["Params"]["loopNumber"].ToString(), json["Params"]["deviceName"].ToString(), json["Params"]["deviceAddress"].ToString());
                     break;
             }
 

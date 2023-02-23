@@ -209,7 +209,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
 
 function openChannelModal(id, path, channelName, oldValue, allNames, newValue) {
     let values = JSON.parse(JSON.stringify(allNames)).split(',');
-
+    $('#showConfirmationModal .modal-title').html(`${new T().t(localStorage.getItem('lang'), 'are_you_sure_changing_channel')}?`);
     $('#showConfirmationModal .modal-body').html(`<p>${new T().t(localStorage.getItem('lang'), "please_confirm_the_change_of")} {${channelName}}: "${values[+oldValue]}" -> "${values[+newValue]}"</p>`);
 
     $("#bigClose, #xClose").on("click", function () {
@@ -394,7 +394,7 @@ function addLoop(loopType, newFlag = "new") {
         btnGroup.classList += ' multi-button';
         let len = btnGroup.firstElementChild.childNodes.length;
         btnGroup.firstElementChild.childNodes[len - 1].textContent = "";
-        btnGroup.insertAdjacentHTML('beforeend', `<button class="btn-border-black">${new T().t(localStorage.getItem('lang'), "loop") }</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>`);
+        btnGroup.insertAdjacentHTML('beforeend', `<button class="btn-border-black">${new T().t(localStorage.getItem('lang'), "loop")}</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>`);
     }
 
     // reordering
@@ -509,14 +509,44 @@ function exchangingLoop(loopType) {
     alert(`exchanging ${loopType}, 'mainKey': ${mainKey}, 'lst.length': ${lst.length}`)
 }
 
-function removeLoop() {
-    // check if there are some connected elements // TODO
+async function removeLoop() {
+    // check if there are some connected elements
+    let returnString = await boundAsync.checkLoopConnection(mainKey, lst.at(-1));
+    // show confirmation dialog
+    if (returnString.length > 0) {
+        let deviceListJSON = JSON.parse(returnString);
+        $('#showConfirmationModal .modal-title').html(`${new T().t(localStorage.getItem('lang'), "are_you_sure_removing")} ${new T().t(localStorage.getItem('lang'), "loop")} ${lst.at(-1)}?`);
 
-    // show confirmation dialog // TODO
+        let modalContent = $('#showConfirmationModal .modal-body')[0];
 
+        const deviceMap = new Map(Object.entries(deviceListJSON));
+        
+        let innerModalContent = `<div class="table-responsive"><table class="table table-striped"><thead><tr>
+                        <th scope="col">${new T().t(localStorage.getItem('lang'), "device_type")}</th>
+                        <th scope="col">${new T().t(localStorage.getItem('lang'), "used_in")}</th>
+                        </tr></thead><tbody>`;
+        deviceMap.forEach((value, key, map) => {
+            innerModalContent += `<tr>
+                        <td >${key}</td>
+                        <td>${value}</td>
+                        </tr>`;
+        })
+        innerModalContent += `</tbody></table></div>`;
+        modalContent.innerHTML = innerModalContent; 
+
+        $("#bigClose, #xClose").on("click", function () {
+            $("#showConfirmationModal").modal("hide");
+        });
+        $("#yesBtn").off('click').on("click", removeLoopAfterConfirm);
+
+        $("#showConfirmationModal").modal("show");
+    }    
+}
+
+function removeLoopAfterConfirm () {
     // if confirmed remove from the backend
     let loopNumber = lst.pop();
-    // sendMessageWPF({ 'Command': 'RemovingLoopElement', 'Params': { 'elementType': `'${mainKey}'`, 'elementNumber': `'${loopNumber}'` } }); // TODO uncomment
+    sendMessageWPF({ 'Command': 'RemovingLoop', 'Params': { 'elementType': `'${mainKey}'`, 'elementNumber': `'${loopNumber}'` } });
     // remove it from the front
     let parent = document.getElementById("new");
     let last = parent.lastChild;
@@ -532,10 +562,14 @@ function removeLoop() {
         firstEl.insertAdjacentHTML('beforeend', ` ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "loop")}`);
         btnGroup.replaceChildren(firstEl);
     }
+    $("#showConfirmationModal").modal("hide");
 }
 
 function calculateLoopDevices(loopNumber) {
     let modal = $(document.getElementById("showDevicesListModal"));
+
+    let modalTitle = modal.find('.modal-title')[0];
+    modalTitle.innerHTML = `${new T().t(localStorage.getItem('lang'), 'number_of_devices_per_loop')}:`;
     let modalContent = modal.find('.modal-body')[0];
 
     const deviceMap = new Map();
