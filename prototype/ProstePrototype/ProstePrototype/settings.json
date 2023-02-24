@@ -1,3 +1,4 @@
 ﻿{
-  "logreads":true
+  "logreads": true,
+  "paths2inc": ["ELEMENTS.iris_zones.CONTAINS.IRIS_ZONE", "ELEMENTS.iris_panels_in_network.CONTAINS.IRIS_PANELINNETWORK"]
 }

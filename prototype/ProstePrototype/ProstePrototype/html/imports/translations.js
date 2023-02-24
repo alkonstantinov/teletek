@@ -120,24 +120,24 @@
         MenuClose: { 'en': 'Close', 'bg': 'Изход' },
         ScanMenuHeader: { 'en': 'Read from device', 'bg': 'Четене от устройството чрез' },
         ScanMenuTCP: { 'en': 'TCP', 'bg': 'TCP' },
-        ScanMenuHostIp: { 'en': '_Host IP:', 'bg': '_Host IP:' },
-        ScanMenuPort: { 'en': '_Port:', 'bg': '_Port:' },
+        ScanMenuHostIp: { 'en': 'Host IP', 'bg': 'Host IP' },
+        ScanMenuPort: { 'en': 'Port', 'bg': 'Port' },
         ScanMenuUSB: { 'en': 'USB', 'bg': 'USB' },
         ScanMenuRS: { 'en': 'RS 232', 'bg': 'RS 232' },
-        ScanMenuRSCom: { 'en': '_COM Port', 'bg': '_COM Port' },
+        ScanMenuRSCom: { 'en': 'COM Port', 'bg': 'COM Port' },
         ScanMenuRSComChoice: { 'en': 'Choose COM Port', 'bg': 'Изберете COM Port' },
-        ScanMenuRSParity: { 'en': '_Parity', 'bg': '_Parity' },
+        ScanMenuRSParity: { 'en': 'Parity', 'bg': 'Parity' },
         ScanMenuRSParityChoice: { 'en': 'Choose Parity', 'bg': 'Изберете Parity' },
         ScanMenuRSParityChoiceNone: { 'en': 'None', 'bg': 'Няма' },
         ScanMenuRSParityChoiceEven: { 'en': 'Even', 'bg': 'Четен' },
         ScanMenuRSParityChoiceMark: { 'en': 'Mark', 'bg': 'Mark' },
         ScanMenuRSParityChoiceOdd: { 'en': 'Odd', 'bg': 'Нечетен' },
         ScanMenuRSParityChoiceSpace: { 'en': 'Space', 'bg': 'Space' },
-        ScanMenuRSBaudRate: { 'en': '_Baud Rate', 'bg': '_Baud Rate' },
+        ScanMenuRSBaudRate: { 'en': 'Baud Rate', 'bg': 'Baud Rate' },
         ScanMenuRSBaudRateChoice: { 'en': 'Choose Baud Rate', 'bg': 'Изберете Baud Rate' },
-        ScanMenuRSStopBits: { 'en': '_Stop Bits', 'bg': '_Stop Bits' },
+        ScanMenuRSStopBits: { 'en': 'Stop Bits', 'bg': 'Stop Bits' },
         ScanMenuRSStopBitsChoice: { 'en': 'Choose Stop Bits', 'bg': 'Изберете Stop Bits' },
-        ScanMenuRSDataBits: { 'en': '_Data Bits', 'bg': '_Data Bits' },
+        ScanMenuRSDataBits: { 'en': 'Data Bits', 'bg': 'Data Bits' },
         ScanMenuConnect: { 'en': 'Connect', 'bg': 'Свързване' },
         logout: { 'bg': 'Изход' },
         login: { 'bg': 'Вход' },
@@ -223,6 +223,18 @@
         },
         used_in: {
             'bg': 'Използвано в', 'en': 'Used in', 'ge': 'Used in' 
+        },
+        number_of_devices_per_loop: {
+            'bg': 'Брой устройства свързани с кръга по тип', 'en': 'Number of devices attached to the loop per type', 'ge': 'Number of devices attached to the loop per type' 
+        },
+        number_of_devices_per_zone: {
+            'bg': 'Брой устройства свързани със зоната по тип', 'en': 'Number of devices attached to the zone per type', 'ge': 'Number of devices attached to the zone per type' 
+        },
+        are_you_sure_removing: {
+            'bg': 'Потвърждавате ли премахането на', 'en': 'Are you sure you want to remove', 'ge': 'Are you sure you want to remove' 
+        },
+        are_you_sure_changing_channel: {
+            'bg': 'Потвърждавате ли промяната на функцията за този канал', 'en': 'Are you sure you want to change the function of this channel', 'ge': 'Are you sure you want to change the function of this channel' 
         },
         enabled: { 
             "en": "Enabled",

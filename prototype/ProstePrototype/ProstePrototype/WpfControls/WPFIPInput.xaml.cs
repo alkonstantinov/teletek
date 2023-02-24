@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,12 +11,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProstePrototype
+namespace ProstePrototype.WpfControls
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for WPFIPInput.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class WPFIPInput : UserControl
     {
         private static readonly List<Key> DigitKeys = new List<Key> { Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9 };
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
@@ -26,7 +25,7 @@ namespace ProstePrototype
 
         private readonly List<TextBox> _segments = new List<TextBox>();
         private bool _suppressAddressUpdate = false;
-        public UserControl1()
+        public WPFIPInput()
         {
             InitializeComponent();
             _segments.Add(FirstSegment);
@@ -36,21 +35,33 @@ namespace ProstePrototype
             this.DataContext = this;
         }
 
-        private void NumericOnly(object sender, TextCompositionEventArgs e)
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register("Label", typeof(string),
+            typeof(WPFIPInput));
+        public string Label
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            get { return (string)GetValue(LabelProperty); }
+            set { SetValue(LabelProperty, value); }
+        }
+
+        public static readonly DependencyProperty LabelFontSizeProperty =
+            DependencyProperty.Register("LabelFontSize", typeof(int),
+            typeof(WPFIPInput));
+        public int LabelFontSize
+        {
+            get { return (int)GetValue(LabelFontSizeProperty); }
+            set { SetValue(LabelFontSizeProperty, value); }
         }
 
         public static readonly DependencyProperty AddressProperty = DependencyProperty.Register(
-            "Address", typeof(string), typeof(UserControl1), new FrameworkPropertyMetadata(default(string), AddressChanged)
+            "Address", typeof(string), typeof(WPFIPInput), new FrameworkPropertyMetadata(default(string), AddressChanged)
             {
                 BindsTwoWayByDefault = true
             });
 
         private static void AddressChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var ipTextBox = dependencyObject as UserControl1;
+            var ipTextBox = dependencyObject as WPFIPInput;
             var text = e.NewValue as string;
 
             if (text != null && ipTextBox != null)
@@ -72,12 +83,23 @@ namespace ProstePrototype
             get { return (string)GetValue(AddressProperty); }
             set { SetValue(AddressProperty, value); }
         }
-        public int Port
+
+        private void UIElement_GotFocus(object sender, RoutedEventArgs e)
         {
-            get
-            {
-                return Convert.ToInt32(txtPort.Text);
-            }
+            lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
+            var SenderElement = (Control)sender;
+            SenderElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Blue"));
+            SenderElement.FontWeight = FontWeights.DemiBold;
+            mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#dae4f0"));
+        }
+
+        private void UIElement_LostFocus(object sender, RoutedEventArgs e)
+        {
+            lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
+            var SenderElement = (Control)sender;
+            SenderElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
+            SenderElement.FontWeight= FontWeights.Normal;
+            mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
         }
 
         private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)

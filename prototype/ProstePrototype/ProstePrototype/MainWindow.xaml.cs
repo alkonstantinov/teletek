@@ -72,6 +72,13 @@ namespace ProstePrototype
             Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
+            applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
+
+            // add the language settings
+            HandleRessources(null);
+
             rw = new ReadWindow();
             rw.Resources= this.Resources;
             //rw.LostFocus += _child_LostFocus;
@@ -80,10 +87,6 @@ namespace ProstePrototype
             //Binding binding = new Binding("Width");
             //binding.Source = Column1.DataContext;
             //wb1.SetBinding(DataGridColumn.WidthProperty, binding);
-
-            applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
 
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
@@ -101,8 +104,6 @@ namespace ProstePrototype
             wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
             wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
 
-            // add the language settings
-            HandleRessources(null);
         }
 
 
@@ -300,6 +301,7 @@ namespace ProstePrototype
             }
 
             this.Resources.MergedDictionaries.Add(dictionary);
+            Application.Current.Resources.MergedDictionaries.Add(dictionary);
         }
 
         private void SetWebBrowsersLang(string langKey)

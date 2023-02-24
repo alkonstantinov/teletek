@@ -15,21 +15,32 @@ using System.Windows.Shapes;
 namespace ProstePrototype
 {
     /// <summary>
-    /// Interaction logic for UserControl3.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl3 : UserControl
+    public partial class UserControl1 : UserControl
     {
-        public UserControl3()
+        public UserControl1()
         {
             InitializeComponent();
-
+            
             this.DataContext = this;
         }
 
-        private void NumericOnly(object sender, TextCompositionEventArgs e)
+        public string Address
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            get
+            {
+                return txtHostIp.Address.ToString();
+            }
         }
+
+        public int Port
+        {
+            get
+            {
+                return Convert.ToInt32(txtPort.Value);
+            }
+        }
+
     }
 }

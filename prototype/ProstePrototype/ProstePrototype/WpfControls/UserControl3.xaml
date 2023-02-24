@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="ProstePrototype.UserControl3"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ProstePrototype"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="600"
+             xmlns:uc="clr-namespace:ProstePrototype.WpfControls">
+    <Grid>        
+        <StackPanel Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <!--<ColumnDefinition Width="85" />-->
+                    <ColumnDefinition Width="*" />
+                    <!--<ColumnDefinition Width="85" />-->
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <uc:WPFSelectInput Grid.Row="0" Grid.Column="0" Margin="10" x:Name="com"
+                                   ValueList="{Binding Path=StringArray1, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   Label="{DynamicResource ScanMenuRSCom}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue1, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   VerticalContentAlignment="Center" HorizontalAlignment="Right" 
+                                   Width="200" />
+
+                <uc:WPFSelectInput Grid.Row="1" Grid.Column="0" x:Name="parity" Margin="10" 
+                                   ValueList="{Binding Path=StringArray2, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   Label="{DynamicResource ScanMenuRSParity}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue2, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   VerticalContentAlignment="Center" HorizontalAlignment="Right" 
+                                   Width="200" />
+
+                <uc:WPFSelectInput Grid.Row="2" Grid.Column="0" x:Name="baudRate" Margin="10" 
+                                   ValueList="{Binding Path=StringArray3, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   Label="{DynamicResource ScanMenuRSBaudRate}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue3, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   VerticalContentAlignment="Center" HorizontalAlignment="Right" 
+                                   Width="200" />
+
+                <uc:WPFSelectInput Grid.Row="0" Grid.Column="1" x:Name="stopBits" Margin="10" 
+                                   ValueList="{Binding Path=StringArray4, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   Label="{DynamicResource ScanMenuRSStopBits}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue4, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   VerticalContentAlignment="Center" HorizontalAlignment="Left" 
+                                   Width="200" />
+
+                <uc:WPFNumericInput Label="{DynamicResource ScanMenuRSDataBits}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" 
+                        Margin="10" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
