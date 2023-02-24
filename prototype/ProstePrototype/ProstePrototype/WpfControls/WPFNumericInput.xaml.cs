@@ -94,5 +94,17 @@ namespace ProstePrototype.WpfControls
             dataBitsText.FontSize = 12;
             dataBitsText.Visibility = Visibility.Visible;
         }
+
+        private void MouseEnter_Event(object sender, MouseEventArgs e)
+        {
+            dataBitsBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#dae4f0"));
+        }
+        private void MouseLeave_Event(object sender, MouseEventArgs e)
+        {
+            if (!dataBitsText.IsFocused)
+            {
+                dataBitsBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+            }
+        }
     }
 }

@@ -11,7 +11,8 @@
             BorderThickness="0.2"
             Background="White"
             CornerRadius="2"
-            Width="{Binding Width}">
+            Width="{Binding Width}"
+            MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event">
         <Border.Resources>
             <Style TargetType="Border">
                 <Setter Property="Border.Effect">
@@ -23,6 +24,9 @@
                     <Trigger Property="IsEnabled" Value="false">
                         <Setter Property="Background" Value="LightGray"/>
                     </Trigger>
+                    <!--<Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="#dae4f0"/>
+                    </Trigger>-->
                 </Style.Triggers>
             </Style>
         </Border.Resources>
@@ -33,14 +37,15 @@
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" x:Name="lbHost" Text="{Binding Label}" Margin="6,0,-4,0" IsReadOnly="True"
                      Foreground="Gray" FontFamily="Poppins" FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" 
-                     BorderThickness="0" Background="Transparent"/>
+                     BorderThickness="0" Background="Transparent" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
             <!--<TextBox Name="txtHostIp" Padding="2" FontSize="14" Margin="10, 0" VerticalAlignment="Center" Width="300" />-->
             <Border Grid.Row="1"
                     BorderBrush="Gray"
                     BorderThickness="0.2"
                     Background="Transparent"
                     CornerRadius="2"
-                    IsEnabled="{Binding Path=IsEnabled, ElementName=mainBorder}" Margin="10,0, 10, 2">
+                    IsEnabled="{Binding Path=IsEnabled, ElementName=mainBorder}" Margin="10,0, 10, 2"
+                    MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event">
                 <Border.Resources>
                     <Style TargetType="Border">
                         <Setter Property="Border.Effect">
@@ -65,41 +70,41 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox x:Name="FirstSegment" Grid.Column="0" TextAlignment="Center" MaxLength="3" 
-                                 VerticalContentAlignment="Center" BorderThickness="0"
-                                 Padding="2" FontSize="12" Background="Transparent"
-                                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                                 DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
+                             VerticalContentAlignment="Center" BorderThickness="0"
+                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="192"/>
 
                     <TextBox Grid.Column="1" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
-                                        BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
-                                        IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
+                             BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
+                             IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
                     <TextBox x:Name="SecondSegment" Grid.Column="2" TextAlignment="Center" MaxLength="3" 
-                                        BorderThickness="0" VerticalContentAlignment="Center"
-                                        Padding="2" FontSize="12" Background="Transparent"
-                                        TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                                        DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
+                             BorderThickness="0" VerticalContentAlignment="Center"
+                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="168" />
                     <TextBox Grid.Column="3" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
-                                        BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
-                                        IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
+                             BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
+                             IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
                     <TextBox x:Name="ThirdSegment" Grid.Column="4" TextAlignment="Center" MaxLength="3" 
-                                        BorderThickness="0" VerticalContentAlignment="Center"
-                                        Padding="2" FontSize="12" Background="Transparent"
-                                        TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                                        DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
+                             BorderThickness="0" VerticalContentAlignment="Center"
+                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="17" />
                     <TextBox Grid.Column="5" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
-                                        BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
-                                        IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
+                             BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
+                             IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
                     <TextBox x:Name="LastSegment" Grid.Column="6" TextAlignment="Center" MaxLength="3" 
-                                        BorderThickness="0" VerticalContentAlignment="Center"
-                                        Padding="2" FontSize="12" Background="Transparent"
-                                        TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                                        DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
+                             BorderThickness="0" VerticalContentAlignment="Center"
+                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="17"/>
                 </Grid>
             </Border>

@@ -7,10 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
     <Border Name="dataBitsBorder" Width="{Binding Width}"
-                        BorderBrush="Gray"
-                        BorderThickness="0.2"
-                        Background="White"
-                        CornerRadius="2" MouseLeftButtonDown="Click_handler" >
+            BorderBrush="Gray"
+            BorderThickness="0.2"
+            Background="White"
+            CornerRadius="2" MouseLeftButtonDown="Click_handler" 
+            MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event">
         <Border.Resources>
             <Style TargetType="Border">
                 <Setter Property="Border.Effect">
@@ -22,6 +23,9 @@
                     <Trigger Property="IsEnabled" Value="false">
                         <Setter Property="Background" Value="LightGray"/>
                     </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#dae4f0" />
+                    </Trigger>
                 </Style.Triggers>
             </Style>
         </Border.Resources>
@@ -32,15 +36,17 @@
             </Grid.RowDefinitions>
             <TextBox Text="{Binding Label}" Name="dataBitsLabel" IsReadOnly="True"
                      VerticalAlignment="Center" Margin="6,0,-4,0" Foreground="Gray" Background="Transparent"
-                     FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" FontFamily="Poppins" BorderThickness="0" GotFocus="Click_handler">
-            </TextBox>
+                     FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" FontFamily="Poppins" BorderThickness="0" 
+                     GotFocus="Click_handler" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
+
             <TextBox Grid.Row="1" Name="dataBitsText" Padding="8, 0"
-                               FontFamily="Poppins" FontSize="16" FontWeight="DemiBold" Foreground="Gray"
-                               TextAlignment="Left" BorderThickness="0" Height="0"
-                               PreviewTextInput="NumericOnly" Background="Transparent"
-                               Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType={x:Type Border}}}" 
-                               GotFocus="Click_handler" LostFocus="LostFocus_handler" Text="{Binding Value}">
-            </TextBox>
+                     FontFamily="Poppins" FontSize="16" FontWeight="DemiBold" Foreground="Gray"
+                     TextAlignment="Left" BorderThickness="0" Height="0"
+                     PreviewTextInput="NumericOnly" Background="Transparent"
+                     Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType={x:Type Border}}}" 
+                     GotFocus="Click_handler" LostFocus="LostFocus_handler" Text="{Binding Value}"
+                     MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
+
         </Grid>
     </Border>
 </UserControl>

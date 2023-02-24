@@ -411,7 +411,7 @@
             <DataTemplate>
                 <Grid>
                     <Rectangle Fill="Transparent" />
-                    <TextBlock Text="{Binding Value, Mode=OneWay}" Margin="3, 0"/>
+                    <TextBlock Text="{Binding Value, Mode=OneWay}" Margin="5, 0"/>
                 </Grid>
                 <!--<ComboBoxItem Content="{Binding Value, Mode=OneWay}" />-->
             </DataTemplate>

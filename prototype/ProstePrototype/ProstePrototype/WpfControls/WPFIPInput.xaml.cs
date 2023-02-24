@@ -84,12 +84,23 @@ namespace ProstePrototype.WpfControls
             set { SetValue(AddressProperty, value); }
         }
 
+        private void MouseEnter_Event(object sender, MouseEventArgs e)
+        {            
+            mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#dae4f0"));
+        }
+        private void MouseLeave_Event(object sender, MouseEventArgs e)
+        {
+            if (!FirstSegment.IsFocused && !SecondSegment.IsFocused && !FirstSegment.IsFocused && !LastSegment.IsFocused)
+            {
+                mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+            }
+        }
+
         private void UIElement_GotFocus(object sender, RoutedEventArgs e)
         {
             lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
             var SenderElement = (Control)sender;
             SenderElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Blue"));
-            SenderElement.FontWeight = FontWeights.DemiBold;
             mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#dae4f0"));
         }
 
@@ -98,7 +109,6 @@ namespace ProstePrototype.WpfControls
             lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
             var SenderElement = (Control)sender;
             SenderElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
-            SenderElement.FontWeight= FontWeights.Normal;
             mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
         }
 
