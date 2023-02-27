@@ -6,6 +6,7 @@ using ljson;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
+using ProstePrototype.WpfControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -37,7 +39,6 @@ namespace ProstePrototype
         private SettingsDialog settings;
 
         public bool DarkMode { get; set; }
-        public string language { get; set; }
 
         private double tempLeft { get; set; }
         private double tempTop { get; set; }
@@ -52,13 +53,12 @@ namespace ProstePrototype
             public string JSfunc { get; set; }
             public string Params { get; set; }
         }
-        private CallbackObjectForJs _callBackObjectForJs;
 
         public MainWindow()
         {
+            applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            
             InitializeComponent();
-
-            _callBackObjectForJs = new CallbackObjectForJs();
 
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
             //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // not to cover the taskBar
@@ -72,16 +72,8 @@ namespace ProstePrototype
             Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
-            applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
             //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
             //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-
-            // add the language settings
-            HandleRessources(null);
-
-            rw = new ReadWindow();
-            rw.Resources= this.Resources;
-            //rw.LostFocus += _child_LostFocus;
 
             //// binding Column1 and wb1 Width trial
             //Binding binding = new Binding("Width");
@@ -103,9 +95,7 @@ namespace ProstePrototype
             wb1.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
             wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
             wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
-
         }
-
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -193,8 +183,7 @@ namespace ProstePrototype
             mainPanel.Background = new SolidColorBrush(bgd);
             fileMenu.Background = new SolidColorBrush(bgd);
             fileMenu.Foreground = new SolidColorBrush(fgd);
-            languagesMenu.Background = new SolidColorBrush(bgd);
-            languagesMenu.Foreground = new SolidColorBrush(fgd);
+            languageButton.Background = new SolidColorBrush(bgd);
             write_btn.Background = new SolidColorBrush(bgd);
             write_btn.Foreground = new SolidColorBrush(fgd);
             log_btn.Background = new SolidColorBrush(bgd);
@@ -203,8 +192,6 @@ namespace ProstePrototype
             clock_btn.Foreground = new SolidColorBrush(fgd);
             verify_btn.Background = new SolidColorBrush(bgd);
             verify_btn.Foreground = new SolidColorBrush(fgd);
-            //save_as_btn.Background = new SolidColorBrush(bgd);
-            //save_as_btn.Foreground = new SolidColorBrush(fgd);
             scan_btn.Background = new SolidColorBrush(bgd);
             scan_btn.Foreground = new SolidColorBrush(fgd);
             export_btn.Background = new SolidColorBrush(bgd);
@@ -247,76 +234,16 @@ namespace ProstePrototype
             }
 
             rw.ReadWindowMain.Background = new SolidColorBrush(bgd);
-            //rw.tabControl.Background = new SolidColorBrush(bgd);
-            //rw.tabControl.Foreground = new SolidColorBrush(fgd);
-            //rw.listBox.Background = new SolidColorBrush(bgd);
-            //rw.listBox.Foreground = new SolidColorBrush(fgd);
             rw.txtBlk.Foreground = new SolidColorBrush(fgd);
-            //rw.lbHost.Foreground = new SolidColorBrush(fgd);
-            //rw.lbPort.Foreground = new SolidColorBrush(fgd);
-            //rw.lbComPort.Foreground = new SolidColorBrush(fgd);
-            //rw.lbParity.Foreground = new SolidColorBrush(fgd);
-            //rw.lbBaudRate.Foreground = new SolidColorBrush(fgd);
-            //rw.lbStopBits.Foreground = new SolidColorBrush(fgd);
-            //rw.lbDataBits.Foreground = new SolidColorBrush(fgd);
             rw.ContentArea.Foreground= new SolidColorBrush(fgd);
             rw.ContentArea.Background= new SolidColorBrush(bgd);
         }
         #endregion
 
         #region Language
-        private void ChangeLanguage_Clicked(object sender, RoutedEventArgs e)
+        private void ApplyLang(string currLang)
         {
-            language = (string)((HeaderedItemsControl)sender).Header;
-            HandleRessources(language);
-
-            SetWebBrowsersLang(language);
-        }
-
-        private void HandleRessources(string langKey)
-        {
-            string translationLocation = Path.Combine(applicationDirectory, "html/imports/translations.js").Replace(@"\", "/");
-            string translations = Regex.Replace(File.ReadAllText(translationLocation), @"^const Translations = ", "", RegexOptions.IgnoreCase);
-            JObject TransJson = JObject.Parse(translations.ToString());
-            JObject translationJson = (JObject)TransJson["translations"];
-            JArray allLanguages = (JArray)TransJson["languages"];
-            string lang = "en";
-            language = (langKey == null) ? TransJson["initial"].Value<string>() : language = langKey; 
-            
-            ResourceDictionary dictionary = new ResourceDictionary();
-            dictionary.Source = new Uri("..\\DefaultDictionary.xaml", UriKind.Relative);
-                        
-            foreach (var langObj in allLanguages)
-            {
-                if ((string)langObj["key"] == language)
-                {
-                    lang = (string)langObj["id"];
-                    break;
-                }
-            }
-
-            foreach (var dictKey in dictionary.Keys)
-            {
-                dictionary[dictKey] = (string)translationJson[dictKey][lang];
-            }
-
-            this.Resources.MergedDictionaries.Add(dictionary);
-            Application.Current.Resources.MergedDictionaries.Add(dictionary);
-        }
-
-        private void SetWebBrowsersLang(string langKey)
-        {
-            if (langKey != null)
-            {
-                var script = $"toggleLang('{langKey}');";
-                wb1.ExecuteScriptAsync(script);
-                wb2.ExecuteScriptAsync(script);
-            }
-        }
-
-        private void ApplyLang()
-        {
-            string script = $"setLang('{language}');";
+            string script = $"setLang('{currLang}');";
             wb1.ExecuteScriptAsyncWhenPageLoaded(script);
             wb2.ExecuteScriptAsyncWhenPageLoaded(script);
         }
@@ -358,8 +285,6 @@ namespace ProstePrototype
                     if (query_string != "")
                         query_string = "?" + query_string;
                     LoadPage("iris_loop_devices" + query_string, "iris_loop_devices");
-                    // TODO loadPage "iris_loop_devices" with highlight "iris_loop_devices"
-
                     break;
                 case "AddingElement":
                     string elementType = json["Params"]["elementType"].ToString();
@@ -477,11 +402,6 @@ namespace ProstePrototype
 
         private void LoadPage(string page, string highlight)
         {
-            //var lpd = new LoadPageData()
-            //{
-            //    RightBrowserUrl = pages[page].Value<JObject>()["right"].Value<string>(),
-            //    LeftBrowserUrl = pages[page].Value<JObject>()["left"].Value<string>()
-            //};
             string rightBrowsersURLParams = page.Split('?').Length > 1 ? page.Split('?')[1] : "";
             page = page.Split('?')[0];
             JObject jnode = new JObject(cJson.GetNode(page));
@@ -495,8 +415,6 @@ namespace ProstePrototype
             string _clean_key = Regex.Replace(page, @"[\d-]", string.Empty);
             var lpd = new LoadPageData()
             {
-                //RightBrowserUrl = jnode["right"].ToString(),
-                //LeftBrowserUrl = jnode["left"].ToString(),
                 RightBrowserUrl = cJson.htmlRight(jnode) + "?" + rightBrowsersURLParams,
                 LeftBrowserUrl = cJson.htmlLeft(jnode),
                 key = _clean_key
@@ -506,6 +424,7 @@ namespace ProstePrototype
             {
                 initBreadCrumbs(pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>());
             });
+            
         }
 
         private void LoadBrowsers(LoadPageData data, string highlight)
@@ -520,7 +439,6 @@ namespace ProstePrototype
                 }
                 this.Dispatcher.Invoke(() =>
                 {
-                    //((BrowserParams)wb1.Tag).Params = $@"{{ ""pageName"": ""wb1: {data.LeftBrowserUrl}"" }}";
                     ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
                 });
 
@@ -591,6 +509,8 @@ namespace ProstePrototype
 
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
+            rw = new ReadWindow();
+            rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
             ChangeThemeRW(DarkMode);
@@ -617,10 +537,7 @@ namespace ProstePrototype
                 funcThread.Join();
 
                 popUpWindow.Close();
-
-            }
-            rw = new ReadWindow();
-            rw.Resources = this.Resources;
+            }            
         }
         private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow)
         {
@@ -725,7 +642,7 @@ namespace ProstePrototype
                     JToken arr = lcommunicate.cComm.Scan();
                     jparam["pageName"]["wb2"] = arr;
                     ((BrowserParams)wb2.Tag).Params = jparam.ToString();
-                    //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";
+                    //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";rw.Resources
                 });
                 wb2.Load("file:///" + myFile);
             }
@@ -743,9 +660,7 @@ namespace ProstePrototype
 
             AddPagesConstant();
             ApplyTheme();
-            ApplyLang();
-            rw = new ReadWindow();
-            rw.Resources = this.Resources;
+            ApplyLang(languageButton.CurrentLanguage);
         }
 
         private void Write_Clicked(object sender, RoutedEventArgs e)

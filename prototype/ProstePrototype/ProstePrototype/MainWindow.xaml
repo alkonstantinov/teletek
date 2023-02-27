@@ -8,7 +8,7 @@
         mc:Ignorable="d"
 		Title="T-Manager 6.1" Height="768" Width="1400"
 		WindowStyle="None"
-		>
+		xmlns:uc="clr-namespace:ProstePrototype.WpfControls">
     <!-- WindowState="Maximized" -->
 
     <Window.CommandBindings>
@@ -91,7 +91,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        
     </Window.Resources>
     <Border BorderBrush="#8090aa" BorderThickness="0" CornerRadius="2">
         <Grid>
@@ -206,230 +206,11 @@
                     </Button>
                 </DockPanel>
                 <StackPanel Grid.Column="9" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
-                    <DockPanel Height="100" HorizontalAlignment="Right" >
-                        <Menu x:Name="languagesMenu" DockPanel.Dock="Top" VerticalAlignment="Center" Background="{Binding Background}" Foreground="{Binding Foreground}">
-                            <MenuItem Margin="10,0,0,0" Height="100" Style="{StaticResource MenuItemStyle}">
-                                <MenuItem.Header >
-                                    <DockPanel>
-                                        <TextBlock Text="&#xf1ab;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                    </DockPanel>
-                                </MenuItem.Header>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_English">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/gb-eng.png" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_German">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/de.png" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Bulgarian">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/bg.png" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Greek">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/EL.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_French">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/FR.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Hungarian">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/HU.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Italian">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/IT.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Netherlands">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/NL.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Polish">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/PL.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Protuguese">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/PT.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Romanian">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/RO.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Russian">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/RU.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Spanish">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/SP.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Serbian">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/SR.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="ChangeLanguage_Clicked" Header="_Turkish">
-                                    <MenuItem.Icon>
-                                        <Image Source="/languages/TR.jpg" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                            </MenuItem>
-                        </Menu>
+                    <DockPanel x:Name="languagesPanel" Height="100" HorizontalAlignment="Right" >
+                        <uc:LanguageControl x:Name="languageButton" />
                     </DockPanel>
                 </StackPanel>
-                <!--<StackPanel x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
-                <DockPanel  Height="50" HorizontalAlignment="Left" >
-                    -->
-                <!--<TextBlock FontSize="20" VerticalAlignment="Center" x:Name="title" Background="{Binding Background}" Foreground="{Binding Foreground}">ProsTE 6.1</TextBlock>-->
-                <!--
-                    <Menu x:Name="topMenu" DockPanel.Dock="Top" FontSize="16" VerticalAlignment="Center" Margin="10, 0, 0, 0" Background="{Binding Background}" Foreground="{Binding Foreground}">
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header >
-                                <DockPanel>
-                                    <TextBlock Text="File" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-
-                            <MenuItem Header="_New" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Open" Click="Open_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Save" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="Save _As" Click="SaveAs_Clicked"/>
-                            -->
-                <!--<Separator Background="{StaticResource DefaultColor}"/>
-                            <MenuItem Header="_Exit" Click="Exit_Clicked" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf52b;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>-->
-                <!--
-                        </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Click="New_Clicked"  >
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="&#xf02a;" Margin="5, 3, 5, 0" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="Scan"/>
-                                </DockPanel>
-                            </MenuItem.Header>
-                        </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="Device" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-                            <MenuItem Header="_Read" Click="New_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf518;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Write">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Log" Click="New_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Clock/Date" Click="New_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Verify" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <Separator Background="{StaticResource DefaultColor}"/>
-                            <MenuItem Header="_Export" Click="Export_Clicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="System" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-                            <MenuItem Header="S_ettings" Click="SettingsClicked">
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Update" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Help" >
-                                <MenuItem.Icon>
-                                    <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Margin="10,0,0,0" Style="{StaticResource MenuItemStyle}">
-                            <MenuItem.Header>
-                                <DockPanel>
-                                    <TextBlock Text="Language" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
-                                </DockPanel>
-                            </MenuItem.Header>
-                            <MenuItem Header="_English">
-                                <MenuItem.Icon>
-                                    <Image Source="/html/gb-eng.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_German">
-                                <MenuItem.Icon>
-                                    <Image Source="/html/de.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="_Bulgarian">
-                                <MenuItem.Icon>
-                                    <Image Source="/html/bg.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                    </Menu>
-                </DockPanel>
-            </StackPanel>-->
-
+                
                 <Grid Grid.Column="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>

@@ -36,7 +36,7 @@ namespace ProstePrototype
             uc1 = new UserControl2();
             uc2 = new UserControl3();
             uc3 = new UserControl();
-            uc3.Resources = this.Resources;
+            uc3.Resources = Application.Current.Resources;
             img3.Source = imgsource;
             ContentArea.Content = uc3;
             Button3.Focus();
@@ -85,7 +85,7 @@ namespace ProstePrototype
         {
             selectedIndex = 0;
             Button_LostFocus(sender, e);
-            uc0.Resources = this.Resources;
+            uc0.Resources = Application.Current.Resources;
             img0.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc0;
             prevIndex= 0;
@@ -94,7 +94,7 @@ namespace ProstePrototype
         {
             selectedIndex = 1;
             Button_LostFocus(sender, e);
-            uc1.Resources = this.Resources;
+            uc1.Resources = Application.Current.Resources;
             img1.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc1;
             prevIndex= 1;
@@ -103,7 +103,7 @@ namespace ProstePrototype
         {
             selectedIndex = 2;
             Button_LostFocus(sender, e);
-            uc2.Resources = this.Resources;
+            uc2.Resources = Application.Current.Resources;
             img2.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc2;
             prevIndex= 2;
@@ -113,7 +113,7 @@ namespace ProstePrototype
         {
             selectedIndex = 3;
             Button_LostFocus(sender, e);
-            uc3.Resources = this.Resources;
+            uc3.Resources = Application.Current.Resources;
             img3.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc3;
             prevIndex= 3;

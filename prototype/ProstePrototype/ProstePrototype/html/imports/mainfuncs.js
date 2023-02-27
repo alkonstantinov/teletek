@@ -46,6 +46,8 @@ function toggleLang(key) {
 function setLang(key) {
     if (Translations.languages.map(x => x.key).includes(key)) {
         localStorage.setItem('lang', Translations.languages.find(x => x.key === key).id);
+    } else if (Translations.languages.map(x => x.id).includes(key)) {
+        localStorage.setItem('lang', key);
     } else {
         localStorage.setItem('lang', 'en');
     }

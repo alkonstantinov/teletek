@@ -163,7 +163,7 @@
 
             <!-- Bottom part with dynamic content -->
             <Grid Grid.Row="1">
-                <ContentControl Name="ContentArea"/>
+                <ContentControl Name="ContentArea" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
             </Grid>
         </Grid>
         <Border Grid.Row="2" BorderBrush="#e8e9ea" >

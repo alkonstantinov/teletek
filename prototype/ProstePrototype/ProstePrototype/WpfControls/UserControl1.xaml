@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProstePrototype"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="600"
+             d:DesignHeight="250" d:DesignWidth="400"
              xmlns:uc="clr-namespace:ProstePrototype.WpfControls">
     <StackPanel Margin="30">
         <uc:WPFIPInput x:Name="txtHostIp" 
                        Label="{DynamicResource ScanMenuHostIp}" LabelFontSize="18"
                        Width="300" Height="40" HorizontalAlignment="Left"
-                       Margin="10" Address="192.69.17.17" />
+                       Margin="10" Address="192.168.17.17"/>
 
         <!--<StackPanel Orientation="Horizontal" Margin="10">
             <Label x:Name="lbHost" Content="{DynamicResource ScanMenuHostIp}" Target="{Binding ElementName=txtHostIp}" FontSize="14" FontWeight="Bold" Foreground="{Binding ElementName=ParentControl, Path=ContentArea.Foreground}"/>

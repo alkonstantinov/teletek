@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:ProstePrototype.WpfControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:SegmentConverter x:Key="SegmentConverter" />
+    </UserControl.Resources>
     <Border x:Name="mainBorder" 
             BorderBrush="Gray"
             BorderThickness="0.2"
@@ -24,9 +27,6 @@
                     <Trigger Property="IsEnabled" Value="false">
                         <Setter Property="Background" Value="LightGray"/>
                     </Trigger>
-                    <!--<Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="#dae4f0"/>
-                    </Trigger>-->
                 </Style.Triggers>
             </Style>
         </Border.Resources>
@@ -38,7 +38,6 @@
             <TextBox Grid.Row="0" x:Name="lbHost" Text="{Binding Label}" Margin="6,0,-4,0" IsReadOnly="True"
                      Foreground="Gray" FontFamily="Poppins" FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" 
                      BorderThickness="0" Background="Transparent" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
-            <!--<TextBox Name="txtHostIp" Padding="2" FontSize="14" Margin="10, 0" VerticalAlignment="Center" Width="300" />-->
             <Border Grid.Row="1"
                     BorderBrush="Gray"
                     BorderThickness="0.2"
@@ -74,7 +73,7 @@
                              Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="192"/>
+                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=1}"/>
 
                     <TextBox Grid.Column="1" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
                              BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
@@ -85,7 +84,7 @@
                              Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="168" />
+                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=2}" />
                     <TextBox Grid.Column="3" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
                              BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
@@ -95,7 +94,7 @@
                              Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="17" />
+                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=3}" />
                     <TextBox Grid.Column="5" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
                              BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
@@ -105,7 +104,7 @@
                              Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="17"/>
+                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=4}"/>
                 </Grid>
             </Border>
         </Grid>
