@@ -17,10 +17,10 @@
         <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}">
                 <Border Background="{TemplateBinding Background}"
-            BorderBrush="{TemplateBinding BorderBrush}"
-            BorderThickness="{TemplateBinding BorderThickness}">
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                 </Border>
             </ControlTemplate>
         </Button.Template>
@@ -31,11 +31,7 @@
             </Style>
         </Button.Resources>
         <Button.Background>
-            <ImageBrush x:Name="iconImage" Stretch="UniformToFill">
-                <!--<ImageBrush.Transform>
-                    <ScaleTransform ScaleX="1" ScaleY="-1" CenterX="0.5" CenterY="0.5"/>
-                </ImageBrush.Transform>-->
-            </ImageBrush>
+            <ImageBrush x:Name="iconImage" Stretch="UniformToFill"/>
         </Button.Background>
     </Button>
     <!--</Grid>-->

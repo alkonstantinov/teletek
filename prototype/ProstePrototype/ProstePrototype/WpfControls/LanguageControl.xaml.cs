@@ -114,9 +114,7 @@ namespace ProstePrototype.WpfControls
             if (control.Languages != null && control.Languages.ContainsKey(languageCode))
             {
                 var languageClass = control.Languages[languageCode];
-                //control.imageSource = languageClass.IconPath;
                 control.iconImage.ImageSource = new BitmapImage(new Uri(languageClass.IconPath, UriKind.RelativeOrAbsolute));
-                //control.languageText.Text = language.Name;
                 control.language= languageCode;
                 control.SetRessourceDictionary();
                 control.SetWebBrowsersLang();
