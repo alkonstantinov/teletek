@@ -73,7 +73,7 @@ namespace ProstePrototype.WpfControls
             JObject TransJson = JObject.Parse(translations.ToString());
             translationJson = (JObject)TransJson["translations"];
             JArray allLanguages = (JArray)TransJson["languages"];
-            string lang = "en";
+
             foreach (JObject el in allLanguages)
             {
                 Language elLang = new Language

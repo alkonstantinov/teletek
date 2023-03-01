@@ -1,5 +1,5 @@
 ﻿const Translations = {
-    initial: "_Bulgarian",
+    initial: "_English",
     languages: [
         {
             title: "Български",

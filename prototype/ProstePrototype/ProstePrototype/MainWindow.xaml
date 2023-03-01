@@ -5,10 +5,11 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 		xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf" 
         xmlns:local="clr-namespace:ProstePrototype"
+		xmlns:uc="clr-namespace:ProstePrototype.WpfControls"
+		xmlns:library="clr-namespace:ProstePrototype.library"
         mc:Ignorable="d"
 		Title="T-Manager 6.1" Height="768" Width="1400"
-		WindowStyle="None"
-		xmlns:uc="clr-namespace:ProstePrototype.WpfControls">
+		WindowStyle="None">
     <!-- WindowState="Maximized" -->
 
     <Window.CommandBindings>
@@ -16,6 +17,7 @@
     </Window.CommandBindings>
     <Window.Resources>
         <uc:HalfValueConverter x:Key="HalfConverter"/>
+        <uc:StringToUpperConverter x:Key="StringToUpperConverter"/>
         <!--#region ToolTip fontfamily-->
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="FontFamily" Value="{StaticResource poppins_regular}"/>
@@ -106,10 +108,11 @@
                     </Button>
 
                     <Button x:Name="scan_btn" Grid.Column="1" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
-                            ToolTip="{DynamicResource MainMenuScan}" Typography.Capitals="AllSmallCaps" Click="Scan_Clicked">
+                            ToolTip="{DynamicResource MainMenuScan}" Click="Scan_Clicked">
                         <DockPanel VerticalAlignment="Center">
                             <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"/>
-                            <TextBlock Text="{DynamicResource MainMenuScan}" FontFamily="{StaticResource poppins_light}" FontSize="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="{library:DynamicResourceBinding MainMenuScan, Converter={StaticResource StringToUpperConverter}}" 
+                                       FontFamily="{StaticResource poppins_light}" FontSize="8" VerticalAlignment="Center"/>
                         </DockPanel>
                     </Button>
 
@@ -128,41 +131,46 @@
                                     </ItemsPanelTemplate>
                                 </MenuItem.ItemsPanel>
                                 <MenuItem.Header>
-                                    <DockPanel Typography.Capitals="AllSmallCaps">
+                                    <DockPanel>
                                         <TextBlock Text="&#xe185;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="-5, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock Text="{DynamicResource MainMenuFile}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
-                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="10" VerticalAlignment="Bottom"></TextBlock>
+                                        <TextBlock Text="{library:DynamicResourceBinding MainMenuFile, Converter={StaticResource StringToUpperConverter}}" 
+                                                   FontFamily="{StaticResource poppins_light}" FontSize="8" />
+                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="10" VerticalAlignment="Bottom" />
                                     </DockPanel>
                                 </MenuItem.Header>
                                 <MenuItem Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuNew}" Click="New_Clicked">
                                     <MenuItem.Header>
-                                        <DockPanel Typography.Capitals="AllSmallCaps">
-                                            <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
-                                            <TextBlock Text="{DynamicResource MainMenuNew}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        <DockPanel>
+                                            <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" />
+                                            <TextBlock Text="{library:DynamicResourceBinding MainMenuNew, Converter={StaticResource StringToUpperConverter}}" 
+                                                       FontFamily="{StaticResource poppins_light}" FontSize="8" />
                                         </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                                 <MenuItem Click="Open_Clicked" Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuOpen}">
                                     <MenuItem.Header>
-                                        <DockPanel Typography.Capitals="AllSmallCaps">
-                                            <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
-                                            <TextBlock Text="{DynamicResource MainMenuOpen}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        <DockPanel>
+                                            <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" />
+                                            <TextBlock Text="{library:DynamicResourceBinding MainMenuOpen, Converter={StaticResource StringToUpperConverter}}" 
+                                                       FontFamily="{StaticResource poppins_light}" FontSize="8" />
                                         </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                                 <MenuItem Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuSave}">
                                     <MenuItem.Header>
-                                        <DockPanel Typography.Capitals="AllSmallCaps">
-                                            <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
-                                            <TextBlock Text="{DynamicResource MainMenuSave}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        <DockPanel>
+                                            <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" />
+                                            <TextBlock Text="{library:DynamicResourceBinding MainMenuSave, Converter={StaticResource StringToUpperConverter}}" 
+                                                       FontFamily="{StaticResource poppins_light}" FontSize="8" />
                                         </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                                 <MenuItem Click="SaveAs_Clicked" Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuSaveas}">
                                     <MenuItem.Header>
-                                        <DockPanel Typography.Capitals="AllSmallCaps">
-                                            <TextBlock Text="&#xf570;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
-                                            <TextBlock Text="{DynamicResource MainMenuSaveas}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        <DockPanel>
+                                            <TextBlock Text="&#xf570;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0"></TextBlock>
+                                            <TextBlock Text="{library:DynamicResourceBinding MainMenuSaveas, Converter={StaticResource StringToUpperConverter}}" 
+                                                       FontFamily="{StaticResource poppins_light}" FontSize="8" />
                                         </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
@@ -171,10 +179,11 @@
                     </Button>
 
                     <Button x:Name="write_btn" Grid.Column="3" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" 
-                            ToolTip="{DynamicResource MainMenuWrite}" Typography.Capitals="AllSmallCaps" Click="Write_Clicked">
+                            ToolTip="{DynamicResource MainMenuWrite}" Click="Write_Clicked">
                         <DockPanel VerticalAlignment="Center">
                             <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
-                            <TextBlock Text="{DynamicResource MainMenuWrite}" FontFamily="{StaticResource poppins_light}" VerticalAlignment="Center" FontSize="10"/>
+                            <TextBlock Text="{library:DynamicResourceBinding MainMenuWrite, Converter={StaticResource StringToUpperConverter}}" 
+                                       FontFamily="{StaticResource poppins_light}" FontSize="8"/>
                         </DockPanel>
                     </Button>
 
@@ -340,16 +349,18 @@
                         <Button x:Name="settings_btn" Grid.Column="1" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
                                 ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked">
                             <DockPanel>
-                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
-                                <TextBlock Text="{DynamicResource MainMenuSettings}" FontFamily="{StaticResource poppins_light}" FontSize="10" VerticalAlignment="Center" Typography.Capitals="AllSmallCaps" />
+                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center" />
+                                <TextBlock Text="{library:DynamicResourceBinding MainMenuSettings, Converter={StaticResource StringToUpperConverter}}" 
+                                           FontFamily="{StaticResource poppins_light}" FontSize="8" />
                             </DockPanel>
                         </Button>
                                 
                         <Button x:Name="help_btn" Grid.Column="2" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
                                 ToolTip="{DynamicResource MainMenuHelp}" >
                             <DockPanel>
-                                <TextBlock Text="i" FontFamily="Book Antiqua Bold" FontSize="14" FontWeight="ExtraBold" Margin="0, 0, 3, 0" Typography.Capitals="Normal" VerticalAlignment="Center"></TextBlock>
-                                <TextBlock Text="{DynamicResource MainMenuHelp}" FontFamily="{StaticResource poppins_light}" FontSize="10" VerticalAlignment="Center" Typography.Capitals="AllSmallCaps"></TextBlock>
+                                <TextBlock Text="i" FontFamily="Book Antiqua Bold" FontSize="14" FontWeight="ExtraBold" Margin="0, 0, 3, 0" />
+                                <TextBlock Text="{library:DynamicResourceBinding MainMenuHelp, Converter={StaticResource StringToUpperConverter}}" 
+                                           FontFamily="{StaticResource poppins_light}" FontSize="8" VerticalAlignment="Center" />
                             </DockPanel>
                         </Button>
                         
@@ -366,8 +377,8 @@
                             <TextBlock Text="&#xf08b;" FontFamily="{StaticResource fa_solid}" FontSize="10"/>
                         </Button>
                         
-                        <DockPanel x:Name="languagesPanel" Grid.Column="4" Height="100">
-                            <uc:LanguageControl x:Name="languageButton" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Margin="0,0,0,50"/>
+                        <DockPanel x:Name="languagesPanel" Grid.Column="4" Height="100" Background="Transparent">
+                            <uc:LanguageControl x:Name="languageButton" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Margin="0,0,0,50"/>
                         </DockPanel>
 
                         <Button Grid.Column="5" x:Name="define_size_btn" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="wb1Size_Click">

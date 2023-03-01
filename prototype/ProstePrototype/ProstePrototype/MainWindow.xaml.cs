@@ -6,25 +6,20 @@ using ljson;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using ProstePrototype.POCO;
-using ProstePrototype.WpfControls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Text;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
+using System.Xml;
 
 namespace ProstePrototype
 {
@@ -57,7 +52,7 @@ namespace ProstePrototype
         public MainWindow()
         {
             applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            
+
             InitializeComponent();
 
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
@@ -552,7 +547,15 @@ namespace ProstePrototype
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
-
+                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                //
+                cTDFParams conn = new cTDFParams();
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
+                conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
+                conn.readcfg = cJson.ReadXML();
+                conn.template = cJson.TemplateXML();
+                ReadDevice(conn, popUpWindow);
                 //    txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
             }
         }
