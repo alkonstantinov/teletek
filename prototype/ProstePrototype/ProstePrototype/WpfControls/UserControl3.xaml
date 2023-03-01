@@ -24,28 +24,28 @@
                 <uc:WPFSelectInput Grid.Row="0" Grid.Column="0" Margin="10" x:Name="com"
                                    ValueList="{Binding Path=StringArray1, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
                                    Label="{DynamicResource ScanMenuRSCom}"
-                                   IsSelectedValue="{Binding Path=IsSelectedValue1, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue1, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}, Mode=TwoWay}"
                                    VerticalContentAlignment="Center" HorizontalAlignment="Right" 
                                    Width="200" />
 
                 <uc:WPFSelectInput Grid.Row="1" Grid.Column="0" x:Name="parity" Margin="10" 
                                    ValueList="{Binding Path=StringArray2, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
                                    Label="{DynamicResource ScanMenuRSParity}"
-                                   IsSelectedValue="{Binding Path=IsSelectedValue2, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue2, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}, Mode=TwoWay}"
                                    VerticalContentAlignment="Center" HorizontalAlignment="Right" 
                                    Width="200" />
 
                 <uc:WPFSelectInput Grid.Row="2" Grid.Column="0" x:Name="baudRate" Margin="10" 
                                    ValueList="{Binding Path=StringArray3, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
                                    Label="{DynamicResource ScanMenuRSBaudRate}"
-                                   IsSelectedValue="{Binding Path=IsSelectedValue3, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue3, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}, Mode=TwoWay}"
                                    VerticalContentAlignment="Center" HorizontalAlignment="Right" 
                                    Width="200" />
 
                 <uc:WPFSelectInput Grid.Row="0" Grid.Column="1" x:Name="stopBits" Margin="10" 
                                    ValueList="{Binding Path=StringArray4, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
                                    Label="{DynamicResource ScanMenuRSStopBits}"
-                                   IsSelectedValue="{Binding Path=IsSelectedValue4, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}}"
+                                   IsSelectedValue="{Binding Path=IsSelectedValue4, RelativeSource={RelativeSource AncestorType={x:Type local:UserControl3}}, Mode=TwoWay}"
                                    VerticalContentAlignment="Center" HorizontalAlignment="Left" 
                                    Width="200" />
 

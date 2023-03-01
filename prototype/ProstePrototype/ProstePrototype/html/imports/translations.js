@@ -108,6 +108,7 @@
         }
     ],
     translations: {
+        MainMenuAddNew: { 'en': 'Add New Panel', 'bg': 'Добави ново устройство' },
         MainMenuNew: { 'en': 'New', 'bg': 'Нов' },
         MainMenuScan: { 'en': 'Scan', 'bg': 'Сканирай' },
         MainMenuExport: { 'en': 'Export', 'bg': 'Експорт' },

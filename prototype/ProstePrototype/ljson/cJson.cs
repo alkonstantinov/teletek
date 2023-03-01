@@ -29,6 +29,7 @@ using System.Data;
 using System.Windows.Media.Animation;
 using System.Windows.Input;
 using System.Security.Cryptography;
+using System.Windows.Controls;
 
 namespace ljson
 {
@@ -49,7 +50,26 @@ namespace ljson
             Monitor.Exit(_cs_panel_xmls);
             return cfg;
         }
-
+        private static string PanelTemplatePath()
+        {
+            JObject _panel = CurrentPanel;
+            if (_panel["~template_loaded_from"] != null)
+                return _panel["~template_loaded_from"].ToString();
+            else
+                return null;
+        }
+        public static JObject ReadXML()
+        {
+            cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
+            string sjson = JsonConvert.SerializeXmlNode((XmlDocument)cfg.ReadConfig);
+            return JObject.Parse(sjson);
+        }
+        public static JObject TemplateXML()
+        {
+            cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
+            string sjson = JsonConvert.SerializeXmlNode((XmlDocument)cfg.Config);
+            return JObject.Parse(sjson);
+        }
         private static void SetLNGID(cXmlConfigs cfg)
         {
             Dictionary<string, string> _lngids_set = new Dictionary<string, string>();
@@ -200,7 +220,15 @@ namespace ljson
             get
             {
                 JObject _panel = CurrentPanel;
-                return _panel["@LNGID"].ToString();
+                return _panel["~guid"].ToString();
+            }
+        }
+        public static string CurrentPanelType
+        {
+            get
+            {
+                JObject _panel = CurrentPanel;
+                return _panel["~panel_type"].ToString();
             }
         }
 
@@ -378,7 +406,7 @@ namespace ljson
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             List<cRWCommand> cmds = new List<cRWCommand>();
             //Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
-            if (_panel_type == "iris")
+            if (CurrentPanelType == "iris")
             {
                 cRWPathIRIS pi = (cRWPathIRIS)p;
                 foreach (cRWCommandIRIS cmd in pi.ReadCommands)
@@ -617,7 +645,7 @@ namespace ljson
             //{
             List<cRWCommand> cmds = new List<cRWCommand>();
             Dictionary<string, cRWProperty> read_props = new Dictionary<string, cRWProperty>();
-            if (_panel_type == "iris")
+            if (CurrentPanelType == "iris")
             {
                 cRWPathIRIS pi = (cRWPathIRIS)p;
                 foreach (cRWCommandIRIS cmd in pi.ReadCommands)
@@ -650,6 +678,8 @@ namespace ljson
             for (byte idx = min; idx <= max; idx++)
             {
                 int reslen = 0;
+                //if (idx == 64 && read_path == "IRIS_PANELSINNETWORK/IRIS_PANELINNETWORK")
+                //    reslen = reslen;
                 List<byte[]> cmdresults = new List<byte[]>();
                 if (!p.ReadCommandsReplacement.ContainsKey(idx.ToString("X2")))
                     foreach (cRWCommand cmd in cmds)
@@ -861,11 +891,11 @@ namespace ljson
                 {
                     JObject _node = new JObject((JObject)((JProperty)t).Value);
                     string nodename = ((JProperty)t).Name;
-                    if (Regex.IsMatch(nodename, "loop", RegexOptions.IgnoreCase))
-                        panel_type = panel_type;
+                    //if (Regex.IsMatch(nodename, "loop", RegexOptions.IgnoreCase))
+                    //    panel_type = panel_type;
                     //continue;
-                    if (Regex.IsMatch(nodename, "snone", RegexOptions.IgnoreCase))
-                        panel_type = panel_type;
+                    //if (Regex.IsMatch(nodename, "snone", RegexOptions.IgnoreCase))
+                    //    panel_type = panel_type;
                     RWData(_node);
                     if (_node["~rw"] != null)
                     {
@@ -896,11 +926,13 @@ namespace ljson
             {
                 Dictionary<string, Tuple<byte, byte>> dpath_minmax = new Dictionary<string, Tuple<byte, byte>>();
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
-                cTransport conn = null;
-                if (conn_params is cIPParams)
-                    conn = cComm.ConnectIP(((cIPParams)conn_params).address, ((cIPParams)conn_params).port);
-                else if (conn_params is string)
-                    conn = cComm.ConnectFile((string)conn_params);
+                cTransport conn = cComm.ConnectBase(conn_params);
+                //if (conn_params is cIPParams)
+                //    conn = cComm.ConnectIP(((cIPParams)conn_params).address, ((cIPParams)conn_params).port);
+                //else if (conn_params is string)
+                //    conn = cComm.ConnectFile((string)conn_params);
+                //else if (conn_params is cTDFParams)
+                //    conn = cComm.ConnectTDF((cTDFParams)conn_params);
                 if (conn == null)
                     return;
                 foreach (string key in drw.Keys)
@@ -1111,6 +1143,23 @@ namespace ljson
                 }
             }
         }
+        //Write
+        public static void WriteDevice(object conn_params)
+        {
+            JObject _panel = new JObject(CurrentPanel);
+            JObject _elements = (JObject)_panel["ELEMENTS"];
+            //Type trw = typeof(cRWPath);
+            foreach (JToken t in (JToken)_elements)
+            {
+                if (t.Type != JTokenType.Property || ((JProperty)t).Value.Type != JTokenType.Object)
+                    continue;
+                JObject _node = new JObject((JObject)((JProperty)t).Value);
+                string nodename = ((JProperty)t).Name;
+                RWData(_node);
+                if (_node["~rw"] == null)
+                    continue;
+            }
+        }
         #endregion
 
         public static JObject GetNode(string name)
@@ -1157,6 +1206,10 @@ namespace ljson
             _panel = _current_panel;
             if (_panel == null)
                 _panel = SchemaJSON(name);
+            _panel["~panel_type"] = _panel_type;
+            _panel["~template_loaded_from"] = _last_loaded_template_filepath;
+            Guid guid = Guid.NewGuid();
+            _panel["~guid"] = guid.ToString();
             if (!_panel_temlates.ContainsKey(filename))
                 _panel_temlates.Add(filename, _panel);
             else
@@ -1393,6 +1446,7 @@ namespace ljson
         }
 
         private static string _panel_type = null;
+        private static string _last_loaded_template_filepath = null;
         public static string ConvertXML(string xml, JObject _pages, string filename)
         {
             string schema = Regex.Replace(System.IO.Path.GetFileName(filename), @"\.\w+$", "");
@@ -1455,6 +1509,7 @@ namespace ljson
             doc = (XmlDocument)cfg.Config;
             WriteReadMerge = cfg.RWMerged();
             SetPanelXMLConfigs(filename, cfg);
+            _last_loaded_template_filepath = filename;
             //
             string json = JsonConvert.SerializeXmlNode(doc);
             JObject o = JObject.Parse(json);
@@ -1471,6 +1526,7 @@ namespace ljson
             else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))
             {
                 sj = cEclipse.Convert(json, _pages);
+                _panel_type = "eclipse";
             }
             constants.NO_LOOP = NoLoopKey(sj);
             return sj;

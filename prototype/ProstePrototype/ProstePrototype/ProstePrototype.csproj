@@ -11,6 +11,10 @@
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
     <None Remove="html\imports\webfonts\fa-v4compatibility.ttf" />
+    <None Remove="html\imports\webfonts\Poppins\Poppins-Bold.ttf" />
+    <None Remove="html\imports\webfonts\Poppins\Poppins-Light.ttf" />
+    <None Remove="html\imports\webfonts\Poppins\Poppins-Regular.ttf" />
+    <None Remove="html\imports\webfonts\Poppins\Poppins-SemiBold.ttf" />
     <None Remove="Images\01.IRIS.ico" />
     <None Remove="Images\Addressables-resized.png" />
     <None Remove="Images\convectional_5-resized.png" />
@@ -38,6 +42,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="html\imports\webfonts\fa-v4compatibility.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\Poppins\Poppins-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\Poppins\Poppins-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\Poppins\Poppins-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\Poppins\Poppins-SemiBold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\01.IRIS.ico">

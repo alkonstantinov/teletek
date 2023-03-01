@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ProstePrototype"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="MainMenuAddNew">Add New</system:String>
     <system:String x:Key="MainMenuNew">New</system:String>
     <system:String x:Key="MainMenuScan">Scan</system:String>
     <system:String x:Key="MainMenuExport">Export</system:String>

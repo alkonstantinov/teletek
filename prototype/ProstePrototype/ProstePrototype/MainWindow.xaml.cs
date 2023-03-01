@@ -23,7 +23,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace ProstePrototype
@@ -95,6 +95,8 @@ namespace ProstePrototype
             wb1.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
             wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
             wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
+
+            define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -113,11 +115,7 @@ namespace ProstePrototype
             // Begin dragging the window
             this.DragMove();
         }
-        private void GridSplitter1_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            wb1.Width = Column1.Width.Value;
-            //MessageBox.Show("Column1 : " + Column1.Width + "(type: "+ Column1.Width.GetType() + ")" + "\n" + "GridSplitter: " + Splitter1.Width + "\n" + "wb1: " + wb1.Width + "\n" + "wb2: " + wb2.Width);
-        }
+
         private void _child_LostFocus(object sender, RoutedEventArgs e)
         {
             rw.Hide();
@@ -168,11 +166,17 @@ namespace ProstePrototype
         {
             var bgd = Color.FromRgb(248, 249, 250);
             var fgd = Color.FromRgb(124, 124, 125);
+            var btn_bgd = (Color)ColorConverter.ConvertFromString("#FFebebeb");
+            var btn_fgd = (Color)ColorConverter.ConvertFromString("Gray");
 
             if (darkMode)
             {
+                //new SolidColorBrush((Color)ColorConverter.ConvertFromString("DarkGray"))
+                
                 bgd = Color.FromRgb(51, 51, 34);
                 fgd = Color.FromRgb(238, 238, 221);
+                btn_bgd = (Color)ColorConverter.ConvertFromString("DarkGray");
+                btn_fgd = (Color)ColorConverter.ConvertFromString("White");
                 gridBrowsers.Background = new SolidColorBrush(bgd);
             }
             else
@@ -180,45 +184,42 @@ namespace ProstePrototype
                 gridBrowsers.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)); // Colors.Transparent;
             }
             mainGrid.Background = new SolidColorBrush(bgd);
-            mainPanel.Background = new SolidColorBrush(bgd);
-            fileMenu.Background = new SolidColorBrush(bgd);
-            fileMenu.Foreground = new SolidColorBrush(fgd);
+            //mainPanel.Background = new SolidColorBrush(bgd);
+            filePanel.Background = new SolidColorBrush(btn_bgd);
+            fileMenu.Foreground = new SolidColorBrush(btn_fgd);
             languageButton.Background = new SolidColorBrush(bgd);
-            write_btn.Background = new SolidColorBrush(bgd);
-            write_btn.Foreground = new SolidColorBrush(fgd);
-            log_btn.Background = new SolidColorBrush(bgd);
-            log_btn.Foreground = new SolidColorBrush(fgd);
-            clock_btn.Background = new SolidColorBrush(bgd);
-            clock_btn.Foreground = new SolidColorBrush(fgd);
-            verify_btn.Background = new SolidColorBrush(bgd);
-            verify_btn.Foreground = new SolidColorBrush(fgd);
-            scan_btn.Background = new SolidColorBrush(bgd);
-            scan_btn.Foreground = new SolidColorBrush(fgd);
-            export_btn.Background = new SolidColorBrush(bgd);
-            export_btn.Foreground = new SolidColorBrush(fgd);
-            settings_btn.Background = new SolidColorBrush(bgd);
-            settings_btn.Foreground = new SolidColorBrush(fgd);
-            changeTheme_btn.Background = new SolidColorBrush(bgd);
-            changeTheme_btn.Foreground = new SolidColorBrush(fgd);
-            update_btn.Background = new SolidColorBrush(bgd);
-            update_btn.Foreground = new SolidColorBrush(fgd);
-            help_btn.Background = new SolidColorBrush(bgd);
-            help_btn.Foreground = new SolidColorBrush(fgd);
-            minimize_btn.Background = new SolidColorBrush(bgd);
-            minimize_btn.Foreground = new SolidColorBrush(fgd);
-            maximize_btn.Background = new SolidColorBrush(bgd);
-            maximize_btn.Foreground = new SolidColorBrush(fgd);
-            exit_btn.Background = new SolidColorBrush(bgd);
-            exit_btn.Foreground = new SolidColorBrush(fgd);
+            write_btn.Background = new SolidColorBrush(btn_bgd);
+            write_btn.Foreground = new SolidColorBrush(btn_fgd);
+            //log_btn.Background = new SolidColorBrush(bgd);
+            //log_btn.Foreground = new SolidColorBrush(fgd);
+            //clock_btn.Background = new SolidColorBrush(bgd);
+            //clock_btn.Foreground = new SolidColorBrush(fgd);
+            //verify_btn.Background = new SolidColorBrush(bgd);
+            //verify_btn.Foreground = new SolidColorBrush(fgd);
+            scan_btn.Background = new SolidColorBrush(btn_bgd);
+            scan_btn.Foreground = new SolidColorBrush(btn_fgd);
+            //export_btn.Background = new SolidColorBrush(btn_bgd);
+            //export_btn.Foreground = new SolidColorBrush(btn_fgd);
+            settings_btn.Background = new SolidColorBrush(btn_bgd);
+            settings_btn.Foreground = new SolidColorBrush(btn_fgd);
+            //changeTheme_btn.Background = new SolidColorBrush(bgd);
+            //changeTheme_btn.Foreground = new SolidColorBrush(fgd);
+            //update_btn.Background = new SolidColorBrush(bgd);
+            //update_btn.Foreground = new SolidColorBrush(fgd);
+            help_btn.Background = new SolidColorBrush(btn_bgd);
+            help_btn.Foreground = new SolidColorBrush(btn_fgd);
+            //minimize_btn.Background = new SolidColorBrush(bgd);
+            //minimize_btn.Foreground = new SolidColorBrush(fgd);
+            //maximize_btn.Background = new SolidColorBrush(bgd);
+            //maximize_btn.Foreground = new SolidColorBrush(fgd);
             breadCrumbsField.Background = new SolidColorBrush(bgd);
             lvBreadCrumbs.Background = new SolidColorBrush(bgd);
             foreach (var item in lvBreadCrumbs.Items)
             {
                 ((Button)item).Foreground = new SolidColorBrush(fgd);
             }
-            grid6.Background = new SolidColorBrush(bgd);
-            textblock_bottom.Background = new SolidColorBrush(bgd);
-            textblock_bottom.Foreground = new SolidColorBrush(fgd);
+            //textblock_bottom.Background = new SolidColorBrush(bgd);
+            //textblock_bottom.Foreground = new SolidColorBrush(fgd);
         }
 
         private void ChangeThemeRW(bool darkMode)
@@ -430,43 +431,29 @@ namespace ProstePrototype
         private void LoadBrowsers(LoadPageData data, string highlight)
         {
 
-            if (!string.IsNullOrEmpty(data.LeftBrowserUrl))
+            string url = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl);
+            if (!string.IsNullOrEmpty(highlight))
             {
-                string url = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.LeftBrowserUrl);
-                if (!string.IsNullOrEmpty(highlight))
-                {
-                    url += "?highlight=" + highlight;
-                }
-                this.Dispatcher.Invoke(() =>
-                {
-                    ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
-                });
-
-                wb1.Load(url);
-                this.Dispatcher.Invoke(() =>
-                {
-                    if (Splitter1.Width == 0)
-                    {
-                        gridBrowsers.ColumnDefinitions[0].Width = new GridLength(350, GridUnitType.Pixel);
-                        wb2.Margin = new Thickness(0);
-                        wb1.MinWidth = 350;
-                        Splitter1.Width = 5;
-                        gsp3.Height = 3;
-                    }
-                });
-
+                url += "?highlight=" + highlight;
             }
-            else
+            this.Dispatcher.Invoke(() =>
             {
-                this.Dispatcher.Invoke(() =>
-                {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-                    wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
-                    wb1.Width = 0;
-                    Splitter1.Width = 0;
-                    gsp3.Height = 0;
-                });
-            }
+                ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
+            });
+
+            wb1.Load(url);
+
+            // use the code below for the define_size_btn clicked function
+            //{
+            //this.Dispatcher.Invoke(() =>
+            //{
+            //    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
+            //    wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
+            //    wb1.Width = 0;
+            //    Splitter1.Width = 0;
+            //    gsp3.Height = 0;
+            //});
+            //}
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
             this.Dispatcher.Invoke(() =>
             {
@@ -548,6 +535,16 @@ namespace ProstePrototype
                 popUpWindow._functionFinished = true;
             });
         }
+        private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow)
+        {
+            cJson.WriteDevice(conn_params);
+            wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
+            //set a flag
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                popUpWindow._functionFinished = true;
+            });
+        }
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -603,59 +600,23 @@ namespace ProstePrototype
         }
         private void New_Clicked(object sender, RoutedEventArgs e)
         {
-            //rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            //rw.Owner = this;
-            //ChangeThemeRW(DarkMode);
-            //rw.DarkMode = DarkMode;
-            //rw.ShowDialog();
-            //var c = rw.DialogResult;
-            ////string index = "index.html";
             string index = "index-automatic.html";
-            //if ((bool)c)
-            if (true)
+
+            //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
+
+            //wb1.Load("file:///" + firstFile); // firstFile should be the old content of wb1 - so nothing new
+            this.Dispatcher.Invoke(() =>
             {
-                string firstFile = System.IO.Path.Combine(applicationDirectory, "html", index);
-                string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
+                JObject jparam = new JObject();
+                jparam["pageName"] = new JObject();
+                JToken arr = lcommunicate.cComm.Scan();
+                jparam["pageName"]["wb2"] = arr;
+                ((BrowserParams)wb2.Tag).Params = jparam.ToString();
+                //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";rw.Resources
+            });
+            wb2.Load("file:///" + myFile);
 
-                wb1.Load("file:///" + firstFile);
-
-                if (myFile == firstFile)
-                {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-                    wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
-                    wb1.Width = 0; //if index.html is loaded
-                    Splitter1.Width = 0; //if index.html is loaded
-                    gsp3.Height = 0;
-                }
-                else if (Splitter1.Width == 0)
-                {
-                    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(350, GridUnitType.Pixel);
-                    wb2.Margin = new Thickness(0);
-                    wb1.MinWidth = 350;
-                    Splitter1.Width = 5;
-                    gsp3.Height = 3;
-                }
-                this.Dispatcher.Invoke(() =>
-                {
-                    JObject jparam = new JObject();
-                    jparam["pageName"] = new JObject();
-                    JToken arr = lcommunicate.cComm.Scan();
-                    jparam["pageName"]["wb2"] = arr;
-                    ((BrowserParams)wb2.Tag).Params = jparam.ToString();
-                    //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";rw.Resources
-                });
-                wb2.Load("file:///" + myFile);
-            }
-            else
-            {
-                gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-                wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
-                wb1.Width = 0; //if index.html is loaded
-                Splitter1.Width = 0; //if index.html is loaded
-                gsp3.Height = 0;
-                wb2.Load("file:///");
-
-            }
             lvBreadCrumbs.Items.Clear();
 
             AddPagesConstant();
@@ -665,10 +626,39 @@ namespace ProstePrototype
 
         private void Write_Clicked(object sender, RoutedEventArgs e)
         {
-            Duration duration = new Duration(TimeSpan.FromSeconds(2));
-            DoubleAnimation doubleanimation = new DoubleAnimation(100.00, 0, duration); // progressBar1.Value + 10
-            progressBar1.BeginAnimation(ProgressBar.ValueProperty, doubleanimation);
-            progressBar1.FlowDirection = FlowDirection.RightToLeft;
+            //Duration duration = new Duration(TimeSpan.FromSeconds(2));
+            //DoubleAnimation doubleanimation = new DoubleAnimation(100.00, 0, duration); // progressBar1.Value + 10
+            //progressBar1.BeginAnimation(ProgressBar.ValueProperty, doubleanimation);
+            //progressBar1.FlowDirection = FlowDirection.RightToLeft;
+            rw = new ReadWindow(0);
+            rw.Resources = Application.Current.Resources;
+            rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            rw.Owner = this;
+            ChangeThemeRW(DarkMode);
+            rw.DarkMode = DarkMode;
+            rw.ShowDialog();
+            var c = rw.DialogResult;
+            ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+            if ((bool)c)
+            {
+                int tabIdx = rw.selectedIndex;
+                //cTransport t = null;
+                string ip = rw.uc0.Address;
+                int port = rw.uc0.Port;
+                object conn_params = null;
+                if (tabIdx == 0)
+                    conn_params = new cIPParams(ip, port);
+                else
+                    return;
+                Thread funcThread = new Thread(() => WriteDevice(conn_params, popUpWindow));
+                funcThread.Start();
+
+                popUpWindow.ShowDialog();
+
+                funcThread.Join();
+
+                popUpWindow.Close();
+            }
         }
 
         private void Exit_Clicked(object sender, RoutedEventArgs e)
@@ -724,14 +714,18 @@ namespace ProstePrototype
         #region breadcrumb
         private void addBreadCrumb(string title, string page)
         {
+            foreach(var item in lvBreadCrumbs.Items)
+            {
+                ((Button)item).Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
+            }
             var btn = new Button()
             {
                 ClickMode = ClickMode.Press,
                 Tag = page,
                 Content = title,
                 Background = Brushes.Transparent,
-                Foreground = DarkMode ? new SolidColorBrush(Color.FromRgb(238, 238, 221)) : new SolidColorBrush(Color.FromRgb(124, 124, 125)),
-                //Foreground = new SolidColorBrush(Color.FromRgb(238, 238, 221)),
+                Foreground = DarkMode ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray")) : new SolidColorBrush((Color)ColorConverter.ConvertFromString("Blue")),
+                //Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
                 BorderBrush = Brushes.Transparent
             };
             btn.Click += breadCrumbItemClick;
@@ -785,6 +779,32 @@ namespace ProstePrototype
 
         }
 
+        private void wb1Size_Click(object sender, RoutedEventArgs e)
+        {
+            define_size_txt.Text = 
+                (define_size_txt.Text) == Encoding.UTF8.GetString(Convert.FromBase64String("74SA")) ?
+                Encoding.UTF8.GetString(Convert.FromBase64String("74SB")) :
+                Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
+            
+            this.Dispatcher.Invoke(() =>
+            {
+                if (mainGrid.ColumnDefinitions[0].Width == new GridLength(70))
+                {
+                    mainGrid.ColumnDefinitions[0].Width = new GridLength(250);
+                    wb1Column.Width = new GridLength(250);
+                    settingsBtnRow.Height = new GridLength(0);
+                    defineSizeBtnRow.Height = new GridLength(0);
+                    footerBtnRow.Height = new GridLength(50);
+                } else
+                {
+                    mainGrid.ColumnDefinitions[0].Width = new GridLength(70);
+                    wb1Column.Width = new GridLength(70);
+                    settingsBtnRow.Height = new GridLength(40);
+                    defineSizeBtnRow.Height = new GridLength(40);
+                    footerBtnRow.Height = new GridLength(0);
+                }
+            });
+        }
     }
 
 }

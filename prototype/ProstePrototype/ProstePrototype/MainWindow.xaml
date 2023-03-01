@@ -15,7 +15,24 @@
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
     </Window.CommandBindings>
     <Window.Resources>
+        <uc:HalfValueConverter x:Key="HalfConverter"/>
+        <!--#region ToolTip fontfamily-->
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="FontFamily" Value="{StaticResource poppins_regular}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <!--#endregion-->
         <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
+        <Style x:Key="ButtonShadow" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="Padding" Value="3"/>
+                    <Setter Property="Margin" Value="2"/>
+                    <Setter Property="Height" Value="25"/>
+                </Style>
+            </Style.Resources>
+        </Style>
         <Style x:Key="FileStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="ToolTip">
                 <Setter.Value>
@@ -26,41 +43,7 @@
                     </ToolTip>
                 </Setter.Value>
             </Setter>
-        </Style>
-        <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type MenuItem}">
-                        <Border x:Name="MenuItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <Grid VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
-									   HorizontalOffset="1" VerticalOffset="-1">
-                                    <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
-                                        <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                        </ScrollViewer>
-                                    </Border>
-                                </Popup>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="ToolTip">
-                <Setter.Value>
-                    <ToolTip>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{DynamicResource MainMenuLanguages}"/>
-                        </StackPanel>
-                    </ToolTip>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        </Style>        
         <Style x:Key="FileMainStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -70,7 +53,7 @@
                                 <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
 									   HorizontalOffset="1" VerticalOffset="-1">
-                                    <Border Background="{Binding ElementName=languagesMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+                                    <Border Background="{Binding ElementName=fileMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
                                         <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                         </ScrollViewer>
@@ -84,59 +67,55 @@
             <Setter Property="ToolTip">
                 <Setter.Value>
                     <ToolTip>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{DynamicResource MainMenuFile}"/>
+                        <StackPanel Orientation="Vertical" Typography.Capitals="AllSmallCaps">
+                            <TextBlock Text="{DynamicResource MainMenuFile}" FontFamily="{StaticResource poppins_regular}"/>
                         </StackPanel>
                     </ToolTip>
                 </Setter.Value>
             </Setter>
         </Style>
-        
     </Window.Resources>
     <Border BorderBrush="#8090aa" BorderThickness="0" CornerRadius="2">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="3" />
-                <RowDefinition Height="29" />
-                <RowDefinition Height="3" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="3" />
-                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <Grid x:Name="mainGrid" Background="{Binding Background}">
+            <Grid x:Name="mainGrid" Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
-                    <ColumnDefinition Width="70" />
-                    <ColumnDefinition Width="70" />
-                    <ColumnDefinition Width="70" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
-                <Image Source="/Images/teletek_logo_m.png" Margin="10,0,0,-25" Width="380" Height="75" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown"/>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <DockPanel Grid.Column="1" >
-                    <Button x:Name="scan_btn" ToolTip="{DynamicResource MainMenuScan}" Click="Scan_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                        <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                    <Button x:Name="add_system_btn" Grid.Column="0" ToolTip="{DynamicResource MainMenuAddNew}" Height="36" Width="36" Click="New_Clicked" BorderThickness="0">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Button}}, Converter={StaticResource HalfConverter}}"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                        </Button.Resources>
+                        <TextBlock Text="&#xf055;" FontFamily="{StaticResource fa_solid}" FontSize="34" FontWeight="Thin" Foreground="Blue"></TextBlock>
                     </Button>
-                </DockPanel>
 
-                <DockPanel Grid.Column="2">
-                    <Button x:Name="export_btn" ToolTip="{DynamicResource MainMenuExport}" Click="Export_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                        <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                    <Button x:Name="scan_btn" Grid.Column="1" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
+                            ToolTip="{DynamicResource MainMenuScan}" Typography.Capitals="AllSmallCaps" Click="Scan_Clicked">
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{DynamicResource MainMenuScan}" FontFamily="{StaticResource poppins_light}" FontSize="10" VerticalAlignment="Center"/>
+                        </DockPanel>
                     </Button>
-                </DockPanel>
 
-                <StackPanel Grid.Column="3" x:Name="filePanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
-                    <DockPanel Height="100">
-                        <Menu x:Name="fileMenu" DockPanel.Dock="Top" Height="100" VerticalAlignment="Center" Background="{Binding Background}" Foreground="{Binding Foreground}">
+                    <Button x:Name="filePanel" Grid.Column="2" Style="{StaticResource ButtonShadow}" BorderThickness="0.2" BorderBrush="AntiqueWhite"
+                            MouseLeftButtonDown="mainPanel_MouseLeftButtonDown" VerticalAlignment="Center" Background="#FFDDDDDD">
+                        <Menu x:Name="fileMenu" Height="40" VerticalAlignment="Center" Background="Transparent">
                             <Menu.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <VirtualizingStackPanel Orientation="Horizontal" />
@@ -148,79 +127,120 @@
                                         <VirtualizingStackPanel Orientation="Horizontal" />
                                     </ItemsPanelTemplate>
                                 </MenuItem.ItemsPanel>
-                                <MenuItem.Header >
-                                    <DockPanel>
-                                        <TextBlock Text="&#xe185;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="14" VerticalAlignment="Bottom"></TextBlock>
+                                <MenuItem.Header>
+                                    <DockPanel Typography.Capitals="AllSmallCaps">
+                                        <TextBlock Text="&#xe185;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="-5, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{DynamicResource MainMenuFile}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        <TextBlock Text="&#xf0d7;" FontFamily="{StaticResource fa_solid}" FontSize="10" VerticalAlignment="Bottom"></TextBlock>
                                     </DockPanel>
                                 </MenuItem.Header>
                                 <MenuItem Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuNew}" Click="New_Clicked">
                                     <MenuItem.Header>
-                                        <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom" Padding="0, 20"></TextBlock>
+                                        <DockPanel Typography.Capitals="AllSmallCaps">
+                                            <TextBlock Text="&#xe4ee;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
+                                            <TextBlock Text="{DynamicResource MainMenuNew}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                                 <MenuItem Click="Open_Clicked" Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuOpen}">
                                     <MenuItem.Header>
-                                        <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                        <DockPanel Typography.Capitals="AllSmallCaps">
+                                            <TextBlock Text="&#xf07c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
+                                            <TextBlock Text="{DynamicResource MainMenuOpen}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                                 <MenuItem Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuSave}">
                                     <MenuItem.Header>
-                                        <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                        <DockPanel Typography.Capitals="AllSmallCaps">
+                                            <TextBlock Text="&#xf0c7;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
+                                            <TextBlock Text="{DynamicResource MainMenuSave}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                                 <MenuItem Click="SaveAs_Clicked" Style="{StaticResource FileStyle}" ToolTip="{DynamicResource MainMenuSaveas}">
                                     <MenuItem.Header>
-                                        <TextBlock Text="&#xf570;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                                        <DockPanel Typography.Capitals="AllSmallCaps">
+                                            <TextBlock Text="&#xf570;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 3, 3, 0"></TextBlock>
+                                            <TextBlock Text="{DynamicResource MainMenuSaveas}" FontFamily="{StaticResource poppins_light}" FontSize="10" ></TextBlock>
+                                        </DockPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
                             </MenuItem>
                         </Menu>
-                    </DockPanel>
-                </StackPanel>
+                    </Button>
 
-                <DockPanel Grid.Column="4">
-                    <Button x:Name="write_btn" ToolTip="{DynamicResource MainMenuWrite}" Click="Write_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                        <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
+                    <Button x:Name="write_btn" Grid.Column="3" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" 
+                            ToolTip="{DynamicResource MainMenuWrite}" Typography.Capitals="AllSmallCaps" Click="Write_Clicked">
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{DynamicResource MainMenuWrite}" FontFamily="{StaticResource poppins_light}" VerticalAlignment="Center" FontSize="10"/>
+                        </DockPanel>
+                    </Button>
+
+                </Grid>
+                <GridSplitter Grid.Column="1" ResizeDirection="Rows" BorderBrush="Gray" Background="LightGray" Width="1" Height="25"/>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" x:Name="breadCrumbsField" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown" VerticalAlignment="Center">
+                        <ListView x:Name="lvBreadCrumbs" Margin="20, 0" FontFamily="{StaticResource poppins_demibold}"
+				                  FontSize="12" BorderThickness="0" VerticalContentAlignment="Center">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" x:Name="GridView_or_ListView_btn"/>
+                </Grid>
+
+
+                <!--<DockPanel Grid.Column="4">
+                    <Button x:Name="export_btn" Grid.Column="3" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
+                            ToolTip="{DynamicResource MainMenuExport}" Typography.Capitals="AllSmallCaps" Click="Export_Clicked">
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{DynamicResource MainMenuExport}" FontFamily="{StaticResource poppins_light}" VerticalAlignment="Center" FontSize="10"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="write_btn" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" 
+                            ToolTip="{DynamicResource MainMenuWrite}" Typography.Capitals="AllSmallCaps" Click="Write_Clicked">
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{DynamicResource MainMenuWrite}" FontFamily="{StaticResource poppins_light}" VerticalAlignment="Center" FontSize="10"/>
+                        </DockPanel>
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="5">
-                    <Button x:Name="log_btn" ToolTip="{DynamicResource MainMenuLog}" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="log_btn" ToolTip="{DynamicResource MainMenuLog}" Click="New_Clicked" BorderThickness="0">
                         <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="6">
-                    <Button x:Name="clock_btn" ToolTip="{DynamicResource MainMenuClock}" Click="New_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="clock_btn" ToolTip="{DynamicResource MainMenuClock}" Click="New_Clicked" BorderThickness="0">
                         <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                     </Button>
                 </DockPanel>
                 <DockPanel Grid.Column="7">
-                    <Button x:Name="verify_btn" ToolTip="{DynamicResource MainMenuVerify}" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                    <Button x:Name="verify_btn" ToolTip="{DynamicResource MainMenuVerify}" BorderThickness="0">
                         <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                     </Button>
-                </DockPanel>
+                </DockPanel>-->
 
-                <DockPanel Grid.Column="8">
-                    <Button x:Name="settings_btn" ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                        <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                    </Button>
-                </DockPanel>
-                <StackPanel Grid.Column="9" x:Name="mainPanel" Background="{Binding Background}" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
-                    <DockPanel x:Name="languagesPanel" Height="100" HorizontalAlignment="Right" >
-                        <uc:LanguageControl x:Name="languageButton" />
-                    </DockPanel>
-                </StackPanel>
-                
-                <Grid Grid.Column="10">
+                <!--<Grid Grid.Column="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button x:Name="minimize_btn" ToolTip="{DynamicResource MainMenuToTray}" Click="Button_Minimize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="1, 0, 0, 1">
+                    <Button x:Name="minimize_btn" ToolTip="{DynamicResource MainMenuToTray}" Click="Button_Minimize_Click" BorderThickness="1, 0, 0, 1">
                         <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
                     </Button>
                     <DockPanel Grid.Row="1">
-                        <Button x:Name="changeTheme_btn" ToolTip="{DynamicResource MainMenuTheme}" Click="ChangeTheme_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <Button x:Name="changeTheme_btn" ToolTip="{DynamicResource MainMenuTheme}" Click="ChangeTheme_Click" BorderThickness="0">
                             <TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="36"/>
                         </Button>
                     </DockPanel>
@@ -230,7 +250,7 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" x:Name="maximize_btn" ToolTip="{DynamicResource MainMenuRestore}" Click="Button_Maximize_Click" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
+                    <Button Grid.Row="0" x:Name="maximize_btn" ToolTip="{DynamicResource MainMenuRestore}" Click="Button_Maximize_Click" BorderThickness="0, 0, 0, 1">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
@@ -257,70 +277,126 @@
                         </Button.Style>
                     </Button>
                     <DockPanel Grid.Row="1">
-                        <Button x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
+                        <Button x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0">
                             <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
                         </Button>
                     </DockPanel>
-                </Grid>
-                <Grid Grid.Column="12">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Button x:Name="exit_btn" ToolTip="{DynamicResource MainMenuExit}" Click="Exit_Clicked" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0, 0, 0, 1">
-                        <TextBlock Text="&#xf00d;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
-                    </Button>
-                    <DockPanel Grid.Row="1">
-                        <Button x:Name="help_btn" ToolTip="{DynamicResource MainMenuHelp}" Background="{Binding Background}" Foreground="{Binding Foreground}" BorderThickness="0">
-                            <TextBlock Text="&#xf05a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        </Button>
-                    </DockPanel>
-                </Grid>
+                </Grid>-->
+                
             </Grid>
-            <GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" />
-            <StackPanel Grid.Row="2" x:Name="breadCrumbsField" Background="{Binding Background}">
-                <ListView x:Name="lvBreadCrumbs" Margin="20, 0" 
-				FontSize="14" BorderThickness="0" VerticalContentAlignment="Center">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"></StackPanel>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
-            </StackPanel>
-            <GridSplitter x:Name="gsp3" Grid.Row="3" Height="{Binding Height}" HorizontalAlignment="Stretch" />
-            <Grid x:Name="gridBrowsers" Grid.Row="4" Background="{Binding Background}">
+
+            <Grid x:Name="gridBrowsers" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition x:Name="Column1" Width="216*" />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="1079*" />
+                    <ColumnDefinition x:Name="wb1Column" Width="250" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition x:Name="settingsBtnRow" Height="0" />
+                        <RowDefinition x:Name="defineSizeBtnRow" Height="0" />
+                        <RowDefinition x:Name="footerBtnRow" Height="50"/>
+                    </Grid.RowDefinitions>
+                    <wpf:ChromiumWebBrowser
+				        Grid.Row="0"
+				        x:Name="wb1"
+                        MinWidth="{Binding MinWidth}"
+				        Background="Transparent"
+				        Margin="0, 0, 0, 0"
+				        Padding="0, 0, 0, 50"
+				        JavascriptMessageReceived="wb_PostMessage"
+				    />
+                    <Grid Grid.Row="1">
+                        <Button x:Name="settings_hidden_btn" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" Width="30"
+                                ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked" HorizontalContentAlignment="Center">
+                            <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="10" Foreground="Gray"
+                                           Margin="0, 0, 3, 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                    </Grid>
+                    
+                    <Grid Grid.Row="2">
+                        <Button x:Name="define_size_hidden_btn" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="wb1Size_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Button}}, Converter={StaticResource HalfConverter}}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </Button.Resources>
+                            <TextBlock Text="&#xf101;" FontFamily="{StaticResource fa_solid}" FontSize="10" Foreground="Gray"/>
+                            <!--&#xf101; = << | &#xf100; = >> -->
+                        </Button>
+                    </Grid>
+                    
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="footerBtnCol1" Width="15"/>
+                            <ColumnDefinition x:Name="footerBtnCol2" Width="7*"/>
+                            <ColumnDefinition x:Name="footerBtnCol3" Width="6*"/>
+                            <ColumnDefinition x:Name="footerBtnCol4" Width="4*"/>
+                            <ColumnDefinition x:Name="footerBtnCol5" Width="4*"/>
+                            <ColumnDefinition x:Name="footerBtnCol6" Width="4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="settings_btn" Grid.Column="1" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
+                                ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked">
+                            <DockPanel>
+                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Text="{DynamicResource MainMenuSettings}" FontFamily="{StaticResource poppins_light}" FontSize="10" VerticalAlignment="Center" Typography.Capitals="AllSmallCaps" />
+                            </DockPanel>
+                        </Button>
+                                
+                        <Button x:Name="help_btn" Grid.Column="2" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
+                                ToolTip="{DynamicResource MainMenuHelp}" >
+                            <DockPanel>
+                                <TextBlock Text="i" FontFamily="Book Antiqua Bold" FontSize="14" FontWeight="ExtraBold" Margin="0, 0, 3, 0" Typography.Capitals="Normal" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Text="{DynamicResource MainMenuHelp}" FontFamily="{StaticResource poppins_light}" FontSize="10" VerticalAlignment="Center" Typography.Capitals="AllSmallCaps"></TextBlock>
+                            </DockPanel>
+                        </Button>
+                        
+                        <Button x:Name="exit_btn" Grid.Column="3" ToolTip="{DynamicResource MainMenuExit}" Typography.Capitals="AllSmallCaps" Width="30" Height="30" Click="Exit_Clicked" Background="LightGray" Foreground="White" BorderThickness="0">
+                            <Button.LayoutTransform>
+                                <RotateTransform Angle="180"/>
+                            </Button.LayoutTransform>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Button}}, Converter={StaticResource HalfConverter}}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </Button.Resources>
+                            <TextBlock Text="&#xf08b;" FontFamily="{StaticResource fa_solid}" FontSize="10"/>
+                        </Button>
+                        
+                        <DockPanel x:Name="languagesPanel" Grid.Column="4" Height="100">
+                            <uc:LanguageControl x:Name="languageButton" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Margin="0,0,0,50"/>
+                        </DockPanel>
+
+                        <Button Grid.Column="5" x:Name="define_size_btn" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="wb1Size_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Button}}, Converter={StaticResource HalfConverter}}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </Button.Resources>
+                            <TextBlock x:Name="define_size_txt" FontFamily="{StaticResource fa_solid}" FontSize="10" Foreground="Gray"/>
+                            <!--&#xf101; = << | &#xf100; = >> -->
+                        </Button>
+                    </Grid>
+
+                </Grid>
                 <wpf:ChromiumWebBrowser
-				Grid.Column="0"
-				x:Name="wb1"
-                MinWidth="{Binding MinWidth}"
-				Background="Transparent"
-				Margin="0, 0, 0, 0"
-				Padding="0, 0, 0, 50"
-				JavascriptMessageReceived="wb_PostMessage"
-				/>
-                <!--Width="{Binding ElementName=Column1, Path=Width, Converter={StaticResource gridLengthConverter}}"-->
-                <GridSplitter x:Name="Splitter1" Grid.Column="1" DragCompleted="GridSplitter1_DragCompleted" HorizontalAlignment="Left" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
-                <wpf:ChromiumWebBrowser
-				Grid.Column="2"
-				x:Name="wb2"
-				Margin="{Binding Margin}"                
-				JavascriptMessageReceived="wb_PostMessage"
-				Background="Transparent"
-                Panel.ZIndex="99"
-			/>
+				    Grid.Column="2"
+				    x:Name="wb2"
+				    Margin="{Binding Margin}"                
+				    JavascriptMessageReceived="wb_PostMessage"
+				    Background="Transparent"
+                    Panel.ZIndex="99"
+			    />
             </Grid>
-            <GridSplitter Grid.Row="5" Height="3" HorizontalAlignment="Stretch" />
-            <StackPanel Grid.Row="6" x:Name="grid6" Background="{Binding Background}" VerticalAlignment="Stretch">
+            <!--<StackPanel Grid.Row="6" x:Name="grid6" VerticalAlignment="Stretch">
                 <TextBlock x:Name="textblock_bottom"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" 
-				TextWrapping="Wrap" Background="{Binding Background}" Foreground="{Binding Foreground}"><Run Text="{DynamicResource MainMenuCopyright}"/><Run FontWeight="Bold" Text="{DynamicResource MainMenuTE}"/></TextBlock>
+				TextWrapping="Wrap"><Run Text="{DynamicResource MainMenuCopyright}"/><Run FontWeight="Bold" Text="{DynamicResource MainMenuTE}"/></TextBlock>
                 <ProgressBar x:Name="progressBar1" HorizontalAlignment="Right" Width="400" Height="20" Panel.ZIndex="2" Background="Transparent" BorderThickness="0"/>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
     </Border>
 </Window>

@@ -53,7 +53,7 @@ namespace ljson
                 if (loop == null || loop == "")
                     return null;
                 Dictionary<string, string> dloops = cComm.GetPseudoElementsList(_panel_id, constants.NO_LOOP);
-                if (!dloops.ContainsKey(loop))
+                if (dloops == null || !dloops.ContainsKey(loop))
                     return null;
                 string loop_template = dloops[loop];
                 if (loop_template == null)
@@ -1001,6 +1001,8 @@ namespace ljson
         }
         public override bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props)
         {
+            if (val.Length == 0)
+                return false;
             if (Regex.IsMatch(key, @"input[\w\W]+?group", RegexOptions.IgnoreCase))
             {
                 //return true;
@@ -1030,13 +1032,22 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"input$", RegexOptions.IgnoreCase))
             {
-                if (val[12] != address + 1)
+                cRWPropertyIRIS prop = (cRWPropertyIRIS)read_props["Group"];
+                int group_byte = prop.offset;
+                prop = (cRWPropertyIRIS)read_props["Type"];
+                int type_byte = prop.offset;
+                prop = (cRWPropertyIRIS)read_props["CHANNEL"];
+                int channel_byte = prop.offset;
+                byte btype = val[type_byte];
+                if (val[group_byte] != address + 1)
                     return true;
                 for (int i = 2; i < val.Length; i++)
-                    if (i == 12)
+                    if (i == group_byte)
                         continue;
                     else
                     {
+                        if (btype == 0 && i == channel_byte)
+                            continue;
                         if (val[i] != 0)
                             return true;
                     }
@@ -1044,6 +1055,7 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"output$", RegexOptions.IgnoreCase))
             {
+                //return true;
                 if (read_props.ContainsKey("Type"))
                 {
                     cRWPropertyIRIS prop = (cRWPropertyIRIS)read_props["Type"];

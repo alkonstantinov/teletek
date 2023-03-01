@@ -157,6 +157,7 @@ namespace ProstePrototype.WpfControls
             {
                 var menuItem = new MenuItem();
                 menuItem.Header = language.Name;
+                menuItem.FontFamily = Application.Current.Resources["poppins_regular"] as FontFamily;
                 menuItem.Tag = language.Code;
                 var icon = new Image();
                 icon.Source = new BitmapImage(new Uri(language.IconPath, UriKind.RelativeOrAbsolute));

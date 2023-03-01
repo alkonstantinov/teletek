@@ -10,6 +10,10 @@
         <FontFamily x:Key="fa_brands">/html/imports/webfonts/fa-brands-400.ttf#Font Awesome 6 Brands Regular</FontFamily>
         <FontFamily x:Key="fa_regular">/html/imports/webfonts/fa-regular-400.ttf#Font Awesome 6 Free Regular</FontFamily>
         <FontFamily x:Key="fa_solid">/html/imports/webfonts/fa-solid-900.ttf#Font Awesome 6 Free Solid</FontFamily>
+        <FontFamily x:Key="poppins_light">/html/imports/webfonts/Poppins/Poppins-Light.ttf#Poppins Light</FontFamily>
+        <FontFamily x:Key="poppins_regular">/html/imports/webfonts/Poppins/Poppins-Regular.ttf#Poppins</FontFamily>
+        <FontFamily x:Key="poppins_demibold">/html/imports/webfonts/Poppins/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
+        <FontFamily x:Key="poppins_bold">/html/imports/webfonts/Poppins/Poppins-Bold.ttf#Poppins</FontFamily>
         <!--<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />-->
     </Application.Resources>
 </Application>

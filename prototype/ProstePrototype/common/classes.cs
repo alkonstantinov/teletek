@@ -87,6 +87,12 @@ namespace common
 
         public cIPParams(string _ip, int _port) { address = _ip; port = _port; }
     }
+    public class cTDFParams
+    {
+        public JObject tdf;
+        public JObject readcfg;
+        public JObject template;
+    }
 
     public class cWriteField
     {

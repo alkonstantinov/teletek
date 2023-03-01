@@ -36,7 +36,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" x:Name="lbHost" Text="{Binding Label}" Margin="6,0,-4,0" IsReadOnly="True"
-                     Foreground="Gray" FontFamily="Poppins" FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" 
+                     Foreground="Gray" FontFamily="{StaticResource poppins_demibold}" FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" 
                      BorderThickness="0" Background="Transparent" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
             <Border Grid.Row="1"
                     BorderBrush="Gray"
@@ -69,8 +69,8 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox x:Name="FirstSegment" Grid.Column="0" TextAlignment="Center" MaxLength="3" 
-                             VerticalContentAlignment="Center" BorderThickness="0"
-                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             VerticalContentAlignment="Center" BorderThickness="0" Foreground="Gray"
+                             Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=1}"/>
@@ -80,8 +80,8 @@
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
                     <TextBox x:Name="SecondSegment" Grid.Column="2" TextAlignment="Center" MaxLength="3" 
-                             BorderThickness="0" VerticalContentAlignment="Center"
-                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             BorderThickness="0" VerticalContentAlignment="Center" Foreground="Gray"
+                             Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=2}" />
@@ -90,8 +90,8 @@
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
                     <TextBox x:Name="ThirdSegment" Grid.Column="4" TextAlignment="Center" MaxLength="3" 
-                             BorderThickness="0" VerticalContentAlignment="Center"
-                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             BorderThickness="0" VerticalContentAlignment="Center" Foreground="Gray"
+                             Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=3}" />
@@ -100,8 +100,8 @@
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
                     <TextBox x:Name="LastSegment" Grid.Column="6" TextAlignment="Center" MaxLength="3" 
-                             BorderThickness="0" VerticalContentAlignment="Center"
-                             Padding="2" FontSize="12" Background="Transparent" FontWeight="DemiBold"
+                             BorderThickness="0" VerticalContentAlignment="Center" Foreground="Gray"
+                             Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
                              DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
                              Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=4}"/>

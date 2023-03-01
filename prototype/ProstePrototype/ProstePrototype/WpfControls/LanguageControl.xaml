@@ -9,10 +9,9 @@
     <UserControl.Resources>
         <local:HalfValueConverter x:Key="HalfConverter"/>
     </UserControl.Resources>
-    <!--<Grid x:Name="langGrid" VerticalAlignment="Stretch" MaxHeight="60" MaxWidth="60">-->
-    <Button VerticalAlignment="Stretch" MaxHeight="60" MaxWidth="60" Click="OpenMenu_Click"
-            Width="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" 
-            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"
+    <Button HorizontalAlignment="Stretch" MaxHeight="60" MaxWidth="60" Click="OpenMenu_Click"
+            Width="{Binding ActualWidth}" 
+            Height="{Binding ActualWidth}"
             >
         <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}">
@@ -26,7 +25,7 @@
         </Button.Template>
         <Button.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Button}}, Converter={StaticResource HalfConverter}}"/>
+                <Setter Property="CornerRadius" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Button}}, Converter={StaticResource HalfConverter}}"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Style>
         </Button.Resources>
@@ -34,5 +33,4 @@
             <ImageBrush x:Name="iconImage" Stretch="UniformToFill"/>
         </Button.Background>
     </Button>
-    <!--</Grid>-->
 </UserControl>

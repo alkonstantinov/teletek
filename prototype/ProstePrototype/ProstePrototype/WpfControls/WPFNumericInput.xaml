@@ -36,11 +36,11 @@
             </Grid.RowDefinitions>
             <TextBox Text="{Binding Label}" Name="dataBitsLabel" IsReadOnly="True"
                      VerticalAlignment="Center" Margin="6,0,-4,0" Foreground="Gray" Background="Transparent"
-                     FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" FontFamily="Poppins" BorderThickness="0" 
+                     FontSize="{Binding LabelFontSize}" FontFamily="{StaticResource poppins_demibold}" BorderThickness="0" 
                      GotFocus="Click_handler" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
 
             <TextBox Grid.Row="1" Name="dataBitsText" Padding="8, 0"
-                     FontFamily="Poppins" FontSize="16" FontWeight="DemiBold" Foreground="Gray"
+                     FontFamily="{StaticResource poppins_regular}" FontSize="16" Foreground="Gray"
                      TextAlignment="Left" BorderThickness="0" Height="0"
                      PreviewTextInput="NumericOnly" Background="Transparent"
                      Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType={x:Type Border}}}" 

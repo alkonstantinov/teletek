@@ -41,6 +41,44 @@ namespace ProstePrototype
             ContentArea.Content = uc3;
             Button3.Focus();
         }
+        public ReadWindow(int startidx)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            uc0 = new UserControl1();
+            uc1 = new UserControl2();
+            uc2 = new UserControl3();
+            uc3 = new UserControl();
+            selectedIndex = startidx;
+            if (startidx == 0)
+            {
+                uc0.Resources = Application.Current.Resources;
+                img0.Source = imgsource;
+                ContentArea.Content = uc0;
+                Button0.Focus();
+            }
+            else if (startidx == 1)
+            {
+                uc1.Resources = Application.Current.Resources;
+                img1.Source = imgsource;
+                ContentArea.Content = uc1;
+                Button1.Focus();
+            }
+            else if (startidx == 2)
+            {
+                uc2.Resources = Application.Current.Resources;
+                img2.Source = imgsource;
+                ContentArea.Content = uc2;
+                Button2.Focus();
+            }
+            else if (startidx == 3)
+            {
+                uc3.Resources = Application.Current.Resources;
+                img3.Source = imgsource;
+                ContentArea.Content = uc3;
+                Button3.Focus();
+            }
+        }
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
             this.Dispatcher.Invoke(() =>

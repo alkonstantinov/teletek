@@ -781,6 +781,26 @@ namespace lcommunicate
             else
                 return null;
         }
+        public static cTransport ConnectTDF(cTDFParams p)
+        {
+            cTransport t = new cTDF();
+            object conn = t.Connect(p);
+            if (conn != null)
+                return t;
+            else
+                return null;
+        }
+        public static cTransport ConnectBase(object conn_params)
+        {
+            cTransport conn = null;
+            if (conn_params is cIPParams)
+                conn = cComm.ConnectIP(((cIPParams)conn_params).address, ((cIPParams)conn_params).port);
+            else if (conn_params is string)
+                conn = cComm.ConnectFile((string)conn_params);
+            else if (conn_params is cTDFParams)
+                conn = cComm.ConnectTDF((cTDFParams)conn_params);
+            return conn;
+        }
         public static byte[] SendCommand(cTransport conn, string cmd)
         {
             byte[] res = conn.SendCommand(cmd);
