@@ -15,8 +15,8 @@ namespace ProstePrototype
 {
     public class CallbackObjectForJs
     {
-        public string showMessage(string msg)
-        {//Read Note
+        public string addNewSystem(string msg)
+        {
             // MessageBox.Show(msg);
             return "Hi from " + msg;
         }

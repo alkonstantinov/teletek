@@ -138,6 +138,9 @@
     <None Update="Configs\XML\Templates\IRIS8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Templates\IRIS8.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Write\WriteConfig_eclipse99.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

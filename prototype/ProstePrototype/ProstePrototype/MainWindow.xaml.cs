@@ -252,6 +252,9 @@ namespace ProstePrototype
             JObject json = JObject.Parse(e.Message.ToString());
             switch (json["Command"].ToString())
             {
+                case "NewSystem":
+                    LoadPage(json["Params"].Value<string>(), null);
+                    break;
                 case "LoadPage":
                     string highlight = json["Highlight"] == null ? null : json["Highlight"].Value<string>();
                     LoadPage(json["Params"].Value<string>(), highlight);
@@ -438,17 +441,6 @@ namespace ProstePrototype
 
             wb1.Load(url);
 
-            // use the code below for the define_size_btn clicked function
-            //{
-            //this.Dispatcher.Invoke(() =>
-            //{
-            //    gridBrowsers.ColumnDefinitions[0].Width = new GridLength(0);
-            //    wb2.Margin = new Thickness(this.Width / 4, 0, 0, 0);
-            //    wb1.Width = 0;
-            //    Splitter1.Width = 0;
-            //    gsp3.Height = 0;
-            //});
-            //}
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
             this.Dispatcher.Invoke(() =>
             {

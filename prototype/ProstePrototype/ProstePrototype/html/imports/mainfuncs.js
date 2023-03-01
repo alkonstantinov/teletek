@@ -101,7 +101,7 @@ function receiveMessageWPF(jsonTxt) {
 
             break;
         case !!document.getElementById('divDevices'):
-            //alert('divDevices')
+            /*alert('divDevices')*/
             body = document.getElementById('divDevices');
             let divD = document.createElement('div');
             divD.classList = "row m2 no-gutter";
@@ -335,7 +335,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
             //    //doSleep(50);
             //} else {
             //    //window.setTimeout(() =>
-            addButton(title, field, div);
+            addAccordeonButton(title, field, div);
             //    //, 50);
             //}
         } else if (jsonAtLevel[field] && Object.keys(jsonAtLevel[field]).length > 0 && typeof (jsonAtLevel[field]) !== 'string') {
@@ -349,7 +349,50 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 //    await new Promise(r => setTimeout(() => { r(); }, time));
 //}
 
+// addButton function for creating the main panels buttons
 const addButton = (title, schemaKey, div, localJSON = {}) => {
+    let indexFlag = Object.keys(localJSON).length > 0;
+    // clean all digits from used schema
+    let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
+
+    // button color definition
+    let color = indexFlag ? localJSON.deviceType : "";
+
+    if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
+    else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
+
+    // title definition
+    var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
+
+    let el = `<a href="javascript: sendMessageWPF({'Command': 'NewSystem','Params': '${schemaKey}'})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
+                <div class="btnStyle ${color}">
+                    <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
+                        <br /><span class="someS">
+                            <span class="h5">
+                                ${titleTranslated}
+                            </span>
+                            ${indexFlag ? localJSON.interface : ""}
+                        </span>
+                    </i>
+                </div>
+            </a>`;
+
+    div.insertAdjacentHTML('beforeend', el);
+};
+
+async function createPanel(sendMessageWPFJson) {
+    alert('here')
+    alert(JSON.stringify(sendMessageWPFJson));
+    // asking the back-end to provide me with id for the new panel
+    let newPanelId = await boundAsync.addNewSystem(sendMessageWPFJson.Params);
+    // after
+    if (newPanelId) {
+        alert(newPanelId)
+        sendMessageWPF(sendMessageWPFJson);
+    }
+};
+
+const addAccordeonButton = (title, schemaKey, div, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
     // clean all digits from used schema
     let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
