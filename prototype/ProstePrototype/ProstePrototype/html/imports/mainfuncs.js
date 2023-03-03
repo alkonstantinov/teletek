@@ -54,6 +54,7 @@ function setLang(key) {
 }
 //#endregion
 
+//#region WPF Communication
 function sendMessageWPF(json, comm = {}) {
     if (Object.keys(comm).length > 0) {
         try {
@@ -100,16 +101,7 @@ function receiveMessageWPF(jsonTxt) {
             drawFields(body, json, color ? BUTTON_COLORS[color] : '');
 
             break;
-        case !!document.getElementById('divDevices'):
-            /*alert('divDevices')*/
-            body = document.getElementById('divDevices');
-            let divD = document.createElement('div');
-            divD.classList = "row m2 no-gutter";
-            devices = json["pageName"]["wb2"];
-            for (let i = 0; i < devices.length; i++) {
-                addButton(devices[i].title, devices[i].schema.toLowerCase(), divD, devices[i]);
-                body.appendChild(divD);
-            }
+        case !!document.getElementById('divDevices'):            
             break;
         case !!document.getElementById("divPDevices"):
             body = document.getElementById('divPDevices');
@@ -118,12 +110,8 @@ function receiveMessageWPF(jsonTxt) {
             break;
         case !!document.getElementById("divLDevices"):
             if (!elements && Object.keys(json)) {
-                mainKey = Object.keys(json).reduce((key, curKey) => {
-                    if (curKey !== '~path') {
-                        return curKey;
-                    }
-                }, ""); // currKey should not be ~path
-
+                mainKey = Object.keys(json)
+                    .find(currKey => currKey !== '~path' && currKey !== '~panel_id'); // currKey should not be ~path, nor ~panel_id
                 elements = json[mainKey]['@MAX']; // case of LDevices
                 minElements = 0;
             }
@@ -151,10 +139,11 @@ function receiveMessageWPF(jsonTxt) {
         pagePreparation();
     });
 }
+//#endregion
 
 const drawWithModal = (body, json) => {
     // getting keys and adding elements to modal for each
-    keys = Object.keys(json).filter(k => k !== '~path');
+    keys = Object.keys(json).filter(k => k !== '~path' && k !== '~panel_id');
 
     lst = [0];
     elements = keys.length + 1; // for the case of PDevices
@@ -191,10 +180,10 @@ function drawFields(body, json, inheritedColor = '') {
     if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
-    keys.filter(k => k !== '~path').forEach(k => {
+    keys.filter(k => k !== '~path' && k !== '~panel_id').forEach(k => {
         let divLevel = json[k];
 
-        if (k.includes('~')) { // ~noname cases
+        if (k.startsWith('~noname')) { // ~noname cases
             let div = document.createElement('div');
             div.classList = "row align-items-center m-2";
             elementsCreationHandler(div, divLevel);
@@ -348,78 +337,6 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 //    // Sleep for 0.05 seconds
 //    await new Promise(r => setTimeout(() => { r(); }, time));
 //}
-
-// addButton function for creating the main panels buttons
-const addButton = (title, schemaKey, div, localJSON = {}) => {
-    let indexFlag = Object.keys(localJSON).length > 0;
-    // clean all digits from used schema
-    let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
-
-    // button color definition
-    let color = indexFlag ? localJSON.deviceType : "";
-
-    if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
-    else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
-
-    // title definition
-    var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
-
-    let el = `<a href="javascript: sendMessageWPF({'Command': 'NewSystem','Params': '${schemaKey}'})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
-                <div class="btnStyle ${color}">
-                    <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
-                        <br /><span class="someS">
-                            <span class="h5">
-                                ${titleTranslated}
-                            </span>
-                            ${indexFlag ? localJSON.interface : ""}
-                        </span>
-                    </i>
-                </div>
-            </a>`;
-
-    div.insertAdjacentHTML('beforeend', el);
-};
-
-async function createPanel(sendMessageWPFJson) {
-    alert('here')
-    alert(JSON.stringify(sendMessageWPFJson));
-    // asking the back-end to provide me with id for the new panel
-    let newPanelId = await boundAsync.addNewSystem(sendMessageWPFJson.Params);
-    // after
-    if (newPanelId) {
-        alert(newPanelId)
-        sendMessageWPF(sendMessageWPFJson);
-    }
-};
-
-const addAccordeonButton = (title, schemaKey, div, localJSON = {}) => {
-    let indexFlag = Object.keys(localJSON).length > 0;
-    // clean all digits from used schema
-    let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
-
-    // button color definition
-    let color = indexFlag ? localJSON.deviceType : "";
-    if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
-    else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
-
-    // title definition
-    var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
-
-    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${schemaKey}'${!indexFlag ? `, 'Highlight':'${schemaKey}'` : ""}})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
-                <div class="btnStyle ${color}">
-                    <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
-                        <br /><span class="someS">
-                            <span class="h5">
-                                ${titleTranslated}
-                            </span>
-                            ${indexFlag ? localJSON.interface : ""}
-                        </span>
-                    </i>
-                </div>
-            </a>`;
-
-    div.insertAdjacentHTML('beforeend', el);
-};
 
 const appendInnerToElement = (innerString, element, elementJSON) => {
     if (!Array.isArray(elementJSON)) return;
@@ -971,7 +888,9 @@ const transformGroupElement = (elementJson) => {
             return getTextInput({ ...attributes });
 
         case 'EMAC':
-            attributes.value = attributes.value.split(':');
+            if (attributes.value)
+                attributes.value = attributes.value.replaceAll(":", " : ");
+            attributes.input_name = elementJson["@TEXT"];
             return getEmacInput({ ...attributes });
 
         case 'WEEK':
@@ -1344,62 +1263,12 @@ const getEmacInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
                             type="text"
                             id="${input_id}0"
                             name="${input_id}0"
-                            placeholder="00" ${readOnly ? "disabled" : ''}
-                            value="${value[0]}"
+                            placeholder="00 : 00 : 00 : 00 : 00 : 00" ${readOnly ? "disabled" : ''}
+                            value="${value}"
                             oninput="javascript: checkHexRegex(event)" maxlength="2"
                             onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}0','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
                             />
-                    <div>:</div>
-                    <input class="col-1 mr-1"
-                            type="text"
-                            id="${input_id}1"
-                            name="${input_id}1"
-                            placeholder="00" ${readOnly ? "disabled" : ''}
-                            value="${value[1]}"
-                            oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}1','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
-                            />
-                    <div>:</div>
-                    <input type="text"
-                            class="col-1 mr-1"
-                            id="${input_id}2"
-                            name="${input_id}2"
-                            placeholder="00" ${readOnly ? "disabled" : ''}
-                            value="${value[2]}"
-                            oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}2','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
-                            />
-                    <div>:</div>
-                    <input type="text"
-                            class="col-1 mr-1"
-                            id="${input_id}3"
-                            name="${input_id}3"
-                            placeholder="00" ${readOnly ? "disabled" : ''}
-                            value="${value[3]}"
-                            oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}3','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
-                            />
-                    <div>:</div>
-                    <input type="text"
-                            class="col-1 mr-1"
-                            id="${input_id}4"
-                            name="${input_id}4"
-                            placeholder="00" ${readOnly ? "disabled" : ''}
-                            value="${value[4]}"
-                            oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}4','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
-                            />
-                    <div>:</div>
-                    <input type="text"
-                            class="col-1 mr-1"
-                            id="${input_id}5"
-                            name="${input_id}5"
-                            placeholder="00" ${readOnly ? "disabled" : ''}
-                            value="${value[5]}"
-                            oninput="javascript: checkHexRegex(event)" maxlength="2"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}5','newValue': this.value,'position':this.id.replace('${input_id}','')}})"
-                            />
-                </div>
+                 </div>
             </div>`;
 }
 

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Channels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Configuration;
 
 namespace common
 {
@@ -64,6 +65,27 @@ namespace common
                     lst.Add(t.ToString());
                 return lst.ToArray();
             }
+        }
+        public static string IRISLoginCMD
+        {
+            get
+            {
+                JObject set = Settings;
+                JToken t = set["iris_login_command"];
+                if (t != null)
+                    return t.ToString();
+                else
+                    return null;
+            }
+        }
+        public static string setting(string key)
+        {
+            JObject set = Settings;
+            JToken t = set[key];
+            if (t != null)
+                return t.ToString();
+            else
+                return null;
         }
     }
     public class cLoopChannelInfo
@@ -327,6 +349,7 @@ namespace common
 
         public virtual int CommandLength() { return 0; }
         public virtual string CommandString() { return null; }
+        public virtual string CommandString(int idx) { return null; }
         public virtual string NoIdxCommandString() { return null; }
         public virtual string CommandKey() { return null; }
         public virtual int idxPosition() { return -1; }

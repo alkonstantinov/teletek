@@ -173,15 +173,15 @@ namespace ljson
         }
         #endregion
 
-        private static Dictionary<string, JObject> _panel_temlates = new Dictionary<string, JObject>();
+        private static Dictionary<string, JObject> _panel_templates = new Dictionary<string, JObject>();
         private static object _cs_panel_templates = new object();
 
         private static JObject GetPanelTemplate(string name)
         {
             JObject res = null;
             Monitor.Enter(_cs_panel_templates);
-            if (_panel_temlates.ContainsKey(name))
-                res = _panel_temlates[name];
+            if (_panel_templates.ContainsKey(name))
+                res = _panel_templates[name];
             Monitor.Exit(_cs_panel_templates);
             return res;
         }
@@ -189,38 +189,60 @@ namespace ljson
         private static void SetPanelTemplate(string name, JObject json)
         {
             Monitor.Enter(_cs_panel_templates);
-            if (!_panel_temlates.ContainsKey(name))
-                _panel_temlates.Add(name, json);
+            if (!_panel_templates.ContainsKey(name))
+                _panel_templates.Add(name, json);
             else
-                _panel_temlates[name] = json;
+                _panel_templates[name] = json;
             Monitor.Exit(_cs_panel_templates);
         }
 
-        private static JObject _current_panel = null;
+        private static Dictionary<string, string> _system_panels = new Dictionary<string, string>();
+        private static string _current_panel_id = null;
         private static object _cs_current_panel = new object();
         private static JObject CurrentPanel
         {
             get
             {
                 Monitor.Enter(_cs_current_panel);
-                JObject res = _current_panel;
+                if (_current_panel_id == null || !_system_panels.ContainsKey(_current_panel_id))
+                {
+                    Monitor.Exit(_cs_current_panel);
+                    return null;
+                }
+                string filename = _system_panels[_current_panel_id];
                 Monitor.Exit(_cs_current_panel);
+                Monitor.Enter(_cs_panel_templates);
+                if (!_panel_templates.ContainsKey(filename))
+                {
+                    Monitor.Exit(_cs_panel_templates);
+                    return null;
+                }
+                JObject res = _panel_templates[filename];
+                Monitor.Exit(_cs_panel_templates);
                 return res;
             }
-            set
-            {
-                Monitor.Enter(_cs_current_panel);
-                _current_panel = value;
-                Monitor.Exit(_cs_current_panel);
-            }
+            //set
+            //{
+            //    Monitor.Enter(_cs_current_panel);
+            //    _current_panel = value;
+            //    Monitor.Exit(_cs_current_panel);
+            //}
         }
 
         public static string CurrentPanelID
         {
             get
             {
-                JObject _panel = CurrentPanel;
-                return _panel["~guid"].ToString();
+                Monitor.Enter(_cs_current_panel);
+                string res = _current_panel_id;
+                Monitor.Exit(_cs_current_panel);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_current_panel);
+                _current_panel_id = value;
+                Monitor.Exit(_cs_current_panel);
             }
         }
         public static string CurrentPanelType
@@ -885,7 +907,7 @@ namespace ljson
             JObject devtypes_bynone = (JObject)o["~devtypes_bynone"];
             JObject _elements = (JObject)o["ELEMENTS"];
             //Type trw = typeof(cRWPath);
-            string panel_type = null;
+            string panel_type = CurrentPanelType;
             foreach (JToken t in (JToken)_elements)
                 if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
                 {
@@ -903,8 +925,6 @@ namespace ljson
                         if (!drw.ContainsKey(((JProperty)t).Name))
                         {
                             string tname = ((JProperty)t).Name;
-                            if (panel_type == null && Regex.IsMatch(tname, "^iris", RegexOptions.IgnoreCase))
-                                panel_type = "iris";
                             if (panel_type == "iris")
                             {
                                 cRWPathIRIS rwi = jrw.ToObject<cRWPathIRIS>();
@@ -1144,27 +1164,219 @@ namespace ljson
             }
         }
         //Write
+        private static Dictionary<string, string> CompiledWriteCommands(Dictionary<string, Dictionary<string, cRWPath>> paths)
+        {
+            Dictionary<string, string> cmds = new Dictionary<string, string>();
+            foreach (string loop_nom in paths.Keys)
+            {
+                Dictionary<string, string> loopdevs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, loop_nom);
+                foreach (string devaddr in paths[loop_nom].Keys)
+                {
+                    cRWPath rw = paths[loop_nom][devaddr];
+                    JObject jdev = JObject.Parse(loopdevs[devaddr]);
+                    jdev = GroupsWithValues(jdev);
+                }
+            }
+            //
+            return cmds;
+        }
+        private static void WriteSingleElement(string key, JObject _node)
+        {
+
+        }
+        private static void WriteSeriaElement(string key, List<JObject> _nodes)
+        {
+
+        }
+        private static void WriteLoop(string key, List<JObject> _nodes)
+        {
+            JObject _node = _nodes[0];
+            string write_path = _node["~rw"]["WritePath"].ToString();
+            string[] parr = write_path.Split('/');
+            string loops_root = parr[0];
+            JObject elements = (JObject)CurrentPanel["ELEMENTS"];
+            foreach (JProperty p in elements.Properties())
+                if (p.Value.Type == JTokenType.Object && Regex.IsMatch(p.Name, "loop", RegexOptions.IgnoreCase) && Regex.IsMatch(loops_root, "^" + Regex.Replace(p.Name, @"[^a-zA-Z]", @"[\w\W]*?") + "$", RegexOptions.IgnoreCase))
+                {
+                    loops_root = p.Name;
+                    break;
+                }
+            if (elements[loops_root] == null)
+                return;
+            JObject content = (JObject)elements[loops_root]["CONTAINS"];
+            int min = int.MaxValue;
+            int max = int.MinValue;
+            foreach (JProperty p in content.Properties())
+                if (p.Value.Type == JTokenType.Object && ((JObject)p.Value)["@MIN"] != null && ((JObject)p.Value)["@MAX"] != null)
+                {
+                    min = Convert.ToInt32(((JObject)p.Value)["@MIN"].ToString());
+                    max = Convert.ToInt32(((JObject)p.Value)["@MAX"].ToString());
+                    break;
+                }
+            if (min >= max)
+                return;
+            Dictionary<string, cRWPath> merge = WriteReadMerge;
+            Dictionary<string, Dictionary<string, cRWPath>> rwdevs = new Dictionary<string, Dictionary<string, cRWPath>>();
+            for (int i = min; i <= max; i++)
+            {
+                string mkey = Regex.Replace(key, @"LOOP\d+", "LOOP" + i.ToString(), RegexOptions.IgnoreCase);
+                if (!merge.ContainsKey(mkey))
+                    continue;
+                cRWPath rw = merge[mkey];
+                string remask = "LOOP" + i.ToString();
+                string[] karr = mkey.Split('/');
+                foreach (string s in karr)
+                    if (Regex.IsMatch(s, remask + "$"))
+                    {
+                        remask = s;
+                        break;
+                    }
+                remask = "^" + remask;
+                if (!cComm.PseudoElementExists(CurrentPanelID, constants.NO_LOOP, remask))
+                    continue;
+                Dictionary<string, string> devs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, i.ToString());
+                foreach (string saddr in devs.Keys)
+                {
+                    JObject odev = JObject.Parse(devs[saddr]);
+                    JObject orw = (JObject)odev["~rw"];
+                    cRWPath rwpath = orw.ToObject<cRWPath>();
+                    if (!rwdevs.ContainsKey(i.ToString()))
+                        rwdevs.Add(i.ToString(), new Dictionary<string, cRWPath>());
+                    rwdevs[i.ToString()].Add(saddr, rwpath);
+                }
+            }
+            if (rwdevs.Count > 0)
+            {
+                Dictionary<string, string> compiled = CompiledWriteCommands(rwdevs);
+            }
+        }
         public static void WriteDevice(object conn_params)
         {
+            //cTransport conn = cComm.ConnectBase(conn_params);
+            //byte[] pass = new byte[] { 0x00, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
+            //byte[] loginres = cComm.SendCommand(conn, pass);
+            //cComm.CloseConnection(conn);
+            //
             JObject _panel = new JObject(CurrentPanel);
             JObject _elements = (JObject)_panel["ELEMENTS"];
-            //Type trw = typeof(cRWPath);
+            //
+            Dictionary<string, List<JObject>> dwrite = new Dictionary<string, List<JObject>>();
+            //
             foreach (JToken t in (JToken)_elements)
             {
                 if (t.Type != JTokenType.Property || ((JProperty)t).Value.Type != JTokenType.Object)
                     continue;
                 JObject _node = new JObject((JObject)((JProperty)t).Value);
                 string nodename = ((JProperty)t).Name;
-                RWData(_node);
+                if (Regex.IsMatch(nodename, @"(SENSORS|MODULES|SNONE|MNONE)"))
+                {
+                    RWData(_node);
+                }
+                else
+                    RWData(_node);
                 if (_node["~rw"] == null)
                     continue;
+                string writekey = _node["~rw"]["WritePath"].ToString();
+                if (CurrentPanelType == "iris" && Regex.IsMatch(writekey, @"(LOOP)"))
+                {
+                    if (_node["CONTAINS"] == null || _node["CONTAINS"].Type != JTokenType.Object)
+                        continue;
+                    JObject content = (JObject)_node["CONTAINS"];
+                    JProperty pnone = null;
+                    foreach (JProperty p in content.Properties())
+                        if (p.Value.Type == JTokenType.Object && Regex.IsMatch(p.Name, @"NONE$"))
+                        {
+                            pnone = p;
+                            break;
+                        }
+                    if (pnone == null && content["ELEMENT"] != null && content["ELEMENT"].Type == JTokenType.Object)
+                    {
+                        JObject el = (JObject)content["ELEMENT"];
+                        if (el["@ID"] != null && Regex.IsMatch(el["@ID"].ToString(), "NONE$"))
+                            pnone = new JProperty("@ID", el["@ID"]);
+                    }
+                    if (pnone == null)
+                        continue;
+                    writekey = Regex.Replace(writekey, @"LOOP\d+", "LOOP1");
+                    if (!dwrite.ContainsKey(writekey))
+                    {
+                        dwrite.Add(writekey, new List<JObject>());
+                        dwrite[writekey].Add(_node);
+                    }
+                }
+                else
+                {
+                    if (!dwrite.ContainsKey(writekey))
+                        dwrite.Add(writekey, new List<JObject>());
+                    dwrite[writekey].Add(_node);
+                }
             }
+            Dictionary<string, JObject> dnormal = new Dictionary<string, JObject>();
+            Dictionary<string, List<JObject>> dseria = new Dictionary<string, List<JObject>>();
+            Dictionary<string, List<JObject>> dloop = new Dictionary<string, List<JObject>>();
+            foreach (string writepath in dwrite.Keys)
+            {
+                if (Regex.IsMatch(writepath, "loop", RegexOptions.IgnoreCase))
+                {
+                    if (!dloop.ContainsKey(writepath))
+                        dloop.Add(writepath, dwrite[writepath]);
+                }
+                else if (dwrite[writepath].Count > 1)
+                {
+                    if (!dseria.ContainsKey(writepath))
+                        dseria.Add(writepath, dwrite[writepath]);
+                }
+                else
+                {
+                    if (!dnormal.ContainsKey(writepath))
+                        dnormal.Add(writepath, dwrite[writepath][0]);
+                }
+            }
+            foreach (string key in dnormal.Keys)
+                WriteSingleElement(key, dnormal[key]);
+            foreach (string key in dseria.Keys)
+                WriteSeriaElement(key, dseria[key]);
+            foreach (string key in dloop.Keys)
+                WriteLoop(key, dloop[key]);
         }
         #endregion
-
+        public static JObject AddPanel(string name)
+        {
+            string filename = FilePathFromSchema(name);
+            JObject _panel = GetPanelTemplate(filename);
+            //if (_panel != null)
+            //    return (JObject)_panel["ELEMENTS"][name];
+            Monitor.Enter(_cs_current_panel);
+            Monitor.Enter(_cs_panel_templates);
+            Monitor.Enter(_cs_main_content_key);
+            //_panel = _current_panel;
+            if (_panel == null)
+                _panel = SchemaJSON(name);
+            _panel["~panel_type"] = _panel_type;
+            _panel["~template_loaded_from"] = _last_loaded_template_filepath;
+            Guid guid = Guid.NewGuid();
+            string _panel_id = guid.ToString();
+            _system_panels.Add(_panel_id, filename);
+            if (!_panel_templates.ContainsKey(filename))
+                _panel_templates.Add(filename, _panel);
+            else
+                _panel_templates[filename] = _panel;
+            _current_panel_id = _panel_id;
+            _main_content_key = Regex.Replace(name, @"\d+$", "");
+            Monitor.Exit(_cs_main_content_key);
+            Monitor.Exit(_cs_panel_templates);
+            Monitor.Exit(_cs_current_panel);
+            return _panel;
+        }
+        private static void SetPanelIDInToken(JToken t)
+        {
+            t["~panel_id"] = CurrentPanelID;
+        }
         public static JObject GetNode(string name)
         {
             JObject _panel = CurrentPanel;
+            if (_panel == null)
+                _panel = AddPanel(name);
             if (_panel != null)
             {
                 JObject _elements = (JObject)_panel["ELEMENTS"];
@@ -1181,7 +1393,7 @@ namespace ljson
                     else
                     {
                         string[] names = name.Split('/');
-                        _res = new JObject((JObject)_elements[names[0]]);
+                        _res = new JObject((JObject)_elements[Regex.Replace(names[0], @"\d+$", "")]);
                         cRWPath rw = RWLoopPath(WriteReadMerge, name);
                         if (rw != null)
                         {
@@ -1192,37 +1404,39 @@ namespace ljson
                     //
                     //ReadDevice("192.168.17.17", 7000);
                     //
+                    SetPanelIDInToken(_res);
                     return _res;
                 }
             }
+            return null;
             //
-            string filename = FilePathFromSchema(name);
-            _panel = GetPanelTemplate(filename);
-            if (_panel != null)
-                return (JObject)_panel["ELEMENTS"][name];
-            Monitor.Enter(_cs_current_panel);
-            Monitor.Enter(_cs_panel_templates);
-            Monitor.Enter(_cs_main_content_key);
-            _panel = _current_panel;
-            if (_panel == null)
-                _panel = SchemaJSON(name);
-            _panel["~panel_type"] = _panel_type;
-            _panel["~template_loaded_from"] = _last_loaded_template_filepath;
-            Guid guid = Guid.NewGuid();
-            _panel["~guid"] = guid.ToString();
-            if (!_panel_temlates.ContainsKey(filename))
-                _panel_temlates.Add(filename, _panel);
-            else
-                _panel_temlates[filename] = _panel;
-            _current_panel = _panel;
-            string _clean_name = Regex.Replace(name, @"[\d-]", string.Empty); // added by Viktor
-            _main_content_key = _clean_name; // replaced name by _clean_name by Viktor
-            Monitor.Exit(_cs_main_content_key);
-            Monitor.Exit(_cs_panel_templates);
-            Monitor.Exit(_cs_current_panel);
-            JObject _res1 = new JObject((JObject)_panel["ELEMENTS"][_clean_name]); // replaced name by _clean_name by Viktor
-            RWData(_res1);
-            return _res1;
+            //string filename = FilePathFromSchema(name);
+            //_panel = GetPanelTemplate(filename);
+            //if (_panel != null)
+            //    return (JObject)_panel["ELEMENTS"][name];
+            //Monitor.Enter(_cs_current_panel);
+            //Monitor.Enter(_cs_panel_templates);
+            //Monitor.Enter(_cs_main_content_key);
+            //_panel = _current_panel;
+            //if (_panel == null)
+            //    _panel = SchemaJSON(name);
+            //_panel["~panel_type"] = _panel_type;
+            //_panel["~template_loaded_from"] = _last_loaded_template_filepath;
+            //Guid guid = Guid.NewGuid();
+            //_panel["~guid"] = guid.ToString();
+            //if (!_panel_templates.ContainsKey(filename))
+            //    _panel_templates.Add(filename, _panel);
+            //else
+            //    _panel_templates[filename] = _panel;
+            //_current_panel = _panel;
+            //string _clean_name = Regex.Replace(name, @"[\d-]", string.Empty); // added by Viktor
+            //_main_content_key = _clean_name; // replaced name by _clean_name by Viktor
+            //Monitor.Exit(_cs_main_content_key);
+            //Monitor.Exit(_cs_panel_templates);
+            //Monitor.Exit(_cs_current_panel);
+            //JObject _res1 = new JObject((JObject)_panel["ELEMENTS"][_clean_name]); // replaced name by _clean_name by Viktor
+            //RWData(_res1);
+            //return _res1;
         }
 
         #region internal relations operations
@@ -1397,7 +1611,18 @@ namespace ljson
             string path = Directory.GetCurrentDirectory();
             if (path[path.Length - 1] != '\\')
                 path += @"\";
-            path += @"Configs\XML\Templates\";
+            path += @"Configs\XML\Systems\";
+            string[] dirs = Directory.GetDirectories(path);
+            string dir = null;
+            foreach (string d in dirs)
+                if (Regex.IsMatch(d, @"\\" + schema + "$", RegexOptions.IgnoreCase))
+                {
+                    dir = d;
+                    break;
+                }
+            if (dir == null)
+                return null;
+            path = dir + "\\Template";
             string[] files = Directory.GetFiles(path);
             for (int i = 0; i < files.Length; i++)
             {
@@ -1562,6 +1787,7 @@ namespace ljson
                 JToken tc = json["ELEMENTS"][content_key]["CONTAINS"];
                 if (tc != null)
                 {
+                    SetPanelIDInToken(tc);
                     string lc = tc.ToString();
                     return lc;
                 }
@@ -1569,6 +1795,7 @@ namespace ljson
             JToken t = json["ELEMENTS"][key]["CONTAINS"];
             if (t != null)
             {
+                SetPanelIDInToken(t);
                 string lc = t.ToString();
                 LastContent = lc;
                 return lc;
@@ -1588,7 +1815,10 @@ namespace ljson
                 {
                     JObject jgrp = (JObject)jprop["Groups"];
                     if (jgrp != null)
+                    {
+                        SetPanelIDInToken(jgrp);
                         return GroupsWithValues(jgrp).ToString();
+                    }
                     else
                         return "{}";
                 }
@@ -1596,7 +1826,10 @@ namespace ljson
                 {
                     JObject jcontains = (JObject)jkey["CONTAINS"];
                     if (jcontains != null)
+                    {
+                        SetPanelIDInToken(jcontains);
                         return jcontains.ToString();
+                    }
                     else
                         return "{}";
                 }

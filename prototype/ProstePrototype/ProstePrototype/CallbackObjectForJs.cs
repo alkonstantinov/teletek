@@ -15,8 +15,8 @@ namespace ProstePrototype
 {
     public class CallbackObjectForJs
     {
-        public string addNewSystem(string msg)
-        {
+        public string showMessage(string msg)
+        {//Read Note
             // MessageBox.Show(msg);
             return "Hi from " + msg;
         }
@@ -153,6 +153,11 @@ namespace ProstePrototype
         {
             JArray zdevs = cJson.ZoneDevices(elementNumber.ToString());
             return (zdevs != null) ? zdevs.ToString() : "[]";
+        }
+        public string setActivePanel(string panel_id)
+        {
+            cJson.CurrentPanelID = panel_id;
+            return "setSuccess";//Ако искаме да връщаме нещо, а ако не - ще е void => връщаме, за да действаме синхронно
         }
     }
 }

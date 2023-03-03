@@ -10,6 +10,8 @@ let maxDevicesAllowed = 100;
 //#endregion VARIABLES
 
 //#region LOOP ELEMENT
+
+// function that get the TTE_NONE or (Sensors or Modules)
 const getArrayToModal = (id, loopNumber, loopType, operation) => {
     boundAsync.getJsonNode(id, operation).then(res => {
         var listJson = Object.keys(JSON.parse(res));
@@ -48,11 +50,12 @@ const getArrayToModal = (id, loopNumber, loopType, operation) => {
     });
 }
 
+// function called when click on + ADD DEVICE IN LOOP {loopNumber}
 const loopElementFunc = (loopNumber, loopType) => {
     boundAsync.getJsonNode(loopType, 'CONTAINS').then(res => {
         var changeJson = JSON.parse(res)["ELEMENT"];
 
-        if (!Array.isArray(changeJson)) {
+        if (!Array.isArray(changeJson)) { // case TTE_NONE
             const { id, min, max } = {
                 id: changeJson["@ID"],
                 min: +(changeJson["@MIN"]),
@@ -64,7 +67,7 @@ const loopElementFunc = (loopNumber, loopType) => {
             if (id) {
                 getArrayToModal(id, loopNumber, loopType, 'CHANGE');
             }
-        } else {
+        } else { // case Sensors or Modules
             Object.keys(changeJson).forEach(idx => {
                 getArrayToModal(changeJson[idx]["@ID"], loopNumber, loopType, 'CONTAINS');
             });
@@ -278,7 +281,7 @@ const fillLoopElements = (loopNumber, loopType) => {
 //#endregion LOOP ELEMENT
 
 //#region LOOP
-// chacking for created loops
+// checking for created loops
 function getLoops() {
     boundAsync.getLoops(mainKey).then(r => {
         if (!r) return;
@@ -291,7 +294,7 @@ function getLoops() {
     $("#deviceList").modal('hide')
 }
 
-// initial loop function for adding a loop;
+// initial loop function for adding a loop; - launch when pressin button ADD LOOP or + LOOP
 const loopFunc = () => {
     if (lst.length - 1 === elements) {
         alert(new T().t(localStorage.getItem('lang'), "max_number_of_loops_created_already"));
@@ -301,13 +304,13 @@ const loopFunc = () => {
         sendMessageWPF({
             'Command': 'AddingLoop',
             'Params': { 'elementType': mainKey, 'elementNumber': lst.length },
-            'Callback': 'loopCallback'
-            //, 'CallBackParams': [mainKey, lst.length, 'CHANGE']
+            'Callback': 'loopCallback' // -> the back-end call the function loopCallBack with default 'CallBackParams': [mainKey, lst.length, 'CHANGE']
         });
         $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
     }
 }
 
+// function to fill in the modal with TELETEK_LOOP and SYSTEM SENSOR LOOP
 function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
     boundAsync.getJsonNodeForElement(key, len, command).then(res => {
         var changeJson = JSON.parse(res);
@@ -430,7 +433,7 @@ function showLoop(loopNumber, loopType) {
                     </div>
                 </div>
 
-                <div class="modal fade bd-example" tabindex="-1" role="dialog" id="${loopType}_modal" aria-hidden="true">
+                <div class="modal fade" tabindex="-1" role="dialog" id="${loopType}_modal" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="row list-group fire justify-content-center" id="list-tab" role="tablist">
@@ -442,7 +445,7 @@ function showLoop(loopNumber, loopType) {
 
                 <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                     <button style="display: inline-flex; margin: -3px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;" 
-                        data-toggle="modal" data-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
+                        data-bs-toggle="modal" data-bs-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
                             <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "device_in_loop")} ${loopNumber}
                     </button>
                 </div>`;
@@ -469,7 +472,7 @@ function showLoop(loopNumber, loopType) {
                             </div>
                         </div>
 
-                        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="${loopType}_modal" aria-hidden="true">
+                        <div class="modal fade" tabindex="-1" role="dialog" id="${loopType}_modal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="row list-group fire" id="list-tab" role="tablist">
@@ -481,7 +484,7 @@ function showLoop(loopNumber, loopType) {
 
                         <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
                             <button style="display: inline-flex; margin: -5px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;"
-                                data-toggle="modal" data-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
+                                data-bs-toggle="modal" data-bs-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
                                     <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}
                             </button>
                         </div>`;

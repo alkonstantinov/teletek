@@ -1,4 +1,92 @@
-﻿:root {
+﻿/* poppins-200 - devanagari_latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 200;
+    src: url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-200.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
+    url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-200.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* poppins-regular - devanagari_latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
+    url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-regular.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* poppins-600 - devanagari_latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    src: url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-600.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
+    url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-600.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* poppins-800 - devanagari_latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    src: url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-800.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
+    url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-800.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'), local('MaterialIcons-Regular'), 
+        url(imports/webfonts/iconfont/MaterialIcons-Regular.woff2) format('woff2'), 
+        url(imports/webfonts/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Material Icons Outlined';
+    font-weight: 400;
+    font-style: normal;
+    src: local('Material Icons Outlined'), local('MaterialIconsOutlined-Regular'), url('imports/webfonts/iconfont/MaterialIcons-Outlined.woff2') format('woff2');
+    font-display: fallback;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.25em; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    margin-right: 0.5em;
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.25em;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    margin-right: 0.5em;
+}
+
+:root {
     --toph: 0;
     --grasse: #439809;
     --grasse-hov: #08893a;
@@ -26,14 +114,17 @@ h5 {
     font-size: 0.75rem;
 }
 
+span.fire,
 .fire h5 {
     color: var(--fire);
 }
 
+span.normal,
 .normal h5 {
     color: var(--normal);
 }
 
+span.grass,
 .grasse h5 {
     color: var(--grasse);
 }
@@ -155,7 +246,7 @@ button {
     }
 
 .scroll {
-    overflow-x: auto;
+    overflow-x: inherit;
     height: calc(100vh - 98px); /* - 98px*/
 }
 
@@ -175,7 +266,7 @@ button {
 }
 
 .modal-content {
-    background-color: var(--white);
+    background-color: var(--bs-modal-bg);
     padding: 10px;
 }
 
@@ -465,10 +556,11 @@ fieldset {
         padding: 0 1rem 0.2rem 1rem;
         font-size: 1.2rem;
         position: relative;
-        width: fit-content;
+        width: fit-content !important;
         font-weight: 700;
         margin-left: auto;
         margin-right: auto;
+        float: none;
     }
 
         fieldset legend:before {
@@ -721,7 +813,7 @@ fieldset {
     background-color: #ffffff;
     border: 1px solid #42485a;
     color: #42485a;
-    max-width: 25vw;
+    max-width: 35vw;
     min-width: 5vw;
 }
 

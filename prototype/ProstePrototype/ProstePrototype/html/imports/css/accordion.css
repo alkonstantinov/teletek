@@ -1,0 +1,70 @@
+body {
+    font-family: 'Poppins';
+    background-color: rgba(238,245,253,1);
+}
+
+.accordion-item {
+    border: 0 solid #dee2e600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0px 0px 5px 2px lightgray;
+}
+
+.accordion-button{
+    font-weight: 600 !important;
+    padding: 0.5rem 0.8rem !important;
+    font-size: 0.8rem !important;
+}
+
+    .accordion-button:focus:not(.collapsed) {
+        box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+    }
+
+    .accordion-button:not(.collapsed) {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .accordion-button.collapsed {
+        border-radius: 8px;
+    }
+
+.accordion-body {
+    background: #e8ebeb;
+    display: grid;
+    gap: 0.2rem;
+    padding: 0;
+}
+
+    .accordion-body a {
+        border: none;
+        background: transparent;
+        color: gray;
+        padding: 0.2rem 2rem;
+    }
+        .accordion-body a * {
+            color: gray;
+        }
+
+        .accordion-body a:hover {
+            background: white;
+        }
+
+        .accordion-body a:focus-within {
+            color: initial;
+            background: white;
+        }
+        .accordion-body a:focus-within *{
+            color: unset;
+        }
+
+    .accordion-body a:focus-within span.fire {
+        color: var(--fire); /* Override the gray color for the span.fire element when the parent button is focused */
+    }
+
+    .accordion-body a:focus-within span.normal {
+        color: var(--normal); /* Override the gray color for the span.normal element when the parent button is focused */
+    }
+
+    .accordion-body a:focus-within span.grasse {
+        color: var(--grasse); /* Override the gray color for the span.grasse element when the parent button is focused */
+    }

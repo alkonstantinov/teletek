@@ -38,6 +38,19 @@ namespace common
             }
             return sio + sDataType + sindex + sbuffoffset + slen;
         }
+        public override string CommandString(int idx)
+        {
+            if (sio == null || sio == "")
+            {
+                sio = "0000";
+                if (io == eIO.ioRead)
+                    sio = "0351";
+                else if (io == eIO.ioWrite)
+                    sio = "0072";
+            }
+            string sidx = idx.ToString("X2");
+            return sio + sDataType + sidx + sbuffoffset + slen;
+        }
         public override string NoIdxCommandString()
         {
             if (sio == null || sio == "")
@@ -292,7 +305,7 @@ namespace common
                             if (!dcmd.ContainsKey(cmdkey))
                                 dcmd.Add(cmdkey, new Dictionary<string, List<string>>());
                             Dictionary<string, List<string>> didx = dcmd[cmdkey];
-                            if (Regex.IsMatch(element_root, @"peripher", RegexOptions.IgnoreCase) && lastidx != null &&  cmdidxs != lastidx)
+                            if (Regex.IsMatch(element_root, @"peripher", RegexOptions.IgnoreCase) && lastidx != null && cmdidxs != lastidx)
                             {
                                 if (!didx.ContainsKey(cmdidxs + "/" + lastidx))
                                     didx.Add(cmdidxs + "/" + lastidx, new List<string>());

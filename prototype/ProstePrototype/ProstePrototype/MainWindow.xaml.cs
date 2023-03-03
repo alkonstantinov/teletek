@@ -49,6 +49,8 @@ namespace ProstePrototype
             public string Params { get; set; }
         }
 
+        private bool loadWb1 { get; set; }
+
         public MainWindow()
         {
             applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
@@ -92,6 +94,7 @@ namespace ProstePrototype
             wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
 
             define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
+            loadWb1 = true;
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -253,11 +256,14 @@ namespace ProstePrototype
             switch (json["Command"].ToString())
             {
                 case "NewSystem":
+                    JObject panel = cJson.AddPanel(json["Params"].ToString());
                     LoadPage(json["Params"].Value<string>(), null);
+                    loadWb1 = false;
                     break;
                 case "LoadPage":
                     string highlight = json["Highlight"] == null ? null : json["Highlight"].Value<string>();
                     LoadPage(json["Params"].Value<string>(), highlight);
+                    loadWb1 = false;
                     break;
                 case "MainMenuBtn":
                     switch (json["Function"].ToString())
@@ -284,6 +290,7 @@ namespace ProstePrototype
                     if (query_string != "")
                         query_string = "?" + query_string;
                     LoadPage("iris_loop_devices" + query_string, "iris_loop_devices");
+                    loadWb1 = false;
                     break;
                 case "AddingElement":
                     string elementType = json["Params"]["elementType"].ToString();
@@ -439,7 +446,13 @@ namespace ProstePrototype
                 ((BrowserParams)wb1.Tag).Params = cJson.ContentBrowserParam(data.key);
             });
 
-            wb1.Load(url);
+            if (loadWb1)
+            {
+                wb1.Load(url);
+            } else
+            {
+                OnStateChanged(wb1, new LoadingStateChangedEventArgs(new object() as IBrowser, false, false, false));
+            }
 
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
             this.Dispatcher.Invoke(() =>

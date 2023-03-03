@@ -6,9 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../boostrap.css" />
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../imports/jquery-3.6.0.js"></script>
+    <script src="../imports/boostrap/popper.min.js"></script>
+    <script src="../imports/boostrap/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../imports/boostrap/boostrap.css" />
+    <script src="../imports/boostrap/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="../imports/css/all.css" />
+    <script src="../imports/font-awesome.js"></script>
+
     <link rel="stylesheet" href="../IRIS.css" />
 
     <title>Teletek Manager</title>
@@ -29,7 +35,7 @@
             </div>
         </div>
 
-        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList" aria-hidden="true">
+        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="row list-group fire" id="list-tab" role="tablist">
@@ -55,13 +61,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
 
@@ -76,14 +82,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title"></h4>
-                        <button type="button" class="close" id="xClose">&times;</button>
+                        <button type="button" class="btn-close" id="xClose"></button>
                     </div>
                     <div class="modal-body">
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" id="yesBtn">Yes</button>
-                        <button type="button" class="btn btn-default" id="bigClose">Close</button>
+                        <button type="button" class="btn btn-primary" id="yesBtn">Yes</button>
+                        <button type="button" class="btn btn-secondary" id="bigClose">Close</button>
                     </div>
                 </div>
 
@@ -91,12 +97,7 @@
         </div>
 
     </div>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../imports/jquery-3.6.0.js"></script>
-    <script src="../imports/popper.min.js"></script>
-    <script src="../imports/boostrap@4.3.1.min.js"></script>
-    <script src="../imports/bootstrap-datepicker.min.js"></script>
-    <script src="../imports/font-awesome.js"></script>
+    
     <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>

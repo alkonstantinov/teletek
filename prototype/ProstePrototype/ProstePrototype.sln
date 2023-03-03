@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jtest", "jtest\jtest.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lcommunicate", "lcommunicate\lcommunicate.csproj", "{D0B8D212-5E23-4B83-A87F-F33EFB28D020}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "common\common.csproj", "{29BE0FE3-D4F2-49F4-A108-0E53EE9F428E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "common", "common\common.csproj", "{29BE0FE3-D4F2-49F4-A108-0E53EE9F428E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

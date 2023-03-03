@@ -806,7 +806,11 @@ namespace lcommunicate
             byte[] res = conn.SendCommand(cmd);
             return res;
         }
-
+        public static byte[] SendCommand(cTransport conn, byte[] cmd)
+        {
+            byte[] res = conn.SendCommand(cmd);
+            return res;
+        }
         public static void CloseConnection(cTransport conn)
         {
             conn.Close();

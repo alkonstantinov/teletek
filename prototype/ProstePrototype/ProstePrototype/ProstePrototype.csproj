@@ -121,19 +121,58 @@
 
   <ItemGroup>
     <None Update="Configs\XML\Read\ReadConfig_eclipse99.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Read\ReadConfig_iris8_version01.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Read\ReadConfig_iris_version24.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Read\ReadConfig_ris8_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Eclipce99\Read\ReadConfig_eclipse99.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Eclipce99\Template\ECLIPSE99.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Eclipce99\Write\WriteConfig_eclipse99.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Eclipce\Read\ReadConfig_eclipse_0005.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Eclipce\Template\ECLIPSE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Eclipce\Write\WriteConfig_eclipse_0005.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Read\ReadConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Template\IRIS8.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Write\WriteConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS\Read\ReadConfig_iris_version24.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS\Template\IRIS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS\Write\WriteConfig_iris_version24.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Templates\ECLIPSE99.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Templates\IRIS.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Templates\IRIS8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -142,13 +181,25 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_eclipse99.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_iris8_version01.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Write\WriteConfig_iris_version24.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Write\WriteConfig_ris8_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\boostrap\bootstrap.bundle.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\boostrap\bootstrap.bundle.min.js.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\boostrap\bootstrap.min.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\dark.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -159,8 +210,14 @@
     <None Update="html\imports\boostrap%404.3.1.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\imports\bootstrap-datepicker.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="html\imports\boostrap\bootstrap-datepicker.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\boostrap\popper.min.js.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\css\accordion.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\css\all.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -234,10 +291,13 @@
     <None Update="html\imports\loop_constants.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\imports\popper.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="html\imports\boostrap\popper.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\translations.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\wb1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\webfonts\fa-brands-400.woff2">
@@ -251,6 +311,39 @@
     </None>
     <None Update="html\imports\webfonts\fa-v4compatibility.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\iconfont\MaterialIcons-Outlined.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\iconfont\MaterialIcons-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\iconfont\MaterialIcons-Regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-200.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-200.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-600.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-600.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-800.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-800.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\IRIS\IRISPanel-automatic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -441,8 +534,8 @@
     <None Update="Images\ANDFunction.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="html\boostrap.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="html\imports\boostrap\boostrap.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\ECLIPSE\Devices.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -618,6 +711,10 @@
     <None Update="languages\TR.JPG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Update="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -638,6 +735,27 @@
   <ItemGroup>
     <Folder Include="Configs\XML\Write\" />
     <Folder Include="Configs\XML\Read\" />
+    <Folder Include="html\imports\webfonts\iconfont\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
