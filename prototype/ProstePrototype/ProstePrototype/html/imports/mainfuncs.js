@@ -297,7 +297,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 return;
             }
             const newElement = document.createElement('div');
-            let className = `col-xs-12 col-lg-${jsonAtLevel[field]['@TYPE'] === "EMAC" || jsonAtLevel[field]['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
+            let className = `col-12 col-lg-${jsonAtLevel[field]['@TYPE'] === "EMAC" || jsonAtLevel[field]['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
             newElement.classList = className;
             if (jsonAtLevel[field]['@TYPE'] === "TAB") newElement.style.minHeight = "6em";
 
@@ -344,7 +344,7 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
     let andArray = elementJSON.filter(f => f["@TYPE"] === "AND").map(e => e["PROPERTIES"]["PROPERTY"]).flatMap(el => el);
     let len2 = andArray.filter(f => f["@TYPE"] !== "HIDDEN").length || 0;
     let len1 = elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length;
-    let className = innerString.slice(0, 9) === '<fieldset' ? "col-12 mt-2 mb-2" : `col-xs-12 col-lg-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
+    let className = innerString.slice(0, 9) === '<fieldset' ? "col-12 mt-2 mb-2" : `col-12 col-lg-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
     newElement.classList = className;
     newElement.innerHTML = innerString;
     element.appendChild(newElement);
@@ -683,7 +683,7 @@ const transformGroupElement = (elementJson) => {
 
             for (el in andElementsList) {
                 let andElDiv = document.createElement('div');
-                andElDiv.classList = 'col-xs-12 col-lg-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
+                andElDiv.classList = 'col-12 col-lg-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
                 andElDiv.insertAdjacentHTML('beforeend', transformGroupElement(andElementsList[el]));
                 ds.appendChild(andElDiv);
             }
@@ -781,7 +781,7 @@ const transformGroupElement = (elementJson) => {
                             else {
                                 if (elementJSON['@TYPE'] === 'HIDDEN') continue;
                                 const newElement = document.createElement('div');
-                                let className = `col-xs-12 col-lg-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
+                                let className = `col-12 col-lg-${elementJSON['@TYPE'] === "EMAC" || elementJSON['@TYPE'] === "TAB" ? "12" : "6"} mt-1`;
                                 newElement.classList = className;
 
                                 const innerString = transformGroupElement(elementJSON);
@@ -1281,7 +1281,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, size, RmBtn = fal
                 <legend>${input_name}</legend>
                 <div class="row">`;
     for (let i = 0; i < size / 2; i++) {
-        if (i % 2 === 0) inner += `<fieldset class="col-xs-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
+        if (i % 2 === 0) inner += `<fieldset class="col-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
         inner += ` <div class="form-item roww mw">
                         <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? newT.t(localStorage.getItem('lang'), 'activate') : newT.t(localStorage.getItem('lang'), 'deactivate')}</label>
                         <input class="ml10${i % 2 === 0 ? 'p' : ''}"
@@ -1464,7 +1464,7 @@ async function createElementButton(last, elementType) {
                             </div>
                         </a>
                     </div>
-                    <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                    <div class="col-1 p-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
                         <i class="fa-solid fa-xmark ${BUTTON_COLORS[color]}"></i>
                     </div>
                 </div>
@@ -1512,9 +1512,9 @@ async function inputGroupTextGenerator(last, elementType) {
             let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
             let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
             let legend = (trans.length + `${last}`.length) > 15 ? trans.substring(0, 12) + '...' : trans;
-            return `<div id="${last}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="row">
-                            <fieldset style="min-width: 200px;">
+                            <fieldset style="min-width: 200px;" class="col-10">
                                 <legend>${legend} ${last}</legend>                                
                                     <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
@@ -1526,12 +1526,12 @@ async function inputGroupTextGenerator(last, elementType) {
                                     </label>
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}
                                 </p>
-                        </fieldset>
-                        <div onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
-                            <i class="fa-solid fa-xmark fire"></i>
+                            </fieldset>
+                            <div class="col-1" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
                         </div>
-                    </div>
-                </div>`;
+                    </div>`;
         }
         return '';
     } catch (e) { console.log('Error', e) }

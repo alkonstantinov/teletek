@@ -246,7 +246,7 @@ button {
     }
 
 .scroll {
-    overflow-x: inherit;
+    overflow-x: auto;
     height: calc(100vh - 98px); /* - 98px*/
 }
 
@@ -362,6 +362,10 @@ button {
 
 mb5r {
     margin-bottom: 5rem;
+}
+
+mlm5 {
+    margin-left: -5px !important;
 }
 /*
 .minh {

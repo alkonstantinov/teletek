@@ -11,6 +11,8 @@
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
     <None Remove="html\imports\webfonts\fa-v4compatibility.ttf" />
+    <None Remove="html\imports\webfonts\iconfont\gridview2x.png" />
+    <None Remove="html\imports\webfonts\iconfont\listview2x.png" />
     <None Remove="html\imports\webfonts\Poppins\Poppins-Bold.ttf" />
     <None Remove="html\imports\webfonts\Poppins\Poppins-Light.ttf" />
     <None Remove="html\imports\webfonts\Poppins\Poppins-Regular.ttf" />
@@ -43,6 +45,12 @@
     </Resource>
     <Resource Include="html\imports\webfonts\fa-v4compatibility.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\iconfont\gridview2x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\iconfont\listview2x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="html\imports\webfonts\Poppins\Poppins-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -735,7 +743,6 @@
   <ItemGroup>
     <Folder Include="Configs\XML\Write\" />
     <Folder Include="Configs\XML\Read\" />
-    <Folder Include="html\imports\webfonts\iconfont\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -428,7 +428,10 @@ namespace ProstePrototype
             LoadBrowsers(lpd, highlight);
             this.Dispatcher.Invoke(() =>
             {
-                initBreadCrumbs(pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>());
+                initBreadCrumbs(
+                    pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>(),
+                    (string)pages[_clean_key].Value<JObject>()["right"].Value<string>().Split("/")[0] // get the directory source to define the color type
+                    );
             });
             
         }
@@ -720,7 +723,7 @@ namespace ProstePrototype
         #endregion
 
         #region breadcrumb
-        private void addBreadCrumb(string title, string page)
+        private void addBreadCrumb(string title, string page, string color)
         {
             foreach(var item in lvBreadCrumbs.Items)
             {
@@ -732,7 +735,7 @@ namespace ProstePrototype
                 Tag = page,
                 Content = title,
                 Background = Brushes.Transparent,
-                Foreground = DarkMode ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray")) : new SolidColorBrush((Color)ColorConverter.ConvertFromString("Blue")),
+                Foreground = DarkMode ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray")) : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color)),
                 //Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
                 BorderBrush = Brushes.Transparent
             };
@@ -746,17 +749,20 @@ namespace ProstePrototype
             string page = ((Button)sender).Tag.ToString();
             LoadPage(page, "");
         }
-        private void initBreadCrumbs(JArray breadCrumbs)
+        private void initBreadCrumbs(JArray breadCrumbs, string panel_type)
         {
             lvBreadCrumbs.Items.Clear();
+            string color = "Blue";
+            if (panel_type.ToLower().StartsWith("iris")) color = "Red";
+            else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
             foreach (var item in breadCrumbs.Select(x => x.Value<string>()))
-            {
+            {                
                 string title = pages[item].Value<JObject>()["title"].Value<string>();
                 if (title != "Start")
                 {
                     title = $">  {title}";
                 }
-                addBreadCrumb(title, item);
+                addBreadCrumb(title, item, color);
             }
         }
         #endregion
@@ -812,6 +818,19 @@ namespace ProstePrototype
                     footerBtnRow.Height = new GridLength(0);
                 }
             });
+        }
+
+        private void GridOrListView_Click(object sender, RoutedEventArgs e)
+        {
+            if (GridView_or_ListView_text.Text == " Grid View")
+            {
+                GridView_or_ListView_text.Text = " List View";
+                GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/listview2x.png", UriKind.RelativeOrAbsolute));
+            } else
+            {
+                GridView_or_ListView_text.Text = " Grid View";
+                GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/gridview2x.png", UriKind.RelativeOrAbsolute));
+            }
         }
     }
 

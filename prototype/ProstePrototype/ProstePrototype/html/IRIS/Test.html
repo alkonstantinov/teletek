@@ -10286,31 +10286,48 @@
     </style>
 
     <link rel="stylesheet" href="../IRIS.css">
-
     <title>Teletek Manager</title>
 </head>
-<body class="fullHeight" style="">
-    <div class="container fullHeight" id="divLDevices">
+<body class="">
+    <div class="container" id="divMain">
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
-
-        <div class="row fullHeight">
+        <div class="row pt-2">
             <div class="col-3 bl fire scroll">
-                <div id="new">
+                <div id="new" class="row">
 
 
 
 
 
 
-                    <p>Add up to 4 Loops</p><div class="col-12" id="IRIS_TTELOOP1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="col-12" id="0">
                         <div class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showLoop('1', 'IRIS_TTELOOP1')" onclick="javascript:addActive()">
+                                <a href="javascript:showElement('0', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
                                     <div class="btnStyle fire">
-                                        <i class="fa-solid fa-arrows-spin fa-3x p15">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
                                             <br><span class="someS">
                                                 <span class="h5">
-                                                    Teletek Loop 1
+                                                    Output 0
                                                 </span>
                                             </span>
                                         </i>
@@ -10318,19 +10335,19 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript: exchangingLoop('IRIS_TTELOOP1')">
-                                <i class="fa-solid fa-right-left fire"></i>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '0' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '0', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
                             </div>
                         </div>
-                    </div><div class="col-12" id="IRIS_LOOP2">
+                    </div><div class="col-12" id="1">
                         <div class="row">
                             <div class="col-11 pr-1">
-                                <a href="javascript:showLoop('2', 'IRIS_LOOP2')" onclick="javascript:addActive()">
+                                <a href="javascript:showElement('1', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
                                     <div class="btnStyle fire">
-                                        <i class="fa-solid fa-arrows-spin fa-3x p15">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
                                             <br><span class="someS">
                                                 <span class="h5">
-                                                    System Sensors Loop 2
+                                                    Output 1
                                                 </span>
                                             </span>
                                         </i>
@@ -10338,630 +10355,1190 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-1 p-0 m-0" onclick="javascript: exchangingLoop('IRIS_LOOP2')">
-                                <i class="fa-solid fa-right-left fire"></i>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '1' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '1', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
+                        </div>
+                    </div><div class="col-12" id="2">
+                        <div class="row">
+                            <div class="col-11 pr-1">
+                                <a href="javascript:showElement('2', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Output 2
+                                                </span>
+                                            </span>
+                                        </i>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '2' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '2', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
+                        </div>
+                    </div><div class="col-12" id="3">
+                        <div class="row">
+                            <div class="col-11 pr-1">
+                                <a href="javascript:showElement('3', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Output 3
+                                                </span>
+                                            </span>
+                                        </i>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '3' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '3', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
+                        </div>
+                    </div><div class="col-12" id="4">
+                        <div class="row">
+                            <div class="col-11 pr-1">
+                                <a href="javascript:showElement('4', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Output 4
+                                                </span>
+                                            </span>
+                                        </i>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '4' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '4', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
+                        </div>
+                    </div><div class="col-12" id="5">
+                        <div class="row">
+                            <div class="col-11 pr-1">
+                                <a href="javascript:showElement('5', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Output 5
+                                                </span>
+                                            </span>
+                                        </i>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '5' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '5', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
+                        </div>
+                    </div><div class="col-12" id="6">
+                        <div class="row">
+                            <div class="col-11 pr-1">
+                                <a href="javascript:showElement('6', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Output 6
+                                                </span>
+                                            </span>
+                                        </i>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '6' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '6', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
+                            </div>
+                        </div>
+                    </div><div class="col-12" id="250">
+                        <div class="row">
+                            <div class="col-11 pr-1">
+                                <a href="javascript:showElement('250', 'IRIS_OUTPUT')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa fa-arrow-up fa-3x p15" aria-hidden="true">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Output 250
+                                                </span>
+                                            </span>
+                                        </i>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS_OUTPUT', 'elementNumber': '250' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '250', 'elementType': '' }})">
+                                <i class="fa-solid fa-xmark fire"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-9 fullHeight">
-                <div id="selected_area" class="fullHeight">
-                    <div class="row fullHeight">
-                        <div class="col-3 bl fire scroll">
-                            <div id="new_device_IRIS_TTELOOP1" class="row">
-
-                                <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(1)" id="calculateDevices" data-toggle="modal" data-target="#showDevicesListModal">Number of devices: 1</button><div class="col-12" id="IRIS_TTELOOP1_1">
-                                    <div class="row">
-                                        <div class="col-10 pr-1">
-                                            <a href="javascript:showDevice('IRIS_TTELOOP1', 'IRIS_MIO22', '1', '1')" onclick="javascript:addActive('#selected_area')">
-                                                <div class="btnStyle fire active" id="1_IRIS_MIO22">
-                                                    <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="25" height="25" class="m15">
-                                                    <div class="someS">
-                                                        <div class="h5">1. MIO22</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-1 p-0 m-0" onclick="javascript:removeDevice('IRIS_TTELOOP1', '1', 'IRIS_MIO22', '1')">
-                                            <i class="fa-solid fa-xmark fire"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9" style="z-index: 1;height: fit-content;">
-                            <div id="selected_device_IRIS_TTELOOP1" style="background: white; margin-right: -1rem">
-                                <fieldset id="selected_IRIS_TTELOOP1_IRIS_MIO22_1" class="row align-items-center">
-                                    <legend>MIO22 1</legend><div class="col-12">
-                                        <div class="form-item roww mt-1">
-
-
-                                            <label for="device_state">Device state</label>
-
-                                            <div class="select">
-                                                <select id="device_state" name="device_state" disabled="" onchange="javascript: sendMessageWPF(
-                                {'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.DEVICESTATE.~index~1','newValue': this.value}}
-                                )
-
-                            ">
-                                                    <option value="" disabled="">Select an option</option>
-                                                    <option value="0" selected="">NONE</option>
-                                                    <option value="1">NEW</option>
-                                                    <option value="2">FIRE</option>
-                                                    <option value="3">FAULT</option>
-                                                    <option value="4">TYPE_ERROR</option>
-                                                    <option value="5">DOUBLE_ADDRESS</option>
-                                                    <option value="6">NORMAL</option>
-                                                    <option value="7">CHAMBER_FAULT</option>
-                                                    <option value="8">CLEAN_ME_NOW</option>
-                                                    <option value="9">DRIFT_ALERT</option>
-                                                    <option value="10">SIGNAL_BLOCKAGE</option>
-                                                    <option value="11">HI_SIGNAL</option>
-                                                    <option value="12">INPUT_FAULT</option>
-                                                    <option value="13">OUTPUT_FAULT</option>
-                                                    <option value="14">PREALARM</option>
-                                                    <option value="15">POWER SUPPLY FAULT</option>
-                                                    <option value="16">GAS ALARM</option>
-                                                    <option value="17">PANIC ALARM</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" name="name" maxlength="39" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.NAME.~index~1','newValue': this.value}})">
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-
-                                            <label for="serial_id">Serial ID</label>
-                                            <input type="text" id="serial_id" name="serial_id" maxlength="10" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.SERIAL_ID.~index~1','newValue': this.value}})" disabled="">
-                                        </div>
-                                    </div>
-                                </fieldset><fieldset id="params_IRIS_TTELOOP1_IRIS_MIO22_1" class="row align-items-center">
-                                    <legend>Parameters</legend><div class="col-xs-12 col-lg-6 pr-1">
-                                        <div class="form-item roww">
-
-                                            <label for="zone">Zone</label>
-                                            <input class="ml10" type="number" id="zone" name="zone" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.ZONE.~index~1','newValue': this.value}})" min="1" max="96" value="1">
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6 pr-1">
-                                        <div class="form-item roww">
-
-                                            <label for="led">LED</label>
-                                            <input type="checkbox" id="led" class="ml10" checked="" onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.LED.~index~1','newValue': this.checked}})">
-                                        </div>
-                                    </div>
-                                </fieldset><fieldset id="channels_IRIS_TTELOOP1_IRIS_MIO22_1" class="row align-items-center">
-                                    <legend>Channels</legend><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww mt-1">
-
-
-                                            <label for="channel_1">Channel 1</label>
-                                            <button id="popoverData_channel_1" class="btn" data-content="Popover with data - trigger" onmouseover="javascript: showChannelInfo(this, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL1.~index~1');" data-placement="top" data-original-title="Used in:">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                            </button>
-                                            <div class="select">
-                                                <select id="channel_1" name="channel_1" onchange="javascript: openChannelModal(this.id, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL1.~index~1', 'Channel 1', '0', 'Input,Alarm,Evacuate,GAS ALARM !,PANIC !', this.value)"><option value="" disabled="">Select an option</option><option value="0" selected="">Input</option><option value="1">Alarm</option><option value="2">Evacuate</option><option value="3">GAS ALARM !</option><option value="4">PANIC !</option></select>
-                                            </div>
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" name="name" maxlength="39" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.NAME_I1.~index~1','newValue': this.value}})">
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww mt-1">
-
-
-                                            <label for="channel_2">Channel 2</label>
-                                            <button id="popoverData_channel_2" class="btn" data-content="Popover with data - trigger" onmouseover="javascript: showChannelInfo(this, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL2.~index~1');" data-placement="top" data-original-title="Used in:">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                            </button>
-                                            <div class="select">
-                                                <select id="channel_2" name="channel_2" onchange="javascript: openChannelModal(this.id, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL2.~index~1', 'Channel 2', '0', 'Input,Alarm,Evacuate,GAS ALARM !,PANIC !', this.value)"><option value="" disabled="">Select an option</option><option value="0" selected="">Input</option><option value="1">Alarm</option><option value="2">Evacuate</option><option value="3">GAS ALARM !</option><option value="4">PANIC !</option></select>
-                                            </div>
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" name="name" maxlength="39" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.NAME_I2.~index~1','newValue': this.value}})">
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww mt-1">
-
-
-                                            <label for="channel_3">Channel 3</label>
-                                            <button id="popoverData_channel_3" class="btn" data-content="Popover with data - trigger" onmouseover="javascript: showChannelInfo(this, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL3.~index~1');" data-placement="top" data-original-title="Used in:">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                            </button>
-                                            <div class="select">
-                                                <select id="channel_3" name="channel_3" onchange="javascript: openChannelModal(this.id, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL3.~index~1', 'Channel 3', '0', 'Output,Alarm,Evacuate,Reset,Sounder Mode', this.value)"><option value="" disabled="">Select an option</option><option value="0" selected="">Output</option><option value="1">Alarm</option><option value="2">Evacuate</option><option value="3">Reset</option><option value="4">Sounder Mode</option></select>
-                                            </div>
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" name="name" maxlength="39" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.NAME_I3.~index~1','newValue': this.value}})">
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww mt-1">
-
-
-                                            <label for="channel_4">Channel 4</label>
-                                            <button id="popoverData_channel_4" class="btn" data-content="Popover with data - trigger" onmouseover="javascript: showChannelInfo(this, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL4.~index~1');" data-placement="top" data-original-title="Used in:">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                            </button>
-                                            <div class="select">
-                                                <select id="channel_4" name="channel_4" onchange="javascript: openChannelModal(this.id, 'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.TYPECHANNEL4.~index~1', 'Channel 4', '0', 'Output,Alarm,Evacuate,Reset,Sounder Mode', this.value)"><option value="" disabled="">Select an option</option><option value="0" selected="">Output</option><option value="1">Alarm</option><option value="2">Evacuate</option><option value="3">Reset</option><option value="4">Sounder Mode</option></select>
-                                            </div>
-                                        </div>
-                                    </div><div class="col-xs-12 col-lg-6">
-                                        <div class="form-item roww flex">
-
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" name="name" maxlength="39" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.NAME_I4.~index~1','newValue': this.value}})">
-                                        </div>
-                                    </div>
-                                </fieldset><fieldset id="channels_IRIS_TTELOOP1_IRIS_MIO22_1" class="row align-items-center">
-                                    <legend>Verification</legend><div class="col-12">
-                                        <div class="form-item roww">
-
-                                            <label for="sounder_group">Sounder Group</label>
-                                            <input class="ml10" type="number" id="sounder_group" name="sounder_group" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'IRIS_TTELOOP1/IRIS_TTENONE#IRIS_MIO22.ELEMENTS.IRIS_MIO22.PROPERTIES.Groups.~noname.fields.DAYVERIFYTIME.~index~1','newValue': this.value}})" min="0" max="96" value="1">
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" tabindex="-1" id="IRIS_TTELOOP1_modal" aria-hidden="true" style="display: none;">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="row list-group fire justify-content-center" id="list-tab" role="tablist">
-
-                                    <div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">DEVICES</div>
-                                    <button type="button" class="list-group-item col" id="IRIS_MIO40" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MIO40</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MIO04" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MIO04</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MIO22" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MIO22</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MIO22M" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MIO22</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MINP" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1080.MINP.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MINP</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MINP_FD" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1080.MINP.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MINP</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MINP_GD" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1080.MINP.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MINP</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MINP_PANIC" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1080.MINP.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MINP</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MOUT" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MOUT</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MOUT240_1" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MOUT</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MOUT240_2" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MOUT</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_ZONEMONITORMC" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>ZONEMONITORMC</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MCP150" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1027. Call Point (IRIS).ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MCP150</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_T110" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>T110</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_T110_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>T110</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_S130" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>S130</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_S130_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/70.SensoIRIS_T110_S130.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>S130</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_M140" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/71.SensoIRIS_M140.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>M140</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_M140_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/71.SensoIRIS_M140.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>M140</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_WSOU" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSOU</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_WSOU_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSOU</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_WSST" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/75.SensoIRIS_wsst.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSST</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_WSST_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/75.SensoIRIS_wsst.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSST</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_WSTR" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSTR</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_WSTR_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSTR</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_BSOU" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/BSOU-600x460.png" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>BSOU</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_BSOU_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/BSOU-600x460.png" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>BSOU</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_BSST" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/BSOU-600x460.png" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>BSST</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_BSST_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/BSOU-600x460.png" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>BSST</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_BSTR" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/BSOU-600x460.png" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>BSTR</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_BSTR_I" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/BSOU-600x460.png" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>BSTR</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_GAS_DETECTOR" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1081.SensoIRIS_GAS.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>GAS DETECTOR</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_GAS_DETECTOR_1" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1081.SensoIRIS_GAS.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>GAS DETECTOR</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_ADDR.BASEB24A" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/68.SensoIRIS_address_base.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>ADDR.BASEB24A</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_CALLPOINTMCP50" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/27. Call Point (IRIS).ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>CALLPOINT MCP50</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_INPUT/OUTPUTM22" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/1058. IRIS M22_IRIS Zone.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>INPUT/OUTPUT M22</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_SOUNDERWSOU" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/72.SensoIRIS_WSOU.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>WSOU</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-
-                                    <button type="button" class="list-group-item col" id="IRIS_MIMIC" onclick="javascript: addLoopElement(this.id, '1', 'IRIS_TTELOOP1', 'IRIS_TTENONE' )" data-toggle="tab" role="tab" aria-selected="false">
-                                        <div class="btnStyle fire">
-                                            <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="50" height="50" class="m15">
-                                            <div class="someS">
-                                                <h5>MIMIC</h5>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
-                        <button style="display: inline-flex; margin: -3px;" type="button" onclick="javascript: loopElementFunc(1, 'IRIS_TTELOOP1'); return false;" data-bs-toggle="modal" data-bs-target="#IRIS_TTELOOP1_modal" id="btn_IRIS_TTELOOP1" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> Add New Device in Loop 1
-                        </button>
-                    </div>
-                </div>
+            <div class="col-9">
+                <div id="selected_area"></div>
             </div>
         </div>
 
-        <div class="modal fade bd-example" tabindex="-1" id="deviceList" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="row list-group fire" id="list-tab" role="tablist"></div>
-                </div>
-            </div>
-        </div>
-
-        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5 multi-button" id="btnGroup">
-            <!--<button type="button" class="btn-round btn-blue">Save</button>
-            <button type="button" class="btn-round btn-border-black">Back</button>-->
-            <button style="display: inline-flex;" type="button" id="_btn" class="btn-round btn-border-black" onclick="javascript: loopFunc(); return false">
-                <i class="fa-solid fa-plus 5x"></i>
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt15" id="buttons">
+            <button style="display: inline-flex;" type="button" onclick="javascript:addElement('element', 'IRIS_OUTPUT')" id="_btn" class="btn-round btn-border-black">
+                <i class="fa-solid fa-plus 5x"></i> Add New OUTPUT
             </button>
-            <button class="btn-border-black">Loop</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>
+
         </div>
-
-        <!-- showDevicesListModal -->
-        <div class="modal fade" id="showDevicesListModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- showDevicesListModal -->
-        <div class="modal fade" id="showConfirmationModal" role="dialog" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"></h4>
-                        <button type="button" class="btn-close" id="xClose"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="yesBtn">Yes</button>
-                        <button type="button" class="btn btn-secondary" id="bigClose">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
     </div>
+
+    <!-- showDevicesListModal required for Zones -->
+    <div class="modal fade" id="showDevicesListModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // 'constants' declaration
+        let lst = [];
+        let elements;
+        let minElements;
+        let deviceNmbr;
+    </script>
 
     <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
-    <script src="../imports/loopfuncs.js"></script>
     <script>
-        $("#deviceList").on('hidden.bs.modal', function () {
-            $("#deviceList").find("#list-tab").empty();
-        });
+//        var js = `{
+//  "IRIS8_EVAC_ZONE_GROUP": {
+//    "@MIN": "0",
+//    "@MAX": "199",
+//    "@LNGID": "c61c3b13-d0e2-49e4-83ae-97dac2513c44",
+//    "~path": "ELEMENTS.iris_evac_zones.CONTAINS.IRIS8_EVAC_ZONE_GROUP"
+//  },
+//  "~path": "ELEMENTS.iris_evac_zones.CONTAINS"
+//}`;
 
-        $("#showDevicesListModal").on('hidden.bs.modal', function () {
-            $("#showDevicesListModal").find(".modal-body").empty();
-        });
+//        var ret = `{
+//  "EvacPanel0": {
+//    "name": "Evacuation Panel 0",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "09a869f2-536e-4315-98c2-d170907eacd9",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "bcb2defa-232c-4688-9444-89cdd925372c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "a58bb48b-22d1-4caa-bb13-4479b9c8d7b8",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "0c4e7860-db0b-49e7-bcc2-8c572fe5f51c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "8c10df2a-61e2-49d9-8c83-412173a0b511",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "c22ddb68-04a8-45c4-b905-27673f4d4d50",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "8373a708-df79-44b2-8859-09f4ee049590",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "9de57ea4-c8a4-4cbf-8bf1-e78f068fd7aa",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "07ffab37-6cda-495c-9454-077e8487159d",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "e4111164-75ba-4bbc-9517-81724fde489e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "1199c1fc-6df3-41fa-971d-7e20a202657c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "d435a421-8833-499e-93d0-9766a3bcc115",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "5b752f4b-21c1-45c5-87b6-29f22ddd0a1f",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "cbdb5fdb-44b8-49c0-9ff2-16a2ca8c993d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "7bc424ac-0f4d-414a-b81a-c458171beab8",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "02a1ea2e-fba1-4756-bc8b-f82762feaa48",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "786f5617-2aa3-448e-8cb6-6e23739c8543",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "c39d47b9-68c1-46d7-b408-92da195ceaf3",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "1d0954cb-a13f-488e-8c59-5ff9f7365014",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "444820ad-866b-4146-a697-bf22b3251edf",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "4c9a989e-de38-489a-a6f4-aae52b7c8f41",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "229d875d-6a77-47b5-bb67-7da6a177732d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "bc181e01-bfbf-4fa9-bee1-cee91149a23e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "fc35bdda-00e6-4c86-ae57-6576787a7520",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0"
+//  },
+//  "EvacPanel1": {
+//    "name": "Evacuation Panel 1",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "52b21e4c-a0a5-4966-9ff2-e9d61bd87c62",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "1be8f464-750c-41cb-8faf-d3f19c1d6e65",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "fab96ebe-f97b-43a7-84e7-1ff5aea1d5a9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "f1673bca-e041-493f-917d-9f9d501a4e48",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "3586cb3b-9237-4351-af58-aea96eec3c7c",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "0539b0fc-f8c8-408e-a5ce-91a36765af05",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "ab63a82a-5864-4e0e-a4f9-3ffed442a40b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "1f6fe3b8-58dd-459c-a686-2e06c8f93767",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "c05b5cc3-7029-4213-8cdd-35b62e7d829e",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "d8b7d595-6749-4570-b99b-e68ebf46bd95",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "e0659631-c6aa-4fd2-a4c9-9744eeccead9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "5a875743-1ab4-4c8e-bb07-1a1c92d6b2d6",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "97eb4987-2acf-482f-b6a6-db29227d7e22",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "06e8583b-fbf5-4a37-8759-dbb116fdbf4d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "c84a2c41-9c25-4ce4-815d-3b9a7ae48948",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "2ba0b737-3d70-481d-bc4f-09453f779921",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "ea7bfff9-2f77-4073-b852-e345d6117ced",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "d52c4327-28cd-4b92-a7ec-294791e12673",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "51693718-1f61-41f0-bd26-caf49f3f76a6",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "814a3bec-bad2-4f04-bb44-5a01ad152419",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "a6cd5323-bc08-409c-a42a-b7fb126c9983",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "bef3c61a-f27a-4bfc-b790-cb9971854a68",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "d4f10a2a-b50d-485c-b471-221ceb3d0b2d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "ea113428-a778-4131-975a-6b731c811485",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1"
+//  },
+//  "EvacPanel2": {
+//    "name": "Evacuation Panel 2",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "51a6825f-2841-4349-bab9-138dd0a039ad",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "51f09136-1bad-4402-9c97-c50a9022828e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "6d5665f6-2bc1-4cd8-9f63-0cb535f3c1ac",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "3b210049-8f22-425e-81fd-60ae2321a4af",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "0bfe0547-d560-4154-bffb-002f2ee38cc9",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "fe4f0145-324f-4621-b204-f3511fd8f1fe",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "b07b2465-ae76-4381-864b-6cd6b44aeda4",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "b68893d5-a999-415d-9559-7fbc2305f580",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "2a2d23b3-56a3-48b3-bf8c-1a17e2db2754",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "e7c2ee93-86c3-4534-9b7c-f0e8b6f074c9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "f78c764d-88d6-4fea-b42c-33842de2b8ff",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "4c3c53dc-5fc5-4297-afa1-e05e5f19af44",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "1cd56a86-c705-4d95-8d8f-04c56fa28635",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "546aa341-9cdd-4543-9939-a4f767421ada",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "1c242c47-52a3-458b-bf72-a5cf785e1fbc",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "cf3de52c-9bd6-4bf1-8e65-349443720f54",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "53057b9c-4e7e-4f69-a0d4-c051724f9090",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "7e310690-69a5-41c1-aa39-a914eacc0067",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "17562b55-11a3-4b3a-955a-44c0b7271d89",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "8d3e7803-2c11-4cd7-897b-61e00f0bcaa0",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "6e2f8457-c371-4616-9e95-513f2b45635c",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "27f21060-676e-4628-8d6a-e56c69fd5529",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "49656942-ec93-49d5-9536-f824d5e8524c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "24e5263d-4016-4457-b507-78c3610cc36d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2"
+//  },
+//  "EvacPanel3": {
+//    "name": "Evacuation Panel 3",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "f89e0a87-0d1d-4681-82a0-1372d1d12b6d",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "81bd93e8-935b-4d88-81d5-ea5509626028",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "478e4a73-3c45-488d-9b20-5f0341e87395",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "196fa70a-9581-47c9-a585-ceb5afac3481",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "62465147-b27d-433d-bdb4-0307a73506c1",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "44fbb218-972b-4b93-adeb-468df4927d99",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "8d36f257-be8b-49a0-a313-f57eee6c5bc3",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "75984b85-961a-40bf-9296-1e525ff443c6",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "7fcb97d4-c508-4b59-9b06-eaa4847279fa",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "52a58c6c-a8b5-4ca5-a1f7-163f01664812",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "ef6e2cc5-50a7-4031-a2c2-11200b3689b0",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "4cb7afc0-6690-4c3b-89ad-b08d697c5f6a",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "2e621b8e-b75f-462b-9413-2aa7eee9cb08",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "011ec12a-18f9-4b10-b5b7-f3fa055ab356",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "ff8139b4-d355-4548-9e3c-82ebfe98a16b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "750a39bc-47f6-4962-903a-b3d75b920f02",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "ec32734e-b915-4ec6-b81f-4564fb9f2b1b",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "7a5b368b-7b24-4259-aa04-076d70d1f299",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "8436bbf4-f20c-462a-b3cb-543e300acd7b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "9a71b3c7-351e-45e1-8304-d9d78d09983a",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "67732e1d-9d07-4910-bee6-452510c1dda8",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "74250f0b-f8cc-49a2-85c8-e558a6e2f665",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "16cec853-275c-4230-adb8-f08b8c32c5d9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "25cb788c-01b4-495b-8bed-02d691eea9bf",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3"
+//  },
+//  "EvacPanel4": {
+//    "name": "Evacuation Panel 4",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "9a3e2951-2af1-4d54-9385-b3eea364cb85",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "7623fa99-7a0f-4e88-b780-f9d4ca5d8a67",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "1d415370-e844-439a-8e8f-9587bd140b11",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "cf976b54-5591-477f-b6ee-eebdd932a7e3",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "9fc387e7-a69f-4670-8f9b-40efb76253d5",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "6e63b04f-3d6d-4c2a-98b7-35d4b740ab5b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "9c2e9737-c2df-4ca6-9113-bc4c1fb81ee8",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "3030b45a-99b2-434b-9dd9-50d9dc53fb1c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "e8d913ea-c770-4e94-8674-0520c217c0f8",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "22b1388c-83c6-4936-8fc0-f86dbcd4736b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "08d3abec-9872-407c-b42a-6f3da7ae1631",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "480ca479-f0ab-4c25-99f4-b5632881a097",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "e5101376-9671-4d70-9f5d-b5e6d457d64c",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "d32f1de4-d618-4da6-88c4-e93916821e21",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "e568c6a8-be83-41ec-81bd-7bff0e93cadb",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "50adfdfa-d527-468f-a562-fa3dd5a98a57",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "cd2cd4d4-342f-4a9e-aa79-e1b6275e9d79",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "a0996e33-d681-4336-be13-bd3959e5f393",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "4db08e64-ca0d-40e7-85dc-f527ce665055",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "c953b757-1b75-4cd0-ad66-280e37a73723",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "ae7e3f6f-0ffd-4b9a-9f61-3d22cd78ff53",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "ecd96ef0-b30a-4e50-936e-611277390448",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "02bf71e5-ba54-45ec-9f79-2e213ec97fb4",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "8d9b20e1-a877-43e0-9f9d-31e4e4e1844e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4"
+//  },
+//  "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups"
+//}`;
+
+        /*        receiveMessageWPF(js)*/
     </script>
 
 
-    <script id="script_modal">
-    $("#IRIS_TTELOOP1_modal").on('hidden.bs.modal', function () {
-            $("#IRIS_TTELOOP1_modal").find("#list-tab").empty();
-        });</script>
 </body>
 </html>

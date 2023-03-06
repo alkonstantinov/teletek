@@ -70,7 +70,7 @@
     "picture": ""
   },
   "iris": {
-    "title": "Iris",
+    "title": "IRIS Panel",
     "left": "menu-automatic.html",
     "right": "IRIS/IRISPanel-automatic.html",
     "breadcrumbs": [ "index" ],
@@ -154,7 +154,7 @@
     "picture": "fa-compact-disc"
   },
   "loop_devices_system_sensor_loop": {
-    "title": "Snesor loop",
+    "title": "Sensor loop",
     "left": "menu-automatic.html",
     "right": "IRIS/loop_devices_system_sensor.html",
     "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
@@ -167,14 +167,14 @@
     "picture": ""
   },
   "tte": {
-    "title": "tte",
+    "title": "TTE",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/General Settings.html",
     "breadcrumbs": [ "index" ],
     "picture": "fa-signal"
   },
   "tte_gen_settings": {
-    "title": "Gen settings",
+    "title": "Genenral settings",
     "left": "menu-automatic.html",
     "right": "TTE GPRS/General Settings.html",
     "breadcrumbs": [ "index", "tte" ],
