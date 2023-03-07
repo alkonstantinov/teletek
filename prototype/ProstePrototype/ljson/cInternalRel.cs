@@ -130,6 +130,7 @@ namespace ljson
         public virtual List<string> ChannelUsedIn(string channel_path, string myIOPath) { return null; }
         public virtual List<string> ChannelUsedIn(string channel_path) { return null; }
         public virtual Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val, string _xmltag) { return null; }
+        public virtual string WritePropertyVal(JObject groups, string PropertyName, string _xmltag) { return null; }
         public virtual bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props) { return true; }
         public virtual void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func) { }
         public virtual void AfterDevicesChanged(string _panel_id, JObject panel, dGetNode _get_node) { }
@@ -137,5 +138,6 @@ namespace ljson
         public virtual void AfterInputRemoved(string _panel_id) { }
         public virtual void ClearCache() { }
         public virtual void RemoveTABCache(string tab, string idx) { }
+        public virtual void OnElementAddressChanged(string oldAddress, string elementType, string newAddress) { }
     }
 }

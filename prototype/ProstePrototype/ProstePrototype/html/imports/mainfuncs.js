@@ -472,7 +472,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 .filter(deviceName => deviceName !== "selected")
                 .map(deviceName => {
                     let nameLst = deviceName.split('/');
-                    let name = !(nameLst[1]) ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
+                    let name = !(nameLst[2]) ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
                     let address = nameLst.at(-1);
                     let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
                     let checkedJson = Object.keys(currentDeviceNameObject)
@@ -566,16 +566,19 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     /*  value reading: the whole is the channel path
      * "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1"
      * --------loop number----------#--device---.-----------------channel-------------------.-address-
+     * 
+     * "IRIS_LOOP2/IRIS_SNONE#IRIS_S6200.ELEMENTS.IRIS_S6200"
+     * -----loop number------#--device--.
      * */
 
-    if (Array.isArray(path)) {
+    if (Array.isArray(path)) { // it should be an array of [~path, ~value]
         pathFound = path[0];
         channel_path = path[1];
     }
     if (channel_path) {
         loop_number = channel_path.split("/")[0];
         device = channel_path.split("#")[1].split(".")[0];
-        address = channel_path.split("~").pop();
+        address = channel_path.split("~").pop(); // if not ~ in channel_path will return channel_path
     }
     let type = pathFound.split(".").find(e => e.includes("putType"));
     switch (type) {
@@ -600,35 +603,6 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
     }
 
     showDiv.replaceChildren(fieldset);
-    /* CONFIGURED_IO example:
-{
-  "IRIS8_TTELOOP1": {
-    "IRIS8_MIO22/1": {
-      "/TYPECHANNEL1": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[7].~index~1",
-        "uses": null
-      },
-      "/TYPECHANNEL2": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1",
-        "uses": null
-      }
-    },
-    "IRIS8_MIO22M/2": {
-      "/TYPECHANNEL1": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.PROPERTY[7].~index~2",
-        "uses": null
-      },
-      "/TYPECHANNEL2": {
-        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
-        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.PROPERTY[9].~index~2",
-        "uses": []
-      }
-    }
-  }
-} */
 }
 // adding ["selected"] flag to CONFIGURED_IO for pre-configured Loop Type based on predefined loop, device, deviceAddress and channel
 function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_path) {
@@ -637,12 +611,19 @@ function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_p
         if (loopProp === loop_number) {
             CONFIGURED_IO[loopProp]["selected"] = true;
             for (let deviceProp in CONFIGURED_IO[loopProp]) {
-                if (deviceProp.includes(device) && deviceProp.endsWith(deviceAddress)) {
-                    CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
-                    for (let channelProp in CONFIGURED_IO[loopProp][deviceProp]) {
-                        if (CONFIGURED_IO[loopProp][deviceProp][channelProp]["channel_path"] === channel_path) {
-                            CONFIGURED_IO[loopProp][deviceProp][channelProp]["selected"] = true;
+                if (deviceProp.includes(device)) {
+                    if (deviceAddress && deviceProp.endsWith(deviceAddress)) {
+                        CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
+                        for (let channelProp in CONFIGURED_IO[loopProp][deviceProp]) {
+                            if (CONFIGURED_IO[loopProp][deviceProp][channelProp]["channel_path"] === channel_path) {
+                                CONFIGURED_IO[loopProp][deviceProp][channelProp]["selected"] = true;
+                            }
                         }
+                    }
+                    else if (deviceAddress === channel_path)
+                    {
+                        CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
+                        CONFIGURED_IO[loopProp][deviceProp]["device"]["selected"] = true;
                     }
                 }
             }
@@ -650,6 +631,7 @@ function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_p
     }
 }
 //#endregion
+
 // transforming object function
 const transformGroupElement = (elementJson) => {
     let attributes = {
@@ -1400,27 +1382,9 @@ function addConcreteElement(id, elementType = "") {
 function addElement(id, elementType = "") {
 
     if (id === "element") {
-        var last = -1;
-        for (i = minElements; i <= elements; i++) {
-            if (lst.includes(i)) {
-                continue;
-            } else {
-                last = i;
-                break;
-            }
-        }
-        if (last === -1 || lst.includes(last)) return;
 
-        if (elementType === "INPUT_GROUP") {
-            boundAsync.addingElementSync(`${elementType}`, last).then(r => {
-                if (r === "added") {
-                    createElementButton(last, elementType);
-                }
-            }).catch((e) => console.log(e));
-        } else {
-            sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
-            createElementButton(last, elementType);
-        }
+        callAddressModal(elementType); // going through modal for defining the address of the element
+        
     } else {
         if (lst.includes(+id)) {
             var elem = document.getElementById(`${id}`);
@@ -1439,6 +1403,63 @@ function addElement(id, elementType = "") {
             return;
         }
     }
+}
+
+function callAddressModal(elementType, current) {
+    let modal = document.getElementById("addressModal");
+    let innerSelectText = `<div class="form-item roww mt-1">
+                                    <label for="select_address">Set the address for ${elementType}</label>
+                                    <div class="select">
+                                        <select id="select_address" name="select_address">`;
+
+    for (var i = minElements; i <= elements; i++) {
+        let currentId = i === +current ? "selected" : "";
+        let disabled = lst.includes(i) ? "disabled style='background: #aaa;'" : ""
+        innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i}</option>`;
+    }
+
+    modal.querySelector(".modal-body").innerHTML = innerSelectText;
+
+    modal.querySelector(".btn.btn-primary").addEventListener('click', function handler(){
+        if (!lst.includes(modal.querySelector("select").value)) {
+            if (!current) // guard (should be impossible not to be true)
+                addElementAtAddress(elementType, modal.querySelector("select").value); // setting the element at the given address            
+            else { // else it is not a new item, so modify the old one
+                modifyElementCurrentAddress(current, elementType, modal.querySelector("select").value)
+            }
+        }
+        $(modal).modal('hide');
+        // removing the event listener function
+        this.removeEventListener('click', handler);
+    });
+    $(modal).modal('show');
+}
+
+function addElementAtAddress(elementType, last) {
+    if (elementType === "INPUT_GROUP") {
+        boundAsync.addingElementSync(`${elementType}`, last).then(r => {
+            if (r === "added") {
+                createElementButton(last, elementType); // creating the fieldset of the INPUT_GROUP element
+            }
+        }).catch((e) => console.log(e));
+    } else {
+        sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
+        createElementButton(last, elementType); // creating the button of the element
+    }
+}
+
+function modifyElementCurrentAddress(oldAddress, elementType, newAddress) {
+    boundAsync.modifyElementAddress(oldAddress, elementType, newAddress).then(r => {
+        if (r) {
+            // recreate button
+            var oldButton = document.getElementById(oldAddress);
+            oldButton.parentNode.removeChild(oldButton);
+            createElementButton(newAddress, elementType);
+            lst = lst.filter(address => address !== +oldAddress);
+            // recreate fieldset
+            showElement(newAddress, elementType);
+        }
+    });
 }
 
 async function createElementButton(last, elementType) {
@@ -1477,7 +1498,7 @@ async function createElementButton(last, elementType) {
                         ${element.innerHTML}
                         ${newUserElement}
                     `;
-    lst.push(last);
+    lst.push(+last);
     element.innerHTML = new_inner;
 
     // reordering
@@ -1556,7 +1577,10 @@ async function showElement(id, elementType) {
             id = parseInt(id);
             const fieldset = document.createElement('fieldset');
             fieldset.id = `id_${id}`;
-            fieldset.insertAdjacentHTML('afterbegin', `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>`);
+            fieldset.insertAdjacentHTML(
+                'afterbegin',
+                `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>
+                <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">Modify current address</button>`);
             drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
             if (oldFieldset) oldFieldset.replaceWith(fieldset);

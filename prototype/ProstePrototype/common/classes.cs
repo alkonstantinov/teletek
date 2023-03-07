@@ -347,12 +347,15 @@ namespace common
         public string sbuffoffset = null;
         public string slen = null;
 
+        public cRWCommand() { }
+        public cRWCommand(string scmd) { InitCommand(scmd); }
         public virtual int CommandLength() { return 0; }
         public virtual string CommandString() { return null; }
         public virtual string CommandString(int idx) { return null; }
         public virtual string NoIdxCommandString() { return null; }
         public virtual string CommandKey() { return null; }
         public virtual int idxPosition() { return -1; }
+        public virtual void InitCommand(string scmd) { }
     }
 
     //public class cAdditionalRWCommands
@@ -365,6 +368,7 @@ namespace common
     {
         public eWriteOperation operation;
         public string value;
+        public string writeval = null;
     }
 
     public class cRWPath

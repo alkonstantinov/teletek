@@ -245,6 +245,24 @@ namespace ljson
                 Monitor.Exit(_cs_current_panel);
             }
         }
+        public static string CurrentPanelName
+        {
+            get
+            {
+                Monitor.Enter(_cs_current_panel);
+                if (_current_panel_id == null || !_system_panels.ContainsKey(_current_panel_id))
+                {
+                    Monitor.Exit(_cs_current_panel);
+                    return null;
+                }
+                string filename = _system_panels[_current_panel_id];
+                Monitor.Exit(_cs_current_panel);
+                Match m = Regex.Match(Regex.Replace(filename, @"\\Template[\w\W]+$", "", RegexOptions.IgnoreCase), @"[\w\W]+?\\([^\\]+)$");
+                if (m.Success)
+                    return m.Groups[1].Value.ToLower();
+                return filename;
+            }
+        }
         public static string CurrentPanelType
         {
             get
@@ -1164,17 +1182,64 @@ namespace ljson
             }
         }
         //Write
-        private static Dictionary<string, string> CompiledWriteCommands(Dictionary<string, Dictionary<string, cRWPath>> paths)
+        private static Dictionary<string, string> CompiledWriteCommands(int idx)
         {
             Dictionary<string, string> cmds = new Dictionary<string, string>();
-            foreach (string loop_nom in paths.Keys)
+            //
+            Dictionary<string, string> loopdevs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, idx.ToString());
+            foreach (string devaddr in loopdevs.Keys)
             {
-                Dictionary<string, string> loopdevs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, loop_nom);
-                foreach (string devaddr in paths[loop_nom].Keys)
+                JObject jdev = JObject.Parse(loopdevs[devaddr]);
+                JObject orw = (JObject)jdev["~rw"];
+                cRWPath rw = orw.ToObject<cRWPath>();
+                jdev = GroupsWithValues(jdev);
+                //
+                List<string> commands = new List<string>();
+                cRWCommand cmd = null;
+                string scmd = null;
+                string _params = "";
+                //
+                cRWCommand cmdl = null;
+                if (CurrentPanelType == "iris")
+                    cmdl = new cRWCommandIRIS();
+                else
+                    cmdl = new cRWCommand();
+                int command_len = cmdl.CommandLength();
+                //
+                foreach (cWriteOperation op in rw.WriteOperationOrder)
                 {
-                    cRWPath rw = paths[loop_nom][devaddr];
-                    JObject jdev = JObject.Parse(loopdevs[devaddr]);
-                    jdev = GroupsWithValues(jdev);
+                    if (op.operation == eWriteOperation.woBytes)
+                    {
+                        op.writeval = op.value;
+                        //
+                        if (cmd != null && op.value.Length == command_len && _params != null && _params != "")
+                        {
+                            cmds.Add(scmd, _params);
+                            _params = "";
+                        }
+                        if (op.value.Length == command_len)
+                        {
+                            if (CurrentPanelType == "iris")
+                                cmd = new cRWCommandIRIS();
+                            else
+                                cmd = new cRWCommand();
+                            cmd.InitCommand(op.value);
+                            scmd = cmd.CommandString(Convert.ToInt32(devaddr));
+                            _params = "";
+                        }
+                        else
+                            _params += op.value;
+                    }
+                    else
+                    {
+                        op.writeval = _internal_relations_operator.WritePropertyVal(jdev, op.value, rw.WriteProperties[op.value].xmltag);
+                        _params += op.writeval;
+                    }
+                }
+                if (scmd != "" && _params != "")
+                {
+                    //_params += "00";
+                    cmds.Add(scmd, _params);
                 }
             }
             //
@@ -1234,26 +1299,29 @@ namespace ljson
                 remask = "^" + remask;
                 if (!cComm.PseudoElementExists(CurrentPanelID, constants.NO_LOOP, remask))
                     continue;
-                Dictionary<string, string> devs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, i.ToString());
-                foreach (string saddr in devs.Keys)
-                {
-                    JObject odev = JObject.Parse(devs[saddr]);
-                    JObject orw = (JObject)odev["~rw"];
-                    cRWPath rwpath = orw.ToObject<cRWPath>();
-                    if (!rwdevs.ContainsKey(i.ToString()))
-                        rwdevs.Add(i.ToString(), new Dictionary<string, cRWPath>());
-                    rwdevs[i.ToString()].Add(saddr, rwpath);
-                }
+                Dictionary<string, string> compiled = CompiledWriteCommands(i);
+                return;
+                //Dictionary<string, string> devs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, i.ToString());
+                //foreach (string saddr in devs.Keys)
+                //{
+                //    JObject odev = JObject.Parse(devs[saddr]);
+                //    JObject orw = (JObject)odev["~rw"];
+                //    cRWPath rwpath = orw.ToObject<cRWPath>();
+                //    if (!rwdevs.ContainsKey(i.ToString()))
+                //        rwdevs.Add(i.ToString(), new Dictionary<string, cRWPath>());
+                //    rwdevs[i.ToString()].Add(saddr, rwpath);
+                //}
             }
-            if (rwdevs.Count > 0)
-            {
-                Dictionary<string, string> compiled = CompiledWriteCommands(rwdevs);
-            }
+            //
+            //if (rwdevs.Count > 0)
+            //{
+            //    Dictionary<string, string> compiled = CompiledWriteCommands(rwdevs);
+            //}
         }
         public static void WriteDevice(object conn_params)
         {
             //cTransport conn = cComm.ConnectBase(conn_params);
-            //byte[] pass = new byte[] { 0x00, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
+            //byte[] pass = new byte[] { 0x08, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
             //byte[] loginres = cComm.SendCommand(conn, pass);
             //cComm.CloseConnection(conn);
             //
@@ -1371,6 +1439,10 @@ namespace ljson
         private static void SetPanelIDInToken(JToken t)
         {
             t["~panel_id"] = CurrentPanelID;
+        }
+        private static void SetPanelNameInToken(JToken t)
+        {
+            t["~panel_name"] = CurrentPanelName;
         }
         public static JObject GetNode(string name)
         {
@@ -1788,6 +1860,7 @@ namespace ljson
                 if (tc != null)
                 {
                     SetPanelIDInToken(tc);
+                    SetPanelNameInToken(tc);
                     string lc = tc.ToString();
                     return lc;
                 }
@@ -1796,6 +1869,7 @@ namespace ljson
             if (t != null)
             {
                 SetPanelIDInToken(t);
+                SetPanelNameInToken(t);
                 string lc = t.ToString();
                 LastContent = lc;
                 return lc;
@@ -2212,6 +2286,38 @@ namespace ljson
         public static JObject GroupsWithValues(string grp)
         {
             return GroupsWithValues(JObject.Parse(grp));
+        }
+        public static string GetListElement(string elementType, string elementNumber)
+        {
+            string res = cComm.GetListElement(CurrentPanelID, elementType, elementNumber);
+            JObject o = JObject.Parse(res);
+            SetNodeFilters(o);
+            res = o.ToString();
+            return res;
+        }
+        //cJson.SetNodeFilters(newpaths);
+        public static void ChangeElementAddress(string oldAddress, string elementType, string newAddress)
+        {
+            cComm.ChangeElementAddress(CurrentPanelID, elementType, oldAddress, newAddress);
+            _internal_relations_operator.OnElementAddressChanged(oldAddress, elementType, newAddress);
+            Dictionary<string, string> pv = cComm.GetPathValues(CurrentPanelID);
+            Dictionary<string, string> old_new_path = new Dictionary<string, string>();
+            foreach (string path in pv.Keys)
+                if (Regex.IsMatch(path, @"[\w\W]+?\." + elementType + @"\.[\w\W]+?~index~" + oldAddress))
+                {
+                    string newpath = Regex.Replace(path, @"~index~" + oldAddress + "$", "~index~" + newAddress);
+                    old_new_path.Add(path, newpath);
+                }
+            //
+            foreach (string path in old_new_path.Keys)
+            {
+                string val = pv[path];
+                //Match m = Regex.Match(val, oldAddress + @"_([0-9a-fA-f]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})$");
+                //if (m.Success)
+                //    val = newAddress + "_" + m.Groups[1].ToString();
+                cComm.RemovePathValue(CurrentPanelID, path);
+                cComm.SetPathValue(CurrentPanelID, old_new_path[path], val);
+            }
         }
         #endregion
     }

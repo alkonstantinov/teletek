@@ -215,7 +215,7 @@
             'bg': 'Добавете до', 'en': 'Add up to', 'ge': 'Add up to' 
         },
         all_channels_used: {
-            'bg': 'всички канали са използвани', 'en': 'all channels used', 'ge': 'all channels used' 
+            'bg': 'устройството е използвано', 'en': 'used device', 'ge': 'used device' 
         },
         used: {
             'bg': 'използван', 'en': 'used', 'ge': 'used' 

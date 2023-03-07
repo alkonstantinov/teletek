@@ -7,6 +7,7 @@ using common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using lcommunicate;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ljson
 {
@@ -279,16 +280,104 @@ namespace ljson
             //
             return res;
         }
+        private static string WriteValue(string _type, int _size, string sval, JObject _field)
+        {
+            string res = null;
+            if (Regex.IsMatch(_type, @"^(INT|LIST)$"))
+            {
+                res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
+                //while (_size * 2 > res.Length)
+                //    res = "0" + res;
+            }
+            else if (Regex.IsMatch(_type, @"(CHECK)"))
+            {
+                res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
+            }
+            else if (Regex.IsMatch(_type, @"(TEXT)"))
+            {
+                byte[] tbytes = Encoding.Unicode.GetBytes(sval);
+                byte[] bytesadd = new byte[_size - tbytes.Length];
+                Array.Clear(bytesadd, 0, bytesadd.Length);
+                byte[] bytesres = new byte[_size];
+                tbytes.CopyTo(bytesres, 0);
+                bytesadd.CopyTo(bytesres, tbytes.Length);
+                res = "";
+                foreach (byte b in bytesres)
+                    res += b.ToString("X2");
+            }
+            else if (Regex.IsMatch(_type, @"(HIDDEN)"))
+            {
+                if (!Regex.IsMatch(sval, @"\D"))
+                    res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
+            }
+            //
+            return res;
+        }
+        public static string WriteValue(JObject _field, string xmltag)
+        {
+            int size = 1;
+            Match m = Regex.Match(xmltag, @"LENGTH\s*?=\s*?""(\d+?)""");
+            if (m.Success)
+                size = Convert.ToInt32(m.Groups[1].Value);
+            else if (_field["@SIZE"] != null)
+                size = Convert.ToInt32(_field["@SIZE"].ToString());
+            //
+            string _type = null;
+            if (_field["@TYPE"] != null)
+                _type = _field["@TYPE"].ToString();
+            if (_type == null)
+                return null;
+            //
+            string sval = null;
+            if (_field["~value"] != null)
+                sval = _field["~value"].ToString();
+            else if (_field["@VALUE"] != null)
+                sval = _field["@VALUE"].ToString();
+            else if (_field["@FORCE"] != null)
+                sval = _field["@FORCE"].ToString();
+            else if (_type == "CHECK")
+            {
+                string schecked = "0";
+                if (_field["@CHECKED"] != null)
+                    schecked = _field["@CHECKED"].ToString();
+                bool _checked = Convert.ToInt32(schecked) != 0;
+                if (_checked && _field["@YESVAL"] != null)
+                    sval = _field["@YESVAL"].ToString();
+                else if (!_checked && _field["@NOVAL"] != null)
+                    sval = _field["@NOVAL"].ToString();
+                else
+                    sval = "0";
+            }
+            else if (_type == "LIST")
+                sval = "0";
+            else
+                sval = "0";
+            int? inc = null;
+            m = Regex.Match(xmltag, @"INC\s*?=\s*?""(\d+?)""");
+            if (m.Success)
+                inc = Convert.ToInt32(m.Groups[1].Value);
+            if (inc != null)
+                sval = (Convert.ToInt32(sval) + inc).ToString();
+            //
+            string _writeval = WriteValue(_type, size, sval, _field);
+            //
+            return _writeval;
+        }
         #endregion
 
         private string _sidx = "";
-        private string _panel_id;
+        private string _panel_id = null;
         private JObject _field;
 
         internal cPanelField(JObject Field, string panelID, int? idx)
         {
             _field = Field;
             _panel_id = panelID;
+            _idx = idx;
+        }
+        internal cPanelField(JObject Field, int? idx)
+        {
+            _field = Field;
             _idx = idx;
         }
         private int? _idx

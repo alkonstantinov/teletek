@@ -12,6 +12,22 @@ namespace common
 {
     public class cRWCommandIRIS : cRWCommand
     {
+        public override void InitCommand(string scmd)
+        {
+            sio = scmd.Substring(0, 4);
+            sDataType = scmd.Substring(4, 2);
+            sindex = scmd.Substring(6, 2);
+            sbuffoffset = scmd.Substring(8, 2);
+            slen = scmd.Substring(10, 2);
+            if (Regex.IsMatch(sio, "51$"))
+                io = eIO.ioRead;
+            else
+                io = eIO.ioWrite;
+            DataType = Convert.ToByte(sDataType, 16);
+            index = Convert.ToByte(sindex, 16);
+            buffoffset = Convert.ToByte(sbuffoffset, 16);
+            len = Convert.ToByte(slen, 16);
+        }
         public override string ToString()
         {
             if (sio == null || sio == "")

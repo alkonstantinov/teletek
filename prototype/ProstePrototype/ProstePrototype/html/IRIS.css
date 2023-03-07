@@ -779,6 +779,11 @@ fieldset {
         color: #ffffff;
     }
 
+.btn-position-right {
+    display: flex;
+    margin-left: auto;
+}
+
 
 .multi-button .btn-border-black {
     height: 3.125em;

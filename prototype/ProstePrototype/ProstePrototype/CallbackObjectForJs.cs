@@ -15,10 +15,16 @@ namespace ProstePrototype
 {
     public class CallbackObjectForJs
     {
-        public string showMessage(string msg)
-        {//Read Note
-            // MessageBox.Show(msg);
-            return "Hi from " + msg;
+        public string modifyElementAddress(string oldAddress, string elementType, string newAddress)
+        {
+            cJson.ChangeElementAddress(oldAddress, elementType, newAddress);
+            return "{}";
+            //return "Hi from " + elementType + " with new address at " + newAddress;
+        }
+        public string modifyDeviceLoopAddress(string oldAddress, string elementType, string newAddress)
+        {
+
+            return "Hi from " + elementType + " with new address at " + newAddress;
         }
         public string getElements(string elementType)
         {
@@ -39,7 +45,9 @@ namespace ProstePrototype
         {
             // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
-            string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
+            //string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
+            string res = cJson.GetListElement(elementType, elementNumber.ToString());
+            //
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
             File.WriteAllTextAsync("wb3.json", res);

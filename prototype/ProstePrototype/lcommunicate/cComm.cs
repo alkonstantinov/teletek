@@ -627,6 +627,29 @@ namespace lcommunicate
                 lst.Add(idx, _template);
             Monitor.Exit(_cs_cache);
         }
+        public static void ChangeElementAddress(string panel_id, string key, string idx, string addrnew)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels == null)
+                _cache_list_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            if (!_cache_list_panels.ContainsKey(panel_id))
+                _cache_list_panels.Add(panel_id, new Dictionary<string, Dictionary<string, string>>());
+            Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+            if (!el.ContainsKey(key))
+                return;
+            Dictionary<string, string> lst = el[key];
+            if (!lst.ContainsKey(idx))
+                return;
+            string _template = lst[idx];
+            string _template_new = Regex.Replace(_template, @"~index~\d+", "~index~" + addrnew);
+            if (!lst.ContainsKey(addrnew))
+            {
+                lst.Remove(idx);
+                lst.Add(addrnew, _template_new);
+            }
+            //
+            Monitor.Exit(_cs_cache);
+        }
         public static Dictionary<string, string> GetElements(string panel_id, string key)
         {
             Dictionary<string, string> res = null;
