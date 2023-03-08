@@ -1422,7 +1422,7 @@ function callAddressModal(elementType, current) {
 
     modal.querySelector(".btn.btn-primary").addEventListener('click', function handler(){
         if (!lst.includes(modal.querySelector("select").value)) {
-            if (!current) // guard (should be impossible not to be true)
+            if (!current) // guard if new
                 addElementAtAddress(elementType, modal.querySelector("select").value); // setting the element at the given address            
             else { // else it is not a new item, so modify the old one
                 modifyElementCurrentAddress(current, elementType, modal.querySelector("select").value)
@@ -1437,7 +1437,7 @@ function callAddressModal(elementType, current) {
 
 function addElementAtAddress(elementType, last) {
     if (elementType === "INPUT_GROUP") {
-        boundAsync.addingElementSync(`${elementType}`, last).then(r => {
+        boundAsync.addingElementSync(`${elementType}`, +last).then(r => {
             if (r === "added") {
                 createElementButton(last, elementType); // creating the fieldset of the INPUT_GROUP element
             }
@@ -1456,8 +1456,9 @@ function modifyElementCurrentAddress(oldAddress, elementType, newAddress) {
             oldButton.parentNode.removeChild(oldButton);
             createElementButton(newAddress, elementType);
             lst = lst.filter(address => address !== +oldAddress);
-            // recreate fieldset
+            // recreate fieldset------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             showElement(newAddress, elementType);
+            document.getElementById(newAddress).addClass('active');
         }
     });
 }
@@ -1532,12 +1533,13 @@ async function inputGroupTextGenerator(last, elementType) {
             let currentJSON = returnedJson["~noname"]["fields"]["Input_Logic"];
             let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
             let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
-            let legend = (trans.length + `${last}`.length) > 15 ? trans.substring(0, 12) + '...' : trans;
+            let legend = (trans.length + `${last}.`.length) > 14 ? trans.substring(0, 8) + '...' : trans;
             return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="row">
                             <fieldset style="min-width: 200px;" class="col-10">
-                                <legend>${legend} ${last}</legend>                                
-                                    <p class="fire">
+                                <legend>${last}. ${legend}</legend> 
+                                <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">Modify current address</button>
+                                <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
                                     <label class="switch">
                                         <input type="checkbox" id="gr_input_logic_${last}"

@@ -14,6 +14,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 using common;
+using System.Windows.Input;
 
 namespace lcommunicate
 {
@@ -649,6 +650,46 @@ namespace lcommunicate
             }
             //
             Monitor.Exit(_cs_cache);
+        }
+        public static void ChangeDeviceAddress(string panel_id, string oldAddress, string loopType, string newAddress)
+        {
+            Monitor.Enter(_cs_cache);
+            if (_cache_list_panels == null)
+                _cache_list_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            if (!_cache_list_panels.ContainsKey(panel_id))
+                _cache_list_panels.Add(panel_id, new Dictionary<string, Dictionary<string, string>>());
+            Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
+            foreach (string loopkey in el.Keys)
+                if (Regex.IsMatch(loopkey, @"^" + loopType, RegexOptions.IgnoreCase))
+                {
+                    Dictionary<string, string> dloop = el[loopkey];
+                    Dictionary<string, string> deldev = new Dictionary<string, string>();
+                    foreach (string addr in dloop.Keys)
+                        if (addr == oldAddress)
+                        {
+                            string j = dloop[addr];
+                            j = Regex.Replace(j, @"~index~" + oldAddress, "~index~" + newAddress);
+                            deldev.Add(addr, j);
+                        }
+                    foreach (string addr in deldev.Keys)
+                    {
+                        dloop.Remove(addr);
+                        dloop.Add(newAddress, deldev[addr]);
+                    }
+                }
+            Monitor.Exit(_cs_cache);
+            //
+            Dictionary<string, string> pvals = GetPathValues(panel_id);
+            Dictionary<string, string> pathchanges = new Dictionary<string, string>();
+            foreach (string path in pvals.Keys)
+                if (Regex.IsMatch(path, "^" + loopType + @"[\w\W]+?#[\w\W]+?~index~" + oldAddress + "$"))
+                    pathchanges.Add(path, pvals[path]);
+            foreach (string path in pathchanges.Keys)
+            {
+                string newpath = Regex.Replace(path, "~index~" + oldAddress + "$", "~index~" + newAddress);
+                RemovePathValue(panel_id, path);
+                SetPathValue(panel_id, newpath, pathchanges[path]);
+            }
         }
         public static Dictionary<string, string> GetElements(string panel_id, string key)
         {

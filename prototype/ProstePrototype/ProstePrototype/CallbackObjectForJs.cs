@@ -21,10 +21,11 @@ namespace ProstePrototype
             return "{}";
             //return "Hi from " + elementType + " with new address at " + newAddress;
         }
-        public string modifyDeviceLoopAddress(string oldAddress, string elementType, string newAddress)
+        public string modifyDeviceLoopAddress(string oldAddress, string loopType, string newAddress)
         {
-
-            return "Hi from " + elementType + " with new address at " + newAddress;
+            cJson.ChangeDeviceAddress(oldAddress, loopType, newAddress);
+            return "{}";
+            //return "Hi from " + loopType + " with new address at " + newAddress;
         }
         public string getElements(string elementType)
         {
@@ -122,7 +123,7 @@ namespace ProstePrototype
             if (jnode != null)
             {
                 JToken t = jnode[key];
-                //File.WriteAllTextAsync("wb3.json", t.ToString());
+                File.WriteAllTextAsync("wb3.json", t.ToString());
                 if (t != null)
                     return t.ToString();
             }

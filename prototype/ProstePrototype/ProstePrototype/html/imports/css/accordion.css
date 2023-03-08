@@ -49,22 +49,22 @@ body {
             background: white;
         }
 
-        .accordion-body a:focus-within {
+        .accordion-body a.active {
             color: initial;
             background: white;
         }
-        .accordion-body a:focus-within *{
-            color: unset;
-        }
+            .accordion-body a.active * {
+                color: unset;
+            }
 
-    .accordion-body a:focus-within span.fire {
-        color: var(--fire); /* Override the gray color for the span.fire element when the parent button is focused */
-    }
+            .accordion-body a.active span.fire {
+                color: var(--fire); /* Override the gray color for the span.fire element when the parent button is focused */
+            }
 
-    .accordion-body a:focus-within span.normal {
-        color: var(--normal); /* Override the gray color for the span.normal element when the parent button is focused */
-    }
+            .accordion-body a.active span.normal {
+                color: var(--normal); /* Override the gray color for the span.normal element when the parent button is focused */
+            }
 
-    .accordion-body a:focus-within span.grasse {
-        color: var(--grasse); /* Override the gray color for the span.grasse element when the parent button is focused */
-    }
+            .accordion-body a.active span.grasse {
+                color: var(--grasse); /* Override the gray color for the span.grasse element when the parent button is focused */
+            }

@@ -10,52 +10,22 @@ let maxDevicesAllowed = 100;
 //#endregion VARIABLES
 
 //#region LOOP ELEMENT
-
-// function that get the TTE_NONE or (Sensors or Modules)
-const getArrayToModal = (id, loopNumber, loopType, operation) => {
-    boundAsync.getJsonNode(id, operation).then(res => {
-        var listJson = Object.keys(JSON.parse(res));
-        let deviceList = document.getElementById(`${loopType}_modal`).querySelector('#list-tab');
-        let deviceListName = id.includes('NONE') ? "DEVICES" : id.split('_').slice(1).join(' ');
-        let { minDevices, maxDevices } = getConfig('', deviceListName); // set minDevices and maxDevices depending on Sensors or Modules
-        if (attachedDevicesList.filter(x => x >= minDevices && x <= maxDevices).length === maxDevicesAllowed) return; // in case of full list of Sensors or Modules
-        deviceList.insertAdjacentHTML('beforeend', `<div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">${deviceListName}</div>`)
-
-        let noneElement = listJson.find(e => e.includes("NONE"));
-        if (!noneElement) noneElement = id;
-
-        listJson.filter(k => !k.includes('NONE')).forEach(deviceName => {
-            let key = getKey(deviceName);
-            deviceList.insertAdjacentHTML('beforeend', `
-                <button type="button"
-                        class="list-group-item col"
-                        id="${deviceName}"
-                        onclick="javascript: addLoopElement(this.id, '${loopNumber}', '${loopType}', '${noneElement}' )"
-                        data-toggle="tab"
-                        role="tab"
-                        aria-selected="false">
-                    <div class="btnStyle fire">
-                        <img src="${DEVICES_CONSTS[key].im}"
-                                alt=""
-                                width="50"
-                                height="50"
-                                class="m15" />
-                        <div class="someS">
-                            <h5>${DEVICES_CONSTS[key].sign}</h5>
-                        </div>
-                    </div>
-                </button>
-            `)
-        });
-    });
-}
-
 // function called when click on + ADD DEVICE IN LOOP {loopNumber}
 const loopElementFunc = (loopNumber, loopType) => {
+    document.getElementById(`${loopType}_modal`).querySelector('#list-tab').innerHTML = "";
     boundAsync.getJsonNode(loopType, 'CONTAINS').then(res => {
         var changeJson = JSON.parse(res)["ELEMENT"];
 
-        if (!Array.isArray(changeJson)) { // case TTE_NONE
+        if (!Array.isArray(changeJson)) {
+            /* case TTE_NONE: {
+              "ELEMENT": {
+                "@ID": "IRIS_TTENONE",
+                "@MIN": "1",
+                "@MAX": "250",
+                "@LNGID": "47ae198f-7ad0-449b-abe5-5fa889652643",
+                "~path": "ELEMENTS.IRIS_TTELOOP1.CONTAINS.ELEMENT"
+              }, ... }
+            */ 
             const { id, min, max } = {
                 id: changeJson["@ID"],
                 min: +(changeJson["@MIN"]),
@@ -75,40 +45,135 @@ const loopElementFunc = (loopNumber, loopType) => {
     });
 }
 
-const addLoopElement = (deviceName, loopNumber, loopType, noneElement) => {
-    let { key, minDevices, maxDevices } = getConfig(deviceName);
+// function that get the TTE_NONE or (Sensors or Modules)
+const getArrayToModal = (id, loopNumber, loopType, operation) => {
+    boundAsync.getJsonNode(id, operation).then(res => {
+        /* case TTE_NONE
+        {
+          "IRIS_MIO40": {
+            "@LNGID": "eda046ae-ca62-48f8-8413-8ebce415093d",
+            "~path": "ELEMENTS.IRIS_TTENONE.CHANGE.IRIS_MIO40"
+          },
+          "IRIS_MIO04": {
+            "@LNGID": "70c750d4-c4b4-4a70-98ca-d404a8dc42f6",
+            "~path": "ELEMENTS.IRIS_TTENONE.CHANGE.IRIS_MIO04"
+          },
+          "IRIS_MIO22": {
+            "@LNGID": "6f7135d8-1f02-4817-9324-fcd727a0b330",
+            "~path": "ELEMENTS.IRIS_TTENONE.CHANGE.IRIS_MIO22"
+          }, ... }
 
-    for (i = minDevices; i <= maxDevices; i++) {
-        if (attachedDevicesList.includes(i)) {
-            continue;
-        } else {
-            var address = i;
-            break;
-        }
-    }
+          case Sensors ( similar to Modules where it starts with "IRIS_MNONE")
+          {
+          "IRIS_SNONE": {
+            "@MIN": "0",
+            "@MAX": "99",
+            "@LNGID": "1862d1e0-b313-450e-aae2-787d7e241f8a",
+            "~path": "ELEMENTS.IRIS_SENSORS.CONTAINS.ELEMENT[0]"
+          },
+          "IRIS_S1251E": {
+            "@MIN": "0",
+            "@MAX": "99",
+            "@LNGID": "4eb06886-cf2c-49c6-8bee-1bf6e9fa98ec",
+            "~path": "ELEMENTS.IRIS_SENSORS.CONTAINS.ELEMENT[1]"
+          }, ... }
+        */
+        var listJson = Object.keys(JSON.parse(res));
+        let deviceList = document.getElementById(`${loopType}_modal`).querySelector('#list-tab');
+        let deviceListName = id.includes('NONE') ? "DEVICES" : id.split('_').slice(1).join(' ');
+        let { minDevices, maxDevices } = getConfig('', deviceListName); // set minDevices and maxDevices depending on Sensors or Modules
+        if (attachedDevicesList.filter(x => x >= minDevices && x <= maxDevices).length === maxDevicesAllowed) return; // in case of full list of Sensors or Modules
+        deviceList.insertAdjacentHTML('beforeend', `<div class="col-12 pt-2" style="text-align: center;text-decoration: underline;">${deviceListName}</div>`)
 
-    if (!address) { // guard, but should never get here
-        alert("It is not possible to add more devices of type " + DEVICES_CONSTS[key].type + " in loop " + loopNumber + "!")
-    }
+        let noneElement = listJson.find(e => e.includes("NONE")); // case Sensors or Modules
+        if (!noneElement) noneElement = id; // "IRIS_TTENONE" - case TTE_NONE
 
-    sendMessageWPF({
-        'Command': 'AddingLoopElement',
-        'Params': { 'NO_LOOP': mainKey, 'loopType': loopType, 'loopNumber': loopNumber, 'noneElement': noneElement, 'deviceName': deviceName, 'deviceAddress': address }
+        listJson.filter(k => !k.includes('NONE')).forEach(deviceName => {
+            let key = getKey(deviceName);
+            deviceList.insertAdjacentHTML('beforeend', `
+                <button type="button"
+                        class="list-group-item col"
+                        id="${deviceName}"
+                        onclick="javascript: openDeviceAddressModal(this.id, '${loopNumber}', '${loopType}', '${noneElement}' )"
+                        data-toggle="tab"
+                        role="tab"
+                        aria-selected="false">
+                    <div class="btnStyle fire">
+                        <img src="${DEVICES_CONSTS[key].im}"
+                                alt=""
+                                width="50"
+                                height="50"
+                                class="m15" />
+                        <div class="someS">
+                            <h5>${DEVICES_CONSTS[key].sign}</h5>
+                        </div>
+                    </div>
+                </button>
+            `)
+        });
     });
-
-    visualizeLoopElement(deviceName, +address, loopType, +loopNumber, key);
 }
 
-function visualizeLoopElement(deviceName, address, loopType, loopNumber, key) {
-    attachedDevicesList.push(address);
+// function fired when choosing the device from the modal and creating the button
+const openDeviceAddressModal = (deviceName, loopNumber, loopType, noneElement, current = -1) => {
+    $(`#${loopType}_modal`).modal('hide');
+
+    let { key, minDevices, maxDevices } = getConfig(deviceName);
+
+    let addrModal = document.getElementById("addressModal");
+
+    let innerSelectText = `<div class="form-item roww mt-1">
+                                    <label for="select_address">Set the address for ${loopType}</label>
+                                    <div class="select">
+                                        <select id="select_address" name="select_address">`;
+
+    for (var i = minDevices; i <= maxDevices; i++) {
+        let currentId = i === +current ? "selected" : "";
+        let disabled = attachedDevicesList.includes(i) ? "disabled style='background: #aaa;'" : ""
+        innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i}</option>`;
+    }
+
+    addrModal.querySelector(".modal-body").innerHTML = innerSelectText;
+
+    addrModal.querySelector(".btn.btn-primary.addr").addEventListener('click', function handler() {
+        if (!attachedDevicesList.includes(+addrModal.querySelector("select").value)) {
+            if (current === -1) { // guard if new
+                sendMessageWPF({
+                    'Command': 'AddingLoopElement',
+                    'Params': {
+                        'NO_LOOP': mainKey,
+                        'loopType': loopType,
+                        'loopNumber': loopNumber,
+                        'noneElement': noneElement,
+                        'deviceName': deviceName,
+                        'deviceAddress': addrModal.querySelector("select").value
+                    }
+                });
+                // setting the element at the given address
+                visualizeLoopElement(deviceName, +addrModal.querySelector("select").value, loopType, +loopNumber, key, noneElement);
+            } else {
+                // else it is not a new item, so modify the old one
+                modifyLoopDeviceCurrentAddress(+current, loopType, deviceName, +addrModal.querySelector("select").value, +loopNumber, key, noneElement );
+            }
+        }
+        $(addrModal).modal('hide');
+        // removing the event listener function
+        this.removeEventListener('click', handler);
+    });
+    $(addrModal).modal('show');    
+}
+
+// adding the new device button to the device list
+function visualizeLoopElement(deviceName, address, loopType, loopNumber, key, noneElement) {    
+    attachedDevicesList.push(+address);
 
     // update deviceNmbr button
     updateDeviceNmbr();
-
+    //alert(`loopType:'${loopType}', deviceName:'${deviceName}', loopNumber:'${loopNumber}', address:'${address}', noneElement:'${noneElement}', key:${key}`);
     const newDeviceInner = `<div class="col-12" id='${loopType}_${address}'>
                                 <div class="row">
                                     <div class="col-10 pr-1">
-                                        <a href="javascript:showDevice('${loopType}', '${deviceName}', '${loopNumber}', '${address}')" onclick="javascript:addActive('#selected_area')" >
+                                        <a href="javascript:showDevice('${loopType}', '${deviceName}', '${loopNumber}', '${address}', '${noneElement}')" onclick="javascript:addActive('#selected_area')" >
                                             <div class="btnStyle fire" id='${address}_${deviceName}'>
                                                 <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
                                                 <div class="someS">
@@ -124,7 +189,6 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key) {
                             </div>`;
 
     var el = document.getElementById(`new_${DEVICES_CONSTS[key].type}_${loopType}`);
-
     if (el) { // inserting
         el.insertAdjacentHTML('beforeend', newDeviceInner)
     }
@@ -138,26 +202,43 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key) {
     if (attachedDevicesList.length === maxDevicesAllowed && DEVICES_CONSTS[key].type === "device") {
         let button = document.getElementById(`btn_${loopType}`);
         button.style.display = "none";
-    }
-    $(`#${loopType}_modal`).modal('hide');
+    }    
 }
 
-const showDevice = (loopType, deviceName, loopNumber, address) => {
+const modifyLoopDeviceCurrentAddress = (oldAddress, loopType, deviceName, newAddress, loopNumber, key, noneElement) => { // deviceName, address, loopType, loopNumber, key, noneElement
+    boundAsync.modifyDeviceLoopAddress(`${oldAddress}`, loopType, `${newAddress}`).then(r => {
+        if (r) {
+            attachedDevicesList = attachedDevicesList.filter(el => el !== +oldAddress);
+            let oldEl = document.getElementById(`${loopType}_${oldAddress}`);
+            oldEl.parentNode.removeChild(oldEl);
+            visualizeLoopElement(deviceName, newAddress, loopType, loopNumber, key, noneElement);
+            showDevice(loopType, deviceName, loopNumber, newAddress, noneElement);
+        }
+    }).catch(e => console.log(e));
+} 
+
+const showDevice = (loopType, deviceName, loopNumber, address, noneElement) => {
     boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
         if (res) {
             let resJSONList = JSON.parse(res);
-            let deviceData = resJSONList.find(dd => dd["~address"] === address && dd["~device"] === deviceName)["Groups"]["~noname"]["fields"];
+            let deviceData = resJSONList.find(dd => dd["~address"] === `${address}` && dd["~device"] === deviceName)["Groups"]["~noname"]["fields"];
             let elem = document.getElementById(`selected_${loopType.includes("TTE") ? "device" : "sensor"}_${loopType}`);
-            showOrderedDevices(loopType, deviceName, address, elem, deviceData)
+            showOrderedDevices(loopType, deviceName, address, elem, deviceData, loopNumber, noneElement)
             collapsible();
             addVisitedBackground();
         }
     }).catch(err => alert(err));
 }
 
-function showOrderedDevices(loopType, deviceName, address, elem, deviceData) {
+function showOrderedDevices(loopType, deviceName, address, elem, deviceData, loopNumber, noneElement) {
     let { key } = getConfig(deviceName);
-    let fieldsetDevice = createFieldset(`selected_${loopType}_${deviceName}_${address}`, `${DEVICES_CONSTS[key].sign} ${address}`);
+    let fieldsetDevice = createFieldset(`selected_${loopType}_${deviceName}_${address}`, `${address}. ${DEVICES_CONSTS[key].sign}`);
+    fieldsetDevice.insertAdjacentHTML(
+        "beforeend",
+        `<button onclick="javascript: openDeviceAddressModal('${deviceName}', '${loopNumber}', '${loopType}', '${noneElement}', '${address}')" type="button" class="btn btn-position-right">
+            Modify current address
+        </button>`
+    );
     let fieldsetParameters;
     let fieldsetChannels;
     let fieldsetAlarmLevel;
@@ -421,7 +502,7 @@ function showLoop(loopNumber, loopType) {
                     <div class="col-3 bl fire scroll">
                         <div id="new_device_${loopType}" class="row">
                             <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices"
-                                data-toggle="modal" data-target="#showDevicesListModal" >
+                                data-bs-toggle="modal" data-bs-target="#showDevicesListModal" >
                                     ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
                             </button>
                         </div>
@@ -453,7 +534,7 @@ function showLoop(loopNumber, loopType) {
     var targetSSL = `<div class="row fullHeight">
                             <div class="col-3 bl fire scroll">
                                 <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices()" id="calculateDevices"
-                                    data-toggle="modal" data-target="#showDevicesListModal">
+                                    data-bs-toggle="modal" data-bs-target="#showDevicesListModal">
                                         ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
                                 </button>
                                 <p>${new T().t(localStorage.getItem('lang'), "sensors")}</p>

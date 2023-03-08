@@ -133,6 +133,7 @@ namespace ljson
                     m = Regex.Match(dev, @"""~device""\s*?:\s*?""([\w\W]+?)""");
                     if (m.Success)
                         device_name = m.Groups[1].Value;
+                    string device_clear_name = device_name;
                     if (saved_name != null)
                         device_name += "/" + saved_name;
                     //
@@ -140,7 +141,7 @@ namespace ljson
                     if (m.Success)
                         device_type = m.Groups[1].Value;
                     //
-                    string path_prefix = loop_type + "/" + device_type + "#" + device_name + ".";
+                    string path_prefix = loop_type + "/" + device_type + "#" + device_clear_name + ".";
                     JObject odev = JObject.Parse(dev);
                     JObject orw = new JObject((JObject)odev["~rw"]);
                     odev.Remove("~rw");
@@ -157,7 +158,7 @@ namespace ljson
                         if (!dsm.ContainsKey(device_name + "/" + dkey))
                             dsm.Add(device_name + "/" + dkey, new Dictionary<string, string>());
                         Dictionary<string, string> dsmch = dsm[device_name + "/" + dkey];
-                        dsmch.Add("device", path_prefix + "ELEMENTS." + device_name);
+                        dsmch.Add("device", path_prefix + "ELEMENTS." + device_name + "~index~" + dkey);
                         //if (saved_name != null && saved_name.Trim() != "")
                         //    dsmch.Add("name", saved_name);
                         if (firstonly)
@@ -832,6 +833,26 @@ namespace ljson
                 _io_channels.Remove(delkey);
                 _io_channels.Add(t.Item1, t.Item2);
             }
+        }
+        public override void OnDeviceAddressChanged(string oldAddress, string loopType, string newAddress)
+        {
+            Dictionary<string, string> dnew = new Dictionary<string, string>();
+            foreach (string iokey in _io_channels.Keys)
+                if (Regex.IsMatch(_io_channels[iokey], "^" + loopType + @"[\w\W]+?~index~" + oldAddress + "$"))
+                    dnew.Add(iokey, Regex.Replace(_io_channels[iokey], "~index~" + oldAddress + "$", "~index~" + newAddress));
+            foreach (string newkey in dnew.Keys)
+                _io_channels[newkey] = dnew[newkey];
+            Dictionary<string, Dictionary<string, string>> uch = new Dictionary<string, Dictionary<string, string>>();
+            foreach (string chkey in _used_channels.Keys)
+                if (Regex.IsMatch(chkey, "^" + loopType + @"[\w\W]+?~index~" + oldAddress + "$"))
+                    uch.Add(chkey, _used_channels[chkey]);
+            foreach (string delkey in uch.Keys)
+            {
+                _used_channels.Remove(delkey);
+                string newkey = Regex.Replace(delkey, "~index~" + oldAddress + "$", "~index~" + newAddress);
+                _used_channels.Add(newkey, uch[delkey]);
+            }
+            string s = "";
         }
         #endregion
 

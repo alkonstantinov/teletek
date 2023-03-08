@@ -782,6 +782,7 @@ fieldset {
 .btn-position-right {
     display: flex;
     margin-left: auto;
+    justify-content: end;
 }
 
 

@@ -139,5 +139,6 @@ namespace ljson
         public virtual void ClearCache() { }
         public virtual void RemoveTABCache(string tab, string idx) { }
         public virtual void OnElementAddressChanged(string oldAddress, string elementType, string newAddress) { }
+        public virtual void OnDeviceAddressChanged(string oldAddress, string loopType, string newAddress) { }
     }
 }

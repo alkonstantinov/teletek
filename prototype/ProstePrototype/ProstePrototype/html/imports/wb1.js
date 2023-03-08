@@ -133,7 +133,7 @@ function receiveMessageWPF(jsonTxt) {
                         break;
                     default: break;
                 }
-                let panelName = jsonKeys[0].split("_")[0].toUpperCase();
+                let panelName = json["~panel_name"][0].toUpperCase() + json["~panel_name"].slice(1).toLowerCase();
                 // 2. create the new panel-item
                 let panelItem = document.createElement('div');
                 panelItem.classList = "accordion-item m-4";
@@ -248,7 +248,7 @@ const addAccordeonButton = (title, page, div) => {
     // title definition
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
 
-    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${page}">
+    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'})" onclick="javascript: addActive()" class="" id="${page}">
                     <span class="${color} mr10"><i class="fa-solid ${CONFIG_CONST[key].picture}"></i></span>${titleTranslated}
             </a>`;
 
@@ -322,10 +322,10 @@ function toggleDarkMode(show, filename) {
     }
 }
 
-function addActive(doc = document) {
-    $(doc).on('click', '.btnStyle', function () {
-        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
-        $(this).addClass('active');// here apply selected class on clicked btnStyle fire
+function addActive() {
+    $('body').on('click', 'a:has(> span:first-child)', function () {
+        $('a:has(> span:first-child)').removeClass('active'); // Remove the active class from all anchor tags that contain a span as their first child
+        $(this).addClass('active'); // Add the active class to the clicked anchor tag
     });
 }
 //#endregion

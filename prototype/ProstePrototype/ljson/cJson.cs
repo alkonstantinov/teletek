@@ -2319,6 +2319,11 @@ namespace ljson
                 cComm.SetPathValue(CurrentPanelID, old_new_path[path], val);
             }
         }
+        public static void ChangeDeviceAddress(string oldAddress, string loopType, string newAddress)
+        {
+            cComm.ChangeDeviceAddress(CurrentPanelID, oldAddress, loopType, newAddress);
+            _internal_relations_operator.OnDeviceAddressChanged(oldAddress, loopType, newAddress);
+        }
         #endregion
     }
 }
