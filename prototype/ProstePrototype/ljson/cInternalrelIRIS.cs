@@ -103,7 +103,7 @@ namespace ljson
     }
     internal class cInternalrelIRIS : cInternalRel
     {
-        private enum eIO { Input = 1, Output = 2 };
+        private enum eIO { Input = 1, Output = 2, FAT_IN = 3, FAT_OUT = 4 };
 
         #region io&loops
         private Dictionary<string, Dictionary<string, Dictionary<string, string>>> LoopsInOuuts(string _panel_id, Dictionary<string, string> loops, string io, bool firstonly)
@@ -368,7 +368,7 @@ namespace ljson
                     Dictionary<string, string> l = loopsbytype[key];
                     string ioloop = Regex.Replace(key, @"^[\w\W]*?_", "");
                     bool haveio = false;
-                    if (io == eIO.Input)
+                    if (io == eIO.Input || io == eIO.FAT_IN)
                         haveio = HaveInputs(_panel_id, l);
                     else
                         haveio = HaveOutputs(_panel_id, l);
@@ -379,6 +379,8 @@ namespace ljson
             }
             //
             JObject looptab = FindObjectByNAMEProp((JToken)_node, "LOOP_DEVICE");
+            if (looptab == null)
+                looptab = FindObjectByNAMEProp((JToken)_node, "LOOP DEVICE");
             if (looptab != null)
             {
                 bool enabled = cComm.PseudoElementExists(_panel_id) && someioexists;
@@ -406,6 +408,10 @@ namespace ljson
                 SetIOFilters(_panel_id, _node, eIO.Input);
             else if (Regex.IsMatch(path, @"OUTPUT", RegexOptions.IgnoreCase))
                 SetIOFilters(_panel_id, _node, eIO.Output);
+            else if (Regex.IsMatch(path, @"\.FAT_[\w\W]+?_IN\d+$", RegexOptions.IgnoreCase))
+                SetIOFilters(_panel_id, _node, eIO.FAT_IN);
+            else if (Regex.IsMatch(path, @"\.FAT_[\w\W]+?_OUT\d+$", RegexOptions.IgnoreCase))
+                SetIOFilters(_panel_id, _node, eIO.FAT_OUT);
         }
         #endregion
 

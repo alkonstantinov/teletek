@@ -444,7 +444,7 @@ function calculateZoneDevices(elementNumber) {
 function fatFbfFunc(json) {
     let elementNames = Object.keys(json).filter(name => !name.startsWith("~"));
     elementNames.forEach(el => {
-        boundAsync.getElement(el).then(response => {
+        boundAsync.setNodeFilters(el).then(response => {
             if (response) {
                 let jObj = JSON.parse(response);
 
@@ -462,7 +462,7 @@ function fatFbfFunc(json) {
                 mainDiv.insertAdjacentHTML('beforeend', inside);
                 let div = mainDiv.querySelector(`#${input_id}`);
 
-                elementsCreationHandler(div, jObj["PROPERTIES"]);
+                elementsCreationHandler(div, jObj["PROPERTIES"]["Groups"]);
 
                 collapsible(`collapsible_${input_id}`)
             }

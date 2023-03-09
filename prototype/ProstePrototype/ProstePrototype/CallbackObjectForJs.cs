@@ -148,7 +148,15 @@ namespace ProstePrototype
             JObject o = cJson.LoopsOutputs(path);
             return o.ToString();
         }
-
+        public string setNodeFilters(string elementName)
+        {
+            JObject el = cJson.GetNode(elementName);
+            cJson.SetNodeFilters(el);
+            el.Remove("~rw");
+            el["PROPERTIES"]["Groups"] = cJson.GroupsWithValues(el["PROPERTIES"]["Groups"].ToString());
+            File.WriteAllTextAsync("wb4.json", el.ToString());
+            return el.ToString(); ;
+        }
         public string checkLoopConnection(string noLoop, int loopNumber)
         {
             JObject o = cJson.LoopRelations(noLoop, loopNumber);

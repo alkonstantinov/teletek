@@ -376,6 +376,75 @@ namespace ljson
         #endregion
 
         #region FAT FBF
+        private static void CreateFATFBFGroups(JObject json)
+        {
+            JObject content = (JObject)json["ELEMENTS"]["iris_fat_fbf"]["CONTAINS"];
+            foreach (JProperty pfat in content.Properties())
+            {
+                string fat_name = pfat.Name;
+                JObject ofat = (JObject)json["ELEMENTS"][fat_name];
+                JObject fatprops_old = new JObject((JObject)ofat["PROPERTIES"]["PROPERTY"]);
+                JObject fatprops = new JObject((JObject)ofat["PROPERTIES"]["PROPERTY"]);
+                //
+                JObject groups = new JObject();
+                groups["~noname"] = new JObject();
+                groups["~noname"]["name"] = "";
+                groups["~noname"]["fields"] = new JObject();
+                groups["~noname"]["fields"]["Type"] = fatprops;
+                json["ELEMENTS"][fat_name]["PROPERTIES"]["Groups"] = ofat["PROPERTIES"]["Groups"];
+                //
+                fatprops = (JObject)ofat["PROPERTIES"];
+                fatprops.Remove("PROPERTY");
+                fatprops["Groups"] = groups;
+                fatprops["PROPERTY"] = fatprops_old;
+            }
+            //
+            //JArray proparr = (JArray)json["iris_fat_fbf"]["PROPERTIES"]["PROPERTY"];
+            //JObject o = Array2Object(proparr);
+            ////groups
+            //json["iris_network"]["PROPERTIES"]["Groups"] = new JObject();
+            ////not grouped params
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname"]["Name"] = o["Name"];
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname"]["PanelNumber"] = o["PanelNumber"];
+            ////
+            //JObject grp1 = new JObject();
+            //grp1["name"] = "Parameters";
+            //JObject f1 = new JObject();
+            //f1["IsNetworkEnabled"] = o["IsNetworkEnabled"];
+            //JObject neprops = Array2Object((JArray)f1["IsNetworkEnabled"]["PROPERTIES"]["PROPERTY"]);
+            //f1["IsNetworkEnabled"]["PROPERTIES"] = neprops;
+            ////f1["NetworkType"] = o["NetworkType"];
+            ////f1["Protocol"] = o["Protocol"];
+            ////f1["Redundancy_En"] = o["Redundancy_En"];
+            //grp1["fields"] = f1;
+            //json["iris_network"]["PROPERTIES"]["Groups"]["Parameters"] = grp1;
+            ////
+            //JObject grp2 = new JObject();
+            //grp2["name"] = "Network Settings";
+            //JObject f2 = new JObject();
+            //f2["HostIP"] = o["HostIP"];
+            //f2["NetMask"] = o["NetMask"];
+            //f2["Gateway"] = o["Router"];
+            //f2["Port"] = o["Port"];
+            ////f2["PanelEvacNumber"] = o["PanelEvacNumber"];
+            ////f2["emacETHADDR0"] = o["emacETHADDR0"];
+            ////f2["emacETHADDR1"] = o["emacETHADDR1"];
+            ////f2["emacETHADDR2"] = o["emacETHADDR2"];
+            ////f2["emacETHADDR3"] = o["emacETHADDR3"];
+            ////f2["emacETHADDR4"] = o["emacETHADDR4"];
+            ////f2["emacETHADDR5"] = o["emacETHADDR5"];
+            //grp2["fields"] = f2;
+            //json["iris_network"]["PROPERTIES"]["Groups"]["NetworkSettings"] = grp2;
+            ////not grouped params
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"] = new JObject();
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["PanelEvacNumber"] = o["PanelEvacNumber"];
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"] = o["emacETHADDR0"];
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TYPE"] = "EMAC";
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TEXT"] = "EMAC";
+            ////
+            //json["iris_network"]["PROPERTIES"]["OLD"] = o;
+        }
         private static void ConvertFATFBF(JObject json, JObject _pages)
         {
             JObject ac = (JObject)json["ELEMENTS"]["iris_fat_fbf"];
@@ -385,6 +454,7 @@ namespace ljson
             ac["breadcrumbs"] = _pages["iris_fat_fbf"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_fat_fbf"]["CONTAINS"]);
             json["ELEMENTS"]["iris_fat_fbf"]["CONTAINS"] = contains;
+            CreateFATFBFGroups(json);
         }
         #endregion
 
