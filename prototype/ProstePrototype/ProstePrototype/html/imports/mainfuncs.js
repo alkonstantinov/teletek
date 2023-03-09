@@ -101,7 +101,8 @@ function receiveMessageWPF(jsonTxt) {
             drawFields(body, json, color ? BUTTON_COLORS[color] : '');
 
             break;
-        case !!document.getElementById('divDevices'):            
+        case !!document.getElementById('divFBF'): 
+            fatFbfFunc(json);
             break;
         case !!document.getElementById("divPDevices"):
             body = document.getElementById('divPDevices');
@@ -439,6 +440,37 @@ function calculateZoneDevices(elementNumber) {
 }
 //#endregion
 
+//#region FAT_FBF
+function fatFbfFunc(json) {
+    let elementNames = Object.keys(json).filter(name => !name.startsWith("~"));
+    elementNames.forEach(el => {
+        boundAsync.getElement(el).then(response => {
+            if (response) {
+                let jObj = JSON.parse(response);
+
+                const { input_name, input_id } = {
+                    input_name: jObj["@PRODUCTNAME"], //new T().t(localStorage.getItem("lang"), jObj["@LNGID"]),
+                    input_id: jObj["@PRODUCTNAME"].replaceAll(" ", "_")
+                }
+
+                var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
+                <div class="collapsible-content col-12">
+                    <div class="row align-items-center m-2" id="${input_id}"></div>
+                </div>`;
+
+                const mainDiv = document.getElementById("divFBF");
+                mainDiv.insertAdjacentHTML('beforeend', inside);
+                let div = mainDiv.querySelector(`#${input_id}`);
+
+                elementsCreationHandler(div, jObj["PROPERTIES"]);
+
+                collapsible(`collapsible_${input_id}`)
+            }
+        }).catch(error => console.log(error));
+    });
+}
+//#endregion
+
 //#region Loop Type
 function showLoopType(level, type, key, showDivId, selectDivId) {
     const showDiv = document.getElementById(showDivId);
@@ -580,8 +612,12 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
         device = channel_path.split("#")[1].split(".")[0];
         address = channel_path.split("~").pop(); // if not ~ in channel_path will return channel_path
     }
-    let type = pathFound.split(".").find(e => e.includes("putType"));
+    let type = pathFound.split(".").find(e => e.includes("putType") || e.includes("FAT_FBF_"));
     switch (type) {
+        case "FAT_FBF_OUT1":
+        case "FAT_FBF_OUT2":
+        case "FAT_FBF_OUT3":
+        case "FAT_FBF_OUT4":
         case "OutputType":
             boundAsync.loopsOutputs(pathFound).then(result => {
                 CONFIGURED_IO = JSON.parse(result);
@@ -590,6 +626,9 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
                 showLoopType(1, "Output", "", fieldset.id, selectDiv.id);
 
             }).catch(err => alert("Error" + err)); break;
+        case "FAT_FBF_IN1":
+        case "FAT_FBF_IN2":
+        case "FAT_FBF_IN3":
         case "InputType":
             boundAsync.loopsInputs(pathFound).then(result => {
                 CONFIGURED_IO = JSON.parse(result);
@@ -637,7 +676,7 @@ const transformGroupElement = (elementJson) => {
     let attributes = {
         type: elementJson['@TYPE'],
         input_name: newT.t(localStorage.getItem('lang'), elementJson['@LNGID']), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
-        input_id: elementJson['@TEXT'] && elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'),
+        input_id: elementJson['@TEXT'] ? elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_') : elementJson['@LNGID'], //.replaceAll("-", "_"),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
         maxTextLength: elementJson['@LENGTH'],

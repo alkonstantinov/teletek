@@ -42273,7 +42273,7 @@
             "tr": "emacETHADDR5"
         },
         "bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -42369,7 +42369,7 @@
             "tr": "Channel"
         },
         "9012abcb-4a16-4ed2-8c94-81b64bd3e6d5": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -42465,7 +42465,7 @@
             "tr": "Channel"
         },
         "7ad68e5a-9a61-487a-892b-838fa8e5dbb8": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -42561,7 +42561,7 @@
             "tr": "Channel"
         },
         "c6799c67-d314-40d8-bba4-8c5b06edecb2": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -42705,7 +42705,7 @@
             "tr": "Channel"
         },
         "3f452ccb-3fde-43bb-ac46-c0932cbed33e": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -42849,7 +42849,7 @@
             "tr": "Channel"
         },
         "7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -42993,7 +42993,7 @@
             "tr": "Channel"
         },
         "61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,

@@ -45,6 +45,8 @@ namespace ProstePrototype
         public string getElement(string elementName)
         {
             JObject el = cJson.GetNode(elementName);
+            el.Remove("~rw");
+            File.WriteAllTextAsync("wb4.json", el.ToString());
             return el.ToString();
         }
         public string getJsonForElement(string elementType, int elementNumber)

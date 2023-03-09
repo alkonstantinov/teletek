@@ -1,5 +1,4 @@
-﻿<!-- saved from url=(0016)http://localhost -->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -10287,211 +10286,410 @@
     </style>
 
     <link rel="stylesheet" href="../IRIS.css">
-    <link rel="stylesheet" href="../imports/css/accordion.css">
-
     <title>Teletek Manager</title>
 </head>
-
 <body>
-    <div class="accordion" id="panelsList">
 
-        <div class="accordion-item m-4">
-            <h2 class="accordion-header" id="b78f9e3a_83be_4759_9a40_0fd43c77fefb" onclick="javascript: selectNewPanel(this.id)">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseb78f9e3a_83be_4759_9a40_0fd43c77fefb" aria-expanded="true" aria-controls="collapseb78f9e3a_83be_4759_9a40_0fd43c77fefb">
-                    <span class="material-icons-outlined fire">local_fire_department</span> IRIS
-                </button>
-            </h2>
-            <div id="collapseb78f9e3a_83be_4759_9a40_0fd43c77fefb" class="accordion-collapse collapse show" aria-labelledby="b78f9e3a_83be_4759_9a40_0fd43c77fefb" data-bs-parent="#panelsList">
-                <div class="accordion-body">
-                    <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'})" onclick="javascript: addActive()" class="" id="iris_access_code">
-                        <span class="fire mr10"><i class="fa-solid fa-fingerprint"></i></span>Access codes
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_panels_in_network'})" onclick="javascript: addActive()" class="" id="iris_panels_in_network">
-                        <span class="fire mr10"><i class="fa-solid fa-network-wired"></i></span>Panels in network
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_network'})" onclick="javascript: addActive()" class="" id="iris_network">
-                        <span class="fire mr10"><i class="fa-solid fa-diagram-project"></i></span>Network
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_inputs'})" onclick="javascript: addActive()" class="" id="iris_inputs">
-                        <span class="fire mr10"><i class="fa-solid fa-arrow-down-1-9"></i></span>Inputs
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_inputs_group'})" onclick="javascript: addActive()" class="" id="iris_inputs_group">
-                        <span class="fire mr10"><i class="fa-solid fa-arrow-down-wide-short"></i></span>Input Groups
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_outputs'})" onclick="javascript: addActive()" class="" id="iris_outputs">
-                        <span class="fire mr10"><i class="fa-solid fa-arrow-up-9-1"></i></span>Output
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_fat_fbf'})" onclick="javascript: addActive()" class="" id="iris_fat_fbf">
-                        <span class="fire mr10"><i class="fa-solid fa-laptop-file"></i></span>FAT FBF
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_zones'})" onclick="javascript: addActive()" class="" id="iris_zones">
-                        <span class="fire mr10"><i class="fa-solid fa-clone"></i></span>Zones
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_evac_zones'})" onclick="javascript: addActive()" class="" id="iris_evac_zones">
-                        <span class="fire mr10"><i class="fa-solid fa-arrows-to-circle"></i></span>Evac zones
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_peripheral_devices'})" onclick="javascript: addActive()" class="" id="iris_peripheral_devices">
-                        <span class="fire mr10"><i class="fa-solid fa-hard-drive"></i></span>Peripheral devices
-                    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_loop_devices'})" onclick="javascript: addActive()" class="" id="iris_loop_devices">
-                        <span class="fire mr10"><i class="fa-solid fa-compact-disc"></i></span>Loop devices
-                    </a>
+    <div class="container" id="divFBF">
+
+
+        <button class="fire collapsible ml-1 collapsible_Door_switch_input cactive">Door switch input</button>
+        <div class="collapsible-content col-12" style="max-height: 97px;">
+            <div class="row align-items-center m-2" id="Door_switch_input">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97">State</label>
+                        <div class="select">
+                            <select id="bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97" name="bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" class="visited-bgd" size="0" style="height: auto; margin-bottom: 0rem; z-index: 1;">
+                                <option value="0_597fab2e-f36a-4f2c-b6e5-61a016de7bf1">NONE </option>
+                                <option value="2_664083f9-2950-4fb5-9f4a-02533bfa14b2">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97"><div class="row align-items-center"></div></div><div id="0_597fab2e-f36a-4f2c-b6e5-61a016de7bf1" style="display: none;"><div class="row align-items-center"></div></div><div id="2_664083f9-2950-4fb5-9f4a-02533bfa14b2" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY.TABS.664083f9-2950-4fb5-9f4a-02533bfa14b2.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY.TABS.664083f9-2950-4fb5-9f4a-02533bfa14b2.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY.TABS.664083f9-2950-4fb5-9f4a-02533bfa14b2.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="fire collapsible ml-1 collapsible_Dialer_ACK_input cactive">Dialer ACK input</button>
+        <div class="collapsible-content col-12" style="max-height: 151px;">
+            <div class="row align-items-center m-2" id="Dialer_ACK_input">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="9012abcb-4a16-4ed2-8c94-81b64bd3e6d5">State</label>
+                        <div class="select">
+                            <select id="9012abcb-4a16-4ed2-8c94-81b64bd3e6d5" name="9012abcb-4a16-4ed2-8c94-81b64bd3e6d5" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_9012abcb-4a16-4ed2-8c94-81b64bd3e6d5', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_cc7ba868-0ed1-404b-a5f2-b6c8acbc75e6">NONE </option>
+                                <option value="2_0e20f2de-0b0a-4411-9d06-8ee2981278b9">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_9012abcb-4a16-4ed2-8c94-81b64bd3e6d5"></div><div id="0_cc7ba868-0ed1-404b-a5f2-b6c8acbc75e6" style="display: none;"><div class="row align-items-center"></div></div><div id="2_0e20f2de-0b0a-4411-9d06-8ee2981278b9" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY.TABS.0e20f2de-0b0a-4411-9d06-8ee2981278b9.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY.TABS.0e20f2de-0b0a-4411-9d06-8ee2981278b9.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY.TABS.0e20f2de-0b0a-4411-9d06-8ee2981278b9.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="fire collapsible ml-1 collapsible_Dialer_fault_input cactive">Dialer fault input</button>
+        <div class="collapsible-content col-12" style="max-height: 151px;">
+            <div class="row align-items-center m-2" id="Dialer_fault_input">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="7ad68e5a-9a61-487a-892b-838fa8e5dbb8">State</label>
+                        <div class="select">
+                            <select id="7ad68e5a-9a61-487a-892b-838fa8e5dbb8" name="7ad68e5a-9a61-487a-892b-838fa8e5dbb8" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_7ad68e5a-9a61-487a-892b-838fa8e5dbb8', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_d113b395-832e-40e7-9b04-d9749819e37c">NONE </option>
+                                <option value="2_c6e3b94b-3537-4dc8-afb3-45f9748897c0">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_7ad68e5a-9a61-487a-892b-838fa8e5dbb8"></div><div id="0_d113b395-832e-40e7-9b04-d9749819e37c" style="display: none;"><div class="row align-items-center"></div></div><div id="2_c6e3b94b-3537-4dc8-afb3-45f9748897c0" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY.TABS.c6e3b94b-3537-4dc8-afb3-45f9748897c0.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY.TABS.c6e3b94b-3537-4dc8-afb3-45f9748897c0.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY.TABS.c6e3b94b-3537-4dc8-afb3-45f9748897c0.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="fire collapsible ml-1 collapsible_Door_unlock_output cactive">Door unlock output</button>
+        <div class="collapsible-content col-12" style="max-height: 151px;">
+            <div class="row align-items-center m-2" id="Door_unlock_output">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="c6799c67-d314-40d8-bba4-8c5b06edecb2">State</label>
+                        <div class="select">
+                            <select id="c6799c67-d314-40d8-bba4-8c5b06edecb2" name="c6799c67-d314-40d8-bba4-8c5b06edecb2" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_c6799c67-d314-40d8-bba4-8c5b06edecb2', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_31291216-bd88-4d6f-8357-f9d20cb0c54f">NONE </option>
+                                <option value="1_6204a03b-78b7-42be-9698-e63aebea2517">PERIPHERY DEVICE </option>
+                                <option value="2_16a9fa4f-6cbd-4cd1-a7e2-9af852e89307">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_c6799c67-d314-40d8-bba4-8c5b06edecb2"></div><div id="0_31291216-bd88-4d6f-8357-f9d20cb0c54f" style="display: none;"><div class="row align-items-center"></div></div><div id="1_6204a03b-78b7-42be-9698-e63aebea2517" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_address">Peripherial device address</label>
+                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.6204a03b-78b7-42be-9698-e63aebea2517.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="0">
+                                </div>
+                            </div><div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_output">Peripherial device output</label>
+                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.6204a03b-78b7-42be-9698-e63aebea2517.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div><div id="2_16a9fa4f-6cbd-4cd1-a7e2-9af852e89307" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.16a9fa4f-6cbd-4cd1-a7e2-9af852e89307.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.16a9fa4f-6cbd-4cd1-a7e2-9af852e89307.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.16a9fa4f-6cbd-4cd1-a7e2-9af852e89307.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="fire collapsible ml-1 collapsible_Fire_alarm_output cactive">Fire alarm output</button>
+        <div class="collapsible-content col-12" style="max-height: 151px;">
+            <div class="row align-items-center m-2" id="Fire_alarm_output">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="3f452ccb-3fde-43bb-ac46-c0932cbed33e">State</label>
+                        <div class="select">
+                            <select id="3f452ccb-3fde-43bb-ac46-c0932cbed33e" name="3f452ccb-3fde-43bb-ac46-c0932cbed33e" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_3f452ccb-3fde-43bb-ac46-c0932cbed33e', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_05df522f-7cd6-463d-85de-e99332437406">NONE </option>
+                                <option value="1_1b072694-9a0e-40d2-a31a-94e1bd3ca07c">PERIPHERY DEVICE </option>
+                                <option value="2_31534e57-cb9a-43f9-8fc6-652f1305410c">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_3f452ccb-3fde-43bb-ac46-c0932cbed33e"></div><div id="0_05df522f-7cd6-463d-85de-e99332437406" style="display: none;"><div class="row align-items-center"></div></div><div id="1_1b072694-9a0e-40d2-a31a-94e1bd3ca07c" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_address">Peripherial device address</label>
+                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.1b072694-9a0e-40d2-a31a-94e1bd3ca07c.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_output">Peripherial device output</label>
+                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.1b072694-9a0e-40d2-a31a-94e1bd3ca07c.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div><div id="2_31534e57-cb9a-43f9-8fc6-652f1305410c" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.31534e57-cb9a-43f9-8fc6-652f1305410c.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.31534e57-cb9a-43f9-8fc6-652f1305410c.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.31534e57-cb9a-43f9-8fc6-652f1305410c.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="fire collapsible ml-1 collapsible_Panel_fault_output cactive">Panel fault output</button>
+        <div class="collapsible-content col-12" style="max-height: 151px;">
+            <div class="row align-items-center m-2" id="Panel_fault_output">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7">State</label>
+                        <div class="select">
+                            <select id="7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7" name="7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_33112609-8a7f-43fd-be47-a49a39dc50e3">NONE </option>
+                                <option value="1_fe48eb02-821f-4e58-9c6e-9d493405e5e1">PERIPHERY DEVICE </option>
+                                <option value="2_a152efd2-e045-49ef-bcf6-614cce125434">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7"></div><div id="0_33112609-8a7f-43fd-be47-a49a39dc50e3" style="display: none;"><div class="row align-items-center"></div></div><div id="1_fe48eb02-821f-4e58-9c6e-9d493405e5e1" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_address">Peripherial device address</label>
+                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.fe48eb02-821f-4e58-9c6e-9d493405e5e1.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_output">Peripherial device output</label>
+                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.fe48eb02-821f-4e58-9c6e-9d493405e5e1.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div><div id="2_a152efd2-e045-49ef-bcf6-614cce125434" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.a152efd2-e045-49ef-bcf6-614cce125434.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.a152efd2-e045-49ef-bcf6-614cce125434.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.a152efd2-e045-49ef-bcf6-614cce125434.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="fire collapsible ml-1 collapsible_Sabotage_output cactive">Sabotage output</button>
+        <div class="collapsible-content col-12" style="max-height: 151px;">
+            <div class="row align-items-center m-2" id="Sabotage_output">
+                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                    <div class="form-item roww">
+                        <label for="61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32">State</label>
+                        <div class="select">
+                            <select id="61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32" name="61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY','newValue': this.value}});
+                                                              loadDiv(this, 'showDiv_61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_888df955-902f-4292-9706-c5b3e4c242c3">NONE </option>
+                                <option value="1_901e70ec-7da4-4bd6-873e-6ce2cb2aba1e">PERIPHERY DEVICE </option>
+                                <option value="2_457eb2bd-cc29-4604-9e51-8aa9caab482d">LOOP DEVICE </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="showDiv_61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32"></div><div id="0_888df955-902f-4292-9706-c5b3e4c242c3" style="display: none;"><div class="row align-items-center"></div></div><div id="1_901e70ec-7da4-4bd6-873e-6ce2cb2aba1e" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_address">Peripherial device address</label>
+                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.901e70ec-7da4-4bd6-873e-6ce2cb2aba1e.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-6 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="peripherial_device_output">Peripherial device output</label>
+                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.901e70ec-7da4-4bd6-873e-6ce2cb2aba1e.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div><div id="2_457eb2bd-cc29-4604-9e51-8aa9caab482d" style="display: none;">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="loop">Loop</label>
+                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.457eb2bd-cc29-4604-9e51-8aa9caab482d.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="device_address">Device address</label>
+                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.457eb2bd-cc29-4604-9e51-8aa9caab482d.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
+                                </div>
+                            </div><div class="col-12 col-lg-4 mt-1">
+                                <div class="form-item roww">
+
+                                    <label for="channel">Channel</label>
+                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.457eb2bd-cc29-4604-9e51-8aa9caab482d.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <menu type="context" id="ctxMenu">
-        <menuitem title="Read" onclick="javascript: sendMsg(this)" icon=""><i class="fa-solid fa-book-open pr-1"></i></menuitem>
-        <menuitem title="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i></menuitem>
-        <menuitem title="Firmware update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i></menuitem>
-        <menuitem title="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i></menuitem>
-        <menuitem title="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i></menuitem>
-    </menu>
-
-    <!--<script src="pages-dynamic.js"></script>-->
+    <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
-    <script src="../imports/wb1.js"></script>
+    <script src="../imports/mainfuncs.js"></script>
+    <script src="../imports/fat_fbf.js"></script>
 
     <script>
-//        var wb1 = `{
-//                "~panel_id": "345152345-2430750934toh298",
-//      "iris_access_code": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "a3a67084-f171-422c-9378-ef472bcde745",
-//        "title": "Access codes",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/IRISPanel-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_access_code"
-//      },
-//      "iris_panels_in_network": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "d709cc30-7355-44a4-b120-d91c64ca35b8",
-//        "title": "Panels in network",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_panels_in_network"
-//      },
-//      "iris_network": {
-//        "@MIN": "0",
-//        "@MAX": "1",
-//        "@LNGID": "52ca04ee-904c-480a-b618-3e343347de4b",
-//        "title": "Network",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/network-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_network"
-//      },
-//      "iris_inputs": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "a6f6149d-9005-454d-b53b-ac5d2a227d73",
-//        "title": "Inputs",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_inputs"
-//      },
-//      "iris_inputs_group": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "36df3d97-8b84-4547-bd1d-2e81909b22a2",
-//        "title": "Input Groups",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_inputs_group"
-//      },
-//      "iris_outputs": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "9bc0be38-1013-4ccd-a005-a65363613d18",
-//        "title": "Output",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_outputs"
-//      },
-//      "iris_fat_fbf": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "ee3be51a-efe2-4990-9b11-18208f9fbba8",
-//        "title": "FAT FBF",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/fat-fbf.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_fat_fbf"
-//      },
-//      "iris_zones": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "bb5054cd-3e05-489e-8e24-ab37a02b726f",
-//        "title": "Zones",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_zones"
-//      },
-//      "iris_evac_zones": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "5074bdad-bb5a-4232-b4e8-fe964dd2c60f",
-//        "title": "Evac zones",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_evac_zones"
-//      },
-//      "iris_peripheral_devices": {
-//        "@MIN": "0",
-//        "@MAX": "1",
-//        "@LNGID": "dbddee1e-e1fe-4a42-b47e-0120df12e1d1",
-//        "title": "Peripheral devices",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/periph_devices-auto.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_peripheral_devices"
-//      },
-//      "iris_loop_devices": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "61af6700-b5aa-490c-a091-22e3bfca8894",
-//        "title": "Loop devices",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/loop_devices-auto.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_loop_devices"
-//      },
-//      "~path": "ELEMENTS.iris.CONTAINS"
+//        var js = `{
+//  "FAT_FBF_IN1": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "45d1d4fd-3fd0-4784-8569-b6220a074665",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_IN1"
+//  },
+//  "FAT_FBF_IN2": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "01b68809-e545-4058-927a-bec67fa1f493",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_IN2"
+//  },
+//  "FAT_FBF_IN3": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "bf3dcc5b-b9f5-4728-b7d3-403cd0634e01",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_IN3"
+//  },
+//  "FAT_FBF_OUT1": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "e34a4bf8-5ef5-4da9-b521-ee54a734c19a",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT1"
+//  },
+//  "FAT_FBF_OUT2": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "6957c98c-e6a8-488b-958c-80fcac357b77",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT2"
+//  },
+//  "FAT_FBF_OUT3": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "8c89a84c-9b44-4af4-b029-19bf5ebeb847",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT3"
+//  },
+//  "FAT_FBF_OUT4": {
+//    "@MIN": "1",
+//    "@MAX": "1",
+//    "@LNGID": "339b5632-82fd-4eb8-81b5-d2ace647ccc1",
+//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT4"
+//  },
+//  "~path": "ELEMENTS.iris_fat_fbf.CONTAINS",
+//  "~panel_id": "f7fa03d0-31b1-4302-98f7-a333e5f2bc89"
 //}`;
-//        receiveMessageWPF(wb1);
+//        receiveMessageWPF(js)
     </script>
 
 
