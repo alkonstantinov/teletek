@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProstePrototype"
+		xmlns:uc="clr-namespace:ProstePrototype.WpfControls"
+		xmlns:library="clr-namespace:ProstePrototype.library"
         mc:Ignorable="d"
         Title="SettingsDialog" Height="350" Width="400"
         WindowStyle="None" WindowStartupLocation ="CenterScreen">
-
+    <Window.Resources>
+        <uc:StringToUpperConverter x:Key="StringToUpperConverter"/>
+    </Window.Resources>
     <Grid x:Name="mainGrid" Background="{Binding Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -21,7 +25,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="mainTbl" Text="{DynamicResource SettingsMenuSettings}" Margin="25, 0" FontSize="18" VerticalAlignment="Center" Foreground="{Binding Foreground}"/>
+                    <TextBlock x:Name="mainTbl" Text="{DynamicResource SettingsMenuSettings}" Margin="45, 0, 0, 0" FontSize="18" VerticalAlignment="Center"  TextAlignment="Center" Foreground="{Binding Foreground}"/>
                     <Button Name="exit_btn" Grid.Column="1" Click="ExitSettings_Clicked" Background="Transparent" Foreground="{Binding Foreground}" BorderThickness="0">
                         <TextBlock Text="&#xF00D;" FontFamily="{StaticResource fa_solid}" FontSize="18" VerticalAlignment="Center"/>
                     </Button>
@@ -29,11 +33,30 @@
             </StackPanel>
         </Border>
         <Grid Grid.Row="1" Margin="15,2">
-            <StackPanel Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="10" Grid.Row="0">
                 <CheckBox Name="autoCheck" FontSize="14" VerticalContentAlignment="Center" Foreground="{Binding Foreground}">
                     <TextBlock Text="{DynamicResource SettingsMenuAuto}"></TextBlock>
                 </CheckBox>
             </StackPanel>
+            <Button Grid.Row="1" x:Name="changeTheme_btn" ToolTip="{DynamicResource MainMenuTheme}" Click="changeTheme_Click" BorderThickness="0" Background="Transparent">
+                <DockPanel VerticalAlignment="Center">
+                    <TextBlock Text="&#xf042; " FontFamily="{StaticResource fa_solid}" FontSize="28"/>
+                    <TextBlock Text="{library:DynamicResourceBinding MainMenuTheme, Converter={StaticResource StringToUpperConverter}}" 
+                                       FontFamily="{StaticResource poppins_demibold}" FontSize="16" VerticalAlignment="Center"/>
+                </DockPanel>
+            </Button>
+            <Button Grid.Row="2" x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0" Background="Transparent">
+                <DockPanel VerticalAlignment="Center">
+                    <TextBlock Text="&#xe4c2; " FontFamily="{StaticResource fa_solid}" FontSize="28" VerticalAlignment="Bottom"></TextBlock>
+                    <TextBlock Text="{library:DynamicResourceBinding MainMenuUpdate, Converter={StaticResource StringToUpperConverter}}" 
+                                       FontFamily="{StaticResource poppins_demibold}" FontSize="16" VerticalAlignment="Center"/>
+                </DockPanel>
+            </Button>
         </Grid>
         <Border Grid.Row="2" BorderBrush="#e8e9ea" BorderThickness="0 2 0 0" >
             <StackPanel Margin="10" VerticalAlignment="Center" >
@@ -44,31 +67,46 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <DockPanel Margin="10, 10, 10, 10" Height="50">
-                        <Button Click="OKSettings_Clicked" Background="#0d91e4" Foreground="#eee" BorderThickness="0">
-                            <TextBlock Text="{DynamicResource SettingsMenuOK}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                        <Button Click="OKSettings_Clicked" Background="Blue" Foreground="#eee" Height="40" BorderThickness="0">
+                            <TextBlock Text="{DynamicResource SettingsMenuOK}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="2"/>
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                    <Setter Property="Button.Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#dfdfdf" Direction="270" ShadowDepth="3" BlurRadius="20" Opacity="0.6" />
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
                             </Button.Resources>
                         </Button>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Margin="10, 10, 10, 10" Height="50">
-                        <Button Click="ExitSettings_Clicked" Background="#777" Foreground="#eee" BorderThickness="0">
-                            <TextBlock Text="{DynamicResource MenuClose}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                        <Button Click="ExitSettings_Clicked" Background="#777" Foreground="#eee" Height="40" BorderThickness="0">
+                            <TextBlock Text="{DynamicResource MenuClose}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="2"/>
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                    <Setter Property="Button.Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#dfdfdf" Direction="270" ShadowDepth="3" BlurRadius="20" Opacity="0.6" />
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
                             </Button.Resources>
                         </Button>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Margin="10, 10, 10, 10">
-                        <Button Click="Help_Clicked" Background="#0c2b90" Foreground="#ccc" BorderThickness="0">
-                            <TextBlock Text="{DynamicResource MainMenuHelp}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                        <Button Click="Help_Clicked" Background="#0d91e4" Foreground="#ccc" Height="40" BorderThickness="0">
+                            <TextBlock Text="{DynamicResource MainMenuHelp}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="2"/>
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                    <Setter Property="Button.Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#dfdfdf" Direction="270" ShadowDepth="3" BlurRadius="20" Opacity="0.6" />
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
                             </Button.Resources>
                         </Button>

@@ -283,6 +283,22 @@
             "en": "Company Info",
             "bg": "Информация за фирмата",
         },
+        modif_address: { 
+            "en": "Modify current address",
+            "bg": "Промяна на адреса",
+        },
+        set_address: { 
+            "en": "Set the address for",
+            "bg": "Изберете адреса на",
+        },
+        element_address: { 
+            "en": "Element address",
+            "bg": "Адрес на елемента",
+        },
+        device_address: { 
+            "en": "Device address",
+            "bg": "Адрес на устройството",
+        },
         "activate": { 
             "en": "Activate",
             "bg": "Активен",

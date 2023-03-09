@@ -168,7 +168,7 @@
         </Grid>
         <Border Grid.Row="2" BorderBrush="#e8e9ea" >
             <Button Click="Connect_Clicked" Background="Blue" Foreground="#eee" Height="40" Width="160" Margin="0, 0, 0, 25" BorderThickness="0">
-                <TextBlock Text="{DynamicResource ScanMenuConnect}" FontSize="16" FontWeight="DemiBold" VerticalAlignment="Bottom"></TextBlock>
+                <TextBlock Text="{DynamicResource ScanMenuConnect}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="6"/>

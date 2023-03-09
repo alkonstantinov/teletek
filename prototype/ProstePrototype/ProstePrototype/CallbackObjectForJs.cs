@@ -42,6 +42,11 @@ namespace ProstePrototype
             File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
+        public string getElement(string elementName)
+        {
+            JObject el = cJson.GetNode(elementName);
+            return el.ToString();
+        }
         public string getJsonForElement(string elementType, int elementNumber)
         {
             // var e = elementType;

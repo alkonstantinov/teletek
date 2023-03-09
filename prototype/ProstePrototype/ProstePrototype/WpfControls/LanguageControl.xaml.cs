@@ -132,6 +132,7 @@ namespace ProstePrototype.WpfControls
                 if (win != null) {
                     win.wb1.ExecuteScriptAsyncWhenPageLoaded(script);
                     win.wb2.ExecuteScriptAsyncWhenPageLoaded(script);
+                    win.ApplyTheme();
                 }
             }
         }

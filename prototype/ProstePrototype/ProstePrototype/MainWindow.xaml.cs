@@ -120,7 +120,7 @@ namespace ProstePrototype
         }
 
         #region theme
-        private void ChangeTheme_Click(object sender, RoutedEventArgs e)
+        public void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
             DarkMode = !DarkMode;
 
@@ -133,7 +133,7 @@ namespace ProstePrototype
             wb2.ExecuteScriptAsync(script);
         }
 
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             //if (DarkMode)
             //{
@@ -200,10 +200,7 @@ namespace ProstePrototype
             //export_btn.Foreground = new SolidColorBrush(btn_fgd);
             settings_btn.Background = new SolidColorBrush(btn_bgd);
             settings_btn.Foreground = new SolidColorBrush(btn_fgd);
-            //changeTheme_btn.Background = new SolidColorBrush(bgd);
-            //changeTheme_btn.Foreground = new SolidColorBrush(fgd);
-            //update_btn.Background = new SolidColorBrush(bgd);
-            //update_btn.Foreground = new SolidColorBrush(fgd);
+            
             help_btn.Background = new SolidColorBrush(btn_bgd);
             help_btn.Foreground = new SolidColorBrush(btn_fgd);
             //minimize_btn.Background = new SolidColorBrush(bgd);
@@ -604,7 +601,7 @@ namespace ProstePrototype
         }
         private void SettingsClicked(object sender, RoutedEventArgs e)
         {
-            settings = new SettingsDialog();
+            settings = new SettingsDialog(this);
             settings.Resources = this.Resources;
             settings.changeTheme(DarkMode);
             settings.ShowDialog();

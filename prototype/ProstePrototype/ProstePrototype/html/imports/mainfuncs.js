@@ -914,7 +914,7 @@ collapsible();
 
 //#region pagePreparation, contextMenu, toggleDarkMode
 function pagePreparation() {
-    $(document).ready(() => {
+    $(() => { // $(function() {}) equivalent to $(document).ready(function () {})
         addVisitedBackground();
         $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
 
@@ -959,7 +959,7 @@ function pagePreparation() {
     });
 }
 //pagePreparation();
-function showContextMenu(el) {
+function showContextMenu(event, el) {
     event.preventDefault();
     let s = JSON.parse(el.href.slice(26, -1).replaceAll('\'', '\"'));
     s.Command = "MainMenuBtn";
@@ -988,7 +988,6 @@ function toggleDarkMode(show, filename) {
         link.href = filename;
         link.id = darkModeStylesheetId;
         head.appendChild(link);
-
     }
     else {
         let ss = document.getElementById(darkModeStylesheetId);
@@ -1054,7 +1053,7 @@ function checkHexRegex(event) {
 
 // hsow changed articles
 function addVisitedBackground() {
-    $('.form-item input, .form-item select').change(function () {
+    $('.form-item input, .form-item select').on('change', function () {
         this.classList.add('visited-bgd');
     });
 }
@@ -1407,8 +1406,10 @@ function addElement(id, elementType = "") {
 
 function callAddressModal(elementType, current) {
     let modal = document.getElementById("addressModal");
+    document.getElementById("addressModalLabel").innerText = newT.t(localStorage.getItem('lang'), "element_address");
+    modal.querySelector(".btn.btn-secondary").innerText = newT.t(localStorage.getItem('lang'), "MenuClose");
     let innerSelectText = `<div class="form-item roww mt-1">
-                                    <label for="select_address">Set the address for ${elementType}</label>
+                                    <label for="select_address">${newT.t(localStorage.getItem('lang'), "set_address")} ${elementType}</label>
                                     <div class="select">
                                         <select id="select_address" name="select_address">`;
 
@@ -1538,7 +1539,7 @@ async function inputGroupTextGenerator(last, elementType) {
                         <div class="row">
                             <fieldset style="min-width: 200px;" class="col-10">
                                 <legend>${last}. ${legend}</legend> 
-                                <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">Modify current address</button>
+                                <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), modif_address)}</button>
                                 <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
                                     <label class="switch">
@@ -1582,7 +1583,7 @@ async function showElement(id, elementType) {
             fieldset.insertAdjacentHTML(
                 'afterbegin',
                 `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>
-                <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">Modify current address</button>`);
+                <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
             drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
             if (oldFieldset) oldFieldset.replaceWith(fieldset);

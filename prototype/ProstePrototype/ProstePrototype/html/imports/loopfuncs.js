@@ -121,9 +121,10 @@ const openDeviceAddressModal = (deviceName, loopNumber, loopType, noneElement, c
     let { key, minDevices, maxDevices } = getConfig(deviceName);
 
     let addrModal = document.getElementById("addressModal");
-
+    document.getElementById("addressModalLabel").innerText = new T().t(localStorage.getItem('lang'), "device_address")
+    addrModal.querySelector(".btn.btn-secondary").innerText = new T().t(localStorage.getItem('lang'), "MenuClose");
     let innerSelectText = `<div class="form-item roww mt-1">
-                                    <label for="select_address">Set the address for ${loopType}</label>
+                                    <label for="select_address">${new T().t(localStorage.getItem('lang'), "set_address")} ${loopType}</label>
                                     <div class="select">
                                         <select id="select_address" name="select_address">`;
 
@@ -236,7 +237,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData, loo
     fieldsetDevice.insertAdjacentHTML(
         "beforeend",
         `<button onclick="javascript: openDeviceAddressModal('${deviceName}', '${loopNumber}', '${loopType}', '${noneElement}', '${address}')" type="button" class="btn btn-position-right">
-            Modify current address
+            ${new T().t(localStorage.getItem('lang'), 'modif_address')}
         </button>`
     );
     let fieldsetParameters;
