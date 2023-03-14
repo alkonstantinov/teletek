@@ -120,7 +120,7 @@ namespace ProstePrototype
         }
 
         #region theme
-        public void ChangeTheme_Click(object sender, RoutedEventArgs e)
+        public void ChangeTheme_Click(object param)
         {
             DarkMode = !DarkMode;
 

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="ProstePrototype.WpfControls.theme"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProstePrototype.WpfControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="800" MouseUp="theme_Clicked">
+    <UserControl.Resources>
+        <local:HalfValueConverter x:Key="HalfConverter"/>
+        <local:MarginConverter x:Key="MarginConverter"/>
+        <local:HalfValueMinusMarginConverter x:Key="HalfValueMinusMarginConverter"/>
+    </UserControl.Resources>
+    <Button x:Name="button" ToolTip="{DynamicResource MainMenuTheme}" Background="Transparent"
+            Command="{Binding Command, RelativeSource={RelativeSource AncestorType=local:theme}}" 
+            Click="theme_Clicked" BorderThickness="0" Padding="0" Margin="0" BorderBrush="Transparent">
+        <Button.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="{Binding ActualHeight, ElementName=button, Converter={StaticResource HalfConverter}}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </Button.Resources>
+        <Border x:Name="border" Height="{Binding ActualHeight, ElementName=button}" CornerRadius="{Binding ActualHeight, ElementName=button, Converter={StaticResource HalfConverter}}" Background="Gray" BorderBrush="Gray">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Light Mode -->
+                <Border CornerRadius="{Binding ActualHeight, ElementName=button, Converter={StaticResource HalfValueMinusMarginConverter}}" x:Name="LightModeButton" Margin="{Binding ActualHeight, ElementName=button, Converter={StaticResource MarginConverter}}" Grid.Column="0" Background="White">
+                    <DockPanel>
+                        <TextBlock Text="&#xe518;" x:Name="LightModeTextIcon" FontFamily="{StaticResource material_icons}" Foreground="Black" Margin="{Binding ActualHeight, ElementName=button, Converter={StaticResource MarginConverter}}" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="LightModeTextBlock" Text="Light Mode" Foreground="Black"
+                                   FontFamily="{StaticResource poppins_regular}" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Border>
+
+                <!-- Dark Mode -->
+                <Border CornerRadius="{Binding ActualHeight, ElementName=button, Converter={StaticResource HalfValueMinusMarginConverter}}" x:Name="DarkModeButton" Margin="{Binding ActualHeight, ElementName=button, Converter={StaticResource MarginConverter}}" Grid.Column="1" Background="Gray">
+                    <DockPanel>
+                        <TextBlock Text="&#xe51c;" x:Name="DarkModeTextIcon" FontFamily="{StaticResource material_icons}" Foreground="White" Margin="{Binding ActualHeight, ElementName=button, Converter={StaticResource MarginConverter}}"  VerticalAlignment="Center"/>
+                        <TextBlock x:Name="DarkModeTextBlock" Text="Dark Mode" Foreground="White"
+                                   FontFamily="{StaticResource poppins_regular}" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Button>
+</UserControl>

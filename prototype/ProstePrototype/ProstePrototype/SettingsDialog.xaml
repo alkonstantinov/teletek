@@ -43,13 +43,9 @@
                     <TextBlock Text="{DynamicResource SettingsMenuAuto}"></TextBlock>
                 </CheckBox>
             </StackPanel>
-            <Button Grid.Row="1" x:Name="changeTheme_btn" ToolTip="{DynamicResource MainMenuTheme}" Click="changeTheme_Click" BorderThickness="0" Background="Transparent">
-                <DockPanel VerticalAlignment="Center">
-                    <TextBlock Text="&#xf042; " FontFamily="{StaticResource fa_solid}" FontSize="28"/>
-                    <TextBlock Text="{library:DynamicResourceBinding MainMenuTheme, Converter={StaticResource StringToUpperConverter}}" 
-                                       FontFamily="{StaticResource poppins_demibold}" FontSize="16" VerticalAlignment="Center"/>
-                </DockPanel>
-            </Button>
+
+            <uc:theme x:Name="changeTheme_btn" Grid.Row="1" Height="30" Width="165"/>
+
             <Button Grid.Row="2" x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0" Background="Transparent">
                 <DockPanel VerticalAlignment="Center">
                     <TextBlock Text="&#xe4c2; " FontFamily="{StaticResource fa_solid}" FontSize="28" VerticalAlignment="Bottom"></TextBlock>

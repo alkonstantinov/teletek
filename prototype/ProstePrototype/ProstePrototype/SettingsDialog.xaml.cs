@@ -22,6 +22,7 @@ namespace ProstePrototype
         {
             InitializeComponent();
             _mainWindow = mainWindow;
+            changeTheme_btn.Command = new RelayCommand(changeTheme_Click);
         }
 
         private void OKSettings_Clicked(object sender, RoutedEventArgs e)
@@ -32,9 +33,9 @@ namespace ProstePrototype
             });
         }
 
-        private void changeTheme_Click(object sender, RoutedEventArgs e)
+        private void changeTheme_Click(object param)
         {
-            _mainWindow.ChangeTheme_Click(sender, e);
+            _mainWindow.ChangeTheme_Click(param);
             changeTheme(_mainWindow.DarkMode);
         }
 
@@ -73,6 +74,36 @@ namespace ProstePrototype
         private void Help_Clicked(object sender, RoutedEventArgs e)
         {
             
+        }
+    }
+
+    public class RelayCommand : ICommand
+    {
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
+
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        {
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute(parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute(parameter);
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
     }
 }

@@ -473,8 +473,10 @@ function fatFbfFunc(json) {
 
 //#region Loop Type
 function showLoopType(level, type, key, showDivId, selectDivId) {
+    //showLoopType(2, 'Output', "IRIS_LOOP1", 'loop_type-showDiv_output_type', 'output_type')
     const showDiv = document.getElementById(showDivId);
     const selectDiv = document.getElementById(selectDivId);
+    //const selectDiv = document.getElementsByName(selectDivId)[0];
     let title = "Loop";
     let nextFunc = `showLoopType(2, '${type}', this.value, '${showDivId}', '${selectDivId}')`;
     let dataUsed = [];
@@ -554,11 +556,12 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
             if (type.toLowerCase() === "output" && (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`) || o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`))) {
                 disabled = 'disabled style="color: red"'
             }
-            if (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`)) {
+            if (o["label"].endsWith(` - ${newT.t(localStorage.getItem('lang'), 'used')}`)) {
+                alert(`- ${newT.t(localStorage.getItem('lang'), 'used')} ------  - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)
                 let againJsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
                 tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
             }
-            if (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)) {
+            if (o["label"].endsWith(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)) {
                 let jsonAtLevel2 = CONFIGURED_IO[key][o["value"]];
                 tooltip += `title="${newT.t(localStorage.getItem('lang'), 'used_in')}: {`;
                 for (let channel in jsonAtLevel2) {
@@ -572,7 +575,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
         inner += `<option value="${o["value"]}" ${disabled} ${tooltip} ${o["selected"] ? "selected" : ""}>${o["label"]}</option>`
     });
     inner += `</select>
-                </div>`;
+                </div></div>`;
 
     showDiv.insertAdjacentHTML('beforeend', inner);
 
@@ -1568,6 +1571,7 @@ async function inputGroupTextGenerator(last, elementType) {
     let result;
     try {
         result = await boundAsync.getJsonForElement(elementType, +last);
+
         if (result) {
             let returnedJson = JSON.parse(result);
             let currentJSON = returnedJson["~noname"]["fields"]["Input_Logic"];
@@ -1578,7 +1582,7 @@ async function inputGroupTextGenerator(last, elementType) {
                         <div class="row">
                             <fieldset style="min-width: 200px;" class="col-10">
                                 <legend>${last}. ${legend}</legend> 
-                                <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), modif_address)}</button>
+                                <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>
                                 <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
                                     <label class="switch">

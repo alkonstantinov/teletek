@@ -10607,7 +10607,7 @@
             "sr": "Learned"
         },
         "a3247402-58e0-4d7a-8ac3-c21759d904e3": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "bh": null,
             "el": null,
@@ -11577,7 +11577,7 @@
             "sr": "Learned"
         },
         "70ed0e77-57e3-45fb-9da8-a350b12c431a": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "bh": null,
             "el": null,
@@ -43953,7 +43953,7 @@
             "tr": "TIME"
         },
         "a3b22819-49c0-41b9-bfb6-ada4c8766e96": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -79709,7 +79709,7 @@
             "bg": "Канал"
         },
         "652e221a-b24f-4edb-86a9-b0f2009cb6e1": {
-            "en": null,
+            "en": "State",
             "bg": null
         },
         "1fe5d790-d9d8-41d7-a940-5524ca56be30": {
@@ -79733,7 +79733,7 @@
             "bg": "Канал"
         },
         "fc95205c-67a1-4004-b2aa-311c47866c38": {
-            "en": null,
+            "en": "State",
             "bg": null
         },
         "eb28fc7c-75ed-47d0-8e89-eb1ad1a26bec": {
@@ -79757,7 +79757,7 @@
             "bg": "Канал"
         },
         "4c6c9aea-fd1e-4216-b395-bc9b9d6d4f63": {
-            "en": null,
+            "en": "State",
             "bg": null
         },
         "5d0025bd-fdac-40fa-b00d-d2121a0574b1": {
@@ -79793,7 +79793,7 @@
             "bg": "Канал"
         },
         "d7f895ce-a3c6-44c0-97fa-ea952f37eeaa": {
-            "en": null,
+            "en": "State",
             "bg": null
         },
         "6d6802dd-6896-4314-b0e8-ded0dd376e8d": {
@@ -79829,7 +79829,7 @@
             "bg": "Канал"
         },
         "ac98228f-3d22-4830-b7a9-565fbdf77ba2": {
-            "en": null,
+            "en": "State",
             "bg": null
         },
         "3196143e-905e-4ef9-a07b-435ba4ebc37a": {
@@ -79865,7 +79865,7 @@
             "bg": "Канал"
         },
         "b571e4f5-953a-4014-8a7e-794ad3ebd55e": {
-            "en": null,
+            "en": "State",
             "bg": null
         },
         "97651379-95af-4dc3-8b41-68bee50084e5": {
@@ -80121,7 +80121,11 @@
             "bg": "Време"
         },
         "5767759e-1e50-45fb-aed8-a4d94aa764ab": {
-            "en": null,
+            "en": "State",
+            "bg": null
+        },
+        "8fd8384d-65ca-45f1-8c3e-fa5a2fa8e3f4": {
+            "en": "State",
             "bg": null
         },
         "6b0b1384-9896-4875-affa-b4669253e9ae": {
@@ -104157,7 +104161,7 @@
             "pt": "Nível de Alarme diurno"
         },
         "c8c61e24-2b5e-4a0d-bc08-98f5336129f2": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104207,7 +104211,7 @@
             "pt": "Baixo"
         },
         "f3c76942-7b3d-40f2-badf-db0b96e2d449": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104257,7 +104261,7 @@
             "pt": "Nível de alarme noturno"
         },
         "50328ebf-0205-4172-8c3a-110d5a20ae30": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104307,7 +104311,7 @@
             "pt": "Baixo"
         },
         "cc0a4ee5-5b32-4e7e-819d-125a35a29755": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104547,7 +104551,7 @@
             "pt": "Nível de Alarme diurno"
         },
         "70d47b17-824c-467e-bf76-45aedb5288c1": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104597,7 +104601,7 @@
             "pt": "Baixo"
         },
         "f3ccb7ac-18de-40ad-ac71-b8c1be5cdf72": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104647,7 +104651,7 @@
             "pt": "Nível de alarme noturno"
         },
         "d120475d-0604-4688-907c-0b779dd04421": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -104697,7 +104701,7 @@
             "pt": "Baixo"
         },
         "e2f49da0-a7ba-4c58-9b81-1a7c1da7e5d7": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -110667,7 +110671,7 @@
             "pt": "Nível de Alarme diurno"
         },
         "c7e71da7-4949-465d-8a59-1465f377a28a": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -110717,7 +110721,7 @@
             "pt": "Baixo"
         },
         "3385a53a-eb4b-4378-b23a-18299649627e": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -110767,7 +110771,7 @@
             "pt": "Nível de alarme noturno"
         },
         "0e1764db-ce7b-4271-b04a-aa809333ff86": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -110817,7 +110821,7 @@
             "pt": "Baixo"
         },
         "b6debfb8-fea9-4245-b483-56ebf929590f": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -111027,7 +111031,7 @@
             "pt": "Nível de Alarme diurno"
         },
         "39b0fe29-10d2-4d9a-90c4-b7e97be01c17": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -111077,7 +111081,7 @@
             "pt": "Baixo"
         },
         "46d06732-d443-4424-97d3-415dd37d5b10": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -111127,7 +111131,7 @@
             "pt": "Nível de alarme noturno"
         },
         "2026d650-68da-4192-a441-412907b19e2b": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -111177,7 +111181,7 @@
             "pt": "Baixo"
         },
         "dd5952fd-0025-4841-a116-a106d0538bab": {
-            "en": null,
+            "en": "State",
             "bg": null,
             "fr": null,
             "ge": null,
@@ -114175,7 +114179,7 @@
             "4g": "Message Areas"
         },
         "bb965425-1728-42fe-bf76-c1e881ba6b03": {
-            "en": null,
+            "en": "State",
             "el": null,
             "fr": null,
             "ge": null,
@@ -114247,7 +114251,7 @@
             "4g": "Area 8"
         },
         "2f4d24c4-3498-413c-9ab5-3084cb310cfb": {
-            "en": null,
+            "en": "State",
             "el": null,
             "fr": null,
             "ge": null,
@@ -114319,7 +114323,7 @@
             "4g": "Area 16"
         },
         "2f7834b7-3d52-4394-840e-5e5d696b91af": {
-            "en": null,
+            "en": "State",
             "el": null,
             "fr": null,
             "ge": null,
@@ -114391,7 +114395,7 @@
             "4g": "Area 24"
         },
         "57f2afa4-1d35-45c5-8c13-921846e80d7e": {
-            "en": null,
+            "en": "State",
             "el": null,
             "fr": null,
             "ge": null,

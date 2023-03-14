@@ -140,12 +140,14 @@ namespace ProstePrototype
         public string loopsInputs(string path)
         {
             JObject o = cJson.LoopsInputs(path);
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
         public string loopsOutputs(string path)
         {
             JObject o = cJson.LoopsOutputs(path);
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
         public string setNodeFilters(string elementName)
