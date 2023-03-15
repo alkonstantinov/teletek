@@ -252,6 +252,24 @@
         are_you_sure_changing_channel: {
             'bg': 'Потвърждавате ли промяната на функцията за този канал', 'en': 'Are you sure you want to change the function of this channel', 'ge': 'Are you sure you want to change the function of this channel' 
         },
+        enable: {
+            "en": "Enable",
+            "bg": "Разрешен",
+            "bh": "Omogući",
+            "el": "Ενεργοποιημένη",
+            "es": "Permitido",
+            "fr": "Activer",
+            "gr": "Ενεργοποιημένη",
+            "hu": "Engedélyezett",
+            "it": "Abilitare",
+            "pl": "Enable",
+            "pt": "Minutos",
+            "ro": "Activat",
+            "ru": "Разрешен",
+            "sp": "Permitido",
+            "sr": "Omogući",
+            "tr": "Devrede"
+        },
         enabled: { 
             "en": "Enabled",
             "id": "",

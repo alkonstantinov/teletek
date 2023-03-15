@@ -689,7 +689,9 @@ const transformGroupElement = (elementJson) => {
         readOnly: !!(+elementJson['@READONLY']),
         input_name_on: elementJson['@YESVAL'],
         input_name_off: elementJson['@NOVAL'],
-        checked: !!(+elementJson['@CHECKED']),
+        yesval: elementJson['@YESVAL'],
+        noval: elementJson['@NOVAL'],
+        checked: (elementJson['@CHECKED'] && (elementJson['@CHECKED'] === elementJson['@YESVAL'])) ? true : false,
         path: elementJson['~path'],
         size: elementJson['@SIZE'],
         value: elementJson["~value"] ? elementJson["~value"] : (elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : "")),
@@ -856,7 +858,7 @@ const transformGroupElement = (elementJson) => {
             if (/\bon\b/i.test(attributes.input_name)) {
                 attributes.input_name = attributes.input_name.replace(/\bon\b/ig, "").trim();
             }
-            if (attributes.input_name.toLowerCase().includes('enable')) {
+            if (attributes.input_name.toLowerCase().includes('enable') || attributes.input_name.toLowerCase().includes(newT.t(localStorage.getItem('lang'), elementJson['enable']))) {
                 attributes.input_name = '';
                 attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'enabled');
                 attributes.input_name_off = newT.t(localStorage.getItem('lang'), 'disabled');
@@ -864,13 +866,13 @@ const transformGroupElement = (elementJson) => {
                 attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'on');
                 attributes.input_name_off = newT.t(localStorage.getItem('lang'), 'off');
             }
-            if (attributes.value === "1" || attributes.value === "True") attributes.checked = true;
-            else if (attributes.value === "0" || attributes.value === "False") attributes.checked = false;
+            if (attributes.value === attributes.yesval) attributes.checked = true;
+            else if (attributes.value === attributes.noval) attributes.checked = false;
             return getSliderInput({ ...attributes });
 
         case 'CHECK':
-            if (attributes.value === "1" || attributes.value === "True") attributes.checked = true;
-            else if (attributes.value === "0" || attributes.value === "False") attributes.checked = false;
+            if (attributes.value === attributes.yesval) attributes.checked = true;
+            else if (attributes.value === attributes.noval) attributes.checked = false;
             return getCheckboxInput({ ...attributes });
 
         case 'LIST':
@@ -1122,9 +1124,11 @@ function loadScript(callback, src = "../imports/jquery.inputmask.min.js") {
 }
 
 function weekChangedValueHandler(scheduleId, index, newValue, path) {
-    let oldValues = document.getElementById(`${scheduleId}`).getAttribute("value").split(" ");
+    const el = document.getElementById(`${scheduleId}`);
+    let oldValues = el.getAttribute("value").split(" ");
     let newValues = [...oldValues];
     newValues[+index] = newValue;
+    el.setAttribute("value", newValues.join(" "));
     //console.log(newValues.join(" "));
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': path, 'newValue': newValues.join(" ") } });
 }
@@ -1164,7 +1168,7 @@ const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderTe
             </div>`
 }
 
-const getCheckboxInput = ({ input_name, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
+const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -1175,11 +1179,12 @@ const getCheckboxInput = ({ input_name, input_id, bytesData, lengthData, readOnl
                     ${lengthData ? `length="${lengthData}"` : ""} 
                     ${readOnly ? "disabled" : ''}
                     ${checked ? "checked" : ''}
-                    onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.checked}})" />
+                    onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')" />
             </div>`
 }
 
-const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
+const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
+    path = path.replaceAll("'", "§");
     return `<div class="form-item roww fire">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -1193,13 +1198,14 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, input_id, b
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
                             ${checked ? "checked" : ''} 
-                            onchange="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.checked }})"/>
+                            onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')"/>
                         <span class="slider"></span>
                     </label>
                     ${input_name_on}
                 </p>
             </div>`
 }
+
 
 const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, modal, addButton = false, RmBtn = false, path = "" }) => {
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
@@ -1296,7 +1302,7 @@ const getEmacInput = ({ input_id, input_name, readOnly, value, RmBtn = false, pa
 }
 
 const getWeekInput = ({ input_id, input_name, readOnly, value, size, RmBtn = false, path = "" }) => {
-    //value = "04:04 03:03 01:00 00:01 01:02 02:01 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00"; // for test purposes
+    if (!value) value = "00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00"; // for test purposes
     let fields = [["Sunday", "-su-"], ["Moday", "-m-"], ["Thuesday", "-t-"], ["Wednesday", "-w-"], ["Thursday", "-th-"], ["Friday", "-f-"], ["Saturday", "-s-"]];
     let data = value.split(" ");
     let inner = `<div style="display: none" id="${input_id}-schedule" value="${value}">
@@ -1562,7 +1568,8 @@ async function createElementButton(last, elementType) {
 }
 
 //#region Input Group Handlers
-const inputGroupHandler = (checked, trueValue, falseValue, path) => {
+function inputGroupHandler(checked, trueValue, falseValue, path) {
+    path = path.replaceAll("§", "'");
     let newValue = checked ? trueValue : falseValue;
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${path}`, 'newValue': newValue } })
 };
