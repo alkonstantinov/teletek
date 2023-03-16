@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using lcommunicate;
 using System.Reflection.Metadata.Ecma335;
+using System.Linq;
 
 namespace ljson
 {
@@ -280,17 +281,41 @@ namespace ljson
             //
             return res;
         }
-        private static string WriteValue(string _type, int _size, string sval, JObject _field)
+        private static string WriteValue(string _type, int _size, string sval, JObject _field, string _xmltag)
         {
             string res = null;
             if (Regex.IsMatch(_type, @"^(INT|LIST)$"))
             {
                 res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
+                if (_size == 2 && Regex.IsMatch(_xmltag, @"OPERATION\s*?=\s*?""MAKEINT16"""))
+                    res = res.Substring(res.Length - 2, 2) + res.Substring(0, 2);
                 //while (_size * 2 > res.Length)
                 //    res = "0" + res;
             }
-            else if (Regex.IsMatch(_type, @"(CHECK)"))
+            else if (Regex.IsMatch(_type, @"^(INTLIST|IP)$"))
             {
+                string[] lst;
+                char delimiter = ',';
+                if (_type == "IP")
+                    delimiter = '.';
+                if (!Regex.IsMatch(sval, @"([,\.])"))
+                {
+                    while (sval.Length < _size) { sval = "0" + sval; }
+                    lst = new string[_size];
+                    for (int i = 0; i < sval.Length; i++) { lst[i] = sval[i].ToString(); }
+                }
+                else
+                    lst = sval.Split(delimiter);
+                sval = "";
+                for (int i = 0; i < lst.Length; i++) { sval += Convert.ToInt32(lst[i]).ToString("X2"); }
+                res = Convert.ToInt32(sval, 16).ToString("X" + (_size * 2).ToString());
+            }
+            else if (Regex.IsMatch(_type, @"(CHECK|SLIDER)"))
+            {
+                if (Regex.IsMatch(sval, "true", RegexOptions.IgnoreCase))
+                    sval = "1";
+                else if (Regex.IsMatch(sval, "false", RegexOptions.IgnoreCase))
+                    sval = "0";
                 res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
             }
             else if (Regex.IsMatch(_type, @"(TEXT)"))
@@ -305,13 +330,110 @@ namespace ljson
                 foreach (byte b in bytesres)
                     res += b.ToString("X2");
             }
-            else if (Regex.IsMatch(_type, @"(HIDDEN)"))
+            else if (Regex.IsMatch(_type, @"(HIDDEN|FROMGROUP)"))
             {
                 if (!Regex.IsMatch(sval, @"\D"))
                     res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
             }
+            else if (_type == "IP")
+            {
+                string[] iparr = sval.Split('.');
+                if (iparr.Length != 4)
+                    return null;
+                res = Convert.ToByte(iparr[0]).ToString("X2");
+                res += Convert.ToByte(iparr[1]).ToString("X2");
+                res += Convert.ToByte(iparr[2]).ToString("X2");
+                res += Convert.ToByte(iparr[3]).ToString("X2");
+            }
+            else if (_type == "TAB")
+            {
+                Match m = Regex.Match(sval, @"^(\d+?)_");
+                if (m.Success)
+                    sval = m.Groups[1].Value;
+                if (!Regex.IsMatch(sval, @"\D"))
+                {
+                    byte bval = Convert.ToByte(sval);
+                    res = bval.ToString("X" + (_size * 2).ToString());
+                }
+                else
+                {
+                    byte[] tbytes = Encoding.Unicode.GetBytes(sval);
+                    byte[] bytesadd = new byte[_size - tbytes.Length];
+                    Array.Clear(bytesadd, 0, bytesadd.Length);
+                    byte[] bytesres = new byte[_size];
+                    tbytes.CopyTo(bytesres, 0);
+                    bytesadd.CopyTo(bytesres, tbytes.Length);
+                    res = "";
+                    foreach (byte b in bytesres)
+                        res += b.ToString("X2");
+                }
+            }
+            else if (_type == "AND")
+            {
+                sval = Value(_field, _type);
+                res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
+            }
+            else if (_type == "WEEK")
+            {
+                if (sval.Length > 2)
+                {
+                    string[] valarr = sval.Split(' ');
+                    res = "";
+                    foreach (string tm in valarr)
+                    {
+                        string[] tmarr = tm.Split(':');
+                        res += Convert.ToByte(tmarr[0]).ToString("X2");
+                    }
+                }
+                else
+                {
+                    res = "".PadLeft(_size * 2, '0');
+                }
+            }
+            else
+            {
+                return null;//breakpoint
+            }
+            //
+            if (_size == 2 && Regex.IsMatch(_xmltag, @"OPERATION\s*?=\s*?""SWITCHBYTES""", RegexOptions.IgnoreCase))
+                res = res.Substring(res.Length - 2, 2) + res.Substring(0, 2);
             //
             return res;
+        }
+        private static string Value(JObject _field, string _type)
+        {
+            string sval = null;
+            if (_field["~value"] != null)
+                sval = _field["~value"].ToString();
+            else if (_field["@VALUE"] != null)
+                sval = _field["@VALUE"].ToString();
+            else if (_field["@FORCE"] != null)
+                sval = _field["@FORCE"].ToString();
+            else if (Regex.IsMatch(_type, "(CHECK|SLIDER)"))
+            {
+                string schecked = "0";
+                if (_field["@CHECKED"] != null)
+                    schecked = _field["@CHECKED"].ToString();
+                bool _checked = Convert.ToInt32(schecked) != 0;
+                if (_checked && _field["@YESVAL"] != null)
+                    sval = _field["@YESVAL"].ToString();
+                else if (!_checked && _field["@NOVAL"] != null)
+                    sval = _field["@NOVAL"].ToString();
+                else
+                    sval = "0";
+            }
+            else if (_type == "LIST")
+                sval = "0";
+            else if (_type == "INTLIST")
+            {
+                if (_field["@MIN"] != null)
+                    sval = _field["@MIN"].ToString();
+                else
+                    sval = "0";
+            }
+            else
+                sval = "0";
+            return sval;
         }
         public static string WriteValue(JObject _field, string xmltag)
         {
@@ -328,40 +450,77 @@ namespace ljson
             if (_type == null)
                 return null;
             //
-            string sval = null;
-            if (_field["~value"] != null)
-                sval = _field["~value"].ToString();
-            else if (_field["@VALUE"] != null)
-                sval = _field["@VALUE"].ToString();
-            else if (_field["@FORCE"] != null)
-                sval = _field["@FORCE"].ToString();
-            else if (_type == "CHECK")
-            {
-                string schecked = "0";
-                if (_field["@CHECKED"] != null)
-                    schecked = _field["@CHECKED"].ToString();
-                bool _checked = Convert.ToInt32(schecked) != 0;
-                if (_checked && _field["@YESVAL"] != null)
-                    sval = _field["@YESVAL"].ToString();
-                else if (!_checked && _field["@NOVAL"] != null)
-                    sval = _field["@NOVAL"].ToString();
-                else
-                    sval = "0";
-            }
-            else if (_type == "LIST")
-                sval = "0";
-            else
-                sval = "0";
+            string sval = Value(_field, _type);
             int? inc = null;
-            m = Regex.Match(xmltag, @"INC\s*?=\s*?""(\d+?)""");
+            m = Regex.Match(xmltag, @"INC\s*?=\s*?""([\d\-]+?)""");
             if (m.Success)
                 inc = Convert.ToInt32(m.Groups[1].Value);
             if (inc != null)
                 sval = (Convert.ToInt32(sval) + inc).ToString();
             //
-            string _writeval = WriteValue(_type, size, sval, _field);
+            string _writeval = WriteValue(_type, size, sval, _field, xmltag);
             //
             return _writeval;
+        }
+        public static JObject TypeGroupToField(JObject group)
+        {
+            JObject res = new JObject(group);
+            if (res["~type"].ToString() == "AND")
+            {
+                JObject fields = new JObject((JObject)res["fields"]);
+                res["@TYPE"] = "FROMGROUP";
+                res["PROPERTIES"] = new JObject();
+                res["PROPERTIES"]["PROPERTY"] = new JObject();
+                int groupval = 0x0000;
+                int size = 1;
+                foreach (JProperty p in fields.Properties())
+                {
+                    if (p.Value.Type == JTokenType.Object)
+                    {
+                        JObject field = (JObject)p.Value;
+                        string sval = Value(field, field["@TYPE"].ToString());
+                        if (sval.ToLower() == "true")
+                            sval = field["@AND"].ToString();
+                        else if (sval.ToLower() == "false")
+                            sval = "0";
+                        int ival = Convert.ToInt32(sval);
+                        groupval |=  ival;
+                        field["~value"] = sval;
+                        if (field["@SIZE"] != null)
+                            size = Convert.ToInt32(field["@SIZE"].ToString());
+                        res["PROPERTIES"]["PROPERTY"][p.Name] = field;
+                    }
+                }
+                res["@SIZE"] = size.ToString();
+                res["~value"] = groupval.ToString();
+                res.Remove("fields");
+                res.Remove("name");
+            }
+            //
+            return res;
+        }
+        public static void TypeGroupsToNewGroup(JObject groups)
+        {
+            Dictionary<string, JObject> typegrp = new Dictionary<string, JObject>();
+            List<string> todel = new List<string>();
+            foreach (JProperty p in groups.Properties())
+            {
+                if (p.Value.Type != JTokenType.Object)
+                    continue;
+                JObject grp = (JObject)p.Value;
+                if (grp["~type"] != null)
+                {
+                    JObject field = TypeGroupToField(grp);
+                    typegrp.Add(p.Name, field);
+                    todel.Add(p.Name);
+                }
+            }
+            foreach (string del in todel)
+                groups.Remove(del);
+            groups["~typegrpfields"] = new JObject();
+            groups["~typegrpfields"]["fields"] = new JObject();
+            foreach (string name in typegrp.Keys)
+                groups["~typegrpfields"]["fields"][name] = typegrp[name];
         }
         #endregion
 

@@ -172,8 +172,8 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key, no
     updateDeviceNmbr();
     //alert(`loopType:'${loopType}', deviceName:'${deviceName}', loopNumber:'${loopNumber}', address:'${address}', noneElement:'${noneElement}', key:${key}`);
     const newDeviceInner = `<div class="col-12" id='${loopType}_${address}'>
-                                <div class="row">
-                                    <div class="col-10 pr-1">
+                                <div class="row pr8">
+                                    <div class="col-11">
                                         <a href="javascript:showDevice('${loopType}', '${deviceName}', '${loopNumber}', '${address}', '${noneElement}')" onclick="javascript:addActive('#selected_area')" >
                                             <div class="btnStyle fire" id='${address}_${deviceName}'>
                                                 <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
@@ -440,9 +440,9 @@ function addLoop(loopType, newFlag = "new") {
     let color = Object.keys(BUTTON_COLORS).find(c => loopType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => loopType.toUpperCase().includes(im));
 
-    const newLoop = `<div class="col-12" id=${loopType}>
+    const newLoop = `<div class="col-12 pr15" id=${loopType}>
                 <div class="row">
-                    <div class="col-11 pr-1">
+                    <div class="col-11">
                         <a href="javascript:showLoop('${last}', '${loopType}')" onclick="javascript:addActive()">
                             <div class="btnStyle ${BUTTON_COLORS[color]}">
                                 <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -10286,412 +10286,195 @@
     </style>
 
     <link rel="stylesheet" href="../IRIS.css">
+
     <title>Teletek Manager</title>
 </head>
-<body>
+<body class="fullHeight" style="">
+    <div class="container fullHeight" id="divLDevices">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
-    <div class="container" id="divFBF">
+        <div class="row fullHeight">
+            <div class="col-3 bl fire scroll">
+                <div id="new">
 
 
-        <button class="fire collapsible ml-1 collapsible_Door_switch_input cactive">Door switch input</button>
-        <div class="collapsible-content col-12" style="max-height: 97px;">
-            <div class="row align-items-center m-2" id="Door_switch_input">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97">State</label>
-                        <div class="select">
-                            <select id="bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97" name="bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" class="visited-bgd" size="0" style="height: auto; margin-bottom: 0rem; z-index: 1;">
-                                <option value="0_597fab2e-f36a-4f2c-b6e5-61a016de7bf1">NONE </option>
-                                <option value="2_664083f9-2950-4fb5-9f4a-02533bfa14b2">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97"><div class="row align-items-center"></div></div><div id="0_597fab2e-f36a-4f2c-b6e5-61a016de7bf1" style="display: none;"><div class="row align-items-center"></div></div><div id="2_664083f9-2950-4fb5-9f4a-02533bfa14b2" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
 
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY.TABS.664083f9-2950-4fb5-9f4a-02533bfa14b2.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
+                    <p>Add up to 4 Loops</p><div class="col-12 pr15" id="IRIS_TTELOOP1">
+                        <div class="row">
+                            <div class="col-11">
+                                <a href="javascript:showLoop('1', 'IRIS_TTELOOP1')" onclick="javascript:addActive()">
+                                    <div class="btnStyle fire">
+                                        <i class="fa-solid fa-arrows-spin fa-3x p15">
+                                            <br><span class="someS">
+                                                <span class="h5">
+                                                    Teletek Loop 1
+                                                </span>
+                                            </span>
+                                        </i>
 
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY.TABS.664083f9-2950-4fb5-9f4a-02533bfa14b2.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN1.PROPERTIES.PROPERTY.TABS.664083f9-2950-4fb5-9f4a-02533bfa14b2.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-1 p-0 m-0" onclick="javascript: exchangingLoop('IRIS_TTELOOP1')">
+                                <i class="fa-solid fa-right-left fire"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><button class="fire collapsible ml-1 collapsible_Dialer_ACK_input cactive">Dialer ACK input</button>
-        <div class="collapsible-content col-12" style="max-height: 151px;">
-            <div class="row align-items-center m-2" id="Dialer_ACK_input">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="9012abcb-4a16-4ed2-8c94-81b64bd3e6d5">State</label>
-                        <div class="select">
-                            <select id="9012abcb-4a16-4ed2-8c94-81b64bd3e6d5" name="9012abcb-4a16-4ed2-8c94-81b64bd3e6d5" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_9012abcb-4a16-4ed2-8c94-81b64bd3e6d5', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
-                                <option value="0_cc7ba868-0ed1-404b-a5f2-b6c8acbc75e6">NONE </option>
-                                <option value="2_0e20f2de-0b0a-4411-9d06-8ee2981278b9">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_9012abcb-4a16-4ed2-8c94-81b64bd3e6d5"></div><div id="0_cc7ba868-0ed1-404b-a5f2-b6c8acbc75e6" style="display: none;"><div class="row align-items-center"></div></div><div id="2_0e20f2de-0b0a-4411-9d06-8ee2981278b9" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
+            <div class="col-9 fullHeight">
+                <div id="selected_area" class="fullHeight">
+                    <div class="row fullHeight">
+                        <div class="col-3 bl fire scroll">
+                            <div id="new_device_IRIS_TTELOOP1" class="row">
 
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY.TABS.0e20f2de-0b0a-4411-9d06-8ee2981278b9.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY.TABS.0e20f2de-0b0a-4411-9d06-8ee2981278b9.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN2.PROPERTIES.PROPERTY.TABS.0e20f2de-0b0a-4411-9d06-8ee2981278b9.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
+                                <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(1)" id="calculateDevices" data-bs-toggle="modal" data-bs-target="#showDevicesListModal">Number of devices: 1</button><div class="col-12" id="IRIS_TTELOOP1_1">
+                                    <div class="row pr7">
+                                        <div class="col-11">
+                                            <a href="javascript:showDevice('IRIS_TTELOOP1', 'IRIS_MIO22', '1', '1', 'IRIS_TTENONE')" onclick="javascript:addActive('#selected_area')">
+                                                <div class="btnStyle fire" id="1_IRIS_MIO22">
+                                                    <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="25" height="25" class="m15">
+                                                    <div class="someS">
+                                                        <div class="h5">1. MIO22</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-1 p-0 m-0" onclick="javascript:removeDevice('IRIS_TTELOOP1', '1', 'IRIS_MIO22', '1')">
+                                            <i class="fa-solid fa-xmark fire"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div><button class="fire collapsible ml-1 collapsible_Dialer_fault_input cactive">Dialer fault input</button>
-        <div class="collapsible-content col-12" style="max-height: 151px;">
-            <div class="row align-items-center m-2" id="Dialer_fault_input">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="7ad68e5a-9a61-487a-892b-838fa8e5dbb8">State</label>
-                        <div class="select">
-                            <select id="7ad68e5a-9a61-487a-892b-838fa8e5dbb8" name="7ad68e5a-9a61-487a-892b-838fa8e5dbb8" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_7ad68e5a-9a61-487a-892b-838fa8e5dbb8', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
-                                <option value="0_d113b395-832e-40e7-9b04-d9749819e37c">NONE </option>
-                                <option value="2_c6e3b94b-3537-4dc8-afb3-45f9748897c0">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_7ad68e5a-9a61-487a-892b-838fa8e5dbb8"></div><div id="0_d113b395-832e-40e7-9b04-d9749819e37c" style="display: none;"><div class="row align-items-center"></div></div><div id="2_c6e3b94b-3537-4dc8-afb3-45f9748897c0" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
+                        <div class="col-9" style="z-index: 1;height: fit-content;">
+                            <div id="selected_device_IRIS_TTELOOP1" style="background: white; margin-right: -1rem">
 
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY.TABS.c6e3b94b-3537-4dc8-afb3-45f9748897c0.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY.TABS.c6e3b94b-3537-4dc8-afb3-45f9748897c0.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_IN3.PROPERTIES.PROPERTY.TABS.c6e3b94b-3537-4dc8-afb3-45f9748897c0.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div><button class="fire collapsible ml-1 collapsible_Door_unlock_output cactive">Door unlock output</button>
-        <div class="collapsible-content col-12" style="max-height: 151px;">
-            <div class="row align-items-center m-2" id="Door_unlock_output">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="c6799c67-d314-40d8-bba4-8c5b06edecb2">State</label>
-                        <div class="select">
-                            <select id="c6799c67-d314-40d8-bba4-8c5b06edecb2" name="c6799c67-d314-40d8-bba4-8c5b06edecb2" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_c6799c67-d314-40d8-bba4-8c5b06edecb2', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
-                                <option value="0_31291216-bd88-4d6f-8357-f9d20cb0c54f">NONE </option>
-                                <option value="1_6204a03b-78b7-42be-9698-e63aebea2517">PERIPHERY DEVICE </option>
-                                <option value="2_16a9fa4f-6cbd-4cd1-a7e2-9af852e89307">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_c6799c67-d314-40d8-bba4-8c5b06edecb2"></div><div id="0_31291216-bd88-4d6f-8357-f9d20cb0c54f" style="display: none;"><div class="row align-items-center"></div></div><div id="1_6204a03b-78b7-42be-9698-e63aebea2517" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
 
-                                    <label for="peripherial_device_address">Peripherial device address</label>
-                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.6204a03b-78b7-42be-9698-e63aebea2517.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="0">
-                                </div>
-                            </div><div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="peripherial_device_output">Peripherial device output</label>
-                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.6204a03b-78b7-42be-9698-e63aebea2517.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="0">
-                                </div>
-                            </div>
-                        </div>
-                    </div><div id="2_16a9fa4f-6cbd-4cd1-a7e2-9af852e89307" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.16a9fa4f-6cbd-4cd1-a7e2-9af852e89307.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.16a9fa4f-6cbd-4cd1-a7e2-9af852e89307.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT1.PROPERTIES.PROPERTY.TABS.16a9fa4f-6cbd-4cd1-a7e2-9af852e89307.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
+                    <div class="modal fade" tabindex="-1" id="IRIS_TTELOOP1_modal" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="row list-group fire justify-content-center" id="list-tab" role="tablist"></div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div><button class="fire collapsible ml-1 collapsible_Fire_alarm_output cactive">Fire alarm output</button>
-        <div class="collapsible-content col-12" style="max-height: 151px;">
-            <div class="row align-items-center m-2" id="Fire_alarm_output">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="3f452ccb-3fde-43bb-ac46-c0932cbed33e">State</label>
-                        <div class="select">
-                            <select id="3f452ccb-3fde-43bb-ac46-c0932cbed33e" name="3f452ccb-3fde-43bb-ac46-c0932cbed33e" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_3f452ccb-3fde-43bb-ac46-c0932cbed33e', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
-                                <option value="0_05df522f-7cd6-463d-85de-e99332437406">NONE </option>
-                                <option value="1_1b072694-9a0e-40d2-a31a-94e1bd3ca07c">PERIPHERY DEVICE </option>
-                                <option value="2_31534e57-cb9a-43f9-8fc6-652f1305410c">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_3f452ccb-3fde-43bb-ac46-c0932cbed33e"></div><div id="0_05df522f-7cd6-463d-85de-e99332437406" style="display: none;"><div class="row align-items-center"></div></div><div id="1_1b072694-9a0e-40d2-a31a-94e1bd3ca07c" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
 
-                                    <label for="peripherial_device_address">Peripherial device address</label>
-                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.1b072694-9a0e-40d2-a31a-94e1bd3ca07c.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="peripherial_device_output">Peripherial device output</label>
-                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.1b072694-9a0e-40d2-a31a-94e1bd3ca07c.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div><div id="2_31534e57-cb9a-43f9-8fc6-652f1305410c" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.31534e57-cb9a-43f9-8fc6-652f1305410c.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.31534e57-cb9a-43f9-8fc6-652f1305410c.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT2.PROPERTIES.PROPERTY.TABS.31534e57-cb9a-43f9-8fc6-652f1305410c.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><button class="fire collapsible ml-1 collapsible_Panel_fault_output cactive">Panel fault output</button>
-        <div class="collapsible-content col-12" style="max-height: 151px;">
-            <div class="row align-items-center m-2" id="Panel_fault_output">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7">State</label>
-                        <div class="select">
-                            <select id="7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7" name="7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
-                                <option value="0_33112609-8a7f-43fd-be47-a49a39dc50e3">NONE </option>
-                                <option value="1_fe48eb02-821f-4e58-9c6e-9d493405e5e1">PERIPHERY DEVICE </option>
-                                <option value="2_a152efd2-e045-49ef-bcf6-614cce125434">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7"></div><div id="0_33112609-8a7f-43fd-be47-a49a39dc50e3" style="display: none;"><div class="row align-items-center"></div></div><div id="1_fe48eb02-821f-4e58-9c6e-9d493405e5e1" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="peripherial_device_address">Peripherial device address</label>
-                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.fe48eb02-821f-4e58-9c6e-9d493405e5e1.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="peripherial_device_output">Peripherial device output</label>
-                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.fe48eb02-821f-4e58-9c6e-9d493405e5e1.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div><div id="2_a152efd2-e045-49ef-bcf6-614cce125434" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.a152efd2-e045-49ef-bcf6-614cce125434.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.a152efd2-e045-49ef-bcf6-614cce125434.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT3.PROPERTIES.PROPERTY.TABS.a152efd2-e045-49ef-bcf6-614cce125434.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><button class="fire collapsible ml-1 collapsible_Sabotage_output cactive">Sabotage output</button>
-        <div class="collapsible-content col-12" style="max-height: 151px;">
-            <div class="row align-items-center m-2" id="Sabotage_output">
-                <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
-                    <div class="form-item roww">
-                        <label for="61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32">State</label>
-                        <div class="select">
-                            <select id="61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32" name="61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
-                                <option value="0_888df955-902f-4292-9706-c5b3e4c242c3">NONE </option>
-                                <option value="1_901e70ec-7da4-4bd6-873e-6ce2cb2aba1e">PERIPHERY DEVICE </option>
-                                <option value="2_457eb2bd-cc29-4604-9e51-8aa9caab482d">LOOP DEVICE </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="showDiv_61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32"></div><div id="0_888df955-902f-4292-9706-c5b3e4c242c3" style="display: none;"><div class="row align-items-center"></div></div><div id="1_901e70ec-7da4-4bd6-873e-6ce2cb2aba1e" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="peripherial_device_address">Peripherial device address</label>
-                                    <input class="ml10" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.901e70ec-7da4-4bd6-873e-6ce2cb2aba1e.PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="0" max="6" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-6 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="peripherial_device_output">Peripherial device output</label>
-                                    <input class="ml10" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.901e70ec-7da4-4bd6-873e-6ce2cb2aba1e.PROPERTIES.PROPERTY[1]','newValue': this.value}})" min="0" max="24" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div><div id="2_457eb2bd-cc29-4604-9e51-8aa9caab482d" style="display: none;">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="loop">Loop</label>
-                                    <input class="ml10" type="number" id="loop" name="loop" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.457eb2bd-cc29-4604-9e51-8aa9caab482d.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY[0]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="device_address">Device address</label>
-                                    <input class="ml10" type="number" id="device_address" name="device_address" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.457eb2bd-cc29-4604-9e51-8aa9caab482d.PROPERTIES.PROPERTY[2]','newValue': this.value}})" min="1" max="250" value="1">
-                                </div>
-                            </div><div class="col-12 col-lg-4 mt-1">
-                                <div class="form-item roww">
-
-                                    <label for="channel">Channel</label>
-                                    <input class="ml10" type="number" id="channel" name="channel" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.FAT_FBF_OUT4.PROPERTIES.PROPERTY.TABS.457eb2bd-cc29-4604-9e51-8aa9caab482d.PROPERTIES.PROPERTY[3]','newValue': this.value}})" min="1" max="4" value="1">
-                                </div>
-                            </div>
-                        </div>
+                    <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
+                        <button style="display: inline-flex; margin: -3px;" type="button" onclick="javascript: loopElementFunc(1, 'IRIS_TTELOOP1'); return false;" data-bs-toggle="modal" data-bs-target="#IRIS_TTELOOP1_modal" id="btn_IRIS_TTELOOP1" class="btn-round btn-border-black">
+                            <i class="fa-solid fa-plus 5x"></i> Add New Device in Loop 1
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade bd-example" tabindex="-1" id="deviceList" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="row list-group fire" id="list-tab" role="tablist"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5 multi-button" id="btnGroup">
+            <!--<button type="button" class="btn-round btn-blue">Save</button>
+            <button type="button" class="btn-round btn-border-black">Back</button>-->
+            <button style="display: inline-flex;" type="button" id="_btn" class="btn-round btn-border-black" onclick="javascript: loopFunc(); return false">
+                <i class="fa-solid fa-plus 5x"></i>
+            </button>
+            <button class="btn-border-black">Loop</button><button onclick="javasript: removeLoop()" class="btn-round btn-border-black" id="rvmBtn"><i class="fa-solid fa-minus"></i></button>
+        </div>
+
+        <!-- showDevicesListModal -->
+        <div class="modal fade" id="showDevicesListModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- showDevicesListModal -->
+        <div class="modal fade" id="showConfirmationModal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="btn-close" id="xClose"></button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="yesBtn">Yes</button>
+                        <button type="button" class="btn btn-secondary" id="bigClose">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- addressModal -->
+        <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addressModalLabel">Device address</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-item roww mt-1">
+                            <label for="select_address">Set the address for IRIS_TTELOOP1</label>
+                            <div class="select">
+                                <select id="select_address" name="select_address"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option><option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option><option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option><option value="101">101</option><option value="102">102</option><option value="103">103</option><option value="104">104</option><option value="105">105</option><option value="106">106</option><option value="107">107</option><option value="108">108</option><option value="109">109</option><option value="110">110</option><option value="111">111</option><option value="112">112</option><option value="113">113</option><option value="114">114</option><option value="115">115</option><option value="116">116</option><option value="117">117</option><option value="118">118</option><option value="119">119</option><option value="120">120</option><option value="121">121</option><option value="122">122</option><option value="123">123</option><option value="124">124</option><option value="125">125</option><option value="126">126</option><option value="127">127</option><option value="128">128</option><option value="129">129</option><option value="130">130</option><option value="131">131</option><option value="132">132</option><option value="133">133</option><option value="134">134</option><option value="135">135</option><option value="136">136</option><option value="137">137</option><option value="138">138</option><option value="139">139</option><option value="140">140</option><option value="141">141</option><option value="142">142</option><option value="143">143</option><option value="144">144</option><option value="145">145</option><option value="146">146</option><option value="147">147</option><option value="148">148</option><option value="149">149</option><option value="150">150</option><option value="151">151</option><option value="152">152</option><option value="153">153</option><option value="154">154</option><option value="155">155</option><option value="156">156</option><option value="157">157</option><option value="158">158</option><option value="159">159</option><option value="160">160</option><option value="161">161</option><option value="162">162</option><option value="163">163</option><option value="164">164</option><option value="165">165</option><option value="166">166</option><option value="167">167</option><option value="168">168</option><option value="169">169</option><option value="170">170</option><option value="171">171</option><option value="172">172</option><option value="173">173</option><option value="174">174</option><option value="175">175</option><option value="176">176</option><option value="177">177</option><option value="178">178</option><option value="179">179</option><option value="180">180</option><option value="181">181</option><option value="182">182</option><option value="183">183</option><option value="184">184</option><option value="185">185</option><option value="186">186</option><option value="187">187</option><option value="188">188</option><option value="189">189</option><option value="190">190</option><option value="191">191</option><option value="192">192</option><option value="193">193</option><option value="194">194</option><option value="195">195</option><option value="196">196</option><option value="197">197</option><option value="198">198</option><option value="199">199</option><option value="200">200</option><option value="201">201</option><option value="202">202</option><option value="203">203</option><option value="204">204</option><option value="205">205</option><option value="206">206</option><option value="207">207</option><option value="208">208</option><option value="209">209</option><option value="210">210</option><option value="211">211</option><option value="212">212</option><option value="213">213</option><option value="214">214</option><option value="215">215</option><option value="216">216</option><option value="217">217</option><option value="218">218</option><option value="219">219</option><option value="220">220</option><option value="221">221</option><option value="222">222</option><option value="223">223</option><option value="224">224</option><option value="225">225</option><option value="226">226</option><option value="227">227</option><option value="228">228</option><option value="229">229</option><option value="230">230</option><option value="231">231</option><option value="232">232</option><option value="233">233</option><option value="234">234</option><option value="235">235</option><option value="236">236</option><option value="237">237</option><option value="238">238</option><option value="239">239</option><option value="240">240</option><option value="241">241</option><option value="242">242</option><option value="243">243</option><option value="244">244</option><option value="245">245</option><option value="246">246</option><option value="247">247</option><option value="248">248</option><option value="249">249</option><option value="250">250</option></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary addr">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
-    <script src="../imports/fat_fbf.js"></script>
-
+    <script src="../imports/loopfuncs.js"></script>
     <script>
-//        var js = `{
-//  "FAT_FBF_IN1": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "45d1d4fd-3fd0-4784-8569-b6220a074665",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_IN1"
-//  },
-//  "FAT_FBF_IN2": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "01b68809-e545-4058-927a-bec67fa1f493",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_IN2"
-//  },
-//  "FAT_FBF_IN3": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "bf3dcc5b-b9f5-4728-b7d3-403cd0634e01",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_IN3"
-//  },
-//  "FAT_FBF_OUT1": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "e34a4bf8-5ef5-4da9-b521-ee54a734c19a",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT1"
-//  },
-//  "FAT_FBF_OUT2": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "6957c98c-e6a8-488b-958c-80fcac357b77",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT2"
-//  },
-//  "FAT_FBF_OUT3": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "8c89a84c-9b44-4af4-b029-19bf5ebeb847",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT3"
-//  },
-//  "FAT_FBF_OUT4": {
-//    "@MIN": "1",
-//    "@MAX": "1",
-//    "@LNGID": "339b5632-82fd-4eb8-81b5-d2ace647ccc1",
-//    "~path": "ELEMENTS.iris_fat_fbf.CONTAINS.FAT_FBF_OUT4"
-//  },
-//  "~path": "ELEMENTS.iris_fat_fbf.CONTAINS",
-//  "~panel_id": "f7fa03d0-31b1-4302-98f7-a333e5f2bc89"
-//}`;
-//        receiveMessageWPF(js)
+        $("#deviceList").on('hidden.bs.modal', function () {
+            $("#deviceList").find("#list-tab").empty();
+        });
+
+        $("#showDevicesListModal").on('hidden.bs.modal', function () {
+            $("#showDevicesListModal").find(".modal-body").empty();
+        });
     </script>
 
 
+    <script id="script_modal">
+    $("#IRIS_TTELOOP1_modal").on('hidden.bs.modal', function () {
+            $("#IRIS_TTELOOP1_modal").find("#list-tab").empty();
+        });</script>
 </body>
 </html>

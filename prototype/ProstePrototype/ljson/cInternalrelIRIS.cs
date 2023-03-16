@@ -1019,7 +1019,12 @@ namespace ljson
         }
         public override string WritePropertyVal(JObject groups, string PropertyName, string _xmltag)
         {
-            JObject prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);
+            groups = new JObject(groups);
+            RemoveUnusedTabs(groups);
+            cPanelField.TypeGroupsToNewGroup(groups);
+            JObject prop = GetDeviceGroupsNode(groups.ToString(), PropertyName, true);
+            if (prop == null)
+                prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);
             if (prop == null)
             {
                 string translated = TranslatePropertyName(PropertyName);
@@ -1035,6 +1040,106 @@ namespace ljson
             }
             else
                 return cPanelField.WriteValue(prop, _xmltag);
+        }
+        private void RemoveUnusedChannelTabs(JObject tab)
+        {
+            string tabval = null;
+            if (tab["~value"] != null)
+                tabval = tab["~value"].ToString();
+            if (tabval == null || !Regex.IsMatch(tabval, @"LOOP\d+?/[\w\W]+?#"))
+                return;
+            string[] split = tabval.Split('#');
+            string looppath = split[0];
+            string channelpath = split[1];
+            string devaddr = "-1";
+            Match m = Regex.Match(channelpath, @"~index~(\d+)$");
+            if (m.Success)
+                devaddr = m.Groups[1].Value;
+            string loopaddr = "1";
+            m = Regex.Match(looppath, @"LOOP(\d+?)/");
+            if (m.Success)
+                loopaddr = m.Groups[1].Value;
+            byte devtype = 0x80;
+            if (Regex.IsMatch(looppath, "_SNONE$"))
+                devtype = 0;
+            string P2 = (devtype | Convert.ToByte(loopaddr)).ToString();
+            //
+            string channel = "1";
+            m = Regex.Match(channelpath, @"TYPECHANNEL(\d+?)\.");
+            if (m.Success)
+                channel = m.Groups[1].Value;
+            string keepmask = null;
+            if (Regex.IsMatch(looppath, @"TTELOOP\d+"))
+                keepmask = "TELETEK";
+            else
+                keepmask = "SENSOR";
+            JObject osubtype = (JObject)tab["PROPERTIES"]["PROPERTY"];
+            string subtype = "0";
+            JObject tabs = (JObject)tab["PROPERTIES"]["PROPERTY"]["TABS"];
+            List<string> todel = new List<string>();
+            JObject keeptab = null;
+            foreach (JProperty p in tabs.Properties())
+            {
+                if (p.Value.Type != JTokenType.Object) continue;
+                JObject t = (JObject)p.Value;
+                if (!Regex.IsMatch(t["@NAME"].ToString(), keepmask, RegexOptions.IgnoreCase))
+                    todel.Add(p.Name);
+                else
+                    keeptab = t;
+            }
+            foreach (string del in todel)
+                tabs.Remove(del);
+            //
+            osubtype["~value"] = keeptab["@VALUE"].ToString();
+            JArray props = (JArray)keeptab["PROPERTIES"]["PROPERTY"];
+            foreach (JToken t in props)
+            {
+                if (t.Type != JTokenType.Object) continue;
+                JObject o = (JObject)t;
+                if (o["@ID"].ToString() == "P1")
+                    o["~value"] = devaddr;
+                else if (o["@ID"].ToString() == "P2")
+                    o["~value"] = P2;
+                else if (o["@ID"].ToString() == "CHANNEL")
+                    o["~value"] = channel;
+            }
+        }
+        public override void RemoveUnusedTabs(JObject json)
+        {
+            if (json["@TYPE"] != null && json["@TYPE"].ToString() == "TAB")
+            {
+                JObject tabs = (JObject)json["TABS"];
+                if (tabs == null)
+                    return;
+                if (json["~value"] == null)
+                {
+                    JProperty p = (JProperty)tabs.First;
+                    JObject o = (JObject)p.Value;
+                    json["~value"] = o["@VALUE"].ToString();
+                }
+                string tabval = (json["~value"] != null) ? json["~value"].ToString() : null;
+                Match m = Regex.Match(tabval, @"^(\d+?)_");
+                if (m.Success)
+                    tabval = m.Groups[1].ToString();
+                List<string> todel = new List<string>();
+                foreach (JProperty p in tabs.Properties())
+                {
+                    if (p.Value.Type != JTokenType.Object) continue;
+                    JObject tabo = (JObject)p.Value;
+                    if (tabo["@VALUE"] == null || tabo["@VALUE"].ToString() != tabval)
+                        todel.Add(p.Name);
+                    else
+                        RemoveUnusedChannelTabs(tabo);
+                }
+                foreach (string t2del in todel)
+                    tabs.Remove(t2del);
+            }
+            else
+            {
+                foreach (JProperty p in json.Properties())
+                    if (p.Value.Type == JTokenType.Object)
+                        RemoveUnusedTabs((JObject)p.Value);
+            }
         }
         public override Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val, string _xmltag)
         {

@@ -55,7 +55,7 @@
                                 <ContentPresenter Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 <Popup AllowsTransparency="True" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{Binding ElementName=MenuItemBorder}"
 									   HorizontalOffset="1" VerticalOffset="-1">
-                                    <Border Background="{Binding ElementName=fileMenu, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
+                                    <Border Background="{Binding ElementName=filePanel, Path=Background}" BorderThickness="1" BorderBrush="{StaticResource DefaultColor}" Padding="2">
                                         <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                         </ScrollViewer>

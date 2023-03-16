@@ -651,6 +651,11 @@ namespace ljson
             grp3["fields"]["ANDINPUTS"] = o["ANDINPUTS"];
             json[key]["PROPERTIES"]["Groups"]["Parameters"] = grp3;
             //
+            json[key]["PROPERTIES"]["Groups"]["~hidden"] = new JObject();
+            json[key]["PROPERTIES"]["Groups"]["~hidden"]["name"] = "Hidden properties";
+            json[key]["PROPERTIES"]["Groups"]["~hidden"]["fields"] = new JObject();
+            json[key]["PROPERTIES"]["Groups"]["~hidden"]["fields"]["FUNCTION"] = o["FUNCTION"];
+            //
             //JObject grp4 = new JObject();
             //grp4["name"] = "OR/AND inputs";
             //grp4["fields"] = new JObject();

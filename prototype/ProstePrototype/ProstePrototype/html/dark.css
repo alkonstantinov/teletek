@@ -59,16 +59,26 @@ input, select, input[type="checkbox" i] {
     filter: invert(82%);
 }
 
-#ctxMenu {
+#ctxMenu, .accordion-button, .accordion-body .active {
     background-color: #332 !important;
+    color: #eed !important;
+}
+
+    .accordion-button.collapsed {
+        color: #808080 !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #eed !important;
+    }
+
+    menuitem:hover {
+        background-color: #555 !important;
+    }
+
+.accordion-body, .collapsible-content {
+    background-color: #555 !important;
     color: #eed;
 }
 
-menuitem:hover {
-    background-color: #555 !important;
-}
 
-.collapsible-content {
-    background-color: #555 !important;
-    color: #eed;
-}

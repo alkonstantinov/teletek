@@ -351,7 +351,19 @@ namespace common
         public cRWCommand(string scmd) { InitCommand(scmd); }
         public virtual int CommandLength() { return 0; }
         public virtual string CommandString() { return null; }
-        public virtual string CommandString(int idx) { return null; }
+        public virtual string CommandString(int idx)
+        {
+            if (sio == null || sio == "")
+            {
+                sio = "0000";
+                if (io == eIO.ioRead)
+                    sio = "0351";
+                else if (io == eIO.ioWrite)
+                    sio = "0072";
+            }
+            string sidx = idx.ToString("X2");
+            return sio + sDataType + sidx + sbuffoffset + slen;
+        }
         public virtual string NoIdxCommandString() { return null; }
         public virtual string CommandKey() { return null; }
         public virtual int idxPosition() { return -1; }
@@ -369,6 +381,7 @@ namespace common
         public eWriteOperation operation;
         public string value;
         public string writeval = null;
+        public string _xmltag;
     }
 
     public class cRWPath

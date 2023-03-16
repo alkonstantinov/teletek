@@ -817,7 +817,7 @@ namespace lcommunicate
         }
         #endregion
 
-        #region trensport
+        #region transport
         public static cTransport ConnectIP()
         {
             cTransport t = new cIP();

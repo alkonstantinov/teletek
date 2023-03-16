@@ -820,6 +820,7 @@ namespace common
                             }
                         }
                     }
+                    op._xmltag = ln;
                     rwpath.WriteOperationOrder.Add(op);
                 }
                 foreach (string cmd in dwcmd.Keys)

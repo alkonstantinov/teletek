@@ -104,6 +104,7 @@
 }*/
 
 body {
+    font-family: 'Poppins';
     font-size: 0.8rem;
 }
 
@@ -213,6 +214,14 @@ button {
     padding: 15px;
 }
 
+.pr8 {
+    padding-right: 8px;
+}
+
+.pr15 {
+    padding-right: 15px;
+}
+
 .pt16 {
     padding-top: 16px !important;
 }
@@ -247,7 +256,7 @@ button {
 
 .scroll {
     overflow-x: auto;
-    height: calc(100vh - 98px); /* - 98px*/
+    height: calc(100vh - 4.125rem); /* - 98px*/
 }
 
 .scroll400 {
@@ -785,7 +794,6 @@ fieldset {
     justify-content: end;
 }
 
-
 .multi-button .btn-border-black {
     height: 3.125em;
     width: fit-content;
@@ -797,27 +805,27 @@ fieldset {
     font-weight: 700;
     text-align: center;
     min-height: 3.125em;
-    margin: -3px;
+    margin: 0 -3px;
     position: relative;
 }
 
-.multi-button .btn-border-black:nth-child(1) {
-    border-radius: 10px 0 0 10px;
-    border-right: none;
-    padding-left: 2rem;
-    /*margin-top: -8px;*/
-}
-.multi-button :nth-child(2) {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-}
-.multi-button :nth-child(3) {
-    border-radius: 0 10px 10px 0;
-    padding-right: 2rem;
-    border-left: none;
-    /*margin-top: -8px;*/
-}
+    .multi-button .btn-border-black:nth-child(1) {
+        border-radius: 10px 0 0 10px;
+        border-right: none;
+        padding-left: 2rem;
+        /*margin-top: -8px;*/
+    }
+    .multi-button :nth-child(2) {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    .multi-button :nth-child(3) {
+        border-radius: 0 10px 10px 0;
+        padding-right: 2rem;
+        border-left: none;
+        /*margin-top: -8px;*/
+    }
 
 .btn-border-black {
     background-color: #ffffff;
@@ -886,6 +894,11 @@ fieldset {
     .multi-button .btn-border-black:nth-child(1), .multi-button :nth-child(3) {
         padding: 0 0.2rem;
     }
+}
+
+.buttons-row {
+    display: flex;
+    justify-content: center;
 }
 
 .btn-small {
