@@ -106,14 +106,7 @@ namespace ProstePrototype
         {
             var i = e;
         }
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonDown(e);
-
-            // Begin dragging the window
-            this.DragMove();
-        }
-
+        
         private void _child_LostFocus(object sender, RoutedEventArgs e)
         {
             rw.Hide();
@@ -676,6 +669,13 @@ namespace ProstePrototype
         #endregion
 
         #region minimizeMaxmimize buttons
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            // Begin dragging the window
+            this.DragMove();
+        }
         private void Button_Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;

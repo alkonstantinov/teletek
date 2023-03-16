@@ -239,6 +239,9 @@
         },
         used_in: {
             'bg': 'Използвано в', 'en': 'Used in', 'ge': 'Used in' 
+        }, 
+        not_used: {
+            'bg': 'не е използвано', 'en': 'not used', 'ge': 'not used' 
         },
         number_of_devices_per_loop: {
             'bg': 'Брой устройства свързани с кръга по тип', 'en': 'Number of devices attached to the loop per type', 'ge': 'Number of devices attached to the loop per type' 

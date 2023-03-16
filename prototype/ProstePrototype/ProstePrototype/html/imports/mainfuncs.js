@@ -211,15 +211,17 @@ function drawFields(body, json, inheritedColor = '') {
             }
             elements = +divLevel["@MAX"]; // case of divMain
             let btnDiv = document.getElementById("buttons");
-            // adding the button
-            btnDiv.insertAdjacentHTML(
-                'afterbegin',
-                `<button style="display: inline-flex;" 
+            // adding the button for everybody except PANNELIN
+            if (!k.toUpperCase().includes("PANELIN")) {
+                btnDiv.insertAdjacentHTML(
+                    'afterbegin',
+                    `<button style="display: inline-flex;" 
                             type="button"
                             onclick="javascript:addElement('element', '${k}')" 
                             id="_btn" class="btn-round btn-border-black">
                             <i class="fa-solid fa-plus 5x"></i> ${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}
                         </button>`);
+            }
             if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
                 deviceNmbr = 0;
                 let divCol9 = document.getElementsByClassName("col-9")[0];
@@ -356,7 +358,7 @@ function getZoneDevices(elementNumber) {
     var el = document.getElementById('attached_device');
     if (!el) return;
     el.innerHTML = `<button class="btn-small btn-border-black" onclick="javacript: calculateZoneDevices(${elementNumber})" id="calculateDevices"
-                        data-toggle="modal" data-target="#showDevicesListModal" >
+                        data-bs-toggle="modal" data-bs-target="#showDevicesListModal" >
                             ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
                     </button>`; // reset of the attached to the zone device list
 
@@ -557,7 +559,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 disabled = 'disabled style="color: red"'
             }
             if (o["label"].endsWith(` - ${newT.t(localStorage.getItem('lang'), 'used')}`)) {
-                alert(`- ${newT.t(localStorage.getItem('lang'), 'used')} ------  - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)
+                //alert(`- ${newT.t(localStorage.getItem('lang'), 'used')} ------  - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)
                 let againJsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
                 tooltip = `title="Used in: ${againJsonAtLevel3[o["value"]]["uses"]}"`;
             }
@@ -1169,6 +1171,7 @@ const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderTe
 }
 
 const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
+    path = path.replaceAll("'", "§");
     return `<div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -1469,19 +1472,26 @@ function callAddressModal(elementType, current) {
 
     modal.querySelector(".modal-body").innerHTML = innerSelectText;
 
-    modal.querySelector(".btn.btn-primary").addEventListener('click', function handler(){
+    function handler() {
         if (!lst.includes(modal.querySelector("select").value)) {
-            if (!current) // guard if new
+            if (!current) { // guard if new
                 addElementAtAddress(elementType, modal.querySelector("select").value); // setting the element at the given address            
-            else { // else it is not a new item, so modify the old one
+            } else { // else it is not a new item, so modify the old one
                 modifyElementCurrentAddress(current, elementType, modal.querySelector("select").value)
             }
         }
         $(modal).modal('hide');
-        // removing the event listener function
-        this.removeEventListener('click', handler);
-    });
+        //// removing the event listener function
+        //modal.querySelector(".btn.btn-primary").removeEventListener('click', handler);
+    }
+
+    modal.querySelector(".btn.btn-primary").addEventListener('click', handler);
+
     $(modal).modal('show');
+
+    $(modal).on('hidden.bs.modal', function () {
+        modal.querySelector(".btn.btn-primary").removeEventListener('click', handler);
+    });
 }
 
 function addElementAtAddress(elementType, last) {
@@ -1584,7 +1594,7 @@ async function inputGroupTextGenerator(last, elementType) {
             let currentJSON = returnedJson["~noname"]["fields"]["Input_Logic"];
             let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
             let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
-            let legend = (trans.length + `${last}.`.length) > 14 ? trans.substring(0, 8) + '...' : trans;
+            let legend = (trans.length + `${last}.`.length) > 14 ? trans.substring(0, 7) + '...' : trans;
             return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="row">
                             <fieldset style="min-width: 200px;" class="col-10">

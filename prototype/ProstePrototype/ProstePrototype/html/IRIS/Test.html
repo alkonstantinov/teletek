@@ -10289,7 +10289,7 @@
 
     <title>Teletek Manager</title>
 </head>
-<body class="fullHeight" style="">
+<body class="fullHeight" style="overflow: hidden; padding-right: 0px;">
     <div class="container fullHeight" id="divLDevices">
         <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
 
@@ -10327,24 +10327,9 @@
                     <div class="row fullHeight">
                         <div class="col-3 bl fire scroll">
                             <div id="new_device_IRIS_TTELOOP1" class="row">
-
-                                <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(1)" id="calculateDevices" data-bs-toggle="modal" data-bs-target="#showDevicesListModal">Number of devices: 1</button><div class="col-12" id="IRIS_TTELOOP1_1">
-                                    <div class="row pr7">
-                                        <div class="col-11">
-                                            <a href="javascript:showDevice('IRIS_TTELOOP1', 'IRIS_MIO22', '1', '1', 'IRIS_TTENONE')" onclick="javascript:addActive('#selected_area')">
-                                                <div class="btnStyle fire" id="1_IRIS_MIO22">
-                                                    <img src="../../Images/69.SensoIRIS_Module_box.ico" alt="" width="25" height="25" class="m15">
-                                                    <div class="someS">
-                                                        <div class="h5">1. MIO22</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-1 p-0 m-0" onclick="javascript:removeDevice('IRIS_TTELOOP1', '1', 'IRIS_MIO22', '1')">
-                                            <i class="fa-solid fa-xmark fire"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(1)" id="calculateDevices" data-bs-toggle="modal" data-bs-target="#showDevicesListModal">
+                                    Number of devices: 0
+                                </button>
                             </div>
                         </div>
                         <div class="col-9" style="z-index: 1;height: fit-content;">
@@ -10432,7 +10417,7 @@
         </div>
 
         <!-- addressModal -->
-        <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal fade show" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-modal="true" role="dialog" style="display: block;">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -10475,6 +10460,6 @@
     <script id="script_modal">
     $("#IRIS_TTELOOP1_modal").on('hidden.bs.modal', function () {
             $("#IRIS_TTELOOP1_modal").find("#list-tab").empty();
-        });</script>
+        });</script><div class="modal-backdrop fade show"></div>
 </body>
 </html>

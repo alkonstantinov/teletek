@@ -598,14 +598,20 @@ async function removeLoop() {
     // check if there are some connected elements
     let returnString = await boundAsync.checkLoopConnection(mainKey, lst.at(-1));
     // show confirmation dialog
-    if (returnString.length > 0) {
-        let deviceListJSON = JSON.parse(returnString);
-        $('#showConfirmationModal .modal-title').html(`${new T().t(localStorage.getItem('lang'), "are_you_sure_removing")} ${new T().t(localStorage.getItem('lang'), "loop")} ${lst.at(-1)}?`);
+    $('#showConfirmationModal .modal-title').html(`${new T().t(localStorage.getItem('lang'), "are_you_sure_removing")} ${new T().t(localStorage.getItem('lang'), "loop")} ${lst.at(-1)}?`);
 
-        let modalContent = $('#showConfirmationModal .modal-body')[0];
+    let modalContent = $('#showConfirmationModal .modal-body')[0];
+
+    $("#bigClose, #xClose").on("click", function () {
+        $("#showConfirmationModal").modal("hide");
+    });
+    $("#yesBtn").off('click').on("click", removeLoopAfterConfirm);
+
+    if (returnString.length > 2) {
+        let deviceListJSON = JSON.parse(returnString);
 
         const deviceMap = new Map(Object.entries(deviceListJSON));
-        
+
         let innerModalContent = `<div class="table-responsive"><table class="table table-striped"><thead><tr>
                         <th scope="col">${new T().t(localStorage.getItem('lang'), "device_type")}</th>
                         <th scope="col">${new T().t(localStorage.getItem('lang'), "used_in")}</th>
@@ -617,15 +623,45 @@ async function removeLoop() {
                         </tr>`;
         })
         innerModalContent += `</tbody></table></div>`;
-        modalContent.innerHTML = innerModalContent; 
-
-        $("#bigClose, #xClose").on("click", function () {
-            $("#showConfirmationModal").modal("hide");
-        });
-        $("#yesBtn").off('click').on("click", removeLoopAfterConfirm);
+        modalContent.innerHTML = innerModalContent;
 
         $("#showConfirmationModal").modal("show");
-    }    
+    } else {
+        let devicesListStr = await boundAsync.getLoopDevices(mainKey, lst.at(-1));
+        let deviceListJSON = JSON.parse(devicesListStr);
+
+        if (deviceListJSON.length > 0) {
+            const deviceMap = new Map();
+
+            deviceListJSON.forEach(e => {
+                let device = e["~device"].split('_').slice(1).join('_');
+                if (deviceMap.has(device)) {
+                    deviceMap.set(device, deviceMap.get(device) + 1)
+                } else {
+                    deviceMap.set(device, 1)
+                }
+            });
+
+            let innerModalContent = `<div class="table-responsive"><table class="table table-striped"><thead><tr>
+                            <th scope="col">${new T().t(localStorage.getItem('lang'), "device_type")}</th>
+                            <th scope="col">${new T().t(localStorage.getItem('lang'), "count")}</th>
+                            <th scope="col">${new T().t(localStorage.getItem('lang'), "used_in")}</th>
+                            </tr></thead><tbody>`;
+            deviceMap.forEach((value, key, map) => {
+                innerModalContent += `<tr>
+                            <td >${key}</td>
+                            <td>${value}</td>
+                            <td>${new T().t(localStorage.getItem('lang'), "not_used")}</td>
+                            </tr>`;
+            })
+            innerModalContent += `</tbody></table></div>`;
+            modalContent.innerHTML = innerModalContent;
+
+            $("#showConfirmationModal").modal("show");
+        } else {
+            removeLoopAfterConfirm();
+        }
+    } 
 }
 
 function removeLoopAfterConfirm () {

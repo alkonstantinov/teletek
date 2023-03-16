@@ -8,7 +8,8 @@
 		xmlns:uc="clr-namespace:ProstePrototype.WpfControls"
 		xmlns:library="clr-namespace:ProstePrototype.library"
         mc:Ignorable="d"
-		Title="T-Manager 6.1" Height="768" Width="1400"
+		Title="T-Manager 6.1" Height="768" Width="1024"
+        WindowState="Normal"
 		WindowStyle="None">
     <!-- WindowState="Maximized" -->
 
@@ -211,23 +212,23 @@
 
                 </Grid>
                 <GridSplitter Grid.Column="1" ResizeDirection="Rows" BorderBrush="#73a6e2" Background="LightGray" Width="1" Height="25"/>
-                <Grid Grid.Column="2">
+                <Grid Grid.Column="2" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" x:Name="breadCrumbsField" MouseLeftButtonDown="mainPanel_MouseLeftButtonDown" VerticalAlignment="Center">
-                        <ListView x:Name="lvBreadCrumbs" Margin="20, 0" FontFamily="{StaticResource poppins_demibold}"
-				                  FontSize="12" BorderThickness="0" VerticalContentAlignment="Center">
+                    <StackPanel Grid.Column="0" x:Name="breadCrumbsField" VerticalAlignment="Center" Height="50">
+                        <ListView x:Name="lvBreadCrumbs" Margin="20, 10, 20, 0" FontFamily="{StaticResource poppins_demibold}"
+				                  FontSize="12" BorderThickness="0" VerticalContentAlignment="Center" VerticalAlignment="Center">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <StackPanel Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ListView.ItemsPanel>
                         </ListView>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" x:Name="GridView_or_ListView_btn" VerticalAlignment="Center">
-                        <Button Background="#73a6e2" Height="20" Width="75" Click="GridOrListView_Click" BorderThickness="0" Foreground="White">
+                    <StackPanel Grid.Column="1" x:Name="GridView_or_ListView_btn" VerticalAlignment="Center" Height="50">
+                        <Button Background="#73a6e2" Height="20" Width="75" Margin="10" Click="GridOrListView_Click" BorderThickness="0" Foreground="White" >
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="9"/>
