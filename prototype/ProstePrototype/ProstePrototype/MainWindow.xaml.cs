@@ -258,11 +258,16 @@ namespace ProstePrototype
                 case "MainMenuBtn":
                     switch (json["Function"].ToString())
                     {
-                        case "Firmware update": break;
-                        case "Read":
-                        case "Write":
-                        case "Verify":
-                        case "Help":
+                        case "Update": break;
+                        case "Read": break;
+                        case "Delete": break;
+                        case "Write": break;
+                        case "Verify": break;
+                        case "Rename":
+                            string currentPanelId = json["~panel_id"].ToString();
+                            string newPanelName = json["newName"].ToString();
+                            break;
+                        case "Help": break;
                         default:
                             // New_Clicked(new object(), new RoutedEventArgs()); // not working!
                             break;

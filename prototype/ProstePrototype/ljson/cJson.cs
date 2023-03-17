@@ -244,6 +244,8 @@ namespace ljson
             {
                 Monitor.Enter(_cs_current_panel);
                 _current_panel_id = value;
+                constants.NO_LOOP = NoLoopKey(CurrentPanel.ToString());
+                //_internal_relations_operator.CurrentPanelID = value;
                 Monitor.Exit(_cs_current_panel);
             }
         }
@@ -296,27 +298,37 @@ namespace ljson
 
         #region read/write
         private static object _cs_write_read_merge = new object();
-        private static Dictionary<string, cRWPath> _write_read_merge = null;
+        private static Dictionary<string, Dictionary<string, cRWPath>> _panel_write_read_merge = new Dictionary<string, Dictionary<string, cRWPath>>();
 
         private static Dictionary<string, cRWPath> WriteReadMerge
         {
             get
             {
                 Monitor.Enter(_cs_write_read_merge);
-                Dictionary<string, cRWPath> res = _write_read_merge;
+                if (!_panel_write_read_merge.ContainsKey(CurrentPanelID))
+                {
+                    Monitor.Exit(_cs_write_read_merge);
+                    return null;
+                }
+                Dictionary<string, cRWPath> res = _panel_write_read_merge[CurrentPanelID];
                 Monitor.Exit(_cs_write_read_merge);
                 return res;
             }
             set
             {
                 Monitor.Enter(_cs_write_read_merge);
-                _write_read_merge = value;
+                if (!_panel_write_read_merge.ContainsKey(CurrentPanelID))
+                    _panel_write_read_merge.Add(CurrentPanelID, value);
+                else
+                    _panel_write_read_merge[CurrentPanelID] = value;
                 Monitor.Exit(_cs_write_read_merge);
             }
         }
 
         private static cRWPath RWLoopPath(Dictionary<string, cRWPath> _merge, string path)
         {
+            if (_merge == null)
+                return null;
             cRWPath rw = null;
             string pathext = null;
             if (Regex.IsMatch(path, "/"))
@@ -900,6 +912,26 @@ namespace ljson
                 }
             }
         }
+        private static string VersionKey(object conn_params, string vercmd)
+        {
+            cTransport conn = cComm.ConnectBase(conn_params);
+            byte[] bres = cComm.SendCommand(conn, vercmd);
+            if (settings.logreads)
+                _log_bytesreaded.Add(vercmd, bres);
+            cComm.CloseConnection(conn);
+            string res = bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2");
+            return res;
+        }
+        private static void SetRWFiles(object conn_params)
+        {
+            cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
+            string ver = VersionKey(conn_params, cfg.VersionCommand);
+            if (ver != cfg.CurrentVersion || WriteReadMerge == null)
+            {
+                cfg.SetRWFiles(ver);
+                WriteReadMerge = cfg.RWMerged();
+            }
+        }
         public static void ClearCache()
         {
             cComm.ClearCache();
@@ -915,6 +947,7 @@ namespace ljson
             ClearCache();
             if (settings.logreads)
                 _log_bytesreaded.Clear();
+            SetRWFiles(conn_params);
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
             Dictionary<string, JObject> dnodes = new Dictionary<string, JObject>();
@@ -1624,6 +1657,8 @@ namespace ljson
         }
         public static void WriteDevice(object conn_params)
         {
+            SetRWFiles(conn_params);
+            //
             JObject _panel = new JObject(CurrentPanel);
             JObject _elements = (JObject)_panel["ELEMENTS"];
             //
@@ -1722,8 +1757,18 @@ namespace ljson
             }
             //
             cTransport conn = cComm.ConnectBase(conn_params);
+            /////////////////////
             //byte[] ver = cComm.SendCommand(conn, "035111000007");
             //cComm.CloseConnection(conn);
+            //////////////////////////////
+            //string sbytes = "";
+            //string log = File.ReadAllText("read.log");
+            //for (int i = 0; i < ver.Length; i++)
+            //    sbytes += ver[i].ToString("X2");
+            //string ln = "035111000007" + ":" + sbytes;
+            //log += ((log != "") ? "\r\n" : "") + ln;
+            //File.WriteAllText("read.log", log);
+            ////////////////////////////
             byte[] pass = new byte[] { 0x08, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
             byte[] loginres = cComm.SendCommand(conn, pass);
             Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled);
@@ -1741,18 +1786,26 @@ namespace ljson
             Monitor.Enter(_cs_panel_templates);
             Monitor.Enter(_cs_main_content_key);
             //_panel = _current_panel;
-            if (_panel == null)
-                _panel = SchemaJSON(name);
-            _panel["~panel_type"] = _panel_type;
-            _panel["~template_loaded_from"] = _last_loaded_template_filepath;
             Guid guid = Guid.NewGuid();
             string _panel_id = guid.ToString();
+            _current_panel_id = _panel_id;
+            //
+            if (_panel == null)
+                _panel = SchemaJSON(name);
+            else
+                _last_loaded_template_filepath = filename;
+            if (_internal_relations_operator == null)
+                _internal_relations_operator = new cInternalrelIRIS();
+            if (_panel["~panel_type"] == null)
+                _panel["~panel_type"] = _panel_type;
+            _panel["~template_loaded_from"] = _last_loaded_template_filepath;
+            //
             _system_panels.Add(_panel_id, filename);
             if (!_panel_templates.ContainsKey(filename))
                 _panel_templates.Add(filename, _panel);
             else
                 _panel_templates[filename] = _panel;
-            _current_panel_id = _panel_id;
+
             _main_content_key = Regex.Replace(name, @"\d+$", "");
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
@@ -1777,6 +1830,8 @@ namespace ljson
                 JObject _elements = (JObject)_panel["ELEMENTS"];
                 if (_elements != null)
                 {
+                    if (Regex.IsMatch(name, CurrentPanelType + @"\d+$"))
+                        name = Regex.Replace(name, @"\d+$", "");
                     JObject _res = null;
                     JToken jbyname = _elements[name];
                     if (jbyname != null)
@@ -1835,7 +1890,29 @@ namespace ljson
         }
 
         #region internal relations operations
-        private static cInternalRel _internal_relations_operator = null;
+        private static Dictionary<string, cInternalRel> _panel_internal_operators = new Dictionary<string, cInternalRel>();
+        //private static cInternalRel __internal_relations_operator = null;
+        private static cInternalRel _internal_relations_operator
+        {
+            get
+            {
+                Monitor.Enter(_cs_current_panel);
+                cInternalRel res = null;
+                if (_panel_internal_operators.ContainsKey(CurrentPanelID))
+                    res = _panel_internal_operators[CurrentPanelID];
+                Monitor.Exit(_cs_current_panel);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_current_panel);
+                if (_panel_internal_operators.ContainsKey(CurrentPanelID))
+                    _panel_internal_operators[CurrentPanelID] = value;
+                else
+                    _panel_internal_operators.Add(CurrentPanelID, value);
+                Monitor.Exit(_cs_current_panel);
+            }
+        }
         public static void SetNodeFilters(JObject _node)
         {
             _internal_relations_operator.SetNodeFilters(CurrentPanelID, _node);
@@ -2078,55 +2155,56 @@ namespace ljson
             string xmldir = Directory.GetParent(Directory.GetParent(filename).ToString()).ToString();
             if (xmldir[xmldir.Length - 1] != '\\')
                 xmldir += "\\";
-            if (Directory.Exists(xmldir + "Read"))
-            {
-                string dir = xmldir + "Read";
-                string f = null;
-                string[] files = Directory.GetFiles(dir);
-                for (int i = 0; i < files.Length; i++)
-                {
-                    string fname = System.IO.Path.GetFileName(files[i]);
-                    if (!Regex.IsMatch(fname, @"\.xml$", RegexOptions.IgnoreCase))
-                        continue;
-                    if (Regex.IsMatch(fname, @"^Read[\w\W]+?" + schema + @"[_\.]", RegexOptions.IgnoreCase))
-                    {
-                        f = files[i];
-                        break; ;
-                    }
-                }
-                if (f != null)
-                {
-                    cfg.ReadConfigPath = f;
-                    doc = new XmlDocument();
-                    doc.LoadXml(File.ReadAllText(f));
-                    cfg.ReadConfig = doc;
-                }
-            }
-            if (Directory.Exists(xmldir + "Write"))
-            {
-                string dir = xmldir + "Write";
-                string f = null;
-                string[] files = Directory.GetFiles(dir);
-                for (int i = 0; i < files.Length; i++)
-                {
-                    string fname = System.IO.Path.GetFileName(files[i]);
-                    if (!Regex.IsMatch(fname, @"\.xml$", RegexOptions.IgnoreCase))
-                        continue;
-                    if (Regex.IsMatch(fname, @"^Write[\w\W]+?" + schema + @"[_\.]", RegexOptions.IgnoreCase))
-                    {
-                        f = files[i];
-                        break; ;
-                    }
-                }
-                if (f != null)
-                {
-                    cfg.WriteConfigPath = f;
-                    doc = new XmlDocument();
-                    doc.LoadXml(File.ReadAllText(f));
-                    cfg.WriteConfig = doc;
-                }
-            }
+            //if (Directory.Exists(xmldir + "Read"))
+            //{
+            //    string dir = xmldir + "Read";
+            //    string f = null;
+            //    string[] files = Directory.GetFiles(dir);
+            //    for (int i = 0; i < files.Length; i++)
+            //    {
+            //        string fname = System.IO.Path.GetFileName(files[i]);
+            //        if (!Regex.IsMatch(fname, @"\.xml$", RegexOptions.IgnoreCase))
+            //            continue;
+            //        if (Regex.IsMatch(fname, @"^Read[\w\W]+?" + schema + @"[_\.]", RegexOptions.IgnoreCase))
+            //        {
+            //            f = files[i];
+            //            break; ;
+            //        }
+            //    }
+            //    if (f != null)
+            //    {
+            //        cfg.ReadConfigPath = f;
+            //        doc = new XmlDocument();
+            //        doc.LoadXml(File.ReadAllText(f));
+            //        cfg.ReadConfig = doc;
+            //    }
+            //}
+            //if (Directory.Exists(xmldir + "Write"))
+            //{
+            //    string dir = xmldir + "Write";
+            //    string f = null;
+            //    string[] files = Directory.GetFiles(dir);
+            //    for (int i = 0; i < files.Length; i++)
+            //    {
+            //        string fname = System.IO.Path.GetFileName(files[i]);
+            //        if (!Regex.IsMatch(fname, @"\.xml$", RegexOptions.IgnoreCase))
+            //            continue;
+            //        if (Regex.IsMatch(fname, @"^Write[\w\W]+?" + schema + @"[_\.]", RegexOptions.IgnoreCase))
+            //        {
+            //            f = files[i];
+            //            break; ;
+            //        }
+            //    }
+            //    if (f != null)
+            //    {
+            //        cfg.WriteConfigPath = f;
+            //        doc = new XmlDocument();
+            //        doc.LoadXml(File.ReadAllText(f));
+            //        cfg.WriteConfig = doc;
+            //    }
+            //}
             doc = (XmlDocument)cfg.Config;
+            cfg.SetRWFilesToLastVersion();
             WriteReadMerge = cfg.RWMerged();
             SetPanelXMLConfigs(filename, cfg);
             _last_loaded_template_filepath = filename;

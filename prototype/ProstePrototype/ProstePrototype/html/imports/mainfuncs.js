@@ -975,16 +975,16 @@ function pagePreparation() {
             elem.scrollIntoView({ behavior: 'auto', block: 'center' });
         }
 
-        // searching for menu context menu on the page - beginning of contextMenu part
-        menuEl = document.getElementById("ctxMenu");
-        if (menuEl) {
-            var elems = document.querySelectorAll('a');
-            for (var i = 0; i < elems.length; i++) {
-                elems[i].oncontextmenu = function (e) {
-                    return showContextMenu(this);
-                }
-            }
-        }
+        //// searching for menu context menu on the page - beginning of contextMenu part
+        //menuEl = document.getElementById("ctxMenu");
+        //if (menuEl) {
+        //    var elems = document.querySelectorAll('a');
+        //    for (var i = 0; i < elems.length; i++) {
+        //        elems[i].oncontextmenu = function (e) {
+        //            return showContextMenu(e, this);
+        //        }
+        //    }
+        //}
         setupSelFixer();
 
         // URLSearchParams: loopType, loopNumber, elementType, elementNumber (address)
@@ -1004,21 +1004,21 @@ function pagePreparation() {
         }
     });
 }
-//pagePreparation();
-function showContextMenu(event, el) {
-    event.preventDefault();
-    let s = JSON.parse(el.href.slice(26, -1).replaceAll('\'', '\"'));
-    s.Command = "MainMenuBtn";
-    var ctxMenu = document.getElementById("ctxMenu");
-    ctxMenu.setAttribute('sendMessage', JSON.stringify(s));
-    ctxMenu.className = el.children[0].className.split(" ")[1];
-    ctxMenu.style.display = "block";
-    ctxMenu.style.left = (event.pageX - 10) + "px";
-    ctxMenu.style.top = (event.pageY - 10) + "px";
-    ctxMenu.onmouseleave = () => ctxMenu.style.display = "none";
-    return false;
-}
-// finish of the contextMenu part
+
+//function showContextMenu(event, el) {
+//    event.preventDefault();
+//    let s = JSON.parse(el.href.slice(26, -1).replaceAll('\'', '\"'));
+//    s.Command = "MainMenuBtn";
+//    var ctxMenu = document.getElementById("ctxMenu");
+//    ctxMenu.setAttribute('sendMessage', JSON.stringify(s));
+//    ctxMenu.className = el.children[0].className.split(" ")[1];
+//    ctxMenu.style.display = "block";
+//    ctxMenu.style.left = (event.pageX - 10) + "px";
+//    ctxMenu.style.top = (event.pageY - 10) + "px";
+//    ctxMenu.onmouseleave = () => ctxMenu.style.display = "none";
+//    return false;
+//}
+//// finish of the contextMenu part
 
 // activate dark mode
 function toggleDarkMode(show, filename) {

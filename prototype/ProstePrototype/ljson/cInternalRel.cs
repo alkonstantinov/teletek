@@ -283,6 +283,7 @@ namespace ljson
         public virtual void OnElementAddressChanged(string oldAddress, string elementType, string newAddress) { }
         public virtual void OnDeviceAddressChanged(string oldAddress, string loopType, string newAddress) { }
         public virtual void RemoveUnusedTabs(JObject json) { }
+        public virtual string CurrentPanelID { get; set; }
         #endregion
     }
 }

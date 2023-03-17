@@ -54,24 +54,7 @@ function setLang(key) {
 
 //#region WPF Communication
 function sendMessageWPF(json, comm = {}) {
-    if (Object.keys(comm).length > 0) {
-        try {
-            switch (comm['funcName']) {
-                case 'changeStyleDisplay':
-                    eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
-                    break;
-                case 'addElement':
-                    eval(`${comm['funcName']}("${comm['params']['id']}", "${comm['params']['elementType']}")`);
-                    break;
-                default:
-                    eval(`${comm['funcName']}("${comm['params']}")`);
-                    break;
-            }
-        } catch (e) {
-            console.log('error', e);
-        }
-    }
-    //alert(JSON.stringify(json));
+    alert(JSON.stringify(json));
     try {
         //alert(`1`);
         CefSharp.PostMessage(JSON.stringify(json));
@@ -258,7 +241,7 @@ const addAccordeonButton = (title, page, div) => {
 
 //#region pagePreparation, contextMenu, toggleDarkMode
 function pagePreparation() {
-    $(document).ready(() => {
+    $(() => { // $(function() {}) equivalent to $(document).ready(function () {})
         $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
 
         let searchParams = new URLSearchParams(window.location.search)
@@ -275,28 +258,86 @@ function pagePreparation() {
         // searching for menu context menu on the page - beginning of contextMenu part
         menuEl = document.getElementById("ctxMenu");
         if (menuEl) {
-            var elems = document.querySelectorAll('a');
+            var elems = document.querySelectorAll('h2');
             for (var i = 0; i < elems.length; i++) {
                 elems[i].oncontextmenu = function (e) {
-                    return showContextMenu(this);
+                    return showContextMenu(e, this);
                 }
             }
         }
     });
 }
-//pagePreparation();
-function showContextMenu(el) {
+
+function showContextMenu(event, el) {
     event.preventDefault();
-    let s = JSON.parse(el.href.slice(26, -1).replaceAll('\'', '\"'));
-    s.Command = "MainMenuBtn";
+
     var ctxMenu = document.getElementById("ctxMenu");
-    ctxMenu.setAttribute('sendMessage', JSON.stringify(s));
+    // Modify the textContent of the menuitem elements
+    var menuItems = ctxMenu.getElementsByTagName("menuitem");
+    for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].title = newT.t(localStorage.getItem('lang'), `${menuItems[i].getAttribute('topic')}`);
+    }
+    ctxMenu.setAttribute('element', `${el.id}`);
     ctxMenu.className = el.children[0].className.split(" ")[1];
     ctxMenu.style.display = "block";
     ctxMenu.style.left = (event.pageX - 10) + "px";
     ctxMenu.style.top = (event.pageY - 10) + "px";
     ctxMenu.onmouseleave = () => ctxMenu.style.display = "none";
+    ctxMenu.onmouseup = () => ctxMenu.style.display = "none";
     return false;
+}
+
+function sendMsg(self) {
+    if (self.getAttribute('topic') === "Rename") {
+        const panelId = self.parentNode.getAttribute('element');
+        const el = document.getElementById(panelId);
+        let currentNode = el.firstElementChild.childNodes[2];
+        let inner = el.firstElementChild.innerHTML;
+        let idx = inner.lastIndexOf(">");
+        let currentName = inner.slice(idx + 1, idx + 11).replaceAll('\n', "");
+        let inp = document.createElement("input");
+        inp.id = "newNameId";
+        inp.maxLength = "15";
+        inp.type = "text";
+        inp.size = "10";
+        inp.placeholder = currentName;
+        let replacing = false; // flag for the focusout event
+        inp.addEventListener('focusout', (e) => {
+            if (!replacing) {
+                setNewName(e, currentName, inp.id, currentNode);
+            }
+        }, false);
+        inp.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                replacing = true;
+                setNewName(e, currentName, inp.id, currentNode);
+            } else if (e.key === 'Escape') {
+                replacing = true;
+                inp.parentElement.replaceChild(document.createTextNode(currentName), inp);
+            } else if (e.key == " " ||
+                e.code == "Space" ||
+                e.key == 32
+            ) {
+                e.preventDefault();
+                inp.value += ' ';
+            }
+        }, false);
+        el.firstElementChild.replaceChild(inp, currentNode);
+        inp.focus();
+    } else {
+        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': self.getAttribute('topic') });
+    }
+}
+
+function setNewName(event, currName, inpId) {
+    let newName = event.target.value;
+    const panelId = event.target.parentElement.parentElement.id.replaceAll("_", "-");
+    let inpEl = document.getElementById(inpId);    
+    if (!newName) inpEl.parentElement.replaceChild(document.createTextNode(currName), inpEl);
+    else {
+        inpEl.parentElement.replaceChild(document.createTextNode(newName), inpEl);
+        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Rename', 'newName': newName, '~panel_id': panelId });
+    }
 }
 // finish of the contextMenu part
 

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="imports/boostrap/boostrap.css" />
     <script src="imports/boostrap/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="imports/css/all.css" />
-    <script src="imports/font-awesome.js"></script>
+    <!--<script src="imports/font-awesome.js"></script>-->
 
     <link rel="stylesheet" href="IRIS.css" />
     <link rel="stylesheet" href="imports/css/accordion.css" />
@@ -28,12 +28,14 @@
         
     </div>
 
-    <menu type="context" id="ctxMenu">
-        <menuitem title="Read" onclick="javascript: sendMsg(this)" icon=""><i class="fa-solid fa-book-open pr-1"></i></menuitem>
-        <menuitem title="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i></menuitem>
-        <menuitem title="Firmware update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i></menuitem>
-        <menuitem title="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i></menuitem>
-        <menuitem title="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i></menuitem>
+    <menu type="context" id="ctxMenu" style="width: fit-content;">
+        <menuitem title="Read" topic="Read" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-book-open pr-1"></i>&nbsp;</menuitem>
+        <menuitem title="Rename" topic="Rename" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-pen pr-1"></i>&nbsp;</menuitem>
+        <menuitem title="Delete" topic="Delete" onclick="javascript: sendMsg(this)"><i class="fa-regular fa-trash-can pr-1"></i>&nbsp;</menuitem>
+        <menuitem title="Write" topic="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i>&nbsp;</menuitem>
+        <menuitem title="Firmware update" topic="Update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i>&nbsp;</menuitem>
+        <menuitem title="Verify" topic="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i>&nbsp;</menuitem>
+        <menuitem title="Help" topic="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i>&nbsp;</menuitem>
     </menu>
 
     <!--<script src="pages-dynamic.js"></script>-->

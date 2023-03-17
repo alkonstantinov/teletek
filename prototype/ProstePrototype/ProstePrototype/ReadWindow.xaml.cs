@@ -31,6 +31,7 @@ namespace ProstePrototype
         public ReadWindow()
         {
             InitializeComponent();
+            KeyDown += ReadWindow_KeyDown;
             this.DataContext = this;
             uc0 = new UserControl1();
             uc1 = new UserControl2();
@@ -44,6 +45,7 @@ namespace ProstePrototype
         public ReadWindow(int startidx)
         {
             InitializeComponent();
+            KeyDown += ReadWindow_KeyDown;
             this.DataContext = this;
             uc0 = new UserControl1();
             uc1 = new UserControl2();
@@ -77,6 +79,14 @@ namespace ProstePrototype
                 img3.Source = imgsource;
                 ContentArea.Content = uc3;
                 Button3.Focus();
+            }
+        }
+        private void ReadWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Exit_Clicked(sender, e );
+                //Close();
             }
         }
         private void Exit_Clicked(object sender, RoutedEventArgs e)

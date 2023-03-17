@@ -25,7 +25,7 @@ namespace common
 
     public static class constants
     {
-        public static string NO_LOOP = "NO_LOOP";
+        public static string NO_LOOP = "NO_LOOP";//{ get { return "NO_LOOP"; } }
     }
     public static class settings
     {
@@ -456,6 +456,77 @@ namespace common
         private object _cs_config = new object();
 
         private string _config_path = null;
+        private string _base_read_file = null;
+        private string _base_write_file = null;
+        private string _ver_command = null;
+        private Dictionary<string, string> _read_ver_files = new Dictionary<string, string>();
+        private Dictionary<string, string> _write_ver_files = new Dictionary<string, string>();
+        private void SetBaseFiles()
+        {
+            if (_config_path == null)
+                return;
+            string path = Regex.Replace(Path.GetDirectoryName(_config_path), @"[\\/]$", "");
+            path = Regex.Replace(Path.GetDirectoryName(_config_path), @"template$", "", RegexOptions.IgnoreCase);
+            string read_path = path + @"Read\";
+            string write_path = path + @"Write\";
+            string _xml = File.ReadAllText(_config_path);
+            Match m = Regex.Match(_xml, @"READXML\s*?=\s*?""([\w\W]+?)""");
+            if (m.Success)
+                _base_read_file = read_path + m.Groups[1].Value;
+            m = Regex.Match(_xml, @"WRITEXML\s*?=\s*?""([\w\W]+?)""");
+            if (m.Success)
+                _base_write_file = write_path + m.Groups[1].Value;
+        }
+        private void SetVersions()
+        {
+            string _read = File.ReadAllText(_base_read_file);
+            _read = Regex.Replace(_read, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
+            foreach (Match m in Regex.Matches(_read, @"<COMMANDS>([\w\W]+?)</COMMANDS>"))
+            {
+                string cmd = m.Groups[1].Value;
+                Match mm = Regex.Match(cmd, @"<COMMAND\s+?BYTES\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>");
+                if (Regex.IsMatch(mm.Value, @"SAVEAS\s*?=\s*?""VERSION"""))
+                {
+                    _ver_command = mm.Groups[1].Value;
+                    break;
+                }
+            }
+            _read_ver_files.Clear();
+            string read_path = Regex.Replace(Path.GetDirectoryName(_base_read_file), @"[\\/]$", "") + @"\";
+            foreach (Match m in Regex.Matches(_read, @"<VERSION[\w\W]+?/>"))
+            {
+                string verline = m.Value;
+                string verkey = "";
+                string ver_file = "";
+                Match mm = Regex.Match(verline, @"VALUE\s*?=\s*?""([\w\W]+?)""");
+                if (mm.Success)
+                    verkey = mm.Groups[1].Value;
+                mm = Regex.Match(verline, @"FILE\s*?=\s*?""([\w\W]+?)""");
+                if (mm.Success)
+                    ver_file = mm.Groups[1].Value;
+                if (verkey != "" && ver_file != "")
+                    _read_ver_files.Add(verkey, read_path + ver_file);
+            }
+            //
+            string _write = File.ReadAllText(_base_write_file);
+            _write = Regex.Replace(_write, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
+            _write_ver_files.Clear();
+            string write_path = Regex.Replace(Path.GetDirectoryName(_base_write_file), @"[\\/]$", "") + @"\";
+            foreach (Match m in Regex.Matches(_write, @"<VERSION[\w\W]+?/>"))
+            {
+                string verline = m.Value;
+                string verkey = "";
+                string ver_file = "";
+                Match mm = Regex.Match(verline, @"VALUE\s*?=\s*?""([\w\W]+?)""");
+                if (mm.Success)
+                    verkey = mm.Groups[1].Value;
+                mm = Regex.Match(verline, @"FILE\s*?=\s*?""([\w\W]+?)""");
+                if (mm.Success)
+                    ver_file = mm.Groups[1].Value;
+                if (verkey != "" && ver_file != "")
+                    _write_ver_files.Add(verkey, write_path + ver_file);
+            }
+        }
         /// <summary>
         /// файл, съдържащ основна конфигурация на устройство
         /// </summary>
@@ -473,10 +544,80 @@ namespace common
             {
                 Monitor.Enter(_cs_config);
                 _config_path = value;
+                SetBaseFiles();
+                SetVersions();
                 Monitor.Exit(_cs_config);
             }
         }
-
+        public string VersionCommand
+        {
+            get
+            {
+                string s = null;
+                Monitor.Enter(_cs_config);
+                s = _ver_command;
+                Monitor.Exit(_cs_config);
+                return s;
+            }
+        }
+        public Dictionary<string, string> ReadVersionFiles
+        {
+            get
+            {
+                Dictionary<string, string> res = new Dictionary<string, string>();
+                Monitor.Enter(_cs_config);
+                foreach (string key in _read_ver_files.Keys)
+                    res.Add(key, _read_ver_files[key]);
+                Monitor.Exit(_cs_config);
+                return res;
+            }
+        }
+        public Dictionary<string, string> WriteVersionFiles
+        {
+            get
+            {
+                Dictionary<string, string> res = new Dictionary<string, string>();
+                Monitor.Enter(_cs_config);
+                foreach (string key in _write_ver_files.Keys)
+                    res.Add(key, _write_ver_files[key]);
+                Monitor.Exit(_cs_config);
+                return res;
+            }
+        }
+        private string _current_version = null;
+        public string CurrentVersion
+        {
+            get
+            {
+                Monitor.Enter(_cs_config);
+                string res = _current_version;
+                Monitor.Exit(_cs_config);
+                return res;
+            }
+        }
+        public void SetRWFiles(string _version)
+        {
+            string fread = null;
+            string fwrite = null;
+            Monitor.Enter(_cs_config);
+            if (_read_ver_files.ContainsKey(_version))
+                fread = _read_ver_files[_version];
+            if (_write_ver_files.ContainsKey(_version))
+                fwrite = _write_ver_files[_version];
+            _current_version = _version;
+            Monitor.Exit(_cs_config);
+            if (fread != null)
+                ReadConfigPath = fread;
+            if (fwrite != null)
+                WriteConfigPath = fwrite;
+        }
+        public void SetRWFilesToLastVersion()
+        {
+            Monitor.Enter(_cs_config);
+            string ver = _read_ver_files.Keys.Last();
+            Monitor.Exit(_cs_config);
+            SetRWFiles(ver);
+        }
         private object _config = null;
         /// <summary>
         /// Основна конфигурация(XmlDocument)
@@ -561,25 +702,6 @@ namespace common
                 }
                 else
                     xml = "";
-                //foreach (Match m in Regex.Matches(xml, @"(<\w+?)([\s>])([\w\W]+)(/>|</\w+>)"))
-                //{
-                //    string start = m.Groups[1].Value;
-                //    string body = m.Groups[2].Value + m.Groups[3].Value;
-                //    string end = m.Groups[4].Value;
-                //    if (end != "/>")//object
-                //    {
-                //        string n = start + body + end;
-                //        string key = Regex.Replace(start, @"[</>]", "").Trim();
-                //        body = Regex.Replace(body, @"^[^<]+", "");
-                //        if (res == null)
-                //            res = new Dictionary<string, object>();
-                //        res.Add(key, ReadNode(body));
-                //    }
-                //    else
-                //    {
-                //        string prop = start + body + end;
-                //    }
-                //}
             } while (xml != "");
             //
             return res;
@@ -829,24 +951,6 @@ namespace common
 
         private object _cs_write_structure = new object();
 
-        //public Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> WriteProperties
-        //{
-        //    get
-        //    {
-        //        Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> res = null;
-        //        Monitor.Enter(_cs_write_structure);
-        //        res = _readwriter._dwrite_prop;
-        //        Monitor.Exit(_cs_write_structure);
-        //        return res;
-        //    }
-        //    set
-        //    {
-        //        Monitor.Enter(_cs_write_structure);
-        //        _readwriter._dwrite_prop = value;
-        //        Monitor.Exit(_cs_write_structure);
-        //    }
-        //}
-
         private Dictionary<string, string> WriteStructuresJSONFiles()
         {
             Dictionary<string, string> res = new Dictionary<string, string>();
@@ -873,13 +977,6 @@ namespace common
         {
             string f = null;
             string s = null;
-            //f = files["wserias"];
-            //s = _serialyzer(_wserias);
-            //File.WriteAllText(f, s);
-            ////
-            //f = files["write_property_groups"];
-            //s = _serialyzer(_write_property_groups);
-            //File.WriteAllText(f, s);
             //
             f = files["write_properties"];
             s = _serialyzer(_readwriter._dwrite_prop);
@@ -890,18 +987,6 @@ namespace common
         {
             string f = null;
             string s = null;
-            //f = files["wserias"];
-            //s = File.ReadAllText(f);
-            //if (_wserias == null)
-            //    _wserias = new List<cSeria>();
-            //_wserias = (List<cSeria>)_deserialyzer(s, _wserias.GetType());
-            ////
-            //f = files["write_property_groups"];
-            //s = File.ReadAllText(f);
-            //if (_write_property_groups == null)
-            //    _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
-            //_write_property_groups = (Dictionary<string, Dictionary<string, List<cSeriaProperty>>>)_deserialyzer(s, _write_property_groups.GetType());
-            //
             //
             f = files["write_properties"];
             s = File.ReadAllText(f);
@@ -994,6 +1079,11 @@ namespace common
                 if (res == null)
                 {
                     string f = _write_path;
+                    if (f == null)
+                    {
+                        Monitor.Exit(_cs_config);
+                        return res;
+                    }
                     string xml = File.ReadAllText(f);
                     _xpaths = new Dictionary<string, Dictionary<string, cWriteField>>();
                     foreach (Match mop in Regex.Matches(xml, @"<WRITEOPERATION>[\w\W]+?</WRITEOPERATION>", RegexOptions.IgnoreCase))

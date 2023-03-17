@@ -11,6 +11,7 @@ using System.Text.Encodings;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
+using System.Threading;
 
 namespace ljson
 {
@@ -862,14 +863,82 @@ namespace ljson
         }
         #endregion
 
-        #region path values
+        #region cache
         private Dictionary<string, Dictionary<string, string>> _used_channels = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _io_channels = new Dictionary<string, string>();
+        //
+        private Dictionary<string, Dictionary<string, Dictionary<string, string>>> _panel_used_channels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+        private Dictionary<string, Dictionary<string, string>> _panel_io_channels = new Dictionary<string, Dictionary<string, string>>();
+        private object _cs_cache = new object();
+        private string _current_panel_id = null;
         public override void ClearCache()
         {
             _used_channels.Clear();
             _io_channels.Clear();
         }
+        private void CopyUsedChannels(Dictionary<string, Dictionary<string, string>> _from, Dictionary<string, Dictionary<string, string>> _to)
+        {
+            _to.Clear();
+            foreach (string _fromkey in _from.Keys)
+            {
+                _to.Add(_fromkey, new Dictionary<string, string>());
+                Dictionary<string, string> _fromdict = _from[_fromkey];
+                Dictionary<string, string> _todict = _to[_fromkey];
+                foreach (string _dictkey in _fromdict.Keys)
+                    _todict.Add(_dictkey, _fromdict[_dictkey]);
+            }
+        }
+        private void CopyIOChannels(Dictionary<string, string> _from, Dictionary<string, string> _to)
+        {
+            _to.Clear();
+            foreach (string key in _from.Keys)
+                _to.Add(key, _from[key]);
+        }
+        public override string CurrentPanelID
+        {
+            get
+            {
+                Monitor.Enter(_cs_cache);
+                string res = _current_panel_id;
+                Monitor.Exit(_cs_cache);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_cache);
+                if (value == _current_panel_id)
+                {
+                    Monitor.Exit(_cs_cache);
+                    return;
+                }
+                if (_current_panel_id != null)
+                {
+                    if (!_panel_used_channels.ContainsKey(_current_panel_id))
+                        _panel_used_channels.Add(_current_panel_id, new Dictionary<string, Dictionary<string, string>>());
+                    Dictionary<string, Dictionary<string, string>> _current_used_channels = _panel_used_channels[_current_panel_id];
+                    CopyUsedChannels(_used_channels, _current_used_channels);
+                    //
+                    if (!_panel_io_channels.ContainsKey(_current_panel_id))
+                        _panel_io_channels.Add(_current_panel_id, new Dictionary<string, string>());
+                    Dictionary<string, string> _current_io_channels = _panel_io_channels[_current_panel_id];
+                    CopyIOChannels(_io_channels, _current_io_channels);
+                }
+                _current_panel_id = value;
+                ClearCache();
+                //
+                if (_panel_used_channels.ContainsKey(_current_panel_id))
+                {
+                    Dictionary<string, Dictionary<string, string>> _current_uc = _panel_used_channels[_current_panel_id];
+                    CopyUsedChannels(_current_uc, _used_channels);
+                }
+                if (_panel_io_channels.ContainsKey(_current_panel_id))
+                    CopyIOChannels(_panel_io_channels[_current_panel_id], _io_channels);
+                //
+                Monitor.Exit(_cs_cache);
+            }
+        }
+        #endregion
+        #region path values
         public override void RemoveTABCache(string tab, string idx)
         {
             List<string> uc2del = new List<string>();
