@@ -140,14 +140,12 @@ namespace ProstePrototype
         public string loopsInputs(string path)
         {
             JObject o = cJson.LoopsInputs(path);
-            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
         public string loopsOutputs(string path)
         {
             JObject o = cJson.LoopsOutputs(path);
-            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
         public string setNodeFilters(string elementName)
@@ -156,8 +154,7 @@ namespace ProstePrototype
             cJson.SetNodeFilters(el);
             el.Remove("~rw");
             el["PROPERTIES"]["Groups"] = cJson.GroupsWithValues(el["PROPERTIES"]["Groups"].ToString());
-            File.WriteAllTextAsync("wb4.json", el.ToString());
-            return el.ToString(); ;
+            return el.ToString();
         }
         public string checkLoopConnection(string noLoop, int loopNumber)
         {
@@ -183,7 +180,13 @@ namespace ProstePrototype
         public string setActivePanel(string panel_id)
         {
             cJson.CurrentPanelID = panel_id;
-            return "setSuccess";//Ако искаме да връщаме нещо, а ако не - ще е void => връщаме, за да действаме синхронно
+            return "setSuccess"; //Ако искаме да връщаме нещо, а ако не - ще е void => връщаме, за да действаме синхронно
+        }
+        public string panelsInLeftBrowser()
+        {
+            JArray res = cJson.PanelsInLeftBrowser();
+            File.WriteAllTextAsync("wb3.json", res.ToString());
+            return res.ToString();
         }
     }
 }

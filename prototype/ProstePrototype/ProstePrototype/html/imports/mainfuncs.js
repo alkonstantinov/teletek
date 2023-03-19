@@ -246,7 +246,7 @@ function drawFields(body, json, inheritedColor = '') {
             }
 
             getAvailableElements(k.toUpperCase());
-        } else { // collapsible parts
+        } else if (!k.includes('~')) { // collapsible parts
             const { input_name, input_id } = {
                 input_name: divLevel.name,
                 input_id: divLevel.name.toLowerCase().trim().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replace(/[/]/g, '')

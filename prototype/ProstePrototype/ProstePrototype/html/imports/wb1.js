@@ -1,5 +1,5 @@
 //#region VARIABLES
-
+let reloading = false;
 const BUTTON_COLORS = {
     IRIS: 'fire',
     ECLIPSE: 'normal',
@@ -38,7 +38,27 @@ const newT = new T();
 
 function toggleLang(key) {
     setLang(key);
-    document.location.reload();
+    // reload
+    // document.location.reload();
+
+    // shoud clear the document.getElementById('panelsList').innerHTML = "";
+    document.getElementById('panelsList').innerHTML = "";
+
+    reloading = true;
+    // request the previous content of panels with boundAsync.panelsInLeftBrowser
+    boundAsync.panelsInLeftBrowser().then(res => {
+        if (res) {
+            let panelArray = JSON.parse(res);
+            panelArray.forEach(panel => {
+                receiveMessageWPF(JSON.stringify(panel));
+                
+            });
+        } else {
+            alert("System error: No response from 'panelsInLeftBrowser'");
+        }
+        // when all the panels are loaded we are back to normal
+        reloading = false;
+    }).catch(err => alert(err));
 }
 
 function setLang(key) {
@@ -54,7 +74,6 @@ function setLang(key) {
 
 //#region WPF Communication
 function sendMessageWPF(json, comm = {}) {
-    alert(JSON.stringify(json));
     try {
         //alert(`1`);
         CefSharp.PostMessage(JSON.stringify(json));
@@ -91,7 +110,7 @@ function receiveMessageWPF(jsonTxt) {
             break;
         default:
             // case menu-page
-            body = document.getElementById('panelsList');;
+            body = document.getElementById('panelsList');
             let id = json["~panel_id"].replaceAll("-", "_");
 
             // check if there is a div with similar id;
@@ -102,7 +121,13 @@ function receiveMessageWPF(jsonTxt) {
             else {
                 // else case: add new panel
                 // 1. find the new panel type
-                let jsonKeys = Object.keys(json).filter(x => x !== "~panel_id").filter(y => y !== "~path");
+                let jsonKeys = reloading ?
+                    Object.keys(json["pages"]) :
+                    Object.keys(json)
+                        .filter(x => x !== "~panel_id")
+                        .filter(y => y !== "~panel_name")
+                        .filter(y => y !== "~path");
+
                 let panelIcon;
                 switch (true) {
                     case jsonKeys[0].toLowerCase().startsWith("iris"):
@@ -116,7 +141,8 @@ function receiveMessageWPF(jsonTxt) {
                         break;
                     default: break;
                 }
-                let panelName = json["~panel_name"][0].toUpperCase() + json["~panel_name"].slice(1).toLowerCase();
+                let panelName = json["~panel_name"]; // [0].toUpperCase() + json["~panel_name"].slice(1).toLowerCase();
+                                
                 // 2. create the new panel-item
                 let panelItem = document.createElement('div');
                 panelItem.classList = "accordion-item m-4";
@@ -128,7 +154,7 @@ function receiveMessageWPF(jsonTxt) {
                         </button>
                     </h2>
                     <div id="collapse${id}" class="accordion-collapse collapse show" aria-labelledby="${id}" data-bs-parent="#panelsList"></div>`);
-
+                
                 panelCreationHandler(panelItem, json);
 
                 body.appendChild(panelItem);
@@ -200,12 +226,16 @@ function openAccordionItem(id) {
 }
 
 const panelCreationHandler = (panelItem, jsonAtLevel) => {
+    if (reloading) jsonAtLevel = jsonAtLevel["pages"];
     let div = document.createElement('div');
     div.classList = "accordion-body";
     if (!jsonAtLevel) return;
     var elementKeys = Object.keys(jsonAtLevel);
+
     const pathStr = "~path";
-    let cleanKeys = elementKeys.filter(x => x !== pathStr).filter(y => y !== '~panel_id');
+    let cleanKeys = reloading ?
+        elementKeys.filter(x => jsonAtLevel[x]["breadcrumbs"].length !== 1) : // for the reloading case
+        elementKeys.filter(x => x !== pathStr && x !== "~panel_id" && x !== "~panel_name"); // for the usual new panel adding
 
     let innerbutton = document.createElement('div');
     innerbutton.class = 'accordion-item';
@@ -216,13 +246,13 @@ const panelCreationHandler = (panelItem, jsonAtLevel) => {
             addAccordeonButton(title, field, div);
         }
     });
+
     panelItem.lastChild.appendChild(div);
 }
 
 const addAccordeonButton = (title, page, div) => {
     // clean all digits from used schema
     let key = page.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
-    
     // button color definition
     let color = "";
     if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }

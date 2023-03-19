@@ -230,7 +230,24 @@ namespace ljson
             //    Monitor.Exit(_cs_current_panel);
             //}
         }
-
+        public static Dictionary<string, JObject> SystemPanels
+        {
+            get
+            {
+                Dictionary<string, JObject> res = new Dictionary<string, JObject>();
+                Monitor.Enter(_cs_current_panel);
+                Monitor.Enter(_cs_panel_templates);
+                foreach (string _id in _system_panels.Keys)
+                {
+                    string filename = _system_panels[_id];
+                    if (_panel_templates.ContainsKey(filename))
+                        res.Add(_id, _panel_templates[filename]);
+                }
+                Monitor.Exit(_cs_panel_templates);
+                Monitor.Exit(_cs_current_panel);
+                return res;
+            }
+        }
         public static string CurrentPanelID
         {
             get
@@ -249,6 +266,7 @@ namespace ljson
                 Monitor.Exit(_cs_current_panel);
             }
         }
+        private static Dictionary<string, string> _panel_names = new Dictionary<string, string>();
         public static string CurrentPanelName
         {
             get
@@ -259,6 +277,12 @@ namespace ljson
                     Monitor.Exit(_cs_current_panel);
                     return null;
                 }
+                if (_panel_names.ContainsKey(CurrentPanelID))
+                {
+                    string res = _panel_names[CurrentPanelID];
+                    Monitor.Exit(_cs_current_panel);
+                    return res;
+                }
                 string filename = _system_panels[_current_panel_id];
                 Monitor.Exit(_cs_current_panel);
                 Match m = Regex.Match(Regex.Replace(filename, @"\\Template[\w\W]+$", "", RegexOptions.IgnoreCase), @"[\w\W]+?\\([^\\]+)$");
@@ -266,6 +290,45 @@ namespace ljson
                     return m.Groups[1].Value.ToLower();
                 return filename;
             }
+            set
+            {
+                Monitor.Enter(_cs_current_panel);
+                if (!_panel_names.ContainsKey(CurrentPanelID))
+                    _panel_names.Add(CurrentPanelID, value);
+                else
+                    _panel_names[CurrentPanelID] = value;
+                Monitor.Exit(_cs_current_panel);
+            }
+        }
+        public static string PanelName(string _id)
+        {
+            Monitor.Enter(_cs_current_panel);
+            if (!_system_panels.ContainsKey(_id))
+            {
+                Monitor.Exit(_cs_current_panel);
+                return null;
+            }
+            if (_panel_names.ContainsKey(_id))
+            {
+                string res = _panel_names[_id];
+                Monitor.Exit(_cs_current_panel);
+                return res;
+            }
+            string filename = _system_panels[_id];
+            Monitor.Exit(_cs_current_panel);
+            Match m = Regex.Match(Regex.Replace(filename, @"\\Template[\w\W]+$", "", RegexOptions.IgnoreCase), @"[\w\W]+?\\([^\\]+)$");
+            if (m.Success)
+                return m.Groups[1].Value.ToLower();
+            return filename;
+        }
+        public static void RenamePanel(string _id, string name)
+        {
+            Monitor.Enter(_cs_current_panel);
+            if (!_panel_names.ContainsKey(_id))
+                _panel_names.Add(_id, name);
+            else
+                _panel_names[_id] = name;
+            Monitor.Exit(_cs_current_panel);
         }
         public static string CurrentPanelType
         {
@@ -2345,6 +2408,35 @@ namespace ljson
             s = _last_html_right;
             Monitor.Exit(_cs_html_right);
             return (s != null) ? s : "";
+        }
+        private static JObject PagesByType(JObject pages, string _type)
+        {
+            JObject res = new JObject();
+            foreach (JProperty p in pages.Properties())
+                if (Regex.IsMatch(p.Name, "^" + _type, RegexOptions.IgnoreCase))
+                    res[p.Name] = p.Value;
+            //
+            return res;
+        }
+        public static JArray PanelsInLeftBrowser()
+        {
+            JArray res = new JArray();
+            Dictionary<string, JObject> _sys_panels = SystemPanels;
+            string spages = File.ReadAllText(@"html\pages.json");
+            JObject pages = JObject.Parse(spages);
+            foreach (string _id in _system_panels.Keys)
+            {
+                JObject _panel = _sys_panels[_id];
+                string _type = _panel["~panel_type"].ToString();
+                JObject _pages = PagesByType(pages, _type);
+                JObject res_panel = new JObject();
+                res_panel["~panel_name"] = PanelName(_id);
+                res_panel["~panel_id"] = _id;
+                res_panel["pages"] = _pages;
+                res.Add(res_panel);
+            }
+            //
+            return res;
         }
         #endregion
 

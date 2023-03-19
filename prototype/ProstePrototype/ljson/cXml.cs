@@ -178,6 +178,8 @@ namespace ljson
                                     if (tarr.Type == JTokenType.Object)
                                     {
                                         ((JObject)tarr)["~path"] = tarr.Path;
+                                        //if (((JObject)tarr)["@LNGID"] == null)
+                                        //    ((JObject)tarr)["@LNGID"] = Guid.NewGuid().ToString();
                                         Arrays2Objects((JObject)(tarr), _convert_checks);
                                     }
 
@@ -203,7 +205,11 @@ namespace ljson
                             {
                                 foreach (JToken tarr in t)
                                     if (tarr.Type == JTokenType.Object)
+                                    {
                                         ((JObject)tarr)["~path"] = tarr.Path;
+                                        //if (((JObject)tarr)["@LNGID"] == null)
+                                        //    ((JObject)tarr)["@LNGID"] = Guid.NewGuid().ToString();
+                                    }
                                 continue;
                             }
                         }
@@ -218,6 +224,8 @@ namespace ljson
                 {
                     JObject o = (JObject)t;
                     o["~path"] = t.Path;
+                    //if (o["@LNGID"] == null)
+                    //    o["@LNGID"] = Guid.NewGuid().ToString();
                     if (_convert_checks && o["@TYPE"] != null && o["@TYPE"].ToString() == "CHECK")
                     {
                         JObject fo = FieldsParent(o);
