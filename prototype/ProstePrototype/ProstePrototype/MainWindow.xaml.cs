@@ -266,6 +266,7 @@ namespace ProstePrototype
                         case "Rename":
                             string currentPanelId = json["~panel_id"].ToString();
                             string newPanelName = json["newName"].ToString();
+                            cJson.RenamePanel(currentPanelId, newPanelName);
                             break;
                         case "Help": break;
                         default:
