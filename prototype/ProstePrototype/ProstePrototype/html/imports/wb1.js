@@ -137,7 +137,7 @@ function receiveMessageWPF(jsonTxt) {
                         panelIcon = '<span class="material-icons-outlined normal">notifications</span >'
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("tte"):
-                        panelIcon = '<span class="material-icons-outlined grasse">nest_remote_comfort_sensor</span > '
+                        panelIcon = '<span class="material-icons-outlined grasse">wifi</span > '
                         break;
                     default: break;
                 }

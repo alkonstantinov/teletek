@@ -106,7 +106,7 @@ namespace ProstePrototype
         {
             var i = e;
         }
-        
+
         private void _child_LostFocus(object sender, RoutedEventArgs e)
         {
             rw.Hide();
@@ -163,7 +163,7 @@ namespace ProstePrototype
             if (darkMode)
             {
                 //new SolidColorBrush((Color)ColorConverter.ConvertFromString("DarkGray"))
-                
+
                 bgd = Color.FromRgb(51, 51, 34);
                 fgd = Color.FromRgb(238, 238, 221);
                 btn_bgd = (Color)ColorConverter.ConvertFromString("DarkGray");
@@ -193,7 +193,7 @@ namespace ProstePrototype
             //export_btn.Foreground = new SolidColorBrush(btn_fgd);
             settings_btn.Background = new SolidColorBrush(btn_bgd);
             settings_btn.Foreground = new SolidColorBrush(btn_fgd);
-            
+
             help_btn.Background = new SolidColorBrush(btn_bgd);
             help_btn.Foreground = new SolidColorBrush(btn_fgd);
             //minimize_btn.Background = new SolidColorBrush(bgd);
@@ -224,8 +224,8 @@ namespace ProstePrototype
 
             rw.ReadWindowMain.Background = new SolidColorBrush(bgd);
             rw.txtBlk.Foreground = new SolidColorBrush(fgd);
-            rw.ContentArea.Foreground= new SolidColorBrush(fgd);
-            rw.ContentArea.Background= new SolidColorBrush(bgd);
+            rw.ContentArea.Foreground = new SolidColorBrush(fgd);
+            rw.ContentArea.Background = new SolidColorBrush(bgd);
         }
         #endregion
 
@@ -429,7 +429,7 @@ namespace ProstePrototype
                     (string)pages[_clean_key].Value<JObject>()["right"].Value<string>().Split("/")[0] // get the directory source to define the color type
                     );
             });
-            
+
         }
 
         private void LoadBrowsers(LoadPageData data, string highlight)
@@ -448,7 +448,8 @@ namespace ProstePrototype
             if (loadWb1)
             {
                 wb1.Load(url);
-            } else
+            }
+            else
             {
                 OnStateChanged(wb1, new LoadingStateChangedEventArgs(new object() as IBrowser, false, false, false));
             }
@@ -503,7 +504,7 @@ namespace ProstePrototype
             rw.DarkMode = DarkMode;
             rw.ShowDialog();
             var c = rw.DialogResult;
-            ScanPopUpWindow popUpWindow= new ScanPopUpWindow();
+            ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
             if ((bool)c)
             {
                 int tabIdx = rw.selectedIndex;
@@ -523,14 +524,15 @@ namespace ProstePrototype
                 funcThread.Join();
 
                 popUpWindow.Close();
-            }            
+            }
         }
         private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow)
         {
             cJson.ReadDevice(conn_params);
             wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
             //set a flag
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 popUpWindow._functionFinished = true;
             });
         }
@@ -728,19 +730,63 @@ namespace ProstePrototype
         #region breadcrumb
         private void addBreadCrumb(string title, string page, string color)
         {
-            foreach(var item in lvBreadCrumbs.Items)
+            foreach (var item in lvBreadCrumbs.Items)
             {
                 ((Button)item).Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
             }
+
             var btn = new Button()
             {
                 ClickMode = ClickMode.Press,
                 Tag = page,
-                Content = title,
                 Background = Brushes.Transparent,
-                Foreground = DarkMode ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray")) : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color)),
-                //Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
+                Foreground = DarkMode
+                    ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
+                    : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color)),
                 BorderBrush = Brushes.Transparent
+
+            };
+
+            string text1 = "> ", text2 = "", text3 = title;
+            switch (page)
+            {
+                case "iris":
+                    text2 = "\uef55 ";
+                    break;
+                case "tte":
+                    text2 = "\ue63e ";
+                    break;
+                case "eclipse":
+                    text2 = "\ue7f4 ";
+                    break;
+                case "index":
+                    text1 = "";
+                    break;
+                default:
+                    break;
+            }
+            btn.Content = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                Children = {
+                    new TextBlock()
+                    {
+                        Text = text1,
+                        FontFamily = (FontFamily)Application.Current.Resources["poppins_demibold"]
+                    },
+                    new TextBlock()
+                    {
+                        Text = text2,
+                        FontFamily = (FontFamily)Application.Current.Resources["material_icons"],
+                        VerticalAlignment = VerticalAlignment.Center,
+                        FontSize = 10
+                    },
+                    new TextBlock()
+                    {
+                        Text = text3,
+                        FontFamily = (FontFamily)Application.Current.Resources["poppins_demibold"]
+                    }
+                }
             };
             btn.Click += breadCrumbItemClick;
 
@@ -755,16 +801,13 @@ namespace ProstePrototype
         private void initBreadCrumbs(JArray breadCrumbs, string panel_type)
         {
             lvBreadCrumbs.Items.Clear();
+
             string color = "Blue";
             if (panel_type.ToLower().StartsWith("iris")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
-            foreach (var item in breadCrumbs.Select(x => x.Value<string>()))
-            {                
+            foreach (string item in breadCrumbs.Select(x => x.Value<string>()))
+            {
                 string title = pages[item].Value<JObject>()["title"].Value<string>();
-                if (title != "Start")
-                {
-                    title = $">  {title}";
-                }
                 addBreadCrumb(title, item, color);
             }
         }
@@ -798,11 +841,11 @@ namespace ProstePrototype
 
         private void wb1Size_Click(object sender, RoutedEventArgs e)
         {
-            define_size_txt.Text = 
+            define_size_txt.Text =
                 (define_size_txt.Text) == Encoding.UTF8.GetString(Convert.FromBase64String("74SA")) ?
                 Encoding.UTF8.GetString(Convert.FromBase64String("74SB")) :
                 Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
-            
+
             this.Dispatcher.Invoke(() =>
             {
                 if (mainGrid.ColumnDefinitions[0].Width == new GridLength(70))
@@ -812,7 +855,8 @@ namespace ProstePrototype
                     settingsBtnRow.Height = new GridLength(0);
                     defineSizeBtnRow.Height = new GridLength(0);
                     footerBtnRow.Height = new GridLength(50);
-                } else
+                }
+                else
                 {
                     mainGrid.ColumnDefinitions[0].Width = new GridLength(70);
                     wb1Column.Width = new GridLength(70);
@@ -829,7 +873,8 @@ namespace ProstePrototype
             {
                 GridView_or_ListView_text.Text = " List View";
                 GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/listview2x.png", UriKind.RelativeOrAbsolute));
-            } else
+            }
+            else
             {
                 GridView_or_ListView_text.Text = " Grid View";
                 GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/gridview2x.png", UriKind.RelativeOrAbsolute));
