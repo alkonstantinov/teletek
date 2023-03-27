@@ -185,7 +185,7 @@ const addButton = (title, schemaKey, div, localJSON = {}) => {
     // title definition
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
 
-    let el = `<a href="javascript: sendMessageWPF({'Command': 'NewSystem','Params': '${schemaKey}'})" onclick="javascript: addActive()" class="col-sm-3 minw" id="${schemaKey}">
+    let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': '${schemaKey}'})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${schemaKey}">
                 <div class="btnStyle ${color}">
                     <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
                         <br /><span class="someS">
@@ -201,6 +201,9 @@ const addButton = (title, schemaKey, div, localJSON = {}) => {
     div.insertAdjacentHTML('beforeend', el);
 };
 
+function showBackDrop() {
+    document.body.classList.add('backdrop');
+}
 
 async function selectNewPanel(id) {
     if (document.getElementById(id).firstElementChild.classList.contains('collapsed')) return;

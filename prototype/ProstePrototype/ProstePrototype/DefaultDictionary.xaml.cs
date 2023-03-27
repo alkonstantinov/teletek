@@ -11,7 +11,12 @@ namespace ProstePrototype
     {
         public DefaultDictionary()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
+
+        //public void InitializeComponent()
+        //{
+        //    // Add any initialization code here
+        //}
     }
 }

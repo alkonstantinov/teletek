@@ -115,6 +115,16 @@ h5 {
     font-size: 0.75rem;
 }
 
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
 span.fire,
 .fire h5 {
     color: var(--fire);

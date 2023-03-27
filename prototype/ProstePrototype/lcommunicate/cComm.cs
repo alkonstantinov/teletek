@@ -888,7 +888,11 @@ namespace lcommunicate
             ////byte[] res = t.SendCommand(conn, t._ver_cmd);
             //byte[] res = t.SendCommand(conn, t._panel_in_nework_0_cmd);
             //t.Close(conn);
-            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, { deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}]");
+            return JArray.Parse("[" +
+                "{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, " +
+                "{ deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, " +
+                //"{ deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}" +
+                "]");
         }
     }
 }

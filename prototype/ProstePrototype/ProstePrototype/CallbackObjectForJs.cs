@@ -39,14 +39,14 @@ namespace ProstePrototype
                 ok.Remove("~rw");
                 o[key] = ok;
             }
-            File.WriteAllTextAsync("wb3.json", o.ToString());
+            //File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
         public string getElement(string elementName)
         {
             JObject el = cJson.GetNode(elementName);
             el.Remove("~rw");
-            File.WriteAllTextAsync("wb4.json", el.ToString());
+            //File.WriteAllTextAsync("wb4.json", el.ToString());
             return el.ToString();
         }
         public string getJsonForElement(string elementType, int elementNumber)
@@ -58,7 +58,7 @@ namespace ProstePrototype
             //
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
-            File.WriteAllTextAsync("wb3.json", res);
+            //File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
@@ -71,7 +71,7 @@ namespace ProstePrototype
         public string getJsonNodeForElement(string elementType, int elementNumber, string key)
         {
             string res = cComm.GetListElementNode(cJson.CurrentPanelID, elementType, elementNumber.ToString(), key);
-            File.WriteAllTextAsync("wb3.json", res);
+            //File.WriteAllTextAsync("wb3.json", res);
             return res;
         }
 
@@ -113,7 +113,7 @@ namespace ProstePrototype
                 onew["~address"] = addr;
                 res.Add(onew);
             }
-            File.WriteAllTextAsync("wb3.json", res.ToString());
+            //File.WriteAllTextAsync("wb3.json", res.ToString());
             return res.ToString();
         }
 
@@ -130,7 +130,7 @@ namespace ProstePrototype
             if (jnode != null)
             {
                 JToken t = jnode[key];
-                File.WriteAllTextAsync("wb3.json", t.ToString());
+                //File.WriteAllTextAsync("wb3.json", t.ToString());
                 if (t != null)
                     return t.ToString();
             }

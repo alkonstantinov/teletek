@@ -53,7 +53,16 @@ namespace ProstePrototype
 
         public MainWindow()
         {
-            applicationDirectory = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            if (applicationDirectory == null)
+            {
+                // handle null case
+                throw new ArgumentNullException("You cannot launch the app from the root folder.");
+            }
+            else
+            {
+                string root = System.IO.Directory.GetDirectoryRoot(applicationDirectory);
+            }
 
             InitializeComponent();
 
