@@ -300,6 +300,24 @@ namespace ljson
                 Monitor.Exit(_cs_current_panel);
             }
         }
+        public static string CurrentPanelFullType
+        {
+            get
+            {
+                Monitor.Enter(_cs_current_panel);
+                if (_current_panel_id == null || !_system_panels.ContainsKey(_current_panel_id))
+                {
+                    Monitor.Exit(_cs_current_panel);
+                    return null;
+                }
+                string filename = _system_panels[_current_panel_id];
+                Monitor.Exit(_cs_current_panel);
+                Match m = Regex.Match(Regex.Replace(filename, @"\\Template[\w\W]+$", "", RegexOptions.IgnoreCase), @"[\w\W]+?\\([^\\]+)$");
+                if (m.Success)
+                    return m.Groups[1].Value.ToLower();
+                return filename;
+            }
+        }
         public static string PanelName(string _id)
         {
             Monitor.Enter(_cs_current_panel);
@@ -673,7 +691,12 @@ namespace ljson
                 if (!merge.ContainsKey(nonekey))
                     nonekey = Regex.Replace(nonekey, @"/[^/]+$", "");
                 if (!merge.ContainsKey(nonekey))
-                    nonekey = "IRIS_LOOPDEVICES/" + nonekey;
+                {
+                    if (merge.ContainsKey("IRIS_LOOPDEVICES/" + nonekey))
+                        nonekey = "IRIS_LOOPDEVICES/" + nonekey;
+                    else if (merge.ContainsKey("IRIS8_LOOPDEVICES/" + nonekey))
+                        nonekey = "IRIS8_LOOPDEVICES/" + nonekey;
+                }
                 if (merge.ContainsKey(nonekey))
                 {
                     Dictionary<string, cRWProperty> ReadProperties = new Dictionary<string, cRWProperty>();
@@ -690,10 +713,10 @@ namespace ljson
                     if (!loopadded)
                     {
                         string jnode = "{}";
-                        JToken t = panel["ELEMENTS"]["NO_LOOP" + num.ToString()];
+                        JToken t = panel["ELEMENTS"][constants.NO_LOOP + num.ToString()];
                         if (t != null)
                             jnode = t.ToString();
-                        cComm.AddPseudoElement(panel_id, "NO_LOOP", jnode);
+                        cComm.AddPseudoElement(panel_id, constants.NO_LOOP, jnode);
                         JObject o = JObject.Parse(cComm.GetPseudoElement(panel_id, constants.NO_LOOP));
                         o["~loop_type"] = loop_type;
                         cComm.SetPseudoElement(panel_id, constants.NO_LOOP, o.ToString());
@@ -783,7 +806,6 @@ namespace ljson
             Dictionary<string, Dictionary<string, byte[]>> droot = res[apath[0]];
             droot.Add(apath[1], new Dictionary<string, byte[]>());
             Dictionary<string, byte[]> didx = droot[apath[1]];
-            //
             int idxinc = 0;
             if (min == 1)
             {
@@ -882,10 +904,18 @@ namespace ljson
                 cRWPath rwpath = null;
                 if (merge.ContainsKey(readkey))
                     rwpath = merge[readkey];
+                else if (merge.ContainsKey(_internal_relations_operator.FindElementKey(readkey, CurrentPanel)))
+                    rwpath = merge[_internal_relations_operator.FindElementKey(readkey, CurrentPanel)];
                 else if (merge.ContainsKey(readsubkey))
                     rwpath = merge[readsubkey];
                 else if (merge.ContainsKey(readkey + "/" + readsubkey))
                     rwpath = merge[readkey + "/" + readsubkey];
+                if (rwpath == null && CurrentPanelType == "iris")
+                {
+                    string rk = Regex.Replace(readkey, "^IRIS_", "IRIS8_");
+                    if (merge.ContainsKey(rk))
+                        rwpath = merge[rk];
+                }
                 Dictionary<string, cRWProperty> ReadProperties = rwpath.ReadProperties;
                 JObject panel = CurrentPanel;
                 string panel_id = CurrentPanelID;
@@ -906,6 +936,27 @@ namespace ljson
                         }
                     }
                 }
+                //
+                JObject fields2inc = settings.inc_fields_on_read;
+                JObject incpaths = null;
+                if (fields2inc != null)
+                {
+                    incpaths = (JObject)fields2inc[CurrentPanelFullType.ToUpper()];
+                    if (incpaths == null)
+                        incpaths = (JObject)fields2inc[CurrentPanelFullType.ToLower()];
+                }
+                JObject incfields = null;
+                if (incpaths != null)
+                {
+                    incfields = (JObject)incpaths[readsubkey];
+                    if (incfields == null)
+                        incfields = (JObject)incpaths[readkey];
+                }
+                Dictionary<string, int> dincfields = new Dictionary<string, int>();
+                if (incfields != null)
+                    foreach (JProperty pfield in incfields.Properties())
+                        dincfields.Add(pfield.Name, Convert.ToInt32(pfield.Value.ToString()));
+                //
                 foreach (string sidx in didx.Keys)
                 {
                     byte[] devbytes = didx[sidx];
@@ -937,6 +988,11 @@ namespace ljson
                         //
                         foreach (string propname in ReadProperties.Keys)
                         {
+                            //
+                            int? incval = null;
+                            if (dincfields.ContainsKey(propname))
+                                incval = dincfields[propname];
+                            //
                             cRWProperty prop = ReadProperties[propname];
                             byte[] pbytes = new byte[prop.bytescnt];
                             if (prop.offset + prop.bytescnt > devbytes.Length)
@@ -947,6 +1003,8 @@ namespace ljson
                             if (path_val == null)
                             {
                                 JObject _element = (JObject)CurrentPanel["ELEMENTS"][readsubkey];
+                                if (_element == null)
+                                    _element = (JObject)CurrentPanel["ELEMENTS"][_internal_relations_operator.FindElementKey(readsubkey, CurrentPanel)];
                                 JObject jgrp = (JObject)_element["PROPERTIES"]["Groups"];
                                 if (jgrp["~invisible"] == null)
                                     jgrp["~invisible"] = new JObject();
@@ -966,6 +1024,8 @@ namespace ljson
                             else
                             {
                                 string sval = path_val.Item2;
+                                if (incval != null)
+                                    sval = (Convert.ToUInt32(sval) + incval).ToString();
                                 cComm.SetPathValue(panel_id, path_val.Item1, sval, FilterValueChanged);
                                 if (!foundkeys.ContainsKey(readsubkey + "/" + propname))
                                     foundkeys.Add(readsubkey + "/" + propname, "");
@@ -1906,7 +1966,7 @@ namespace ljson
                     else
                     {
                         string[] names = name.Split('/');
-                        _res = new JObject((JObject)_elements[Regex.Replace(names[0], @"\d+$", "")]);
+                        _res = new JObject((JObject)_elements[Regex.Replace(_internal_relations_operator.FindElementKey(names[0], CurrentPanel), @"\d+$", "")]);
                         cRWPath rw = RWLoopPath(WriteReadMerge, name);
                         if (rw != null)
                         {

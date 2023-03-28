@@ -66,6 +66,15 @@ namespace common
                 return lst.ToArray();
             }
         }
+        public static JObject inc_fields_on_read
+        {
+            get
+            {
+                JObject set = Settings;
+                JObject res = (JObject)set["inc_fields_on_read"];
+                return res;
+            }
+        }
         public static string IRISLoginCMD
         {
             get

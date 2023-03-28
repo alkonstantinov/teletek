@@ -108,7 +108,7 @@ namespace ljson
                     if (go["fields"] != null)
                     {
                         JObject po = (JObject)go["fields"];
-                        if (po[node_name] != null)
+                        if (po[node_name] != null && po[node_name].Type == JTokenType.Object)
                         {
                             JObject res = (JObject)po[node_name];
                             return res;
@@ -279,11 +279,13 @@ namespace ljson
         public virtual void AfterDeviceRemoved(string _panel_id, JObject panel, string loop_type, string dev_addr) { }
         public virtual void AfterInputRemoved(string _panel_id) { }
         public virtual void ClearCache() { }
+        public virtual JObject Data2Save() { return null; }
         public virtual void RemoveTABCache(string tab, string idx) { }
         public virtual void OnElementAddressChanged(string oldAddress, string elementType, string newAddress) { }
         public virtual void OnDeviceAddressChanged(string oldAddress, string loopType, string newAddress) { }
         public virtual void RemoveUnusedTabs(JObject json) { }
         public virtual string CurrentPanelID { get; set; }
+        public virtual string FindElementKey(string _searching, JObject _panel) { return _searching; }
         #endregion
     }
 }

@@ -744,7 +744,7 @@ const transformGroupElement = (elementJson) => {
                 let value = `${tabs[o]['@VALUE']}_${o}`;  // (tabs[o].hasOwnProperty("~enabled")) ? tabs[o]['@VALUE'] : `${tabs[o]['@VALUE']}_${o}`;
                 let selected;
                 if (attributes.value) {
-                    selected = attributes.value === value ? "selected" : "";
+                    selected = (attributes.value === value || attributes.value === value.split('_')[0]) ? "selected" : "";
                 } else {
                     selected = !!(+tabs[o]['@DEFAULT']) ? "selected" : "";
                 }
@@ -1662,7 +1662,7 @@ async function showElement(id, elementType) {
 
 // loadDiv function required for TABs
 function loadDiv(it, id, value, type) {
-    // alert(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
+     alert(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
     if (!value) return;
     var element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)

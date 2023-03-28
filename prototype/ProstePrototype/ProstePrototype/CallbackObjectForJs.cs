@@ -58,7 +58,7 @@ namespace ProstePrototype
             //
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
-            //File.WriteAllTextAsync("wb3.json", res);
+            File.WriteAllText("wb3.json", res);
             return res;
         }
 

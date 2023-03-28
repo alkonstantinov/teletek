@@ -55,22 +55,6 @@ namespace lcommunicate
         private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> _cache_pseudo_element_panels;
         private static object _cs_pseudo_element_cache = new object();
 
-        public static void ClearCache()
-        {
-            Monitor.Enter(_cs_cache);
-            Monitor.Enter(_cs_pseudo_element_cache);
-            //
-            if (_cache_panels != null)
-                _cache_panels.Clear();
-            if (_cache_list_panels != null)
-                _cache_list_panels.Clear();
-            if (_cache_pseudo_element_panels != null)
-                _cache_pseudo_element_panels.Clear();
-            //
-            Monitor.Exit(_cs_pseudo_element_cache);
-            Monitor.Exit(_cs_cache);
-        }
-
         #region path values
         public static void SetPathValue(string panel_id, string path, string value, dFilterValueChanged filter)
         {
@@ -881,6 +865,40 @@ namespace lcommunicate
         }
         #endregion
 
+        #region save/load
+        public static void ClearCache()
+        {
+            Monitor.Enter(_cs_cache);
+            Monitor.Enter(_cs_pseudo_element_cache);
+            //
+            if (_cache_panels != null)
+                _cache_panels.Clear();
+            if (_cache_list_panels != null)
+                _cache_list_panels.Clear();
+            if (_cache_pseudo_element_panels != null)
+                _cache_pseudo_element_panels.Clear();
+            //
+            Monitor.Exit(_cs_pseudo_element_cache);
+            Monitor.Exit(_cs_cache);
+        }
+        public static JObject Data2Save()
+        {
+            Monitor.Enter(_cs_cache);
+            Monitor.Enter(_cs_pseudo_element_cache);
+            JObject _j_cache_panels = JObject.FromObject(_cache_panels);
+            JObject _j_cache_list_panels = JObject.FromObject(_cache_list_panels);
+            JObject _j_cache_pseudo_element_panels = JObject.FromObject(_cache_pseudo_element_panels);
+            Monitor.Exit(_cs_pseudo_element_cache);
+            Monitor.Exit(_cs_cache);
+            //
+            JObject res = new JObject();
+            res["_cache_panels"] = _j_cache_panels;
+            res["_cache_list_panels"] = _j_cache_list_panels;
+            res["_cache_pseudo_element_panels"] = _j_cache_pseudo_element_panels;
+            //
+            return res;
+        }
+        #endregion
         public static JArray Scan()
         {
             cTransport t = new cIP();
@@ -888,11 +906,7 @@ namespace lcommunicate
             ////byte[] res = t.SendCommand(conn, t._ver_cmd);
             //byte[] res = t.SendCommand(conn, t._panel_in_nework_0_cmd);
             //t.Close(conn);
-            return JArray.Parse("[" +
-                "{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, " +
-                "{ deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, " +
-                //"{ deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}" +
-                "]");
+            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, { deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}]");
         }
     }
 }

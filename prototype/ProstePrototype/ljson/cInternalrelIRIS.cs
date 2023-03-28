@@ -55,6 +55,16 @@ namespace ljson
                     return null;
                 Dictionary<string, string> dloops = cComm.GetPseudoElementsList(_panel_id, constants.NO_LOOP);
                 if (dloops == null || !dloops.ContainsKey(loop))
+                {
+                    JToken jmin = oloop["@MIN"];
+                    if (jmin != null)
+                    {
+                        int min = Convert.ToInt32(oloop["@MIN"].ToString());
+                        if (Convert.ToInt32(loop) < min)
+                            loop = min.ToString();
+                    }
+                }
+                if (dloops == null || !dloops.ContainsKey(loop))
                     return null;
                 string loop_template = dloops[loop];
                 if (loop_template == null)
@@ -764,15 +774,18 @@ namespace ljson
             //ELEMENTS.IRIS_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~1
             //ELEMENTS.INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~17
             Dictionary<string, string> inputs = cComm.GetElements(_panel_id, "IRIS_INPUT");
+            if (inputs == null)
+                inputs = cComm.GetElements(_panel_id, "IRIS8_INPUT");
             Dictionary<string, string> groups_used = new Dictionary<string, string>();
-            foreach (string inkey in inputs.Keys)
-            {
-                JObject io = JObject.Parse(inputs[inkey]);
-                string gpath = io["Settings"]["fields"]["Group"]["~path"].ToString();
-                string sgrp = path_values[gpath];
-                if (sgrp != null && !groups_used.ContainsKey((Convert.ToInt32(sgrp) - 1).ToString()))
-                    groups_used.Add((Convert.ToInt32(sgrp) - 1).ToString(), inkey);
-            }
+            if (inputs != null)
+                foreach (string inkey in inputs.Keys)
+                {
+                    JObject io = JObject.Parse(inputs[inkey]);
+                    string gpath = io["Settings"]["fields"]["Group"]["~path"].ToString();
+                    string sgrp = path_values[gpath];
+                    if (sgrp != null && !groups_used.ContainsKey((Convert.ToInt32(sgrp) - 1).ToString()))
+                        groups_used.Add((Convert.ToInt32(sgrp) - 1).ToString(), inkey);
+                }
             //if (Regex.IsMatch(inkey, @"^ELEMENTS\.IRIS_INPUT\.PROPERTIES\.Groups\.Settings\.fields\.Group"))
             //    groups_used.Add((Convert.ToInt32(inputs[inkey]) - 1).ToString(), inkey);
             foreach (string pathkey in path_values.Keys)
@@ -782,10 +795,13 @@ namespace ljson
                     cComm.RemovePathValue(_panel_id, pathkey);
             }
             Dictionary<string, string> ingroups = cComm.GetElements(_panel_id, "INPUT_GROUP");
+            if (ingroups == null)
+                ingroups = cComm.GetElements(_panel_id, "IRIS8_INPUT_GROUP");
             List<string> grp2del = new List<string>();
-            foreach (string g in ingroups.Keys)
-                if (!groups_used.ContainsKey(g))
-                    grp2del.Add(g);
+            if (ingroups != null)
+                foreach (string g in ingroups.Keys)
+                    if (!groups_used.ContainsKey(g))
+                        grp2del.Add(g);
             foreach (string del in grp2del)
                 cComm.RemoveListElement(_panel_id, "INPUT_GROUP", del);
         }
@@ -803,6 +819,7 @@ namespace ljson
             FilterINGroups(_panel_id, path_values);
         }
         #endregion
+
         #region events
         public override void OnElementAddressChanged(string oldAddress, string elementType, string newAddress)
         {
@@ -876,6 +893,15 @@ namespace ljson
             _used_channels.Clear();
             _io_channels.Clear();
         }
+        public override JObject Data2Save()
+        {
+            JObject _j_io_channels = JObject.FromObject(_io_channels);
+            JObject _j_used_channels = JObject.FromObject(_used_channels);
+            JObject res = new JObject();
+            res["_io_channels"] = _j_io_channels;
+            res["_used_channels"] = _j_used_channels;
+            return res;
+        }
         private void CopyUsedChannels(Dictionary<string, Dictionary<string, string>> _from, Dictionary<string, Dictionary<string, string>> _to)
         {
             _to.Clear();
@@ -938,6 +964,7 @@ namespace ljson
             }
         }
         #endregion
+
         #region path values
         public override void RemoveTABCache(string tab, string idx)
         {
@@ -1226,7 +1253,7 @@ namespace ljson
             string path = prop["~path"].ToString();
             string sval = null;
             if (val.Length == 1)
-                sval = val[0].ToString();
+                sval = (val[0]).ToString();
             else
             {
                 if (prop["@TYPE"].ToString().ToLower() == "week")
@@ -1367,6 +1394,27 @@ namespace ljson
                 return false;
             }
             return base.AddSerialDevice(key, node, val, address, read_props);
+        }
+        #endregion
+
+        #region elements
+        public override string FindElementKey(string _searching, JObject _panel)
+        {
+            JObject _elements = (JObject)_panel["ELEMENTS"];
+            string res = _searching;
+            if (_elements[res] != null)
+                return res;
+            string el = Regex.Replace(_searching, @"^IRIS_", "IRIS8_");
+            if (_elements[el] != null)
+                return el;
+            el = Regex.Replace(el, "S$", "");
+            if (_elements[el] != null)
+                return el;
+            el = Regex.Replace(el, "S_", "_");
+            if (_elements[el] != null)
+                return el;
+            //
+            return res;
         }
         #endregion
     }
