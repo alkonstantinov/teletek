@@ -523,6 +523,17 @@ namespace ljson
                         rw = _merge[key];
                         break;
                     }
+                    path1 = Regex.Replace(path1, @"_", "");
+                    if (Regex.IsMatch(key, path1 + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path1 + "$", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(path, @"panel[\w\W]+?network", RegexOptions.IgnoreCase) && Regex.IsMatch(key, @"panel[\w\W]+?network", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
                     path = path + "";
                 }
             }
@@ -536,6 +547,7 @@ namespace ljson
         private static bool readed = false;
         private static bool reading = false;
         private static Dictionary<string, byte[]> _log_bytesreaded = new Dictionary<string, byte[]>();
+        private static Dictionary<string, string> _log_byteswrite = new Dictionary<string, string>();
         private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
@@ -758,7 +770,7 @@ namespace ljson
                             byte[] pbytes = new byte[prop.bytescnt];
                             for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                                 pbytes[i - prop.offset] = devbytes[i];
-                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes, prop.xmltag);
+                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(CurrentPanelID, groups, propname, pbytes, prop.xmltag);
                             if (path_val == null)
                             {
                                 if (!missedkeys.ContainsKey(dev_save_path + "/" + propname))
@@ -901,6 +913,8 @@ namespace ljson
                 string readkey = loopkey;
                 string readsubkey = dreaded[readkey].Keys.First();
                 string key2adddev = readsubkey;
+                string paneltypepref = Regex.Replace(CurrentPanelFullType, @"\d+$", "") + "_";
+                key2adddev = Regex.Replace(key2adddev, "^" + paneltypepref.ToUpper(), CurrentPanelFullType.ToUpper() + "_");
                 cRWPath rwpath = null;
                 if (merge.ContainsKey(readkey))
                     rwpath = merge[readkey];
@@ -937,6 +951,8 @@ namespace ljson
                     }
                 }
                 //
+                byte? condidx = null;
+                byte? condval = null;
                 JObject fields2inc = settings.inc_fields_on_read;
                 JObject incpaths = null;
                 if (fields2inc != null)
@@ -955,7 +971,15 @@ namespace ljson
                 Dictionary<string, int> dincfields = new Dictionary<string, int>();
                 if (incfields != null)
                     foreach (JProperty pfield in incfields.Properties())
-                        dincfields.Add(pfield.Name, Convert.ToInt32(pfield.Value.ToString()));
+                        if (!Regex.IsMatch(pfield.Name, @"^~if", RegexOptions.IgnoreCase))
+                            dincfields.Add(pfield.Name, Convert.ToInt32(pfield.Value.ToString()));
+                        else
+                        {
+                            string scond = pfield.Value.ToString();
+                            string[] acond = scond.Split('=');
+                            condidx = Convert.ToByte(Regex.Replace(acond[0].Trim(), @"^\D+", ""));
+                            condval = Convert.ToByte(acond[1].Trim());
+                        }
                 //
                 foreach (string sidx in didx.Keys)
                 {
@@ -999,7 +1023,7 @@ namespace ljson
                                 continue;
                             for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                                 pbytes[i - prop.offset] = devbytes[i];
-                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(newpaths, propname, pbytes, prop.xmltag);
+                            Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(CurrentPanelID, newpaths, propname, pbytes, prop.xmltag);
                             if (path_val == null)
                             {
                                 JObject _element = (JObject)CurrentPanel["ELEMENTS"][readsubkey];
@@ -1025,7 +1049,13 @@ namespace ljson
                             {
                                 string sval = path_val.Item2;
                                 if (incval != null)
-                                    sval = (Convert.ToUInt32(sval) + incval).ToString();
+                                {
+                                    bool incflag = true;
+                                    if (condidx != null && condval != null)
+                                        incflag = devbytes[(int)condidx] == condval;
+                                    if (incflag)
+                                        sval = (Convert.ToUInt32(sval) + incval).ToString();
+                                }
                                 cComm.SetPathValue(panel_id, path_val.Item1, sval, FilterValueChanged);
                                 if (!foundkeys.ContainsKey(readsubkey + "/" + propname))
                                     foundkeys.Add(readsubkey + "/" + propname, "");
@@ -1039,9 +1069,10 @@ namespace ljson
         {
             cTransport conn = cComm.ConnectBase(conn_params);
             byte[] bres = cComm.SendCommand(conn, vercmd);
-            if (settings.logreads)
-                _log_bytesreaded.Add(vercmd, bres);
             cComm.CloseConnection(conn);
+            if (settings.logreads && !_log_bytesreaded.ContainsKey(vercmd))
+                _log_bytesreaded.Add(vercmd, bres);
+            //cComm.CloseConnection(conn);
             string res = bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2");
             return res;
         }
@@ -1268,7 +1299,7 @@ namespace ljson
                         byte[] pbytes = new byte[prop.bytescnt];
                         for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
                             pbytes[i - prop.offset] = result[i];
-                        Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(groups, propname, pbytes, prop.xmltag);
+                        Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(CurrentPanelID, groups, propname, pbytes, prop.xmltag);
                         if (path_val == null)
                         {
                             if (!missedkeys.ContainsKey(key + "/" + propname))
@@ -1285,7 +1316,7 @@ namespace ljson
                                 pp["~path"] = pp.Path;
                                 pp["@TYPE"] = "MISSED";
                                 JObject groups1 = new JObject(jgrp);
-                                path_val = _internal_relations_operator.GroupPropertyVal(groups1, propname, pbytes, prop.xmltag);
+                                path_val = _internal_relations_operator.GroupPropertyVal(CurrentPanelID, groups1, propname, pbytes, prop.xmltag);
                                 Match m = Regex.Match(propname, @"emacETHADDR(\d)", RegexOptions.IgnoreCase);
                                 if (m.Success)
                                 {
@@ -1782,6 +1813,9 @@ namespace ljson
         {
             SetRWFiles(conn_params);
             //
+            if (settings.logreads)
+                _log_byteswrite.Clear();
+            //
             JObject _panel = new JObject(CurrentPanel);
             JObject _elements = (JObject)_panel["ELEMENTS"];
             //
@@ -1862,21 +1896,50 @@ namespace ljson
             {
                 Dictionary<string, string> dsingle = WriteSingleElementCommands(key, dnormal[key]);
                 foreach (string singlekey in dsingle.Keys)
+                {
                     compiled.Add(singlekey, dsingle[singlekey]);
+                    if (settings.logreads)
+                        _log_byteswrite.Add(singlekey, dsingle[singlekey]);
+                }
             }
             foreach (string key in dseria.Keys)
             {
                 //if (!Regex.IsMatch(key, @"(evac)", RegexOptions.IgnoreCase)) continue;
                 Dictionary<string, string> dseriac = WriteSeriaElementCommands(key, dseria[key]);
                 foreach (string seriakey in dseriac.Keys)
+                {
                     compiled.Add(seriakey, dseriac[seriakey]);
+                    if (settings.logreads)
+                        _log_byteswrite.Add(seriakey, dseriac[seriakey]);
+                }
             }
+            Dictionary<string, string> loopscompiled = new Dictionary<string, string>();
             foreach (string key in dloop.Keys)
             {
-                continue;
+                //continue;
                 Dictionary<string, string> dcompiledloop = WriteLoopCommands(key, dloop[key]);
+                string llog = "";
                 foreach (string lkey in dcompiledloop.Keys)
-                    compiled.Add(lkey, dcompiledloop[lkey]);
+                {
+                    llog += ((llog != "") ? "\r\n" : "") + lkey + ":" + dcompiledloop[lkey];
+                    loopscompiled.Add(lkey, dcompiledloop[lkey]);
+                    //
+                    if (settings.logreads)
+                        _log_byteswrite.Add(lkey, dcompiledloop[lkey]);
+                }
+                //
+                File.WriteAllText("loops.log", llog);
+                //
+                //foreach (string lkey in dcompiledloop.Keys)
+                //    compiled.Add(lkey, dcompiledloop[lkey]);
+            }
+            //
+            if (settings.logreads)
+            {
+                string _swrite = "";
+                foreach (string wkey in _log_byteswrite.Keys)
+                    _swrite += ((_swrite != "") ? "\r\n" : "") + wkey + ":" + _log_byteswrite[wkey];
+                File.WriteAllText("write.log", _swrite);
             }
             //
             cTransport conn = cComm.ConnectBase(conn_params);
@@ -1896,6 +1959,19 @@ namespace ljson
             byte[] loginres = cComm.SendCommand(conn, pass);
             Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled);
             cComm.CloseConnection(conn);
+            if (settings.logreads)
+            {
+                string wres = "";
+                string werr = "";
+                foreach (string wkey in dres.Keys)
+                {
+                    wres += ((wres != "") ? "\r\n" : "") + wkey + ":" + dres[wkey];
+                    if (dres[wkey] != "0010FF")
+                        werr += ((werr != "") ? "\r\n" : "") + wkey + ":" + dres[wkey];
+                }
+                File.WriteAllText("writeres.log", wres);
+                File.WriteAllText("writeerr.log", werr);
+            }
             return;
         }
         #endregion
@@ -2538,7 +2614,9 @@ namespace ljson
                 JToken tp = o["~path"];
                 if (tp != null)
                 {
-                    string path = tp.ToString() + ".~index~" + idx;
+                    string path = tp.ToString();
+                    if (!Regex.IsMatch(path, @"\.~index~\d+$"))
+                        path += ".~index~" + idx;
                     o["~path"] = path;
                 }
                 foreach (JToken t in token)
@@ -2563,6 +2641,7 @@ namespace ljson
                 if (pgrp.Value.Type == JTokenType.Object)
                 {
                     JObject grp = (JObject)pgrp.Value;
+                    ChangePath(grp, idx);
                     JObject fields = (JObject)grp["fields"];
                     if (fields == null)
                     {

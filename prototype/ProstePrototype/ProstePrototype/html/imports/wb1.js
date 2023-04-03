@@ -128,16 +128,19 @@ function receiveMessageWPF(jsonTxt) {
                         .filter(y => y !== "~panel_name")
                         .filter(y => y !== "~path");
 
-                let panelIcon;
+                let panelIcon, pageType;
                 switch (true) {
                     case jsonKeys[0].toLowerCase().startsWith("iris"):
-                        panelIcon = '<span class="material-icons-outlined fire">local_fire_department</span>'
+                        panelIcon = '<span class="material-icons-outlined fire">local_fire_department</span>';
+                        pageType = "iris";
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("eclipse"):
-                        panelIcon = '<span class="material-icons-outlined normal">notifications</span >'
+                        panelIcon = '<span class="material-icons-outlined normal">notifications</span >';
+                        pageType = "eclipse";
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("tte"):
-                        panelIcon = '<span class="material-icons-outlined grasse">wifi</span > '
+                        panelIcon = '<span class="material-icons-outlined grasse">wifi</span > ';
+                        pageType = "tte";
                         break;
                     default: break;
                 }
@@ -148,7 +151,7 @@ function receiveMessageWPF(jsonTxt) {
                 panelItem.classList = "accordion-item m-4";
                 panelItem.insertAdjacentHTML(
                     'afterbegin', 
-                    `<h2 class="accordion-header" id="${id}" onclick="javascript: selectNewPanel(this.id)">
+                    `<h2 class="accordion-header" id="${id}" onclick="javascript: selectNewPanel(this.id, this)" pageType="${pageType}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}" aria-expanded="true" aria-controls="collapse${id}">
                             ${panelIcon} ${panelName}
                         </button>
@@ -205,13 +208,15 @@ function showBackDrop() {
     document.body.classList.add('backdrop');
 }
 
-async function selectNewPanel(id) {
+async function selectNewPanel(id, self) {
     if (document.getElementById(id).firstElementChild.classList.contains('collapsed')) return;
     // asking the back-end to provide me with id for the new panel
     let backEndId = id.replaceAll("_", "-");
     let newPanelId = await boundAsync.setActivePanel(backEndId);
     // after
-    if (newPanelId) {
+    if (newPanelId) {        
+        $('a:has(> span:first-child)').removeClass('active');
+        sendMessageWPF({ 'Command': 'LoadPage', 'Params': self.getAttribute("pageType") });
         //openAccordionItem(id);
     }
 };
@@ -270,6 +275,24 @@ const addAccordeonButton = (title, page, div) => {
 
     div.insertAdjacentHTML('beforeend', el);
 };
+
+function alertScanFinished(show) {
+    if (show === 'alert') {
+        var el = document.getElementsByClassName("active")[0];
+        if (el)
+            el.click();
+        else {
+            el = document.getElementsByClassName("show");
+            if (!el[0]) {
+                el = document.querySelectorAll('h2')[0];
+            } else {
+                el = el[0].previousElementSibling;
+            }
+            const pageType = el.getAttribute("pageType");
+            sendMessageWPF({ 'Command': 'LoadPage', 'Params': pageType });
+        }
+    }
+}
 
 
 //#region pagePreparation, contextMenu, toggleDarkMode
@@ -399,7 +422,9 @@ function toggleDarkMode(show, filename) {
 function addActive() {
     $('body').on('click', 'a:has(> span:first-child)', function () {
         $('a:has(> span:first-child)').removeClass('active'); // Remove the active class from all anchor tags that contain a span as their first child
-        $(this).addClass('active'); // Add the active class to the clicked anchor tag
+        if (this.parentElement.parentElement.classList.contains("show")) {
+            $(this).addClass('active'); // Add the active class to the clicked anchor tag
+        }
     });
 }
 //#endregion

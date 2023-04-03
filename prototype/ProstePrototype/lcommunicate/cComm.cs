@@ -112,6 +112,20 @@ namespace lcommunicate
             Monitor.Exit(_cs_cache);
             return res;
         }
+        public static Dictionary<string, string> GetPathValues(string panel_id, string remask)
+        {
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            Monitor.Enter(_cs_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(panel_id))
+            {
+                Dictionary<string, string> panel_paths = _cache_panels[panel_id];
+                foreach (string key in panel_paths.Keys)
+                    if (Regex.IsMatch(key, remask))
+                        res.Add(key, panel_paths[key]);
+            }
+            Monitor.Exit(_cs_cache);
+            return res;
+        }
         public static void RemovePathValue(string panel_id, string path)
         {
             Monitor.Enter(_cs_cache);

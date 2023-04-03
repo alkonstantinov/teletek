@@ -611,6 +611,57 @@ namespace ljson
                             }
                     }
                 }
+                //INNER TABS
+                Match mio = Regex.Match(sio, @"([\w\W]+?)(\d+$)");
+                if (mio.Success)
+                {
+                    string remask = "^" + mio.Groups[1].Value + @"\.[\w\W]+?\.~index~" + mio.Groups[2].Value;
+                    Dictionary<string, string> dio = cComm.GetPathValues(_panel_id, remask);
+                    string tabinpath = null;
+                    string tabin = null;
+                    foreach (string tkey in dio.Keys)
+                    {
+                        Match mtab = Regex.Match(tkey, @"^([\w\W]+?\.TABS\.[\w\W]+?)\.TABS\.([\w\W]+?)\.");
+                        if (mtab.Success)
+                        {
+                            tabinpath = mtab.Groups[1].Value;
+                            tabin = mtab.Groups[2].Value;
+                            break;
+                        }
+                    }
+                    if (tabinpath != null && tabin != null && dio.ContainsKey(tabinpath + ".~index~" + mio.Groups[2].Value))
+                    {
+                        string tabval = dio[tabinpath + ".~index~" + mio.Groups[2].Value];
+                        JObject otabsin = (JObject)panel.SelectToken(tabinpath + ".TABS");
+                        string newtabin = null;
+                        foreach (JProperty ptabin in otabsin.Properties())
+                        {
+                            if (ptabin.Value.Type != JTokenType.Object) continue;
+                            JObject otabin = (JObject)ptabin.Value;
+                            if (otabin["@VALUE"] != null && otabin["@VALUE"].ToString() == tabval)
+                            {
+                                newtabin = ptabin.Name;
+                                break;
+                            }
+                        }
+                        if (newtabin != null)
+                        {
+                            Dictionary<string, string> tabinrepl = new Dictionary<string, string>();
+                            foreach (string iokey in dio.Keys)
+                            {
+                                if (Regex.IsMatch(iokey, tabin))
+                                    tabinrepl.Add(iokey, Regex.Replace(iokey, tabin, newtabin));
+                            }
+                            foreach (string replkey in tabinrepl.Keys)
+                            {
+                                string replpath = tabinrepl[replkey];
+                                string replval = cComm.GetPathValue(_panel_id, replkey);
+                                cComm.RemovePathValue(_panel_id, replkey);
+                                cComm.SetPathValue(_panel_id, replpath, replval);
+                            }
+                        }
+                    }
+                }
             }
             return res;
         }
@@ -788,11 +839,16 @@ namespace ljson
                 }
             //if (Regex.IsMatch(inkey, @"^ELEMENTS\.IRIS_INPUT\.PROPERTIES\.Groups\.Settings\.fields\.Group"))
             //    groups_used.Add((Convert.ToInt32(inputs[inkey]) - 1).ToString(), inkey);
+            string element_prefix = "";
             foreach (string pathkey in path_values.Keys)
             {
-                Match m = Regex.Match(pathkey, @"^ELEMENTS\.INPUT_GROUP\.PROPERTIES\.Groups\.~noname\.fields\.Input_Logic\.~index~(\d+)", RegexOptions.IgnoreCase);
-                if (m.Success && !groups_used.ContainsKey(m.Groups[1].Value))
-                    cComm.RemovePathValue(_panel_id, pathkey);
+                Match m = Regex.Match(pathkey, @"^ELEMENTS\.(IRIS8_|)INPUT_GROUP\.PROPERTIES\.Groups\.~noname\.fields\.Input_Logic\.~index~(\d+)", RegexOptions.IgnoreCase);
+                if (m.Success)
+                {
+                    if (!groups_used.ContainsKey(m.Groups[2].Value))
+                        cComm.RemovePathValue(_panel_id, pathkey);
+                    element_prefix = m.Groups[1].ToString();
+                }
             }
             Dictionary<string, string> ingroups = cComm.GetElements(_panel_id, "INPUT_GROUP");
             if (ingroups == null)
@@ -803,7 +859,39 @@ namespace ljson
                     if (!groups_used.ContainsKey(g))
                         grp2del.Add(g);
             foreach (string del in grp2del)
-                cComm.RemoveListElement(_panel_id, "INPUT_GROUP", del);
+                cComm.RemoveListElement(_panel_id, element_prefix + "INPUT_GROUP", del);
+        }
+        private void TABValuesFromHiddenFields(string _panel_id, JObject _panel)
+        {
+            Dictionary<string, string> path_values = cComm.GetPathValues(_panel_id);
+            Dictionary<string, string> dhiddens = new Dictionary<string, string>();
+            foreach (string path in path_values.Keys)
+                if (Regex.IsMatch(path, @"Groups\.~hidden"))
+                    dhiddens.Add(path, path_values[path]);
+            Dictionary<string, string> fpaths = new Dictionary<string, string>();
+            foreach (string h in dhiddens.Keys)
+            {
+                Match m = Regex.Match(h, @"^([\w\W]+?Groups)(\.[\w\W]+?)(\.~index[\w\W]+?)$");
+                if (m.Success)
+                {
+                    string grppath = m.Groups[1].Value;
+                    string idx = m.Groups[3].Value;
+                    string field = Regex.Replace(m.Groups[2].Value, @"^[\w\W]+\.", "");
+                    JToken tgrp = _panel.SelectToken(grppath);
+                    JObject ogrp = new JObject((JObject)tgrp);
+                    JObject o = FindObjectByProperty(ogrp, "@ID", field);
+                    while (o != null)
+                    {
+                        string fpath = o["~path"].ToString();
+                        o["@ID"] = field + "_checked";
+                        fpaths.Add(fpath + idx, dhiddens[h]);
+                        o = FindObjectByProperty(ogrp, "@ID", field);
+                    }
+                }
+                //JObject grp = Find
+            }
+            foreach (string p in fpaths.Keys)
+                cComm.SetPathValue(_panel_id, p, fpaths[p]);
         }
         public override void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func)
         {
@@ -812,6 +900,7 @@ namespace ljson
             SetIOTabsAfterRead(_panel_id, panel, path_values);
             EvacZones(_panel_id, panel, _get_node);
             FilterINGroups(_panel_id, path_values);
+            TABValuesFromHiddenFields(_panel_id, panel);
         }
         public override void AfterInputRemoved(string _panel_id)
         {
@@ -1132,10 +1221,24 @@ namespace ljson
                 Match m = Regex.Match(_xmltag, @"DEFAULT\s*?=\s*?""(\d+?)""");
                 if (m.Success)
                     return m.Groups[1].Value;
-                return null;
+                //return null;
+            }
+            if (prop == null)
+            {
+                string path = "";
+                if (groups["~path"] != null)
+                    path = groups["~path"].ToString();
+                if (Regex.IsMatch(path, @"INPUT\."))
+                {
+                    Match m = Regex.Match(_xmltag, @"@ID\s*?=\s*?'(FUNCTION|P2)'");
+                    if (m.Success)
+                        return "00";
+                }
+                //return null;
             }
             else
                 return cPanelField.WriteValue(prop, _xmltag);
+            return null;
         }
         private void RemoveUnusedChannelTabs(JObject tab)
         {
@@ -1237,9 +1340,27 @@ namespace ljson
                         RemoveUnusedTabs((JObject)p.Value);
             }
         }
-        public override Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val, string _xmltag)
+        public override Tuple<string, string> GroupPropertyVal(string _panel_id, JObject groups, string PropertyName, byte[] val, string _xmltag)
         {
-            JObject prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);
+            JObject prop = null;
+            foreach (JProperty pgrp in groups.Properties())
+            {
+                if (pgrp.Name.ToLower() != PropertyName.ToLower())
+                    continue;
+                if (pgrp.Value.Type != JTokenType.Object)
+                    continue;
+                JObject ogrp = (JObject)pgrp.Value;
+                if (ogrp["~type"] == null)
+                    continue;
+                prop = ogrp;
+                prop["@TYPE"] = prop["~type"];
+                Dictionary<string, string> gvals = cPanelField.GroupPathValues(prop, val);
+                foreach (string gpath in gvals.Keys)
+                    cComm.SetPathValue(_panel_id, gpath, gvals[gpath]);
+                break;
+            }
+            if (prop == null)
+                prop = GetDeviceGroupsNode(groups.ToString(), PropertyName);
             if (prop == null)
             {
                 string translated = TranslatePropertyName(PropertyName);
@@ -1278,7 +1399,7 @@ namespace ljson
                 }
                 else if (val.Length == 2 && prop["@VALUE"] != null && !Regex.IsMatch(prop["@VALUE"].ToString(), @"\D"))
                 {
-                    sval = (val[1] * 16 + val[0]).ToString();
+                    sval = (val[1] * 256 + val[0]).ToString();
                     return new Tuple<string, string>(path, sval);
                 }
                 else if (prop["@TYPE"].ToString().ToLower() == "intlist")
@@ -1379,10 +1500,10 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"zone$", RegexOptions.IgnoreCase))
             {
-                if (val[2] != 60 || val[4] != 60)
+                if (val[2] != 60 || val[4] != 60 || (val.Length > 97 && val[98] != 60))
                     return true;
                 for (int i = 5; i < val.Length; i++)
-                    if (val[i] != 0)
+                    if (i != 98 && val[i] != 0)
                         return true;
                 return false;
             }

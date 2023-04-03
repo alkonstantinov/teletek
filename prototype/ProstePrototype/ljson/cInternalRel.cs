@@ -151,7 +151,7 @@ namespace ljson
                     if (go["fields"] != null)
                     {
                         JObject po = (JObject)go["fields"];
-                        if (po[node_name] != null && (!check_value_exists || po[node_name]["~value"] != null))
+                        if (po[node_name] != null && po[node_name].Type != JTokenType.Null && (!check_value_exists || po[node_name]["~value"] != null))
                         {
                             JObject res = (JObject)po[node_name];
                             return res;
@@ -271,7 +271,7 @@ namespace ljson
         public virtual void FilterValueChanged(string path, string _new_val, ref bool remove_value) { }
         public virtual List<string> ChannelUsedIn(string channel_path, string myIOPath) { return null; }
         public virtual List<string> ChannelUsedIn(string channel_path) { return null; }
-        public virtual Tuple<string, string> GroupPropertyVal(JObject groups, string PropertyName, byte[] val, string _xmltag) { return null; }
+        public virtual Tuple<string, string> GroupPropertyVal(string _panel_id, JObject groups, string PropertyName, byte[] val, string _xmltag) { return null; }
         public virtual string WritePropertyVal(JObject groups, string PropertyName, string _xmltag) { return null; }
         public virtual bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props) { return true; }
         public virtual void AfterRead(string _panel_id, JObject panel, dGetNode _get_node, dFilterValueChanged _filter_func) { }

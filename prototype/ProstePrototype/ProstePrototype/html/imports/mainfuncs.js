@@ -696,7 +696,7 @@ const transformGroupElement = (elementJson) => {
         checked: (elementJson['@CHECKED'] && (elementJson['@CHECKED'] === elementJson['@YESVAL'])) ? true : false,
         path: elementJson['~path'],
         size: elementJson['@SIZE'],
-        value: elementJson["~value"] ? elementJson["~value"] : (elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : "")),
+        value: elementJson.hasOwnProperty("~value") ? elementJson["~value"] : (elementJson['@VALUE'] ? elementJson['@VALUE'] : (elementJson['@MIN'] ? elementJson['@MIN'] : "")),
     };
 
     switch (attributes.type) {
@@ -1662,7 +1662,7 @@ async function showElement(id, elementType) {
 
 // loadDiv function required for TABs
 function loadDiv(it, id, value, type) {
-     alert(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
+    //alert(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
     if (!value) return;
     var element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)

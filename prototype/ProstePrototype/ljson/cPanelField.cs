@@ -167,7 +167,7 @@ namespace ljson
                 ushort band = Convert.ToUInt16(o["@AND"].ToString(), 16);
                 ushort bres = (ushort)(bval & band);
                 string sval = null;
-                if (ftype == "CHECK")
+                if (ftype == "CHECK" && false)
                 {
                     sval = (bres != 0) ? "True" : "False";
                 }
@@ -175,7 +175,9 @@ namespace ljson
                 {
                     sval = bres.ToString();//ako ne e check
                 }
-                string path = o["~path"].ToString() + sidx;
+                string path = o["~path"].ToString();
+                if (!Regex.IsMatch(path, @"\.~index~\d+$"))
+                    path += sidx;
                 if (sval != null)
                     res.Add(path, sval);
             }
@@ -191,6 +193,37 @@ namespace ljson
                 return GroupPathValuesAND(grp, val, sidx);
             //
             return null;
+        }
+        internal static string GroupFieldsIdx(JObject grp)
+        {
+            if (grp["fields"] == null)
+                return "";
+            grp = (JObject)grp["fields"];
+            string path = null;
+            foreach (JProperty tf in grp.Properties())
+            {
+                if (tf.Value.Type != JTokenType.Object)
+                    continue;
+                JObject of = (JObject)tf.Value;
+                if (of["~path"] == null)
+                    continue;
+                path = of["~path"].ToString();
+                break;
+            }
+            if (path == null)
+                return "";
+            Match m = Regex.Match(path, @"(\.~index~\d+)$");
+            if (!m.Success)
+                return "";
+            return m.Groups[1].Value;
+        }
+        internal static Dictionary<string, string> GroupPathValues(JObject grp, byte[] val)
+        {
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            string sidx = GroupFieldsIdx(grp);
+            if (sidx != null && sidx != "")
+                res = GroupPathValues(grp, val, sidx);
+            return res;
         }
         internal static Dictionary<string, string> GroupPathValues(JObject grp, string sval, string sidx)
         {
@@ -263,7 +296,7 @@ namespace ljson
             if (ofield["@TYPE"] == null)
                 return res;
             string jtype = ofield["@TYPE"].ToString().ToUpper();
-            if (jtype == "CHECK")
+            if (jtype == "CHECK" && false)
                 try
                 {
                     res[path] = Convert.ToBoolean(sval).ToString();

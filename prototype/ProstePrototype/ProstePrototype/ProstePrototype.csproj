@@ -109,6 +109,7 @@
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="109.1.110" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="System.IO.Ports" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -63,7 +63,7 @@ namespace ProstePrototype
             {
                 string root = System.IO.Directory.GetDirectoryRoot(applicationDirectory);
             }
-
+            
             InitializeComponent();
 
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
@@ -413,6 +413,7 @@ namespace ProstePrototype
 
         private void LoadPage(string page, string highlight)
         {
+            if (page == "index") { New_Clicked(new object(), new RoutedEventArgs()); return; }
             string rightBrowsersURLParams = page.Split('?').Length > 1 ? page.Split('?')[1] : "";
             page = page.Split('?')[0];
             JObject jnode = new JObject(cJson.GetNode(page));
@@ -538,7 +539,7 @@ namespace ProstePrototype
         private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow)
         {
             cJson.ReadDevice(conn_params);
-            wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
+            wb1.ExecuteScriptAsync($"alertScanFinished('alert')");
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
             {

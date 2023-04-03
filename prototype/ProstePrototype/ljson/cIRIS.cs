@@ -167,6 +167,8 @@ namespace ljson
             f2["SoundersMode"] = o["SoundersMode"];
             f2["CallPointMode"] = o["CallPointMode"];
             f2["PRINTER"] = o["Protocol"];
+            if (f2["PRINTER"] == null || f2["PRINTER"].Type == JTokenType.Null)
+                f2["PRINTER"] = o["PRINTER"];
             f2["T1DELAY"] = o["T1DELAY"];
             f2["EVACUATION_TIMEOUT"] = o["EVACUATION_TIMEOUT"];
             grp2["fields"] = f2;
