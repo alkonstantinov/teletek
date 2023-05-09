@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TELETEK INPUT DEMO</title>
+    <link rel="icon" href="./assets/images/teletek-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/sidebar.css" rel="stylesheet">
+    <link href="./assets/css/ram-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- HEADER START -->
+    <header class="navbar sticky-top flex-md-nowrap p-0">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Teletek manager</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="#">List/grid</a>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER END -->
+
+    <!-- SIDEBAR START -->
+
+    <div class="open" id="ram_sidebar">
+
+        <div class="ram_sidebar_content_wrapper">
+            <div class="ram_flex_left" id="ram_sidebar_nav">
+                <div class="ram_flex_top">
+                    <div class="accordion" id="ram_sidebar_menu">
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="eclipse_8">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_1" aria-expanded="false" aria-controls="collapse_1">
+                                    <i class="ram_icon bell"></i>
+                                    <span class="ram_btn_title">ECLIPSE 8</span>
+                                </button>
+                            </h2>
+                            <div id="collapse_1" class="accordion-collapse collapse" aria-labelledby="eclipse_8"
+                                data-bs-parent="#ram_sidebar_menu">
+
+                                <div class="accordion-body">
+                                    <ul class="ram_list_group">
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon access_codes"></i>
+                                                <span>Access Codes</span>
+                                            </div>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon network"></i>
+                                                <span>Network</span>
+                                            </div>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon panels"></i>
+                                                <span>Panels in Network</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon inputs"></i>
+                                                <span>Inputs</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon input_groups"></i>
+                                                <span>Inputs Group</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon outputs"></i>
+                                                <span>Outputs</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon fat_fbf"></i>
+                                                <span>FAT - FBF</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon zones"></i>
+                                                <span>Zones</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon peripheral_devices"></i>
+                                                <span>Peripheral Devices</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon loop_devices"></i>
+                                                <span>Loop Devices</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="tte_combo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_2" aria-expanded="false" aria-controls="collapse_2">
+                                    <i class="ram_icon signall"></i>
+                                    <span class="ram_btn_title">TTE COMBO</span>
+                                </button>
+                            </h2>
+                            <div id="collapse_2" class="accordion-collapse collapse" aria-labelledby="tte_combo"
+                                data-bs-parent="#ram_sidebar_menu">
+                                <div class="accordion-body">
+                                    <ul class="ram_list_group">
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon access_codes"></i>
+                                                <span>Access Codes</span>
+                                            </div>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon network"></i>
+                                                <span>Network</span>
+                                            </div>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon panels"></i>
+                                                <span>Panels in Network</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon inputs"></i>
+                                                <span>Inputs</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon input_groups"></i>
+                                                <span>Inputs Group</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon outputs"></i>
+                                                <span>Outputs</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon fat_fbf"></i>
+                                                <span>FAT - FBF</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon zones"></i>
+                                                <span>Zones</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon peripheral_devices"></i>
+                                                <span>Peripheral Devices</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                        <li class="ram_list_group_item">
+                                            <div class="ram_flex_grow_1">
+                                                <i class="ram_icon loop_devices"></i>
+                                                <span>Loop Devices</span>
+                                            </div>
+                                            <i class="ram_icon add_device"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="iris_panel">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_3" aria-expanded="true" aria-controls="collapse_3">
+                                    <i class="ram_icon fire"></i>
+                                    <span class="ram_btn_title">IRIS Panel</span>
+                                </button>
+                            </h2>
+                            <div id="collapse_3" class="accordion-collapse collapse" aria-labelledby="iris_panel"
+                                data-bs-parent="#ram_sidebar_menu">
+                                <div class="accordion-body">
+                                    <div class="accordion-body">
+                                        <ul class="ram_list_group">
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon access_codes"></i>
+                                                    <span>Access Codes</span>
+                                                </div>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon network"></i>
+                                                    <span>Network</span>
+                                                </div>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon panels"></i>
+                                                    <span>Panels in Network</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon inputs"></i>
+                                                    <span>Inputs</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon input_groups"></i>
+                                                    <span>Inputs Group</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon outputs"></i>
+                                                    <span>Outputs</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon fat_fbf"></i>
+                                                    <span>FAT - FBF</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon zones"></i>
+                                                    <span>Zones</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon peripheral_devices"></i>
+                                                    <span>Peripheral Devices</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                            <li class="ram_list_group_item">
+                                                <div class="ram_flex_grow_1">
+                                                    <i class="ram_icon loop_devices"></i>
+                                                    <span>Loop Devices</span>
+                                                </div>
+                                                <i class="ram_icon add_device"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ram_flex_bottom">
+                    <div class="ram_settings">
+
+                        <button class="btn  ram_btn btn_light">
+                            <i class="ram_icon settings"></i>
+                            <div class="ram_btn_title">SETTINGS</div>
+                        </button>
+                        <button class="btn ram_btn btn_light">
+                            <i class="ram_icon help"></i>
+                            <div class="ram_btn_title">HELP</div>
+                        </button>
+                        <button class="btn btn-light ram_btn btn_circle btn_grey">
+                            <i class="ram_icon logout"></i>
+                        </button>
+                        <button class="btn btn-light ram_btn btn_circle flag_bg">
+
+                        </button>
+                        <button class="ram_btn ram_toggle_btn open">
+                            <i class="ram_icon toggle"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ram_flex_right" id="ram_devices_wrapper">
+
+                <div class="ram_resizable open" id="ram_devices_1">
+                    <div class="ram_flex_top">
+                        <div class="ram_cards">
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <i class="ram_icon loop_devices"></i>
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">Teletek Loop 1</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top"><i class="ram_icon loop_devices"></i></div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">Teletek Loop 2</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top"><i class="ram_icon loop_devices"></i></div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">Teletek Loop 3</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top"><i class="ram_icon loop_devices"></i></div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">System Sensor Loop 4</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ram_flex_bottom">
+                        <div class="ram_settings">
+                            <div class="ram_settings">
+                                <button class="btn ram_btn btn_white">
+                                    <i class="ram_icon add_device"></i>
+                                    <div class="ram_btn_title">Add Device</div>
+                                </button>
+                                <button class="ram_btn ram_toggle_btn open">
+                                    <i class="ram_icon toggle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ram_resizer" id="ram_resizer_1"></div>
+
+                <div class="ram_resizable" id="ram_devices_2">
+                    <div class="ram_flex_top">
+                        <div class="ram_cards">
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MINP M (Fire)</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ram_flex_bottom">
+                        <div class="ram_settings">
+                            <div class="ram_settings">
+                                <button class="btn ram_btn btn_white">
+                                    <i class="ram_icon add_device"></i>
+                                    <div class="ram_btn_title">Add Device</div>
+                                </button>
+                                <button class="ram_btn ram_toggle_btn open">
+                                    <i class="ram_icon toggle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ram_resizer" id="ram_resizer_2"></div>
+
+                <div class="ram_resizable" id="ram_devices_3">
+                    <div class="ram_flex_top">
+                        <div class="ram_cards">
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MINP M (Fire)</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                            <div class="ram_card">
+                                <div class="ram_card_img_top">
+                                    <img src="./assets/images/sensoiris-mio04.jpg" alt="sensoIRIS MIO04">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">SensoIRIS MIO40</h5>
+                                </div>
+                                <div class="ram_add_btn"><i class="ram_icon add_device"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ram_flex_bottom">
+                        <div class="ram_settings">
+                            <button class="btn ram_btn btn_white">
+                                <i class="ram_icon add_device"></i>
+                                <div class="ram_btn_title">Add Device</div>
+                            </button>
+                            <button class="ram_btn ram_toggle_btn open">
+                                <i class="ram_icon toggle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ram_resizer" id="ram_resizer_3"></div>
+            </div>
+        </div>
+        <div id="ram_toggle_sidebar" class="ram_sidebar_toggle_wrapper">
+            <button class="ram_btn btn_toggle" id="ram_hamburger_btn" data-bs-target="#ram_sidebar"
+                aria-controls="ram_sidebar">
+                <i class="ram_icon toggle"></i>
+            </button>
+        </div>
+
+    </div>
+    <!-- SIDEBAR END -->
+    
+
+    <!-- CENTRAL PART MAIN CONTENT START -->
+    <!-- <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> -->
+    <main id="ram_main">
+
+        <!-- SUBHEADER START -->
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Input types demo</h1>
+        </div>
+        <!-- SUBHEADER END -->
+
+        <!-- TEXT INPUT START -->
+        <h4 class="h4">Simple text inputs</h4>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control ram_floating_input" id="ram_floating_input_text_id"
+                        placeholder="Code 1">
+                    <label for="ram_floating_input_text_id">Code 1 label</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control is-valid ram_floating_input" id="ram_floating_input_text_id"
+                        placeholder="Is valid" value="This is a valid input">
+                    <label for="ram_floating_input_text_id">Is a valid label</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control is-invalid ram_floating_input"
+                        id="ram_floating_input_text_id" placeholder="Is invalid" value="This is an invalid input">
+                    <label for="ram_floating_input_text_id">Is an invalid label</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control ram_floating_input" id="ram_floating_input_text_id"
+                        placeholder="Disabled" value="This is a disabled input" disabled>
+                    <label for="ram_floating_input_text_id">Disabled</label>
+                </div>
+
+            </div>
+        </div>
+        <!-- TEXT INPUT END -->
+        <hr>
+        <!-- DROPDOWN START -->
+        <h4 class="h4">Dropdown menu</h4>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="form-floating mb-3">
+                    <select class="form-select ram_floating_select" id="ram_floating_select_id"
+                        aria-label="Level for Code 1">
+                        <option selected>Please select an option</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label for="ram_floating_select_id">Level for Code 1</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select is-valid ram_floating_select" id="ram_floating_select_id"
+                        aria-label="Level for Code 1">
+                        <option selected>Please select an option</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label for="ram_floating_select_id">Level for Code 1</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select is-invalid ram_floating_select" id="ram_floating_select_id"
+                        aria-label="Level for Code 1">
+                        <option selected>Pdasdsadasdas</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label for="ram_floating_select_id">Level for Code 1</label>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <select class="form-select ram_floating_select" id="ram_floating_select_id"
+                        aria-label="Level for Code 1" disabled>
+                        <option selected>1</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label for="ram_floating_select_id">You cannot change this level</label>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- DROPDOWN END -->
+        <hr>
+        <!-- CHECKBOX START -->
+        <h4 class="h4">Checkboxes</h4>
+        <div class="row">
+            <div class="col-6">
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input ram_checkbox" type="checkbox" value="" id="ram_checkbox_id">
+                    <label class="form-check-label" for="ram_checkbox_id">
+                        Default checkbox
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input ram_checkbox" type="checkbox" value="" id="ram_checkbox_id_checked"
+                        checked>
+                    <label class="form-check-label" for="ram_checkbox_id_checked">
+                        Checked checkbox
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input is-valid ram_checkbox" type="checkbox" value=""
+                        id="ram_checkbox_id_valid" checked>
+                    <label class="form-check-label" for="ram_checkbox_id_valid">
+                        Valid checkbox
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input is-invalid ram_checkbox" type="checkbox" value=""
+                        id="ram_checkbox_id_invalid" checked>
+                    <label class="form-check-label" for="ram_checkbox_id_invalid">
+                        Invalid checkbox
+                    </label>
+                    <div class="invalid-feedback">
+                        Checkbox missed
+                    </div>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input ram_checkbox" type="checkbox" value=""
+                        id="ram_checkbox_id_checked_disabled" checked disabled>
+                    <label class="form-check-label" for="ram_checkbox_id_checked_disabled">
+                        Disabled Checked checkbox
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="col-6">
+
+                <div class="ram_attribute_holder">
+                    <p class="ram_attribute_holder_title">ATTRIBUTES</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input is-valid ram_checkbox" type="checkbox" value=""
+                            id="ram_checkbox_id_valid1" checked>
+                        <label class="form-check-label" for="ram_checkbox_id_valid1">
+                            Disarm
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input is-valid ram_checkbox" type="checkbox" value=""
+                            id="ram_checkbox_id_valid2" checked>
+                        <label class="form-check-label" for="ram_checkbox_id_valid2">
+                            Stay & sleep alarm
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input is-valid ram_checkbox" type="checkbox" value=""
+                            id="ram_checkbox_id_valid3" checked>
+                        <label class="form-check-label" for="ram_checkbox_id_valid3">
+                            Bypass
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- CHECKBOX END -->
+        <hr>
+        <!-- NUMBER INPUT START -->
+        <h4 class="h4">Numbers input</h4>
+        <div class="row">
+            <div class="col-4">
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control ram_number_input" id="ram_number_input_id" value="100">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="ram_number_input_button_left"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="ram_number_input_button_right"></button>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control is-valid ram_number_input" id="ram_number_input_valid_id"
+                        value="100">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="ram_number_input_button_left"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="ram_number_input_button_right"></button>
+                    <div class="valid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                            <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056" />
+                            <path
+                                d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z"
+                                transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff"
+                                stroke-width="0.5" />
+                        </svg> Looks good!
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control is-invalid ram_number_input"
+                        id="ram_number_input_invalid_id" value="100">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="ram_number_input_button_left"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="ram_number_input_button_right"></button>
+                    <div class="invalid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                            <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#ff484b" />
+                            <g transform="translate(10.111 10.225)">
+                                <path d="M910.64,279.7l8.85,8.85" transform="translate(-910.64 -279.696)" fill="none"
+                                    stroke="#fff" stroke-linecap="round" stroke-width="1" />
+                                <path d="M0,0,8.85,8.85" transform="translate(0 8.85) rotate(-90)" fill="none"
+                                    stroke="#fff" stroke-linecap="round" stroke-width="1" />
+                            </g>
+                        </svg> Invalid value!
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control ram_number_input" id="ram_number_input_disabled_id"
+                        value="100" disabled>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="ram_number_input_button_left" disabled></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="ram_number_input_button_right" disabled></button>
+                </div>
+
+            </div>
+
+            <div class="col-8">
+
+                <div class="ram_attribute_holder">
+                    <p class="ram_attribute_holder_title">TEXT INPUTS</p>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control ram_number_input" id="ram_number_input_id"
+                                    value="100">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="ram_number_input_button_left"></button>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="ram_number_input_button_right"></button>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control is-valid ram_number_input"
+                                    id="ram_number_input_valid_id" value="100">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="ram_number_input_button_left"></button>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="ram_number_input_button_right"></button>
+                                <div class="valid-feedback">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                        viewBox="0 0 29.46 29.46">
+                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)"
+                                            fill="#98d056" />
+                                        <path
+                                            d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z"
+                                            transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff"
+                                            stroke-width="0.5" />
+                                    </svg> Looks good!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control is-invalid ram_number_input"
+                                    id="ram_number_input_invalid_id" value="100">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="ram_number_input_button_left"></button>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="ram_number_input_button_right"></button>
+                                <div class="invalid-feedback">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                        viewBox="0 0 29.46 29.46">
+                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)"
+                                            fill="#ff484b" />
+                                        <g transform="translate(10.111 10.225)">
+                                            <path d="M910.64,279.7l8.85,8.85" transform="translate(-910.64 -279.696)"
+                                                fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1" />
+                                            <path d="M0,0,8.85,8.85" transform="translate(0 8.85) rotate(-90)"
+                                                fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1" />
+                                        </g>
+                                    </svg> Invalid value!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control ram_number_input"
+                                    id="ram_number_input_disabled_id" value="100" disabled>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="ram_number_input_button_left" disabled></button>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="ram_number_input_button_right" disabled></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- NUMBER INPUT END -->
+        <hr>
+        <!-- SCHEDULE START -->
+        <h4 class="h4">Schedule input</h4>
+        <div class="row">
+            <div class="col-6">
+
+                <div class="ram_attribute_holder">
+                    <p class="ram_attribute_holder_title">Day / Night Schedule</p>
+
+                    <div class="ram_schedule_title">Monday</div>
+                    <div class="ram_input_combine">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                            <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                            <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                        </div>
+
+                    </div>
+
+                    <div class="ram_schedule_title">Monday</div>
+                    <div class="ram_input_combine">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control is-valid ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                            <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control is-valid ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                            <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                        </div>
+
+                    </div>
+
+                    <div class="ram_schedule_title">Monday</div>
+                    <div class="ram_input_combine">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control is-invalid ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                            <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control is-invalid ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                            <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                        </div>
+
+                    </div>
+
+                    <div class="ram_schedule_title">Monday</div>
+                    <div class="ram_input_combine">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                            <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                            <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- SCHEDULE END -->
+        <hr>
+        <!-- RAM INPUT COMBINE START -->
+        <h4 class="h4">Combine/group inputs </h4>
+        <div class="row">
+            <div class="col-6">
+
+                <div class="ram_attribute_holder">
+                    <p class="ram_attribute_holder_title">Input combine demo</p>
+
+                    <div class="ram_input_combine">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                            <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input"
+                                id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                            <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control is-valid ram_floating_input"
+                                id="ram_floating_input_text_id" placeholder="Is valid" value="This is a valid input">
+                            <label for="ram_floating_input_text_id">Is a valid label</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control is-invalid ram_floating_input"
+                                id="ram_floating_input_text_id" placeholder="Is invalid"
+                                value="This is an invalid input">
+                            <label for="ram_floating_input_text_id">Is an invalid label</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control ram_floating_input" id="ram_floating_input_text_id"
+                                placeholder="Disabled" value="This is a disabled input" disabled>
+                            <label for="ram_floating_input_text_id">Disabled</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-3">
+                <div class="ram_input_combine">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                        <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                        <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="ram_input_combine">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                        <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                        <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="ram_input_combine">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                        <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                        <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="ram_input_combine">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_1" placeholder="Activate">
+                        <label for="ram_floating_input_text_day_night_id_1">Activate</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control ram_floating_input"
+                            id="ram_floating_input_text_day_night_id_2" placeholder="Desactivate">
+                        <label for="ram_floating_input_text_day_night_id_2">Desactivate</label>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- RAM INPUT COMBINE END -->
+        <hr>
+
+
+    </main>
+    <!-- CENTRAL PART MAIN CONTENT END -->
+
+    <!-- BOOTSTRAP BUNDE -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+        </script>
+    <!-- ICONS FOR DEMO -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+        </script>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <!-- RAM SCRIPT -->
+    <script src="./assets/js/ram.js"></script>
+</body>
+
+</html>

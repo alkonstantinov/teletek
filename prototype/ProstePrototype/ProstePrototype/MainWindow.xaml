@@ -26,16 +26,62 @@
         </Style>
         <!--#endregion-->
         <!--<local:GridLengthConverter x:Key="gridLengthConverter" />-->
-        <Style x:Key="ButtonShadow" TargetType="{x:Type Button}">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Padding" Value="3"/>
-                    <Setter Property="Margin" Value="2"/>
-                    <Setter Property="Height" Value="30"/>
-                </Style>
-            </Style.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonShadow" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="5" Height="30" Padding="3" Margin="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+       
         <Style x:Key="FileStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="ToolTip">
                 <Setter.Value>
@@ -46,7 +92,7 @@
                     </ToolTip>
                 </Setter.Value>
             </Setter>
-        </Style>        
+        </Style>
         <Style x:Key="FileMainStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -131,7 +177,7 @@
                     </Button>
 
                     <Button x:Name="scan_btn" Grid.Column="1" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
-                            ToolTip="{DynamicResource MainMenuScan}" Click="Scan_Clicked">
+                            ToolTip="{DynamicResource MainMenuScan}" Click="Scan_Clicked" IsEnabled="False">
                         <DockPanel VerticalAlignment="Center">
                             <TextBlock Text="&#xf02a;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"/>
                             <TextBlock Text="{library:DynamicResourceBinding MainMenuScan, Converter={StaticResource StringToUpperConverter}}" 
@@ -326,7 +372,7 @@
                         </Button>
                     </DockPanel>
                 </Grid>-->
-                
+
             </Grid>
 
             <Grid x:Name="gridBrowsers" Grid.Row="1">
@@ -357,7 +403,7 @@
                                            Margin="0, 0, 3, 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
                     </Grid>
-                    
+
                     <Grid Grid.Row="2">
                         <Button x:Name="define_size_hidden_btn" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="wb1Size_Click">
                             <Button.Resources>
@@ -370,7 +416,7 @@
                             <!--&#xf101; = << | &#xf100; = >> -->
                         </Button>
                     </Grid>
-                    
+
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="footerBtnCol1" Width="15"/>
@@ -389,7 +435,7 @@
                                            FontFamily="{StaticResource poppins_demibold}" FontSize="8" />
                             </DockPanel>
                         </Button>
-                                
+
                         <Button x:Name="help_btn" Grid.Column="2" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
                                 ToolTip="{DynamicResource MainMenuHelp}" >
                             <DockPanel>
@@ -398,7 +444,7 @@
                                            FontFamily="{StaticResource poppins_demibold}" FontSize="8" VerticalAlignment="Center" />
                             </DockPanel>
                         </Button>
-                        
+
                         <Button x:Name="exit_btn" Grid.Column="3" ToolTip="{DynamicResource MainMenuExit}" Typography.Capitals="AllSmallCaps" Width="30" Height="30" Click="Exit_Clicked" Background="LightGray" Foreground="White" BorderThickness="0">
                             <Button.LayoutTransform>
                                 <RotateTransform Angle="180"/>
@@ -411,7 +457,7 @@
                             </Button.Resources>
                             <TextBlock Text="&#xf08b;" FontFamily="{StaticResource fa_solid}" FontSize="10"/>
                         </Button>
-                        
+
                         <DockPanel x:Name="languagesPanel" Grid.Column="4" Height="100" Background="Transparent">
                             <uc:LanguageControl x:Name="languageButton" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Margin="0,0,0,50"/>
                         </DockPanel>

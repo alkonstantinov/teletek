@@ -196,7 +196,13 @@ namespace ProstePrototype
             //clock_btn.Foreground = new SolidColorBrush(fgd);
             //verify_btn.Background = new SolidColorBrush(bgd);
             //verify_btn.Foreground = new SolidColorBrush(fgd);
-            scan_btn.Background = new SolidColorBrush(btn_bgd);
+            if (scan_btn.IsEnabled)
+            {
+                scan_btn.Background = new SolidColorBrush(btn_bgd);
+            } else
+            {
+                scan_btn.Background = Brushes.Transparent;
+            }
             scan_btn.Foreground = new SolidColorBrush(btn_fgd);
             //export_btn.Background = new SolidColorBrush(btn_bgd);
             //export_btn.Foreground = new SolidColorBrush(btn_fgd);
@@ -458,6 +464,11 @@ namespace ProstePrototype
             if (loadWb1)
             {
                 wb1.Load(url);
+                this.Dispatcher.Invoke(() =>
+                {
+                    scan_btn.IsEnabled = true;
+                    ChangeTheme(DarkMode);
+                } );
             }
             else
             {

@@ -1,0 +1,547 @@
+/*GENERAL*/
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  background-color: #ffffff;
+}
+
+/*HEADER*/
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0px 3px 8px #0000000A;
+}
+
+.navbar-brand {
+  background-color: #ffffff;
+}
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
+
+.navbar .navbar-toggler {
+  top: .25rem;
+  right: 1rem;
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+}
+
+.nav {
+  display: none;
+}
+
+/*SIDEBAR*/
+.feather {
+  width: 16px;
+  height: 16px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  background-color: #EEF5FD;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+
+.sidebar-sticky {
+  height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #727272;
+}
+
+.sidebar .nav-link.active {
+  color: #2470dc;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+}
+
+
+/*INPUT STYLES START*/
+
+
+/*BASIC TEXT INPUT*/
+.ram_floating_input {
+  background-color: #F8F8F8;
+  border: 0px;
+  box-shadow: 0px 3px 15px #0000001A;
+  border-radius: 5px;
+  transition: background-color 0.5s ease;
+  color: #2F66AD !important;
+  font-weight: 600;
+}
+
+.ram_floating_input:focus {
+  background-color: #DCE4EF;
+  box-shadow: 0px 3px 15px #0000001A !important;
+}
+
+.ram_floating_input:hover {
+  background-color: #DCE4EF;
+/*  add !important to background-color if you want to activate hover on all inputs*/
+}
+
+.ram_floating_input + label {
+  color: #818181;
+}
+
+.form-floating>.form-control-plaintext~label, .form-floating>.form-control:focus~label, .form-floating>.form-control:not(:placeholder-shown)~label, .form-floating>.form-select~label {
+  opacity: 1;
+}
+
+.ram_floating_input:focus + label {
+  color: #000000;
+  opacity: 1 !important;
+}
+
+
+/*VALIDATED TEXT INPUT*/
+.form-control.is-valid, .was-validated .form-control:valid {
+  background-color: white;
+  color: #A5A5A5 !important;
+  border-left: 6px solid #98D056;
+  padding-left: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='29.46' height='29.46' viewBox='0 0 29.46 29.46'%3E%3Ccircle cx='14.73' cy='14.73' r='14.73' transform='translate(0 0)' fill='%2398d056'/%3E%3Cpath d='M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z' transform='translate(-792.496 -2643.924)' fill='%23fff' stroke='%23fff' stroke-width='0.5'/%3E%3C/svg%3E");
+}
+
+.form-control.is-valid:focus {
+  border-left: 6px solid #98D056;
+}
+
+.form-control.is-valid + label , .was-validated .form-control:valid  + label {
+  color: #000000;
+}
+
+/*INVALID TEXT INPUT*/
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  background-color: #FF484B1F;
+  color: #FF484B80 !important;
+  border-left: 6px solid #FF484B;
+  padding-left: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='29.46' height='29.46' viewBox='0 0 29.46 29.46'%3E%3Ccircle cx='14.73' cy='14.73' r='14.73' transform='translate(0 0)' fill='%23ff484b'/%3E%3Cg transform='translate(10.111 10.225)'%3E%3Cpath d='M910.64,279.7l8.85,8.85' transform='translate(-910.64 -279.696)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3Cpath d='M0,0,8.85,8.85' transform='translate(0 8.85) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E"); 
+}
+
+.form-control.is-invalid:focus {
+  border-left: 6px solid #FF484B;
+}
+
+.form-control.is-invalid + label , .was-validated .form-control:invalid  + label {
+  color: #FF484B;
+}
+
+/*DISABLED TEXT INPUT*/
+
+.ram_floating_input:disabled {
+    background-color: #D6D6D6;
+    color: #0000004D !important;
+}
+
+.ram_floating_input:disabled  + label {
+    color: #00000099;
+}
+
+/*BASIC NUMBER INPUT*/
+.ram_number_input::-webkit-inner-spin-button,
+.ram_number_input::-webkit-outer-spin-button{
+   -webkit-appearance:none;
+}
+
+.ram_number_input {
+  background-color: #F8F8F8;
+  border: 0px;
+  box-shadow: 0px 3px 15px #0000001A;
+  border-radius: 5px !important;
+  transition: background-color 0.5s ease;
+  color: #818181 !important;
+  text-align:center;
+  font-weight: 600;
+}
+
+.ram_number_input:focus {
+  background-color: #DCE4EF;
+  box-shadow: 0px 3px 15px #0000001A !important;
+}
+
+.ram_number_input_button_left {
+  background-color: #D1D1D1;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  z-index: 99;
+  width: 25px;
+  height: 25px;
+  border: 0px;
+  border-radius: 3px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14.186' height='1.5' viewBox='0 0 14.186 1.5'%3E%3Cpath d='M0,0V12.686' transform='translate(0.75 0.75) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 10px;
+  transition: background-color 0.5s ease;
+}
+
+.ram_number_input_button_right {
+  background-color: #D1D1D1;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 99;
+  width: 25px;
+  height: 25px;
+  border: 0px;
+  border-radius: 3px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18.174' height='18.174' viewBox='0 0 18.174 18.174'%3E%3Cg transform='translate(0.75 0.75)'%3E%3Cpath d='M161.188,154.953v16.674' transform='translate(-152.851 -154.953)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1.5'/%3E%3Cpath d='M0,0V16.674' transform='translate(0 8.337) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 10px;
+  transition: background-color 0.5s ease;
+}
+
+.ram_number_input_button_left:hover, .ram_number_input_button_right:hover {
+  background-color: #DCE4EF;
+}
+
+.ram_number_input_button_left:active, .ram_number_input_button_right:active {
+  background-color: #005ED8;
+}
+
+/*VALIDATED NUMBER INPUT*/
+.ram_number_input.is-valid, .was-validated .ram_number_input:valid {
+  border-left: 0px;
+  color: #000000 !important;
+  padding: 0.375rem 0.75rem;
+}
+
+.ram_number_input.is-valid ~ .ram_number_input_button_left, .was-validated .ram_number_input:valid ~ .ram_number_input_button_left, .ram_number_input.is-valid ~ .ram_number_input_button_right, .was-validated .ram_number_input:valid ~ .ram_number_input_button_right{
+  background-color: #8D8D8D;
+}
+
+.ram_number_input.is-valid ~ .ram_number_input_button_left:hover, .was-validated .ram_number_input:valid ~ .ram_number_input_button_left:hover, .ram_number_input.is-valid ~ .ram_number_input_button_right:hover, .was-validated .ram_number_input:valid ~ .ram_number_input_button_right:hover{
+  background-color: #DCE4EF;
+}
+
+.ram_number_input.is-valid:focus {
+  border-left: 0px;
+  background-color: #ffffff;
+}
+
+.is-valid~.valid-feedback, .is-valid~.valid-tooltip, .was-validated :valid~.valid-feedback, .was-validated :valid~.valid-tooltip {
+  color: #98D056;
+  font-size: 0.7em;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+/*INVALID NUMBER INPUT*/
+.ram_number_input.is-invalid, .was-validated .ram_number_input:invalid {
+  background-color: #FF484B1F;
+  border-left: 0px;
+  color: #FF484B !important;
+  padding: 0.375rem 0.75rem;
+}
+
+.ram_number_input.is-invalid ~ .ram_number_input_button_left, .was-validated .ram_number_input:invalid ~ .ram_number_input_button_left, .ram_number_input.is-invalid ~ .ram_number_input_button_right, .was-validated .ram_number_input:invalid ~ .ram_number_input_button_right{
+  background-color: #FF484B;
+}
+
+.ram_number_input.is-invalid ~ .ram_number_input_button_left:hover, .was-validated .ram_number_input:invalid ~ .ram_number_input_button_left:hover, .ram_number_input.is-invalid ~ .ram_number_input_button_right:hover, .was-validated .ram_number_input:invalid ~ .ram_number_input_button_right:hover{
+  background-color: #DCE4EF;
+}
+
+.ram_number_input.is-invalid:focus {
+  border-left: 0px;
+}
+
+.ram_number_input ~ .invalid-feedback{
+  margin-top: 5px !important;
+}
+
+/*DISABLED NUMBER INPUT*/
+.ram_number_input:disabled {
+  background-color: #CBCBCB;
+  color: #8D8D8D !important;
+}
+
+.ram_number_input_button_left:disabled, .ram_number_input_button_right:disabled {
+  background-color: #A7A7A7;
+}
+/*INPUT STYLES END*/
+
+
+/*SELECT STYLES START*/
+
+/*BASIC SELECT INPUT*/
+.ram_floating_select {
+  background-color: #F8F8F8;
+  border: 0px;
+  box-shadow: 0px 3px 15px #0000001A;
+  border-radius: 5px;
+  transition: background-color 0.5s ease;
+  color: #2F66AD !important;
+}
+
+
+.ram_floating_select:focus {
+  background-color: #DCE4EF;
+  box-shadow: 0px 3px 15px #0000001A !important;
+}
+
+.ram_floating_select:hover {
+  background-color: #DCE4EF;
+/*  add !important to background-color if you want to activate hover on all inputs*/
+}
+
+.ram_floating_select + label {
+  color: #818181;
+}
+
+.ram_floating_select:focus + label {
+  color: #000000;
+  opacity: 1 !important;
+}
+
+/*VALIDATED SELECT INPUT*/
+.form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"] {
+  background-color: white;
+  color: #A5A5A5 !important;
+  border-left: 6px solid #98D056;
+  padding-left: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='49.893' height='40.69' viewBox='0 0 49.893 40.69'%3E%3Cg transform='translate(20.482 5.085)'%3E%3Cellipse cx='14.706' cy='14.706' rx='14.706' ry='14.706' transform='translate(0 0)' fill='%2398d056'/%3E%3Cpath d='M813.94,2653.588a.53.53,0,0,0-.749,0l-8.58,8.571-3.375-3.371a.529.529,0,0,0-.748.747l3.749,3.745a.532.532,0,0,0,.749,0l8.955-8.944A.528.528,0,0,0,813.94,2653.588Z' transform='translate(-792.509 -2643.828)' fill='%23fff' stroke='%23fff' stroke-width='0.5'/%3E%3Cpath d='M382.616,1987.152v40.69' transform='translate(-402.597 -1992.237)' fill='none' stroke='%23abafb3' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E"),url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center,center right 3.25rem;
+  background-size: 30px 30px,calc(0.5em + 0.375rem) calc(0.40em + 0.375rem);
+}
+
+.form-select.is-valid:focus {
+  border-left: 6px solid #98D056;
+}
+
+.form-select.is-valid + label , .was-validated .form-select:valid  + label {
+  color: #000000;
+}
+
+/*INVALID SELECT INPUT*/
+.form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"] {
+  background-color: #FF484B1F;
+  color: #FF484B80 !important;
+  border-left: 6px solid #FF484B;
+  padding-left: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='49.893' height='40.69' viewBox='0 0 49.893 40.69'%3E%3Cg transform='translate(20.433 5.156)'%3E%3Cpath d='M382.616,1987.152v40.69' transform='translate(-402.549 -1992.309)' fill='none' stroke='%23abafb3' stroke-width='1'/%3E%3Ccircle cx='14.73' cy='14.73' r='14.73' transform='translate(0 0)' fill='%23ff484b'/%3E%3Cg transform='translate(10.111 10.225)'%3E%3Cpath d='M910.64,279.7l8.85,8.85' transform='translate(-910.64 -279.696)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3Cpath d='M0,0,8.85,8.85' transform='translate(0 8.85) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center,center right 3.25rem;
+  background-size: 30px 30px,calc(0.5em + 0.375rem) calc(0.40em + 0.375rem);
+}
+
+.form-select.is-invalid:focus {
+  border-left: 6px solid #FF484B;
+}
+
+.form-select.is-invalid + label , .was-validated .form-select:invalid  + label {
+  color: #FF484B;
+}
+
+/*DISABLED SELECT INPUT*/
+
+.ram_floating_select:disabled {
+    background-color: #D6D6D6;
+    color: #0000004D !important;
+}
+
+.ram_floating_select:disabled  + label {
+    color: #00000099;
+}
+
+/*SELECT STYLES END*/
+
+
+
+/*CHECKBOX STYLES START*/
+
+/*BASIC CHECKBOX START*/
+.ram_checkbox {
+  background-color: #D1D1D1;
+  border-radius: 3px !important;
+  border: 0px;
+  transition: background-color 0.5s ease;
+}
+
+.ram_checkbox + label {
+  color: #ABAFB3;
+}
+
+.ram_checkbox:hover {
+  background-color: #DCE4EF;
+}
+
+.ram_checkbox:focus, .ram_checkbox::before {
+  box-shadow: none;
+}
+
+/*CHEKCED CHECKBOX START*/
+.ram_checkbox:checked {
+  background-color: #005ED8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25.313' height='18.84' viewBox='0 0 25.313 18.84'%3E%3Cpath d='M824.372,2653.706a.937.937,0,0,0-1.323,0l-15.158,15.139-5.962-5.955a.934.934,0,0,0-1.323,1.32l6.623,6.616a.937.937,0,0,0,1.323,0l15.819-15.8A.933.933,0,0,0,824.372,2653.706Z' transform='translate(-799.833 -2652.846)' fill='%23fff' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") !important;
+  background-size: 0.7em;
+}
+
+.ram_checkbox:checked + label {
+  color: #000000;
+}
+
+/*VALID CHECKBOX START*/
+.ram_checkbox.is-valid:checked, .was-validated .ram_checkbox:valid:checked {
+  background-color: #98D056;
+}
+
+.ram_checkbox.is-valid:focus {
+  box-shadow: none;
+}
+
+.ram_checkbox.is-valid:checked + label, .was-validated + label .ram_checkbox:valid:checked + label{
+  color: #000000;
+}
+
+.ram_checkbox.is-valid~.form-check-label, .was-validated .ram_checkbox:valid~.form-check-label {
+  color: #ABAFB3;
+}
+
+/*INVALID CHECKBOX START*/
+.ram_checkbox.is-invalid:checked, .was-validated .ram_checkbox:invalid:checked {
+  background-color: #FF484B;
+}
+
+.ram_checkbox.is-invalid:focus {
+  box-shadow: none;
+}
+
+.ram_checkbox.is-invalid:checked + label, .was-validated .ram_checkbox:invalid:checked + label {
+  color: #FF484B;
+}
+
+.ram_checkbox.is-invalid~.form-check-label, .was-validated .ram_checkbox:invalid~.form-check-label {
+  color: #ABAFB3;
+}
+
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip, .was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+  color: #FF484B;
+  font-size: 0.7em;
+  margin-top: 0px;
+  font-weight: 400;
+}
+
+/*DISABLED CHECKBOX START*/
+.ram_checkbox:disabled {
+  background-color: #A7A7A7;
+  opacity: 1;
+}
+
+.ram_checkbox:disabled + label{
+  color: #ABAFB3;
+  opacity: 1 !important;
+}
+
+/*CHECKBOX STYLES END*/
+
+/*ATTRIBUTE HOLDER START*/
+
+.ram_attribute_holder {
+  background-color: #FFFFFF;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.ram_attribute_holder_title {
+  font-size: 17px;
+  color: #A5A5A5;
+}
+
+/*ATTRIBUTE HOLDER END*/
+
+/*RAM INPUT COMBINE START*/
+
+.ram_input_combine {
+  box-shadow: 0px 3px 15px #00000029;
+  border-radius: 5px;
+}
+
+.ram_input_combine .form-floating .ram_floating_input {
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px;
+  border-top: 1px solid #D1D1D1;
+}
+
+.ram_input_combine .form-floating:first-child .ram_floating_input {
+  border-radius: 5px 5px 0px 0px;
+  border-top: 0px;
+}
+
+.ram_input_combine .form-floating:last-child .ram_floating_input {
+  border-radius: 0px 0px 5px 5px;
+}
+
+/*RAM INPUT COMBINE END*/
+
+/*RAM SCHEDULE START*/
+
+.ram_schedule_title {
+  display: inline-block;
+  background-color: #E6E6E6;
+  font-weight: 400;
+  color: #1E2022;
+  padding: 3px 25px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.ram_schedule_title:first-of-type {
+  margin-top: 0px;
+}
+
+/*RAM SCHEDULE END*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
