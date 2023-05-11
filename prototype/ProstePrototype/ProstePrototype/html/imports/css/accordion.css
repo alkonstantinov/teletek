@@ -11,7 +11,7 @@ body {
 
 .accordion-button{
     font-weight: 600 !important;
-    padding: 0.5rem 0.8rem !important;
+    /*padding: 0.5rem 0.8rem !important;*/
     font-size: 0.8rem !important;
 }
 

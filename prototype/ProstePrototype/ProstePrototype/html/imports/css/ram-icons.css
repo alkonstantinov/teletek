@@ -1,0 +1,89 @@
+.ram_icon {
+    width: 14px;
+    height: 14px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+}
+
+.ram_icon.toggle.open {
+    background-image: url(../images/icons/25-show.svg);
+}
+.ram_icon.toggle {
+    background-image: url(../images/icons/20-hide.svg);
+}
+.ram_icon.scan {
+    background-image: url(../images/icons/01-scan.svg);
+}
+.ram_icon.file {
+    background-image: url(../images/icons/01-scan.svg);
+}
+.ram_icon.edit {
+    background-image: url(../images/icons/03-edit.svg);
+}
+.ram_icon.bell {
+    background-image: url(../images/icons/04-bell.svg);
+}
+.ram_icon.signall {
+    background-image: url(../images/icons/05-signall.svg);
+}
+.ram_icon.fireicon {
+    background-image: url(../images/icons/06-fire.svg);
+}
+.ram_icon.access_codes {
+    background-image: url(../images/icons/07-access-codes.svg);
+}
+.ram_icon.network {
+    background-image: url(../images/icons/08-network.svg);
+}
+.ram_icon.panels {
+    background-image: url(../images/icons/09-panels.svg);
+}
+.ram_icon.inputs {
+    background-image: url(../images/icons/10-inputs.svg);
+}
+.ram_icon.input_groups {
+    background-image: url(../images/icons/11-input-groups.svg);
+}
+.ram_icon.outputs {
+    background-image: url(../images/icons/12-outputs.svg);
+}
+.ram_icon.fat_fbf {
+    background-image: url(../images/icons/13-fat-fbf.svg);
+}
+.ram_icon.zones {
+    background-image: url(../images/icons/14-zones.svg);
+}
+.ram_icon.peripheral_devices {
+    background-image: url(../images/icons/15-peripheral-devices.svg);
+}
+.ram_icon.loop_devices {
+    background-image: url(../images/icons/16-loop-devices.svg);
+}
+.ram_icon.zones {
+    background-image: url(../images/icons/14-zones.svg);
+}
+.ram_icon.settings {
+    background-image: url(../images/icons/17-settings.svg);
+}
+.ram_icon.help {
+    background-image: url(../images/icons/18-help.svg);
+}
+.ram_icon.logout {
+    background-image: url(../images/icons/19-log-out.svg);
+}
+.ram_icon.hide {
+    background-image: url(../images/icons/20-hide.svg);
+}
+.ram_icon.sensor_iris {
+    background-image: url(../images/icons/21-sensor-iris.svg);
+}
+.ram_icon.arrow_left {
+    background-image: url(../images/icons/23-arrow-left.svg);
+}
+.ram_icon.arrow_right {
+    background-image: url(../images/icons/24-arrow-right.svg);
+}
+.ram_icon.add_device {
+    background-image: url(../images/icons/22-add-device.svg);
+}

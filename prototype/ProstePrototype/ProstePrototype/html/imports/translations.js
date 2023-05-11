@@ -6,7 +6,7 @@
             short: "БГ",
             key: "_Bulgarian",
             id: "bg",
-            icon: "languages/BG.jpg",
+            icon: "languages/BG.png",
         },
         {
             title: "English",
@@ -165,6 +165,7 @@
         logout: { 'bg': 'Изход' },
         login: { 'bg': 'Вход' },
         iris: { 'bg': 'IRIS', 'en': 'IRIS', 'ge': 'IRIS' },
+        iris4: { 'bg': 'IRIS4', 'en': 'IRIS4', 'ge': 'IRIS4' },
         iris8: { 'bg': 'IRIS8', 'en': 'IRIS8', 'ge': 'IRIS8' },
         eclipse: { 'bg': 'ECLIPSE', 'en': 'ECLIPSE', 'ge': 'ECLIPSE' },
         eclipse99: { 'bg': 'ECLIPSE99', 'en': 'ECLIPSE99', 'ge': 'ECLIPSE99' },

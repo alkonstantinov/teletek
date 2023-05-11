@@ -1045,47 +1045,49 @@ function toggleDarkMode(show, filename) {
 //#region UTILS
 // select dropdownmenu limitation to 5 rows
 function setupSelFixer(contain = $("body")) {
-    if (!window.IsLocal) {
-        contain.find("select").on("mousedown", function (ev) {
-            //console.log("selFixer mouseDown.");
-            var _this = $(this);
-            //this.focus();
-            var size = 5;
-            if (_this.hasClass("sf6")) {
-                size = 6;
-            } else if (_this.hasClass("sf3")) {
-                size = 3;
-            } else if (_this.hasClass("sf8")) {
-                size = 8;
-            } else if (_this.hasClass("sf12")) {
-                size = 12;
-            }
-            //console.log("ht:", this.style.height);
-            if (this.options.length > size) {
-                this.size = size;
-                this.style.height = `${size}rem`;
-                this.style.marginBottom = (-(size - 1)) + "rem";
-                this.style.position = "relative";
-                this.style.zIndex = 10009;
-            }
-        });
-        //onchange
-        contain.find("select").on("change select", function () {
-            //console.log("selFixer Change.");
-            resetSelFixer(this);
-        });
-        //onblur
-        contain.find("select").on("blur", function () {
-            resetSelFixer(this);
-        });
-        function resetSelFixer(el) {
-            el.size = 0;
-            el.style.height = "auto";
-            el.style.marginBottom = "0rem";
-            el.style.zIndex = 1;
-        }
-    }
 }
+//function setupSelFixer(contain = $("body")) {
+//    if (!window.IsLocal) {
+//        contain.find("select").on("mousedown", function (ev) {
+//            //console.log("selFixer mouseDown.");
+//            var _this = $(this);
+//            //this.focus();
+//            var size = 5;
+//            if (_this.hasClass("sf6")) {
+//                size = 6;
+//            } else if (_this.hasClass("sf3")) {
+//                size = 3;
+//            } else if (_this.hasClass("sf8")) {
+//                size = 8;
+//            } else if (_this.hasClass("sf12")) {
+//                size = 12;
+//            }
+//            //console.log("ht:", this.style.height);
+//            if (this.options.length > size) {
+//                this.size = size;
+//                this.style.height = `${size}rem`;
+//                this.style.marginBottom = (-(size - 1)) + "rem";
+//                this.style.position = "relative";
+//                this.style.zIndex = 10009;
+//            }
+//        });
+//        //onchange
+//        contain.find("select").on("change select", function () {
+//            //console.log("selFixer Change.");
+//            resetSelFixer(this);
+//        });
+//        //onblur
+//        contain.find("select").on("blur", function () {
+//            resetSelFixer(this);
+//        });
+//        function resetSelFixer(el) {
+//            el.size = 0;
+//            el.style.height = "auto";
+//            el.style.marginBottom = "0rem";
+//            el.style.zIndex = 1;
+//        }
+//    }
+//}
 
 // checking a hex value function
 function checkHexRegex(event) {
@@ -1152,7 +1154,23 @@ function intListChangedValueHandler(index, newValue, path, input_id, size) {
 
 //#region //----- COMMON Funcs -----////////////////////////////////////////////
 const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderText, bytesData, lengthData, readOnly, RmBtn = false, ip = false, path = '', value }) => {
-    return `<div class="form-item roww flex">
+    return `<div class="form-floating mb-3">
+                ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
+                    <i class="fa-solid fa-square-minus fa-2x"></i>
+                </button>` : ""}
+                <input type="${type === 'passInput' ? 'password' : 'text'}" class="form-control ram_floating_input"
+                       id="${input_id}" name="${input_id}" 
+                       ${maxTextLength ? `maxlength="${maxTextLength}"` : (ip ? `maxlength = "15"` : "")}
+                       ${ip ? `ip="yes"` : ""}
+                       ${placeHolderText ? `placeholder="${placeHolderText}"` : (ip ? `placeholder = " 0 . 0 . 0 . 0 "` : "")} 
+                       onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
+                       ${value ? `value="${value}"` : ""}
+                       ${bytesData ? `bytes="${bytesData}"` : ""} 
+                       ${lengthData ? `length="${lengthData}"` : ""} 
+                       ${readOnly ? "disabled" : ''}/>
+                <label for="${input_id}">${input_name}</label>
+            </div>`
+            /*old style : <div class="form-item roww flex">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
@@ -1167,23 +1185,35 @@ const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderTe
                        ${bytesData ? `bytes="${bytesData}"` : ""} 
                        ${lengthData ? `length="${lengthData}"` : ""} 
                        ${readOnly ? "disabled" : ''}/>
-            </div>`
+            </div> */
 }
 
 const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     path = path.replaceAll("'", "§");
-    return `<div class="form-item roww">
+    return `<div class="form-check mb-3">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
-                <label for="${input_id}">${input_name}</label>
+                <input type="checkbox" id="${input_id}" class="form-check-input ram_checkbox"
+                    ${bytesData ? `bytes="${bytesData}"` : ""} 
+                    ${lengthData ? `length="${lengthData}"` : ""} 
+                    ${readOnly ? "disabled" : ''}
+                    ${checked ? "checked" : ''}
+                    onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')" />
+                <label for="${input_id}" class="form-check-label">${input_name}</label>
+            </div>`
+            /*old style: <div class="form-item roww">
+                ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
+                    <i class="fa-solid fa-square-minus fa-2x"></i>
+                </button>` : ""}
                 <input type="checkbox" id="${input_id}" class="ml10"
                     ${bytesData ? `bytes="${bytesData}"` : ""} 
                     ${lengthData ? `length="${lengthData}"` : ""} 
                     ${readOnly ? "disabled" : ''}
                     ${checked ? "checked" : ''}
                     onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')" />
-            </div>`
+                <label for="${input_id}">${input_name}</label>
+            </div> */
 }
 
 const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
@@ -1213,7 +1243,54 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, nov
 const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, bytesData, lengthData, readOnly, modal, addButton = false, RmBtn = false, path = "" }) => {
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let image = selectList.filter(x => x.imageKey).length > 0;
-    let str = `<${image ? "fieldset" : "div"} class="form-item roww mt-1">
+
+    let str = `<${image ? "fieldset" : "div"} class="form-floating mb-3">
+                    ${image ? `<legend>${input_name}</legend>` : ""}
+                    ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
+                        <i class="fa-solid fa-square-minus fa-2x"></i>
+                    </button>` : ""}
+                    ${addButton ? `<button 
+                                        id="popoverData_${input_id}" class="btn"
+                                        data-content="Popover with data - trigger"
+                                        onmouseover="javascript: showChannelInfo(this, '${path}');"
+                                        data-placement="top" data-original-title="Used in:">
+                                            <i class="fa-solid fa-circle-question"></i>
+                                    </button>`: ""}
+                    <select class="form-select ram_floating_select" id="${input_id}" name="${input_id}" aria-label="${input_name}"
+                        ${bytesData ? `bytes="${bytesData}"` : ""} 
+                        ${lengthData ? `length="${lengthData}"` : ""} 
+                        ${readOnly ? "disabled" : ''}                            
+                        onchange="javascript: ${modal ? modal : `sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
+                            ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""})
+                            ${image ? `; loadDiv(this,'showSchema_${input_id}', this.value + '_function');` : ""}
+                        `}" >`;
+    if (selectList.length > 0) {
+        let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
+        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
+        selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
+    }
+    str += '</select>';
+    str += image ? "" : `<label for="${input_id}">${input_name}</label>`
+    if (link.length > 0)
+        str += `<img src onerror="javascript: changeStyleDisplay('${link}', '${input_id}')" />`; // dirty workaround
+    str += image ? "" : "</div>";
+
+    if (image) {
+        str += `<div id="showSchema_${input_id}" class="image col-9" style="margin-left: auto; margin-right: auto">`
+        let selectedImageEl = selectList.find(o => o.selected);
+        if (selectedImageEl) {
+            str += `<img src="${BUTTON_IMAGES[selectedImageEl.imageKey].im}" alt="${selectedImageEl.imageKey}" />`
+        }
+        str += `</div>`;
+
+        selectList.map(o => str += `<div style="display: none" id="${o["value"] + "_function"}">
+            <img src="${BUTTON_IMAGES[o.imageKey].im}" alt="${o.imageKey}" />
+        </div>`);
+        str += "</fieldset>"
+    }
+    return str;
+    /* old way: let str = `<${image ? "fieldset" : "div"} class="form-item roww mt-1">
                     ${image ? `<legend>${input_name}</legend>` : ""}
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -1244,26 +1321,33 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
     str += '</select>';
     if (link.length > 0)
         str += `<img src onerror="javascript: changeStyleDisplay('${link}', '${input_id}')" />`; // dirty workaround
-    str += `</div>${image ? "" : "</div>"}`;
-
-    if (image) {
-        str += `<div id="showSchema_${input_id}" class="image col-9" style="margin-left: auto; margin-right: auto">`
-        let selectedImageEl = selectList.find(o => o.selected);
-        if (selectedImageEl) {
-            str += `<img src="${BUTTON_IMAGES[selectedImageEl.imageKey].im}" alt="${selectedImageEl.imageKey}" />`
-        }
-        str += `</div>`;
-
-        selectList.map(o => str += `<div style="display: none" id="${o["value"] + "_function"}">
-            <img src="${BUTTON_IMAGES[o.imageKey].im}" alt="${o.imageKey}" />
-        </div>`);
-        str += "</fieldset>"
-    }
-    return str;
+    str += `</div>${image ? "" : "</div>"}`; */
 }
 
 const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "", value }) => {
-    return `<div class="form-item roww">
+    return `<div>
+                <label for="${input_id}" class="input-group-text">${input_name}</label>
+                <div class="input-group mb-3">
+                    ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
+                        <i class="fa-solid fa-square-minus fa-2x"></i>
+                    </button>` : ""}                
+                    <input class="form-control ram_number_input"
+                            type="number"
+                            id="${input_id}"
+                            name="${input_id}"
+                            ${max ? `data-maxlength="${`${max}`.length}"` : ""}
+                            oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+                            onchange"javascript: myFunction2(this.id)"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
+                            ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
+                            ${value ? `value="${value}"` : ""}
+                            ${bytesData ? `bytes="${bytesData}"` : ""} 
+                            ${lengthData ? `length="${lengthData}"` : ""} 
+                            ${readOnly ? "disabled" : ''} />
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="ram_number_input_button_left"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="ram_number_input_button_right"></button>
+            </div></div>`;
+            /*old style: <div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
@@ -1281,7 +1365,7 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                         ${bytesData ? `bytes="${bytesData}"` : ""} 
                         ${lengthData ? `length="${lengthData}"` : ""} 
                         ${readOnly ? "disabled" : ''} />
-            </div>`;
+            </div> */
 }
 
 const getEmacInput = ({ input_id, input_name, readOnly, value, RmBtn = false, path = "" }) => {

@@ -1309,3 +1309,280 @@ input:checked + .slider:before {
 .without:after {
     content: '',
 }
+
+/*new design*/
+
+/*INPUT STYLES START*/
+
+
+/*BASIC TEXT INPUT*/
+.ram_floating_input {
+    background-color: #F8F8F8;
+    border: 0px;
+    box-shadow: 0px 3px 15px #0000001A;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+    color: #2F66AD !important;
+    font-weight: 600;
+}
+
+
+    .ram_floating_input:focus {
+        background-color: #DCE4EF;
+        box-shadow: 0px 3px 15px #0000001A !important;
+    }
+
+    .ram_floating_input:hover {
+        background-color: #DCE4EF;
+        /*  add !important to background-color if you want to activate hover on all inputs*/
+    }
+
+    .ram_floating_input + label {
+        color: #818181;
+    }
+
+.form-floating > .form-control-plaintext ~ label, .form-floating > .form-control:focus ~ label, .form-floating > .form-control:not(:placeholder-shown) ~ label, .form-floating > .form-select ~ label {
+    opacity: 1;
+}
+
+.ram_floating_input:focus + label {
+    color: #000000;
+    opacity: 1 !important;
+}
+/*DISABLED TEXT INPUT*/
+
+.ram_floating_input:disabled {
+    background-color: #D6D6D6;
+    color: #0000004D !important;
+}
+
+    .ram_floating_input:disabled + label {
+        color: #00000099;
+    }
+
+/*BASIC NUMBER INPUT*/
+.ram_number_input::-webkit-inner-spin-button,
+.ram_number_input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.ram_number_input {
+    background-color: #F8F8F8;
+    border: 0px;
+    box-shadow: 0px 3px 15px #0000001A;
+    border-radius: 5px !important;
+    transition: background-color 0.5s ease;
+    color: #818181 !important;
+    text-align: center;
+    font-weight: 600;
+}
+
+    .ram_number_input:focus {
+        background-color: #DCE4EF;
+        box-shadow: 0px 3px 15px #0000001A !important;
+    }
+
+.ram_number_input_button_left {
+    background-color: #D1D1D1;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 99;
+    width: 25px;
+    height: 25px;
+    border: 0px;
+    border-radius: 3px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14.186' height='1.5' viewBox='0 0 14.186 1.5'%3E%3Cpath d='M0,0V12.686' transform='translate(0.75 0.75) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.ram_number_input_button_right {
+    background-color: #D1D1D1;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 99;
+    width: 25px;
+    height: 25px;
+    border: 0px;
+    border-radius: 3px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18.174' height='18.174' viewBox='0 0 18.174 18.174'%3E%3Cg transform='translate(0.75 0.75)'%3E%3Cpath d='M161.188,154.953v16.674' transform='translate(-152.851 -154.953)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1.5'/%3E%3Cpath d='M0,0V16.674' transform='translate(0 8.337) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 10px;
+    transition: background-color 0.5s ease;
+}
+
+    .ram_number_input_button_left:hover, .ram_number_input_button_right:hover {
+        background-color: #DCE4EF;
+    }
+
+    .ram_number_input_button_left:active, .ram_number_input_button_right:active {
+        background-color: #005ED8;
+    }
+/*DISABLED NUMBER INPUT*/
+.ram_number_input:disabled {
+    background-color: #CBCBCB;
+    color: #8D8D8D !important;
+}
+
+.ram_number_input_button_left:disabled, .ram_number_input_button_right:disabled {
+    background-color: #A7A7A7;
+}
+/*INPUT STYLES END*/
+
+
+/*SELECT STYLES START*/
+
+/*BASIC SELECT INPUT*/
+.ram_floating_select {
+    background-color: #F8F8F8;
+    border: 0px;
+    box-shadow: 0px 3px 15px #0000001A;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+    color: #2F66AD !important;
+}
+
+
+    .ram_floating_select:focus {
+        background-color: #DCE4EF;
+        box-shadow: 0px 3px 15px #0000001A !important;
+    }
+
+    .ram_floating_select:hover {
+        background-color: #DCE4EF;
+        /*  add !important to background-color if you want to activate hover on all inputs*/
+    }
+
+    .ram_floating_select + label {
+        color: #818181;
+    }
+
+    .ram_floating_select:focus + label {
+        color: #000000;
+        opacity: 1 !important;
+    }
+*DISABLED SELECT INPUT*/
+
+.ram_floating_select:disabled {
+    background-color: #D6D6D6;
+    color: #0000004D !important;
+}
+
+.ram_floating_select:disabled + label {
+    color: #00000099;
+}
+
+/*SELECT STYLES END*/
+
+
+
+/*CHECKBOX STYLES START*/
+
+/*BASIC CHECKBOX START*/
+.ram_checkbox {
+    background-color: #D1D1D1;
+    border-radius: 3px !important;
+    border: 0px;
+    transition: background-color 0.5s ease;
+}
+
+    .ram_checkbox + label {
+        color: #ABAFB3;
+    }
+
+    .ram_checkbox:hover {
+        background-color: #DCE4EF;
+    }
+
+    .ram_checkbox:focus, .ram_checkbox::before {
+        box-shadow: none;
+    }
+
+    /*CHEKCED CHECKBOX START*/
+    .ram_checkbox:checked {
+        background-color: #005ED8;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25.313' height='18.84' viewBox='0 0 25.313 18.84'%3E%3Cpath d='M824.372,2653.706a.937.937,0,0,0-1.323,0l-15.158,15.139-5.962-5.955a.934.934,0,0,0-1.323,1.32l6.623,6.616a.937.937,0,0,0,1.323,0l15.819-15.8A.933.933,0,0,0,824.372,2653.706Z' transform='translate(-799.833 -2652.846)' fill='%23fff' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") !important;
+        background-size: 0.7em;
+    }
+
+        .ram_checkbox:checked + label {
+            color: #000000;
+        }
+
+    /*DISABLED CHECKBOX START*/
+    .ram_checkbox:disabled {
+        background-color: #A7A7A7;
+        opacity: 1;
+    }
+
+        .ram_checkbox:disabled + label {
+            color: #ABAFB3;
+            opacity: 1 !important;
+        }
+
+/*CHECKBOX STYLES END*/
+
+/*ATTRIBUTE HOLDER START*/
+
+.ram_attribute_holder {
+    background-color: #FFFFFF;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.ram_attribute_holder_title {
+    font-size: 17px;
+    color: #A5A5A5;
+}
+
+/*ATTRIBUTE HOLDER END*/
+
+/*RAM INPUT COMBINE START*/
+
+.ram_input_combine {
+    box-shadow: 0px 3px 15px #00000029;
+    border-radius: 5px;
+}
+
+    .ram_input_combine .form-floating .ram_floating_input {
+        border-radius: 0px;
+        box-shadow: 0px 0px 0px;
+        border-top: 1px solid #D1D1D1;
+    }
+
+    .ram_input_combine .form-floating:first-child .ram_floating_input {
+        border-radius: 5px 5px 0px 0px;
+        border-top: 0px;
+    }
+
+    .ram_input_combine .form-floating:last-child .ram_floating_input {
+        border-radius: 0px 0px 5px 5px;
+    }
+
+/*RAM INPUT COMBINE END*/
+
+/*RAM SCHEDULE START*/
+
+.ram_schedule_title {
+    display: inline-block;
+    background-color: #E6E6E6;
+    font-weight: 400;
+    color: #1E2022;
+    padding: 3px 25px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+    .ram_schedule_title:first-of-type {
+        margin-top: 0px;
+    }
+
+/*RAM SCHEDULE END*/

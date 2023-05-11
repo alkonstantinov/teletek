@@ -19,30 +19,38 @@
 
     <link rel="stylesheet" href="IRIS.css" />
     <link rel="stylesheet" href="imports/css/accordion.css" />
+    <link rel="stylesheet" href="imports/css/sidebar.css" />
+    <link rel="stylesheet" href="imports/css/ram-icons.css" />
 
     <title>Teletek Manager</title>
 </head>
 
 <body>
-    <div class="accordion" id="panelsList">
-        
+    <div id="ram_sidebar" class="fullopen">
+        <div class="ram_sidebar_content_wrapper">
+            <div class="ram_flex_left" id="ram_sidebar_nav">
+                <div class="ram_flex_top">
+                    <div class="accordion" id="ram_sidebar_menu">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <menu type="context" id="ctxMenu" style="width: fit-content;">
+            <menuitem title="Read" topic="Read" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-book-open pr-1"></i>&nbsp;</menuitem>
+            <menuitem title="Rename" topic="Rename" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-pen pr-1"></i>&nbsp;</menuitem>
+            <menuitem title="Delete" topic="Delete" onclick="javascript: sendMsg(this)"><i class="fa-regular fa-trash-can pr-1"></i>&nbsp;</menuitem>
+            <menuitem title="Write" topic="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i>&nbsp;</menuitem>
+            <menuitem title="Firmware update" topic="Update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i>&nbsp;</menuitem>
+            <menuitem title="Verify" topic="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i>&nbsp;</menuitem>
+            <menuitem title="Help" topic="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i>&nbsp;</menuitem>
+        </menu>
     </div>
+            <!--<script src="pages-dynamic.js"></script>-->
+            <script src="imports/translations.js"></script>
+            <script src="imports/wb1.js"></script>
 
-    <menu type="context" id="ctxMenu" style="width: fit-content;">
-        <menuitem title="Read" topic="Read" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-book-open pr-1"></i>&nbsp;</menuitem>
-        <menuitem title="Rename" topic="Rename" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-pen pr-1"></i>&nbsp;</menuitem>
-        <menuitem title="Delete" topic="Delete" onclick="javascript: sendMsg(this)"><i class="fa-regular fa-trash-can pr-1"></i>&nbsp;</menuitem>
-        <menuitem title="Write" topic="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i>&nbsp;</menuitem>
-        <menuitem title="Firmware update" topic="Update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i>&nbsp;</menuitem>
-        <menuitem title="Verify" topic="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i>&nbsp;</menuitem>
-        <menuitem title="Help" topic="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i>&nbsp;</menuitem>
-    </menu>
-
-    <!--<script src="pages-dynamic.js"></script>-->
-    <script src="imports/translations.js"></script>
-    <script src="imports/wb1.js"></script>
-
-    <script>
+            <script>
 //        var wb1 = `{
 //                "~panel_id": "345152345-2430750934toh298",
 //      "iris_access_code": {
@@ -191,7 +199,7 @@
 //      "~path": "ELEMENTS.iris.CONTAINS"
 //}`;
 //        receiveMessageWPF(wb1);
-    </script>
+            </script>
 </body>
 
 </html>

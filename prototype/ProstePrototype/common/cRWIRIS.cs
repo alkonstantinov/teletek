@@ -629,6 +629,18 @@ namespace common
         }
 
         #region merge
+        private bool IRIS4SpecificMerge(string wkey, string rkey)
+        {
+            string rkey1 = Regex.Replace(rkey, "IRIS4_NO_LOOP", "IRIS4_LOOP");
+            string wstart = Regex.Replace(wkey, "/IRIS4_SENSORS$", "");
+            if (Regex.IsMatch(rkey1, "^" + wstart) && Regex.IsMatch(rkey, "IRIS4_SENSORS"))
+                return true;
+            //
+            if (Regex.IsMatch(rkey, "^IRIS4_MODULES") && Regex.IsMatch(wkey, "LOOP1/IRIS4_MODULES$"))
+                return true;
+            //
+            return false;
+        }
         private string FindReadKey(string wkey)
         {
             string loop = "abcd";
@@ -664,6 +676,8 @@ namespace common
                 if (Regex.IsMatch(key, "^" + tteloop))
                     return key;
                 if (Regex.IsMatch(key, tteloop + "$"))
+                    return key;
+                if (IRIS4SpecificMerge(wkey, key))
                     return key;
                 //m = Regex.Match(wkey, @"[\w\W]+?[\\/]([\w_]+)$");
                 //if (m.Success && Regex.IsMatch(key, m.Groups[1].Value))

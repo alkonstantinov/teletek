@@ -88,6 +88,7 @@ namespace ProstePrototype
 
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
+
             DataContext = this;
 
             DarkMode = false;
@@ -104,11 +105,22 @@ namespace ProstePrototype
 
             define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
             loadWb1 = true;
-        }
 
+        }
+       
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
+        }
+        
+        private void MouseEnter_func_log_out(object sender, MouseEventArgs e)
+        {
+            log_out_img.Source = new BitmapImage(new Uri("Images/19-log-out-blue.png", UriKind.Relative));
+        }
+
+        private void MouseOut_func_log_out(object sender, MouseEventArgs e)
+        {
+            log_out_img.Source = new BitmapImage(new Uri("Images/19-log-out.png", UriKind.Relative));
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -166,7 +178,7 @@ namespace ProstePrototype
         {
             var bgd = Color.FromRgb(248, 249, 250);
             var fgd = Color.FromRgb(124, 124, 125);
-            var btn_bgd = (Color)ColorConverter.ConvertFromString("#FFebebeb");
+            var btn_bgd = (Color)ColorConverter.ConvertFromString("#f5f5f5");
             var btn_fgd = (Color)ColorConverter.ConvertFromString("Gray");
 
             if (darkMode)
@@ -261,8 +273,9 @@ namespace ProstePrototype
             switch (json["Command"].ToString())
             {
                 case "NewSystem":
-                    JObject panel = cJson.AddPanel(json["Params"].ToString());
-                    LoadPage(json["Params"].Value<string>(), null);
+                    //JObject panel = cJson.AddPanel(json["Params"]["schema"].ToString());
+                    JObject panel = cJson.AddPanel((JObject)json["Params"]);
+                    LoadPage(json["Params"]["schema"].Value<string>(), null);
                     loadWb1 = false;
                     break;
                 case "LoadPage":

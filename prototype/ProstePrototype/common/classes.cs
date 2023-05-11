@@ -87,6 +87,18 @@ namespace common
                     return null;
             }
         }
+        public static string IRISLogCMD
+        {
+            get
+            {
+                JObject set = Settings;
+                JToken t = set["iris_log_command"];
+                if (t != null)
+                    return t.ToString();
+                else
+                    return null;
+            }
+        }
         public static string setting(string key)
         {
             JObject set = Settings;

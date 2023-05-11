@@ -913,8 +913,50 @@ namespace lcommunicate
             return res;
         }
         #endregion
+        private static List<JObject> AvailableSystems()
+        {
+            List<JObject> res = new List<JObject>();
+            string[] dirs = Directory.GetDirectories("Configs\\XML\\Systems");
+            List<JObject> lstFire = new List<JObject>();
+            List<JObject> lstGuard = new List<JObject>();
+            List<JObject> lstOther = new List<JObject>();
+            foreach (string s in dirs)
+            {
+                string dir = Path.GetFileName(s);
+                JObject jSys = new JObject();
+                if (Regex.IsMatch(dir, "^(iris|simpo)", RegexOptions.IgnoreCase))
+                    jSys["deviceType"] = "fire";
+                else if (Regex.IsMatch(dir, "^eclipse", RegexOptions.IgnoreCase))
+                    jSys["deviceType"] = "guard";
+                else
+                    jSys["deviceType"] = "";
+                jSys["schema"] = dir.ToLower();
+                jSys["title"] = dir;
+                if (jSys["deviceType"].ToString() == "fire")
+                    jSys["interface"] = "IP";
+                else
+                    jSys["interface"] = "COM";
+                jSys["address"] = "";
+                //
+                if (jSys["deviceType"].ToString() == "fire")
+                    lstFire.Add(jSys);
+                else if (jSys["deviceType"].ToString() == "guard")
+                    lstGuard.Add(jSys);
+                else lstOther.Add(jSys);
+            }
+            foreach (JObject o in lstFire) res.Add(o);
+            foreach (JObject o in lstGuard) res.Add(o);
+            foreach (JObject o in lstOther) res.Add(o);
+            //
+            return res;
+        }
         public static JArray Scan()
         {
+            List<JObject> dirs = AvailableSystems();
+            JArray res = new JArray();
+            foreach (JObject o in dirs) res.Add(o);
+            return res;
+            //
             cTransport t = new cIP();
             //object conn = t.Connect(new cIPParams("92.247.2.162", 7000));
             ////byte[] res = t.SendCommand(conn, t._ver_cmd);

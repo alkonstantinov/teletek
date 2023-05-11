@@ -1086,6 +1086,33 @@ namespace ljson
                 WriteReadMerge = cfg.RWMerged();
             }
         }
+        public static string ReadLog(object conn_params)
+        {
+            cTransport conn = cComm.ConnectBase(conn_params);
+            byte[] blog = cComm.SendCommand(conn, settings.IRISLogCMD);
+            cComm.CloseConnection(conn);
+            if (settings.logreads)
+            {
+                if (!_log_bytesreaded.ContainsKey(settings.IRISLogCMD))
+                    _log_bytesreaded.Add(settings.IRISLogCMD, blog);
+            }
+            //string rlog = File.ReadAllText("read.log");
+            //string s = "";
+            //for (int i = 0; i < blog.Length; i++)
+            //    s += blog[i].ToString("X2");
+            //s = settings.IRISLogCMD + ":" + s;
+            //rlog += ((!Regex.IsMatch(rlog, @"\r\n$")) ? "\r\n" : "") + s;
+            //File.WriteAllText("read.log", rlog);
+            if (blog.Length > 6 && blog[1] == 0xff)
+            {
+                byte[] bres = new byte[blog.Length - 6];
+                for (int i = 0; i < bres.Length; i++)
+                    bres[i] = blog[i + 6];
+                string slog = Encoding.Unicode.GetString(bres).Replace('\0', '|');
+                return slog;
+            }
+            return "";
+        }
         public static void ClearCache()
         {
             cComm.ClearCache();
@@ -1098,9 +1125,10 @@ namespace ljson
             //if (reading)
             //    return;
             //reading = true;
-            ClearCache();
             if (settings.logreads)
                 _log_bytesreaded.Clear();
+            //string slog = ReadLog(conn_params);
+            ClearCache();
             SetRWFiles(conn_params);
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
@@ -1975,9 +2003,9 @@ namespace ljson
             return;
         }
         #endregion
-        public static JObject AddPanel(string name)
+        public static JObject AddPanel(JObject jSys)
         {
-            string filename = FilePathFromSchema(name);
+            string filename = FilePathFromSchema(jSys["schema"].ToString());
             JObject _panel = GetPanelTemplate(filename);
             //if (_panel != null)
             //    return (JObject)_panel["ELEMENTS"][name];
@@ -1990,7 +2018,7 @@ namespace ljson
             _current_panel_id = _panel_id;
             //
             if (_panel == null)
-                _panel = SchemaJSON(name);
+                _panel = SchemaJSON(jSys["schema"].ToString());
             else
                 _last_loaded_template_filepath = filename;
             if (_internal_relations_operator == null)
@@ -2005,7 +2033,7 @@ namespace ljson
             else
                 _panel_templates[filename] = _panel;
 
-            _main_content_key = Regex.Replace(name, @"\d+$", "");
+            _main_content_key = Regex.Replace(jSys["schema"].ToString(), @"\d+$", "");
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
@@ -2022,8 +2050,8 @@ namespace ljson
         public static JObject GetNode(string name)
         {
             JObject _panel = CurrentPanel;
-            if (_panel == null)
-                _panel = AddPanel(name);
+            //if (_panel == null)
+            //    _panel = AddPanel(name);
             if (_panel != null)
             {
                 JObject _elements = (JObject)_panel["ELEMENTS"];

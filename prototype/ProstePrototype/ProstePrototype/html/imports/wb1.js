@@ -41,8 +41,8 @@ function toggleLang(key) {
     // reload
     // document.location.reload();
 
-    // shoud clear the document.getElementById('panelsList').innerHTML = "";
-    document.getElementById('panelsList').innerHTML = "";
+    // shoud clear the document.getElementById('ram_sidebar_menu').innerHTML = "";
+    document.getElementById('ram_sidebar_menu').innerHTML = "";
 
     reloading = true;
     // request the previous content of panels with boundAsync.panelsInLeftBrowser
@@ -98,7 +98,7 @@ function receiveMessageWPF(jsonTxt) {
             divD.classList = "row m2 no-gutter";
             devices = json["pageName"]["wb2"];
             for (let i = 0; i < devices.length; i++) {
-                addButton(devices[i].title, devices[i].schema.toLowerCase(), divD, devices[i]);
+                addButton(devices[i].title, divD, i, devices[i]);
                 body.appendChild(divD);
             }
             break;
@@ -110,7 +110,7 @@ function receiveMessageWPF(jsonTxt) {
             break;
         default:
             // case menu-page
-            body = document.getElementById('panelsList');
+            body = document.getElementById('ram_sidebar_menu');
             let id = json["~panel_id"].replaceAll("-", "_");
 
             // check if there is a div with similar id;
@@ -131,15 +131,15 @@ function receiveMessageWPF(jsonTxt) {
                 let panelIcon, pageType;
                 switch (true) {
                     case jsonKeys[0].toLowerCase().startsWith("iris"):
-                        panelIcon = '<span class="material-icons-outlined fire">local_fire_department</span>';
+                        panelIcon = '<i class="ram_icon fireicon fire"></i>';
                         pageType = "iris";
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("eclipse"):
-                        panelIcon = '<span class="material-icons-outlined normal">notifications</span >';
+                        panelIcon = '<i class="ram_icon bell normal"></i>';
                         pageType = "eclipse";
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("tte"):
-                        panelIcon = '<span class="material-icons-outlined grasse">wifi</span > ';
+                        panelIcon = '<i class="ram_icon signall grasse"></i>';
                         pageType = "tte";
                         break;
                     default: break;
@@ -148,15 +148,15 @@ function receiveMessageWPF(jsonTxt) {
                                 
                 // 2. create the new panel-item
                 let panelItem = document.createElement('div');
-                panelItem.classList = "accordion-item m-4";
+                panelItem.classList = "accordion-item";
                 panelItem.insertAdjacentHTML(
                     'afterbegin', 
                     `<h2 class="accordion-header" id="${id}" onclick="javascript: selectNewPanel(this.id, this)" pageType="${pageType}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}" aria-expanded="true" aria-controls="collapse${id}">
-                            ${panelIcon} ${panelName}
+                            ${panelIcon} <span class="ram_btn_title">${panelName}</span>
                         </button>
                     </h2>
-                    <div id="collapse${id}" class="accordion-collapse collapse show" aria-labelledby="${id}" data-bs-parent="#panelsList"></div>`);
+                    <div id="collapse${id}" class="accordion-collapse collapse show" aria-labelledby="${id}" data-bs-parent="#ram_sidebar_menu"></div>`);
                 
                 panelCreationHandler(panelItem, json);
 
@@ -174,21 +174,24 @@ function receiveMessageWPF(jsonTxt) {
 //#endregion
 
 // addButton function for creating the main panels buttons
-const addButton = (title, schemaKey, div, localJSON = {}) => {
+const addButton = (title, div, index, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
-    // clean all digits from used schema
-    let key = schemaKey.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
-
     // button color definition
     let color = indexFlag ? localJSON.deviceType : "";
+    if (color === 'guard') color = ''; // options for color: "", "fire", "grasse"
 
-    if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
-    else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
+    // clean all digits from used deviceType
+    let key;
+    switch (color) {
+        case 'fire': key = 'iris'; break;
+        case 'grasse': key = 'tte'; break;
+        default: key = 'eclipse';
+    }
 
     // title definition
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
-
-    let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': '${schemaKey}'})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${schemaKey}">
+    let localJSONString = JSON.stringify(localJSON).replaceAll("\"", "'");
+    let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': ${localJSONString}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${index}_${localJSON.schema}">
                 <div class="btnStyle ${color}">
                     <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
                         <br /><span class="someS">
