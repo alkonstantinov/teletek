@@ -93,9 +93,10 @@ function receiveMessageWPF(jsonTxt) {
             break;
         case !!document.getElementById('divDevices'):
             /* case index-page */
+            document.body.style.backgroundColor = "#E6ECF4";
             body = document.getElementById('divDevices');
             let divD = document.createElement('div');
-            divD.classList = "row m2 no-gutter";
+            divD.classList = "row m-2 g10 no-gutter";
             devices = json["pageName"]["wb2"];
             for (let i = 0; i < devices.length; i++) {
                 addButton(devices[i].title, divD, i, devices[i]);
@@ -128,19 +129,22 @@ function receiveMessageWPF(jsonTxt) {
                         .filter(y => y !== "~panel_name")
                         .filter(y => y !== "~path");
 
-                let panelIcon, pageType;
+                let panelIcon, pageType, color;
                 switch (true) {
                     case jsonKeys[0].toLowerCase().startsWith("iris"):
                         panelIcon = '<i class="ram_icon fireicon fire"></i>';
                         pageType = "iris";
+                        color = "fire";
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("eclipse"):
                         panelIcon = '<i class="ram_icon bell normal"></i>';
                         pageType = "eclipse";
+                        color = "normal";
                         break;
                     case jsonKeys[0].toLowerCase().startsWith("tte"):
                         panelIcon = '<i class="ram_icon signall grasse"></i>';
                         pageType = "tte";
+                        color = "grasse";
                         break;
                     default: break;
                 }
@@ -148,7 +152,7 @@ function receiveMessageWPF(jsonTxt) {
                                 
                 // 2. create the new panel-item
                 let panelItem = document.createElement('div');
-                panelItem.classList = "accordion-item";
+                panelItem.classList.add("accordion-item", color);
                 panelItem.insertAdjacentHTML(
                     'afterbegin', 
                     `<h2 class="accordion-header" id="${id}" onclick="javascript: selectNewPanel(this.id, this)" pageType="${pageType}">
@@ -158,7 +162,7 @@ function receiveMessageWPF(jsonTxt) {
                     </h2>
                     <div id="collapse${id}" class="accordion-collapse collapse show" aria-labelledby="${id}" data-bs-parent="#ram_sidebar_menu"></div>`);
                 
-                panelCreationHandler(panelItem, json);
+                panelCreationHandler(color, panelItem, json);
 
                 body.appendChild(panelItem);
 
@@ -178,7 +182,7 @@ const addButton = (title, div, index, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
     // button color definition
     let color = indexFlag ? localJSON.deviceType : "";
-    if (color === 'guard') color = ''; // options for color: "", "fire", "grasse"
+    if (color === 'guard') color = 'normal'; // options for color: "normal", "fire", "grasse"
 
     // clean all digits from used deviceType
     let key;
@@ -192,15 +196,13 @@ const addButton = (title, div, index, localJSON = {}) => {
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
     let localJSONString = JSON.stringify(localJSON).replaceAll("\"", "'");
     let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': ${localJSONString}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${index}_${localJSON.schema}">
-                <div class="btnStyle ${color}">
-                    <i class="fa-solid ${CONFIG_CONST[key].picture} fa-3x p15">
-                        <br /><span class="someS">
-                            <span class="h5">
-                                ${titleTranslated}
-                            </span>
-                            ${indexFlag ? localJSON.interface : ""}
-                        </span>
-                    </i>
+                <div class="${color} ram_card">
+                    <i class="${CONFIG_CONST[key].picture.startsWith("fa-") ? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture} p15 m-3"> </i>
+                    <br/>
+                    <h5>
+                        ${titleTranslated}
+                        <span class="h5">${indexFlag ? localJSON.interface : ""}</span>
+                    </h5>
                 </div>
             </a>`;
 
@@ -236,47 +238,54 @@ function openAccordionItem(id) {
     }
 }
 
-const panelCreationHandler = (panelItem, jsonAtLevel) => {
+const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
     if (reloading) jsonAtLevel = jsonAtLevel["pages"];
+    // create teh accordion-body div
     let div = document.createElement('div');
     div.classList = "accordion-body";
     if (!jsonAtLevel) return;
     var elementKeys = Object.keys(jsonAtLevel);
+    // create the ram_list_group ul
+    let ul = document.createElement('ul');
+    ul.classList = "ram_list_group";
 
     const pathStr = "~path";
     let cleanKeys = reloading ?
         elementKeys.filter(x => jsonAtLevel[x]["breadcrumbs"].length !== 1) : // for the reloading case
         elementKeys.filter(x => x !== pathStr && x !== "~panel_id" && x !== "~panel_name"); // for the usual new panel adding
 
-    let innerbutton = document.createElement('div');
-    innerbutton.class = 'accordion-item';
     cleanKeys.forEach(field => {
         // guard for null value of jsonAtLevel[field]
         if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;
-            addAccordeonButton(title, field, div);
+            addAccordeonButton(title, field, ul);
         }
     });
+
+    div.appendChild(ul);
 
     panelItem.lastChild.appendChild(div);
 }
 
-const addAccordeonButton = (title, page, div) => {
+const addAccordeonButton = (title, page, ul_element) => {
     // clean all digits from used schema
     let key = page.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
-    // button color definition
-    let color = "";
-    if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('iris')) { color = "fire"; }
-    else if (CONFIG_CONST[key] && CONFIG_CONST[key].breadcrumbs.includes('tte')) { color = "grasse"; }
 
     // title definition
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
 
-    let el = `<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'})" onclick="javascript: addActive()" class="" id="${page}">
-                    <span class="${color} mr10"><i class="fa-solid ${CONFIG_CONST[key].picture}"></i></span>${titleTranslated}
-            </a>`;
-
-    div.insertAdjacentHTML('beforeend', el);
+    let el = `<li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'}); addActive()" id="${page}">
+                   <div class="ram_flex_grow_1">
+                       <i class="${CONFIG_CONST[key].picture.startsWith("fa-")? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture}"></i>
+                       <span>${titleTranslated}</span>
+                   </div>`;
+    if (false) el += `<i class="ram_icon add_device"></i>`;
+    el += `</li>`;
+    // old el: 
+    //<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'})" onclick="javascript: addActive()" class="" id="${page}">
+    //    <span class="${color} mr10"><i class="fa-solid ${CONFIG_CONST[key].picture}"></i></span>${titleTranslated}
+    //</a>
+    ul_element.insertAdjacentHTML('beforeend', el);
 };
 
 function alertScanFinished(show) {
@@ -337,7 +346,7 @@ function showContextMenu(event, el) {
         menuItems[i].title = newT.t(localStorage.getItem('lang'), `${menuItems[i].getAttribute('topic')}`);
     }
     ctxMenu.setAttribute('element', `${el.id}`);
-    ctxMenu.className = el.children[0].className.split(" ")[1];
+    ctxMenu.className = el.parentElement.className.split(" ")[1];
     ctxMenu.style.display = "block";
     ctxMenu.style.left = (event.pageX - 10) + "px";
     ctxMenu.style.top = (event.pageY - 10) + "px";

@@ -13,9 +13,11 @@
     <script src="../imports/boostrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../imports/boostrap/boostrap.css">
     <script src="../imports/boostrap/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="../imports/css/all.css">
+
     <link rel="stylesheet" href="../imports/css/sidebar.css" />
-    <link rel="stylesheet" href="../imports/css/ram-icons.css" />
+    <link rel="stylesheet" href="../imports/css/ram-icons.css">
+
+    <link rel="stylesheet" href="../imports/css/all.css">
     <script src="../imports/font-awesome.js"></script>
     <style media="all" id="fa-v4-font-face">
         /*!
@@ -10289,302 +10291,83 @@
     </style>
 
     <link rel="stylesheet" href="../IRIS.css">
-    <link rel="stylesheet" href="../imports/css/accordion.css">
-
     <title>Teletek Manager</title>
 </head>
 
-<body>
-    <div id="ram_sidebar" class="fullopen">
-        <div class="ram_sidebar_content_wrapper">
-            <div class="ram_flex_left" id="ram_sidebar_nav">
-                <div class="ram_flex_top">
-                    <div class="accordion" id="ram_sidebar_menu">
 
-                        <div class="accordion-item fire">
-                            <h2 class="accordion-header" id="2d3e2a6c_9e92_473a_a244_b9a4482971c9" onclick="javascript: selectNewPanel(this.id)">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2d3e2a6c_9e92_473a_a244_b9a4482971c9" aria-expanded="true" aria-controls="collapse2d3e2a6c_9e92_473a_a244_b9a4482971c9">
-                                    <i class="ram_icon fireicon"></i><span class="ram_btn_title">Iris</span>
-                                </button>
-                            </h2>
-                            <div id="collapse2d3e2a6c_9e92_473a_a244_b9a4482971c9" class="accordion-collapse collapse show" aria-labelledby="2d3e2a6c_9e92_473a_a244_b9a4482971c9" data-bs-parent="#ram_sidebar_menu">
-                                <div class="accordion-body">
-                                    <ul class="ram_list_group">
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon access_codes"></i>
-                                                <span>Access Codes</span>
-                                            </div>
-                                        </li>
-                                        <!--<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'})"
-        onclick="javascript: addActive()" class="" id="iris_access_code">
-        <span class="fire mr10">
-            <i class="fa-solid fa-fingerprint"></i>
-        </span>Access codes
-    </a>-->
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon network"></i>
-                                                <span>Network</span>
-                                            </div>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon panels"></i>
-                                                <span>Panels in Network</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon inputs"></i>
-                                                <span>Inputs</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon input_groups"></i>
-                                                <span>Inputs Group</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon outputs"></i>
-                                                <span>Outputs</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon fat_fbf"></i>
-                                                <span>FAT - FBF</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon zones"></i>
-                                                <span>Zones</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                                <a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_evac_zones'})" onclick="javascript: addActive()" class="" id="iris_evac_zones">
-                                                    <span class="fire mr10"><i class="fa-solid fa-arrows-to-circle"></i></span>Evac zones
-                                                </a>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon peripheral_devices"></i>
-                                                <span>Peripheral Devices</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                        <li class="ram_list_group_item">
-                                            <div class="ram_flex_grow_1">
-                                                <i class="ram_icon loop_devices"></i>
-                                                <span>Loop Devices</span>
-                                            </div>
-                                            <i class="ram_icon add_device"></i>
-                                        </li>
-                                    </ul>
-                                    <!--<a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'})" onclick="javascript: addActive()" class="" id="iris_access_code">
-        <span class="fire mr10"><i class="fa-solid fa-fingerprint"></i></span>Access codes
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_panels_in_network'})" onclick="javascript: addActive()" class="" id="iris_panels_in_network">
-        <span class="fire mr10"><i class="fa-solid fa-network-wired"></i></span>Panels in network
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_network'})" onclick="javascript: addActive()" class="" id="iris_network">
-        <span class="fire mr10"><i class="fa-solid fa-diagram-project"></i></span>Network
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_inputs'})" onclick="javascript: addActive()" class="" id="iris_inputs">
-        <span class="fire mr10"><i class="fa-solid fa-arrow-down-1-9"></i></span>Inputs
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_inputs_group'})" onclick="javascript: addActive()" class="" id="iris_inputs_group">
-        <span class="fire mr10"><i class="fa-solid fa-arrow-down-wide-short"></i></span>Input Groups
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_outputs'})" onclick="javascript: addActive()" class="" id="iris_outputs">
-        <span class="fire mr10"><i class="fa-solid fa-arrow-up-9-1"></i></span>Output
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_fat_fbf'})" onclick="javascript: addActive()" class="" id="iris_fat_fbf">
-        <span class="fire mr10"><i class="fa-solid fa-laptop-file"></i></span>FAT FBF
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_zones'})" onclick="javascript: addActive()" class="" id="iris_zones">
-        <span class="fire mr10"><i class="fa-solid fa-clone"></i></span>Zones
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_evac_zones'})" onclick="javascript: addActive()" class="" id="iris_evac_zones">
-        <span class="fire mr10"><i class="fa-solid fa-arrows-to-circle"></i></span>Evac zones
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_peripheral_devices'})" onclick="javascript: addActive()" class="" id="iris_peripheral_devices">
-        <span class="fire mr10"><i class="fa-solid fa-hard-drive"></i></span>Peripheral devices
-    </a><a href="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_loop_devices'})" onclick="javascript: addActive()" class="" id="iris_loop_devices">
-        <span class="fire mr10"><i class="fa-solid fa-compact-disc"></i></span>Loop devices
-    </a>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body style="background-color: rgb(230, 236, 244);">
+    <div id="divDevices">
+
+        <div class="row m2 no-gutter">
+            <a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': {'deviceType':'fire','schema':'iris','title':'IRIS','interface':'IP','address':''}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="0_iris">
+                <div class="fire ram_card m-2">
+                    <i class="ram_icon fireicon p15 m-3"> </i>
+                    <br>
+                    <h5>
+                        IRIS
+                        <span class="h5">IP</span>
+                    </h5>
                 </div>
-            </div>
+            </a><a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': {'deviceType':'fire','schema':'iris4','title':'IRIS4','interface':'IP','address':''}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="1_iris4">
+                <div class="fire ram_card m-2">
+                    <i class="ram_icon fireicon p15 m-3"> </i>
+                    <br>
+                    <h5>
+                        IRIS4
+                        <span class="h5">IP</span>
+                    </h5>
+                </div>
+            </a><a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': {'deviceType':'fire','schema':'iris8','title':'IRIS8','interface':'IP','address':''}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="2_iris8">
+                <div class="fire ram_card m-2">
+                    <i class="ram_icon fireicon p15 m-3"> </i>
+                    <br>
+                    <h5>
+                        IRIS8
+                        <span class="h5">IP</span>
+                    </h5>
+                </div>
+            </a><a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': {'deviceType':'guard','schema':'eclipse','title':'Eclipse','interface':'COM','address':''}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="3_eclipse">
+                <div class="normal ram_card m-2">
+                    <i class="ram_icon bell p15 m-3"> </i>
+                    <br>
+                    <h5>
+                        ECLIPSE
+                        <span class="h5">COM</span>
+                    </h5>
+                </div>
+            </a><a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': {'deviceType':'guard','schema':'eclipse99','title':'Eclipse99','interface':'COM','address':''}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="4_eclipse99">
+                <div class="normal ram_card m-2">
+                    <i class="ram_icon bell p15 m-3"> </i>
+                    <br>
+                    <h5>
+                        ECLIPSE99
+                        <span class="h5">COM</span>
+                    </h5>
+                </div>
+            </a>
         </div>
-        <menu type="context" id="ctxMenu">
-            <menuitem title="Read" topic="Read" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-book-open pr-1"></i>&nbsp;</menuitem>
-            <menuitem title="Rename" topic="Rename" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-pen pr-1"></i>&nbsp;</menuitem>
-            <menuitem title="Delete" topic="Delete" onclick="javascript: sendMsg(this)"><i class="fa-regular fa-trash-can pr-1"></i>&nbsp;</menuitem>
-            <menuitem title="Write" topic="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i>&nbsp;</menuitem>
-            <menuitem title="Firmware update" topic="Update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i>&nbsp;</menuitem>
-            <menuitem title="Verify" topic="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i>&nbsp;</menuitem>
-            <menuitem title="Help" topic="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i>&nbsp;</menuitem>
-        </menu>
     </div>
-            <!--<script src="pages-dynamic.js"></script>-->
-            <script src="../imports/translations.js"></script>
-            <script src="../imports/wb1.js"></script>
 
-            <script>
-                pagePreparation();
-//        var wb1 = `{
-//                "~panel_id": "345152345-2430750934toh298",
-//      "iris_access_code": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "a3a67084-f171-422c-9378-ef472bcde745",
-//        "title": "Access codes",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/IRISPanel-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_access_code"
-//      },
-//      "iris_panels_in_network": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "d709cc30-7355-44a4-b120-d91c64ca35b8",
-//        "title": "Panels in network",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_panels_in_network"
-//      },
-//      "iris_network": {
-//        "@MIN": "0",
-//        "@MAX": "1",
-//        "@LNGID": "52ca04ee-904c-480a-b618-3e343347de4b",
-//        "title": "Network",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/network-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_network"
-//      },
-//      "iris_inputs": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "a6f6149d-9005-454d-b53b-ac5d2a227d73",
-//        "title": "Inputs",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_inputs"
-//      },
-//      "iris_inputs_group": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "36df3d97-8b84-4547-bd1d-2e81909b22a2",
-//        "title": "Input Groups",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_inputs_group"
-//      },
-//      "iris_outputs": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "9bc0be38-1013-4ccd-a005-a65363613d18",
-//        "title": "Output",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_outputs"
-//      },
-//      "iris_fat_fbf": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "ee3be51a-efe2-4990-9b11-18208f9fbba8",
-//        "title": "FAT FBF",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/fat-fbf.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_fat_fbf"
-//      },
-//      "iris_zones": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "bb5054cd-3e05-489e-8e24-ab37a02b726f",
-//        "title": "Zones",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_zones"
-//      },
-//      "iris_evac_zones": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "5074bdad-bb5a-4232-b4e8-fe964dd2c60f",
-//        "title": "Evac zones",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/io-automatic.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_evac_zones"
-//      },
-//      "iris_peripheral_devices": {
-//        "@MIN": "0",
-//        "@MAX": "1",
-//        "@LNGID": "dbddee1e-e1fe-4a42-b47e-0120df12e1d1",
-//        "title": "Peripheral devices",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/periph_devices-auto.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_peripheral_devices"
-//      },
-//      "iris_loop_devices": {
-//        "@MIN": "1",
-//        "@MAX": "1",
-//        "@LNGID": "61af6700-b5aa-490c-a091-22e3bfca8894",
-//        "title": "Loop devices",
-//        "left": "menu-automatic.html",
-//        "right": "IRIS/loop_devices-auto.html",
-//        "breadcrumbs": [
-//          "index",
-//          "iris"
-//        ],
-//        "~path": "ELEMENTS.iris.CONTAINS.iris_loop_devices"
-//      },
-//      "~path": "ELEMENTS.iris.CONTAINS"
-//}`;
-//        receiveMessageWPF(wb1);
-            </script>
+    <menu type="context" id="ctxMenu">
+        <menuitem title="Read" onclick="javascript: sendMsg(this)" icon=""><i class="fa-solid fa-book-open pr-1"></i></menuitem>
+        <menuitem title="Write" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-file-pen pr-1"></i></menuitem>
+        <menuitem title="Firmware update" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-screwdriver-wrench pr-1"></i></menuitem>
+        <menuitem title="Verify" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-check-to-slot pr-1"></i></menuitem>
+        <menuitem title="Help" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-circle-info pr-1"></i></menuitem>
+    </menu>
+
+    <script src="imports/translations.js"></script>
+    <script src="imports/wb1.js"></script>
+
+    <script>
+        function loadDiv(id, bc) {
+            $("#divMain").html($('#' + id).html());
+            CefSharp.PostMessage(bc);
+            //$("#olBC").empty();
+            //bc.split('|').forEach(x => $("#olBC").append($("<li class='breadcrumb-item active' aria-current='page'>" + x + "</li>")));
+        }
+
+    </script>
 
 
 </body>

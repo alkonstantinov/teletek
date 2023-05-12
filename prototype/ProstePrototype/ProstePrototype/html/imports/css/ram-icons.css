@@ -1,3 +1,10 @@
+:root {
+    --ram-icon-color-grey: invert(82%) sepia(0%) saturate(683%) hue-rotate(341deg) brightness(97%) contrast(100%);
+    --ram-icon-color-red: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);
+    --ram-icon-color-green: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%);
+    --ram-icon-color-blue: invert(26%) sepia(64%) saturate(6323%) hue-rotate(214deg) brightness(105%) contrast(103%);
+}
+
 .ram_icon {
     width: 14px;
     height: 14px;
@@ -87,3 +94,18 @@
 .ram_icon.add_device {
     background-image: url(../images/icons/22-add-device.svg);
 }
+
+a .ram_card .ram_icon.bell, a .ram_card .ram_icon.fireicon, a .ram_card .ram_icon.signall {
+    filter: var(--ram-icon-color-grey);
+}
+    a .ram_card .ram_icon.bell:hover {
+        filter: var(--ram-icon-color-blue);
+    }
+
+    a .ram_card .ram_icon.fireicon:hover {
+        filter: var(--ram-icon-color-red);
+    }
+
+    a .ram_card .ram_icon.signall:hover {
+        filter: var(--ram-icon-color-green);
+    }

@@ -30,12 +30,9 @@ body {
 
 /* SIDEBAR */
 
+.fa-solid.fa-arrows-to-circle,
 .ram_icon:not(.logout) {
     filter: invert(82%) sepia(0%) saturate(683%) hue-rotate(341deg) brightness(97%) contrast(100%);
-}
-
-.ram_icon.logout {
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
 }
 
 /* sidebar buttons */
@@ -432,32 +429,49 @@ body {
     color: black;
 }
 
-#ram_sidebar .accordion-item .accordion-header .ram_icon.normal,
-#ram_sidebar .accordion-item .accordion-header .accordion-button .normal:after {
+#ram_sidebar .accordion-item.normal .accordion-header .ram_icon,
+#ram_sidebar .accordion-item.normal .accordion-header .accordion-button::after {
     filter: var(--ram-icon-color-blue);
 }
 
-#ram_sidebar .accordion-item .accordion-header .ram_icon.fire,
-#ram_sidebar .accordion-item .accordion-header .accordion-button .fire:after {
+#ram_sidebar .accordion-item.normal .accordion-header .accordion-button:not(.collapsed)::after {
+    filter: hue-rotate(0deg);
+}
+
+#ram_sidebar .accordion-item.fire .accordion-header .ram_icon,
+#ram_sidebar .accordion-item.fire .accordion-header .accordion-button::after {
     filter: var(--ram-icon-color-red);
 }
 
-#ram_sidebar .accordion-item .accordion-header .ram_icon.grasse,
-#ram_sidebar .accordion-item .accordion-header .accordion-button .grasse:after {
+#ram_sidebar .accordion-item.fire .accordion-header .accordion-button:not(.collapsed)::after {
+    filter: hue-rotate(120deg);
+}
+
+#ram_sidebar .accordion-item.grasse .accordion-header .ram_icon,
+#ram_sidebar .accordion-item.grasse .accordion-header .accordion-button::after {
     filter: var(--ram-icon-color-green);
 }
 
+#ram_sidebar .accordion-item.grasse .accordion-header .accordion-button:not(.collapsed)::after {
+    filter: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%);
+}
 
-#ram_sidebar .accordion-item:nth-of-type(1) .ram_list_group_item:hover .ram_icon,
-#ram_sidebar .accordion-item:nth-of-type(1) .ram_list_group_item:active .ram_icon {
+#ram_sidebar .accordion-item.normal .ram_list_group_item:hover .ram_icon,
+#ram_sidebar .accordion-item.normal .ram_list_group_item:active .ram_icon,
+#ram_sidebar .accordion-item.normal .ram_list_group_item:hover .fa-solid,
+#ram_sidebar .accordion-item.normal .ram_list_group_item:active .fa-solid {
     filter: var(--ram-icon-color-blue);
 }
-#ram_sidebar .accordion-item:nth-of-type(2) .ram_list_group_item:hover .ram_icon,
-#ram_sidebar .accordion-item:nth-of-type(2) .ram_list_group_item:active .ram_icon {
+#ram_sidebar .accordion-item.grasse .ram_list_group_item:hover .ram_icon,
+#ram_sidebar .accordion-item.grasse .ram_list_group_item:active .ram_icon,
+#ram_sidebar .accordion-item.grasse .ram_list_group_item:hover .fa-solid,
+#ram_sidebar .accordion-item.grasse .ram_list_group_item:active .fa-solid {
     filter: var(--ram-icon-color-green);
 }
-#ram_sidebar .accordion-item:nth-of-type(3) .ram_list_group_item:hover .ram_icon,
-#ram_sidebar .accordion-item:nth-of-type(3) .ram_list_group_item:active .ram_icon {
+#ram_sidebar .accordion-item.fire .ram_list_group_item:hover .ram_icon,
+#ram_sidebar .accordion-item.fire .ram_list_group_item:active .ram_icon,
+#ram_sidebar .accordion-item.fire .ram_list_group_item:hover .fa-solid,
+#ram_sidebar .accordion-item.fire .ram_list_group_item:active .fa-solid {
     filter: var(--ram-icon-color-red);
 }
 

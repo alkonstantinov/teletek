@@ -369,6 +369,9 @@
     <None Update="html\imports\css\solid.min.css">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Update="html\imports\css\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="html\imports\css\svg-with-js.css">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

@@ -343,6 +343,10 @@ button {
         border: 2px solid var(--grey);
     }
 
+.g10 {
+    gap: 10px;
+}
+
 .m0 {
     margin: 0px;
 }
@@ -394,7 +398,7 @@ mlm5 {
 @media (min-width: 350px) {
     .minw {
         flex: 0 0 50%;
-        max-width: 50%;
+        max-width: calc(50% - 10px);
     }
 
     .modal-dialog {
@@ -408,14 +412,14 @@ mlm5 {
 @media (min-width: 520px) {
     .minw {
         flex: 0 0 33%;
-        max-width: 33%;
+        max-width: calc(33% - 10px);
     }
 }
 
 @media (min-width: 650px) {
     .minw {
         flex: 0 0 25%;
-        max-width: 25%;
+        max-width: calc(25% - 10px);
     }
 
     .modal-dialog {
@@ -447,6 +451,8 @@ div[class^="someS"] {
     background-color: var(--grey);
     color: var(--normal);
     border: solid 2px var(--white);
+    border-radius: 5px;
+    box-shadow: 2px 0px 6px #0000001A;
     min-width: 77px;
 }
 
@@ -1160,7 +1166,7 @@ button:focus {
 /* context menu */
 #ctxMenu {
     display: none;
-    z-index: 100;
+    z-index: 1000;
 }
 
 menu {
