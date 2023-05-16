@@ -175,9 +175,21 @@ namespace ljson
         }
         #endregion
 
+        #region private structures & fields
         private static Dictionary<string, JObject> _panel_templates = new Dictionary<string, JObject>();
         private static object _cs_panel_templates = new object();
 
+        private static Dictionary<string, string> _system_panels = new Dictionary<string, string>();
+        private static string _current_panel_id = null;
+        private static object _cs_current_panel = new object();
+
+        private static Dictionary<string, string> _panel_names = new Dictionary<string, string>();
+
+        private static object _cs_last_content = new object();
+        private static string _last_content = null;
+        #endregion
+
+        #region private structure properties
         private static JObject GetPanelTemplate(string name)
         {
             JObject res = null;
@@ -197,10 +209,6 @@ namespace ljson
                 _panel_templates[name] = json;
             Monitor.Exit(_cs_panel_templates);
         }
-
-        private static Dictionary<string, string> _system_panels = new Dictionary<string, string>();
-        private static string _current_panel_id = null;
-        private static object _cs_current_panel = new object();
         private static JObject CurrentPanel
         {
             get
@@ -230,6 +238,25 @@ namespace ljson
             //    Monitor.Exit(_cs_current_panel);
             //}
         }
+        private static string LastContent
+        {
+            get
+            {
+                Monitor.Enter(_cs_last_content);
+                string res = _last_content;
+                Monitor.Exit(_cs_last_content);
+                return res;
+            }
+            set
+            {
+                Monitor.Enter(_cs_last_content);
+                _last_content = value;
+                Monitor.Exit(_cs_last_content);
+            }
+        }
+        #endregion
+
+        #region public properties
         public static Dictionary<string, JObject> SystemPanels
         {
             get
@@ -266,7 +293,6 @@ namespace ljson
                 Monitor.Exit(_cs_current_panel);
             }
         }
-        private static Dictionary<string, string> _panel_names = new Dictionary<string, string>();
         public static string CurrentPanelName
         {
             get
@@ -318,6 +344,15 @@ namespace ljson
                 return filename;
             }
         }
+        public static string CurrentPanelType
+        {
+            get
+            {
+                JObject _panel = CurrentPanel;
+                return _panel["~panel_type"].ToString();
+            }
+        }
+        #endregion
         public static string PanelName(string _id)
         {
             Monitor.Enter(_cs_current_panel);
@@ -348,34 +383,37 @@ namespace ljson
                 _panel_names[_id] = name;
             Monitor.Exit(_cs_current_panel);
         }
-        public static string CurrentPanelType
-        {
-            get
-            {
-                JObject _panel = CurrentPanel;
-                return _panel["~panel_type"].ToString();
-            }
-        }
 
-        private static object _cs_last_content = new object();
-        private static string _last_content = null;
-
-        private static string LastContent
+        #region save/load
+        public static JObject Data2Save()
         {
-            get
+            JObject res = new JObject();
+            res["cComm"] = cComm.Data2Save();
+            res["panels"] = new JObject();
+            JObject oPanels = (JObject)res["panels"];
+            //
+            Monitor.Enter(_cs_current_panel);
+            Monitor.Enter(_cs_panel_templates);
+            foreach (string pid in _system_panels.Keys)
             {
-                Monitor.Enter(_cs_last_content);
-                string res = _last_content;
-                Monitor.Exit(_cs_last_content);
-                return res;
+                string filename = _system_panels[pid];
+                JObject _panel = _panel_templates[filename];
+                oPanels["panel"] = _panel;
+                cInternalRel ir = _panel_internal_operators[pid];
+                JObject ir2save = ir.Data2Save();
+                oPanels["internal_rel"] = ir2save;
+                cXmlConfigs cfg = GetPanelXMLConfigs(filename);
             }
-            set
-            {
-                Monitor.Enter(_cs_last_content);
-                _last_content = value;
-                Monitor.Exit(_cs_last_content);
-            }
+            Monitor.Exit(_cs_panel_templates);
+            Monitor.Exit(_cs_current_panel);
+            //
+            return res;
         }
+        public static void SaveAs(string filename)
+        {
+            JObject data = Data2Save();
+        }
+        #endregion
 
         #region read/write
         private static object _cs_write_read_merge = new object();
@@ -2007,8 +2045,8 @@ namespace ljson
         {
             string filename = FilePathFromSchema(jSys["schema"].ToString());
             JObject _panel = GetPanelTemplate(filename);
-            //if (_panel != null)
-            //    return (JObject)_panel["ELEMENTS"][name];
+            if (_panel != null)
+                return (JObject)_panel["ELEMENTS"][jSys["schema"].ToString()];
             Monitor.Enter(_cs_current_panel);
             Monitor.Enter(_cs_panel_templates);
             Monitor.Enter(_cs_main_content_key);
@@ -2332,6 +2370,8 @@ namespace ljson
                     return filename;
                 }
             }
+            if (files.Length == 1)
+                return files[0];
             return null;
         }
         private static JObject SchemaJSON(string schema)

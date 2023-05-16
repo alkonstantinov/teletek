@@ -924,7 +924,7 @@ namespace lcommunicate
             {
                 string dir = Path.GetFileName(s);
                 JObject jSys = new JObject();
-                if (Regex.IsMatch(dir, "^(iris|simpo)", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(dir, "^(iris|simpo)", RegexOptions.IgnoreCase) || Regex.IsMatch(dir, @"^repeater[\w\W]+?simpo$", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
                 else if (Regex.IsMatch(dir, "^eclipse", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "guard";

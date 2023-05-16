@@ -632,6 +632,7 @@ namespace ProstePrototype
             {
                 // Save document
                 string filename = dlg.FileName;
+                cJson.SaveAs(filename);
             }
         }
         private void SettingsClicked(object sender, RoutedEventArgs e)
@@ -884,8 +885,8 @@ namespace ProstePrototype
             {
                 if (mainGrid.ColumnDefinitions[0].Width == new GridLength(70))
                 {
-                    mainGrid.ColumnDefinitions[0].Width = new GridLength(250);
-                    wb1Column.Width = new GridLength(250);
+                    mainGrid.ColumnDefinitions[0].Width = new GridLength(280);
+                    wb1Column.Width = new GridLength(280);
                     settingsBtnRow.Height = new GridLength(0);
                     defineSizeBtnRow.Height = new GridLength(0);
                     footerBtnRow.Height = new GridLength(50);

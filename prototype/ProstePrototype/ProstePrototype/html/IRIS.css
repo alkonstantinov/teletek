@@ -793,6 +793,12 @@ fieldset {
     border-left: none;
 }*/
 
+.btn_q {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn-blue {
     background-color: var(--normal);
     border: 1px solid #ffffff;

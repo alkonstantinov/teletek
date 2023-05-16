@@ -115,8 +115,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="109.1.110" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="113.1.40" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.IO.Ports" Version="7.0.0" />
   </ItemGroup>
 
@@ -654,6 +654,9 @@
     <None Update="html\imports\webfonts\Poppins\poppins-v20-devanagari_latin_latin-ext-regular.woff2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="html\IRIS\io-automatic-olddesign.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="html\IRIS\IRISPanel-automatic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1033,15 +1036,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="109.1.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="113.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="109.1.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="113.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="109.1.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="113.1.4" />
   </ItemGroup>
 
   <ItemGroup>

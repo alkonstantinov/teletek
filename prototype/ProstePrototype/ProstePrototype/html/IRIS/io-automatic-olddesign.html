@@ -15,41 +15,27 @@
     <link rel="stylesheet" href="../imports/css/all.css" />
     <script src="../imports/font-awesome.js"></script>
 
-    <link rel="stylesheet" href="../imports/css/ram-icons.css">
-    <link rel="stylesheet" href="../imports/css/sidebar.css">
     <link rel="stylesheet" href="../IRIS.css" />
     <title>Teletek Manager</title>
 </head>
-<body>
-    <div id="ram_sidebar" class="openvar">
-        <div class="ram_sidebar_content_wrapper" id="divMain">
-            <div class="ram_flex_right" id="ram_devices_wrapper">
-                <div class="ram_resizable open" id="ram_devices_1">
-                    <div class="ram_flex_top">
-                        <div id="new" class="ram_cards">
-                            
-                        </div>
-                    </div>
-                    <div class="ram_flex_bottom">
-                        <div class="ram_settings">
-                            <div class="ram_settings" id="buttons">
+<body class="">
+    <div class="container" id="divMain">
+        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+        <div class="row pt-2">
+            <div class="col-3 bl fire scroll">
+                <div id="new" class="row">
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="ram_resizer"></div>
+            </div>
+            <div class="col-9">
+                <div id="selected_area"></div>
             </div>
         </div>
-        <div id="ram_toggle_sidebar" class="ram_sidebar_toggle_wrapper">
-            <button class="ram_btn btn_toggle" id="ram_hamburger_btn" data-bs-target="#ram_sidebar" aria-controls="ram_sidebar" onclick="javascript: sidebar_toggle(this)">
-                <i class="ram_icon toggle"></i>
-            </button>
+
+        <div style="bottom: 10px; position: absolute;" class="buttons-row mt15" id="buttons">
+
         </div>
     </div>
-    <main class="ram_main" id="selected_area">
-
-    </main>
 
     <!-- showDevicesListModal required for Zones -->
     <div class="modal fade" id="showDevicesListModal" role="dialog">
@@ -59,7 +45,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"></h4>
-                    <!--<button type="button" class="close" data-bs-dismiss="modal">&times;</button>-->
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 
@@ -103,7 +89,7 @@
     <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
-    <script>        
+    <script>
 //        var js = `{
 //  "IRIS8_EVAC_ZONE_GROUP": {
 //    "@MIN": "0",

@@ -90,15 +90,16 @@ function receiveMessageWPF(jsonTxt) {
         case !!document.getElementById('divMain'): // setting the body element
             //alert('divMain')
             body = document.getElementById('divMain');
-            if (body.firstElementChild?.tagName === 'FIELDSET') {
+            if (body.firstElementChild?.tagName === 'FIELDSET') { // case network html
                 body = body.firstElementChild;
             }
 
             let path = json["~path"];
             let color;
-            if (path) color = Object.keys(BUTTON_COLORS).find(x => path.toUpperCase().includes(x));
+            // check for simpo - it should include iris to have correct color
+            if (path) color = Object.keys(BUTTON_COLORS).find(x => path.toUpperCase().includes(x)); 
 
-            drawFields(body, json, color ? BUTTON_COLORS[color] : '');
+            drawFields(body, json, color ? BUTTON_COLORS[color] : 'normal');
 
             break;
         case !!document.getElementById('divFBF'): 
@@ -121,7 +122,6 @@ function receiveMessageWPF(jsonTxt) {
             body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>${newT.t(localStorage.getItem('lang'), "add_up_to")} ${elements} ${newT.t(localStorage.getItem('lang'), 'loops')}</p>`)
 
             getLoops();
-            //drawWithModal(body, json);
             break;
         default:
             // case divIRIS, divTTE, divECLIPSE
@@ -137,7 +137,7 @@ function receiveMessageWPF(jsonTxt) {
     }
     $(function () {
         // DOM Ready - do your stuff
-        pagePreparation();
+        pagePreparation();        
     });
 }
 //#endregion
@@ -177,14 +177,15 @@ const drawWithModal = (body, json) => {
     };
 }
 
-function drawFields(body, json, inheritedColor = '') {
+function drawFields(body, json, inheritedColor = 'normal') {
+    // (body = document.getElementById('divMain'), json = sent json from backend, inheritedColor - based on deviceType)
     if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
     keys.filter(k => k !== '~path' && k !== '~panel_id').forEach(k => {
         let divLevel = json[k];
 
-        if (k.startsWith('~noname')) { // ~noname cases
+        if (k.startsWith('~noname')) { // ~noname, ~noname1, ~noname2, ..., etc cases
             let div = document.createElement('div');
             div.classList = "row align-items-center m-2";
             elementsCreationHandler(div, divLevel);
@@ -204,47 +205,75 @@ function drawFields(body, json, inheritedColor = '') {
             }
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
             body.appendChild(fieldset);
-        } else if (!divLevel["@TYPE"] && !divLevel.name) {
+        } else if (!divLevel["@TYPE"] && !divLevel.name) { // cases for adding panels/inputs/outputs/loops/etc
             minElements = +divLevel["@MIN"];
             for (let i = 0; i < minElements; i++) {
                 if (!lst.includes(i)) lst.push(i);
             }
             elements = +divLevel["@MAX"]; // case of divMain
             let btnDiv = document.getElementById("buttons");
-            // adding the button for everybody except PANNELIN
-            if (!k.toUpperCase().includes("PANELIN")) {
-                btnDiv.insertAdjacentHTML(
-                    'afterbegin',
-                    `<button style="display: inline-flex;" 
-                            type="button"
-                            onclick="javascript:addElement('element', '${k}')" 
-                            id="_btn" class="btn-round btn-border-black">
-                            <i class="fa-solid fa-plus 5x"></i> ${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}
-                        </button>`);
-            }
-            if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
-                deviceNmbr = 0;
-                let divCol9 = document.getElementsByClassName("col-9")[0];
-                divCol9.classList = 'col-7';
-
-                var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
-
-                divCol9.insertAdjacentHTML(
-                    'beforebegin',
-                    `<div class="col-2 bl ${inheritedColor || (colors ? BUTTON_COLORS[colors] : '')} scroll">
-                        <div id="attached_device" class="row">                            
-                        </div>
-                            </div>`
-                );
-            }
             if (k.toUpperCase().includes('INPUT_GROUP')) {
-                const oldEl = document.querySelector('.row.pt-2');
-                const newEl = document.createElement("div");
+                document.documentElement.style.setProperty('--open-size', '0');
+                body.innerHTML = '';
+                const oldEl = document.querySelector('#selected_area');
+                const newEl = document.createElement("main");
                 newEl.id = 'new';
-                newEl.classList = "row scroll";
+                newEl.classList = "ram_main row";
                 oldEl.replaceWith(newEl);
-            }
 
+                const button = document.querySelector('#ram_toggle_sidebar');
+                button.innerHTML = `<button class="btn ram_btn btn_white ${inheritedColor}" id="add_group_btn" 
+                                        title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}"
+                                        onclick="javascript:addElement('element', '${k}')">
+                                        <i class="ram_icon add_device x14"></i>
+                                    </button>`;
+            } else {
+                // adding the button for everybody except PANNELIN
+                if (!k.toUpperCase().includes("PANELIN")) {
+                    document.documentElement.style.setProperty('--open-size', '20');
+                    btnDiv.insertAdjacentHTML(
+                        'afterbegin',
+                        `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn">
+                            <i class="ram_icon add_device"></i>
+                            <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}</div>
+                        </button>`);
+                }         
+                if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                    document.documentElement.style.setProperty('--open-size', '40');
+                    deviceNmbr = 0;
+                    // add the toggle button to the zones fiels
+                    btnDiv.insertAdjacentHTML(
+                        'beforeend',
+                        `<button class="ram_btn ram_toggle_btn open" onclick="javascript:sidebar_toggle(this, 1);">
+                            <i class="ram_icon toggle"></i>
+                        </button>`
+                    )
+                    // add the section showing the attached_device per zone with the device summary button
+                    let wrapper = document.querySelector('#ram_devices_wrapper');
+                    wrapper.insertAdjacentHTML(
+                        'beforeend',
+                        `<div class="ram_resizable open" id="ram_devices_2">
+                        <div class="ram_flex_top">
+                            <div id="attached_device" class="ram_cards">
+                            
+                            </div>
+                        </div>
+                        <div class="ram_flex_bottom">
+                            <div class="ram_settings">
+                                <div class="ram_settings" id="attached_device_button">
+                                    <button class="ram_btn ram_toggle_btn open" onclick="javascript:sidebar_toggle(this, 2);">
+                                        <i class="ram_icon toggle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ram_resizer"></div>`
+                    );
+                }
+            }
+            const main = document.querySelector('.ram_main');
+            if (main) main.style.marginLeft = body.offsetWidth + 'px';
             getAvailableElements(k.toUpperCase());
         } else if (!k.includes('~')) { // collapsible parts
             const { input_name, input_id } = {
@@ -355,20 +384,29 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
 
 //#region Zone Device functions
 function getZoneDevices(elementNumber) {
-    var el = document.getElementById('attached_device');
-    if (!el) return;
-    el.innerHTML = `<button class="btn-small btn-border-black" onclick="javacript: calculateZoneDevices(${elementNumber})" id="calculateDevices"
-                        data-bs-toggle="modal" data-bs-target="#showDevicesListModal" >
-                            ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
-                    </button>`; // reset of the attached to the zone device list
-
+    const el = document.getElementById('attached_device_button');
+    const bar2 = document.getElementById('attached_device');
+    //el.innerHTML = `<button class="btn-small btn-border-black" onclick="javacript: calculateZoneDevices(${elementNumber})" id="calculateDevices"
+    //                    data-bs-toggle="modal" data-bs-target="#showDevicesListModal" >
+    //                        ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
+    //                </button>`; // reset of the attached to the zone device list
+    let calculateDevices = el.querySelector('#calculateDevices');
+    if (!calculateDevices)
+        el.insertAdjacentHTML(
+            'afterbegin',
+            `<button class='btn ram_btn btn_white' onclick='javacript: calculateZoneDevices(${elementNumber})' id='calculateDevices'
+                data-bs-toggle='modal' data-bs-target='#showDevicesListModal'><div class='ram_btn_title'>
+                ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
+            </div></button>`
+        ); // reset of the attached to the zone device list
     boundAsync.zoneDevices(elementNumber).then(r => {
-        if (!r) return;        
+        if (!r) return;
         let zoneDevicesJson = JSON.parse(r);
 
         //update the nuber of devices in zone
         deviceNmbr = zoneDevicesJson.length;
-        let showBtn = document.getElementById("calculateDevices");
+        
+        let showBtn = document.getElementById("calculateDevices").firstElementChild;
         showBtn.innerHTML = `${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}`;        
 
         zoneDevicesJson.forEach(device => {
@@ -380,19 +418,27 @@ function getZoneDevices(elementNumber) {
             let showName = device["~devname"] || DEVICES_CONSTS[key].sign;
             //('${loopType}', '${deviceName}', '${loopNumber}', '${address}')
             // create a new button
-            const newDeviceInner = `<div class="col-12" id='${deviceName}_${address}'>
-                                        <a href="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopNumber}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });" > 
-                                            <div class="btnStyle ${BUTTON_COLORS[deviceName.split("_")[0]]}">
-                                                <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
-                                                <div class="someS">
-                                                    <div class="h5">${address + '. ' + showName}</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>`;          
-
+            //const newDeviceInner = `<div class="col-12" >
+            //                            <a href="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopNumber}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });" > 
+            //                                <div class="btnStyle ${BUTTON_COLORS[deviceName.split("_")[0]]}">
+            //                                    <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
+            //                                    <div class="someS">
+            //                                        <div class="h5">${address + '. ' + showName}</div>
+            //                                    </div>
+            //                                </div>
+            //                            </a>
+            //                        </div>`;          
+            const newDeviceInner = `<div class="ram_card" id='${deviceName}_${address}' 
+                onclick="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopNumber}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });">
+                                <div class="ram_card_img_top">
+                                    <img src="${DEVICES_CONSTS[key].im}" alt="${DEVICES_CONSTS[key].sign}">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">${address + '. ' + showName}</h5>
+                                </div>
+                            </div>`;
             // inserting
-            el.insertAdjacentHTML('beforeend', newDeviceInner);
+            bar2.insertAdjacentHTML('beforeend', newDeviceInner);
             
             // reordering
             [].map.call(el.children, Object).sort(function (a, b) {
@@ -583,7 +629,6 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 
     adjustCollapsibleHeight(selectDiv);
     addVisitedBackground();
-    setupSelFixer();
 
     if (dataUsed.some(x => x["selected"])) {
         if (level + 1 === 3) {
@@ -985,7 +1030,6 @@ function pagePreparation() {
         //        }
         //    }
         //}
-        setupSelFixer();
 
         // URLSearchParams: loopType, loopNumber, elementType, elementNumber (address)
         // etape 1: showLoop('1', 'IRIS_TTELOOP1')
@@ -1044,8 +1088,6 @@ function toggleDarkMode(show, filename) {
 
 //#region UTILS
 // select dropdownmenu limitation to 5 rows
-function setupSelFixer(contain = $("body")) {
-}
 //function setupSelFixer(contain = $("body")) {
 //    if (!window.IsLocal) {
 //        contain.find("select").on("mousedown", function (ev) {
@@ -1244,18 +1286,11 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let image = selectList.filter(x => x.imageKey).length > 0;
 
-    let str = `<${image ? "fieldset" : "div"} class="form-floating mb-3">
+    let str = `<${image ? "fieldset" : "div"} class="form-floating mb-3 ${addButton ? "col" : ""}">
                     ${image ? `<legend>${input_name}</legend>` : ""}
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
                     </button>` : ""}
-                    ${addButton ? `<button 
-                                        id="popoverData_${input_id}" class="btn"
-                                        data-content="Popover with data - trigger"
-                                        onmouseover="javascript: showChannelInfo(this, '${path}');"
-                                        data-placement="top" data-original-title="Used in:">
-                                            <i class="fa-solid fa-circle-question"></i>
-                                    </button>`: ""}
                     <select class="form-select ram_floating_select" id="${input_id}" name="${input_id}" aria-label="${input_name}"
                         ${bytesData ? `bytes="${bytesData}"` : ""} 
                         ${lengthData ? `length="${lengthData}"` : ""} 
@@ -1275,7 +1310,14 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
     if (link.length > 0)
         str += `<img src onerror="javascript: changeStyleDisplay('${link}', '${input_id}')" />`; // dirty workaround
     str += image ? "" : "</div>";
-
+    if (addButton) str += `<button type="button"
+                                id="popoverData_${input_id}" class="btn btn_q col-1"
+                                onmouseover="javascript: showChannelInfo(this, '${path}');"
+                                title="Popover title"
+                                data-bs-toggle="popover" data-bs-trigger="hover"
+                                data-bs-placement="top">
+                                    <i class="fa-solid fa-circle-question"></i>
+                            </button>`;
     if (image) {
         str += `<div id="showSchema_${input_id}" class="image col-9" style="margin-left: auto; margin-right: auto">`
         let selectedImageEl = selectList.find(o => o.selected);
@@ -1344,8 +1386,12 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} />
-                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="ram_number_input_button_left"></button>
-                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="ram_number_input_button_right"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}})"
+                            class="ram_number_input_button_left"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}})"
+                            class="ram_number_input_button_right"></button>
             </div></div>`;
             /*old style: <div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
@@ -1392,7 +1438,7 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, size, RmBtn = fal
     if (!value) value = "00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00"; // for test purposes
     let fields = [["Sunday", "-su-"], ["Moday", "-m-"], ["Thuesday", "-t-"], ["Wednesday", "-w-"], ["Thursday", "-th-"], ["Friday", "-f-"], ["Saturday", "-s-"]];
     let data = value.split(" ");
-    let inner = `<div style="display: none" id="${input_id}-schedule" value="${value}">
+    let inner = `<div style="display: none" id="${input_id.replaceAll("/", "")}-schedule" value="${value}">
             <fieldset>
                 <legend>${input_name}</legend>
                 <div class="row">`;
@@ -1543,16 +1589,16 @@ function callAddressModal(elementType, current) {
     let modal = document.getElementById("addressModal");
     document.getElementById("addressModalLabel").innerText = newT.t(localStorage.getItem('lang'), "element_address");
     modal.querySelector(".btn.btn-secondary").innerText = newT.t(localStorage.getItem('lang'), "MenuClose");
-    let innerSelectText = `<div class="form-item roww mt-1">
-                                    <label for="select_address">${newT.t(localStorage.getItem('lang'), "set_address")} ${elementType}</label>
-                                    <div class="select">
-                                        <select id="select_address" name="select_address">`;
-
+    let innerSelectText = `<div class="form-floating mb-3">
+                               <label for="select_address" class="contents">${newT.t(localStorage.getItem('lang'), "set_address")} ${elementType}</label>                              
+                               <select id="select_address" name="select_address" class="form-select ram_floating_select">`;
     for (var i = minElements; i <= elements; i++) {
         let currentId = i === +current ? "selected" : "";
         let disabled = lst.includes(i) ? "disabled style='background: #aaa;'" : ""
         innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i}</option>`;
     }
+    innerSelectText += `</select>
+                    <div>`
 
     modal.querySelector(".modal-body").innerHTML = innerSelectText;
 
@@ -1579,7 +1625,7 @@ function callAddressModal(elementType, current) {
 }
 
 function addElementAtAddress(elementType, last) {
-    if (elementType === "INPUT_GROUP") {
+    if (elementType.toUpperCase().endsWith("INPUT_GROUP")) {
         boundAsync.addingElementSync(`${elementType}`, +last).then(r => {
             if (r === "added") {
                 createElementButton(last, elementType); // creating the fieldset of the INPUT_GROUP element
@@ -1613,29 +1659,21 @@ async function createElementButton(last, elementType) {
     let newUserElement;
     if (!elementType.toUpperCase().includes('INPUT_GROUP')) {
         //if the element is not INPUT_GROUP
-        newUserElement = `<div class="col-12" id=${last}>
-                <div class="row">
-                    <div class="col-11 pr-1">
-                        <a href="javascript:showElement('${last}', '${elementType}')" onclick="javascript:addActive()">
-                            <div class="btnStyle ${BUTTON_COLORS[color]}">
-                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p15">
-                                    <br /><span class="someS">
-                                        <span class="h5">
-                                            ${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}
-                                        </span>
-                                    </span>
-                                </i>
-                                                            
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-1 p-0" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
-                        <i class="fa-solid fa-xmark ${BUTTON_COLORS[color]}"></i>
-                    </div>
-                </div>
-            </div>`;
+        newUserElement = `<div onclick="javascript: showElement('${last}', '${elementType}'); addActive()" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
+                                <div class="ram_card_img_top">
+                                    <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `fa-solid ${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}</h5>
+                                </div>
+                                <div class="ram_add_btn" 
+                                    onclick="javascript: event.stopPropagation();
+                                        sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                                    <i class="ram_icon add_device rot45"></i>
+                                </div>
+                            </div>`;
     } else { //if the element is INPUT_GROUP
-        newUserElement = await inputGroupTextGenerator(last, elementType);       
+        newUserElement = await inputGroupTextGenerator(last, elementType);
     }
     var element = document.getElementById("new");
     var new_inner = `
@@ -1680,8 +1718,8 @@ async function inputGroupTextGenerator(last, elementType) {
             let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
             let legend = (trans.length + `${last}.`.length) > 14 ? trans.substring(0, 7) + '...' : trans;
             return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="row">
-                            <fieldset style="min-width: 200px;" class="col-10">
+                        <div class="ram_card fire">
+                            <fieldset style="min-width: 200px;" class="ram_card_body">
                                 <legend>${last}. ${legend}</legend> 
                                 <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>
                                 <p class="fire">
@@ -1695,8 +1733,8 @@ async function inputGroupTextGenerator(last, elementType) {
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}
                                 </p>
                             </fieldset>
-                            <div class="col-1" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})" class="mt-2 ml-1">
-                                <i class="fa-solid fa-xmark fire"></i>
+                            <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                                <i class="ram_icon add_device rot45 x14"></i>
                             </div>
                         </div>
                     </div>`;
@@ -1734,7 +1772,6 @@ async function showElement(id, elementType) {
             else el.appendChild(fieldset);
             collapsible();
             addVisitedBackground();
-            setupSelFixer()
         }
         if (elementType.endsWith("ZONE")) {
             getZoneDevices(+id);
@@ -1785,7 +1822,6 @@ function loadDiv(it, id, value, type) {
     }
     adjustCollapsibleHeight(it, element.scrollHeight)
     addVisitedBackground();
-    setupSelFixer();
 }
 
 function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {
@@ -1804,5 +1840,34 @@ function alertScanFinished(show) {
     if (show === 'alert') {
         document.location.reload();
     }
+}
+
+function sidebar_toggle(itElement, sectionId = 0) {
+    const mainTransition = 300;
+    const sidebar = document.querySelector("#ram_sidebar");
+    const sidebarWrapper = sidebar.firstElementChild;
+    const main = document.querySelector('.ram_main');
+    //const hamburgerBtn = document.querySelector("#ram_hamburger_btn");
+    const bar1 = document.querySelector('#ram_devices_1');
+    const bar2 = document.querySelector('#ram_devices_2');
+    const bar3 = document.querySelector('#ram_devices_3');
+    switch (sectionId) {
+        case 1:
+            bar1.classList.toggle("open");
+            break;
+        case 2:
+            bar2.classList.toggle("open");
+            break;
+        case 3:
+            bar3.classList.toggle("open");
+            break;
+        default:
+            sidebar.classList.toggle("openvar");
+            break;
+    }
+    itElement.firstElementChild.classList.toggle("open");
+    setTimeout(() => {
+        main.style.marginLeft = sidebarWrapper.offsetWidth + 'px';
+    }, mainTransition);
 }
 //#endregion

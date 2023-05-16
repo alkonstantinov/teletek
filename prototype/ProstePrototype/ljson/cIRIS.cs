@@ -788,7 +788,16 @@ namespace ljson
         private static JObject ConvertPreripherialDevicesContentNodeChange(JObject json)
         {
             JObject res = json;
-            JObject elements = Array2Object((JArray)res["CHANGE"]["ELEMENT"]);
+            JToken t = res["CHANGE"]["ELEMENT"];
+            JArray chg = null;
+            if (t.Type != JTokenType.Array)
+            {
+                chg = new JArray();
+                chg.Add(t);
+            }
+            else
+                chg = (JArray)res["CHANGE"]["ELEMENT"];
+            JObject elements = Array2Object(chg);
             //
             return elements;
         }

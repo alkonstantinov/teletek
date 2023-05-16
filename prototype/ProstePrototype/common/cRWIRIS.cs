@@ -7,6 +7,7 @@ using System.Threading;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
+using System.Windows.Documents;
 
 namespace common
 {
@@ -221,7 +222,6 @@ namespace common
             return SynCMD(io, datatype, idx, bytesoffset, bytescnt);
         }
         #endregion
-
         internal override void ParseReadSeriaIRIS(string elements, ref string last_path)
         {
             string element_root = "";
@@ -244,7 +244,7 @@ namespace common
                 if (path != "")
                     path = path.Substring(0, path.Length - 1);
             }
-            if (Regex.IsMatch(path, @"(IRIS8_SENSORS|IRIS8_MODULES)"))
+            if (Regex.IsMatch(path, @"(IRIS\d_SENSORS|IRIS\d_MODULES)"))
             {
                 string[] path_arr = Regex.Split(path, @"[\\/]");
                 string[] last_path_arr = Regex.Split(last_path, @"[\\/]");
@@ -277,7 +277,10 @@ namespace common
                 //IRIS_LOOP2/IRIS_SENSORS/IRIS_SNONE
             }
             //
-            elements = Regex.Replace(elements, @"^\s*?<ELEMENT[\w\W]*?>\s*?<ELEMENTS>", "");
+            if (element_root == "SIMPO_NETWORK_R")
+                elements = Regex.Replace(elements, @"^(\s*?<ELEMENT[\w\W]*?>\s*?)<ELEMENTS>", "$1</ELEMENT>");
+            else
+                elements = Regex.Replace(elements, @"^\s*?<ELEMENT[\w\W]*?>\s*?<ELEMENTS>", "");
             elements = Regex.Replace(elements, @"</ELEMENTS>\s*?</ELEMENT>\s*$", "").Trim();
             foreach (Match mel in Regex.Matches(elements, @"<ELEMENT[\w\W]*?</ELEMENT>"))
             {
@@ -339,7 +342,151 @@ namespace common
                 }
             }
         }
-
+        internal void UnionReadElementsList(Dictionary<string, List<string>> _from, Dictionary<string, List<string>> _to)
+        {
+            foreach (string k in _from.Keys)
+            {
+                List<string> _lstfrom = _from[k];
+                if (!_to.ContainsKey(k))
+                    _to.Add(k, new List<string>());
+                List<string> _lstto = _to[k];
+                foreach (string l in _lstfrom)
+                    _lstto.Add(l);
+            }
+        }
+        internal void MergeReadNodesByCommand(string cmdprefix, Dictionary<string, List<string>> nodes)
+        {
+            string props = "";
+            string firstkey = null;
+            string maxcmdkey = null;
+            string maxcmd = null;
+            List<string> nodekeys = new List<string>();
+            foreach (string node in nodes.Keys)
+            {
+                if (firstkey == null)
+                    firstkey = node;
+                nodekeys.Add(node);
+                List<string> lst = nodes[node];
+                foreach (string s in lst)
+                {
+                    Match m = Regex.Match(s, @"<COMMAND[\w\W]+?BYTES\s*?=\s*?""" + cmdprefix + @"([\w\W]+?)""", RegexOptions.IgnoreCase);
+                    if (m.Success)
+                    {
+                        if (maxcmd == null || String.Compare(m.Groups[1].Value, maxcmd) > 0)
+                        {
+                            maxcmd = m.Groups[1].Value;
+                            maxcmdkey = node;
+                            m = Regex.Match(s, @"<PROPERTIES>([\w\W]+?)</PROPERTIES>", RegexOptions.IgnoreCase);
+                            if (m.Success)
+                                props += m.Groups[1].Value;
+                        }
+                    }
+                }
+            }
+            if (firstkey != null)
+            {
+                List<string> lmax = nodes[firstkey];
+                for (int i = 0; i < lmax.Count; i++)
+                {
+                    string s = lmax[i];
+                    Match m = Regex.Match(s, @"<COMMAND[\w\W]+?BYTES\s*?=\s*?""" + cmdprefix + @"([\w\W]+?)""", RegexOptions.IgnoreCase);
+                    if (m.Success)
+                    {
+                        string cmdtag = m.Value;
+                        lmax[i] = Regex.Replace(lmax[i], @"<PROPERTIES>[\w\W]+?</PROPERTIES>", "<PROPERTIES>" + props + "</PROPERTIES>");
+                        string tagnew = Regex.Replace(cmdtag, @"BYTES\s*?=\s*?""[\w\W]+?""", @"BYTES=""" + cmdprefix + maxcmd + @"""");
+                        lmax[i] = Regex.Replace(lmax[i], cmdtag, tagnew);
+                    }
+                }
+            }
+            foreach (string nodekey in nodekeys)
+                if (nodekey != firstkey)
+                    nodes.Remove(nodekey);
+        }
+        internal void UnionReadReadProp()
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> dinvertedtmp = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+            foreach (string k in _dread_prop.Keys)
+            {
+                Dictionary<string, Dictionary<string, List<string>>> d = _dread_prop[k];
+                foreach (string k1 in d.Keys)
+                {
+                    Dictionary<string, List<string>> d1 = d[k1];
+                    if (!dinvertedtmp.ContainsKey(k1))
+                        dinvertedtmp.Add(k1, new Dictionary<string, Dictionary<string, List<string>>>());
+                    Dictionary<string, Dictionary<string, List<string>>> dinv = dinvertedtmp[k1];
+                    if (!dinv.ContainsKey(k))
+                        dinv.Add(k, new Dictionary<string, List<string>>());
+                    UnionReadElementsList(d1, dinv[k]);
+                }
+            }
+            Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> dinverted = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+            foreach (string cmd in dinvertedtmp.Keys)
+            {
+                Dictionary<string, Dictionary<string, List<string>>> dcmd = dinvertedtmp[cmd];
+                if (!dinverted.ContainsKey(cmd))
+                    dinverted.Add(cmd, new Dictionary<string, Dictionary<string, List<string>>>());
+                Dictionary<string, Dictionary<string, List<string>>> dinvcmd = dinverted[cmd];
+                foreach (string node in dcmd.Keys)
+                {
+                    Dictionary<string, List<string>> dnode = dcmd[node];
+                    foreach (string idx in dnode.Keys)
+                    {
+                        List<string> lidx = dnode[idx];
+                        if (!dinvcmd.ContainsKey(idx))
+                            dinvcmd.Add(idx, new Dictionary<string, List<string>>());
+                        Dictionary<string, List<string>> dinvidx = dinvcmd[idx];
+                        if (!dinvidx.ContainsKey(node))
+                            dinvidx.Add(node, new List<string>());
+                        List<string> lst = dinvidx[node];
+                        foreach (string l in lidx)
+                            lst.Add(l);
+                    }
+                }
+            }
+            foreach (string cmd in dinverted.Keys)
+            {
+                Dictionary<string, Dictionary<string, List<string>>> didx = dinverted[cmd];
+                foreach (string idx in didx.Keys)
+                {
+                    Dictionary<string, List<string>> dnode = didx[idx];
+                    if (dnode.Count > 1)
+                        MergeReadNodesByCommand(cmd + idx, dnode);
+                }
+            }
+            _dread_prop.Clear();
+            foreach (string cmd in dinverted.Keys)
+            {
+                Dictionary<string, Dictionary<string, List<string>>> didx = dinverted[cmd];
+                foreach (string idx in didx.Keys)
+                {
+                    Dictionary<string, List<string>> dnode = didx[idx];
+                    foreach (string node in dnode.Keys)
+                    {
+                        if (!_dread_prop.ContainsKey(node))
+                            _dread_prop.Add(node, new Dictionary<string, Dictionary<string, List<string>>>());
+                        Dictionary<string, Dictionary<string, List<string>>> _drpnode = _dread_prop[node];
+                        if (!_drpnode.ContainsKey(cmd))
+                            _drpnode.Add(cmd, new Dictionary<string, List<string>>());
+                        Dictionary<string, List<string>> _dcmd = _drpnode[cmd];
+                        if (!_dcmd.ContainsKey(idx))
+                            _dcmd.Add(idx, new List<string>());
+                        List<string> _lidx = _dcmd[idx];
+                        foreach (string l in dnode[node])
+                            _lidx.Add(l);
+                    }
+                }
+            }
+            return;
+        }
+        internal void JoinSimpoRepeaterGenSettings()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dgensettings = _dread_prop["SIMPO_GENERAL_SETTINGS_R"];
+            Dictionary<string, Dictionary<string, List<string>>> dpanelsettings = _dread_prop["SIMPO_PANELSETTINGS_R"];
+            foreach (string pkey in dpanelsettings.Keys)
+                dgensettings.Add(pkey, dpanelsettings[pkey]);
+            _dread_prop.Remove("SIMPO_PANELSETTINGS_R");
+        }
         internal override List<cSeria> cfgReadSeries(string xml)
         {
             if (_dread_prop == null)
@@ -350,7 +497,10 @@ namespace common
             string last_path = "";
             List<cSeria> res = new List<cSeria>();
             xml = Regex.Replace(xml, @"<!\-+?[\w\W]*?\-+?>", "");
-            MatchCollection matches = Regex.Matches(xml, @"(<ELEMENT[^<]*?>\s*?<ELEMENTS[\w\W]*?<ELEMENT[\w\W]*?</ELEMENT>\s*?</ELEMENTS>\s*?</ELEMENT>)", RegexOptions.IgnoreCase);
+            string _regex = @"(<ELEMENT[^<]*?>\s*?<ELEMENTS[\w\W]*?<ELEMENT[\w\W]*?</ELEMENT>\s*?</ELEMENTS>\s*?</ELEMENT>)";
+            if (Regex.IsMatch(xml, "SIMPO_PANEL"))
+                _regex = @"(<ELEMENT[^<]*?>[\w\W]*?<ELEMENTS[\w\W]*?<ELEMENT[\w\W]*?</ELEMENT>\s*?</ELEMENTS>\s*?</ELEMENT>)";
+            MatchCollection matches = Regex.Matches(xml, _regex, RegexOptions.IgnoreCase);
             foreach (Match m in matches)
                 ParseReadSeriaIRIS(m.Groups[1].Value, ref last_path);
             //
@@ -366,6 +516,12 @@ namespace common
                     s = "<ELEMENT ID=\"\">\r\n<ELEMENTS>\r\n" + s + "\r\n</ELEMENTS>\r\n</ELEMENT>";
                     ParseReadSeriaIRIS(s, ref last_path);
                 }
+            }
+            //
+            if (Regex.IsMatch(xml, @"<ELEMENT\s+?ID\s*?=\s*?""R_PANEL"">"))
+            {
+                UnionReadReadProp();
+                JoinSimpoRepeaterGenSettings();
             }
             //
             return res;
@@ -460,7 +616,23 @@ namespace common
             }
             return null;
         }
-
+        internal void ReorderSimpoRepeaterWriteProps()
+        {
+            if (!_dwrite_prop.ContainsKey("SIMPO_NETWORK_R"))
+                return;
+            Dictionary<string, Dictionary<string, List<string>>> dnet = _dwrite_prop["SIMPO_NETWORK_R"];
+            Dictionary<string, Dictionary<string, List<string>>> dpanels = new Dictionary<string, Dictionary<string, List<string>>>();
+            string panelskey = null;
+            foreach (string key in dnet.Keys)
+                if (dnet[key].Count > 1)
+                {
+                    dpanels.Add(key, dnet[key]);
+                    panelskey = key;
+                    break;
+                }
+            dnet.Remove(panelskey);
+            _dwrite_prop["SIMPO_PANELS_R"] = dpanels;
+        }
         internal override List<cSeria> cfgWriteSerias(string xml)
         {
             List<cSeria> res = new List<cSeria>();
@@ -474,6 +646,7 @@ namespace common
             string outputscmd = null;
             int inidx = 1;
             int outidx = 1;
+            xml = Regex.Replace(xml, @"<!\-\-[\w\W]*?\-\->", "");
             foreach (Match mwo in Regex.Matches(xml, @"<WRITEOPERATION[\w\W]+?</WRITEOPERATION[\w\W]*?>", RegexOptions.IgnoreCase))
             {
                 string swo = mwo.Value;
@@ -492,7 +665,7 @@ namespace common
                             inputscmd = cmdkey;
                     }
                     if (outputscmd == null)
-                        if (Regex.IsMatch(element, @"OUTPUTS$"))
+                        if (Regex.IsMatch(element, @"OUTPUTS$") && element != "SIMPO_PANELOUTPUTS")
                             outputscmd = cmdkey;
                     //
                     if (cmdkey == inputscmd && !Regex.IsMatch(element, @"INPUTS$"))
@@ -624,6 +797,8 @@ namespace common
                 seria._commands.Add(_cmd);
                 res.Add(seria);
             }
+            //
+            ReorderSimpoRepeaterWriteProps();
             //
             return res;
         }

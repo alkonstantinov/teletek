@@ -436,11 +436,13 @@ namespace common
 
         //
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+        internal JObject _jread_prop { get { return JObject.FromObject(_dread_prop); } }
         internal string _read_xml_no_serias = null;
         internal object _cs_ = new object();
         internal List<cSeria> _wserias = null;
         internal Dictionary<string, Dictionary<string, List<cSeriaProperty>>> _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+        internal JObject _jwrite_prop { get { return JObject.FromObject(_jwrite_prop); } }
         //
         internal virtual void ParseReadSeriaIRIS(string elements, ref string last_path) { }
         internal virtual List<cSeria> cfgReadSeries(string xml) { return null; }
@@ -465,13 +467,20 @@ namespace common
 
         public cXmlConfigs(string _s_panel_type, dObject2JSONString serialyzer, dJSONString2Object deserialyzer)
         {
-            if (Regex.IsMatch(_s_panel_type, "iris", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(_s_panel_type, "(iris|simpo|Repeater)", RegexOptions.IgnoreCase))
             {
                 _readwriter = new cRWIRIS();
                 PanelType = ePanelType.ptIRIS;
             }
             _serialyzer = serialyzer;
             _deserialyzer = deserialyzer;
+        }
+        public JObject Save()
+        {
+            JObject res = new JObject();
+            res["jread_prop"] = _readwriter._jread_prop;
+            res["jwrite_prop"] = _readwriter._jwrite_prop;
+            return res;
         }
 
         private object _cs_config = new object();
@@ -899,7 +908,11 @@ namespace common
             string _rp = _read_path;
             string rxml = null;
             if (_rp != null && File.Exists(_rp))
+            {
                 rxml = File.ReadAllText(_rp);
+                if (Regex.IsMatch(rxml, "IRIS4_PANEL"))
+                    rxml = Regex.Replace(rxml, @"<ELEMENT\s+?ID=""IRIS4_NO_LOOP\d+""[\w\W]+?</ELEMENT>", "");
+            }
             string _wp = _write_path;
             string wxml = null;
             if (_wp != null && File.Exists(_wp))

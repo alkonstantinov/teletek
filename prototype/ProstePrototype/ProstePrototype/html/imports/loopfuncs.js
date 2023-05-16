@@ -244,6 +244,7 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData, loo
     let fieldsetChannels;
     let fieldsetAlarmLevel;
     let fieldsetVerifyTime;
+    let row = "";
     //alert(Object.keys(deviceData))
     for (let key of Object.keys(deviceData)) { //Object.keys(deviceData).forEach(key => {
         let inner;
@@ -266,10 +267,11 @@ function showOrderedDevices(loopType, deviceName, address, elem, deviceData, loo
                 //deviceData[key]["ITEMS"]["ITEM"][ParseInt(deviceData[key]["value"])]["@NAME"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@NAME"]
                 deviceData[key]["openModalFirst"] = `openChannelModal(this.id, '${deviceData[key]["~path"]}', '${deviceData[key]["@TEXT"]}', '${deviceData[key]["value"] ? deviceData[key]["value"] : deviceData[key]["ITEMS"]["ITEM"].find(i => i.hasOwnProperty("@DEFAULT"))["@DEFAULT"]}', '${deviceData[key]["ITEMS"]["ITEM"].map(x => x["@NAME"])}', this.value)`;
                 deviceData[key]["addChannelHelp"] = true;
+                row = " row";
             case (key.includes("NAME_I")):
                 if (!fieldsetChannels) fieldsetChannels = createFieldset(`channels_${loopType}_${deviceName}_${address}`, new T().t(localStorage.getItem('lang'), "channels"));
                 inner = transformGroupElement(deviceData[key]);
-                if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6">${inner}</div>`);
+                if (inner) fieldsetChannels.insertAdjacentHTML('beforeend', `<div class="col-xs-12 col-lg-6${key.includes("TYPECHANNEL") ? row : ""}">${inner}</div>`);
                 break;
             case (key.includes("ALARMLEVEL")):
                 if (!fieldsetAlarmLevel) fieldsetAlarmLevel = createFieldset(`channels_${loopType}_${deviceName}_${address}`, new T().t(localStorage.getItem('lang'), "levels"));
@@ -314,10 +316,14 @@ function openChannelModal(id, path, channelName, oldValue, allNames, newValue) {
 function showChannelInfo(it, path) {
     boundAsync.channelUses(path).then(r => {
         if (r) {
-            it.dataset.content = r;
+            const popover = bootstrap.Popover.getOrCreateInstance(it);
+
+            return popover.setContent({
+                '.popover-header': 'used_in',
+                '.popover-body': r,
+            });
         }
     });
-    $(it).popover({ trigger: "hover" });
 }
 
 const removeDevice = (loopType, loopNumber, deviceName, address) => {

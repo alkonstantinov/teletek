@@ -11,6 +11,12 @@
     background-repeat: no-repeat;
     background-position: center center;
     display: inline-block;
+    min-width: 10%; /*added lately*/
+}
+
+.ram_icon.x14 {
+    width: 1.4rem;
+    height: 1.4rem;
 }
 
 .ram_icon.toggle.open {
@@ -93,6 +99,10 @@
 }
 .ram_icon.add_device {
     background-image: url(../images/icons/22-add-device.svg);
+}
+
+.ram_icon.rot45 {
+    transform: rotate(45deg);
 }
 
 a .ram_card .ram_icon.bell, a .ram_card .ram_icon.fireicon, a .ram_card .ram_icon.signall {

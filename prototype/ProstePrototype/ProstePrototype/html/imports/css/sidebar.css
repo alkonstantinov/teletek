@@ -3,9 +3,10 @@
     --ram-icon-color-red: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);
     --ram-icon-color-green: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%);
     --ram-icon-color-blue: invert(26%) sepia(64%) saturate(6323%) hue-rotate(214deg) brightness(105%) contrast(103%);
+    --open-size: 60; /*added lately*/
 }
 
-/* Scrolbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -69,27 +70,45 @@ body {
 .ram_btn.btn_grey:hover {
     background-color: #cbcbcbbd;
 }
-.ram_btn.btn_light:hover {
+/*used in WPF*/
+/*.ram_btn.btn_light:hover {
     background-color: #e9e9e9bd;
-}
-.btn.ram_btn.btn_light:hover .ram_icon{
+}*/
+/*used in WPF*/
+/*.btn.ram_btn.btn_light:hover .ram_icon{
     filter: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);
-}
+}*/
 .ram_btn.btn_white {
     background-color: #ffffff;
+    max-height: 70px;
 }
 
 .btn.ram_btn.btn_white:hover{
     background-color: #ffffffc7;
 }
-.btn.ram_btn.btn_white:hover .ram_icon{
-    filter: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);
+/*modified*/
+.btn.ram_btn.btn_white.fire:hover .ram_icon{
+    /*filter: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);*/
+    filter: var(--ram-icon-color-red);
 }
-
+/*added lately*/
+.btn.ram_btn.btn_white.normal:hover .ram_icon {
+    filter: var(--ram-icon-color-blue);
+}
+/*added lately*/
+.btn.ram_btn.btn_white.grasse:hover .ram_icon {
+    filter: var(--ram-icon-color-green);
+}
+/*modified*/
 .ram_btn .ram_btn_title {
     margin-left: 2px;
     font-size: 10px;
     font-weight: 600;
+    max-width: 6em;  /*set the maximum width of the div*/ 
+    white-space: normal; /* allow the text to wrap onto new lines up until the max-height of the element*/
+    overflow: hidden; /* hide any text that overflows the maximum width */
+    text-overflow: ellipsis; /* show an ellipsis at the end of the truncated text */
+    overflow-wrap: break-word; /* allow the text to wrap within words */
 }
 
 .ram_btn.ram_toggle_btn {
@@ -128,13 +147,29 @@ body {
     overflow: hidden;
     transition: 0.3s ease;
     z-index: 999;
+    max-width: calc(calc(var(--open-size) * 1%) + 30px);
 }
+
+/*added lately*/
+    #ram_sidebar.openvar {
+        width: calc(calc(var(--open-size) * 1%) + 30px);
+    }
+    #ram_sidebar.openvar1 {
+        width: calc(calc(20%) + 30px);
+    }
+    #ram_sidebar.openvar2 {
+        width: calc(calc(40%) + 30px);
+    }
+    #ram_sidebar.openvar3 {
+        width: calc(calc(var(--open-size) * 1%) + 30px);
+    }
 
 #ram_sidebar.open {
      max-width: 80%;
      width: 80%;
 }
 
+/*added lately*/
 #ram_sidebar.fullopen {
     max-width: 100%;
     width: 100%;
@@ -143,7 +178,7 @@ body {
 #ram_sidebar .ram_sidebar_content_wrapper {
     display: flex;
     overflow-y: hidden;
-    /*height: calc(100vh - 48px);*/
+    /*height: calc(100vh - 48px);*/ /*added lately*/
     position: relative;
     width: auto;
     /* max-width: 80%;     */
@@ -193,10 +228,11 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 
-
+/*modified*/
 #ram_sidebar_nav {
     min-width: 250px;
     width: 250px;
@@ -223,16 +259,16 @@ body {
     width: 100%;
     max-height: 70px;
 }
-
-.ram_flex_bottom .ram_settings {
-    display: flex;
-    width: 100%;
-    padding: 16px;
-    padding-right: 10px;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 150px;
-}
+    /*modified*/
+    .ram_flex_bottom .ram_settings {
+        display: flex;
+        width: 100%;
+        padding: 15px; /*previously 16px*/
+        padding-right: 5px; /*previously 10px*/
+        justify-content: space-between;
+        align-items: center;
+        min-width: 115px; /*previously 150px*/
+    }
 
 #ram_sidebar_nav .ram_flex_bottom .ram_settings {
     background-color: white;
@@ -256,7 +292,6 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    position: relative;
     border-radius: 5px;
     box-shadow: 2px 0px 6px #0000001A;
     position: relative;
@@ -268,10 +303,28 @@ body {
     cursor: pointer;
 }
 
-.ram_card:hover .ram_icon,
-.ram_card.active .ram_icon {
-    filter: invert(23%) sepia(99%) saturate(4302%) hue-rotate(352deg) brightness(88%) contrast(132%);
-}
+/*modified*/
+    .ram_card.fire:hover .ram_icon,
+    .ram_card.fire.active .ram_icon,
+    .ram_card.fire:hover .fa-solid,
+    .ram_card.fire.active .fa-solid {
+        /*filter: invert(23%) sepia(99%) saturate(4302%) hue-rotate(352deg) brightness(88%) contrast(132%);*/
+        filter: var(--ram-icon-color-red);
+    }
+    /*modified*/
+    .ram_card.normal:hover .ram_icon,
+    .ram_card.normal.active .ram_icon,
+    .ram_card.normal:hover .fa-solid,
+    .ram_card.normal.active .fa-solid {
+        filter: var(--ram-icon-color-blue);
+    }
+    /*modified*/
+    .ram_card.grasse:hover .ram_icon,
+    .ram_card.grasse.active .ram_icon,
+    .ram_card.grasse:hover .fa-solid,
+    .ram_card.grasse.active .fa-solid {
+        filter: var(--ram-icon-color-green);
+    }
 
 .ram_card .ram_card_img_top {
     padding-top: 10px;
@@ -316,6 +369,11 @@ body {
     height: 11px;
 }
 
+    .ram_card .ram_icon.add_device.x14 {
+        width: 14px;
+        height: 14px;
+    }
+
 .ram_card .ram_add_btn {
     margin: 0;
     padding: 0;
@@ -323,6 +381,17 @@ body {
     top: 6px;
     right: 6px;
     color: #7e808f;
+}
+
+.ram_card .ram_rot_btn {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    color: #7e808f;
+    display: flex;
+    justify-content: end;
 }
 
 #ram_sidebar #ram_devices_3 .ram_cards {
@@ -428,46 +497,48 @@ body {
 #ram_sidebar .ram_list_group_item:active span{
     color: black;
 }
-
+/*modified*/
 #ram_sidebar .accordion-item.normal .accordion-header .ram_icon,
 #ram_sidebar .accordion-item.normal .accordion-header .accordion-button::after {
     filter: var(--ram-icon-color-blue);
 }
-
+/*added lately*/
 #ram_sidebar .accordion-item.normal .accordion-header .accordion-button:not(.collapsed)::after {
     filter: hue-rotate(0deg);
 }
-
+/*modified*/
 #ram_sidebar .accordion-item.fire .accordion-header .ram_icon,
 #ram_sidebar .accordion-item.fire .accordion-header .accordion-button::after {
     filter: var(--ram-icon-color-red);
 }
-
+/*added lately*/
 #ram_sidebar .accordion-item.fire .accordion-header .accordion-button:not(.collapsed)::after {
     filter: hue-rotate(120deg);
 }
-
+/*modified*/
 #ram_sidebar .accordion-item.grasse .accordion-header .ram_icon,
 #ram_sidebar .accordion-item.grasse .accordion-header .accordion-button::after {
     filter: var(--ram-icon-color-green);
 }
-
+/*added lately*/
 #ram_sidebar .accordion-item.grasse .accordion-header .accordion-button:not(.collapsed)::after {
     filter: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%);
 }
-
+/*modified*/
 #ram_sidebar .accordion-item.normal .ram_list_group_item:hover .ram_icon,
 #ram_sidebar .accordion-item.normal .ram_list_group_item:active .ram_icon,
 #ram_sidebar .accordion-item.normal .ram_list_group_item:hover .fa-solid,
 #ram_sidebar .accordion-item.normal .ram_list_group_item:active .fa-solid {
     filter: var(--ram-icon-color-blue);
 }
+/*modified*/
 #ram_sidebar .accordion-item.grasse .ram_list_group_item:hover .ram_icon,
 #ram_sidebar .accordion-item.grasse .ram_list_group_item:active .ram_icon,
 #ram_sidebar .accordion-item.grasse .ram_list_group_item:hover .fa-solid,
 #ram_sidebar .accordion-item.grasse .ram_list_group_item:active .fa-solid {
     filter: var(--ram-icon-color-green);
 }
+/*modified*/
 #ram_sidebar .accordion-item.fire .ram_list_group_item:hover .ram_icon,
 #ram_sidebar .accordion-item.fire .ram_list_group_item:active .ram_icon,
 #ram_sidebar .accordion-item.fire .ram_list_group_item:hover .fa-solid,
@@ -475,10 +546,16 @@ body {
     filter: var(--ram-icon-color-red);
 }
 
+/* Modal */
+label.contents {
+    display: contents;
+}
+
 
 /* Main */
 
-#ram_main {
+.ram_main {
     transition: 0.3s ease;
     padding: 30px;
+    /*margin-left: calc(calc(var(--open-size) * 1%) - 20px);*/ /*added lately*/
 }
