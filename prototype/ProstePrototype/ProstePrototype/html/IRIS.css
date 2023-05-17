@@ -97,16 +97,38 @@
     --grey: #a4a9ad;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgb(163, 163, 163);
+    box-shadow: inset 0 0 5px rgb(163, 163, 163);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff0000;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #ff0000;
+    }
+
+body {
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #ffffff;
+}
+
 /* debugging*/
 /**{
     box-sizing: border-box;
     background: rgb(0 100 0 / 0.05) !important;
 }*/
-
-body {
-    font-family: 'Poppins';
-    font-size: 0.8rem;
-}
 
 h5 {
     color: #eed;
@@ -1116,7 +1138,7 @@ button:focus {
 }
 
     .collapsible-content:last-child:has(select:focus) {
-        margin-bottom: 4em;
+        margin-bottom: 5em;
     }
 
 /*    .collapsible-content:not(has(select:focus)) {
@@ -1478,7 +1500,7 @@ input:checked + .slider:before {
         color: #000000;
         opacity: 1 !important;
     }
-*DISABLED SELECT INPUT*/
+/*DISABLED SELECT INPUT*/
 
 .ram_floating_select:disabled {
     background-color: #D6D6D6;
@@ -1545,7 +1567,8 @@ input:checked + .slider:before {
     background-color: #FFFFFF;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 12px;
-    padding: 24px;
+    padding: 6px 24px;
+    margin: 0.5rem 0;
 }
 
 .ram_attribute_holder_title {
@@ -1577,21 +1600,31 @@ input:checked + .slider:before {
         border-radius: 0px 0px 5px 5px;
     }
 
-/*RAM INPUT COMBINE END*/
+    .ram_input_combine .ram_schedule_title {
+        display: flex;
+        background-color: #E6E6E6;
+        font-weight: 400;
+        color: #1E2022;
+        padding: 3px 25px;
+        border-radius: 5px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-size: 13px;
+    }
+    /*RAM INPUT COMBINE END*/
 
-/*RAM SCHEDULE START*/
-
-.ram_schedule_title {
-    display: inline-block;
-    background-color: #E6E6E6;
-    font-weight: 400;
-    color: #1E2022;
-    padding: 3px 25px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin-top: 20px;
-    font-size: 13px;
-}
+    /*RAM SCHEDULE START*/
+    .ram_schedule_title {
+        display: inline-block;
+        background-color: #E6E6E6;
+        font-weight: 400;
+        color: #1E2022;
+        padding: 3px 25px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        font-size: 13px;
+    }
 
     .ram_schedule_title:first-of-type {
         margin-top: 0px;

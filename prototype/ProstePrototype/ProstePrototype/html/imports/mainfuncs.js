@@ -191,16 +191,17 @@ function drawFields(body, json, inheritedColor = 'normal') {
             elementsCreationHandler(div, divLevel);
             body.appendChild(div);
         } else if (divLevel.name === "Company Info") { // unique case "Company Info"
-            let fieldset = document.createElement('fieldset');
-            var insideRows = `<legend>${newT.t(localStorage.getItem('lang'), "company_info")}</legend>`;
+            let fieldset = document.createElement('div');
+            fieldset.classList.add("ram_attribute_holder");
+            var insideRows = `<p class="ram_attribute_holder_title">${newT.t(localStorage.getItem('lang'), "company_info")}</p>`;
             for (field in divLevel.fields) {
                 if (field.includes("~")) continue;
                 let pl = newT.t(localStorage.getItem('lang'), divLevel.fields[field]["@LNGID"]);
                 let id = divLevel.fields[field]["@LNGID"];
                 let m = divLevel.fields[field]["@LENGTH"];
                 let value = divLevel.fields[field]["~value"];
-                insideRows += `<div class="form-item p0">
-                            <input type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}" value="${value || ''}">
+                insideRows += `<div class="ram_input_combine">
+                            <input class="form-control" type="text" maxlength="${m}" name="${id}" id="${id}" placeholder="${pl}" value="${value || ''}">
                         </div>`
             }
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
@@ -230,7 +231,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
             } else {
                 // adding the button for everybody except PANNELIN
                 if (!k.toUpperCase().includes("PANELIN")) {
-                    document.documentElement.style.setProperty('--open-size', '20');
+                    document.documentElement.style.setProperty('--open-size', '135');
                     btnDiv.insertAdjacentHTML(
                         'afterbegin',
                         `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn">
@@ -239,7 +240,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                         </button>`);
                 }         
                 if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
-                    document.documentElement.style.setProperty('--open-size', '40');
+                    document.documentElement.style.setProperty('--open-size', '270');
                     deviceNmbr = 0;
                     // add the toggle button to the zones fiels
                     btnDiv.insertAdjacentHTML(
@@ -376,7 +377,7 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
     let andArray = elementJSON.filter(f => f["@TYPE"] === "AND").map(e => e["PROPERTIES"]["PROPERTY"]).flatMap(el => el);
     let len2 = andArray.filter(f => f["@TYPE"] !== "HIDDEN").length || 0;
     let len1 = elementJSON.filter(f => f["@TYPE"] !== "HIDDEN").filter(f => f["@TYPE"] !== "AND").length;
-    let className = innerString.slice(0, 9) === '<fieldset' ? "col-12 mt-2 mb-2" : `col-12 col-lg-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
+    let className = innerString.startsWith('<fieldset') ? "col-12 mt-2 mb-2" : `col-12 col-lg-${(len1 + len2 > 4) ? 6 : (12 / (len1 + len2))} mt-1`;
     newElement.classList = className;
     newElement.innerHTML = innerString;
     element.appendChild(newElement);
@@ -521,10 +522,11 @@ function fatFbfFunc(json) {
 
 //#region Loop Type
 function showLoopType(level, type, key, showDivId, selectDivId) {
+
     //showLoopType(2, 'Output', "IRIS_LOOP1", 'loop_type-showDiv_output_type', 'output_type')
     const showDiv = document.getElementById(showDivId);
     const selectDiv = document.getElementById(selectDivId);
-    //const selectDiv = document.getElementsByName(selectDivId)[0];
+
     let title = "Loop";
     let nextFunc = `showLoopType(2, '${type}', this.value, '${showDivId}', '${selectDivId}')`;
     let dataUsed = [];
@@ -592,12 +594,12 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 
     let selectId = showDivId + "-" + title;
     let inner = `
-            <div class="form-item roww">
-                <label for="${selectId}">${newT.t(localStorage.getItem('lang'), title.toLowerCase())}</label>
-                <div class="select">
-                    <select id="${selectId}" name="${selectId}"
-                        onchange="javascript: ${nextFunc}" >
-                        <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
+            <div class="form-floating">                
+                <select id="${selectId}" name="${selectId}"
+                    class="form-select ram_floating_select"
+                    aria-label="${newT.t(localStorage.getItem('lang'), title.toLowerCase())}"
+                    onchange="javascript: ${nextFunc}" >
+                    <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
     dataUsed.map(o => {
         let disabled = ""; let tooltip = "";
         if (level >= 2) {
@@ -623,8 +625,8 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
         inner += `<option value="${o["value"]}" ${disabled} ${tooltip} ${o["selected"] ? "selected" : ""}>${o["label"]}</option>`
     });
     inner += `</select>
-                </div></div>`;
-
+              <label for="${selectId}">${newT.t(localStorage.getItem('lang'), title.toLowerCase())}</label></div>`;
+    
     showDiv.insertAdjacentHTML('beforeend', inner);
 
     adjustCollapsibleHeight(selectDiv);
@@ -641,9 +643,17 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
 
 //createLoopTypeMenu
 function createLoopTypeMenu(selectDiv, showDiv, path) {
-    let fieldset = document.createElement("fieldset");
-    fieldset.id = "loop_type-" + showDiv.id;
-    fieldset.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), 'loop_type')}</legend>`);
+    //let divSet = document.createElement("fieldset");
+    let divSet = document.createElement("div");
+    divSet.classList.add('ram_attribute_holder');
+    divSet.id = "loop_type-" + showDiv.id;
+    divSet.insertAdjacentHTML('afterbegin', `<p class="ram_attribute_holder_title">${newT.t(localStorage.getItem('lang'), 'loop_type')}</p>`);
+
+    let divInSet = document.createElement("div"); // creation of <div class="ram_input_combine"></div>
+    divInSet.classList.add('ram_input_combine');
+    divInSet.id = "loop_type-" + showDiv.id + '-target';
+    divSet.appendChild(divInSet);
+
     let pathFound = path, channel_path = "", loop_number = "", device = "", address = "";
     /*  value reading: the whole is the channel path
      * "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22.ELEMENTS.IRIS8_MIO22.PROPERTIES.PROPERTY[9].~index~1"
@@ -673,7 +683,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
                 CONFIGURED_IO = JSON.parse(result);
                 addElementToCONFIGURED_IO(loop_number, device, address, channel_path);
 
-                showLoopType(1, "Output", "", fieldset.id, selectDiv.id);
+                showLoopType(1, "Output", "", divInSet.id, selectDiv.id);
 
             }).catch(err => alert("Error" + err)); break;
         case "FAT_FBF_IN1":
@@ -684,14 +694,14 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
                 CONFIGURED_IO = JSON.parse(result);
                 addElementToCONFIGURED_IO(loop_number, device, address, channel_path);
 
-                showLoopType(1, "Input", "", fieldset.id, selectDiv.id);
+                showLoopType(1, "Input", "", divInSet.id, selectDiv.id);
 
             }).catch(err => alert("Error" + err)); break;
         default:
             alert("something is wrong");
     }
 
-    showDiv.replaceChildren(fieldset);
+    showDiv.replaceChildren(divSet);
 }
 // adding ["selected"] flag to CONFIGURED_IO for pre-configured Loop Type based on predefined loop, device, deviceAddress and channel
 function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_path) {
@@ -748,17 +758,24 @@ const transformGroupElement = (elementJson) => {
         case 'AND':
             let andElementsList = elementJson["PROPERTIES"] && elementJson["PROPERTIES"]["PROPERTY"];
             if (!Array.isArray(andElementsList)) return '';
-            let fs = document.createElement('fieldset');
+            let fs = document.createElement('div');
             fs.id = attributes.input_id;
-            fs.insertAdjacentHTML('afterbegin', `<legend>${attributes.input_name}</legend>`);
+            fs.classList.add('ram_attribute_holder');
+            fs.insertAdjacentHTML('afterbegin', `<p class="ram_attribute_holder_title">${attributes.input_name}</p>`);
             let ds = document.createElement('div');
             ds.classList = 'row align-items-center';
 
             for (el in andElementsList) {
-                let andElDiv = document.createElement('div');
-                andElDiv.classList = 'col-12 col-lg-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
-                andElDiv.insertAdjacentHTML('beforeend', transformGroupElement(andElementsList[el]));
-                ds.appendChild(andElDiv);
+                let innerString = transformGroupElement(andElementsList[el]);
+                if (innerString.includes('form-check mb-3') && andElementsList.length > 4) {
+                    innerString.replaceAll('form-check mb-3', 'form-check form-check-inline');
+                    ds.insertAdjacentHTML('beforeend', innerString);
+                } else {
+                    let andElDiv = document.createElement('div');
+                    andElDiv.classList = 'col-12 col-lg-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
+                    andElDiv.insertAdjacentHTML('beforeend', innerString);
+                    ds.appendChild(andElDiv);
+                }
             }
             fs.appendChild(ds);
             return fs.outerHTML;
@@ -768,14 +785,12 @@ const transformGroupElement = (elementJson) => {
             if (tabs["TAB"]) tabs = tabs["TAB"];
             // input_name = "Input Type", input_id = "input_name"
             let tabsKeys = Object.keys(tabs);
-            //console.log('tabsKeys', tabsKeys, 'tabs', tabs);
+            // alert('tabsKeys '+ tabsKeys + ' tabs '+ tabs);
             // create selectField and append it
-            let inner = `<div class="form-item roww">
-                            <label for="${attributes.input_id}">${attributes.input_name}</label>
-                            <div class="select">
-                                <select id="${attributes.input_id}" name="${attributes.input_id}" 
-                                        onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
-                                                              loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" >`;
+            let inner = `<div class="form-floating mb-3">                            
+                            <select id="${attributes.input_id}" name="${attributes.input_id}" class="form-select ram_floating_select"
+                                    onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" >`;
             tabsKeys.map(o => {
                 let disabled = false; // todo
                 let checkType = "";
@@ -796,9 +811,8 @@ const transformGroupElement = (elementJson) => {
                 inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${newT.t(localStorage.getItem('lang'), tabs[o]['@LNGID'])} </option>`
             });
             inner += `</select>
-                            </div>
-                        </div>
-                        <div id="showDiv_${attributes.input_id}"></div>`;
+                      <label for="${attributes.input_id}">${attributes.input_name}</label></div>
+                      <div id="showDiv_${attributes.input_id}"></div>`;
 
             let additionalOnChangeCommand = "";
             let loopTypePath = "";
@@ -830,8 +844,9 @@ const transformGroupElement = (elementJson) => {
                                     if (Array.isArray(andElements)) {
                                         for (andEl in andElements) {
                                             innerString = transformGroupElement(andElements[andEl]);
-                                            if (innerString && typeof (innerString) === "string") //NB!! Might lead to bug
+                                            if (innerString && typeof (innerString) === "string") { //NB!! Might lead to bug
                                                 appendInnerToElement(innerString, fieldsetDiv, elementJSON);
+                                            }
                                             innerString = '';
                                         }
                                     } else {
@@ -1180,9 +1195,11 @@ function weekChangedValueHandler(scheduleId, index, newValue, path) {
 }
 
 function intListChangedValueHandler(index, newValue, path, input_id, size) {
+    
     let valueArray = [];
     for (var i = 0; i < +size; i++) {
         var e = document.getElementById(`${input_id}_${i}`);
+        console.log(index, newValue, path, input_id, size, i, e)
         if (i === index) {
             valueArray.push(+newValue);
             e.value = +newValue;
@@ -1438,15 +1455,13 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, size, RmBtn = fal
     if (!value) value = "00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00 00:00"; // for test purposes
     let fields = [["Sunday", "-su-"], ["Moday", "-m-"], ["Thuesday", "-t-"], ["Wednesday", "-w-"], ["Thursday", "-th-"], ["Friday", "-f-"], ["Saturday", "-s-"]];
     let data = value.split(" ");
-    let inner = `<div style="display: none" id="${input_id.replaceAll("/", "")}-schedule" value="${value}">
-            <fieldset>
-                <legend>${input_name}</legend>
+    let inner = `<div style="display: none" id="${input_id.replaceAll("/", "")}-schedule" value="${value}" class="ram_attribute_holder">
+            <p class="ram_attribute_holder_title">${input_name}</p>
                 <div class="row">`;
     for (let i = 0; i < size / 2; i++) {
-        if (i % 2 === 0) inner += `<fieldset class="col-12 col-md-3 col-lg bn"><legend>${fields[Math.floor(i / 2)][0]}</legend>`;
-        inner += ` <div class="form-item roww mw">
-                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? newT.t(localStorage.getItem('lang'), 'activate') : newT.t(localStorage.getItem('lang'), 'deactivate')}</label>
-                        <input class="ml10${i % 2 === 0 ? 'p' : ''}"
+        if (i % 2 === 0) inner += `<div class="ram_input_combine col-12 col-md-3 col-lg"><div class="ram_schedule_title">${fields[Math.floor(i / 2)][0]}</div>`;
+        inner += ` <div class="form-floating">
+                        <input class="form-control ram_floating_input"
                                 type="text"
                                 id="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
                                 name="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}"
@@ -1456,30 +1471,43 @@ const getWeekInput = ({ input_id, input_name, readOnly, value, size, RmBtn = fal
                                 oninput="javascript: myFunction3(this.id)"
                                 onblur="javascript: weekChangedValueHandler('${input_id}-schedule', ${i}, this.value, '${path}')"
                                 placeholder="00:00" />
+                        <label for="${i % 2 === 0 ? "activate" : "deactivate"}${fields[Math.floor(i / 2)][1]}${input_id}">${i % 2 === 0 ? newT.t(localStorage.getItem('lang'), 'activate') : newT.t(localStorage.getItem('lang'), 'deactivate')}</label>
                     </div>`
-        if (i % 2 !== 0) inner += `</fieldset>`;
+        if (i % 2 !== 0) inner += `</div>`;
     }
-    inner += "</div></fieldset></div>"
+    inner += "</div></div>"
     return inner;
 }
 
 const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path = "", value, size }) => {
     attributes = [ input_id, input_name, max, min, RmBtn, path, value, size ];
-    let inner = `<fieldset id="${input_id}">
-                <legend>${input_name}</legend>
-                <div class="form-item roww row mr-1">`;
+    let inner = `<div id="${input_id}" class="ram_attribute_holder">
+                <p class="ram_attribute_holder_title">${input_name}</p>
+                <div class="row mr-1">`;
     for (let i = 0; i < size; i++) {
-        inner += `<div class="col-3 p-0">
-                        <input
-                            type="number" id="${input_id}_${i}" name="${input_id}_${i}" 
-                            data-maxlength="${max.length}" 
-                            oninput="javascript: myFunction(this.id); myFunction2(this.id);"
-                            onblur="javascript: intListChangedValueHandler(${i}, this.value, '${path}', '${input_id}', ${size});"
-                            value="${value[i]}" min="${min}" max="${max}">
+        inner += `<div class="col-12 col-md-6 col-lg-3 p-0">
+        <div class="input-group mb-3">             
+                    <input class="form-control ram_number_input"
+                            type="number"
+                            id="${input_id}_${i}"
+                            name="${input_id}_${i}"
+                            ${max ? `data-maxlength="${`${max}`.length}"` : ""}
+                            oninput="this.value=this.value.slice(0,this.dataset.maxlength);"
+                            onchange"javascript: myFunction(this.id); myFunction2(this.id);"
+                            onblur="javascript:intListChangedValueHandler(${i}, this.value, '${path}', '${input_id}', ${size});"
+                            ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
+                            ${value[i] ? `value="${value[i]}"` : ""}/>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                            onblur="javascript:intListChangedValueHandler(${i}, this.parentNode.querySelector('input[type=number]').value, '${path}', '${input_id}', ${size});"
+                            class="ram_number_input_button_left"></button>
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                            onblur="javascript:intListChangedValueHandler(${i}, this.parentNode.querySelector('input[type=number]').value, '${path}', '${input_id}', ${size});"
+                            class="ram_number_input_button_right"></button>
+            </div>
                     </div>`;
     }
     inner += `</div>
-            </fieldset >`;
+            </div >`;
     return inner;
 }
 //#endregion

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="fullHeight" style="--open-size: 0;">
+<html lang="en" class="fullHeight" style="--open-size: 135;">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -10290,331 +10290,352 @@
     <link rel="stylesheet" href="../IRIS.css">
     <title>Teletek Manager</title>
 </head>
-<body class="" style="">
+<body>
     <div id="ram_sidebar" class="openvar">
-        <div class="ram_sidebar_content_wrapper" id="divMain"></div>
+        <div class="ram_sidebar_content_wrapper" id="divMain">
+            <div class="ram_flex_right" id="ram_devices_wrapper">
+                <div class="ram_resizable open" id="ram_devices_1">
+                    <div class="ram_flex_top">
+                        <div id="new" class="ram_cards">
+
+
+
+
+                            <div onclick="javascript: showElement('0', 'IRIS8_OUTPUT'); addActive()" id="0" class="ram_card fire">
+                                <div class="ram_card_img_top">
+                                    <i class="ram_icon outputs"></i>
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">Output 0</h5>
+                                </div>
+                                <div class="ram_add_btn" onclick="javascript: event.stopPropagation();
+                                        sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_OUTPUT', 'elementNumber': '0' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '0', 'elementType': '' }})">
+                                    <i class="ram_icon add_device rot45"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ram_flex_bottom">
+                        <div class="ram_settings">
+                            <div class="ram_settings" id="buttons">
+                                <button class="btn ram_btn btn_white fire" onclick="javascript:addElement('element', 'IRIS8_OUTPUT')" id="_btn">
+                                    <i class="ram_icon add_device"></i>
+                                    <div class="ram_btn_title">Add New OUTPUT</div>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ram_resizer"></div>
+            </div>
+        </div>
         <div id="ram_toggle_sidebar" class="ram_sidebar_toggle_wrapper">
-            <button class="btn ram_btn btn_white fire" id="add_group_btn" title="Add New INPUT GROUP" onclick="javascript:addElement('element', 'IRIS8_INPUT_GROUP')">
-                <i class="ram_icon add_device x14"></i>
+            <button class="ram_btn btn_toggle" id="ram_hamburger_btn" data-bs-target="#ram_sidebar" aria-controls="ram_sidebar" onclick="javascript: sidebar_toggle(this)">
+                <i class="ram_icon toggle"></i>
             </button>
         </div>
     </div>
-    <main id="new" class="ram_main row scroll" style="margin-left: 0px;">
+    <main class="ram_main" id="selected_area" style="margin-left: 135px;">
+
+        <fieldset id="id_0">
+            <legend>Output 0</legend>
+            <button onclick="javascript: callAddressModal('IRIS8_OUTPUT', '0')" type="button" class="btn btn-position-right">Modify current address</button><div class="row align-items-center m-2">
+                <div class="col-12 col-lg-6 mt-1">
+                    <div class="form-floating mb-3">
+
+                        <input type="text" class="form-control ram_floating_input" id="note" name="note" maxlength="40" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.~noname.MESS.~index~0','newValue': this.value}})">
+                        <label for="note">Note</label>
+                    </div>
+                </div>
+            </div><button class="fire collapsible ml-1 collapsible_settings cactive">Settings</button>
+            <div class="collapsible-content col-12" style="max-height: 145px;">
+                <div class="row align-items-center m-2" id="settings">
+                    <div class="col-12 col-lg-6 mt-1">
+                        <div>
+                            <label for="delay_(seconds)" class="input-group-text">Delay (seconds)</label>
+                            <div class="input-group mb-3">
+
+                                <input class="form-control ram_number_input" type="number" id="delay_(seconds)" name="delay_(seconds)" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~0','newValue': this.value}})" min="0" max="600" value="0">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                            </div>
+                        </div>
+                    </div><div class="col-12 col-lg-6 mt-1">
+                        <div>
+                            <label for="pulse_duration_[sec]" class="input-group-text">Pulse duration [sec]</label>
+                            <div class="input-group mb-3">
+
+                                <input class="form-control ram_number_input" type="number" id="pulse_duration_[sec]" name="pulse_duration_[sec]" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Settings.fields.PULSE_DURATION.~index~0','newValue': this.value}})" min="0" max="250" value="0">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Settings.fields.PULSE_DURATION.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Settings.fields.PULSE_DURATION.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><button class="fire collapsible ml-1 collapsible_output_type cactive">Output Type</button>
+            <div class="collapsible-content col-12" style="max-height: 344px;">
+                <div class="row align-items-center m-2" id="output_type">
+                    <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                        <div class="form-floating mb-3">
+                            <select id="output_type" name="output_type" class="form-select ram_floating_select" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.~index~0','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_output_type', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                <option value="0_382ac73f-5bae-43ad-be71-8624987639d5">NONE </option>
+                                <option value="1_a2bd4100-aefc-4b90-81e8-dcd8b086fe21">PERIPHERY_DEVICE </option>
+                                <option checktype="ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.9eaf1efb-fcb1-4c80-a708-b15cfd3b0a8f.~index~0" value="2_9eaf1efb-fcb1-4c80-a708-b15cfd3b0a8f">LOOP_DEVICE </option>
+                                <option value="5_717f0dd9-7fff-409c-ab2a-c01b81ff2a89">NETWORK </option>
+                                <option value="3_72d6f74b-3a0c-41cb-85f3-cb3142b8fa15">ACTION </option>
+                                <option value="4_2d4a550a-6ce8-45a1-a618-94b9cbaf522b" selected="">EVENT </option>
+                            </select>
+                            <label for="output_type">Output type</label>
+                        </div>
+                        <div id="showDiv_output_type">
+                            <fieldset id="loop_type-showDiv_output_type">
+                                <legend>Loop type</legend>
+                                <div class="form-item roww">
+                                    <label for="loop_type-showDiv_output_type-Loop">Loop</label>
+                                    <div class="select">
+                                        <select id="loop_type-showDiv_output_type-Loop" name="loop_type-showDiv_output_type-Loop" onchange="javascript: showLoopType(2, 'Output', this.value, 'loop_type-showDiv_output_type', 'output_type')" class="visited-bgd">
+                                            <option value="" disabled="" selected="">Select an option</option>
+                                            <option value="IRIS8_TTELOOP1">TTELOOP1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-item roww">
+                                    <label for="loop_type-showDiv_output_type-Device">Device</label>
+                                    <div class="select">
+                                        <select id="loop_type-showDiv_output_type-Device" name="loop_type-showDiv_output_type-Device" onchange="javascript: showLoopType(3, 'Output', 'IRIS8_TTELOOP1' + '+' + this.value, 'loop_type-showDiv_output_type', 'output_type')" class="visited-bgd">
+                                            <option value="" disabled="" selected="">Select an option</option>
+                                            <option value="IRIS8_MIO22M/1">1. MIO22M</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-item roww">
+                                    <label for="loop_type-showDiv_output_type-Output">Output</label>
+                                    <div class="select">
+                                        <select id="loop_type-showDiv_output_type-Output" name="loop_type-showDiv_output_type-Output" onchange="javascript: showLoopType(4, 'Output', 'IRIS8_TTELOOP1+IRIS8_MIO22M/1' + '+' + this.value, 'loop_type-showDiv_output_type', 'output_type')" class="visited-bgd">
+                                            <option value="" disabled="" selected="">Select an option</option>
+                                            <option value="/TYPECHANNEL3">TYPECHANNEL3</option>
+                                            <option value="/TYPECHANNEL4">TYPECHANNEL4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div><div id="0_382ac73f-5bae-43ad-be71-8624987639d5" style="display: none;"><div class="row align-items-center"></div></div><div id="1_a2bd4100-aefc-4b90-81e8-dcd8b086fe21" style="display: none;">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-6 mt-1">
+                                    <div>
+                                        <label for="peripherial_device_address" class="input-group-text">Peripherial device address</label>
+                                        <div class="input-group mb-3">
+
+                                            <input class="form-control ram_number_input" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.a2bd4100-aefc-4b90-81e8-dcd8b086fe21.PROPERTIES.PROPERTY[0].~index~0','newValue': this.value}})" min="2" max="12" value="2">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.a2bd4100-aefc-4b90-81e8-dcd8b086fe21.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.a2bd4100-aefc-4b90-81e8-dcd8b086fe21.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                                        </div>
+                                    </div>
+                                </div><div class="col-12 col-lg-6 mt-1">
+                                    <div>
+                                        <label for="peripherial_device_output" class="input-group-text">Peripherial device output</label>
+                                        <div class="input-group mb-3">
+
+                                            <input class="form-control ram_number_input" type="number" id="peripherial_device_output" name="peripherial_device_output" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.a2bd4100-aefc-4b90-81e8-dcd8b086fe21.PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}})" min="1" max="24" value="1">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.a2bd4100-aefc-4b90-81e8-dcd8b086fe21.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.a2bd4100-aefc-4b90-81e8-dcd8b086fe21.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="5_717f0dd9-7fff-409c-ab2a-c01b81ff2a89" style="display: none;">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-6 mt-1">
+                                    <div>
+                                        <label for="input_number" class="input-group-text">Input number</label>
+                                        <div class="input-group mb-3">
+
+                                            <input class="form-control ram_number_input" type="number" id="input_number" name="input_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.717f0dd9-7fff-409c-ab2a-c01b81ff2a89.PROPERTIES.PROPERTY[0].~index~0','newValue': this.value}})" min="0" max="250" value="0">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.717f0dd9-7fff-409c-ab2a-c01b81ff2a89.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.717f0dd9-7fff-409c-ab2a-c01b81ff2a89.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                                        </div>
+                                    </div>
+                                </div><div class="col-12 col-lg-6 mt-1">
+                                    <div>
+                                        <label for="panel_number" class="input-group-text">Panel number</label>
+                                        <div class="input-group mb-3">
+
+                                            <input class="form-control ram_number_input" type="number" id="panel_number" name="panel_number" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.717f0dd9-7fff-409c-ab2a-c01b81ff2a89.PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}})" min="0" max="64" value="0">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.717f0dd9-7fff-409c-ab2a-c01b81ff2a89.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.717f0dd9-7fff-409c-ab2a-c01b81ff2a89.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="3_72d6f74b-3a0c-41cb-85f3-cb3142b8fa15" style="display: none;">
+                            <fieldset class="row align-items-center">
+                                <legend>FUNCTION</legend><div class="col-12 col-lg-12 mt-1">
+                                    <div class="form-floating mb-3">
+                                        <select id="function" name="function" class="form-select ram_floating_select" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.72d6f74b-3a0c-41cb-85f3-cb3142b8fa15.PROPERTIES.PROPERTY.~index~0','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_function', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                            <option value="0_d0a4667c-3732-4d07-a741-7ac83226e7cf" selected="">SILLENCE BUZZER </option>
+                                            <option value="1_6531ffc3-39f8-4fc7-9f1c-209dc5c306b0">SILLENCE SOUNDER </option>
+                                            <option value="2_0a357ab7-4abe-402b-891c-f36cc95b9d7d">RESET </option>
+                                            <option value="3_6f09eff9-5319-475e-8abe-0f79f17a683f">EVACUATE </option>
+                                            <option value="4_7c9afd9c-983d-44fa-8023-1ee71a8f37f3">DELAY OVERRIDE </option>
+                                            <option value="5_fa4a2dc7-e22b-4893-a997-f00b124abe39">CLASS CHANGE </option>
+                                            <option value="6_f7335f09-30c8-4ad3-9bb4-2c32098acfcb">SILLENCE SOUNDER (STROBE ON) </option>
+                                            <option value="7_c4c9e6a6-3673-49b1-a021-853db51211d7">DAY </option>
+                                            <option value="8_a0cc9ee2-2452-427a-8a32-d2ab0117e618">NIGHT </option>
+                                        </select>
+                                        <label for="function">FUNCTION</label>
+                                    </div>
+                                    <div id="showDiv_function"></div><div id="0_d0a4667c-3732-4d07-a741-7ac83226e7cf" style="display: none;"></div><div id="1_6531ffc3-39f8-4fc7-9f1c-209dc5c306b0" style="display: none;"></div><div id="2_0a357ab7-4abe-402b-891c-f36cc95b9d7d" style="display: none;"></div><div id="3_6f09eff9-5319-475e-8abe-0f79f17a683f" style="display: none;"></div><div id="4_7c9afd9c-983d-44fa-8023-1ee71a8f37f3" style="display: none;"></div><div id="5_fa4a2dc7-e22b-4893-a997-f00b124abe39" style="display: none;"></div><div id="6_f7335f09-30c8-4ad3-9bb4-2c32098acfcb" style="display: none;">
+                                        <fieldset class="row align-items-center">
+                                            <legend>Zone number</legend><div class="col-12 col-lg-6 mt-1">
+                                                <div>
+                                                    <label for="zone_number" class="input-group-text">Zone number</label>
+                                                    <div class="input-group mb-3">
+
+                                                        <input class="form-control ram_number_input" type="number" id="zone_number" name="zone_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.72d6f74b-3a0c-41cb-85f3-cb3142b8fa15.PROPERTIES.PROPERTY.TABS.f7335f09-30c8-4ad3-9bb4-2c32098acfcb.PROPERTIES.PROPERTY.~index~0','newValue': this.value}})" min="0" max="200" value="0">
+                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.72d6f74b-3a0c-41cb-85f3-cb3142b8fa15.PROPERTIES.PROPERTY.TABS.f7335f09-30c8-4ad3-9bb4-2c32098acfcb.PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_left"></button>
+                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.72d6f74b-3a0c-41cb-85f3-cb3142b8fa15.PROPERTIES.PROPERTY.TABS.f7335f09-30c8-4ad3-9bb4-2c32098acfcb.PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}})" class="ram_number_input_button_right"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div><div id="7_c4c9e6a6-3673-49b1-a021-853db51211d7" style="display: none;"></div><div id="8_a0cc9ee2-2452-427a-8a32-d2ab0117e618" style="display: none;"></div>
+                                </div>
+                            </fieldset>
+                        </div><div id="4_2d4a550a-6ce8-45a1-a618-94b9cbaf522b" style="display: none;">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-12 mt-1">
+                                    <div class="form-floating mb-3 ">
 
 
+                                        <select class="form-select ram_floating_select" id="function" name="function" aria-label="Function" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.OutputType.fields.Type.TABS.2d4a550a-6ce8-45a1-a618-94b9cbaf522b.PROPERTIES.PROPERTY[0].~index~0','newValue': this.value}}
+                            )
+
+                        ">
+                                            <option value="" disabled="">Select an option</option>
+                                            <option value="0" selected="">ALARM</option>
+                                            <option value="1">FAULT</option>
+                                            <option value="2">WARNING</option>
+                                        </select><label for="function">Function</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><button class="fire collapsible ml-1 collapsible_parameters cactive">Parameters</button>
+            <div class="collapsible-content col-12" style="max-height: 419px;">
+                <div class="row align-items-center m-2" id="parameters">
+                    <div class="col-12 col-lg-6 mt-1">
+                        <div class="form-check mb-3">
+
+                            <input type="checkbox" id="latched" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '1', '0', 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.Parameters.PROPERTIES.PROPERTY[0].~index~0')">
+                            <label for="latched" class="form-check-label">Latched</label>
+                        </div>
+                    </div><div class="col-12 col-lg-6 mt-1">
+                        <div class="form-check mb-3">
+
+                            <input type="checkbox" id="inverted" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '2', '0', 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.Parameters.PROPERTIES.PROPERTY[1].~index~0')">
+                            <label for="inverted" class="form-check-label">Inverted</label>
+                        </div>
+                    </div><div class="col-12 col-lg-6 mt-1">
+                        <fieldset class="form-floating mb-3 ">
+                            <legend>Logic</legend>
+
+                            <select class="form-select ram_floating_select" id="logic" name="logic" aria-label="Logic" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.Parameters.PROPERTIES.PROPERTY[2].~index~0','newValue': this.value}}
+                            )
+                            ; loadDiv(this,'showSchema_logic', this.value + '_function');
+                        ">
+                                <option value="" disabled="">Select an option</option>
+                                <option value="0">OR</option>
+                                <option value="4" selected="">AND</option>
+                            </select><div id="showSchema_logic" class="image col-9" style="margin-left: auto; margin-right: auto"><img src="../../Images/ANDFunction.png" alt="ANDFunction"></div><div style="display: none" id="0_function">
+                                <img src="../../Images/ORFunction.png" alt="ORFunction">
+                            </div><div style="display: none" id="4_function">
+                                <img src="../../Images/ANDFunction.png" alt="ANDFunction">
+                            </div>
+                        </fieldset>
+                    </div><div class="col-12 col-lg-6 mt-1">
+                        <div class="form-floating mb-3 ">
 
 
+                            <select class="form-select ram_floating_select" id="signal_type" name="signal_type" aria-label="Signal type" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.Parameters.PROPERTIES.PROPERTY[3].~index~0','newValue': this.value}}
+                            )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div id="0" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>0. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '0')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_0" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~0' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '0' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '0', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
+                        ">
+                                <option value="" disabled="">Select an option</option>
+                                <option value="16">ONE_PULSE</option>
+                                <option value="32" selected="">PULSED</option>
+                                <option value="0">CONTINIOUS</option>
+                            </select><label for="signal_type">Signal type</label>
+                        </div><div id="or_group_inputs" class="ram_attribute_holder">
+                            <p class="ram_attribute_holder_title">OR group inputs</p>
+                            <div class="row mr-1">
+                                <div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="or_group_inputs_0" name="or_group_inputs" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(0, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" min="0" max="250" value="0">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(0, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(0, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div><div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="or_group_inputs_1" name="or_group_inputs" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(1, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" min="0" max="250" value="2">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(1, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(1, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div><div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="or_group_inputs_2" name="or_group_inputs" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(2, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" min="0" max="250" value="1">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(2, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(2, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div><div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="or_group_inputs_3" name="or_group_inputs" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(3, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" min="0" max="250" value="0">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(3, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(3, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ORINPUTS.~index~0', 'or_group_inputs', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="and_group_inputs_" class="ram_attribute_holder">
+                            <p class="ram_attribute_holder_title">AND group inputs</p>
+                            <div class="row mr-1">
+                                <div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="and_group_inputs__0" name="and_group_inputs_" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(0, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" min="0" max="250" value="0">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(0, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(0, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div><div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="and_group_inputs__1" name="and_group_inputs_" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(1, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" min="0" max="250">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(1, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(1, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div><div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="and_group_inputs__2" name="and_group_inputs_" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(2, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" min="0" max="250">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(2, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(2, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div><div class="col-12 col-md-6 col-lg-3 p-0">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control ram_number_input" type="number" id="and_group_inputs__3" name="and_group_inputs_" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength);" onchange"javascript:="" myfunction(this.id);="" myfunction2(this.id);"="" onblur="javascript:intListChangedValueHandler(3, this.value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" min="0" max="250">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:intListChangedValueHandler(3, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_left"></button>
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:intListChangedValueHandler(3, this.parentNode.querySelector('input[type=number]').value, 'ELEMENTS.IRIS8_OUTPUT.PROPERTIES.Groups.Parameters.fields.ANDINPUTS.~index~0', 'and_group_inputs_', 4);" class="ram_number_input_button_right"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div><div id="1" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>1. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '1')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_1" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~1' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '1' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '1', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="2" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>2. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '2')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_2" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~2' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '2' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '2', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="3" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>3. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '3')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_3" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~3' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '3' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '3', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="4" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>4. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '4')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_4" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~4' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '4' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '4', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="5" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>5. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '5')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_5" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~5' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '5' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '5', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="6" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>6. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '6')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_6" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~6' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '6' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '6', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="7" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>7. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '7')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_7" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~7' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '7' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '7', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="8" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>8. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '8')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_8" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~8' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '8' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '8', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="9" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>9. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '9')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_9" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~9' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '9' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '9', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="10" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>10. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '10')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_10" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~10' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '10' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '10', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="11" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>11. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '11')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_11" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~11' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '11' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '11', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="12" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>12. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '12')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_12" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~12' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '12' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '12', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="13" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>13. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '13')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_13" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~13' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '13' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '13', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div><div id="14" class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="ram_card fire">
-                <fieldset style="min-width: 200px;" class="ram_card_body">
-                    <legend>14. Input Logic</legend>
-                    <button onclick="javascript: callAddressModal('IRIS8_INPUT_GROUP', '14')" type="button" class="btn btn-position-right h5">Modify current address</button>
-                    <p class="fire">
-                        OR
-                        <label class="switch">
-                            <input type="checkbox" id="gr_input_logic_14" onchange="javascript: inputGroupHandler(this.checked, 255, 0, 'ELEMENTS.IRIS8_INPUT_GROUP.PROPERTIES.Groups.~noname.fields.Input_Logic.~index~14' );">
-                            <span class="slider"></span>
-                        </label>
-                        AND
-                    </p>
-                </fieldset>
-                <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'IRIS8_INPUT_GROUP', 'elementNumber': '14' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '14', 'elementType': '' }})">
-                    <i class="ram_icon add_device rot45 x14"></i>
-                </div>
-            </div>
-        </div>
+        </fieldset>
     </main>
 
     <!-- showDevicesListModal required for Zones -->
@@ -10639,19 +10660,15 @@
     </div>
 
     <!-- addressModal -->
-    <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addressModalLabel">Element address</h1>
+                    <h1 class="modal-title fs-5" id="addressModalLabel">Device address</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <label for="select_address" class="contents">Set the address for IRIS8_INPUT_GROUP</label>
-                        <select id="select_address" name="select_address" class="form-select ram_floating_select"><option value="0" disabled="" style="background: #aaa;">0</option><option value="1" disabled="" style="background: #aaa;">1</option><option value="2" disabled="" style="background: #aaa;">2</option><option value="3" disabled="" style="background: #aaa;">3</option><option value="4" disabled="" style="background: #aaa;">4</option><option value="5" disabled="" style="background: #aaa;">5</option><option value="6" disabled="" style="background: #aaa;">6</option><option value="7" disabled="" style="background: #aaa;">7</option><option value="8" disabled="" style="background: #aaa;">8</option><option value="9" disabled="" style="background: #aaa;">9</option><option value="10" disabled="" style="background: #aaa;">10</option><option value="11" disabled="" style="background: #aaa;">11</option><option value="12" disabled="" style="background: #aaa;">12</option><option value="13" disabled="" style="background: #aaa;">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option><option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option><option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option><option value="101">101</option><option value="102">102</option><option value="103">103</option><option value="104">104</option><option value="105">105</option><option value="106">106</option><option value="107">107</option><option value="108">108</option><option value="109">109</option><option value="110">110</option><option value="111">111</option><option value="112">112</option><option value="113">113</option><option value="114">114</option><option value="115">115</option><option value="116">116</option><option value="117">117</option><option value="118">118</option><option value="119">119</option><option value="120">120</option><option value="121">121</option><option value="122">122</option><option value="123">123</option><option value="124">124</option><option value="125">125</option><option value="126">126</option><option value="127">127</option><option value="128">128</option><option value="129">129</option><option value="130">130</option><option value="131">131</option><option value="132">132</option><option value="133">133</option><option value="134">134</option><option value="135">135</option><option value="136">136</option><option value="137">137</option><option value="138">138</option><option value="139">139</option><option value="140">140</option><option value="141">141</option><option value="142">142</option><option value="143">143</option><option value="144">144</option><option value="145">145</option><option value="146">146</option><option value="147">147</option><option value="148">148</option><option value="149">149</option><option value="150">150</option><option value="151">151</option><option value="152">152</option><option value="153">153</option><option value="154">154</option><option value="155">155</option><option value="156">156</option><option value="157">157</option><option value="158">158</option><option value="159">159</option><option value="160">160</option><option value="161">161</option><option value="162">162</option><option value="163">163</option><option value="164">164</option><option value="165">165</option><option value="166">166</option><option value="167">167</option><option value="168">168</option><option value="169">169</option><option value="170">170</option><option value="171">171</option><option value="172">172</option><option value="173">173</option><option value="174">174</option><option value="175">175</option><option value="176">176</option><option value="177">177</option><option value="178">178</option><option value="179">179</option><option value="180">180</option><option value="181">181</option><option value="182">182</option><option value="183">183</option><option value="184">184</option><option value="185">185</option><option value="186">186</option><option value="187">187</option><option value="188">188</option><option value="189">189</option><option value="190">190</option><option value="191">191</option><option value="192">192</option><option value="193">193</option><option value="194">194</option><option value="195">195</option><option value="196">196</option><option value="197">197</option><option value="198">198</option><option value="199">199</option><option value="200">200</option><option value="201">201</option><option value="202">202</option><option value="203">203</option><option value="204">204</option><option value="205">205</option><option value="206">206</option><option value="207">207</option><option value="208">208</option><option value="209">209</option><option value="210">210</option><option value="211">211</option><option value="212">212</option><option value="213">213</option><option value="214">214</option><option value="215">215</option><option value="216">216</option><option value="217">217</option><option value="218">218</option><option value="219">219</option><option value="220">220</option><option value="221">221</option><option value="222">222</option><option value="223">223</option><option value="224">224</option><option value="225">225</option><option value="226">226</option><option value="227">227</option><option value="228">228</option><option value="229">229</option><option value="230">230</option><option value="231">231</option><option value="232">232</option><option value="233">233</option><option value="234">234</option><option value="235">235</option><option value="236">236</option><option value="237">237</option><option value="238">238</option><option value="239">239</option><option value="240">240</option><option value="241">241</option><option value="242">242</option><option value="243">243</option><option value="244">244</option><option value="245">245</option><option value="246">246</option><option value="247">247</option><option value="248">248</option><option value="249">249</option><option value="250">250</option></select>
-                        <div></div>
-                    </div>
+                    ...
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -11688,5 +11705,4 @@
 
 
 </body>
-</html>
 </html>
