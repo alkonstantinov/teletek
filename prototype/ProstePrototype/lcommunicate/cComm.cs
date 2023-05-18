@@ -15,6 +15,12 @@ using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 using common;
 using System.Windows.Input;
+//using LibUsbDotNet;
+//using LibUsbDotNet.Main;
+using HidSharp;
+using System.Security.Cryptography;
+//using LibUsbDotNet.Info;
+//using System.Collections.ObjectModel;
 
 namespace lcommunicate
 {
@@ -899,9 +905,9 @@ namespace lcommunicate
         {
             Monitor.Enter(_cs_cache);
             Monitor.Enter(_cs_pseudo_element_cache);
-            JObject _j_cache_panels = JObject.FromObject(_cache_panels);
-            JObject _j_cache_list_panels = JObject.FromObject(_cache_list_panels);
-            JObject _j_cache_pseudo_element_panels = JObject.FromObject(_cache_pseudo_element_panels);
+            JObject _j_cache_panels = (_cache_panels != null) ? JObject.FromObject(_cache_panels) : null;
+            JObject _j_cache_list_panels = (_cache_list_panels != null) ? JObject.FromObject(_cache_list_panels) : null;
+            JObject _j_cache_pseudo_element_panels = (_cache_pseudo_element_panels != null) ? JObject.FromObject(_cache_pseudo_element_panels) : null;
             Monitor.Exit(_cs_pseudo_element_cache);
             Monitor.Exit(_cs_cache);
             //
@@ -913,6 +919,28 @@ namespace lcommunicate
             return res;
         }
         #endregion
+
+        #region scan&new system
+        public static Dictionary<string, HidDevice> ScanHID()
+        {
+            Dictionary<string, HidDevice> res = new Dictionary<string, HidDevice>();
+            //
+            //var device = loader.GetDevices(0x1234, 0x9876).First();
+            //
+            HidDeviceLoader _loader = new HidDeviceLoader();
+            //USB\VID_0483 & PID_5710
+            //HidDevice dev = _loader.GetDeviceOrDefault(0x0483, 0x5710, null, null);
+            IEnumerable<HidDevice> _devs = _loader.GetDevices();
+            foreach (HidDevice _dev in _devs)
+            {
+                if (Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) && !res.ContainsKey(_dev.ToString()))
+                    res.Add(_dev.ToString(), _dev);
+            }
+            //DeviceList dLst = new FilteredDeviceList();
+            //IEnumerable<Device> _devs = dLst.GetAllDevices();// GetHidDevices();
+            //
+            return res;
+        }
         private static List<JObject> AvailableSystems()
         {
             List<JObject> res = new List<JObject>();
@@ -950,11 +978,72 @@ namespace lcommunicate
             //
             return res;
         }
-        public static JArray Scan()
+        private static string HidSchema(HidDevice _dev)
         {
+            if (Regex.IsMatch(_dev.ProductName, @"repeater[\w\W]*?iris[\w\W]*?simpo", RegexOptions.IgnoreCase))
+                return "Repeater_Iris_Simpo";
+            return "";
+        }
+        private static List<JObject> SystemsFound(Dictionary<string, HidDevice> hid)
+        {
+            List<JObject> res = new List<JObject>();
+            //
+            List<JObject> lstFire = new List<JObject>();
+            List<JObject> lstGuard = new List<JObject>();
+            List<JObject> lstOther = new List<JObject>();
+            foreach (string s in hid.Keys)
+            {
+                HidDevice _dev = hid[s];
+                JObject jSys = new JObject();
+                if (Regex.IsMatch(s, "^(iris|simpo)", RegexOptions.IgnoreCase) || Regex.IsMatch(s, @"repeater[\w\W]+?iris[\w\W]+?simpo", RegexOptions.IgnoreCase))
+                    jSys["deviceType"] = "fire";
+                else if (Regex.IsMatch(s, "^eclipse", RegexOptions.IgnoreCase))
+                    jSys["deviceType"] = "guard";
+                else
+                    jSys["deviceType"] = "";
+                string _schema = HidSchema(_dev);
+                jSys["schema"] = _schema.ToLower();
+                jSys["title"] = _schema;
+                jSys["interface"] = "USB";
+                jSys["address"] = _dev.VendorID.ToString() + "&" + _dev.ProductID.ToString();
+                //
+                if (jSys["deviceType"].ToString() == "fire")
+                    lstFire.Add(jSys);
+                else if (jSys["deviceType"].ToString() == "guard")
+                    lstGuard.Add(jSys);
+                else lstOther.Add(jSys);
+            }
+            foreach (JObject o in lstFire) res.Add(o);
+            foreach (JObject o in lstGuard) res.Add(o);
+            foreach (JObject o in lstOther) res.Add(o);
+            //
+            return res;
+        }
+        public static JObject Scan()
+        {
+            JObject res = new JObject();
+            //
+            Dictionary<string, HidDevice> devs = ScanHID();
+            List<JObject> lstFound = SystemsFound(devs);
+            if (lstFound.Count > 0)
+            {
+                JObject oFound = new JObject();
+                JArray aFound = new JArray();
+                foreach (JObject o in lstFound) aFound.Add(o);
+                res["found"] = aFound;
+            }
+            //
             List<JObject> dirs = AvailableSystems();
-            JArray res = new JArray();
-            foreach (JObject o in dirs) res.Add(o);
+            JArray aFire = new JArray();
+            JArray aGuard = new JArray();
+            JArray aOther = new JArray();
+            foreach (JObject o in dirs)
+                if (o["deviceType"].ToString() == "fire") aFire.Add(o);
+                else if (o["deviceType"].ToString() == "guard") aGuard.Add(o);
+                else aOther.Add(o);
+            if (aFire.Count > 0) res["fire"] = aFire;
+            if (aGuard.Count > 0) res["guard"] = aGuard;
+            if (aOther.Count > 0) res["other"] = aOther;
             return res;
             //
             cTransport t = new cIP();
@@ -962,7 +1051,8 @@ namespace lcommunicate
             ////byte[] res = t.SendCommand(conn, t._ver_cmd);
             //byte[] res = t.SendCommand(conn, t._panel_in_nework_0_cmd);
             //t.Close(conn);
-            return JArray.Parse("[{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, { deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}]");
+            //return JArray.Parse("[{ deviceType: 'fire', schema: 'iris', title: 'IRIS', interface: 'IP', address: '92.247.2.162:7000'}, { deviceType: 'fire', schema: 'iris8', title: 'IRIS8', interface: 'IP', address: '212.36.21.86:7000'}, { deviceType: '', schema: 'eclipse', title: 'ECLIPSE99', interface: 'COM', address: 'COM1'}]");
         }
+        #endregion
     }
 }

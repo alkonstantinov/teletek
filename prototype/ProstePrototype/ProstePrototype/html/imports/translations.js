@@ -164,9 +164,30 @@
         Help: { 'en': 'Help', 'bg': 'Помощ' },
         logout: { 'bg': 'Изход' },
         login: { 'bg': 'Вход' },
+        found: { "en": "Discovered devices", "bg": "Открити устройства", "ge": "Erkannte Geräte" },
+        fire: {
+            "en": "Fire Alarm Templates",
+            "bg": "Пожароизвестителни системи",
+            "ge": "Brandmeldeanlagen",
+            "tr": "Yangin Alarm Systemleri",
+        },
+        guard: {
+            "en": "Intruder Alarm Templates",
+            "bg": "Алармени системи",
+            "ge": "Alarmanlagen",
+            "tr": "Alarm Systemleri"
+        },
+        tte: {
+            "en": "Monitoring Templates",
+            "bg": "Системи за мониторинг",
+            "ge": "Uberwahung",
+            "tr": "Haberlesme Modulleri"
+        },
         iris: { 'bg': 'IRIS', 'en': 'IRIS', 'ge': 'IRIS' },
         iris4: { 'bg': 'IRIS4', 'en': 'IRIS4', 'ge': 'IRIS4' },
         iris8: { 'bg': 'IRIS8', 'en': 'IRIS8', 'ge': 'IRIS8' },
+        simpo: { 'bg': 'SIMPO', 'en': 'SIMPO', 'ge': 'SIMPO' },
+        repeater_iris_simpo: { 'bg': 'Repeater Iris Simpo', 'en': 'Repeater Iris Simpo', 'ge': 'Repeater Iris Simpo' },
         eclipse: { 'bg': 'ECLIPSE', 'en': 'ECLIPSE', 'ge': 'ECLIPSE' },
         eclipse99: { 'bg': 'ECLIPSE99', 'en': 'ECLIPSE99', 'ge': 'ECLIPSE99' },
         access_codes: { 'bg': 'Кодове за достъп', 'en': 'Access codes', 'ge': 'Access codes' }, 

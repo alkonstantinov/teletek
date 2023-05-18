@@ -633,6 +633,47 @@ namespace common
             dnet.Remove(panelskey);
             _dwrite_prop["SIMPO_PANELS_R"] = dpanels;
         }
+        internal void MergeSimpoWritePropsByNode()
+        {
+            if (!_dwrite_prop.ContainsKey("SIMPO_MIMICPANELS"))
+                return;
+            Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>> del = new Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>>();
+            foreach (string el in _dwrite_prop.Keys)
+            {
+                Dictionary<string, Dictionary<string, List<string>>> _dcmd = _dwrite_prop[el];
+                foreach (string cmd in _dcmd.Keys)
+                {
+                    Dictionary<string, List<string>> _didx = _dcmd[cmd];
+                    foreach (string idx in _didx.Keys)
+                    {
+                        List<string> lxml = _didx[idx];
+                        foreach (string xml in lxml)
+                        {
+                            foreach (Match mm in Regex.Matches(xml, @"<BYTE\s+?XPATH\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>"))
+                            {
+                                Match m = Regex.Match(mm.Groups[1].Value, @"ELEMENTS/ELEMENT\[@ID='([\w\W]+?)'\]", RegexOptions.IgnoreCase);
+                                if (m.Success)
+                                {
+                                    string elkey = m.Groups[1].Value;
+                                    if (!del.ContainsKey(elkey))
+                                        del.Add(elkey, new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>());
+                                    if (!del[elkey].ContainsKey(el))
+                                        del[elkey].Add(el, new Dictionary<string, Dictionary<string, List<string>>>());
+                                    Dictionary<string, Dictionary<string, List<string>>> dcmd = del[elkey][el];
+                                    if (!dcmd.ContainsKey(cmd))
+                                        dcmd.Add(cmd, new Dictionary<string, List<string>>());
+                                    Dictionary<string, List<string>> didx = dcmd[cmd];
+                                    if (!didx.ContainsKey(idx))
+                                        didx.Add(idx, new List<string>());
+                                    didx[idx].Add(mm.Value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return;
+        }
         internal override List<cSeria> cfgWriteSerias(string xml)
         {
             List<cSeria> res = new List<cSeria>();
@@ -799,6 +840,7 @@ namespace common
             }
             //
             ReorderSimpoRepeaterWriteProps();
+            MergeSimpoWritePropsByNode();
             //
             return res;
         }

@@ -95,13 +95,20 @@ function receiveMessageWPF(jsonTxt) {
             /* case index-page */
             document.body.style.backgroundColor = "#E6ECF4";
             body = document.getElementById('divDevices');
-            let divD = document.createElement('div');
-            divD.classList = "row m-2 g10 no-gutter";
-            devices = json["pageName"]["wb2"];
-            for (let i = 0; i < devices.length; i++) {
-                addButton(devices[i].title, divD, i, devices[i]);
-                body.appendChild(divD);
-            }
+            const devicesPerType = json["pageName"]["wb2"];
+            Object.keys(devicesPerType).forEach(deviceType => {
+                let divD = document.createElement('div');
+                divD.classList = "row m-2 g10 no-gutter border-top";
+                let h4 = document.createElement('h4');
+                h4.classList = "h4";
+                h4.innerText = newT.t(localStorage.getItem('lang'), deviceType);
+                divD.appendChild(h4);
+                const devices = devicesPerType[deviceType];
+                for (let i = 0; i < devices.length; i++) {
+                    addButton(devices[i].title, divD, i, devices[i]);
+                    body.appendChild(divD);
+                }
+            });
             break;
         case !!document.getElementById("divPDevices"):
 

@@ -413,6 +413,9 @@ namespace ljson
         {
             JObject data = Data2Save();
         }
+        public static void LoadFile(string filename)
+        {
+        }
         #endregion
 
         #region read/write
