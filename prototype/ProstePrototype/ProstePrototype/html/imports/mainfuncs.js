@@ -1158,8 +1158,8 @@ function checkHexRegex(event) {
 
 // hsow changed articles
 function addVisitedBackground() {
-    $('.form-item input, .form-item select').on('change', function () {
-        this.classList.add('visited-bgd');
+    $('input.form-control, select.form-select, .form-check-input, .form-item p label input').on('change', function () {
+        this.classList.add('is-valid');
     });
 }
 
@@ -1295,6 +1295,12 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, nov
                     </label>
                     ${input_name_on}
                 </p>
+                <div class="valid-feedback m-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                    </svg>
+                </div>
             </div>`
 }
 
@@ -1404,11 +1410,17 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} />
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); this.parentNode.querySelector('input[type=number]').classList.add('is-valid');"
                             class="ram_number_input_button_left"></button>
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}})"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); this.parentNode.querySelector('input[type=number]').classList.add('is-valid');"
                             class="ram_number_input_button_right"></button>
+                    <div class="valid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                            <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                            <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                        </svg>
+                    </div>
             </div></div>`;
             /*old style: <div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
