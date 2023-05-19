@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ELEMENTS XMLVERSION="10" LNGID="d51182f4-4acf-4814-9eb8-f16d83826efc">
+  <ELEMENT ID="R_PANEL"  SORTORDER="20" IMAGEINDEX="1001" AUTOCREATE="0" EXPORT="1" CANDEL="1" CANADD="1" CANCOMMUNICATE="1" PRODUCTNAME="REPEATER Iris/Simpo" HELPFILE="..\..\..\help\help.chm" HELP="main.html" READXML="ReadConfig_SimpoR.xml" WRITEXML="WriteConfig_Simpo.xml" TIMEXML="TimeConfig_Simpo.xml" LOGXML="logConfig_Simpo.xml" DEVICE="ProsTE.Device.SIMPO.dll!1.0.0.0!ProsTE.Device.SIMPO" MIN="0" MAX="1" USBDEVICES="0483:5710;16D0:0E5C" DEFAULTTDF="SIMPO.TDF" LNGID="2886c70b-0274-41ae-bf49-3bee1a8b9ff4">
+    <MEDIA>
+      <ITEMS>
+        <ITEM NAME="USB" />
+      </ITEMS>
+    </MEDIA>
+    <ADDITIONALPARAMS>
+      <PARAM ID="PASSWORD" TEXT="Password" LNGID="b69c83a0-a9c8-4cd9-93f8-35ddc3465b67">
+      </PARAM>
+    </ADDITIONALPARAMS>
+    <CONTAINS>
+      <ELEMENT ID="SIMPO_GENERAL_SETTINGS_R" MIN="1" MAX="1" LNGID="ffdee7bd-0742-400d-b52d-188d924b4330">
+      </ELEMENT>
+     <!-- <ELEMENT ID="SIMPO_ZONES" MIN="1" MAX="1" LNGID="a1a8c4fe-7843-4bd1-bdb5-d23642f8d2ad">
+      </ELEMENT> -->
+      <ELEMENT ID="SIMPO_NETWORK_R" MIN="1" MAX="1" LNGID="fd7751b2-dc70-4989-95ad-95ca81662055">
+      </ELEMENT>
+     <!--<ELEMENT ID="SIMPO_LOOPDEVICES" MIN="1" MAX="1" LNGID="25ac1ef7-5f54-433e-9198-9ab7f9e5ad6f">
+      </ELEMENT>-->
+    </CONTAINS>
+  </ELEMENT>
+  <ELEMENT ID="SIMPO_GENERAL_SETTINGS_R" IMAGEINDEX="1031" AUTOCREATE="1" CANCOMMUNICATE="0" PRODUCTNAME="General Settings" EXPAND="0" LNGID="93bd231c-e05f-4d70-85ee-2103f2fc4cf5">
+    <CONTAINS>
+      <ELEMENT ID="SIMPO_ACCESSCODE_R" MIN="1" MAX="1" LNGID="bc59c705-7e4f-4581-b3f3-a4cce12abb5b">
+      </ELEMENT>
+      <!--<ELEMENT ID="SIMPO_DAYNIGHT_R" MIN="1" MAX="1" LNGID="b24ef13d-54a4-4a95-8495-6723fcb2cc09"> 
+      </ELEMENT>-->
+      <ELEMENT ID="SIMPO_PANELSETTINGS_R" MIN="1" MAX="1" LNGID="411f10fe-b79c-4043-930c-08d60e09f7db">
+      </ELEMENT>
+      <!--<ELEMENT ID="SIMPO_DELAYT1_R" MIN="1" MAX="1" LNGID="9d479bde-6196-42f2-b562-a0485f7d209f">
+      </ELEMENT> 
+      <ELEMENT ID="SIMPO_SOUNDERSMODE_R" MIN="1" MAX="1" LNGID="8d2d8d18-20ec-4b8d-8bd7-8b7845d92a54">
+      </ELEMENT> -->
+      <ELEMENT ID="SIMPO_LOGO_R" MIN="1" MAX="1" LNGID="802f47f0-2e0a-44f0-94a1-80800aea4299">
+      </ELEMENT>
+    </CONTAINS>
+  </ELEMENT>
+  <ELEMENT ID="SIMPO_ACCESSCODE_R" IMAGEINDEX="1002" AUTOCREATE="1" PRODUCTNAME="Access Codes" LNGID="f503fdac-8f83-4d46-9b54-8119ba9ba98b">
+    <RULES>
+      <RULE TYPE="INTEGRATED" ERRMSG="Access codes must be unique" METHOD="PanelCheckCodesDifferent" LNGID="94e90574-ca6c-4ad3-830b-7a342d92d75d">
+      </RULE>
+    </RULES>
+    <PROPERTIES>
+      <PROPERTY TYPE="TEXT" ID="Code1" LENGTH="4" SIZE="4" TEXT="Code Maintenance" VALUE="2222" NUMERICONLY="1" MINLENGTH="4" LNGID="f3411020-fbad-4938-ba61-faa74a77d458">
+      </PROPERTY>
+      <PROPERTY TYPE="TEXT" ID="Code2" LENGTH="4" SIZE="4" TEXT="Code Installer" VALUE="3333" NUMERICONLY="1" MINLENGTH="4" LNGID="a8658888-950a-448f-8845-07cf9cf0e966">
+      </PROPERTY>
+    </PROPERTIES>
+  </ELEMENT>
+  
+  <ELEMENT ID="SIMPO_PANELSETTINGS_R" IMAGEINDEX="1031" AUTOCREATE="1" PRODUCTNAME="Panel Settings" LNGID="2a2be948-4f32-45d4-bb2e-eacce0038c6c">
+    <PROPERTIES>
+      <PROPERTY TYPE="LIST" ID="Language" SIZE="1" TEXT="Language" LNGID="ff91e036-bb9e-4588-98a8-3d8c743adb26">
+        <ITEMS>
+          <ITEM NAME="Еnglish" VALUE="0" DEFAULT="1" LNGID="baa4f786-2fcf-4e89-a5cc-fc14dd67ed8a">
+          </ITEM>
+          <ITEM NAME="Bulgarian" VALUE="1" LNGID="862eef31-2f28-45a6-adb6-527656b80cfd">
+          </ITEM>
+          <ITEM NAME="Portuguese" VALUE="2" LNGID="2e88aca2-6a1d-4178-a226-a13242786bcc">
+          </ITEM>
+          <ITEM NAME="Turkish" VALUE="3" LNGID="945b1f44-6f1b-433f-a4d3-0038d9f85fd5">
+          </ITEM>
+          <ITEM NAME="Italian" VALUE="4" LNGID="25a11181-5b85-4b9a-af2c-93155a190025">
+          </ITEM>
+          <ITEM NAME="Dutch" VALUE="5" LNGID="f2a4a813-bf0e-4b73-a95e-089cf18f8ee5">
+          </ITEM>
+          <ITEM NAME="Polish" VALUE="6" LNGID="2b818de4-df9c-4737-be50-c1e43ab79599">
+          </ITEM>
+          <ITEM NAME="Croatian" VALUE="7" LNGID="2bf89199-1605-4f06-9405-22c9266e1488">
+          </ITEM>
+          <ITEM NAME="France" VALUE="8" LNGID="4127f5e5-3033-4764-94f9-db21c98d6d38">
+          </ITEM>
+          <ITEM NAME="Romanian" VALUE="9" LNGID="d91494fe-b546-41b4-b6e2-f055934d24f9">
+          </ITEM>
+          <ITEM NAME="Spanish" VALUE="10" LNGID="76d1647b-8e00-4555-8215-e2ec78f48901">
+          </ITEM>
+          <ITEM NAME="Hungarian" VALUE="11" LNGID="4660aebc-43a5-4d18-a1a3-6eaa6b65cacc">
+          </ITEM>
+          <ITEM NAME="Estonian" VALUE="12" LNGID="2e81d6c1-1f6e-4a93-9973-e427aab3a71c">
+          </ITEM>
+		  <ITEM NAME="Lietuviu" VALUE="13" LNGID="284097aa-51a0-4faf-84ce-dc4231aa0a63">
+		  </ITEM>
+		  <ITEM NAME="Srpski" VALUE="14" LNGID="284097aa-51a0-4faf-84ce-dc4231aa0a64">
+          </ITEM>
+          <ITEM NAME="German" VALUE="15" LNGID="7df12175-e4d1-494b-90ff-b0855a69b1d2">
+          </ITEM>
+          <ITEM NAME="Latvian" VALUE="16" LNGID="9f35f00a-4f32-4265-9538-910841c2e9e9">
+          </ITEM>
+          <ITEM NAME="Slovenian" VALUE="17" LNGID="9f45f00a-df32-4295-9538-910941c2c9e1">
+          </ITEM>
+          <ITEM NAME="Norsk" VALUE="18" LNGID="9f45f009-df31-4294-9537-910941c2c9e2">
+          </ITEM>
+        </ITEMS>
+      </PROPERTY>
+      <PROPERTY TYPE="INT" ID="BRIGHTNESS_R" SIZE="1" MIN="0" MAX="20" VALUE="10" TEXT="Brightness" LNGID="2bdf42a5-ada8-44b4-8313-5d5f7c4f2ced">
+      </PROPERTY>
+      <PROPERTY TYPE="INT" ID="AUTOLOGOFF" SIZE="1" MIN="1" MAX="60" VALUE="30" TEXT="Auto Log off" LNGID="8c3ec902-bc6d-4392-bedf-a3ab29cd6b04">
+      </PROPERTY> 
+      <PROPERTY TYPE="CHECK" ID="LOGOFFENABLED" SIZE="1" TEXT="Auto Log off Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="0d53fd7e-3c63-4196-bff2-5a81b28077d1">
+      </PROPERTY>
+      <!--<PROPERTY TYPE="HIDDEN" ID="PRINTER" SIZE="1" VALUE="0" TEXT="Printer" LNGID="07b41b46-82c8-49da-ad04-23e32b0ee7e2">
+        <ITEMS>
+          <ITEM NAME="KAFKA" VALUE="0" DEFAULT="1" LNGID="69ce6db9-647a-46fc-9cbe-dcf01b5c578c">
+          </ITEM>
+          <ITEM NAME="EP 1000" VALUE="1" LNGID="ccc8a99d-da47-4621-994d-17f3995fef68">
+          </ITEM>
+        </ITEMS>
+      </PROPERTY>
+      <PROPERTY TYPE="HIDDEN" ID="PAPER" SIZE="1" TEXT="Paper size" LNGID="0da5653d-1d16-4702-bb23-17157b596fda">
+        <ITEMS>
+          <ITEM NAME="37 mm" VALUE="0" DEFAULT="1" LNGID="f38c2715-3b91-4690-afff-c2209db35f03">
+          </ITEM>
+          <ITEM NAME="57 mm" VALUE="1" LNGID="76729ff6-e220-4106-aa3d-cd514b46ec73">
+          </ITEM>
+          <ITEM NAME="80 mm" VALUE="2" LNGID="a3e5dbf2-5fd8-4aef-af13-51d04493d2f1">
+          </ITEM>
+        </ITEMS>
+      </PROPERTY> -->
+    </PROPERTIES>
+  </ELEMENT>
+  
+  <!--<ELEMENT ID="SIMPO_SOUNDERSMODE_R" IMAGEINDEX="1101" AUTOCREATE="1" PRODUCTNAME="Sounders Mode" LNGID="21dd0bd0-a9e2-4d36-aa6d-c79e3cb890a8">
+    <PROPERTIES>
+      <PROPERTY TYPE="HIDDEN" ID="SoundersMode" SIZE="1" TEXT="Sounders Mode" LNGID="8862dfcf-38f0-427c-9407-7bcc796ee9a1">
+        <ITEMS>
+          <ITEM NAME="COMMON" VALUE="0" DEFAULT="1" LNGID="8dc605c9-e6a9-4b3f-970b-664a5d00b587">
+          </ITEM>
+          <ITEM NAME="ZONAL" VALUE="1" LNGID="47ae5f28-c924-4990-92ad-070681f50f6d">
+          </ITEM>
+        </ITEMS>
+      </PROPERTY>
+      <PROPERTY TYPE="HIDDEN" ID="EVACUATIONTONE" SIZE="1" TEXT="Evacuation Tone" LNGID="7a66fdef-455d-4fc4-b4fc-df5221e18618">
+        <ITEMS>
+          <ITEM NAME="970 Hz" VALUE="0" DEFAULT="0" LNGID="bf323ce3-0c30-4ec5-b136-a359953700a9">
+          </ITEM>
+          <ITEM NAME="800 Hz / 970 Hz @ 2 Hz" VALUE="1" LNGID="811c3948-29c5-4976-bbdb-a1c186db6667">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 1 Hz" VALUE="2" LNGID="8b46d572-3a1b-4143-8345-56f67d7a60fa">
+          </ITEM>
+          <ITEM NAME="970 Hz 1s OFF / 1s ON" VALUE="3" LNGID="b7cd7ee9-af01-48b3-914d-7a19fcb2f510">
+          </ITEM>
+          <ITEM NAME="970 Hz, 0.5s / 630 Hz, 0.5s" VALUE="4" LNGID="33d10498-e8f5-45f1-98a8-17e65eda7ff3">
+          </ITEM>
+          <ITEM NAME="554 Hz, 0.1s / 440 Hz, 0.4s" VALUE="5" LNGID="f1db72d7-7572-4315-96e7-890173f479b6">
+          </ITEM>
+          <ITEM NAME="500-1200 Hz, 3.5s / 0.5s OFF" VALUE="6" LNGID="64f4ab52-8024-41b1-ad35-db505e79b732">
+          </ITEM>
+          <ITEM NAME="420 Hz 0.625s ON / 0.625s OFF" VALUE="7" LNGID="4c8475b2-50ee-43bb-b48b-d7ed738ec2bf">
+          </ITEM>
+          <ITEM NAME="500-1200 Hz, 0.5s / OFF x 3/1.5s OFF" VALUE="8" LNGID="66a8f430-9566-4615-a82f-24642ed03cc5">
+          </ITEM>
+          <ITEM NAME="550 Hz / 440 Hz @ 0.5 Hz" VALUE="9" LNGID="8bb53a5c-5b4c-4cdb-b3dd-63d75bf03e84">
+          </ITEM>
+          <ITEM NAME="970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="10" LNGID="812970f5-68eb-4fc2-ab16-873cb5f84de2">
+          </ITEM>
+          <ITEM NAME="2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="11" LNGID="fd24c139-b0b7-4b2e-adea-7eb99998072e">
+          </ITEM>
+          <ITEM NAME="1200 Hz - 500 Hz @ 1 Hz" VALUE="12" LNGID="1761d425-9b9a-4220-93cc-a4ec0f384c72">
+          </ITEM>
+          <ITEM NAME="400 Hz" VALUE="13" LNGID="c06b0677-1996-4177-8e21-2651c033fb98">
+          </ITEM>
+          <ITEM NAME="550 Hz, 0.7s / 1000 Hz, 0.33s" VALUE="14" LNGID="2aae6049-2602-4d91-9916-ea0bff2056ae">
+          </ITEM>
+          <ITEM NAME="1500 Hz - 2700 Hz @ 3 Hz" VALUE="15" LNGID="f3739738-4fe0-443d-ae37-4d1231aca10c">
+          </ITEM>
+          <ITEM NAME="750 Hz" VALUE="16" LNGID="c533c392-ae14-45e8-be1d-1d2d21626efd">
+          </ITEM>
+          <ITEM NAME="2400 Hz" VALUE="17" LNGID="709ecb28-3d0e-40ab-81e9-e1565a0535ee">
+          </ITEM>
+          <ITEM NAME="660 Hz" VALUE="18" LNGID="e015c585-9f25-46d1-be92-898c8158e2e7">
+          </ITEM>
+          <ITEM NAME="660 Hz 1.8s ON / 1.8s OFF" VALUE="19" LNGID="9e3adf49-871b-4375-9def-832a5fc3c6d3">
+          </ITEM>
+          <ITEM NAME="660 Hz 0.15s ON / 0.15s OFF" VALUE="20" LNGID="ca831153-a882-474b-b6c6-05858b5fd8c8">
+          </ITEM>
+          <ITEM NAME="510 Hz, 0.25s / 610 Hz, 0.25s" VALUE="21" LNGID="e9367672-0f48-4cb0-9ff0-a3c0d8541298">
+          </ITEM>
+          <ITEM NAME="800 / 1000 Hz 0.5s each (1 Hz)" VALUE="22" LNGID="e2c33157-a596-4763-83a2-932e7c44f945">
+          </ITEM>
+          <ITEM NAME="250 Hz - 1200 Hz @ 12 Hz" VALUE="23" LNGID="350860b8-4d7b-4a8d-9fcc-5d74e2a55ba3">
+          </ITEM>
+          <ITEM NAME="500 Hz - 1200 Hz @ 0.33 Hz" VALUE="24" LNGID="ff4b7125-da88-4376-925f-da4e152dcc51">
+          </ITEM>
+          <ITEM NAME="2400 Hz - 2900 Hz @ 9 Hz" VALUE="25" LNGID="4400a5c7-b159-43b8-8953-dd0f97e73604">
+          </ITEM>
+          <ITEM NAME="2400 Hz - 2900 Hz @ 3 Hz" VALUE="26" LNGID="5fbabec2-f8f5-40ec-a963-69a60e9d51b4">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 100 Hz" VALUE="27" LNGID="9af97748-1525-474b-87af-ff0c1b11bfde">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 9 Hz" VALUE="28" LNGID="b4f1df1a-d8ef-43c5-899c-c2685f724538">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 3 Hz" VALUE="29" LNGID="45cbb047-9bae-4828-b49f-ca3edf73a878">
+          </ITEM>
+          <ITEM NAME="800 Hz, 0.25s ON / 1s OFF" VALUE="30" LNGID="30f9e57d-da1f-4261-a975-21d9ff4c4009">
+          </ITEM>
+          <ITEM NAME="500 Hz - 1200 Hz, 3.75s / 0.25s OFF" VALUE="31" LNGID="2b9de7a3-db1c-451f-83e2-2ef95ef4c03d">
+          </ITEM>
+        </ITEMS>
+      </PROPERTY>
+      <PROPERTY TYPE="HIDDEN" ID="ALARMTONE" SIZE="1" TEXT="Alarm Tone" LNGID="69ed7109-0543-4fc9-9fc3-023b7a93e2f1">
+        <ITEMS>
+          <ITEM NAME="970 Hz" VALUE="0" DEFAULT="0" LNGID="4b6d1e3b-1ad3-4fd4-bbc8-6a8b34bd0dcf">
+          </ITEM>
+          <ITEM NAME="800 Hz / 970 Hz @ 2 Hz" VALUE="1" LNGID="62a35744-5a90-495c-ab1b-50d29e41c3f5">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 1 Hz" VALUE="2" LNGID="adbc5e9f-6e7b-4273-b7a6-758bb5299a32">
+          </ITEM>
+          <ITEM NAME="970 Hz 1s OFF / 1s ON" VALUE="3" LNGID="8e1c54d4-33bf-4d69-8b8b-353e3774868b">
+          </ITEM>
+          <ITEM NAME="970 Hz, 0.5s / 630 Hz, 0.5s" VALUE="4" LNGID="2aea184d-3777-40e5-810a-190573488ef9">
+          </ITEM>
+          <ITEM NAME="554 Hz, 0.1s / 440 Hz, 0.4s" VALUE="5" LNGID="59895a80-17ff-4db6-9deb-b4883cf4624c">
+          </ITEM>
+          <ITEM NAME="500-1200 Hz, 3.5s / 0.5s OFF" VALUE="6" LNGID="778a394d-47ae-4f85-a8f0-793527ea26e1">
+          </ITEM>
+          <ITEM NAME="420 Hz 0.625s ON / 0.625s OFF" VALUE="7" LNGID="74bc0375-e2ca-4557-bf06-37d5c0a45886">
+          </ITEM>
+          <ITEM NAME="500-1200 Hz, 0.5s / OFF x 3/1.5s OFF" VALUE="8" LNGID="4a0f60b0-bc04-4118-b80a-99d3db41f4df">
+          </ITEM>
+          <ITEM NAME="550 Hz / 440 Hz @ 0.5 Hz" VALUE="9" LNGID="deb797e8-e535-4a44-b206-af604195f509">
+          </ITEM>
+          <ITEM NAME="970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="10" LNGID="555341af-559f-47f7-9a62-cee8cfd0513d">
+          </ITEM>
+          <ITEM NAME="2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="11" LNGID="fb2c29e5-e893-42d4-8ee8-890826827622">
+          </ITEM>
+          <ITEM NAME="1200 Hz - 500 Hz @ 1 Hz" VALUE="12" LNGID="481c67dd-fae6-49ad-bed5-d63bc7957b69">
+          </ITEM>
+          <ITEM NAME="400 Hz" VALUE="13" LNGID="92c1a551-972e-4e4b-8388-a43851666ac4">
+          </ITEM>
+          <ITEM NAME="550 Hz, 0.7s / 1000 Hz, 0.33s" VALUE="14" LNGID="bbe373af-7aab-428e-95a4-0c91b638d227">
+          </ITEM>
+          <ITEM NAME="1500 Hz - 2700 Hz @ 3 Hz" VALUE="15" LNGID="be8bb686-dcb0-4dbf-8c97-35faff8fbd05">
+          </ITEM>
+          <ITEM NAME="750 Hz" VALUE="16" LNGID="cd056a76-c264-4cd4-a93e-7ed9dd49466e">
+          </ITEM>
+          <ITEM NAME="2400 Hz" VALUE="17" LNGID="eccd14f7-4154-4d23-9e1c-3977526f0352">
+          </ITEM>
+          <ITEM NAME="660 Hz" VALUE="18" LNGID="b8b067fb-a6e2-4009-8dae-15e3084d7a2a">
+          </ITEM>
+          <ITEM NAME="660 Hz 1.8s ON / 1.8s OFF" VALUE="19" LNGID="73a020ab-d9e7-4375-9039-f83f1f8e02b0">
+          </ITEM>
+          <ITEM NAME="660 Hz 0.15s ON / 0.15s OFF" VALUE="20" LNGID="5041ed8b-5f07-44b8-a961-b173a1bac9f4">
+          </ITEM>
+          <ITEM NAME="510 Hz, 0.25s / 610 Hz, 0.25s" VALUE="21" LNGID="f8ea4e3c-3e7f-4e44-b104-64dae64b679d">
+          </ITEM>
+          <ITEM NAME="800 / 1000 Hz 0.5s each (1 Hz)" VALUE="22" LNGID="69db8c85-97af-4be6-bb79-a389f9ed4019">
+          </ITEM>
+          <ITEM NAME="250 Hz - 1200 Hz @ 12 Hz" VALUE="23" LNGID="42c46d26-5678-4000-8d35-c8084af5da74">
+          </ITEM>
+          <ITEM NAME="500 Hz - 1200 Hz @ 0.33 Hz" VALUE="24" LNGID="ff2b75cd-169d-4971-b34b-ccf50e9fd7d6">
+          </ITEM>
+          <ITEM NAME="2400 Hz - 2900 Hz @ 9 Hz" VALUE="25" LNGID="5a6b4fe6-38e0-48fe-beb8-ae58066660b3">
+          </ITEM>
+          <ITEM NAME="2400 Hz - 2900 Hz @ 3 Hz" VALUE="26" LNGID="4c6e48b4-b383-42e0-a4fb-5e912ac22e38">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 100 Hz" VALUE="27" LNGID="f1e130da-8ef8-4075-be4f-aa8c464a82a4">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 9 Hz" VALUE="28" LNGID="134c53ce-007c-483d-be11-25894bc00222">
+          </ITEM>
+          <ITEM NAME="800 Hz - 970 Hz @ 3 Hz" VALUE="29" LNGID="29d908f5-02a7-4e97-aa9d-46fa0b3572a9">
+          </ITEM>
+          <ITEM NAME="800 Hz, 0.25s ON / 1s OFF" VALUE="30" LNGID="c72956fc-9dd5-42ba-9612-d12aeb1a1227">
+          </ITEM>
+          <ITEM NAME="500 Hz - 1200 Hz, 3.75s / 0.25s OFF" VALUE="31" LNGID="0b6dabe6-7659-4576-8455-6ada4322d69c">
+          </ITEM>
+        </ITEMS>
+      </PROPERTY>
+      <PROPERTY TYPE="HIDDEN" ID="EVACUATETIMEOUT" SIZE="1" MIN="0" MAX="10" VALUE="0" TEXT="Evacuate Timeout [min]" LNGID="87d03ea4-4da0-4f08-8c11-a69f84557a6d" />
+      <PROPERTY TYPE="HIDDEN" ID="EVACUATESETTINGS" SIZE="1" TEXT="Evacuate Settings" LNGID="5e1c9925-d858-403f-bf94-b54701f0f83d">
+        <ITEMS>
+          <ITEM NAME="Sound / Strobe" VALUE="192" DEFAULT="1" LNGID="cd775894-5cd1-4ef8-8a0f-aae16f15c5c2" />
+          <ITEM NAME="Sound " VALUE="64" LNGID="84797e60-8d9c-4448-9c3b-180492c944bd" />
+          <ITEM NAME="Strobe" VALUE="128" LNGID="0efda9af-abde-4024-b081-a66f8cc66b98" />
+        </ITEMS>
+      </PROPERTY>
+    </PROPERTIES>
+  </ELEMENT>-->
+  <ELEMENT ID="SIMPO_LOGO_R" IMAGEINDEX="1067" AUTOCREATE="1" PRODUCTNAME="Company Logo" LNGID="7f820282-bd0e-48cd-a342-be4a2be593c0">
+    <PROPERTIES>
+      <PROPERTY TYPE="TEXT" ID="LOGO1" VALUE="" SIZE="39" LENGTH="39" TEXT="Company Logo row 1" LNGID="a225826b-7f82-404e-bc21-e0fb6b7a8cb9">
+      </PROPERTY>
+      <PROPERTY TYPE="TEXT" ID="LOGO2" VALUE="" SIZE="39" LENGTH="39" TEXT="Company Logo row 2" LNGID="dee463a1-da24-47d6-9aad-34389198dee4">
+      </PROPERTY>
+    </PROPERTIES>
+  </ELEMENT>
+  <ELEMENT ID="SIMPO_NETWORK_R" IMAGEINDEX="1004" AUTOCREATE="1" PRODUCTNAME="Network" EXPAND="0" LNGID="a5f6adde-75dc-4712-ad08-96f815fb73c2">
+    <CONTAINS>
+      <ELEMENT ID="SIMPO_PANELS_R" MIN="0" MAX="63" LNGID="a2991fac-7071-4f0d-92e5-34a1df87bec2">
+      </ELEMENT>
+    </CONTAINS>
+    <PROPERTIES>
+      <PROPERTY TYPE="INT" ID="PANELNUMBER" SIZE="1" MIN="1" MAX="64" TEXT="Panel Number" LNGID="68821a9e-56f3-4857-9d8c-f625f8cdef05">
+      </PROPERTY>
+      <PROPERTY TYPE="TEXT" ID="PANELNAME" SIZE="39" LENGTH="39" TEXT="Panel Name" LNGID="4110d499-725d-4e19-a434-2319da61642e">
+      </PROPERTY>
+      <PROPERTY TYPE="AND" ID="NETWORKENABLED" SIZE="1" TEXT="Parameters" LNGID="34a7148a-4047-4ad0-a118-c9db7c7fec2d">
+        <PROPERTIES>
+          <PROPERTY TYPE="CHECK" ID="ENABLED" SIZE="1" TEXT="Network Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="8894d05f-f87d-4c3d-81b4-cb586a6f9b66">
+          </PROPERTY>
+          <PROPERTY TYPE="CHECK" ID="REDUNDANCY" SIZE="1" TEXT="Redundancy On" AND="8" YESVAL="8" NOVAL="0" CHECKED="0" LNGID="b94edc05-e52f-4628-82ab-c6016562accc">
+          </PROPERTY>
+        </PROPERTIES>
+      </PROPERTY>
+    </PROPERTIES>
+  </ELEMENT>
+  <ELEMENT ID="SIMPO_PANELS_R" IMAGEINDEX="1003" PRODUCTNAME="Panel" AUTOCREATE="1" AUTOCREATECOUNT="64" LNGID="4a8c29e7-9446-46ba-bc0f-8546aafd6381">
+    <PROPERTIES>
+      <PROPERTY TYPE="LIST" ID="status" SIZE="1" TEXT="Status"  READONLY="1" LNGID="ad0c4e28-57e7-44a9-b2b9-0222e726052e">
+        <ITEMS>
+          <ITEM NAME="none" VALUE="0" DEFAULT="1"  LNGID="3a92feb5-938d-4a5f-afc7-96597c2324ef" />
+          <ITEM NAME="new" VALUE="1" LNGID="6dbf4b1e-8910-4636-aa6a-0b601901785b" />
+          <ITEM NAME="present" VALUE="2" LNGID="f1acdcb8-b9df-421a-8a25-d263bcb06569" />
+          <ITEM NAME="fault" VALUE="3"  LNGID="c8facb2f-e815-44f3-88ae-f65c610834eb" />
+          <ITEM NAME="doubled" VALUE="4" LNGID="fb6f6366-0438-491d-a5d4-b3d680857f54" />
+        </ITEMS>
+      </PROPERTY>
+      <PROPERTY TYPE="AND" ID="PANELFLAGS" SIZE="1" TEXT="Properties" LNGID="4747dc0d-12a1-4ecf-aed4-4f8dfc05e942">
+        <PROPERTIES>
+          <PROPERTY TYPE="CHECK" ID="COMMANDS" SIZE="1" TEXT="Receive Commands" AND="2" YESVAL="2" NOVAL="0" CHECKED="0" LNGID="9470a8ce-97e7-4704-adb9-0a312d79cec9">
+          </PROPERTY>
+          <PROPERTY TYPE="CHECK" ID="MESSAGES" SIZE="1" TEXT="Receive Messages" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="1ca00510-a8d1-4ab3-89e9-7b2c5898b526">
+          </PROPERTY>
+          <!--<PROPERTY TYPE="CHECK" ID="SENDCOMMANDS" SIZE="1" TEXT="Send Messages and Commands" AND="4" YESVAL="4" NOVAL="0" CHECKED="0" LNGID="352f2449-b8f5-4885-8a7a-262835633173">
+          </PROPERTY> -->
+		  
+		  <PROPERTY TYPE="LIST" ID="SENDCOMMANDS" SIZE="1" AND="4" TEXT="Send..." LNGID="ca1f6214-e48f-4c9d-aa6f-f5abddc520e9">
+            <ITEMS>
+              <ITEM NAME="Send Messages and Commands" VALUE="4" DEFAULT="0" LNGID="d368c1f6-6c25-44a6-a4e3-64a17eacb0db">
+              </ITEM>
+              <ITEM NAME="Send Messages" VALUE="0" LNGID="161b9ce7-5f34-4e5f-997c-48a184fef39e">
+              </ITEM>
+            </ITEMS>
+          </PROPERTY>
+        </PROPERTIES>
+      </PROPERTY>
+    </PROPERTIES>
+  </ELEMENT>
+  
+
+</ELEMENTS>

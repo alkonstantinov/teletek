@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OPERATIONS XMLVERSION="10">
+  <PREOPERATIONS>
+  </PREOPERATIONS>
+
+  <ELEMENTS>
+    <ELEMENT ID="R_PANEL">
+      <COMMANDS>
+        <COMMAND BYTES="0760" OKBYTE="1" OKVALUE="12" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
+		<COMMAND BYTES="0061FF" SAVEAS="LOOPTYPE"/>
+      </COMMANDS>
+  <ELEMENTS>
+
+      <!--COMMANDS>
+        <COMMAND BYTES="03510F000078" />
+        <COMMAND BYTES="0760" OKBYTE="1" OKVALUE="10" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
+        <COMMAND BYTES="0061FF" SAVEAS="LOOPTYPE"/>
+      </COMMANDS-->
+
+    <ELEMENT ID="SIMPO_GENERAL_SETTINGS_R">
+      <ELEMENTS>
+        <ELEMENT ID="SIMPO_ACCESSCODE_R">
+          <COMMANDS>
+            <COMMAND BYTES="035210000004" />
+            <COMMAND BYTES="035210010004" />
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="Code1" BYTE="2" LENGTH="4" OPERATION="ASCII2TEXT"/>
+            <PROPERTY ID="Code2" BYTE="8" LENGTH="4" OPERATION="ASCII2TEXT"/>
+          </PROPERTIES>
+        </ELEMENT>
+
+       <!--<ELEMENT ID="SIMPO_DAYNIGHT_R">
+          <COMMANDS>
+            <COMMAND BYTES="03520F00002c" />
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="DayNightSchedule" BYTE="4" LENGTH="28"/>
+            <PROPERTY ID="DayMode" BYTE="32" LENGTH="1"/>
+          </PROPERTIES>
+        </ELEMENT> -->
+
+        <ELEMENT ID="SIMPO_PANELSETTINGS_R">
+          <COMMANDS>
+            <COMMAND BYTES="03520F00002c" />
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="Language" BYTE="36" LENGTH="1"/>
+            <PROPERTY ID="BRIGHTNESS_R" BYTE="38" LENGTH="1"/>
+		    <!--<PROPERTY ID="PRINTER" BYTE="34" LENGTH="1"/>
+		    <PROPERTY ID="PAPER" BYTE="35" LENGTH="1"/> -->
+		    <PROPERTY ID="AUTOLOGOFF" BYTE="41" LENGTH="1"/>
+		    <PROPERTY ID="LOGOFFENABLED" BYTE="42" LENGTH="1"/>
+          </PROPERTIES>
+        </ELEMENT>
+
+        <!--<ELEMENT ID="SIMPO_DELAYT1_R">
+          <COMMANDS>
+            <COMMAND BYTES="03520F00002c" />
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="T1DELAY" BYTE="37" LENGTH="1"/>
+          </PROPERTIES>
+        </ELEMENT> 
+
+        <ELEMENT ID="SIMPO_SOUNDERSMODE_R">
+          <COMMANDS>
+            <COMMAND BYTES="03520F00002d" />
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="SoundersMode" BYTE="33" LENGTH="1"/>
+            <PROPERTY ID="ALARMTONE" BYTE="39" LENGTH="1"/>
+            <PROPERTY ID="EVACUATIONTONE" BYTE="40" LENGTH="1"/>
+			<PROPERTY ID="EVACUATETIMEOUT" BYTE="43" LENGTH="1"/>
+			<PROPERTY ID="EVACUATESETTINGS" BYTE="44" LENGTH="1"/>
+          </PROPERTIES>
+        </ELEMENT>-->
+
+        <ELEMENT ID="SIMPO_LOGO_R">
+          <COMMANDS>
+            <COMMAND BYTES="03520F00007d" />
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="LOGO1" BYTE="45" LENGTH="39" OPERATION="MATRIX_CYR2TEXT"/>
+            <PROPERTY ID="LOGO2" BYTE="85" LENGTH="39" OPERATION="MATRIX_CYR2TEXT"/>
+          </PROPERTIES>
+        </ELEMENT>
+       </ELEMENTS>
+      </ELEMENT>
+           
+
+
+        <!--ELEMENT ID="SIMPO_NETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03520600002a" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="PANELNAME" BYTE="2" LENGTH="40" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="NETWORKENABLED" BYTE="42" LENGTH="1"/>
+                <PROPERTY ID="PANELNUMBER" BYTE="43" LENGTH="1" INC="1"/>
+              </PROPERTIES>
+        </ELEMENT-->
+
+
+        <ELEMENT ID="SIMPO_NETWORK_R">
+
+              <COMMANDS>
+                <COMMAND BYTES="03520600002a" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="PANELNAME" BYTE="2" LENGTH="40" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="NETWORKENABLED" BYTE="42" LENGTH="1"/>
+                <PROPERTY ID="PANELNUMBER" BYTE="43" LENGTH="1" INC="1"/>
+              </PROPERTIES>
+
+          <ELEMENTS>
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207000006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207010006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207020006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207030006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207040006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207050006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207060006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207070006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207080006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207090006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352070a0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352070b0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352070c0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352070d0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352070e0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352070f0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207100006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207110006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207120006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207130006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207140006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207150006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207160006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207170006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207180006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="035207190006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352071a0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352071b0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352071c0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352071d0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352071e0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+
+            <ELEMENT ID="SIMPO_PANELS_R">
+              <COMMANDS>
+                <COMMAND BYTES="0352071f0006" />
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="status" BYTE="2" LENGTH="4"/>
+                <PROPERTY ID="PANELFLAGS" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+           </ELEMENTS>
+        </ELEMENT>
+
+
+        <!--<ELEMENT ID="SIMPO_LOOPDEVICES">
+             
+        </ELEMENT>--> 
+      </ELEMENTS> 
+    </ELEMENT>
+  </ELEMENTS>
+  <POSTOPERATIONS>
+  </POSTOPERATIONS>
+</OPERATIONS>

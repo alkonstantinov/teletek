@@ -282,6 +282,84 @@
     <None Update="Configs\XML\Systems\IRIS\Write\WriteConfig_iris_version24.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Read\ReadConfig_SimpoR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Read\ReadConfig_SimpoR0001.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Read\ReadConfig_SimpoR0002.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Template\Repeater.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Write\WriteConfig_Simpo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Write\WriteConfig_Simpo0001.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Write\WriteConfig_Simpo0002.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0001.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0002.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0003.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0004.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0005.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0006.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0007.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Read\ReadConfig_Simpo0008.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Template\SIMPO.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0001.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0002.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0003.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0004.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0005.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0006.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0007.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0008.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Templates\ECLIPSE99.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

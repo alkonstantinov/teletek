@@ -1160,7 +1160,15 @@ function checkHexRegex(event) {
 function addVisitedBackground() {
     $('input.form-control, select.form-select, .form-check-input, .form-item p label input').on('change', function () {
         this.classList.add('is-valid');
+        if (this.parentElement.classList.contains('pb-3')) {
+            this.parentNode.classList.remove('pb-3');
+        }
     });
+}
+
+function addVisitedNumeric(it) {
+    it.parentNode.querySelector('input[type=number]').classList.add('is-valid');
+    it.parentNode.classList.remove('pb-3');
 }
 
 // ip mask activation
@@ -1392,7 +1400,7 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
 const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "", value }) => {
     return `<div>
                 <label for="${input_id}" class="input-group-text">${input_name}</label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 pb-3">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
                     </button>` : ""}                
@@ -1410,10 +1418,10 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} />
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); this.parentNode.querySelector('input[type=number]').classList.add('is-valid');"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);"
                             class="ram_number_input_button_left"></button>
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); this.parentNode.querySelector('input[type=number]').classList.add('is-valid');"
+                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);"
                             class="ram_number_input_button_right"></button>
                     <div class="valid-feedback">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
