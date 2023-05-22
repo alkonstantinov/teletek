@@ -24,7 +24,11 @@ namespace ljson
                 name = "iris_access_code";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
                 name = "iris_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK_R$", RegexOptions.IgnoreCase))
+                name = "iris_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANELSINNETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_panels_in_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS_R$", RegexOptions.IgnoreCase))
                 name = "iris_panels_in_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_INPUTS$", RegexOptions.IgnoreCase))
                 name = "iris_inputs";
@@ -44,16 +48,21 @@ namespace ljson
                 name = "iris_loop_devices";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANEL$", RegexOptions.IgnoreCase))
                 name = "iris";
+            else if (Regex.IsMatch(name, @"^R_PANEL$", RegexOptions.IgnoreCase))
+                name = "iris";
             return name;
         }
 
         private static void TranslateObjectsKeys(JObject content)
         {
+            bool isRepeater = Regex.IsMatch(content.ToString(), @"""@PRODUCTNAME""\s*?:\s*?""REPEATER\s+?Iris/Simpo", RegexOptions.IgnoreCase);
             List<JToken> from = new List<JToken>();
             List<JToken> to = new List<JToken>();
             foreach (JToken t in (JToken)content)
             {
                 string name = cIRIS.TranslateKey(((JProperty)t).Name);
+                if (isRepeater && Regex.IsMatch(name, @"panels[\w\W]+?in[\w\W]+?network$", RegexOptions.IgnoreCase))
+                    name = ((JProperty)t).Name;
                 JProperty p = new JProperty(name, ((JProperty)t).Value);
                 from.Add(t);
                 to.Add((JToken)p);
@@ -68,64 +77,135 @@ namespace ljson
         {
             TranslateObjectsKeys(content);
             //
-            content["iris_access_code"]["title"] = _pages["iris_access_code"]["title"];//"Access codes";
-            content["iris_access_code"]["left"] = _pages["iris_access_code"]["left"]; //"IRIS/divIRIS.html";
-            content["iris_access_code"]["right"] = _pages["iris_access_code"]["right"];// "IRIS/access.html";
-            content["iris_access_code"]["breadcrumbs"] = _pages["iris_access_code"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_access_code"] != null)
+            {
+                content["iris_access_code"]["title"] = _pages["iris_access_code"]["title"];//"Access codes";
+                content["iris_access_code"]["left"] = _pages["iris_access_code"]["left"]; //"IRIS/divIRIS.html";
+                content["iris_access_code"]["right"] = _pages["iris_access_code"]["right"];// "IRIS/access.html";
+                content["iris_access_code"]["breadcrumbs"] = _pages["iris_access_code"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
             content["iris_network"]["title"] = _pages["iris_network"]["title"];// "Network";
             content["iris_network"]["left"] = _pages["iris_network"]["left"];// "IRIS/divIRIS.html";
             content["iris_network"]["right"] = _pages["iris_network"]["right"];// "IRIS/network.html";
             content["iris_network"]["breadcrumbs"] = _pages["iris_network"]["breadcrumbs"];// JArray.Parse("[\"index\", \"iris\"]");
             //
-            content["iris_panels_in_network"]["title"] = _pages["iris_panels_in_network"]["title"];// "Panels in network";
-            content["iris_panels_in_network"]["left"] = _pages["iris_panels_in_network"]["left"];//"IRIS/divIRIS.html";
-            content["iris_panels_in_network"]["right"] = _pages["iris_panels_in_network"]["right"];//"IRIS/panels_in_network.html";
-            content["iris_panels_in_network"]["breadcrumbs"] = _pages["iris_panels_in_network"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_panels_in_network"] != null)
+            {
+                content["iris_panels_in_network"]["@MIN"] = "1";
+                content["iris_panels_in_network"]["@MAX"] = "1";
+                content["iris_panels_in_network"]["title"] = _pages["iris_panels_in_network"]["title"];// "Panels in network";
+                content["iris_panels_in_network"]["left"] = _pages["iris_panels_in_network"]["left"];//"IRIS/divIRIS.html";
+                content["iris_panels_in_network"]["right"] = _pages["iris_panels_in_network"]["right"];//"IRIS/panels_in_network.html";
+                content["iris_panels_in_network"]["breadcrumbs"] = _pages["iris_panels_in_network"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_inputs"]["title"] = _pages["iris_inputs"]["title"];// "Inputs";
-            content["iris_inputs"]["left"] = _pages["iris_inputs"]["left"];//"IRIS/divIRIS.html";
-            content["iris_inputs"]["right"] = _pages["iris_inputs"]["right"];//"IRIS/input.html";
-            content["iris_inputs"]["breadcrumbs"] = _pages["iris_inputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_inputs"] != null)
+            {
+                content["iris_inputs"]["title"] = _pages["iris_inputs"]["title"];// "Inputs";
+                content["iris_inputs"]["left"] = _pages["iris_inputs"]["left"];//"IRIS/divIRIS.html";
+                content["iris_inputs"]["right"] = _pages["iris_inputs"]["right"];//"IRIS/input.html";
+                content["iris_inputs"]["breadcrumbs"] = _pages["iris_inputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_inputs_group"]["title"] = _pages["iris_inputs_group"]["title"];// "Input Groups";
-            content["iris_inputs_group"]["left"] = _pages["iris_inputs_group"]["left"];//"IRIS/divIRIS.html";
-            content["iris_inputs_group"]["right"] = _pages["iris_inputs_group"]["right"];//"IRIS/inputs_group.html";
-            content["iris_inputs_group"]["breadcrumbs"] = _pages["iris_inputs_group"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_inputs_group"] != null)
+            {
+                content["iris_inputs_group"]["title"] = _pages["iris_inputs_group"]["title"];// "Input Groups";
+                content["iris_inputs_group"]["left"] = _pages["iris_inputs_group"]["left"];//"IRIS/divIRIS.html";
+                content["iris_inputs_group"]["right"] = _pages["iris_inputs_group"]["right"];//"IRIS/inputs_group.html";
+                content["iris_inputs_group"]["breadcrumbs"] = _pages["iris_inputs_group"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_outputs"]["title"] = _pages["iris_outputs"]["title"];// "Output";
-            content["iris_outputs"]["left"] = _pages["iris_outputs"]["left"];//"IRIS/divIRIS.html";
-            content["iris_outputs"]["right"] = _pages["iris_outputs"]["right"];//"IRIS/output.html";
-            content["iris_outputs"]["breadcrumbs"] = _pages["iris_outputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_outputs"] != null)
+            {
+                content["iris_outputs"]["title"] = _pages["iris_outputs"]["title"];// "Output";
+                content["iris_outputs"]["left"] = _pages["iris_outputs"]["left"];//"IRIS/divIRIS.html";
+                content["iris_outputs"]["right"] = _pages["iris_outputs"]["right"];//"IRIS/output.html";
+                content["iris_outputs"]["breadcrumbs"] = _pages["iris_outputs"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_fat_fbf"]["title"] = _pages["iris_fat_fbf"]["title"];// "FAT FBF";
-            content["iris_fat_fbf"]["left"] = _pages["iris_fat_fbf"]["left"];//"IRIS/divIRIS.html";
-            content["iris_fat_fbf"]["right"] = _pages["iris_fat_fbf"]["right"];//"IRIS/fat-fbf.html";
-            content["iris_fat_fbf"]["breadcrumbs"] = _pages["iris_fat_fbf"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_fat_fbf"] != null)
+            {
+                content["iris_fat_fbf"]["title"] = _pages["iris_fat_fbf"]["title"];// "FAT FBF";
+                content["iris_fat_fbf"]["left"] = _pages["iris_fat_fbf"]["left"];//"IRIS/divIRIS.html";
+                content["iris_fat_fbf"]["right"] = _pages["iris_fat_fbf"]["right"];//"IRIS/fat-fbf.html";
+                content["iris_fat_fbf"]["breadcrumbs"] = _pages["iris_fat_fbf"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_zones"]["title"] = _pages["iris_zones"]["title"];// "Zones";
-            content["iris_zones"]["left"] = _pages["iris_zones"]["left"];//"IRIS/divIRIS.html";
-            content["iris_zones"]["right"] = _pages["iris_zones"]["right"];//"IRIS/zone.html";
-            content["iris_zones"]["breadcrumbs"] = _pages["iris_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_zones"] != null)
+            {
+                content["iris_zones"]["title"] = _pages["iris_zones"]["title"];// "Zones";
+                content["iris_zones"]["left"] = _pages["iris_zones"]["left"];//"IRIS/divIRIS.html";
+                content["iris_zones"]["right"] = _pages["iris_zones"]["right"];//"IRIS/zone.html";
+                content["iris_zones"]["breadcrumbs"] = _pages["iris_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_evac_zones"]["title"] = _pages["iris_evac_zones"]["title"];// "Evac zones";
-            content["iris_evac_zones"]["left"] = _pages["iris_evac_zones"]["left"];//"IRIS/divIRIS.html";
-            content["iris_evac_zones"]["right"] = _pages["iris_evac_zones"]["right"];//"IRIS/zone_evac.html";
-            content["iris_evac_zones"]["breadcrumbs"] = _pages["iris_evac_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_evac_zones"] != null)
+            {
+                content["iris_evac_zones"]["title"] = _pages["iris_evac_zones"]["title"];// "Evac zones";
+                content["iris_evac_zones"]["left"] = _pages["iris_evac_zones"]["left"];//"IRIS/divIRIS.html";
+                content["iris_evac_zones"]["right"] = _pages["iris_evac_zones"]["right"];//"IRIS/zone_evac.html";
+                content["iris_evac_zones"]["breadcrumbs"] = _pages["iris_evac_zones"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_peripheral_devices"]["title"] = _pages["iris_peripheral_devices"]["title"];// "Peripheral devices";
-            content["iris_peripheral_devices"]["left"] = _pages["iris_peripheral_devices"]["left"];//"IRIS/divIRIS.html";
-            content["iris_peripheral_devices"]["right"] = _pages["iris_peripheral_devices"]["right"];//"IRIS/periph_devices.html";
-            content["iris_peripheral_devices"]["breadcrumbs"] = _pages["iris_peripheral_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_peripheral_devices"] != null)
+            {
+                content["iris_peripheral_devices"]["title"] = _pages["iris_peripheral_devices"]["title"];// "Peripheral devices";
+                content["iris_peripheral_devices"]["left"] = _pages["iris_peripheral_devices"]["left"];//"IRIS/divIRIS.html";
+                content["iris_peripheral_devices"]["right"] = _pages["iris_peripheral_devices"]["right"];//"IRIS/periph_devices.html";
+                content["iris_peripheral_devices"]["breadcrumbs"] = _pages["iris_peripheral_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
             //
-            content["iris_loop_devices"]["title"] = _pages["iris_loop_devices"]["title"];// "Loop devices";
-            content["iris_loop_devices"]["left"] = _pages["iris_loop_devices"]["left"];//"IRIS/divIRIS.html";
-            content["iris_loop_devices"]["right"] = _pages["iris_loop_devices"]["right"];//"IRIS/loop_devices.html";
-            content["iris_loop_devices"]["breadcrumbs"] = _pages["iris_loop_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            if (content["iris_loop_devices"] != null)
+            {
+                content["iris_loop_devices"]["title"] = _pages["iris_loop_devices"]["title"];// "Loop devices";
+                content["iris_loop_devices"]["left"] = _pages["iris_loop_devices"]["left"];//"IRIS/divIRIS.html";
+                content["iris_loop_devices"]["right"] = _pages["iris_loop_devices"]["right"];//"IRIS/loop_devices.html";
+                content["iris_loop_devices"]["breadcrumbs"] = _pages["iris_loop_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
+            }
         }
-
+        private static void CreateMainGroupsSimpoRepeater(JObject json)
+        {
+            JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            json["iris"]["PROPERTIES"]["Groups"] = new JObject();
+            //
+            JObject grp1 = new JObject();
+            grp1["name"] = "Panel Settings";
+            JObject f1 = new JObject();
+            f1["Language"] = o["Language"];
+            f1["BRIGHTNESS_R"] = o["BRIGHTNESS_R"];
+            f1["AUTOLOGOFF"] = o["AUTOLOGOFF"];
+            f1["LOGOFFENABLED"] = o["LOGOFFENABLED"];
+            grp1["fields"] = f1;
+            json["iris"]["PROPERTIES"]["Groups"]["PanelSettings"] = grp1;
+            //
+            JObject grp2 = new JObject();
+            grp2["name"] = "Access Codes";
+            JObject f2 = new JObject();
+            f2["Code1"] = o["Code1"];
+            f2["Code2"] = o["Code2"];
+            grp2["fields"] = f2;
+            json["iris"]["PROPERTIES"]["Groups"]["AccessCodes"] = grp2;
+            //
+            JObject grp3 = new JObject();
+            grp2["name"] = "Company Logo";
+            JObject f3 = new JObject();
+            f3["LOGO1"] = o["LOGO1"];
+            f3["LOGO2"] = o["LOGO2"];
+            grp3["fields"] = f3;
+            json["iris"]["PROPERTIES"]["Groups"]["CompanyLogo"] = grp3;
+            //
+            json["iris"]["PROPERTIES"]["OLD"] = o;
+        }
         private static void CreateMainGroups(JObject json)
         {
+            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                CreateMainGroupsSimpoRepeater(json);
+                return;
+            }
             JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
             JObject o = Array2Object(proparr);
             //groups
@@ -278,6 +358,10 @@ namespace ljson
 
         private static void ConvertAccessCode(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             CreateAccessCodeGroups((JObject)json["ELEMENTS"]);
             JObject ac = (JObject)json["ELEMENTS"]["iris_access_code"];
             ac["title"] = _pages["iris_access_code"]["title"];
@@ -294,6 +378,16 @@ namespace ljson
         #region panels in network
         private static void ConvertPanelsInNetwork(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                JObject pcontent = new JObject((JObject)json["ELEMENTS"]["iris_network"]["CONTAINS"]["ELEMENT"]);
+                if (json["ELEMENTS"]["iris_panels_in_network"] == null) json["ELEMENTS"]["iris_panels_in_network"] = new JObject();
+                json["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"] = new JObject();
+                json["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"]["ELEMENT"] = pcontent;
+                //pcontent["@ID"] = TranslateKey(pcontent["@ID"].ToString());
+                JObject netobj = (JObject)json["ELEMENTS"]["iris_network"];
+                netobj.Remove("CONTAINS");
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_panels_in_network"];
             ac["title"] = _pages["iris_panels_in_network"]["title"];
             ac["left"] = _pages["iris_panels_in_network"]["left"];
@@ -305,8 +399,29 @@ namespace ljson
         #endregion
 
         #region network
+        private static void CreateRepeaterNetworkGroups(JObject json)
+        {
+            JArray proparr = (JArray)json["iris_network"]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            json["iris_network"]["PROPERTIES"]["Groups"] = new JObject();
+            //not grouped params
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+            //json["iris_network"]["PROPERTIES"]["Groups"]["~noname"]["Name"] = "";
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname"]["PANELNUMBER"] = o["PANELNUMBER"];
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname"]["PANELNAME"] = o["PANELNAME"];
+            json["iris_network"]["PROPERTIES"]["Groups"]["~noname"]["NETWORKENABLED"] = o["NETWORKENABLED"];
+            //
+            //
+            json["iris_network"]["PROPERTIES"]["OLD"] = o;
+        }
         private static void CreateNetworkGroups(JObject json)
         {
+            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                CreateRepeaterNetworkGroups(json);
+                return;
+            }
             JArray proparr = (JArray)json["iris_network"]["PROPERTIES"]["PROPERTY"];
             JObject o = Array2Object(proparr);
             //groups
@@ -367,6 +482,10 @@ namespace ljson
         #region inputs
         private static void ConvertInputs(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_inputs"];
             ac["title"] = _pages["iris_inputs"]["title"];
             ac["left"] = _pages["iris_inputs"]["left"];
@@ -449,6 +568,10 @@ namespace ljson
         }
         private static void ConvertFATFBF(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_fat_fbf"];
             ac["title"] = _pages["iris_fat_fbf"]["title"];
             ac["left"] = _pages["iris_fat_fbf"]["left"];
@@ -463,6 +586,10 @@ namespace ljson
         #region input groups
         private static void ConvertInputGroups(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_inputs_group"];
             ac["title"] = _pages["iris_inputs_group"]["title"];
             ac["left"] = _pages["iris_inputs_group"]["left"];
@@ -476,6 +603,10 @@ namespace ljson
         #region outputs
         private static void ConvertOutputs(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_outputs"];
             ac["title"] = _pages["iris_outputs"]["title"];
             ac["left"] = _pages["iris_outputs"]["left"];
@@ -489,6 +620,10 @@ namespace ljson
         #region zones
         private static void ConvertZones(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_zones"];
             ac["title"] = _pages["iris_zones"]["title"];
             ac["left"] = _pages["iris_zones"]["left"];
@@ -502,6 +637,10 @@ namespace ljson
         #region evac zones
         private static void ConvertEvacZones(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_evac_zones"];
             ac["title"] = _pages["iris_evac_zones"]["title"];
             ac["left"] = _pages["iris_evac_zones"]["left"];
@@ -515,6 +654,10 @@ namespace ljson
         #region peripheral devices
         private static void ConvertPeripheralDevices(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_peripheral_devices"];
             ac["title"] = _pages["iris_peripheral_devices"]["title"];
             ac["left"] = _pages["iris_peripheral_devices"]["left"];
@@ -528,6 +671,10 @@ namespace ljson
         #region loop devices
         private static void ConvertLoopDevices(JObject json, JObject _pages)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject ac = (JObject)json["ELEMENTS"]["iris_loop_devices"];
             ac["title"] = _pages["iris_loop_devices"]["title"];
             ac["left"] = _pages["iris_loop_devices"]["left"];
@@ -541,6 +688,10 @@ namespace ljson
         #region input group
         private static void ConvertInputsGroup(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             foreach (JProperty p in json["ELEMENTS"]["iris_inputs_group"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
@@ -606,6 +757,10 @@ namespace ljson
         }
         private static void ConvertInput(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             foreach (JProperty p in json["ELEMENTS"]["iris_inputs"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
@@ -669,6 +824,10 @@ namespace ljson
         }
         private static void ConvertOutput(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             foreach (JProperty p in json["ELEMENTS"]["iris_outputs"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
@@ -721,6 +880,10 @@ namespace ljson
         }
         private static void ConvertZone(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             foreach (JProperty p in json["ELEMENTS"]["iris_zones"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
@@ -776,6 +939,10 @@ namespace ljson
         }
         private static void ConvertEvacZoneGroup(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             foreach (JProperty p in json["ELEMENTS"]["iris_evac_zones"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
@@ -812,6 +979,10 @@ namespace ljson
 
         private static void ConvertPreripherialDevicesContentNodes(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JObject pdtypes = new JObject();
             foreach (JProperty p in json["ELEMENTS"]["iris_peripheral_devices"]["CONTAINS"])
             {
@@ -843,6 +1014,19 @@ namespace ljson
         #endregion
 
         #region panel in network
+        private static void CreateRepeaterPanelInNetworkGroups(JObject json, string key)
+        {
+            JArray proparr = (JArray)json[key]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            json[key]["PROPERTIES"]["Groups"] = new JObject();
+            //not grouped params
+            json[key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["status"] = o["status"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["PANELFLAGS"] = o["PANELFLAGS"];
+            //
+            json[key]["PROPERTIES"]["OLD"] = o;
+        }
         private static void CreatePanelInNetworkGroups(JObject json, string key)
         {
             JArray proparr = (JArray)json[key]["PROPERTIES"]["PROPERTY"];
@@ -884,6 +1068,11 @@ namespace ljson
             foreach (JProperty p in json["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"])
             {
                 string key = p.Name.ToString();
+                if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+                {
+                    CreateRepeaterPanelInNetworkGroups((JObject)json["ELEMENTS"], key);
+                    return;
+                }
                 CreatePanelInNetworkGroups((JObject)json["ELEMENTS"], key);
             }
         }
@@ -957,6 +1146,10 @@ namespace ljson
         }
         private static void ChangeLoops(JObject json)
         {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            {
+                return;
+            }
             JToken c = json.SelectToken("ELEMENTS.iris_loop_devices.CONTAINS");
             List<string> loop = new List<string>();
             foreach (JToken t in c.Children())
@@ -998,8 +1191,114 @@ namespace ljson
         }
         #endregion
 
+        #region Repeater IRIS Simpo
+        private static Dictionary<string, JObject> ElementProperties(JArray elements, string ekey)
+        {
+            Dictionary<string, JObject> res = new Dictionary<string, JObject>();
+            JObject el = null;
+            foreach (JToken t in elements)
+            {
+                el = (JObject)t;
+                if (el["@ID"].ToString() == ekey) break;
+            }
+            if (el != null)
+            {
+                JArray props = (JArray)el["PROPERTIES"]["PROPERTY"];
+                foreach (JToken t in props)
+                {
+                    JObject p = (JObject)t;
+                    string pkey = p["@ID"].ToString();
+                    if (!res.ContainsKey(pkey)) res.Add(pkey, p);
+                }
+            }
+            //
+            return res;
+        }
+        private static JArray PropertiesFromContentItems(JArray elements, string ckey)
+        {
+            JArray res = new JArray();
+            //
+            JObject el = null;
+            foreach (JToken t in elements)
+            {
+                el = (JObject)t;
+                if (el["@ID"].ToString() == ckey) break;
+            }
+            if (el == null) return res;
+            JArray content = (JArray)el["CONTAINS"]["ELEMENT"];
+            Dictionary<string, JObject> props = new Dictionary<string, JObject>();
+            foreach (JToken t in content)
+            {
+                Dictionary<string, JObject> eprops = ElementProperties(elements, t["@ID"].ToString());
+                foreach (string k in eprops.Keys)
+                    if (!props.ContainsKey(k))
+                        props.Add(k, eprops[k]);
+            }
+            foreach (string k in props.Keys)
+                res.Add(props[k]);
+            //
+            return res;
+        }
+        private static Dictionary<string, JObject> ItemContent(JArray elements, string itemid)
+        {
+            Dictionary<string, JObject> res = new Dictionary<string, JObject>();
+            JObject el = null;
+            foreach (JToken t in elements)
+            {
+                el = (JObject)t;
+                if (el["@ID"].ToString() == itemid) break;
+            }
+            if (el == null) return res;
+            JArray content;
+            if (el["CONTAINS"]["ELEMENT"].Type == JTokenType.Array)
+                content = (JArray)el["CONTAINS"]["ELEMENT"];
+            else
+            {
+                content = new JArray();
+                content.Add(el["CONTAINS"]["ELEMENT"]);
+            }
+            foreach (JToken t in content)
+            {
+                el = (JObject)t;
+                res.Add(el["@ID"].ToString(), el);
+            }
+            return res;
+        }
+        private static string ReorderRepeaterTemplate(string json)
+        {
+            JObject o = JObject.Parse(json);
+            JArray elements = (JArray)o["ELEMENTS"]["ELEMENT"];
+            JArray content = (JArray)elements[0]["CONTAINS"]["ELEMENT"];
+            Dictionary<string, JObject> dcontent = new Dictionary<string, JObject>();
+            foreach (JToken t in content)
+            {
+                JObject el = (JObject)t;
+                string ekey = el["@ID"].ToString();
+                if (Regex.IsMatch(ekey, @"simpo[\w\W]+?general[\w\W]+?settings[\w\W]*?_r$", RegexOptions.IgnoreCase))
+                {
+                    JArray props = PropertiesFromContentItems(elements, ekey);
+                    JObject el0 = (JObject)elements[0];
+                    el0["PROPERTIES"] = new JObject();
+                    el0["PROPERTIES"]["PROPERTY"] = props;
+                }
+                else
+                {
+                    dcontent.Add(ekey, el);
+                    Dictionary<string, JObject> c = ItemContent(elements, el["@ID"].ToString());
+                    foreach (string ckey in c.Keys) dcontent.Add(ckey, c[ckey]);
+                }
+            }
+            JArray content_new = new JArray();
+            foreach (string ckey in dcontent.Keys) content_new.Add(dcontent[ckey]);
+            elements[0]["CONTAINS"]["ELEMENT"] = content_new;
+            //
+            return o.ToString();
+        }
+        #endregion
         public static string Convert(string json, JObject _pages)
         {
+            if (Regex.IsMatch(json, @"""@ID""\s*?:\s*?""R_PANEL""", RegexOptions.IgnoreCase))
+                json = ReorderRepeaterTemplate(json);
             JObject o = JObject.Parse(json);
             JObject o1 = new JObject();
             foreach (JProperty p in o["ELEMENTS"])

@@ -2075,6 +2075,8 @@ namespace ljson
                 _panel_templates[filename] = _panel;
 
             _main_content_key = Regex.Replace(jSys["schema"].ToString(), @"\d+$", "");
+            if (Regex.IsMatch(_main_content_key, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
+                _main_content_key = "iris";
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
@@ -2100,6 +2102,8 @@ namespace ljson
                 {
                     if (Regex.IsMatch(name, CurrentPanelType + @"\d+$"))
                         name = Regex.Replace(name, @"\d+$", "");
+                    if (Regex.IsMatch(name, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
+                        name = "iris";
                     JObject _res = null;
                     JToken jbyname = _elements[name];
                     if (jbyname != null)

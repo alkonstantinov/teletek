@@ -444,6 +444,8 @@ namespace ProstePrototype
                     jnode["PROPERTIES"]["Groups"] = cJson.GroupsWithValues(jnode["PROPERTIES"]["Groups"].ToString());
             }
             string _clean_key = Regex.Replace(page, @"[\d-]", string.Empty);
+            if (Regex.IsMatch(_clean_key, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
+                _clean_key = "iris";
             var lpd = new LoadPageData()
             {
                 RightBrowserUrl = cJson.htmlRight(jnode) + "?" + rightBrowsersURLParams,
@@ -543,11 +545,17 @@ namespace ProstePrototype
             {
                 int tabIdx = rw.selectedIndex;
                 //cTransport t = null;
-                string ip = rw.uc0.Address;
-                int port = rw.uc0.Port;
                 object conn_params = null;
-                if (tabIdx == 0)
+                if (tabIdx == 0) 
+                {
+                    string ip = rw.uc0.Address;
+                    int port = rw.uc0.Port;
                     conn_params = new cIPParams(ip, port);
+                }
+                else if (tabIdx == 1)
+                {
+                    conn_params = rw.uc1.USBDevice;
+                }
                 else if (tabIdx == 3)
                     conn_params = "read.log";
                 Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));

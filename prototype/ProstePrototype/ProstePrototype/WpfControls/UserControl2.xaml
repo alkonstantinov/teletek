@@ -8,7 +8,7 @@
              d:DesignHeight="250" d:DesignWidth="600">
     <Grid>
         <ListBox x:Name="listBox" Padding="0, 20" BorderThickness="0, 0, 0, 0" Foreground="{Binding ElementName=ParentControl, Path=ContentArea.Foreground}" Background="{Binding ElementName=ParentControl, Path=ContentArea.Background}">
-            <ListBoxItem FontSize="16" Padding="30, 15" FontFamily="{StaticResource poppins_regular}"
+            <!--<ListBoxItem FontSize="16" Padding="30, 15" FontFamily="{StaticResource poppins_regular}"
                                      BorderThickness="0, 0, 0, 1" BorderBrush="Gray" 
                                      IsSelected="True">
                 ID 7ff05d20-d232-4446-b9c9-8c6dff382c9e Teletek IRIS
@@ -20,7 +20,7 @@
             <ListBoxItem FontSize="16" Padding="30, 15" FontFamily="{StaticResource poppins_regular}"
                                      BorderThickness="0, 0, 0, 1" BorderBrush="Gray">
                 ID a60679af-f134-4113-840f-7177b625ff81 Eclipse 5
-            </ListBoxItem>
+            </ListBoxItem>-->
         </ListBox>
     </Grid>
 </UserControl>

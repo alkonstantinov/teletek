@@ -190,7 +190,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
             div.classList = "row align-items-center m-2";
             elementsCreationHandler(div, divLevel);
             body.appendChild(div);
-        } else if (divLevel.name === "Company Info") { // unique case "Company Info"
+        } else if (k === "CompanyInfo" || k === "CompanyLogo") { // unique case "CompanyInfo" or "CompanyLogo"
             let fieldset = document.createElement('div');
             fieldset.classList.add("ram_attribute_holder");
             var insideRows = `<p class="ram_attribute_holder_title">${newT.t(localStorage.getItem('lang'), "company_info")}</p>`;
@@ -921,7 +921,8 @@ const transformGroupElement = (elementJson) => {
                 attributes.input_name = attributes.input_name.replace(/\bon\b/ig, "").trim();
             }
             if (attributes.input_name.toLowerCase().includes('enable') || attributes.input_name.toLowerCase().includes(newT.t(localStorage.getItem('lang'), elementJson['enable']))) {
-                attributes.input_name = '';
+                let words = attributes.input_name.split(' ');
+                attributes.input_name = words.filter(word => !word.toLowerCase().includes('enable')).join(' ');
                 attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'enabled');
                 attributes.input_name_off = newT.t(localStorage.getItem('lang'), 'disabled');
             } else {

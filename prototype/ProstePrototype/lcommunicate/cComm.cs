@@ -933,7 +933,7 @@ namespace lcommunicate
             IEnumerable<HidDevice> _devs = _loader.GetDevices();
             foreach (HidDevice _dev in _devs)
             {
-                if (Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) && !res.ContainsKey(_dev.ToString()))
+                if (/*Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) &&*/ !res.ContainsKey(_dev.ToString()))
                     res.Add(_dev.ToString(), _dev);
             }
             //DeviceList dLst = new FilteredDeviceList();
