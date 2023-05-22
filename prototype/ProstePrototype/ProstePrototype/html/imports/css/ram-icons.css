@@ -6,8 +6,8 @@
 }
 
 .ram_icon {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
     background-repeat: no-repeat;
     background-position: center center;
     display: inline-block;
@@ -29,7 +29,7 @@
     background-image: url(../images/icons/01-scan.svg);
 }
 .ram_icon.file {
-    background-image: url(../images/icons/01-scan.svg);
+    background-image: url(../images/icons/02-file.svg);
 }
 .ram_icon.edit {
     background-image: url(../images/icons/03-edit.svg);
@@ -99,6 +99,10 @@
 }
 .ram_icon.add_device {
     background-image: url(../images/icons/22-add-device.svg);
+}
+.ram_icon.minus {
+    background-image: url(../images/icons/26-minus.svg);
+    border-radius: 50%;
 }
 
 .ram_icon.rot45 {

@@ -1,6 +1,7 @@
 body {
     font-family: 'Poppins';
-    background-color: rgba(238,245,253,1);
+    /*background-color: rgba(238,245,253,1);*/
+    background-color: #EFF5FC;
 }
 
 .accordion-item {

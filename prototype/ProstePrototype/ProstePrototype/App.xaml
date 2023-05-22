@@ -7,6 +7,7 @@
     <Application.Resources>
         <SolidColorBrush x:Key="DefaultColor" Color="#0c2b90" />
         <SolidColorBrush x:Key="LighterColor" Color="#007bff" />
+        <SolidColorBrush x:Key="SideBar_Nav" Color="#EFF5FC" />
         <FontFamily x:Key="fa_brands">/html/imports/webfonts/fa-brands-400.ttf#Font Awesome 6 Brands Regular</FontFamily>
         <FontFamily x:Key="fa_regular">/html/imports/webfonts/fa-regular-400.ttf#Font Awesome 6 Free Regular</FontFamily>
         <FontFamily x:Key="fa_solid">/html/imports/webfonts/fa-solid-900.ttf#Font Awesome 6 Free Solid</FontFamily>

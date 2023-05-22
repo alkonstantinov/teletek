@@ -128,6 +128,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
+                <RowDefinition Height="2" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid x:Name="mainGrid" Grid.Row="0">
@@ -374,21 +375,29 @@
                 </Grid>-->
 
             </Grid>
-
-            <Grid x:Name="gridBrowsers" Grid.Row="1">
+            <GridSplitter Grid.Row="1" Background="{StaticResource SideBar_Nav}" Height="2" Width="{Binding Width}"/>
+            <Grid x:Name="gridBrowsers" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition x:Name="wb1Column" Width="281" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
+                        <RowDefinition x:Name="editBtnRow" Height="0" />
                         <RowDefinition Height="*" />
                         <RowDefinition x:Name="settingsBtnRow" Height="0" />
                         <RowDefinition x:Name="defineSizeBtnRow" Height="0" />
                         <RowDefinition x:Name="footerBtnRow" Height="50"/>
                     </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="{StaticResource SideBar_Nav}">
+                        <Button x:Name="write_hidden_btn" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" Width="34"
+                            ToolTip="{DynamicResource MainMenuWrite}" Click="Write_Clicked" HorizontalContentAlignment="Center">
+                            <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="15" Foreground="Gray"
+                                           Margin="0, 0, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                    </Grid>
                     <wpf:ChromiumWebBrowser
-				        Grid.Row="0"
+				        Grid.Row="1"
 				        x:Name="wb1"
                         MinWidth="{Binding MinWidth}"
 				        Background="Transparent"
@@ -396,15 +405,15 @@
 				        Padding="0, 0, 0, 50"
 				        JavascriptMessageReceived="wb_PostMessage"
 				    />
-                    <Grid Grid.Row="1">
-                        <Button x:Name="settings_hidden_btn" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" Width="30"
+                    <Grid Grid.Row="2" Background="{StaticResource SideBar_Nav}">
+                        <Button x:Name="settings_hidden_btn" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" Width="34"
                                 ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked" HorizontalContentAlignment="Center">
-                            <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="10" Foreground="Gray"
-                                           Margin="0, 0, 3, 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="15" Foreground="Gray"
+                                           Margin="0, 0, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
                     </Grid>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="3" Background="{StaticResource SideBar_Nav}">
                         <Button x:Name="define_size_hidden_btn" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="wb1Size_Click">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -412,12 +421,12 @@
                                     <Setter Property="BorderThickness" Value="0"/>
                                 </Style>
                             </Button.Resources>
-                            <TextBlock Text="&#xf101;" FontFamily="{StaticResource fa_solid}" FontSize="10" Foreground="Gray"/>
+                            <TextBlock Text="&#xf101;" FontFamily="{StaticResource fa_solid}" FontSize="15" Foreground="Gray"/>
                             <!--&#xf101; = << | &#xf100; = >> -->
                         </Button>
                     </Grid>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="footerBtnCol1" Width="15"/>
                             <ColumnDefinition x:Name="footerBtnCol2" Width="7*"/>
@@ -430,7 +439,7 @@
                         <Button x:Name="settings_btn" Grid.Column="1" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
                                 ToolTip="{DynamicResource MainMenuSettings}" Click="SettingsClicked">
                             <DockPanel>
-                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center" />
+                                <TextBlock Text="&#xf013;" FontFamily="{StaticResource fa_solid}" FontSize="15" Margin="0, 0, 3, 0" VerticalAlignment="Center" />
                                 <TextBlock Text="{library:DynamicResourceBinding MainMenuSettings, Converter={StaticResource StringToUpperConverter}}" 
                                            FontFamily="{StaticResource poppins_demibold}" FontSize="8" />
                             </DockPanel>
@@ -439,7 +448,7 @@
                         <Button x:Name="help_btn" Grid.Column="2" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
                                 ToolTip="{DynamicResource MainMenuHelp}" >
                             <DockPanel>
-                                <TextBlock Text="i" FontFamily="Book Antiqua Bold" FontSize="14" FontWeight="ExtraBold" Margin="0, 0, 3, 0" />
+                                <TextBlock Text="i" FontFamily="Book Antiqua Bold" FontSize="15" FontWeight="ExtraBold" Margin="0, 0, 3, 0" />
                                 <TextBlock Text="{library:DynamicResourceBinding MainMenuHelp, Converter={StaticResource StringToUpperConverter}}" 
                                            FontFamily="{StaticResource poppins_demibold}" FontSize="8" VerticalAlignment="Center" />
                             </DockPanel>
@@ -480,7 +489,7 @@
                                     <Setter Property="BorderThickness" Value="0"/>
                                 </Style>
                             </Button.Resources>
-                            <TextBlock x:Name="define_size_txt" FontFamily="{StaticResource fa_solid}" FontSize="10" Foreground="Gray"/>
+                            <TextBlock x:Name="define_size_txt" FontFamily="{StaticResource fa_solid}" FontSize="15" Foreground="Gray"/>
                             <!--&#xf101; = << | &#xf100; = >> -->
                         </Button>
                     </Grid>

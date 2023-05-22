@@ -176,7 +176,7 @@ namespace ProstePrototype
 
         private void ChangeTheme(bool darkMode)
         {
-            var bgd = Color.FromRgb(248, 249, 250);
+            var bgd = (Color)ColorConverter.ConvertFromString("White");
             var fgd = Color.FromRgb(124, 124, 125);
             var btn_bgd = (Color)ColorConverter.ConvertFromString("#f5f5f5");
             var btn_fgd = (Color)ColorConverter.ConvertFromString("Gray");
@@ -894,6 +894,7 @@ namespace ProstePrototype
                 if (mainGrid.ColumnDefinitions[0].Width == new GridLength(70))
                 {
                     mainGrid.ColumnDefinitions[0].Width = new GridLength(280);
+                    editBtnRow.Height = new GridLength(0);
                     wb1Column.Width = new GridLength(280);
                     settingsBtnRow.Height = new GridLength(0);
                     defineSizeBtnRow.Height = new GridLength(0);
@@ -902,6 +903,7 @@ namespace ProstePrototype
                 else
                 {
                     mainGrid.ColumnDefinitions[0].Width = new GridLength(70);
+                    editBtnRow.Height = new GridLength(40);
                     wb1Column.Width = new GridLength(70);
                     settingsBtnRow.Height = new GridLength(40);
                     defineSizeBtnRow.Height = new GridLength(40);
