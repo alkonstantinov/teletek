@@ -20,7 +20,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Rectangle x:Name="Rectangle1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Blue" SnapsToDevicePixels="True"/>
+                        <Rectangle x:Name="Rectangle1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#BDBDC3" SnapsToDevicePixels="True" RadiusX="5" RadiusY="5"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Tag" Value="Horizontal">
                                 <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
@@ -33,7 +33,7 @@
         </Style>
         <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
             <!--<Setter Property="Stylus.IsFlicksEnabled" Value="True" />-->
-            <Setter Property="Foreground" Value="Blue" />
+            <Setter Property="Foreground" Value="#BDBDC3" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ScrollBar}">
@@ -90,12 +90,12 @@
             <!--Here we set the width-->
             <Style.Triggers>
                 <Trigger Property="Orientation" Value="Horizontal">
-                    <Setter Property="Height" Value="5" />
-                    <Setter Property="MinHeight" Value="5" />
+                    <Setter Property="Height" Value="10" />
+                    <Setter Property="MinHeight" Value="10" />
                 </Trigger>
                 <Trigger Property="Orientation" Value="Vertical">
-                    <Setter Property="Width" Value="5" />
-                    <Setter Property="MinWidth" Value="5" />
+                    <Setter Property="Width" Value="10" />
+                    <Setter Property="MinWidth" Value="10" />
                 </Trigger>
             </Style.Triggers>
         </Style>
