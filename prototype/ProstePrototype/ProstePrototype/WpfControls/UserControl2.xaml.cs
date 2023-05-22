@@ -20,7 +20,7 @@ namespace ProstePrototype
     /// </summary>
     public partial class UserControl2 : UserControl
     {
-        private Dictionary<string, HidDevice> devices = new Dictionary<string, HidDevice>();
+        private readonly Dictionary<string, HidDevice> devices = new Dictionary<string, HidDevice>();
         public UserControl2()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace ProstePrototype
             foreach(var device in devices) {
                 ListBoxItem item = new ListBoxItem();
                 item.FontSize = 16;
-                item.Padding = new Thickness(30, 15, 0, 0);
+                item.Padding = new Thickness(30, 15, 30, 15);
                 item.FontFamily = (FontFamily)Application.Current.Resources["poppins_regular"];
                 item.BorderThickness = new Thickness(0, 0, 0, 1);
                 item.BorderBrush = Brushes.Gray;
