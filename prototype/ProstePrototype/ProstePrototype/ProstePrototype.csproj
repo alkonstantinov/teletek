@@ -636,6 +636,9 @@
     <None Update="html\imports\images\icons\25-show.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="html\imports\images\icons\26-minus.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="html\imports\images\is_invalid_x.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

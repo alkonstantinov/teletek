@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="fullHeight">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8" />
@@ -21,113 +21,120 @@
 
     <title>Teletek Manager</title>
 </head>
-<body class="fullHeight">
-    <div class="container fullHeight" id="divLDevices">
-        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+<body>
+    <div id="ram_main_wrapper">
+        <div class="ram_panels" id="divLDevices">
 
-        <div class="row fullHeight">
-            <div class="col-3 bl fire scroll">
-                <div id="new">
-                </div>
-            </div>
-            <div class="col-9 fullHeight">
-                <div id="selected_area" class="fullHeight">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="row list-group fire" id="list-tab" role="tablist">
+            <div class="ram_panel ram_resizable ram_animate" id="ram_panel_1">
+                <div class="ram_panel_content">
+                    <div id="new" class="ram_cards">
 
                     </div>
                 </div>
+                <div class="ram_fixed_bottom">
+                    <div class="ram_settings" id="buttons">
+
+                    </div>
+                    <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
+                        <i class="ram_icon toggle"></i>
+                    </button>
+                </div>
+                <div class="ram_resizer"></div>
             </div>
-        </div>
-
-        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5" id="btnGroup">
-            <!--<button type="button" class="btn-round btn-blue">Save</button>
-        <button type="button" class="btn-round btn-border-black">Back</button>-->
-            <button style="display: inline-flex;" type="button" id="_btn" class="btn-round btn-border-black" onclick="javascript: loopFunc(); return false">
-                <i class="fa-solid fa-plus 5x"></i> Add New Loop
-            </button>
-        </div>
-
-        <!-- showDevicesListModal -->
-        <div class="modal fade" id="showDevicesListModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="" id="ram_panel_2">
+            
+            </div>
+            <div class="ram_panel ram_resizable ram_animate" id="ram_panel_add" style="margin-left: -360px;">
+                <div class="ram_panel_content">
+                    <div class="ram_cards" id="list-tab">
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-        <!-- showDevicesListModal -->
-        <div class="modal fade" id="showConfirmationModal" role="dialog" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"></h4>
-                        <button type="button" class="btn-close" id="xClose"></button>
+                <div class="ram_fixed_bottom">
+                    <div class="ram_settings">
+                        <button class="ram_btn ram_btn_main btn_white" onclick="javascript: hidePanelAdd();">
+                            <div class="ram_btn_title">Close</div>
+                        </button>
                     </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="yesBtn">Yes</button>
-                        <button type="button" class="btn btn-secondary" id="bigClose">Close</button>
-                    </div>
+                    <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this, 3)">
+                        <i class="ram_icon toggle"></i>
+                    </button>
                 </div>
-
+                <div class="ram_resizer"></div>
             </div>
+            </div>
+            <main class="ram_main" id="selected_area">
+
+            </main>
         </div>
 
-        <!-- addressModal -->
-        <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addressModalLabel">Device address</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary addr">Ok</button>
-                    </div>
+    <!-- showDevicesListModal -->
+    <div class="modal fade" id="showDevicesListModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
+
+    <!-- showConfirmationModal -->
+    <div class="modal fade" id="showConfirmationModal" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="btn-close" id="xClose"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="yesBtn">Yes</button>
+                    <button type="button" class="btn btn-secondary" id="bigClose">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- addressModal -->
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addressModalLabel">Device address</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary addr">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
     <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
     <script src="../imports/loopfuncs.js"></script>
     <script>
-        $("#deviceList").on('hidden.bs.modal', function () {
-            $("#deviceList").find("#list-tab").empty();
-        });
-
         $("#showDevicesListModal").on('hidden.bs.modal', function () {
             $("#showDevicesListModal").find(".modal-body").empty();
         });

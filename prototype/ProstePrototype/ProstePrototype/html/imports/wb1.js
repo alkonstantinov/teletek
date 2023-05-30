@@ -282,8 +282,8 @@ const addAccordeonButton = (title, page, ul_element) => {
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
 
     let el = `<li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'}); addActive()" id="${page}">
-                   <div class="ram_flex_grow_1">
-                       <i class="${CONFIG_CONST[key].picture.startsWith("fa-")? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture}"></i>
+                   <div class="ram_list_item_content">
+                       <i class="${CONFIG_CONST[key].picture.startsWith("fa-") ? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture}"></i>
                        <span>${titleTranslated}</span>
                    </div>`;
     if (false) el += `<i class="ram_icon add_device"></i>`;
@@ -439,11 +439,26 @@ function toggleDarkMode(show, filename) {
 }
 
 function addActive() {
-    $('body').on('click', 'a:has(> span:first-child)', function () {
-        $('a:has(> span:first-child)').removeClass('active'); // Remove the active class from all anchor tags that contain a span as their first child
-        if (this.parentElement.parentElement.classList.contains("show")) {
+    $('body').on('click', 'li.ram_list_group_item', function () {
+        $('li.ram_list_group_item').removeClass('active'); // Remove the active class from all anchor tags that contain a span as their first child
+        if (this.parentElement.parentElement.parentElement.classList.contains("show")) {
             $(this).addClass('active'); // Add the active class to the clicked anchor tag
         }
     });
+}
+
+function toggleClosedClass(action = 'close') {
+    const el = document.getElementById("ram_sidebar");
+    if (action === 'close')
+        el.classList.add("closed");
+    else {
+        el.classList.remove("closed");
+    }
+}
+
+function transformToTooltip(spanContent) {
+    boundAsync.transformToTooltip(spanContent)
+        .then(() => { })
+        .catch(err => console.log(err));
 }
 //#endregion

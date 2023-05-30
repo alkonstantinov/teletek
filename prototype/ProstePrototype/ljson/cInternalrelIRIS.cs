@@ -1340,6 +1340,15 @@ namespace ljson
                         RemoveUnusedTabs((JObject)p.Value);
             }
         }
+        private Encoding ReadedFieldEncoding(string _xmltag)
+        {
+            if (Regex.IsMatch(_xmltag, @"OPERATION\s*?=\s*?""ASCII2TEXT""", RegexOptions.IgnoreCase))
+                return Encoding.ASCII;
+            else if (Regex.IsMatch(_xmltag, @"OPERATION\s*?=\s*?""MATRIX_CYR2TEXT""", RegexOptions.IgnoreCase))
+                return Encoding.ASCII;
+            else
+                return Encoding.Unicode;
+        }
         public override Tuple<string, string> GroupPropertyVal(string _panel_id, JObject groups, string PropertyName, byte[] val, string _xmltag)
         {
             JObject prop = null;
@@ -1384,7 +1393,7 @@ namespace ljson
                 }
                 else if (prop["@TYPE"].ToString().ToLower() == "text")
                 {
-                    sval = Encoding.Unicode.GetString(val).TrimEnd((Char)0);
+                    sval = ReadedFieldEncoding(_xmltag).GetString(val).TrimEnd((Char)0);
                     return new Tuple<string, string>(path, sval);
                 }
                 else if (prop["@TYPE"].ToString().ToLower() == "int" && val.Length == 2)

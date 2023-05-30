@@ -1,0 +1,132 @@
+.ram_svg {
+    width: 14px;
+    height: 14px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ram_svg.ram_btn {
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+}
+
+
+.ram_svg.ram_toggle {
+    content: url(../images/25-show.svg);
+    width: 20px;
+    height: 20px;
+}
+
+.ram_svg.ram_toggle.open {
+    content: url(../images/20-hide.svg);
+}
+
+.ram_svg.scan {
+    content: url(../images/01-scan.svg);
+}
+
+.ram_svg.file {
+    content: url(../images/01-scan.svg);
+}
+
+.ram_svg.edit {
+    content: url(../images/03-edit.svg);
+}
+
+.ram_svg.bell {
+    content: url(../images/04-bell.svg);
+}
+
+.ram_svg.signall {
+    content: url(../images/05-signall.svg);
+}
+
+.ram_svg.fire {
+    content: url(../images/06-fire.svg);
+}
+
+.ram_svg.access_codes {
+    content: url(../images/07-access-codes.svg);
+}
+
+.ram_svg.network {
+    content: url(../images/08-network.svg);
+}
+
+.ram_svg.panels {
+    content: url(../images/09-panels.svg);
+}
+
+.ram_svg.inputs {
+    content: url(../images/10-inputs.svg);
+}
+
+.ram_svg.input_groups {
+    content: url(../images/11-input-groups.svg);
+}
+
+.ram_svg.outputs {
+    content: url(../images/12-outputs.svg);
+}
+
+.ram_svg.fat_fbf {
+    content: url(../images/13-fat-fbf.svg);
+}
+
+.ram_svg.zones {
+    content: url(../images/14-zones.svg);
+}
+
+.ram_svg.peripheral_devices {
+    content: url(../images/15-peripheral-devices.svg);
+}
+
+.ram_svg.loop_devices {
+    content: url(../images/16-loop-devices.svg);
+}
+.ram_svg.loop_devices.active {
+    content: url(../images/16-loop-devices-red.svg);
+}
+
+.ram_svg.zones {
+    content: url(../images/14-zones.svg);
+}
+
+.ram_svg.settings {
+    content: url(../images/17-settings.svg);
+}
+
+.ram_svg.help {
+    content: url(../images/18-help.svg);
+}
+
+.ram_svg.logout {
+    content: url(../images/19-log-out.svg);
+}
+
+.ram_svg.hide {
+    content: url(../images/20-hide.svg);
+}
+
+.ram_svg.sensor_iris {
+    content: url(../images/21-sensor-iris.svg);
+}
+
+.ram_svg.arrow_left {
+    content: url(../images/23-arrow-left.svg);
+}
+
+.ram_svg.arrow_right {
+    content: url(../images/24-arrow-right.svg);
+}
+
+.ram_icon.add_device {
+    content: url(../images/22-add-device.svg);
+}
+
+.ram_svg.add_device.active {
+    content: url(../images/22-add-device-red.svg);
+}

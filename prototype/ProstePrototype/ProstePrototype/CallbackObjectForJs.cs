@@ -10,11 +10,26 @@ using lcommunicate;
 using System.Windows.Controls;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.Windows.Controls.Primitives;
 
 namespace ProstePrototype
 {
     public class CallbackObjectForJs
     {
+        //public void transformToTooltip(string spanContent)
+        //{
+        //    Application.Current.Dispatcher.Invoke(() =>
+        //    {
+        //        MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        //        ToolTip tooltip = new ToolTip();
+        //        tooltip.Content = spanContent;
+        //        tooltip.Placement = PlacementMode.Mouse;
+        //        //tooltip.PlacementTarget = mainWindow.wb1;
+
+        //        mainWindow.wb1.ToolTip = tooltip;
+        //    });
+        //}
         public string modifyElementAddress(string oldAddress, string elementType, string newAddress)
         {
             cJson.ChangeElementAddress(oldAddress, elementType, newAddress);
@@ -39,7 +54,7 @@ namespace ProstePrototype
                 ok.Remove("~rw");
                 o[key] = ok;
             }
-            //File.WriteAllTextAsync("wb3.json", o.ToString());
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
         public string getElement(string elementName)
@@ -86,6 +101,7 @@ namespace ProstePrototype
                 JObject ok = JObject.Parse(dres[key]);
                 o[key] = ok["~loop_type"];
             }
+            File.WriteAllTextAsync("wb3.json", o.ToString());
             return o.ToString();
         }
 
@@ -113,7 +129,7 @@ namespace ProstePrototype
                 onew["~address"] = addr;
                 res.Add(onew);
             }
-            //File.WriteAllTextAsync("wb3.json", res.ToString());
+            File.WriteAllTextAsync("wb3.json", res.ToString());
             return res.ToString();
         }
 

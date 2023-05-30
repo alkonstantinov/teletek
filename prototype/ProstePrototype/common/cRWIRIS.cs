@@ -487,6 +487,61 @@ namespace common
                 dgensettings.Add(pkey, dpanelsettings[pkey]);
             _dread_prop.Remove("SIMPO_PANELSETTINGS_R");
         }
+        private Dictionary<string, int> ReadSeriasIds(string xml)
+        {
+            Dictionary<string, int> dall = new Dictionary<string, int>();
+            Dictionary<string, int> res = new Dictionary<string, int>();
+            //
+            foreach (Match m in Regex.Matches(xml, @"<ELEMENT[\w\W]+?>", RegexOptions.IgnoreCase))
+            {
+                string el = m.Value;
+                Match mel = Regex.Match(el, @"ID\s*?=\S*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
+                if (mel.Success)
+                {
+                    string elkey = mel.Groups[1].Value;
+                    if (!dall.ContainsKey(elkey)) dall.Add(elkey, 0);
+                    dall[elkey]++;
+                }
+            }
+            foreach (string key in dall.Keys)
+                if (dall[key] > 1)
+                    res.Add(key, dall[key]);
+            //
+            return res;
+        }
+        private void RepeaterUnionIndexes(Dictionary<string, int> _read_serias_ids)
+        {
+            foreach (string rkey in _dread_prop.Keys)
+            {
+                if (_read_serias_ids.ContainsKey(rkey)) continue;
+                Dictionary<string, Dictionary<string, List<string>>> dkey = _dread_prop[rkey];
+                Dictionary<string, string> todel = new Dictionary<string, string>();
+                Dictionary<string, Dictionary<string, List<string>>> toadd = new Dictionary<string, Dictionary<string, List<string>>>();
+                foreach (string cmd in dkey.Keys)
+                {
+                    Dictionary<string, List<string>> didx = dkey[cmd];
+                    if (didx.Count > 1)
+                    {
+                        if (!todel.ContainsKey(cmd)) todel.Add(cmd, null);
+                        foreach (string idx in didx.Keys)
+                        {
+                            string cmdnew = cmd + idx;
+                            if (!toadd.ContainsKey(cmdnew))
+                                toadd.Add(cmdnew, new Dictionary<string, List<string>>());
+                            if (!toadd[cmdnew].ContainsKey(""))
+                                toadd[cmdnew].Add("", new List<string>());
+                            List<string> lst = toadd[cmdnew][""];
+                            foreach (string s in didx[idx])
+                                lst.Add(s);
+                        }
+                    }
+                }
+                foreach (string delkey in todel.Keys)
+                    dkey.Remove(delkey);
+                foreach (string addkey in toadd.Keys)
+                    dkey.Add(addkey, toadd[addkey]);
+            }
+        }
         internal override List<cSeria> cfgReadSeries(string xml)
         {
             if (_dread_prop == null)
@@ -497,6 +552,7 @@ namespace common
             string last_path = "";
             List<cSeria> res = new List<cSeria>();
             xml = Regex.Replace(xml, @"<!\-+?[\w\W]*?\-+?>", "");
+            Dictionary<string, int> _read_serias_ids = ReadSeriasIds(xml);
             string _regex = @"(<ELEMENT[^<]*?>\s*?<ELEMENTS[\w\W]*?<ELEMENT[\w\W]*?</ELEMENT>\s*?</ELEMENTS>\s*?</ELEMENT>)";
             if (Regex.IsMatch(xml, "SIMPO_PANEL"))
                 _regex = @"(<ELEMENT[^<]*?>[\w\W]*?<ELEMENTS[\w\W]*?<ELEMENT[\w\W]*?</ELEMENT>\s*?</ELEMENTS>\s*?</ELEMENT>)";
@@ -522,6 +578,7 @@ namespace common
             {
                 UnionReadReadProp();
                 JoinSimpoRepeaterGenSettings();
+                RepeaterUnionIndexes(_read_serias_ids);
             }
             //
             return res;
@@ -928,7 +985,141 @@ namespace common
             Monitor.Exit(_cs_);
             return wrkeys;
         }
-
+        private void FillReadRWPathRepeaterSimpo(cRWPath rwpath, string wpath)
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dr = _dread_prop[rwpath.ReadPath];
+            //
+            Dictionary<string, int> dcommands = new Dictionary<string, int>();
+            //Dictionary<string, cRWPropertyIRIS> dprops = new Dictionary<string, cRWPropertyIRIS>();
+            Dictionary<string, string> dcmdprops = new Dictionary<string, string>();
+            foreach (string cmd in dr.Keys)
+            {
+                Dictionary<string, List<string>> didx = dr[cmd];
+                foreach (string idx in didx.Keys)
+                {
+                    List<string> lcmdlocal = new List<string>();
+                    List<string> lproplocal = new List<string>();
+                    foreach (string cxml in didx[idx])
+                    {
+                        foreach (Match mxml in Regex.Matches(cxml, @"<COMMAND\s[\w\W]+?/>", RegexOptions.IgnoreCase))
+                        {
+                            Match lm = Regex.Match(mxml.Value, @"BYTES\s*?=\s*?""([\w\W]+?)""");
+                            if (lm.Success)
+                                lcmdlocal.Add(lm.Groups[1].Value);
+                        }
+                        foreach (Match mxml in Regex.Matches(cxml, @"<PROPERTY[\w\W]+?/>"))
+                            lproplocal.Add(mxml.Value);
+                    }
+                    string localkey = String.Join('-', lcmdlocal.ToArray());
+                    string localprop = String.Join("\r\n", lproplocal.ToArray());
+                    if (!dcmdprops.ContainsKey(localkey))
+                        dcmdprops.Add(localkey, localprop);
+                }
+            }
+            int bufsize = 0;
+            foreach (string cmds in dcmdprops.Keys)
+            {
+                string[] acmds = cmds.Split('-');
+                int cmdsreslen = 0;
+                foreach (string cmd in acmds)
+                {
+                    int reslen = Convert.ToInt32(cmd.Substring(cmd.Length - 2, 2), 16) + 2;
+                    cmdsreslen += reslen;
+                    cRWCommand rwc = CommandObject(cmd);
+                    string cmdkey = rwc.CommandKey();
+                    if (cmd.Length < rwc.CommandLength())
+                        continue;
+                    rwpath.ReadCommands.Add(rwc);
+                }
+                string sprops = dcmdprops[cmds];
+                foreach (Match pm in Regex.Matches(sprops, @"<PROPERTY\s[\w\W]+?/>"))
+                {
+                    cRWPropertyIRIS p = new cRWPropertyIRIS();
+                    p.xmltag = pm.Value;
+                    p.id = p.PropertyValue(eIO.ioRead, "ID");
+                    p.offset = Convert.ToInt32(p.PropertyValue(eIO.ioRead, "BYTE")) + bufsize;
+                    p.bytescnt = Convert.ToByte(p.PropertyValue(eIO.ioRead, "LENGTH"));
+                    rwpath.ReadProperties.Add(p.id, p);
+                }
+                bufsize += cmdsreslen;
+            }
+        }
+        private void FillReadRWPath(cRWPath rwpath, string wpath)
+        {
+            if (Regex.IsMatch(wpath, "^SIMPO_GENERAL_SETTINGS_R"))
+            {
+                FillReadRWPathRepeaterSimpo(rwpath, wpath);
+                return;
+            }
+            Dictionary<string, Dictionary<string, List<string>>> dr = _dread_prop[rwpath.ReadPath];
+            string firstkey = dr.Keys.First();
+            Dictionary<string, List<string>> dr1 = dr[firstkey];
+            firstkey = dr1.Keys.First();
+            List<string> lXml = dr1[firstkey];
+            string xml = lXml[0];
+            string lastcommand = null;
+            Dictionary<string, string> firstcommands = new Dictionary<string, string>();
+            Match m = Regex.Match(xml, @"<COMMANDS([\w\W]+?)</COMMANDS");
+            if (m.Success)
+                foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\W[\w\W]*?BYTES\s*?=\s*?""(\w+?)"""))
+                {
+                    string cmd = mc.Groups[1].Value;
+                    cRWCommand rwc = CommandObject(cmd);
+                    string cmdkey = rwc.CommandKey();
+                    if (cmd.Length < rwc.CommandLength())
+                        continue;
+                    rwpath.ReadCommands.Add(rwc);
+                    lastcommand = cmd;
+                    if (!firstcommands.ContainsKey(cmdkey))
+                        firstcommands.Add(cmdkey, null);
+                }
+            if (Regex.IsMatch(wpath, "peripher", RegexOptions.IgnoreCase))
+            {
+                foreach (string pdkey in dr1.Keys)
+                {
+                    lXml = dr1[pdkey];
+                    xml = lXml[0];
+                    m = Regex.Match(xml, @"<COMMANDS([\w\W]+?)</COMMANDS");
+                    if (m.Success)
+                    {
+                        List<string> lastcommands = new List<string>();
+                        string sidx = "00";
+                        foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\W[\w\W]*?BYTES\s*?=\s*?""(\w+?)"""))
+                        {
+                            string cmd = mc.Groups[1].Value;
+                            cRWCommand rwc = CommandObject(cmd);
+                            if (!firstcommands.ContainsKey(rwc.CommandKey()))
+                            {
+                                if (!rwpath.ReadCommandsReplacement.ContainsKey(sidx))
+                                    rwpath.ReadCommandsReplacement.Add(sidx, new List<string>());
+                                List<string> addcmds = rwpath.ReadCommandsReplacement[sidx];
+                                foreach (string s in lastcommands)
+                                    addcmds.Add(s);
+                                lastcommands.Clear();
+                                addcmds.Add(cmd);
+                            }
+                            else
+                            {
+                                sidx = rwc.sindex;
+                                lastcommand = cmd;
+                                lastcommands.Add(cmd);
+                            }
+                        }
+                    }
+                }
+            }
+            m = Regex.Match(xml, @"<PROPERTIES([\w\W]+?)</PROPERTIES");
+            if (m.Success)
+                foreach (Match mp in Regex.Matches(m.Groups[1].Value, @"<PROPERTY[\w\W]+?/>"))
+                {
+                    cRWPropertyIRIS p = new cRWPropertyIRIS();
+                    p.xmltag = mp.Value;
+                    p.id = p.PropertyValue(eIO.ioRead, "ID");
+                    p.offset = Convert.ToInt32(p.PropertyValue(eIO.ioRead, "BYTE"));
+                    p.bytescnt = Convert.ToByte(p.PropertyValue(eIO.ioRead, "LENGTH"));
+                    rwpath.ReadProperties.Add(p.id, p);
+                }
+        }
         internal override Dictionary<string, cRWPath> RWMerged()
         {
             Dictionary<string, cRWPath> res = new Dictionary<string, cRWPath>();
@@ -938,76 +1129,11 @@ namespace common
                 cRWPath rwpath = new cRWPath();
                 rwpath.WritePath = wpath;
                 rwpath.ReadPath = wrkeys[wpath];
+                string firstkey = null;
+                Match m = null;
                 //read
-                Dictionary<string, Dictionary<string, List<string>>> dr = _dread_prop[rwpath.ReadPath];
-                string firstkey = dr.Keys.First();
-                Dictionary<string, List<string>> dr1 = dr[firstkey];
-                firstkey = dr1.Keys.First();
-                List<string> lXml = dr1[firstkey];
-                string xml = lXml[0];
-                string lastcommand = null;
-                Dictionary<string, string> firstcommands = new Dictionary<string, string>();
-                Match m = Regex.Match(xml, @"<COMMANDS([\w\W]+?)</COMMANDS");
-                if (m.Success)
-                    foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\W[\w\W]*?BYTES\s*?=\s*?""(\w+?)"""))
-                    {
-                        string cmd = mc.Groups[1].Value;
-                        cRWCommand rwc = CommandObject(cmd);
-                        string cmdkey = rwc.CommandKey();
-                        if (cmd.Length < rwc.CommandLength())
-                            continue;
-                        rwpath.ReadCommands.Add(rwc);
-                        lastcommand = cmd;
-                        if (!firstcommands.ContainsKey(cmdkey))
-                            firstcommands.Add(cmdkey, null);
-                    }
-                if (Regex.IsMatch(wpath, "peripher", RegexOptions.IgnoreCase))
-                {
-                    foreach (string pdkey in dr1.Keys)
-                    {
-                        lXml = dr1[pdkey];
-                        xml = lXml[0];
-                        m = Regex.Match(xml, @"<COMMANDS([\w\W]+?)</COMMANDS");
-                        if (m.Success)
-                        {
-                            List<string> lastcommands = new List<string>();
-                            string sidx = "00";
-                            foreach (Match mc in Regex.Matches(m.Groups[1].Value, @"<COMMAND\W[\w\W]*?BYTES\s*?=\s*?""(\w+?)"""))
-                            {
-                                string cmd = mc.Groups[1].Value;
-                                cRWCommand rwc = CommandObject(cmd);
-                                if (!firstcommands.ContainsKey(rwc.CommandKey()))
-                                {
-                                    if (!rwpath.ReadCommandsReplacement.ContainsKey(sidx))
-                                        rwpath.ReadCommandsReplacement.Add(sidx, new List<string>());
-                                    List<string> addcmds = rwpath.ReadCommandsReplacement[sidx];
-                                    foreach (string s in lastcommands)
-                                        addcmds.Add(s);
-                                    lastcommands.Clear();
-                                    addcmds.Add(cmd);
-                                }
-                                else
-                                {
-                                    sidx = rwc.sindex;
-                                    lastcommand = cmd;
-                                    lastcommands.Add(cmd);
-                                }
-                            }
-                        }
-                    }
-                }
-                m = Regex.Match(xml, @"<PROPERTIES([\w\W]+?)</PROPERTIES");
-                if (m.Success)
-                    foreach (Match mp in Regex.Matches(m.Groups[1].Value, @"<PROPERTY[\w\W]+?/>"))
-                    {
-                        cRWPropertyIRIS p = new cRWPropertyIRIS();
-                        p.xmltag = mp.Value;
-                        p.id = p.PropertyValue(eIO.ioRead, "ID");
-                        p.offset = Convert.ToInt32(p.PropertyValue(eIO.ioRead, "BYTE"));
-                        p.bytescnt = Convert.ToByte(p.PropertyValue(eIO.ioRead, "LENGTH"));
-                        rwpath.ReadProperties.Add(p.id, p);
-                    }
-                //
+                FillReadRWPath(rwpath, wpath);
+                // write
                 Dictionary<string, Dictionary<string, List<string>>> dw = _dwrite_prop[wpath];
                 StringBuilder sbwo = new StringBuilder();
                 foreach (string dwkey in dw.Keys)

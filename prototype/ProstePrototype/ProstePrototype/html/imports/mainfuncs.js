@@ -2,6 +2,7 @@
 
 const BUTTON_COLORS = {
     IRIS: 'fire',
+    SIMPO: 'fire',
     ECLIPSE: 'normal',
     TTE: 'grasse',
 };
@@ -85,19 +86,16 @@ function receiveMessageWPF(jsonTxt) {
     var json = JSON.parse(jsonTxt);
     if (Object.keys(json) === 0) return; // guard for empty json
 
+    let path = json["~path"];
+    let color;
+    // check for simpo - it should include iris to have correct color
+    if (path) color = Object.keys(BUTTON_COLORS).find(x => path.toUpperCase().includes(x)); 
+
     let body; // Main, Devices, Menu
     switch (true) {
         case !!document.getElementById('divMain'): // setting the body element
             //alert('divMain')
             body = document.getElementById('divMain');
-            if (body.firstElementChild?.tagName === 'FIELDSET') { // case network html
-                body = body.firstElementChild;
-            }
-
-            let path = json["~path"];
-            let color;
-            // check for simpo - it should include iris to have correct color
-            if (path) color = Object.keys(BUTTON_COLORS).find(x => path.toUpperCase().includes(x)); 
 
             drawFields(body, json, color ? BUTTON_COLORS[color] : 'normal');
 
@@ -108,7 +106,15 @@ function receiveMessageWPF(jsonTxt) {
         case !!document.getElementById("divPDevices"):
             body = document.getElementById('divPDevices');
 
-            drawWithModal(body, json);
+            let button = document.getElementById('buttons');
+            button.insertAdjacentHTML(
+                'beforeend',
+                `<button type="button" id="_btn" class="btn ram_btn btn_white ${BUTTON_COLORS[color]}" onclick="javascript: showPanelAdd();">
+                    <i class="ram_icon add_device"></i>
+                    <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new_device')}</div>
+                </button>`
+            );
+            drawWithModal(body, json, BUTTON_COLORS[color]);
             break;
         case !!document.getElementById("divLDevices"):
             if (!elements && Object.keys(json)) {
@@ -120,6 +126,15 @@ function receiveMessageWPF(jsonTxt) {
 
             body = document.getElementById('divLDevices');
             body.querySelector('#new').insertAdjacentHTML('afterbegin', `<p>${newT.t(localStorage.getItem('lang'), "add_up_to")} ${elements} ${newT.t(localStorage.getItem('lang'), 'loops')}</p>`)
+
+            let button1 = document.getElementById('buttons');
+            button1.insertAdjacentHTML(
+                'beforeend',
+                `<button type="button" id="_btn" class="btn ram_btn btn_white ${BUTTON_COLORS[color]}" onclick="javascript: loopFunc();">
+                    <i class="ram_icon add_device"></i>
+                    <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${newT.t(localStorage.getItem('lang'), 'loop')}</div>
+                </button>`
+            );
 
             getLoops();
             break;
@@ -137,12 +152,12 @@ function receiveMessageWPF(jsonTxt) {
     }
     $(function () {
         // DOM Ready - do your stuff
-        pagePreparation();        
+        pagePreparation();      
     });
 }
 //#endregion
 
-const drawWithModal = (body, json) => {
+const drawWithModal = (body, json, colorClass) => {
     // getting keys and adding elements to modal for each
     keys = Object.keys(json).filter(k => k !== '~path' && k !== '~panel_id');
 
@@ -150,29 +165,25 @@ const drawWithModal = (body, json) => {
     elements = keys.length + 1; // for the case of PDevices
     minElements = 0;
 
-    var deviceList = body.querySelector('#deviceList');
+    var deviceList = body.querySelector('#ram_panel_add');
     var modalList = deviceList.querySelector('#list-tab');
 
     for (k of keys) {
-        if (k.split('_').pop() === 'NONE') continue;
+        if (k.endsWith('NONE')) continue;
 
         let elType = Object.keys(BUTTON_IMAGES).find(x => k.includes(x));
-
-        modalList.insertAdjacentHTML('beforeend', `<button type="button"
-                                class="list-group-item col"
-                                id="${k.toLowerCase()}_btn"
-                                onclick="javascript: addElement('element', '${k}'); $('#deviceList').modal('hide');"
-                                data-toggle="tab"
-                                role="tab"
-                                aria-selected="false">
-                            <div class="btnStyle fire">
-                                <i class="${BUTTON_IMAGES[elType].im} fa-3x p-2"></i>
-                                <div class="someS">
-                                    <h5>${k.split('_').slice(1).join(' ').toUpperCase()}</h5>
-                                </div>
-                            </div>
-                        </button>`);
-
+        // replace the <i...></i> with <img src="../imports/images/....repective....sensoiris-mio04.jpg" alt="${k.split('_').slice(1).join(' ').toUpperCase()}">
+        modalList.insertAdjacentHTML('beforeend', 
+        `<div class="ram_card ${colorClass}" 
+              id="${k.toLowerCase()}_btn"
+              onclick="javascript: addElement('element', '${k}'); hidePanelAdd();">
+            <div class="ram_card_img">
+                <i class="${BUTTON_IMAGES[elType].im} fa-2x"></i>
+            </div>
+            <div class="ram_card_body">
+                <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || k.split('_').slice(1).join(' ').toUpperCase()}</h5>
+            </div>
+        </div>`);
         getAvailableElements(k.toUpperCase());
     };
 }
@@ -214,67 +225,57 @@ function drawFields(body, json, inheritedColor = 'normal') {
             elements = +divLevel["@MAX"]; // case of divMain
             let btnDiv = document.getElementById("buttons");
             if (k.toUpperCase().includes('INPUT_GROUP')) {
-                document.documentElement.style.setProperty('--open-size', '0');
-                body.innerHTML = '';
                 const oldEl = document.querySelector('#selected_area');
                 const newEl = document.createElement("main");
                 newEl.id = 'new';
                 newEl.classList = "ram_main row";
                 oldEl.replaceWith(newEl);
 
-                const button = document.querySelector('#ram_toggle_sidebar');
-                button.innerHTML = `<button class="btn ram_btn btn_white ${inheritedColor}" id="add_group_btn" 
-                                        title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}"
-                                        onclick="javascript:addElement('element', '${k}')">
-                                        <i class="ram_icon add_device x14"></i>
-                                    </button>`;
+                body.innerHTML = `<button class="btn ram_btn btn_white ${inheritedColor}" id="add_group_btn" 
+                                    title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}"
+                                    onclick="javascript:addElement('element', '${k}')">
+                                    <i class="ram_icon add_device x14"></i>
+                                </button>`;
             } else {
-                // adding the button for everybody except PANNELIN
-                if (!k.toUpperCase().includes("PANELIN")) {
-                    document.documentElement.style.setProperty('--open-size', '135');
+                // adding the button for everybody except PANNELIN // SIMPO_PANELS_R //IRIS8_PANELINNETWORK
+                if (!k.toUpperCase().includes("PANEL")) { 
                     btnDiv.insertAdjacentHTML(
                         'afterbegin',
                         `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn">
                             <i class="ram_icon add_device"></i>
                             <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}</div>
                         </button>`);
+                    btnDiv.parentElement.insertAdjacentHTML(
+                        'beforeend',
+                        `<button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
+                             <i class="ram_icon toggle"></i>
+                         </button>`);
                 }         
                 if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
-                    document.documentElement.style.setProperty('--open-size', '270');
-                    deviceNmbr = 0;
-                    // add the toggle button to the zones fiels
-                    btnDiv.insertAdjacentHTML(
-                        'beforeend',
-                        `<button class="ram_btn ram_toggle_btn open" onclick="javascript:sidebar_toggle(this, 1);">
-                            <i class="ram_icon toggle"></i>
-                        </button>`
-                    )
+                    deviceNmbr = 0;                    
                     // add the section showing the attached_device per zone with the device summary button
-                    let wrapper = document.querySelector('#ram_devices_wrapper');
-                    wrapper.insertAdjacentHTML(
+                    body.insertAdjacentHTML(
                         'beforeend',
-                        `<div class="ram_resizable open" id="ram_devices_2">
-                        <div class="ram_flex_top">
-                            <div id="attached_device" class="ram_cards">
-                            
-                            </div>
-                        </div>
-                        <div class="ram_flex_bottom">
-                            <div class="ram_settings">
-                                <div class="ram_settings" id="attached_device_button">
-                                    <button class="ram_btn ram_toggle_btn open" onclick="javascript:sidebar_toggle(this, 2);">
-                                        <i class="ram_icon toggle"></i>
-                                    </button>
+                        `<div class="ram_panel ram_resizable ram_animate" id="ram_panel_2">
+                            <div class="ram_panel_content">
+                                <div class="ram_cards" id="attached_device">
+                                
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="ram_resizer"></div>`
+                            <div class="ram_fixed_bottom">
+                                <div class="ram_settings" id="attached_device_button">
+
+                                </div>
+                                <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this, 2);">
+                                    <i class="ram_icon toggle"></i>
+                                </button>
+                            </div>
+                            <div class="ram_resizer"></div>
+                        </div>`
                     );
                 }
             }
-            const main = document.querySelector('.ram_main');
-            if (main) main.style.marginLeft = body.offsetWidth + 'px';
+
             getAvailableElements(k.toUpperCase());
         } else if (!k.includes('~')) { // collapsible parts
             const { input_name, input_id } = {
@@ -387,18 +388,19 @@ const appendInnerToElement = (innerString, element, elementJSON) => {
 function getZoneDevices(elementNumber) {
     const el = document.getElementById('attached_device_button');
     const bar2 = document.getElementById('attached_device');
-    //el.innerHTML = `<button class="btn-small btn-border-black" onclick="javacript: calculateZoneDevices(${elementNumber})" id="calculateDevices"
-    //                    data-bs-toggle="modal" data-bs-target="#showDevicesListModal" >
-    //                        ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
-    //                </button>`; // reset of the attached to the zone device list
+    bar2.innerHTML = ''; // erase all the available devices before
+
     let calculateDevices = el.querySelector('#calculateDevices');
     if (!calculateDevices)
         el.insertAdjacentHTML(
             'afterbegin',
             `<button class='btn ram_btn btn_white' onclick='javacript: calculateZoneDevices(${elementNumber})' id='calculateDevices'
-                data-bs-toggle='modal' data-bs-target='#showDevicesListModal'><div class='ram_btn_title'>
-                ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
-            </div></button>`
+                data-bs-toggle='modal' data-bs-target='#showDevicesListModal'>
+                <i class="ram_icon loop_devices"></i>
+                <div class='ram_btn_title'>
+                    ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
+                </div>
+            </button>`
         ); // reset of the attached to the zone device list
     boundAsync.zoneDevices(elementNumber).then(r => {
         if (!r) return;
@@ -407,7 +409,7 @@ function getZoneDevices(elementNumber) {
         //update the nuber of devices in zone
         deviceNmbr = zoneDevicesJson.length;
         
-        let showBtn = document.getElementById("calculateDevices").firstElementChild;
+        let showBtn = document.getElementById("calculateDevices").lastElementChild;
         showBtn.innerHTML = `${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}`;        
 
         zoneDevicesJson.forEach(device => {
@@ -417,18 +419,7 @@ function getZoneDevices(elementNumber) {
             let loopNumber = device["~loop_nom"];
             let key = device["~device"].split("_").slice(1).join("_");
             let showName = device["~devname"] || DEVICES_CONSTS[key].sign;
-            //('${loopType}', '${deviceName}', '${loopNumber}', '${address}')
-            // create a new button
-            //const newDeviceInner = `<div class="col-12" >
-            //                            <a href="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopNumber}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });" > 
-            //                                <div class="btnStyle ${BUTTON_COLORS[deviceName.split("_")[0]]}">
-            //                                    <img src="${DEVICES_CONSTS[key].im}" alt="" width="25" height="25" class="m15" />
-            //                                    <div class="someS">
-            //                                        <div class="h5">${address + '. ' + showName}</div>
-            //                                    </div>
-            //                                </div>
-            //                            </a>
-            //                        </div>`;          
+        
             const newDeviceInner = `<div class="ram_card" id='${deviceName}_${address}' 
                 onclick="javascript:sendMessageWPF({ 'Command': 'GoToDeviceInLoop', 'Params': { 'loopType': '${loopType}', 'loopNumber': '${loopNumber}', 'elementType': '${deviceName}', 'elementNumber': '${address}' } });">
                                 <div class="ram_card_img_top">
@@ -1062,6 +1053,8 @@ function pagePreparation() {
                 setTimeout(() => $(`#${address}_${deviceName}`).addClass('active'), 200);
             }
         }
+
+        resizingPanels();
     });
 }
 
@@ -1579,9 +1572,9 @@ function changeStyleDisplay(goToId, id) {
     }
 }
 
-function addActive(doc = document) {
-    $(doc).on('click', '.btnStyle', function () {
-        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle fire
+function addActive(doc = 'ram_panel_1') {
+    $(`#${doc}`).on('click', '.ram_card', function () {
+        $('.ram_card').removeClass('active');// here remove class active from all btnStyle fire
         $(this).addClass('active');// here apply selected class on clicked btnStyle fire
     });
 }
@@ -1710,7 +1703,7 @@ async function createElementButton(last, elementType) {
         //if the element is not INPUT_GROUP
         newUserElement = `<div onclick="javascript: showElement('${last}', '${elementType}'); addActive()" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
                                 <div class="ram_card_img_top">
-                                    <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `fa-solid ${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
+                                    <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
                                 </div>
                                 <div class="ram_card_body">
                                     <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}</h5>
@@ -1765,11 +1758,11 @@ async function inputGroupTextGenerator(last, elementType) {
             let currentJSON = returnedJson["~noname"]["fields"]["Input_Logic"];
             let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
             let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
-            let legend = (trans.length + `${last}.`.length) > 14 ? trans.substring(0, 7) + '...' : trans;
+            let legend = (trans.length + `${last}.`.length) > 16 ? trans.substring(0, 9) + '...' : trans;
             return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="ram_card fire">
-                            <fieldset style="min-width: 200px;" class="ram_card_body">
-                                <legend>${last}. ${legend}</legend> 
+                            <div style="min-width: 200px;" class="ram_card_body">
+                                <span>${last}. ${legend}</span> 
                                 <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>
                                 <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
@@ -1781,7 +1774,7 @@ async function inputGroupTextGenerator(last, elementType) {
                                     </label>
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}
                                 </p>
-                            </fieldset>
+                            </div>
                             <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
                                 <i class="ram_icon add_device rot45 x14"></i>
                             </div>
@@ -1891,32 +1884,190 @@ function alertScanFinished(show) {
     }
 }
 
-function sidebar_toggle(itElement, sectionId = 0) {
-    const mainTransition = 300;
-    const sidebar = document.querySelector("#ram_sidebar");
-    const sidebarWrapper = sidebar.firstElementChild;
-    const main = document.querySelector('.ram_main');
-    //const hamburgerBtn = document.querySelector("#ram_hamburger_btn");
-    const bar1 = document.querySelector('#ram_devices_1');
-    const bar2 = document.querySelector('#ram_devices_2');
-    const bar3 = document.querySelector('#ram_devices_3');
+function sidebar_toggle(itElement, sectionId = 1) {
+    const panelOpenWidth = 180;
+    const panelClosedWidth = 80;
+    const bar1 = document.querySelector('#ram_panel_1');
+    const bar2 = document.querySelector('#ram_panel_2');
+    const bar3 = document.querySelector('#ram_panel_add');
     switch (sectionId) {
         case 1:
-            bar1.classList.toggle("open");
+            bar1.classList.toggle("closed");
+            if (bar1.offsetWidth >= panelOpenWidth) {
+                bar1.style.width = `${panelClosedWidth}px`;
+                bar1.querySelector(".ram_cards").style.gridTemplateColumns = "repeat(1, 1fr)";
+            } else {
+                bar1.style.width = `${panelOpenWidth}px`;
+                bar1.querySelector(".ram_cards").style.gridTemplateColumns = "repeat(1, 1fr)";
+            }
             break;
         case 2:
-            bar2.classList.toggle("open");
+            bar2.classList.toggle("closed");
+            if (bar2.offsetWidth >= panelOpenWidth) {
+                bar2.style.width = `${panelClosedWidth}px`;
+                bar2.querySelector(".ram_cards").style.gridTemplateColumns = "repeat(1, 1fr)";
+            } else {
+                bar2.style.width = `${panelOpenWidth}px`;
+                bar2.querySelector(".ram_cards").style.gridTemplateColumns = "repeat(1, 1fr)";
+            }
             break;
         case 3:
-            bar3.classList.toggle("open");
+            const panelAddClosedWidth = 260;
+            const panelAddOpenWidth = 360;
+            bar3.classList.toggle("closed");
+            if (bar3.offsetWidth >= panelAddOpenWidth) {
+                bar3.style.width = `${panelAddClosedWidth}px`;
+                bar3.querySelector(".ram_cards").style.gridTemplateColumns = "repeat(4, 1fr)";
+            } else {
+                bar3.style.width = `${panelAddOpenWidth}px`;
+                bar3.querySelector(".ram_cards").style.gridTemplateColumns = "repeat(2, 1fr)";
+            }
             break;
         default:
-            sidebar.classList.toggle("openvar");
             break;
     }
     itElement.firstElementChild.classList.toggle("open");
-    setTimeout(() => {
-        main.style.marginLeft = sidebarWrapper.offsetWidth + 'px';
-    }, mainTransition);
+    
+}
+
+function showPanelAdd() {
+    const panelAdd = document.querySelector("#ram_panel_add");
+    panelAdd.style.marginLeft = "0px";
+    /* TO-DO Add resource */
+}
+
+function hidePanelAdd() {
+    const panelAdd = document.querySelector("#ram_panel_add");
+    panelAdd.style.marginLeft = `-${panelAdd.offsetWidth}px`;
+    /* TO-DO Remove resource */
+}
+
+function resizingPanels() {
+
+    const panelOpenWidth = 180;
+    const panelClosedWidth = 80;
+    const panelAddOpenWidth = 360;
+    const panelAddClosedWidth = 260;
+
+    const main = document.querySelector('#ram_main_wrapper');
+    const resizers = document.querySelectorAll(".ram_resizer");
+
+    /* Resize panels */
+    var dragging = false;
+    var initiator = '';
+    let resizedEl = '';
+    let icon = '';
+
+    let x = 0;
+    let resizedElW = 0;
+    let cardsContainer = null;
+
+    /* Calculate Devices column on Panel resize */
+    function calcCardsColumn(e) {
+        let el = e[0].target;
+        let cW = el.offsetWidth;
+        cardsContainer = el.querySelectorAll(".ram_cards")[0];
+
+        if (cW >= 1260) {
+            cardsContainer.style.gridTemplateColumns = "repeat(8, 1fr)";
+        } else if (cW >= 1110) {
+            cardsContainer.style.gridTemplateColumns = "repeat(7, 1fr)";
+        } else if (cW >= 960) {
+            cardsContainer.style.gridTemplateColumns = "repeat(6, 1fr)";
+        } else if (cW >= 810) {
+            cardsContainer.style.gridTemplateColumns = "repeat(5, 1fr)";
+        } else if (cW >= 660) {
+            cardsContainer.style.gridTemplateColumns = "repeat(4, 1fr)";
+        } else if (cW >= 510) {
+            cardsContainer.style.gridTemplateColumns = "repeat(3, 1fr)";
+        } else if (cW >= 360) {
+            cardsContainer.style.gridTemplateColumns = "repeat(2, 1fr)";
+        } else {
+            if (el.id == "ram_panel_add") {
+                cardsContainer.style.gridTemplateColumns = "repeat(4, 1fr)";
+            } else {
+                cardsContainer.style.gridTemplateColumns = "repeat(1, 1fr)";
+            }
+        }
+    }
+
+    const observerCards = new MutationObserver(calcCardsColumn);
+    const observerOptions = {
+        attributes: true,
+        attributeFilter: ["style"],
+    };
+
+    resizers.forEach(el => {
+        el.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            dragging = true;
+            x = e.clientX;
+            initiator = el;
+            resizedEl = initiator.parentElement;
+            resizedElW = resizedEl.getBoundingClientRect().width;
+            icon = resizedEl.querySelector(".ram_icon.toggle");
+            resizedEl.classList.remove("ram_animate");
+            main.classList.remove("ram_animate");
+
+            observerCards.observe(resizedEl, observerOptions);
+
+            document.addEventListener('mousemove', onMouseMove);
+        });
+    });
+
+    document.addEventListener('mouseup', function (e) {
+        e.preventDefault();
+        if (dragging) {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.body.style.removeProperty('cursor');
+            document.body.style.removeProperty('user-select');
+            resizedEl.classList.add("ram_animate");
+            main.classList.add("ram_animate");
+
+            observerCards.disconnect();
+
+            dragging = false;
+        }
+    });
+
+    function onMouseMove(e) {
+        e.preventDefault();
+        const dx = (e.clientX - x);
+        const newWidth = (resizedElW + dx);
+
+        document.body.style.cursor = "col-resize";
+        document.body.style.userSelect = "none";
+
+        if (resizedEl.id !== "ram_panel_add") {
+            if (resizedEl.offsetWidth >= panelOpenWidth) {
+                resizedEl.classList.remove("closed");
+                icon.classList.remove("open");
+            } else {
+                resizedEl.classList.add("closed");
+                icon.classList.add("open");
+            }
+
+            if (newWidth >= 80) {
+                resizedEl.style.width = `${newWidth}px`;
+            } else {
+                resizedEl.style.width = `${panelClosedWidth}px`;
+            }
+        } else {
+            if (resizedEl.offsetWidth >= panelAddOpenWidth) {
+                resizedEl.classList.remove("closed");
+                icon.classList.remove("open");
+            } else {
+                resizedEl.classList.add("closed");
+                icon.classList.add("open");
+            }
+
+            if (newWidth >= panelAddClosedWidth) {
+                resizedEl.style.width = `${newWidth}px`;
+                oldWidth = newWidth;
+            } else {
+                resizedEl.style.width = `${panelAddClosedWidth}px`;
+            }
+        }
+    }
 }
 //#endregion

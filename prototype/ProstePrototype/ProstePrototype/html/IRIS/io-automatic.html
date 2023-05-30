@@ -21,35 +21,31 @@
     <title>Teletek Manager</title>
 </head>
 <body>
-    <div id="ram_sidebar" class="openvar">
-        <div class="ram_sidebar_content_wrapper" id="divMain">
-            <div class="ram_flex_right" id="ram_devices_wrapper">
-                <div class="ram_resizable open" id="ram_devices_1">
-                    <div class="ram_flex_top">
-                        <div id="new" class="ram_cards">
-                            
-                        </div>
-                    </div>
-                    <div class="ram_flex_bottom">
-                        <div class="ram_settings">
-                            <div class="ram_settings" id="buttons">
+    <div id="ram_main_wrapper">
+        <div class="ram_panels" id="divMain">
+            <div class="ram_panel ram_resizable ram_animate" id="ram_panel_1">
+                <div class="ram_panel_content" id="">
+                    <div id="new" class="ram_cards">
 
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div class="ram_fixed_bottom">
+                    <div class="ram_settings" id="buttons">
+
                     </div>
                 </div>
                 <div class="ram_resizer"></div>
             </div>
         </div>
-        <div id="ram_toggle_sidebar" class="ram_sidebar_toggle_wrapper">
+        <!--<div id="ram_toggle_sidebar" class="ram_sidebar_toggle_wrapper">
             <button class="ram_btn btn_toggle" id="ram_hamburger_btn" data-bs-target="#ram_sidebar" aria-controls="ram_sidebar" onclick="javascript: sidebar_toggle(this)">
                 <i class="ram_icon toggle"></i>
             </button>
-        </div>
-    </div>
-    <main class="ram_main" id="selected_area">
+        </div>-->
+        <main class="ram_main" id="selected_area">
 
-    </main>
+        </main>
+    </div>
 
     <!-- showDevicesListModal required for Zones -->
     <div class="modal fade" id="showDevicesListModal" role="dialog">

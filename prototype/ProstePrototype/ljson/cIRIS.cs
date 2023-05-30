@@ -190,7 +190,7 @@ namespace ljson
             json["iris"]["PROPERTIES"]["Groups"]["AccessCodes"] = grp2;
             //
             JObject grp3 = new JObject();
-            grp2["name"] = "Company Logo";
+            grp3["name"] = "Company Logo";
             JObject f3 = new JObject();
             f3["LOGO1"] = o["LOGO1"];
             f3["LOGO2"] = o["LOGO2"];
@@ -1294,6 +1294,17 @@ namespace ljson
             //
             return o.ToString();
         }
+        private static void RemoveRepeaterSimpoElements(JObject json)
+        {
+            JObject elements = (JObject)json["ELEMENTS"];
+            if (elements["SIMPO_GENERAL_SETTINGS_R"] != null) elements.Remove("SIMPO_GENERAL_SETTINGS_R");
+            if (elements["SIMPO_ACCESSCODE_R"] != null) elements.Remove("SIMPO_ACCESSCODE_R");
+            if (elements["SIMPO_PANELSETTINGS_R"] != null) elements.Remove("SIMPO_PANELSETTINGS_R");
+            if (elements["SIMPO_LOGO_R"] != null) elements.Remove("SIMPO_LOGO_R");
+            JObject panels = new JObject((JObject)elements["SIMPO_PANELS_R"]);
+            elements.Remove("SIMPO_PANELS_R");
+            elements["SIMPO_PANELS_R"] = panels;
+        }
         #endregion
         public static string Convert(string json, JObject _pages)
         {
@@ -1364,6 +1375,7 @@ namespace ljson
             ConvertEvacZoneGroup(o1);
             ConvertPreripherialDevicesContentNodes(o1);
             ConvertPanelInNetwork(o1);
+            RemoveRepeaterSimpoElements(o1);
             //
             cXml.Arrays2Objects(o1, true);
             //

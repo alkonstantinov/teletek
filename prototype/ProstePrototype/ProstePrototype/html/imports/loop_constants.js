@@ -68,7 +68,7 @@ const BUTTON_IMAGES = {
     OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
     OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
     POWER: { im: 'fa-solid fa-plug', sign: '' },
-    PANELINNETWORK: { im: 'panels', sign: 'Panel' },
+    PANEL: { im: 'panels', sign: 'Panel' },
     INPUT: { im: 'inputs', sign: 'Input' },
     OUTPUT: { im: 'outputs', sign: 'Output' },
     EVAC_ZONE: { im: 'fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна

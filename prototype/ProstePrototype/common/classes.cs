@@ -14,6 +14,7 @@ using System.Threading.Channels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
+using System.Windows.Shapes;
 
 namespace common
 {
@@ -45,6 +46,24 @@ namespace common
                 _res = _settings;
                 Monitor.Exit(_cs_);
                 return _res;
+            }
+        }
+        public static Dictionary<string, Dictionary<string, string>> read_replacements
+        {
+            get
+            {
+                Dictionary<string, Dictionary<string, string>> res = new Dictionary<string, Dictionary<string, string>>();
+                JArray arepl = (JArray)Settings["read_replacements"];
+                foreach (JObject e in arepl)
+                {
+                    string el = e["ELEMENT_ID"].ToString();
+                    res.Add(el, new Dictionary<string, string>());
+                    Dictionary<string, string> drepl = res[el];
+                    JArray repl = (JArray)e["replacements"];
+                    foreach (JObject r in repl)
+                        drepl.Add(r["match"].ToString(), r["replacewith"].ToString());
+                }
+                return res;
             }
         }
         public static bool logreads
@@ -495,8 +514,8 @@ namespace common
         {
             if (_config_path == null)
                 return;
-            string path = Regex.Replace(Path.GetDirectoryName(_config_path), @"[\\/]$", "");
-            path = Regex.Replace(Path.GetDirectoryName(_config_path), @"template$", "", RegexOptions.IgnoreCase);
+            string path = Regex.Replace(System.IO.Path.GetDirectoryName(_config_path), @"[\\/]$", "");
+            path = Regex.Replace(System.IO.Path.GetDirectoryName(_config_path), @"template$", "", RegexOptions.IgnoreCase);
             string read_path = path + @"Read\";
             string write_path = path + @"Write\";
             string _xml = File.ReadAllText(_config_path);
@@ -522,7 +541,7 @@ namespace common
                 }
             }
             _read_ver_files.Clear();
-            string read_path = Regex.Replace(Path.GetDirectoryName(_base_read_file), @"[\\/]$", "") + @"\";
+            string read_path = Regex.Replace(System.IO.Path.GetDirectoryName(_base_read_file), @"[\\/]$", "") + @"\";
             foreach (Match m in Regex.Matches(_read, @"<VERSION[\w\W]+?/>"))
             {
                 string verline = m.Value;
@@ -541,7 +560,7 @@ namespace common
             string _write = File.ReadAllText(_base_write_file);
             _write = Regex.Replace(_write, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
             _write_ver_files.Clear();
-            string write_path = Regex.Replace(Path.GetDirectoryName(_base_write_file), @"[\\/]$", "") + @"\";
+            string write_path = Regex.Replace(System.IO.Path.GetDirectoryName(_base_write_file), @"[\\/]$", "") + @"\";
             foreach (Match m in Regex.Matches(_write, @"<VERSION[\w\W]+?/>"))
             {
                 string verline = m.Value;
@@ -834,10 +853,10 @@ namespace common
         private Dictionary<string, string> ReadStructuresJSONFiles()
         {
             Dictionary<string, string> res = new Dictionary<string, string>();
-            string dir = Path.GetDirectoryName(_read_path);
+            string dir = System.IO.Path.GetDirectoryName(_read_path);
             if (!Regex.IsMatch(dir, "\\$"))
                 dir += "\\";
-            string fn = Path.GetFileNameWithoutExtension(_read_path);
+            string fn = System.IO.Path.GetFileNameWithoutExtension(_read_path);
             //res.Add("serias", dir + "_serias.json");
             //res.Add("read_xml_no_serias", dir + "_read_xml_no_serias.txt");
             //res.Add("property_groups", dir + "_property_groups.json");
@@ -901,7 +920,25 @@ namespace common
                 _readwriter._dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
             _readwriter._dread_prop = (Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>)_deserialyzer(s, _readwriter._dread_prop.GetType());
         }
-
+        private string DoReplacements(string xml)
+        {
+            string res = xml;
+            Dictionary<string, Dictionary<string, string>> drepl = settings.read_replacements;
+            foreach (string elkey in drepl.Keys)
+            {
+                foreach (Match mel in Regex.Matches(xml, @"<ELEMENT\s+?ID\s*?=\s*?""" + elkey + @"""[\w\W]*?>[\w\W]+?</ELEMENT>", RegexOptions.IgnoreCase))
+                {
+                    string sel = mel.Value;
+                    string selnew = sel;
+                    Dictionary<string, string> d = drepl[elkey];
+                    foreach (string smatch in d.Keys)
+                        selnew = Regex.Replace(selnew, smatch, d[smatch], RegexOptions.IgnoreCase);
+                    res = Regex.Replace(res, sel, selnew);
+                }
+            }
+            //
+            return res;
+        }
         private void CreateReadStructure()
         {
             Monitor.Enter(_cs_config);
@@ -910,6 +947,7 @@ namespace common
             if (_rp != null && File.Exists(_rp))
             {
                 rxml = File.ReadAllText(_rp);
+                rxml = DoReplacements(rxml);
                 if (Regex.IsMatch(rxml, "IRIS4_PANEL"))
                     rxml = Regex.Replace(rxml, @"<ELEMENT\s+?ID=""IRIS4_NO_LOOP\d+""[\w\W]+?</ELEMENT>", "");
             }
@@ -988,10 +1026,10 @@ namespace common
         private Dictionary<string, string> WriteStructuresJSONFiles()
         {
             Dictionary<string, string> res = new Dictionary<string, string>();
-            string dir = Path.GetDirectoryName(_write_path);
+            string dir = System.IO.Path.GetDirectoryName(_write_path);
             if (!Regex.IsMatch(dir, "\\$"))
                 dir += "\\";
-            string fn = Path.GetFileNameWithoutExtension(_write_path);
+            string fn = System.IO.Path.GetFileNameWithoutExtension(_write_path);
             //res.Add("wserias", dir + "_wserias.json");
             //res.Add("write_property_groups", dir + "_write_property_groups.json");
             res.Add("write_properties", dir + fn + "_dwrite_prop.json");

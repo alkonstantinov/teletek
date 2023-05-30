@@ -858,6 +858,15 @@ namespace lcommunicate
             else
                 return null;
         }
+        public static cTransport ConnectHID(HidDevice p)
+        {
+            cTransport t = new cUSB();
+            object conn = t.Connect(p);
+            if (conn != null)
+                return t;
+            else
+                return null;
+        }
         public static cTransport ConnectBase(object conn_params)
         {
             cTransport conn = null;
@@ -867,6 +876,8 @@ namespace lcommunicate
                 conn = cComm.ConnectFile((string)conn_params);
             else if (conn_params is cTDFParams)
                 conn = cComm.ConnectTDF((cTDFParams)conn_params);
+            else if (conn_params is HidDevice)
+                conn = cComm.ConnectHID((HidDevice)conn_params);
             return conn;
         }
         public static byte[] SendCommand(cTransport conn, string cmd)
@@ -933,7 +944,7 @@ namespace lcommunicate
             IEnumerable<HidDevice> _devs = _loader.GetDevices();
             foreach (HidDevice _dev in _devs)
             {
-                if (/*Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) &&*/ !res.ContainsKey(_dev.ToString()))
+                if (Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) && !res.ContainsKey(_dev.ToString()))
                     res.Add(_dev.ToString(), _dev);
             }
             //DeviceList dLst = new FilteredDeviceList();

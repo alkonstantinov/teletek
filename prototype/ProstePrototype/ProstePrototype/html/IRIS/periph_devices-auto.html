@@ -15,152 +15,178 @@
     <link rel="stylesheet" href="../imports/css/all.css" />
     <script src="../imports/font-awesome.js"></script>
 
+    <link rel="stylesheet" href="../imports/css/sidebar.css" />
+    <link rel="stylesheet" href="../imports/css/ram-icons.css" />
     <link rel="stylesheet" href="../IRIS.css" />
 
     <title>Teletek Manager</title>
 </head>
-<body class="fullHeight">
-    <div class="container fullHeight" id="divPDevices">
-        <!-- IMPORTANT When disable input, put class .disabled in the .form-item class -->
+<body>
+    <div id="ram_main_wrapper">
+        <div class="ram_panels" id="divPDevices">
 
-        <div class="row fullHeight">
-            <div class="col-3 bl fire scroll">
-                <div id="new" class="row">
-
-                </div>
-            </div>
-            <div class="col-9 fullHeight">
-                <div id="selected_area" class="fullHeight">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade bd-example" tabindex="-1" role="dialog" id="deviceList" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="row list-group fire" id="list-tab" role="tablist">
-                        
-                        
+            <div class="ram_panel ram_resizable ram_animate" id="ram_panel_1">
+                <div class="ram_panel_content">
+                    <div id="new" class="ram_cards">
 
                     </div>
                 </div>
+                <div class="ram_fixed_bottom">
+                    <div class="ram_settings" id="buttons">
+
+                    </div>
+                    <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
+                        <i class="ram_icon toggle"></i>
+                    </button>
+                </div>
+                <div class="ram_resizer"></div>
+            </div>
+            <div class="ram_panel ram_resizable ram_animate" id="ram_panel_add" style="margin-left: -360px;">
+                <div class="ram_panel_content">
+                    <div class="ram_cards" id="list-tab">
+                    </div>
+                </div>
+                <div class="ram_fixed_bottom">
+                    <div class="ram_settings">
+                        <button class="ram_btn ram_btn_main btn_white" onclick="javascript: hidePanelAdd();">
+                            <div class="ram_btn_title">Close</div>
+                        </button>
+                    </div>
+                    <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this, 3)">
+                        <i class="ram_icon toggle"></i>
+                    </button>
+                </div>
+                <div class="ram_resizer"></div>
             </div>
         </div>
+        <main class="ram_main" id="selected_area">
 
-        <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5" id="buttons">
-            <!--<button type="button" class="btn-round btn-blue">Save</button>
-            <button type="button" class="btn-round btn-border-black">Back</button>-->
-            <button style="display: inline-flex;" type="button" data-toggle="modal" data-target="#deviceList" id="_btn" class="btn-round btn-border-black">
-                <i class="fa-solid fa-plus 5x"></i> Add New Device
-            </button>
-        </div>
-
-        <script>
-            let elements;
-            let minElements;
-            let lst = [];
-
-            const BUTTON_IMAGES = {
-                TTELOOP: { im: 'fa-solid fa-arrows-spin', sign: 'Teletek Loop' }, // NB! последователността е важна
-                LOOP: { im: 'fa-solid fa-arrows-spin', sign: 'System Sensors Loop' },
-                OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-                OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
-                POWER: { im: 'fa-solid fa-plug', sign: '' },
-                PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
-                INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
-                OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
-                EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
-                ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
-                ORFunction: { im: "../../Images/ORFunction.png", sign: '' },
-                ANDFunction: { im: "../../Images/ANDFunction.png", sign: 'Zone' },
-            };
-        </script>
-        
+        </main>
     </div>
-    
+
+    <!-- addressModal -->
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addressModalLabel">Device address</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let elements;
+        let minElements;
+        let lst = [];
+
+        const BUTTON_IMAGES = {
+            TTELOOP: { im: 'fa-solid fa-arrows-spin', sign: 'Teletek Loop' }, // NB! последователността е важна
+            LOOP: { im: 'fa-solid fa-arrows-spin', sign: 'System Sensors Loop' },
+            OUTREL: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+            OUTMON: { im: 'fa-solid fa-arrow-down-up-across-line', sign: '' },
+            POWER: { im: 'fa-solid fa-plug', sign: '' },
+            PANELINNETWORK: { im: 'fa-solid fa-display', sign: 'Panel' },
+            INPUT: { im: 'fa fa-arrow-down', sign: 'Input' },
+            OUTPUT: { im: 'fa fa-arrow-up', sign: 'Output' },
+            EVAC_ZONE: { im: 'fa-solid fa-arrows-to-circle', sign: 'EVAC Zone' }, // NB! последователността е важна
+            ZONE: { im: 'fa-brands fa-square-font-awesome-stroke', sign: 'Zone' },
+            ORFunction: { im: "../../Images/ORFunction.png", sign: '' },
+            ANDFunction: { im: "../../Images/ANDFunction.png", sign: 'Zone' },
+        };
+    </script>
+
+
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
     <script>
         function sendMessage(bc) {
             CefSharp.PostMessage(bc);
         }
-                //$(document).ready(() => {
-                //    sendMessage("Devices|ECLIPSE|Timeslots");
-                //});
-//         var wb2 = `{
-//  "IRIS8_NONE": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "9712215a-0529-44fd-a3a1-1618109e419d",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_NONE"
-//  },
-//  "IRIS8_TTELOOP": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "af185ba2-2c24-41cf-8b75-c4e4f3332389",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_TTELOOP"
-//  },
-//  "IRIS8_LOOP": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "3b094593-70ba-4da2-afa6-4b67001518f9",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_LOOP"
-//  },
-//  "IRIS8_INPUT4_OUTREL4_OUTMON4": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "673c2683-1d18-42af-9b9c-22f99ae3c867",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT4_OUTREL4_OUTMON4"
-//  },
-//  "IRIS8_INPUT4_OUTREL20_OUTMON4": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "e1d325dd-e50c-49e6-8d2d-d1824bc9a297",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT4_OUTREL20_OUTMON4"
-//  },
-//  "IRIS8_INPUT0_OUTREL0_OUTMON4": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "577be944-34df-4a3a-ad21-5fb4c3f8ed50",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL0_OUTMON4"
-//  },
-//  "IRIS8_INPUT0_OUTREL4_OUTMON4": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "83147721-1fad-446d-b3f1-80ed931a60d8",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL4_OUTMON4"
-//  },
-//  "IRIS8_INPUT3_OUTREL5_OUTMON4_AUX": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "b3c798f1-81ab-4aae-aa28-19c1b5b1f11a",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT3_OUTREL5_OUTMON4_AUX"
-//  },
-//  "IRIS8_INPUT0_OUTREL0_OUTMON1_AUX": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "4cc1f800-d14e-4a5f-aafd-a8f98cf71a18",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL0_OUTMON1_AUX"
-//  },
-//  "IRIS8_INPUT0_OUTREL0_OUTMON4_AUX": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "9d1445f3-d0b5-4f54-94df-cf708dc43c2b",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL0_OUTMON4_AUX"
-//  },
-//  "IRIS8_POWER_SUPPLY": {
-//    "@MIN": "1",
-//    "@MAX": "12",
-//    "@LNGID": "4c207580-7bcd-4f97-850e-9a9ea333a71b",
-//    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_POWER_SUPPLY"
-//  },
-//  "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS"
-//}`;
+                            //$(document).ready(() => {
+                            //    sendMessage("Devices|ECLIPSE|Timeslots");
+                            //});
+                            //         var wb2 = `{
+                            //  "IRIS8_NONE": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "9712215a-0529-44fd-a3a1-1618109e419d",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_NONE"
+                            //  },
+                            //  "IRIS8_TTELOOP": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "af185ba2-2c24-41cf-8b75-c4e4f3332389",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_TTELOOP"
+                            //  },
+                            //  "IRIS8_LOOP": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "3b094593-70ba-4da2-afa6-4b67001518f9",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_LOOP"
+                            //  },
+                            //  "IRIS8_INPUT4_OUTREL4_OUTMON4": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "673c2683-1d18-42af-9b9c-22f99ae3c867",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT4_OUTREL4_OUTMON4"
+                            //  },
+                            //  "IRIS8_INPUT4_OUTREL20_OUTMON4": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "e1d325dd-e50c-49e6-8d2d-d1824bc9a297",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT4_OUTREL20_OUTMON4"
+                            //  },
+                            //  "IRIS8_INPUT0_OUTREL0_OUTMON4": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "577be944-34df-4a3a-ad21-5fb4c3f8ed50",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL0_OUTMON4"
+                            //  },
+                            //  "IRIS8_INPUT0_OUTREL4_OUTMON4": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "83147721-1fad-446d-b3f1-80ed931a60d8",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL4_OUTMON4"
+                            //  },
+                            //  "IRIS8_INPUT3_OUTREL5_OUTMON4_AUX": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "b3c798f1-81ab-4aae-aa28-19c1b5b1f11a",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT3_OUTREL5_OUTMON4_AUX"
+                            //  },
+                            //  "IRIS8_INPUT0_OUTREL0_OUTMON1_AUX": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "4cc1f800-d14e-4a5f-aafd-a8f98cf71a18",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL0_OUTMON1_AUX"
+                            //  },
+                            //  "IRIS8_INPUT0_OUTREL0_OUTMON4_AUX": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "9d1445f3-d0b5-4f54-94df-cf708dc43c2b",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_INPUT0_OUTREL0_OUTMON4_AUX"
+                            //  },
+                            //  "IRIS8_POWER_SUPPLY": {
+                            //    "@MIN": "1",
+                            //    "@MAX": "12",
+                            //    "@LNGID": "4c207580-7bcd-4f97-850e-9a9ea333a71b",
+                            //    "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS.IRIS8_POWER_SUPPLY"
+                            //  },
+                            //  "~path": "ELEMENTS.iris_peripheral_devices.CONTAINS"
+                            //}`;
 
 
 
-//        receiveMessageWPF(wb2);
+                            //        receiveMessageWPF(wb2);
     </script>
 </body>
 </html>

@@ -498,7 +498,7 @@ namespace ljson
                     rw = _merge[""];
                 else
                     foreach (string key in _merge.Keys)
-                        if (Regex.IsMatch(_merge[key].ReadPath, "PANEL$", RegexOptions.IgnoreCase))
+                        if (Regex.IsMatch(_merge[key].ReadPath, "PANEL$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, "GENERAL_SETTINGS_R$", RegexOptions.IgnoreCase))
                         {
                             rw = _merge[key];
                             break;
@@ -571,6 +571,12 @@ namespace ljson
                         break;
                     }
                     if (Regex.IsMatch(path, @"panel[\w\W]+?network", RegexOptions.IgnoreCase) && Regex.IsMatch(key, @"panel[\w\W]+?network", RegexOptions.IgnoreCase))
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    path1 = Regex.Replace(path, "^iris_", "simpo_");
+                    if (Regex.IsMatch(key, "^" + path1, RegexOptions.IgnoreCase))
                     {
                         rw = _merge[key];
                         break;
@@ -854,6 +860,8 @@ namespace ljson
                     read_props.Add(rpk, p.ReadProperties[rpk]);
             }
             //
+            if (!Regex.IsMatch(read_path, "/"))
+                read_path += "/" + read_path;
             string[] apath = read_path.Split('/');
             res.Add(apath[0], new Dictionary<string, Dictionary<string, byte[]>>());
             Dictionary<string, Dictionary<string, byte[]>> droot = res[apath[0]];
@@ -1161,6 +1169,10 @@ namespace ljson
         }
         public static void ReadDevice(object conn_params)
         {
+            bool isRepeaterIris = false;
+            JToken templatepath = CurrentPanel["~template_loaded_from"];
+            if (templatepath != null && Regex.IsMatch(templatepath.ToString(), @"repeater[\w\W]+?iris[\w\W]+?simpo", RegexOptions.IgnoreCase))
+                isRepeaterIris = true;
             //if (readed)
             //    return;
             //if (reading)
@@ -1221,8 +1233,23 @@ namespace ljson
             if (drw.Count > 0)
             {
                 Dictionary<string, Tuple<byte, byte>> dpath_minmax = new Dictionary<string, Tuple<byte, byte>>();
+                if (isRepeaterIris)
+                {
+                    JObject pinnet = (JObject)CurrentPanel["ELEMENTS"]["iris_panels_in_network"]["CONTAINS"];
+                    JProperty ppanel = pinnet.Properties().First();
+                    if (!dpath_minmax.ContainsKey(ppanel.Name))
+                    {
+                        JObject opanelminmax = (JObject)ppanel.Value;
+                        byte pmin = Convert.ToByte(opanelminmax["@MIN"].ToString());
+                        byte pmax = Convert.ToByte(opanelminmax["@MAX"].ToString());
+                        dpath_minmax.Add(ppanel.Name, new Tuple<byte, byte>(pmin, pmax));
+                    }
+                }
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
                 cTransport conn = cComm.ConnectBase(conn_params);
+                //LOGIN!!!!!!!!!!!!!!!!!!!!!!!
+                //byte[] loginres = cComm.SendCommand(conn, "076033333333");
+                //
                 //if (conn_params is cIPParams)
                 //    conn = cComm.ConnectIP(((cIPParams)conn_params).address, ((cIPParams)conn_params).port);
                 //else if (conn_params is string)

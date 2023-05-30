@@ -484,6 +484,22 @@ namespace ProstePrototype
                     scan_btn.IsEnabled = true;
                     ChangeTheme(DarkMode);
                 } );
+
+                wb1.LoadingStateChanged += (sender, args) =>
+                {
+                    //Wait for the Page to finish loading
+                    if (args.IsLoading == false)
+                    {
+                        if (wb1.ActualWidth > 280)
+                        {
+                            wb1.ExecuteScriptAsync("toggleClosedClass('open')");
+                        }
+                        else
+                        {
+                            wb1.ExecuteScriptAsync("toggleClosedClass()");
+                        }
+                    }
+                };
             }
             else
             {
@@ -891,25 +907,36 @@ namespace ProstePrototype
 
             this.Dispatcher.Invoke(() =>
             {
-                if (mainGrid.ColumnDefinitions[0].Width == new GridLength(70))
+                if (mainGrid.ColumnDefinitions[0].Width == new GridLength(90))
                 {
                     mainGrid.ColumnDefinitions[0].Width = new GridLength(280);
                     editBtnRow.Height = new GridLength(0);
                     wb1Column.Width = new GridLength(280);
                     settingsBtnRow.Height = new GridLength(0);
                     defineSizeBtnRow.Height = new GridLength(0);
-                    footerBtnRow.Height = new GridLength(50);
+                    footerBtnRow.Height = new GridLength(70);
                 }
                 else
                 {
-                    mainGrid.ColumnDefinitions[0].Width = new GridLength(70);
-                    editBtnRow.Height = new GridLength(40);
-                    wb1Column.Width = new GridLength(70);
-                    settingsBtnRow.Height = new GridLength(40);
-                    defineSizeBtnRow.Height = new GridLength(40);
+                    mainGrid.ColumnDefinitions[0].Width = new GridLength(90);
+                    editBtnRow.Height = new GridLength(50);
+                    wb1Column.Width = new GridLength(90);
+                    settingsBtnRow.Height = new GridLength(50);
+                    defineSizeBtnRow.Height = new GridLength(50);
                     footerBtnRow.Height = new GridLength(0);
                 }
             });
+            
+            if (!string.IsNullOrEmpty(wb1.Address))
+            {
+                if (wb1.ActualWidth < 280)
+                {
+                    wb1.ExecuteScriptAsync("toggleClosedClass('open')");
+                } else
+                {
+                    wb1.ExecuteScriptAsync("toggleClosedClass()");
+                }
+            }
         }
 
         private void GridOrListView_Click(object sender, RoutedEventArgs e)

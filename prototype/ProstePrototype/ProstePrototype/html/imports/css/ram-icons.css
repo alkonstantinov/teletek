@@ -1,8 +1,13 @@
-:root {
-    --ram-icon-color-grey: invert(82%) sepia(0%) saturate(683%) hue-rotate(341deg) brightness(97%) contrast(100%);
-    --ram-icon-color-red: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);
-    --ram-icon-color-green: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%);
-    --ram-icon-color-blue: invert(26%) sepia(64%) saturate(6323%) hue-rotate(214deg) brightness(105%) contrast(103%);
+.ram_icon {
+    --ram-icon-filter-white: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%) grayscale(0) opacity(1);
+    --ram-icon-filter-red: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%) grayscale(0) opacity(1);
+    --ram-icon-filter-green: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%) grayscale(0) opacity(1);
+    --ram-icon-filter-blue: invert(26%) sepia(64%) saturate(6323%) hue-rotate(214deg) brightness(105%) contrast(103%) grayscale(0) opacity(1);
+    --ram-icon-filter-light-blue: invert(85%) sepia(41%) saturate(7139%) hue-rotate(190deg) brightness(96%) contrast(112%) grayscale(0) opacity(1);
+    --ram-icon-filter-black: invert(9%) sepia(10%) saturate(4764%) hue-rotate(174deg) brightness(96%) contrast(96%) grayscale(0) opacity(1);
+    --ram-icon-filter-disabled: grayscale(1) opacity(0.5);
+    --ram-icon-filter-main-color: var(--ram-icon-filter-blue);
+    --ram-icon-filter-variable-color: var(--ram-icon-filter-blue);
 }
 
 .ram_icon {
@@ -11,6 +16,8 @@
     background-repeat: no-repeat;
     background-position: center center;
     display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
     min-width: 10%; /*added lately*/
 }
 
@@ -110,16 +117,58 @@
 }
 
 a .ram_card .ram_icon.bell, a .ram_card .ram_icon.fireicon, a .ram_card .ram_icon.signall {
-    filter: var(--ram-icon-color-grey);
+    filter: var(--ram-icon-filter-disabled);
 }
     a .ram_card .ram_icon.bell:hover {
-        filter: var(--ram-icon-color-blue);
+        filter: var(--ram-icon-filter-blue);
     }
 
     a .ram_card .ram_icon.fireicon:hover {
-        filter: var(--ram-icon-color-red);
+        filter: var(--ram-icon-filter-red);
     }
 
     a .ram_card .ram_icon.signall:hover {
-        filter: var(--ram-icon-color-green);
+        filter: var(--ram-icon-filter-green);
     }
+
+.fa-solid.fa-arrows-to-circle,
+.ram_icon:not(.logout) {
+    filter: var(--ram-icon-filter-disabled);
+}
+
+.ram_icon.logout {
+    filter: var(--ram-icon-filter-white);
+}
+
+.ram_icon.toggle:hover {
+    filter: var(--ram-icon-filter-black);
+}
+
+.ram_card:hover .ram_icon,
+.ram_card.active .ram_icon,
+.ram_btn:not(.ram_toggle_btn):hover .ram_icon,
+.ram_list_group_item:hover .ram_icon,
+.ram_list_group_item.active .ram_icon {
+    filter: var(--ram-icon-filter-variable-color);
+}
+
+.ram_btn.ram_btn_main:hover .ram_icon,
+.ram_btn.ram_btn_main.active .ram_icon {
+    filter: var(--ram-icon-filter-main-color);
+}
+
+
+#ram_sidebar .ram_show_panel_add .ram_icon {
+    filter: var(--ram-icon-filter-main-color);
+}
+
+#ram_sidebar .ram_show_panel_add:hover .ram_icon,
+#ram_sidebar .ram_show_panel_add.active .ram_icon {
+    filter: var(--ram-icon-filter-light-blue);
+}
+
+.ram_rot_btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

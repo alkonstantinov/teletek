@@ -1,6 +1,26 @@
 ﻿{
   "logreads": true,
   "paths2inc": [ "ELEMENTS.iris_zones.CONTAINS.IRIS_ZONE", "ELEMENTS.iris_panels_in_network.CONTAINS.IRIS_PANELINNETWORK" ],
-  "inc_fields_on_read": {"IRIS8": {"IRIS8_INPUT": {"P1": 1 ,"P2": 1, "~if": "~idx_8=2" }}},
-  "iris_login_command": "0660"
+  "inc_fields_on_read": {
+    "IRIS8": {
+      "IRIS8_INPUT": {
+        "P1": 1,
+        "P2": 1,
+        "~if": "~idx_8=2"
+      }
+    }
+  },
+  "iris_login_command": "0660",
+  "iris_log_command": "01FF0000",
+  "read_replacements": [
+    {
+      "ELEMENT_ID": "SIMPO_PANELS_R",
+      "replacements": [
+        {
+          "match": "<PROPERTY ID=\"status\" BYTE=\"2\" LENGTH=\"4\"/>",
+          "replacewith": "<PROPERTY ID=\"status\" BYTE=\"2\" LENGTH=\"1\"/>"
+        }
+      ]
+    }
+  ]
 }

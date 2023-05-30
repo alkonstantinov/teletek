@@ -240,8 +240,14 @@
         add_new: {
             'bg': 'Добавете нов', 'en': 'Add New', 'ge': 'Add New' 
         },
+        add_new_device: {
+            'bg': 'Добавете ново устройство', 'en': 'Add New Device', 'ge': 'Add New Device' 
+        },
         add_up_to: {
             'bg': 'Добавете до', 'en': 'Add up to', 'ge': 'Add up to' 
+        },
+        remove_last_loop: {
+            'bg': 'Премахване на последния кръг', 'en': 'Remove Last Loop', 'ge': 'Remove Last Loop' 
         },
         all_channels_used: {
             'bg': 'устройството е използвано', 'en': 'used device', 'ge': 'used device' 

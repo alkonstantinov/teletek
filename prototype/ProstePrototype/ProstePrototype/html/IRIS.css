@@ -313,6 +313,11 @@ button {
     padding: 10px;
 }
 
+    .modal-content .form-floating > label {
+        white-space: initial;
+        word-wrap: break-word;
+    }
+
 .row.list-group {
     flex-direction: unset;
     margin: 0;
@@ -1347,6 +1352,13 @@ input:checked + .slider:before {
 }
 
 /*new design*/
+
+.text_grid_middle {
+    text-align: center;
+    text-decoration: underline;
+    grid-column: 1 / -1;
+    justify-self: center;
+}
 
 /*INPUT STYLES START*/
 
