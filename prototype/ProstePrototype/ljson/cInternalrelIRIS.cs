@@ -1394,6 +1394,8 @@ namespace ljson
                 else if (prop["@TYPE"].ToString().ToLower() == "text")
                 {
                     sval = ReadedFieldEncoding(_xmltag).GetString(val).TrimEnd((Char)0);
+                    int zidx = sval.IndexOf((Char)0);
+                    if (zidx >= 0) sval = sval.Substring(0, zidx);
                     return new Tuple<string, string>(path, sval);
                 }
                 else if (prop["@TYPE"].ToString().ToLower() == "int" && val.Length == 2)

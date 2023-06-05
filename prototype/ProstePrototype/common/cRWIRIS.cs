@@ -509,12 +509,12 @@ namespace common
             //
             return res;
         }
-        private void RepeaterUnionIndexes(Dictionary<string, int> _read_serias_ids)
+        private void RepeaterUnionIndexes(Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dprop, Dictionary<string, int> _rw_serias_ids)
         {
-            foreach (string rkey in _dread_prop.Keys)
+            foreach (string rkey in _dprop.Keys)
             {
-                if (_read_serias_ids.ContainsKey(rkey)) continue;
-                Dictionary<string, Dictionary<string, List<string>>> dkey = _dread_prop[rkey];
+                if (_rw_serias_ids.ContainsKey(rkey)) continue;
+                Dictionary<string, Dictionary<string, List<string>>> dkey = _dprop[rkey];
                 Dictionary<string, string> todel = new Dictionary<string, string>();
                 Dictionary<string, Dictionary<string, List<string>>> toadd = new Dictionary<string, Dictionary<string, List<string>>>();
                 foreach (string cmd in dkey.Keys)
@@ -578,7 +578,7 @@ namespace common
             {
                 UnionReadReadProp();
                 JoinSimpoRepeaterGenSettings();
-                RepeaterUnionIndexes(_read_serias_ids);
+                RepeaterUnionIndexes(_dread_prop, _read_serias_ids);
             }
             //
             return res;
@@ -896,8 +896,14 @@ namespace common
                 res.Add(seria);
             }
             //
-            ReorderSimpoRepeaterWriteProps();
-            MergeSimpoWritePropsByNode();
+            if (Regex.IsMatch(xml, @"@ID\s*?=\s*?'SIMPO_GENERAL_SETTINGS_R'"))
+            {
+                ReorderSimpoRepeaterWriteProps();
+                MergeSimpoWritePropsByNode();
+                Dictionary<string, int> _write_serias_ids = new Dictionary<string, int>();
+                _write_serias_ids.Add("SIMPO_PANELS_R", 64);
+                RepeaterUnionIndexes(_dwrite_prop, _write_serias_ids);
+            }
             //
             return res;
         }

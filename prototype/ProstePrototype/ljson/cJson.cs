@@ -1643,10 +1643,15 @@ namespace ljson
                     if (m.Success)
                     {
                         int len = Convert.ToInt32(m.Groups[1].ToString());
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 1; i <= len; i++)
-                            sb.Append(op.value);
-                        op.writeval = sb.ToString();
+                        if (len != op.value.Length / 2)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            for (int i = 1; i <= len; i++)
+                                sb.Append(op.value);
+                            op.writeval = sb.ToString();
+                        }
+                        else
+                            op.writeval = op.value;
                     }
                     else
                         op.writeval = op.value;
@@ -1660,7 +1665,7 @@ namespace ljson
                         cmds.Add(scmd, _params);
                         _params = "";
                     }
-                    if (op.value.Length == command_len)
+                    if (op.value.Length == command_len && !Regex.IsMatch(op.value, "^0+$"))
                     {
                         if (CurrentPanelType == "iris")
                             cmd = new cRWCommandIRIS();
@@ -1977,6 +1982,11 @@ namespace ljson
                         dloop.Add(writepath, dwrite[writepath]);
                 }
                 else if (dwrite[writepath].Count > 1)
+                {
+                    if (!dseria.ContainsKey(writepath))
+                        dseria.Add(writepath, dwrite[writepath]);
+                }
+                else if (writepath == "SIMPO_PANELS_R")
                 {
                     if (!dseria.ContainsKey(writepath))
                         dseria.Add(writepath, dwrite[writepath]);
@@ -2664,14 +2674,18 @@ namespace ljson
             JObject pages = JObject.Parse(spages);
             foreach (string _id in _system_panels.Keys)
             {
-                JObject _panel = _sys_panels[_id];
-                string _type = _panel["~panel_type"].ToString();
-                JObject _pages = PagesByType(pages, _type);
-                JObject res_panel = new JObject();
-                res_panel["~panel_name"] = PanelName(_id);
-                res_panel["~panel_id"] = _id;
-                res_panel["pages"] = _pages;
-                res.Add(res_panel);
+                JObject json = _sys_panels[_id];
+                string content_key = json["~panel_type"].ToString();
+                if (content_key != null)
+                {
+                    JToken tc = json["ELEMENTS"][content_key]["CONTAINS"];
+                    if (tc != null)
+                    {
+                        tc["~panel_id"] = _id;
+                        tc["~panel_name"] = PanelName(_id);
+                        res.Add(tc);
+                    }
+                }
             }
             //
             return res;

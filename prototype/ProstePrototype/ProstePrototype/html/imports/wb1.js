@@ -1,5 +1,4 @@
 //#region VARIABLES
-let reloading = false;
 const BUTTON_COLORS = {
     IRIS: 'fire',
     ECLIPSE: 'normal',
@@ -44,20 +43,17 @@ function toggleLang(key) {
     // shoud clear the document.getElementById('ram_sidebar_menu').innerHTML = "";
     document.getElementById('ram_sidebar_menu').innerHTML = "";
 
-    reloading = true;
     // request the previous content of panels with boundAsync.panelsInLeftBrowser
     boundAsync.panelsInLeftBrowser().then(res => {
         if (res) {
+            //alert(typeof (res) + 'is the type;  ' + res);
             let panelArray = JSON.parse(res);
             panelArray.forEach(panel => {
-                receiveMessageWPF(JSON.stringify(panel));
-                
+                receiveMessageWPF(JSON.stringify(panel));                
             });
         } else {
             alert("System error: No response from 'panelsInLeftBrowser'");
         }
-        // when all the panels are loaded we are back to normal
-        reloading = false;
     }).catch(err => alert(err));
 }
 
@@ -129,9 +125,7 @@ function receiveMessageWPF(jsonTxt) {
             else {
                 // else case: add new panel
                 // 1. find the new panel type
-                let jsonKeys = reloading ?
-                    Object.keys(json["pages"]) :
-                    Object.keys(json)
+                let jsonKeys = Object.keys(json)
                         .filter(x => x !== "~panel_id")
                         .filter(y => y !== "~panel_name")
                         .filter(y => y !== "~path");
@@ -250,8 +244,7 @@ function openAccordionItem(id) {
 }
 
 const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
-    if (reloading) jsonAtLevel = jsonAtLevel["pages"];
-    // create teh accordion-body div
+    // create the accordion-body div
     let div = document.createElement('div');
     div.classList = "accordion-body";
     if (!jsonAtLevel) return;
@@ -261,9 +254,7 @@ const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
     ul.classList = "ram_list_group";
 
     const pathStr = "~path";
-    let cleanKeys = reloading ?
-        elementKeys.filter(x => jsonAtLevel[x]["breadcrumbs"].length !== 1) : // for the reloading case
-        elementKeys.filter(x => x !== pathStr && x !== "~panel_id" && x !== "~panel_name"); // for the usual new panel adding
+    let cleanKeys = elementKeys.filter(x => x !== pathStr && x !== "~panel_id" && x !== "~panel_name"); // for the usual new panel adding
 
     cleanKeys.forEach(field => {
         // guard for null value of jsonAtLevel[field]

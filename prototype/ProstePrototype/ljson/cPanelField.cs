@@ -353,7 +353,15 @@ namespace ljson
             }
             else if (Regex.IsMatch(_type, @"(TEXT)"))
             {
-                byte[] tbytes = Encoding.Unicode.GetBytes(sval);
+                string sop = null;
+                Match m = Regex.Match(_xmltag, @"OPERATION\s*?=\s*?""([\w\W]+?)""");
+                if (m.Success)
+                    sop = m.Groups[1].Value;
+                byte[] tbytes;
+                if (sop == "TEXT2ASCII" || sop == "TEXT2MATRIX_CYR")
+                    tbytes = Encoding.ASCII.GetBytes(sval);
+                else
+                    tbytes = Encoding.Unicode.GetBytes(sval);
                 byte[] bytesadd = new byte[_size - tbytes.Length];
                 Array.Clear(bytesadd, 0, bytesadd.Length);
                 byte[] bytesres = new byte[_size];
@@ -517,7 +525,7 @@ namespace ljson
                         else if (sval.ToLower() == "false")
                             sval = "0";
                         int ival = Convert.ToInt32(sval);
-                        groupval |=  ival;
+                        groupval |= ival;
                         field["~value"] = sval;
                         if (field["@SIZE"] != null)
                             size = Convert.ToInt32(field["@SIZE"].ToString());
