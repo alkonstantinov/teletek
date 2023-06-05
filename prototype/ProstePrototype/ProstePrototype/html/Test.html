@@ -25,21 +25,21 @@
 </head>
 
 <body>
-    <div id="ram_sidebar" class="ram_resizable ram_animate fullopen closed">
+    <div id="ram_sidebar" class="ram_resizable ram_animate fullopen">
         <div class="ram_sidebar_content">
             <!--<div class="ram_flex_left" id="ram_sidebar_nav">-->
             <div class="accordion" id="ram_sidebar_menu">
 
                 <div class="accordion-item fire">
-                    <h2 class="accordion-header" id="29a196fa_75e5_43f2_a4cc_1bda5446065d" onclick="javascript: selectNewPanel(this.id, this)" pagetype="iris">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse29a196fa_75e5_43f2_a4cc_1bda5446065d" aria-expanded="false" aria-controls="collapse29a196fa_75e5_43f2_a4cc_1bda5446065d">
-                            <i class="ram_icon fireicon fire"></i> <span class="ram_btn_title">iris8</span>
+                    <h2 class="accordion-header" id="9d68f770_be10_4a57_ac1a_84db5b0fb11a" onclick="javascript: selectNewPanel(this.id, this)" pagetype="iris">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9d68f770_be10_4a57_ac1a_84db5b0fb11a" aria-expanded="true" aria-controls="collapse9d68f770_be10_4a57_ac1a_84db5b0fb11a">
+                            <i class="ram_icon fireicon fire"></i> <span class="ram_btn_title">iris</span>
                         </button>
                     </h2>
-                    <div id="collapse29a196fa_75e5_43f2_a4cc_1bda5446065d" class="accordion-collapse collapse" aria-labelledby="29a196fa_75e5_43f2_a4cc_1bda5446065d" data-bs-parent="#ram_sidebar_menu" style="">
+                    <div id="collapse9d68f770_be10_4a57_ac1a_84db5b0fb11a" class="accordion-collapse collapse show" aria-labelledby="9d68f770_be10_4a57_ac1a_84db5b0fb11a" data-bs-parent="#ram_sidebar_menu">
                         <div class="accordion-body">
                             <ul class="ram_list_group">
-                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'}); addActive()" id="iris_access_code">
+                                <li class="ram_list_group_item active" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'}); addActive()" id="iris_access_code">
                                     <div class="ram_list_item_content">
                                         <i class="ram_icon access_codes"></i>
                                         <span>Access codes</span>
@@ -93,7 +93,7 @@
                                         <span>Evac zones</span>
                                     </div>
                                 </li>
-                                <li class="ram_list_group_item active" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_peripheral_devices'}); addActive()" id="iris_peripheral_devices">
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_peripheral_devices'}); addActive()" id="iris_peripheral_devices">
                                     <div class="ram_list_item_content">
                                         <i class="ram_icon peripheral_devices"></i>
                                         <span>Peripheral devices</span>
@@ -103,30 +103,6 @@
                                     <div class="ram_list_item_content">
                                         <i class="ram_icon loop_devices"></i>
                                         <span>Loop devices</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><div class="accordion-item fire">
-                    <h2 class="accordion-header" id="7c484e6b_9a66_4ef6_8143_8f9889b258bd" onclick="javascript: selectNewPanel(this.id, this)" pagetype="iris">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7c484e6b_9a66_4ef6_8143_8f9889b258bd" aria-expanded="true" aria-controls="collapse7c484e6b_9a66_4ef6_8143_8f9889b258bd">
-                            <i class="ram_icon fireicon fire"></i> <span class="ram_btn_title">repeater_iris_simpo</span>
-                        </button>
-                    </h2>
-                    <div id="collapse7c484e6b_9a66_4ef6_8143_8f9889b258bd" class="accordion-collapse collapse show" aria-labelledby="7c484e6b_9a66_4ef6_8143_8f9889b258bd" data-bs-parent="#ram_sidebar_menu">
-                        <div class="accordion-body">
-                            <ul class="ram_list_group">
-                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_network'}); addActive()" id="iris_network">
-                                    <div class="ram_list_item_content">
-                                        <i class="ram_icon network"></i>
-                                        <span>Network</span>
-                                    </div>
-                                </li>
-                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_panels_in_network'}); addActive()" id="iris_panels_in_network">
-                                    <div class="ram_list_item_content">
-                                        <i class="ram_icon panels"></i>
-                                        <span>Panels in network</span>
                                     </div>
                                 </li>
                             </ul>

@@ -1,24 +1,38 @@
-.ram_icon {
-    --ram-icon-filter-white: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%) grayscale(0) opacity(1);
-    --ram-icon-filter-red: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%) grayscale(0) opacity(1);
-    --ram-icon-filter-green: invert(70%) sepia(54%) saturate(511%) hue-rotate(45deg) brightness(96%) contrast(93%) grayscale(0) opacity(1);
-    --ram-icon-filter-blue: invert(26%) sepia(64%) saturate(6323%) hue-rotate(214deg) brightness(105%) contrast(103%) grayscale(0) opacity(1);
-    --ram-icon-filter-light-blue: invert(85%) sepia(41%) saturate(7139%) hue-rotate(190deg) brightness(96%) contrast(112%) grayscale(0) opacity(1);
-    --ram-icon-filter-black: invert(9%) sepia(10%) saturate(4764%) hue-rotate(174deg) brightness(96%) contrast(96%) grayscale(0) opacity(1);
-    --ram-icon-filter-disabled: grayscale(1) opacity(0.5);
-    --ram-icon-filter-main-color: var(--ram-icon-filter-blue);
-    --ram-icon-filter-variable-color: var(--ram-icon-filter-blue);
+@font-face {
+    font-family: 'icoram';
+    src: url('../webfonts/iconfont/icoram.eot?shyzl8');
+    src: url('../webfonts/iconfont/icoram.eot?shyzl8#iefix') format('embedded-opentype'), url('../webfonts/iconfont/icoram.ttf?shyzl8') format('truetype'), url('../webfonts/iconfont/icoram.woff?shyzl8') format('woff'), url('../webfonts/iconfont/icoram.svg?shyzl8#icoram') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
 }
 
 .ram_icon {
-    width: 15px;
-    height: 15px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    display: inline-block;
-    cursor: pointer;
+    --eclipse_8-color: #0064ff;
+    --tte_combo-color: #87d23d;
+    --iris_panel-color: #ff484b;
+    --ram-icon-white: white;
+    --ram-icon-light-blue: #66a3ff;
+    --ram-icon-black: black;
+    --ram-icon-disabled: grayscale(1) opacity(0.5);
+    --ram-icon-main-color: var(--eclipse_8-color);
+    --ram-icon-variable-color: var(--eclipse_8-color);
+}
+
+i.ram_icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    display: inline-table;
+    font-family: 'icoram' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 15px;
+    line-height: 1;
     vertical-align: middle;
-    min-width: 10%; /*added lately*/
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .ram_icon.x14 {
@@ -26,90 +40,114 @@
     height: 1.4rem;
 }
 
-.ram_icon.toggle.open {
-    background-image: url(../images/icons/25-show.svg);
-}
-.ram_icon.toggle {
-    background-image: url(../images/icons/20-hide.svg);
-}
-.ram_icon.scan {
-    background-image: url(../images/icons/01-scan.svg);
-}
-.ram_icon.file {
-    background-image: url(../images/icons/02-file.svg);
-}
-.ram_icon.edit {
-    background-image: url(../images/icons/03-edit.svg);
-}
-.ram_icon.bell {
-    background-image: url(../images/icons/04-bell.svg);
-}
-.ram_icon.signall {
-    background-image: url(../images/icons/05-signall.svg);
-}
-.ram_icon.fireicon {
-    background-image: url(../images/icons/06-fire.svg);
-}
-.ram_icon.access_codes {
-    background-image: url(../images/icons/07-access-codes.svg);
-}
-.ram_icon.network {
-    background-image: url(../images/icons/08-network.svg);
-}
-.ram_icon.panels {
-    background-image: url(../images/icons/09-panels.svg);
-}
-.ram_icon.inputs {
-    background-image: url(../images/icons/10-inputs.svg);
-}
-.ram_icon.input_groups {
-    background-image: url(../images/icons/11-input-groups.svg);
-}
-.ram_icon.outputs {
-    background-image: url(../images/icons/12-outputs.svg);
-}
-.ram_icon.fat_fbf {
-    background-image: url(../images/icons/13-fat-fbf.svg);
-}
-.ram_icon.zones {
-    background-image: url(../images/icons/14-zones.svg);
-}
-.ram_icon.peripheral_devices {
-    background-image: url(../images/icons/15-peripheral-devices.svg);
-}
-.ram_icon.loop_devices {
-    background-image: url(../images/icons/16-loop-devices.svg);
-}
-.ram_icon.zones {
-    background-image: url(../images/icons/14-zones.svg);
-}
-.ram_icon.settings {
-    background-image: url(../images/icons/17-settings.svg);
-}
-.ram_icon.help {
-    background-image: url(../images/icons/18-help.svg);
-}
-.ram_icon.logout {
-    background-image: url(../images/icons/19-log-out.svg);
-}
-.ram_icon.hide {
-    background-image: url(../images/icons/20-hide.svg);
-}
-.ram_icon.sensor_iris {
-    background-image: url(../images/icons/21-sensor-iris.svg);
-}
-.ram_icon.arrow_left {
-    background-image: url(../images/icons/23-arrow-left.svg);
-}
-.ram_icon.arrow_right {
-    background-image: url(../images/icons/24-arrow-right.svg);
-}
-.ram_icon.add_device {
-    background-image: url(../images/icons/22-add-device.svg);
-}
+    .ram_icon.toggle:before {
+        content: "\e915";
+    }
+
+    .ram_icon.toggle.open:before {
+        content: "\e916";
+    }
+
+    .ram_icon.scan:before {
+        content: "\e900";
+    }
+
+    .ram_icon.file:before {
+        content: "\e901";
+    }
+
+    .ram_icon.edit:before {
+        content: "\e902";
+    }
+    .ram_icon.settings:before {
+        content: "\e903";
+    }
+
+    .ram_icon.help:before {
+        content: "\e904";
+    }
+    .ram_icon.logout:before {
+        content: "\e905";
+    }
+    .ram_icon.bell:before {
+        content: "\e906";
+    }
+
+    .ram_icon.signall:before {
+        content: "\e907";
+    }
+
+    .ram_icon.fireicon:before {
+        content: "\e908";
+    }
+    .ram_icon.access_codes:before {
+        content: "\e909";
+    }
+
+    .ram_icon.network:before {
+        content: "\e90a";
+    }
+
+    .ram_icon.panels:before {
+        content: "\e90b";
+    }
+    .ram_icon.inputs:before {
+        content: "\e90c";
+    }
+
+    .ram_icon.input_groups:before {
+        content: "\e90e";
+    }
+    .ram_icon.outputs:before {
+        content: "\e90d";
+    }
+    .ram_icon.fat_fbf:before {
+        content: "\e90c";
+    }
+
+    .ram_icon.zones:before {
+        content: "\e90f";
+        padding-left: 1px;
+    }
+
+    .ram_icon.peripheral_devices:before {
+        content: "\e910";
+    }
+
+    .ram_icon.loop_devices:before {
+        content: "\e911";
+    }
+
+    .ram_icon.hide:before {
+        content: "\e915";
+    }
+    .ram_icon.sensor_iris:before {
+        content: "\e912";
+    }
+
+    .ram_icon.arrow_left:before {
+        content: "\e913";
+    }
+
+    .ram_icon.arrow_right:before {
+        content: "\e914";
+    }
+    .ram_icon.add_device:before {
+        content: "\e917";
+    }
+    .ram_icon.show:before {
+        content: "\e916";
+    }
+    .ram_icon.burger:before {
+        content: "\e919";
+    }
 .ram_icon.minus {
     background-image: url(../images/icons/26-minus.svg);
     border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .ram_icon.rot45 {
@@ -117,31 +155,38 @@
 }
 
 a .ram_card .ram_icon.bell, a .ram_card .ram_icon.fireicon, a .ram_card .ram_icon.signall {
-    filter: var(--ram-icon-filter-disabled);
+    filter: var(--ram-icon-disabled);
 }
     a .ram_card .ram_icon.bell:hover {
-        filter: var(--ram-icon-filter-blue);
+        color: var(--eclipse_8-color);
+        filter: none;
     }
 
     a .ram_card .ram_icon.fireicon:hover {
-        filter: var(--ram-icon-filter-red);
+        color: var(--iris_panel-color);
+        filter: none;
     }
 
     a .ram_card .ram_icon.signall:hover {
-        filter: var(--ram-icon-filter-green);
+        color: var(--tte_combo-color);
+        filter: none;
     }
 
-.fa-solid.fa-arrows-to-circle,
+.fa-solid.fa-arrows-to-circle {
+    filter: var(--ram-icon-disabled);
+}
+
 .ram_icon:not(.logout) {
-    filter: var(--ram-icon-filter-disabled);
+    color: #818181;
 }
 
 .ram_icon.logout {
-    filter: var(--ram-icon-filter-white);
+    color: var(--ram-icon-white);
+    filter: none;
 }
 
 .ram_icon.toggle:hover {
-    filter: var(--ram-icon-filter-black);
+    color: var(--ram-icon-black);
 }
 
 .ram_card:hover .ram_icon,
@@ -149,22 +194,22 @@ a .ram_card .ram_icon.bell, a .ram_card .ram_icon.fireicon, a .ram_card .ram_ico
 .ram_btn:not(.ram_toggle_btn):hover .ram_icon,
 .ram_list_group_item:hover .ram_icon,
 .ram_list_group_item.active .ram_icon {
-    filter: var(--ram-icon-filter-variable-color);
+    color: inherit;
 }
 
 .ram_btn.ram_btn_main:hover .ram_icon,
 .ram_btn.ram_btn_main.active .ram_icon {
-    filter: var(--ram-icon-filter-main-color);
+    color: var(--ram-icon-main-color);
 }
 
 
 #ram_sidebar .ram_show_panel_add .ram_icon {
-    filter: var(--ram-icon-filter-main-color);
+    color: var(--ram-icon-main-color);
 }
 
 #ram_sidebar .ram_show_panel_add:hover .ram_icon,
 #ram_sidebar .ram_show_panel_add.active .ram_icon {
-    filter: var(--ram-icon-filter-light-blue);
+    color: var(--ram-icon-light-blue);
 }
 
 .ram_rot_btn {

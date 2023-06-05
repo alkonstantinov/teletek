@@ -1297,6 +1297,7 @@ namespace ljson
         private static void RemoveRepeaterSimpoElements(JObject json)
         {
             JObject elements = (JObject)json["ELEMENTS"];
+            if (elements["SIMPO_PANELS_R"] == null) return;
             if (elements["SIMPO_GENERAL_SETTINGS_R"] != null) elements.Remove("SIMPO_GENERAL_SETTINGS_R");
             if (elements["SIMPO_ACCESSCODE_R"] != null) elements.Remove("SIMPO_ACCESSCODE_R");
             if (elements["SIMPO_PANELSETTINGS_R"] != null) elements.Remove("SIMPO_PANELSETTINGS_R");

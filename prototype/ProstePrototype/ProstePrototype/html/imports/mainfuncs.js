@@ -109,7 +109,7 @@ function receiveMessageWPF(jsonTxt) {
             let button = document.getElementById('buttons');
             button.insertAdjacentHTML(
                 'beforeend',
-                `<button type="button" id="_btn" class="btn ram_btn btn_white ${BUTTON_COLORS[color]}" onclick="javascript: showPanelAdd();">
+                `<button type="button" id="_btn" class="btn ram_btn btn_white ${BUTTON_COLORS[color]}" onclick="javascript: showPanelAdd();" title="${newT.t(localStorage.getItem('lang'), 'add_new_device')}">
                     <i class="ram_icon add_device"></i>
                     <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new_device')}</div>
                 </button>`
@@ -130,7 +130,7 @@ function receiveMessageWPF(jsonTxt) {
             let button1 = document.getElementById('buttons');
             button1.insertAdjacentHTML(
                 'beforeend',
-                `<button type="button" id="_btn" class="btn ram_btn btn_white ${BUTTON_COLORS[color]}" onclick="javascript: loopFunc();">
+                `<button type="button" id="_btn" class="btn ram_btn btn_white ${BUTTON_COLORS[color]}" onclick="javascript: loopFunc();" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${newT.t(localStorage.getItem('lang'), 'loop')}">
                     <i class="ram_icon add_device"></i>
                     <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${newT.t(localStorage.getItem('lang'), 'loop')}</div>
                 </button>`
@@ -241,7 +241,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                 if (!k.toUpperCase().includes("PANEL")) { 
                     btnDiv.insertAdjacentHTML(
                         'afterbegin',
-                        `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn">
+                        `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}">
                             <i class="ram_icon add_device"></i>
                             <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}</div>
                         </button>`);
@@ -394,7 +394,7 @@ function getZoneDevices(elementNumber) {
     if (!calculateDevices)
         el.insertAdjacentHTML(
             'afterbegin',
-            `<button class='btn ram_btn btn_white' onclick='javacript: calculateZoneDevices(${elementNumber})' id='calculateDevices'
+            `<button class='btn ram_btn btn_white fire' onclick='javacript: calculateZoneDevices(${elementNumber})' id='calculateDevices'
                 data-bs-toggle='modal' data-bs-target='#showDevicesListModal'>
                 <i class="ram_icon loop_devices"></i>
                 <div class='ram_btn_title'>
@@ -1260,7 +1260,7 @@ const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, leng
                     ${lengthData ? `length="${lengthData}"` : ""} 
                     ${readOnly ? "disabled" : ''}
                     ${checked ? "checked" : ''}
-                    onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')" />
+                    onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}', this.id)" />
                 <label for="${input_id}" class="form-check-label">${input_name}</label>
             </div>`
             /*old style: <div class="form-item roww">
@@ -1292,7 +1292,7 @@ const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, nov
                             ${lengthData ? `length="${lengthData}"` : ""} 
                             ${readOnly ? "disabled" : ''} 
                             ${checked ? "checked" : ''} 
-                            onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')"/>
+                            onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}', this.id)"/>
                         <span class="slider"></span>
                     </label>
                     ${input_name_on}
@@ -1574,7 +1574,7 @@ function changeStyleDisplay(goToId, id) {
 
 function addActive(doc = 'ram_panel_1') {
     $(`#${doc}`).on('click', '.ram_card', function () {
-        $('.ram_card').removeClass('active');// here remove class active from all btnStyle fire
+        $(`#${doc}`).find('.ram_card').removeClass('active');// here remove class active from all btnStyle fire
         $(this).addClass('active');// here apply selected class on clicked btnStyle fire
     });
 }
@@ -1742,7 +1742,10 @@ async function createElementButton(last, elementType) {
 }
 
 //#region Input Group Handlers
-function inputGroupHandler(checked, trueValue, falseValue, path) {
+function inputGroupHandler(checked, trueValue, falseValue, path, id) {
+    const checkbox = document.getElementById(id);
+    if (checked) checkbox.setAttribute('checked', true);
+    else checkbox.removeAttribute('checked');
     path = path.replaceAll("§", "'");
     let newValue = checked ? trueValue : falseValue;
     sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `${path}`, 'newValue': newValue } })
@@ -1769,7 +1772,7 @@ async function inputGroupTextGenerator(last, elementType) {
                                     <label class="switch">
                                         <input type="checkbox" id="gr_input_logic_${last}"
                                                 ${isChecked ? "checked" : ""}
-                                                onchange="javascript: inputGroupHandler(this.checked, ${currentJSON["ITEMS"]["ITEM"][1]["@VALUE"]}, ${currentJSON["ITEMS"]["ITEM"][0]["@VALUE"]}, '${currentJSON["~path"]}' );"/>
+                                                onchange="javascript: inputGroupHandler(this.checked, ${currentJSON["ITEMS"]["ITEM"][1]["@VALUE"]}, ${currentJSON["ITEMS"]["ITEM"][0]["@VALUE"]}, '${currentJSON["~path"]}', this.id);"/>
                                         <span class="slider"></span>
                                     </label>
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}

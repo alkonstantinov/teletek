@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Text;
 using Newtonsoft.Json;
 using System.Xml;
+using System.Diagnostics;
 
 namespace ProstePrototype
 {
@@ -103,7 +104,7 @@ namespace ProstePrototype
             wb2.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
             wb2.JavascriptObjectRepository.Register("boundAsync", new CallbackObjectForJs(), options: BindingOptions.DefaultBinder);
 
-            define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
+            //define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA")); valid for fa_solid font
             loadWb1 = true;
 
         }
@@ -111,16 +112,6 @@ namespace ProstePrototype
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
-        }
-        
-        private void MouseEnter_func_log_out(object sender, MouseEventArgs e)
-        {
-            log_out_img.Source = new BitmapImage(new Uri("Images/19-log-out-blue.png", UriKind.Relative));
-        }
-
-        private void MouseOut_func_log_out(object sender, MouseEventArgs e)
-        {
-            log_out_img.Source = new BitmapImage(new Uri("Images/19-log-out.png", UriKind.Relative));
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -132,6 +123,104 @@ namespace ProstePrototype
         {
             rw.Hide();
         }
+
+        #region MainButtons MouseEnter-MouseLeave
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                string imageName = null;
+                switch (button.Name)
+                {
+                    case "scan_btn":
+                        imageName = "scan_icon";
+                        break;
+                    case "filePanel":
+                        imageName = "file_icon";
+                        break;
+                    case "write_hidden_btn":
+                        imageName = "edit_hidden_icon";
+                        break;
+                    case "write_btn":
+                        imageName = "edit_icon";
+                        break;
+                    case "settings_hidden_btn":
+                        imageName = "settings_hidden_icon";
+                        break;
+                    case "settings_btn":
+                        imageName = "settings_icon";
+                        break;
+                    case "help_btn":
+                        imageName = "help_icon";
+                        break;
+                    case "exit_btn":
+                        imageName = "log_out_img";
+                        break;
+                }
+
+                if (imageName != null)
+                {
+                    var image = button.FindName(imageName) as TextBlock;
+                    if (image != null)
+                    {
+                        image.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0064FF"));
+                    }
+                }
+            }
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                string imageName = null;
+                switch (button.Name)
+                {
+                    case "scan_btn":
+                        imageName = "scan_icon";
+                        break;
+                    case "filePanel":
+                        imageName = "file_icon";
+                        break;
+                    case "write_hidden_btn":
+                        imageName = "edit_hidden_icon";
+                        break;
+                    case "write_btn":
+                        imageName = "edit_icon";
+                        break;
+                    case "settings_hidden_btn":
+                        imageName = "settings_hidden_icon";
+                        break;
+                    case "settings_btn":
+                        imageName = "settings_icon";
+                        break;
+                    case "help_btn":
+                        imageName = "help_icon";
+                        break;
+                    case "exit_btn":
+                        imageName = "log_out_img";
+                        break;
+                }
+
+                if (imageName != null)
+                {
+                    var image = button.FindName(imageName) as TextBlock;
+                    if (image != null)
+                    {
+                        if (button.Name == "exit_btn")
+                        {
+                            image.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White")); 
+                        } else
+                        {
+                            image.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#818181"));
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
 
         #region theme
         public void ChangeTheme_Click(object param)
@@ -456,7 +545,11 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 initBreadCrumbs(
-                    pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>(),
+                    pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>(), // takes the respective pages ["breadcrumbs"]
+                    (string)pages[_clean_key].Value<JObject>()["right"].Value<string>().Split("/")[0] // get the directory source to define the color type
+                    );
+                addLastBreadCrumb(
+                    _clean_key,
                     (string)pages[_clean_key].Value<JObject>()["right"].Value<string>().Split("/")[0] // get the directory source to define the color type
                     );
             });
@@ -544,7 +637,7 @@ namespace ProstePrototype
         }
         #endregion
 
-        #region mainDropdownMenusButtonsClicked
+        #region mainButtonsClicked
 
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
@@ -787,36 +880,84 @@ namespace ProstePrototype
         #endregion
 
         #region breadcrumb
+
+        private void addLastBreadCrumb(string page, string panel_type)
+        {
+            string color = "Blue";
+            if (panel_type.ToLower().StartsWith("iris")) color = "Red";
+            else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
+
+            string title = pages[page].Value<JObject>()["title"].Value<string>();
+            string icon = pages[page].Value<JObject>()["icon"].Value<string>();
+
+            var lastBreadCrumb = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                Children = {
+                    new TextBlock()
+                    {
+                        Text = " \ue914 ",
+                        FontFamily = (FontFamily)Application.Current.Resources["ram_icons"],
+                        FontSize = 10,
+                        Padding = new Thickness(0, 4, 0, 0),
+                        Foreground = DarkMode
+                            ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
+                            : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B5B5B5"))
+                    },
+                    new TextBlock()
+                    {
+                        Text = icon + " ",
+                        FontFamily = (FontFamily)Application.Current.Resources["ram_icons"],
+                        VerticalAlignment = VerticalAlignment.Center,
+                        FontSize = 14,
+                        Foreground = DarkMode
+                            ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
+                            : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color))
+                    },
+                    new TextBlock() {
+                        Text = title,
+                        Background = Brushes.Transparent,
+                        Foreground = DarkMode
+                            ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
+                            : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color))
+                    }
+                }
+            };
+
+            lvBreadCrumbs.Items.Add(lastBreadCrumb);
+        }
+
         private void addBreadCrumb(string title, string page, string color)
         {
-            foreach (var item in lvBreadCrumbs.Items)
-            {
-                ((Button)item).Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
-            }
+            var DefaultForeground = DarkMode
+                ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
+                : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B5B5B5"));
+
+            var OnHoverForeground = DarkMode
+                ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
+                : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
 
             var btn = new Button()
             {
+                OverridesDefaultStyle = true,
                 ClickMode = ClickMode.Press,
                 Tag = page,
                 Background = Brushes.Transparent,
-                Foreground = DarkMode
-                    ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"))
-                    : new SolidColorBrush((Color)ColorConverter.ConvertFromString(color)),
-                BorderBrush = Brushes.Transparent
-
+                BorderBrush = Brushes.Transparent,
+                Cursor = Cursors.Hand
             };
 
-            string text1 = "> ", text2 = "", text3 = title;
+            string text1 = " \ue914", text2 = " ", text3 = title;
             switch (page)
             {
                 case "iris":
-                    text2 = "\uef55 ";
+                    text2 = " \ue908 ";
                     break;
                 case "tte":
-                    text2 = "\ue63e ";
+                    text2 = " \ue907 ";
                     break;
                 case "eclipse":
-                    text2 = "\ue7f4 ";
+                    text2 = " \ue906 ";
                     break;
                 case "index":
                     text1 = "";
@@ -831,14 +972,17 @@ namespace ProstePrototype
                     new TextBlock()
                     {
                         Text = text1,
-                        FontFamily = (FontFamily)Application.Current.Resources["poppins_demibold"]
+                        FontFamily = (FontFamily)Application.Current.Resources["ram_icons"],
+                        FontSize = 10,
+                        Padding = new Thickness(0, 4, 0, 0) //,
+                        //Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B5B5B5"))
                     },
                     new TextBlock()
                     {
                         Text = text2,
-                        FontFamily = (FontFamily)Application.Current.Resources["material_icons"],
+                        FontFamily = (FontFamily)Application.Current.Resources["ram_icons"],
                         VerticalAlignment = VerticalAlignment.Center,
-                        FontSize = 10
+                        FontSize = 14
                     },
                     new TextBlock()
                     {
@@ -848,6 +992,21 @@ namespace ProstePrototype
                 }
             };
             btn.Click += breadCrumbItemClick;
+
+            var style = new Style(typeof(Button));
+            style.Setters.Add(new Setter(Button.BackgroundProperty, Brushes.Transparent));
+            style.Setters.Add(new Setter(Button.ForegroundProperty, DefaultForeground));
+            var template = new ControlTemplate(typeof(Button));
+            var borderFactory = new FrameworkElementFactory(typeof(Border));
+            borderFactory.SetValue(Border.BackgroundProperty, new TemplateBindingExtension(Border.BackgroundProperty));
+            borderFactory.AppendChild(new FrameworkElementFactory(typeof(ContentPresenter)));
+            template.VisualTree = borderFactory;
+            style.Setters.Add(new Setter(Control.TemplateProperty, template));
+
+            var trigger = new Trigger { Property = Button.IsMouseOverProperty, Value = true };
+            trigger.Setters.Add(new Setter(Button.ForegroundProperty, OnHoverForeground));
+            style.Triggers.Add(trigger);
+            btn.Style = style;
 
             lvBreadCrumbs.Items.Add(btn);
         }
@@ -868,6 +1027,7 @@ namespace ProstePrototype
             {
                 string title = pages[item].Value<JObject>()["title"].Value<string>();
                 addBreadCrumb(title, item, color);
+                //addBreadCrumb(title, item);
             }
         }
         #endregion
@@ -900,10 +1060,10 @@ namespace ProstePrototype
 
         private void wb1Size_Click(object sender, RoutedEventArgs e)
         {
-            define_size_txt.Text =
-                (define_size_txt.Text) == Encoding.UTF8.GetString(Convert.FromBase64String("74SA")) ?
-                Encoding.UTF8.GetString(Convert.FromBase64String("74SB")) :
-                Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
+            //define_size_txt.Text = // valid for fa_solid font
+            //    (define_size_txt.Text) == Encoding.UTF8.GetString(Convert.FromBase64String("74SA")) ?
+            //    Encoding.UTF8.GetString(Convert.FromBase64String("74SB")) :
+            //    Encoding.UTF8.GetString(Convert.FromBase64String("74SA"));
 
             this.Dispatcher.Invoke(() =>
             {

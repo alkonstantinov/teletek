@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="html\imports\images\icons\01-scan.png" />
+    <None Remove="html\imports\images\icons\02-file.png" />
+    <None Remove="html\imports\images\icons\03-edit.png" />
+    <None Remove="html\imports\images\icons\17-settings.png" />
+    <None Remove="html\imports\images\icons\18-help.png" />
+    <None Remove="html\imports\images\icons\19-log-out.png" />
     <None Remove="html\imports\webfonts\fa-brands-400.ttf" />
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
     <None Remove="html\imports\webfonts\fa-v4compatibility.ttf" />
     <None Remove="html\imports\webfonts\iconfont\gridview2x.png" />
+    <None Remove="html\imports\webfonts\iconfont\icoram.ttf" />
     <None Remove="html\imports\webfonts\iconfont\listview2x.png" />
     <None Remove="html\imports\webfonts\iconfont\MaterialIcons-Regular.ttf" />
     <None Remove="html\imports\webfonts\Poppins\Poppins-Bold.ttf" />
@@ -19,8 +26,6 @@
     <None Remove="html\imports\webfonts\Poppins\Poppins-Regular.ttf" />
     <None Remove="html\imports\webfonts\Poppins\Poppins-SemiBold.ttf" />
     <None Remove="Images\01.IRIS.ico" />
-    <None Remove="Images\19-log-out-blue.png" />
-    <None Remove="Images\19-log-out.png" />
     <None Remove="Images\Addressables-resized.png" />
     <None Remove="Images\convectional_5-resized.png" />
     <None Remove="Images\de.png" />
@@ -37,6 +42,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="html\imports\images\icons\01-scan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\icons\02-file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\icons\03-edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\icons\17-settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\icons\18-help.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\icons\19-log-out.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="html\imports\webfonts\fa-brands-400.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -50,6 +73,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="html\imports\webfonts\iconfont\gridview2x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\webfonts\iconfont\icoram.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="html\imports\webfonts\iconfont\listview2x.png">
@@ -71,12 +97,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\01.IRIS.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\19-log-out-blue.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\19-log-out.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Addressables-resized.png">
@@ -483,19 +503,10 @@
     <None Update="html\imports\images\checkbox_check.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="html\imports\images\icons\01-scan.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="html\imports\images\icons\01-scan.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="html\imports\images\icons\02-file.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="html\imports\images\icons\02-file.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="html\imports\images\icons\03-edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\images\icons\03-edit.svg">
@@ -579,22 +590,13 @@
     <None Update="html\imports\images\icons\16-loop-devices.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="html\imports\images\icons\17-settings.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="html\imports\images\icons\17-settings.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="html\imports\images\icons\18-help.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\images\icons\18-help.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\images\icons\19-log-out-white.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="html\imports\images\icons\19-log-out.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\images\icons\19-log-out.svg">
@@ -663,6 +665,90 @@
     <None Update="html\imports\images\number_input_plus.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="html\imports\images\pics\BSOU.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\BSST.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\CSOU+VAD_RST.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\CSOU+VAD_WST.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\CSOU.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\CSST.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\GAS.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\IRIS.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\iRIS4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\iRIS8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\M140.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\MCP150.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\MIMIC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\MiniOUT.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\MINP_M.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\MIO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\NATRON_MD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\NATRON_SD+TD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\NATRON_WE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\NATRON_WSS.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\Repeater.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\Repeater_TFT.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\S110+S130.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\SIMPO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\System_Sensor_Loop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\Teletek_Loop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\WSOU.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\images\pics\WSST.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="html\imports\images\sensoiris-mio04.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -704,6 +790,12 @@
     </None>
     <None Update="html\imports\webfonts\fa-v4compatibility.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\iconfont\icoram.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="html\imports\webfonts\iconfont\icoram.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="html\imports\webfonts\iconfont\MaterialIcons-Outlined.woff2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

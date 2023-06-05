@@ -412,7 +412,7 @@ function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
                   id="list-${k}"
                   onclick="javascript: addLoop('${k}'); hidePanelAdd();">
                 <div class="ram_card_img">
-                    <img src="../imports/images/icons/16-loop-devices.png" alt="${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop">
+                    <img src="${BUTTON_IMAGES[k.includes("TTE") ? "TTELOOP" : "LOOP"].im}" alt="${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop">
                 </div>
                 <div class="ram_card_body">
                     <h5 class="ram_card_title">${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop</h5>
@@ -437,10 +437,13 @@ function addLoop(loopType, newFlag = "new") {
 
     let color = Object.keys(BUTTON_COLORS).find(c => loopType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => loopType.toUpperCase().includes(im));
-    
-    const newLoop = `<div id=${loopType} class="ram_card ${BUTTON_COLORS[color]}" onclick="javascript:showLoop('${last}', '${loopType}'); addActive(); hidePanelAdd();">
+
+    let img = BUTTON_IMAGES[elType].im.split('.').pop().length === 3
+        ? `<img src="${BUTTON_IMAGES[elType].im}" alt="${BUTTON_IMAGES[elType].sign}">`
+        : `<i class="ram_icon ${BUTTON_IMAGES[elType].im}"></i>`;
+    const newLoop = `<div id=${loopType} class="ram_card ${BUTTON_COLORS[color]}" onclick="javascript:showLoop('${last}', '${loopType}'); addActive('ram_panel_1'); hidePanelAdd(); document.getElementById('selected_area').innerHTML = '';">
                         <div class="ram_card_img">
-                            <i class="ram_icon ${BUTTON_IMAGES[elType].im}"></i>
+                            ${img}
                         </div>
                         <div class="ram_card_body">
                             <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign} ${last}</h5>
@@ -492,13 +495,16 @@ function showLoop(loopNumber, loopType) {
     deviceNmbr = attachedDevicesList.length;
     //resizer2.innerHTML = '';
     resizer2.classList = 'ram_panel ram_resizable ram_animate';
+    let btnTitle = `${new T().t(localStorage.getItem('lang'), "add_new")} ${loopType.includes("TTE") ? new T().t(localStorage.getItem('lang'), "device_in_loop") : new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}`;
     resizer2.insertAdjacentHTML('beforeend',
-        `<div class="ram_settings middle"><button class="btn ram_btn btn_white" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices" data-bs-toggle="modal" data-bs-target="#showDevicesListModal">
+        `<div class="ram_settings middle">
+            <button class="btn ram_btn btn_white fire" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices" data-bs-toggle="modal" data-bs-target="#showDevicesListModal" title="${new T().t(localStorage.getItem('lang'), "number_of_devices")}">
                 <i class="ram_icon loop_devices"></i>
                 <div class="ram_btn_title">
                     ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
                 </div>
-        </button></div>
+            </button>
+        </div>
         <div class="ram_panel_content">
             <div id="new_devices" class="ram_cards">
 
@@ -506,11 +512,9 @@ function showLoop(loopNumber, loopType) {
         </div>
         <div class="ram_fixed_bottom">
             <div class="ram_settings" id="buttons_devices">
-                <button class="btn ram_btn btn_white fire" onclick="javascript:loopElementFunc(${loopNumber}, '${loopType}'); showPanelAdd();" id="_btn_devices">
+                <button class="btn ram_btn btn_white fire" onclick="javascript:loopElementFunc(${loopNumber}, '${loopType}'); showPanelAdd();" id="_btn_devices" title="${btnTitle}">
                     <i class="ram_icon add_device"></i>
-                    <div class="ram_btn_title">${new T().t(localStorage.getItem('lang'), "add_new")} 
-                    ${loopType.includes("TTE") ? new T().t(localStorage.getItem('lang'), "device_in_loop") : new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} 
-                    ${loopNumber}</div>
+                    <div class="ram_btn_title">${btnTitle}</div>
                 </button>
             </div>
             <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this, 2);">
@@ -524,93 +528,6 @@ function showLoop(loopNumber, loopType) {
 
     old_resizer2.replaceWith(resizer2);
     resizingPanels(); // update the resizers capability
-    //let targetTTE = `<div class="row fullHeight">
-    //                <div class="col-3 bl fire scroll">
-    //                    <div id="new_device_${loopType}" class="row">
-    //                        <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices"
-    //                            data-bs-toggle="modal" data-bs-target="#showDevicesListModal" >
-    //                                ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
-    //                        </button>
-    //                    </div>
-    //                </div>
-    //                <div class="col-9" style="z-index: 1;height: fit-content;">
-    //                    <div id="selected_device_${loopType}" style="background: white; margin-right: -1rem">
-
-    //                    </div>
-    //                </div>
-    //            </div>
-
-    //            <div class="modal fade" tabindex="-1" role="dialog" id="${loopType}_modal" aria-hidden="true">
-    //                <div class="modal-dialog" role="document">
-    //                    <div class="modal-content">
-    //                        <div class="row list-group fire justify-content-center" id="list-tab" role="tablist">
-                                                        
-    //                        </div>
-    //                    </div>
-    //                </div>
-    //            </div>
-
-    //            <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
-    //                <button style="display: inline-flex; margin: -3px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;" 
-    //                    data-bs-toggle="modal" data-bs-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
-    //                        <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "device_in_loop")} ${loopNumber}
-    //                </button>
-    //            </div>`;
-
-    //var targetSSL = `<div class="row fullHeight">
-    //                        <div class="col-3 bl fire scroll">
-    //                            <button class="btn-small btn-border-black" onclick="javacript: calculateLoopDevices()" id="calculateDevices"
-    //                                data-bs-toggle="modal" data-bs-target="#showDevicesListModal">
-    //                                    ${new T().t(localStorage.getItem('lang'), "number_of_devices")}: ${deviceNmbr}
-    //                            </button>
-    //                            <p>${new T().t(localStorage.getItem('lang'), "sensors")}</p>
-    //                            <div id="new_sensor_${loopType}" class="row">
-
-    //                            </div>
-    //                            <p>${new T().t(localStorage.getItem('lang'), "modules")}</p>
-    //                            <div id="new_module_${loopType}" class="row">
-
-    //                            </div>
-    //                        </div>
-    //                        <div class="col-9" style="z-index: 1;height: fit-content;">
-    //                            <div id="selected_sensor_${loopType}" style="background: white; margin-right: -1rem">
-
-    //                            </div>
-    //                        </div>
-    //                    </div>
-
-    //                    <div class="modal fade" tabindex="-1" role="dialog" id="${loopType}_modal" aria-hidden="true">
-    //                        <div class="modal-dialog" role="document">
-    //                            <div class="modal-content">
-    //                                <div class="row list-group fire" id="list-tab" role="tablist">
-                                               
-    //                                </div>
-    //                            </div>
-    //                        </div>
-    //                    </div>
-
-    //                    <div style="bottom: 10px; position: absolute;" class="buttons-row mt-5">
-    //                        <button style="display: inline-flex; margin: -5px;" type="button" onclick="javascript: loopElementFunc(${loopNumber}, '${loopType}'); return false;"
-    //                            data-bs-toggle="modal" data-bs-target="#${loopType}_modal" id="btn_${loopType}" class="btn-round btn-border-black">
-    //                                <i class="fa-solid fa-plus 5x"></i> ${new T().t(localStorage.getItem('lang'), "add_new")} ${new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}
-    //                        </button>
-    //                    </div>`;
-
-    //if (loopType.includes("TTE")) {
-    //    el.innerHTML = targetTTE;
-    //} else {
-    //    el.innerHTML = targetSSL;
-    //}
-
-    //var script = document.getElementById("script_modal");
-    //if (!script) {
-    //    script = document.createElement('script');
-    //    script.id = "script_modal";
-    //    document.body.appendChild(script);
-    //}
-    //script.innerHTML = `$("#${loopType}_modal").on('hidden.bs.modal', function () {
-    //        $("#${loopType}_modal").find("#list-tab").empty();
-    //    });`;
 
     fillLoopElements(loopNumber, loopType);
 }
@@ -749,7 +666,7 @@ function calculateLoopDevices(loopNumber) {
 
 //#region UTILS
 function getKey(deviceName) {
-    return Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k));
+    return Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k) && DEVICES_CONSTS[k].type !== 'panel');
 }
 
 function getConfig(deviceName, device = '') {

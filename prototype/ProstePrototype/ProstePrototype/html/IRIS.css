@@ -35,7 +35,7 @@
     url('imports/webfonts/Poppins/poppins-v20-devanagari_latin_latin-ext-800.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-@font-face {
+/*@font-face {
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
@@ -56,16 +56,16 @@
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 1.25em; /* Preferred icon size */
-    display: inline-block;
+    font-size: 1.25em;*/ /* Preferred icon size */
+    /*display: inline-block;
     line-height: 1;
     text-transform: none;
     letter-spacing: normal;
     word-wrap: normal;
     white-space: nowrap;
-    direction: ltr;
+    direction: ltr;*/
     /* Support for all WebKit browsers. */
-    -webkit-font-smoothing: antialiased;
+    /*-webkit-font-smoothing: antialiased;
     margin-right: 0.5em;
 }
 
@@ -84,15 +84,15 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     margin-right: 0.5em;
-}
+}*/
 
 :root {
     --toph: 0;
-    --grasse: #439809;
+    --grasse: #87d23d;
     --grasse-hov: #08893a;
-    --fire: #db3232;
+    --fire: #ff484b;
     --fire-hov: #b4210a;
-    --normal: #1e73be;
+    --normal: #0064ff;
     --normal-hov: #0d91e4;
     --grey: #a4a9ad;
 }
@@ -124,6 +124,7 @@ body {
     font-size: 1rem;
     font-weight: 600;
     background-color: #ffffff;
+    --ram-active-color: #0064ff;
 }
 
 /* debugging*/
@@ -1486,7 +1487,7 @@ input:checked + .slider:before {
         background-color: #DCE4EF;
     }
 
-    .ram_number_input_button_left:active, .ram_number_input_button_right:active {
+    .ram_number_input_button_left.active, .ram_number_input_button_right.active {
         background-color: #005ED8;
     }
 
@@ -1736,3 +1737,12 @@ p:has(label input[type=checkbox].is-valid) ~ .valid-feedback {
     }
 
 /*RAM SCHEDULE END*/
+
+#divDevices .ram_card .ram_card_img {
+    width: 120px;
+    height: 90px;
+}
+    #divDevices .ram_card .ram_card_img .ram_icon {
+        display: initial;
+        font-size: 3em;
+    }

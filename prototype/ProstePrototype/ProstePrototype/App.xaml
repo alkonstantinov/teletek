@@ -8,14 +8,15 @@
         <SolidColorBrush x:Key="DefaultColor" Color="#0c2b90" />
         <SolidColorBrush x:Key="LighterColor" Color="#007bff" />
         <SolidColorBrush x:Key="SideBar_Nav" Color="#EFF5FC" />
-        <FontFamily x:Key="fa_brands">/html/imports/webfonts/fa-brands-400.ttf#Font Awesome 6 Brands Regular</FontFamily>
-        <FontFamily x:Key="fa_regular">/html/imports/webfonts/fa-regular-400.ttf#Font Awesome 6 Free Regular</FontFamily>
+        <!--<FontFamily x:Key="fa_brands">/html/imports/webfonts/fa-brands-400.ttf#Font Awesome 6 Brands Regular</FontFamily>
+        <FontFamily x:Key="fa_regular">/html/imports/webfonts/fa-regular-400.ttf#Font Awesome 6 Free Regular</FontFamily>-->
         <FontFamily x:Key="fa_solid">/html/imports/webfonts/fa-solid-900.ttf#Font Awesome 6 Free Solid</FontFamily>
         <FontFamily x:Key="poppins_light">/html/imports/webfonts/Poppins/Poppins-Light.ttf#Poppins Light</FontFamily>
         <FontFamily x:Key="poppins_regular">/html/imports/webfonts/Poppins/Poppins-Regular.ttf#Poppins</FontFamily>
         <FontFamily x:Key="poppins_demibold">/html/imports/webfonts/Poppins/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
         <FontFamily x:Key="poppins_bold">/html/imports/webfonts/Poppins/Poppins-Bold.ttf#Poppins</FontFamily>
         <FontFamily x:Key="material_icons">/html/imports/webfonts/iconfont/MaterialIcons-Regular.ttf#Material Icons</FontFamily>
+        <FontFamily x:Key="ram_icons">/html/imports/webfonts/iconfont/icoram.ttf#icoram</FontFamily>
         <!--<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />-->
         <Style x:Key="ScrollThumb" TargetType="{x:Type Thumb}">
             <Setter Property="Template">

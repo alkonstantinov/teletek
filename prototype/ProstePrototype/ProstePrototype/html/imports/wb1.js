@@ -200,16 +200,20 @@ const addButton = (title, div, index, localJSON = {}) => {
     }
 
     // title definition
-    var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
+    const titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
+    let img = DEVICES_CONSTS[title].im ? `<img src="${DEVICES_CONSTS[title].im}" alt="${DEVICES_CONSTS[title].sign}">` : `<i class="ram_icon ${CONFIG_CONST[key].picture}"></i>`
     let localJSONString = JSON.stringify(localJSON).replaceAll("\"", "'");
     let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': ${localJSONString}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${index}_${localJSON.schema}">
                 <div class="${color} ram_card">
-                    <i class="${CONFIG_CONST[key].picture.startsWith("fa-") ? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture} p15 m-3"> </i>
-                    <br/>
-                    <h5>
-                        ${titleTranslated}
-                        <span class="h5">${indexFlag ? localJSON.interface : ""}</span>
-                    </h5>
+                    <div class="ram_card_img">
+                        ${img}
+                    </div>
+                    <div class="ram_card_body">
+                        <h5 class="ram_title">
+                            ${titleTranslated}
+                            <span class="h5">${indexFlag ? localJSON.interface : ""}</span>
+                        </h5>      
+                    </div>
                 </div>
             </a>`;
 

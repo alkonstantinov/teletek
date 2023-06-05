@@ -1,7 +1,8 @@
 :root {
     --ram-main-color: #0064ff;
+    --ram-hover-main-color: #66a3ff;
     --ram-box-shadow-red: 0 0 0px 3px #ff2b40;
-    --ram-box-shadow-green: 0 0 0px 3px #bbff00; 
+    --ram-box-shadow-green: 0 0 0px 3px #bbff00;
     --ram-box-shadow-blue: 0 0 0px 3px var(--ram-main-color);
     --ram-icon-color-grey: invert(82%) sepia(0%) saturate(683%) hue-rotate(341deg) brightness(97%) contrast(100%);
     --ram-icon-color-red: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);
@@ -11,6 +12,12 @@
     --ram-panel-2-bg-color: #E1E6ED;
     --ram-panel-add-bg-color: #DAE0E7;
     --fixed-button-max-height: 4.2em;
+    --ram-btn-main-hover-color: #DCE4EF;
+    --ram-btn-light-color: #f5f5f5;
+
+    --eclipse_8-color: #0064ff;
+    --tte_combo-color: #87d23d;
+    --iris_panel-color: #ff484b;
 }
 
 /* SIDEBAR */
@@ -80,17 +87,17 @@
         background-color: #ffffffc7;
     }
     /*modified*/
-    .btn.ram_btn.btn_white.fire:hover .ram_icon{
-        /*filter: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);*/
-        filter: var(--ram-icon-color-red);
-    }
+.btn.ram_btn.btn_white.fire:hover .ram_icon {
+    /*filter: invert(30%) sepia(63%) saturate(4973%) hue-rotate(339deg) brightness(101%) contrast(101%);*/
+    color: var(--iris_panel-color);
+}
     /*added lately*/
     .btn.ram_btn.btn_white.normal:hover .ram_icon {
-        filter: var(--ram-icon-color-blue);
+        color: var(--eclipse_8-color);
     }
     /*added lately*/
     .btn.ram_btn.btn_white.grasse:hover .ram_icon {
-        filter: var(--ram-icon-color-green);
+        color: var(--tte_combo-color);
     }
     /*modified*/
     .ram_btn .ram_btn_title {
@@ -117,22 +124,7 @@
 #ram_sidebar_menu .accordion-button {
     transition: all 0.5s ease;
 }
-/*
-#ram_hamburger_btn {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 0;
-    right: -30px;
-    border-radius: 0 5px 5px 0;
-    background-color: transparent;
-}
 
-#ram_hamburger_btn .ram_icon {
-    width: 15px;
-    height: 15px;
-}
-*/
 #ram_toggle_sidebar {
     position: relative;
 }
@@ -288,20 +280,30 @@
                 margin: 0;
             }
 
-        #ram_sidebar.closed .ram_settings .ram_btn .ram_icon:not(.toggle, .logout),
-        .ram_resizable.closed:not(#ram_panel_add) .ram_settings .ram_btn .ram_icon:not(.toggle) {
-            width: 20px;
-            height: 20px;
-        }
+#ram_sidebar.closed .ram_settings .ram_btn .ram_icon:not(.toggle, .logout),
+.ram_resizable.closed:not(#ram_panel_add) .ram_settings .ram_btn .ram_icon:not(.toggle) {
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
 
-        #ram_sidebar.closed .ram_settings,
-        .ram_resizable.closed:not(#ram_panel_add) .ram_settings {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            background-color: transparent;
-        }
+.ram_resizable.closed:not(.ram_settings) .ram_cards .ram_icon:not(.add_device):not(.edit) {
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#ram_sidebar.closed .ram_settings,
+.ram_resizable.closed:not(#ram_panel_add) .ram_settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+}
 
         #ram_sidebar.closed .ram_btn.ram_sm_hide,
         #ram_sidebar.closed .ram_fixed_top .ram_btn,
@@ -327,63 +329,6 @@
     position: relative;
     max-height: calc(100vh - var(--fixed-button-max-height) - 20px);
 }
-
-    /*OLD STYLE*/
-
-#ram_devices_wrapper {
-    display: flex;
-    box-shadow: inset 2px 0px 6px #c5c5c51a;
-}
-
-#ram_devices_wrapper:last-of-type {
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-}
-
-#ram_devices_wrapper .ram_resizer {
-    z-index: 1000;
-    max-width: 10px;
-    width: 10px;
-    margin-left: -10px;
-    background-color: transparent;
-    box-shadow: 10px 0px 9px #c5c5c538;
-    cursor: col-resize;
-    display: none;
-}
-
-#ram_devices_1 {
-    display: flex;
-    background-color: #E6ECF4;
-}
-
-#ram_devices_2 {
-    display: flex;
-    background-color: #E1E6ED;
-}
-
-#ram_devices_3 {
-    display: flex;
-    background-color: #DAE0E7;
-}
-
-.ram_flex_bottom {
-    display: inline-flex;
-    align-self: flex-end;
-    margin: 0;
-    width: 100%;
-    max-height: 70px;
-}
-    /*modified*/
-    .ram_flex_bottom .ram_settings {
-        display: flex;
-        width: 100%;
-        padding: 15px; /*previously 16px*/
-        padding-right: 5px; /*previously 10px*/
-        justify-content: space-between;
-        align-items: center;
-        min-width: 115px; /*previously 150px*/
-    }
-    /*OLD STYLE END*/
 
     /*NEW STYLE*/
 .ram_panels {
@@ -513,7 +458,7 @@
     .ram_card.fire:hover .fa-solid,
     .ram_card.fire.active .fa-solid {
         /*filter: invert(23%) sepia(99%) saturate(4302%) hue-rotate(352deg) brightness(88%) contrast(132%);*/
-        filter: var(--ram-icon-color-red);
+        color: var(--iris_panel-color);
     }
 
     /*modified*/
@@ -524,7 +469,7 @@
     .ram_card.normal.active .ram_icon,
     .ram_card.normal:hover .fa-solid,
     .ram_card.normal.active .fa-solid {
-        filter: var(--ram-icon-color-blue);
+        color: var(--eclipse_8-color);
     }
 
     /*modified*/
@@ -535,7 +480,7 @@
     .ram_card.grasse.active .ram_icon,
     .ram_card.grasse:hover .fa-solid,
     .ram_card.grasse.active .fa-solid {
-        filter: var(--ram-icon-color-green);
+        color: var(--tte_combo-color);
     }
 
     .ram_card .ram_card_img {
@@ -548,6 +493,12 @@
             height: inherit;
             object-fit: contain;
             filter: grayscale(1) opacity(0.5);
+        }
+
+        .ram_card .ram_card_img .ram_icon,
+        .ram_card .ram_card_img_top .ram_icon {
+            font-size: 34px;
+            cursor: pointer;
         }
 
 .ram_card_title, .ram_btn_title, .ram_list_group_item span, .ram_list_group_item.active span {
@@ -577,7 +528,7 @@
 }
 
 .ram_card:hover img,
-.ram_card:active img {
+.ram_card.active img {
     /*height: 30px;*/
     filter: none;
 }
@@ -681,7 +632,7 @@
     background-color: #f5f5f5;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 5px 5px;
 }
 
 #ram_sidebar .ram_list_group_item {
@@ -704,12 +655,12 @@
 }
 
 #ram_sidebar .ram_list_group_item:hover,
-#ram_sidebar .ram_list_group_item:active {
+#ram_sidebar .ram_list_group_item.active {
     background-color: white;
 }
 
 #ram_sidebar .ram_list_group_item:hover span,
-#ram_sidebar .ram_list_group_item:active span{
+#ram_sidebar .ram_list_group_item.active span{
     color: black;
 }
 /*modified*/
@@ -744,21 +695,21 @@
 #ram_sidebar .accordion-item.normal .ram_list_group_item.active .ram_icon,
 #ram_sidebar .accordion-item.normal .ram_list_group_item:hover .fa-solid,
 #ram_sidebar .accordion-item.normal .ram_list_group_item.active .fa-solid {
-    filter: var(--ram-icon-color-blue);
+    color: var(--eclipse_8-color);
 }
 /*modified*/
 #ram_sidebar .accordion-item.grasse .ram_list_group_item:hover .ram_icon,
 #ram_sidebar .accordion-item.grasse .ram_list_group_item.active .ram_icon,
 #ram_sidebar .accordion-item.grasse .ram_list_group_item:hover .fa-solid,
 #ram_sidebar .accordion-item.grasse .ram_list_group_item.active .fa-solid {
-    filter: var(--ram-icon-color-green);
+    color: var(--tte_combo-color);
 }
 /*modified*/
 #ram_sidebar .accordion-item.fire .ram_list_group_item:hover .ram_icon,
 #ram_sidebar .accordion-item.fire .ram_list_group_item.active .ram_icon,
 #ram_sidebar .accordion-item.fire .ram_list_group_item:hover .fa-solid,
 #ram_sidebar .accordion-item.fire .ram_list_group_item.active .fa-solid {
-    filter: var(--ram-icon-color-red);
+    color: var(--iris_panel-color);
 }
 
 /* Modal */
