@@ -804,11 +804,19 @@ namespace ProstePrototype
             {
                 int tabIdx = rw.selectedIndex;
                 //cTransport t = null;
-                string ip = rw.uc0.Address;
-                int port = rw.uc0.Port;
                 object conn_params = null;
                 if (tabIdx == 0)
+                {
+                    string ip = rw.uc0.Address;
+                    int port = rw.uc0.Port;
                     conn_params = new cIPParams(ip, port);
+                }
+                else if (tabIdx == 1)
+                {
+                    conn_params = rw.uc1.USBDevice;
+                }
+                else if (tabIdx == 3)
+                    conn_params = "read.log";
                 else
                     return;
                 Thread funcThread = new Thread(() => WriteDevice(conn_params, popUpWindow));
