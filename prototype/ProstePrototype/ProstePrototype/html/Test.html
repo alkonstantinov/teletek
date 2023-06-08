@@ -31,15 +31,93 @@
             <div class="accordion" id="ram_sidebar_menu">
 
                 <div class="accordion-item fire">
-                    <h2 class="accordion-header" id="9d68f770_be10_4a57_ac1a_84db5b0fb11a" onclick="javascript: selectNewPanel(this.id, this)" pagetype="iris">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9d68f770_be10_4a57_ac1a_84db5b0fb11a" aria-expanded="true" aria-controls="collapse9d68f770_be10_4a57_ac1a_84db5b0fb11a">
+                    <h2 class="accordion-header" id="aeafbaa5_572a_4174_b736_64c26521d5e2" onclick="javascript: selectNewPanel(this.id, this)" pagetype="iris">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseaeafbaa5_572a_4174_b736_64c26521d5e2" aria-expanded="false" aria-controls="collapseaeafbaa5_572a_4174_b736_64c26521d5e2">
                             <i class="ram_icon fireicon fire"></i> <span class="ram_btn_title">iris</span>
                         </button>
                     </h2>
-                    <div id="collapse9d68f770_be10_4a57_ac1a_84db5b0fb11a" class="accordion-collapse collapse show" aria-labelledby="9d68f770_be10_4a57_ac1a_84db5b0fb11a" data-bs-parent="#ram_sidebar_menu">
+                    <div id="collapseaeafbaa5_572a_4174_b736_64c26521d5e2" class="accordion-collapse collapse" aria-labelledby="aeafbaa5_572a_4174_b736_64c26521d5e2" data-bs-parent="#ram_sidebar_menu">
                         <div class="accordion-body">
                             <ul class="ram_list_group">
-                                <li class="ram_list_group_item active" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'}); addActive()" id="iris_access_code">
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'}); addActive()" id="iris_access_code">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon access_codes"></i>
+                                        <span>Access codes</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_panels_in_network'}); addActive()" id="iris_panels_in_network">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon panels"></i>
+                                        <span>Panels in network</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_network'}); addActive()" id="iris_network">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon network"></i>
+                                        <span>Network</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_inputs'}); addActive()" id="iris_inputs">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon inputs"></i>
+                                        <span>Inputs</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_inputs_group'}); addActive()" id="iris_inputs_group">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon input_groups"></i>
+                                        <span>Input Groups</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_outputs'}); addActive()" id="iris_outputs">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon outputs"></i>
+                                        <span>Output</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_fat_fbf'}); addActive()" id="iris_fat_fbf">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon fat_fbf"></i>
+                                        <span>FAT FBF</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_zones'}); addActive()" id="iris_zones">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon zones"></i>
+                                        <span>Zones</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_evac_zones'}); addActive()" id="iris_evac_zones">
+                                    <div class="ram_list_item_content">
+                                        <i class="fa-solid fa-arrows-to-circle"></i>
+                                        <span>Evac zones</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_peripheral_devices'}); addActive()" id="iris_peripheral_devices">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon peripheral_devices"></i>
+                                        <span>Peripheral devices</span>
+                                    </div>
+                                </li>
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_loop_devices'}); addActive()" id="iris_loop_devices">
+                                    <div class="ram_list_item_content">
+                                        <i class="ram_icon loop_devices"></i>
+                                        <span>Loop devices</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><div class="accordion-item fire">
+                    <h2 class="accordion-header" id="102850d9_2ea5_47db_b4ee_93426c2c9072" onclick="javascript: selectNewPanel(this.id, this)" pagetype="iris">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse102850d9_2ea5_47db_b4ee_93426c2c9072" aria-expanded="true" aria-controls="collapse102850d9_2ea5_47db_b4ee_93426c2c9072">
+                            <i class="ram_icon fireicon fire"></i> <span class="ram_btn_title">iris</span>
+                        </button>
+                    </h2>
+                    <div id="collapse102850d9_2ea5_47db_b4ee_93426c2c9072" class="accordion-collapse collapse show" aria-labelledby="102850d9_2ea5_47db_b4ee_93426c2c9072" data-bs-parent="#ram_sidebar_menu">
+                        <div class="accordion-body">
+                            <ul class="ram_list_group">
+                                <li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': 'iris_access_code'}); addActive()" id="iris_access_code">
                                     <div class="ram_list_item_content">
                                         <i class="ram_icon access_codes"></i>
                                         <span>Access codes</span>
@@ -112,7 +190,7 @@
             </div>
             <!--</div>-->
         </div>
-        <menu type="context" id="ctxMenu" style="width: fit-content;">
+        <menu type="context" id="ctxMenu" style="width: fit-content; display: none; left: 62px; top: 28px;" element="aeafbaa5_572a_4174_b736_64c26521d5e2" class="fire">
             <menuitem title="Read" topic="Read" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-book-open pr-1"></i>&nbsp;</menuitem>
             <menuitem title="Rename" topic="Rename" onclick="javascript: sendMsg(this)"><i class="fa-solid fa-pen pr-1"></i>&nbsp;</menuitem>
             <menuitem title="Delete" topic="Delete" onclick="javascript: sendMsg(this)"><i class="fa-regular fa-trash-can pr-1"></i>&nbsp;</menuitem>

@@ -597,6 +597,13 @@ namespace ProstePrototype
             else
             {
                 OnStateChanged(wb1, new LoadingStateChangedEventArgs(new object() as IBrowser, false, false, false));
+                if (!string.IsNullOrEmpty(highlight))
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        wb1.ExecuteScriptAsync("highlighting", new object[] { highlight });
+                    });
+                }
             }
 
             var wb2UrlAddress = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", data.RightBrowserUrl);
@@ -704,16 +711,17 @@ namespace ProstePrototype
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
-                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
-                //
-                cTDFParams conn = new cTDFParams();
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
-                conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
-                conn.readcfg = cJson.ReadXML();
-                conn.template = cJson.TemplateXML();
-                ReadDevice(conn, popUpWindow);
-                //    txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
+                //ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                ////
+                //cTDFParams conn = new cTDFParams();
+                //XmlDocument doc = new XmlDocument();
+                //doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
+                //conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
+                //conn.readcfg = cJson.ReadXML();
+                //conn.template = cJson.TemplateXML();
+                //ReadDevice(conn, popUpWindow);
+                ////    txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
+                cJson.LoadFile(openFileDialog.FileName);
             }
         }
         private void Export_Clicked(object sender, RoutedEventArgs e)
@@ -759,7 +767,7 @@ namespace ProstePrototype
             settings.changeTheme(DarkMode);
             settings.ShowDialog();
         }
-        private void New_Clicked(object sender, RoutedEventArgs e)
+        private void NewSystem_Clicked(object sender, RoutedEventArgs e)
         {
             string index = "index-automatic.html";
 
@@ -767,6 +775,31 @@ namespace ProstePrototype
             string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
 
             //wb1.Load("file:///" + firstFile); // firstFile should be the old content of wb1 - so nothing new
+            wb1.Load("about:blank");
+            loadWb1 = true;
+            this.Dispatcher.Invoke(() =>
+            {
+                JObject jparam = new JObject();
+                jparam["pageName"] = new JObject();
+                JToken arr = lcommunicate.cComm.Scan();
+                jparam["pageName"]["wb2"] = arr;
+                ((BrowserParams)wb2.Tag).Params = jparam.ToString();
+                //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";rw.Resources
+            });
+            wb2.Load("file:///" + myFile);
+
+            lvBreadCrumbs.Items.Clear();
+
+            AddPagesConstant();
+            ApplyTheme();
+            ApplyLang(languageButton.CurrentLanguage);
+        }
+        private void New_Clicked(object sender, RoutedEventArgs e)
+        {
+            string index = "index-automatic.html";
+
+            string myFile = System.IO.Path.Combine(applicationDirectory, "html", index);
+
             this.Dispatcher.Invoke(() =>
             {
                 JObject jparam = new JObject();

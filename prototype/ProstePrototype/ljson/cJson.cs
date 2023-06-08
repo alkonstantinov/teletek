@@ -413,8 +413,9 @@ namespace ljson
         {
             JObject data = Data2Save();
         }
-        public static void LoadFile(string filename)
+        public static JArray LoadFile(string filename)
         {
+            return PanelsInLeftBrowser();
         }
         #endregion
 
@@ -2085,8 +2086,8 @@ namespace ljson
         {
             string filename = FilePathFromSchema(jSys["schema"].ToString());
             JObject _panel = GetPanelTemplate(filename);
-            if (_panel != null)
-                return (JObject)_panel["ELEMENTS"][jSys["schema"].ToString()];
+            //if (_panel != null)
+            //    return (JObject)_panel["ELEMENTS"][jSys["schema"].ToString()];
             Monitor.Enter(_cs_current_panel);
             Monitor.Enter(_cs_panel_templates);
             Monitor.Enter(_cs_main_content_key);

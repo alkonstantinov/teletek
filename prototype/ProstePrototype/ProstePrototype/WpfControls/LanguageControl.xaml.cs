@@ -125,7 +125,8 @@ namespace ProstePrototype.WpfControls
             {
                 var languageClass = control.Languages[languageCode];
                 control.iconImage.ImageSource = new BitmapImage(new Uri(languageClass.IconPath, UriKind.RelativeOrAbsolute));
-                control.language= languageCode;
+                control.language = languageCode;
+                control.ToolTip = languageClass.Name;
                 control.SetRessourceDictionary();
                 control.SetWebBrowsersLang();
             }

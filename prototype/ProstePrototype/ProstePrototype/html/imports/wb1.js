@@ -38,8 +38,10 @@ const newT = new T();
 function toggleLang(key) {
     setLang(key);
     // reload
-    // document.location.reload();
-
+    if (!!document.getElementById('divDevices')) {
+        document.location.reload(); // needed for index-automatic only
+        return;
+    }
     // shoud clear the document.getElementById('ram_sidebar_menu').innerHTML = "";
     document.getElementById('ram_sidebar_menu').innerHTML = "";
 
@@ -225,7 +227,7 @@ async function selectNewPanel(id, self) {
     let newPanelId = await boundAsync.setActivePanel(backEndId);
     // after
     if (newPanelId) {        
-        $('a:has(> span:first-child)').removeClass('active');
+        $('li').removeClass('active');
         sendMessageWPF({ 'Command': 'LoadPage', 'Params': self.getAttribute("pageType") });
         //openAccordionItem(id);
     }
@@ -361,35 +363,34 @@ function sendMsg(self) {
     if (self.getAttribute('topic') === "Rename") {
         const panelId = self.parentNode.getAttribute('element');
         const el = document.getElementById(panelId);
-        let currentNode = el.firstElementChild.childNodes[2];
-        let inner = el.firstElementChild.innerHTML;
-        let idx = inner.lastIndexOf(">");
-        let currentName = inner.slice(idx + 1, idx + 11).replaceAll('\n', "");
+        let currentNode = el.firstElementChild.childNodes[3];
         let inp = document.createElement("input");
         inp.id = "newNameId";
         inp.maxLength = "15";
         inp.type = "text";
         inp.size = "10";
-        inp.placeholder = currentName;
+        inp.value = currentNode.textContent;
         let replacing = false; // flag for the focusout event
         inp.addEventListener('focusout', (e) => {
             if (!replacing) {
-                setNewName(e, currentName, inp.id, currentNode);
+                setNewName(e, currentNode, inp.id);
             }
         }, false);
         inp.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 replacing = true;
-                setNewName(e, currentName, inp.id, currentNode);
+                setNewName(e, currentNode, inp.id);
             } else if (e.key === 'Escape') {
                 replacing = true;
-                inp.parentElement.replaceChild(document.createTextNode(currentName), inp);
+                inp.parentElement.replaceChild(currentNode, inp);
             } else if (e.key == " " ||
                 e.code == "Space" ||
                 e.key == 32
             ) {
                 e.preventDefault();
-                inp.value += ' ';
+                const index = e.target.selectionStart;
+                inp.value = inp.value.slice(0, index) + ' ' + inp.value.slice(index);
+                inp.selectionEnd = index + 1;
             }
         }, false);
         el.firstElementChild.replaceChild(inp, currentNode);
@@ -399,15 +400,15 @@ function sendMsg(self) {
     }
 }
 
-function setNewName(event, currName, inpId) {
+function setNewName(event, currentNode, inpId) {
     let newName = event.target.value;
     const panelId = event.target.parentElement.parentElement.id.replaceAll("_", "-");
-    let inpEl = document.getElementById(inpId);    
-    if (!newName) inpEl.parentElement.replaceChild(document.createTextNode(currName), inpEl);
-    else {
-        inpEl.parentElement.replaceChild(document.createTextNode(newName), inpEl);
+    let inpEl = document.getElementById(inpId);
+    if (newName || newName.trim() !== currName) {
+        currentNode.textContent = newName;        
         sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Rename', 'newName': newName, '~panel_id': panelId });
     }
+    inpEl.parentElement.replaceChild(currentNode, inpEl);
 }
 // finish of the contextMenu part
 
@@ -440,6 +441,18 @@ function addActive() {
             $(this).addClass('active'); // Add the active class to the clicked anchor tag
         }
     });
+}
+
+function highlighting(highlight) {
+    switch (highlight) {
+        case "iris_loop_devices":
+            const activeLi = document.querySelector(".active");
+            const targetLi = activeLi.parentElement.querySelector(`#${highlight}`);
+            activeLi.classList.remove("active");
+            targetLi.classList.add("active");
+            break;
+        default: break;
+    }
 }
 
 function toggleClosedClass(action = 'close') {
