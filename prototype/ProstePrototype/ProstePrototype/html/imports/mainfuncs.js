@@ -94,7 +94,7 @@ function receiveMessageWPF(jsonTxt) {
     let body; // Main, Devices, Menu
     switch (true) {
         case !!document.getElementById('divMain'): // setting the body element
-            //alert('divMain')
+            //alert('divMain') // IrisPanel-automatic case
             body = document.getElementById('divMain');
 
             drawFields(body, json, color ? BUTTON_COLORS[color] : 'normal');
@@ -280,7 +280,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
         } else if (!k.includes('~')) { // collapsible parts
             const { input_name, input_id } = {
                 input_name: divLevel.name,
-                input_id: divLevel.name.toLowerCase().trim().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replace(/[/]/g, '')
+                input_id: divLevel.name.toLowerCase().trim().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replace(/[/()]/g, '')
             }
 
             var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
@@ -320,7 +320,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
 
             if (jsonAtLevel[field]["@TYPE"] === "PAD") return; // another guard
 
-            const innerString = transformGroupElement(jsonAtLevel[field]);
+            const innerString = transformGroupElement(jsonAtLevel[field], field);
             if (!innerString) return;
             if (jsonAtLevel[field]['@TYPE'] === "WEEK") {
                 div.parentNode.parentNode.insertAdjacentHTML('beforeend', innerString);
@@ -723,7 +723,7 @@ function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_p
 //#endregion
 
 // transforming object function
-const transformGroupElement = (elementJson) => {
+const transformGroupElement = (elementJson, fieldName = '') => {
     let attributes = {
         type: elementJson['@TYPE'],
         input_name: newT.t(localStorage.getItem('lang'), elementJson['@LNGID']), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
@@ -779,9 +779,9 @@ const transformGroupElement = (elementJson) => {
             // alert('tabsKeys '+ tabsKeys + ' tabs '+ tabs);
             // create selectField and append it
             let inner = `<div class="form-floating mb-3">                            
-                            <select id="${attributes.input_id}" name="${attributes.input_id}" class="form-select ram_floating_select"
+                            <select id="${attributes.input_id}_${fieldName}" name="${attributes.input_id}_${fieldName}" class="form-select ram_floating_select"
                                     onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'${attributes.path}','newValue': this.value}});
-                                                          loadDiv(this, 'showDiv_${attributes.input_id}', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" >`;
+                                                          loadDiv(this, 'showDiv_${attributes.input_id}_${fieldName}', this.value, this.options[this.selectedIndex].getAttribute('checktype'));" >`;
             tabsKeys.map(o => {
                 let disabled = false; // todo
                 let checkType = "";
@@ -792,7 +792,7 @@ const transformGroupElement = (elementJson) => {
                         checkType = `checktype='${tabs[o]["~path"]}'`;
                     }
                 }
-                let value = `${tabs[o]['@VALUE']}_${o}`;  // (tabs[o].hasOwnProperty("~enabled")) ? tabs[o]['@VALUE'] : `${tabs[o]['@VALUE']}_${o}`;
+                let value = `${tabs[o]['@VALUE']}_${o}_${fieldName}`;  // (tabs[o].hasOwnProperty("~enabled")) ? tabs[o]['@VALUE'] : `${tabs[o]['@VALUE']}_${o}`;
                 let selected;
                 if (attributes.value) {
                     selected = (attributes.value === value || attributes.value === value.split('_')[0]) ? "selected" : "";
@@ -803,7 +803,7 @@ const transformGroupElement = (elementJson) => {
             });
             inner += `</select>
                       <label for="${attributes.input_id}">${attributes.input_name}</label></div>
-                      <div id="showDiv_${attributes.input_id}"></div>`;
+                      <div id="showDiv_${attributes.input_id}_${fieldName}"></div>`;
 
             let additionalOnChangeCommand = "";
             let loopTypePath = "";
@@ -811,7 +811,7 @@ const transformGroupElement = (elementJson) => {
             tabsKeys.forEach(key => {
                 if (!tabs[key]["~enabled"]) {
                     let tabDiv = document.createElement('div');
-                    tabDiv.id = tabs[key]['@VALUE'] + '_' + key;
+                    tabDiv.id = tabs[key]['@VALUE'] + '_' + key + '_' + fieldName;
                     tabDiv.style.display = 'none';
 
                     let tabFlag = (tabs[key]["PROPERTIES"] && Array.isArray(tabs[key]["PROPERTIES"]["PROPERTY"]));
@@ -1828,39 +1828,21 @@ async function showElement(id, elementType) {
 
 // loadDiv function required for TABs
 function loadDiv(it, id, value, type) {
-    //alert(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
+    //console.log(`it -> ${it}, id -> ${id}, value -> ${value}, type -> ${type}`);
     if (!value) return;
-    var element = document.getElementById(value);
+    const element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)
-    var addElement = document.getElementById(id);
+    const addElement = document.getElementById(id);
     //console.log(it, "value -> element", value, "->", element, "id", id);
     if (!type) {
-        switch (true) {
-            case value.startsWith("0_"):
-            case value.startsWith("1_"):
-            case value.startsWith("2_"):
-            case value.startsWith("3_"):
-            case value.startsWith("4_"):
-            case value.startsWith("5_"):
-            case value.startsWith("6_"):
-            case value.startsWith("7_"):
-            case value.startsWith("8_"):
-            case value.startsWith("9_"):
-            case value.startsWith("10_"):
-            case value.startsWith("11_"):
-            case value.includes("Teletek"):
-            case value.includes("System"):
-            case value.includes("sounder_zonal"):
-            case value.includes("common_fire"):
-                addElement.innerHTML = element.innerHTML;
-                var execute = addElement.querySelector('select');
-                if (execute && execute.onchange.toLocaleString().includes("loadDiv")) {
-                    execute.onchange();
-                }
-                break;
-            default:
-                addElement.innerHTML = "";
-                break;
+        if (/^(\d{1,2}|Teletek|System|sounder_zonal|common_fire)_/.test(value)) {
+            addElement.innerHTML = element.innerHTML;
+            const execute = addElement.querySelector('select');
+            if (execute && execute.onchange.toLocaleString().includes("loadDiv")) {
+                execute.onchange();
+            }
+        } else {
+            addElement.innerHTML = "";
         }
     } else {
         createLoopTypeMenu(it, addElement, type); return;

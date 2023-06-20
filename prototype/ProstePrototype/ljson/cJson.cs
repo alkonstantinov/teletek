@@ -2142,6 +2142,8 @@ namespace ljson
                         name = Regex.Replace(name, @"\d+$", "");
                     if (Regex.IsMatch(name, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
                         name = "iris";
+                    if (Regex.IsMatch(name, "^simpo", RegexOptions.IgnoreCase) && !Regex.IsMatch(name, "paneloutputs$", RegexOptions.IgnoreCase))
+                        name = "iris";
                     JObject _res = null;
                     JToken jbyname = _elements[name];
                     if (jbyname != null)
@@ -2455,6 +2457,7 @@ namespace ljson
         }
 
         private static string _panel_type = null;
+        private static string _panel_subtype = null;
         private static string _last_loaded_template_filepath = null;
         public static string ConvertXML(string xml, JObject _pages, string filename)
         {
@@ -2527,10 +2530,11 @@ namespace ljson
             o = (JObject)t;
             string prod = o["@PRODUCTNAME"].ToString();
             string sj = "{}";
-            if (Regex.IsMatch(prod, @"iris", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(prod, @"(iris|simpo)", RegexOptions.IgnoreCase))
             {
                 _internal_relations_operator = new cInternalrelIRIS();
                 _panel_type = "iris";
+                _panel_subtype = prod;
                 sj = cIRIS.Convert(json, _pages);
             }
             else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))
@@ -2567,8 +2571,11 @@ namespace ljson
         {
             JObject json = CurrentPanel;
             string content_key = MainContentKey;
+            if (json["ELEMENTS"][content_key] == null) content_key = key;
             if (content_key != null)
             {
+                if (json["ELEMENTS"][content_key] == null)
+                    content_key = content_key.ToUpper();
                 JToken tc = json["ELEMENTS"][content_key]["CONTAINS"];
                 if (tc != null)
                 {
@@ -2595,6 +2602,7 @@ namespace ljson
         {
             JObject json = CurrentPanel;
             JObject jkey = (JObject)json["ELEMENTS"][key];
+            if (jkey == null) jkey = (JObject)json["ELEMENTS"][key.ToUpper()];
             if (jkey != null)
             {
                 JObject jprop = (JObject)jkey["PROPERTIES"];

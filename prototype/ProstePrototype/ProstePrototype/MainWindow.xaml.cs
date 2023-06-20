@@ -535,6 +535,10 @@ namespace ProstePrototype
             string _clean_key = Regex.Replace(page, @"[\d-]", string.Empty);
             if (Regex.IsMatch(_clean_key, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
                 _clean_key = "iris";
+            if (Regex.IsMatch(_clean_key, "^simpo", RegexOptions.IgnoreCase) && !Regex.IsMatch(_clean_key, "paneloutputs$", RegexOptions.IgnoreCase))
+                _clean_key = "iris";
+            if (pages[_clean_key] == null && pages[_clean_key.ToLower()] != null)
+                _clean_key = _clean_key.ToLower();
             var lpd = new LoadPageData()
             {
                 RightBrowserUrl = cJson.htmlRight(jnode) + "?" + rightBrowsersURLParams,

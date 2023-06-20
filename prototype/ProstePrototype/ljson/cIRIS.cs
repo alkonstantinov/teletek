@@ -26,9 +26,13 @@ namespace ljson
                 name = "iris_network";
             else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK_R$", RegexOptions.IgnoreCase))
                 name = "iris_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANELSINNETWORK$", RegexOptions.IgnoreCase))
                 name = "iris_panels_in_network";
             else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS_R$", RegexOptions.IgnoreCase))
+                name = "iris_panels_in_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS$", RegexOptions.IgnoreCase))
                 name = "iris_panels_in_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_INPUTS$", RegexOptions.IgnoreCase))
                 name = "iris_inputs";
@@ -40,15 +44,23 @@ namespace ljson
                 name = "iris_fat_fbf";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_ZONES$", RegexOptions.IgnoreCase))
                 name = "iris_zones";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_ZONES$", RegexOptions.IgnoreCase))
+                name = "iris_zones";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_EVAC_ZONES_GROUPS$", RegexOptions.IgnoreCase))
+                name = "iris_evac_zones";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_EVAC_ZONES_GROUPS$", RegexOptions.IgnoreCase))
                 name = "iris_evac_zones";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PERIPHERIALDEVICES$", RegexOptions.IgnoreCase))
                 name = "iris_peripheral_devices";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_LOOPDEVICES$", RegexOptions.IgnoreCase))
                 name = "iris_loop_devices";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_LOOPDEVICES$", RegexOptions.IgnoreCase))
+                name = "iris_loop_devices";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANEL$", RegexOptions.IgnoreCase))
                 name = "iris";
             else if (Regex.IsMatch(name, @"^R_PANEL$", RegexOptions.IgnoreCase))
+                name = "iris";
+            else if (Regex.IsMatch(name, @"^SIMPO_PANEL$", RegexOptions.IgnoreCase))
                 name = "iris";
             return name;
         }
@@ -163,6 +175,13 @@ namespace ljson
                 content["iris_loop_devices"]["right"] = _pages["iris_loop_devices"]["right"];//"IRIS/loop_devices.html";
                 content["iris_loop_devices"]["breadcrumbs"] = _pages["iris_loop_devices"]["breadcrumbs"];//JArray.Parse("[\"index\", \"iris\"]");
             }
+            if (content["SIMPO_PANELOUTPUTS"] != null)
+            {
+                content["SIMPO_PANELOUTPUTS"]["title"] = _pages["simpo_paneloutputs"]["title"];
+                content["SIMPO_PANELOUTPUTS"]["left"] = _pages["simpo_paneloutputs"]["left"];
+                content["SIMPO_PANELOUTPUTS"]["right"] = _pages["simpo_paneloutputs"]["right"];
+                content["SIMPO_PANELOUTPUTS"]["breadcrumbs"] = _pages["simpo_paneloutputs"]["breadcrumbs"];
+            }
         }
         private static void CreateMainGroupsSimpoRepeater(JObject json)
         {
@@ -199,11 +218,82 @@ namespace ljson
             //
             json["iris"]["PROPERTIES"]["OLD"] = o;
         }
+        private static void CreateMainGroupsSimpoPanel(JObject json)
+        {
+            JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            json["iris"]["PROPERTIES"]["Groups"] = new JObject();
+            //
+            JObject grp1 = new JObject();
+            grp1["name"] = "Panel Settings";
+            JObject f1 = new JObject();
+            f1["Language"] = o["Language"];
+            f1["BRIGHTNESS_R"] = o["BRIGHTNESS_R"];
+            f1["AUTOLOGOFF"] = o["AUTOLOGOFF"];
+            f1["LOGOFFENABLED"] = o["LOGOFFENABLED"];
+            grp1["fields"] = f1;
+            json["iris"]["PROPERTIES"]["Groups"]["PanelSettings"] = grp1;
+            //
+            JObject grp2 = new JObject();
+            grp2["name"] = "Access Codes";
+            JObject f2 = new JObject();
+            f2["Code1"] = o["Code1"];
+            f2["Code2"] = o["Code2"];
+            grp2["fields"] = f2;
+            json["iris"]["PROPERTIES"]["Groups"]["AccessCodes"] = grp2;
+            //
+            JObject grp3 = new JObject();
+            grp3["name"] = "Day/Night";
+            JObject f3 = new JObject();
+            f3["DayNightScedule"] = o["DayNightScedule"];
+            f3["DayMode"] = o["DayMode"];
+            grp3["fields"] = f3;
+            json["iris"]["PROPERTIES"]["Groups"]["DayNight"] = grp3;
+            //
+            JObject grp4 = new JObject();
+            grp4["name"] = "Delay(T1)";
+            JObject f4 = new JObject();
+            f4["T1DELAY"] = o["T1DELAY"];
+            grp4["fields"] = f4;
+            json["iris"]["PROPERTIES"]["Groups"]["DelayT1"] = grp4;
+            //
+            JObject grp5 = new JObject();
+            grp5["name"] = "Sounders mode";
+            JObject f5 = new JObject();
+            f5["SoundersMode"] = o["SoundersMode"];
+            f5["ClassChangeTone"] = o["ClassChangeTone"];
+            f5["ALARMTONE"] = o["ALARMTONE"];
+            f5["ALARMTONESETTINGS"] = o["ALARMTONESETTINGS"];
+            f5["EVACUATIONTONE"] = o["EVACUATIONTONE"];
+            f5["EVACUATETIMEOUT"] = o["EVACUATETIMEOUT"];
+            f5["VECInverted"] = o["VECInverted"];
+            f5["EVACUATECYCLE_OFF"] = o["EVACUATECYCLE_OFF"];
+            f5["EVACUATECYCLE_ON"] = o["EVACUATECYCLE_ON"];
+            f5["EVACUATESETTINGS"] = o["EVACUATESETTINGS"];
+            grp5["fields"] = f5;
+            json["iris"]["PROPERTIES"]["Groups"]["SoundersMode"] = grp5;
+            //
+            JObject grp6 = new JObject();
+            grp6["name"] = "Company Logo";
+            JObject f6 = new JObject();
+            f6["LOGO1"] = o["LOGO1"];
+            f6["LOGO2"] = o["LOGO2"];
+            grp6["fields"] = f6;
+            json["iris"]["PROPERTIES"]["Groups"]["CompanyLogo"] = grp6;
+            //
+            json["iris"]["PROPERTIES"]["OLD"] = o;
+        }
         private static void CreateMainGroups(JObject json)
         {
             if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
             {
                 CreateMainGroupsSimpoRepeater(json);
+                return;
+            }
+            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"Simpo[\w\W]+?panel\s*$", RegexOptions.IgnoreCase))
+            {
+                CreateMainGroupsSimpoPanel(json);
                 return;
             }
             JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
@@ -359,9 +449,9 @@ namespace ljson
         private static void ConvertAccessCode(JObject json, JObject _pages)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
-            {
                 return;
-            }
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]*?PANEL$", RegexOptions.IgnoreCase))
+                return;
             CreateAccessCodeGroups((JObject)json["ELEMENTS"]);
             JObject ac = (JObject)json["ELEMENTS"]["iris_access_code"];
             ac["title"] = _pages["iris_access_code"]["title"];
@@ -378,7 +468,8 @@ namespace ljson
         #region panels in network
         private static void ConvertPanelsInNetwork(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 JObject pcontent = new JObject((JObject)json["ELEMENTS"]["iris_network"]["CONTAINS"]["ELEMENT"]);
                 if (json["ELEMENTS"]["iris_panels_in_network"] == null) json["ELEMENTS"]["iris_panels_in_network"] = new JObject();
@@ -417,7 +508,8 @@ namespace ljson
         }
         private static void CreateNetworkGroups(JObject json)
         {
-            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 CreateRepeaterNetworkGroups(json);
                 return;
@@ -482,7 +574,8 @@ namespace ljson
         #region inputs
         private static void ConvertInputs(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase)||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -568,7 +661,8 @@ namespace ljson
         }
         private static void ConvertFATFBF(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase)||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -586,7 +680,8 @@ namespace ljson
         #region input groups
         private static void ConvertInputGroups(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -603,7 +698,8 @@ namespace ljson
         #region outputs
         private static void ConvertOutputs(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -654,7 +750,8 @@ namespace ljson
         #region peripheral devices
         private static void ConvertPeripheralDevices(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase)||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -688,7 +785,8 @@ namespace ljson
         #region input group
         private static void ConvertInputsGroup(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -757,7 +855,8 @@ namespace ljson
         }
         private static void ConvertInput(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -824,7 +923,8 @@ namespace ljson
         }
         private static void ConvertOutput(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -994,7 +1094,8 @@ namespace ljson
 
         private static void ConvertPreripherialDevicesContentNodes(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1038,6 +1139,22 @@ namespace ljson
             //not grouped params
             json[key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
             json[key]["PROPERTIES"]["Groups"]["~noname"]["status"] = o["status"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["PANELFLAGS"] = o["PANELFLAGS"];
+            //
+            json[key]["PROPERTIES"]["OLD"] = o;
+        }
+        private static void CreateSimpoPanelPanelInNetworkGroups(JObject json, string key)
+        {
+            if (Regex.IsMatch(key, @"^SIMPO_PANELS$") && json[key] == null)
+                key = "iris_panels_in_network";
+            JArray proparr = (JArray)json[key]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            json[key]["PROPERTIES"]["Groups"] = new JObject();
+            //not grouped params
+            json[key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["status"] = o["status"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["panel_flags"] = o["panel_flags"];
             json[key]["PROPERTIES"]["Groups"]["~noname"]["PANELFLAGS"] = o["PANELFLAGS"];
             //
             json[key]["PROPERTIES"]["OLD"] = o;
@@ -1086,6 +1203,11 @@ namespace ljson
                 if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
                 {
                     CreateRepeaterPanelInNetworkGroups((JObject)json["ELEMENTS"], key);
+                    return;
+                }
+                if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                {
+                    CreateSimpoPanelPanelInNetworkGroups((JObject)json["ELEMENTS"], key);
                     return;
                 }
                 CreatePanelInNetworkGroups((JObject)json["ELEMENTS"], key);
@@ -1218,10 +1340,19 @@ namespace ljson
             }
             if (el != null)
             {
-                JArray props = (JArray)el["PROPERTIES"]["PROPERTY"];
-                foreach (JToken t in props)
+                if (el["PROPERTIES"]["PROPERTY"].Type == JTokenType.Array)
                 {
-                    JObject p = (JObject)t;
+                    JArray props = (JArray)el["PROPERTIES"]["PROPERTY"];
+                    foreach (JToken t in props)
+                    {
+                        JObject p = (JObject)t;
+                        string pkey = p["@ID"].ToString();
+                        if (!res.ContainsKey(pkey)) res.Add(pkey, p);
+                    }
+                }
+                else if (el["PROPERTIES"]["PROPERTY"].Type == JTokenType.Object)
+                {
+                    JObject p = (JObject)el["PROPERTIES"]["PROPERTY"];
                     string pkey = p["@ID"].ToString();
                     if (!res.ContainsKey(pkey)) res.Add(pkey, p);
                 }
@@ -1322,10 +1453,138 @@ namespace ljson
             elements["SIMPO_PANELS_R"] = panels;
         }
         #endregion
+        #region Simpo panel
+        private static string ReorderSimpoPanelTemplate(string json)
+        {
+            JObject o = JObject.Parse(json);
+            JArray elements = (JArray)o["ELEMENTS"]["ELEMENT"];
+            JArray content = (JArray)elements[0]["CONTAINS"]["ELEMENT"];
+            Dictionary<string, JObject> dcontent = new Dictionary<string, JObject>();
+            foreach (JToken t in content)
+            {
+                JObject el = (JObject)t;
+                string ekey = el["@ID"].ToString();
+                if (Regex.IsMatch(ekey, @"simpo[\w\W]+?general[\w\W]+?settings$", RegexOptions.IgnoreCase))
+                {
+                    JArray props = PropertiesFromContentItems(elements, ekey);
+                    JObject el0 = (JObject)elements[0];
+                    el0["PROPERTIES"] = new JObject();
+                    el0["PROPERTIES"]["PROPERTY"] = props;
+                }
+                else if (Regex.IsMatch(ekey, @"simpo[\w\W]+?paneloutputs$", RegexOptions.IgnoreCase))
+                {
+                    JArray props = PropertiesFromContentItems(elements, ekey);
+                    JObject elout = null;
+                    foreach (JObject oel in elements)
+                        if (oel["@ID"] != null && oel["@ID"].ToString() == "SIMPO_PANELOUTPUTS")
+                        {
+                            elout = oel;
+                            break;
+                        }
+                    if (elout != null)
+                    {
+                        elout["PROPERTIES"] = new JObject();
+                        elout["PROPERTIES"]["PROPERTY"] = props;
+
+                    }
+                }
+                else
+                {
+                    dcontent.Add(ekey, el);
+                    Dictionary<string, JObject> c = ItemContent(elements, el["@ID"].ToString());
+                    foreach (string ckey in c.Keys) dcontent.Add(ckey, c[ckey]);
+                }
+            }
+            JArray content_new = new JArray();
+            foreach (string ckey in dcontent.Keys) content_new.Add(dcontent[ckey]);
+            //elements[0]["CONTAINS"]["ELEMENT"] = content_new;
+            //
+            return o.ToString();
+        }
+        private static void ChangeSimpoPanelComtent(JObject json)
+        {
+            JObject c = (JObject)json["ELEMENTS"]["iris"]["CONTAINS"];
+            JObject content = new JObject();
+            content["SIMPO_GENERAL_SETTINGS"] = c["SIMPO_GENERAL_SETTINGS"];
+            content["SIMPO_PANELOUTPUTS"] = c["SIMPO_PANELOUTPUTS"];
+            content["iris_zones"] = c["iris_zones"];
+            content["iris_evac_zones"] = c["iris_evac_zones"];
+            content["iris_network"] = c["iris_network"];
+            //content["iris_panels_in_network"] = c["iris_network"];
+        }
+        private static void CreatePaneloutputsGroups(JObject elements)
+        {
+            if (elements["SIMPO_PANELOUTPUTS"] == null)
+                return;
+            JArray proparr = (JArray)elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"] = new JObject();
+            //
+            JObject grp1 = new JObject();
+            grp1["name"] = "Sounders";
+            JObject f1 = new JObject();
+            f1["SounderDelayMode"] = o["SounderDelayMode"];
+            grp1["fields"] = f1;
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"]["Sounders"] = grp1;
+            //
+            JObject grp2 = new JObject();
+            grp2["name"] = "Fire brigade";
+            JObject f2 = new JObject();
+            f2["FireBrigadeDelayMode"] = o["FireBrigadeDelayMode"];
+            grp2["fields"] = f2;
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"]["FireBrigade"] = grp2;
+            //
+            JObject grp3 = new JObject();
+            grp3["name"] = "Relay 1";
+            JObject f3 = new JObject();
+            f3["ACTIVATION1r"] = o["ACTIVATION1r"];
+            f3["NAME_OUT1r"] = o["NAME_OUT1r"];
+            grp3["fields"] = f3;
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"]["Relay1"] = grp3;
+            //
+            JObject grp4 = new JObject();
+            grp4["name"] = "Relay 2";
+            JObject f4 = new JObject();
+            f4["ACTIVATION2r"] = o["ACTIVATION2r"];
+            f4["NAME_OUT2r"] = o["NAME_OUT2r"];
+            grp4["fields"] = f4;
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"]["Relay2"] = grp4;
+            //
+            JObject grp5 = new JObject();
+            grp5["name"] = "Relay 3";
+            JObject f5 = new JObject();
+            f5["ACTIVATION3r"] = o["ACTIVATION3r"];
+            f5["NAME_OUT3r"] = o["NAME_OUT3r"];
+            grp5["fields"] = f5;
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"]["Relay3"] = grp5;
+            //
+            JObject grp6 = new JObject();
+            grp6["name"] = "Relay 4";
+            JObject f6 = new JObject();
+            f6["ACTIVATION4r"] = o["ACTIVATION4r"];
+            f6["NAME_OUT4r"] = o["NAME_OUT4r"];
+            grp6["fields"] = f6;
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["Groups"]["Relay4"] = grp6;
+            //
+            elements["SIMPO_PANELOUTPUTS"]["PROPERTIES"]["OLD"] = o;
+        }
+        private static void ConvertSimpoPaneloutputs(JObject json, JObject _pages)
+        {
+            CreatePaneloutputsGroups((JObject)json["ELEMENTS"]);
+            JObject ac = (JObject)json["ELEMENTS"]["iris_network"];
+            ac["title"] = _pages["iris_network"]["title"];
+            ac["left"] = _pages["iris_network"]["left"];
+            ac["right"] = _pages["iris_network"]["right"];
+            ac["breadcrumbs"] = _pages["iris_network"]["breadcrumbs"];
+        }
+        #endregion
         public static string Convert(string json, JObject _pages)
         {
             if (Regex.IsMatch(json, @"""@ID""\s*?:\s*?""R_PANEL""", RegexOptions.IgnoreCase))
                 json = ReorderRepeaterTemplate(json);
+            else if (Regex.IsMatch(json, @"""@ID""\s*?:\s*?""SIMPO_PANEL""", RegexOptions.IgnoreCase))
+                json = ReorderSimpoPanelTemplate(json);
             JObject o = JObject.Parse(json);
             JObject o1 = new JObject();
             foreach (JProperty p in o["ELEMENTS"])
@@ -1392,6 +1651,7 @@ namespace ljson
             ConvertPreripherialDevicesContentNodes(o1);
             ConvertPanelInNetwork(o1);
             RemoveRepeaterSimpoElements(o1);
+            ConvertSimpoPaneloutputs(o1, _pages);
             //
             cXml.Arrays2Objects(o1, true);
             //

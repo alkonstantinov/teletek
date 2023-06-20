@@ -228,5 +228,29 @@
     "breadcrumbs": [ "index", "tte" ],
     "picture": "fa-gears",
     "icon": "\ue903"
+  },
+  "simpo_general_settings": {
+    "title": "Simpo General Settings",
+    "left": "menu-automatic.html",
+    "right": "IRIS/IRISPanel-automatic.html",
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-gears",
+    "icon": "\ue903"
+  },
+  "simpo_paneloutputs": {
+    "title": "Panel outputs",
+    "left": "menu-automatic.html",
+    "right": "IRIS/IRISPanel-automatic.html",
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "outputs", // "fa-arrow-up-9-1"
+    "icon": "\ue90d"
+  },
+  "simpo_mimicpanels": {
+    "title": "Simpo Mimic Panels",
+    "left": "menu-automatic.html",
+    "right": "IRIS/io-automatic.html",
+    "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-arrows-to-circle",
+    "icon": "\ue915"
   }
 }

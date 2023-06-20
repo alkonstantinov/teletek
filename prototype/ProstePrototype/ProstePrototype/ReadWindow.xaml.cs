@@ -100,7 +100,6 @@ namespace ProstePrototype
 
         private void Connect_Clicked(object sender, RoutedEventArgs e)
         {
-
             this.Dispatcher.Invoke(() =>
             {
                 this.DialogResult = true;

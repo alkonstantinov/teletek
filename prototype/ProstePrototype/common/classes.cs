@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
 using System.Windows.Shapes;
+using System.Threading.Tasks.Dataflow;
+using System.Windows.Controls;
 
 namespace common
 {
@@ -380,12 +382,15 @@ namespace common
         public byte? index = null;
         public byte? buffoffset = null;
         public byte? len = null;
+        public byte? subidx_cmd_len = null;
+        public byte? subidx = null;
         //
         public string sio = null;
         public string sDataType = null;
         public string sindex = null;
         public string sbuffoffset = null;
         public string slen = null;
+        public string ssubidx = null;
 
         public cRWCommand() { }
         public cRWCommand(string scmd) { InitCommand(scmd); }
@@ -404,10 +409,13 @@ namespace common
             string sidx = idx.ToString("X2");
             return sio + sDataType + sidx + sbuffoffset + slen;
         }
+        public virtual string CommandString(int _idx, int _subidx) { return CommandString(_idx); }
         public virtual string NoIdxCommandString() { return null; }
         public virtual string CommandKey() { return null; }
         public virtual int idxPosition() { return -1; }
         public virtual void InitCommand(string scmd) { }
+        public virtual void InitCommand(string scmd, string _ssubidx) { }
+        public virtual bool IsValid(string _cmd) { return Regex.IsMatch(_cmd, "[^0]"); }
     }
 
     //public class cAdditionalRWCommands

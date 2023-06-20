@@ -134,6 +134,7 @@ function receiveMessageWPF(jsonTxt) {
 
                 let panelIcon, pageType, color;
                 switch (true) {
+                    case jsonKeys[0].toLowerCase().startsWith("simpo"):
                     case jsonKeys[0].toLowerCase().startsWith("iris"):
                         panelIcon = '<i class="ram_icon fireicon fire"></i>';
                         pageType = "iris";
@@ -152,7 +153,7 @@ function receiveMessageWPF(jsonTxt) {
                     default: break;
                 }
                 let panelName = json["~panel_name"]; // [0].toUpperCase() + json["~panel_name"].slice(1).toLowerCase();
-                                
+                          
                 // 2. create the new panel-item
                 let panelItem = document.createElement('div');
                 panelItem.classList.add("accordion-item", color);
@@ -164,9 +165,9 @@ function receiveMessageWPF(jsonTxt) {
                         </button>
                     </h2>
                     <div id="collapse${id}" class="accordion-collapse collapse show" aria-labelledby="${id}" data-bs-parent="#ram_sidebar_menu"></div>`);
-                
-                panelCreationHandler(color, panelItem, json);
 
+                panelCreationHandler(color, panelItem, json);
+                
                 body.appendChild(panelItem);
 
                 setTimeout(() => openAccordionItem(id), 100);
@@ -246,6 +247,7 @@ function openAccordionItem(id) {
 }
 
 const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
+    
     // create the accordion-body div
     let div = document.createElement('div');
     div.classList = "accordion-body";
@@ -257,11 +259,12 @@ const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
 
     const pathStr = "~path";
     let cleanKeys = elementKeys.filter(x => x !== pathStr && x !== "~panel_id" && x !== "~panel_name"); // for the usual new panel adding
-
+    
     cleanKeys.forEach(field => {
         // guard for null value of jsonAtLevel[field]
         if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;
+            
             addAccordeonButton(title, field, ul);
         }
     });
@@ -273,11 +276,12 @@ const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
 
 const addAccordeonButton = (title, page, ul_element) => {
     // clean all digits from used schema
+    console.log(title)
     let key = page.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
-
+    
     // title definition
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
-
+    console.log(titleTranslated, key, CONFIG_CONST)
     let el = `<li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'}); addActive()" id="${page}">
                    <div class="ram_list_item_content">
                        <i class="${CONFIG_CONST[key].picture.startsWith("fa-") ? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture}"></i>

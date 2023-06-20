@@ -33,1122 +33,953 @@
             //sendMessage("Devices|IRIS");
         });
 //        wb3 = `{
-//  "DelayMode": {
-//    "name": "Delay Mode",
+//  "PanelSettings": {
+//    "name": "Panel Settings",
 //    "fields": {
-//      "SounderDelayMode": {
+//      "Language": {
 //        "@TYPE": "LIST",
 //        "@SIZE": "1",
-//        "@TEXT": "Sounder Delay Mode",
-//        "@LNGID": "07b8b835-b811-43f3-b245-d275d3d0e204",
+//        "@TEXT": "Language",
+//        "@LNGID": "b0229d26-273a-402a-a2a6-4b6009edc470",
 //        "ITEMS": {
 //          "ITEM": [
 //            {
-//              "@NAME": "OFF",
+//              "@NAME": "English",
 //              "@VALUE": "0",
 //              "@DEFAULT": "1",
-//              "@LNGID": "4546776e-7e5f-4f33-a6fe-54549ca0d9e4",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelayMode.ITEMS.ITEM[0]"
+//              "@LNGID": "1b227b2e-3936-4570-8e81-22ce18d2fee8",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[0]"
 //            },
 //            {
-//              "@NAME": "ON",
+//              "@NAME": "Bulgarian",
 //              "@VALUE": "1",
-//              "@LNGID": "16c50874-a93a-491f-aad6-5e0bc60f42e2",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelayMode.ITEMS.ITEM[1]"
+//              "@LNGID": "aaeff12f-03b9-41ba-9dde-5eb541223385",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[1]"
 //            },
 //            {
-//              "@NAME": "SCHEDULE",
+//              "@NAME": "Portuguese",
 //              "@VALUE": "2",
-//              "@LNGID": "bc689a88-3a65-45c4-95f7-eac5e586f4b2",
-//              "ScheduleKey": "SounderDelaySchedule",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelayMode.ITEMS.ITEM[2]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelayMode.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelayMode"
-//      },
-//      "SounderDelaySchedule": {
-//        "@TYPE": "WEEK",
-//        "@TEXT": "Sounder Delay Schedule",
-//        "@SIZE": "28",
-//        "@LNGID": "3f52ee50-1ef3-439e-9c85-943736aeb3fe",
-//        "PROPERTIES": {
-//          "PROPERTY": [
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "ACTIVATE",
-//              "@TEXT": "Activate",
-//              "@SIZE": "2",
-//              "@LNGID": "dcf04ae3-fcec-46b5-9f76-92835ed02594",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelaySchedule.PROPERTIES.PROPERTY[0]"
+//              "@LNGID": "106a25ed-2ee7-4ae4-953e-e09d8327b208",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[2]"
 //            },
 //            {
-//              "@TYPE": "TIME",
-//              "@ID": "DEACTIVATE",
-//              "@TEXT": "Deactivate",
-//              "@SIZE": "2",
-//              "@LNGID": "4f36e006-5ca9-4e63-85d4-b102669e9de3",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelaySchedule.PROPERTIES.PROPERTY[1]"
+//              "@NAME": "Turkish",
+//              "@VALUE": "3",
+//              "@LNGID": "e0e7e7dc-2380-4a00-b7aa-ad5410feb780",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[3]"
+//            },
+//            {
+//              "@NAME": "Italian",
+//              "@VALUE": "4",
+//              "@LNGID": "29856076-af3e-4b3a-81ea-fa7bf5c92bbe",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[4]"
+//            },
+//            {
+//              "@NAME": "Dutch",
+//              "@VALUE": "5",
+//              "@LNGID": "b801a4b3-09a2-4b77-b7f6-40190e60fe8b",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[5]"
+//            },
+//            {
+//              "@NAME": "Polish",
+//              "@VALUE": "6",
+//              "@LNGID": "c45698e1-5346-439e-b78f-f0a59ec9a5ad",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[6]"
+//            },
+//            {
+//              "@NAME": "Croatian",
+//              "@VALUE": "7",
+//              "@LNGID": "1a5c59bd-afc0-4317-b1cd-21f3a6d1b0d4",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[7]"
+//            },
+//            {
+//              "@NAME": "France",
+//              "@VALUE": "8",
+//              "@LNGID": "4ffd39a5-fbd5-4060-9f65-875310c2a018",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[8]"
+//            },
+//            {
+//              "@NAME": "Romanian",
+//              "@VALUE": "9",
+//              "@LNGID": "3a498fc7-9088-4b50-829f-2caab639ace9",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[9]"
+//            },
+//            {
+//              "@NAME": "Spanish",
+//              "@VALUE": "10",
+//              "@LNGID": "0e0f136f-a181-4987-b824-cd6346838007",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[10]"
+//            },
+//            {
+//              "@NAME": "Hungarian",
+//              "@VALUE": "11",
+//              "@LNGID": "d2225205-353b-4143-b974-0725cf28cae8",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[11]"
+//            },
+//            {
+//              "@NAME": "Estonian",
+//              "@VALUE": "12",
+//              "@LNGID": "5694b175-73f9-47a3-ad22-62839c12e685",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[12]"
+//            },
+//            {
+//              "@NAME": "Lietuviu",
+//              "@VALUE": "13",
+//              "@LNGID": "386fdc1d-567f-4461-8490-c0dc4d9165cc",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[13]"
+//            },
+//            {
+//              "@NAME": "Srpski",
+//              "@VALUE": "14",
+//              "@LNGID": "9a62549e-0b43-4c23-87f7-bd1b3e3b2ed9",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[14]"
+//            },
+//            {
+//              "@NAME": "German",
+//              "@VALUE": "15",
+//              "@LNGID": "7df12175-e4d1-494b-90ff-b0855a69b1d2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[15]"
+//            },
+//            {
+//              "@NAME": "Latvian",
+//              "@VALUE": "16",
+//              "@LNGID": "9f35f00a-4f32-4265-9538-910841c2e9e9",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[16]"
+//            },
+//            {
+//              "@NAME": "Slovenian",
+//              "@VALUE": "17",
+//              "@LNGID": "9f45f00a-df32-4295-9538-910941c2c9e1",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[17]"
+//            },
+//            {
+//              "@NAME": "Norwegian",
+//              "@VALUE": "18",
+//              "@LNGID": "9f45f009-df31-4294-9537-910941c2c9e2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[18]"
+//            },
+//            {
+//              "@NAME": "Island",
+//              "@VALUE": "19",
+//              "@LNGID": "7f45f108-df32-3295-9636-810941c2c9e1",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS.ITEM[19]"
 //            }
 //          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelaySchedule.PROPERTIES"
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language.ITEMS"
 //        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.SounderDelaySchedule"
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.Language"
 //      },
-//      "FireBrigadeDelayMode": {
-//        "@TYPE": "LIST",
+//      "BRIGHTNESS_R": null,
+//      "AUTOLOGOFF": {
+//        "@TYPE": "INT",
 //        "@SIZE": "1",
-//        "@TEXT": "Fire Brigade Delay Mode",
-//        "@LNGID": "0b0e4088-c9b4-4e84-b088-54a189ffabae",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "2c885216-fa81-42b8-bf96-a46e9deb0a8a",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelayMode.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "ON",
-//              "@VALUE": "1",
-//              "@LNGID": "bb8b6022-2fc6-4a33-9e40-cda676784d15",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelayMode.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "SCHEDULE",
-//              "@VALUE": "2",
-//              "@LNGID": "f9064d60-67de-402a-b95a-1ac178f6be40",
-//              "ScheduleKey": "FireBrigadeDelaySchedule",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelayMode.ITEMS.ITEM[2]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelayMode.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelayMode"
+//        "@MIN": "1",
+//        "@MAX": "60",
+//        "@VALUE": "30",
+//        "@TEXT": "Auto log off",
+//        "@LNGID": "0bea5a16-f7fd-4b31-932b-ce4ca494e686",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.AUTOLOGOFF"
 //      },
-//      "FireBrigadeDelaySchedule": {
-//        "@TYPE": "WEEK",
-//        "@TEXT": "Fire Brigade Delay Schedule",
-//        "@SIZE": "28",
-//        "@LNGID": "eb6254e4-51b9-4060-9b23-17aefed63a04",
-//        "PROPERTIES": {
-//          "PROPERTY": [
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "ACTIVATE",
-//              "@TEXT": "Activate",
-//              "@SIZE": "2",
-//              "@LNGID": "f74d480b-ccb4-4424-a2e5-ee82baae21a6",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelaySchedule.PROPERTIES.PROPERTY[0]"
-//            },
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "DEACTIVATE",
-//              "@TEXT": "Deactivate",
-//              "@SIZE": "2",
-//              "@LNGID": "1fcd2050-7b8a-4ccc-823e-bdf960c6727e",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelaySchedule.PROPERTIES.PROPERTY[1]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelaySchedule.PROPERTIES"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireBrigadeDelaySchedule"
-//      },
-//      "FireProtectionDelayMode": {
-//        "@TYPE": "LIST",
+//      "LOGOFFENABLED": {
+//        "@TYPE": "SLIDER",
 //        "@SIZE": "1",
-//        "@TEXT": "Fire Protection Delay Mode",
-//        "@LNGID": "74cd8ea3-55d1-48cf-8d58-e790e7e39fe1",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "42f0a80f-5ac5-4190-9e4c-43f334189058",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelayMode.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "ON",
-//              "@VALUE": "1",
-//              "@LNGID": "0eebb5fb-3f56-4b75-87f6-f6cfafacac62",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelayMode.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "SCHEDULE",
-//              "@VALUE": "2",
-//              "@LNGID": "7e3b8b95-f744-4491-bb2c-f1143fbcdb11",
-//              "ScheduleKey": "FireProtectionDelaySchedule",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelayMode.ITEMS.ITEM[2]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelayMode.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelayMode"
+//        "@TEXT": "Auto log off enabled",
+//        "@AND": "1",
+//        "@YESVAL": "1",
+//        "@NOVAL": "0",
+//        "@CHECKED": "0",
+//        "@LNGID": "de69774e-f25d-4379-be5f-67f2fb2d0204",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields.LOGOFFENABLED"
 //      },
-//      "FireProtectionDelaySchedule": {
-//        "@TYPE": "WEEK",
-//        "@TEXT": "Fire Protection Delay Schedule",
-//        "@SIZE": "28",
-//        "@LNGID": "806dbb08-9940-45a4-bd38-ec640b6e6878",
-//        "PROPERTIES": {
-//          "PROPERTY": [
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "ACTIVATE",
-//              "@TEXT": "Activate",
-//              "@SIZE": "2",
-//              "@LNGID": "b23eec87-d481-4ffd-921f-b978c843e954",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelaySchedule.PROPERTIES.PROPERTY[0]"
-//            },
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "DEACTIVATE",
-//              "@TEXT": "Deactivate",
-//              "@SIZE": "2",
-//              "@LNGID": "b82e3a9c-ba79-4293-a81d-a7aea1366c32",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelaySchedule.PROPERTIES.PROPERTY[1]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelaySchedule.PROPERTIES"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.FireProtectionDelaySchedule"
+//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings.fields"
+//    },
+//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.PanelSettings"
+//  },
+//  "AccessCodes": {
+//    "name": "Access Codes",
+//    "fields": {
+//      "Code1": {
+//        "@TYPE": "TEXT",
+//        "@LENGTH": "4",
+//        "@SIZE": "4",
+//        "@TEXT": "Code maintenance",
+//        "@VALUE": "2222",
+//        "@NUMERICONLY": "1",
+//        "@MINLENGTH": "4",
+//        "@LNGID": "4090f0ab-4025-4dd3-8494-e3670b5593a3",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AccessCodes.fields.Code1"
 //      },
+//      "Code2": {
+//        "@TYPE": "TEXT",
+//        "@LENGTH": "4",
+//        "@SIZE": "4",
+//        "@TEXT": "Code installer",
+//        "@VALUE": "3333",
+//        "@NUMERICONLY": "1",
+//        "@MINLENGTH": "4",
+//        "@LNGID": "1239b6de-d970-4ac4-b876-a94c95fc5ba4",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AccessCodes.fields.Code2"
+//      },
+//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.AccessCodes.fields"
+//    },
+//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.AccessCodes"
+//  },
+//  "DayNight": {
+//    "name": "Day/Night",
+//    "fields": {
+//      "DayNightScedule": null,
 //      "DayMode": {
 //        "@TYPE": "LIST",
 //        "@SIZE": "1",
 //        "@TEXT": "Day Mode",
-//        "@LNGID": "ca00787d-3b67-43cf-ad7c-9c0d99d85a7f",
+//        "@LNGID": "c2bb0c46-2164-427d-9f5d-0e3c49f2d43b",
 //        "ITEMS": {
 //          "ITEM": [
 //            {
-//              "@NAME": "OFF",
+//              "@NAME": "Off",
 //              "@VALUE": "0",
 //              "@DEFAULT": "1",
-//              "@LNGID": "57afd252-4efe-4be4-a174-bcdf5225e404",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayMode.ITEMS.ITEM[0]"
+//              "@LNGID": "0f8d545d-4642-4d15-9966-b783306f6032",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight.fields.DayMode.ITEMS.ITEM[0]"
 //            },
 //            {
-//              "@NAME": "ON",
+//              "@NAME": "On",
 //              "@VALUE": "1",
-//              "@LNGID": "13a41490-20c7-4f4a-b0d2-3852530d13b5",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayMode.ITEMS.ITEM[1]"
+//              "@LNGID": "7a0c78fd-f8ab-47c1-9e51-d19f6db841d2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight.fields.DayMode.ITEMS.ITEM[1]"
 //            },
 //            {
-//              "@NAME": "SCHEDULE",
+//              "@NAME": "Schedule",
 //              "@VALUE": "2",
-//              "@LNGID": "d1859b18-51dc-4ca1-96c7-4d192c58cdc8",
-//              "ScheduleKey": "DayNightSchedule",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayMode.ITEMS.ITEM[2]"
+//              "@LNGID": "d1159cc1-78e5-43a7-9d54-eb397c39d01e",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight.fields.DayMode.ITEMS.ITEM[2]"
 //            }
 //          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayMode.ITEMS"
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight.fields.DayMode.ITEMS"
 //        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayMode"
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight.fields.DayMode"
 //      },
-//      "DayNightSchedule": {
-//        "@TYPE": "WEEK",
-//        "@TEXT": "Day/Night Schedule",
-//        "@SIZE": "28",
-//        "@LNGID": "160ef63a-fe47-4836-87c5-50ed6e20915e",
-//        "PROPERTIES": {
-//          "PROPERTY": [
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "ACTIVATE",
-//              "@TEXT": "Activate",
-//              "@SIZE": "2",
-//              "@LNGID": "7542a79e-b627-44d7-ab97-10a0443bba8b",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayNightSchedule.PROPERTIES.PROPERTY[0]"
-//            },
-//            {
-//              "@TYPE": "TIME",
-//              "@ID": "DEACTIVATE",
-//              "@TEXT": "Deactivate",
-//              "@SIZE": "2",
-//              "@LNGID": "d23e25ab-7bb4-4b8d-a09b-ab851f8cde2e",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayNightSchedule.PROPERTIES.PROPERTY[1]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayNightSchedule.PROPERTIES"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields.DayNightSchedule"
-//      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode.fields"
+//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight.fields"
 //    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayMode"
+//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.DayNight"
 //  },
-//  "Parameters": {
-//    "name": "Parameters",
+//  "DelayT1": {
+//    "name": "Delay(T1)",
 //    "fields": {
-//      "SoundersMode": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Sounders Mode",
-//        "@LNGID": "00c2956c-31be-4097-85a7-d5fa7d18d7a9",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "COMMON",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "62050735-e0e9-476b-b411-0de7f590928c",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.SoundersMode.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "ZONAL",
-//              "@VALUE": "1",
-//              "@LNGID": "5e13a3cd-5d66-4982-a558-7d8ada1d0f06",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.SoundersMode.ITEMS.ITEM[1]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.SoundersMode.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.SoundersMode"
-//      },
-//      "CallPointMode": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Call Point Mode",
-//        "@LNGID": "fbada625-7747-4ae2-88e9-28fd69f56dc1",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "COMMON",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "8e7fb85f-3266-4ea0-bd5a-ce7240db50b3",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.CallPointMode.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "ZONAL",
-//              "@VALUE": "1",
-//              "@LNGID": "dfc8dcc6-7117-4136-9179-0f432cfb7504",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.CallPointMode.ITEMS.ITEM[1]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.CallPointMode.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.CallPointMode"
-//      },
-//      "PRINTER": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Printer",
-//        "@LNGID": "d444f3db-3dcb-4d24-b139-8dbb6f40ba2e",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "KAFKA",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "da6ee53b-a303-444b-9b80-f35d20f690a5",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "EP1000",
-//              "@VALUE": "1",
-//              "@LNGID": "d9d37cd4-ed5a-42a0-a877-601ead8d66a2",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "IRIS printer",
-//              "@VALUE": "2",
-//              "@LNGID": "2297b725-ee99-4e78-9f89-d94105102f3e",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER.ITEMS.ITEM[2]"
-//            },
-//            {
-//              "@NAME": "FAT/FBF",
-//              "@VALUE": "3",
-//              "@LNGID": "2ad53397-5cf0-4355-8969-a783b58f262c",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER.ITEMS.ITEM[3]"
-//            },
-//            {
-//              "@NAME": "ESPA 444",
-//              "@VALUE": "4",
-//              "@LNGID": "7e354b5e-8ab0-4778-962b-3e6fe579d7d1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER.ITEMS.ITEM[4]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.PRINTER"
-//      },
 //      "T1DELAY": {
 //        "@TYPE": "INT",
 //        "@SIZE": "1",
 //        "@MIN": "0",
 //        "@MAX": "60",
 //        "@VALUE": "30",
-//        "@TEXT": "Delay (T1), [sec]",
-//        "@LNGID": "bf8a2c69-50ab-4841-91e1-85867aba0c2c",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.T1DELAY"
+//        "@TEXT": "Delay (T1) [sec]",
+//        "@LNGID": "98dcfbe0-c3fe-4b64-abc2-3452b50b65b3",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayT1.fields.T1DELAY"
 //      },
-//      "EVACUATION_TIMEOUT": {
+//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayT1.fields"
+//    },
+//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.DelayT1"
+//  },
+//  "SoundersMode": {
+//    "name": "Sounders mode",
+//    "fields": {
+//      "SoundersMode": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "1",
+//        "@TEXT": "Sounders mode",
+//        "@LNGID": "355612dd-2784-495f-89ed-891c47191b64",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "Common",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "eedc2043-798f-4d37-b884-528ab5b2fb00",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.SoundersMode.ITEMS.ITEM[0]"
+//            },
+//            {
+//              "@NAME": "Zonal",
+//              "@VALUE": "1",
+//              "@LNGID": "bfecb431-35d8-4c0f-b83f-9862c036a066",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.SoundersMode.ITEMS.ITEM[1]"
+//            }
+//          ],
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.SoundersMode.ITEMS"
+//        },
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.SoundersMode"
+//      },
+//      "ClassChangeTone": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "1",
+//        "@TEXT": "Class Change Tone",
+//        "@LNGID": "05d1966c-ac53-4cf4-a0b3-b32bd40926ff",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "970 Hz",
+//              "@VALUE": "0",
+//              "@LNGID": "a9c588e3-5950-4105-ac33-4f39f56ba9fe",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[0]"
+//            },
+//            {
+//              "@NAME": "800 Hz / 970 Hz @ 2 Hz",
+//              "@VALUE": "1",
+//              "@LNGID": "be0693d3-f1ab-4d6c-8bcf-0f18099f713a",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[1]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 1 Hz",
+//              "@VALUE": "2",
+//              "@LNGID": "1daa4f3b-63c0-41cf-9912-2f1edbdf9d9f",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[2]"
+//            },
+//            {
+//              "@NAME": "970 Hz 1s Off / 1s On",
+//              "@VALUE": "3",
+//              "@LNGID": "1f26db90-df93-443c-beca-38d5b0cb5952",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[3]"
+//            },
+//            {
+//              "@NAME": "970 Hz, 0.5s / 630 Hz, 0.5s",
+//              "@VALUE": "4",
+//              "@LNGID": "bdf90705-06b1-49dc-8200-cac411716e14",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[4]"
+//            },
+//            {
+//              "@NAME": "554 Hz, 0.1s / 440 Hz, 0.4s",
+//              "@VALUE": "5",
+//              "@LNGID": "e72f7993-f239-40ea-8119-a8f9ded9c309",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[5]"
+//            },
+//            {
+//              "@NAME": "500-1200 Hz, 3.5s / 0.5s Off",
+//              "@VALUE": "6",
+//              "@LNGID": "f0985c97-e3b3-459d-afba-9bdac0afb7a7",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[6]"
+//            },
+//            {
+//              "@NAME": "420 Hz 0.625s On / 0.625s Off",
+//              "@VALUE": "7",
+//              "@LNGID": "e91e890c-2442-4dc2-b117-5a8e0da95ea5",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[7]"
+//            },
+//            {
+//              "@NAME": "500-1200 Hz, 0.5s / Off x 3/1.5s Off",
+//              "@VALUE": "8",
+//              "@LNGID": "ed3f55c7-6906-439b-be3e-84d3d885fe60",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[8]"
+//            },
+//            {
+//              "@NAME": "550 Hz / 440 Hz @ 0.5 Hz",
+//              "@VALUE": "9",
+//              "@LNGID": "971a7cec-f705-43e9-b3f2-b0895d14c01f",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[9]"
+//            },
+//            {
+//              "@NAME": "970 Hz, 0.5s On / 0.5s Off x 3 / 1.5s Off",
+//              "@VALUE": "10",
+//              "@DEFAULT": "0",
+//              "@LNGID": "5adf52e7-556c-4d78-b7b4-cb49cac95d58",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[10]"
+//            },
+//            {
+//              "@NAME": "2850 Hz, 0.5s On / 0.5s Off x 3 / 1.5s Off",
+//              "@VALUE": "11",
+//              "@LNGID": "8dafc572-7903-4e3a-9812-9dc55f9f86ee",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[11]"
+//            },
+//            {
+//              "@NAME": "1200 Hz - 500 Hz @ 1 Hz",
+//              "@VALUE": "12",
+//              "@LNGID": "66a1e013-9ab9-4185-af8d-59a205fd9e00",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[12]"
+//            },
+//            {
+//              "@NAME": "400 Hz",
+//              "@VALUE": "13",
+//              "@LNGID": "17346de0-9194-4df5-aa7c-daa49fd1f6e2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[13]"
+//            },
+//            {
+//              "@NAME": "550 Hz, 0.7s / 1000 Hz, 0.33s",
+//              "@VALUE": "14",
+//              "@LNGID": "f361d60f-3d1f-4baf-b98a-35c7672ad425",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[14]"
+//            },
+//            {
+//              "@NAME": "1500 Hz - 2700 Hz @ 3 Hz",
+//              "@VALUE": "15",
+//              "@LNGID": "f3f103eb-f221-4496-8c6e-f8faed146596",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[15]"
+//            },
+//            {
+//              "@NAME": "750 Hz",
+//              "@VALUE": "16",
+//              "@LNGID": "aa1bde57-e038-401e-88ab-06139250bd11",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[16]"
+//            },
+//            {
+//              "@NAME": "2400 Hz",
+//              "@VALUE": "17",
+//              "@LNGID": "664c0984-ed89-4ea9-be74-b282f787a9a8",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[17]"
+//            },
+//            {
+//              "@NAME": "660 Hz",
+//              "@VALUE": "18",
+//              "@LNGID": "73fb5752-1a50-42bc-8655-8f8816778691",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[18]"
+//            },
+//            {
+//              "@NAME": "660 Hz 1.8s On / 1.8s Off",
+//              "@VALUE": "19",
+//              "@LNGID": "79b839c8-677d-4515-b9ae-a70f351fe9ef",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[19]"
+//            },
+//            {
+//              "@NAME": "660 Hz 0.15s On / 0.15s Off",
+//              "@VALUE": "20",
+//              "@LNGID": "af13402e-81bc-4f94-b09b-57ccba18b80a",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[20]"
+//            },
+//            {
+//              "@NAME": "510 Hz, 0.25s / 610 Hz, 0.25s",
+//              "@VALUE": "21",
+//              "@LNGID": "23c556f7-d85c-4338-ae5a-844c94982316",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[21]"
+//            },
+//            {
+//              "@NAME": "800 / 1000 Hz 0.5s each (1 Hz)",
+//              "@VALUE": "22",
+//              "@LNGID": "817ec4cb-7071-4209-be6d-90d25ee89aab",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[22]"
+//            },
+//            {
+//              "@NAME": "250 Hz - 1200 Hz @ 12 Hz",
+//              "@VALUE": "23",
+//              "@LNGID": "6affa100-b510-4b37-adc7-2b55c1e893d0",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[23]"
+//            },
+//            {
+//              "@NAME": "500 Hz - 1200 Hz @ 0.33 Hz",
+//              "@VALUE": "24",
+//              "@LNGID": "872aa0e2-1d76-422a-8b58-5bcc1a103f7c",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[24]"
+//            },
+//            {
+//              "@NAME": "2400 Hz - 2900 Hz @ 9 Hz",
+//              "@VALUE": "25",
+//              "@LNGID": "968ae4e5-caf6-4c83-9010-09ab1004c703",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[25]"
+//            },
+//            {
+//              "@NAME": "2400 Hz - 2900 Hz @ 3 Hz",
+//              "@VALUE": "26",
+//              "@LNGID": "bb1ec73a-dfdd-485a-a155-b2841fd65037",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[26]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 100 Hz",
+//              "@VALUE": "27",
+//              "@LNGID": "b2974b4c-2a8c-4e1b-9d96-5f6002075df8",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[27]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 9 Hz",
+//              "@VALUE": "28",
+//              "@LNGID": "eb50d849-7b76-49f1-bf56-45a96f6a13f3",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[28]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 3 Hz",
+//              "@VALUE": "29",
+//              "@LNGID": "1599dd8b-3a9d-4bc3-9330-fb5abc4ee919",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[29]"
+//            },
+//            {
+//              "@NAME": "800 Hz, 0.25s On / 1s Off",
+//              "@VALUE": "30",
+//              "@LNGID": "e5e9dc2c-3235-497a-8384-de641f5ebc56",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[30]"
+//            },
+//            {
+//              "@NAME": "500 Hz - 1200 Hz, 3.75s / 0.25s Off",
+//              "@VALUE": "31",
+//              "@LNGID": "940f6540-ebfd-45e0-94b1-1eb9ef013cc1",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS.ITEM[31]"
+//            }
+//          ],
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone.ITEMS"
+//        },
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ClassChangeTone"
+//      },
+//      "ALARMTONE": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "1",
+//        "@TEXT": "Alarm tone",
+//        "@LNGID": "05d1966d-ac52-4cf4-b0b3-b32bd40926fc",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "970 Hz",
+//              "@VALUE": "0",
+//              "@DEFAULT": "0",
+//              "@LNGID": "a9c588e3-5950-4105-ac33-4f39f56ba9fe",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[0]"
+//            },
+//            {
+//              "@NAME": "800 Hz / 970 Hz @ 2 Hz",
+//              "@VALUE": "1",
+//              "@LNGID": "be0693d3-f1ab-4d6c-8bcf-0f18099f713a",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[1]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 1 Hz",
+//              "@VALUE": "2",
+//              "@LNGID": "1daa4f3b-63c0-41cf-9912-2f1edbdf9d9f",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[2]"
+//            },
+//            {
+//              "@NAME": "970 Hz 1s Off / 1s On",
+//              "@VALUE": "3",
+//              "@LNGID": "1f26db90-df93-443c-beca-38d5b0cb5952",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[3]"
+//            },
+//            {
+//              "@NAME": "970 Hz, 0.5s / 630 Hz, 0.5s",
+//              "@VALUE": "4",
+//              "@LNGID": "bdf90705-06b1-49dc-8200-cac411716e14",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[4]"
+//            },
+//            {
+//              "@NAME": "554 Hz, 0.1s / 440 Hz, 0.4s",
+//              "@VALUE": "5",
+//              "@LNGID": "e72f7993-f239-40ea-8119-a8f9ded9c309",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[5]"
+//            },
+//            {
+//              "@NAME": "500-1200 Hz, 3.5s / 0.5s Off",
+//              "@VALUE": "6",
+//              "@LNGID": "f0985c97-e3b3-459d-afba-9bdac0afb7a7",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[6]"
+//            },
+//            {
+//              "@NAME": "420 Hz 0.625s On / 0.625s Off",
+//              "@VALUE": "7",
+//              "@LNGID": "e91e890c-2442-4dc2-b117-5a8e0da95ea5",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[7]"
+//            },
+//            {
+//              "@NAME": "500-1200 Hz, 0.5s / Off x 3/1.5s Off",
+//              "@VALUE": "8",
+//              "@LNGID": "ed3f55c7-6906-439b-be3e-84d3d885fe60",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[8]"
+//            },
+//            {
+//              "@NAME": "550 Hz / 440 Hz @ 0.5 Hz",
+//              "@VALUE": "9",
+//              "@LNGID": "971a7cec-f705-43e9-b3f2-b0895d14c01f",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[9]"
+//            },
+//            {
+//              "@NAME": "970 Hz, 0.5s On / 0.5s Off x 3 / 1.5s Off",
+//              "@VALUE": "10",
+//              "@LNGID": "5adf52e7-556c-4d78-b7b4-cb49cac95d58",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[10]"
+//            },
+//            {
+//              "@NAME": "2850 Hz, 0.5s On / 0.5s Off x 3 / 1.5s Off",
+//              "@VALUE": "11",
+//              "@LNGID": "8dafc572-7903-4e3a-9812-9dc55f9f86ee",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[11]"
+//            },
+//            {
+//              "@NAME": "1200 Hz - 500 Hz @ 1 Hz",
+//              "@VALUE": "12",
+//              "@LNGID": "66a1e013-9ab9-4185-af8d-59a205fd9e00",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[12]"
+//            },
+//            {
+//              "@NAME": "400 Hz",
+//              "@VALUE": "13",
+//              "@LNGID": "17346de0-9194-4df5-aa7c-daa49fd1f6e2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[13]"
+//            },
+//            {
+//              "@NAME": "550 Hz, 0.7s / 1000 Hz, 0.33s",
+//              "@VALUE": "14",
+//              "@LNGID": "f361d60f-3d1f-4baf-b98a-35c7672ad425",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[14]"
+//            },
+//            {
+//              "@NAME": "1500 Hz - 2700 Hz @ 3 Hz",
+//              "@VALUE": "15",
+//              "@LNGID": "f3f103eb-f221-4496-8c6e-f8faed146596",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[15]"
+//            },
+//            {
+//              "@NAME": "750 Hz",
+//              "@VALUE": "16",
+//              "@LNGID": "aa1bde57-e038-401e-88ab-06139250bd11",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[16]"
+//            },
+//            {
+//              "@NAME": "2400 Hz",
+//              "@VALUE": "17",
+//              "@LNGID": "664c0984-ed89-4ea9-be74-b282f787a9a8",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[17]"
+//            },
+//            {
+//              "@NAME": "660 Hz",
+//              "@VALUE": "18",
+//              "@LNGID": "73fb5752-1a50-42bc-8655-8f8816778691",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[18]"
+//            },
+//            {
+//              "@NAME": "660 Hz 1.8s On / 1.8s Off",
+//              "@VALUE": "19",
+//              "@LNGID": "79b839c8-677d-4515-b9ae-a70f351fe9ef",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[19]"
+//            },
+//            {
+//              "@NAME": "660 Hz 0.15s On / 0.15s Off",
+//              "@VALUE": "20",
+//              "@LNGID": "af13402e-81bc-4f94-b09b-57ccba18b80a",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[20]"
+//            },
+//            {
+//              "@NAME": "510 Hz, 0.25s / 610 Hz, 0.25s",
+//              "@VALUE": "21",
+//              "@LNGID": "23c556f7-d85c-4338-ae5a-844c94982316",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[21]"
+//            },
+//            {
+//              "@NAME": "800 / 1000 Hz 0.5s each (1 Hz)",
+//              "@VALUE": "22",
+//              "@LNGID": "817ec4cb-7071-4209-be6d-90d25ee89aab",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[22]"
+//            },
+//            {
+//              "@NAME": "250 Hz - 1200 Hz @ 12 Hz",
+//              "@VALUE": "23",
+//              "@LNGID": "6affa100-b510-4b37-adc7-2b55c1e893d0",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[23]"
+//            },
+//            {
+//              "@NAME": "500 Hz - 1200 Hz @ 0.33 Hz",
+//              "@VALUE": "24",
+//              "@LNGID": "872aa0e2-1d76-422a-8b58-5bcc1a103f7c",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[24]"
+//            },
+//            {
+//              "@NAME": "2400 Hz - 2900 Hz @ 9 Hz",
+//              "@VALUE": "25",
+//              "@LNGID": "968ae4e5-caf6-4c83-9010-09ab1004c703",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[25]"
+//            },
+//            {
+//              "@NAME": "2400 Hz - 2900 Hz @ 3 Hz",
+//              "@VALUE": "26",
+//              "@LNGID": "bb1ec73a-dfdd-485a-a155-b2841fd65037",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[26]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 100 Hz",
+//              "@VALUE": "27",
+//              "@LNGID": "b2974b4c-2a8c-4e1b-9d96-5f6002075df8",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[27]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 9 Hz",
+//              "@VALUE": "28",
+//              "@LNGID": "eb50d849-7b76-49f1-bf56-45a96f6a13f3",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[28]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 3 Hz",
+//              "@VALUE": "29",
+//              "@LNGID": "1599dd8b-3a9d-4bc3-9330-fb5abc4ee919",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[29]"
+//            },
+//            {
+//              "@NAME": "800 Hz, 0.25s On / 1s Off",
+//              "@VALUE": "30",
+//              "@LNGID": "e5e9dc2c-3235-497a-8384-de641f5ebc56",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[30]"
+//            },
+//            {
+//              "@NAME": "500 Hz - 1200 Hz, 3.75s / 0.25s Off",
+//              "@VALUE": "31",
+//              "@LNGID": "940f6540-ebfd-45e0-94b1-1eb9ef013cc1",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS.ITEM[31]"
+//            }
+//          ],
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE.ITEMS"
+//        },
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONE"
+//      },
+//      "ALARMTONESETTINGS": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "1",
+//        "@TEXT": "Alarm tone settings",
+//        "@LNGID": "2bdeec8f-5223-423b-b0f2-1c00ccaeaf7e",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "Individual",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "423997fb-ed78-4a88-ab37-57735d8db393",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONESETTINGS.ITEMS.ITEM[0]"
+//            },
+//            {
+//              "@NAME": "Sound / Strobe",
+//              "@VALUE": "192",
+//              "@LNGID": "f51cc817-724a-4457-96f1-4c0ce5f273a0",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONESETTINGS.ITEMS.ITEM[1]"
+//            },
+//            {
+//              "@NAME": "Sound ",
+//              "@VALUE": "64",
+//              "@LNGID": "3a3bf8d3-a02a-4093-b207-1d0f15f27873",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONESETTINGS.ITEMS.ITEM[2]"
+//            },
+//            {
+//              "@NAME": "Strobe",
+//              "@VALUE": "128",
+//              "@LNGID": "0aa76b9c-6a62-47ac-9871-cd8be4ace484",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONESETTINGS.ITEMS.ITEM[3]"
+//            }
+//          ],
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONESETTINGS.ITEMS"
+//        },
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.ALARMTONESETTINGS"
+//      },
+//      "EVACUATIONTONE": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "1",
+//        "@TEXT": "Evacuation tone",
+//        "@LNGID": "25633dc3-51e0-4228-84d0-a9f64de05086",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "970 Hz",
+//              "@VALUE": "0",
+//              "@DEFAULT": "0",
+//              "@LNGID": "7714cbe8-57c2-47ad-95c1-c2cff6fb3b82",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[0]"
+//            },
+//            {
+//              "@NAME": "800 Hz / 970 Hz @ 2 Hz",
+//              "@VALUE": "1",
+//              "@LNGID": "4668babf-6a6d-4494-b451-f05de9370734",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[1]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 1 Hz",
+//              "@VALUE": "2",
+//              "@LNGID": "ee77d0f6-3d2e-418f-85ba-1ca4966e53fc",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[2]"
+//            },
+//            {
+//              "@NAME": "970 Hz 1s Off / 1s On",
+//              "@VALUE": "3",
+//              "@LNGID": "55bc5105-ebf4-4b79-a030-f928ba176896",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[3]"
+//            },
+//            {
+//              "@NAME": "970 Hz, 0.5s / 630 Hz, 0.5s",
+//              "@VALUE": "4",
+//              "@LNGID": "1386b06d-4bc8-4318-a04e-cae95da04df2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[4]"
+//            },
+//            {
+//              "@NAME": "554 Hz, 0.1s / 440 Hz, 0.4s",
+//              "@VALUE": "5",
+//              "@LNGID": "fe5ec250-3559-4a5a-910d-eb141136a4c5",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[5]"
+//            },
+//            {
+//              "@NAME": "500-1200 Hz, 3.5s / 0.5s Off",
+//              "@VALUE": "6",
+//              "@LNGID": "63eeadbe-1bce-4fe1-9f91-409ca0da4e5d",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[6]"
+//            },
+//            {
+//              "@NAME": "420 Hz 0.625s On / 0.625s Off",
+//              "@VALUE": "7",
+//              "@LNGID": "39262561-8526-4a49-8370-eea9fd4575e4",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[7]"
+//            },
+//            {
+//              "@NAME": "500-1200 Hz, 0.5s / Off x 3/1.5s Off",
+//              "@VALUE": "8",
+//              "@LNGID": "6017c3ff-11be-4bc8-9b3c-f46c8ddd671b",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[8]"
+//            },
+//            {
+//              "@NAME": "550 Hz / 440 Hz @ 0.5 Hz",
+//              "@VALUE": "9",
+//              "@LNGID": "6b121d6a-21f6-438d-8dfd-1020d24ba2a0",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[9]"
+//            },
+//            {
+//              "@NAME": "970 Hz, 0.5s On / 0.5s Off x 3 / 1.5s Off",
+//              "@VALUE": "10",
+//              "@LNGID": "a8349e5e-03c8-4576-a534-746e85e9ee53",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[10]"
+//            },
+//            {
+//              "@NAME": "2850 Hz, 0.5s On / 0.5s Off x 3 / 1.5s Off",
+//              "@VALUE": "11",
+//              "@LNGID": "b71585be-7a7f-4652-bd5b-de06f1d2dbed",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[11]"
+//            },
+//            {
+//              "@NAME": "1200 Hz - 500 Hz @ 1 Hz",
+//              "@VALUE": "12",
+//              "@LNGID": "19c213c4-e9bc-4af2-a717-114b225c0231",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[12]"
+//            },
+//            {
+//              "@NAME": "400 Hz",
+//              "@VALUE": "13",
+//              "@LNGID": "2977a351-5855-4da0-8d83-4566b0e7664f",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[13]"
+//            },
+//            {
+//              "@NAME": "550 Hz, 0.7s / 1000 Hz, 0.33s",
+//              "@VALUE": "14",
+//              "@LNGID": "3c7f82c9-8804-4454-98d8-f4a06f24c3af",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[14]"
+//            },
+//            {
+//              "@NAME": "1500 Hz - 2700 Hz @ 3 Hz",
+//              "@VALUE": "15",
+//              "@LNGID": "2b907ad5-7357-41ed-b56b-27f302a2492f",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[15]"
+//            },
+//            {
+//              "@NAME": "750 Hz",
+//              "@VALUE": "16",
+//              "@LNGID": "ce72773f-e520-4ec9-8aa3-ff0b5a9b2412",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[16]"
+//            },
+//            {
+//              "@NAME": "2400 Hz",
+//              "@VALUE": "17",
+//              "@LNGID": "7ce607bd-9744-494c-b341-bd4defce1021",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[17]"
+//            },
+//            {
+//              "@NAME": "660 Hz",
+//              "@VALUE": "18",
+//              "@LNGID": "ecb39f2b-086f-4780-a2fa-922a2d69a468",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[18]"
+//            },
+//            {
+//              "@NAME": "660 Hz 1.8s On / 1.8s Off",
+//              "@VALUE": "19",
+//              "@LNGID": "42980d2e-5a8a-4505-951e-a4f0b8ef4cee",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[19]"
+//            },
+//            {
+//              "@NAME": "660 Hz 0.15s On / 0.15s Off",
+//              "@VALUE": "20",
+//              "@LNGID": "b10bec14-18d4-45be-89ef-76a57d41efab",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[20]"
+//            },
+//            {
+//              "@NAME": "510 Hz, 0.25s / 610 Hz, 0.25s",
+//              "@VALUE": "21",
+//              "@LNGID": "04fa168d-5740-4bc9-be98-3f792ccabf93",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[21]"
+//            },
+//            {
+//              "@NAME": "800 / 1000 Hz 0.5s each (1 Hz)",
+//              "@VALUE": "22",
+//              "@LNGID": "5deee843-9c7c-4064-a70d-14df92e2c48c",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[22]"
+//            },
+//            {
+//              "@NAME": "250 Hz - 1200 Hz @ 12 Hz",
+//              "@VALUE": "23",
+//              "@LNGID": "a03ce57a-b133-4323-95a9-05e74c9cd3ab",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[23]"
+//            },
+//            {
+//              "@NAME": "500 Hz - 1200 Hz @ 0.33 Hz",
+//              "@VALUE": "24",
+//              "@LNGID": "982c366d-b6de-4511-acda-5ec797b0c57a",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[24]"
+//            },
+//            {
+//              "@NAME": "2400 Hz - 2900 Hz @ 9 Hz",
+//              "@VALUE": "25",
+//              "@LNGID": "b8bb655f-8327-4b76-8df3-80a198fc06f1",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[25]"
+//            },
+//            {
+//              "@NAME": "2400 Hz - 2900 Hz @ 3 Hz",
+//              "@VALUE": "26",
+//              "@LNGID": "d56ab8c5-45d3-41db-a630-470eb55b8743",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[26]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 100 Hz",
+//              "@VALUE": "27",
+//              "@LNGID": "fdeb85c7-3b03-4926-bba2-e7d3bc5744ff",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[27]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 9 Hz",
+//              "@VALUE": "28",
+//              "@LNGID": "79283606-5cd3-42ae-bbc0-f11923fe7aa7",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[28]"
+//            },
+//            {
+//              "@NAME": "800 Hz - 970 Hz @ 3 Hz",
+//              "@VALUE": "29",
+//              "@LNGID": "35508957-1693-451d-b578-88b7f84320b2",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[29]"
+//            },
+//            {
+//              "@NAME": "800 Hz, 0.25s On / 1s Off",
+//              "@VALUE": "30",
+//              "@LNGID": "6a6f5487-940e-4d4c-b253-ba9f6dad8ba4",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[30]"
+//            },
+//            {
+//              "@NAME": "500 Hz - 1200 Hz, 3.75s / 0.25s Off",
+//              "@VALUE": "31",
+//              "@LNGID": "e95742c4-f11a-44d0-ad98-3ce96b4c87d5",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS.ITEM[31]"
+//            }
+//          ],
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE.ITEMS"
+//        },
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATIONTONE"
+//      },
+//      "EVACUATETIMEOUT": {
 //        "@TYPE": "INT",
 //        "@SIZE": "1",
 //        "@MIN": "0",
 //        "@MAX": "10",
 //        "@VALUE": "0",
-//        "@TEXT": "Evacuation Timeout (Т3), [min]",
-//        "@LNGID": "905539ac-7129-47ed-95fc-864787d514ca",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields.EVACUATION_TIMEOUT"
+//        "@TEXT": "Evacuate timeout [min]",
+//        "@LNGID": "dfcf2c3e-9f41-4fe9-804b-e9e14b47735a",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATETIMEOUT"
 //      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters.fields"
-//    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.Parameters"
-//  },
-//  "ToneSettings": {
-//    "name": "Tone Settings",
-//    "fields": {
-//      "TONEALARM": {
-//        "@TYPE": "LIST",
+//      "VECInverted": {
+//        "@TYPE": "SLIDER",
 //        "@SIZE": "1",
-//        "@TEXT": "Tone Alarm",
-//        "@LNGID": "f3d45b86-be6d-47ed-ab4f-a9880c7ff406",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "970 Hz",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "4024610f-2939-45d0-95f5-571b92ece47c",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "800 Hz / 970 Hz @ 2 Hz",
-//              "@VALUE": "1",
-//              "@LNGID": "54940221-159d-4c37-af9f-6437d0d2ca35",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 1 Hz",
-//              "@VALUE": "2",
-//              "@LNGID": "2fdd250d-bc74-4989-ad02-0098e56ac3c3",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[2]"
-//            },
-//            {
-//              "@NAME": "970 Hz 1s OFF / 1s ON",
-//              "@VALUE": "3",
-//              "@LNGID": "7dfcaa30-33b0-4bef-892d-c1e729e306cb",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[3]"
-//            },
-//            {
-//              "@NAME": "970 Hz, 0.5s / 630 Hz, 0.5s",
-//              "@VALUE": "4",
-//              "@LNGID": "5b95475e-496d-4d26-b315-f8463f483ee0",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[4]"
-//            },
-//            {
-//              "@NAME": "554 Hz, 0.1s / 440 Hz, 0.4s",
-//              "@VALUE": "5",
-//              "@LNGID": "2b16cd78-6034-4992-8c94-ed80d599dbe1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[5]"
-//            },
-//            {
-//              "@NAME": "500-1200 Hz, 3.5s / 0.5s OFF",
-//              "@VALUE": "6",
-//              "@LNGID": "4e7307b6-5c48-4096-a97c-3d493c5fcd13",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[6]"
-//            },
-//            {
-//              "@NAME": "420 Hz 0.625s ON / 0.625s OFF",
-//              "@VALUE": "7",
-//              "@LNGID": "5eb2894c-1eb4-4dd4-97d2-7ba4e1581a03",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[7]"
-//            },
-//            {
-//              "@NAME": "500-1200 Hz, 0.5s / OFF x 3/1.5s OFF",
-//              "@VALUE": "8",
-//              "@LNGID": "e6078499-0c2e-44ee-bd3a-88233d822570",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[8]"
-//            },
-//            {
-//              "@NAME": "550 Hz / 440 Hz @ 0.5 Hz",
-//              "@VALUE": "9",
-//              "@LNGID": "202abfea-d6b8-438c-a988-ec99fd814e99",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[9]"
-//            },
-//            {
-//              "@NAME": "970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF",
-//              "@VALUE": "10",
-//              "@LNGID": "f9536618-cfa8-4290-8c34-66e3b537379f",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[10]"
-//            },
-//            {
-//              "@NAME": "2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF",
-//              "@VALUE": "11",
-//              "@LNGID": "f2bfa202-15cb-4423-adf1-b15ba201c7e0",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[11]"
-//            },
-//            {
-//              "@NAME": "1200 Hz - 500 Hz @ 1 Hz",
-//              "@VALUE": "12",
-//              "@LNGID": "f936aec5-03e4-4c46-976f-25fcf2eeb928",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[12]"
-//            },
-//            {
-//              "@NAME": "400 Hz",
-//              "@VALUE": "13",
-//              "@LNGID": "8ee7f03a-6b0e-4bfe-bdbe-fb2fcf7caf3d",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[13]"
-//            },
-//            {
-//              "@NAME": "550 Hz, 0.7s / 1000 Hz, 0.33s",
-//              "@VALUE": "14",
-//              "@LNGID": "89d3d7b8-3d4a-491d-8f37-a827114440dc",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[14]"
-//            },
-//            {
-//              "@NAME": "1500 Hz - 2700 Hz @ 3 Hz",
-//              "@VALUE": "15",
-//              "@LNGID": "9cf76b4d-e411-4521-aec0-11c8d3bcda51",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[15]"
-//            },
-//            {
-//              "@NAME": "750 Hz",
-//              "@VALUE": "16",
-//              "@LNGID": "cf34c0ca-2a8b-4fad-8886-bd7acd172ed7",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[16]"
-//            },
-//            {
-//              "@NAME": "2400 Hz",
-//              "@VALUE": "17",
-//              "@LNGID": "595697b1-412d-4726-86c8-0a1de2393337",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[17]"
-//            },
-//            {
-//              "@NAME": "660 Hz",
-//              "@VALUE": "18",
-//              "@LNGID": "093e6e20-12fa-480f-a160-cfd258745629",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[18]"
-//            },
-//            {
-//              "@NAME": "660 Hz 1.8s ON / 1.8s OFF",
-//              "@VALUE": "19",
-//              "@LNGID": "56b84208-e108-4c32-8f22-40c2fa952370",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[19]"
-//            },
-//            {
-//              "@NAME": "660 Hz 0.15s ON / 0.15s OFF",
-//              "@VALUE": "20",
-//              "@LNGID": "e5863b58-e9eb-45aa-8415-bef2039831d8",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[20]"
-//            },
-//            {
-//              "@NAME": "510 Hz, 0.25s / 610 Hz, 0.25s",
-//              "@VALUE": "21",
-//              "@LNGID": "6bf22083-0453-42f4-9a42-35ad7c542947",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[21]"
-//            },
-//            {
-//              "@NAME": "800 / 1000 Hz 0.5s each (1 Hz)",
-//              "@VALUE": "22",
-//              "@LNGID": "5657c53c-2fd1-4ef2-84c3-3a066bb18fb4",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[22]"
-//            },
-//            {
-//              "@NAME": "250 Hz - 1200 Hz @ 12 Hz",
-//              "@VALUE": "23",
-//              "@LNGID": "2098404f-f95a-4087-9062-0899b4fce510",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[23]"
-//            },
-//            {
-//              "@NAME": "500 Hz - 1200 Hz @ 0.33 Hz",
-//              "@VALUE": "24",
-//              "@LNGID": "4b9567cf-4478-4d2d-9549-85295ed40fb4",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[24]"
-//            },
-//            {
-//              "@NAME": "2400 Hz - 2900 Hz @ 9 Hz",
-//              "@VALUE": "25",
-//              "@LNGID": "96373260-8dce-4e30-8040-90979cb9e9d1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[25]"
-//            },
-//            {
-//              "@NAME": "2400 Hz - 2900 Hz @ 3 Hz",
-//              "@VALUE": "26",
-//              "@LNGID": "01d6acb8-07f5-49d3-905f-a61988974deb",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[26]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 100 Hz",
-//              "@VALUE": "27",
-//              "@LNGID": "67c9bae2-e4f6-42c4-a159-9f517e295969",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[27]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 9 Hz",
-//              "@VALUE": "28",
-//              "@LNGID": "4eb577be-c1b6-456f-ac49-9b6414be649b",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[28]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 3 Hz",
-//              "@VALUE": "29",
-//              "@LNGID": "0168fa61-e497-44c6-b9b9-ce73a91c0699",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[29]"
-//            },
-//            {
-//              "@NAME": "800 Hz, 0.25s ON / 1s OFF",
-//              "@VALUE": "30",
-//              "@LNGID": "e0135281-4bed-4d47-8c24-ed3b039606c8",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[30]"
-//            },
-//            {
-//              "@NAME": "500 Hz - 1200 Hz, 3.75s / 0.25s OFF",
-//              "@VALUE": "31",
-//              "@LNGID": "b0be419b-87cd-4e39-b9c1-16ea37be15b5",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS.ITEM[31]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEALARM"
-//      },
-//      "TONEEVACUATE": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Tone Evacuate",
-//        "@LNGID": "235b093c-5f3a-4ba2-9f36-b94347fa4468",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "970 Hz",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "4e8b1b15-e191-4f9f-9cea-596674529a36",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "800 Hz / 970 Hz @ 2 Hz",
-//              "@VALUE": "1",
-//              "@LNGID": "3fbefbe3-776f-4f77-af91-35543bc48990",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 1 Hz",
-//              "@VALUE": "2",
-//              "@LNGID": "c5b1f1d5-03d0-49a8-93d8-e05938e6ec58",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[2]"
-//            },
-//            {
-//              "@NAME": "970 Hz 1s OFF / 1s ON",
-//              "@VALUE": "3",
-//              "@LNGID": "9367d48d-5645-44f1-9bbe-d6e7d6d34523",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[3]"
-//            },
-//            {
-//              "@NAME": "970 Hz, 0.5s / 630 Hz, 0.5s",
-//              "@VALUE": "4",
-//              "@LNGID": "069554b3-be9a-4995-b99e-406f523d379d",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[4]"
-//            },
-//            {
-//              "@NAME": "554 Hz, 0.1s / 440 Hz, 0.4s",
-//              "@VALUE": "5",
-//              "@LNGID": "4bd966c8-e20e-4930-96f4-1c0ca689b936",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[5]"
-//            },
-//            {
-//              "@NAME": "500-1200 Hz, 3.5s / 0.5s OFF",
-//              "@VALUE": "6",
-//              "@LNGID": "44a84cd4-a502-4f98-955b-0b3afc34a744",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[6]"
-//            },
-//            {
-//              "@NAME": "420 Hz 0.625s ON / 0.625s OFF",
-//              "@VALUE": "7",
-//              "@LNGID": "0286070d-6106-43ad-ae89-937ae938e707",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[7]"
-//            },
-//            {
-//              "@NAME": "500-1200 Hz, 0.5s / OFF x 3/1.5s OFF",
-//              "@VALUE": "8",
-//              "@LNGID": "2a98caa4-b882-4c83-8364-8ca4e88e9a46",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[8]"
-//            },
-//            {
-//              "@NAME": "550 Hz / 440 Hz @ 0.5 Hz",
-//              "@VALUE": "9",
-//              "@LNGID": "51b554b0-5025-4bf8-9531-a2df490c5946",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[9]"
-//            },
-//            {
-//              "@NAME": "970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF",
-//              "@VALUE": "10",
-//              "@LNGID": "82252a21-5898-4672-b104-a96ed8a7bbc9",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[10]"
-//            },
-//            {
-//              "@NAME": "2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF",
-//              "@VALUE": "11",
-//              "@LNGID": "43b1bc10-97e0-4565-9535-d62e83266406",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[11]"
-//            },
-//            {
-//              "@NAME": "1200 Hz - 500 Hz @ 1 Hz",
-//              "@VALUE": "12",
-//              "@LNGID": "5f8c272b-308d-48cc-a692-de04e2262cef",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[12]"
-//            },
-//            {
-//              "@NAME": "400 Hz",
-//              "@VALUE": "13",
-//              "@LNGID": "a7983c59-8f1e-4c36-97ee-f1ed9b46a897",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[13]"
-//            },
-//            {
-//              "@NAME": "550 Hz, 0.7s / 1000 Hz, 0.33s",
-//              "@VALUE": "14",
-//              "@LNGID": "c7bee5f0-d1be-4072-a72c-135004fcc4fc",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[14]"
-//            },
-//            {
-//              "@NAME": "1500 Hz - 2700 Hz @ 3 Hz",
-//              "@VALUE": "15",
-//              "@LNGID": "cd0fba84-64f0-4544-8f14-29563a18276a",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[15]"
-//            },
-//            {
-//              "@NAME": "750 Hz",
-//              "@VALUE": "16",
-//              "@LNGID": "a3ba9890-0efd-4ba3-9569-fc61dc478ba2",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[16]"
-//            },
-//            {
-//              "@NAME": "2400 Hz",
-//              "@VALUE": "17",
-//              "@LNGID": "bb10d75d-0794-4719-8ad9-1bac1393ab16",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[17]"
-//            },
-//            {
-//              "@NAME": "660 Hz",
-//              "@VALUE": "18",
-//              "@LNGID": "0932361c-8d28-4c66-8912-19e6c3c22bee",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[18]"
-//            },
-//            {
-//              "@NAME": "660 Hz 1.8s ON / 1.8s OFF",
-//              "@VALUE": "19",
-//              "@LNGID": "44db9f55-623f-438e-a71e-5ad204c7337b",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[19]"
-//            },
-//            {
-//              "@NAME": "660 Hz 0.15s ON / 0.15s OFF",
-//              "@VALUE": "20",
-//              "@LNGID": "02f88311-60d8-4e41-9a92-9b290f1dd61d",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[20]"
-//            },
-//            {
-//              "@NAME": "510 Hz, 0.25s / 610 Hz, 0.25s",
-//              "@VALUE": "21",
-//              "@LNGID": "d2d4a4fd-ec7d-4900-a238-a58dc2fa4e30",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[21]"
-//            },
-//            {
-//              "@NAME": "800 / 1000 Hz 0.5s each (1 Hz)",
-//              "@VALUE": "22",
-//              "@LNGID": "7cefda1e-0d84-4045-b275-2d613756822b",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[22]"
-//            },
-//            {
-//              "@NAME": "250 Hz - 1200 Hz @ 12 Hz",
-//              "@VALUE": "23",
-//              "@LNGID": "5c2873ca-3ed6-445f-bfde-98ee8bf75ad2",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[23]"
-//            },
-//            {
-//              "@NAME": "500 Hz - 1200 Hz @ 0.33 Hz",
-//              "@VALUE": "24",
-//              "@LNGID": "79d229d1-6744-49ec-8c86-d14f1c66bcfc",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[24]"
-//            },
-//            {
-//              "@NAME": "2400 Hz - 2900 Hz @ 9 Hz",
-//              "@VALUE": "25",
-//              "@LNGID": "2b812844-47e8-4e03-b1c5-c4c773ce3edf",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[25]"
-//            },
-//            {
-//              "@NAME": "2400 Hz - 2900 Hz @ 3 Hz",
-//              "@VALUE": "26",
-//              "@LNGID": "c2d4a44f-7f48-41ef-8f9c-b46fbdf73308",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[26]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 100 Hz",
-//              "@VALUE": "27",
-//              "@LNGID": "f9da1362-5432-44d2-9ca3-0064435056cf",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[27]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 9 Hz",
-//              "@VALUE": "28",
-//              "@LNGID": "80663ddd-d4ab-4f0d-b5f9-e964bee36fca",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[28]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 3 Hz",
-//              "@VALUE": "29",
-//              "@LNGID": "e1f54a87-2b77-44e1-b36c-21091f369ed1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[29]"
-//            },
-//            {
-//              "@NAME": "800 Hz, 0.25s ON / 1s OFF",
-//              "@VALUE": "30",
-//              "@LNGID": "4cb424e9-3381-43a9-9e99-bd139a3c1f62",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[30]"
-//            },
-//            {
-//              "@NAME": "500 Hz - 1200 Hz, 3.75s / 0.25s OFF",
-//              "@VALUE": "31",
-//              "@LNGID": "5a719b26-2d33-4808-b39a-275c1a0906ff",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS.ITEM[31]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONEEVACUATE"
-//      },
-//      "TONECLASSCHANGE": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Class Change Tone",
-//        "@LNGID": "1a6bbff4-a8f2-42e9-9ba8-deb989c6fd53",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "970 Hz",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "8ad995aa-b113-4a0d-a9e2-543088622b7b",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "800 Hz / 970 Hz @ 2 Hz",
-//              "@VALUE": "1",
-//              "@LNGID": "df309f46-4860-414d-a662-d96222f8128a",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 1 Hz",
-//              "@VALUE": "2",
-//              "@LNGID": "4409fd51-69e1-4076-ba55-2f89f7a4e827",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[2]"
-//            },
-//            {
-//              "@NAME": "970 Hz 1s OFF / 1s ON",
-//              "@VALUE": "3",
-//              "@LNGID": "4ecd6867-e448-4505-90b4-9a1c9001a7ae",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[3]"
-//            },
-//            {
-//              "@NAME": "970 Hz, 0.5s / 630 Hz, 0.5s",
-//              "@VALUE": "4",
-//              "@LNGID": "b01e4b2b-6a50-4c27-87bb-9b1b9bc33431",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[4]"
-//            },
-//            {
-//              "@NAME": "554 Hz, 0.1s / 440 Hz, 0.4s",
-//              "@VALUE": "5",
-//              "@LNGID": "eb08b139-554c-4a85-92a8-0a89a445f2ed",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[5]"
-//            },
-//            {
-//              "@NAME": "500-1200 Hz, 3.5s / 0.5s OFF",
-//              "@VALUE": "6",
-//              "@LNGID": "fea61ea1-4be4-4652-924c-0b922c32f786",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[6]"
-//            },
-//            {
-//              "@NAME": "420 Hz 0.625s ON / 0.625s OFF",
-//              "@VALUE": "7",
-//              "@LNGID": "f8b8514e-c8c1-45bb-b6ac-1bb20417d41c",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[7]"
-//            },
-//            {
-//              "@NAME": "500-1200 Hz, 0.5s / OFF x 3/1.5s OFF",
-//              "@VALUE": "8",
-//              "@LNGID": "4fc89612-fe5d-4ccc-bdb0-adb0a54e1247",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[8]"
-//            },
-//            {
-//              "@NAME": "550 Hz / 440 Hz @ 0.5 Hz",
-//              "@VALUE": "9",
-//              "@LNGID": "ffeb31ca-835f-41e6-8632-b44120b33b7c",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[9]"
-//            },
-//            {
-//              "@NAME": "970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF",
-//              "@VALUE": "10",
-//              "@DEFAULT": "1",
-//              "@LNGID": "53e1f368-b17f-4ce7-9b04-185d6fd5e212",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[10]"
-//            },
-//            {
-//              "@NAME": "2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF",
-//              "@VALUE": "11",
-//              "@LNGID": "464ab19f-9341-4f7a-9af4-97f8e8211891",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[11]"
-//            },
-//            {
-//              "@NAME": "1200 Hz - 500 Hz @ 1 Hz",
-//              "@VALUE": "12",
-//              "@LNGID": "0370bcb3-3676-43f2-a528-781473553117",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[12]"
-//            },
-//            {
-//              "@NAME": "400 Hz",
-//              "@VALUE": "13",
-//              "@LNGID": "20b46ff0-6b62-4e51-a5a8-8abd88d91242",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[13]"
-//            },
-//            {
-//              "@NAME": "550 Hz, 0.7s / 1000 Hz, 0.33s",
-//              "@VALUE": "14",
-//              "@LNGID": "d48194ed-7c9a-4d24-80c6-96b97a084127",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[14]"
-//            },
-//            {
-//              "@NAME": "1500 Hz - 2700 Hz @ 3 Hz",
-//              "@VALUE": "15",
-//              "@LNGID": "a40caf6e-f934-41cf-96d8-31c1406146f6",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[15]"
-//            },
-//            {
-//              "@NAME": "750 Hz",
-//              "@VALUE": "16",
-//              "@LNGID": "e5462f0e-e7be-41c7-8231-a5de747adbcd",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[16]"
-//            },
-//            {
-//              "@NAME": "2400 Hz",
-//              "@VALUE": "17",
-//              "@LNGID": "7e5f4aa0-b01c-4889-89c6-5560e9abb540",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[17]"
-//            },
-//            {
-//              "@NAME": "660 Hz",
-//              "@VALUE": "18",
-//              "@LNGID": "988a99ee-0816-447a-9c74-b237e49a80af",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[18]"
-//            },
-//            {
-//              "@NAME": "660 Hz 1.8s ON / 1.8s OFF",
-//              "@VALUE": "19",
-//              "@LNGID": "5b229b07-3cad-44ec-8aa8-724aa3e9a06d",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[19]"
-//            },
-//            {
-//              "@NAME": "660 Hz 0.15s ON / 0.15s OFF",
-//              "@VALUE": "20",
-//              "@LNGID": "760e6586-9a8e-4531-a9d3-70923e11451b",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[20]"
-//            },
-//            {
-//              "@NAME": "510 Hz, 0.25s / 610 Hz, 0.25s",
-//              "@VALUE": "21",
-//              "@LNGID": "846015c9-04e1-49da-b883-58ef904a264a",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[21]"
-//            },
-//            {
-//              "@NAME": "800 / 1000 Hz 0.5s each (1 Hz)",
-//              "@VALUE": "22",
-//              "@LNGID": "7ee39eac-cbea-4fc7-b8b5-6375146f4648",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[22]"
-//            },
-//            {
-//              "@NAME": "250 Hz - 1200 Hz @ 12 Hz",
-//              "@VALUE": "23",
-//              "@LNGID": "feb528c4-3336-4077-9362-49684f516dc2",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[23]"
-//            },
-//            {
-//              "@NAME": "500 Hz - 1200 Hz @ 0.33 Hz",
-//              "@VALUE": "24",
-//              "@LNGID": "928afc05-0f02-4c38-924a-97138f0c4395",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[24]"
-//            },
-//            {
-//              "@NAME": "2400 Hz - 2900 Hz @ 9 Hz",
-//              "@VALUE": "25",
-//              "@LNGID": "0486e7e9-5865-4548-8759-cd0ab9cd9dac",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[25]"
-//            },
-//            {
-//              "@NAME": "2400 Hz - 2900 Hz @ 3 Hz",
-//              "@VALUE": "26",
-//              "@LNGID": "fb8da6b5-4c5a-495b-ae7e-ddd55c161cc1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[26]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 100 Hz",
-//              "@VALUE": "27",
-//              "@LNGID": "3b264ac5-1f44-4dfa-b0c6-a148007ab36c",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[27]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 9 Hz",
-//              "@VALUE": "28",
-//              "@LNGID": "defe0357-1c39-4a9b-b2ef-735425e76124",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[28]"
-//            },
-//            {
-//              "@NAME": "800 Hz - 970 Hz @ 3 Hz",
-//              "@VALUE": "29",
-//              "@LNGID": "76014c85-e363-4f61-bc6a-f79eeb31efa1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[29]"
-//            },
-//            {
-//              "@NAME": "800 Hz, 0.25s ON / 1s OFF",
-//              "@VALUE": "30",
-//              "@LNGID": "84ce0a99-af84-4330-a97b-0cca8d3ba118",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[30]"
-//            },
-//            {
-//              "@NAME": "500 Hz - 1200 Hz, 3.75s / 0.25s OFF",
-//              "@VALUE": "31",
-//              "@LNGID": "f2802e10-ca07-4dc2-b518-670429ef93f1",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS.ITEM[31]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields.TONECLASSCHANGE"
-//      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings.fields"
-//    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.ToneSettings"
-//  },
-//  "AutoLogOff": {
-//    "name": "Auto Log Off",
-//    "fields": {
-//      "AUTOLOGOFFENABLED": {
-//        "@TYPE": "AND",
-//        "@SIZE": "1",
-//        "@TEXT": "Auto Log off",
-//        "@LNGID": "9798abfa-578d-494d-949f-f88f7aeb9d0f",
-//        "PROPERTIES": {
-//          "PROPERTY": {
-//            "@TYPE": "SLIDER",
-//            "@ID": "LOGOFFENABLED",
-//            "@SIZE": "1",
-//            "@TEXT": "Enabled",
-//            "@AND": "1",
-//            "@YESVAL": "1",
-//            "@NOVAL": "0",
-//            "@CHECKED": "0",
-//            "@LNGID": "135ed5dc-e47c-4f01-8dc7-6233e5af3707",
-//            "~path": "ELEMENTS.iris.PROPERTIES.Groups.AutoLogOff.fields.AUTOLOGOFFENABLED.PROPERTIES.PROPERTY"
-//          },
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.AutoLogOff.fields.AUTOLOGOFFENABLED.PROPERTIES"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AutoLogOff.fields.AUTOLOGOFFENABLED"
-//      },
-//      "TIMEAUTOLOGOFFINSTALLER": {
-//        "@TYPE": "INT",
-//        "@SIZE": "1",
-//        "@MIN": "1",
-//        "@MAX": "60",
-//        "@VALUE": "30",
-//        "@TEXT": "Time Auto Log off Installer, [min]",
-//        "@LNGID": "ea29a686-84da-4070-9380-62215b76bb2e",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AutoLogOff.fields.TIMEAUTOLOGOFFINSTALLER"
-//      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.AutoLogOff.fields"
-//    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.AutoLogOff"
-//  },
-//  "Settings": {
-//    "name": "Settings",
-//    "fields": {
-//      "ALARM_SETTINGS": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Alarm Settings",
-//        "@LNGID": "4e961f50-f84a-4784-832b-e543bc9367c0",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "Sound / Strobe",
-//              "@VALUE": "192",
-//              "@LNGID": "e6be6d79-a4b8-49c1-9581-91e0ff71f4b9",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.ALARM_SETTINGS.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "Sound ",
-//              "@VALUE": "64",
-//              "@LNGID": "7211a321-401d-4c81-8e17-1b617442bec9",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.ALARM_SETTINGS.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "Strobe",
-//              "@VALUE": "128",
-//              "@LNGID": "731d6553-e45f-4953-a702-ccf431650dbd",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.ALARM_SETTINGS.ITEMS.ITEM[2]"
-//            },
-//            {
-//              "@NAME": "Individual",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "a5523098-d049-40f5-9ee0-95ca763c6a74",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.ALARM_SETTINGS.ITEMS.ITEM[3]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.ALARM_SETTINGS.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.ALARM_SETTINGS"
-//      },
-//      "EVACUATE_SETTINGS": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "1",
-//        "@TEXT": "Evacuate Settings",
-//        "@LNGID": "2a0f8837-53b4-4230-a6aa-df0e8424a08f",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "Sound / Strobe",
-//              "@VALUE": "192",
-//              "@DEFAULT": "1",
-//              "@LNGID": "eb8d8e77-074c-470c-a2dd-53d24cbb1d8a",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.EVACUATE_SETTINGS.ITEMS.ITEM[0]"
-//            },
-//            {
-//              "@NAME": "Sound ",
-//              "@VALUE": "64",
-//              "@LNGID": "9ee9c25c-5809-4165-9470-529981170137",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.EVACUATE_SETTINGS.ITEMS.ITEM[1]"
-//            },
-//            {
-//              "@NAME": "Strobe",
-//              "@VALUE": "128",
-//              "@LNGID": "52bcc7a4-8336-4760-9779-7fccd2fb7b94",
-//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.EVACUATE_SETTINGS.ITEMS.ITEM[2]"
-//            }
-//          ],
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.EVACUATE_SETTINGS.ITEMS"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields.EVACUATE_SETTINGS"
-//      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings.fields"
-//    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.Settings"
-//  },
-//  "AlertEVACVoiceCycle": {
-//    "name": "Alert/EVAC Voice Cycle",
-//    "fields": {
-//      "EVACUATECYCLE_ON": {
-//        "@TYPE": "INT",
-//        "@SIZE": "2",
-//        "@MIN": "0",
-//        "@MAX": "600",
-//        "@VALUE": "0",
-//        "@TEXT": "Alert/EVAC Voice Cycle ON, [sec]",
-//        "@LNGID": "ef746bfc-c4eb-4487-871a-3658340eb21d",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields.EVACUATECYCLE_ON"
+//        "@TEXT": "Voice evacuation cycle off/on inverted",
+//        "@AND": "4",
+//        "@YESVAL": "4",
+//        "@NOVAL": "0",
+//        "@CHECKED": "0",
+//        "@LNGID": "8fb145cc-4336-3441-97b9-04ba4bd2f7ff",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.VECInverted"
 //      },
 //      "EVACUATECYCLE_OFF": {
 //        "@TYPE": "INT",
@@ -1156,103 +987,82 @@
 //        "@MIN": "0",
 //        "@MAX": "600",
 //        "@VALUE": "0",
-//        "@TEXT": "Alert/EVAC Voice Cycle OFF, [sec]",
-//        "@LNGID": "b3b38ccd-4b70-478c-bf98-39ff77b3e5e7",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields.EVACUATECYCLE_OFF"
+//        "@TEXT": "Voice evacuation cycle off [sec]",
+//        "@LNGID": "94eca3e5-ebe1-46f6-af7f-5694c98843a5",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATECYCLE_OFF"
 //      },
-//      "EVACUATIONCYCLE INVERTED": {
-//        "@TYPE": "AND",
+//      "EVACUATECYCLE_ON": {
+//        "@TYPE": "INT",
+//        "@SIZE": "2",
+//        "@MIN": "0",
+//        "@MAX": "600",
+//        "@VALUE": "0",
+//        "@TEXT": "Voice evacuation cycle on [sec]",
+//        "@LNGID": "9fb145cd-5335-4440-97b9-a4ba4bd2f7fe",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATECYCLE_ON"
+//      },
+//      "EVACUATESETTINGS": {
+//        "@TYPE": "LIST",
 //        "@SIZE": "1",
-//        "@TEXT": "Alert/EVAC Voice Cycle OFF/ON Inverted",
-//        "@LNGID": "f28ecacd-a019-4dd2-88bc-76f2433efc7f",
-//        "PROPERTIES": {
-//          "PROPERTY": {
-//            "@TYPE": "SLIDER",
-//            "@ID": "CYCLE INVERTED",
-//            "@SIZE": "1",
-//            "@TEXT": "Enabled",
-//            "@AND": "2",
-//            "@YESVAL": "2",
-//            "@NOVAL": "0",
-//            "@CHECKED": "0",
-//            "@LNGID": "71bcba01-320c-4a5a-bafa-2b8c4c7dff3f",
-//            "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields['EVACUATIONCYCLE INVERTED'].PROPERTIES.PROPERTY"
-//          },
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields['EVACUATIONCYCLE INVERTED'].PROPERTIES"
+//        "@TEXT": "Evacuate settings",
+//        "@LNGID": "d5f02eda-8734-4778-8761-d6fa603561e9",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "Sound / Strobe",
+//              "@VALUE": "192",
+//              "@DEFAULT": "1",
+//              "@LNGID": "9754eb83-aa68-4a61-b9bf-612843a909eb",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATESETTINGS.ITEMS.ITEM[0]"
+//            },
+//            {
+//              "@NAME": "Sound ",
+//              "@VALUE": "64",
+//              "@LNGID": "34ffc172-6124-4612-b0d8-29eba9528ab5",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATESETTINGS.ITEMS.ITEM[1]"
+//            },
+//            {
+//              "@NAME": "Strobe",
+//              "@VALUE": "128",
+//              "@LNGID": "fcfbee76-015b-4744-9258-5a4dedb71b75",
+//              "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATESETTINGS.ITEMS.ITEM[2]"
+//            }
+//          ],
+//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATESETTINGS.ITEMS"
 //        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields['EVACUATIONCYCLE INVERTED']"
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields.EVACUATESETTINGS"
 //      },
-//      "SOUNDERS_RESOUND": {
-//        "@TYPE": "AND",
-//        "@SIZE": "1",
-//        "@TEXT": "Resound Alarm",
-//        "@LNGID": "660c0451-c24b-427a-b184-c5248c499497",
-//        "PROPERTIES": {
-//          "PROPERTY": {
-//            "@TYPE": "SLIDER",
-//            "@ID": "RESOUND",
-//            "@SIZE": "1",
-//            "@TEXT": "Enabled",
-//            "@AND": "1",
-//            "@YESVAL": "1",
-//            "@NOVAL": "0",
-//            "@CHECKED": "0",
-//            "@LNGID": "576a652a-6c87-483c-b546-d5fbbe3345f9",
-//            "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields.SOUNDERS_RESOUND.PROPERTIES.PROPERTY"
-//          },
-//          "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields.SOUNDERS_RESOUND.PROPERTIES"
-//        },
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields.SOUNDERS_RESOUND"
-//      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle.fields"
+//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode.fields"
 //    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.AlertEVACVoiceCycle"
+//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.SoundersMode"
 //  },
-//  "CompanyInfo": {
-//    "name": "Company Info",
+//  "CompanyLogo": {
+//    "name": "Company Logo",
 //    "fields": {
 //      "LOGO1": {
 //        "@TYPE": "TEXT",
 //        "@VALUE": "",
 //        "@SIZE": "40",
 //        "@LENGTH": "39",
-//        "@TEXT": "Company Logo row 1",
-//        "@LNGID": "d4e4f267-651b-4ade-9a61-c37196f13ea8",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyInfo.fields.LOGO1"
+//        "@TEXT": "Company logo row 1",
+//        "@LNGID": "f8738a9e-c474-4f3b-889f-8941b2cf922e",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyLogo.fields.LOGO1"
 //      },
 //      "LOGO2": {
 //        "@TYPE": "TEXT",
 //        "@VALUE": "",
 //        "@SIZE": "40",
 //        "@LENGTH": "39",
-//        "@TEXT": "Company Logo row 2",
-//        "@LNGID": "850cbc5c-c847-4ecf-aa55-3d8fd34558f8",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyInfo.fields.LOGO2"
+//        "@TEXT": "Company logo row 2",
+//        "@LNGID": "4911f4c7-a6c8-4bba-b335-c9030a1f8bdd",
+//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyLogo.fields.LOGO2"
 //      },
-//      "LOGO3": {
-//        "@TYPE": "TEXT",
-//        "@VALUE": "",
-//        "@SIZE": "40",
-//        "@LENGTH": "39",
-//        "@TEXT": "Company Logo row 3",
-//        "@LNGID": "2375cdbe-319c-4a0e-b375-0ad177245f25",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyInfo.fields.LOGO3"
-//      },
-//      "LOGO4": {
-//        "@TYPE": "TEXT",
-//        "@VALUE": "",
-//        "@SIZE": "40",
-//        "@LENGTH": "39",
-//        "@TEXT": "Company Logo row 4",
-//        "@LNGID": "d0758c41-cf9a-4b71-8de9-a1f6840cbac9",
-//        "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyInfo.fields.LOGO4"
-//      },
-//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyInfo.fields"
+//      "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyLogo.fields"
 //    },
-//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyInfo"
+//    "~path": "ELEMENTS.iris.PROPERTIES.Groups.CompanyLogo"
 //  },
 //  "~path": "ELEMENTS.iris.PROPERTIES.Groups",
-//  "~panel_id": "757d5efb-4c49-42fe-a475-3549b42849f9"
+//  "~panel_id": "fca87e12-ed1c-461b-82fa-69033bf5cdd5"
 //}`;
 //        receiveMessageWPF(wb3);
     </script>

@@ -8,26 +8,47 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
 using System.Windows.Documents;
+using System.Windows.Input;
 
 namespace common
 {
+    #region cRWCommand
     public class cRWCommandIRIS : cRWCommand
     {
-        public override void InitCommand(string scmd)
+        private void InitCommandBase(string scmd)
         {
             sio = scmd.Substring(0, 4);
             sDataType = scmd.Substring(4, 2);
             sindex = scmd.Substring(6, 2);
             sbuffoffset = scmd.Substring(8, 2);
             slen = scmd.Substring(10, 2);
-            if (Regex.IsMatch(sio, "51$"))
+            if (Regex.IsMatch(sio, @"^035\d$"))
                 io = eIO.ioRead;
-            else
+            else if (Regex.IsMatch(sio, @"^007\d$"))
                 io = eIO.ioWrite;
+            else
+                io = eIO.ioNull;
             DataType = Convert.ToByte(sDataType, 16);
             index = Convert.ToByte(sindex, 16);
             buffoffset = Convert.ToByte(sbuffoffset, 16);
             len = Convert.ToByte(slen, 16);
+        }
+        public override void InitCommand(string scmd)
+        {
+            if (scmd.Length == CommandLength())
+                InitCommandBase(scmd);
+            else
+            {
+                string _ssubidx = scmd.Substring(CommandLength(), scmd.Length - CommandLength());
+                InitCommand(scmd.Substring(0, CommandLength()), _ssubidx);
+            }
+        }
+        public override void InitCommand(string scmd, string _ssubidx)
+        {
+            InitCommandBase(scmd);
+            ssubidx = _ssubidx;
+            subidx_cmd_len = (byte?)(ssubidx.Length / 2);
+            subidx = Convert.ToByte(ssubidx, 16);
         }
         public override string ToString()
         {
@@ -41,7 +62,6 @@ namespace common
             }
             return sio + sDataType + sindex + sbuffoffset + slen;
         }
-
         public override int CommandLength() { return 12; }
         public override string CommandString()
         {
@@ -68,6 +88,22 @@ namespace common
             string sidx = idx.ToString("X2");
             return sio + sDataType + sidx + sbuffoffset + slen;
         }
+        public override string CommandString(int _idx, int _subidx)
+        {
+            if (io == eIO.ioWrite)
+            {
+                string _ssubidx = (ssubidx != null) ? ssubidx : null;
+                return CommandString(_idx) + _ssubidx;
+            }
+            else if (io == eIO.ioRead)
+            {
+                string s = CommandString(_idx);
+                string sl = s.Substring(0, 8);
+                string sr = s.Substring(CommandLength() - 2, 2);
+                return sl + _subidx.ToString("X2") + sr;
+            }
+            return "";
+        }
         public override string NoIdxCommandString()
         {
             if (sio == null || sio == "")
@@ -92,12 +128,19 @@ namespace common
             }
             return sio + sDataType;
         }
-
         public override int idxPosition()
         {
             return 3;
         }
+        public override bool IsValid(string _cmd)
+        {
+            bool res = base.IsValid(_cmd);
+            res &= _cmd.Length == CommandLength() + ((ssubidx != null) ? ssubidx.Length : 0);
+            //
+            return res;
+        }
     }
+    #endregion
     public class cRWPropertyIRIS : cRWProperty
     {
         private string ReadPropertyValue(string PropertyName)
@@ -277,8 +320,23 @@ namespace common
                 //IRIS_LOOP2/IRIS_SENSORS/IRIS_SNONE
             }
             //
-            if (element_root == "SIMPO_NETWORK_R")
+            if (element_root == "SIMPO_NETWORK_R" || element_root == "SIMPO_NETWORK")
                 elements = Regex.Replace(elements, @"^(\s*?<ELEMENT[\w\W]*?>\s*?)<ELEMENTS>", "$1</ELEMENT>");
+            else if (Regex.IsMatch(element_root, "^SIMPO_MIMIC"))
+            {
+                elements = Regex.Replace(elements, @"^<ELEMENT\s+?ID\s*?=\s*?""SIMPO_MIMICPANELS"">[\w\W]+?<ELEMENTS>", "");
+                elements = Regex.Replace(elements, @"^(\s*?<ELEMENT[\w\W]*?>\s*?)<ELEMENTS>", "$1</ELEMENT>");
+            }
+            else if (Regex.IsMatch(element_root, "^SIMPO_LOOPDEVICES"))
+            {
+                elements = Regex.Replace(elements, @"^<ELEMENT\s+?ID\s*?=\s*?""SIMPO_LOOPDEVICES"">[\w\W]+?<ELEMENTS>", "");
+                elements = Regex.Replace(elements, @"^(\s*?<ELEMENT[\w\W]*?>\s*?)<ELEMENTS>", "$1</ELEMENT>");
+            }
+            else if (Regex.IsMatch(element_root, "^SIMPO_TTELOOP2"))
+            {
+                elements = Regex.Replace(elements, @"^<ELEMENT\s+?ID\s*?=\s*?""SIMPO_TTELOOP2"">[\w\W]+?<ELEMENTS>", "");
+                elements = Regex.Replace(elements, @"^(\s*?<ELEMENT[\w\W]*?>\s*?)<ELEMENTS>", "$1</ELEMENT>");
+            }
             else
                 elements = Regex.Replace(elements, @"^\s*?<ELEMENT[\w\W]*?>\s*?<ELEMENTS>", "");
             elements = Regex.Replace(elements, @"</ELEMENTS>\s*?</ELEMENT>\s*$", "").Trim();
@@ -307,6 +365,8 @@ namespace common
                             element = String.Join('/', sarr);
                         }
                     }
+                    if (Regex.IsMatch(element, @"^SIMPO_MIMICOUT"))
+                        element = path + "/" + element;
                     //string element = path;
                     m = Regex.Match(el, @"<COMMANDS>([\w\W]*?)</COMMANDS>");
                     if (m.Success)
@@ -376,10 +436,10 @@ namespace common
                         {
                             maxcmd = m.Groups[1].Value;
                             maxcmdkey = node;
-                            m = Regex.Match(s, @"<PROPERTIES>([\w\W]+?)</PROPERTIES>", RegexOptions.IgnoreCase);
-                            if (m.Success)
-                                props += m.Groups[1].Value;
                         }
+                        m = Regex.Match(s, @"<PROPERTIES>([\w\W]+?)</PROPERTIES>", RegexOptions.IgnoreCase);
+                        if (m.Success)
+                            props += m.Groups[1].Value;
                     }
                 }
             }
@@ -449,9 +509,31 @@ namespace common
                 Dictionary<string, Dictionary<string, List<string>>> didx = dinverted[cmd];
                 foreach (string idx in didx.Keys)
                 {
+                    //SIMPO_PANELOUTPUTS/SIMPO_SOUNDERS
+                    //SIMPO_PANELOUTPUTS/SIMPO_FIREBRIGADE
                     Dictionary<string, List<string>> dnode = didx[idx];
                     if (dnode.Count > 1)
-                        MergeReadNodesByCommand(cmd + idx, dnode);
+                    {
+                        if (dnode.ContainsKey("SIMPO_PANELOUTPUTS/SIMPO_SOUNDERS") && dnode.ContainsKey("SIMPO_PANELOUTPUTS/SIMPO_FIREBRIGADE"))
+                        {
+                            Dictionary<string, List<string>> dnode1 = new Dictionary<string, List<string>>();
+                            Dictionary<string, List<string>> dnode2 = new Dictionary<string, List<string>>();
+                            foreach (string snode in dnode.Keys)
+                                if (!Regex.IsMatch(snode, @"^SIMPO_PANELOUTPUTS/"))
+                                    dnode1.Add(snode, dnode[snode]);
+                                else
+                                    dnode2.Add(snode, dnode[snode]);
+                            MergeReadNodesByCommand(cmd + idx, dnode1);
+                            MergeReadNodesByCommand(cmd + idx, dnode2);
+                            dnode.Clear();
+                            foreach (string snode in dnode1.Keys)
+                                dnode.Add(snode, dnode1[snode]);
+                            foreach (string snode in dnode2.Keys)
+                                dnode.Add(snode, dnode2[snode]);
+                        }
+                        else
+                            MergeReadNodesByCommand(cmd + idx, dnode);
+                    }
                 }
             }
             _dread_prop.Clear();
@@ -479,6 +561,37 @@ namespace common
             }
             return;
         }
+        internal void JoinSimpoPanelPanelOutputs()
+        {
+            List<string> delkeys = new List<string>();
+            Dictionary<string, Dictionary<string, List<string>>> dpanelouts = new Dictionary<string, Dictionary<string, List<string>>>();
+            foreach (string key in _dread_prop.Keys)
+                if (Regex.IsMatch(key, @"^SIMPO_PANELOUTPUTS/"))
+                {
+                    delkeys.Add(key);
+                    Dictionary<string, Dictionary<string, List<string>>> dnew = _dread_prop[key];
+                    foreach (string cmd in dnew.Keys)
+                    {
+                        string idx = dnew[cmd].Keys.First();
+                        List<string> lst = dnew[cmd][idx];
+                        dnew[cmd].Remove(idx);
+                        dnew[cmd].Add("", lst);
+                        dpanelouts.Add(cmd + idx, dnew[cmd]);
+                    }
+                }
+            foreach (string key in delkeys)
+                _dread_prop.Remove(key);
+            _dread_prop.Add("SIMPO_PANELOUTPUTS", dpanelouts);
+        }
+        internal void RenameSimpoPanelReadLoops()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> d = _dread_prop["SIMPO_LOOPDEVICES/SIMPO_TTENONE"];
+            _dread_prop.Remove("SIMPO_LOOPDEVICES/SIMPO_TTENONE");
+            _dread_prop.Add("SIMPO_LOOPDEVICES/SIMPO_TTENONE1", d);
+            d = _dread_prop["SIMPO_TTENONE"];
+            _dread_prop.Remove("SIMPO_TTENONE");
+            _dread_prop.Add("SIMPO_TTENONE2", d);
+        }
         internal void JoinSimpoRepeaterGenSettings()
         {
             Dictionary<string, Dictionary<string, List<string>>> dgensettings = _dread_prop["SIMPO_GENERAL_SETTINGS_R"];
@@ -486,6 +599,14 @@ namespace common
             foreach (string pkey in dpanelsettings.Keys)
                 dgensettings.Add(pkey, dpanelsettings[pkey]);
             _dread_prop.Remove("SIMPO_PANELSETTINGS_R");
+        }
+        internal void JoinSimpoPanelGenSettings()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dgensettings = _dread_prop["SIMPO_GENERAL_SETTINGS"];
+            Dictionary<string, Dictionary<string, List<string>>> ddaynight = _dread_prop["SIMPO_DAYNIGHT"];
+            foreach (string pkey in ddaynight.Keys)
+                dgensettings.Add(pkey, ddaynight[pkey]);
+            _dread_prop.Remove("SIMPO_DAYNIGHT");
         }
         private Dictionary<string, int> ReadSeriasIds(string xml)
         {
@@ -520,7 +641,7 @@ namespace common
                 foreach (string cmd in dkey.Keys)
                 {
                     Dictionary<string, List<string>> didx = dkey[cmd];
-                    if (didx.Count > 1)
+                    if (didx.Count > 1 && didx.Count < 16)
                     {
                         if (!todel.ContainsKey(cmd)) todel.Add(cmd, null);
                         foreach (string idx in didx.Keys)
@@ -579,6 +700,14 @@ namespace common
                 UnionReadReadProp();
                 JoinSimpoRepeaterGenSettings();
                 RepeaterUnionIndexes(_dread_prop, _read_serias_ids);
+            }
+            else if (Regex.IsMatch(xml, @"<ELEMENT\s+?ID\s*?=\s*?""SIMPO_PANEL"">"))
+            {
+                UnionReadReadProp();
+                JoinSimpoPanelPanelOutputs();
+                JoinSimpoPanelGenSettings();
+                RepeaterUnionIndexes(_dread_prop, _read_serias_ids);
+                RenameSimpoPanelReadLoops();
             }
             //
             return res;
@@ -689,6 +818,136 @@ namespace common
                 }
             dnet.Remove(panelskey);
             _dwrite_prop["SIMPO_PANELS_R"] = dpanels;
+        }
+        internal void RepareSimpoPanelWriteGenSettings()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> gensett = _dwrite_prop["SIMPO_GENERAL_SETTINGS"];
+            //Dictionary<string, Dictionary<string, List<string>>> dpanels = _dwrite_prop["SIMPO_PANELOUTPUTS"];
+            List<string> lstGenSett = new List<string>();
+            //find general settings in other elements
+            foreach (string element in _dwrite_prop.Keys)
+            {
+                if (element == "SIMPO_GENERAL_SETTINGS") continue;
+                Dictionary<string, Dictionary<string, List<string>>> del = _dwrite_prop[element];
+                foreach (string cmd in del.Keys)
+                {
+                    Dictionary<string, List<string>> dcmd = del[cmd];
+                    foreach (string idx in dcmd.Keys)
+                    {
+                        List<string> lst = dcmd[idx];
+                        List<string> lst1 = new List<string>();
+                        foreach (string s1 in lst) lst1.Add(s1);
+                        foreach (string s in lst1)
+                            if (Regex.IsMatch(s, @"@ID\s*?=\s*?'SIMPO_GENERAL_SETTINGS']"))
+                            {
+                                if (!gensett.ContainsKey(cmd))
+                                    gensett.Add(cmd, new Dictionary<string, List<string>>());
+                                Dictionary<string, List<string>> dgscmd = gensett[cmd];
+                                if (!dgscmd.ContainsKey(idx))
+                                    dgscmd.Add(idx, new List<string>());
+                                List<string> lstTo = dgscmd[idx];
+                                string sbytes = "";
+                                foreach (Match m in Regex.Matches(s, @"<BYTE\s[\w\W]+?/>"))
+                                {
+                                    string ln = m.Value;
+                                    if (Regex.IsMatch(ln, "XPATH") && !Regex.IsMatch(ln, "SIMPO_GENERAL_SETTINGS"))
+                                    {
+                                        string sb = "00";
+                                        Match msz = Regex.Match(ln, @"LENGTH\s*?=\s*?""(\d+?)""");
+                                        if (msz.Success)
+                                        {
+                                            sb = "";
+                                            int len = Convert.ToInt32(msz.Groups[1].Value);
+                                            while (len * 2 > sb.Length) sb += "00";
+                                        }
+                                        ln = "<BYTE VALUE=\"" + sb + "\"/>";
+                                    }
+                                    sbytes += ((sbytes != "") ? "\n" : "") + ln;
+                                }
+                                sbytes = "<WRITEOPERATION>\n<BYTES>\n" + sbytes + "\n</BYTES>\n</WRITEOPERATION>";
+                                lstTo.Add(sbytes);
+                            }
+                    }
+                }
+            }
+        }
+        internal void RepareSimpoPanelWriteNetwork()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dnet = _dwrite_prop["SIMPO_NETWORK"];
+            Dictionary<string, List<string>> dpanels = null;
+            string cmdpanels = "";
+            foreach (string cmd in dnet.Keys)
+                if (dnet[cmd].Count > 1)
+                {
+                    dpanels = dnet[cmd];
+                    cmdpanels = cmd;
+                    break;
+                }
+            if (dpanels == null) return;
+            if (!_dwrite_prop.ContainsKey("SIMPO_PANELS"))
+                _dwrite_prop.Add("SIMPO_PANELS", new Dictionary<string, Dictionary<string, List<string>>>());
+            Dictionary<string, Dictionary<string, List<string>>> dcmd = _dwrite_prop["SIMPO_PANELS"];
+            if (!dcmd.ContainsKey(cmdpanels))
+                dcmd.Add(cmdpanels, dpanels);
+            dnet.Remove(cmdpanels);
+        }
+        internal void RepareSimpoPanelWriteMIMIC()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dmimic = _dwrite_prop["SIMPO_MIMICPANELS"];
+            Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> toadd = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+            int mimicnom = 1;
+            string cmd = dmimic.Keys.First();
+            foreach (string idx in dmimic[cmd].Keys)
+            {
+                toadd.Add("SIMPO_MIMIC" + mimicnom.ToString() + "/SIMPO_MIMICOUT", new Dictionary<string, Dictionary<string, List<string>>>());
+                Dictionary<string, Dictionary<string, List<string>>> cmdadd = toadd["SIMPO_MIMIC" + mimicnom.ToString() + "/SIMPO_MIMICOUT"];
+                cmdadd.Add(cmd, new Dictionary<string, List<string>>());
+                cmdadd[cmd].Add(idx, dmimic[cmd][idx]);
+                mimicnom++;
+            }
+            foreach (string key in toadd.Keys)
+                _dwrite_prop.Add(key, toadd[key]);
+            _dwrite_prop.Remove("SIMPO_MIMICPANELS");
+            return;
+        }
+        internal void RepareSimpoPanelWriteLoops()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dloop = _dwrite_prop["SIMPO_LOOPDEVICES"];
+            Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> toadd = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+            foreach (string cmd in dloop.Keys)
+            {
+                Dictionary<string, List<string>> didx = dloop[cmd];
+                foreach (string idx in didx.Keys)
+                {
+                    List<string> lst = didx[idx];
+                    foreach (string xml in lst)
+                    {
+                        Match m = Regex.Match(xml, @"ELEMENTS/ELEMENT\[@ID='SIMPO_LOOPDEVICES'\]/ELEMENTS/ELEMENT\[(\d+?)\]//ELEMENTS/ELEMENT\[(\d+?)\]");
+                        if (m.Success)
+                        {
+                            string sloop = m.Groups[1].Value;
+                            string saddr = m.Groups[2].Value;
+                            string key2add = "SIMPO_LOOPDEVICES/SIMPO_TTENONE" + sloop;
+                            if (!toadd.ContainsKey(key2add))
+                                toadd.Add(key2add, new Dictionary<string, Dictionary<string, List<string>>>());
+                            Dictionary<string, Dictionary<string, List<string>>> dcmd2add = toadd[key2add];
+                            if (!dcmd2add.ContainsKey(cmd))
+                                dcmd2add.Add(cmd, new Dictionary<string, List<string>>());
+                            Dictionary<string, List<string>> didx2add = dcmd2add[cmd];
+                            if (!didx2add.ContainsKey(idx))
+                                didx2add.Add(idx, new List<string>());
+                            List<string> lst2add = didx2add[idx];
+                            lst2add.Add(xml);
+                        }
+                    }
+                }
+            }
+            foreach (string key in toadd.Keys)
+                _dwrite_prop.Add(key, toadd[key]);
+            _dwrite_prop.Remove("SIMPO_LOOPDEVICES");
+            //"ELEMENTS/ELEMENT[@ID='SIMPO_LOOPDEVICES']/ELEMENTS/ELEMENT[2]//ELEMENTS/ELEMENT[1]
+            //SIMPO_LOOPDEVICES/SIMPO_TTELOOP1
+            return;
         }
         internal void MergeSimpoWritePropsByNode()
         {
@@ -904,6 +1163,17 @@ namespace common
                 _write_serias_ids.Add("SIMPO_PANELS_R", 64);
                 RepeaterUnionIndexes(_dwrite_prop, _write_serias_ids);
             }
+            else if (Regex.IsMatch(xml, @"@ID\s*?=\s*?'SIMPO_GENERAL_SETTINGS'"))
+            {
+                RepareSimpoPanelWriteGenSettings();
+                RepareSimpoPanelWriteNetwork();
+                RepareSimpoPanelWriteMIMIC();
+                RepareSimpoPanelWriteLoops();
+                //MergeSimpoWritePropsByNode();
+                //Dictionary<string, int> _write_serias_ids = new Dictionary<string, int>();
+                //_write_serias_ids.Add("SIMPO_PANELS_R", 64);
+                //RepeaterUnionIndexes(_dwrite_prop, _write_serias_ids);
+            }
             //
             return res;
         }
@@ -919,6 +1189,20 @@ namespace common
             if (Regex.IsMatch(rkey, "^IRIS4_MODULES") && Regex.IsMatch(wkey, "LOOP1/IRIS4_MODULES$"))
                 return true;
             //
+            return false;
+        }
+        private bool SimpoPanelMergeFirst(string wkey, string rkey)
+        {
+            if (wkey == "SIMPO_LOOPDEVICES/SIMPO_TTENONE1" && rkey == "SIMPO_TTENONE1")
+                return true;
+            if (wkey == "SIMPO_LOOPDEVICES/SIMPO_TTENONE2" && rkey == "SIMPO_TTENONE2")
+                return true;
+            return false;
+        }
+        private bool SimpoPanelSpecificMerge(string wkey, string rkey)
+        {
+            if (wkey == "SIMPO_MIMIC1/SIMPO_MIMICOUT" && rkey == "SIMPO_MIMICPANELS/SIMPO_MIMICOUT")
+                return true;
             return false;
         }
         private string FindReadKey(string wkey)
@@ -959,6 +1243,10 @@ namespace common
                     return key;
                 if (IRIS4SpecificMerge(wkey, key))
                     return key;
+                if (SimpoPanelSpecificMerge(wkey, key))
+                    return key;
+                if (SimpoPanelMergeFirst(wkey, key))
+                    return key;
                 //m = Regex.Match(wkey, @"[\w\W]+?[\\/]([\w_]+)$");
                 //if (m.Success && Regex.IsMatch(key, m.Groups[1].Value))
                 //    return key;
@@ -966,7 +1254,13 @@ namespace common
             //
             return null;
         }
-
+        private bool ReadKeyExistsInMerge(Dictionary<string, string> wrmerge, string rkey)
+        {
+            foreach (string wkey in wrmerge.Keys)
+                if (wrmerge[wkey] == rkey)
+                    return true;
+            return false;
+        }
         private Dictionary<string, string> RWMergedPaths()
         {
             Monitor.Enter(_cs_);
@@ -987,6 +1281,9 @@ namespace common
                 }
                 wrkeys.Add(wkey, rkey);
             }
+            foreach (string rkey in _dread_prop.Keys)
+                if (!ReadKeyExistsInMerge(wrkeys, rkey))
+                    wrkeys.Add(rkey, rkey);
             //
             Monitor.Exit(_cs_);
             return wrkeys;
@@ -1140,6 +1437,11 @@ namespace common
                 //read
                 FillReadRWPath(rwpath, wpath);
                 // write
+                if (!_dwrite_prop.ContainsKey(wpath))
+                {
+                    res.Add(wpath, rwpath);
+                    continue;
+                }
                 Dictionary<string, Dictionary<string, List<string>>> dw = _dwrite_prop[wpath];
                 StringBuilder sbwo = new StringBuilder();
                 foreach (string dwkey in dw.Keys)
@@ -1179,7 +1481,10 @@ namespace common
                                 p.xmltag = mo.Value;
                                 p.id = m.Groups[1].Value;
                                 p.bytescnt = Convert.ToByte(p.PropertyValue(eIO.ioWrite, "LENGTH"));
-                                rwpath.WriteProperties.Add(p.id, p);
+                                if (!rwpath.WriteProperties.ContainsKey(p.id))
+                                    rwpath.WriteProperties.Add(p.id, p);
+                                //<BYTE XPATH = "ELEMENTS/ELEMENT[@ID='SIMPO_MIMICPANELS']/ELEMENTS/ELEMENT[1]//ELEMENTS/ELEMENT[2]/PROPERTIES/PROPERTY[@ID='ACTIVATION1']" LENGTH = "1" />
+                                //<BYTE XPATH="ELEMENTS/ELEMENT[@ID='SIMPO_MIMICPANELS']/ELEMENTS/ELEMENT[1]//ELEMENTS/ELEMENT[1]/PROPERTIES/PROPERTY[@ID='ACTIVATION1']" LENGTH="1"/>
                             }
                         }
                     }
