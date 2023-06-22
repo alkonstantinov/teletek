@@ -367,10 +367,14 @@ const fillLoopElements = (loopNumber, loopType) => {
 function getLoops() {
     boundAsync.getLoops(mainKey).then(r => {
         if (!r) return;
-        let loopsList = JSON.parse(r);
+        let loopsJson = JSON.parse(r);
         // creating the founded loops
-        Object.keys(loopsList).forEach(key => {
-            addLoop(loopsList[key], "old");
+        if (Object.keys(loopsJson).includes("ELEMENT")) {
+            loopsJson = loopsJson["ELEMENT"];
+        }
+        let loopList = Object.keys(loopsJson);
+        loopList.forEach(key => {
+            addLoop(loopsJson[key], "old");
         });
     }).catch(err => alert(err));
     $("#deviceList").modal('hide')
@@ -383,19 +387,57 @@ const loopFunc = () => {
         hidePanelAdd(); // $("#deviceList").modal('hide'); //.hide();
         return;
     } else {
-        sendMessageWPF({
+        const params = {
             'Command': 'AddingLoop',
             'Params': { 'elementType': mainKey, 'elementNumber': lst.length },
-            'Callback': 'loopCallback' // -> the back-end call the function loopCallBack with default 'CallBackParams': [mainKey, lst.length, 'CHANGE']
-        });
+            'Callback': 'loopCallback' // -> the back-end call the function loopCallBack with default 'CallBackParams': [mainKey, lst.length, 'CHANGE'] for IRIS
+        };
+        sendMessageWPF(params);
         showPanelAdd({ 'elementType': mainKey, 'elementNumber': lst.length });// $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
     }
 }
 
-// function to fill in the modal with TELETEK_LOOP and SYSTEM SENSOR LOOP
-function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
-    boundAsync.getJsonNodeForElement(key, len, command).then(res => {
-        var changeJson = JSON.parse(res);
+/**
+ * loopKeyContainsCheck returns true if given key of a loop (IRIS_TTELOOP, IRIS_NO_LOOP, etc)
+ * has its 'CONTAINS' property available else false
+ * @param {string} loopKey - the name of the key
+ */
+async function loopKeyContainsCheck(loopKey) {
+    try {
+        const res = await boundAsync.getJsonNode(loopKey, 'CONTAINS');
+        if (res) {
+            return true;
+        }
+        return false;
+    } catch (e) {
+        return false;
+    }
+}
+
+/**
+ * exchanges the key if equal to "Element" for the real Loopkey of its
+ * @param {string} key
+ * @param {json} json
+ * @returns the same key or the exchanged key
+ */
+function exchangeElementForLoopkey(key, json) {
+    if (key === "ELEMENT") {
+        key = json[key]["@ID"];
+    }
+    return key;
+}
+
+/**
+ * function to fill in the modal with TELETEK_LOOP and SYSTEM SENSOR LOOP
+ * @param {string} key default the the mainKey (NO_LOOP for  Iris, SIMPO_TTELOOP ofr Simpo etc)
+ * @param {number} len default to the lst.len
+ * @param {string} command default to 'CHANGE'
+ */
+async function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
+    try {
+        const res = await boundAsync.getJsonNodeForElement(key, len, command)
+        const changeJson = JSON.parse(res);
+
         if (!Object.keys(changeJson).length) { // guard that the res is full
             var i = 0;
             do {
@@ -405,27 +447,68 @@ function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE') {
                 alert("Error 3 occurred. Please, connect your software providers!"); return;
             }
         }
-        var listTab = document.getElementById('ram_panel_add').querySelector("#list-tab"); // old way: $("#deviceList").find("#list-tab")[0];
+        const listTab = document.getElementById('ram_panel_add').querySelector("#list-tab"); // old way: $("#deviceList").find("#list-tab")[0];
         listTab.innerHTML = ''; // clear any previous data there
-        Object.keys(changeJson).forEach(k => {
+        let optionsList = Object.keys(changeJson).filter(k => k !== "~path");
+
+        // check if optionsList contains items that have 'CONTAINS' key and save then into finalOptionsLists
+        let finalOptionsLists = [];
+        for (let option of optionsList) { // use for ... of as the async await will be used
+            option = exchangeElementForLoopkey(option, changeJson);
+
+            let loopKeyVerificationResult = await loopKeyContainsCheck(option);
+            if (loopKeyVerificationResult) {
+                finalOptionsLists.push(option);
+            } else {
+                try {
+                    const r = await boundAsync.getJsonNode(option, 'CHANGE');
+                    if (r) {
+                        const json = JSON.parse(r);
+                        const keysArr = Object.keys(json).filter(rkey => rkey !== "~path");
+                        for (let i = 0; i < keysArr.length; i++) {
+                            let tempKey = exchangeElementForLoopkey(keysArr[i], json);
+                            
+                            let anotherloopKeyVerification = await loopKeyContainsCheck(tempKey);
+                            if (anotherloopKeyVerification) {
+                                finalOptionsLists.push(tempKey);
+                                break;
+                            }
+                        }
+                    }
+                } catch (error) {
+                    alert("Err: " + error);
+                }
+            }
+        }
+
+        // use finalOptionsLists to create the buttons
+        finalOptionsLists.forEach(k => {
             let tabListButton = `<div class="ram_card fire" 
-                  id="list-${k}"
-                  onclick="javascript: addLoop('${k}'); hidePanelAdd();">
-                <div class="ram_card_img">
-                    <img src="${BUTTON_IMAGES[k.includes("TTE") ? "TTELOOP" : "LOOP"].im}" alt="${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop">
-                </div>
-                <div class="ram_card_body">
-                    <h5 class="ram_card_title">${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop</h5>
-                </div>
-            </div>`;
+                      id="list-${k}"
+                      onclick="javascript: addLoop('${k}'); hidePanelAdd();">
+                    <div class="ram_card_img">
+                        <img src="${BUTTON_IMAGES[k.includes("TTE") ? "TTELOOP" : "LOOP"].im}" alt="${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop">
+                    </div>
+                    <div class="ram_card_body">
+                        <h5 class="ram_card_title">${k.includes("TTE") ? "Teletek" : "System Sensor"} Loop</h5>
+                    </div>
+                </div>`;
             // <i class="ram_icon loop_devices"></i>
-            
+
             listTab.insertAdjacentHTML('beforeend', tabListButton);
         });
-    }).catch(err => alert(err));
+    }
+    catch (err) {
+        alert("Err: " + err);
+    }
 }
 
-//actual adding loop elements function
+/**
+ * actual adding Loop function to the interface
+ * @param {string} loopType
+ * @param {string} newFlag default to "new". Can be "old"
+ * @returns
+ */
 function addLoop(loopType, newFlag = "new") {
     if (!loopType) return;
 
@@ -463,7 +546,11 @@ function addLoop(loopType, newFlag = "new") {
         boundAsync.setLoopType(mainKey, last, loopType).then().catch(err => console.log(err));
     }
     // adding remove button
-    if (last === 1 && !document.getElementById("rmvBtn")) {
+    if (
+        ((last === 1 && !mainKey.toUpperCase().includes("SIMPO")) ||
+        (last === 2 && mainKey.toUpperCase().includes("SIMPO"))) &&
+        !document.getElementById("rmvBtn")
+        ) {
         let btnGroup = document.getElementById("buttons");
         btnGroup.insertAdjacentHTML(
             'beforeend', 
@@ -539,7 +626,7 @@ function exchangingLoop(loopType) {
 async function removeLoop() {
     // check if there are some connected elements
     let returnString = await boundAsync.checkLoopConnection(mainKey, lst.at(-1));
-
+    
     // show confirmation dialog
     $('#showConfirmationModal .modal-title').html(`${new T().t(localStorage.getItem('lang'), "are_you_sure_removing")} ${new T().t(localStorage.getItem('lang'), "loop")} ${lst.at(-1)}?`);
 
@@ -549,7 +636,7 @@ async function removeLoop() {
         $("#showConfirmationModal").modal("hide");
     });
     $("#yesBtn").off('click').on("click", removeLoopAfterConfirm);
-
+    
     if (returnString.length > 2) {
         let deviceListJSON = JSON.parse(returnString);
 
@@ -571,8 +658,10 @@ async function removeLoop() {
         $("#showConfirmationModal").modal("show");
     } else {
         let devicesListStr = await boundAsync.getLoopDevices(mainKey, lst.at(-1));
-        let deviceListJSON = JSON.parse(devicesListStr);
-
+        let deviceListJSON;
+        if (devicesListStr) { 
+            deviceListJSON = JSON.parse(devicesListStr);
+        }
         if (deviceListJSON && deviceListJSON.length > 0) {
             const deviceMap = new Map();
 
@@ -618,12 +707,12 @@ function removeLoopAfterConfirm () {
         document.getElementById("selected_area").innerHTML = '';
     }
     parent.removeChild(last);
-
+    
     // clear all the appended elements in front if visible
     const ram_panel_2 = document.getElementById("ram_panel_2");
-    if (ram_panel_2.innerHTML != "") {
+    if (ram_panel_2 && ram_panel_2.innerHTML !== "") {
         const calculateDevicesBtn = ram_panel_2.querySelector("#calculateDevices");
-        const calculateDevicesFn = calculateDevicesBtn.onclick;
+        const calculateDevicesFn = calculateDevicesBtn ? calculateDevicesBtn.onclick : "";
         if (calculateDevicesFn) {
             const params = calculateDevicesFn.toString().match(/calculateLoopDevices\((.*?)\)/)[1];
             if (loopNumber === +params) {
@@ -632,8 +721,11 @@ function removeLoopAfterConfirm () {
             }
         }
     }
-
-    if (loopNumber === 1) {
+    
+    if (
+        loopNumber === 1 ||
+        (loopNumber === 2 && mainKey.toUpperCase().includes("SIMPO"))
+    ) {
         let rmvBtn = document.getElementById("rmvBtn");
         rmvBtn.remove();
     }

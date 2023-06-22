@@ -1183,6 +1183,7 @@ namespace ljson
                 _log_bytesreaded.Clear();
             //string slog = ReadLog(conn_params);
             ClearCache();
+            //
             SetRWFiles(conn_params);
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
@@ -2082,6 +2083,46 @@ namespace ljson
             return;
         }
         #endregion
+        private static void AddDefaultLoops(JObject _panel)
+        {
+            JObject elements = (JObject)_panel["ELEMENTS"];
+            if (elements == null) return;
+            JObject oloops = (JObject)elements["iris_loop_devices"];
+            if (oloops == null) return;
+            JObject content = (JObject)oloops["CONTAINS"];
+            string loop_key = null;
+            foreach (JProperty p in content.Properties())
+            {
+                if (p.Value == null || p.Value.Type != JTokenType.Object) continue;
+                loop_key = p.Name;
+                break;
+            }
+            if (loop_key == null) return;
+            JArray aloops = new JArray();
+            foreach (JProperty p in elements.Properties())
+            {
+                if (p.Value == null || p.Value.Type != JTokenType.Object || !Regex.IsMatch(p.Name, "^" + loop_key + @"\d*?$")) continue;
+                JObject oloop = (JObject)p.Value;
+                if (oloop["CHANGE"] != null) continue;
+                aloops.Add(oloop);
+            }
+            foreach (JObject defloop in aloops)
+            {
+                string path = defloop["~path"].ToString();
+                Match m = Regex.Match(path, @"\.([\w\W]+?)(\d+)$");
+                if (m.Success)
+                {
+                    string elementType = m.Groups[1].Value;
+                    string elementNumber = m.Groups[2].Value;
+                    JObject el = cJson.GetNode(elementType + elementNumber);
+                    cComm.AddPseudoElement(CurrentPanelID, elementType, elementNumber, el.ToString());
+                    //
+                    JObject o = JObject.Parse(cComm.GetPseudoElement(cJson.CurrentPanelID, elementType, elementNumber.ToString()));
+                    o["~loop_type"] = elementType + elementNumber;
+                    cComm.SetPseudoElement(cJson.CurrentPanelID, elementType, elementNumber.ToString(), o.ToString());
+                }
+            }
+        }
         public static JObject AddPanel(JObject jSys)
         {
             string filename = FilePathFromSchema(jSys["schema"].ToString());
@@ -2118,6 +2159,7 @@ namespace ljson
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
+            AddDefaultLoops(_panel);
             return _panel;
         }
         private static void SetPanelIDInToken(JToken t)

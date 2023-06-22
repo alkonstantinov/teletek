@@ -959,26 +959,26 @@ namespace ljson
             JObject f1 = new JObject();
             f1["SOUNDERDELAY"] = o["SOUNDERDELAY"];
             f1["FIREBRIGADEDELAY"] = o["FIREBRIGADEDELAY"];
-            f1["FIREPROTECTIONDELAY"] = o["FIREPROTECTIONDELAY"];
+            if (o["FIREPROTECTIONDELAY"] != null) f1["FIREPROTECTIONDELAY"] = o["FIREPROTECTIONDELAY"];
             grp1["fields"] = f1;
             json[key]["PROPERTIES"]["Groups"]["Delays"] = grp1;
             //
             JObject grp2 = new JObject();
             grp2["name"] = "Zone";
             JObject f2 = new JObject();
-            f2["ZoneGroupA"] = o["ZONEGROUP"];
-            f2["ZoneGroupB"] = o["ZONEGROUP2"];
-            f2["ZoneGroupC"] = o["ZONEGROUP3"];
-            f2["ZoneSounders"] = o["ZONESOUNDERS"];
+            if (o["ZONEGROUP"] != null) f2["ZoneGroupA"] = o["ZONEGROUP"]; else f2["GROUP"] = o["GROUP"];
+            if (o["ZONEGROUP2"] != null) f2["ZoneGroupB"] = o["ZONEGROUP2"]; else f2["GROUP2"] = o["GROUP2"];
+            if (o["ZONEGROUP3"] != null) f2["ZoneGroupC"] = o["ZONEGROUP3"]; else f2["GROUP3"] = o["GROUP3"];
+            if (o["ZONESOUNDERS"] != null) f2["ZoneSounders"] = o["ZONESOUNDERS"]; else f2["ZSOUNDERS"] = o["ZSOUNDERS"];
             grp2["fields"] = f2;
             json[key]["PROPERTIES"]["Groups"]["Zone"] = grp2;
             //
             JObject grp3 = new JObject();
             grp3["name"] = "Sounder";
             JObject f3 = new JObject();
-            f3["SounderGroupA"] = o["SOUNDERGROUP"];
-            f3["SounderGroupB"] = o["SOUNDERGROUP2"];
-            f3["SounderGroupC"] = o["SOUNDERGROUP3"];
+            if (o["SOUNDERGROUP"] != null) f3["SounderGroupA"] = o["SOUNDERGROUP"]; else f3["SGROUP_A"] = o["SGROUP_A"];
+            if (o["SOUNDERGROUP2"] != null) f3["SounderGroupB"] = o["SOUNDERGROUP2"]; else f3["SGROUP_B"] = o["SGROUP_B"];
+            if (o["SOUNDERGROUP3"] != null) f3["SounderGroupC"] = o["SOUNDERGROUP3"]; f3["SGROUP_C"] = o["SGROUP_C"];
             grp3["fields"] = f3;
             json[key]["PROPERTIES"]["Groups"]["Sounder"] = grp3;
             //
@@ -1308,8 +1308,10 @@ namespace ljson
             ((JObject)c)[key] = co;
             if (Regex.IsMatch(key, "8"))
                 ((JObject)c)[key]["@MAX"] = 8;
-            else
+            else if (!Regex.IsMatch(key, @"^SIMPO_", RegexOptions.IgnoreCase))
                 ((JObject)c)[key]["@MAX"] = 4;
+            else
+                ((JObject)c)[key]["@MAX"] = 2;
             if (((JObject)c)[key]["~path"] == null)
                 ((JObject)c)[key]["~path"] = ((JObject)c)[key].Path;
             ((JObject)c)[key]["~path"] = Regex.Replace(((JObject)c)[key]["~path"].ToString(), @"\d+$", "");

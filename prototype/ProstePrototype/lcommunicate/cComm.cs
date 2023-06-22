@@ -19,6 +19,7 @@ using System.Windows.Input;
 //using LibUsbDotNet.Main;
 using HidSharp;
 using System.Security.Cryptography;
+using System.IO.Ports;
 //using LibUsbDotNet.Info;
 //using System.Collections.ObjectModel;
 
@@ -932,6 +933,76 @@ namespace lcommunicate
         #endregion
 
         #region scan&new system
+        private static Dictionary<string, List<string>> _version_commands = null;
+        private static object _cs_ver_cmds = new object();
+        public static Dictionary<string, List<string>> VersionCommands
+        {
+            get
+            {
+                Dictionary<string, List<string>> res = new Dictionary<string, List<string>>();
+                Monitor.Enter(_cs_ver_cmds);
+                if (_version_commands == null)
+                {
+                    _version_commands = new Dictionary<string, List<string>>();
+                    string sysdir = System.Environment.CurrentDirectory;
+                    if (!Regex.IsMatch(sysdir, @"[\\/]$")) sysdir += @"\";
+                    sysdir += @"Configs\XML\Systems\";
+                    string[] systems = System.IO.Directory.GetDirectories(sysdir);
+                    foreach (string sys in systems)
+                    {
+                        string readdir = sys;
+                        if (!Regex.IsMatch(sys, @"[\\/]$")) readdir += @"\";
+                        readdir += "Read";
+                        string[] rfiles = System.IO.Directory.GetFiles(readdir);
+                        foreach (string rf in rfiles)
+                        {
+                            string s = System.IO.Path.GetFileName(rf);
+                            if (!Regex.IsMatch(s, @"^read[\w\W]+?\.xml$", RegexOptions.IgnoreCase)) continue;
+                            if (Regex.IsMatch(s, @"0\d+?\.xml$", RegexOptions.IgnoreCase)) continue;
+                            if (Regex.IsMatch(s, @"version\d+?\.xml$", RegexOptions.IgnoreCase)) continue;
+                            string xml = System.IO.File.ReadAllText(rf);
+                            Match m = Regex.Match(xml, @"<COMMAND\s[\w\W]+?/>", RegexOptions.IgnoreCase);
+                            if (!m.Success) continue;
+                            string cmd = m.Value;
+                            m = Regex.Match(cmd, @"SAVEAS\s*?=\s*?""VERSION""", RegexOptions.IgnoreCase);
+                            if (!m.Success) continue;
+                            m = Regex.Match(cmd, @"BYTES\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
+                            if (!m.Success) continue;
+                            cmd = m.Groups[1].Value;
+                            string sysname = System.IO.Path.GetFileName(sys);
+                            if (!_version_commands.ContainsKey(cmd)) _version_commands.Add(cmd, new List<string>());
+                            _version_commands[cmd].Add(sysname);
+                        }
+                    }
+                }
+                foreach (string key in _version_commands.Keys)
+                    res.Add(key, _version_commands[key]);
+                Monitor.Exit(_cs_ver_cmds);
+                return res;
+            }
+        }
+        private static Dictionary<string, SerialPort> ScanCOM()
+        {
+            Dictionary<string, SerialPort> res = new Dictionary<string, SerialPort>();
+            Dictionary<string, List<string>> cmds = VersionCommands;
+            string[] ports = cCOM.GetCOMPorts();
+            if (ports == null) return res;
+            foreach (string port in ports)
+            {
+                cCOM com = new cCOM();
+                object conn = com.Connect(new SerialPort(port));
+                foreach (string cmd in cmds.Keys)
+                {
+                    byte[] aver = com.SendCommand(conn, cmd);
+                    if (aver == null) continue;
+                    com.Close(conn);
+                }
+                //bool f = cCOM.TryOpen(port);
+                //if (!f) continue;
+            }
+            //
+            return res;
+        }
         public static Dictionary<string, HidDevice> ScanHID()
         {
             Dictionary<string, HidDevice> res = new Dictionary<string, HidDevice>();
@@ -952,7 +1023,7 @@ namespace lcommunicate
             //
             return res;
         }
-        private static List<JObject> AvailableSystems()
+        public static List<JObject> AvailableSystems()
         {
             List<JObject> res = new List<JObject>();
             string[] dirs = Directory.GetDirectories("Configs\\XML\\Systems");
@@ -993,6 +1064,8 @@ namespace lcommunicate
         {
             if (Regex.IsMatch(_dev.ProductName, @"repeater[\w\W]*?iris[\w\W]*?simpo", RegexOptions.IgnoreCase))
                 return "Repeater_Iris_Simpo";
+            if (Regex.IsMatch(_dev.ProductName, @"Fire\s+?panel\s+?simpo", RegexOptions.IgnoreCase))
+                return "SIMPO";
             return "";
         }
         private static List<JObject> SystemsFound(Dictionary<string, HidDevice> hid)
@@ -1006,7 +1079,9 @@ namespace lcommunicate
             {
                 HidDevice _dev = hid[s];
                 JObject jSys = new JObject();
-                if (Regex.IsMatch(s, "^(iris|simpo)", RegexOptions.IgnoreCase) || Regex.IsMatch(s, @"repeater[\w\W]+?iris[\w\W]+?simpo", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(s, "^(iris|simpo)", RegexOptions.IgnoreCase) ||
+                    Regex.IsMatch(s, @"repeater[\w\W]+?iris[\w\W]+?simpo", RegexOptions.IgnoreCase) ||
+                    Regex.IsMatch(s, @"Fire\s+?panel\s+?simpo", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
                 else if (Regex.IsMatch(s, "^eclipse", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "guard";
@@ -1033,6 +1108,8 @@ namespace lcommunicate
         public static JObject Scan()
         {
             JObject res = new JObject();
+            //
+            //Dictionary<string, SerialPort> comdevs = ScanCOM();
             //
             Dictionary<string, HidDevice> devs = ScanHID();
             List<JObject> lstFound = SystemsFound(devs);
