@@ -196,6 +196,7 @@ const addButton = (title, div, index, localJSON = {}) => {
         default: key = 'eclipse';
     }
 
+    title = title.toUpperCase();
     // title definition
     const titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
     let img = DEVICES_CONSTS[title].im ? `<img src="${DEVICES_CONSTS[title].im}" alt="${DEVICES_CONSTS[title].sign}">` : `<i class="ram_icon ${CONFIG_CONST[key].picture}"></i>`

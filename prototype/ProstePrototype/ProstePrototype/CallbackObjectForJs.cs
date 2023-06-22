@@ -148,7 +148,16 @@ namespace ProstePrototype
                 JToken t = jnode[key];
                 //File.WriteAllTextAsync("wb3.json", t.ToString());
                 if (t != null)
+                {
+                    File.WriteAllTextAsync("wb3.json", t.ToString());
                     return t.ToString();
+                }
+                t = jnode["PROPERTIES"][key];
+                if (t != null)
+                {
+                    File.WriteAllTextAsync("wb3.json", t.ToString());
+                    return t.ToString();
+                }
             }
             return null;
         }
@@ -203,6 +212,10 @@ namespace ProstePrototype
             JArray res = cJson.PanelsInLeftBrowser();
             File.WriteAllTextAsync("wb3.json", res.ToString());
             return res.ToString();
+        }
+        public string MIMICPanels()
+        {
+            return JArray.Parse("[]").ToString();
         }
     }
 }

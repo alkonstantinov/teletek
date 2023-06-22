@@ -2142,7 +2142,7 @@ namespace ljson
                         name = Regex.Replace(name, @"\d+$", "");
                     if (Regex.IsMatch(name, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
                         name = "iris";
-                    if (Regex.IsMatch(name, "^simpo", RegexOptions.IgnoreCase) && !Regex.IsMatch(name, "paneloutputs$", RegexOptions.IgnoreCase))
+                    if (Regex.IsMatch(name, "^simpo$", RegexOptions.IgnoreCase))
                         name = "iris";
                     JObject _res = null;
                     JToken jbyname = _elements[name];
@@ -3080,6 +3080,29 @@ namespace ljson
         {
             cComm.ChangeDeviceAddress(CurrentPanelID, oldAddress, loopType, newAddress);
             _internal_relations_operator.OnDeviceAddressChanged(oldAddress, loopType, newAddress);
+        }
+        public static JArray MIMICPanels()
+        {
+            JArray res = new JArray();
+            JObject _panel = CurrentPanel;
+            JObject _main = (JObject)_panel["ELEMENTS"]["iris"];
+            if (_main == null) return res;
+            JObject _content = (JObject)_main["CONTAINS"];
+            foreach (JProperty _p in _content.Properties())
+                if (Regex.IsMatch(_p.Name, @"^SIMPO[\w\W]+?MIMIC", RegexOptions.IgnoreCase))
+                {
+                    JObject _mimic = (JObject)_panel["ELEMENTS"][_p.Name];
+                    if (_mimic == null) return res;
+                    JObject _mimicc = (JObject)_mimic["CONTAINS"];
+                    foreach (JProperty ppanel in _mimicc.Properties())
+                    {
+                        string _id = ppanel.Name;
+                        JObject node = GetNode(_id);
+                        if (node != null) res.Add(node);
+                    }
+                }
+            //
+            return res;
         }
         #endregion
     }

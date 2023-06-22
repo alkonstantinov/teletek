@@ -388,7 +388,7 @@ const loopFunc = () => {
             'Params': { 'elementType': mainKey, 'elementNumber': lst.length },
             'Callback': 'loopCallback' // -> the back-end call the function loopCallBack with default 'CallBackParams': [mainKey, lst.length, 'CHANGE']
         });
-        showPanelAdd();// $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
+        showPanelAdd({ 'elementType': mainKey, 'elementNumber': lst.length });// $("#deviceList").modal('show');// data - toggle="modal" data - target="#deviceList"
     }
 }
 
@@ -618,6 +618,20 @@ function removeLoopAfterConfirm () {
         document.getElementById("selected_area").innerHTML = '';
     }
     parent.removeChild(last);
+
+    // clear all the appended elements in front if visible
+    const ram_panel_2 = document.getElementById("ram_panel_2");
+    if (ram_panel_2.innerHTML != "") {
+        const calculateDevicesBtn = ram_panel_2.querySelector("#calculateDevices");
+        const calculateDevicesFn = calculateDevicesBtn.onclick;
+        if (calculateDevicesFn) {
+            const params = calculateDevicesFn.toString().match(/calculateLoopDevices\((.*?)\)/)[1];
+            if (loopNumber === +params) {
+                ram_panel_2.innerHTML = "";
+                ram_panel_2.classList = "";
+            }
+        }
+    }
 
     if (loopNumber === 1) {
         let rmvBtn = document.getElementById("rmvBtn");

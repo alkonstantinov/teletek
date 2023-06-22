@@ -194,7 +194,7 @@
         panels_in_network: { 'bg': 'Панели в мрежата', 'en': 'Panels in network', 'ge': 'Panels in network' }, 
         panel_outputs: { 'bg': 'Панели', 'en': 'Panels outputs', 'ge': 'Panels outputs' }, 
         general_settings: { 'bg': 'Основни настройки', 'en': 'General Settings', 'ge': 'General Settings' }, 
-        mimic_panels: { 'bg': 'Основни настройки', 'en': 'Mimic Panels', 'ge': 'Mimic Panels' }, 
+        simpo_mimic_panels: { 'bg': 'Mimic панели', 'en': 'Mimic Panels', 'ge': 'Mimic Panels' }, 
         network: {
             'bg': 'Мрежа', 'en': 'Network', 'ge': 'Network' 
         },

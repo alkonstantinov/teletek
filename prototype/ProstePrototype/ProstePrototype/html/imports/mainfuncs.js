@@ -64,22 +64,26 @@ function sendMessageWPF(json, comm = {}) {
                     eval(`${comm['funcName']}("${comm['params']['goToId']}", "${comm['params']['id']}")`);
                     break;
                 case 'addElement':
-                    eval(`${comm['funcName']}("${comm['params']['id']}", "${comm['params']['elementType']}")`);
+                    if (comm['params']['btnId']) {
+                        let str = `${comm['funcName']}("${comm['params']['id']}", "${comm['params']['elementType']}", "${comm['params']['btnId']}")`;
+                        eval(str);
+                    } else {
+                        eval(`${comm['funcName']}("${comm['params']['id']}", "${comm['params']['elementType']}")`);
+                    }
                     break;
                 default:
-                    eval(`${comm['funcName']}("${comm['params']}")`);
                     break;
             }
         } catch (e) {
-            console.log('error', e);
+            alert('error '+ e);
         }
     }
-    //alert(JSON.stringify(json));
+    //alert(JSON.stringify(comm));
     try {
         //alert(`1`);
         CefSharp.PostMessage(JSON.stringify(json));
         //alert(`2`);
-    } catch (e) { console.log('CefSharp error', e); }
+    } catch (e) { alert('CefSharp error '+ e); }
 }
 
 function receiveMessageWPF(jsonTxt) {
@@ -193,7 +197,8 @@ function drawFields(body, json, inheritedColor = 'normal') {
     if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
-    keys.filter(k => k !== '~path' && k !== '~panel_id').forEach(k => {
+
+    keys.filter(k => k !== '~path' && k !== '~panel_id' && k !== '~panel_name').forEach(k => {
         let divLevel = json[k];
 
         if (k.startsWith('~noname')) { // ~noname, ~noname1, ~noname2, ..., etc cases
@@ -217,6 +222,41 @@ function drawFields(body, json, inheritedColor = 'normal') {
             }
             fieldset.insertAdjacentHTML('afterbegin', insideRows);
             body.appendChild(fieldset);
+        } else if (k.toLowerCase().startsWith('simpo_mimic')) { // case for SIMPO_MIMICs
+            // put into element with id="new"
+            const newDiv = document.getElementById("new");
+
+            boundAsync.getJsonNode(k, 'Groups').then(res => {
+                if (!res) return;
+                
+                let btnJSON = JSON.parse(res);
+                const name = btnJSON["~noname"]["fields"]["NAME"]
+                const loop = btnJSON["~noname"]["fields"]["LOOP"]
+                const addr = btnJSON["~noname"]["fields"]["ADDRESS"]
+                let deviceName = k.split('_').pop();
+                let address = deviceName.match(/(\d+)$/g)[0];
+                deviceName = deviceName.match(/^(.*?)(?=\d+$)/)[1];
+                const newMimicInner = `<div class="ram_card fire" id='${deviceName}_${address}' 
+                            onclick="javascript: showMimicOutputs('${k}', '${address}'); addActive();">
+                                <div class="ram_card_img_top">
+                                    <img src="${DEVICES_CONSTS[deviceName].im}" alt="${DEVICES_CONSTS[deviceName].sign}">
+                                </div>
+                                <div class="ram_card_body">
+                                    <h5 class="ram_card_title">${address + '. ' + deviceName}</h5>
+                                </div> <div class="ram_card_body">
+                                    <p class="ram_card_title">${newT.t(localStorage.getItem('lang'), name["@LNGID"])}:${name["~value"] ? name["~value"] : (name["@VALUE"] ? name["@VALUE"] : "")}</p>
+                                </div> <div class="ram_card_body">
+                                    <p class="ram_card_title">${newT.t(localStorage.getItem('lang'), loop["@LNGID"])}:${loop["~value"] ? loop["~value"] : loop["@VALUE"]}</p>
+                                    <p class="ram_card_title">${newT.t(localStorage.getItem('lang'), addr["@LNGID"])}:${addr["~value"] ? addr["~value"] : addr["@VALUE"]}</p>
+                                </div>
+                            </div>`;
+                sendMessageWPF({
+                    'Command': 'AddingLoop',
+                    'Params': { 'elementType': k, 'elementNumber': address }
+                });
+                newDiv.insertAdjacentHTML('beforeend', newMimicInner);
+
+            }).catch(err => alert("Error " + err));
         } else if (!divLevel["@TYPE"] && !divLevel.name) { // cases for adding panels/inputs/outputs/loops/etc
             minElements = +divLevel["@MIN"];
             for (let i = 0; i < minElements; i++) {
@@ -250,7 +290,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                         `<button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
                              <i class="ram_icon toggle"></i>
                          </button>`);
-                }         
+                }  
                 if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
                     deviceNmbr = 0;                    
                     // add the section showing the attached_device per zone with the device summary button
@@ -439,7 +479,7 @@ function getZoneDevices(elementNumber) {
                 el.appendChild(elem);
             });
         });
-    }).catch(e => console.log('e', e));
+    }).catch(err => alert("Error " + err));
 };
 
 function calculateZoneDevices(elementNumber) {
@@ -476,7 +516,7 @@ function calculateZoneDevices(elementNumber) {
             innerModalContent += `</tbody></table></div>`;
             modalContent.innerHTML = innerModalContent;
         }
-    }).catch(err => alert(err));
+    }).catch(err => alert("Error " + err));
 }
 //#endregion
 
@@ -506,7 +546,7 @@ function fatFbfFunc(json) {
 
                 collapsible(`collapsible_${input_id}`)
             }
-        }).catch(error => console.log(error));
+        }).catch(err => alert("Error " + err));
     });
 }
 //#endregion
@@ -676,7 +716,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 
                 showLoopType(1, "Output", "", divInSet.id, selectDiv.id);
 
-            }).catch(err => alert("Error" + err)); break;
+            }).catch(err => alert("Error " + err)); break;
         case "FAT_FBF_IN1":
         case "FAT_FBF_IN2":
         case "FAT_FBF_IN3":
@@ -687,7 +727,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 
                 showLoopType(1, "Input", "", divInSet.id, selectDiv.id);
 
-            }).catch(err => alert("Error" + err)); break;
+            }).catch(err => alert("Error " + err)); break;
         default:
             alert("something is wrong");
     }
@@ -722,6 +762,142 @@ function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_p
 }
 //#endregion
 
+//#region Mimic Outputs
+function showMimicOutputs(elementType, elementNumber) {
+    document.getElementById("selected_area").innerHTML = "";
+    let ram_panel_2 = document.getElementById('ram_panel_2');
+    if (!ram_panel_2) {
+        const body = document.getElementById('divMain');
+
+        ram_panel_2 = document.createElement('div');
+        ram_panel_2.id = 'ram_panel_2';
+        ram_panel_2.classList = 'ram_panel ram_resizable ram_animate';
+
+        let btnTitle = `${newT.t(localStorage.getItem('lang'), "add_new")} ${newT.t(localStorage.getItem('lang'), "output")}`;
+        ram_panel_2.insertAdjacentHTML(
+            'beforeend',
+            `<div class="ram_panel_content">
+                <div id="new_mimic_outputs" class="ram_cards">
+
+                </div>
+            </div>
+            <div class="ram_fixed_bottom">
+                <div class="ram_settings" id="buttons_devices">
+                    <button class="btn ram_btn btn_white fire" onclick="javascript:addMimicOutput('${elementType}', '${elementNumber}');" id="_btn_devices" title="${btnTitle}">
+                        <i class="ram_icon add_device"></i>
+                        <div class="ram_btn_title">${btnTitle}</div>
+                    </button>
+                </div>
+                <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this, 2);">
+                    <i class="ram_icon toggle"></i>
+                </button>
+            </div>
+            <div class="ram_resizer"></div>`
+        );
+
+        body.appendChild(ram_panel_2);
+    } else {
+        const btn = ram_panel_2.querySelector("#_btn_devices");
+        btn.onclick = function () {
+            addMimicOutput(elementType, elementNumber);
+        };
+    }
+    lst = [];
+    const new_mimic_outputs = document.getElementById("new_mimic_outputs");
+    new_mimic_outputs.innerHTML = "";
+
+    boundAsync.getJsonNode(elementType, "CONTAINS").then(res => {
+        const changeJson = JSON.parse(res)["ELEMENT"];
+        elements = parseInt(changeJson["@MAX"]);
+        minElements = parseInt(changeJson["@MIN"]);
+        let params = {
+            'NO_LOOP': "",
+            'loopType': elementType,
+            'loopNumber': +elementNumber,
+            'noneElement': changeJson["@ID"],
+            'deviceName': changeJson["@ID"],
+            'deviceAddress': ""
+        };
+        boundAsync.getLoopDevices(elementType.match(/^(.*?)(?=\d+$)/)[1], +elementNumber).then(res => {
+            if (res) {
+                let returnedJson = JSON.parse(res);
+
+                if (!Array.isArray(returnedJson)) {
+                    alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
+                    return;
+                }
+
+                returnedJson.forEach(outputJson => {
+                    params['deviceAddress'] = outputJson["~device"];
+                    createElementButton(outputJson["~address"], outputJson["~device"], "new_mimic_outputs", "_btn_devices", params);
+                })
+                deviceNmbr = lst.length;
+            }
+        }).catch(err => alert("Error: " + err));
+    }).catch(err => alert("Error: " + err));;
+
+       
+}
+
+function addMimicOutput(elementType, elementNumber) {
+    boundAsync.getJsonNode(elementType, "CONTAINS").then(res => {
+        const changeJson = JSON.parse(res)["ELEMENT"];
+        elements = parseInt(changeJson["@MAX"]);
+        minElements = parseInt(changeJson["@MIN"]);
+        let params = {
+            'NO_LOOP': "",
+            'loopType': elementType,
+            'loopNumber': +elementNumber,
+            'noneElement': changeJson["@ID"],
+            'deviceName': changeJson["@ID"],
+            'deviceAddress': ""
+        };
+        
+        callAddressModal(elementType, "", params);
+    }).catch(err => alert("Error " + err));
+}
+
+async function showMimicout(id, params) {    
+    const elementType = params['deviceName'];
+    const clearElementType = params['loopType'].match(/^(.*?)(?=\d+$)/)[1];
+    let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
+    let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
+    let returnedJson;
+    try {
+        let result = await boundAsync.getLoopDevices(clearElementType, +params['loopNumber']);
+
+        returnedJson = JSON.parse(result);
+        
+        returnedJson = returnedJson.find(json => json["~address"] === id);
+        if (!returnedJson) {
+            alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
+            return;
+        }
+        
+        if (Object.keys(returnedJson).length > 0) {
+            const el = document.getElementById("selected_area");
+            id = parseInt(id);
+            const fieldset = document.createElement('fieldset');
+            fieldset.id = `id_${id}`;
+            fieldset.insertAdjacentHTML(
+                'afterbegin',
+                `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>
+                <button onclick="javascript: callAddressModal('${elementType}', '${id}', ${JSON.stringify(params).replaceAll('"', '\'')})" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
+
+            drawFields(fieldset, returnedJson["Groups"], color ? BUTTON_COLORS[color] : '');
+            var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
+            if (oldFieldset) oldFieldset.replaceWith(fieldset);
+            else el.appendChild(fieldset);
+            collapsible();
+            addVisitedBackground();
+        }
+    } catch (e) {
+        alert('Error ' + e);
+    }
+}
+
+//#endregion
+
 // transforming object function
 const transformGroupElement = (elementJson, fieldName = '') => {
     let attributes = {
@@ -748,11 +924,17 @@ const transformGroupElement = (elementJson, fieldName = '') => {
     switch (attributes.type) {
         case 'AND':
             let andElementsList = elementJson["PROPERTIES"] && elementJson["PROPERTIES"]["PROPERTY"];
-            if (!Array.isArray(andElementsList)) return '';
+
+            if (!Array.isArray(andElementsList)) {
+                if (attributes.size === "1") {
+                    andElementsList = [andElementsList];
+                }
+                else return '';
+            }
             let fs = document.createElement('div');
             fs.id = attributes.input_id;
-            fs.classList.add('ram_attribute_holder');
-            fs.insertAdjacentHTML('afterbegin', `<p class="ram_attribute_holder_title">${attributes.input_name}</p>`);
+            //fs.classList.add('ram_attribute_holder');
+            //fs.insertAdjacentHTML('afterbegin', `<p class="ram_attribute_holder_title">${attributes.input_name}</p>`);
             let ds = document.createElement('div');
             ds.classList = 'row align-items-center';
 
@@ -802,7 +984,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                 inner += `<option ${checkType} value="${value}" ${selected} ${disabled ? "disabled" : ""} >${newT.t(localStorage.getItem('lang'), tabs[o]['@LNGID'])} </option>`
             });
             inner += `</select>
-                      <label for="${attributes.input_id}">${attributes.input_name}</label></div>
+                      <label for="${attributes.input_id}_${fieldName}">${attributes.input_name}</label></div>
                       <div id="showDiv_${attributes.input_id}_${fieldName}"></div>`;
 
             let additionalOnChangeCommand = "";
@@ -815,14 +997,14 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                     tabDiv.style.display = 'none';
 
                     let tabFlag = (tabs[key]["PROPERTIES"] && Array.isArray(tabs[key]["PROPERTIES"]["PROPERTY"]));
-
-                    let fieldsetDiv = document.createElement(tabFlag ? 'div' : 'fieldset');
-                    fieldsetDiv.classList = 'row align-items-center';
+                    //console.log('key', key, 'tabflag', tabFlag)
+                    let fieldsetDiv = document.createElement('div');
+                    fieldsetDiv.classList = !tabFlag ? 'ram_attribute_holder' : 'row align-items-center';
 
                     let elementJSON;
                     if (tabs[key]["PROPERTIES"]) {
                         if (!tabFlag) {
-                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<legend>${newT.t(localStorage.getItem('lang'), tabs[key]["PROPERTIES"]["PROPERTY"]["@LNGID"])}</legend>`);
+                            fieldsetDiv.insertAdjacentHTML('afterbegin', `<p class="ram_attribute_holder_title">${newT.t(localStorage.getItem('lang'), tabs[key]["PROPERTIES"]["PROPERTY"]["@LNGID"])}</p>`);
                         }
                         elementJSON = tabs[key]["PROPERTIES"]["PROPERTY"];
 
@@ -896,7 +1078,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
             }
             if (attributes.value && (!elementJson["@ID"] || elementJson["@ID"] !== "SUBTYPE")) {
                 // elementJson and attributes are those of Input Type
-                const jsFunc = () => [`${attributes.input_id}`, `showDiv_${attributes.input_id}`, `${attributes.value}`, loopTypePath];
+                const jsFunc = () => [`${attributes.input_id}_${fieldName}`, `showDiv_${attributes.input_id}_${fieldName}`, `${attributes.value}`, loopTypePath];
 
                 return [inner, jsFunc];
             }
@@ -1526,8 +1708,7 @@ const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path =
 }
 //#endregion
 
-//#region //----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
-
+//#region //-------GENERAL FUNCS----------////////////////////////
 function myFunction(id) {
     var element = document.getElementById(id);
     element.value = element.value.slice(0, element.dataset.maxlength);
@@ -1579,6 +1760,10 @@ function addActive(doc = 'ram_panel_1') {
     });
 }
 
+//#endregion
+
+//#region //----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
+
 const getAvailableElements = (elementType) => {
     boundAsync.getElements(elementType).then(r => {
         if (!r) return;
@@ -1587,7 +1772,7 @@ const getAvailableElements = (elementType) => {
         Object.keys(elementList).forEach(key => {
             addConcreteElement(key, elementType);
         });
-    }).catch(err => alert(err));
+    }).catch(err => alert("Error " + err));
 }
 
 // adding pre-defined elements function
@@ -1601,7 +1786,7 @@ function addConcreteElement(id, elementType = "") {
 }
 
 // adding button elements function
-function addElement(id, elementType = "") {
+function addElement(id, elementType = "", btnId = "_btn") {
 
     if (id === "element") {
 
@@ -1617,8 +1802,8 @@ function addElement(id, elementType = "") {
             var el = document.getElementById(`id_${id}`);
             if (el) el.parentNode.removeChild(el);
 
-            let button = document.getElementById("_btn");
-            if (lst.length < element && button.style.display === "none") {
+            let button = document.getElementById(btnId);
+            if (lst.length < elements && button.style.display === "none") {
                 button.style.display = "block";
             }
         } else {
@@ -1627,7 +1812,7 @@ function addElement(id, elementType = "") {
     }
 }
 
-function callAddressModal(elementType, current) {
+function callAddressModal(elementType, current, params = {}) {
     let modal = document.getElementById("addressModal");
     document.getElementById("addressModalLabel").innerText = newT.t(localStorage.getItem('lang'), "element_address");
     modal.querySelector(".btn.btn-secondary").innerText = newT.t(localStorage.getItem('lang'), "MenuClose");
@@ -1646,10 +1831,11 @@ function callAddressModal(elementType, current) {
 
     function handler() {
         if (!lst.includes(modal.querySelector("select").value)) {
+            params['deviceAddress'] = modal.querySelector("select").value;
             if (!current) { // guard if new
-                addElementAtAddress(elementType, modal.querySelector("select").value); // setting the element at the given address            
+                addElementAtAddress(elementType, params); // setting the element at the given address            
             } else { // else it is not a new item, so modify the old one
-                modifyElementCurrentAddress(current, elementType, modal.querySelector("select").value)
+                modifyElementCurrentAddress(current, elementType, params)
             }
         }
         $(modal).modal('hide');
@@ -1666,42 +1852,71 @@ function callAddressModal(elementType, current) {
     });
 }
 
-function addElementAtAddress(elementType, last) {
+function addElementAtAddress(elementType, params) {
+    const last = params['deviceAddress'];
     if (elementType.toUpperCase().endsWith("INPUT_GROUP")) {
         boundAsync.addingElementSync(`${elementType}`, +last).then(r => {
             if (r === "added") {
                 createElementButton(last, elementType); // creating the fieldset of the INPUT_GROUP element
             }
-        }).catch((e) => console.log(e));
+        }).catch(err => alert("Error " + err));
+    } else if (elementType.toUpperCase().includes("_MIMIC")) {
+        sendMessageWPF({
+            'Command': 'AddingLoopElement',
+            'Params': params
+        });
+        createElementButton(last, params["deviceName"], "new_mimic_outputs", "_btn_devices", params);
     } else {
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
         createElementButton(last, elementType); // creating the button of the element
     }
 }
 
-function modifyElementCurrentAddress(oldAddress, elementType, newAddress) {
-    boundAsync.modifyElementAddress(oldAddress, elementType, newAddress).then(r => {
-        if (r) {
-            // recreate button
-            var oldButton = document.getElementById(oldAddress);
-            oldButton.parentNode.removeChild(oldButton);
-            createElementButton(newAddress, elementType);
-            lst = lst.filter(address => address !== +oldAddress);
-            // recreate fieldset------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            showElement(newAddress, elementType);
-            document.getElementById(newAddress).addClass('active');
-        }
-    });
+function modifyElementCurrentAddress(oldAddress, elementType, params) {
+    const newAddress = params['deviceAddress'];
+    if (elementType.toUpperCase().includes("_MIMIC")) {
+        boundAsync.modifyDeviceLoopAddress(oldAddress, params['loopType'].match(/^(.*?)(?=\d+$)/)[1], newAddress).then(r => {
+            if (r) {
+                // recreate button
+                var oldButton = document.getElementById(oldAddress);
+                oldButton.parentNode.removeChild(oldButton);
+                createElementButton(newAddress, params["deviceName"], "new_mimic_outputs", "_btn_devices", params);
+                lst = lst.filter(address => address !== +oldAddress);
+                // recreate fieldset--------------------------------------------------------------------------------
+                showMimicout(newAddress, params);
+                document.getElementById(newAddress).classList.add('active');
+            }
+        });
+    } else {
+        boundAsync.modifyElementAddress(oldAddress, elementType, newAddress).then(r => {
+            if (r) {
+                // recreate button
+                var oldButton = document.getElementById(oldAddress);
+                oldButton.parentNode.removeChild(oldButton);
+                createElementButton(newAddress, elementType);
+                lst = lst.filter(address => address !== +oldAddress);
+                // recreate fieldset--------------------------------------------------------------------------------
+                showElement(newAddress, elementType);
+                document.getElementById(newAddress).classList.add('active');
+            }
+        });
+    }
 }
 
-async function createElementButton(last, elementType) {
+async function createElementButton(last, elementType, fieldId = "new", fieldBtnId = "_btn", params = {}) {
     let color = Object.keys(BUTTON_COLORS).find(c => elementType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
-
+    
     let newUserElement;
     if (!elementType.toUpperCase().includes('INPUT_GROUP')) {
         //if the element is not INPUT_GROUP
-        newUserElement = `<div onclick="javascript: showElement('${last}', '${elementType}'); addActive()" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
+        const showFn = !elementType.toUpperCase().includes('MIMICOUT') ? "showElement" : "showMimicout";
+        const type = !elementType.toUpperCase().includes('MIMICOUT') ? `'${elementType}'` : JSON.stringify(params).replaceAll('"', '\'');
+        const removeFn = !elementType.toUpperCase().includes('MIMICOUT') ?
+            `sendMessageWPF({ 'Command': 'RemovingElement', 'Params': { 'elementType': '${elementType}', 'elementNumber': '${last}' } }, comm = { 'funcName': 'addElement', 'params': { 'id': '${last}', 'elementType': '' } })` :
+            `sendMessageWPF({ 'Command': 'RemovingLoopElement', 'Params': ${JSON.stringify(params).replaceAll('"', '\'')} }, comm = { 'funcName': 'addElement', 'params': { 'id': '${last}', 'elementType': '', 'btnId': '${fieldBtnId}' } })`;
+
+        newUserElement = `<div onclick="javascript: ${showFn}('${last}', ${type}); addActive('ram_panel_2')" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
                                 <div class="ram_card_img_top">
                                     <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
                                 </div>
@@ -1710,23 +1925,25 @@ async function createElementButton(last, elementType) {
                                 </div>
                                 <div class="ram_add_btn" 
                                     onclick="javascript: event.stopPropagation();
-                                        sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
+                                        ${removeFn}">
                                     <i class="ram_icon add_device rot45"></i>
                                 </div>
                             </div>`;
     } else { //if the element is INPUT_GROUP
         newUserElement = await inputGroupTextGenerator(last, elementType);
     }
-    var element = document.getElementById("new");
+    var element = document.getElementById(fieldId);
     var new_inner = `
                         ${element.innerHTML}
                         ${newUserElement}
                     `;
+
     lst.push(+last);
+    
     element.innerHTML = new_inner;
 
     // reordering
-    var main = document.getElementById('new');
+    var main = document.getElementById(fieldId);
 
     [].map.call(main.children, Object).sort(function (a, b) {
         return +a.id.match(/\d+/) - +b.id.match(/\d+/);
@@ -1736,7 +1953,7 @@ async function createElementButton(last, elementType) {
 
     // button display check
     if (lst.length === elements) {
-        let button = document.getElementById("_btn");
+        let button = document.getElementById(fieldBtnId);
         button.style.display = "none";
     }
 }
@@ -1785,7 +2002,7 @@ async function inputGroupTextGenerator(last, elementType) {
                     </div>`;
         }
         return '';
-    } catch (e) { console.log('Error', e) }
+    } catch (e) { alert('Error ' + e) }
 }
 
 //#endregion
@@ -1822,7 +2039,7 @@ async function showElement(id, elementType) {
             getZoneDevices(+id);
         }
     } catch (e) {
-        console.log('Error', e);
+        alert('Error ' + e);
     }
 }
 
@@ -1869,6 +2086,9 @@ function alertScanFinished(show) {
     }
 }
 
+//#endregion
+
+//#region SIDEBARS AND PANELS
 function sidebar_toggle(itElement, sectionId = 1) {
     const panelOpenWidth = 180;
     const panelClosedWidth = 80;
@@ -1915,16 +2135,30 @@ function sidebar_toggle(itElement, sectionId = 1) {
     
 }
 
-function showPanelAdd() {
+function showPanelAdd(command = {}) {
     const panelAdd = document.querySelector("#ram_panel_add");
     panelAdd.style.marginLeft = "0px";
-    /* TO-DO Add resource */
+    const closeBtn = panelAdd.querySelector(".btn_white");
+    if (Object.keys(command).length > 0) {
+        closeBtn.onclick = function () {
+            hidePanelAdd(command);
+        };
+    } else {
+        closeBtn.onclick = function () {
+            hidePanelAdd();
+        };
+    }
 }
 
-function hidePanelAdd() {
+function hidePanelAdd(command = {}) {
     const panelAdd = document.querySelector("#ram_panel_add");
     panelAdd.style.marginLeft = `-${panelAdd.offsetWidth}px`;
-    /* TO-DO Remove resource */
+    if (Object.keys(command).length > 0) {
+        sendMessageWPF({
+            'Command': 'RemovingLoop',
+            'Params': command
+        });
+    }
 }
 
 function resizingPanels() {

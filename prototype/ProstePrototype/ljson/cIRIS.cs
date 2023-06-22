@@ -32,8 +32,8 @@ namespace ljson
                 name = "iris_panels_in_network";
             else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS_R$", RegexOptions.IgnoreCase))
                 name = "iris_panels_in_network";
-            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS$", RegexOptions.IgnoreCase))
-                name = "iris_panels_in_network";
+            //else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS$", RegexOptions.IgnoreCase))
+            //    name = "iris_panels_in_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_INPUTS$", RegexOptions.IgnoreCase))
                 name = "iris_inputs";
             else if (Regex.IsMatch(name, @"INPUTS[\w\W]*?_GROUP$", RegexOptions.IgnoreCase))
@@ -181,6 +181,13 @@ namespace ljson
                 content["SIMPO_PANELOUTPUTS"]["left"] = _pages["simpo_paneloutputs"]["left"];
                 content["SIMPO_PANELOUTPUTS"]["right"] = _pages["simpo_paneloutputs"]["right"];
                 content["SIMPO_PANELOUTPUTS"]["breadcrumbs"] = _pages["simpo_paneloutputs"]["breadcrumbs"];
+            }
+            if (content["SIMPO_MIMICPANELS"] != null)
+            {
+                content["SIMPO_MIMICPANELS"]["title"] = _pages["simpo_mimicpanels"]["title"];
+                content["SIMPO_MIMICPANELS"]["left"] = _pages["simpo_mimicpanels"]["left"];
+                content["SIMPO_MIMICPANELS"]["right"] = _pages["simpo_mimicpanels"]["right"];
+                content["SIMPO_MIMICPANELS"]["breadcrumbs"] = _pages["simpo_mimicpanels"]["breadcrumbs"];
             }
         }
         private static void CreateMainGroupsSimpoRepeater(JObject json)
@@ -468,8 +475,7 @@ namespace ljson
         #region panels in network
         private static void ConvertPanelsInNetwork(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
             {
                 JObject pcontent = new JObject((JObject)json["ELEMENTS"]["iris_network"]["CONTAINS"]["ELEMENT"]);
                 if (json["ELEMENTS"]["iris_panels_in_network"] == null) json["ELEMENTS"]["iris_panels_in_network"] = new JObject();
@@ -574,7 +580,7 @@ namespace ljson
         #region inputs
         private static void ConvertInputs(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase)||
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
                 Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
@@ -661,7 +667,7 @@ namespace ljson
         }
         private static void ConvertFATFBF(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase)||
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
                 Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
@@ -750,7 +756,7 @@ namespace ljson
         #region peripheral devices
         private static void ConvertPeripheralDevices(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase)||
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
                 Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
@@ -1578,6 +1584,116 @@ namespace ljson
             ac["right"] = _pages["iris_network"]["right"];
             ac["breadcrumbs"] = _pages["iris_network"]["breadcrumbs"];
         }
+        private static void SimpoPanelExtractPanelsFromNetwork(JObject json, JObject _pages)
+        {
+            JObject elements = (JObject)json["ELEMENTS"];
+            if (elements["iris"] == null || elements["iris"]["@PRODUCTNAME"] == null) return;
+            string product = elements["iris"]["@PRODUCTNAME"].ToString();
+            if (!Regex.IsMatch(product, @"^SIMPO\s+?panel$", RegexOptions.IgnoreCase)) return;
+            //
+            JObject content = (JObject)elements["iris"]["CONTAINS"];
+            JObject content_new = new JObject();
+            foreach (JProperty p in content.Properties())
+            {
+                content_new[p.Name] = p.Value;
+                if (p.Name == "iris_network")
+                {
+                    JObject o = new JObject();
+                    o["@MIN"] = "1";
+                    o["@MAX"] = "1";
+                    o["title"] = _pages["iris_panels_in_network"]["title"];
+                    o["left"] = _pages["iris_panels_in_network"]["left"];
+                    o["right"] = _pages["iris_panels_in_network"]["right"];
+                    o["breadcrumbs"] = _pages["iris_panels_in_network"]["breadcrumbs"];
+                    content_new["iris_panels_in_network"] = o;
+                    JObject onet = (JObject)elements["iris_network"];
+                    elements["iris_panels_in_network"] = new JObject(onet);
+                    ((JObject)elements["iris_panels_in_network"]).Remove("PROPERTIES");
+                    elements["iris_panels_in_network"]["@PRODUCTNAME"] = "Panels";
+                    onet.Remove("CONTAINS");
+                }
+            }
+            elements["iris"]["CONTAINS"] = content_new;
+        }
+        private static void ConvertMIMICPanelGroups(JObject _panel)
+        {
+            if (_panel == null) return;
+            //
+            JArray proparr = (JArray)_panel["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            _panel["PROPERTIES"]["Groups"] = new JObject();
+            //
+            JObject grp1 = new JObject();
+            grp1["name"] = "";
+            JObject f1 = new JObject();
+            f1["NAME"] = o["NAME"];
+            f1["LOOP"] = o["LOOP"];
+            f1["ADDRESS"] = o["ADDRESS"];
+            grp1["fields"] = f1;
+            _panel["PROPERTIES"]["Groups"]["~noname"] = grp1;
+            //
+            _panel["PROPERTIES"]["OLD"] = o;
+        }
+        private static void ConvertMIMICPanelsGroups(JObject json)
+        {
+            JObject content = (JObject)json["ELEMENTS"]["iris"];
+            if (content == null) return;
+            content = (JObject)content["CONTAINS"];
+            if (content == null) return;
+            JProperty pmimic = null;
+            foreach (JProperty p in content.Properties())
+                if (Regex.IsMatch(p.Name, @"^SIMPO_MIMIC"))
+                {
+                    pmimic = p;
+                    break;
+                }
+            if (pmimic == null) return;
+            JObject omimicpanels = (JObject)json["ELEMENTS"][pmimic.Name];
+            omimicpanels["title"] = pmimic.Value["title"].ToString();
+            omimicpanels["left"] = pmimic.Value["left"].ToString();
+            omimicpanels["right"] = pmimic.Value["right"].ToString();
+            omimicpanels["breadcrumbs"] = JArray.Parse(pmimic.Value["breadcrumbs"].ToString());
+            content = (JObject)omimicpanels["CONTAINS"];
+            if (content == null) return;
+            if (content["ELEMENT"] != null && content["ELEMENT"].Type == JTokenType.Array)
+            {
+                JObject o = Array2Object((JArray)content["ELEMENT"]);
+                omimicpanels["CONTAINS"] = o;
+                content = o;
+            }
+            foreach (JProperty p in content.Properties())
+            {
+                JObject opanel = (JObject)json["ELEMENTS"][p.Name];
+                ConvertMIMICPanelGroups(opanel);
+            }
+        }
+        private static void ConvertMIMICOut(JObject json)
+        {
+            JObject element = (JObject)json["ELEMENTS"]["SIMPO_MIMICOUT"];
+            if (element == null) return;
+            //
+            JArray proparr = null;
+            if (element["PROPERTIES"]["PROPERTY"].Type == JTokenType.Array)
+                proparr = (JArray)element["PROPERTIES"]["PROPERTY"];
+            else
+            {
+                proparr = new JArray();
+                proparr.Add(element["PROPERTIES"]["PROPERTY"]);
+            }
+            JObject o = Array2Object(proparr);
+            //groups
+            element["PROPERTIES"]["Groups"] = new JObject();
+            //
+            JObject grp1 = new JObject();
+            grp1["name"] = "";
+            JObject f1 = new JObject();
+            f1["ACTIVATION1"] = o["ACTIVATION1"];
+            grp1["fields"] = f1;
+            element["PROPERTIES"]["Groups"]["~noname"] = grp1;
+            //
+            element["PROPERTIES"]["OLD"] = o;
+        }
         #endregion
         public static string Convert(string json, JObject _pages)
         {
@@ -1633,6 +1749,7 @@ namespace ljson
             }
             ConvertMainArraysLeft(o1);
             ConvertAccessCode(o1, _pages);
+            SimpoPanelExtractPanelsFromNetwork(o1, _pages);
             ConvertPanelsInNetwork(o1, _pages);
             ConvertNetwork(o1, _pages);
             ConvertInputs(o1, _pages);
@@ -1652,6 +1769,8 @@ namespace ljson
             ConvertPanelInNetwork(o1);
             RemoveRepeaterSimpoElements(o1);
             ConvertSimpoPaneloutputs(o1, _pages);
+            ConvertMIMICPanelsGroups(o1);
+            ConvertMIMICOut(o1);
             //
             cXml.Arrays2Objects(o1, true);
             //

@@ -229,14 +229,6 @@
     "picture": "fa-gears",
     "icon": "\ue903"
   },
-  "simpo_general_settings": {
-    "title": "Simpo General Settings",
-    "left": "menu-automatic.html",
-    "right": "IRIS/IRISPanel-automatic.html",
-    "breadcrumbs": [ "index", "iris" ],
-    "picture": "fa-gears",
-    "icon": "\ue903"
-  },
   "simpo_paneloutputs": {
     "title": "Panel outputs",
     "left": "menu-automatic.html",
