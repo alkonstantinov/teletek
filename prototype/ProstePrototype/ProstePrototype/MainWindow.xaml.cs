@@ -551,12 +551,12 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 initBreadCrumbs(
-                    pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>(), // takes the respective pages ["breadcrumbs"]
-                    (string)pages[_clean_key].Value<JObject>()["right"].Value<string>().Split("/")[0] // get the directory source to define the color type
+                    page, // in order to get the directory source to define the color type
+                    pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>() // takes the respective pages ["breadcrumbs"]
                     );
                 addLastBreadCrumb(
-                    _clean_key,
-                    (string)pages[_clean_key].Value<JObject>()["right"].Value<string>().Split("/")[0] // get the directory source to define the color type
+                    (string)jnode["@PRODUCTNAME"], // get the directory source to define the color type
+                    _clean_key
                     );
             });
 
@@ -928,11 +928,17 @@ namespace ProstePrototype
 
         #region breadcrumb
 
-        private void addLastBreadCrumb(string page, string panel_type)
+        private void addLastBreadCrumb(string panel_type, string page)
         {
             string color = "Blue";
-            if (panel_type.ToLower().StartsWith("iris")) color = "Red";
+            if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") || 
+                page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
+
+            if (page == "iris" && panel_type.ToLower().StartsWith("simpo")) // unique case when page === "iris"
+            {
+                page = "simpo";
+            }
 
             string title = pages[page].Value<JObject>()["title"].Value<string>();
             string icon = pages[page].Value<JObject>()["icon"].Value<string>();
@@ -1063,18 +1069,26 @@ namespace ProstePrototype
             string page = ((Button)sender).Tag.ToString();
             LoadPage(page, "");
         }
-        private void initBreadCrumbs(JArray breadCrumbs, string panel_type)
-        {
-            lvBreadCrumbs.Items.Clear();
+        private void initBreadCrumbs(string page, JArray breadCrumbs)
+        {   
+            JObject jnode = new JObject(cJson.GetNode(page));
+            string panel_type = (string)jnode["@PRODUCTNAME"];
+            lvBreadCrumbs.Items.Clear();            
 
             string color = "Blue";
-            if (panel_type.ToLower().StartsWith("iris")) color = "Red";
+            if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") ||
+                page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
             foreach (string item in breadCrumbs.Select(x => x.Value<string>()))
             {
-                string title = pages[item].Value<JObject>()["title"].Value<string>();
-                addBreadCrumb(title, item, color);
-                //addBreadCrumb(title, item);
+                string currItem = item;
+                if (item == "iris" && jnode.ToString().Contains("SIMPO"))
+                {
+                    currItem = "simpo";
+                }
+                string title = pages[currItem].Value<JObject>()["title"].Value<string>();
+                addBreadCrumb(title, currItem, color);
+                //addBreadCrumb(title, currItem);
             }
         }
         #endregion

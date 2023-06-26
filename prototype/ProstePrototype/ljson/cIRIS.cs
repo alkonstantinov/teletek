@@ -236,7 +236,7 @@ namespace ljson
             grp1["name"] = "Panel Settings";
             JObject f1 = new JObject();
             f1["Language"] = o["Language"];
-            f1["BRIGHTNESS_R"] = o["BRIGHTNESS_R"];
+            f1["BRIGHTNESS"] = o["BRIGHTNESS"];
             f1["AUTOLOGOFF"] = o["AUTOLOGOFF"];
             f1["LOGOFFENABLED"] = o["LOGOFFENABLED"];
             grp1["fields"] = f1;
@@ -253,7 +253,7 @@ namespace ljson
             JObject grp3 = new JObject();
             grp3["name"] = "Day/Night";
             JObject f3 = new JObject();
-            f3["DayNightScedule"] = o["DayNightScedule"];
+            f3["DayNightSchedule"] = o["DayNightSchedule"];
             f3["DayMode"] = o["DayMode"];
             grp3["fields"] = f3;
             json["iris"]["PROPERTIES"]["Groups"]["DayNight"] = grp3;
@@ -1696,6 +1696,23 @@ namespace ljson
             //
             element["PROPERTIES"]["OLD"] = o;
         }
+        private static void RemoveSimpoElements(JObject json)
+        {
+            JObject elements = (JObject)json["ELEMENTS"];
+            if (elements["SIMPO_GENERAL_SETTINGS"] != null) elements.Remove("SIMPO_GENERAL_SETTINGS");
+            if (elements["SIMPO_PANELSETTINGS"] != null) elements.Remove("SIMPO_PANELSETTINGS");
+            if (elements["SIMPO_ACCESSCODE"] != null) elements.Remove("SIMPO_ACCESSCODE");
+            if (elements["SIMPO_DAYNIGHT"] != null) elements.Remove("SIMPO_DAYNIGHT");
+            if (elements["SIMPO_DELAYT1"] != null) elements.Remove("SIMPO_DELAYT1");
+            if (elements["SIMPO_SOUNDERSMODE"] != null) elements.Remove("SIMPO_SOUNDERSMODE");
+            if (elements["SIMPO_LOGO"] != null) elements.Remove("SIMPO_LOGO");
+            if (elements["SIMPO_SOUNDERS"] != null) elements.Remove("SIMPO_SOUNDERS");
+            if (elements["SIMPO_FIREBRIGADE"] != null) elements.Remove("SIMPO_FIREBRIGADE");
+            if (elements["SIMPO_RELAY1"] != null) elements.Remove("SIMPO_RELAY1");
+            if (elements["SIMPO_RELAY2"] != null) elements.Remove("SIMPO_RELAY2");
+            if (elements["SIMPO_RELAY3"] != null) elements.Remove("SIMPO_RELAY3");
+            if (elements["SIMPO_RELAY4"] != null) elements.Remove("SIMPO_RELAY4");
+        }
         #endregion
         public static string Convert(string json, JObject _pages)
         {
@@ -1770,6 +1787,7 @@ namespace ljson
             ConvertPreripherialDevicesContentNodes(o1);
             ConvertPanelInNetwork(o1);
             RemoveRepeaterSimpoElements(o1);
+            RemoveSimpoElements(o1);
             ConvertSimpoPaneloutputs(o1, _pages);
             ConvertMIMICPanelsGroups(o1);
             ConvertMIMICOut(o1);

@@ -531,8 +531,8 @@ function addLoop(loopType, newFlag = "new") {
                         <div class="ram_card_body">
                             <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign} ${last}</h5>
                         </div>
-                        <div class="ram_add_btn" onclick="javascript: exchangingLoop('${loopType}')"><i class="ram_icon edit"></i></div>
                     </div>`;
+                        // <div class="ram_add_btn" onclick="javascript: exchangingLoop('${loopType}')"><i class="ram_icon edit"></i></div>
 
     var element = document.getElementById("new");
     var new_inner = `
@@ -712,7 +712,7 @@ function removeLoopAfterConfirm () {
     const ram_panel_2 = document.getElementById("ram_panel_2");
     if (ram_panel_2 && ram_panel_2.innerHTML !== "") {
         const calculateDevicesBtn = ram_panel_2.querySelector("#calculateDevices");
-        const calculateDevicesFn = calculateDevicesBtn ? calculateDevicesBtn.onclick : "";
+        const calculateDevicesFn = calculateDevicesBtn && calculateDevicesBtn.onclick;
         if (calculateDevicesFn) {
             const params = calculateDevicesFn.toString().match(/calculateLoopDevices\((.*?)\)/)[1];
             if (loopNumber === +params) {

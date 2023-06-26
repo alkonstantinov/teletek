@@ -229,11 +229,19 @@
     "picture": "fa-gears",
     "icon": "\ue903"
   },
+  "simpo": {
+    "title": "SIMPO Panel",
+    "left": "menu-automatic.html",
+    "right": "IRIS/IRISPanel-automatic.html",
+    "breadcrumbs": [ "index" ],
+    "picture": "fireicon", // "fa-house-fire"
+    "icon": "\ue908"
+  },
   "simpo_paneloutputs": {
     "title": "Panel outputs",
     "left": "menu-automatic.html",
     "right": "IRIS/IRISPanel-automatic.html",
-    "breadcrumbs": [ "index", "iris" ],
+    "breadcrumbs": [ "index", "simpo" ],
     "picture": "outputs", // "fa-arrow-up-9-1"
     "icon": "\ue90d"
   },
@@ -241,7 +249,7 @@
     "title": "Simpo Mimic Panels",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "iris" ],
+    "breadcrumbs": [ "index", "simpo" ],
     "picture": "fa-arrows-to-circle",
     "icon": "\ue915"
   }

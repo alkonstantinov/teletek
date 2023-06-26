@@ -1129,6 +1129,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                     selected: sel
                 };
                 if (o['ScheduleKey']) tmp.link = o['ScheduleKey'];
+                if (!o['ScheduleKey'] && elementJson["@TEXT"] === "Day Mode") tmp.link = "DayNightschedule"; // added for SIMPO only - it has a typo in the JSON
                 if (o['@IMAGE']) tmp.imageKey = o['@IMAGE'].split('.')[0];
                 return tmp;
             });
