@@ -330,13 +330,17 @@
     max-height: calc(100vh - var(--fixed-button-max-height) - 20px);
 }
 
-    /*NEW STYLE*/
-.ram_panels {
-    display: flex;
-    height: 100vh;
-    border-radius: 0 10px 10px 0;
-    /*height: calc(100vh - var(--ram-top-nav-height));*/
+.ram_panel .middle ~ .ram_panel_content {
+    max-height: calc(100vh - var(--fixed-button-max-height) - 66px);
 }
+
+    /*NEW STYLE*/
+    .ram_panels {
+        display: flex;
+        height: 100vh;
+        border-radius: 0 10px 10px 0;
+        /*height: calc(100vh - var(--ram-top-nav-height));*/
+    }
 
 .ram_panel {
     min-width: 180px;

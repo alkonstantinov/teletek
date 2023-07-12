@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullHeight">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -9,8 +9,8 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../imports/jquery-3.6.0.js"></script>
     <script src="../imports/boostrap/popper.min.js"></script>
-    <link rel="stylesheet" href="../imports/boostrap/boostrap.css">
     <script src="../imports/boostrap/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../imports/boostrap/boostrap.css">
     <script src="../imports/boostrap/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="../imports/css/all.css">
     <script src="../imports/font-awesome.js"></script>
@@ -10285,18 +10285,16 @@
                }
     </style>
 
-    <link rel="stylesheet" href="../imports/css/sidebar.css">
     <link rel="stylesheet" href="../imports/css/ram-icons.css">
+    <link rel="stylesheet" href="../imports/css/sidebar.css">
     <link rel="stylesheet" href="../IRIS.css">
-
     <title>Teletek Manager</title>
 </head>
 <body>
     <div id="ram_main_wrapper">
-        <div class="ram_panels" id="divLDevices">
-
+        <div class="ram_panels" id="divMain">
             <div class="ram_panel ram_resizable ram_animate" id="ram_panel_1">
-                <div class="ram_panel_content">
+                <div class="ram_panel_content" id="">
                     <div id="new" class="ram_cards">
 
 
@@ -10305,21 +10303,38 @@
 
 
 
-
-
-
-                        <p>Add up to 4 Loops</p>
+                        <div onclick="javascript: showElement('0', 'IRIS8_INPUT'); addActive('ram_panel_2')" id="0" class="ram_card fire">
+                            <div class="ram_card_img_top">
+                                <i class="ram_icon inputs"></i>
+                            </div>
+                            <div class="ram_card_body">
+                                <h5 class="ram_card_title">Input 0</h5>
+                            </div>
+                            <div class="ram_add_btn" onclick="javascript: event.stopPropagation();
+                                        sendMessageWPF({ 'Command': 'RemovingElement', 'Params': { 'elementType': 'IRIS8_INPUT', 'elementNumber': '0' } }, comm = { 'funcName': 'addElement', 'params': { 'id': '0', 'elementType': '' } })">
+                                <i class="ram_icon add_device rot45"></i>
+                            </div>
+                        </div><div onclick="javascript: showElement('1', 'IRIS8_INPUT'); addActive('ram_panel_2')" id="1" class="ram_card fire">
+                            <div class="ram_card_img_top">
+                                <i class="ram_icon inputs"></i>
+                            </div>
+                            <div class="ram_card_body">
+                                <h5 class="ram_card_title">Input 1</h5>
+                            </div>
+                            <div class="ram_add_btn" onclick="javascript: event.stopPropagation();
+                                        sendMessageWPF({ 'Command': 'RemovingElement', 'Params': { 'elementType': 'IRIS8_INPUT', 'elementNumber': '1' } }, comm = { 'funcName': 'addElement', 'params': { 'id': '1', 'elementType': '' } })">
+                                <i class="ram_icon add_device rot45"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="ram_fixed_bottom">
                     <div class="ram_settings" id="buttons">
-
-                        <button type="button" id="_btn" class="btn ram_btn btn_white fire" onclick="javascript: loopFunc();" title="Add New Loop">
+                        <button class="btn ram_btn btn_white fire" onclick="javascript:addElement('element', 'IRIS8_INPUT')" id="_btn" title="Add New INPUT">
                             <i class="ram_icon add_device"></i>
-                            <div class="ram_btn_title">Add New Loop</div>
-                        </button><button type="button" id="rmvBtn" class="btn ram_btn btn_white fire" onclick="javascript: removeLoop();" title="Remove Last Loop">
-                            <i class="ram_icon minus"></i>
+                            <div class="ram_btn_title">Add New INPUT</div>
                         </button>
+
                     </div>
                     <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
                         <i class="ram_icon toggle"></i>
@@ -10327,80 +10342,632 @@
                 </div>
                 <div class="ram_resizer"></div>
             </div>
-            <div id="ram_panel_2" class=""></div>
-            <div class="ram_panel ram_resizable ram_animate" id="ram_panel_add" style="margin-left: -360px;">
-                <div class="ram_panel_content">
-                    <div class="ram_cards" id="list-tab">
-                        <div class="ram_card fire" id="list-IRIS_TTELOOP1" onclick="javascript: addLoop('IRIS_TTELOOP1'); hidePanelAdd();">
-                            <div class="ram_card_img">
-                                <img src="../imports/images/pics/Teletek_Loop.png" alt="Teletek Loop">
+        </div>
+        <!--<div id="ram_toggle_sidebar" class="ram_sidebar_toggle_wrapper">
+            <button class="ram_btn btn_toggle" id="ram_hamburger_btn" data-bs-target="#ram_sidebar" aria-controls="ram_sidebar" onclick="javascript: sidebar_toggle(this)">
+                <i class="ram_icon toggle"></i>
+            </button>
+        </div>-->
+        <main class="ram_main" id="selected_area">
+
+            <fieldset id="id_0">
+                <legend>Input 0</legend>
+                <button onclick="javascript: callAddressModal('IRIS8_INPUT', '0')" type="button" class="btn btn-position-right">Modify current address</button><div class="row align-items-center m-2">
+                    <div class="col-12 col-lg-6 mt-1">
+                        <div class="form-floating mb-3">
+
+                            <input type="text" class="form-control ram_floating_input" id="note" name="note" maxlength="39" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.~noname.MESS_IN.~index~0','newValue': this.value}})">
+                            <label for="note">Note</label>
+                        </div>
+                    </div>
+                </div><button class="fire collapsible ml-1 collapsible_settings cactive">Settings</button>
+                <div class="collapsible-content col-12" style="max-height: 252px;">
+                    <div class="row align-items-center m-2" id="settings">
+                        <div class="col-12 col-lg-6 mt-1">
+                            <div>
+                                <label for="delay_(seconds)" class="input-group-text">Delay (seconds)</label>
+                                <div class="input-group mb-3 pb-3">
+
+                                    <input class="form-control ram_number_input" type="number" id="delay_(seconds)" name="delay_(seconds)" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~0','newValue': this.value}})" min="0" max="600" value="0">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                    <div class="valid-feedback">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                            <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                            <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ram_card_body">
-                                <h5 class="ram_card_title">Teletek Loop</h5>
+                        </div><div class="col-12 col-lg-6 mt-1">
+                            <div>
+                                <label for="group" class="input-group-text">Group</label>
+                                <div class="input-group mb-3 pb-3">
+
+                                    <input class="form-control ram_number_input" type="number" id="group" name="group" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~0','newValue': this.value}})" min="1" max="250" value="1">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                    <div class="valid-feedback">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                            <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                            <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
-                        </div><div class="ram_card fire" id="list-IRIS_LOOP1" onclick="javascript: addLoop('IRIS_LOOP1'); hidePanelAdd();">
-                            <div class="ram_card_img">
-                                <img src="../imports/images/pics/System_Sensor_Loop.png" alt="System Sensor Loop">
+                        </div>
+                    </div>
+                </div><button class="fire collapsible ml-1 collapsible_parameters cactive">Parameters</button>
+                <div class="collapsible-content col-12" style="max-height: 158px;">
+                    <div class="row align-items-center m-2" id="parameters">
+                        <div class="col-12 col-lg-6 mt-1">
+                            <div class="form-check mb-3">
+
+                                <input type="checkbox" id="latched" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '1', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Parameters.fields.LATCHED.~index~0', this.id)">
+                                <label for="latched" class="form-check-label">Latched</label>
                             </div>
-                            <div class="ram_card_body">
-                                <h5 class="ram_card_title">System Sensor Loop</h5>
+                        </div><div class="col-12 col-lg-6 mt-1">
+                            <div class="form-check mb-3">
+
+                                <input type="checkbox" id="inverted" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '2', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Parameters.fields.INVERTED.~index~0', this.id)">
+                                <label for="inverted" class="form-check-label">Inverted</label>
+                            </div>
+                        </div>
+                    </div>
+                </div><button class="fire collapsible ml-1 collapsible_input_type cactive">Input Type</button>
+                <div class="collapsible-content col-12" style="max-height: 330px;">
+                    <div class="row align-items-center m-2" id="input_type">
+                        <div class="col-12 col-lg-12 mt-1" style="min-height: 6em;">
+                            <div class="form-floating mb-3">
+                                <select id="input_type_Type" name="input_type_Type" class="form-select ram_floating_select" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~0','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_input_type_Type', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                    <option value="0_ff9614f2-a32d-4514-b5dd-aaa37359b84f_Type">NONE </option>
+                                    <option value="1_c25c86e7-eced-49c5-8e76-9e4b1d34d8f5_Type">PERIPHERY DEVICE </option>
+                                    <option checktype="ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~0" value="2_f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca_Type" selected="">LOOP DEVICE </option>
+                                    <option value="3_21aac9d8-e7ef-4f61-a901-3c5504ae00bc_Type">ZONE </option>
+                                    <option value="10_bde34abf-ebe4-4de5-be9e-72537d338167_Type">ZONE GROUP </option>
+                                    <option value="11_2f2acccd-bd04-4d1b-aa29-05fffe4a879e_Type">DEVICE GROUP </option>
+                                    <option value="9_08479ebd-d2e6-44c6-83ee-346a90986568_Type">ALARMS </option>
+                                    <option value="4_d076749b-3d30-4cb2-8785-fd82145fd7dd_Type">TIME </option>
+                                    <option value="5_5c612535-4161-479f-b201-3bc31d5f0103_Type">DATE </option>
+                                    <option value="6_172136a2-1576-4e40-a2cb-b11050cf2403_Type">ACTION </option>
+                                    <option value="7_65cf3d35-ce3e-4df1-924e-455ccad214e6_Type">GENERAL </option>
+                                    <option value="8_06f13ccc-dc3b-4d8f-a0a3-81991b49afc2_Type">NETWORK </option>
+                                </select>
+                                <label for="input_type_Type">Input type</label>
+                            </div>
+                            <div id="showDiv_input_type_Type">
+                                <div class="ram_attribute_holder" id="loop_type-showDiv_input_type_Type">
+                                    <p class="ram_attribute_holder_title">Loop type</p><div class="ram_input_combine" id="loop_type-showDiv_input_type_Type-target">
+                                        <div class="form-floating">
+                                            <select id="loop_type-showDiv_input_type_Type-target-Loop" name="loop_type-showDiv_input_type_Type-target-Loop" class="form-select ram_floating_select" aria-label="Loop" onchange="javascript: showLoopType(2, 'Input', this.value, 'loop_type-showDiv_input_type_Type-target', 'input_type_Type')">
+                                                <option value="" disabled="">Select an option</option>
+                                                <option value="IRIS8_TTELOOP1" selected="">Teletek Loop 1</option>
+                                                <option value="IRIS8_LOOP2">Sensor Loop 2</option>
+                                            </select>
+                                            <label for="loop_type-showDiv_input_type_Type-target-Loop">Loop</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <select id="loop_type-showDiv_input_type_Type-target-Device" name="loop_type-showDiv_input_type_Type-target-Device" class="form-select ram_floating_select" aria-label="Device" onchange="javascript: showLoopType(3, 'Input', 'IRIS8_TTELOOP1' + '+' + this.value, 'loop_type-showDiv_input_type_Type-target', 'input_type_Type')">
+                                                <option value="" disabled="">Select an option</option>
+                                                <option value="IRIS8_MIO22/mio22/1" selected="">1. mio22</option>
+                                                <option value="IRIS8_MIO22M/2">2. MIO22M</option>
+                                            </select>
+                                            <label for="loop_type-showDiv_input_type_Type-target-Device">Device</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <select id="loop_type-showDiv_input_type_Type-target-Input" name="loop_type-showDiv_input_type_Type-target-Input" class="form-select ram_floating_select" aria-label="Input" onchange="javascript: showLoopType(4, 'Input', 'IRIS8_TTELOOP1+IRIS8_MIO22/mio22/1' + '+' + this.value, 'loop_type-showDiv_input_type_Type-target', 'input_type_Type')">
+                                                <option value="" disabled="">Select an option</option>
+                                                <option value="input1/TYPECHANNEL1" selected="">input1</option>
+                                                <option value="input2/TYPECHANNEL2">input2</option>
+                                            </select>
+                                            <label for="loop_type-showDiv_input_type_Type-target-Input">Input</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="0_ff9614f2-a32d-4514-b5dd-aaa37359b84f_Type" style="display: none;"><div class="row align-items-center"></div></div><div id="1_c25c86e7-eced-49c5-8e76-9e4b1d34d8f5_Type" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="peripherial_device_address" class="input-group-text">Peripherial device address</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="peripherial_device_address" name="peripherial_device_address" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[2].~index~0','newValue': this.value}})" min="1" max="12" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="peripherial_device_input" class="input-group-text">Peripherial device input</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="peripherial_device_input" name="peripherial_device_input" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[3].~index~0','newValue': this.value}})" min="1" max="24" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[3].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[3].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="3_21aac9d8-e7ef-4f61-a901-3c5504ae00bc_Type" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-6 mt-1">
+                                        <div class="form-floating mb-3 ">
+
+
+                                            <select class="form-select ram_floating_select" id="function" name="function" aria-label="Function" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}}
+                            )
+
+                        ">
+                                                <option value="" disabled="">Select an option</option>
+                                                <option value="0" selected="">FIRE</option>
+                                                <option value="1">FAULT</option>
+                                                <option value="2">DISABLED</option>
+                                                <option value="3">PREALARM</option>
+                                            </select><label for="function">Function</label>
+                                        </div>
+                                    </div><div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="zone_number" class="input-group-text">Zone number</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="zone_number" name="zone_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[2].~index~0','newValue': this.value}})" min="1" max="200" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="10_bde34abf-ebe4-4de5-be9e-72537d338167_Type" style="display: none;">
+                                <div class="ram_attribute_holder">
+                                    <p class="ram_attribute_holder_title">Function</p><div class="col-12 col-lg-12 mt-1">
+                                        <div class="form-floating mb-3">
+                                            <select id="function_" name="function_" class="form-select ram_floating_select" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.~index~0','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_function_', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                                <option value="0_40434a7f-17e3-4842-ac51-727c58a9f062_" selected="">Fire </option>
+                                                <option value="1_c7ad8e73-678b-4538-ba70-e10c0449ebe8_">Fault </option>
+                                            </select>
+                                            <label for="function_">Function</label>
+                                        </div>
+                                        <div id="showDiv_function_"></div><div id="0_40434a7f-17e3-4842-ac51-727c58a9f062_" style="display: none;">
+                                            <div class="row align-items-center">
+                                                <div class="col-12 col-lg-4 mt-1">
+                                                    <div>
+                                                        <label for="zone_group_number" class="input-group-text">Zone group number</label>
+                                                        <div class="input-group mb-3 pb-3">
+
+                                                            <input class="form-control ram_number_input" type="number" id="zone_group_number" name="zone_group_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[0].~index~0','newValue': this.value}})" min="1" max="200" value="1">
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                            <div class="valid-feedback">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                                    <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                                    <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><div class="col-12 col-lg-4 mt-1">
+                                                    <div class="form-floating mb-3 ">
+
+
+                                                        <select class="form-select ram_floating_select" id="logic" name="logic" aria-label="Logic" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.~index~0','newValue': this.value}}
+                            )
+
+                        ">
+                                                            <option value="" disabled="">Select an option</option>
+                                                            <option value="0" selected="">OR</option>
+                                                            <option value="4">AND</option>
+                                                        </select><label for="logic">Logic</label>
+                                                    </div>
+                                                </div><div class="col-12 col-lg-4 mt-1">
+                                                    <div>
+                                                        <label for="alarms_counter" class="input-group-text">Alarms Counter</label>
+                                                        <div class="input-group mb-3 pb-3">
+
+                                                            <input class="form-control ram_number_input" type="number" id="alarms_counter" name="alarms_counter" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[3].~index~0','newValue': this.value}})" min="0" max="9" value="1">
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[3].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[3].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                            <div class="valid-feedback">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                                    <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                                    <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><div id="1_c7ad8e73-678b-4538-ba70-e10c0449ebe8_" style="display: none;">
+                                            <div class="row align-items-center">
+                                                <div class="col-12 col-lg-6 mt-1">
+                                                    <div>
+                                                        <label for="zone_group_number" class="input-group-text">Zone group number</label>
+                                                        <div class="input-group mb-3 pb-3">
+
+                                                            <input class="form-control ram_number_input" type="number" id="zone_group_number" name="zone_group_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[0].~index~0','newValue': this.value}})" min="1" max="200" value="1">
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                            <div class="valid-feedback">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                                    <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                                    <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><div class="col-12 col-lg-6 mt-1">
+                                                    <div class="form-floating mb-3 ">
+
+
+                                                        <select class="form-select ram_floating_select" id="logic" name="logic" aria-label="Logic" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.~index~0','newValue': this.value}}
+                            )
+
+                        ">
+                                                            <option value="" disabled="">Select an option</option>
+                                                            <option value="0">OR</option>
+                                                            <option value="4" selected="">AND</option>
+                                                        </select><label for="logic">Logic</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="11_2f2acccd-bd04-4d1b-aa29-05fffe4a879e_Type" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-6 mt-1">
+                                        <div class="form-floating mb-3 ">
+
+
+                                            <select class="form-select ram_floating_select" id="logic" name="logic" aria-label="Logic" onchange="javascript: sendMessageWPF(
+                            {'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY.~index~0','newValue': this.value}}
+                            )
+
+                        ">
+                                                <option value="" disabled="">Select an option</option>
+                                                <option value="0">OR</option>
+                                                <option value="4" selected="">AND</option>
+                                            </select><label for="logic">Logic</label>
+                                        </div>
+                                    </div><div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="group_number" class="input-group-text">Group Number</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="group_number" name="group_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[2].~index~0','newValue': this.value}})" min="1" max="100" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="9_08479ebd-d2e6-44c6-83ee-346a90986568_Type" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="zone_number" class="input-group-text">Zone Number</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="zone_number" name="zone_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}})" min="1" max="200" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="alarms_counter" class="input-group-text">Alarms Counter</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="alarms_counter" name="alarms_counter" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[2].~index~0','newValue': this.value}})" min="1" max="9" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="4_d076749b-3d30-4cb2-8785-fd82145fd7dd_Type" style="display: none;">
+                                <div class="row align-items-center justify-content-around">
+                                    <div class="col-12 col-lg-4 mt-1">
+                                        <div id="days_of_week">
+                                            <div class="row align-items-center">
+                                                <div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="sunday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '256', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[0].~index~0', this.id)">
+                                                    <label for="sunday" class="form-check-label">Sunday</label>
+                                                </div><div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="monday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '512', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[1].~index~0', this.id)">
+                                                    <label for="monday" class="form-check-label">Monday</label>
+                                                </div><div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="tuesday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '1024', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[2].~index~0', this.id)">
+                                                    <label for="tuesday" class="form-check-label">Tuesday</label>
+                                                </div><div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="wednesday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '2048', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[3].~index~0', this.id)">
+                                                    <label for="wednesday" class="form-check-label">Wednesday</label>
+                                                </div><div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="thursday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '4096', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[4].~index~0', this.id)">
+                                                    <label for="thursday" class="form-check-label">Thursday</label>
+                                                </div><div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="friday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '8192', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[5].~index~0', this.id)">
+                                                    <label for="friday" class="form-check-label">Friday</label>
+                                                </div><div class="form-check mb-3">
+
+                                                    <input type="checkbox" id="saturday" class="form-check-input ram_checkbox" onchange="javascript:inputGroupHandler(this.checked, '16384', '0', 'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[6].~index~0', this.id)">
+                                                    <label for="saturday" class="form-check-label">Saturday</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-4 mt-1">
+                                        <div>
+                                            <label for="hour" class="input-group-text">Hour</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="hour" name="hour" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}})" min="0" max="23" value="0">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-4 mt-1">
+                                        <div>
+                                            <label for="minutes" class="input-group-text">Minutes</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="minutes" name="minutes" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~0','newValue': this.value}})" min="0" max="59" value="0">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="5_5c612535-4161-479f-b201-3bc31d5f0103_Type" style="display: none;">
+                                <div class="row align-items-center justify-content-around">
+                                    <div class="col-12 col-lg-4 mt-1">
+                                        <div>
+                                            <label for="year" class="input-group-text">Year</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="year" name="year" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~0','newValue': this.value}})" min="1990" value="1990">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-4 mt-1">
+                                        <div>
+                                            <label for="month" class="input-group-text">Month</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="month" name="month" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}})" min="1" max="12" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-4 mt-1">
+                                        <div>
+                                            <label for="day" class="input-group-text">Day</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="day" name="day" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~0','newValue': this.value}})" min="1" max="31" value="1">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><div id="6_172136a2-1576-4e40-a2cb-b11050cf2403_Type" style="display: none;">
+                                <div class="ram_attribute_holder">
+                                    <p class="ram_attribute_holder_title">FUNCTION</p><div class="col-12 col-lg-12 mt-1">
+                                        <div class="form-floating mb-3">
+                                            <select id="function_" name="function_" class="form-select ram_floating_select" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.~index~0','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_function_', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                                <option value="0_8cc124a0-5bb2-4fd5-9464-7ed7d240fdac_" selected="">SILLENCE BUZZER </option>
+                                                <option value="1_135bde56-df1e-4792-a935-78a8739090cf_">SILLENCE SOUNDER </option>
+                                                <option value="2_199a969d-168f-468d-9c9a-07ad24140c24_">RESET </option>
+                                                <option value="3_59109c13-31c0-4176-9701-bf762f3d25ea_">SOUNDER ON </option>
+                                                <option value="4_4cc92227-e325-49c4-9804-f458a09ff3e6_">FIRE BRIGADE ON </option>
+                                                <option value="5_da82ef0c-72c7-45b0-977d-09b78c477a98_">FAULT OUTPUT ON </option>
+                                                <option value="6_95369aef-ab99-49a5-bc89-5b71dea38bab_">FIRE PROTECTION ON </option>
+                                                <option value="7_3b16f634-1e64-45c1-b553-4cbf36abafe7_">SOUNDER ON(ZONAL) </option>
+                                                <option value="8_d4ef4d92-a715-4db7-8c24-4119a695affd_">DAY </option>
+                                                <option value="9_768bb134-9416-4e62-9ede-f4f7f4f23323_">NIGHT </option>
+                                            </select>
+                                            <label for="function_">FUNCTION</label>
+                                        </div>
+                                        <div id="showDiv_function_"></div><div id="0_8cc124a0-5bb2-4fd5-9464-7ed7d240fdac_" style="display: none;"></div><div id="1_135bde56-df1e-4792-a935-78a8739090cf_" style="display: none;"></div><div id="2_199a969d-168f-468d-9c9a-07ad24140c24_" style="display: none;"></div><div id="3_59109c13-31c0-4176-9701-bf762f3d25ea_" style="display: none;"></div><div id="4_4cc92227-e325-49c4-9804-f458a09ff3e6_" style="display: none;"></div><div id="5_da82ef0c-72c7-45b0-977d-09b78c477a98_" style="display: none;"></div><div id="6_95369aef-ab99-49a5-bc89-5b71dea38bab_" style="display: none;"></div><div id="7_3b16f634-1e64-45c1-b553-4cbf36abafe7_" style="display: none;">
+                                            <div class="ram_attribute_holder">
+                                                <p class="ram_attribute_holder_title">Zone number</p><div class="col-12 col-lg-6 mt-1">
+                                                    <div>
+                                                        <label for="zone_number" class="input-group-text">Zone number</label>
+                                                        <div class="input-group mb-3 pb-3">
+
+                                                            <input class="form-control ram_number_input" type="number" id="zone_number" name="zone_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.3b16f634-1e64-45c1-b553-4cbf36abafe7.PROPERTIES.PROPERTY.~index~0','newValue': this.value}})" min="1" max="200" value="1">
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.3b16f634-1e64-45c1-b553-4cbf36abafe7.PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.3b16f634-1e64-45c1-b553-4cbf36abafe7.PROPERTIES.PROPERTY.~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                            <div class="valid-feedback">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                                    <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                                    <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><div id="8_d4ef4d92-a715-4db7-8c24-4119a695affd_" style="display: none;"></div><div id="9_768bb134-9416-4e62-9ede-f4f7f4f23323_" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div><div id="7_65cf3d35-ce3e-4df1-924e-455ccad214e6_Type" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-12 mt-1">
+                                        <div class="form-floating mb-3">
+                                            <select id="function_" name="function_" class="form-select ram_floating_select" onchange="javascript: sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}});
+                                                          loadDiv(this, 'showDiv_function_', this.value, this.options[this.selectedIndex].getAttribute('checktype'));">
+                                                <option value="0_042b5eb5-e216-495f-bdeb-968cdc877b28_" selected="">COMMON FIRE </option>
+                                                <option value="1_7ba1a072-4d95-4b57-bad7-5cb0077aed7c_">COMMON PREALARM </option>
+                                                <option value="2_b40eb253-8cd1-483c-8d29-db3b1eee30e7_">COMMON FAULT </option>
+                                                <option value="3_14622d4e-0574-4643-ae79-609a4fc233f4_">SYSTEM FAULT </option>
+                                                <option value="4_4802d072-9ddf-4948-942e-c46b5e0e685a_">DISABLED </option>
+                                                <option value="5_571c8650-3723-4b05-b9c2-cf09ff9dfeb6_">TEST </option>
+                                                <option value="6_0118a28e-cb9f-4ac8-90e5-21d6d6704de0_">COMMON EVACUATE </option>
+                                                <option value="7_dfac2c27-6fbb-4662-a69f-78e538dd78b1_">VOICE EVACUATION CYCLE </option>
+                                            </select>
+                                            <label for="function_">Function</label>
+                                        </div>
+                                        <div id="showDiv_function_"></div><div id="0_042b5eb5-e216-495f-bdeb-968cdc877b28_" style="display: none;">
+                                            <div class="row align-items-center">
+                                                <div class="col-12 col-lg-12 mt-1">
+                                                    <div>
+                                                        <label for="alarms_counter" class="input-group-text">Alarms Counter</label>
+                                                        <div class="input-group mb-3 pb-3">
+
+                                                            <input class="form-control ram_number_input" type="number" id="alarms_counter" name="alarms_counter" data-maxlength="1" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.PROPERTY[1].~index~0','newValue': this.value}})" min="1" max="9" value="1">
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.PROPERTY[1].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                            <div class="valid-feedback">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                                    <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                                    <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><div id="1_7ba1a072-4d95-4b57-bad7-5cb0077aed7c_" style="display: none;"></div><div id="2_b40eb253-8cd1-483c-8d29-db3b1eee30e7_" style="display: none;"></div><div id="3_14622d4e-0574-4643-ae79-609a4fc233f4_" style="display: none;"></div><div id="4_4802d072-9ddf-4948-942e-c46b5e0e685a_" style="display: none;"></div><div id="5_571c8650-3723-4b05-b9c2-cf09ff9dfeb6_" style="display: none;"></div><div id="6_0118a28e-cb9f-4ac8-90e5-21d6d6704de0_" style="display: none;"></div><div id="7_dfac2c27-6fbb-4662-a69f-78e538dd78b1_" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div><div id="8_06f13ccc-dc3b-4d8f-a0a3-81991b49afc2_Type" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="output_number" class="input-group-text">Output number</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="output_number" name="output_number" data-maxlength="3" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[2].~index~0','newValue': this.value}})" min="0" max="250" value="0">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[2].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="col-12 col-lg-6 mt-1">
+                                        <div>
+                                            <label for="panel_number" class="input-group-text">Panel number</label>
+                                            <div class="input-group mb-3 pb-3">
+
+                                                <input class="form-control ram_number_input" type="number" id="panel_number" name="panel_number" data-maxlength="2" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" onchange"javascript:="" myfunction2(this.id)"="" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[3].~index~0','newValue': this.value}})" min="0" max="64" value="0">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[3].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_left"></button>
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[3].~index~0','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);" class="ram_number_input_button_right"></button>
+                                                <div class="valid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                                                        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                                                        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ram_fixed_bottom">
-                    <div class="ram_settings">
-                        <button class="ram_btn ram_btn_main btn_white">
-                            <div class="ram_btn_title">Close</div>
-                        </button>
-                    </div>
-                    <button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this, 3)">
-                        <i class="ram_icon toggle"></i>
-                    </button>
-                </div>
-                <div class="ram_resizer"></div>
-            </div>
-        </div>
-        <main class="ram_main" id="selected_area"></main>
+            </fieldset>
+        </main>
     </div>
 
-    <!-- showDevicesListModal -->
+    <!-- showDevicesListModal required for Zones -->
     <div class="modal fade" id="showDevicesListModal" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Number of devices attached to the loop per type:</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title"></h4>
+                    <!--<button type="button" class="close" data-bs-dismiss="modal">&times;</button>-->
                 </div>
                 <div class="modal-body">
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- showConfirmationModal -->
-    <div class="modal fade" id="showConfirmationModal" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Are you sure you want to remove Loop 1?</h4>
-                    <button type="button" class="btn-close" id="xClose"></button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="yesBtn">Yes</button>
-                    <button type="button" class="btn btn-secondary" id="bigClose">Close</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
 
@@ -10420,21 +10987,1035 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary addr">Ok</button>
+                    <button type="button" class="btn btn-primary">Ok</button>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <script>
+        // 'constants' declaration
+        let lst = [];
+        let elements;
+        let minElements;
+        let deviceNmbr;
+    </script>
+
     <script src="../imports/loop_constants.js"></script>
     <script src="../imports/translations.js"></script>
     <script src="../imports/mainfuncs.js"></script>
-    <script src="../imports/loopfuncs.js"></script>
     <script>
-        $("#showDevicesListModal").on('hidden.bs.modal', function () {
-            $("#showDevicesListModal").find(".modal-body").empty();
-        });
+//        var js = `{
+//  "IRIS8_EVAC_ZONE_GROUP": {
+//    "@MIN": "0",
+//    "@MAX": "199",
+//    "@LNGID": "c61c3b13-d0e2-49e4-83ae-97dac2513c44",
+//    "~path": "ELEMENTS.iris_evac_zones.CONTAINS.IRIS8_EVAC_ZONE_GROUP"
+//  },
+//  "~path": "ELEMENTS.iris_evac_zones.CONTAINS"
+//}`;
+
+//        var ret = `{
+//  "EvacPanel0": {
+//    "name": "Evacuation Panel 0",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "09a869f2-536e-4315-98c2-d170907eacd9",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "bcb2defa-232c-4688-9444-89cdd925372c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "a58bb48b-22d1-4caa-bb13-4479b9c8d7b8",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "0c4e7860-db0b-49e7-bcc2-8c572fe5f51c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "8c10df2a-61e2-49d9-8c83-412173a0b511",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "c22ddb68-04a8-45c4-b905-27673f4d4d50",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "8373a708-df79-44b2-8859-09f4ee049590",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "9de57ea4-c8a4-4cbf-8bf1-e78f068fd7aa",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "07ffab37-6cda-495c-9454-077e8487159d",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "e4111164-75ba-4bbc-9517-81724fde489e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "1199c1fc-6df3-41fa-971d-7e20a202657c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "d435a421-8833-499e-93d0-9766a3bcc115",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "5b752f4b-21c1-45c5-87b6-29f22ddd0a1f",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "cbdb5fdb-44b8-49c0-9ff2-16a2ca8c993d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "7bc424ac-0f4d-414a-b81a-c458171beab8",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "02a1ea2e-fba1-4756-bc8b-f82762feaa48",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "786f5617-2aa3-448e-8cb6-6e23739c8543",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "c39d47b9-68c1-46d7-b408-92da195ceaf3",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "1d0954cb-a13f-488e-8c59-5ff9f7365014",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "444820ad-866b-4146-a697-bf22b3251edf",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "4c9a989e-de38-489a-a6f4-aae52b7c8f41",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "229d875d-6a77-47b5-bb67-7da6a177732d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "bc181e01-bfbf-4fa9-bee1-cee91149a23e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "fc35bdda-00e6-4c86-ae57-6576787a7520",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0"
+//  },
+//  "EvacPanel1": {
+//    "name": "Evacuation Panel 1",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "52b21e4c-a0a5-4966-9ff2-e9d61bd87c62",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "1be8f464-750c-41cb-8faf-d3f19c1d6e65",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "fab96ebe-f97b-43a7-84e7-1ff5aea1d5a9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "f1673bca-e041-493f-917d-9f9d501a4e48",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "3586cb3b-9237-4351-af58-aea96eec3c7c",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "0539b0fc-f8c8-408e-a5ce-91a36765af05",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "ab63a82a-5864-4e0e-a4f9-3ffed442a40b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "1f6fe3b8-58dd-459c-a686-2e06c8f93767",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "c05b5cc3-7029-4213-8cdd-35b62e7d829e",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "d8b7d595-6749-4570-b99b-e68ebf46bd95",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "e0659631-c6aa-4fd2-a4c9-9744eeccead9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "5a875743-1ab4-4c8e-bb07-1a1c92d6b2d6",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "97eb4987-2acf-482f-b6a6-db29227d7e22",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "06e8583b-fbf5-4a37-8759-dbb116fdbf4d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "c84a2c41-9c25-4ce4-815d-3b9a7ae48948",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "2ba0b737-3d70-481d-bc4f-09453f779921",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "ea7bfff9-2f77-4073-b852-e345d6117ced",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "d52c4327-28cd-4b92-a7ec-294791e12673",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "51693718-1f61-41f0-bd26-caf49f3f76a6",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "814a3bec-bad2-4f04-bb44-5a01ad152419",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "a6cd5323-bc08-409c-a42a-b7fb126c9983",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "bef3c61a-f27a-4bfc-b790-cb9971854a68",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "d4f10a2a-b50d-485c-b471-221ceb3d0b2d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "ea113428-a778-4131-975a-6b731c811485",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1"
+//  },
+//  "EvacPanel2": {
+//    "name": "Evacuation Panel 2",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "51a6825f-2841-4349-bab9-138dd0a039ad",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "51f09136-1bad-4402-9c97-c50a9022828e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "6d5665f6-2bc1-4cd8-9f63-0cb535f3c1ac",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "3b210049-8f22-425e-81fd-60ae2321a4af",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "0bfe0547-d560-4154-bffb-002f2ee38cc9",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "fe4f0145-324f-4621-b204-f3511fd8f1fe",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "b07b2465-ae76-4381-864b-6cd6b44aeda4",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "b68893d5-a999-415d-9559-7fbc2305f580",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "2a2d23b3-56a3-48b3-bf8c-1a17e2db2754",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "e7c2ee93-86c3-4534-9b7c-f0e8b6f074c9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "f78c764d-88d6-4fea-b42c-33842de2b8ff",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "4c3c53dc-5fc5-4297-afa1-e05e5f19af44",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "1cd56a86-c705-4d95-8d8f-04c56fa28635",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "546aa341-9cdd-4543-9939-a4f767421ada",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "1c242c47-52a3-458b-bf72-a5cf785e1fbc",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "cf3de52c-9bd6-4bf1-8e65-349443720f54",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "53057b9c-4e7e-4f69-a0d4-c051724f9090",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "7e310690-69a5-41c1-aa39-a914eacc0067",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "17562b55-11a3-4b3a-955a-44c0b7271d89",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "8d3e7803-2c11-4cd7-897b-61e00f0bcaa0",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "6e2f8457-c371-4616-9e95-513f2b45635c",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "27f21060-676e-4628-8d6a-e56c69fd5529",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "49656942-ec93-49d5-9536-f824d5e8524c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "24e5263d-4016-4457-b507-78c3610cc36d",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2"
+//  },
+//  "EvacPanel3": {
+//    "name": "Evacuation Panel 3",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "f89e0a87-0d1d-4681-82a0-1372d1d12b6d",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "81bd93e8-935b-4d88-81d5-ea5509626028",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "478e4a73-3c45-488d-9b20-5f0341e87395",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "196fa70a-9581-47c9-a585-ceb5afac3481",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "62465147-b27d-433d-bdb4-0307a73506c1",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "44fbb218-972b-4b93-adeb-468df4927d99",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "8d36f257-be8b-49a0-a313-f57eee6c5bc3",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "75984b85-961a-40bf-9296-1e525ff443c6",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "7fcb97d4-c508-4b59-9b06-eaa4847279fa",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "52a58c6c-a8b5-4ca5-a1f7-163f01664812",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "ef6e2cc5-50a7-4031-a2c2-11200b3689b0",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "4cb7afc0-6690-4c3b-89ad-b08d697c5f6a",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "2e621b8e-b75f-462b-9413-2aa7eee9cb08",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "011ec12a-18f9-4b10-b5b7-f3fa055ab356",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "ff8139b4-d355-4548-9e3c-82ebfe98a16b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "750a39bc-47f6-4962-903a-b3d75b920f02",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "ec32734e-b915-4ec6-b81f-4564fb9f2b1b",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "7a5b368b-7b24-4259-aa04-076d70d1f299",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "8436bbf4-f20c-462a-b3cb-543e300acd7b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "9a71b3c7-351e-45e1-8304-d9d78d09983a",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "67732e1d-9d07-4910-bee6-452510c1dda8",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "74250f0b-f8cc-49a2-85c8-e558a6e2f665",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "16cec853-275c-4230-adb8-f08b8c32c5d9",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "25cb788c-01b4-495b-8bed-02d691eea9bf",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3"
+//  },
+//  "EvacPanel4": {
+//    "name": "Evacuation Panel 4",
+//    "fields": {
+//      "OUTPUT1": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 1",
+//        "@AND": "3",
+//        "@LNGID": "9a3e2951-2af1-4d54-9385-b3eea364cb85",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "7623fa99-7a0f-4e88-b780-f9d4ca5d8a67",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1",
+//              "@LNGID": "1d415370-e844-439a-8e8f-9587bd140b11",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2",
+//              "@LNGID": "cf976b54-5591-477f-b6ee-eebdd932a7e3",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.~index~1"
+//      },
+//      "OUTPUT2": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 2",
+//        "@AND": "c",
+//        "@LNGID": "9fc387e7-a69f-4670-8f9b-40efb76253d5",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "6e63b04f-3d6d-4c2a-98b7-35d4b740ab5b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "4",
+//              "@LNGID": "9c2e9737-c2df-4ca6-9113-bc4c1fb81ee8",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "8",
+//              "@LNGID": "3030b45a-99b2-434b-9dd9-50d9dc53fb1c",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.~index~1"
+//      },
+//      "OUTPUT3": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 3",
+//        "@AND": "30",
+//        "@LNGID": "e8d913ea-c770-4e94-8674-0520c217c0f8",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "22b1388c-83c6-4936-8fc0-f86dbcd4736b",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "16",
+//              "@LNGID": "08d3abec-9872-407c-b42a-6f3da7ae1631",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "32",
+//              "@LNGID": "480ca479-f0ab-4c25-99f4-b5632881a097",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.~index~1"
+//      },
+//      "OUTPUT4": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 4",
+//        "@AND": "c0",
+//        "@LNGID": "e5101376-9671-4d70-9f5d-b5e6d457d64c",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "d32f1de4-d618-4da6-88c4-e93916821e21",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "64",
+//              "@LNGID": "e568c6a8-be83-41ec-81bd-7bff0e93cadb",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "128",
+//              "@LNGID": "50adfdfa-d527-468f-a562-fa3dd5a98a57",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.~index~1"
+//      },
+//      "OUTPUT5": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 5",
+//        "@AND": "300",
+//        "@LNGID": "cd2cd4d4-342f-4a9e-aa79-e1b6275e9d79",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "a0996e33-d681-4336-be13-bd3959e5f393",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "256",
+//              "@LNGID": "4db08e64-ca0d-40e7-85dc-f527ce665055",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "512",
+//              "@LNGID": "c953b757-1b75-4cd0-ad66-280e37a73723",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.~index~1"
+//      },
+//      "OUTPUT6": {
+//        "@TYPE": "LIST",
+//        "@SIZE": "2",
+//        "@TEXT": "Evac Zone 6",
+//        "@AND": "c00",
+//        "@LNGID": "ae7e3f6f-0ffd-4b9a-9f61-3d22cd78ff53",
+//        "ITEMS": {
+//          "ITEM": [
+//            {
+//              "@NAME": "OFF",
+//              "@VALUE": "0",
+//              "@DEFAULT": "1",
+//              "@LNGID": "ecd96ef0-b30a-4e50-936e-611277390448",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
+//            },
+//            {
+//              "@NAME": "A",
+//              "@VALUE": "1024",
+//              "@LNGID": "02bf71e5-ba54-45ec-9f79-2e213ec97fb4",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
+//            },
+//            {
+//              "@NAME": "E",
+//              "@VALUE": "2048",
+//              "@LNGID": "8d9b20e1-a877-43e0-9f9d-31e4e4e1844e",
+//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
+//            }
+//          ],
+//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.~index~1"
+//        },
+//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.~index~1"
+//      },
+//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields"
+//    },
+//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4"
+//  },
+//  "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups"
+//}`;
+
+        /*        receiveMessageWPF(js)*/
     </script>
 
 

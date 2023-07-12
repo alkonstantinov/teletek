@@ -11,8 +11,9 @@
     <system:String x:Key="MainMenuOpen">Open</system:String>
     <system:String x:Key="MainMenuSave">Save</system:String>
     <system:String x:Key="MainMenuSaveas">Save As</system:String>
+    <system:String x:Key="MainMenuSystemLog">System Log</system:String>
+    <system:String x:Key="MainMenuEventsLog">Events Log</system:String>
     <system:String x:Key="MainMenuWrite">Write</system:String>
-    <system:String x:Key="MainMenuLog">Log</system:String>
     <system:String x:Key="MainMenuClock">Clock/Date</system:String>
     <system:String x:Key="MainMenuVerify">Verify</system:String>
     <system:String x:Key="MainMenuSettings">Settings</system:String>

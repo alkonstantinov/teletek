@@ -262,6 +262,27 @@ namespace ProstePrototype
             //}
         }
 
+        public static class VisualTreeHelperExtensions
+        {
+            public static IEnumerable<T> FindVisualChildren<T>(DependencyObject dependencyObject) where T : DependencyObject
+            {
+                if (dependencyObject != null)
+                {
+                    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(dependencyObject); i++)
+                    {
+                        DependencyObject child = VisualTreeHelper.GetChild(dependencyObject, i);
+                        if (child is T t)
+                        {
+                            yield return t;
+                        }
+                        foreach (T childOfChild in FindVisualChildren<T>(child))
+                        {
+                            yield return childOfChild;
+                        }
+                    }
+                }
+            }
+        }
 
         private void ChangeTheme(bool darkMode)
         {
@@ -277,7 +298,7 @@ namespace ProstePrototype
                 bgd = Color.FromRgb(51, 51, 34);
                 fgd = Color.FromRgb(238, 238, 221);
                 btn_bgd = (Color)ColorConverter.ConvertFromString("DarkGray");
-                btn_fgd = (Color)ColorConverter.ConvertFromString("White");
+                btn_fgd = (Color)ColorConverter.ConvertFromString("#FF212121");
                 gridBrowsers.Background = new SolidColorBrush(bgd);
             }
             else
@@ -285,45 +306,38 @@ namespace ProstePrototype
                 gridBrowsers.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)); // Colors.Transparent;
             }
             mainGrid.Background = new SolidColorBrush(bgd);
-            //mainPanel.Background = new SolidColorBrush(bgd);
-            filePanel.Background = new SolidColorBrush(btn_bgd);
-            fileMenu.Foreground = new SolidColorBrush(btn_fgd);
-            languageButton.Background = new SolidColorBrush(bgd);
-            write_btn.Background = new SolidColorBrush(btn_bgd);
-            write_btn.Foreground = new SolidColorBrush(btn_fgd);
-            //log_btn.Background = new SolidColorBrush(bgd);
-            //log_btn.Foreground = new SolidColorBrush(fgd);
-            //clock_btn.Background = new SolidColorBrush(bgd);
-            //clock_btn.Foreground = new SolidColorBrush(fgd);
-            //verify_btn.Background = new SolidColorBrush(bgd);
-            //verify_btn.Foreground = new SolidColorBrush(fgd);
-            if (scan_btn.IsEnabled)
+
+            IEnumerable<Button> buttons = VisualTreeHelperExtensions.FindVisualChildren<Button>(mainGrid);
+            foreach (Button button in buttons)
             {
-                scan_btn.Background = new SolidColorBrush(btn_bgd);
-            } else
-            {
-                scan_btn.Background = Brushes.Transparent;
+                button.Foreground = new SolidColorBrush(btn_fgd);
+                if (button.IsEnabled)
+                {
+                    button.Background = new SolidColorBrush(btn_bgd);
+                }
+                else
+                {
+                    button.Background = Brushes.Transparent;
+                }
             }
-            scan_btn.Foreground = new SolidColorBrush(btn_fgd);
-            //export_btn.Background = new SolidColorBrush(btn_bgd);
-            //export_btn.Foreground = new SolidColorBrush(btn_fgd);
+
+            //filePanel.Background = new SolidColorBrush(btn_bgd);
+            fileMenu.Foreground = new SolidColorBrush(btn_fgd);
+
             settings_btn.Background = new SolidColorBrush(btn_bgd);
             settings_btn.Foreground = new SolidColorBrush(btn_fgd);
 
             help_btn.Background = new SolidColorBrush(btn_bgd);
             help_btn.Foreground = new SolidColorBrush(btn_fgd);
-            //minimize_btn.Background = new SolidColorBrush(bgd);
-            //minimize_btn.Foreground = new SolidColorBrush(fgd);
-            //maximize_btn.Background = new SolidColorBrush(bgd);
-            //maximize_btn.Foreground = new SolidColorBrush(fgd);
             breadCrumbsField.Background = new SolidColorBrush(bgd);
             lvBreadCrumbs.Background = new SolidColorBrush(bgd);
             foreach (var item in lvBreadCrumbs.Items)
             {
-                ((Button)item).Foreground = new SolidColorBrush(fgd);
+                if (item is Button)
+                {
+                    ((Button)item).Foreground = new SolidColorBrush(fgd);
+                }
             }
-            //textblock_bottom.Background = new SolidColorBrush(bgd);
-            //textblock_bottom.Foreground = new SolidColorBrush(fgd);
         }
 
         private void ChangeThemeRW(bool darkMode)
@@ -377,11 +391,13 @@ namespace ProstePrototype
                     {
                         case "Update": break;
                         case "Read": break;
-                        case "Delete": break;
+                        case "Delete":
+                            string currentPanelId = json["~panel_id"].ToString();
+                            break;
                         case "Write": break;
                         case "Verify": break;
                         case "Rename":
-                            string currentPanelId = json["~panel_id"].ToString();
+                            currentPanelId = json["~panel_id"].ToString();
                             string newPanelName = json["newName"].ToString();
                             cJson.RenamePanel(currentPanelId, newPanelName);
                             break;
@@ -679,7 +695,7 @@ namespace ProstePrototype
                     conn_params = rw.uc1.USBDevice;
                 }
                 else if (tabIdx == 3)
-                    conn_params = "read.log";
+                    conn_params = "read-simpo.log";
                 Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));
                 funcThread.Start();
 
@@ -1093,6 +1109,25 @@ namespace ProstePrototype
         }
         #endregion
 
+        #region Logging
+        private void ShowSystemLog_Clicked(object sender, RoutedEventArgs e)
+        {
+            ShowLog("read-iris.log");
+        }
+
+        private void ShowEventsLog_Clicked(object sender, RoutedEventArgs e)
+        {
+            ShowLog("read-simpo.log");
+        }
+
+        private void ShowLog(string fileName)
+        {
+            LoggingPopUp LogPage = new LoggingPopUp(fileName);
+            LogPage.Title = $"Showing {fileName.Split(".")[0]}";
+            LogPage.Show();
+        }
+        #endregion
+
         private void AddPagesConstant()
         {
             //string addConstScript = $"const CONFIG_CONST = {pages}";
@@ -1162,17 +1197,18 @@ namespace ProstePrototype
 
         private void GridOrListView_Click(object sender, RoutedEventArgs e)
         {
-            if (GridView_or_ListView_text.Text == " Grid View")
-            {
-                GridView_or_ListView_text.Text = " List View";
-                GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/listview2x.png", UriKind.RelativeOrAbsolute));
-            }
-            else
-            {
-                GridView_or_ListView_text.Text = " Grid View";
-                GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/gridview2x.png", UriKind.RelativeOrAbsolute));
-            }
+            //if (GridView_or_ListView_text.Text == " Grid View")
+            //{
+            //    GridView_or_ListView_text.Text = " List View";
+            //    GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/listview2x.png", UriKind.RelativeOrAbsolute));
+            //}
+            //else
+            //{
+            //    GridView_or_ListView_text.Text = " Grid View";
+            //    GridView_or_ListView_image.Source = new BitmapImage(new Uri(@"/html/imports/webfonts/iconfont/gridview2x.png", UriKind.RelativeOrAbsolute));
+            //}
         }
+
     }
 
 }

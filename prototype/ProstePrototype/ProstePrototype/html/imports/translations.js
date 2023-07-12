@@ -117,7 +117,8 @@
         MainMenuSave: { 'en': 'Save', 'bg': 'Запомни' },
         MainMenuSaveas: { 'en': 'Save as', 'bg': 'Запомни като' },
         MainMenuWrite: { 'en': 'Write', 'bg': 'Запис' },
-        MainMenuLog: { 'en': 'Log', 'bg': 'Лог' },
+        MainMenuSystemLog: { 'en': 'System Log', 'bg': 'Логове на системата' },
+        MainMenuEventsLog: { 'en': 'Events Log', 'bg': 'Логове на промени' },
         MainMenuClock: { 'en': 'Clock/Date', 'bg': 'Час/Дата' },
         MainMenuVerify: { 'en': 'Verify', 'bg': 'Проверка' },
         MainMenuSettings: { 'en': 'Settings', 'bg': 'Настройки' },
@@ -14371,7 +14372,7 @@
             "ge": "Nutzer code change disabled",
             "hu": "User code change disabled",
             "it": "Cambio codice utente disabilitato",
-            "ro": "SCHIMBARE_COD_UTILIZATOR_DEZACTIVATA",
+            "ro": "SCHIMBARE COD UTILIZATOR DEZACTIVATA",
             "bg": "Забранена дистанц. промяна на кодове",
             "sr": "Onemogucena promena korisnickog koda"
         },
@@ -23375,14 +23376,14 @@
             "sr": "Greska u liniji za dojavu"
         },
         "7100cf48-0e80-42ce-bfc4-e2ff861bd285": {
-            "en": "EAD_TAMPER",
+            "en": "EAD TAMPER",
             "bg": "EAD Тампер",
             "el": "Τάμπερ",
-            "ge": "EAD_Sabotage",
+            "ge": "EAD Sabotage",
             "hu": "Szabotázs",
-            "it": "EAD_TAMPER",
+            "it": "EAD TAMPER",
             "ro": "TAMPER",
-            "sr": "EAD_TAMPER"
+            "sr": "EAD TAMPER"
         },
         "22858500-a1ac-4964-bcd4-319e810b7f21": {
             "en": "System bus Error",
@@ -25141,19 +25142,19 @@
             "tr": "043 RINGS"
         },
         "c773462b-7408-46a1-974a-47b44ea778bf": {
-            "en": "044 Free____________",
-            "bg": "044 Free____________",
-            "bh": "044 Free____________",
-            "el": "044 Free____________",
-            "fr": "044 Free____________",
-            "hu": "044 Free____________",
-            "it": "044 Free____________",
-            "pt": "044 Free____________",
-            "ro": "044 Free____________",
-            "ru": "044 Free____________",
-            "sp": "044 Free____________",
-            "sr": "044 Free____________",
-            "tr": "044 Free____________"
+            "en": "044 Free            ",
+            "bg": "044 Free            ",
+            "bh": "044 Free            ",
+            "el": "044 Free            ",
+            "fr": "044 Free            ",
+            "hu": "044 Free            ",
+            "it": "044 Free            ",
+            "pt": "044 Free            ",
+            "ro": "044 Free            ",
+            "ru": "044 Free            ",
+            "sp": "044 Free            ",
+            "sr": "044 Free            ",
+            "tr": "044 Free            "
         },
         "4e3c9382-d8a6-401d-b9a8-0a710cfce9e8": {
             "en": "045 VD OPT",
@@ -42662,7 +42663,7 @@
             "pl": "URZĄDZENIE PERYFERYJNE",
             "pt": "Dispositivos periféricos",
             "ro": "Dispozitiv periferic",
-            "ru": "Периферийное_устройство",
+            "ru": "Периферийное устройство",
             "sp": "DISPOSITIVO PERIFÉRICO",
             "sr": "PERIFERNI UREĐAJ",
             "tr": "PERIPHERY DEVICE"
@@ -42806,7 +42807,7 @@
             "pl": "URZĄDZENIE PERYFERYJNE",
             "pt": "Dispositivos periféricos",
             "ro": "Dispozitiv periferic",
-            "ru": "Периферийное_устройство",
+            "ru": "Периферийное устройство",
             "sp": "DISPOSITIVO PERIFÉRICO",
             "sr": "PERIFERNI UREĐAJ",
             "tr": "PERIPHERY DEVICE"
@@ -42950,7 +42951,7 @@
             "pl": "URZĄDZENIE PERYFERYJNE",
             "pt": "Dispositivos periféricos",
             "ro": "Dispozitiv periferic",
-            "ru": "Периферийное_устройство",
+            "ru": "Периферийное устройство",
             "sp": "DISPOSITIVO PERIFÉRICO",
             "sr": "PERIFERNI UREĐAJ",
             "tr": "PERIPHERY DEVICE"
@@ -43094,7 +43095,7 @@
             "pl": "URZĄDZENIE PERYFERYJNE",
             "pt": "Dispositivos periféricos",
             "ro": "Dispozitiv periferic",
-            "ru": "Периферийное_устройство",
+            "ru": "Периферийное устройство",
             "sp": "DISPOSITIVO PERIFÉRICO",
             "sr": "PERIFERNI UREĐAJ",
             "tr": "PERIPHERY DEVICE"
@@ -43372,9 +43373,9 @@
             "tr": "NONE"
         },
         "3a0071ec-74f7-40e5-8ed6-cde2a6d0b7f7": {
-            "en": "PERIPHERY_DEVICE",
-            "bg": "Периферно_устройство",
-            "fr": "DISPOSITIF_PÉRIPHÉRIQUE",
+            "en": "PERIPHERY DEVICE",
+            "bg": "Периферно устройство",
+            "fr": "DISPOSITIF PÉRIPHÉRIQUE",
             "ge": "Peripherie Gerät",
             "it": "DISPOSITIVI PERIFERICI",
             "nl": "RANDAPPARATUUR",
@@ -43385,7 +43386,7 @@
             "ru": "Периферийное устройство",
             "sp": "DISPOSITIVO PERIFÉRICO",
             "sr": "PERIFERNI UREĐAJ",
-            "tr": "PERIPHERY_DEVICE"
+            "tr": "PERIPHERY DEVICE"
         },
         "76d90af7-b9fb-4da8-b1dc-b08d7563ae1f": {
             "en": "Peripherial device address",
@@ -43420,10 +43421,10 @@
             "tr": "Peripherial device input"
         },
         "2f5f4b2b-79ee-4f54-95f0-74dd31ba3f2e": {
-            "en": "LOOP_DEVICE",
+            "en": "LOOP DEVICE",
             "bg": "Кръгово устройство",
             "fr": "DISPOSITIF EN BOUCLE",
-            "ge": "LOOP_DEVICE",
+            "ge": "LOOP DEVICE",
             "it": "DISPOSITIVO LOOP",
             "nl": "LUS ELEMENT",
             "no": "SLØYFEENHET",
@@ -43433,7 +43434,7 @@
             "ru": "Петлевое устройство",
             "sp": "DISPOSITIVO CIRCUITO",
             "sr": "UREĐAJ PETLJE",
-            "tr": "LOOP_DEVICE"
+            "tr": "LOOP DEVICE"
         },
         "a13f7a67-f26d-4c95-9c69-07ec1791621a": {
             "en": "Loop Type",
@@ -44860,20 +44861,20 @@
             "tr": "Signal type"
         },
         "a787d463-24eb-4ebc-ba00-df4dd065a209": {
-            "en": "ONE_PULSE",
+            "en": "ONE PULSE",
             "bg": "1 импулс",
-            "fr": "UNE_IMPULSION",
-            "ge": "EIN_PULS",
+            "fr": "UNE IMPULSION",
+            "ge": "EIN PULS",
             "it": "Singulo Impulso",
-            "nl": "EEN_PULS",
+            "nl": "EEN PULS",
             "no": "EN PULS",
             "pl": "IMPULS",
-            "pt": "UMA_ BATIDA/ SOM",
+            "pt": "UMA  BATIDA/ SOM",
             "ro": "UN IMPULS",
             "ru": "1 импульс",
             "sp": "IMPULSO 1",
             "sr": "JEDAN PULS",
-            "tr": "ONE_PULSE"
+            "tr": "ONE PULSE"
         },
         "8c0a86ce-5d84-4710-9b54-d163d820bac5": {
             "en": "PULSED",
@@ -44956,9 +44957,9 @@
             "tr": "NONE"
         },
         "50bae12c-4414-4d39-9854-111c950d3fe9": {
-            "en": "PERIPHERY_DEVICE",
-            "bg": "Периферно_устройство",
-            "fr": "DISPOSITIF_PÉRIPHÉRIQUE",
+            "en": "PERIPHERY DEVICE",
+            "bg": "Периферно устройство",
+            "fr": "DISPOSITIF PÉRIPHÉRIQUE",
             "ge": "PERPHERIE DEVICE",
             "it": "DISPOSITIVI PERIFERICI",
             "nl": "RANDAPPARATUUR",
@@ -44966,10 +44967,10 @@
             "pl": "URZĄDZENIE PERYFERYJNE",
             "pt": "DISPOSITIVO DE PERIFERIA",
             "ro": "Dispozitiv periferic",
-            "ru": "Периферийное_устройство",
+            "ru": "Периферийное устройство",
             "sp": "DISPOSITIVO PERIFERICO",
             "sr": "PERIFERNI UREĐAJ",
-            "tr": "PERIPHERY_DEVICE"
+            "tr": "PERIPHERY DEVICE"
         },
         "dcda1f3a-42c8-48dc-b9a8-284a5db6d8ce": {
             "en": "Peripherial device address",
@@ -45004,11 +45005,11 @@
             "tr": "Peripherial device output"
         },
         "8af00e15-7e68-44bd-bb1f-c14bc8dc6440": {
-            "en": "LOOP_DEVICE",
+            "en": "LOOP DEVICE",
             "bg": "Кръгово устройство",
-            "fr": "DISPOSITIF_EN_BOUCLE",
-            "ge": "LOOP_DEVICE",
-            "it": "DISPOSITIVO_LOOP",
+            "fr": "DISPOSITIF EN BOUCLE",
+            "ge": "LOOP DEVICE",
+            "it": "DISPOSITIVO LOOP",
             "nl": "LUS ELEMENT",
             "no": "SLØYFEENHET",
             "pl": "URZĄDZENIE PĘTLOWE",
@@ -45017,7 +45018,7 @@
             "ru": "Петлевое устройство",
             "sp": "Dispositivo circuito",
             "sr": "UREĐAJ PETLJE",
-            "tr": "LOOP_DEVICE"
+            "tr": "LOOP DEVICE"
         },
         "cf392408-83ca-40b1-8e1c-f47900f17797": {
             "en": "Loop Type",
@@ -45596,20 +45597,20 @@
             "tr": "FAULT"
         },
         "35dfb591-a815-4465-aa27-433ae7650694": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "a6d7b06d-fd6e-43e0-b3bd-91610f9a3ca3": {
             "en": "NEW",
@@ -45724,20 +45725,20 @@
             "tr": "FAULT"
         },
         "7eb89690-d448-4421-8190-a8deaa4e8907": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "acb5f4a7-0127-4074-b19e-de76bdd28ade": {
             "en": "NEW",
@@ -45836,20 +45837,20 @@
             "tr": "FAULT"
         },
         "fd80a248-bb47-4b90-aa92-72545f92cc0f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "215b4850-64da-4a96-a6e3-cdda99a43188": {
             "en": "NEW",
@@ -45948,20 +45949,20 @@
             "tr": "FAULT"
         },
         "1ad1df39-625d-4e57-8764-d66961156af1": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "f2a960a3-5dc3-4bb6-9a6f-ce9c6b7ae362": {
             "en": "NEW",
@@ -46060,20 +46061,20 @@
             "tr": "FAULT"
         },
         "757accba-263a-46eb-bfbc-0c2dab915f56": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "61733bc4-fbbe-44dd-bfd2-1ee9daa567c2": {
             "en": "NEW",
@@ -46172,20 +46173,20 @@
             "tr": "FAULT"
         },
         "4ef7c123-1441-4700-b81b-83304b8b86c7": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "17296948-8769-443c-9ecf-3e9ae121802c": {
             "en": "NEW",
@@ -46284,20 +46285,20 @@
             "tr": "FAULT"
         },
         "dba2c02d-68fa-49c4-bde6-f5d923b17027": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "08b9f2a9-dfc1-4beb-a156-e3770332e15a": {
             "en": "NEW",
@@ -46396,20 +46397,20 @@
             "tr": "FAULT"
         },
         "c9ea83db-17ba-45eb-8a9c-63c9bbc9c7fd": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "2b6024ce-46f1-452e-8715-902baa9c0bba": {
             "en": "NEW",
@@ -46508,20 +46509,20 @@
             "tr": "FAULT"
         },
         "2d209c47-0938-4456-91de-6d3597483247": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "237af066-2b82-41f6-a778-3818938ba1e5": {
             "en": "NEW",
@@ -46620,20 +46621,20 @@
             "tr": "FAULT"
         },
         "9840ccf3-06e4-4fb8-964d-ac8bea7cc623": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "cfa80432-8753-4792-aa53-811c691dfd32": {
             "en": "NEW",
@@ -46732,20 +46733,20 @@
             "tr": "FAULT"
         },
         "4c631a0e-83d7-4161-b394-32d4280d3448": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "7aed5dc2-1a39-4e01-ba64-cde2265fec8e": {
             "en": "NEW",
@@ -49420,36 +49421,36 @@
             "tr": "FAULT"
         },
         "d84bc779-fb7c-4387-9909-faccf77e0dc0": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "848e3fd1-658e-426f-a729-5c7c96ea3f3a": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "e394fd1b-83bb-4cb9-9195-9d5b5879178a": {
             "en": "NORMAL",
@@ -49468,116 +49469,116 @@
             "tr": "NORMAL"
         },
         "a3ceb7e7-b1fb-4058-9845-3d1479fbf926": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_U_KOMORI",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA U KOMORI",
+            "tr": "CHAMBER FAULT"
         },
         "487d3817-198d-4600-a5a8-e5da42662e84": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYMAGAM CZYSZCZENIA",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "bc5833af-0df3-46fb-9b49-01ab4d97623a": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONA_GREŠKA_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONA GREŠKA SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "69de70a0-6a9c-4821-8736-67d85e2a40c4": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "BLOKIRAN_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "BLOKIRAN SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "f30c1346-dc29-4f7a-a614-1ae5f38d60fd": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
             "it": "SEG. OTTICO ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_ HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL  HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "a655a0df-35b5-40d0-b879-7c76f5432962": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "b33f4e2a-f38f-4039-8738-3fd261d93a85": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "4d28d48f-5872-4a53-a47a-e70697f123cd": {
             "en": "Type",
@@ -49804,36 +49805,36 @@
             "tr": "FAULT"
         },
         "bc6aa461-cb7d-4945-8486-b7accb7a6c6e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "1d2560ef-ad07-4326-96b4-be87f12b8b70": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "PODWÓJNY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "49418b74-ab98-4895-b19b-f3138a69d5e6": {
             "en": "NORMAL",
@@ -49852,116 +49853,116 @@
             "tr": "NORMAL"
         },
         "50e2b609-6bd1-4007-996f-c2c704462b62": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "d2fe8ade-8ddb-434e-9e11-8ad2ce78e7d8": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OCISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OCISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "cfde3d20-c814-420d-8e3e-584d7326ed5d": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "026ae713-fc79-44cc-ae08-f7fe1e11cbbe": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "aa133421-c5ec-4621-a586-a691117296af": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
             "it": "SEG. OTTICO ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "c002ff6a-5e15-4d50-9469-63b04dd7f2f5": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "425ae54f-0cbc-4305-9c38-e444b3437ef9": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "e83a2d11-04a2-44de-b46d-1751626003d1": {
             "en": "Type",
@@ -50188,36 +50189,36 @@
             "tr": "FAULT"
         },
         "b2c88029-820c-4d43-9bb1-0f6371c37739": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "20b55fc5-c11c-4c02-a181-6a293b69cf2b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "997b6ba5-0175-4be0-9624-01c73efebfd7": {
             "en": "NORMAL",
@@ -50236,116 +50237,116 @@
             "tr": "NORMAL"
         },
         "7ce13888-2dfa-44e7-874e-d44f05190b67": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "a426feb9-3bda-4e3a-98a2-ebd796929098": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚC MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "286ff9c1-8a24-4a70-9a26-ca21aaa70611": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "d0e2cb92-00b3-497f-94f9-d78fbd8141dd": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "08b81f27-5505-4809-ae53-dd3a0c6cc7ed": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "4793f788-6371-4b20-91b1-5b130f1c98b7": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "61af08b9-6ad9-48e7-b43a-5b6d536f6556": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "cb94a1fd-270a-446a-a827-4c57ba9f3787": {
             "en": "Type",
@@ -50572,36 +50573,36 @@
             "tr": "FAULT"
         },
         "9a88f2b6-194d-4af0-851f-2f74093bf906": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "5180ff4b-a59d-450f-a228-4032f191cb53": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "bbfcd8ba-070a-4d10-afa6-f4cb2e5afdf3": {
             "en": "NORMAL",
@@ -50620,116 +50621,116 @@
             "tr": "NORMAL"
         },
         "58336557-bb16-4a0a-b64e-c76082e9cb18": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "caa8223f-1bef-40c6-9264-645c01dfc7b3": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "bbe27070-c356-4478-83fe-fdbed88cf2d7": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "5ebe34d8-f2ab-4550-a152-c99d31225463": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "4802959d-9006-44da-873a-3e19e4da884f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "27f276f0-eb7e-4a42-b2cb-06ecc391c7fb": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "47d4c596-79fb-41ed-a92a-7fd8a1ffb14b": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "bc8d388c-4bea-4bda-be52-41102dcc8ebd": {
             "en": "Type",
@@ -50924,36 +50925,36 @@
             "tr": "FAULT"
         },
         "5add9312-4b36-43d1-9a7e-a92d4e7231ea": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_TIPA",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA TIPA",
+            "tr": "TYPE ERROR"
         },
         "f5e09dd7-8deb-4711-929d-3469f829a910": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "1e883852-2676-48d7-8abd-df40e71d310f": {
             "en": "NORMAL",
@@ -50972,116 +50973,116 @@
             "tr": "NORMAL"
         },
         "571ba77f-babd-4ff8-843d-f943f4d02a32": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "20f5b7be-ab95-4941-b509-bae165251810": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "5daa858d-6696-46f3-b790-e94669e70cfc": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "d597403a-87f4-4920-bcb7-045e22cfa6a9": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "ff42f0a6-ff5f-4024-8f61-c9648b5c31af": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "acb39a97-5e55-46b1-8443-532ae0771065": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "840f3c97-97f8-4c79-b0a3-257a111b2551": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "54cc949f-355d-42c8-8e6a-6a27516d42fd": {
             "en": "Type",
@@ -51276,36 +51277,36 @@
             "tr": "FAULT"
         },
         "d76947dc-8788-4592-aef3-b9a74c262a76": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "e20789ac-1e09-46cb-8443-7593a64fa378": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "57e61602-8662-4a64-9535-1e63efbfe4ee": {
             "en": "NORMAL",
@@ -51324,116 +51325,116 @@
             "tr": "NORMAL"
         },
         "9f4798ce-62f3-4b0a-8487-d53e3b1a06e0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "e983baff-15d1-40d6-b951-8425c08de35b": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "47deb202-19c8-470e-ae9c-766ca8ae5003": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "d76df7e0-85fc-4874-b3b2-aef8b7cb8190": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "d2b9ce70-832b-4cb4-b12d-6ee45af512cf": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "c3ce31d5-7b8b-4ef1-975b-f25d23fbb22f": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "50167279-0aea-4d69-be56-f06569dcbec4": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "07fa41cb-0ab0-4c21-af83-0bc241820ea7": {
             "en": "Type",
@@ -51628,36 +51629,36 @@
             "tr": "FAULT"
         },
         "e4f0d09a-599e-4edb-a1bd-9459de572c3a": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "7d097263-b490-413b-b41f-84bbd3c1acbb": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "b5d1c90f-97cf-4670-951f-b6007f9bc476": {
             "en": "NORMAL",
@@ -51676,116 +51677,116 @@
             "tr": "NORMAL"
         },
         "71b8d66c-eebe-4311-93a7-78b9a5778b36": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "d938d673-5dd1-463b-9a09-a0566315b005": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "e78663a8-3cb3-4b0c-9739-b41fbfc1e0e6": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "f9bcaee4-b07c-444b-86ed-890959b0cac0": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "911f992c-be41-4efe-813b-feb6475d9cff": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "d079e304-71a4-4025-a2a7-123ed13c8938": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "3a9376ab-e081-4411-abc0-74662f501f5a": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "03529136-6a8e-4a52-9715-8ad9df15ee1f": {
             "en": "Type",
@@ -51980,36 +51981,36 @@
             "tr": "FAULT"
         },
         "119ba65b-ebbc-4736-9ccf-86e5c954a23e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "c740cb78-3f10-48da-9ea6-fc5c0f60a87c": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "5f421156-264b-409c-b8ce-f7f4274fa0fc": {
             "en": "NORMAL",
@@ -52028,116 +52029,116 @@
             "tr": "NORMAL"
         },
         "ef48a425-46a2-4140-b013-20298855b0d0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "dd627dbc-c360-402d-bb39-66fe8d9d3238": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "f96acc39-7949-4be5-a563-a9cf14756518": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "0ec28c8c-ba50-42ef-9fe6-b520b5cbd6a8": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "4748c70b-c500-49e4-8cd4-89742f74bad3": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "8b1bfd03-56cd-4c7e-a44c-8c58656d9da0": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "396f8eed-dfe2-4024-a76b-239d73b6e8c5": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "92fa2dd6-6cd5-4659-8c8c-7f2c05aff65f": {
             "en": "Type",
@@ -52332,36 +52333,36 @@
             "tr": "FAULT"
         },
         "39e5756a-f614-45a9-81bc-5e24918ca196": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "b026275c-1ecf-49ab-9439-503503bc0a05": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "7ddf8426-b5f0-4894-9b81-81ab362d27da": {
             "en": "NORMAL",
@@ -52380,116 +52381,116 @@
             "tr": "NORMAL"
         },
         "4e3fae18-29f1-448b-ac0d-c320c64bdd82": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "2df67046-36ff-49c5-a67c-41f837b958e2": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "a7d8fd92-85c5-4e5a-8227-05d73027711b": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "f3c2b106-a91c-4870-8bdd-81ec2f7e22cd": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "0593ff41-166e-46a2-a8ca-52a07c0db9c9": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "b44c7dbf-7792-481c-bd08-2b1116c210a6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "38e67e39-261a-45b1-b383-42806a3ad3c3": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "8fb45ec7-8806-4aee-9781-64d0bbb3c8cd": {
             "en": "Type",
@@ -52684,36 +52685,36 @@
             "tr": "FAULT"
         },
         "a6419dfc-f758-4fd7-a557-d01f569100c6": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "7a65bed0-9eeb-48f8-ac51-345a4a0be1fd": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "05cd9138-bf44-42de-a0db-0d89b03b6731": {
             "en": "NORMAL",
@@ -52732,116 +52733,116 @@
             "tr": "NORMAL"
         },
         "348763f9-e74b-4bf3-bb5d-4ac4b29e1579": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "9914ed98-86d2-499c-a1d3-0f7b3c91cefd": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "2cb4cf64-0a64-498b-9e59-d29da1b9b721": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "7948d20a-e346-421e-8bfe-2e5020110a48": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "1a622b08-f579-40f3-a5e2-d59d87d98bb7": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "0b794d75-117c-497f-a2c3-f8e7628e19e4": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "82d7fa6a-d2a5-4c3a-9bd1-4d1e92376c61": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "47749479-54a9-48a1-b8cd-8612ff16ddff": {
             "en": "Type",
@@ -53036,36 +53037,36 @@
             "tr": "FAULT"
         },
         "3428ba27-ce31-47a1-bf7e-23a3b2d3f96a": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "603250f1-52a0-407b-9f30-53ef3c3f686a": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "cb14896b-afc8-4547-9c95-5ad6da439bb6": {
             "en": "NORMAL",
@@ -53084,116 +53085,116 @@
             "tr": "NORMAL"
         },
         "efd53a65-723f-41f7-bb15-46f6f5e6dca3": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "a32670f2-2976-4b97-9ef1-e69b42bfc67a": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "02bb9d3c-3fd5-4db0-9e50-95d267c19608": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "492659af-8812-471c-b56c-c7646736c070": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "86354714-6a39-4058-98a2-fdb152e33b35": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "28fc4526-96ee-4498-9d51-542c5fccb249": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "4b24e0f1-d844-478e-8a4c-9eb6bcd851fd": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "44e5eff6-527b-40a3-a63c-a17489b20610": {
             "en": "Type",
@@ -53420,36 +53421,36 @@
             "tr": "FAULT"
         },
         "b31c9f8f-0afe-4985-8b83-803e3bd3d207": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "809e3093-fad4-4f28-be8d-b34cf248b89e": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "4a08a01a-acdb-4e7d-8449-310bb9d8f98f": {
             "en": "NORMAL",
@@ -53468,116 +53469,116 @@
             "tr": "NORMAL"
         },
         "6414cc8d-bb67-4161-b4c5-3b53a3cdb481": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "49d4079e-dc7f-4b52-b0cb-6f6a1f2f0ae3": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "497cff12-5ddf-4fe7-ad07-7b0b3df3649d": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "c00f85d8-d73b-422a-8205-1098caeeb599": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "4f5b52df-607f-4920-87af-4e2af15c338d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "b8a08223-8875-4820-a1c0-3e68cea7fc7a": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "57486994-185f-4058-b04e-80b3cf30c8bb": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "54b45408-54d6-4b5e-9c95-68a0fb0423d1": {
             "en": "Type",
@@ -53772,36 +53773,36 @@
             "tr": "FAULT"
         },
         "3c310b05-a793-4159-ba9b-85389faed7bb": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "de0519e3-a7cd-453e-8bed-5817591fa518": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "3a0297a7-bc0d-418f-bee3-9636523c3b13": {
             "en": "NORMAL",
@@ -53820,116 +53821,116 @@
             "tr": "NORMAL"
         },
         "e69272d3-1921-4fa4-be29-b9ade6b8be37": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "87535744-912b-4313-a65f-88ea0fe490d3": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "42b98791-2469-4bf6-b272-9f38675887bf": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "9da2de54-a489-49ce-bfc9-7aac367b27dc": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "8fa1cc42-8e00-434a-a6d7-1cc685b3005b": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "f5d8fe9b-3711-404b-83c8-da981c18f80e": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "265651d4-e762-468d-ba1b-66117e6d29f0": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "5b31b341-37d8-4774-b279-e3f6c1b3e6c7": {
             "en": "Type",
@@ -54156,36 +54157,36 @@
             "tr": "FAULT"
         },
         "9ce549af-7786-41c7-a23a-2025d6db7912": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "88c278e1-a614-4f32-beb7-cf23f4976cbc": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "83683621-f2b6-4a8c-9bfc-2bec51600e95": {
             "en": "NORMAL",
@@ -54204,116 +54205,116 @@
             "tr": "NORMAL"
         },
         "20ade24c-d92f-4def-9e5f-25b7c149f859": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "faec4940-c956-42a2-b04f-d1b80486b4b6": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "23d7901e-5390-4b52-957c-4b4670f2af59": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "431cfceb-cb0e-4b17-8fa5-7e7a46035bac": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "b0955089-3ebe-4dac-bf1b-e41813becff7": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "06148a43-174a-4584-bd7f-0f7c5550a6cb": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "a3a782b4-3a27-4d9a-ab4f-72ae2a46adb8": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "5b45e16b-30d8-4a12-905a-1817760771ee": {
             "en": "Type",
@@ -54540,36 +54541,36 @@
             "tr": "FAULT"
         },
         "891f8a8e-4589-412a-bc60-b12e7deda7bf": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "4487920b-ee18-432a-adf3-9d169388ce40": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "78e5bd6e-e7d3-4926-a13b-869f365daab3": {
             "en": "NORMAL",
@@ -54588,116 +54589,116 @@
             "tr": "NORMAL"
         },
         "6c8b24f4-c4f2-45b3-bb40-0a28e4b37ab5": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "822a8d07-3e6c-4c8f-8d46-4a88b3867715": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "f9a84957-dc32-4868-bda5-89f4645d036c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "91188b1f-e66c-4678-8f17-83be6bb4f31b": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "9b74f4be-f19e-4c2d-8f31-da2df9e5f9b2": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "bb09e926-0e42-4cfa-a748-eb9a1e208d1c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "f26b8c41-4b69-46d9-a43c-cbcfd1950739": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "e3ad1d6a-bbd8-4eed-affa-177ea18e657a": {
             "en": "Type",
@@ -54860,36 +54861,36 @@
             "tr": "FAULT"
         },
         "c773ac9a-eaf5-4f34-8873-461622430505": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "0944a1a9-e0f8-4ff6-995b-a815f3c2864e": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "82190bb7-b31c-46fd-9ee1-fe6427325712": {
             "en": "NORMAL",
@@ -54908,116 +54909,116 @@
             "tr": "NORMAL"
         },
         "47c67b93-c265-4029-8473-230d70ff9846": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "05a018df-8831-4543-b697-968c970f81a4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "1528f7ce-0bf7-4c7a-8b6d-6fe33ece3d3d": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "ce10ec2a-5dbc-4eca-ac1b-dfa23d5c0e35": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "682390fc-5449-4cf8-a6bc-9f67df84a338": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "eed216c4-01a7-41d0-a2ee-34f53d8c5e3d": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "9e56a84e-bb1a-418a-a202-edfe6ff5a4ba": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "0cdd13f9-5d68-4b93-901d-53869b8b1401": {
             "en": "Type",
@@ -55180,36 +55181,36 @@
             "tr": "FAULT"
         },
         "41f5fccc-1d7e-4800-ac0e-3ee262ab3062": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "6e01cf65-03b6-4b2a-bf82-127da191fab6": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "069f44a2-3fa7-415c-9106-1bf06a4a9cac": {
             "en": "NORMAL",
@@ -55228,116 +55229,116 @@
             "tr": "NORMAL"
         },
         "c5dc35fb-b8f0-4515-aa2c-664fdbd4d4af": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
-            "it": "CHAMBER_DEFAULT",
-            "nl": "KAMER_STORING",
+            "it": "CHAMBER DEFAULT",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "40264b68-d87e-4aa5-9e4c-258ab087d1ee": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "f4dcf800-55a2-4bb4-b402-e80eb4aace04": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "5b9a6e08-900d-4426-b82a-371a56c5631f": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "9252ebfa-ed3c-44bb-896d-124be612f82d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "fcd01243-fc71-4761-a189-222389f5d074": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "5cec1fac-ca04-4e95-8c3b-20ce5da3d0e1": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "78aca291-f7fa-48bb-97ac-c9edc1c4e997": {
             "en": "Type",
@@ -55500,36 +55501,36 @@
             "tr": "FAULT"
         },
         "3fb76b20-3c58-4a6b-8077-fa464aa7051b": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "fd990273-06e5-4289-bed2-4d5d16a12a5f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "d2ab39d3-9dfd-4476-a0d2-99b165b40ae0": {
             "en": "NORMAL",
@@ -55548,116 +55549,116 @@
             "tr": "NORMAL"
         },
         "a45dbb75-b97c-4c9d-a912-e8c57874191c": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "d7cb6403-6423-4521-a18b-b51a0d35f2e4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "a6de1a9d-fad7-4e51-ac6d-9beb25174fd5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "0cb7e79a-b4bd-46af-a893-d2db52f53a41": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "92bb5119-5727-4a67-85af-d8df17ce7458": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "b3374a5c-ef65-4a95-bac1-4370c947302f": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "699d188b-ed9f-4e7d-9777-f46adf1c809b": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "3a68a948-c248-4efb-b5a9-bb7645c4175c": {
             "en": "Type",
@@ -55820,36 +55821,36 @@
             "tr": "FAULT"
         },
         "258b91b9-32f0-4c05-b6a5-e6362b8fafb2": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "7eed5ec9-93fb-47a5-84db-e2264456c790": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "091613eb-8926-44d3-afbb-364fe22ac417": {
             "en": "NORMAL",
@@ -55868,116 +55869,116 @@
             "tr": "NORMAL"
         },
         "de3f185a-231b-439c-abfa-4be001485b0b": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
-            "it": "CHAMBER_DEFAULT",
-            "nl": "KAMER_STORING",
+            "it": "CHAMBER DEFAULT",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "56168a93-68c0-4203-a16c-5c4225d95db1": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "52eaf88d-6618-4fbe-941b-cf72575f5639": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "28b7b479-2ce7-41a9-a4f2-13c0fba5c022": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "38bad2f5-bb86-4fce-92b0-38c009c21dda": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "0ab77c0e-467e-41ce-8502-717d28a81296": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "80b0fb29-fb52-46f0-9fca-1a30287fc610": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "09a6a641-5b63-4210-8a42-881f192c9604": {
             "en": "Type",
@@ -56140,36 +56141,36 @@
             "tr": "FAULT"
         },
         "8c0464a3-d6f0-492a-9739-e45cc15b4cd5": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "05d53366-d9ef-4915-994d-f70d9993686f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "5dc3b713-14fc-4069-a59a-1ce31cc59e6b": {
             "en": "NORMAL",
@@ -56188,116 +56189,116 @@
             "tr": "NORMAL"
         },
         "ef9ec553-5cda-4bc4-b7f8-6fefeada96fa": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "7ad0a837-7a3f-4184-9552-ccd25b727d2c": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "9b260b74-50f8-4fcf-988f-cb8d2629ba7b": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "ed29812c-7e98-4ea9-852d-8277664c0043": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "7dfafb28-d9a4-40a9-880c-3f2cb533d243": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "826b3510-76f9-475d-87e5-1347214b30a5": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "585132df-db10-4869-9871-68f6da0dfeb1": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "bba2d929-0c27-4165-8935-36bee1c8d238": {
             "en": "Type",
@@ -56460,36 +56461,36 @@
             "tr": "FAULT"
         },
         "5a49c3a9-3c52-4abf-ab2c-c09e920e08e5": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "e3e514e4-03bc-406e-ad66-69328f8423d3": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "9d8ecd18-cb41-4b90-98cc-dfa3780ba3f1": {
             "en": "NORMAL",
@@ -56508,116 +56509,116 @@
             "tr": "NORMAL"
         },
         "7ecd01d1-662e-4fb4-82d5-6d26e4e9cf3b": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "008decc3-7f6e-4866-8b7e-dfae473898d1": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "832bdf16-0944-4ae5-8378-d87c6e0253b9": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "8f9c69f3-3b78-4e0d-a503-846f4668714c": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "f3aa07c2-8f92-4901-9fa0-4e5f88017b24": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "9eab8730-8587-40b2-b8a9-c74640afebbd": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "cf7f3924-413e-44fa-87ca-ec943afee0cd": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "0908174b-724c-4744-a219-587ccff7e367": {
             "en": "Type",
@@ -56780,36 +56781,36 @@
             "tr": "FAULT"
         },
         "973df374-39b4-4c9d-9886-c9de0beb1df4": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "440ec96e-6564-4196-b137-8905e4d12d7a": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "96f1c48b-2412-454c-899e-d30f820d4788": {
             "en": "NORMAL",
@@ -56828,116 +56829,116 @@
             "tr": "NORMAL"
         },
         "0035cab3-887f-4496-ba5d-780b96431920": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "0b19d0d1-518f-401e-837b-6cfb0309f374": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "eb1fab3e-a3df-4b7d-98e0-1eb09dea42cf": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "a6830a24-31cb-439d-854e-3a1aa99e54ee": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "8a25716c-7620-4e99-b3d4-1ddd682aa5d6": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "e9bd8ca5-3f88-49e5-8db2-c9eda763f25a": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "b09d862a-c1f2-44f2-b387-51a98fd7c38c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "e1ea3176-4e1b-4e03-b03a-28914b784695": {
             "en": "Type",
@@ -57100,36 +57101,36 @@
             "tr": "FAULT"
         },
         "b917704d-e78e-48be-93c4-317654950307": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "cee2f847-22f8-4a33-b109-ae8eb0352ae3": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "0a03dfeb-7d6f-4c98-83e6-bfcbd56e7922": {
             "en": "NORMAL",
@@ -57148,116 +57149,116 @@
             "tr": "NORMAL"
         },
         "d479b617-0c78-41dd-a42b-7b0480d61a3e": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "78cd61d1-b95b-4e9c-a480-ce205a033282": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "a60c0d70-8869-4c9f-b8e2-9fc37628c735": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "9f336d19-1155-44b8-86e9-4080f6c48d42": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "056502d2-a11c-4f4b-ba7f-61ec42b6081e": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "94fcce95-62c3-4bc1-89ce-a46de410ad2a": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "0b649a4f-7d63-4b5f-9468-3c7a98f93cf3": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "f438e547-bbd9-43c5-94ac-3ee4f9b46b3a": {
             "en": "Type",
@@ -57420,36 +57421,36 @@
             "tr": "FAULT"
         },
         "83727c97-64f6-40ba-810e-7eaf6d57abcd": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "c4a148ec-8760-4a47-9f7d-69dfacdc02d6": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "4b5db32d-d9b6-4096-8820-c2351355b34a": {
             "en": "NORMAL",
@@ -57468,116 +57469,116 @@
             "tr": "NORMAL"
         },
         "b226086d-ff3f-4528-9ce3-5d29ba9d7e89": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "057b2b7f-f3b0-47c5-bce1-6f64b37ab471": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "ad2a2335-2407-475c-855e-3b966cace30c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "4c8d08a7-cc5d-4767-bea0-4a3d9744df90": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "e49a0462-ca99-469b-9ea6-26f6f1375ed3": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "a9d2bc4e-5f8c-4533-a210-eae5926fccaf": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "34f31da1-f7ac-429d-b3f8-03f9f63abf41": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "3902ca54-b674-46f9-95df-7a3fb3c62df3": {
             "en": "Type",
@@ -57740,36 +57741,36 @@
             "tr": "FAULT"
         },
         "06c74197-228f-4e9b-a696-4f25829e818e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "6b9fc4d0-18fd-4057-b0b6-bcddf5c7febf": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "6076adbf-1cde-494d-8b0e-d2e88c7b35f9": {
             "en": "NORMAL",
@@ -57788,116 +57789,116 @@
             "tr": "NORMAL"
         },
         "da062568-6494-4d05-9bb6-31428d97ad0f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "49a8abd0-ad61-4345-82e7-cc11b28e49cc": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "813b2532-a781-4aa3-9a40-acea5de70672": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "22e00db7-bfa6-4b6b-a12e-427ba92f3eae": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "d341404c-84f7-40ff-8ff5-bbae1a30bd95": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "f931771b-1777-40b7-824d-ea8516d9d1be": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "0f554da2-3326-4d75-9d76-6e3226a5372c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚĆIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "2ea975f7-c26a-4d15-930d-81f6f6dc3b2c": {
             "en": "Type",
@@ -58060,36 +58061,36 @@
             "tr": "FAULT"
         },
         "27cc304b-f12e-4efd-b18b-9f125c7e70ee": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "028591f9-b4b9-4014-ac7c-7a7bdf492224": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "7414d2c2-bae7-46d3-ac0b-60edb788964c": {
             "en": "NORMAL",
@@ -58108,116 +58109,116 @@
             "tr": "NORMAL"
         },
         "edbb7a1c-51fd-43b1-91d3-aed5987e50e5": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "78a8e995-c01b-4e11-b7e5-598d32b6b53b": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "14c7c73c-ba95-4dc6-ac42-8e8060b8da6f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "308aefe6-7a15-4096-ba04-c211964fd318": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "15852359-fe1c-4c92-9303-0db14dbcf9da": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "58dc378d-30ae-4541-b860-94c82572cdf4": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "5086e1c7-641f-4329-aec4-cd872c1f13c2": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "a3b9693f-9e19-4f86-ab19-94d92a3a9929": {
             "en": "Type",
@@ -58380,36 +58381,36 @@
             "tr": "FAULT"
         },
         "a8fdd83e-ddce-4c9f-945c-3afc4d2d192f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "8c7333a0-650c-475a-8bb6-cb08a0154ffb": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "d7f59bd6-7736-48e8-9b83-6517a4d761fd": {
             "en": "NORMAL",
@@ -58428,116 +58429,116 @@
             "tr": "NORMAL"
         },
         "3df4399e-d9df-43b7-a357-1c6127e5daf0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "4fff5ec9-6d03-439a-9c6a-f3cd20efbb32": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "c73c1902-1412-42b9-9f5c-1dabbac876dd": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "0de73631-9cf3-45da-ae34-1267d7ee196a": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "1f2cec9b-dc96-448a-b2f7-bb75080b6294": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "e1c9264a-8542-4204-85e7-d086b88d6115": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "5859526b-64d9-4bc9-bdfb-981a008d98c4": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "d1bba68a-a985-43e0-b297-6297f7c7bdc2": {
             "en": "Type",
@@ -58700,36 +58701,36 @@
             "tr": "FAULT"
         },
         "7ae6eb96-bffa-4e90-ac43-b582cb12d390": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "93f4022b-f37c-49ce-ba3a-848c3211b996": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "25f93232-1e97-4dbf-8c17-5b11ad720124": {
             "en": "NORMAL",
@@ -58748,116 +58749,116 @@
             "tr": "NORMAL"
         },
         "e0f583c9-0c3a-4dfe-9ab8-797282ad7eb2": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "d3547144-c596-4659-afda-99342dc0fb6a": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "414af54a-bf80-4d4a-82f7-851e1afb8ea5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "8c413158-9886-4104-b174-a9403f2f2d5f": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "63522372-e836-44a7-a12a-6994b525c98a": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "2239030c-e8b7-49c6-aed1-981354186621": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "bdb30b97-5055-4929-b22a-f49cd0efb3a3": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "026e4045-0140-4493-af6a-16f0f702c01e": {
             "en": "PREALARM",
@@ -59132,36 +59133,36 @@
             "tr": "FAULT"
         },
         "9157f83e-c309-4201-b611-ac5462aefe61": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "7a2ceb9f-d3b2-480d-b6a9-e56f3caf3f83": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "db8e2140-5691-4414-be5e-a0d39861e6b1": {
             "en": "NORMAL",
@@ -59180,116 +59181,116 @@
             "tr": "NORMAL"
         },
         "0c6f4a66-3b6d-453d-bccb-31c5b0381041": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
-            "fr": "DÉFAUT_CAMÉRA",
+            "fr": "DÉFAUT CAMÉRA",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "c1b0c338-7741-4af8-ab9b-e0610dc8fba4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "6bbc20b7-c542-4f86-b969-a2eeb257f30d": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "64959186-74c6-4e66-bfff-bf8f556823bc": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "f92a7cfc-b2c6-4088-a3cd-d135148d6e7e": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "e26e1fe2-e34f-4b3a-a2ed-8ca684cfa269": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "bc2c8a1a-8441-4c09-9daf-950e10fc1788": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "8dcafad5-8c44-4a97-8b64-927bb6d9032d": {
             "en": "PREALARM",
@@ -59580,36 +59581,36 @@
             "tr": "FAULT"
         },
         "bf19bef9-fc58-42e2-8ee9-2c7aea7ff1dc": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "ab772460-0254-4e9f-a445-5baaf32dadef": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "eebf199e-4e04-4177-949d-adc47e07aedc": {
             "en": "NORMAL",
@@ -59628,116 +59629,116 @@
             "tr": "NORMAL"
         },
         "8486c36e-cffe-4649-a01a-6d6600427c49": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "bcdaf7fb-a643-45d1-bcb9-f50792b3d2b5": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "6ea7da75-bf40-4d18-bd83-cb55eb362143": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "0552a9ba-735f-4e48-8f0b-ec057d8ab010": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "ea7a4271-d4ae-471e-922c-1d0709c4f956": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "7b7f1e92-8fb7-4876-9156-a10dab0d39c7": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "36aa54b5-cc14-4296-8df3-454452b3b200": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "7e8d145e-2a35-4624-81c1-23a13031d89f": {
             "en": "PREALARM",
@@ -59980,36 +59981,36 @@
             "tr": "FAULT"
         },
         "1671110a-25db-4c61-aa2d-5389a4e5e423": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "9346b6ee-3b24-42b3-9d62-a53a4c24f5f2": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "ab5a15e4-51e1-4dbc-a420-2c22f956123f": {
             "en": "NORMAL",
@@ -60028,116 +60029,116 @@
             "tr": "NORMAL"
         },
         "b4058b48-0d73-4383-b08c-b330a5d5d25f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "065b40b5-e917-4481-8928-7c7af85b40b3": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "55f71667-29da-4a56-8ea5-ac6c2ce8617e": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "9ced6382-c787-43af-90a6-683e2517f7dd": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "8dde1be7-44c3-4c34-b125-06260e9a8159": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "fe6f0495-37a5-48fd-8fe9-c5789c8a43d6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "25749f28-9b61-425f-beeb-66e77cc51824": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "f41433c9-ffce-4e24-8fcf-8cc236842ca6": {
             "en": "PREALARM",
@@ -60828,36 +60829,36 @@
             "tr": "FAULT"
         },
         "28e1ff1e-02e9-4ce2-9395-97a36558e199": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "06699358-9bd4-4bc3-bcb5-134b156d2354": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "67373946-20c4-4c1e-8c80-617c34b9d10b": {
             "en": "NORMAL",
@@ -60876,116 +60877,116 @@
             "tr": "NORMAL"
         },
         "4f2fa84e-3a96-4a2c-b36b-b213520fc763": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "78816dde-2448-4728-bb2e-a189318dbafd": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "62297af7-95ac-47cd-9d6c-1d7b84148dc0": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "e5906c5d-d076-4bc3-8c71-42ea94dc123c": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "a4a93a26-e08c-472f-9921-0a8b33593f33": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "71e9ca8c-ffff-41a8-a5cd-9fa857ff406e": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "767925a8-b99f-4454-9871-dc02aa0af368": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "78ca7b87-efb2-4ae4-91dd-ca1fc17d38a6": {
             "en": "PREALARM",
@@ -61692,36 +61693,36 @@
             "tr": "FAULT"
         },
         "66b28dce-1813-4432-91a8-9b1dcdd3614d": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "ee27d1cd-bd98-4b7f-a26e-dea5b3a02875": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "c67693c5-bc06-41ce-a08d-684dbb7d04a8": {
             "en": "NORMAL",
@@ -61740,116 +61741,116 @@
             "tr": "NORMAL"
         },
         "11038724-9517-4026-a07d-a010cc85637b": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "d69c1692-0a3b-4d73-9e7a-15ff5378b15a": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "cdd10e28-24fb-4ea1-a98a-a7e56a078921": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "65a332b8-d068-4915-ad2c-4943f89db4af": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "ca12c19b-b2a4-4d9d-a944-2ae1154ee97f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "8a0389ff-e6e9-4fd8-a52e-2cd472f763bf": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "eff54bb9-f21c-4887-a8c5-e248f25a028a": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "0dc64041-c887-457e-84ee-3c9757ab9297": {
             "en": "PREALARM",
@@ -62108,36 +62109,36 @@
             "tr": "FAULT"
         },
         "4c9bddae-d487-43c7-a7d8-1e5fc6c49289": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "d5f2fe8b-d04c-4c49-b5bb-c39933affad6": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "7b2b9b21-f5a2-41f1-a752-9eb81ec9853b": {
             "en": "NORMAL",
@@ -62156,116 +62157,116 @@
             "tr": "NORMAL"
         },
         "6e91fed6-b3ff-4fda-835d-701e338c1013": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "fbdaa44d-92cf-4875-ba73-f4d433d0d0b7": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "f1cc28ba-2011-4fa2-9017-b220a6a489f8": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "a6fdf782-6750-42f2-985e-2d098fc2ef26": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "25ce8633-1100-4404-b5eb-525f6560575b": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "1fe16051-affe-4e42-8162-c747caea3280": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "36cba547-2721-45aa-b3fb-1154e1923089": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "cba33289-0866-4681-a99f-334f30f0996f": {
             "en": "PREALARM",
@@ -62508,36 +62509,36 @@
             "tr": "FAULT"
         },
         "7f18e8e8-a4a6-4cb3-8272-444cbc1a8540": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "be716bed-32de-4089-9d5f-735588ab8264": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "039be525-d3cd-47d9-ae38-7c5da7152986": {
             "en": "NORMAL",
@@ -62556,116 +62557,116 @@
             "tr": "NORMAL"
         },
         "185dde5c-8f49-4400-a2bb-526e4ec67662": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "9828ae0a-0f03-48a5-9123-937ba16d1c72": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚC MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "a2ff187b-c466-461e-adb4-08159b5858fb": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "88a3eb63-3103-4345-ac3a-6cc594583ea4": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "001914b5-f73b-419d-bf24-fa988e46afb1": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "003e623e-2747-4f1f-be6d-6d7841aafa6d": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "e3d0d67f-ec03-410a-a1e7-e91c4df37567": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "f5238edd-2846-4b7e-b950-a12b86c04c4b": {
             "en": "PREALARM",
@@ -62908,36 +62909,36 @@
             "tr": "FAULT"
         },
         "541dbccc-6fc9-4b68-aadf-6b0530d82a41": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "465a8fef-af82-46b4-939d-38ec673d4927": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "192aab1e-8c52-4bf7-b4a8-f6ecf2d6f21d": {
             "en": "NORMAL",
@@ -62956,116 +62957,116 @@
             "tr": "NORMAL"
         },
         "6b849922-087e-4d1c-91c4-17cbc387e6bb": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "f023b6f9-80ac-40d5-8794-62929fc0e970": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "ccae91ea-342d-44d3-a419-7efc00ad0572": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "3e0a4bca-d7d2-4bc7-9703-1ca8fb03b74b": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "537f2c00-f35c-4d9b-b1d2-e918a2bc0c51": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "b0333672-d4d0-4c07-8b77-4528f0d5d199": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "711f1e42-12ff-47f3-9aa5-85f635d9d962": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "168f777d-d53c-41d0-917d-adc7b8831de0": {
             "en": "PREALARM",
@@ -63356,36 +63357,36 @@
             "tr": "FAULT"
         },
         "f0f0d4d4-deb0-443b-b1d5-b78f327fcdbe": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "763511a5-a605-4909-b798-f46d8302c87b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "e5261ac2-2641-4842-9401-3a576cb3ef39": {
             "en": "NORMAL",
@@ -63404,116 +63405,116 @@
             "tr": "NORMAL"
         },
         "d1572b2b-3994-4786-94de-ef271d93329e": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
-            "fr": "DÉFAUT_CAMÉRA",
+            "fr": "DÉFAUT CAMÉRA",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "ef6c9822-b2c2-45b2-8ca3-80095a969caa": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
-            "fr": "NETTOYER_LA_CAMÉRA",
+            "fr": "NETTOYER LA CAMÉRA",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "d470d0dc-2cd6-4c93-8138-98ff5cf5fe85": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "b4d9d3f4-dedc-446b-8ea5-87ac319ca6ff": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "73d07a10-a367-41cf-b756-79b6451ff256": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "a9444e99-ff04-4306-8ce5-09abe6a41826": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "690e7e94-0a4c-447f-a1a9-6ab5fff97089": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "d4fdaff0-e560-4aab-85f9-98e35b937ceb": {
             "en": "PREALARM",
@@ -64220,36 +64221,36 @@
             "tr": "FAULT"
         },
         "0742a84e-f0b2-4d74-91ba-2cf86ebdee53": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "e1d2aea3-1357-4fc1-94a4-7a621e18fc7f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "d17c8595-3bec-4c37-856b-3d10896d4ac6": {
             "en": "NORMAL",
@@ -64268,116 +64269,116 @@
             "tr": "NORMAL"
         },
         "a708899a-289d-45c5-b122-268c4860ff47": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
-            "fr": "DÉFAUT_CAMÉRA",
+            "fr": "DÉFAUT CAMÉRA",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "2acb81a8-bbb3-440b-9b6a-8e89e5efa3ac": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "82b8d483-8d25-4974-99da-08a774844896": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "67ceafab-fdfa-409e-b763-a9295e7d8b75": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "136b6bec-da0e-4ce6-9678-067f61c446c1": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "d8a29c79-0227-4d1a-9491-4acad39669ff": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "d4ce40f8-c8ab-433a-97c7-05ef27e6c846": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "c097ad16-586d-4fea-8ee6-64f12447ca79": {
             "en": "PREALARM",
@@ -64620,36 +64621,36 @@
             "tr": "FAULT"
         },
         "e6172128-4070-46e0-8ed5-5221da9753d5": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "8634953c-8e0f-467c-bfea-0a1942d43ccd": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "27917f01-5fa2-453f-b785-15c40016b3b4": {
             "en": "NORMAL",
@@ -64668,116 +64669,116 @@
             "tr": "NORMAL"
         },
         "97c44822-06f8-4385-8d5c-c9f2f6993497": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "3f6447e9-f64a-4175-af42-15cf4fd0745f": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "e6be7372-9612-4a80-ad19-9d1b8bccf80c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "6cfbb0ab-d3a8-4230-84fa-5ec3c7bd3e51": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "bfc0f65c-0941-4df5-89a2-48faa7e9e95d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "ccbe1c48-2cbb-4d76-9169-25a451d917cc": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "5a7c221c-633f-4088-accb-47ab19a37fde": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "8be2a46a-f775-4d64-a221-ef394fb91cca": {
             "en": "PREALARM",
@@ -65148,36 +65149,36 @@
             "tr": "FAULT"
         },
         "7e4a50f2-903f-400c-99c1-7e648dfaac7e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "f607d3ea-8f65-4dc0-b780-3cb9fc257c94": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "829c1f6e-2b7d-4e32-b638-2702a7d59ad5": {
             "en": "NORMAL",
@@ -65196,116 +65197,116 @@
             "tr": "NORMAL"
         },
         "7ed5869d-5fa6-47c0-b286-9669ece1f5ad": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "b1e48b5e-279e-4c4b-bd6e-09eea0cb91fe": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "6b90e757-2cda-46db-b355-95dbb0d39af5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "9f7e9ec0-50a1-4117-8f16-7ea2c8013ab1": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "75b45eb7-f9cb-4c43-a363-22ee3d430ceb": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "b7b9cf9f-db89-4227-a912-46588cf077a8": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "4774e058-f4ed-4ebd-b840-e6f29b4ffca0": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "26561250-fad4-4778-8ab9-704206471462": {
             "en": "PREALARM",
@@ -65724,36 +65725,36 @@
             "tr": "FAULT"
         },
         "9bb4232d-abbf-444a-8c5d-f66b15fc193b": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "8ba36ed8-9eba-4377-988c-c9d6ca04f442": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "c98daf01-a22b-4e10-9e23-f857cbd7c090": {
             "en": "NORMAL",
@@ -65772,116 +65773,116 @@
             "tr": "NORMAL"
         },
         "dfee26d2-c17c-44ad-a515-c7627e74aea8": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "db756776-6489-48d3-9cce-3da81ffed5a7": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "9b62525a-18f1-45cb-907d-2660ea556043": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "e8fa21b4-d4ea-4c08-a515-d5cb981814c7": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "477eb03c-8867-4f69-8932-32174df4481e": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "2ddd5ca0-abcd-4d74-a622-d06db38f42a1": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "6d7b1b3e-7753-4ad1-8cac-aec94dc45634": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "d84f169d-8fe0-4c24-8cb3-d8c29dabd60e": {
             "en": "PREALARM",
@@ -66300,36 +66301,36 @@
             "tr": "FAULT"
         },
         "6936fe93-ad33-44d3-ae32-acb2331648db": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "ebd0a286-b77b-45dd-a68b-03b420cab7cc": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "439c7bbc-7797-4450-822a-12f49968d50a": {
             "en": "NORMAL",
@@ -66348,116 +66349,116 @@
             "tr": "NORMAL"
         },
         "43f23256-bb13-470d-b144-2f1f000c837f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "d79aa871-8eb1-491b-a46e-24cac5a123d3": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "b81c9f14-569a-421f-8de7-8e1bcb0397f3": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "2c692559-950e-4639-8ee8-2d7c2ff5d8ed": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "0c6816fb-bf25-4342-8dcc-fe7ba99b92cf": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "d4645576-e462-4ebf-8f9c-3566b504452e": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "c9a2d26a-4d19-4710-8031-7766a037a98c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "e36fa731-dd74-4478-901d-1ed87651e7b4": {
             "en": "PREALARM",
@@ -66924,36 +66925,36 @@
             "tr": "FAULT"
         },
         "700bfe77-db1e-4450-852a-7b1b0dcedc2f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "d4ca18df-7f77-4f20-a3cb-d3ad6d9f68aa": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "34cc5504-74d5-4dee-b29d-088e8cb744a2": {
             "en": "NORMAL",
@@ -66972,116 +66973,116 @@
             "tr": "NORMAL"
         },
         "0fefeb16-507c-4713-80ab-6dd7b700312e": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "83770089-4924-488e-b262-ec29232dddec": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "4486455c-559a-4ecb-9e86-495bbfbf460c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "b30e2a1d-893f-427a-bbc6-1119a52f039a": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "a5d44257-4f20-455d-a600-33ac16ef0adb": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "22e2c7c9-5657-4806-92fd-e4f57f106de2": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "9cf287dc-3672-430b-b38a-5e0291dfd810": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "50eb19e4-be2e-4990-aee8-1beccfc3c5e7": {
             "en": "PREALARM",
@@ -67548,36 +67549,36 @@
             "tr": "FAULT"
         },
         "f162ac63-5795-428d-8fbe-4a1cf59b9866": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "9fa6855c-2cef-442b-8fc4-9507625fc3bf": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "60705d52-ebab-4ae7-8445-f3e2b2c12370": {
             "en": "NORMAL",
@@ -67596,116 +67597,116 @@
             "tr": "NORMAL"
         },
         "2ddd6035-d4e1-4c5e-8f0d-7b5de0a5b533": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "1cf5c651-9c16-49c1-9e40-106c74bc3c2d": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "68293ef3-ef9d-4e00-a572-ffa6de49672c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "11cc2613-7bbe-4469-9503-2d3e4faa0503": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "b8a9ab16-b186-4a80-8687-f9bb305ec9bc": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "cd07d8c3-880b-4092-9fcb-6a08ba72a145": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "035e1264-69bf-4130-81f6-4a960ea42aef": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "04c81764-8ead-42ad-a1f3-0f9fce374a08": {
             "en": "PREALARM",
@@ -68332,36 +68333,36 @@
             "tr": "FAULT"
         },
         "0af957c4-f3a7-4266-b0c9-a53cfff52776": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "818a770c-aa84-4b4d-88f2-362ab31b22bd": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "c7ce4943-2fd3-4006-a188-456cb17d23a4": {
             "en": "NORMAL",
@@ -68380,116 +68381,116 @@
             "tr": "NORMAL"
         },
         "626cf9d5-3d04-4724-91c8-2a261a83a4e0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "9761a310-ee0e-4a4e-9de0-1cbd61bec77e": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "267f08f1-ddfa-41a5-b224-4771db83a6c6": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "527db9e1-3ffb-4cf7-be0f-9bd0b954c96a": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "188ad447-e5b6-4452-8556-f2a534a5effc": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "be47a116-865c-487d-8b06-04bd37294b2b": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "4bb528ee-1c23-40c5-ae9f-87c2fcbc574c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "62a05c4a-a77d-4f07-af93-9293e1bef850": {
             "en": "PREALARM",
@@ -69116,36 +69117,36 @@
             "tr": "FAULT"
         },
         "81b787a5-8d64-4e67-be88-1ca869460bfc": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "fb109a2f-3f0e-4dcb-bf1a-e5b055d408a6": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "2d624de3-0957-4381-88d4-511c8c071d90": {
             "en": "NORMAL",
@@ -69164,116 +69165,116 @@
             "tr": "NORMAL"
         },
         "486035b2-f496-4cb7-b167-9d98efcc5fe6": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "48be75bf-f5a2-42df-8ba0-0f76d36de9a1": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "a7ec7050-3939-4712-93b6-6f6b40669130": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "94fb5969-a1bd-4cd1-b282-e2bfb04c7146": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "6ae48887-7a7f-41db-b1e9-5cb07aa771b8": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "8b037cd1-39a8-44ae-b2e3-ff50f9de0367": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "8c5b6651-8329-42eb-b41f-2de2ded53be4": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "9d0b35fc-af3f-4c2e-ad43-75faa5d89f2b": {
             "en": "PREALARM",
@@ -69516,36 +69517,36 @@
             "tr": "FAULT"
         },
         "7155d933-5ab6-4329-9866-ab0904c6e4b7": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "1707fc24-4fd3-43ce-ba04-bc08930b0542": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "7af8afea-c8a8-42bf-ad12-9f459270cafc": {
             "en": "NORMAL",
@@ -69564,116 +69565,116 @@
             "tr": "NORMAL"
         },
         "5d096408-b64c-471b-9ae7-65b667768647": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "80842e41-ef88-480e-813d-edc1b37b194b": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "3560b4c9-815a-48ec-92a5-7e4dbe0a8bc3": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "d79322f3-db34-4b7d-a73e-1c395d9653ac": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "8930849d-e863-4d0c-8927-d53f5aa551fd": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "67300be2-a871-4f07-802d-fcd549c34403": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "dbade9ab-078a-4a1a-bf25-9f0ef1d8ba35": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "1ddf3e40-3525-43c0-9f69-558f794bbbde": {
             "en": "PREALARM",
@@ -69916,36 +69917,36 @@
             "tr": "FAULT"
         },
         "ec5e947d-ae79-453d-8db4-a0b3a039e1fa": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "75c39425-d8e0-4313-94bb-ae9fdb518ca5": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "27e9a544-94a1-49ea-adb2-887658134e99": {
             "en": "NORMAL",
@@ -69964,116 +69965,116 @@
             "tr": "NORMAL"
         },
         "ab708c12-2f80-4989-af23-d36ae0953285": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "3ebe08ef-f948-4160-a6c0-db3b0a4fe8a1": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "aedd780f-1048-4e86-9697-d9f28a1a20c9": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "19920f36-1ae1-47bb-a5cf-8fd46f9413c1": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "58fd7a23-722d-4f20-b21a-f3c6dc675596": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "1d26d371-6a57-4873-b3ac-f26fd15edc3b": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "22c5672c-3b60-4a66-b5a6-fe665b1923a1": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "ddd7f0b3-5972-4cd8-8295-c057773b129e": {
             "en": "PREALARM",
@@ -70316,36 +70317,36 @@
             "tr": "FAULT"
         },
         "465bf915-c6c3-4618-9d41-3fe3a0de1be1": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "95b75d4e-3d6d-4989-9191-e66f203c1c30": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "3d436e2d-ab99-47ca-81c2-3832d0d64797": {
             "en": "NORMAL",
@@ -70364,116 +70365,116 @@
             "tr": "NORMAL"
         },
         "a117ba08-3ca1-4bd3-a620-0fd3a097e67e": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "921474e4-fd4c-455d-afe7-0218ebdc9b5e": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "6309f827-b5a7-420e-a98f-a5ed9e185200": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "57363126-dfb8-40d0-af2e-ab5c41209706": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "89872ae0-14fc-4407-9f27-efef5f166d2c": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "5005795b-e878-47f6-a25e-2822140d7d82": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "606e0acb-758f-416d-a619-e4baa6914ffe": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "d87788c1-8c93-402d-9d8f-e36094513449": {
             "en": "PREALARM",
@@ -70844,36 +70845,36 @@
             "tr": "FAULT"
         },
         "9fa2db14-f7ac-4a88-b2e7-e02139d0d204": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "04efd874-8f6a-406e-b995-62f3925be8b0": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "962b494b-7e95-45d9-ab1b-4c433413eb11": {
             "en": "NORMAL",
@@ -70892,116 +70893,116 @@
             "tr": "NORMAL"
         },
         "ba0b1389-407d-4f18-b0a2-39a6c76ecb09": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "3223f1a6-cf37-4c6d-8338-05bb201ea301": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "aea13456-7580-4ce9-91d5-baea4b0d20e3": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "8095f9f0-f56c-4f4f-83ef-911f475809fe": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "072de5a7-bdb1-43a5-9ee0-e63edb85414d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "10c2fdb9-43db-47ef-811f-fe9f447652a9": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "54357853-e0f9-4066-977b-d931edfaa342": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "48feddde-0530-4a33-9844-a76e56d43f11": {
             "en": "PREALARM",
@@ -71372,36 +71373,36 @@
             "tr": "FAULT"
         },
         "8045423e-7f1d-49c5-bfd3-7e8ffbf003ce": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "5262d2e9-de78-40c9-ab5d-cf80ea1feecb": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "151e60da-35c8-4d57-a90f-e7d46c91bb6d": {
             "en": "NORMAL",
@@ -71420,116 +71421,116 @@
             "tr": "NORMAL"
         },
         "b491c877-c4a2-47dc-8c26-aca219fa023e": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "66c2f6a9-d1ae-4c21-80a9-c324ceed8c89": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "207c8422-56ae-4fc1-a6ad-5463ccf6ef08": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "ee64f5d1-1c04-4cea-8121-82cbac8baf78": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "08df6878-a3a7-4e68-aab5-619970df6322": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "f6cc00ae-be99-43a8-a216-1e8a4dcf1df7": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "2b160323-bc00-4a71-9211-9d1f8cc719eb": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "9a3938c0-4412-4c39-b57f-fb742e0684ff": {
             "en": "PREALARM",
@@ -71836,36 +71837,36 @@
             "tr": "FAULT"
         },
         "1cc67398-8dbc-403f-a27d-a41c1ef0c9e9": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "a44414e9-ebbb-495e-912f-87913c5df042": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "ae360b50-2aa1-45ee-bfab-89feecda8c00": {
             "en": "NORMAL",
@@ -71884,116 +71885,116 @@
             "tr": "NORMAL"
         },
         "386fc491-a960-410c-a86d-d23fdf38e36d": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "ee5a95de-520c-493c-a147-590dd5f471a7": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "1ed24eb2-5d95-4f55-bba8-b4f9e327e016": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "f3459f5c-1dfe-40c1-8fe3-d9738494c6c4": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "7fbbafd7-a6a5-47b8-b5fb-67c56f238814": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "00424e2f-ac5b-4596-8479-4362b3ca1e33": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "3c3b0abd-7f38-4502-82a6-be4a4828a89d": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "1d30b397-1c62-489a-9b32-c44597524895": {
             "en": "PREALARM",
@@ -72300,36 +72301,36 @@
             "tr": "FAULT"
         },
         "4d4984b8-9551-4d2e-b106-1b2341d31eaf": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "410648fd-fe8c-45d6-b8e6-4a243e271405": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "3aaae018-9410-480b-9a90-777b1ed02fd0": {
             "en": "NORMAL",
@@ -72348,116 +72349,116 @@
             "tr": "NORMAL"
         },
         "2be19421-4484-4f8d-96e0-87370fb18ac6": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "b190f99f-f89f-4b63-8521-9fa3fe18ee0a": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "395ae83a-49c0-4cd9-8bc4-705c633bcf26": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "5e7f26bb-2eee-4b51-b098-61c4710dd6cc": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "812fe269-c3b5-4151-afde-81b893371797": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "d7dcb5e0-f319-4821-bfc8-2c8ec8a12394": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "0aba4638-5d11-4ac9-9d87-deae8b361372": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "802f0862-d4e7-415d-8306-54b17013375f": {
             "en": "PREALARM",
@@ -72812,36 +72813,36 @@
             "tr": "FAULT"
         },
         "7799f6ac-230c-475e-924e-3fdf3904e3e0": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "201950ee-e8e6-4bb5-9abd-904276d2bfd8": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "5ad68560-5e21-423a-925f-41f26fc28a2c": {
             "en": "NORMAL",
@@ -72860,116 +72861,116 @@
             "tr": "NORMAL"
         },
         "c43ae156-178b-4307-a3bf-feae06942f5c": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "159a0c9d-a8b7-4ccd-a7e1-6b8d2d5b33f0": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "bf54cbe9-b908-45b7-928c-1ead94c8aab1": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "7d4d939d-2a8e-40d2-88fc-51c29f67b27d": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "783b9c1f-5db5-4344-81ea-abd2b18c1230": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "52de6ffa-b36c-4aca-9e1e-6efdc95422ed": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "b5c67f06-1846-4b90-9616-399e3dc9ce37": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "54908c81-aa64-4276-9e00-a48e579b50a9": {
             "en": "PREALARM",
@@ -73324,36 +73325,36 @@
             "tr": "FAULT"
         },
         "082ef0d4-48b9-4066-b080-6ff294762fbf": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "27310e3c-db4c-46bf-978d-792b3e9b77d1": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "9d3b5315-4831-43c9-b4bc-305e30c5a774": {
             "en": "NORMAL",
@@ -73372,116 +73373,116 @@
             "tr": "NORMAL"
         },
         "f63bfe9b-72c6-4ef2-8fd5-caf3cd002699": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
-            "fr": "DÉFAUT_CAMÉRA",
+            "fr": "DÉFAUT CAMÉRA",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "3f15b128-d3bc-44b9-8f94-30251045f8a2": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "2a380692-1ed6-48c8-a3df-6cb2732e7916": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "d8be3b33-c806-4214-a14c-ec7edd5b5272": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "89ebe244-5ded-4855-9d11-c61f92c2f5a1": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "42f678d3-0496-430e-92a3-6c6b91418709": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "0773f367-7cd2-47ed-8fac-0cc6efe9df6b": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "88ea7aee-77c5-46a8-873d-30c1b61b3aad": {
             "en": "PREALARM",
@@ -73740,36 +73741,36 @@
             "tr": "FAULT"
         },
         "4c971068-55e6-4ce2-abff-7854f5c6f945": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "b47e3e9a-aec4-4b9a-9d69-8059d76728d1": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "3146e222-3849-4e4d-96c4-4dbf6954a122": {
             "en": "NORMAL",
@@ -73788,116 +73789,116 @@
             "tr": "NORMAL"
         },
         "0e15d7e4-7f6a-4281-82ef-4179b38cc001": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "47ef8d95-eb4a-47d6-8eab-d2bc12626923": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "c377abce-3e59-43c8-8a69-5a54a896c4ba": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "55d5be96-9172-47c0-baaa-da886f4638e8": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "f23f698b-6400-47c3-936a-df97d73b230a": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "3fe40fe3-9594-40c0-ad3d-bffdf836d507": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "432d5bac-3333-4544-b983-4deb1bb7adb6": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "31f60a0a-df95-416b-b122-fbdb98b5d3f9": {
             "en": "PREALARM",
@@ -74156,36 +74157,36 @@
             "tr": "FAULT"
         },
         "c27dbdfb-32f5-4268-be39-20de7d21ddf6": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "817938a9-fec2-4b09-bd09-0389ba0e67cc": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "9847d2ad-1f79-4d66-9824-f38fa1530aa9": {
             "en": "NORMAL",
@@ -74204,116 +74205,116 @@
             "tr": "NORMAL"
         },
         "c6190d7a-d06e-4876-8454-0293ffbd98d0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "9104791d-f062-4918-a1b2-ab13bdf6d799": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "580354dd-c381-410e-b7b3-0242c764a133": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "7af99a08-24f1-41ab-a86d-2220aa2c7014": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "95c20012-b414-491f-a077-39f0e6eafaf3": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "1b78b15f-de22-41b8-babc-2d1ff8fabb4b": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "b1c3085c-6dcf-4e0e-8526-8fae31625ca7": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "7ce6f02e-7bae-44ae-a7eb-c45f12771d8e": {
             "en": "PREALARM",
@@ -74620,36 +74621,36 @@
             "tr": "FAULT"
         },
         "d0c830b2-cdd0-4102-9fc3-d9dcc6477e70": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "0532a700-2657-47fc-9589-1b2184ebea3c": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "8520685d-1031-44ee-bd29-8ede50c854cf": {
             "en": "NORMAL",
@@ -74668,116 +74669,116 @@
             "tr": "NORMAL"
         },
         "f6f22268-e592-438d-9345-b2327403b8f7": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "3aa0de19-7d9a-498d-a680-f02bab7bb6d4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "d8420f9f-1ef9-4f48-ac32-508a5eb3701f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "8b18c19c-0a57-46c3-a0da-93a8f5e5527d": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "bbbc4f13-6dd2-4a28-9dfc-bbc56049b305": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "232f13f9-0005-435b-8df4-fffecd273fe6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "183d918f-5f75-4926-8b78-37b58cfe7bc6": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "48635a8d-04d6-4fb5-bfe6-b280192cee26": {
             "en": "PREALARM",
@@ -75084,36 +75085,36 @@
             "tr": "FAULT"
         },
         "47861902-06c9-416b-85fd-ab6b4b96df14": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "22e214b4-d547-416e-92fc-a2d43b1db1ff": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "ef1a11be-4174-44dd-b59f-4b121422f059": {
             "en": "NORMAL",
@@ -75132,116 +75133,116 @@
             "tr": "NORMAL"
         },
         "64aaa617-6c31-4009-8d3c-b90d9c52bef8": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "77865e59-99ad-493c-b54c-b8568c139feb": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "eb9547e9-4705-432c-8ed9-b5301cd14197": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "1227a540-4c50-40cf-a4e0-2645491722df": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "bcb14120-966c-4e56-8ae1-0222eaa919b4": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "95cf5bff-ebb4-4d27-b271-eb844798cced": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "30309685-fda9-4dad-aa8a-e2033384869c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "dfe573d5-1b8e-4b49-86a4-329324b88b21": {
             "en": "PREALARM",
@@ -75596,36 +75597,36 @@
             "tr": "FAULT"
         },
         "3cd61776-b29f-47f3-92eb-2cc63c821c66": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "90e64044-7044-4c03-a857-bb6b419a1f73": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "4888a327-5e46-41f4-ab2b-1f96b6348d1d": {
             "en": "NORMAL",
@@ -75644,116 +75645,116 @@
             "tr": "NORMAL"
         },
         "29f397c6-05f7-454c-a8eb-9e0e6b558642": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "7809863a-bc2e-443c-a938-2648b5bd6295": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "8cc554f2-45c1-4e54-aa46-7e0f338bd06e": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "89da4903-b980-4a86-9469-925b4ac4b2bd": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "a17e749e-ffdb-4194-b4e1-9a53a03e2932": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "cd5e6ce6-5bdb-4a5f-88b2-352b6009a9f0": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "69d69a5c-ed89-43b2-b866-6d21b334b701": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "ffc32bbe-0073-480b-b931-481cb4869471": {
             "en": "PREALARM",
@@ -76108,36 +76109,36 @@
             "tr": "FAULT"
         },
         "2f08b3b6-acc2-45c1-999c-133c6f7030f7": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "171cf5a4-4e36-4aea-8579-823fef9bf699": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "e0ae588a-58ba-42d4-b137-0953a3a22c0b": {
             "en": "NORMAL",
@@ -76156,116 +76157,116 @@
             "tr": "NORMAL"
         },
         "e633687b-36b3-42e6-bf60-5cc3d2be1c84": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "638a70e2-19ac-4d28-a802-a1d0ea486cbd": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "3646790b-2604-489c-a539-0e54b4084d0a": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "682955e3-0f8e-4954-83a6-9a02c3130df6": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "49114960-6bc3-47b7-b7fe-adee8f83d36d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "4f4b5099-123f-4661-8c6b-dd3a93ee1221": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "7ddbe619-f74b-4a2f-8d09-bc0d785be901": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "7f159e37-eb3f-4bab-bfce-5a4e82744d8a": {
             "en": "PREALARM",
@@ -76524,36 +76525,36 @@
             "tr": "FAULT"
         },
         "3ce14523-0876-429e-b4b0-3b5b0970314d": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "54302efc-26dc-454b-9a02-715da23659e7": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "0ce4a578-03a4-4601-b088-4c9b0dbeab60": {
             "en": "NORMAL",
@@ -76572,116 +76573,116 @@
             "tr": "NORMAL"
         },
         "113bdc2f-d617-46c5-aadb-e4f98737642f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "e34413b3-28dc-4156-b8a9-367dc0bae7e9": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "3244fd8e-a45d-4ca0-abb3-afee2827caf6": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "9d151e98-f095-4aa9-8c5f-3e62ef4d0ee4": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "c0608c60-861c-4cd9-a1a9-9fea905071a8": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "0d099429-95d2-4840-ba59-318a8ee9059f": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "eafe5494-d208-4f66-936b-d7d4b90974b0": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "d7155b1e-4fa1-492a-97bf-562458259350": {
             "en": "PREALARM",
@@ -76940,36 +76941,36 @@
             "tr": "FAULT"
         },
         "e7a094ed-ac7c-47c0-95e9-152b6ca2a117": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "f2bcbbd7-9ecb-44f8-969e-d15b540fe08d": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "6c821d00-286a-4cf3-a8b9-d1f2c4a457f9": {
             "en": "NORMAL",
@@ -76988,116 +76989,116 @@
             "tr": "NORMAL"
         },
         "b9caed99-3e93-4d34-887b-9e5a4ba051b7": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
-            "pt": "CHAMBER_DEFAULT",
-            "ro": "CAMERA_IMPLICIT",
+            "pt": "CHAMBER DEFAULT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "63e9517b-2eab-4883-b6db-9141420ca008": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
             "pt": "LIMPAR AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "d556fbfd-dfdc-4ed4-b79a-ec243f6ceff3": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "654fdb38-f845-4c55-8a19-f21ffa55fb85": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "4703620b-44d7-400a-9f7a-7c0e3b484395": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "2efd2b13-673d-4351-8e79-1593dbfda341": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "6556a990-3661-4fa2-872e-80b2334bbf1d": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "ff3791b5-72c4-4590-8a80-76e542fbcb58": {
             "en": "PREALARM",
@@ -77340,36 +77341,36 @@
             "tr": "FAULT"
         },
         "6b45b35a-9ed9-4428-8d01-cb874a894eda": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "c9223dbb-db75-4a16-916a-386e1c22e5ea": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "55770e86-457f-4037-b250-a7621a2a06fe": {
             "en": "NORMAL",
@@ -77388,116 +77389,116 @@
             "tr": "NORMAL"
         },
         "8c5c3352-b038-4d2c-ba5c-b7bcfc6633d6": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
-            "pt": "CHAMBER_DEFAULT",
-            "ro": "CAMERA_IMPLICIT",
+            "pt": "CHAMBER DEFAULT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "e0da35a6-ece9-4fdf-960d-13aea2adabeb": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
             "pt": "LIMPAR AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "af77510f-4f7d-40ab-afba-606b3f045ad1": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "d72356f6-c6c9-432e-92e3-1a73a65121a9": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "c27471cd-0738-4723-a0ec-b5a49c9f825a": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "944dc612-7d67-4857-941e-1880f8cb972c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "a04486ea-770f-4f80-b21c-718f2c099c80": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "71c885a9-7ec9-4353-9ad7-c9f569155fb2": {
             "en": "PREALARM",
@@ -77772,36 +77773,36 @@
             "tr": "FAULT"
         },
         "4aa5c78c-c13b-4595-8d2d-d1e2d8836f14": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "30bc39c9-3cc1-4bc9-86cb-f5a27788a61a": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "9992ae4c-f969-4cc7-8862-9a28d432ea48": {
             "en": "NORMAL",
@@ -77820,116 +77821,116 @@
             "tr": "NORMAL"
         },
         "55a7ebcc-425c-47c7-8e76-7eee2b9bc5bb": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
-            "pt": "CHAMBER_DEFAULT",
-            "ro": "CAMERA_IMPLICIT",
+            "pt": "CHAMBER DEFAULT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "1d75d6fb-08e8-44d5-98d3-a9c06c1af242": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
             "pt": "LIMPAR AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "f33775c7-15a3-418f-a3fd-08cf84b5aaf8": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "e5193720-5859-470b-99ee-480b85960e60": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Стоп зумер",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "3f604a0c-3e58-4716-9936-ff4a00934c2b": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "64a5529e-01ac-47ba-a296-f1d5e2bf5b36": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "7e4fd546-5941-4a9f-9674-c0f8439d1c6f": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "e0aac664-60d1-4a3c-8a98-e6d5cc7fc15a": {
             "en": "PREALARM",
@@ -77996,36 +77997,36 @@
             "tr": "PANIC ALARM"
         },
         "51ab7e0c-f5aa-491c-9cd0-e2c92e34ebe9": {
-            "en": "LOOP_DEVICE_IO_FAULT",
+            "en": "LOOP DEVICE IO FAULT",
             "bg": "Повреда вход/изход",
-            "fr": "DEFAUT_ES_DISPOSITIF_EN_BOUCLE",
-            "ge": "LOOP_DEVICE_IO_FAULT",
-            "it": "LOOP_DEVICE_IO_FAULT",
-            "nl": "LOOP_DEVICE_IO_FAULT",
-            "no": "LOOP_DEVICE_IO_FAULT",
-            "pl": "LOOP_DEVICE_IO_FAULT",
-            "pt": "LOOP_DEVICE_IO_FAULT",
-            "ro": "LOOP_DEVICE_IO_FAULT",
-            "ru": "LOOP_DEVICE_IO_FAULT",
-            "sp": "LOOP_DEVICE_IO_FAULT",
-            "sr": "LOOP_DEVICE_IO_FAULT",
-            "tr": "LOOP_DEVICE_IO_FAULT"
+            "fr": "DEFAUT ES DISPOSITIF EN BOUCLE",
+            "ge": "LOOP DEVICE IO FAULT",
+            "it": "LOOP DEVICE IO FAULT",
+            "nl": "LOOP DEVICE IO FAULT",
+            "no": "LOOP DEVICE IO FAULT",
+            "pl": "LOOP DEVICE IO FAULT",
+            "pt": "LOOP DEVICE IO FAULT",
+            "ro": "LOOP DEVICE IO FAULT",
+            "ru": "LOOP DEVICE IO FAULT",
+            "sp": "LOOP DEVICE IO FAULT",
+            "sr": "LOOP DEVICE IO FAULT",
+            "tr": "LOOP DEVICE IO FAULT"
         },
         "51ab7e0e-f5ee-380c-2bd2-c1c81a24abe8": {
-            "en": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
+            "en": "LOOP DEVICE OUTPUT TYPE ERROR",
             "bg": "Грешен тип на изхода",
-            "fr": "ERREUR_TYPE_SORTIE_DISPOSITIF_EN_BOUCLE",
-            "ge": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "it": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "nl": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "no": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "pl": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "pt": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "ro": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "ru": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "sp": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "sr": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
-            "tr": "LOOP_DEVICE_OUTPUT_TYPE_ERROR"
+            "fr": "ERREUR TYPE SORTIE DISPOSITIF EN BOUCLE",
+            "ge": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "it": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "nl": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "no": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "pl": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "pt": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "ro": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "ru": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "sp": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "sr": "LOOP DEVICE OUTPUT TYPE ERROR",
+            "tr": "LOOP DEVICE OUTPUT TYPE ERROR"
         },
         "b133be81-c9f6-4e65-95aa-9ced49e521a7": {
             "en": "Type",
@@ -78668,36 +78669,36 @@
             "tr": "FAULT"
         },
         "9947689e-efb3-4b42-877d-8307da7bd0ff": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип",
-            "fr": "ERREUR_TYPE",
-            "ge": "TYP_FEHLER",
+            "fr": "ERREUR TYPE",
+            "ge": "TYP FEHLER",
             "it": "TIPO ERRORE",
-            "nl": "TYPE_FOUT",
+            "nl": "TYPE FOUT",
             "no": "TYPEFEIL",
             "pl": "ZŁY TYP",
             "pt": "TIPO DE ERRO",
-            "ro": "TIP_EROARE",
+            "ro": "TIP EROARE",
             "ru": "Неверный тип",
             "sp": "TIPO ERRONEO",
-            "sr": "GREŠKA_U_TIPU",
-            "tr": "TYPE_ERROR"
+            "sr": "GREŠKA U TIPU",
+            "tr": "TYPE ERROR"
         },
         "afacf49c-2a4e-4cba-b9fd-04365ff7ba67": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес",
-            "fr": "ADRESSE_DOUBLE",
+            "fr": "ADRESSE DOUBLE",
             "ge": "DOPPELTE ADRESSE",
             "it": "Indirizzo duplicato",
-            "nl": "DUBBEL_ADRES",
+            "nl": "DUBBEL ADRES",
             "no": "DOBBELADRESSE",
             "pl": "ZDUBLOWANY ADRES",
             "pt": "Endereço Duplicado",
-            "ro": "ADRESA_DUBLA",
+            "ro": "ADRESA DUBLA",
             "ru": "Двойной адрес",
             "sp": "DIRECCIÓN DOBLE",
-            "sr": "DUPLA_ADRESA",
-            "tr": "DOUBLE_ADDRESS"
+            "sr": "DUPLA ADRESA",
+            "tr": "DOUBLE ADDRESS"
         },
         "acb44b67-9ff6-4b7d-a448-9e79908234a8": {
             "en": "NORMAL",
@@ -78716,116 +78717,116 @@
             "tr": "NORMAL"
         },
         "981399c9-ca0b-4f0c-a001-85a09b15becd": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера",
             "fr": "DEFAUT CHAMBRE OPTIQUE",
             "ge": "FEHLER RAUCHKAMMER",
             "it": "RIVELATORE GUASTO",
-            "nl": "KAMER_STORING",
+            "nl": "KAMER STORING",
             "no": "KAMMERFEIL",
             "pl": "USZKODZENIE KOMORY",
             "pt": "CÂMARA PADRÃO",
-            "ro": "CAMERA_IMPLICIT",
+            "ro": "CAMERA IMPLICIT",
             "ru": "Неисправная камера",
             "sp": "CAMARA DAÑADA",
-            "sr": "GREŠKA_KOMORE",
-            "tr": "CHAMBER_FAULT"
+            "sr": "GREŠKA KOMORE",
+            "tr": "CHAMBER FAULT"
         },
         "27293f8f-1fc4-46a1-9457-af9caf9731ad": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера",
             "fr": "NETTOYER MOI MAINTENANT",
             "ge": "BITTE REINIGEN",
             "it": "PULIZIA DISPOSITIVO",
-            "nl": "CLEAN_ME_NU",
-            "no": "RENS_MEG_NÅ",
+            "nl": "CLEAN ME NU",
+            "no": "RENS MEG NÅ",
             "pl": "WYCZYŚĆ MNIE",
-            "pt": "LIMPAR_AGORA",
-            "ro": "CURATA_MA_ACUM",
+            "pt": "LIMPAR AGORA",
+            "ro": "CURATA MA ACUM",
             "ru": "Загрязнённая камера",
             "sp": "CAMERA CONTAMINADA",
-            "sr": "OČISTI_ME_SAD",
-            "tr": "CLEAN_ME_NOW"
+            "sr": "OČISTI ME SAD",
+            "tr": "CLEAN ME NOW"
         },
         "e9b83b34-567b-4ded-8250-7bbfd22f4399": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация",
-            "fr": "ALERTE_DÉRIVE",
+            "fr": "ALERTE DÉRIVE",
             "ge": "ABWEICHENDER ALARM",
             "it": "RIVELATORE SPORCO",
-            "nl": "DRIFT_ALARM",
+            "nl": "DRIFT ALARM",
             "no": "KOMPENSERINGSVARSEL",
             "pl": "ALERT DRYFTU",
             "pt": "Alerta acumulado",
             "ro": "ALERTA DE DEPASIRE",
             "ru": "Граница компенсации",
             "sp": "FRONTERA DE INDEMNIZACIÓN",
-            "sr": "KOMPENZACIONI_LIMIT_SENZORA",
-            "tr": "DRIFT_ALERT"
+            "sr": "KOMPENZACIONI LIMIT SENZORA",
+            "tr": "DRIFT ALERT"
         },
         "174fed38-b0d4-4bdb-96ab-737d35a93dab": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Стоп зумер",
-            "fr": "BLOQUAGE_SIGNAL",
+            "fr": "BLOQUAGE SIGNAL",
             "ge": "SIGNAL BLOCKADE",
             "it": "BLOCCO SEGNALE",
-            "nl": "SIGNAAL_BLOKKERING",
+            "nl": "SIGNAAL BLOKKERING",
             "no": "SIGNALBLOKKERING",
             "pl": "BLOKADA SYGNAŁU",
             "pt": "SINAL BLOQUEADO",
-            "ro": "BLOCAJ_SEMNAL",
+            "ro": "BLOCAJ SEMNAL",
             "ru": "Блок. сигнал",
             "sp": "SEÑAL BLOQUEADO",
-            "sr": "SIGNAL_BLOKIRAN",
-            "tr": "SIGNAL_BLOCKAGE"
+            "sr": "SIGNAL BLOKIRAN",
+            "tr": "SIGNAL BLOCKAGE"
         },
         "ce88a803-e41a-4dbb-b63b-4eb5ccd32132": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал",
-            "fr": "SIGNAL_HAUT",
-            "ge": "HI_SIGNAL",
-            "it": "SEGNALE_ALTO",
-            "nl": "HI_SIGNAAL",
-            "no": "HØYT_SIGNAL",
+            "fr": "SIGNAL HAUT",
+            "ge": "HI SIGNAL",
+            "it": "SEGNALE ALTO",
+            "nl": "HI SIGNAAL",
+            "no": "HØYT SIGNAL",
             "pl": "SYGNAŁ WYSOKI",
-            "pt": "SINAL_HI",
-            "ro": "SEMNAL_MARE",
+            "pt": "SINAL HI",
+            "ro": "SEMNAL MARE",
             "ru": "Сильный сигнал",
             "sp": "SEÑAL FUERTE",
-            "sr": "PREJAK_SIGNAL_LINIJSKOG_DETEKTORA",
-            "tr": "HI_SIGNAL"
+            "sr": "PREJAK SIGNAL LINIJSKOG DETEKTORA",
+            "tr": "HI SIGNAL"
         },
         "da1a7e59-6830-46df-9bbf-f7294cabcf0c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход",
-            "fr": "DÉFAUT_ENTRÉE",
+            "fr": "DÉFAUT ENTRÉE",
             "ge": "FEHLER EINGANG",
-            "it": "GUASTO_INGRESSO",
-            "nl": "INGANG_STORING",
+            "it": "GUASTO INGRESSO",
+            "nl": "INGANG STORING",
             "no": "INNGANGSFEIL",
             "pl": "AWARIA WEJŚCIA",
             "pt": "Avaria entrada",
-            "ro": "AVARIE_INTRARE",
+            "ro": "AVARIE INTRARE",
             "ru": "Неисправность вход",
             "sp": "DAÑO DE ENTRADA",
-            "sr": "GREŠKA_ULAZA",
-            "tr": "INPUT_FAULT"
+            "sr": "GREŠKA ULAZA",
+            "tr": "INPUT FAULT"
         },
         "7a24dca6-63a6-4a19-969a-ffa7ea68305b": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход",
-            "fr": "DÉFAUT_SORTIE",
+            "fr": "DÉFAUT SORTIE",
             "ge": "FEHLER AUSGANG",
             "it": "GUASTO USCITA",
-            "nl": "UITGANG_STORING",
+            "nl": "UITGANG STORING",
             "no": "UTGANGSFEIL",
             "pl": "AWARIA WYJŚCIA",
             "pt": "FALHA SAÍDA",
             "ro": "AVARIEIESIRE",
             "ru": "Неисправность выход",
             "sp": "DAÑO DE SALIDA",
-            "sr": "GREŠKA_IZLAZA",
-            "tr": "OUTPUT_FAULT"
+            "sr": "GREŠKA IZLAZA",
+            "tr": "OUTPUT FAULT"
         },
         "a9df032b-59ab-4365-9a6a-1e793335e7f6": {
             "en": "PREALARM",
@@ -80004,8 +80005,8 @@
             "bg": "Няма"
         },
         "c25c86e7-eced-49c5-8e76-9e4b1d34d8f5": {
-            "en": "PERIPHERY_DEVICE",
-            "bg": "Периферно_устройство"
+            "en": "PERIPHERY DEVICE",
+            "bg": "Периферно устройство"
         },
         "969d9471-9fe5-4929-88af-04024124605d": {
             "en": "Peripherial device address",
@@ -80016,7 +80017,7 @@
             "bg": "Вход на периферно устройство"
         },
         "f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca": {
-            "en": "LOOP_DEVICE",
+            "en": "LOOP DEVICE",
             "bg": "Кръгово устройство"
         },
         "49b8709c-694c-4b5d-a659-e2250acb5793": {
@@ -80396,7 +80397,7 @@
             "bg": "Тип сигнал"
         },
         "a39a088d-f5a7-41ea-a006-92df9e4dcef5": {
-            "en": "ONE_PULSE",
+            "en": "ONE PULSE",
             "bg": "1 импулс"
         },
         "cd13751d-7f60-4f46-b843-fb1248e5a6cf": {
@@ -80420,8 +80421,8 @@
             "bg": "Няма"
         },
         "a2bd4100-aefc-4b90-81e8-dcd8b086fe21": {
-            "en": "PERIPHERY_DEVICE",
-            "bg": "Периферно_устройство"
+            "en": "PERIPHERY DEVICE",
+            "bg": "Периферно устройство"
         },
         "240e7082-a0f4-43b5-8190-1bbc818e5364": {
             "en": "Peripherial device address",
@@ -80432,7 +80433,7 @@
             "bg": "Изход на периферно устройство"
         },
         "9eaf1efb-fcb1-4c80-a708-b15cfd3b0a8f": {
-            "en": "LOOP_DEVICE",
+            "en": "LOOP DEVICE",
             "bg": "Кръгово устройство"
         },
         "ce1fc302-4577-4ceb-ab86-5bffc5b75c6f": {
@@ -80580,7 +80581,7 @@
             "bg": "Повреда"
         },
         "b9f75118-c89d-4c34-87d2-99ca0805b986": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "5d5dbb98-32ce-4c00-8936-35ee3bd2cf1d": {
@@ -80612,7 +80613,7 @@
             "bg": "Повреда"
         },
         "701427da-0d4d-4961-a658-bb1e5f0fbb86": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "ed7e4320-3433-4ed2-bf0f-d962ce6f8bc4": {
@@ -80644,7 +80645,7 @@
             "bg": "Повреда"
         },
         "3df88860-159c-418a-8906-cdab88b760c8": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "5db7a638-5ff8-46dd-9689-fa397839a126": {
@@ -80672,7 +80673,7 @@
             "bg": "Повреда"
         },
         "f08fabc4-79a4-4ba4-9bb5-7ff365eb53da": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "b69889c4-7b6c-43f0-b8d6-8b4f59f168d2": {
@@ -80700,7 +80701,7 @@
             "bg": "Повреда"
         },
         "ce8eca2e-4023-4cae-a60e-b5427664dc14": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "49eb5b8a-0a50-4286-ade7-130c21789a09": {
@@ -80728,7 +80729,7 @@
             "bg": "Повреда"
         },
         "4067624e-0a98-4c90-b352-56ec30248678": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "47c2e485-5655-4b02-ad48-83fe5c2f17df": {
@@ -80756,7 +80757,7 @@
             "bg": "Повреда"
         },
         "bcf58915-5203-4c0a-a0bb-2c07551ba1c5": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "98e2817a-530d-446a-af00-e2d4d67dbbad": {
@@ -80784,7 +80785,7 @@
             "bg": "Повреда"
         },
         "336cf1a9-229c-4c27-ac31-a0a97e179001": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "aefcc93c-ed87-4c88-83d3-7fb507ce66b1": {
@@ -80812,7 +80813,7 @@
             "bg": "Повреда"
         },
         "f2cbd426-a1c1-48cb-842f-830d6954fe8f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "6c3dcbde-e8a2-4934-8d00-ac89d589fdfa": {
@@ -80840,7 +80841,7 @@
             "bg": "Повреда"
         },
         "44f36c19-bbf3-476c-a427-8e8fd5091731": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "eaa2c894-8e03-42a8-b684-b5788259208a": {
@@ -80868,7 +80869,7 @@
             "bg": "Повреда"
         },
         "82f8e351-b425-40a2-976b-8faa6262384f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "b300f7a5-aa80-4c6e-8f90-f524270a3183": {
@@ -81496,11 +81497,11 @@
             "bg": "Повреда"
         },
         "61dafdbe-0a73-48fe-9e66-eb097fa77b31": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "052e4e39-8306-4f9d-b938-1f98319858c7": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "ec8051f1-9327-40bb-9172-60a2c296410f": {
@@ -81508,31 +81509,31 @@
             "bg": "Нормален"
         },
         "7b69d8ba-5d5d-48f1-a24e-1063efe77895": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "7422abb2-3be2-4209-837c-408d7fb460c9": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "38434680-ec7e-4833-9ca8-e6752e1661fa": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "18c02e44-dfb2-433e-b095-401d0a7d9d7f": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "7d8b919d-0f0b-4ee5-a8d3-21e77bdcb1ce": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "d2c33ff1-4c7d-40d2-97ea-010d07d69706": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "3d87884f-d8bf-473e-9d2b-11c8eaf91fe2": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "1c2a663b-5d95-4b03-8316-b93a14e3b59d": {
@@ -81592,11 +81593,11 @@
             "bg": "Повреда"
         },
         "e382f346-5e53-4ff2-aeed-44599b5aadb8": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "f9a1ec0f-5baa-48ac-a1f8-091f8e58081f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "fc0cd5bf-2fd5-4628-a4cf-678032cf2cfa": {
@@ -81604,31 +81605,31 @@
             "bg": "Нормален"
         },
         "4e508c07-0cd3-45bd-acbf-d971eb1e4111": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "37af9d5c-c118-4d62-86aa-05ce1e2b0ece": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "f15a9518-8a80-4e7c-b7f5-ad03d0d3e761": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "0b9258f0-08d8-466d-bf51-02b3c7cb49ab": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "8f746ff9-1632-424c-ac43-20bc7ef2deba": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a03d89eb-3448-440e-aaa5-1327d813dab4": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "c07444db-0df8-4d62-8e46-5fcf815d2403": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "56e910e7-58db-4313-8c55-0a154e0fcd71": {
@@ -81688,11 +81689,11 @@
             "bg": "Повреда"
         },
         "1f3c37e5-4e8e-4e30-be9b-3e3ced9b624e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "1cc1346a-42cf-4def-b257-fe2272cadb23": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "1b0c66e0-8a92-4ae5-9f45-7c9a81e27eff": {
@@ -81700,31 +81701,31 @@
             "bg": "Нормален"
         },
         "6936a0f0-69a9-48f8-a1de-6a29cfbc017f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "be605fb9-52b6-4732-b27a-161709ebb1bf": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "deb51179-4151-4cdc-909a-5d245d5dd2fc": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "73078802-9d64-481c-a303-20ff42e867b6": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "25b4c457-54cf-4bed-936f-1c4b791dc415": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "de081410-e5b5-4e03-bb0e-36bff52393ff": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "bd8c16d9-924b-41ad-8276-61f30bde5fd2": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4fe2cbe8-6547-4794-a3d1-cb0ab8464181": {
@@ -81784,11 +81785,11 @@
             "bg": "Повреда"
         },
         "965e7523-1fde-43ed-90ef-47d77c87af2e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "8e538389-a554-4084-b904-20d8e81618d0": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "d10f2547-2447-4a5c-8db4-afb393843a78": {
@@ -81796,31 +81797,31 @@
             "bg": "Нормален"
         },
         "fff6423e-421a-4fb0-b0d5-8ed5b890afaf": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "edfefb01-a526-435a-87d2-ce8c2fa12179": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "c65af825-bc08-4121-9177-ab18d1d0102f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "78b7d703-bfc8-41a0-ba31-617277f6a629": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "1840d671-1350-45ce-b39b-993d05e47658": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "1d6969a6-ff93-4a62-a94c-12ca79b6c403": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "3840fdde-b283-4480-ab30-31ab7c4c65c8": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "989413c3-6711-4639-bd04-580007ddbe58": {
@@ -81872,11 +81873,11 @@
             "bg": "Повреда"
         },
         "a57131c6-ddcf-4679-92e0-a4fba718289c": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "1bd1a8a2-ee39-4881-8404-0b5c738f655c": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "ab8a33c8-7a4e-4bca-b636-cd07c558f074": {
@@ -81884,31 +81885,31 @@
             "bg": "Нормален"
         },
         "4b8b69ce-7e0e-4133-ba0a-2c13df1d4dda": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "ed511a6f-71c0-4879-8029-697f7b183bd5": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "7fb4c090-18e1-4e96-b808-ebe852a82639": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "5f32bb28-456a-432a-8321-e7bcc43a1fc2": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "59088b33-c503-42a9-b862-8d6f91feec2d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "aea7f15a-6d1c-4cba-a1fb-e62876b50520": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "978155c7-ca7a-40bb-a552-dafe12df9bc3": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "83eab00a-9bb4-46a7-8d40-2e4a09966bb3": {
@@ -81960,11 +81961,11 @@
             "bg": "Повреда"
         },
         "0a3ff7b3-291b-4af3-9794-522d6bceefc9": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "c02c5ed3-9572-4116-bc2d-5edaa0f86721": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "265b3538-b154-4abf-9038-04c7c7db169f": {
@@ -81972,31 +81973,31 @@
             "bg": "Нормален"
         },
         "8cce2177-412a-4e58-8507-16b4a3ff274d": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "3c7682b8-8d5f-4dc4-bc62-dc029405cdb9": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "09cda93b-bbb8-451c-a22b-6bf6a76c7b94": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "4c4bc2f0-2f6d-4dec-bb59-51eb179779a3": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "004399f0-bf45-40e7-9323-4676198f25d8": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "6a3d36ce-0d5f-4942-88c4-206d71408539": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "5eb872ce-157b-4715-b4ee-3a6fe9a8286a": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "8c9f04df-1491-425c-9b4f-5074dc3dda66": {
@@ -82048,11 +82049,11 @@
             "bg": "Повреда"
         },
         "74c0f217-6d27-4aa9-bac8-9fb2dce52c4c": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "c48d32ce-532f-45b2-a73b-73d93e15d898": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "50154f79-6858-4c90-8f9b-8fdf9b059676": {
@@ -82060,31 +82061,31 @@
             "bg": "Нормален"
         },
         "b32a2100-d6d4-4a4f-a314-87dea6520e1f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "0e3583ac-e8e1-471c-8ff4-72bc68d579cb": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "edc03248-6f05-4a21-9af4-193b80b8de5b": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "a38de8b8-7a6c-4ab4-bd8e-9104f7da5196": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "27e4bcf9-0c4c-4888-92f1-d174e46d0d37": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "9dfe7182-93f4-42a9-ad5e-8f1fc175090c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "f5fd25e1-a47b-4856-99a5-0b06c0b2b913": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "2db5a65a-4434-404e-9df5-afc5a677e41b": {
@@ -82136,11 +82137,11 @@
             "bg": "Повреда"
         },
         "e70ec184-b41f-448b-960e-4561284bc76a": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "b345c814-fe1d-44e0-8a26-535e75138ee6": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "60a211ff-bcc8-432a-8e69-74e301b4840e": {
@@ -82148,31 +82149,31 @@
             "bg": "Нормален"
         },
         "f9a87526-ae44-4449-a334-6e6f1813fd1b": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "bd85b14d-8b05-4a55-b340-555321d3ac46": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "724b4942-d7dd-4b20-961c-bccd4244294f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "c45ac88f-f6bc-4610-9f73-e0c277933cec": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "78774830-16f3-4f16-b2d6-5e5ec476a787": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "4541f245-f45b-4495-ba88-283f0db10665": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "df63872b-4540-4446-b95e-d265a406227a": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "22ab99c3-1d3f-4874-91be-950beea44981": {
@@ -82224,11 +82225,11 @@
             "bg": "Повреда"
         },
         "5d691732-7c3e-4cc0-8048-9e8b819d45dd": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "91a50e2c-2b90-40d2-8c9d-fa4ede3534c5": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "7e0e1ec1-536f-4e1a-8acf-4caeba03a459": {
@@ -82236,31 +82237,31 @@
             "bg": "Нормален"
         },
         "5fb80fe9-61e2-4262-af5a-6ffccbc5efa5": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "1c797d74-5d1a-4d2d-86ce-9abfbbdb12fc": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "9d85d451-8af4-4922-bf71-992243d2b2eb": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "8825ce90-0449-4548-b586-fe58b88962fa": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "afc4dfdc-ec31-429e-9562-ba635c97f7f6": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "50fb417e-9d7d-4351-93fb-dbfbf7cf166c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "29a3f3f4-f7f5-40fa-9919-b0e6c2e17270": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "ab15d33c-ad42-4e4b-883d-16663b7a135b": {
@@ -82312,11 +82313,11 @@
             "bg": "Повреда"
         },
         "3bc8ad3a-6baa-47d8-bd8e-f68dc4702b0d": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "4527700b-fd83-4ac1-810c-64bc1c95abcf": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "7c90423c-ec4a-46d2-8af4-eb112747dd41": {
@@ -82324,31 +82325,31 @@
             "bg": "Нормален"
         },
         "0718c852-5c7c-4162-af34-785f3f65b5fa": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "2488f55f-65a5-4a42-8268-ba6ab0f31fbf": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "a8b06270-e874-4e4e-8f3f-8ed042590ca9": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "d8d3775c-c61a-4a10-938a-c3a122de0032": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "3f48d1cf-8fba-4c66-9673-8b9c8442ce3f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "5c32e85e-d1e3-4377-bf8d-594560ecb8d4": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "225590bc-4200-4026-9d7a-26aa48178f10": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "78a0733e-60cd-475e-b1ae-bc39be358070": {
@@ -82400,11 +82401,11 @@
             "bg": "Повреда"
         },
         "e77a1ecd-b69f-4aad-9da3-63be24108fb6": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "e392313d-d6b6-4726-bb1e-bd4b9f7dc6f4": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "29f1bfa9-d324-4b0d-9252-8674a3594dee": {
@@ -82412,31 +82413,31 @@
             "bg": "Нормален"
         },
         "2d311082-0cd7-4b86-bdf8-208f7851692a": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "50f93e83-9072-4332-aa9f-cc8cb0e869d4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "47b43db9-ea4c-4d8f-b478-3a4851b71be9": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "07583958-87ba-4e10-9a7d-7bebccbdf0e9": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "d2577908-7f20-4766-b313-e47481867b40": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "72b8729b-bd3c-45a6-a49d-d8f65580137e": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "25580ce6-5595-4893-9258-b1edd89e8959": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "22371fae-53a7-45cc-bb73-6c00a2497069": {
@@ -82496,11 +82497,11 @@
             "bg": "Повреда"
         },
         "777a87dd-f4b0-479a-b9bf-9c4d15f46a16": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "ebe6cdb7-b0e4-41d4-9aed-94ea93458022": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "fa976221-51d3-4a5b-8848-c159b0889a20": {
@@ -82508,31 +82509,31 @@
             "bg": "Нормален"
         },
         "5aec5c90-e551-4814-a9f1-205b5a0dce7a": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "e4b4cbe5-b151-4da8-b950-fae297285c0b": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "a8d6deab-8a60-4dfb-bd45-9d30dc27afda": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "63368bb4-e3cc-4684-b385-b72ce5238e60": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "068d3191-2a8f-403f-b460-7d04ae1d50b5": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "6da0467d-c467-4872-8793-8a77d06d584c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "50a46992-6e10-4010-b577-5dcbf0cf7738": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "7c31fb50-cfe2-48e1-921a-ce557411a74d": {
@@ -82584,11 +82585,11 @@
             "bg": "Повреда"
         },
         "ac32f817-2560-4f5e-855f-a0fc895657fa": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "1af1d550-595a-45b0-98f8-1789324222df": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "03c82e9c-b825-4991-96ae-31685836db61": {
@@ -82596,31 +82597,31 @@
             "bg": "Нормален"
         },
         "db6af569-0aed-4de4-bc9d-acba8a7b9026": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "f88cfa23-631e-4af6-a598-1cfe021c1b4d": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "823837c1-49ab-4b21-8ee3-9dee9f30494c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "34d7fd6a-3576-4a70-a866-fd553dedb18e": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "d026314a-807e-4144-80c6-6e0210813037": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a821f807-8662-4221-96d6-751aac4afd49": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "2bef60be-914d-47f4-888b-1e1a4dc5eda1": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "647170c9-4078-4312-a985-a6278a96aae2": {
@@ -82680,11 +82681,11 @@
             "bg": "Повреда"
         },
         "0cab24ba-d13f-43ef-98c4-f39296c46e46": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "81b1a840-9821-481f-b881-40f1f44bba27": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "ebcbef69-713d-4480-a5c6-42d2dc16776b": {
@@ -82692,31 +82693,31 @@
             "bg": "Нормален"
         },
         "fa5ecba8-21ac-4aee-b39a-54b2a58d4b8e": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "41de2784-e2eb-49c9-b6ac-bf65baf804d2": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "9318d933-cbaa-4b3a-b313-21f198a47bfe": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "3bb0a484-c606-4ce0-8f66-aeea6d68e742": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "580aaca7-f45c-44da-9d0d-84ccad6e3c6a": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "e1dd2eef-9e5e-4d3c-a4ec-2cfcebf7fd5f": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "9e47c1f6-523d-4196-b75c-65398bc58c80": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "37a6637c-6a84-4767-a550-2ba4d90b9e4f": {
@@ -82776,11 +82777,11 @@
             "bg": "Повреда"
         },
         "1eef8675-117d-42af-a5c0-81a634c4423c": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "6c91fb84-bc73-4005-ac5d-81e12a4eae9b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "2311acf8-85c6-4623-b67a-010199bce10c": {
@@ -82788,31 +82789,31 @@
             "bg": "Нормален"
         },
         "5cc8a530-303e-4529-a9b7-46b0d80d4908": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "b26d6900-fe6d-4f65-97ff-ffcf30005a97": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "51ff0081-c75d-4de0-9f08-19c78bfed385": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "79798005-4f73-4f46-96c1-0c3b2ddd4710": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "e98fb9f2-2538-4bfa-9753-3970409ab46f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "6c1e3585-da5f-438f-9d1a-b8bd45c94e7d": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "bee3a4ae-2e83-4f20-af47-0b4a0a290dff": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "e3b880b0-f69e-4aee-a7b3-ec1fd0b9b5e0": {
@@ -82856,11 +82857,11 @@
             "bg": "Повреда"
         },
         "dbc0654a-ae60-4e48-8043-87a05960b441": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "b1a9a8bc-76e9-4ccd-ab55-20de63eb4df9": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "a3f59f96-036b-477b-97af-748d3ce94613": {
@@ -82868,31 +82869,31 @@
             "bg": "Нормален"
         },
         "3708ed88-65d9-4192-a1a8-61af29b100b2": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "d39a1238-18e7-4a94-9089-c8d33ebb1032": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "48f3143d-8520-482e-bf5f-990d4242290e": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "0b608b8e-d089-4af4-a835-cfc1235aff13": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "24c56fe2-a000-4542-afd6-6a416a984b82": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "dc026083-5599-41ae-8425-3fcdcb06b4b2": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "ac48eda1-79e0-43cc-9f5a-5ca64b1a4243": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "b65e3620-4d26-46c2-8fb6-ff73c07ffef5": {
@@ -82936,11 +82937,11 @@
             "bg": "Повреда"
         },
         "c2534a93-d7e3-47ba-b9c0-4f03e658f564": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "8736578f-fd20-4f77-be3b-a45892780425": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "f95becb5-4d95-44a2-9c6f-47200616d41f": {
@@ -82948,31 +82949,31 @@
             "bg": "Нормален"
         },
         "f7edc6a1-f912-43af-b07b-e3f7edd5aedf": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "5452131c-0334-46db-a0bd-6056ee984986": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "59803fe3-2c43-4956-bfd5-8d614a28aefe": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "ebeb91f2-4d23-41bd-a257-3c2b5551c055": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "bba320f8-dbee-4ab8-95d0-89c7218240fa": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "fc6c2a3e-fd5c-43e7-a728-b1ccf9a6d306": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "637d086b-a00c-4ae7-84d9-563f8eddc395": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4df3cbd0-49c9-45ae-bb9c-68592f337043": {
@@ -83016,11 +83017,11 @@
             "bg": "Повреда"
         },
         "64c1be30-ed14-44ff-8907-524f2266fcc1": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "180122a9-2c30-47e5-a2b9-aeae0efc4077": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "060bede6-c272-41fe-8fba-a7efe4e590a2": {
@@ -83028,31 +83029,31 @@
             "bg": "Нормален"
         },
         "a686c288-73f3-4650-a3d1-7fe5f84b3962": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "b3f26221-2bd5-4a4c-95d4-f155e1244cf4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "02ac47d6-5332-4661-becf-dbad6e1318f5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "559ae5c6-12a3-4e91-ad8d-c955397f2392": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "677c6c63-0eaf-438a-8edf-a8f6edfe1e46": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a672f71d-9634-4fea-95d4-e88d473b88ba": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "6c4ca0c1-419f-475a-b185-817b51253577": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "8f99407b-7c04-45c2-b1e5-1e03148f068f": {
@@ -83096,11 +83097,11 @@
             "bg": "Повреда"
         },
         "6a6ab48f-0b3f-49b2-9be3-af49d4de1de0": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "0229ee92-43ca-481c-9f7a-9b3cb14c74e6": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "2c5f9754-b0e3-4c01-a73c-39b37e8735d1": {
@@ -83108,31 +83109,31 @@
             "bg": "Нормален"
         },
         "dfdbe8a7-9cff-4a8e-a020-f36ba30276fd": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "158473cd-5348-454d-bf54-2886e6377a58": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "0fb907e1-9d56-4012-80e1-d61219ffd7e5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "b329c978-b844-43f2-a010-498002a87c07": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "618ccc4c-0817-436f-a6cf-a6cd2b51e0f5": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "f88d9b98-0d75-4a19-ab48-d6894b7a6a63": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "eb754088-af47-4086-b673-0b12d76cd315": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "5f4b11c1-d34c-45e9-af82-76d7c96d5e8b": {
@@ -83176,11 +83177,11 @@
             "bg": "Повреда"
         },
         "14cf95ab-d297-46cb-8f62-88029f411f36": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "7857da4c-b421-4b4b-abf9-725ddadd60cc": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "4d58ea67-3a35-4de7-bbf7-b0c83e551774": {
@@ -83188,31 +83189,31 @@
             "bg": "Нормален"
         },
         "1fbb59d1-d0a6-4204-999b-80da25326a81": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "953e92f3-6b53-44ee-b593-a1d1d6a8549c": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "f1024d6c-702e-48b5-b9ee-2d2c32361012": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "72a1281a-f6d7-4e97-977c-5c5a4e352827": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "75d9b0b7-aa3a-4f22-a654-6f293f514496": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "b9d63a36-db50-4a2e-a35b-ec3005e6b710": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "781a8a88-0db1-4152-9a12-69defb452efb": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "c22e2d4a-52c2-444d-9861-4db1819155cd": {
@@ -83256,11 +83257,11 @@
             "bg": "Повреда"
         },
         "88a1f6f3-e835-4007-828a-fca638c1c740": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "4434b8fe-10ad-4b65-8053-64e2cf4294db": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "84892707-590e-4562-a5c3-9e232eca9902": {
@@ -83268,31 +83269,31 @@
             "bg": "Нормален"
         },
         "215dc7d5-3201-40eb-8291-04957153ce9f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "02635e04-808a-4952-a341-a777a8bad5de": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "a909f8ad-0f7e-47b5-be26-88057b24fff2": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "7c6f24b9-e802-4a06-80ed-fdd3a8e03fec": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "bfd52941-12fa-4a3c-9dcb-797bdcba80c3": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "fbd2aca6-a71b-499d-8425-01a2d25dafc0": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "196f5de5-e1a3-47a6-bbbf-70a199fe9c62": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "12c75b62-4ed9-4448-92b1-4cb3bd2e8f09": {
@@ -83336,11 +83337,11 @@
             "bg": "Повреда"
         },
         "19b71928-e240-4129-9358-64405d875e49": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "2b895b9f-444f-4531-ad8e-dfe80990dff8": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "af718094-d180-489d-a012-2ccd1c9247e8": {
@@ -83348,31 +83349,31 @@
             "bg": "Нормален"
         },
         "52451d73-9cd9-41a8-8b0a-62cf36fc5aea": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "cf8c7f9f-762e-42e4-846d-c84aec698a5b": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "efcea835-cb94-444f-9b43-5d264f7b4abc": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "a8409e6d-dde3-4de5-af6c-c84cae187123": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "bb63a4cd-c158-4769-911a-a48d4e1e5c8b": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "baaa342d-cb06-4560-9c34-13439d0a3530": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "9bbbe60f-8be7-4efb-9467-8544a5bef80d": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "51667e7c-3d1c-423b-b3ae-cf2aac9e125b": {
@@ -83416,11 +83417,11 @@
             "bg": "Повреда"
         },
         "20275730-7bd2-4d7f-8b6f-272580893c57": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "378d66ba-b992-45bc-b9a2-5381969c498a": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "ccbf6997-c8d3-4d2a-89b8-9276ca4168d6": {
@@ -83428,31 +83429,31 @@
             "bg": "Нормален"
         },
         "aae7b041-1653-4029-b5f3-0baaf77429ac": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "01b1efaa-ec4e-47af-ad6c-7b068b7f9198": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "f4fffdb4-e5e1-4faf-a41e-e1f892b0f7a5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "d30ac809-575c-4270-b86a-02913676cd50": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "f9372a7a-8292-40e0-8e85-b9beb215d4b9": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "4b8ebf1d-264f-49fc-a111-cc830cbb0340": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "a42c76be-28e7-4b03-896c-51ed936d2026": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "e210e047-376e-4f22-985b-de517b1b3297": {
@@ -83496,11 +83497,11 @@
             "bg": "Повреда"
         },
         "cecd1bc0-f1dd-4891-91b3-241316b703b6": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "49a9110f-7da1-409c-b826-4a5a93b4e460": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "001eee7a-f584-4e0e-832d-9307ae5983df": {
@@ -83508,31 +83509,31 @@
             "bg": "Нормален"
         },
         "41348f33-fcd5-4ce4-8572-02ebccb8c31f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "e855b0b9-32f3-487f-9f22-feb966985d34": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "c1f022ec-c2ea-4f75-9870-9e7154a47434": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "24b1b802-2e37-4e94-8361-0aa0c250940c": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "a9c6c821-aff2-4fb5-a6a0-2f6c7aaa8162": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "0881367e-e560-4d1e-94f2-589bbec423e3": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "a5328413-7440-4df1-9620-81b51666ab9d": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "6a59b8d8-e1c7-4ac0-90a8-d85c9665f87d": {
@@ -83576,11 +83577,11 @@
             "bg": "Повреда"
         },
         "72b47c81-82f9-4be5-bf4f-5306dfb8d5cd": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "2f49680f-bb73-44ea-a6b8-88f2da1056a5": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "454650a8-c211-4327-8790-a698d2411a01": {
@@ -83588,31 +83589,31 @@
             "bg": "Нормален"
         },
         "9e9e5866-414f-4888-96bd-621a41d78f80": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "786399c6-ae91-474a-958c-1963b4270d95": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "bfab7df9-627d-43ff-8211-c603c4bdd590": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "7c91ced7-e7b9-4e42-9e3e-e68bed750c30": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "0860f93f-223b-4d3e-8da5-9a10163688c7": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "f25529f7-b58d-4033-8e42-d8198fb9b963": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "a0d921e6-abb3-47c4-b578-914323548b20": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "8a94583e-18a2-4fd2-9e12-4edc98306a03": {
@@ -83656,11 +83657,11 @@
             "bg": "Повреда"
         },
         "7a24ae41-6bf9-4708-9d4e-33ecf8586f7e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "26a0aa2b-2805-4dbd-bcfa-ae977c46cb4f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "7c288421-7ebe-402e-97d9-7e467fed431a": {
@@ -83668,31 +83669,31 @@
             "bg": "Нормален"
         },
         "8c828798-c305-4905-9ea5-ba8369bd9aea": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "06fe52f2-d807-4980-9433-00c6094ec28c": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "4ee58717-f574-4f5f-a8e4-e91a5b787384": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "0a454990-b0a9-4e3c-8dca-8562d4331ea1": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "4ee720f3-7624-43ff-80fa-8276150ec800": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "77058098-ee92-441e-bb51-8ca9995e2048": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "b9ef13cd-01ff-4d95-bad0-9bf80156dce0": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "e53a3663-d13f-4a76-9a94-d0fae815fe07": {
@@ -83736,11 +83737,11 @@
             "bg": "Повреда"
         },
         "e5ae29b6-1b54-4c31-9f6d-2cca5f17dfe2": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "ea8613ec-faa9-4d09-b620-334a221bdba3": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "fc020c40-f6b0-4c36-9177-733345e84885": {
@@ -83748,31 +83749,31 @@
             "bg": "Нормален"
         },
         "d9937124-1cb1-499e-bb4a-e22f08f6562c": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "95c50531-2c51-41aa-9922-c9c0ce7ac1df": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "77ead75b-3afe-404f-acca-b7ff33c62cd2": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "96d1bd00-d98c-478e-92cc-2a4b6a3c85e2": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "ff88a244-a446-43c4-92d2-248536823420": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "64b3a8e1-6c95-4e2d-8f05-50d33487304c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "4a2aefc4-c0a8-46b4-bb8f-ee4843543609": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "5b062951-977c-495e-8cb1-213a832ff1f2": {
@@ -83816,11 +83817,11 @@
             "bg": "Повреда"
         },
         "3fa3843e-35db-4f83-9ac9-00396e9708b8": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "ad362d17-f4c0-4d2d-8c13-564a6601ab42": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "8928ed8f-f4f4-4be0-b1ac-8fabeb36d8f2": {
@@ -83828,31 +83829,31 @@
             "bg": "Нормален"
         },
         "8e2832cd-06c9-4188-80fb-0dd7b47b2ba5": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "e006cd09-f581-469b-9c1c-5dc73c99d094": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "3d92e82e-a180-425f-beac-f7e567d2225f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "918f0614-8c3d-40bc-8002-faa9069e7785": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "91d04a88-ec5f-48d3-9015-42fe91a3adb9": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "b7c3d0f8-c698-4475-ae8a-a962505c4ad6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "5f920ca9-7544-49ed-84f0-d2c1d5ff77ac": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "cdcec1e4-1589-4f40-812f-f8242dce1f3e": {
@@ -83924,11 +83925,11 @@
             "bg": "Повреда"
         },
         "db3a3d3a-e1ad-42e9-91a2-c93a23d2996e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "fffd6df3-3897-48a8-9df2-31c3178ce732": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "86984449-0263-48ff-bee1-0e9b0d222b92": {
@@ -83936,31 +83937,31 @@
             "bg": "Нормален"
         },
         "0e85f75c-2c98-40f5-9cea-45f9156a6ccf": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "41a151e0-1873-40ee-a34f-e1253c721e98": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "51e329a1-f958-4ec5-9cdf-50f70a9ca860": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "85fdb74b-3bba-43a2-9eef-6f7efd117252": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "9f4e8152-6734-4d35-9782-5fb55fbf328f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "5043059e-6f3b-471d-9e42-a78000023e60": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "febd174c-9e74-4419-8afc-2928294849ec": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "38551e29-11ec-4af8-a8bb-5c9b02154be9": {
@@ -84028,11 +84029,11 @@
             "bg": "Повреда"
         },
         "47ca80b4-8ac5-4c05-ad54-d540024853fa": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "bc33fa26-3ab8-443e-a872-be9912c192d8": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "851cf4d1-c695-438b-ba67-b582648c1271": {
@@ -84040,31 +84041,31 @@
             "bg": "Нормален"
         },
         "2293fbe1-b042-41f5-9a7e-b4cf1e8a07aa": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "93ea5b33-545b-45f4-8233-26c6c7f16d50": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "bda31a55-ec88-4d7f-84e2-65d70cb8ed3f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "5a3e11f9-c03e-4d02-8b63-65a918f0f8bc": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "8b627ac6-2196-4247-bc83-3e59872b00e8": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "e4e9e819-aa20-4790-89cf-16fb850ac552": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "8b38a809-39d4-4aec-830d-52c10f321dbc": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "65dcc3d3-3e55-4ff9-af42-0c13406af6b8": {
@@ -84128,11 +84129,11 @@
             "bg": "Повреда"
         },
         "d5ddaf68-d5df-4907-8815-0ef72ff6bf9f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "8af3027c-35b1-4b91-a5d1-257db09d6e36": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "bba293e7-9ffb-44bb-924b-77829c76cb23": {
@@ -84140,31 +84141,31 @@
             "bg": "Нормален"
         },
         "16956a07-bec5-4c9d-ac18-aab2d1c26748": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "9b4244d6-ed68-4255-88e4-eb78aa0a3b78": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "2c1e40a5-cd5b-4565-94ab-2a3eed0dd620": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "c10ff64b-5c0d-413e-857f-915947cb24ca": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "33f7169c-1e33-46dc-ae4f-5a52c9ae711e": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "683addee-1c2f-4a26-b7db-93c45fcd1e7f": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "6f072004-3afd-4a6a-be64-d7f27ab86794": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "2c778af3-5e40-49c0-b0c2-16799b6d83af": {
@@ -84340,11 +84341,11 @@
             "bg": "Повреда"
         },
         "8b1d4024-3e98-4a86-b710-6e9a0f0f11e9": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "89780eee-0bdf-4456-8d6c-6e7d79ce70dd": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "e990d1bd-d940-41a9-9a04-b9b32afec246": {
@@ -84352,31 +84353,31 @@
             "bg": "Нормален"
         },
         "910f0933-9d8e-4a36-bbb1-01adc9fcda4a": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "84333ae4-0dc9-4ab9-9ddb-c93cb5fed6e0": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "0c3b090d-6eed-4bf6-8dbc-83f9fe5e7034": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "4ac3ff4d-2fd5-4b67-8ace-55a8b8552e89": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "def1c524-231b-4cb2-a670-5fa35cb9ea7b": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "3daceb28-002e-4ea4-bed6-734bd857d941": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "82f798ce-4b11-4fdc-9887-81fc8a0751f7": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "a875cae4-db1f-4f3e-b8f5-708ab6ee2e8d": {
@@ -84556,11 +84557,11 @@
             "bg": "Повреда"
         },
         "5e1019c0-b1a7-476e-8b98-7bb200bbe9d2": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "699db1c6-14b0-499c-80ca-5bce9ed9fe70": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "011b2af5-6ec5-470f-86d7-286cb56be2ab": {
@@ -84568,31 +84569,31 @@
             "bg": "Нормален"
         },
         "772e111c-da53-4ae3-bebc-1b48fd5251ed": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "5c2bf0df-842d-44aa-be57-e9741283e69e": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "8267cbfb-d647-4b32-ac87-3f9414b5d411": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "1595e165-7516-4577-bcef-f04f99d0d969": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "9cfd3596-a774-45e8-bf3d-7b41f93f78dc": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "bf869031-24a4-41ca-a934-2f95d0503a08": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "d7de1bc4-b25d-428a-8e4b-a0aeea0f7b30": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4b31166e-581c-44c0-9e1c-69c7d80fecd9": {
@@ -84660,11 +84661,11 @@
             "bg": "Повреда"
         },
         "d740d6c6-6840-4a65-b473-3c26594cb1e8": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "9b0a6937-c3af-4b01-930d-c8c41f4b9a32": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "4ceb2ca4-40f2-447e-a2b1-4e2931204253": {
@@ -84672,31 +84673,31 @@
             "bg": "Нормален"
         },
         "17b210fc-9df0-41d6-a73f-1c0f828d7415": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "57febaac-9f35-4bc6-a0a3-e4f9835b2bef": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "06f3deb1-9c2c-4464-b2fd-4501b635e8b2": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "8ce6ad6d-4128-436c-9980-b253cc17ac51": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "50064257-0df6-4f21-84b1-f82ced6cbb9a": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a9728d18-967c-4057-8369-cccda5c8c1b9": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "ae1542f0-8bc2-4b3b-943d-ebef8110fcda": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "bf0ae534-1428-4a1c-abbf-8cdf05c2c2ea": {
@@ -84764,11 +84765,11 @@
             "bg": "Повреда"
         },
         "92d26e63-5037-4e68-9566-458f2aa5714c": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "7ec18c0a-e857-4fbd-95ee-d6e443d3a573": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "23cc69b0-45e5-4a71-b885-4c40215abde1": {
@@ -84776,31 +84777,31 @@
             "bg": "Нормален"
         },
         "b870ef6a-e21e-4f57-a0b2-a3440e18b57a": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "ae84b781-3f23-49ad-99ea-4f21412b6541": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "57deb58d-835a-4c61-8e8a-0dd0bd821712": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "be198ffe-7473-4d5a-974c-559e19d4e241": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "74e16a1a-1695-4079-8e7b-ca842e691607": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "7b356a7d-19b0-470d-aa5d-6dc9ba192567": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "4ed4e7f3-2362-422f-8edc-486c9277bbe5": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "9f2a90c2-d8e4-4ad6-aa01-8b32cfd43331": {
@@ -84864,11 +84865,11 @@
             "bg": "Повреда"
         },
         "43b0e661-e7e6-4d89-941a-702e0b60e1de": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "ca1d0710-78c9-4a95-aaed-5414adb4ddb2": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "1ffa3a48-9209-4a7b-9003-5f260f103a14": {
@@ -84876,31 +84877,31 @@
             "bg": "Нормален"
         },
         "228a383a-4251-4810-bcd8-53709dd0b26f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "01d2f637-47df-4709-adbc-f36df15cace2": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "2d9cec81-6558-46a1-84c0-279b814b9f9a": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "52378ee0-3f8d-4f84-a205-3417fdb43e49": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "02d3bd22-607a-4423-86a7-d1165e717f15": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "1148b374-e6a8-4838-a18a-0277156b2ad6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "00a79d16-1ffd-4173-939b-3ae7a05f63dc": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "14ce6109-a54d-4c83-82c9-3d42f07fb8f2": {
@@ -84980,11 +84981,11 @@
             "bg": "Повреда"
         },
         "aff18f36-a905-4679-a3c3-7d136d58943d": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "bbfd3db2-b514-4824-8866-970890cb2c2b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "b7e09899-879f-4d6a-a738-c4fa2b5d3682": {
@@ -84992,31 +84993,31 @@
             "bg": "Нормален"
         },
         "ec50716a-f435-49d3-8b53-f54712656590": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "d09a8167-be86-4ba8-8b04-bdb146d91648": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "cb5601b8-85f9-40f7-979e-5d5fac54b519": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "fcf147e1-b69b-4461-bdaf-834276371bc9": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "ce6a756a-896c-4283-af6f-660d8ae9f7fb": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "11cbb5bc-16ae-48bd-b10c-22e1a5197f27": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "c4026f0f-21d2-40a7-b707-62fc120ef5d1": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "486eaba5-d4b8-41d2-bde3-fc940f1b2f85": {
@@ -85196,11 +85197,11 @@
             "bg": "Повреда"
         },
         "24661a17-cfa3-41b7-8345-e505ca88b594": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "547cf601-d9da-41ca-b324-c8e11746127b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "c3d8b121-cdf6-49e5-87f2-4284f861470d": {
@@ -85208,31 +85209,31 @@
             "bg": "Нормален"
         },
         "264ed7bb-4dd0-4f7c-989c-a3a2c7bb8b7c": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "86a57968-ffda-46e2-86d4-a7931e5ebb9d": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "036c43b8-4c0d-49de-ae91-b3bc2c166c05": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "79b19cc5-edc6-4ab5-8b98-7cb0429ee1d6": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "7fbd3ed3-051f-42df-9eba-bc83c7bd6cab": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "7bdab6dc-a886-4c4a-a501-bc9b47d9956d": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "1de2e1aa-e281-4191-bde0-08ed2dfd31f6": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "1ea7c9fb-9bec-4334-8055-779930f991e4": {
@@ -85296,11 +85297,11 @@
             "bg": "Повреда"
         },
         "0d6f58de-c1d2-41f3-bb7f-bc4c9382612d": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "9f90b34b-f671-476b-9b6f-a5d26da299e2": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "99911ab2-26b6-4336-978f-9eaeb0e865ec": {
@@ -85308,31 +85309,31 @@
             "bg": "Нормален"
         },
         "40e628ff-4c66-47d0-973a-bfbe6a1e845c": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "2c9a9189-904b-4cab-b1a0-4feef5e55185": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "7f2e2713-3cb1-46ce-89e2-403b54752cb3": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "749658c1-759c-4cf7-a8f1-a8ea8fa1f8cc": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "0da80a3a-a9ad-4d09-97a9-0c4b40fb7805": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "305d0c82-d3d4-482a-bddb-5e52b754160d": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "a4c65271-4aca-4fc2-a388-ae6ad9911e15": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "6fdf4821-61c7-4ed3-901b-72e2304d8cb5": {
@@ -85428,11 +85429,11 @@
             "bg": "Повреда"
         },
         "31605e48-88f1-497d-a727-0298ba48dd75": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "8b2dc586-032d-47ba-8cbf-570ad80b7834": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "ebeb5c0e-11fc-4619-a684-61bb1204907d": {
@@ -85440,31 +85441,31 @@
             "bg": "Нормален"
         },
         "3b682d3e-aa21-45c0-98b8-ffd8388f0d21": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "43a01bba-43fb-4e6c-be2d-f7095bd22583": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "3561d4c6-9dd1-41c3-9cf9-66b7b556d79c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "0279f94b-6a93-4c4a-ab67-71a1e43f2466": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "c3744e37-9017-40e4-8cfa-1ff8037611ae": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "82533a2e-b65b-43f2-8339-e899eff18134": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "7d88a6d7-23b8-4b5c-b22d-0350cf2efa67": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "b98bb09b-b935-4b00-9cf5-db7c84b112b7": {
@@ -85572,11 +85573,11 @@
             "bg": "Повреда"
         },
         "5934d2f9-8a5b-4b93-9b6a-29b68fe05f7a": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "6ec8a514-3c79-4599-b170-bce9887d27a8": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "a9e2d274-71e2-4e51-857c-3e39ef5274c4": {
@@ -85584,31 +85585,31 @@
             "bg": "Нормален"
         },
         "b0ad3e6f-3d58-45d4-8130-9e7d41b79e47": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "dcc72dbd-c4f2-4d0f-8fa2-03deff747a35": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "b8a53952-cc54-4f92-a123-5a5dba47adcb": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "fd438ed5-8a93-40d2-b774-5d3ae8ad3e62": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "e61d6906-75ce-4169-9498-55f038f7e199": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "1acbfbfe-0b0c-41a0-9583-562658842510": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "f2d847b0-1744-46b1-ba39-fc29e2a41cad": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "765832c5-66e2-40c6-a91a-4bfa5a942575": {
@@ -85716,11 +85717,11 @@
             "bg": "Повреда"
         },
         "312e9903-a7f9-441c-9fb2-4617696a9bef": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "6f36e9ae-d92e-447f-be05-eded59f8f3c8": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "f7cd8428-ac57-4fd1-8a00-e828309b045e": {
@@ -85728,31 +85729,31 @@
             "bg": "Нормален"
         },
         "a9eb4485-d886-47cf-babd-30c9c3923339": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "4538e3af-1744-430f-9ddd-6a461706b331": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "5d7212b4-78df-4ad1-a955-7d699a2a061d": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "2deced86-5148-4df0-a39d-4b1afc4571b2": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "e9adafec-4908-498f-a22c-bf061e7ed6f7": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "f6084299-b336-48f3-b1b9-9cb8d07440d1": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "37cfb245-abe5-4b35-be4d-39e9aef158f2": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "cecd28d3-5d98-4d79-aae3-61a48b3fb9a3": {
@@ -85872,11 +85873,11 @@
             "bg": "Повреда"
         },
         "fde6afb1-8482-454e-8048-75d53d0cc597": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "a604d4b0-bbb9-4726-b60a-ff5650dae193": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "20ebfab4-a0e2-4761-b64a-f3b3200030fe": {
@@ -85884,31 +85885,31 @@
             "bg": "Нормален"
         },
         "42c4d1b2-d794-4c7a-971c-fd5d401efcd0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "2eb920e3-1dfe-4bf9-929e-1f1851b8be1d": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "cf325741-0ee5-4677-87a3-32afe6e76e4f": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "a677f184-0196-4ac8-9c36-c54b09e0818d": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "9aca2124-9a57-4d0f-8a2c-cd1f68b282e7": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "8ea917df-a9fe-4d76-b4c3-2d1d4ebc1c41": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "21838f2b-0a86-44cf-b2e9-c9ff4d51fa56": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "79cb0eab-0881-45bd-978a-82db6643b38f": {
@@ -86028,11 +86029,11 @@
             "bg": "Повреда"
         },
         "609301d2-c897-4112-b0d5-cdc9fc2b3f2a": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "4457c1a3-24aa-4242-a6f2-863edaf98272": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "19762c58-7a5f-48dc-a24e-c0777ce3762c": {
@@ -86040,31 +86041,31 @@
             "bg": "Нормален"
         },
         "35e47e34-0db1-43ce-b96c-855a43ab6dad": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "4ca8ee30-2a66-4cf7-954f-70035304cf84": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "e134d774-6695-44cc-b622-cf901ab721f5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "eb988f67-5a74-4c5f-8167-31d5393e7318": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "d5f63d93-becc-4491-b86b-6ce018e70666": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "5434caed-192a-40e8-9488-9827ad5ce1d6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "f0911f51-3fcb-425f-9fc8-d72b94b48748": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "43e33efb-e5bf-47bd-98a0-eadc5707c119": {
@@ -86224,11 +86225,11 @@
             "bg": "Повреда"
         },
         "ca37fcd2-2145-4bff-85a1-7727947a8b75": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "38bca3c4-716b-4929-892b-e12bddc30759": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "aeaae6bd-69da-4101-b0eb-3987489dfee6": {
@@ -86236,31 +86237,31 @@
             "bg": "Нормален"
         },
         "51140fd5-1202-49b5-96e0-c9772670ac47": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "c37512ac-24f0-4b6f-b1b8-ef3ae647a144": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "31ccd402-b179-4e25-9b8d-58d855a089c1": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "84792bf2-1d38-42b1-81d2-0db630a6aa19": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "939a41f2-b256-4708-bb41-bbb9b3afcaa5": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "3fece46e-787f-4e6e-a56f-a186979520a8": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "d342354f-f9a2-454e-8465-574678ae1ee9": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "ab8fa7af-11c8-437f-a9f9-6915ec1bba3f": {
@@ -86420,11 +86421,11 @@
             "bg": "Повреда"
         },
         "9d909891-e625-4c1c-aa76-42979e1fa7bf": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "62a0144d-1621-45cd-a269-00fc617617cf": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "1bf4752f-7338-4501-a8b5-df2c3fa529a5": {
@@ -86432,31 +86433,31 @@
             "bg": "Нормален"
         },
         "787f9b9d-857e-4a49-9405-824b8ff9a1cd": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "16a9d010-0ae1-49f4-aef5-3ef197cd1690": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "43d08d40-a3d4-4ea1-8873-1818dd864909": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "a7f5475d-2d2f-4ece-a1b1-e2d0fcd45ecb": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "c8dc799a-6bf2-4905-aa94-ea69542ffe73": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "4ef83fca-b9b6-445e-a2f2-b99dfa293364": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "dda150a3-e71c-451f-bc1d-46f534d917df": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "2e33533a-d473-4f51-82e0-0c891a5b09c9": {
@@ -86520,11 +86521,11 @@
             "bg": "Повреда"
         },
         "c8cf98f3-043a-4ee0-88cc-182f06dc0033": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "2ca86110-20a8-414a-ae67-561fcd05cf07": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "b505d9af-e801-4bed-b958-7c179576fdf4": {
@@ -86532,31 +86533,31 @@
             "bg": "Нормален"
         },
         "b00d285b-e1cb-4d22-a890-a208c07c6f3b": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "b2bea402-d5e6-488d-b7db-c2db0f2da73c": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "e7cecd48-71d1-4f5a-9af0-09312d61aa81": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "80c42dc4-9d4f-4acd-8aca-00c0a1b63254": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "1bb90cef-45e2-4df2-9016-27dabf8791fd": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "33f1456b-4e8a-45f9-9099-93d8cea9d8b3": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "f33efdf7-7b7b-4b49-af45-2c47c89df6cb": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4db821b0-e217-4d53-885a-88b0c4837de9": {
@@ -86620,11 +86621,11 @@
             "bg": "Повреда"
         },
         "50a6e589-2c07-4170-b499-e0ae568b6db2": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "77c138d8-a39b-4213-84e4-d9159d9aab6e": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "5d311b2f-2ae8-41a3-ae24-eeca4ae65336": {
@@ -86632,31 +86633,31 @@
             "bg": "Нормален"
         },
         "f894719c-1308-4338-a5dd-34503639780d": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "7f8e3494-e33f-41c4-b3e0-00483890cd81": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "6598638d-4d2b-43ab-aa55-9b5e65bf03c1": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "f158e7e7-27dd-44a0-81c5-d6cf9f11c8f1": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "89786c78-0a0a-4e39-969e-efae6a3a80cd": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "b9e21332-88a7-494e-9c31-ef8c06ed5241": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "525a3bf5-8ac3-477f-8087-4d7b17163f34": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "0100ef4f-cb4e-4b83-ae90-994c3de43e07": {
@@ -86720,11 +86721,11 @@
             "bg": "Повреда"
         },
         "ebe6f003-e630-4349-87f7-b7fcc79a376e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "be5b2717-6361-4340-bc4e-420efc646aec": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "36916df9-0dae-40b0-88f2-8bff3a659297": {
@@ -86732,31 +86733,31 @@
             "bg": "Нормален"
         },
         "3dd6caba-5489-4243-9e70-bc83fdcbe760": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "ac08f3fc-10b1-4d31-89ff-9cf201b24422": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "e02d101e-1573-411c-af91-941b347ff09c": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "8b2fdf4f-6a90-4205-b2b8-279820ef5d7c": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "ebc49c5c-240b-49d0-aa71-97f6d800166f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "cc30776d-5a2c-422b-9228-a7292e4511a7": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "442282d9-8c11-4334-825b-3728133a408f": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "491c4942-f608-4401-ba0c-823dfe7a8e3a": {
@@ -86852,11 +86853,11 @@
             "bg": "Повреда"
         },
         "d8cca881-09c3-4070-b47b-b17e1347285a": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "b212b253-858a-4cf1-ae61-629b5cb9f46f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "3682a3d2-121c-40f8-a95c-bfe227f0dce4": {
@@ -86864,31 +86865,31 @@
             "bg": "Нормален"
         },
         "a9512510-9993-4cd5-a30b-081c861c829b": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "2e6dd86b-8658-40e0-b9a1-c7462eac6eb4": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "39e537b4-6f12-459e-80ef-92174c249fc0": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "a8349473-f767-4438-9f9f-07103bb21099": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "d078340f-a56e-46bf-98da-1d730d90d32a": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "27d8e751-0083-4bba-b3f4-1cade8ed8978": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "6da4e2dd-5e3f-42bf-a776-8815ad70c575": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "d8773686-262c-4a42-b4fc-dcbd271fd07f": {
@@ -86984,11 +86985,11 @@
             "bg": "Повреда"
         },
         "179aff1f-cfae-44f9-ad15-29459696e24e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "c367b358-abf0-4429-be40-bd92314a6180": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "608459ed-a87c-4c6d-b394-dfb7c0e4962f": {
@@ -86996,31 +86997,31 @@
             "bg": "Нормален"
         },
         "fa5650d1-3938-4c43-9582-e039b28eae83": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "2c74a98e-d354-4419-b123-9ae9b7d6b42c": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "8ea44fd9-3556-4f0b-b758-ed6976c82587": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "37e49429-9aa4-443d-8700-4da721e5458f": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "e95dee75-3c7c-45f2-bb85-01f5eaf38abe": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a2446060-871e-415f-9a71-47fc5e12b422": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "e8834bfa-72dd-4f8b-9c87-adb690b9a0c2": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "33c96ddd-bf42-4a78-a44a-7598ba79662e": {
@@ -87100,11 +87101,11 @@
             "bg": "Повреда"
         },
         "c766b8ea-9164-46c0-bf6a-8f6ca3f1a79f": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "cdfcaba0-5062-4165-853e-0e56c607c522": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "d2149e42-9d1a-4fba-abce-557aca759e56": {
@@ -87112,31 +87113,31 @@
             "bg": "Нормален"
         },
         "427ed758-12bf-42ba-9282-56134591e542": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "e24a1af9-fceb-4208-a22a-d36bab9a950e": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "0c2dbc76-7f0e-4e89-87c1-1eea6e181745": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "9b8058d3-0a19-418e-b73c-49528089adf1": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "8d000d9e-816d-458e-ba94-894687a6a245": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a0a18705-68b3-40b3-a126-e00b0fa29669": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "7dd0edcf-bfec-4671-8feb-c2ab0538f49f": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "50283592-3521-4669-96f4-4b34ac596293": {
@@ -87216,11 +87217,11 @@
             "bg": "Повреда"
         },
         "45e4f2ee-cf11-44e5-a127-64a1f4a1d527": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "00bd3bb4-7a3b-466e-b966-dbcbab65a61f": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "4a08726c-b8f5-47a1-affb-a10c6edba799": {
@@ -87228,31 +87229,31 @@
             "bg": "Нормален"
         },
         "883a0b41-3938-4d7f-8c43-f1d835dec448": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "40f76e15-bc2e-4cf7-a306-b5903a453425": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "58cf6e1d-2a58-4d04-a9ea-16d2be0138c1": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "88f02caa-a89d-4fd4-955a-b5384ea94376": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "c735859b-0b17-407c-b386-5de4d6e599fb": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "ed3bb4a6-f00a-4617-8483-85a5353a8567": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "101c7330-2e90-4bdd-9ac3-3fb812286ce7": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "fd5ede08-7708-4d04-97f7-a90771b26547": {
@@ -87344,11 +87345,11 @@
             "bg": "Повреда"
         },
         "ad02a3f2-5897-4d5d-af5e-8a4a855d31cb": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "69a78757-1f8a-4bbe-9df6-cc05a5eeb726": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "9032fd48-6b62-4a9a-8311-36328df96c2f": {
@@ -87356,31 +87357,31 @@
             "bg": "Нормален"
         },
         "d3fabe59-9eb6-4cfa-ab72-f7bdb3428f96": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "58494328-224e-41fd-bcb1-85090e822c1c": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "d05e844c-163b-44fc-8147-a6860888bd99": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "43e810e5-a64e-48f0-baa7-4e33438e2e08": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "9a463d3a-8b1f-48e5-a567-7bdcdf9bb096": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "3fa59f63-7be1-46f5-90fa-093b756c7ce1": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "6ef6ca1f-da4f-4966-9150-47289963ab08": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4e33a279-c730-46a0-89b6-c9687697a17c": {
@@ -87472,11 +87473,11 @@
             "bg": "Повреда"
         },
         "11c22724-06c6-426a-ad6d-69d76bffd726": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "3235b7cd-fb4f-4391-9dfd-98210afc42fb": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "f7cc9d6e-09dd-4ab7-8bc2-2d4930ced015": {
@@ -87484,31 +87485,31 @@
             "bg": "Нормален"
         },
         "7ba17cfe-ebd5-463d-82c0-8a6b6707c3eb": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "ae211477-2364-4cb7-92d9-c95f055031db": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "81b608f3-17bf-49d6-a257-c1bdd34d0591": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "607364bd-fbab-46a2-9169-0bcf64d69bc6": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "405fd2d7-fe2a-4712-8991-8c8744dc1a3d": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "d6fb91fd-a9a2-410d-a3c0-c8567119fccc": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "0b1bcb09-fe82-4d94-a9e9-0970f8df6b08": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "90a94291-3de9-4c6b-8d6d-146f8942b016": {
@@ -87576,11 +87577,11 @@
             "bg": "Повреда"
         },
         "7fcfcf5d-45c6-4549-bd3c-d5fbd8c7067c": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "4e8e6eff-0545-42ed-93dc-df54fcc33f4b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "629cea82-9c72-4691-b5b9-f705850331d8": {
@@ -87588,31 +87589,31 @@
             "bg": "Нормален"
         },
         "e92b8291-8657-4f13-a631-c6e80afd4bd0": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "5f1491cb-8e23-4ecb-8144-bc8d001adf14": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "e0ca878f-7fac-48ec-9007-d6646a7ae6a0": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "d2dd5e93-7745-44ea-941c-ff4167238070": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "be047fc1-2832-472c-81e3-933baae8e494": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "a00f2271-bd86-489d-aabf-7c13b972568c": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "b23baa57-1a67-459f-87e6-4119dde12e18": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "c96588b7-4207-4933-a69f-d1e6db59d0c2": {
@@ -87680,11 +87681,11 @@
             "bg": "Повреда"
         },
         "4dffd15a-17e8-44bb-8df5-a31d7c6651e1": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "6df78211-4d4d-411a-ac4c-1baac5adcbee": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "95628f5a-57f5-49ee-9d8f-749c63116fdf": {
@@ -87692,31 +87693,31 @@
             "bg": "Нормален"
         },
         "f7e45838-6d83-41a4-bf6d-e11a9ab160a9": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "2dbfb212-b076-45fd-b5ce-3a0485395d6d": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "66e8c766-fae3-45ca-844f-0921ff4961c4": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "54fa8e84-d2fc-4608-be85-81c576cf2fd6": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "1f7cbd46-24d3-426b-bd42-1fc7ebfc5fa2": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "ca884d2a-79e1-4d43-a8a0-ca7c318dc938": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "c28dc79c-bdac-420d-93c3-463f40163236": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "aed835c2-39ca-413c-b259-3ed330f4c87c": {
@@ -87796,11 +87797,11 @@
             "bg": "Повреда"
         },
         "1c7b159b-cce4-4cba-9340-01a929c377e4": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "e23809ad-2f02-4fb4-9fa2-72482e472263": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "290d8480-2e67-4123-b5b8-75d5e018a21a": {
@@ -87808,31 +87809,31 @@
             "bg": "Нормален"
         },
         "5138208e-c963-48c2-9aa0-0c200cf9d090": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "dd0d3611-bd6b-4b2c-a940-4d3e269365e2": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "b7b8502b-60cb-4bcf-bb29-4b9b7f6822b7": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "6b0e4133-2127-4a7d-b17e-5114e4cb4bb7": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "58aff13f-f1bc-4b23-ae18-96a53ec1faea": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "4b395f08-494e-4902-8c91-44f64759bb5e": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "bdd38a5d-7150-4152-8c34-403ce999ee1c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "94aa4a9a-e377-4f52-9747-5f51c09a7f00": {
@@ -87912,11 +87913,11 @@
             "bg": "Повреда"
         },
         "9b40d561-7077-4d1e-a346-0922c7a05d73": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "1e8b31c8-a1df-4daa-8d90-5dc05079ea95": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "5a79f3e8-5169-4eb7-8dfa-ee2d9dd956c0": {
@@ -87924,31 +87925,31 @@
             "bg": "Нормален"
         },
         "98e603ce-d6ad-4739-9fba-7d03f10d7fd4": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "a0484aa4-3b45-4616-b8c4-97eb7905b796": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "9805b437-6246-4c88-a0c6-6dcdb2167b70": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "9bb16245-2d2d-4b63-8609-856a2d99fd2a": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "d85cda8f-c981-4254-90f3-30dd94e214d0": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "bf2ee8d1-e8aa-4fb9-aca3-4afc78508007": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "444d3993-52dd-4f8e-8bd9-1340dbe54090": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "e3b86826-a20e-44e6-9fcf-b146e4144226": {
@@ -88040,11 +88041,11 @@
             "bg": "Повреда"
         },
         "c4ea273b-7d14-49af-8ea6-6be32c0ceeb0": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "c1c28fb0-ac13-4e6f-a717-dbebb254fd5e": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "76a0297e-73d5-45b2-83cc-a7830f0c6360": {
@@ -88052,31 +88053,31 @@
             "bg": "Нормален"
         },
         "7551a36e-aa9d-42b3-a917-4944a123cacf": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "8363d185-b95e-4c14-a319-3f43a9ef2214": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "8466d05a-3268-4137-993a-4f2db6755476": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "af0ed516-70ae-4860-b700-e7a4e687c2a8": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "e277cfd3-46c0-4300-8610-a60efe2f695f": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "bd68717d-4667-4aff-840d-49ae88e49eee": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "4ece2c57-0a2e-48c1-9164-840da3cc70cd": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "a10c53ef-d433-402d-95c0-7bd13a972571": {
@@ -88168,11 +88169,11 @@
             "bg": "Повреда"
         },
         "85217c13-4cfa-44aa-8878-e64b2c62a0e9": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "7ad8f803-8275-49a7-9146-98abd372fde8": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "dc059074-3541-4541-b329-32abf2508f95": {
@@ -88180,31 +88181,31 @@
             "bg": "Нормален"
         },
         "149d93d6-3383-42b0-9963-79641de9738f": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "5f817624-78f7-46a2-b34d-d369b7566a9d": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "4fcdf562-44df-4cfe-a0f8-c8390dde56c5": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "ca650b62-bd73-4920-9e45-81f70dc69a4d": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "807ba1b9-c986-4e3a-a2db-210c3be48cb5": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "9448f8d0-3092-4b93-8244-881cc3f178c9": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "c645a4ce-c3fc-49e2-87d4-3217b6c7f76c": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "47e363f9-bf1b-4121-8936-7d52b26a5611": {
@@ -88272,11 +88273,11 @@
             "bg": "Повреда"
         },
         "e14f41c8-b508-4447-b07d-d8c82f4e7eed": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "0a564a4c-69f9-4913-8a39-a47532639b25": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "d5898fbb-a31c-4cff-9c58-ce8fbdd6e862": {
@@ -88284,31 +88285,31 @@
             "bg": "Нормален"
         },
         "567e42f4-b780-40f8-96b5-c3b201bd0aed": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "0ba2fd5b-a416-4ab7-8393-be2e001a17f1": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "4dbd4e43-f67e-4eb3-92a5-60f543a17e38": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "d43ed34e-bb54-40c3-8a35-74772cb09f88": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "63affe1f-cb38-4b21-b23c-a3416a8f2a81": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "b94a1221-49cd-41be-a0d6-2d179a134d18": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "e21ccb28-db54-4f6c-9476-970ee743f8fb": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "38aba280-2678-447f-874e-464f7a03f057": {
@@ -88376,11 +88377,11 @@
             "bg": "Повреда"
         },
         "e3559f14-c6ba-4d47-bc3e-89691d963c82": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "14b6c697-a14f-41da-9844-8d98804358cf": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "b9128078-6893-4069-ad53-37b8a09dfdbf": {
@@ -88388,31 +88389,31 @@
             "bg": "Нормален"
         },
         "057aacea-1bad-4b9d-94b8-4329dfa74b55": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "1f4bacaa-27ca-4ab0-8b82-5aa99f035366": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "f1780ee0-3e32-4840-82c4-9c778ba7a83e": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "25e49a18-b4d6-45cb-8271-1411b1c02e25": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "9534c10f-73d4-469c-8585-ca4b7668d7e7": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "c8d43687-fdcf-40ed-b327-a9c5e4d96271": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "1790e1f3-64c8-46b7-a9a4-05cb9b5ee3ef": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4ae70177-26fd-4ae6-bcee-d50c1229807b": {
@@ -88476,11 +88477,11 @@
             "bg": "Повреда"
         },
         "38901d2a-edc3-4264-9d19-82c19d9ced3d": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "62d6ff53-091d-4b51-ac8d-f484047da174": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "b9a86afd-cc8c-46f2-b259-d0c13da08f40": {
@@ -88488,31 +88489,31 @@
             "bg": "Нормален"
         },
         "2c7d6be2-c06d-47a4-9dd1-3f44fe7b5576": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "511846ab-e7c7-4638-9e3d-44f829b3a274": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "90985f43-db82-47e0-ba49-ec8682966aa9": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "e949a02e-d0e7-45b7-b6a4-4332318b7530": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Блокиран сигнал"
         },
         "a05c5e81-ca5c-4da3-91b9-54d52b7dc5b4": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "92636dfe-7bf1-40b0-a9b8-c8a0a26c1ee6": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "47e6d655-ecbf-430a-ad7d-eed5fe5eb971": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "51154720-5c1e-4497-9c23-8a706af8d4e8": {
@@ -88584,11 +88585,11 @@
             "bg": "Повреда"
         },
         "464de1c7-4443-4392-b008-640fbf38ed0e": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "a0baa755-a253-4420-8812-6e80c514641b": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "ad774b33-7eb8-4707-8542-eb335ca2c83c": {
@@ -88596,31 +88597,31 @@
             "bg": "Нормален"
         },
         "3249fad3-07c6-4533-a301-400809d57cac": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "cb315c7e-d0f0-4a02-a1b5-8e09573815ad": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "8fee9d93-eb2a-47dd-a484-aaffc89d2376": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "9c64aec2-9e35-4881-8c4b-f9b67418236e": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Стоп зумер"
         },
         "87b12d3c-bdc0-4694-81ff-641106559a95": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "e0d7df2b-2359-4899-be65-c1399e9e9d09": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "a1291881-ea9d-43aa-aa3f-70e71f32a93a": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "4447a698-0404-48cb-a6a1-8eea5b4a27f6": {
@@ -88640,11 +88641,11 @@
             "bg": "Паника"
         },
         "9366a148-0b50-41a8-81bc-90fe05c97ae3": {
-            "en": "LOOP_DEVICE_IO_FAULT",
+            "en": "LOOP DEVICE IO FAULT",
             "bg": "Повреда вход/изход"
         },
         "8b6c5a72-4bd4-48f2-9a33-4eede393a726": {
-            "en": "LOOP_DEVICE_OUTPUT_TYPE_ERROR",
+            "en": "LOOP DEVICE OUTPUT TYPE ERROR",
             "bg": "Грешен тип на изхода"
         },
         "29d9a48c-2c76-4b0d-b615-cac092fe47d6": {
@@ -88808,11 +88809,11 @@
             "bg": "Повреда"
         },
         "75afeef7-bc57-4a8c-92d1-207b2ec4de46": {
-            "en": "TYPE_ERROR",
+            "en": "TYPE ERROR",
             "bg": "Грешен тип"
         },
         "97244315-0cd4-4e0c-ae42-95dcc3c69375": {
-            "en": "DOUBLE_ADDRESS",
+            "en": "DOUBLE ADDRESS",
             "bg": "Двоен адрес"
         },
         "6475d4a1-cdb6-4a80-9fba-234ad7a508f8": {
@@ -88820,31 +88821,31 @@
             "bg": "Нормален"
         },
         "866a7991-52f5-4c2c-8f20-9ebd694f3b9d": {
-            "en": "CHAMBER_FAULT",
+            "en": "CHAMBER FAULT",
             "bg": "Повредена камера"
         },
         "ab943d8d-7969-407b-8d9f-fe48788a9e5a": {
-            "en": "CLEAN_ME_NOW",
+            "en": "CLEAN ME NOW",
             "bg": "Замърсена камера"
         },
         "097ea8d0-1913-42cb-be2f-9a7db6a3bbca": {
-            "en": "DRIFT_ALERT",
+            "en": "DRIFT ALERT",
             "bg": "Граница на компенсация"
         },
         "2debb7f3-a2c3-40f6-8a70-695f1a08c2f0": {
-            "en": "SIGNAL_BLOCKAGE",
+            "en": "SIGNAL BLOCKAGE",
             "bg": "Стоп зумер"
         },
         "bfaad9d5-4568-4224-bda4-267e366ecd84": {
-            "en": "HI_SIGNAL",
+            "en": "HI SIGNAL",
             "bg": "Силен сигнал"
         },
         "314173be-d092-4371-8c75-11b4dd2568ce": {
-            "en": "INPUT_FAULT",
+            "en": "INPUT FAULT",
             "bg": "Повреда вход"
         },
         "23cf2154-2219-4a55-b54e-09e6f2fb2d15": {
-            "en": "OUTPUT_FAULT",
+            "en": "OUTPUT FAULT",
             "bg": "Повреда изход"
         },
         "0e8fd06b-4c31-4ded-a8a4-f5073d34cfdd": {
@@ -116078,79 +116079,79 @@
 
 /*-p transform -f
 "C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_BG.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_FR.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_NL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_PL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_PT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_RO.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_RU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_SP.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_SR.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts_TR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts BG.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts FR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts NL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts PL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts PT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts RU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts SP.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts SR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\translation\InterfaceTexts TR.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts_RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Bravo\Translation\InterfaceTexts RO.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_BG.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_RO.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts_SR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts BG.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse\Translation\InterfaceTexts SR.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_BG.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_RO.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts_SR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts BG.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse8\Translation\InterfaceTexts SR.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_BG.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_RO.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts_SR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts BG.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\eclipse8plus\Translation\InterfaceTexts SR.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_BG.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_RO.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts_SR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts BG.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse16\Translation\InterfaceTexts SR.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_BG.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_RO.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts_SR.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts BG.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\Eclipse99\Translation\InterfaceTexts SR.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts_EL.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts_IT.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts_RO.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts EL.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts IT.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseCore\Translation\InterfaceTexts RO.xml,
 C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts_GE.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts_HU.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts_RO.xml"
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts GE.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts HU.xml,
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\EclipseStr\Translation\InterfaceTexts RO.xml"
 
 
 -f "C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\IRIS\Config\IRIS.xml,
-C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\IRIS\Config\IRIS_BG.xml"
+C:\Users\vbb12\GitHub\Teletek\Programming Software Teletek Electronics\Configuration\IRIS\Config\IRIS BG.xml"
 -p dowhatever
 */

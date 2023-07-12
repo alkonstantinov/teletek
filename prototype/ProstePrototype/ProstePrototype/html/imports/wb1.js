@@ -400,6 +400,9 @@ function sendMsg(self) {
         }, false);
         el.firstElementChild.replaceChild(inp, currentNode);
         inp.focus();
+    } else if (self.getAttribute('topic') === "Delete") {
+        const panelId = self.parentNode.getAttribute('element').replaceAll("_", "-");
+        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Delete', '~panel_id': panelId });
     } else {
         sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': self.getAttribute('topic') });
     }

@@ -88,11 +88,11 @@
                                     </Border>                                    
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="bd" Property="Background" Value="LightGray"/>
+                                            <Setter TargetName="bd" Property="Background" Value="White"/>
                                             <Setter Property="Cursor" Value="Hand" />
                                         </Trigger>
                                         <Trigger Property="IsFocused" Value="True">
-                                            <Setter TargetName="bd" Property="BorderBrush" Value="#aabbff"/>
+                                            <Setter TargetName="bd" Property="BorderBrush" Value="#0064ff"/>
                                             <Setter TargetName="bd" Property="BorderThickness" Value="3"/>
                                             <Setter Property="Foreground" Value="Black"/>
                                         </Trigger>
@@ -102,51 +102,27 @@
                         </Setter>
                     </Style>
                 </StackPanel.Resources>
-                <Button Name="Button0" Margin="10" Click="Button0_Click">
+                <Button Name="Button0" Margin="10" Click="Button0_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
                     <StackPanel Orientation="Vertical">
-                        <Image x:Name="img0" Width="36" Height="36" Margin="0,0,0,10">
-                            <Image.Source>
-                                <FormatConvertedBitmap Source="Images\01.IRIS.ico"
-                                   DestinationFormat="Gray8"/>
-                            </Image.Source>
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="Images\01.IRIS.ico"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="{DynamicResource ScanMenuTCP}" TextAlignment="Center"/>
+                        <TextBlock x:Name="tcp_icon" Text="&#xe907;" FontFamily="{StaticResource ram_icons}" FontSize="28" TextAlignment="Center" Margin="0, 0, 0, 5"/>
+                        <TextBlock Text="{DynamicResource ScanMenuTCP}" FontFamily="{StaticResource poppins_demibold}" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Name="Button1" Margin="10" Click="Button1_Click">
+                <Button Name="Button1" Margin="10" Click="Button1_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
                     <StackPanel Orientation="Vertical">
-                        <Image x:Name="img1" Width="36" Height="36" Margin="0,0,0,10">
-                            <Image.Source>
-                                <FormatConvertedBitmap Source="Images\01.IRIS.ico"
-                                   DestinationFormat="Gray8"/>
-                            </Image.Source>
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="Images\01.IRIS.ico"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="{DynamicResource ScanMenuUSB}" TextAlignment="Center"/>
+                        <TextBlock x:Name="usb_icon" Text="&#xe91a;" FontFamily="{StaticResource ram_icons}" FontSize="28" TextAlignment="Center" Margin="0, 0, 0, 5" />
+                        <TextBlock Text="{DynamicResource ScanMenuUSB}" FontFamily="{StaticResource poppins_demibold}" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Name="Button2" Margin="10" Click="Button2_Click">
+                <Button Name="Button2" Margin="10" Click="Button2_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
                     <StackPanel Orientation="Vertical">
-                        <Image x:Name="img2" Width="36" Height="36" Margin="0,0,0,10">
-                            <Image.Source>
-                                <FormatConvertedBitmap Source="Images\01.IRIS.ico"
-                                   DestinationFormat="Gray8"/>
-                            </Image.Source>
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="Images\01.IRIS.ico"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="{DynamicResource ScanMenuRS}" TextAlignment="Center"/>
+                        <TextBlock x:Name="rs232_icon" Text="&#xe91b;" FontFamily="{StaticResource ram_icons}" FontSize="18" TextAlignment="Center" Margin="0, 0, 0, 8" />
+                        <TextBlock Text="{DynamicResource ScanMenuRS}" FontFamily="{StaticResource poppins_demibold}" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button Name="Button3" Margin="10" Click="Button3_Click">
                     <StackPanel Orientation="Vertical">
-                        <Image x:Name="img3" Width="36" Height="36" Margin="0,0,0,10">
+                        <Image x:Name="img3" Width="36" Height="36" Margin="0,0,0,2">
                             <Image.Source>
                                 <FormatConvertedBitmap Source="Images\01.IRIS.ico"
                                    DestinationFormat="Gray8"/>

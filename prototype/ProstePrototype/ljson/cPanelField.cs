@@ -284,6 +284,8 @@ namespace ljson
         {
             Dictionary<string, string> res = new Dictionary<string, string>();
             res.Add(path, sval);
+            while (Regex.IsMatch(path, @"~index~\d+?\.~index~\d+?"))
+                path = Regex.Replace(path, @"\.~index~\d+$", "");
             string path_noidx = Regex.Replace(path, @"\.~index~\d+$", "");
             string sidx = "";
             Match m = Regex.Match(path, @"([\w\W]+?)(\.~index~\d+)$");
@@ -291,7 +293,15 @@ namespace ljson
                 sidx = m.Groups[2].Value;
             JToken field = panel.SelectToken(path_noidx);
             if (field == null || field.Type != JTokenType.Object)
-                return res;
+            {
+                if (!Regex.IsMatch(path_noidx, @"SIMPO[\w\W]+?MIMIC"))
+                    return res;
+                string loop_path = Regex.Replace(path_noidx, @"^[\w\W]+?#", "");
+                loop_path = Regex.Replace(loop_path, @"^[\w\W]+?ELEMENTS\.", "ELEMENTS.");
+                field = panel.SelectToken(loop_path);
+                if (field == null || field.Type != JTokenType.Object)
+                    return res;
+            }
             JObject ofield = (JObject)field;
             if (ofield["@TYPE"] == null)
                 return res;
@@ -309,6 +319,26 @@ namespace ljson
                 AddAndValues(res, ofield, sval, sidx);
             else if (jtype == "LIST" || jtype == "INT" || jtype == "TEXT" || jtype == "INTLIST" || jtype == "HIDDEN" || jtype == "IP" || jtype == "SLIDER")
                 return res;
+            else if (jtype == "TAB" && ofield["TABS"] != null)
+            {
+                JObject jtabs = (JObject)ofield["TABS"];
+                foreach (JProperty tab in jtabs.Properties())
+                {
+                    if (tab.Value.Type != JTokenType.Object) continue;
+                    JObject otab = (JObject)tab.Value;
+                    if (otab["@VALUE"] == null) continue;
+                    if (otab["@VALUE"].ToString().Trim() != sval) continue;
+                    string newval = sval + "_" + tab.Name;
+                    if (Regex.IsMatch(path, @"#SIMPO_MIMIC"))
+                    {
+                        JProperty tparent = (JProperty)ofield.Parent;
+                        newval += "_" + tparent.Name;
+                    }
+                    res[path] = newval;
+                    break;
+                }
+                return res;
+            }
             else
                 return res;
             //

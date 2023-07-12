@@ -457,6 +457,8 @@ namespace lcommunicate
                 return null;
             }
             Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key) && Regex.IsMatch(key, @"^SIMPO_[\w\W]*?LOOP"))
+                key = constants.NO_LOOP;
             if (!el.ContainsKey(key))
             {
                 Monitor.Exit(_cs_pseudo_element_cache);
@@ -465,6 +467,39 @@ namespace lcommunicate
             Dictionary<string, string> lst = el[key];
             Monitor.Exit(_cs_pseudo_element_cache);
             return lst;
+        }
+        public static Dictionary<string, string> GetPseudoElementsList(string panel_id, string key, string match)
+        {
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_pseudo_element_panels == null)
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            if (!_cache_pseudo_element_panels.ContainsKey(panel_id))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, Dictionary<string, string>> el = _cache_pseudo_element_panels[panel_id];
+            if (!el.ContainsKey(key))
+            {
+                Monitor.Exit(_cs_pseudo_element_cache);
+                return null;
+            }
+            Dictionary<string, string> lst = el[key];
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            match = Regex.Replace(match, @"\d+$", "");
+            foreach (string lkey in lst.Keys)
+            {
+                string lt = lst[lkey];
+                if (Regex.IsMatch(lt, @"""~loop_type""\s*?:\s*?""" + match, RegexOptions.IgnoreCase))
+                    res.Add(lkey, lt);
+            }
+            if (res.Count == 0)
+                res = null;
+            Monitor.Exit(_cs_pseudo_element_cache);
+            return res;
         }
         public static void SetPseudoElement(string panel_id, string key, string idx, string _template)
         {

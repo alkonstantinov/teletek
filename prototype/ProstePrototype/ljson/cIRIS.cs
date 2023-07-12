@@ -785,6 +785,26 @@ namespace ljson
             ac["breadcrumbs"] = _pages["iris_loop_devices"]["breadcrumbs"];
             JObject contains = Contains2Object((JObject)json["ELEMENTS"]["iris_loop_devices"]["CONTAINS"]);
             json["ELEMENTS"]["iris_loop_devices"]["CONTAINS"] = contains;
+            //
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"SIMPO\s+?panel$", RegexOptions.IgnoreCase))
+            {
+                JObject elements = (JObject)json["ELEMENTS"];
+                JObject props = (JObject)elements["SIMPO_TTELOOP1"]["PROPERTIES"];
+                props["Groups"] = new JObject();
+                props["Groups"]["~noname"] = new JObject();
+                props["Groups"]["~noname"]["name"] = "";
+                props["Groups"]["~noname"]["fields"] = new JObject();
+                JObject f = new JObject((JObject)props["PROPERTY"]);
+                props["Groups"]["~noname"]["fields"]["Ver"] = f;
+                //
+                props = (JObject)elements["SIMPO_TTELOOP2"]["PROPERTIES"];
+                props["Groups"] = new JObject();
+                props["Groups"]["~noname"] = new JObject();
+                props["Groups"]["~noname"]["name"] = "";
+                props["Groups"]["~noname"]["fields"] = new JObject();
+                f = new JObject((JObject)props["PROPERTY"]);
+                props["Groups"]["~noname"]["fields"]["Ver"] = f;
+            }
         }
         #endregion
 
@@ -1580,11 +1600,12 @@ namespace ljson
         private static void ConvertSimpoPaneloutputs(JObject json, JObject _pages)
         {
             CreatePaneloutputsGroups((JObject)json["ELEMENTS"]);
-            JObject ac = (JObject)json["ELEMENTS"]["iris_network"];
-            ac["title"] = _pages["iris_network"]["title"];
-            ac["left"] = _pages["iris_network"]["left"];
-            ac["right"] = _pages["iris_network"]["right"];
-            ac["breadcrumbs"] = _pages["iris_network"]["breadcrumbs"];
+            JObject ac = (JObject)json["ELEMENTS"]["SIMPO_PANELOUTPUTS"];
+            if (ac == null) return;
+            ac["title"] = _pages["simpo_paneloutputs"]["title"];
+            ac["left"] = _pages["simpo_paneloutputs"]["left"];
+            ac["right"] = _pages["simpo_paneloutputs"]["right"];
+            ac["breadcrumbs"] = _pages["simpo_paneloutputs"]["breadcrumbs"];
         }
         private static void SimpoPanelExtractPanelsFromNetwork(JObject json, JObject _pages)
         {
@@ -1713,6 +1734,18 @@ namespace ljson
             if (elements["SIMPO_RELAY3"] != null) elements.Remove("SIMPO_RELAY3");
             if (elements["SIMPO_RELAY4"] != null) elements.Remove("SIMPO_RELAY4");
         }
+        private static void ChangeSIMPOPanelTTENONE(JObject json)
+        {
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"SIMPO\s+?panel$", RegexOptions.IgnoreCase))
+            {
+                JObject elements = (JObject)json["ELEMENTS"];
+                JObject ttenone1 = new JObject((JObject)elements["SIMPO_TTENONE"]);
+                JObject ttenone2 = new JObject(ttenone1);
+                //elements.Remove("SIMPO_TTENONE");
+                elements["SIMPO_TTENONE1"] = ttenone1;
+                elements["SIMPO_TTENONE2"] = ttenone2;
+            }
+        }
         #endregion
         public static string Convert(string json, JObject _pages)
         {
@@ -1791,6 +1824,7 @@ namespace ljson
             ConvertSimpoPaneloutputs(o1, _pages);
             ConvertMIMICPanelsGroups(o1);
             ConvertMIMICOut(o1);
+            //ChangeSIMPOPanelTTENONE(o1);
             //
             cXml.Arrays2Objects(o1, true);
             //

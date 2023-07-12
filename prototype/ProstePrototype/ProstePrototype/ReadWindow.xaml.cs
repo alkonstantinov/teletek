@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ProstePrototype
 {
@@ -28,6 +21,8 @@ namespace ProstePrototype
         public UserControl3 uc2 { get; set; }
         public UserControl uc3 { get; set; }
         public BitmapImage imgsource = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+        private SolidColorBrush defaultColorBrush = (SolidColorBrush)App.Current.FindResource("DefaultColor");
+        private SolidColorBrush grayColorBrush = (SolidColorBrush)App.Current.FindResource("GrayColor");
         public ReadWindow()
         {
             InitializeComponent();
@@ -55,21 +50,21 @@ namespace ProstePrototype
             if (startidx == 0)
             {
                 uc0.Resources = Application.Current.Resources;
-                img0.Source = imgsource;
+                tcp_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc0;
                 Button0.Focus();
             }
             else if (startidx == 1)
             {
                 uc1.Resources = Application.Current.Resources;
-                img1.Source = imgsource;
+                usb_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc1;
                 Button1.Focus();
             }
             else if (startidx == 2)
             {
                 uc2.Resources = Application.Current.Resources;
-                img2.Source = imgsource;
+                rs232_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc2;
                 Button2.Focus();
             }
@@ -112,9 +107,9 @@ namespace ProstePrototype
             string img = "img3";
             switch (prevIndex)
             {
-                case 0: img = "img0"; break;
-                case 1: img = "img1"; break;
-                case 2: img = "img2"; break;
+                case 0: img = "tcp_icon"; break;
+                case 1: img = "usb_icon"; break;
+                case 2: img = "rs232_icon"; break;
                 default: break;
             }
             var a = sender as Button;
@@ -125,6 +120,10 @@ namespace ProstePrototype
                 Image image = im as Image;
                 var b = imgsource as BitmapImage;
                 image.Source = (ImageSource)(new FormatConvertedBitmap(b, PixelFormats.Gray8, null, 0));
+            } else if (im is TextBlock)
+            {
+                TextBlock textBlock = im as TextBlock;
+                textBlock.Foreground = grayColorBrush;
             }
         }
 
@@ -133,7 +132,7 @@ namespace ProstePrototype
             selectedIndex = 0;
             Button_LostFocus(sender, e);
             uc0.Resources = Application.Current.Resources;
-            img0.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            tcp_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc0;
             prevIndex= 0;
         }
@@ -142,7 +141,7 @@ namespace ProstePrototype
             selectedIndex = 1;
             Button_LostFocus(sender, e);
             uc1.Resources = Application.Current.Resources;
-            img1.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            usb_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc1;
             prevIndex= 1;
         }
@@ -151,7 +150,7 @@ namespace ProstePrototype
             selectedIndex = 2;
             Button_LostFocus(sender, e);
             uc2.Resources = Application.Current.Resources;
-            img2.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            rs232_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc2;
             prevIndex= 2;
         }
@@ -165,5 +164,69 @@ namespace ProstePrototype
             ContentArea.Content = uc3;
             prevIndex= 3;
         }
+
+        #region MouseEnter-MouseLeave
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                string imageName = null;
+                switch (button.Name)
+                {
+                    case "Button0":
+                        imageName = "tcp_icon";
+                        break;
+                    case "Button1":
+                        imageName = "usb_icon";
+                        break;
+                    case "Button2":
+                        imageName = "rs232_icon";
+                        break;
+                }
+
+                if (imageName != null)
+                {
+                    var image = button.FindName(imageName) as TextBlock;
+                    if (image != null)
+                    {
+                        image.Foreground = defaultColorBrush;
+                        button.Foreground = new SolidColorBrush(Color.FromRgb(0,0,0));
+                    }
+                }
+            }
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                string imageName = null;
+                switch (button.Name)
+                {
+                    case "Button0":
+                        imageName = "tcp_icon";
+                        break;
+                    case "Button1":
+                        imageName = "usb_icon";
+                        break;
+                    case "Button2":
+                        imageName = "rs232_icon";
+                        break;
+                }
+
+                if (imageName != null)
+                {
+                    var image = button.FindName(imageName) as TextBlock;
+                    if (image != null && !button.IsFocused)
+                    {
+                        image.Foreground = grayColorBrush;
+                        button.Foreground = grayColorBrush;
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

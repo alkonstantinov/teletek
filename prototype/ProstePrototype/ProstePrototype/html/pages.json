@@ -250,7 +250,7 @@
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "simpo" ],
-    "picture": "fa-arrows-to-circle",
-    "icon": "\ue915"
+    "picture": "input_groups",
+    "icon": "\ue90e"
   }
 }

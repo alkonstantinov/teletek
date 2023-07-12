@@ -130,6 +130,7 @@ namespace ljson
                 if (m.Success)
                     loop_type = m.Groups[1].Value;
                 Dictionary<string, string> d = cComm.GetPseudoElementDevices(_panel_id, constants.NO_LOOP, key);
+                if (d == null) continue;
                 foreach (string dkey in d.Keys)
                 {
                     string dev = d[dkey];
@@ -686,6 +687,8 @@ namespace ljson
             Dictionary<string, string> tabindexes = new Dictionary<string, string>();
             foreach (string path in _old_paths.Keys)
             {
+                //if (!Regex.IsMatch(path, @"^ELEMENTS\.[^\.]+?(INPUT|OUTPUT)\.", RegexOptions.IgnoreCase) &&
+                //    !Regex.IsMatch(path, @"^SIMPO_MIMIC", RegexOptions.IgnoreCase))
                 if (!Regex.IsMatch(path, @"^ELEMENTS\.[^\.]+?(INPUT|OUTPUT)\.", RegexOptions.IgnoreCase))
                 {
                     paths_left.Add(path, _old_paths[path]);
@@ -693,6 +696,8 @@ namespace ljson
                 }
                 string ioidx = "";
                 Match m = Regex.Match(path, @"^(ELEMENTS\.[\w\W]+?)\.[\w\W]+?~index~(\d+)", RegexOptions.IgnoreCase);
+                //if (!m.Success)
+                //    m = Regex.Match(path, @"^(SIMPO_MIMIC[\w\W]+?)~index~(\d+)", RegexOptions.IgnoreCase);
                 if (m.Success)
                 {
                     string iokey = m.Groups[1].Value + m.Groups[2].Value;
@@ -1505,6 +1510,13 @@ namespace ljson
                     if (val[i] != 0)
                         return true;
                 for (int i = 86; i < val.Length; i++)
+                    if (val[i] != 0)
+                        return true;
+                return false;
+            }
+            else if (Regex.IsMatch(key, @"^simpo_zone$", RegexOptions.IgnoreCase))
+            {
+                for (int i = 0; i < val.Length; i++)
                     if (val[i] != 0)
                         return true;
                 return false;

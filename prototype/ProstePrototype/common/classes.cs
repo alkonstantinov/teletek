@@ -410,6 +410,7 @@ namespace common
             return sio + sDataType + sidx + sbuffoffset + slen;
         }
         public virtual string CommandString(int _idx, int _subidx) { return CommandString(_idx); }
+        public virtual string CommandStringSubIdxOnly(int _subidx) { return CommandString(); }
         public virtual string NoIdxCommandString() { return null; }
         public virtual string CommandKey() { return null; }
         public virtual int idxPosition() { return -1; }
@@ -442,6 +443,81 @@ namespace common
         public List<cRWCommand> WriteCommands = new List<cRWCommand>();
         public Dictionary<string, cRWProperty> WriteProperties = new Dictionary<string, cRWProperty>();
         public List<cWriteOperation> WriteOperationOrder = new List<cWriteOperation>();
+        public Dictionary<string, List<string>> WriteCommandsReplacement = new Dictionary<string, List<string>>();
+        //
+        /// <summary>
+        /// for simpo panel outputs
+        /// </summary>
+        public void WriteCmdReplacementsByAdditionalBytes(int command_len)
+        {
+            WriteCommandsReplacement.Clear();
+            Dictionary<string, int> dublicated = new Dictionary<string, int>();
+            foreach (cWriteOperation op in WriteOperationOrder)
+            {
+                if (op.operation != eWriteOperation.woBytes || op.value.Length != command_len) continue;
+                if (!dublicated.ContainsKey(op.value)) dublicated.Add(op.value, 1);
+                else dublicated[op.value]++;
+            }
+            for (int i = 0; i < WriteOperationOrder.Count; i++)
+            {
+                cWriteOperation op = WriteOperationOrder[i];
+                if (!dublicated.ContainsKey(op.value) || dublicated[op.value] == 1) continue;
+                int j = i + 1;
+                string addbytes = "";
+                while (j < WriteOperationOrder.Count && WriteOperationOrder[j].operation == eWriteOperation.woBytes)
+                {
+                    addbytes += WriteOperationOrder[j].value;
+                    j++;
+                }
+                if (!WriteCommandsReplacement.ContainsKey(op.value))
+                    WriteCommandsReplacement.Add(op.value, new List<string>());
+                List<string> lst = WriteCommandsReplacement[op.value];
+                lst.Add(op.value + addbytes);
+            }
+        }
+        public void RepareSimpoMIMICOUTCommands(int command_len)
+        {
+            Dictionary<string, List<cWriteOperation>> operations = new Dictionary<string, List<cWriteOperation>>();
+            string scmd = null;
+            string lastcmd = scmd;
+            for (int i = 0; i < WriteOperationOrder.Count; i++)
+            {
+                if (WriteOperationOrder[i].operation == eWriteOperation.woBytes && WriteOperationOrder[i].value.Length == command_len)
+                    scmd = WriteOperationOrder[i].value;
+                if (scmd != null && operations.ContainsKey(scmd))
+                    break;
+                if (scmd != null)
+                {
+                    operations.Add(scmd, new List<cWriteOperation>());
+                    cRWCommand wcmd = null;
+                    foreach (cRWCommand cmd in WriteCommands)
+                        if (scmd == cmd.CommandString())
+                        {
+                            wcmd = cmd;
+                            break;
+                        }
+                    operations[scmd].Add(WriteOperationOrder[i]);
+                    lastcmd = scmd;
+                    scmd = null;
+                    i++;
+                    continue;
+                }
+                operations[lastcmd].Add(WriteOperationOrder[i]);
+            }
+            WriteOperationOrder.Clear();
+            foreach (string key in operations.Keys)
+                foreach (cWriteOperation o in operations[key])
+                    WriteOperationOrder.Add(o);
+        }
+        public static string MergeWriteParams(string _p1, string _p2)
+        {
+            if (_p1.Length <= 0 || _p1.Length != _p2.Length) return _p1;
+            string res = "";
+            for (int i = 0; i < _p1.Length; i += 2)
+                if (_p1.Substring(i, 2) != "00") res += _p1.Substring(i, 2);
+                else res += _p2.Substring(i, 2);
+            return res;
+        }
     }
 
     internal class cRW

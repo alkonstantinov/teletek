@@ -59,6 +59,18 @@ input, select, input[type="checkbox" i] {
     filter: invert(82%);
 }
 
+#ram_panel_1 {
+    background-color: #162c34 !important;
+}
+
+#ram_panel_2 {
+    background-color: #112634 !important;
+}
+
+#ram_panel_add {
+    background-color: #121a27 !important;
+}
+
 #ctxMenu, .accordion-button, .accordion-body .active {
     background-color: #332 !important;
     color: #eed !important;

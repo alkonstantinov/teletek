@@ -92,12 +92,30 @@ namespace common
         {
             if (io == eIO.ioWrite)
             {
-                string _ssubidx = (ssubidx != null) ? ssubidx : null;
+                string _ssubidx = _subidx.ToString("X2");
+                while (_ssubidx.Length < subidx_cmd_len * 2) _ssubidx = "00" + _ssubidx;
                 return CommandString(_idx) + _ssubidx;
             }
             else if (io == eIO.ioRead)
             {
                 string s = CommandString(_idx);
+                string sl = s.Substring(0, 8);
+                string sr = s.Substring(CommandLength() - 2, 2);
+                return sl + _subidx.ToString("X2") + sr;
+            }
+            return "";
+        }
+        public override string CommandStringSubIdxOnly(int _subidx)
+        {
+            if (io == eIO.ioWrite)
+            {
+                string _ssubidx = _subidx.ToString("X2");
+                while (_ssubidx.Length < subidx_cmd_len * 2) _ssubidx = "00" + _ssubidx;
+                return CommandString() + _ssubidx;
+            }
+            else if (io == eIO.ioRead)
+            {
+                string s = CommandString();
                 string sl = s.Substring(0, 8);
                 string sr = s.Substring(CommandLength() - 2, 2);
                 return sl + _subidx.ToString("X2") + sr;
@@ -822,6 +840,27 @@ namespace common
         internal void RepareSimpoPanelWriteGenSettings()
         {
             Dictionary<string, Dictionary<string, List<string>>> gensett = _dwrite_prop["SIMPO_GENERAL_SETTINGS"];
+            //split codes
+            List<string> gs2del = new List<string>();
+            Dictionary<string, Dictionary<string, List<string>>> gs2add = new Dictionary<string, Dictionary<string, List<string>>>();
+            foreach (string scmd in gensett.Keys)
+                if (gensett[scmd].Count > 1 && gensett[scmd].Count < 8)
+                {
+                    foreach (string sidx in gensett[scmd].Keys)
+                    {
+                        string newkey = scmd + sidx;
+                        gs2add.Add(newkey, new Dictionary<string, List<string>>());
+                        Dictionary<string, List<string>> newdict = gs2add[newkey];
+                        newdict.Add("", new List<string>());
+                        List<string> newlst = newdict[""];
+                        foreach (string _xml in gensett[scmd][sidx])
+                            newlst.Add(_xml);
+                    }
+                    gs2del.Add(scmd);
+                }
+            foreach (string cmd2del in gs2del) gensett.Remove(cmd2del);
+            foreach (string cmd2add in gs2add.Keys) gensett.Add(cmd2add, gs2add[cmd2add]);
+            //
             //Dictionary<string, Dictionary<string, List<string>>> dpanels = _dwrite_prop["SIMPO_PANELOUTPUTS"];
             List<string> lstGenSett = new List<string>();
             //find general settings in other elements
@@ -870,6 +909,7 @@ namespace common
                     }
                 }
             }
+            return;
         }
         internal void RepareSimpoPanelWriteNetwork()
         {
@@ -1347,13 +1387,82 @@ namespace common
                 bufsize += cmdsreslen;
             }
         }
+        private void FillReadRWPathSimpo(cRWPath rwpath, string wpath)
+        {
+            Dictionary<string, Dictionary<string, List<string>>> dr = _dread_prop[rwpath.ReadPath];
+            //
+            Dictionary<string, int> dcommands = new Dictionary<string, int>();
+            //Dictionary<string, cRWPropertyIRIS> dprops = new Dictionary<string, cRWPropertyIRIS>();
+            Dictionary<string, string> dcmdprops = new Dictionary<string, string>();
+            foreach (string cmd in dr.Keys)
+            {
+                Dictionary<string, List<string>> didx = dr[cmd];
+                foreach (string idx in didx.Keys)
+                {
+                    List<string> lcmdlocal = new List<string>();
+                    List<string> lproplocal = new List<string>();
+                    foreach (string cxml in didx[idx])
+                    {
+                        foreach (Match mxml in Regex.Matches(cxml, @"<COMMAND\s[\w\W]+?/>", RegexOptions.IgnoreCase))
+                        {
+                            Match lm = Regex.Match(mxml.Value, @"BYTES\s*?=\s*?""([\w\W]+?)""");
+                            if (lm.Success)
+                                lcmdlocal.Add(lm.Groups[1].Value);
+                        }
+                        foreach (Match mxml in Regex.Matches(cxml, @"<PROPERTY[\w\W]+?/>"))
+                            lproplocal.Add(mxml.Value);
+                    }
+                    string localkey = String.Join('-', lcmdlocal.ToArray());
+                    string localprop = String.Join("\r\n", lproplocal.ToArray());
+                    if (!dcmdprops.ContainsKey(localkey))
+                        dcmdprops.Add(localkey, localprop);
+                }
+            }
+            int bufsize = 0;
+            foreach (string cmds in dcmdprops.Keys)
+            {
+                string[] acmds = cmds.Split('-');
+                int cmdsreslen = 0;
+                foreach (string cmd in acmds)
+                {
+                    int reslen = Convert.ToInt32(cmd.Substring(cmd.Length - 2, 2), 16) + 2;
+                    cmdsreslen += reslen;
+                    cRWCommand rwc = CommandObject(cmd);
+                    string cmdkey = rwc.CommandKey();
+                    if (cmd.Length < rwc.CommandLength())
+                        continue;
+                    rwpath.ReadCommands.Add(rwc);
+                }
+                string sprops = dcmdprops[cmds];
+                foreach (Match pm in Regex.Matches(sprops, @"<PROPERTY\s[\w\W]+?/>"))
+                {
+                    cRWPropertyIRIS p = new cRWPropertyIRIS();
+                    p.xmltag = pm.Value;
+                    p.id = p.PropertyValue(eIO.ioRead, "ID");
+                    p.offset = Convert.ToInt32(p.PropertyValue(eIO.ioRead, "BYTE")) + bufsize;
+                    p.bytescnt = Convert.ToByte(p.PropertyValue(eIO.ioRead, "LENGTH"));
+                    rwpath.ReadProperties.Add(p.id, p);
+                }
+                bufsize += cmdsreslen;
+            }
+        }
         private void FillReadRWPath(cRWPath rwpath, string wpath)
         {
-            if (Regex.IsMatch(wpath, "^SIMPO_GENERAL_SETTINGS_R"))
+            if (Regex.IsMatch(wpath, "^SIMPO_GENERAL_SETTINGS"))
             {
                 FillReadRWPathRepeaterSimpo(rwpath, wpath);
                 return;
             }
+            if (Regex.IsMatch(wpath, "^SIMPO_PANELOUTPUTS$"))
+            {
+                FillReadRWPathRepeaterSimpo(rwpath, wpath);
+                return;
+            }
+            //if (Regex.IsMatch(wpath, "^SIMPO_GENERAL_SETTINGS$"))
+            //{
+            //    FillReadRWPathSimpo(rwpath, wpath);
+            //    return;
+            //}
             Dictionary<string, Dictionary<string, List<string>>> dr = _dread_prop[rwpath.ReadPath];
             string firstkey = dr.Keys.First();
             Dictionary<string, List<string>> dr1 = dr[firstkey];

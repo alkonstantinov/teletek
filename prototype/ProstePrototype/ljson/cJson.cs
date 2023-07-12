@@ -518,6 +518,13 @@ namespace ljson
                         rw = _merge[key];
                         break;
                     }
+                    string mimic_path = "SIMPO_MIMICPANELS/" + path;
+                    if (key.ToLower() == mimic_path.ToLower())
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
+                    if (Regex.IsMatch(path, @"^SIMPO_MIMIC\d+$")) continue;
                     string path1 = Regex.Replace(path, @"(^[\w\W]+?)_([^_]+$)", "$1$2", RegexOptions.IgnoreCase);
                     if (key.ToLower() == path1.ToLower() || _merge[key].ReadPath.ToLower() == path1.ToLower())
                     {
@@ -592,12 +599,20 @@ namespace ljson
                 JObject o = JObject.FromObject(rw);
                 _node["~rw"] = o;
             }
+            else
+                return;
         }
 
         private static bool readed = false;
         private static bool reading = false;
         private static Dictionary<string, byte[]> _log_bytesreaded = new Dictionary<string, byte[]>();
         private static Dictionary<string, string> _log_byteswrite = new Dictionary<string, string>();
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSimpoLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            //
+            return res;
+        }
         private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
@@ -617,7 +632,18 @@ namespace ljson
             //
             Match m = Regex.Match(read_path, @"LOOP(\d+)", RegexOptions.IgnoreCase);
             if (!m.Success)
-                return res;
+            {
+                if (Regex.IsMatch(read_path, @"SIMPO_MIMICPANELS\s*?/\s*?SIMPO_MIMICOUT")) read_path = "SIMPO_MIMIC1/SIMPO_MIMICOUT";
+                read_path = Regex.Replace(read_path, @"\s+", "");
+                m = Regex.Match(read_path, @"SIMPO_MIMIC(\d+?)/");
+                if (!m.Success)
+                {
+                    m = Regex.Match(read_path, @"SIMPO_TTENONE(\d+)$");
+                    if (!m.Success)
+                        return res;
+                    read_path = "SIMPO_TTELOOP" + m.Groups[1].Value + "/" + "SIMPO_TTENONE";
+                }
+            }
             string num = m.Groups[1].Value;
             JObject panel = CurrentPanel;
             string panel_id = CurrentPanelID;
@@ -665,7 +691,7 @@ namespace ljson
             {
                 JToken trp = _rw["ReadProperties"];
                 foreach (JProperty tprop in trp)
-                    if (tprop.Name.ToLower() == "type")
+                    if (tprop.Name.ToLower() == "type" || (Regex.IsMatch(dev_path, @"^SIMPO_") && tprop.Name.ToLower() == "activation1"))
                     {
                         JObject otype = (JObject)tprop.Value;
                         if (otype["offset"] != null)
@@ -686,8 +712,14 @@ namespace ljson
                 List<byte[]> cmdresults = new List<byte[]>();
                 foreach (cRWCommand cmd in cmds)
                 {
+                    cmd.io = eIO.ioRead;
                     string scmd = cmd.CommandString();
-                    scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                    if (!Regex.IsMatch(dev_path, @"^SIMPO_") || Regex.IsMatch(dev_path, @"_TTENONE$"))
+                        scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                    else if (!Regex.IsMatch(dev_path, @"MIMICOUT"))
+                        scmd = cmd.CommandString(Convert.ToInt32(num) - 1, idx);
+                    else
+                        scmd = cmd.CommandStringSubIdxOnly(idx);
                     byte[] cmdres = cComm.SendCommand(conn, scmd);
                     if (settings.logreads)
                     {
@@ -709,9 +741,9 @@ namespace ljson
                 if (devtypes[devtype] != null)
                     devbytype = (JObject)devtypes[devtype];
                 string sdevname = null;
-                if (devbytype[bcmdres[typeidx].ToString()] != null)
+                if (devbytype != null && devbytype[bcmdres[typeidx].ToString()] != null)
                     sdevname = devbytype[bcmdres[typeidx].ToString()].ToString();
-                if (typeidx >= 0 && bcmdres[typeidx] != 0 && sdevname != null)
+                if (typeidx >= 0 && bcmdres[typeidx] != 0 && (sdevname != null || Regex.IsMatch(dev_path, @"^SIMPO_")))
                 {
                     didx.Add((idx + idxinc).ToString(), bcmdres);
                 }
@@ -728,7 +760,16 @@ namespace ljson
             Dictionary<string, cRWPath> merge = WriteReadMerge;
             JObject panel = CurrentPanel;
             string panel_id = CurrentPanelID;
-            Dictionary<string, string> dres = cComm.GetPseudoElementsList(panel_id, constants.NO_LOOP);
+            Dictionary<string, string> dres = null;
+            if (!Regex.IsMatch(loopkey, @"SIMPO_"))
+                dres = cComm.GetPseudoElementsList(panel_id, constants.NO_LOOP);
+            else
+            {
+                dres = cComm.GetPseudoElementsList(panel_id, constants.NO_LOOP, loopkey);
+                if (dres == null && Regex.IsMatch(loopkey, @"^SIMPO_[\w\W]*?(LOOP|MIMIC)"))
+                    dres = cComm.GetPseudoElementsList(panel_id, Regex.Replace(loopkey, @"\d+$", ""), loopkey);
+            }
+            //SIMPO_TTELOOP1
             int num = ((dres != null) ? dres.Count : 0) + 1;
             string read_path = loopkey + "/" + dreaded.Keys.First();
             string[] apath = read_path.Split('/');
@@ -739,25 +780,45 @@ namespace ljson
             JObject groups = null;
             //
             for (int i = 0; i < apath.Length; i++)
-                if (Regex.IsMatch(apath[i], @"(LOOP\d+|NONE)$"))
+                if (Regex.IsMatch(apath[i], @"(LOOP\d+|NONE)$") || Regex.IsMatch(apath[i], @"^SIMPO_MIMIC"))
                 {
-                    if (Regex.IsMatch(apath[i], @"LOOP\d+$"))
+                    if (Regex.IsMatch(apath[i], @"LOOP\d+$") || Regex.IsMatch(apath[i], @"^SIMPO_MIMIC\d"))
                         loop_type = apath[i];
                     dev_path += ((dev_path != "") ? "/" : "") + apath[i];
                 }
-            loop_type = Regex.Replace(loop_type, @"\d+$", num.ToString());
+            if (!Regex.IsMatch(loop_type, @"MIMIC"))
+                loop_type = Regex.Replace(loop_type, @"\d+$", num.ToString());
             //
             foreach (string snone in dreaded.Keys)
             {
                 string nonekey = loopkey + "/" + snone;
                 if (!merge.ContainsKey(nonekey))
-                    nonekey = Regex.Replace(nonekey, @"/[^/]+$", "");
+                {
+                    if (!Regex.IsMatch(nonekey, @"^SIMPO_TTE[\w\W]+?/"))
+                        nonekey = Regex.Replace(nonekey, @"/[^/]+$", "");
+                    else
+                    {
+                        Match mkey = Regex.Match(nonekey, @"^(SIMPO_TTE[\w\W]+?)(\d+?)([\w\W]+?)$");
+                        if (mkey.Success)
+                            nonekey = mkey.Groups[1].Value + mkey.Groups[3].Value + mkey.Groups[2].Value;
+                    }
+                }
                 if (!merge.ContainsKey(nonekey))
                 {
                     if (merge.ContainsKey("IRIS_LOOPDEVICES/" + nonekey))
                         nonekey = "IRIS_LOOPDEVICES/" + nonekey;
                     else if (merge.ContainsKey("IRIS8_LOOPDEVICES/" + nonekey))
                         nonekey = "IRIS8_LOOPDEVICES/" + nonekey;
+                    else
+                    {
+                        Match mnom = Regex.Match(loopkey, @"(\d+)$");
+                        if (mnom.Success)
+                        {
+                            string snom = mnom.Groups[1].Value;
+                            if (merge.ContainsKey("SIMPO_LOOPDEVICES/SIMPO_TTENONE" + snom))
+                                nonekey = "SIMPO_LOOPDEVICES/SIMPO_TTENONE" + snom;
+                        }
+                    }
                 }
                 if (merge.ContainsKey(nonekey))
                 {
@@ -768,26 +829,68 @@ namespace ljson
                     {
                         cRWProperty prop = p.ReadProperties[k];
                         ReadProperties.Add(k, prop);
-                        if (typeidx <= 0 && Regex.IsMatch(k, "^type$", RegexOptions.IgnoreCase))
+                        if (typeidx <= 0 && (Regex.IsMatch(k, "^type$", RegexOptions.IgnoreCase) || Regex.IsMatch(k, "^activation1$", RegexOptions.IgnoreCase)))
+                        {
                             typeidx = prop.offset;
+                            break;
+                        }
+                    }
+                    if (typeidx < 0)
+                    {
+                        Match mnokey = Regex.Match(nonekey, @"^SIMPO_[\w\W]*?LOOP[\w\W]*?(\d+)$");
+                        if (mnokey.Success)
+                        {
+                            string lnom = mnokey.Groups[1].Value;
+                            foreach (string mkey in merge.Keys)
+                                if (Regex.IsMatch(mkey, "SIMPO_TTENONE" + lnom + "$"))
+                                {
+                                    nonekey = mkey;
+                                    break;
+                                }
+                            if (merge.ContainsKey(nonekey))
+                            {
+                                p = merge[nonekey];
+                                foreach (string k in p.ReadProperties.Keys)
+                                {
+                                    cRWProperty prop = p.ReadProperties[k];
+                                    ReadProperties.Add(k, prop);
+                                    if (typeidx <= 0 && (Regex.IsMatch(k, "^type$", RegexOptions.IgnoreCase) || Regex.IsMatch(k, "^activation1$", RegexOptions.IgnoreCase)))
+                                    {
+                                        typeidx = prop.offset;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     }
                     //
                     if (!loopadded)
                     {
+                        string noloop_key = constants.NO_LOOP;
                         string jnode = "{}";
-                        JToken t = panel["ELEMENTS"][constants.NO_LOOP + num.ToString()];
+                        JToken t = null;
+                        if (!Regex.IsMatch(loopkey, @"^SIMPO_"))
+                            t = panel["ELEMENTS"][constants.NO_LOOP + num.ToString()];
+                        if (t == null && Regex.IsMatch(loopkey, @"^SIMPO_"))
+                        {
+                            t = panel["ELEMENTS"][loopkey];
+                            noloop_key = loopkey;
+                            if (Regex.IsMatch(noloop_key, @"LOOP"))
+                                noloop_key = Regex.Replace(noloop_key, @"\d+$", "");
+                        }
                         if (t != null)
                             jnode = t.ToString();
-                        cComm.AddPseudoElement(panel_id, constants.NO_LOOP, jnode);
-                        JObject o = JObject.Parse(cComm.GetPseudoElement(panel_id, constants.NO_LOOP));
+                        cComm.AddPseudoElement(panel_id, /*constants.NO_LOOP*/noloop_key, jnode);
+                        JObject o = JObject.Parse(cComm.GetPseudoElement(panel_id, /*constants.NO_LOOP*/noloop_key));
                         o["~loop_type"] = loop_type;
-                        cComm.SetPseudoElement(panel_id, constants.NO_LOOP, o.ToString());
+                        cComm.SetPseudoElement(panel_id, /*constants.NO_LOOP*/noloop_key, o.ToString());
                         loopadded = true;
                     }
                     dev_path = Regex.Replace(snone, @"^[\w\W]*?/", "");// apath[apath.Length - 1];
                     none_element = dev_path;
                     //
                     JObject el = GetNode(dev_path);
+                    el["~rw"] = JObject.FromObject(p);
                     if (el != null && el["PROPERTIES"] != null && el["PROPERTIES"]["Groups"] != null)
                         groups = (JObject)el["PROPERTIES"]["Groups"];
                     JObject _rw = (JObject)el["~rw"];
@@ -796,7 +899,11 @@ namespace ljson
                     foreach (string idx in didx.Keys)
                     {
                         byte btype = didx[idx][typeidx];
-                        string devname = devtypes[btype.ToString()].ToString();
+                        string devname = null;
+                        if (!Regex.IsMatch(none_element, @"^SIMPO_") || Regex.IsMatch(loopkey, "loop", RegexOptions.IgnoreCase))
+                            devname = devtypes[btype.ToString()].ToString();
+                        else
+                            devname = none_element;
                         el["~device"] = devname;
                         el["~device_type"] = none_element;
                         string dev_save_path = loop_type + "/" + none_element + "#" + devname;
@@ -838,10 +945,80 @@ namespace ljson
                 }
             }
         }
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllMIMICPanels(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            Dictionary<string, cRWPath> _merge = WriteReadMerge;
+            //string rp = Regex.Replace(read_path, @"\d+$", "");
+            foreach (string key in _merge.Keys)
+                if (Regex.IsMatch(key, "SIMPO_MIMICOUT$"))
+                {
+                    cRWPath loopp = _merge[key];
+                    if (CurrentPanelType == "iris")
+                    {
+                        cRWPathIRIS pi = new cRWPathIRIS();
+                        foreach (cRWCommandIRIS cmd in loopp.ReadCommands)
+                            pi.ReadCommands.Add(cmd);
+                        pi.ReadPath = loopp.ReadPath;
+                        foreach (string prop in loopp.ReadProperties.Keys)
+                            pi.ReadProperties.Add(prop, (cRWPropertyIRIS)loopp.ReadProperties[prop]);
+                        //pi.ReadProperties = loopp.ReadProperties;
+                        //cRWPathIRIS pi = (cRWPathIRIS)_merge[key];
+                        //foreach (cRWCommandIRIS cmd in pi.ReadCommands)
+                        //    cmds.Add(cmd);
+                        loopp = pi;
+                    }
+                    else
+                        loopp = _merge[key];
+                    Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes);
+                    foreach (string reskey in lres.Keys)
+                        res.Add(reskey, lres[reskey]);
+                }
+            //
+            return res;
+        }
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            Dictionary<string, cRWPath> _merge = WriteReadMerge;
+            string rp = Regex.Replace(read_path, @"\d+$", "");
+            foreach (string key in _merge.Keys)
+                if (Regex.IsMatch(key, rp + @"\d+$"))
+                {
+                    cRWPath loopp = _merge[key];
+                    if (CurrentPanelType == "iris")
+                    {
+                        cRWPathIRIS pi = new cRWPathIRIS();
+                        foreach (cRWCommandIRIS cmd in loopp.ReadCommands)
+                            pi.ReadCommands.Add(cmd);
+                        pi.ReadPath = loopp.ReadPath;
+                        foreach (string prop in loopp.ReadProperties.Keys)
+                            pi.ReadProperties.Add(prop, (cRWPropertyIRIS)loopp.ReadProperties[prop]);
+                        //pi.ReadProperties = loopp.ReadProperties;
+                        //cRWPathIRIS pi = (cRWPathIRIS)_merge[key];
+                        //foreach (cRWCommandIRIS cmd in pi.ReadCommands)
+                        //    cmds.Add(cmd);
+                        loopp = pi;
+                    }
+                    else
+                        loopp = _merge[key];
+                    Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes);
+                    foreach (string reskey in lres.Keys)
+                        res.Add(reskey, lres[reskey]);
+                }
+            //
+            return res;
+        }
         private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSeriaDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
         {
+            //if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
+            //    return ReadSimpoLoopDevices(conn, p, min, max, read_path, devtypes);
             if (Regex.IsMatch(read_path, @"LOOP"))
                 return ReadLoopDevices(conn, p, min, max, read_path, devtypes);
+            if (Regex.IsMatch(read_path, @"SIMPO_MIMICOUT$"))
+                return ReadAllMIMICPanels(conn, p, min, max, read_path, devtypes);
+            if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
+                return ReadAllLoopDevices(conn, p, min, max, read_path, devtypes);
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             //if (Regex.IsMatch(read_path, @"(INPUTS_GR|INPUTS/|OUTPUTS|PERIPHER)"))
             //{
@@ -888,7 +1065,13 @@ namespace ljson
                     foreach (cRWCommand cmd in cmds)
                     {
                         string scmd = cmd.CommandString();
-                        scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                        if (!Regex.IsMatch(read_path, @"SIMPO_MIMICOUT$"))
+                            scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                        else
+                        {
+                            cmd.io = eIO.ioRead;
+                            scmd = cmd.CommandString(0, idx);
+                        }
                         byte[] cmdres = cComm.SendCommand(conn, scmd);
                         ////
                         //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
@@ -956,7 +1139,7 @@ namespace ljson
                 return;
             foreach (string loopkey in dreaded.Keys)
             {
-                if (Regex.IsMatch(loopkey, @"LOOP"))
+                if (Regex.IsMatch(loopkey, @"LOOP") || Regex.IsMatch(loopkey, @"SIMPO_MIMIC\d+$"))
                 {
                     SetLoopDevicesValues(loopkey, dreaded[loopkey], devtypes, missedkeys, foundkeys, dloopdevs);
                     continue;
@@ -1298,7 +1481,7 @@ namespace ljson
                     JObject groups = null;
                     if (_node["PROPERTIES"] != null && _node["PROPERTIES"]["Groups"] != null)
                         groups = (JObject)_node["PROPERTIES"]["Groups"];
-                    else
+                    if (groups == null || Regex.IsMatch(key, @"^SIMPO_MIMIC\d+$") || Regex.IsMatch(key, @"^SIMPO_TTELOOP\d+$"))
                     {
                         JObject contains = (JObject)_node["CONTAINS"];
                         if (contains != null)
@@ -1322,14 +1505,20 @@ namespace ljson
                                 {
                                     byte min = Convert.ToByte(tmin.ToString());
                                     byte max = Convert.ToByte(tmax.ToString());
-                                    if (!dpath_minmax.ContainsKey(read_path))
-                                        dpath_minmax.Add(read_path, new Tuple<byte, byte>(min, max));
-                                    else
-                                        dpath_minmax[read_path] = new Tuple<byte, byte>(min, max);
-                                    if (ofirst["@ID"] != null && fname == "ELEMENT")
-                                        fname = ofirst["@ID"].ToString();
-                                    if (!dpath_minmax.ContainsKey(fname))
-                                        dpath_minmax.Add(fname, new Tuple<byte, byte>(min, max));
+                                    if (max > min)
+                                    {
+                                        if (!Regex.IsMatch(key, @"^SIMPO_MIMIC\d+$") && !Regex.IsMatch(key, @"^SIMPO_TTELOOP\d+$"))
+                                        {
+                                            if (!dpath_minmax.ContainsKey(read_path))
+                                                dpath_minmax.Add(read_path, new Tuple<byte, byte>(min, max));
+                                            else
+                                                dpath_minmax[read_path] = new Tuple<byte, byte>(min, max);
+                                        }
+                                        if (ofirst["@ID"] != null && fname == "ELEMENT")
+                                            fname = ofirst["@ID"].ToString();
+                                        if (!dpath_minmax.ContainsKey(fname))
+                                            dpath_minmax.Add(fname, new Tuple<byte, byte>(min, max));
+                                    }
                                     Match loopm = Regex.Match(read_path, @"SIMPO_TTELOOP(\d)$");
                                     if (loopm.Success)
                                     {
@@ -1340,7 +1529,8 @@ namespace ljson
                                 }
                             }
                         }
-                        continue;
+                        if (!Regex.IsMatch(key, @"^SIMPO_MIMIC\d+$") && !Regex.IsMatch(key, @"^SIMPO_TTELOOP\d+$"))
+                            continue;
                     }
                     //
                     if (groups == null)
@@ -1361,9 +1551,13 @@ namespace ljson
                     if (dpath_minmax.ContainsKey(read_path) && !dpath_log.ContainsKey(read_path))
                         dpath_log.Add(read_path, dpath_minmax[read_path]);
                     ///////////////////////
-                    if (dpath_minmax.ContainsKey(read_path))
+                    if (dpath_minmax.ContainsKey(read_path) || (Regex.IsMatch(key, @"_MIMICOUT$") && dpath_minmax.ContainsKey(key)))
                     {
-                        Tuple<byte, byte> tminmax = dpath_minmax[read_path];
+                        Tuple<byte, byte> tminmax = new Tuple<byte, byte>(0, 0);
+                        if (dpath_minmax.ContainsKey(read_path))
+                            tminmax = dpath_minmax[read_path];
+                        else
+                            tminmax = dpath_minmax[key];
                         Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dread = ReadSeriaDevices(conn, p, tminmax.Item1, tminmax.Item2, read_path, devtypes_bynone);
                         foreach (string loopkey in dread.Keys)
                         {
@@ -1493,14 +1687,25 @@ namespace ljson
             JObject res = null;
             string[] keys = key.Split('/');
             JObject jnone = (JObject)CurrentPanel["ELEMENTS"][keys[keys.Length - 1]];
+            if (jnone == null)
+            {
+                Match mnone = Regex.Match(keys[keys.Length - 1], @"SIMPO_TTENONE(\d+)$");
+                if (mnone.Success)
+                    jnone = (JObject)CurrentPanel["ELEMENTS"]["SIMPO_TTELOOP" + mnone.Groups[1].Value];
+            }
             JObject content = (JObject)jnone["CONTAINS"];
+            if (content == null)
+            {
+                jnone = (JObject)CurrentPanel["ELEMENTS"][keys[0]];
+                content = (JObject)jnone["CONTAINS"];
+            }
             foreach (JProperty p in content.Properties())
-                if (Regex.IsMatch(p.Name, "NONE$"))
+                if (Regex.IsMatch(p.Name, "(NONE|MIMICOUT)$"))
                 {
                     res = GetNode(p.Name);
                     break;
                 }
-                else if (p.Value.Type == JTokenType.Object && ((JObject)p.Value)["@ID"] != null && Regex.IsMatch(((JObject)p.Value)["@ID"].ToString(), "NONE$"))
+                else if (p.Value.Type == JTokenType.Object && ((JObject)p.Value)["@ID"] != null && Regex.IsMatch(((JObject)p.Value)["@ID"].ToString(), "(NONE|MIMICOUT)$"))
                 {
                     res = GetNode(((JObject)p.Value)["@ID"].ToString());
                     break;
@@ -1508,11 +1713,15 @@ namespace ljson
             //
             return res;
         }
-        private static void FillJNodeCommands(JObject jgroups, cRWPath rw, string devaddr, int command_len, int inc, Dictionary<string, string> cmds)
+        private static void FillJNodeCommands(int loop_idx, JObject jgroups, cRWPath rw, string devaddr, int command_len, int inc, Dictionary<string, string> cmds)
         {
             cRWCommand cmd = null;
             string scmd = null;
             string _params = "";
+            bool isMIMIC = Regex.IsMatch(rw.WritePath, @"SIMPO_MIMICOUT$");
+            bool isSIMPOTTE = Regex.IsMatch(rw.WritePath, @"SIMPO_TTENONE\d+$");
+            string scmdlen = "00";
+            int cmdlen = Convert.ToInt32(scmdlen, 16);
             foreach (cWriteOperation op in rw.WriteOperationOrder)
             {
                 if (op.operation == eWriteOperation.woBytes)
@@ -1531,10 +1740,15 @@ namespace ljson
                     //
                     if (cmd != null && op.value.Length == command_len && _params != null && _params != "")
                     {
-                        string scmdlen = scmd.Substring(scmd.Length - 2, 2);
-                        int cmdlen = Convert.ToInt32(scmdlen, 16);
+                        //scmdlen = scmd.Substring(scmd.Length - 2, 2);
+                        //cmdlen = Convert.ToInt32(scmdlen, 16);
                         while (_params.Length / 2 < cmdlen)
                             _params += "00";
+                        if (cmds.ContainsKey(scmd) && isSIMPOTTE)
+                        {
+                            scmd += _params.Substring(0, 6);
+                            _params = _params.Substring(5, _params.Length - 6);
+                        }
                         cmds.Add(scmd, _params);
                         _params = "";
                     }
@@ -1545,7 +1759,20 @@ namespace ljson
                         else
                             cmd = new cRWCommand();
                         cmd.InitCommand(op.value);
-                        scmd = cmd.CommandString(Convert.ToInt32(devaddr) + inc);
+                        if (!isMIMIC)
+                        {
+                            scmd = cmd.CommandString(Convert.ToInt32(devaddr) + inc);
+                            scmdlen = scmd.Substring(scmd.Length - 2, 2);
+                            cmdlen = Convert.ToInt32(scmdlen, 16);
+                        }
+                        else
+                        {
+                            cmd.subidx_cmd_len = 3;
+                            //scmd = cmd.CommandStringSubIdxOnly(Convert.ToInt32(devaddr) + inc);
+                            scmd = cmd.CommandString(loop_idx, Convert.ToInt32(devaddr) + inc);
+                            scmdlen = scmd.Substring(scmd.Length - 8, 2);
+                            cmdlen = Convert.ToInt32(scmdlen, 16) - 3;
+                        }
                         _params = "";
                     }
                     else
@@ -1560,10 +1787,13 @@ namespace ljson
             if (scmd != "" && _params != "")
             {
                 //_params += "00";
-                string scmdlen = scmd.Substring(scmd.Length - 2, 2);
-                int cmdlen = Convert.ToInt32(scmdlen, 16);
                 while (_params.Length / 2 < cmdlen)
                     _params += "00";
+                if (cmds.ContainsKey(scmd) && isSIMPOTTE)
+                {
+                    scmd += _params.Substring(0, 6);
+                    _params = _params.Substring(5, _params.Length - 6);
+                }
                 cmds.Add(scmd, _params);
             }
         }
@@ -1574,7 +1804,17 @@ namespace ljson
                 inc = -1;
             Dictionary<string, string> cmds = new Dictionary<string, string>();
             //
-            Dictionary<string, string> loopdevs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, idx.ToString());
+            string _path = nulldev["~path"].ToString();
+            bool isMIMIC = false;
+            Dictionary<string, string> loopdevs = null;
+            if (!Regex.IsMatch(_path, @"SIMPO_MIMIC")) loopdevs = cComm.GetPseudoElementDevices(CurrentPanelID, constants.NO_LOOP, idx.ToString());
+            else
+            {
+                loopdevs = cComm.GetPseudoElementDevices(CurrentPanelID, "SIMPO_MIMIC", idx.ToString());
+                isMIMIC = true;
+            }
+            bool isSIMPOTTENONE = Regex.IsMatch(_path, @"SIMPO_TTENONE");
+            List<cWriteOperation> oTrunc = null;
             foreach (string devaddr in loopdevs.Keys)
             {
                 JObject jdev = JObject.Parse(loopdevs[devaddr]);
@@ -1593,8 +1833,18 @@ namespace ljson
                 else
                     cmdl = new cRWCommand();
                 int command_len = cmdl.CommandLength();
+                if (isMIMIC)
+                {
+                    if (oTrunc == null)
+                    {
+                        rw.RepareSimpoMIMICOUTCommands(command_len);
+                        oTrunc = rw.WriteOperationOrder;
+                    }
+                    else
+                        rw.WriteOperationOrder = oTrunc;
+                }
                 //
-                FillJNodeCommands(jdev, rw, devaddr, command_len, inc, cmds);
+                FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
                 //
                 //foreach (cWriteOperation op in rw.WriteOperationOrder)
                 //{
@@ -1644,7 +1894,14 @@ namespace ljson
             zcmd.InitCommand(cmdfirst);
             for (int i = min + inc; i <= max + inc; i++)
             {
-                string zaddr = zcmd.CommandString(i);
+                string zaddr = null;
+                if (!isMIMIC)
+                    zaddr = zcmd.CommandString(i);
+                else
+                {
+                    zcmd.subidx_cmd_len = 3;
+                    zaddr = zcmd.CommandStringSubIdxOnly(i);
+                }
                 if (!cmds.ContainsKey(zaddr))
                     cmds.Add(zaddr, zparam);
             }
@@ -1653,6 +1910,7 @@ namespace ljson
         }
         private static void FillJNodeCommands(JObject jgroups, cRWPath rw, int command_len, Dictionary<string, string> cmds)
         {
+            if (Regex.IsMatch(rw.WritePath, "SIMPO_PANELOUTPUTS")) rw.WriteCmdReplacementsByAdditionalBytes(command_len);
             cRWCommand cmd = null;
             string scmd = null;
             string _params = "";
@@ -1683,7 +1941,15 @@ namespace ljson
                         int cmdlen = Convert.ToInt32(scmdlen, 16);
                         while (_params.Length / 2 < cmdlen)
                             _params += "00";
-                        cmds.Add(scmd, _params);
+                        string scmd2add = scmd;
+                        if (rw.WriteCommandsReplacement.ContainsKey(scmd))
+                        {
+                            string repl = rw.WriteCommandsReplacement[scmd].First();
+                            int addlen = repl.Length - scmd.Length;
+                            if (addlen > 0 && _params.Length >= addlen)
+                                scmd2add += "_" + _params.Substring(0, addlen);
+                        }
+                        cmds.Add(scmd2add, _params);
                         _params = "";
                     }
                     if (op.value.Length == command_len && !Regex.IsMatch(op.value, "^0+$"))
@@ -1712,7 +1978,15 @@ namespace ljson
                 int cmdlen = Convert.ToInt32(scmdlen, 16);
                 while (_params.Length / 2 < cmdlen)
                     _params += "00";
-                cmds.Add(scmd, _params);
+                string scmd2add = scmd;
+                if (rw.WriteCommandsReplacement.ContainsKey(scmd))
+                {
+                    string repl = rw.WriteCommandsReplacement[scmd].First();
+                    int addlen = repl.Length - scmd.Length;
+                    if (addlen > 0 && _params.Length >= addlen)
+                        scmd2add += "_" + _params.Substring(0, addlen);
+                }
+                cmds.Add(scmd2add, _params);
             }
         }
         private static Dictionary<string, string> WriteSingleElementCommands(string key, JObject _node)
@@ -1798,7 +2072,7 @@ namespace ljson
                 {
                     JObject jgrp = ChangeGroupsElementsPath(groups, devaddr);
                     jgrp = GroupsWithValues(jgrp);
-                    FillJNodeCommands(jgrp, rw, devaddr, cmdlen, inc, res);
+                    FillJNodeCommands(0, jgrp, rw, devaddr, cmdlen, inc, res);
                 }
             //
             Dictionary<string, string> uniquecmds = new Dictionary<string, string>();
@@ -1833,7 +2107,7 @@ namespace ljson
             foreach (string cmd in cmds.Keys)
             {
                 string sfirs = (cmds[cmd].Length / 2 + 3).ToString("X2");
-                string cmdnew = sfirs + cmd.Substring(2);
+                string cmdnew = Regex.Replace(sfirs + cmd.Substring(2), @"_[\da-fA-F]+$", "");
                 string scmd = cmdnew + cmds[cmd];
                 byte[] res = cComm.SendCommand(conn, scmd);
                 string sres = "";
@@ -1855,15 +2129,26 @@ namespace ljson
             Tuple<int, int> res = new Tuple<int, int>(min, max);
             string[] keys = key.Split('/');
             JObject jnone = (JObject)CurrentPanel["ELEMENTS"][keys[keys.Length - 1]];
+            if (jnone == null)
+            {
+                Match mnone =  Regex.Match(keys[keys.Length - 1], @"SIMPO_TTENONE(\d+)$");
+                if (mnone.Success)
+                    jnone = (JObject)CurrentPanel["ELEMENTS"]["SIMPO_TTELOOP" + mnone.Groups[1].Value];
+            }
             JObject content = (JObject)jnone["CONTAINS"];
+            if (content == null)
+            {
+                jnone = (JObject)CurrentPanel["ELEMENTS"][keys[0]];
+                content = (JObject)jnone["CONTAINS"];
+            }
             JObject onone = null;
             foreach (JProperty p in content.Properties())
-                if (Regex.IsMatch(p.Name, "NONE$"))
+                if (Regex.IsMatch(p.Name, "(NONE|MIMICOUT)$"))
                 {
                     onone = (JObject)p.Value;
                     break;
                 }
-                else if (p.Value.Type == JTokenType.Object && ((JObject)p.Value)["@ID"] != null && Regex.IsMatch(((JObject)p.Value)["@ID"].ToString(), "NONE$"))
+                else if (p.Value.Type == JTokenType.Object && ((JObject)p.Value)["@ID"] != null && Regex.IsMatch(((JObject)p.Value)["@ID"].ToString(), "(NONE|MIMICOUT)$"))
                 {
                     onone = (JObject)p.Value;
                     break;
@@ -1884,11 +2169,18 @@ namespace ljson
             string loops_root = parr[0];
             JObject elements = (JObject)CurrentPanel["ELEMENTS"];
             foreach (JProperty p in elements.Properties())
+            {
                 if (p.Value.Type == JTokenType.Object && Regex.IsMatch(p.Name, "loop", RegexOptions.IgnoreCase) && Regex.IsMatch(loops_root, "^" + Regex.Replace(p.Name, @"[^a-zA-Z]", @"[\w\W]*?") + "$", RegexOptions.IgnoreCase))
                 {
                     loops_root = p.Name;
                     break;
                 }
+                if (p.Value.Type == JTokenType.Object && Regex.IsMatch(loops_root, "SIMPO_LOOPDEVICE") && p.Name == "iris_loop_devices")
+                {
+                    loops_root = p.Name;
+                    break;
+                }
+            }
             if (elements[loops_root] == null)
                 return res;
             JObject content = (JObject)elements[loops_root]["CONTAINS"];
@@ -1902,18 +2194,42 @@ namespace ljson
                     break;
                 }
             if (min >= max)
-                return res;
+            {
+                if (loops_root == "SIMPO_MIMICPANELS")
+                {
+                    min = int.MaxValue;
+                    max = int.MinValue;
+                    foreach (JProperty pmimic in content.Properties())
+                    {
+                        Match mmimic = Regex.Match(pmimic.Name, @"SIMPO_MIMIC(\d+)$");
+                        if (!mmimic.Success) continue;
+                        int imimic = Convert.ToInt32(mmimic.Groups[1].Value);
+                        if (imimic < min) min = imimic;
+                        if (imimic > max) max = imimic;
+                    }
+                }
+                if (min >= max)
+                    return res;
+            }
             Dictionary<string, cRWPath> merge = WriteReadMerge;
             Dictionary<string, Dictionary<string, cRWPath>> rwdevs = new Dictionary<string, Dictionary<string, cRWPath>>();
             for (int i = min; i <= max; i++)
             {
                 string mkey = Regex.Replace(key, @"LOOP\d+", "LOOP" + i.ToString(), RegexOptions.IgnoreCase);
+                mkey = Regex.Replace(key, @"MIMIC\d+", "MIMIC" + i.ToString(), RegexOptions.IgnoreCase);
+                if (Regex.IsMatch(mkey, @"^SIMPO_MIMIC\d+$")) mkey += "/SIMPO_MIMICOUT";
+                if (!merge.ContainsKey(mkey))
+                {
+                    Match mnom = Regex.Match(mkey, @"SIMPO_TTELOOP(\d+)$");
+                    if (mnom.Success)
+                        mkey = "SIMPO_LOOPDEVICES/SIMPO_TTENONE" + mnom.Groups[1].Value;
+                }
                 if (!merge.ContainsKey(mkey))
                     continue;
                 cRWPath rw = merge[mkey];
                 Tuple<int, int> devrange = NONEElementsRange(mkey);
                 JObject devnull = NONEElementRW(mkey);
-                string remask = "LOOP" + i.ToString();
+                string remask = "(LOOP|SIMPO_MIMIC)" + i.ToString();
                 string[] karr = mkey.Split('/');
                 foreach (string s in karr)
                     if (Regex.IsMatch(s, remask + "$"))
@@ -1921,8 +2237,16 @@ namespace ljson
                         remask = s;
                         break;
                     }
+                string mimickey = remask;
+                string simpoloopkey = "SIMPO_TTELOOP";
+                string simpoloopmask = "SIMPO_TTELOOP" + i.ToString();
                 remask = "^" + remask;
-                if (!cComm.PseudoElementExists(CurrentPanelID, constants.NO_LOOP, remask))
+                bool lexists = cComm.PseudoElementExists(CurrentPanelID, constants.NO_LOOP, remask);
+                if (!lexists && Regex.IsMatch(remask, "MIMIC"))
+                    lexists = cComm.PseudoElementExists(CurrentPanelID, mimickey, remask);
+                if (!lexists && Regex.IsMatch(remask, "MIMIC"))
+                    lexists = cComm.PseudoElementExists(CurrentPanelID, simpoloopkey, simpoloopmask);
+                if (!lexists)
                     continue;
                 Dictionary<string, string> compiled = LoopCompiledWriteCommands(i, devrange.Item1, devrange.Item2, devnull);
                 foreach (string ckey in compiled.Keys)
@@ -1958,14 +2282,19 @@ namespace ljson
                 if (_node["~rw"] == null)
                     continue;
                 string writekey = _node["~rw"]["WritePath"].ToString();
-                if (CurrentPanelType == "iris" && Regex.IsMatch(writekey, @"(LOOP)"))
+                if (CurrentPanelType == "iris" && Regex.IsMatch(writekey, @"(LOOP|SIMPO_MIMIC\d)"))
                 {
                     if (_node["CONTAINS"] == null || _node["CONTAINS"].Type != JTokenType.Object)
                         continue;
                     JObject content = (JObject)_node["CONTAINS"];
                     JProperty pnone = null;
                     foreach (JProperty p in content.Properties())
-                        if (p.Value.Type == JTokenType.Object && Regex.IsMatch(p.Name, @"NONE$"))
+                        if (p.Value.Type == JTokenType.Object && Regex.IsMatch(p.Name, @"(NONE|MIMICOUT)$"))
+                        {
+                            pnone = p;
+                            break;
+                        }
+                        else if (p.Name == "ELEMENT" && p.Value.Type == JTokenType.Object && p.Value["@ID"] != null && Regex.IsMatch(p.Value["@ID"].ToString(), "(NONE|MIMICOUT)$"))
                         {
                             pnone = p;
                             break;
@@ -1973,12 +2302,15 @@ namespace ljson
                     if (pnone == null && content["ELEMENT"] != null && content["ELEMENT"].Type == JTokenType.Object)
                     {
                         JObject el = (JObject)content["ELEMENT"];
-                        if (el["@ID"] != null && Regex.IsMatch(el["@ID"].ToString(), "NONE$"))
+                        if (el["@ID"] != null && Regex.IsMatch(el["@ID"].ToString(), "(NONE|MIMICOUT)$"))
                             pnone = new JProperty("@ID", el["@ID"]);
                     }
                     if (pnone == null)
                         continue;
                     writekey = Regex.Replace(writekey, @"LOOP\d+", "LOOP1");
+                    writekey = Regex.Replace(writekey, @"^SIMPO_LOOPDEVICES/", "");
+                    writekey = Regex.Replace(writekey, @"SIMPO_MIMIC\d+", "SIMPO_MIMIC1");
+                    writekey = Regex.Replace(writekey, @"^SIMPO_MIMICPANELS/", "");
                     if (!dwrite.ContainsKey(writekey))
                     {
                         dwrite.Add(writekey, new List<JObject>());
@@ -1997,7 +2329,7 @@ namespace ljson
             Dictionary<string, List<JObject>> dloop = new Dictionary<string, List<JObject>>();
             foreach (string writepath in dwrite.Keys)
             {
-                if (Regex.IsMatch(writepath, "loop", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(writepath, @"(loop|mimic\d)", RegexOptions.IgnoreCase))
                 {
                     if (!dloop.ContainsKey(writepath))
                         dloop.Add(writepath, dwrite[writepath]);
@@ -2007,7 +2339,7 @@ namespace ljson
                     if (!dseria.ContainsKey(writepath))
                         dseria.Add(writepath, dwrite[writepath]);
                 }
-                else if (writepath == "SIMPO_PANELS_R")
+                else if (writepath == "SIMPO_PANELS")
                 {
                     if (!dseria.ContainsKey(writepath))
                         dseria.Add(writepath, dwrite[writepath]);
@@ -2024,9 +2356,17 @@ namespace ljson
                 Dictionary<string, string> dsingle = WriteSingleElementCommands(key, dnormal[key]);
                 foreach (string singlekey in dsingle.Keys)
                 {
-                    compiled.Add(singlekey, dsingle[singlekey]);
+                    if (!compiled.ContainsKey(singlekey))
+                        compiled.Add(singlekey, dsingle[singlekey]);
+                    else
+                        compiled[singlekey] = cRWPath.MergeWriteParams(compiled[singlekey], dsingle[singlekey]);
                     if (settings.logreads)
-                        _log_byteswrite.Add(singlekey, dsingle[singlekey]);
+                    {
+                        if (!_log_byteswrite.ContainsKey(singlekey))
+                            _log_byteswrite.Add(singlekey, dsingle[singlekey]);
+                        else
+                            _log_byteswrite[singlekey] = cRWPath.MergeWriteParams(_log_byteswrite[singlekey], dsingle[singlekey]);
+                    }
                 }
             }
             foreach (string key in dseria.Keys)

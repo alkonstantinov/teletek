@@ -228,7 +228,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
 
             boundAsync.getJsonNode(k, 'Groups').then(res => {
                 if (!res) return;
-                
+                alert(res);
                 let btnJSON = JSON.parse(res);
                 const name = btnJSON["~noname"]["fields"]["NAME"]
                 const loop = btnJSON["~noname"]["fields"]["LOOP"]
@@ -553,7 +553,7 @@ function fatFbfFunc(json) {
 
 //#region Loop Type
 function showLoopType(level, type, key, showDivId, selectDivId) {
-
+    //showLoopType(3, 'Input', 'IRIS8_TTELOOP1' + '+' + this.value, 'loop_type-showDiv_input_type_Type-target', 'input_type_Type')
     //showLoopType(2, 'Output', "IRIS_LOOP1", 'loop_type-showDiv_output_type', 'output_type')
     const showDiv = document.getElementById(showDivId);
     const selectDiv = document.getElementById(selectDivId);
@@ -579,8 +579,8 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
         case 2:
             title = "Device";
             // remove lower menus if any
-            if (lowerDiv) showDiv.removeChild(lowerDiv.parentNode.parentNode);
-            if (lowestDiv) showDiv.removeChild(lowestDiv.parentNode.parentNode);
+            if (lowerDiv) showDiv.removeChild(lowerDiv.parentNode); //
+            if (lowestDiv) showDiv.removeChild(lowestDiv.parentNode); //
 
             nextFunc = `showLoopType(3, '${type}', '${key}' + '+' + this.value, '${showDivId}', '${selectDivId}')`;
             dataUsed = Object.keys(CONFIGURED_IO[key])
@@ -604,7 +604,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
         case 3:
             title = type;
             // remove lower menus if any
-            if (lowestDiv) lowestDiv.parentNode.parentNode.parentNode.removeChild(lowestDiv.parentNode.parentNode);
+            if (lowestDiv) lowestDiv.parentNode.parentNode.removeChild(lowestDiv.parentNode); // one level removed from here
             let jsonAtLevel3 = CONFIGURED_IO[key.split("+")[0]][key.split("+")[1]];
             dataUsed = Object.keys(jsonAtLevel3)
                 .filter(ch => ch !== "selected")
@@ -631,7 +631,13 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                     aria-label="${newT.t(localStorage.getItem('lang'), title.toLowerCase())}"
                     onchange="javascript: ${nextFunc}" >
                     <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
+    alert(JSON.stringify(dataUsed));
     dataUsed.map(o => {
+        if (o["label"].startsWith("TTELOOP")) {
+            o["label"] = o["label"].replace("TTELOOP", "Teletek Loop ");
+        } else if (o["label"].startsWith("LOOP")) {
+            o["label"] = o["label"].replace("LOOP", "Sensor Loop ");
+        }
         let disabled = ""; let tooltip = "";
         if (level >= 2) {
             if (type.toLowerCase() === "output" && (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`) || o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`))) {
@@ -1804,8 +1810,8 @@ function addElement(id, elementType = "", btnId = "_btn") {
             if (el) el.parentNode.removeChild(el);
 
             let button = document.getElementById(btnId);
-            if (lst.length < elements && button.style.display === "none") {
-                button.style.display = "block";
+            if (lst.length <= elements && button.style.display === "none") {
+                button.style.display = "flex";
             }
         } else {
             return;
@@ -1991,7 +1997,7 @@ async function inputGroupTextGenerator(last, elementType) {
                                         <input type="checkbox" id="gr_input_logic_${last}"
                                                 ${isChecked ? "checked" : ""}
                                                 onchange="javascript: inputGroupHandler(this.checked, ${currentJSON["ITEMS"]["ITEM"][1]["@VALUE"]}, ${currentJSON["ITEMS"]["ITEM"][0]["@VALUE"]}, '${currentJSON["~path"]}', this.id);"/>
-                                        <span class="slider"></span>
+                                        <span class="slider fire"></span>
                                     </label>
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}
                                 </p>

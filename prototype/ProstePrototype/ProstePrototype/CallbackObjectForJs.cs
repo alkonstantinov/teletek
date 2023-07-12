@@ -146,17 +146,26 @@ namespace ProstePrototype
             if (jnode != null)
             {
                 JToken t = jnode[key];
-                //File.WriteAllTextAsync("wb3.json", t.ToString());
+                
                 if (t != null)
+                {
+                    File.WriteAllTextAsync("wb3.json", t.ToString());
                     return t.ToString();
+                }
                 if (jnode["PROPERTIES"] != null)
                     t = jnode["PROPERTIES"][key];
                 if (t != null)
+                {
+                    File.WriteAllTextAsync("wb3.json", t.ToString());
                     return t.ToString();
+                }
                 if (jnode["CONTAINS"] != null)
                     t = jnode["CONTAINS"];
                 if (t != null)
+                {
+                    File.WriteAllTextAsync("wb3.json", t.ToString());
                     return t.ToString();
+                }
             }
             return null;
         }

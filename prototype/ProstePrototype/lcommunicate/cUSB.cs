@@ -68,7 +68,7 @@ namespace lcommunicate
             List<byte[]> lcmd = split_command(pack_cmd(_command));
             foreach (byte[] a in lcmd) _hid_conn.Write(a);
             //_hid_conn.Write(pack_cmd(_command));
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             byte[] res = new byte[1024];
             int cnt = _hid_conn.Read(res);
             res = unpack_result(_command, res);
@@ -88,7 +88,7 @@ namespace lcommunicate
             List<byte[]> lcmd = split_command(pack_cmd(_command));
             foreach (byte[] a in lcmd) _hid_conn.Write(a);
             //_hid_conn.Write(pack_cmd(_command));
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             byte[] res = new byte[1024];
             int cnt = _hid_conn.Read(res);
             res = unpack_result(_command, res);
