@@ -977,7 +977,7 @@ namespace ljson
             //
             return res;
         }
-        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllSimpoLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             Dictionary<string, cRWPath> _merge = WriteReadMerge;
@@ -1009,16 +1009,57 @@ namespace ljson
             //
             return res;
         }
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            Dictionary<string, cRWPath> _merge = WriteReadMerge;
+            //
+            string rp = Regex.Replace(read_path, @"/IRIS\d*?_(TTENONE|MNONE|SNONE)$", "");
+            string mask = Regex.Replace(rp, @"LOOP\d", @"LOOP\d");
+            //
+            List<string> loopkeys = new List<string>();
+            foreach (string key in _merge.Keys)
+                if (Regex.IsMatch(key, mask))
+                    loopkeys.Add(key);
+            foreach (string key in loopkeys)
+            {
+                cRWPath loopp = _merge[key];
+                if (CurrentPanelType == "iris")
+                {
+                    cRWPathIRIS pi = new cRWPathIRIS();
+                    foreach (cRWCommandIRIS cmd in loopp.ReadCommands)
+                        pi.ReadCommands.Add(cmd);
+                    pi.ReadPath = loopp.ReadPath;
+                    foreach (string prop in loopp.ReadProperties.Keys)
+                        pi.ReadProperties.Add(prop, (cRWPropertyIRIS)loopp.ReadProperties[prop]);
+                    //pi.ReadProperties = loopp.ReadProperties;
+                    //cRWPathIRIS pi = (cRWPathIRIS)_merge[key];
+                    //foreach (cRWCommandIRIS cmd in pi.ReadCommands)
+                    //    cmds.Add(cmd);
+                    loopp = pi;
+                }
+                else
+                    loopp = _merge[key];
+                Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes);
+                foreach (string reskey in lres.Keys)
+                    res.Add(reskey, lres[reskey]);
+            }
+            //
+            return res;
+        }
         private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSeriaDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
         {
             //if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
             //    return ReadSimpoLoopDevices(conn, p, min, max, read_path, devtypes);
+            //
             if (Regex.IsMatch(read_path, @"LOOP"))
-                return ReadLoopDevices(conn, p, min, max, read_path, devtypes);
+                //return ReadLoopDevices(conn, p, min, max, read_path, devtypes);
+                return ReadAllLoopDevices(conn, p, min, max, read_path, devtypes);
+            //
             if (Regex.IsMatch(read_path, @"SIMPO_MIMICOUT$"))
                 return ReadAllMIMICPanels(conn, p, min, max, read_path, devtypes);
             if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
-                return ReadAllLoopDevices(conn, p, min, max, read_path, devtypes);
+                return ReadAllSimpoLoopDevices(conn, p, min, max, read_path, devtypes);
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             //if (Regex.IsMatch(read_path, @"(INPUTS_GR|INPUTS/|OUTPUTS|PERIPHER)"))
             //{
@@ -2131,7 +2172,7 @@ namespace ljson
             JObject jnone = (JObject)CurrentPanel["ELEMENTS"][keys[keys.Length - 1]];
             if (jnone == null)
             {
-                Match mnone =  Regex.Match(keys[keys.Length - 1], @"SIMPO_TTENONE(\d+)$");
+                Match mnone = Regex.Match(keys[keys.Length - 1], @"SIMPO_TTENONE(\d+)$");
                 if (mnone.Success)
                     jnone = (JObject)CurrentPanel["ELEMENTS"]["SIMPO_TTELOOP" + mnone.Groups[1].Value];
             }

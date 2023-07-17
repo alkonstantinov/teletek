@@ -695,7 +695,7 @@ namespace ProstePrototype
                     conn_params = rw.uc1.USBDevice;
                 }
                 else if (tabIdx == 3)
-                    conn_params = "read-simpo.log";
+                    conn_params = "read.log";
                 Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));
                 funcThread.Start();
 
@@ -833,11 +833,20 @@ namespace ProstePrototype
             });
             wb2.Load("file:///" + myFile);
 
-            lvBreadCrumbs.Items.Clear();
+            if (lvBreadCrumbs.Items.Count > 0)
+            {
+                lvBreadCrumbs.Items.Clear();
+            }
 
             AddPagesConstant();
             ApplyTheme();
-            ApplyLang(languageButton.CurrentLanguage);
+            try
+            {
+                ApplyLang(languageButton.CurrentLanguage);
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void Write_Clicked(object sender, RoutedEventArgs e)
@@ -947,6 +956,7 @@ namespace ProstePrototype
         private void addLastBreadCrumb(string panel_type, string page)
         {
             string color = "Blue";
+            if (panel_type == null) panel_type = "";
             if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") || 
                 page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
@@ -1088,7 +1098,8 @@ namespace ProstePrototype
         private void initBreadCrumbs(string page, JArray breadCrumbs)
         {   
             JObject jnode = new JObject(cJson.GetNode(page));
-            string panel_type = (string)jnode["@PRODUCTNAME"];
+            //string panel_type = (string)jnode["@PRODUCTNAME"];
+            string panel_type = (jnode["@PRODUCTNAME"] != null) ? (string)jnode["@PRODUCTNAME"] : "";
             lvBreadCrumbs.Items.Clear();            
 
             string color = "Blue";
@@ -1098,7 +1109,7 @@ namespace ProstePrototype
             foreach (string item in breadCrumbs.Select(x => x.Value<string>()))
             {
                 string currItem = item;
-                if (item == "iris" && jnode.ToString().Contains("SIMPO"))
+                if (item == "iris" && jnode.ToString().Contains("SIMPO") && !jnode.ToString().Contains("_R")) // SIMPO_NETWORK_R, SIMPO_PANEL_R exceptions
                 {
                     currItem = "simpo";
                 }

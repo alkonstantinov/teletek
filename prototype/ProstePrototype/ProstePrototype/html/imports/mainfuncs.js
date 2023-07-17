@@ -228,7 +228,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
 
             boundAsync.getJsonNode(k, 'Groups').then(res => {
                 if (!res) return;
-                alert(res);
+
                 let btnJSON = JSON.parse(res);
                 const name = btnJSON["~noname"]["fields"]["NAME"]
                 const loop = btnJSON["~noname"]["fields"]["LOOP"]
@@ -631,7 +631,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                     aria-label="${newT.t(localStorage.getItem('lang'), title.toLowerCase())}"
                     onchange="javascript: ${nextFunc}" >
                     <option value="" disabled ${dataUsed.some(x => x["selected"]) ? "" : "selected"} >${newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
-    alert(JSON.stringify(dataUsed));
+    
     dataUsed.map(o => {
         if (o["label"].startsWith("TTELOOP")) {
             o["label"] = o["label"].replace("TTELOOP", "Teletek Loop ");
