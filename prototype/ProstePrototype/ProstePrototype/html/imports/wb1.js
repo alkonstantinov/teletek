@@ -187,6 +187,7 @@ const addButton = (title, div, index, localJSON = {}) => {
     // button color definition
     let color = indexFlag ? localJSON.deviceType : "";
     if (color === 'guard') color = 'normal'; // options for color: "normal", "fire", "grasse"
+    //if (color === 'guard') return; // case without Eclipse - for delivering without Eclipse 
 
     // clean all digits from used deviceType
     let key;
@@ -404,7 +405,8 @@ function sendMsg(self) {
         const panelId = self.parentNode.getAttribute('element').replaceAll("_", "-");
         sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Delete', '~panel_id': panelId });
     } else {
-        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': self.getAttribute('topic') });
+        const panelId = self.parentNode.getAttribute('element').replaceAll("_", "-");
+        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': self.getAttribute('topic'), '~panel_id': panelId });
     }
 }
 

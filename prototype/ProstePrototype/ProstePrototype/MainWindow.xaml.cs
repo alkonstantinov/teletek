@@ -390,11 +390,29 @@ namespace ProstePrototype
                     switch (json["Function"].ToString())
                     {
                         case "Update": break;
-                        case "Read": break;
-                        case "Delete":
+                        case "Read":
                             string currentPanelId = json["~panel_id"].ToString();
+                            string oldPanelId = cJson.CurrentPanelID.ToString();
+                            cJson.CurrentPanelID = currentPanelId;
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Scan_Clicked(new object(), new RoutedEventArgs());
+                            });
+                                cJson.CurrentPanelID = oldPanelId;
                             break;
-                        case "Write": break;
+                        case "Delete":
+                            currentPanelId = json["~panel_id"].ToString();
+                            break;
+                        case "Write":
+                            currentPanelId = json["~panel_id"].ToString();
+                            oldPanelId = cJson.CurrentPanelID.ToString();
+                            cJson.CurrentPanelID = currentPanelId;
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Write_Clicked(new object(), new RoutedEventArgs());
+                            });
+                            cJson.CurrentPanelID = oldPanelId;
+                            break;
                         case "Verify": break;
                         case "Rename":
                             currentPanelId = json["~panel_id"].ToString();
@@ -671,7 +689,8 @@ namespace ProstePrototype
 
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
-            rw = new ReadWindow();
+            //rw = new ReadWindow(0); 
+            rw = new ReadWindow(); // default 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
@@ -696,7 +715,7 @@ namespace ProstePrototype
                     conn_params = rw.uc1.USBDevice;
                 }
                 else if (tabIdx == 3)
-                    conn_params = "read-iris8.log";
+                    conn_params = "read.log";
                 Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));
                 funcThread.Start();
 
@@ -730,7 +749,7 @@ namespace ProstePrototype
         private void Open_Clicked(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*";
+            openFileDialog.Filter = "Teletek Manager File (*.TMF)|*.TMF|All files (*.*)|*.*";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
@@ -789,8 +808,8 @@ namespace ProstePrototype
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*"; // Filter files by extension
+            dlg.DefaultExt = ".TMF"; // Default file extension
+            dlg.Filter = "Teletek Manager File (*.TMF)|*.TMF|All files (*.*)|*.*"; // Filter files by extension
 
             // Show save file dialog box
             Nullable<bool> result = dlg.ShowDialog();

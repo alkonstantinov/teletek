@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,7 +21,7 @@ namespace ProstePrototype
         public UserControl2 uc1 { get; set; }
         public UserControl3 uc2 { get; set; }
         public UserControl uc3 { get; set; }
-        public BitmapImage imgsource = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+        public BitmapImage imgsource = new BitmapImage(new Uri("pack://application:,,,/Images/01.IRIS.ico")); //@" / Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
         private SolidColorBrush defaultColorBrush = (SolidColorBrush)App.Current.FindResource("DefaultColor");
         private SolidColorBrush grayColorBrush = (SolidColorBrush)App.Current.FindResource("GrayColor");
         public ReadWindow()

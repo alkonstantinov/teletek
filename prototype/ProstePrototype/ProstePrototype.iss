@@ -2,12 +2,12 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Teletek Manager"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.0.0"
 #define MyAppPublisher "Teletek Electronics JSC"
 #define MyAppURL "https://teletek-electronics.com/"
 #define MyAppExeName "ProstePrototype.exe"
-#define MyAppAssocName MyAppName + " File"
-#define MyAppAssocExt ".tdf"
+#define MyAppAssocName MyAppName + " Teletek Manager File"
+#define MyAppAssocExt ".TMF"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
 [Setup]
