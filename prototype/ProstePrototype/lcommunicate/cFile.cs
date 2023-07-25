@@ -36,6 +36,10 @@ namespace lcommunicate
                 return null;
             }
         }
+        internal override object ConnectCached(object o, object _cache)
+        {
+            return Connect(o);
+        }
         internal override byte[] SendCommand(object _connection, byte[] _command)
         {
             string scmd = "";

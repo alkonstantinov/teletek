@@ -9,6 +9,7 @@
     <system:String x:Key="MainMenuExport">Export</system:String>
     <system:String x:Key="MainMenuFile">File</system:String>
     <system:String x:Key="MainMenuOpen">Open</system:String>
+    <system:String x:Key="MainMenuOpenTDF">Open TDF file</system:String>
     <system:String x:Key="MainMenuSave">Save</system:String>
     <system:String x:Key="MainMenuSaveas">Save As</system:String>
     <system:String x:Key="MainMenuSystemLog">System Log</system:String>

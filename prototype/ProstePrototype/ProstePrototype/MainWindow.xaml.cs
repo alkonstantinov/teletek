@@ -597,6 +597,7 @@ namespace ProstePrototype
                 this.Dispatcher.Invoke(() =>
                 {
                     scan_btn.IsEnabled = true;
+                    mainMenuOpenTDF_btn.IsEnabled = true;
                     ChangeTheme(DarkMode);
                 } );
 
@@ -733,17 +734,37 @@ namespace ProstePrototype
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
-                //ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
-                ////
-                //cTDFParams conn = new cTDFParams();
-                //XmlDocument doc = new XmlDocument();
-                //doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
-                //conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
-                //conn.readcfg = cJson.ReadXML();
-                //conn.template = cJson.TemplateXML();
-                //ReadDevice(conn, popUpWindow);
-                ////    txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
                 cJson.LoadFile(openFileDialog.FileName);
+            }
+        }
+        
+        private void OpenTDF_Clicked(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                
+                Thread funcThread = new Thread(() => {
+                        cTDFParams conn = new cTDFParams();
+                        XmlDocument doc = new XmlDocument();
+                        doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
+                        conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
+                        conn.readcfg = cJson.ReadXML();
+                        conn.template = cJson.TemplateXML();
+                        ReadDevice(conn, popUpWindow);
+                    }
+                );
+                funcThread.Start();
+
+                popUpWindow.ShowDialog();
+
+                funcThread.Join();
+
+                popUpWindow.Close();
+                //cJson.LoadFile(openFileDialog.FileName);
             }
         }
         private void Export_Clicked(object sender, RoutedEventArgs e)

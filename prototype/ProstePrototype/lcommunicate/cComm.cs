@@ -36,6 +36,8 @@ namespace lcommunicate
         internal object _conn = null;
         //
         internal virtual object Connect(object o) { return null; }
+        public virtual object GetCache() { return null; }
+        internal virtual object ConnectCached(object o, object _cache) { return null; }
         internal virtual void Close(object o) { }
         internal virtual void Close() { }
         internal virtual byte[] SendCommand(object _connection, byte[] _command) { return null; }
@@ -894,6 +896,15 @@ namespace lcommunicate
             else
                 return null;
         }
+        public static cTransport ConnectTDFCached(cTDFParams p, object _cache)
+        {
+            cTransport t = new cTDF();
+            object conn = t.ConnectCached(p, _cache);
+            if (conn != null)
+                return t;
+            else
+                return null;
+        }
         public static cTransport ConnectHID(HidDevice p)
         {
             cTransport t = new cUSB();
@@ -912,6 +923,19 @@ namespace lcommunicate
                 conn = cComm.ConnectFile((string)conn_params);
             else if (conn_params is cTDFParams)
                 conn = cComm.ConnectTDF((cTDFParams)conn_params);
+            else if (conn_params is HidDevice)
+                conn = cComm.ConnectHID((HidDevice)conn_params);
+            return conn;
+        }
+        public static cTransport ConnectBaseCached(object conn_params, object _cache)
+        {
+            cTransport conn = null;
+            if (conn_params is cIPParams)
+                conn = cComm.ConnectIP(((cIPParams)conn_params).address, ((cIPParams)conn_params).port);
+            else if (conn_params is string)
+                conn = cComm.ConnectFile((string)conn_params);
+            else if (conn_params is cTDFParams)
+                conn = cComm.ConnectTDFCached((cTDFParams)conn_params, _cache);
             else if (conn_params is HidDevice)
                 conn = cComm.ConnectHID((HidDevice)conn_params);
             return conn;

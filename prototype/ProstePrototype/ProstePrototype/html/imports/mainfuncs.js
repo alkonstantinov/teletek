@@ -1923,7 +1923,7 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
             `sendMessageWPF({ 'Command': 'RemovingElement', 'Params': { 'elementType': '${elementType}', 'elementNumber': '${last}' } }, comm = { 'funcName': 'addElement', 'params': { 'id': '${last}', 'elementType': '' } })` :
             `sendMessageWPF({ 'Command': 'RemovingLoopElement', 'Params': ${JSON.stringify(params).replaceAll('"', '\'')} }, comm = { 'funcName': 'addElement', 'params': { 'id': '${last}', 'elementType': '', 'btnId': '${fieldBtnId}' } })`;
 
-        newUserElement = `<div onclick="javascript: ${showFn}('${last}', ${type}); addActive('ram_panel_2')" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
+        newUserElement = `<div onclick="javascript: ${showFn}('${last}', ${type}); addActive('ram_panel_1')" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
                                 <div class="ram_card_img_top">
                                     <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
                                 </div>

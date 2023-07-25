@@ -63,6 +63,13 @@ namespace ljson
         public static JObject ReadXML()
         {
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
+            if (cfg.ReadConfig == null)
+            {
+                string xml = File.ReadAllText(cfg.ReadConfigPath);
+                XmlDocument xdoc = new XmlDocument();
+                xdoc.LoadXml(xml);
+                cfg.ReadConfig = xdoc;
+            }
             string sjson = JsonConvert.SerializeXmlNode((XmlDocument)cfg.ReadConfig);
             return JObject.Parse(sjson);
         }
@@ -1020,7 +1027,17 @@ namespace ljson
             List<string> loopkeys = new List<string>();
             foreach (string key in _merge.Keys)
                 if (Regex.IsMatch(key, mask))
-                    loopkeys.Add(key);
+                {
+                    string looptype = "";
+                    if (Regex.IsMatch(key, "TTE")) looptype = "tte";
+                    else if (Regex.IsMatch(key, "(SENSOR|MODULE)")) looptype = "sens";
+                    int loopnom = -1;
+                    Match mnom = Regex.Match(key, @"LOOP(\d+)");
+                    if (mnom.Success) loopnom = Convert.ToInt32(mnom.Groups[1].Value);
+                    if (looptype == "tte" && loopnom <= _tteloops_count_in_peripherial_devs ||
+                        looptype == "sens" && loopnom <= _sensloops_count_in_peripherial_devs)
+                        loopkeys.Add(key);
+                }
             foreach (string key in loopkeys)
             {
                 cRWPath loopp = _merge[key];
@@ -1047,6 +1064,8 @@ namespace ljson
             //
             return res;
         }
+        private static int _tteloops_count_in_peripherial_devs = -1;
+        private static int _sensloops_count_in_peripherial_devs = -1;
         private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSeriaDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
         {
             //if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
@@ -1061,9 +1080,12 @@ namespace ljson
             if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
                 return ReadAllSimpoLoopDevices(conn, p, min, max, read_path, devtypes);
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+            JObject pdtypes = (JObject)CurrentPanel["~pdtypes"];
+            if (pdtypes == null) pdtypes = new JObject();
             //if (Regex.IsMatch(read_path, @"(INPUTS_GR|INPUTS/|OUTPUTS|PERIPHER)"))
             //{
             List<cRWCommand> cmds = new List<cRWCommand>();
+            int typeidx = -1;
             Dictionary<string, cRWProperty> read_props = new Dictionary<string, cRWProperty>();
             if (CurrentPanelType == "iris")
             {
@@ -1071,7 +1093,11 @@ namespace ljson
                 foreach (cRWCommandIRIS cmd in pi.ReadCommands)
                     cmds.Add(cmd);
                 foreach (string rpk in pi.ReadProperties.Keys)
+                {
                     read_props.Add(rpk, (cRWPropertyIRIS)pi.ReadProperties[rpk]);
+                    if (Regex.IsMatch(read_path, @"^IRIS\d*?_PERIPHER", RegexOptions.IgnoreCase) && Regex.IsMatch(rpk, @"type", RegexOptions.IgnoreCase))
+                        typeidx = read_props[rpk].offset;
+                }
             }
             else
             {
@@ -1155,6 +1181,23 @@ namespace ljson
                 }
                 //
                 JObject node = GetNode(apath[1]);
+                bool adddev = true;
+                if (typeidx >= 0 && typeidx < bcmdres.Length)
+                {
+                    byte btype = bcmdres[typeidx];
+                    string devname = (pdtypes[btype.ToString()] != null) ? pdtypes[btype.ToString()].ToString() : "";
+                    adddev = devname != "" && !Regex.IsMatch(devname, @"NONE$");
+                    if (Regex.IsMatch(devname, @"^IRIS[\w\W]+?TTELOOP$"))
+                    {
+                        if (_tteloops_count_in_peripherial_devs > 0) _tteloops_count_in_peripherial_devs++;
+                        else _tteloops_count_in_peripherial_devs = 1;
+                    }
+                    else if (Regex.IsMatch(devname, @"^IRIS[\w\W]+?LOOP$"))
+                    {
+                        if (_sensloops_count_in_peripherial_devs > 0) _sensloops_count_in_peripherial_devs++;
+                        else _sensloops_count_in_peripherial_devs = 1;
+                    }
+                }
                 //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
                 //{
                 //    string first = res.Keys.First();
@@ -1344,10 +1387,12 @@ namespace ljson
                 }
             }
         }
+        private static object _connection_cache = null;
         private static string VersionKey(object conn_params, string vercmd)
         {
             cTransport conn = cComm.ConnectBase(conn_params);
             byte[] bres = cComm.SendCommand(conn, vercmd);
+            _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
             if (settings.logreads && !_log_bytesreaded.ContainsKey(vercmd))
                 _log_bytesreaded.Add(vercmd, bres);
@@ -1396,6 +1441,8 @@ namespace ljson
         {
             cComm.ClearCache();
             _internal_relations_operator.ClearCache();
+            _tteloops_count_in_peripherial_devs = -1;
+            _sensloops_count_in_peripherial_devs = -1;
         }
         public static void ReadDevice(object conn_params)
         {
@@ -1480,7 +1527,7 @@ namespace ljson
                     }
                 }
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
-                cTransport conn = cComm.ConnectBase(conn_params);
+                cTransport conn = cComm.ConnectBaseCached(conn_params, _connection_cache);
                 //LOGIN!!!!!!!!!!!!!!!!!!!!!!!
                 //byte[] loginres = cComm.SendCommand(conn, "076033333333");
                 //

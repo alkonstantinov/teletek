@@ -773,10 +773,14 @@ namespace ljson
                         m = Regex.Match(tab_path, @"^([\w\W]+?)\.TABS\.([\w\W]+)$");
                         if (m.Success)
                         {
+                            Match mfield = Regex.Match(m.Groups[1].Value, @"\.([^\.]+)$");
+                            string sfield = "";
+                            if (mfield.Success)
+                                sfield = mfield.Groups[1].Value;
                             string s = m.Groups[1].Value + sidx;
                             string orgval = cComm.GetPathValue(_panel_id, s);
                             string tab = m.Groups[2].Value;
-                            cComm.SetPathValue(_panel_id, s, orgval + "_" + tab);
+                            cComm.SetPathValue(_panel_id, s, orgval + "_" + tab + "_" + sfield);
                         }
                     }
                 }
@@ -1465,15 +1469,19 @@ namespace ljson
             {
                 cRWPropertyIRIS prop = (cRWPropertyIRIS)read_props["Group"];
                 int group_byte = prop.offset;
+                int group_bytes = prop.bytescnt;
+                int _group = val[group_byte];
+                if (group_bytes == 2)
+                    _group = _group * 256 + val[group_byte + 1];
                 prop = (cRWPropertyIRIS)read_props["Type"];
                 int type_byte = prop.offset;
                 prop = (cRWPropertyIRIS)read_props["CHANNEL"];
                 int channel_byte = prop.offset;
                 byte btype = val[type_byte];
-                if (val[group_byte] != address + 1)
+                if (_group > 0 && _group != address + 1)
                     return true;
                 for (int i = 2; i < val.Length; i++)
-                    if (i == group_byte)
+                    if (i == group_byte || group_bytes == 2 && i == group_byte + 1)
                         continue;
                     else
                     {

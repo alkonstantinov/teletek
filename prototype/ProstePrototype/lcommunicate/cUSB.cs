@@ -22,6 +22,10 @@ namespace lcommunicate
             //
             return _conn;
         }
+        internal override object ConnectCached(object o, object _cache)
+        {
+            return Connect(o);
+        }
         internal override void Close(object o)
         {
             ((HidStream)o).Close();

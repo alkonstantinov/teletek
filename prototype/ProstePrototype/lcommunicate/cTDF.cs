@@ -228,18 +228,35 @@ namespace lcommunicate
             FillCommands(new JObject(_conn.readcfg), new JObject(_conn.tdf), new JObject(_conn.template));
             return "Ok";
         }
+        public override object GetCache()
+        {
+            return _commands;
+        }
+        internal override object ConnectCached(object o, object _cache)
+        {
+            if (!(o is cTDFParams))
+                return null;
+            cTDFParams _conn = (cTDFParams)o;
+            if (_conn.tdf == null || _conn.readcfg == null)
+                return null;
+            if (_cache != null)
+                _commands = (Dictionary<string, byte[]>)_cache;
+            if (_commands == null || _commands.Count == 0)
+                FillCommands(new JObject(_conn.readcfg), new JObject(_conn.tdf), new JObject(_conn.template));
+            return "Ok";
+        }
         private byte[] ZArray(string cmd)
         {
             byte[] res = new byte[Convert.ToByte(cmd.Substring(cmd.Length - 2), 16) + 2];
-            for (int i = 0; i < res.Length; i++)
-                res[i] = 0;
+            //for (int i = 0; i < res.Length; i++)
+            //    res[i] = 0;
             return res;
         }
         private byte[] ZArray(byte[] cmd)
         {
             byte[] res = new byte[cmd[cmd.Length - 1] + 2];
-            for (int i = 0; i < res.Length; i++)
-                res[i] = 0;
+            //for (int i = 0; i < res.Length; i++)
+            //    res[i] = 0;
             return res;
         }
         internal override byte[] SendCommand(object _connection, byte[] _command)

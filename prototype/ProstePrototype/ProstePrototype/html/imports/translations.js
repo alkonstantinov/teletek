@@ -114,6 +114,7 @@
         MainMenuExport: { 'en': 'Export', 'bg': 'Експорт' },
         MainMenuFile: { 'en': 'File', 'bg': 'Файл' },
         MainMenuOpen: { 'en': 'Open', 'bg': 'Отваряне' },
+        MainMenuOpenTDF: { 'en': 'Open TDF file', 'bg': 'Отваряне на TDF' },
         MainMenuSave: { 'en': 'Save', 'bg': 'Запомни' },
         MainMenuSaveas: { 'en': 'Save as', 'bg': 'Запомни като' },
         MainMenuWrite: { 'en': 'Write', 'bg': 'Запис' },
