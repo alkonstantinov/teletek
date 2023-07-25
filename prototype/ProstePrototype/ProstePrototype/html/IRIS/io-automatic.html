@@ -101,1015 +101,1289 @@
     <script src="../imports/mainfuncs.js"></script>
     <script>        
 //        var js = `{
-//  "IRIS8_EVAC_ZONE_GROUP": {
-//    "@MIN": "0",
-//    "@MAX": "199",
-//    "@LNGID": "c61c3b13-d0e2-49e4-83ae-97dac2513c44",
-//    "~path": "ELEMENTS.iris_evac_zones.CONTAINS.IRIS8_EVAC_ZONE_GROUP"
+//  "~noname": {
+//    "MESS_IN": {
+//      "@TYPE": "TEXT",
+//      "@SIZE": "78",
+//      "@LENGTH": "39",
+//      "@TEXT": "Note",
+//      "@REQUIRED": "0",
+//      "@READONLY": "0",
+//      "@LNGID": "c4122d15-c74a-4035-8902-ad6a2aa90c96",
+//      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.~noname.MESS_IN.~index~1",
+//      "~value": "l2"
+//    },
+//    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.~noname.~index~1"
 //  },
-//  "~path": "ELEMENTS.iris_evac_zones.CONTAINS"
+//  "Settings": {
+//    "name": "Settings",
+//    "fields": {
+//      "DELAY": {
+//        "@TYPE": "INT",
+//        "@SIZE": "2",
+//        "@MIN": "0",
+//        "@MAX": "600",
+//        "@TEXT": "Delay (seconds)",
+//        "@LNGID": "d401a0a0-bd22-4347-af62-c0d9c1417d58",
+//        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.DELAY.~index~1",
+//        "~value": "17"
+//      },
+//      "Group": {
+//        "@TYPE": "INT",
+//        "@SIZE": "2",
+//        "@MIN": "1",
+//        "@MAX": "250",
+//        "@TEXT": "Group",
+//        "@LNGID": "e0d590a4-e334-4217-8149-fd8023058541",
+//        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~1",
+//        "~value": "2"
+//      },
+//      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.fields.~index~1"
+//    },
+//    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Settings.~index~1"
+//  },
+//  "Parameters": {
+//    "name": "Parameters",
+//    "fields": {
+//      "LATCHED": {
+//        "@TYPE": "CHECK",
+//        "@SIZE": "1",
+//        "@TEXT": "Latched",
+//        "@AND": "1",
+//        "@YESVAL": "1",
+//        "@NOVAL": "0",
+//        "@CHECKED": "0",
+//        "@LNGID": "24b044c3-2342-46b0-b1a5-f4bf5df6b2bf",
+//        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Parameters.fields.LATCHED.~index~1",
+//        "~value": "1"
+//      },
+//      "INVERTED": {
+//        "@TYPE": "CHECK",
+//        "@SIZE": "1",
+//        "@TEXT": "Inverted",
+//        "@AND": "2",
+//        "@YESVAL": "2",
+//        "@NOVAL": "0",
+//        "@CHECKED": "0",
+//        "@LNGID": "07d0d3e7-4dcf-4c29-a405-c7db1ee4439c",
+//        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Parameters.fields.INVERTED.~index~1",
+//        "~value": "2"
+//      },
+//      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Parameters.fields.~index~1"
+//    },
+//    "~type": "AND",
+//    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.Parameters.~index~1",
+//    "~value": "3"
+//  },
+//  "InputType": {
+//    "name": "Input Type",
+//    "fields": {
+//      "Type": {
+//        "@TYPE": "TAB",
+//        "@SIZE": "1",
+//        "@TEXT": "Input type",
+//        "@LNGID": "41bac4e6-1173-4d24-b855-a5aa3cbba6b0",
+//        "TABS": {
+//          "ff9614f2-a32d-4514-b5dd-aaa37359b84f": {
+//            "@NAME": "NONE",
+//            "@VALUE": "0",
+//            "@LNGID": "ff9614f2-a32d-4514-b5dd-aaa37359b84f",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "e38d55e4-569d-4a3f-8dab-876b5a13c1ea",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "29eb438a-98da-44c0-96ef-1433e9f189ab",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "0",
+//                  "@LNGID": "1cb10b08-5c51-4faa-83bb-d44a419b4ad3",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "020d85ce-27a9-44a9-a1a3-a326aa835c19",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.PROPERTIES.PROPERTY[3].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "1ab6f25c-f84e-4737-954d-9eff16eb340e",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.PROPERTIES.PROPERTY[4].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.ff9614f2-a32d-4514-b5dd-aaa37359b84f.~index~1"
+//          },
+//          "c25c86e7-eced-49c5-8e76-9e4b1d34d8f5": {
+//            "@NAME": "PERIPHERY_DEVICE",
+//            "@VALUE": "1",
+//            "@LNGID": "c25c86e7-eced-49c5-8e76-9e4b1d34d8f5",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "e47f7af2-2ff4-4521-8105-27a0afbfe927",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "87d482ad-a15b-4226-a10b-8a8917cd59b5",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "1",
+//                  "@MIN": "1",
+//                  "@MAX": "12",
+//                  "@TEXT": "Peripherial device address",
+//                  "@LNGID": "969d9471-9fe5-4929-88af-04024124605d",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@MIN": "1",
+//                  "@MAX": "24",
+//                  "@VALUE": "1",
+//                  "@TEXT": "Peripherial device input",
+//                  "@LNGID": "1d4e3745-859a-4189-9525-636c45783f03",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[3].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "5d26da98-83b2-4291-b0d1-75be2ae3f718",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.PROPERTY[4].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.c25c86e7-eced-49c5-8e76-9e4b1d34d8f5.~index~1"
+//          },
+//          "f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca": {
+//            "@NAME": "LOOP_DEVICE",
+//            "@VALUE": "2",
+//            "@LNGID": "f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca",
+//            "PROPERTIES": {
+//              "PROPERTY": {
+//                "@TYPE": "TAB",
+//                "@ID": "SUBTYPE",
+//                "@SIZE": "1",
+//                "@TEXT": "Loop Type",
+//                "@LNGID": "49b8709c-694c-4b5d-a659-e2250acb5793",
+//                "TABS": {
+//                  "59ae7ecc-3260-4175-8abb-1ef4d764ff12": {
+//                    "@NAME": "TELETEK LOOP",
+//                    "@VALUE": "2",
+//                    "@LNGID": "59ae7ecc-3260-4175-8abb-1ef4d764ff12",
+//                    "PROPERTIES": {
+//                      "PROPERTY": [
+//                        {
+//                          "@TYPE": "HIDDEN",
+//                          "@ID": "FUNCTION",
+//                          "@SIZE": "1",
+//                          "@VALUE": "0",
+//                          "@LNGID": "c6c162ce-965a-4112-b3fd-98f3973d4be1",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[0].~index~1",
+//                          "~value": "0"
+//                        },
+//                        {
+//                          "@TYPE": "INT",
+//                          "@ID": "P1",
+//                          "@SIZE": "2",
+//                          "@VALUE": "1",
+//                          "@MIN": "1",
+//                          "@MAX": "250",
+//                          "@TEXT": "Device address",
+//                          "@LNGID": "be4bd70c-286d-4c91-b0bb-5ceda520ba13",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[1].~index~1",
+//                          "~value": "2"
+//                        },
+//                        {
+//                          "@TYPE": "AND",
+//                          "@ID": "P2",
+//                          "@SIZE": "1",
+//                          "@VALUE": "1",
+//                          "@LNGID": "f77c2b76-8565-4d29-8d8d-69c7d7c642fd",
+//                          "PROPERTIES": {
+//                            "PROPERTY": [
+//                              {
+//                                "@TYPE": "INT",
+//                                "@ID": "LOOP",
+//                                "@MIN": "1",
+//                                "@MAX": "8",
+//                                "@VALUE": "1",
+//                                "@TEXT": "Loop",
+//                                "@AND": "7F",
+//                                "@LNGID": "9e73af42-b3a7-44fb-b3ba-524115e8bca4",
+//                                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~1",
+//                                "~value": "2"
+//                              },
+//                              {
+//                                "@TYPE": "HIDDEN",
+//                                "@ID": "DEVICE_TYPE",
+//                                "@SIZE": "1",
+//                                "@AND": "80",
+//                                "@LNGID": "a15def9b-3262-4e65-a1af-9f01eb52fdb7",
+//                                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~1",
+//                                "~value": "128"
+//                              }
+//                            ],
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[2].PROPERTIES.~index~1"
+//                          },
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[2].~index~1",
+//                          "~value": "130"
+//                        },
+//                        {
+//                          "@TYPE": "INT",
+//                          "@ID": "CHANNEL",
+//                          "@SIZE": "1",
+//                          "@MIN": "1",
+//                          "@MAX": "4",
+//                          "@TEXT": "Channel",
+//                          "@LNGID": "f7456507-5deb-43bb-a933-d62dc1bc61c0",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.PROPERTY[3].~index~1",
+//                          "~value": "1"
+//                        }
+//                      ],
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.PROPERTIES.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.59ae7ecc-3260-4175-8abb-1ef4d764ff12.~index~1",
+//                    "~enabled": true
+//                  },
+//                  "ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3": {
+//                    "@NAME": "SYSTEM SENSOR LOOP",
+//                    "@VALUE": "1",
+//                    "@LNGID": "ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3",
+//                    "PROPERTIES": {
+//                      "PROPERTY": [
+//                        {
+//                          "@TYPE": "HIDDEN",
+//                          "@ID": "FUNCTION",
+//                          "@SIZE": "1",
+//                          "@VALUE": "0",
+//                          "@LNGID": "d9566e3a-d7c6-439e-8542-1ca1047acd9b",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[0].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "INT",
+//                          "@ID": "P1",
+//                          "@SIZE": "2",
+//                          "@VALUE": "1",
+//                          "@MIN": "1",
+//                          "@MAX": "99",
+//                          "@TEXT": "Device address",
+//                          "@LNGID": "58590b6b-3880-4c89-bb61-ec752eda396a",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[1].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "AND",
+//                          "@ID": "P2",
+//                          "@SIZE": "1",
+//                          "@VALUE": "1",
+//                          "@LNGID": "450ae24e-4372-4d52-876a-97900601cc80",
+//                          "PROPERTIES": {
+//                            "PROPERTY": [
+//                              {
+//                                "@TYPE": "INT",
+//                                "@ID": "LOOP",
+//                                "@MIN": "1",
+//                                "@MAX": "4",
+//                                "@TEXT": "Loop",
+//                                "@AND": "7F",
+//                                "@LNGID": "4387e8a7-787c-45a8-8c9c-c1583cab02aa",
+//                                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~1"
+//                              },
+//                              {
+//                                "@TYPE": "LIST",
+//                                "@ID": "DEVICE_TYPE",
+//                                "@TEXT": "Device type",
+//                                "@AND": "80",
+//                                "@LNGID": "23dbc5d3-9069-4ffd-99dd-f2ac38c419f1",
+//                                "ITEMS": {
+//                                  "ITEM": [
+//                                    {
+//                                      "@NAME": "Sensor",
+//                                      "@VALUE": "0",
+//                                      "@LNGID": "ff3e5cb5-a179-4a73-a3cd-13f023c6f169",
+//                                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].ITEMS.ITEM[0].~index~1"
+//                                    },
+//                                    {
+//                                      "@NAME": "Module",
+//                                      "@VALUE": "128",
+//                                      "@DEFAULT": "1",
+//                                      "@LNGID": "7ac99a24-76f3-422c-8bee-f94eaa6544e0",
+//                                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].ITEMS.ITEM[1].~index~1"
+//                                    }
+//                                  ],
+//                                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].ITEMS.~index~1"
+//                                },
+//                                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~1"
+//                              }
+//                            ],
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].PROPERTIES.~index~1"
+//                          },
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[2].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "HIDDEN",
+//                          "@ID": "CHANNEL",
+//                          "@SIZE": "1",
+//                          "@LNGID": "ab42abc9-8b97-4b30-8e96-0b6a3ebf6785",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.PROPERTY[3].~index~1"
+//                        }
+//                      ],
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.PROPERTIES.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.TABS.ef29bf8b-e1f8-4bcc-b8bf-53384183a7f3.~index~1",
+//                    "~enabled": false
+//                  }
+//                },
+//                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.PROPERTY.~index~1",
+//                "~value": "2_59ae7ecc-3260-4175-8abb-1ef4d764ff12"
+//              },
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~1",
+//            "~enabled": true
+//          },
+//          "21aac9d8-e7ef-4f61-a901-3c5504ae00bc": {
+//            "@NAME": "ZONE",
+//            "@VALUE": "3",
+//            "@LNGID": "21aac9d8-e7ef-4f61-a901-3c5504ae00bc",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "ca7cb8e5-351f-45aa-a10e-7684a2bf287c",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "LIST",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@TEXT": "Function",
+//                  "@LNGID": "b486f902-971a-450f-b25b-e1ecf84613b8",
+//                  "ITEMS": {
+//                    "ITEM": [
+//                      {
+//                        "@NAME": "FIRE",
+//                        "@VALUE": "0",
+//                        "@DEFAULT": "1",
+//                        "@LNGID": "bd85b270-8bb5-4b1f-a22b-cf41b8ecfada",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].ITEMS.ITEM[0].~index~1"
+//                      },
+//                      {
+//                        "@NAME": "FAULT",
+//                        "@VALUE": "1",
+//                        "@LNGID": "514aec2d-eec8-4e0d-95e3-e09d84563d4b",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].ITEMS.ITEM[1].~index~1"
+//                      },
+//                      {
+//                        "@NAME": "DISABLED",
+//                        "@VALUE": "2",
+//                        "@LNGID": "866259d0-5958-4200-b9a7-9cd3ad6c4e71",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].ITEMS.ITEM[2].~index~1"
+//                      },
+//                      {
+//                        "@NAME": "PREALARM",
+//                        "@VALUE": "3",
+//                        "@LNGID": "5e2766ef-9908-4d96-94fa-61fbfe7e5fe0",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].ITEMS.ITEM[3].~index~1"
+//                      }
+//                    ],
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].ITEMS.~index~1"
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "1",
+//                  "@MIN": "1",
+//                  "@MAX": "200",
+//                  "@TEXT": "Zone number",
+//                  "@LNGID": "c857e444-8654-4221-af09-a773d0603b78",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "c969d510-3347-43e4-8332-c458062a6575",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[3].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "fe503afa-a16d-421d-b397-a76de9970f55",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.PROPERTY[4].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.21aac9d8-e7ef-4f61-a901-3c5504ae00bc.~index~1"
+//          },
+//          "bde34abf-ebe4-4de5-be9e-72537d338167": {
+//            "@NAME": "ZONE GROUP",
+//            "@VALUE": "10",
+//            "@LNGID": "bde34abf-ebe4-4de5-be9e-72537d338167",
+//            "PROPERTIES": {
+//              "PROPERTY": {
+//                "@TYPE": "TAB",
+//                "@ID": "FUNCTION",
+//                "@SIZE": "1",
+//                "@TEXT": "Function",
+//                "@LNGID": "9b4d11eb-1fd6-4661-aacc-1cfe3b91549b",
+//                "TABS": {
+//                  "40434a7f-17e3-4842-ac51-727c58a9f062": {
+//                    "@NAME": "Fire",
+//                    "@VALUE": "0",
+//                    "@DEFAULT": "1",
+//                    "@LNGID": "40434a7f-17e3-4842-ac51-727c58a9f062",
+//                    "PROPERTIES": {
+//                      "PROPERTY": [
+//                        {
+//                          "@TYPE": "INT",
+//                          "@ID": "P1",
+//                          "@SIZE": "2",
+//                          "@VALUE": "1",
+//                          "@MIN": "1",
+//                          "@MAX": "200",
+//                          "@TEXT": "Zone group number",
+//                          "@LNGID": "a8b5684b-74bc-4e1f-9b0f-993247c72c4d",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[0].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "HIDDEN",
+//                          "@ID": "CHANNEL",
+//                          "@SIZE": "1",
+//                          "@LNGID": "c54655ce-61ab-46a2-ac2b-694812286118",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[1].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "AND",
+//                          "@ID": "PARAMETERS",
+//                          "@SIZE": "1",
+//                          "@LNGID": "f43dc3c3-680d-43de-a7de-1e5ae8ec3cb1",
+//                          "PROPERTIES": {
+//                            "PROPERTY": {
+//                              "@TYPE": "LIST",
+//                              "@ID": "LOGIC",
+//                              "@TEXT": "Logic",
+//                              "@AND": "4",
+//                              "@LNGID": "e4832d96-3838-42bf-9420-18662ab858fb",
+//                              "ITEMS": {
+//                                "ITEM": [
+//                                  {
+//                                    "@NAME": "OR",
+//                                    "@VALUE": "0",
+//                                    "@DEFAULT": "1",
+//                                    "@LNGID": "a0a3966a-32c9-4448-bb85-7be254f0a82b",
+//                                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.ITEMS.ITEM[0].~index~1"
+//                                  },
+//                                  {
+//                                    "@NAME": "AND",
+//                                    "@VALUE": "4",
+//                                    "@LNGID": "b413a768-b9af-4f5d-ad13-6979d8219efa",
+//                                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.ITEMS.ITEM[1].~index~1"
+//                                  }
+//                                ],
+//                                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.ITEMS.~index~1"
+//                              },
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.~index~1"
+//                            },
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].PROPERTIES.~index~1"
+//                          },
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[2].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "INT",
+//                          "@ID": "P2",
+//                          "@SIZE": "1",
+//                          "@VALUE": "1",
+//                          "@MIN": "0",
+//                          "@MAX": "9",
+//                          "@TEXT": "Alarms Counter",
+//                          "@LNGID": "486f8ef6-5e06-4e53-9ab2-401910b5bbee",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.PROPERTY[3].~index~1"
+//                        }
+//                      ],
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.PROPERTIES.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.40434a7f-17e3-4842-ac51-727c58a9f062.~index~1"
+//                  },
+//                  "c7ad8e73-678b-4538-ba70-e10c0449ebe8": {
+//                    "@NAME": "Fault",
+//                    "@VALUE": "1",
+//                    "@LNGID": "c7ad8e73-678b-4538-ba70-e10c0449ebe8",
+//                    "PROPERTIES": {
+//                      "PROPERTY": [
+//                        {
+//                          "@TYPE": "INT",
+//                          "@ID": "P1",
+//                          "@SIZE": "2",
+//                          "@VALUE": "1",
+//                          "@MIN": "1",
+//                          "@MAX": "200",
+//                          "@TEXT": "Zone group number",
+//                          "@LNGID": "ea5036d0-bf85-4b78-aa4d-29b2069acd91",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[0].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "HIDDEN",
+//                          "@ID": "CHANNEL",
+//                          "@SIZE": "1",
+//                          "@LNGID": "6c6a4b22-9915-47e6-adca-278c6b7dc320",
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[1].~index~1"
+//                        },
+//                        {
+//                          "@TYPE": "AND",
+//                          "@ID": "PARAMETERS",
+//                          "@SIZE": "1",
+//                          "@LNGID": "8df43afb-422b-40c5-ac73-856ba0c099e1",
+//                          "PROPERTIES": {
+//                            "PROPERTY": {
+//                              "@TYPE": "LIST",
+//                              "@ID": "LOGIC",
+//                              "@TEXT": "Logic",
+//                              "@AND": "4",
+//                              "@LNGID": "3828b2be-b359-4005-b66e-eafdb5419a4e",
+//                              "ITEMS": {
+//                                "ITEM": [
+//                                  {
+//                                    "@NAME": "OR",
+//                                    "@VALUE": "0",
+//                                    "@LNGID": "0e9bd7a4-1562-4621-99d3-3b092f0f6552",
+//                                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.ITEMS.ITEM[0].~index~1"
+//                                  },
+//                                  {
+//                                    "@NAME": "AND",
+//                                    "@VALUE": "4",
+//                                    "@DEFAULT": "1",
+//                                    "@LNGID": "c046dc02-412d-4d42-b474-563459ae4a7e",
+//                                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.ITEMS.ITEM[1].~index~1"
+//                                  }
+//                                ],
+//                                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.ITEMS.~index~1"
+//                              },
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY.~index~1"
+//                            },
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].PROPERTIES.~index~1"
+//                          },
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.PROPERTY[2].~index~1"
+//                        }
+//                      ],
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.PROPERTIES.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.TABS.c7ad8e73-678b-4538-ba70-e10c0449ebe8.~index~1"
+//                  }
+//                },
+//                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.PROPERTY.~index~1"
+//              },
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.bde34abf-ebe4-4de5-be9e-72537d338167.~index~1"
+//          },
+//          "2f2acccd-bd04-4d1b-aa29-05fffe4a879e": {
+//            "@NAME": "DEVICE GROUP",
+//            "@VALUE": "11",
+//            "@LNGID": "2f2acccd-bd04-4d1b-aa29-05fffe4a879e",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "9b88cd1f-4c54-425b-ab99-89a81dbb89ab",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "AND",
+//                  "@ID": "PARAMETERS",
+//                  "@SIZE": "1",
+//                  "@LNGID": "d59a33ad-053a-4077-81ae-ac93419946c9",
+//                  "PROPERTIES": {
+//                    "PROPERTY": {
+//                      "@TYPE": "LIST",
+//                      "@ID": "LOGIC",
+//                      "@TEXT": "Logic",
+//                      "@AND": "4",
+//                      "@LNGID": "8466be4e-088d-4567-8dd3-3644359e7097",
+//                      "ITEMS": {
+//                        "ITEM": [
+//                          {
+//                            "@NAME": "OR",
+//                            "@VALUE": "0",
+//                            "@LNGID": "184e2eb9-189b-47cc-a19a-e962a1eb5f1f",
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY.ITEMS.ITEM[0].~index~1"
+//                          },
+//                          {
+//                            "@NAME": "AND",
+//                            "@VALUE": "4",
+//                            "@DEFAULT": "1",
+//                            "@LNGID": "daeaedb2-c562-4047-b50a-45bd12cefd62",
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY.ITEMS.ITEM[1].~index~1"
+//                          }
+//                        ],
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY.ITEMS.~index~1"
+//                      },
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].PROPERTIES.PROPERTY.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].PROPERTIES.~index~1"
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "1",
+//                  "@MIN": "1",
+//                  "@MAX": "100",
+//                  "@TEXT": "Group Number",
+//                  "@LNGID": "b5da620f-aa3c-4732-a47b-e73b62a8d49b",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "b3a42eec-0009-404d-bd65-2208249b72d7",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.PROPERTY[3].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.2f2acccd-bd04-4d1b-aa29-05fffe4a879e.~index~1"
+//          },
+//          "08479ebd-d2e6-44c6-83ee-346a90986568": {
+//            "@NAME": "ALARMS",
+//            "@VALUE": "9",
+//            "@LNGID": "08479ebd-d2e6-44c6-83ee-346a90986568",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "8287848a-0287-4c0a-9a3b-65d8a43d9b79",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "1",
+//                  "@MIN": "1",
+//                  "@MAX": "200",
+//                  "@TEXT": "Zone Number",
+//                  "@LNGID": "616762c4-b69d-43a9-a1fd-4f77616d96dc",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@VALUE": "1",
+//                  "@MIN": "1",
+//                  "@MAX": "9",
+//                  "@TEXT": "Alarms Counter",
+//                  "@LNGID": "4069eb5c-febf-4d04-9130-e093531cb11e",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "a8328198-6a15-421c-9f1b-c95803a0ddf3",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.PROPERTY[3].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.08479ebd-d2e6-44c6-83ee-346a90986568.~index~1"
+//          },
+//          "d076749b-3d30-4cb2-8785-fd82145fd7dd": {
+//            "@NAME": "TIME",
+//            "@VALUE": "4",
+//            "@LNGID": "d076749b-3d30-4cb2-8785-fd82145fd7dd",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "1894907e-f5d7-4919-8bae-97718cfd8f34",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "066dc759-6cac-4774-8bd6-36a7e919adae",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "AND",
+//                  "@ID": "P1",
+//                  "@VALUE": "0",
+//                  "@SIZE": "2",
+//                  "@TEXT": "",
+//                  "@LNGID": "5767759e-1e50-45fb-aed8-a4d94aa764ab",
+//                  "PROPERTIES": {
+//                    "PROPERTY": [
+//                      {
+//                        "@TYPE": "AND",
+//                        "@ID": "PP1",
+//                        "@SIZE": "2",
+//                        "@AND": "FF00",
+//                        "@TEXT": "Days of week",
+//                        "@LNGID": "6b0b1384-9896-4875-affa-b4669253e9ae",
+//                        "PROPERTIES": {
+//                          "PROPERTY": [
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "SUNDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Sunday",
+//                              "@AND": "0100",
+//                              "@YESVAL": "256",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "7fbb3889-01a4-4091-a35a-a8d5c769efb1",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[0].~index~1"
+//                            },
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "MONDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Monday",
+//                              "@AND": "0200",
+//                              "@YESVAL": "512",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "f891b140-b78b-4879-9ae6-d8ad71d7e9c5",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[1].~index~1"
+//                            },
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "TUESDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Tuesday",
+//                              "@AND": "0400",
+//                              "@YESVAL": "1024",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "9855e323-5434-4fde-a25c-9b331cbc7377",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[2].~index~1"
+//                            },
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "WEDNESDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Wednesday",
+//                              "@AND": "0800",
+//                              "@YESVAL": "2048",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "3e3812ee-bf08-4c49-9271-2f777e3a516b",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[3].~index~1"
+//                            },
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "THURSDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Thursday",
+//                              "@AND": "1000",
+//                              "@YESVAL": "4096",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "22f36241-9f93-413c-bb3f-faf440ba2ba7",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[4].~index~1"
+//                            },
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "FRIDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Friday",
+//                              "@AND": "2000",
+//                              "@YESVAL": "8192",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "f74ae7bc-ddf1-4205-8f23-df764d94131a",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[5].~index~1"
+//                            },
+//                            {
+//                              "@TYPE": "CHECK",
+//                              "@ID": "SATURDAY",
+//                              "@SIZE": "2",
+//                              "@TEXT": "Saturday",
+//                              "@AND": "4000",
+//                              "@YESVAL": "16384",
+//                              "@NOVAL": "0",
+//                              "@CHECKED": "0",
+//                              "@LNGID": "b05d5dc5-80db-4d03-958b-3274a057c55f",
+//                              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.PROPERTY[6].~index~1"
+//                            }
+//                          ],
+//                          "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].PROPERTIES.~index~1"
+//                        },
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~1"
+//                      },
+//                      {
+//                        "@TYPE": "INT",
+//                        "@ID": "Hour",
+//                        "@SIZE": "2",
+//                        "@MIN": "0",
+//                        "@MAX": "23",
+//                        "@TEXT": "Hour",
+//                        "@AND": "00FF",
+//                        "@LNGID": "bb39e18c-561d-45a8-a7f7-5a571f27222e",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~1"
+//                      }
+//                    ],
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].PROPERTIES.~index~1"
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "AND",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "18e30950-e4be-471b-97ef-77385bc458c3",
+//                  "PROPERTIES": {
+//                    "PROPERTY": {
+//                      "@TYPE": "INT",
+//                      "@ID": "Minutes",
+//                      "@SIZE": "1",
+//                      "@VALUE": "0",
+//                      "@MIN": "0",
+//                      "@MAX": "59",
+//                      "@TEXT": "Minutes",
+//                      "@AND": "FF",
+//                      "@LNGID": "77cddfcd-632d-46ba-8243-399a5e920106",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[3].PROPERTIES.~index~1"
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[3].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "4bfddd0c-2385-4d76-ace9-ba8b442dd20a",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.PROPERTY[4].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.d076749b-3d30-4cb2-8785-fd82145fd7dd.~index~1"
+//          },
+//          "5c612535-4161-479f-b201-3bc31d5f0103": {
+//            "@NAME": "DATE",
+//            "@VALUE": "5",
+//            "@LNGID": "5c612535-4161-479f-b201-3bc31d5f0103",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "f2afcad7-9126-418f-9fde-2dbfd8e7d120",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "62f768c4-64a5-41df-86c2-1e7a28d10945",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "AND",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "0",
+//                  "@LNGID": "230f55f2-85e8-4bbc-becf-901f2057c8b7",
+//                  "PROPERTIES": {
+//                    "PROPERTY": [
+//                      {
+//                        "@TYPE": "INT",
+//                        "@ID": "Year",
+//                        "@SIZE": "2",
+//                        "@MIN": "1990",
+//                        "@TEXT": "Year",
+//                        "@AND": "FFF",
+//                        "@LNGID": "b83f2f4a-a0d9-4447-abe0-ccd65a33a158",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[0].~index~1"
+//                      },
+//                      {
+//                        "@TYPE": "INT",
+//                        "@ID": "Month",
+//                        "@SIZE": "1",
+//                        "@MIN": "1",
+//                        "@MAX": "12",
+//                        "@TEXT": "Month",
+//                        "@AND": "F",
+//                        "@SHIFT": "12",
+//                        "@LNGID": "4c594e0e-d3ec-4ecb-a755-ba18a34c9734",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.PROPERTY[1].~index~1"
+//                      }
+//                    ],
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].PROPERTIES.~index~1"
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "AND",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "7b4c3a4d-92b3-4fb4-a516-17f8a3878d7e",
+//                  "PROPERTIES": {
+//                    "PROPERTY": {
+//                      "@TYPE": "INT",
+//                      "@ID": "Day",
+//                      "@SIZE": "1",
+//                      "@VALUE": "1",
+//                      "@MIN": "1",
+//                      "@MAX": "31",
+//                      "@TEXT": "Day",
+//                      "@AND": "FF",
+//                      "@LNGID": "ca8400e3-d095-455c-954a-52f8b9a75f63",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[3].PROPERTIES.PROPERTY.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[3].PROPERTIES.~index~1"
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[3].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "03592853-df9a-420a-98c3-dc56148e7009",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.PROPERTY[4].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.5c612535-4161-479f-b201-3bc31d5f0103.~index~1"
+//          },
+//          "172136a2-1576-4e40-a2cb-b11050cf2403": {
+//            "@NAME": "ACTION",
+//            "@VALUE": "6",
+//            "@LNGID": "172136a2-1576-4e40-a2cb-b11050cf2403",
+//            "PROPERTIES": {
+//              "PROPERTY": {
+//                "@TYPE": "TAB",
+//                "@ID": "FUNCTION",
+//                "@SIZE": "1",
+//                "@TEXT": "FUNCTION",
+//                "@LNGID": "68199302-3983-4310-9d3a-551eadb5f06e",
+//                "TABS": {
+//                  "8cc124a0-5bb2-4fd5-9464-7ed7d240fdac": {
+//                    "@NAME": "SILLENCE BUZZER",
+//                    "@VALUE": "0",
+//                    "@DEFAULT": "1",
+//                    "@LNGID": "8cc124a0-5bb2-4fd5-9464-7ed7d240fdac",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.8cc124a0-5bb2-4fd5-9464-7ed7d240fdac.~index~1"
+//                  },
+//                  "135bde56-df1e-4792-a935-78a8739090cf": {
+//                    "@NAME": "SILLENCE SOUNDER",
+//                    "@VALUE": "1",
+//                    "@LNGID": "135bde56-df1e-4792-a935-78a8739090cf",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.135bde56-df1e-4792-a935-78a8739090cf.~index~1"
+//                  },
+//                  "199a969d-168f-468d-9c9a-07ad24140c24": {
+//                    "@NAME": "RESET",
+//                    "@VALUE": "2",
+//                    "@LNGID": "199a969d-168f-468d-9c9a-07ad24140c24",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.199a969d-168f-468d-9c9a-07ad24140c24.~index~1"
+//                  },
+//                  "59109c13-31c0-4176-9701-bf762f3d25ea": {
+//                    "@NAME": "SOUNDER ON",
+//                    "@VALUE": "3",
+//                    "@LNGID": "59109c13-31c0-4176-9701-bf762f3d25ea",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.59109c13-31c0-4176-9701-bf762f3d25ea.~index~1"
+//                  },
+//                  "4cc92227-e325-49c4-9804-f458a09ff3e6": {
+//                    "@NAME": "FIRE BRIGADE ON",
+//                    "@VALUE": "4",
+//                    "@LNGID": "4cc92227-e325-49c4-9804-f458a09ff3e6",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.4cc92227-e325-49c4-9804-f458a09ff3e6.~index~1"
+//                  },
+//                  "da82ef0c-72c7-45b0-977d-09b78c477a98": {
+//                    "@NAME": "FAULT OUTPUT ON",
+//                    "@VALUE": "5",
+//                    "@LNGID": "da82ef0c-72c7-45b0-977d-09b78c477a98",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.da82ef0c-72c7-45b0-977d-09b78c477a98.~index~1"
+//                  },
+//                  "95369aef-ab99-49a5-bc89-5b71dea38bab": {
+//                    "@NAME": "FIRE PROTECTION ON",
+//                    "@VALUE": "6",
+//                    "@LNGID": "95369aef-ab99-49a5-bc89-5b71dea38bab",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.95369aef-ab99-49a5-bc89-5b71dea38bab.~index~1"
+//                  },
+//                  "3b16f634-1e64-45c1-b553-4cbf36abafe7": {
+//                    "@NAME": "SOUNDER ON(ZONAL)",
+//                    "@VALUE": "7",
+//                    "@LNGID": "3b16f634-1e64-45c1-b553-4cbf36abafe7",
+//                    "PROPERTIES": {
+//                      "PROPERTY": {
+//                        "@TYPE": "INT",
+//                        "@ID": "P1",
+//                        "@SIZE": "2",
+//                        "@MIN": "1",
+//                        "@MAX": "200",
+//                        "@TEXT": "Zone number",
+//                        "@LNGID": "90beb2cc-976d-4586-9d4d-fb825d48d726",
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.3b16f634-1e64-45c1-b553-4cbf36abafe7.PROPERTIES.PROPERTY.~index~1"
+//                      },
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.3b16f634-1e64-45c1-b553-4cbf36abafe7.PROPERTIES.~index~1"
+//                    },
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.3b16f634-1e64-45c1-b553-4cbf36abafe7.~index~1"
+//                  },
+//                  "d4ef4d92-a715-4db7-8c24-4119a695affd": {
+//                    "@NAME": "DAY",
+//                    "@VALUE": "8",
+//                    "@LNGID": "d4ef4d92-a715-4db7-8c24-4119a695affd",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.d4ef4d92-a715-4db7-8c24-4119a695affd.~index~1"
+//                  },
+//                  "768bb134-9416-4e62-9ede-f4f7f4f23323": {
+//                    "@NAME": "NIGHT",
+//                    "@VALUE": "9",
+//                    "@LNGID": "768bb134-9416-4e62-9ede-f4f7f4f23323",
+//                    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.TABS.768bb134-9416-4e62-9ede-f4f7f4f23323.~index~1"
+//                  }
+//                },
+//                "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.PROPERTY.~index~1"
+//              },
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.172136a2-1576-4e40-a2cb-b11050cf2403.~index~1"
+//          },
+//          "65cf3d35-ce3e-4df1-924e-455ccad214e6": {
+//            "@NAME": "GENERAL",
+//            "@VALUE": "7",
+//            "@LNGID": "65cf3d35-ce3e-4df1-924e-455ccad214e6",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "853d3bf6-23f3-464c-988c-dfd89960b3e5",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "TAB",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@TEXT": "Function",
+//                  "@LNGID": "6e626eda-0da5-4d06-a7cc-9ee40e750d5f",
+//                  "TABS": {
+//                    "042b5eb5-e216-495f-bdeb-968cdc877b28": {
+//                      "@NAME": "COMMON FIRE",
+//                      "@VALUE": "0",
+//                      "@DEFAULT": "1",
+//                      "@LNGID": "042b5eb5-e216-495f-bdeb-968cdc877b28",
+//                      "PROPERTIES": {
+//                        "PROPERTY": [
+//                          {
+//                            "@TYPE": "HIDDEN",
+//                            "@ID": "P1",
+//                            "@SIZE": "2",
+//                            "@VALUE": "0",
+//                            "@LNGID": "073ce6ba-9b33-4fe9-b588-680bb87035d6",
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.PROPERTY[0].~index~1"
+//                          },
+//                          {
+//                            "@TYPE": "INT",
+//                            "@ID": "P2",
+//                            "@SIZE": "1",
+//                            "@VALUE": "1",
+//                            "@MIN": "1",
+//                            "@MAX": "9",
+//                            "@TEXT": "Alarms Counter",
+//                            "@LNGID": "bea79c2a-8dac-4890-b351-7c813143fd20",
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.PROPERTY[1].~index~1"
+//                          },
+//                          {
+//                            "@TYPE": "HIDDEN",
+//                            "@ID": "CHANNEL",
+//                            "@SIZE": "1",
+//                            "@LNGID": "26157de5-7161-4c0a-9348-abad2104a943",
+//                            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.PROPERTY[2].~index~1"
+//                          }
+//                        ],
+//                        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.PROPERTIES.~index~1"
+//                      },
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.042b5eb5-e216-495f-bdeb-968cdc877b28.~index~1"
+//                    },
+//                    "7ba1a072-4d95-4b57-bad7-5cb0077aed7c": {
+//                      "@NAME": "COMMON PREALARM",
+//                      "@VALUE": "1",
+//                      "@LNGID": "7ba1a072-4d95-4b57-bad7-5cb0077aed7c",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.7ba1a072-4d95-4b57-bad7-5cb0077aed7c.~index~1"
+//                    },
+//                    "b40eb253-8cd1-483c-8d29-db3b1eee30e7": {
+//                      "@NAME": "COMMON FAULT",
+//                      "@VALUE": "2",
+//                      "@LNGID": "b40eb253-8cd1-483c-8d29-db3b1eee30e7",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.b40eb253-8cd1-483c-8d29-db3b1eee30e7.~index~1"
+//                    },
+//                    "14622d4e-0574-4643-ae79-609a4fc233f4": {
+//                      "@NAME": "SYSTEM FAULT",
+//                      "@VALUE": "3",
+//                      "@LNGID": "14622d4e-0574-4643-ae79-609a4fc233f4",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.14622d4e-0574-4643-ae79-609a4fc233f4.~index~1"
+//                    },
+//                    "4802d072-9ddf-4948-942e-c46b5e0e685a": {
+//                      "@NAME": "DISABLED",
+//                      "@VALUE": "4",
+//                      "@LNGID": "4802d072-9ddf-4948-942e-c46b5e0e685a",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.4802d072-9ddf-4948-942e-c46b5e0e685a.~index~1"
+//                    },
+//                    "571c8650-3723-4b05-b9c2-cf09ff9dfeb6": {
+//                      "@NAME": "TEST",
+//                      "@VALUE": "5",
+//                      "@LNGID": "571c8650-3723-4b05-b9c2-cf09ff9dfeb6",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.571c8650-3723-4b05-b9c2-cf09ff9dfeb6.~index~1"
+//                    },
+//                    "0118a28e-cb9f-4ac8-90e5-21d6d6704de0": {
+//                      "@NAME": "COMMON EVACUATE",
+//                      "@VALUE": "6",
+//                      "@LNGID": "0118a28e-cb9f-4ac8-90e5-21d6d6704de0",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.0118a28e-cb9f-4ac8-90e5-21d6d6704de0.~index~1"
+//                    },
+//                    "dfac2c27-6fbb-4662-a69f-78e538dd78b1": {
+//                      "@NAME": "VOICE EVACUATION CYCLE",
+//                      "@VALUE": "7",
+//                      "@LNGID": "dfac2c27-6fbb-4662-a69f-78e538dd78b1",
+//                      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].TABS.dfac2c27-6fbb-4662-a69f-78e538dd78b1.~index~1"
+//                    }
+//                  },
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.PROPERTY[1].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.65cf3d35-ce3e-4df1-924e-455ccad214e6.~index~1"
+//          },
+//          "06f13ccc-dc3b-4d8f-a0a3-81991b49afc2": {
+//            "@NAME": "NETWORK",
+//            "@VALUE": "8",
+//            "@LNGID": "06f13ccc-dc3b-4d8f-a0a3-81991b49afc2",
+//            "PROPERTIES": {
+//              "PROPERTY": [
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "SUBTYPE",
+//                  "@SIZE": "1",
+//                  "@VALUE": "2",
+//                  "@LNGID": "1b095f3b-cf23-4e28-9f8f-e6d5fa14b9d8",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[0].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "FUNCTION",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@LNGID": "7c5b582d-acf9-4b52-a300-42763d6489df",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[1].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P1",
+//                  "@SIZE": "2",
+//                  "@VALUE": "0",
+//                  "@MIN": "0",
+//                  "@MAX": "250",
+//                  "@TEXT": "Output number",
+//                  "@LNGID": "02029079-fda4-44a8-af67-91b03cb56c2d",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[2].~index~1"
+//                },
+//                {
+//                  "@TYPE": "INT",
+//                  "@ID": "P2",
+//                  "@SIZE": "1",
+//                  "@VALUE": "0",
+//                  "@MIN": "0",
+//                  "@MAX": "64",
+//                  "@TEXT": "Panel number",
+//                  "@LNGID": "df4f2947-6f4f-4acc-9c16-ce0f5b5c038c",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[3].~index~1"
+//                },
+//                {
+//                  "@TYPE": "HIDDEN",
+//                  "@ID": "CHANNEL",
+//                  "@SIZE": "1",
+//                  "@LNGID": "ebcef8d0-f931-424f-a8af-3bc9f9d0675c",
+//                  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.PROPERTY[4].~index~1"
+//                }
+//              ],
+//              "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.PROPERTIES.~index~1"
+//            },
+//            "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.06f13ccc-dc3b-4d8f-a0a3-81991b49afc2.~index~1"
+//          }
+//        },
+//        "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.~index~1",
+//        "~value": "2_f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca_Type"
+//      },
+//      "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.~index~1"
+//    },
+//    "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.~index~1"
+//  },
+//  "~path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups"
 //}`;
 
-//        var ret = `{
-//  "EvacPanel0": {
-//    "name": "Evacuation Panel 0",
-//    "fields": {
-//      "OUTPUT1": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 1",
-//        "@AND": "3",
-//        "@LNGID": "09a869f2-536e-4315-98c2-d170907eacd9",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "bcb2defa-232c-4688-9444-89cdd925372c",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1",
-//              "@LNGID": "a58bb48b-22d1-4caa-bb13-4479b9c8d7b8",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2",
-//              "@LNGID": "0c4e7860-db0b-49e7-bcc2-8c572fe5f51c",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT1.~index~1"
-//      },
-//      "OUTPUT2": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 2",
-//        "@AND": "c",
-//        "@LNGID": "8c10df2a-61e2-49d9-8c83-412173a0b511",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "c22ddb68-04a8-45c4-b905-27673f4d4d50",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "4",
-//              "@LNGID": "8373a708-df79-44b2-8859-09f4ee049590",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "8",
-//              "@LNGID": "9de57ea4-c8a4-4cbf-8bf1-e78f068fd7aa",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT2.~index~1"
-//      },
-//      "OUTPUT3": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 3",
-//        "@AND": "30",
-//        "@LNGID": "07ffab37-6cda-495c-9454-077e8487159d",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "e4111164-75ba-4bbc-9517-81724fde489e",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "16",
-//              "@LNGID": "1199c1fc-6df3-41fa-971d-7e20a202657c",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "32",
-//              "@LNGID": "d435a421-8833-499e-93d0-9766a3bcc115",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT3.~index~1"
-//      },
-//      "OUTPUT4": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 4",
-//        "@AND": "c0",
-//        "@LNGID": "5b752f4b-21c1-45c5-87b6-29f22ddd0a1f",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "cbdb5fdb-44b8-49c0-9ff2-16a2ca8c993d",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "64",
-//              "@LNGID": "7bc424ac-0f4d-414a-b81a-c458171beab8",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "128",
-//              "@LNGID": "02a1ea2e-fba1-4756-bc8b-f82762feaa48",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT4.~index~1"
-//      },
-//      "OUTPUT5": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 5",
-//        "@AND": "300",
-//        "@LNGID": "786f5617-2aa3-448e-8cb6-6e23739c8543",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "c39d47b9-68c1-46d7-b408-92da195ceaf3",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "256",
-//              "@LNGID": "1d0954cb-a13f-488e-8c59-5ff9f7365014",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "512",
-//              "@LNGID": "444820ad-866b-4146-a697-bf22b3251edf",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT5.~index~1"
-//      },
-//      "OUTPUT6": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 6",
-//        "@AND": "c00",
-//        "@LNGID": "4c9a989e-de38-489a-a6f4-aae52b7c8f41",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "229d875d-6a77-47b5-bb67-7da6a177732d",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1024",
-//              "@LNGID": "bc181e01-bfbf-4fa9-bee1-cee91149a23e",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2048",
-//              "@LNGID": "fc35bdda-00e6-4c86-ae57-6576787a7520",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields.OUTPUT6.~index~1"
-//      },
-//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0.fields"
-//    },
-//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel0"
-//  },
-//  "EvacPanel1": {
-//    "name": "Evacuation Panel 1",
-//    "fields": {
-//      "OUTPUT1": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 1",
-//        "@AND": "3",
-//        "@LNGID": "52b21e4c-a0a5-4966-9ff2-e9d61bd87c62",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "1be8f464-750c-41cb-8faf-d3f19c1d6e65",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1",
-//              "@LNGID": "fab96ebe-f97b-43a7-84e7-1ff5aea1d5a9",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2",
-//              "@LNGID": "f1673bca-e041-493f-917d-9f9d501a4e48",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT1.~index~1"
-//      },
-//      "OUTPUT2": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 2",
-//        "@AND": "c",
-//        "@LNGID": "3586cb3b-9237-4351-af58-aea96eec3c7c",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "0539b0fc-f8c8-408e-a5ce-91a36765af05",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "4",
-//              "@LNGID": "ab63a82a-5864-4e0e-a4f9-3ffed442a40b",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "8",
-//              "@LNGID": "1f6fe3b8-58dd-459c-a686-2e06c8f93767",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT2.~index~1"
-//      },
-//      "OUTPUT3": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 3",
-//        "@AND": "30",
-//        "@LNGID": "c05b5cc3-7029-4213-8cdd-35b62e7d829e",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "d8b7d595-6749-4570-b99b-e68ebf46bd95",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "16",
-//              "@LNGID": "e0659631-c6aa-4fd2-a4c9-9744eeccead9",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "32",
-//              "@LNGID": "5a875743-1ab4-4c8e-bb07-1a1c92d6b2d6",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT3.~index~1"
-//      },
-//      "OUTPUT4": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 4",
-//        "@AND": "c0",
-//        "@LNGID": "97eb4987-2acf-482f-b6a6-db29227d7e22",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "06e8583b-fbf5-4a37-8759-dbb116fdbf4d",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "64",
-//              "@LNGID": "c84a2c41-9c25-4ce4-815d-3b9a7ae48948",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "128",
-//              "@LNGID": "2ba0b737-3d70-481d-bc4f-09453f779921",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT4.~index~1"
-//      },
-//      "OUTPUT5": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 5",
-//        "@AND": "300",
-//        "@LNGID": "ea7bfff9-2f77-4073-b852-e345d6117ced",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "d52c4327-28cd-4b92-a7ec-294791e12673",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "256",
-//              "@LNGID": "51693718-1f61-41f0-bd26-caf49f3f76a6",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "512",
-//              "@LNGID": "814a3bec-bad2-4f04-bb44-5a01ad152419",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT5.~index~1"
-//      },
-//      "OUTPUT6": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 6",
-//        "@AND": "c00",
-//        "@LNGID": "a6cd5323-bc08-409c-a42a-b7fb126c9983",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "bef3c61a-f27a-4bfc-b790-cb9971854a68",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1024",
-//              "@LNGID": "d4f10a2a-b50d-485c-b471-221ceb3d0b2d",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2048",
-//              "@LNGID": "ea113428-a778-4131-975a-6b731c811485",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields.OUTPUT6.~index~1"
-//      },
-//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1.fields"
-//    },
-//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel1"
-//  },
-//  "EvacPanel2": {
-//    "name": "Evacuation Panel 2",
-//    "fields": {
-//      "OUTPUT1": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 1",
-//        "@AND": "3",
-//        "@LNGID": "51a6825f-2841-4349-bab9-138dd0a039ad",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "51f09136-1bad-4402-9c97-c50a9022828e",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1",
-//              "@LNGID": "6d5665f6-2bc1-4cd8-9f63-0cb535f3c1ac",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2",
-//              "@LNGID": "3b210049-8f22-425e-81fd-60ae2321a4af",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT1.~index~1"
-//      },
-//      "OUTPUT2": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 2",
-//        "@AND": "c",
-//        "@LNGID": "0bfe0547-d560-4154-bffb-002f2ee38cc9",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "fe4f0145-324f-4621-b204-f3511fd8f1fe",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "4",
-//              "@LNGID": "b07b2465-ae76-4381-864b-6cd6b44aeda4",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "8",
-//              "@LNGID": "b68893d5-a999-415d-9559-7fbc2305f580",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT2.~index~1"
-//      },
-//      "OUTPUT3": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 3",
-//        "@AND": "30",
-//        "@LNGID": "2a2d23b3-56a3-48b3-bf8c-1a17e2db2754",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "e7c2ee93-86c3-4534-9b7c-f0e8b6f074c9",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "16",
-//              "@LNGID": "f78c764d-88d6-4fea-b42c-33842de2b8ff",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "32",
-//              "@LNGID": "4c3c53dc-5fc5-4297-afa1-e05e5f19af44",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT3.~index~1"
-//      },
-//      "OUTPUT4": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 4",
-//        "@AND": "c0",
-//        "@LNGID": "1cd56a86-c705-4d95-8d8f-04c56fa28635",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "546aa341-9cdd-4543-9939-a4f767421ada",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "64",
-//              "@LNGID": "1c242c47-52a3-458b-bf72-a5cf785e1fbc",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "128",
-//              "@LNGID": "cf3de52c-9bd6-4bf1-8e65-349443720f54",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT4.~index~1"
-//      },
-//      "OUTPUT5": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 5",
-//        "@AND": "300",
-//        "@LNGID": "53057b9c-4e7e-4f69-a0d4-c051724f9090",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "7e310690-69a5-41c1-aa39-a914eacc0067",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "256",
-//              "@LNGID": "17562b55-11a3-4b3a-955a-44c0b7271d89",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "512",
-//              "@LNGID": "8d3e7803-2c11-4cd7-897b-61e00f0bcaa0",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT5.~index~1"
-//      },
-//      "OUTPUT6": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 6",
-//        "@AND": "c00",
-//        "@LNGID": "6e2f8457-c371-4616-9e95-513f2b45635c",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "27f21060-676e-4628-8d6a-e56c69fd5529",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1024",
-//              "@LNGID": "49656942-ec93-49d5-9536-f824d5e8524c",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2048",
-//              "@LNGID": "24e5263d-4016-4457-b507-78c3610cc36d",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields.OUTPUT6.~index~1"
-//      },
-//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2.fields"
-//    },
-//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel2"
-//  },
-//  "EvacPanel3": {
-//    "name": "Evacuation Panel 3",
-//    "fields": {
-//      "OUTPUT1": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 1",
-//        "@AND": "3",
-//        "@LNGID": "f89e0a87-0d1d-4681-82a0-1372d1d12b6d",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "81bd93e8-935b-4d88-81d5-ea5509626028",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1",
-//              "@LNGID": "478e4a73-3c45-488d-9b20-5f0341e87395",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2",
-//              "@LNGID": "196fa70a-9581-47c9-a585-ceb5afac3481",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT1.~index~1"
-//      },
-//      "OUTPUT2": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 2",
-//        "@AND": "c",
-//        "@LNGID": "62465147-b27d-433d-bdb4-0307a73506c1",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "44fbb218-972b-4b93-adeb-468df4927d99",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "4",
-//              "@LNGID": "8d36f257-be8b-49a0-a313-f57eee6c5bc3",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "8",
-//              "@LNGID": "75984b85-961a-40bf-9296-1e525ff443c6",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT2.~index~1"
-//      },
-//      "OUTPUT3": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 3",
-//        "@AND": "30",
-//        "@LNGID": "7fcb97d4-c508-4b59-9b06-eaa4847279fa",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "52a58c6c-a8b5-4ca5-a1f7-163f01664812",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "16",
-//              "@LNGID": "ef6e2cc5-50a7-4031-a2c2-11200b3689b0",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "32",
-//              "@LNGID": "4cb7afc0-6690-4c3b-89ad-b08d697c5f6a",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT3.~index~1"
-//      },
-//      "OUTPUT4": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 4",
-//        "@AND": "c0",
-//        "@LNGID": "2e621b8e-b75f-462b-9413-2aa7eee9cb08",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "011ec12a-18f9-4b10-b5b7-f3fa055ab356",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "64",
-//              "@LNGID": "ff8139b4-d355-4548-9e3c-82ebfe98a16b",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "128",
-//              "@LNGID": "750a39bc-47f6-4962-903a-b3d75b920f02",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT4.~index~1"
-//      },
-//      "OUTPUT5": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 5",
-//        "@AND": "300",
-//        "@LNGID": "ec32734e-b915-4ec6-b81f-4564fb9f2b1b",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "7a5b368b-7b24-4259-aa04-076d70d1f299",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "256",
-//              "@LNGID": "8436bbf4-f20c-462a-b3cb-543e300acd7b",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "512",
-//              "@LNGID": "9a71b3c7-351e-45e1-8304-d9d78d09983a",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT5.~index~1"
-//      },
-//      "OUTPUT6": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 6",
-//        "@AND": "c00",
-//        "@LNGID": "67732e1d-9d07-4910-bee6-452510c1dda8",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "74250f0b-f8cc-49a2-85c8-e558a6e2f665",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1024",
-//              "@LNGID": "16cec853-275c-4230-adb8-f08b8c32c5d9",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2048",
-//              "@LNGID": "25cb788c-01b4-495b-8bed-02d691eea9bf",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields.OUTPUT6.~index~1"
-//      },
-//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3.fields"
-//    },
-//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel3"
-//  },
-//  "EvacPanel4": {
-//    "name": "Evacuation Panel 4",
-//    "fields": {
-//      "OUTPUT1": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 1",
-//        "@AND": "3",
-//        "@LNGID": "9a3e2951-2af1-4d54-9385-b3eea364cb85",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "7623fa99-7a0f-4e88-b780-f9d4ca5d8a67",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1",
-//              "@LNGID": "1d415370-e844-439a-8e8f-9587bd140b11",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2",
-//              "@LNGID": "cf976b54-5591-477f-b6ee-eebdd932a7e3",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT1.~index~1"
-//      },
-//      "OUTPUT2": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 2",
-//        "@AND": "c",
-//        "@LNGID": "9fc387e7-a69f-4670-8f9b-40efb76253d5",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "6e63b04f-3d6d-4c2a-98b7-35d4b740ab5b",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "4",
-//              "@LNGID": "9c2e9737-c2df-4ca6-9113-bc4c1fb81ee8",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "8",
-//              "@LNGID": "3030b45a-99b2-434b-9dd9-50d9dc53fb1c",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT2.~index~1"
-//      },
-//      "OUTPUT3": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 3",
-//        "@AND": "30",
-//        "@LNGID": "e8d913ea-c770-4e94-8674-0520c217c0f8",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "22b1388c-83c6-4936-8fc0-f86dbcd4736b",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "16",
-//              "@LNGID": "08d3abec-9872-407c-b42a-6f3da7ae1631",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "32",
-//              "@LNGID": "480ca479-f0ab-4c25-99f4-b5632881a097",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT3.~index~1"
-//      },
-//      "OUTPUT4": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 4",
-//        "@AND": "c0",
-//        "@LNGID": "e5101376-9671-4d70-9f5d-b5e6d457d64c",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "d32f1de4-d618-4da6-88c4-e93916821e21",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "64",
-//              "@LNGID": "e568c6a8-be83-41ec-81bd-7bff0e93cadb",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "128",
-//              "@LNGID": "50adfdfa-d527-468f-a562-fa3dd5a98a57",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT4.~index~1"
-//      },
-//      "OUTPUT5": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 5",
-//        "@AND": "300",
-//        "@LNGID": "cd2cd4d4-342f-4a9e-aa79-e1b6275e9d79",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "a0996e33-d681-4336-be13-bd3959e5f393",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "256",
-//              "@LNGID": "4db08e64-ca0d-40e7-85dc-f527ce665055",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "512",
-//              "@LNGID": "c953b757-1b75-4cd0-ad66-280e37a73723",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT5.~index~1"
-//      },
-//      "OUTPUT6": {
-//        "@TYPE": "LIST",
-//        "@SIZE": "2",
-//        "@TEXT": "Evac Zone 6",
-//        "@AND": "c00",
-//        "@LNGID": "ae7e3f6f-0ffd-4b9a-9f61-3d22cd78ff53",
-//        "ITEMS": {
-//          "ITEM": [
-//            {
-//              "@NAME": "OFF",
-//              "@VALUE": "0",
-//              "@DEFAULT": "1",
-//              "@LNGID": "ecd96ef0-b30a-4e50-936e-611277390448",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[0].~index~1"
-//            },
-//            {
-//              "@NAME": "A",
-//              "@VALUE": "1024",
-//              "@LNGID": "02bf71e5-ba54-45ec-9f79-2e213ec97fb4",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[1].~index~1"
-//            },
-//            {
-//              "@NAME": "E",
-//              "@VALUE": "2048",
-//              "@LNGID": "8d9b20e1-a877-43e0-9f9d-31e4e4e1844e",
-//              "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.ITEM[2].~index~1"
-//            }
-//          ],
-//          "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.ITEMS.~index~1"
-//        },
-//        "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields.OUTPUT6.~index~1"
-//      },
-//      "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4.fields"
-//    },
-//    "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups.EvacPanel4"
-//  },
-//  "~path": "ELEMENTS.IRIS8_EVAC_ZONE_GROUP.PROPERTIES.Groups"
-//}`;
-
-        /*        receiveMessageWPF(js)*/
+//                receiveMessageWPF(js)
     </script>
 </body>
 </html>

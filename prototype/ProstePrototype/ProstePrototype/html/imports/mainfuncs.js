@@ -380,7 +380,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
                 newElement.innerHTML = inner;
                 div.appendChild(newElement);
                 const [el1, el2, el3, el4] = jsFunc();
-                // alert(`el1 -> ${el1}, el2 -> ${el2}, el3 -> ${el3}, el4 -> ${el4}`)
+                //alert(`el1 -> ${el1}, el2 -> ${el2}, el3 -> ${el3}, el4 -> ${el4}`)
                 setTimeout(() => {
                     let el = document.getElementById(el1);
                     loadDiv(el, el2, el3, el4);
@@ -587,7 +587,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 .filter(deviceName => deviceName !== "selected")
                 .map(deviceName => {
                     let nameLst = deviceName.split('/');
-                    let name = !(nameLst[2]) ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
+                    let name = !(nameLst[1]) ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
                     let address = nameLst.at(-1);
                     let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
                     let checkedJson = Object.keys(currentDeviceNameObject)
@@ -1074,6 +1074,9 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                         additionalOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params': {'path':'${attributes.path}','newValue': this.value}})`;
                     }
                     inner += tabDiv.outerHTML;
+                } else if (tabs[key]["~enabled"] && !tabs[key]["~value"] && elementJson['~value'].includes(key)) {
+                    // execute on load the function loadDiv(`${attributes.input_id}_${fieldName}`, `showDiv_${attributes.input_id}_${fieldName}`, `${attributes.value}`, `${attributes.path}`);
+                    loopTypePath = tabs[key]["~path"];
                 } else if (tabs[key]["~value"]) {
                     loopTypePath = [tabs[key]["~path"], tabs[key]["~value"]];
                 }
@@ -2057,7 +2060,7 @@ function loadDiv(it, id, value, type) {
     const element = document.getElementById(value);
     //console.log('element.innerHTML', element, ' value ', value)
     const addElement = document.getElementById(id);
-    //console.log(it, "value -> element", value, "->", element, "id", id);
+    /*console.log(it, "value -> element", value, "->", element, "id", id);*/
     if (!type) {
         if (/^(\d{1,2}|Teletek|System|sounder_zonal|common_fire)_/.test(value)) {
             addElement.innerHTML = element.innerHTML;

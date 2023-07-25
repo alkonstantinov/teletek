@@ -696,7 +696,7 @@ namespace ProstePrototype
                     conn_params = rw.uc1.USBDevice;
                 }
                 else if (tabIdx == 3)
-                    conn_params = "read.log";
+                    conn_params = "read-iris8.log";
                 Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));
                 funcThread.Start();
 

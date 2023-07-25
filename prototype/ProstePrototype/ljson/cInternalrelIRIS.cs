@@ -1409,7 +1409,13 @@ namespace ljson
                 }
                 else if (prop["@TYPE"].ToString().ToLower() == "int" && val.Length == 2)
                 {
-                    sval = (val[1] * 256 + val[0]).ToString();
+                    int max = int.MaxValue;
+                    if (prop["@MAX"] != null)
+                        max = Convert.ToInt32(prop["@MAX"].ToString());
+                    if (val[1] * 256 + val[0] <= max)
+                        sval = (val[1] * 256 + val[0]).ToString();
+                    else
+                        sval = (val[0] * 256 + val[1]).ToString();
                     return new Tuple<string, string>(path, sval);
                 }
                 else if (val.Length == 4 && prop["@TYPE"].ToString().ToLower() == "ip")
@@ -1471,8 +1477,21 @@ namespace ljson
                 int group_byte = prop.offset;
                 int group_bytes = prop.bytescnt;
                 int _group = val[group_byte];
+                int gmax = int.MaxValue;
                 if (group_bytes == 2)
-                    _group = _group * 256 + val[group_byte + 1];
+                {
+                    if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["Settings"] != null &&
+                    node["PROPERTIES"]["Groups"]["Settings"]["fields"] != null &&
+                    node["PROPERTIES"]["Groups"]["Settings"]["fields"]["Group"] != null)
+                    {
+                        JObject gobj = (JObject)node["PROPERTIES"]["Groups"]["Settings"]["fields"]["Group"];
+                        if (gobj["@MAX"] != null) gmax = Convert.ToInt32(gobj["@MAX"].ToString());
+                    }
+                    if (_group * 256 + val[group_byte + 1] < gmax)
+                        _group = _group * 256 + val[group_byte + 1];
+                    else
+                        _group = val[group_byte + 1] * 256 + _group;
+                }
                 prop = (cRWPropertyIRIS)read_props["Type"];
                 int type_byte = prop.offset;
                 prop = (cRWPropertyIRIS)read_props["CHANNEL"];
@@ -1531,6 +1550,8 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"zone$", RegexOptions.IgnoreCase))
             {
+                if (Array.FindIndex(val, 2, element => element > 0) < 0)
+                    return false;
                 if (val[2] != 60 || val[4] != 60 || (val.Length > 97 && val[98] != 60))
                     return true;
                 for (int i = 5; i < val.Length; i++)

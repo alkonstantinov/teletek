@@ -837,10 +837,7 @@ namespace ljson
                         cRWProperty prop = p.ReadProperties[k];
                         ReadProperties.Add(k, prop);
                         if (typeidx <= 0 && (Regex.IsMatch(k, "^type$", RegexOptions.IgnoreCase) || Regex.IsMatch(k, "^activation1$", RegexOptions.IgnoreCase)))
-                        {
                             typeidx = prop.offset;
-                            break;
-                        }
                     }
                     if (typeidx < 0)
                     {
@@ -2845,6 +2842,8 @@ namespace ljson
                     continue;
                 string path = zone["~path"].ToString();
                 string val = cComm.GetPathValue(CurrentPanelID, path);
+                if (val == null && zone["@VALUE"] != null)
+                    val = zone["@VALUE"].ToString();
                 if (val == null || val != zone_key)
                     continue;
                 //
