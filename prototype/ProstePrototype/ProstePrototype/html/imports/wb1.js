@@ -210,11 +210,11 @@ const addButton = (title, div, index, localJSON = {}) => {
                     <div class="ram_card_body">
                         <h5 class="ram_title">
                             ${titleTranslated}
-                            <span class="h5">${indexFlag ? localJSON.interface : ""}</span>
                         </h5>      
                     </div>
                 </div>
             </a>`;
+                            //<span class="h5">${indexFlag ? localJSON.interface : ""}</span> //previously positioned above in the <h5> tag
 
     div.insertAdjacentHTML('beforeend', el);
 };
@@ -314,6 +314,9 @@ function alertScanFinished(show) {
             sendMessageWPF({ 'Command': 'LoadPage', 'Params': pageType });
         }
     }
+    else {
+        confirm(show);
+    }
 }
 
 
@@ -402,8 +405,11 @@ function sendMsg(self) {
         el.firstElementChild.replaceChild(inp, currentNode);
         inp.focus();
     } else if (self.getAttribute('topic') === "Delete") {
-        const panelId = self.parentNode.getAttribute('element').replaceAll("_", "-");
-        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Delete', '~panel_id': panelId });
+        const panelId = self.parentNode.getAttribute('element');
+        const currentPanelId = panelId.replaceAll("_", "-");
+        sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Delete', '~panel_id': currentPanelId });
+        const el = document.getElementById(panelId);
+        el.remove();
     } else {
         const panelId = self.parentNode.getAttribute('element').replaceAll("_", "-");
         sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': self.getAttribute('topic'), '~panel_id': panelId });

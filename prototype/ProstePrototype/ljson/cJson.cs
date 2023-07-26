@@ -1385,9 +1385,15 @@ namespace ljson
             }
         }
         private static object _connection_cache = null;
-        private static string VersionKey(object conn_params, string vercmd)
+        private static string VersionKey(object conn_params, string vercmd, out eRWResult rwres)
         {
             cTransport conn = cComm.ConnectBase(conn_params);
+            if (conn == null)
+            {
+                rwres = eRWResult.ConnectionError;
+                return null;
+            }
+            rwres = eRWResult.Ok;
             byte[] bres = cComm.SendCommand(conn, vercmd);
             _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
@@ -1397,15 +1403,17 @@ namespace ljson
             string res = bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2");
             return res;
         }
-        private static void SetRWFiles(object conn_params)
+        private static eRWResult SetRWFiles(object conn_params)
         {
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
-            string ver = VersionKey(conn_params, cfg.VersionCommand);
-            if (ver != cfg.CurrentVersion || WriteReadMerge == null)
+            eRWResult rwres = eRWResult.Ok;
+            string ver = VersionKey(conn_params, cfg.VersionCommand, out rwres);
+            if (rwres == eRWResult.Ok && ver != cfg.CurrentVersion || WriteReadMerge == null)
             {
                 cfg.SetRWFiles(ver);
                 WriteReadMerge = cfg.RWMerged();
             }
+            return rwres;
         }
         public static string ReadLog(object conn_params)
         {
@@ -1441,7 +1449,20 @@ namespace ljson
             _tteloops_count_in_peripherial_devs = -1;
             _sensloops_count_in_peripherial_devs = -1;
         }
-        public static void ReadDevice(object conn_params)
+        public static void ClearPanelCache(string _panel_id)
+        {
+            cComm.ClearPanelCache(_panel_id);
+            Monitor.Enter(_cs_current_panel);
+            if (_panel_internal_operators.ContainsKey(_panel_id))
+            {
+                cInternalRel _inop = _panel_internal_operators[_panel_id];
+                _inop.ClearCache();
+                _tteloops_count_in_peripherial_devs = -1;
+                _sensloops_count_in_peripherial_devs = -1;
+            }
+            Monitor.Exit(_cs_current_panel);
+        }
+        public static eRWResult ReadDevice(object conn_params)
         {
             bool isRepeaterIris = false;
             bool isSimpoPanel = false;
@@ -1458,9 +1479,11 @@ namespace ljson
             if (settings.logreads)
                 _log_bytesreaded.Clear();
             //string slog = ReadLog(conn_params);
-            ClearCache();
+            ClearPanelCache(CurrentPanelID);
             //
-            SetRWFiles(conn_params);
+            eRWResult rwres = SetRWFiles(conn_params);
+            if (rwres != eRWResult.Ok)
+                return rwres;
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
             Dictionary<string, JObject> dnodes = new Dictionary<string, JObject>();
@@ -1535,7 +1558,7 @@ namespace ljson
                 //else if (conn_params is cTDFParams)
                 //    conn = cComm.ConnectTDF((cTDFParams)conn_params);
                 if (conn == null)
-                    return;
+                    return eRWResult.ConnectionError;
                 foreach (string key in drw.Keys)
                 {
                     cRWPath p = null;
@@ -1765,6 +1788,7 @@ namespace ljson
                     File.WriteAllText("read.log", log);
                 }
             }
+            return rwres;
         }
         //Write
         private static JObject NONEElementRW(string key)
@@ -2340,9 +2364,11 @@ namespace ljson
             //
             return res;
         }
-        public static void WriteDevice(object conn_params)
+        public static eRWResult WriteDevice(object conn_params)
         {
-            SetRWFiles(conn_params);
+            eRWResult rwres = SetRWFiles(conn_params);
+            if (rwres != eRWResult.Ok)
+                return rwres;
             //
             if (settings.logreads)
                 _log_byteswrite.Clear();
@@ -2524,7 +2550,7 @@ namespace ljson
                 File.WriteAllText("writeres.log", wres);
                 File.WriteAllText("writeerr.log", werr);
             }
-            return;
+            return eRWResult.Ok;
         }
         #endregion
         private static void AddDefaultLoops(JObject _panel)
@@ -2605,6 +2631,21 @@ namespace ljson
             Monitor.Exit(_cs_current_panel);
             AddDefaultLoops(_panel);
             return _panel;
+        }
+
+        public static void RemovePanel(string _panel_id)
+        {
+            Monitor.Enter(_cs_current_panel);
+            Monitor.Enter(_cs_panel_templates);
+            if (_system_panels.ContainsKey(_panel_id))
+            {
+                ClearPanelCache(_panel_id);
+                _system_panels.Remove(_panel_id);
+                if (_panel_internal_operators.ContainsKey(_panel_id))
+                    _panel_internal_operators.Remove(_panel_id);
+            }
+            Monitor.Exit(_cs_current_panel);
+            Monitor.Exit(_cs_panel_templates);
         }
         private static void SetPanelIDInToken(JToken t)
         {

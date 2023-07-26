@@ -5,7 +5,7 @@
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <system:String x:Key="MainMenuAddNew">Add New</system:String>
     <system:String x:Key="MainMenuNew">New</system:String>
-    <system:String x:Key="MainMenuScan">Scan</system:String>
+    <system:String x:Key="MainMenuScan">Read</system:String>
     <system:String x:Key="MainMenuExport">Export</system:String>
     <system:String x:Key="MainMenuFile">File</system:String>
     <system:String x:Key="MainMenuOpen">Open</system:String>

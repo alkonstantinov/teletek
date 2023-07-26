@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using System.Threading;
+using Microsoft.Windows.Themes;
 
 namespace ljson
 {
@@ -1533,6 +1534,13 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"panel", RegexOptions.IgnoreCase))
             {
+                if (read_props.ContainsKey("IP"))
+                {
+                    cRWProperty prop = read_props["IP"];
+                    bool haveip = false;
+                    for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++) haveip |= val[i] != 0;
+                    return haveip;
+                }
                 for (int i = 2; i <= 5; i++)
                     if (val[i] != 0)
                         return true;

@@ -110,7 +110,7 @@
     translations: {
         MainMenuAddNew: { 'en': 'Add New Panel', 'bg': 'Добави ново устройство' },
         MainMenuNew: { 'en': 'New System', 'bg': 'Нова система' },
-        MainMenuScan: { 'en': 'Scan', 'bg': 'Сканирай' },
+        MainMenuScan: { 'en': 'Read', 'bg': 'Прочитане' },
         MainMenuExport: { 'en': 'Export', 'bg': 'Експорт' },
         MainMenuFile: { 'en': 'File', 'bg': 'Файл' },
         MainMenuOpen: { 'en': 'Open', 'bg': 'Отваряне' },

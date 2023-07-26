@@ -26,6 +26,8 @@ namespace common
     public delegate JObject dGetNode(string name);
     public delegate JObject dFindObjectByProperty(JToken _node, string prop_name, string val);
 
+    public enum eRWResult { Ok = 1, ConnectionError = 2 };
+
     public static class constants
     {
         public static string NO_LOOP = "NO_LOOP";//{ get { return "NO_LOOP"; } }

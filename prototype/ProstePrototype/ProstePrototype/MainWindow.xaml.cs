@@ -21,6 +21,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Xml;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace ProstePrototype
 {
@@ -360,9 +361,9 @@ namespace ProstePrototype
         #endregion
 
         #region Language
-        private void ApplyLang(string currLang)
+        private void ApplyLang(string currLang, string fn = "setLang")
         {
-            string script = $"setLang('{currLang}');";
+            string script = $"{fn}('{currLang}');";
             wb1.ExecuteScriptAsyncWhenPageLoaded(script);
             wb2.ExecuteScriptAsyncWhenPageLoaded(script);
         }
@@ -402,6 +403,13 @@ namespace ProstePrototype
                             break;
                         case "Delete":
                             currentPanelId = json["~panel_id"].ToString();
+                            cJson.RemovePanel(currentPanelId);
+                            wb2.Load("about:blank");
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                ApplyLang(languageButton.CurrentLanguage, "toggleLang");
+                            });
+
                             break;
                         case "Write":
                             currentPanelId = json["~panel_id"].ToString();
@@ -615,7 +623,7 @@ namespace ProstePrototype
                 this.Dispatcher.Invoke(() =>
                 {
                     scan_btn.IsEnabled = true;
-                    mainMenuOpenTDF_btn.IsEnabled = true;
+                    //mainMenuOpenTDF_btn.IsEnabled = true;
                     ChangeTheme(DarkMode);
                 } );
 
@@ -716,7 +724,17 @@ namespace ProstePrototype
                 }
                 else if (tabIdx == 3)
                     conn_params = "read.log";
-                Thread funcThread = new Thread(() => ReadDevice(conn_params, popUpWindow));
+                Thread funcThread = new Thread(() =>
+                {
+                    try
+                    {
+                        ReadDevice(conn_params, popUpWindow);
+                    }
+                    catch (Exception ex)
+                    {
+                        popUpWindow.Close();
+                    }
+                });
                 funcThread.Start();
 
                 popUpWindow.ShowDialog();
@@ -728,8 +746,16 @@ namespace ProstePrototype
         }
         private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow)
         {
-            cJson.ReadDevice(conn_params);
-            wb1.ExecuteScriptAsync($"alertScanFinished('alert')");
+            eRWResult resp = cJson.ReadDevice(conn_params);
+            if (resp == eRWResult.Ok) { 
+                wb1.ExecuteScriptAsync($"alertScanFinished('alert')");
+            } else
+            {
+                string showMsg = conn_params != null ? 
+                    $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
+                    $"Connection Error: Please, provided some connection details";
+                wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+            }
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -738,8 +764,18 @@ namespace ProstePrototype
         }
         private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow)
         {
-            cJson.WriteDevice(conn_params);
-            wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
+            eRWResult resp = cJson.WriteDevice(conn_params);
+            if (resp == eRWResult.Ok)
+            {
+                wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
+            }
+            else
+            {
+                string showMsg = conn_params != null ?
+                    $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
+                    $"Connection Error: Please, provided some connection details";
+                wb2.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+            }
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -766,16 +802,49 @@ namespace ProstePrototype
             {
                 ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
                 
-                Thread funcThread = new Thread(() => {
-                        cTDFParams conn = new cTDFParams();
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
-                        conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
-                        conn.readcfg = cJson.ReadXML();
-                        conn.template = cJson.TemplateXML();
-                        ReadDevice(conn, popUpWindow);
+                Thread funcThread = new Thread(() =>
+                {
+                    cTDFParams conn = new cTDFParams();
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(File.ReadAllText(openFileDialog.FileName));
+                    XmlNode element = doc.SelectSingleNode("//ELEMENT[@ID='SYSTEM']/ELEMENTS/ELEMENT[1]");
+                    string panelType = element.Attributes["ID"].Value;
+                    panelType = panelType.Split("_")[0].ToLower();
+                    switch (panelType)
+                    {
+                        case "tftr":
+                        case "r":
+                            panelType = "repeater_iris_simpo"; break;
+                        default: break;
                     }
-                );
+                    
+                    JObject arr = lcommunicate.cComm.Scan();
+                    // adding newSystem
+                    JArray jArray = new JArray(((JArray)arr["fire"]).Union((JArray)arr["guard"]));
+                    JObject param = (JObject)jArray.FirstOrDefault(device => device["schema"].Value<string>() == panelType);
+                    JObject panel = cJson.AddPanel(param);
+                    LoadPage(param["schema"].Value<string>(), null);
+                    loadWb1 = false;
+                    AddPagesConstant();
+                    ApplyTheme();
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        ApplyLang(languageButton.CurrentLanguage);
+                    });
+                    conn.tdf = JObject.Parse(JsonConvert.SerializeXmlNode(doc));
+                    conn.readcfg = cJson.ReadXML();
+                    conn.template = cJson.TemplateXML();
+                    try
+                    {
+                        ReadDevice(conn, popUpWindow);
+                    } catch (Exception)
+                    {                        
+                        string showMsg = $"Reading Error: We currently could not read '{panelType}' type of panel from .TDF";
+                        wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+                        popUpWindow._functionFinished = true;
+                    }
+                });
+                funcThread.SetApartmentState(ApartmentState.STA);
                 funcThread.Start();
 
                 popUpWindow.ShowDialog();
@@ -783,7 +852,6 @@ namespace ProstePrototype
                 funcThread.Join();
 
                 popUpWindow.Close();
-                //cJson.LoadFile(openFileDialog.FileName);
             }
         }
         private void Export_Clicked(object sender, RoutedEventArgs e)

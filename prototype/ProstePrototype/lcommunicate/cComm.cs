@@ -957,6 +957,29 @@ namespace lcommunicate
         #endregion
 
         #region save/load
+        public static void ClearPanelCache(string _panel_id)
+        {
+            Monitor.Enter(_cs_cache);
+            Monitor.Enter(_cs_pseudo_element_cache);
+            if (_cache_panels != null && _cache_panels.ContainsKey(_panel_id))
+            {
+                _cache_panels[_panel_id].Clear();
+                _cache_panels.Remove(_panel_id);
+            }
+            if (_cache_list_panels != null && _cache_list_panels.ContainsKey(_panel_id))
+            {
+                _cache_list_panels[_panel_id].Clear();
+                _cache_list_panels.Remove(_panel_id);
+            }
+            if (_cache_pseudo_element_panels != null && _cache_pseudo_element_panels.ContainsKey(_panel_id))
+            {
+                _cache_pseudo_element_panels[_panel_id].Clear();
+                _cache_pseudo_element_panels.Remove(_panel_id);
+            }
+            //
+            Monitor.Exit(_cs_pseudo_element_cache);
+            Monitor.Exit(_cs_cache);
+        }
         public static void ClearCache()
         {
             Monitor.Enter(_cs_cache);
