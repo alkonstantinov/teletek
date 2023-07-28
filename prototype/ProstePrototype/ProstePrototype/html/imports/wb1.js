@@ -187,7 +187,7 @@ const addButton = (title, div, index, localJSON = {}) => {
     // button color definition
     let color = indexFlag ? localJSON.deviceType : "";
     if (color === 'guard') color = 'normal'; // options for color: "normal", "fire", "grasse"
-    //if (color === 'guard') return; // case without Eclipse - for delivering without Eclipse 
+    /*if (color === 'guard') return; // case without Eclipse - for delivering without Eclipse */
 
     // clean all digits from used deviceType
     let key;

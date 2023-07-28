@@ -513,7 +513,7 @@
                                         </DockPanel>
                                     </MenuItem.Header>-->
                                 </MenuItem>
-                                <MenuItem Style="{StaticResource FileStyle}" Header="{DynamicResource MainMenuSave}"
+                                <MenuItem Click="Save_Clicked" Style="{StaticResource FileStyle}" Header="{DynamicResource MainMenuSave}"
                                           >
                                     <!--<MenuItem.Header>
                                         <DockPanel>

@@ -7,6 +7,8 @@ const BUTTON_COLORS = {
     TTE: 'grasse',
 };
 
+let INC = false;
+
 let darkModeStylesheetId = "ssDarkMode";
 
 let CONFIGURED_IO = {};
@@ -259,6 +261,9 @@ function drawFields(body, json, inheritedColor = 'normal') {
             }).catch(err => alert("Error " + err));
         } else if (!divLevel["@TYPE"] && !divLevel.name) { // cases for adding panels/inputs/outputs/loops/etc
             minElements = +divLevel["@MIN"];
+            if (minElements == 0) {
+                INC = true;
+            }
             for (let i = 0; i < minElements; i++) {
                 if (!lst.includes(i)) lst.push(i);
             }
@@ -1832,7 +1837,7 @@ function callAddressModal(elementType, current, params = {}) {
     for (var i = minElements; i <= elements; i++) {
         let currentId = i === +current ? "selected" : "";
         let disabled = lst.includes(i) ? "disabled style='background: #aaa;'" : ""
-        innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i}</option>`;
+        innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i + Number(INC)}</option>`;
     }
     innerSelectText += `</select>
                     <div>`
@@ -1931,7 +1936,7 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
                                     <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
                                 </div>
                                 <div class="ram_card_body">
-                                    <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${last}</h5>
+                                    <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+last+Number(INC)}</h5>
                                 </div>
                                 <div class="ram_add_btn" 
                                     onclick="javascript: event.stopPropagation();
@@ -1992,7 +1997,7 @@ async function inputGroupTextGenerator(last, elementType) {
             return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="ram_card fire">
                             <div style="min-width: 200px;" class="ram_card_body">
-                                <span>${last}. ${legend}</span> 
+                                <span>${+last+Number(INC)}. ${legend}</span> 
                                 <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>
                                 <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
@@ -2036,7 +2041,7 @@ async function showElement(id, elementType) {
             fieldset.id = `id_${id}`;
             fieldset.insertAdjacentHTML(
                 'afterbegin',
-                `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>
+                `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+id+Number(INC)}</legend>
                 <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
             drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];

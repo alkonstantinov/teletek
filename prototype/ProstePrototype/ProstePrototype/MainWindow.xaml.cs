@@ -43,6 +43,7 @@ namespace ProstePrototype
         private double tempWidth { get; set; }
         private double tempMaxHeight { get; set; }
         private double tempMaxWidth { get; set; }
+        private string currentFileName { get; set; }
 
         private class BrowserParams
         {
@@ -693,11 +694,35 @@ namespace ProstePrototype
         }
         #endregion
 
+        #region lastUsedFolder
+        private string GetLastUsedDirectory()
+        {
+            // Read last used directory from file or MyDocuments
+            if (String.IsNullOrEmpty(Properties.Settings.Default.LastUsedDirectory))
+                return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); 
+            return Properties.Settings.Default.LastUsedDirectory;
+        }
+
+        private void SaveLastUsedDirectory(string fileName)
+        {
+            // Save last used directory to file or registry key
+            Properties.Settings.Default.LastUsedDirectory = Path.GetDirectoryName(fileName);
+            Properties.Settings.Default.Save();
+        }
+
+        private void ExitLastUsedDirectory()
+        {
+            // Save last used directory to file or registry key
+            Properties.Settings.Default.LastUsedDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            Properties.Settings.Default.Save();
+        }
+        #endregion
+
         #region mainButtonsClicked
 
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
-            //rw = new ReadWindow(0); 
+            //rw = new ReadWindow(0); // for delivery to Teletek
             rw = new ReadWindow(); // default 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -786,10 +811,13 @@ namespace ProstePrototype
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Teletek Manager File (*.TMF)|*.TMF|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.InitialDirectory = GetLastUsedDirectory();
+
             if (openFileDialog.ShowDialog() == true)
             {
                 cJson.LoadFile(openFileDialog.FileName);
+                currentFileName = openFileDialog.FileName;
+                SaveLastUsedDirectory(openFileDialog.FileName);
             }
         }
         
@@ -797,12 +825,13 @@ namespace ProstePrototype
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Teletek Data File (*.TDF)|*.TDF|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.InitialDirectory = GetLastUsedDirectory();
             if (openFileDialog.ShowDialog() == true)
             {
                 ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
-                
-                Thread funcThread = new Thread(() =>
+                SaveLastUsedDirectory(openFileDialog.FileName);
+
+                Thread funcThread = new Thread(async () =>
                 {
                     cTDFParams conn = new cTDFParams();
                     XmlDocument doc = new XmlDocument();
@@ -838,13 +867,12 @@ namespace ProstePrototype
                     {
                         ReadDevice(conn, popUpWindow);
                     } catch (Exception)
-                    {                        
-                        string showMsg = $"Reading Error: We currently could not read '{panelType}' type of panel from .TDF";
-                        wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+                    {
+                        string showMsg = $"Reading Error - Temporarily unable to read values for \"{panelType}\" panel type from .TDF";
+                        wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");                        
                         popUpWindow._functionFinished = true;
                     }
                 });
-                funcThread.SetApartmentState(ApartmentState.STA);
                 funcThread.Start();
 
                 popUpWindow.ShowDialog();
@@ -854,6 +882,7 @@ namespace ProstePrototype
                 popUpWindow.Close();
             }
         }
+
         private void Export_Clicked(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -872,6 +901,21 @@ namespace ProstePrototype
             }
         }
 
+        private void Save_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(currentFileName))
+            {
+                SaveAs_Clicked(sender, e);
+            }
+            
+            // Save document
+            string filename = currentFileName;
+            //TODO!!!
+            cJson.SaveAs(filename);
+            // no need to SaveLastUsedDirectory(filename)
+
+        }
+
         private void SaveAs_Clicked(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -888,6 +932,7 @@ namespace ProstePrototype
                 // Save document
                 string filename = dlg.FileName;
                 cJson.SaveAs(filename);
+                SaveLastUsedDirectory(filename);
             }
         }
         private void SettingsClicked(object sender, RoutedEventArgs e)
@@ -1004,6 +1049,7 @@ namespace ProstePrototype
 
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
+            ExitLastUsedDirectory();
             Environment.Exit(0);
         }
         #endregion
