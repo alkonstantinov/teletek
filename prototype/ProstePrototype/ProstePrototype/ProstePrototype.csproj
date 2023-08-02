@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Images\teletek_favicon_hfk_icon.ico</ApplicationIcon>
-    <Version>$(VersionPrefix)1.0.1</Version>
+    <Version>$(VersionPrefix)1.0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -141,7 +141,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="113.1.40" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="115.3.110" />
     <PackageReference Include="HidSharp" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
@@ -1218,15 +1218,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="113.1.4" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="115.3.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="113.1.4" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="115.3.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="113.1.4" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="115.3.11" />
   </ItemGroup>
 
   <ItemGroup>

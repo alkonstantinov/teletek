@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,11 +20,14 @@ namespace ProstePrototype
     public partial class SettingsDialog : Window
     {
         private MainWindow _mainWindow;
+        private string currentVersion;
         public SettingsDialog(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
             changeTheme_btn.Command = new RelayCommand(changeTheme_Click);
+            currentVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
+            ver.Text = currentVersion;
         }
 
         private void OKSettings_Clicked(object sender, RoutedEventArgs e)
@@ -74,6 +79,50 @@ namespace ProstePrototype
         private void Help_Clicked(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Update_Clicked(object sender, RoutedEventArgs e)
+        {
+            // send for comparison in current version
+            // Get the path to the folder.
+            string folderPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Release";
+
+            // Check if the folder exists.
+            if (Directory.Exists(folderPath))
+            {
+                // Get the list of all files in the folder.
+                string[] files = Directory.GetFiles(folderPath, "*.exe");
+
+                // Get the creation date and version of each file.
+                DateTime[] creationDates = new DateTime[files.Length];
+                string[] versions = new string[files.Length];
+                string[] descr = new string[files.Length];
+                for (int i = 0; i < files.Length; i++)
+                {
+                    creationDates[i] = File.GetCreationTime(files[i]);
+                    versions[i] = FileVersionInfo.GetVersionInfo(files[i]).FileVersion;
+                    descr[i] = FileVersionInfo.GetVersionInfo(files[i]).FileDescription;
+                }
+
+                Debug.WriteLine("currentVersion" + currentVersion);
+                // Display the creation date and version of each file.
+                for (int i = 0; i < files.Length; i++)
+                {
+                    Debug.WriteLine("File: " + files[i] + ", Creation Date: " + creationDates[i] + ", Version: " + versions[i]+ ", Descr: " + descr[i]);
+                    if (!string.IsNullOrEmpty(versions[i]) && currentVersion.CompareTo(versions[i].Trim()) < 0)
+                    {
+                        // perform install this update
+                        Debug.WriteLine("Hurray");
+                    }
+                }
+            }
+            else
+            {
+                // No Connection to the Internet
+                MessageBox.Show("Please check your Internet Connection and then try again", "No Connection to the Internet", MessageBoxButton.OK, MessageBoxImage.Warning);
+                // The folder is wrong.
+                Debug.WriteLine("No Connection to the Internet. Path used: " + folderPath);
+            }
         }
     }
 

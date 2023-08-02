@@ -23,6 +23,8 @@ namespace ProstePrototype
         {
             InitializeComponent();
 
+            ver.Text = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
+
             dT.Tick += new EventHandler(dt_Tick);
             dT.Interval = new TimeSpan(0, 0, 2);
             dT.Start();
@@ -38,3 +40,4 @@ namespace ProstePrototype
         }
     }
 }
+

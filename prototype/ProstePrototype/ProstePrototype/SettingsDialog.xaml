@@ -46,11 +46,14 @@
 
             <uc:theme x:Name="changeTheme_btn" Grid.Row="1" Height="30" Width="165"/>
 
-            <Button Grid.Row="2" x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0" Background="Transparent">
+            <Button Click="Update_Clicked" Grid.Row="2" x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0" Background="Transparent">
                 <DockPanel VerticalAlignment="Center">
                     <TextBlock Text="&#xe4c2; " FontFamily="{StaticResource fa_solid}" FontSize="28" VerticalAlignment="Bottom"></TextBlock>
-                    <TextBlock Text="{library:DynamicResourceBinding MainMenuUpdate, Converter={StaticResource StringToUpperConverter}}" 
-                                       FontFamily="{StaticResource poppins_demibold}" FontSize="16" VerticalAlignment="Center"/>
+                    <TextBlock TextAlignment="Center"  Margin="0, 10, 0, 0">
+                        <Run Text="{library:DynamicResourceBinding MainMenuUpdate, Converter={StaticResource StringToUpperConverter}}" 
+                                               FontFamily="{StaticResource poppins_demibold}" FontSize="16"/>
+                        <Run x:Name="ver"/>
+                    </TextBlock>
                 </DockPanel>
             </Button>
         </Grid>
