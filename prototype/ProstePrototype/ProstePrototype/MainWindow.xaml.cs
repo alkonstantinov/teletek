@@ -22,6 +22,8 @@ using Newtonsoft.Json;
 using System.Xml;
 using System.Diagnostics;
 using System.Xml.Linq;
+using ProstePrototype.WpfControls;
+using System.Windows.Threading;
 
 namespace ProstePrototype
 {
@@ -34,6 +36,7 @@ namespace ProstePrototype
         private readonly JObject pages;
         private ReadWindow rw;
         private SettingsDialog settings;
+        private JObject useSetting;
 
         public bool DarkMode { get; set; }
 
@@ -91,6 +94,13 @@ namespace ProstePrototype
 
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
+            try
+            {
+                useSetting = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "useSetting.json")));
+            } catch 
+            { 
+                useSetting = new JObject();
+            }
 
             DataContext = this;
 
@@ -709,13 +719,6 @@ namespace ProstePrototype
             Properties.Settings.Default.LastUsedDirectory = Path.GetDirectoryName(fileName);
             Properties.Settings.Default.Save();
         }
-
-        private void ExitLastUsedDirectory()
-        {
-            // Save last used directory to file or registry key
-            Properties.Settings.Default.LastUsedDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Properties.Settings.Default.Save();
-        }
         #endregion
 
         #region mainButtonsClicked
@@ -749,15 +752,27 @@ namespace ProstePrototype
                 }
                 else if (tabIdx == 3)
                     conn_params = "read.log";
+                CodeWindow cw = new CodeWindow();
+                cw.ShowDialog();
+                var codeEntered = cw.DialogResult;
                 Thread funcThread = new Thread(() =>
                 {
                     try
                     {
-                        ReadDevice(conn_params, popUpWindow);
+                        if ((bool)codeEntered)
+                        {
+                            // Use Dispatcher.Invoke to access the property from the UI thread.
+                            string code = (string)Dispatcher.Invoke(new Func<string>(() => { return cw.Code; }));
+                            ReadDevice(conn_params, popUpWindow, code);
+                        } else
+                        {
+                            Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
+                        }
                     }
                     catch (Exception ex)
                     {
-                        popUpWindow.Close();
+                        wb1.ExecuteScriptAsync($"alertScanFinished('{ex.Message}')");
+                        Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
                     }
                 });
                 funcThread.Start();
@@ -769,17 +784,24 @@ namespace ProstePrototype
                 popUpWindow.Close();
             }
         }
-        private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow)
+        private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
         {
-            eRWResult resp = cJson.ReadDevice(conn_params);
-            if (resp == eRWResult.Ok) { 
-                wb1.ExecuteScriptAsync($"alertScanFinished('alert')");
-            } else
+            eRWResult resp = cJson.ReadDevice(conn_params, code);
+            switch (resp)
             {
-                string showMsg = conn_params != null ? 
+                case eRWResult.Ok: wb1.ExecuteScriptAsync($"alertScanFinished('alert')"); break;
+                case eRWResult.ConnectionError: 
+                case eRWResult.BadLogin: 
+                case eRWResult.NullLoginCMD: 
+                case eRWResult.NullLoginOkByte: 
+                case eRWResult.NullLoginOkVal: 
+                case eRWResult.BadCommandResult:
+                default:
+                    string showMsg = (conn_params != null && (string)conn_params != "read.log") ?
                     $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
-                    $"Connection Error: Please, provided some connection details";
-                wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+                    $"Connection Error: Please check your provided details";
+                    wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')"); 
+                    break;
             }
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
@@ -787,9 +809,9 @@ namespace ProstePrototype
                 popUpWindow._functionFinished = true;
             });
         }
-        private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow)
+        private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
         {
-            eRWResult resp = cJson.WriteDevice(conn_params);
+            eRWResult resp = cJson.WriteDevice(conn_params, code);
             if (resp == eRWResult.Ok)
             {
                 wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
@@ -831,7 +853,7 @@ namespace ProstePrototype
                 ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
                 SaveLastUsedDirectory(openFileDialog.FileName);
 
-                Thread funcThread = new Thread(async () =>
+                Thread funcThread = new Thread(() =>
                 {
                     cTDFParams conn = new cTDFParams();
                     XmlDocument doc = new XmlDocument();
@@ -865,7 +887,7 @@ namespace ProstePrototype
                     conn.template = cJson.TemplateXML();
                     try
                     {
-                        ReadDevice(conn, popUpWindow);
+                        ReadDevice(conn, popUpWindow, "");
                     } catch (Exception)
                     {
                         string showMsg = $"Reading Error - Temporarily unable to read values for \"{panelType}\" panel type from .TDF";
@@ -1036,7 +1058,19 @@ namespace ProstePrototype
                     conn_params = "read.log";
                 else
                     return;
-                Thread funcThread = new Thread(() => WriteDevice(conn_params, popUpWindow));
+                CodeWindow cw = new CodeWindow();
+                cw.ShowDialog();
+                var codeEntered = cw.DialogResult;
+                Thread funcThread = new Thread(() => {
+                    if ((bool)codeEntered)
+                    {
+                        string code = this.Dispatcher.Invoke(new Func<string>(() => cw.Code));
+                        WriteDevice(conn_params, popUpWindow, code);
+                    } else
+                    {
+                        Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
+                    }                   
+                });
                 funcThread.Start();
 
                 popUpWindow.ShowDialog();
@@ -1049,7 +1083,7 @@ namespace ProstePrototype
 
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
-            ExitLastUsedDirectory();
+            File.WriteAllTextAsync("useSetting.json", useSetting.ToString());
             Environment.Exit(0);
         }
         #endregion

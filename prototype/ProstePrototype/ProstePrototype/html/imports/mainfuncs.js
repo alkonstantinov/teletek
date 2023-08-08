@@ -199,12 +199,12 @@ function drawFields(body, json, inheritedColor = 'normal') {
     if (!json) return;
     // getting keys and creating element for each
     keys = Object.keys(json);
-
+    //alert('keys ' + keys + ' with length ' + keys.length);
     keys.filter(k => k !== '~path' && k !== '~panel_id' && k !== '~panel_name').forEach(k => {
         let divLevel = json[k];
-
         if (k.startsWith('~noname')) { // ~noname, ~noname1, ~noname2, ..., etc cases
             let div = document.createElement('div');
+            
             div.classList = "row align-items-center m-2";
             elementsCreationHandler(div, divLevel);
             body.appendChild(div);
@@ -213,7 +213,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
             fieldset.classList.add("ram_attribute_holder");
             var insideRows = `<p class="ram_attribute_holder_title">${newT.t(localStorage.getItem('lang'), "company_info")}</p>`;
             for (field in divLevel.fields) {
-                if (field.includes("~")) continue;
+                if (field && field.includes("~")) continue;
                 let pl = newT.t(localStorage.getItem('lang'), divLevel.fields[field]["@LNGID"]);
                 let id = divLevel.fields[field]["@LNGID"];
                 let m = divLevel.fields[field]["@LENGTH"];
@@ -260,16 +260,17 @@ function drawFields(body, json, inheritedColor = 'normal') {
 
             }).catch(err => alert("Error " + err));
         } else if (!divLevel["@TYPE"] && !divLevel.name) { // cases for adding panels/inputs/outputs/loops/etc
+            
             minElements = +divLevel["@MIN"];
             if (minElements == 0) {
                 INC = true;
             }
             for (let i = 0; i < minElements; i++) {
-                if (!lst.includes(i)) lst.push(i);
+                if (lst && !lst.includes(i)) lst.push(i);
             }
             elements = +divLevel["@MAX"]; // case of divMain
             let btnDiv = document.getElementById("buttons");
-            if (k.toUpperCase().includes('INPUT_GROUP')) {
+            if (k && k.toUpperCase().includes('INPUT_GROUP')) {
                 const oldEl = document.querySelector('#selected_area');
                 const newEl = document.createElement("main");
                 newEl.id = 'new';
@@ -283,7 +284,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                                 </button>`;
             } else {
                 // adding the button for everybody except PANNELIN // SIMPO_PANELS_R //IRIS8_PANELINNETWORK
-                if (!k.toUpperCase().includes("PANEL")) { 
+                if (k && !k.toUpperCase().includes("PANEL")) { 
                     btnDiv.insertAdjacentHTML(
                         'afterbegin',
                         `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}">
@@ -296,7 +297,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                              <i class="ram_icon toggle"></i>
                          </button>`);
                 }  
-                if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                if (k && k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
                     deviceNmbr = 0;                    
                     // add the section showing the attached_device per zone with the device summary button
                     body.insertAdjacentHTML(
@@ -322,7 +323,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
             }
 
             getAvailableElements(k.toUpperCase());
-        } else if (!k.includes('~')) { // collapsible parts
+        } else if (k && !k.includes('~')) { // collapsible parts
             const { input_name, input_id } = {
                 input_name: divLevel.name,
                 input_id: divLevel.name.toLowerCase().trim().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replace(/[/()]/g, '')
@@ -560,6 +561,22 @@ function fatFbfFunc(json) {
 function showLoopType(level, type, key, showDivId, selectDivId) {
     //showLoopType(3, 'Input', 'IRIS8_TTELOOP1' + '+' + this.value, 'loop_type-showDiv_input_type_Type-target', 'input_type_Type')
     //showLoopType(2, 'Output', "IRIS_LOOP1", 'loop_type-showDiv_output_type', 'output_type')
+    /*{
+  "IRIS8_TTELOOP1": {
+    "IRIS8_MIO22M/1": {
+      "/TYPECHANNEL1": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~0",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.Groups.~noname.fields.TYPECHANNEL1.~index~1",
+        "uses": []
+      },
+      "/TYPECHANNEL2": {
+        "path": "ELEMENTS.IRIS8_INPUT.PROPERTIES.Groups.InputType.fields.Type.TABS.f5cb7ae8-4ed9-4eaa-828f-07c0804f78ca.~index~0",
+        "channel_path": "IRIS8_TTELOOP1/IRIS8_TTENONE#IRIS8_MIO22M.ELEMENTS.IRIS8_MIO22M.PROPERTIES.Groups.~noname.fields.TYPECHANNEL2.~index~1",
+        "uses": null
+      }
+    }
+  }
+} */
     const showDiv = document.getElementById(showDivId);
     const selectDiv = document.getElementById(selectDivId);
 
@@ -592,7 +609,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
                 .filter(deviceName => deviceName !== "selected")
                 .map(deviceName => {
                     let nameLst = deviceName.split('/');
-                    let name = !(nameLst[1]) ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
+                    let name = nameLst.length <= 2 ? nameLst[0].split("_").slice(1).join("_") : nameLst[1];
                     let address = nameLst.at(-1);
                     let currentDeviceNameObject = CONFIGURED_IO[key][deviceName];
                     let checkedJson = Object.keys(currentDeviceNameObject)
@@ -645,7 +662,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
         }
         let disabled = ""; let tooltip = "";
         if (level >= 2) {
-            if (type.toLowerCase() === "output" && (o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`) || o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`))) {
+            if (type.toLowerCase() === "output" && ((o["label"] && o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'used')}`)) || (o["label"] && o["label"].includes(` - ${newT.t(localStorage.getItem('lang'), 'all_channels_used')}`)))) {
                 disabled = 'disabled style="color: red"'
             }
             if (o["label"].endsWith(` - ${newT.t(localStorage.getItem('lang'), 'used')}`)) {
@@ -714,6 +731,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
         device = channel_path.split("#")[1].split(".")[0];
         address = channel_path.split("~").pop(); // if not ~ in channel_path will return channel_path
     }
+    
     let type = pathFound.split(".").find(e => e.includes("putType") || e.includes("FAT_FBF_"));
     switch (type) {
         case "FAT_FBF_OUT1":
@@ -752,7 +770,7 @@ function addElementToCONFIGURED_IO(loop_number, device, deviceAddress, channel_p
         if (loopProp === loop_number) {
             CONFIGURED_IO[loopProp]["selected"] = true;
             for (let deviceProp in CONFIGURED_IO[loopProp]) {
-                if (deviceProp.includes(device)) {
+                if (deviceProp && deviceProp.includes(device)) {
                     if (deviceAddress && deviceProp.endsWith(deviceAddress)) {
                         CONFIGURED_IO[loopProp][deviceProp]["selected"] = true;
                         for (let channelProp in CONFIGURED_IO[loopProp][deviceProp]) {
@@ -951,7 +969,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
 
             for (el in andElementsList) {
                 let innerString = transformGroupElement(andElementsList[el]);
-                if (innerString.includes('form-check mb-3') && andElementsList.length > 4) {
+                if (innerString && innerString.includes('form-check mb-3') && andElementsList.length > 4) {
                     innerString.replaceAll('form-check mb-3', 'form-check form-check-inline');
                     ds.insertAdjacentHTML('beforeend', innerString);
                 } else {
@@ -1079,7 +1097,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                         additionalOnChangeCommand = `sendMessageWPF({'Command': 'changedValue','Params': {'path':'${attributes.path}','newValue': this.value}})`;
                     }
                     inner += tabDiv.outerHTML;
-                } else if (tabs[key]["~enabled"] && !tabs[key]["~value"] && elementJson['~value'].includes(key)) {
+                } else if (tabs[key]["~enabled"] && !tabs[key]["~value"] && elementJson['~value'] && elementJson['~value'].includes(key)) {
                     // execute on load the function loadDiv(`${attributes.input_id}_${fieldName}`, `showDiv_${attributes.input_id}_${fieldName}`, `${attributes.value}`, `${attributes.path}`);
                     loopTypePath = tabs[key]["~path"];
                 } else if (tabs[key]["~value"]) {
@@ -1107,7 +1125,9 @@ const transformGroupElement = (elementJson, fieldName = '') => {
             if (/\bon\b/i.test(attributes.input_name)) {
                 attributes.input_name = attributes.input_name.replace(/\bon\b/ig, "").trim();
             }
-            if (attributes.input_name.toLowerCase().includes('enable') || attributes.input_name.toLowerCase().includes(newT.t(localStorage.getItem('lang'), elementJson['enable']))) {
+            if (attributes.input_name &&
+                (attributes.input_name.toLowerCase().includes('enable') || attributes.input_name.toLowerCase().includes(newT.t(localStorage.getItem('lang'), elementJson['enable'])))
+            ) {
                 let words = attributes.input_name.split(' ');
                 attributes.input_name = words.filter(word => !word.toLowerCase().includes('enable')).join(' ');
                 attributes.input_name_on = newT.t(localStorage.getItem('lang'), 'enabled');
@@ -1792,7 +1812,7 @@ const getAvailableElements = (elementType) => {
 
 // adding pre-defined elements function
 function addConcreteElement(id, elementType = "") {
-    if (lst.includes(+id)) {
+    if (lst && lst.includes(+id)) {
         return;
     } else {
         last = parseInt(id);
@@ -1808,7 +1828,7 @@ function addElement(id, elementType = "", btnId = "_btn") {
         callAddressModal(elementType); // going through modal for defining the address of the element
         
     } else {
-        if (lst.includes(+id)) {
+        if (lst && lst.includes(+id)) {
             var elem = document.getElementById(`${id}`);
             elem.parentNode.removeChild(elem);
             lst = lst.filter(function (item) {
@@ -1836,7 +1856,7 @@ function callAddressModal(elementType, current, params = {}) {
                                <select id="select_address" name="select_address" class="form-select ram_floating_select">`;
     for (var i = minElements; i <= elements; i++) {
         let currentId = i === +current ? "selected" : "";
-        let disabled = lst.includes(i) ? "disabled style='background: #aaa;'" : ""
+        let disabled = (lst && lst.includes(i)) ? "disabled style='background: #aaa;'" : ""
         innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i + Number(INC)}</option>`;
     }
     innerSelectText += `</select>
@@ -1845,7 +1865,7 @@ function callAddressModal(elementType, current, params = {}) {
     modal.querySelector(".modal-body").innerHTML = innerSelectText;
 
     function handler() {
-        if (!lst.includes(modal.querySelector("select").value)) {
+        if (lst && !lst.includes(modal.querySelector("select").value)) {
             params['deviceAddress'] = modal.querySelector("select").value;
             if (!current) { // guard if new
                 addElementAtAddress(elementType, params); // setting the element at the given address            
@@ -1875,7 +1895,7 @@ function addElementAtAddress(elementType, params) {
                 createElementButton(last, elementType); // creating the fieldset of the INPUT_GROUP element
             }
         }).catch(err => alert("Error " + err));
-    } else if (elementType.toUpperCase().includes("_MIMIC")) {
+    } else if (elementType && elementType.toUpperCase().includes("_MIMIC")) {
         sendMessageWPF({
             'Command': 'AddingLoopElement',
             'Params': params
@@ -1889,7 +1909,7 @@ function addElementAtAddress(elementType, params) {
 
 function modifyElementCurrentAddress(oldAddress, elementType, params) {
     const newAddress = params['deviceAddress'];
-    if (elementType.toUpperCase().includes("_MIMIC")) {
+    if (elementType && elementType.toUpperCase().includes("_MIMIC")) {
         boundAsync.modifyDeviceLoopAddress(oldAddress, params['loopType'].match(/^(.*?)(?=\d+$)/)[1], newAddress).then(r => {
             if (r) {
                 // recreate button
@@ -1923,7 +1943,7 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
     
     let newUserElement;
-    if (!elementType.toUpperCase().includes('INPUT_GROUP')) {
+    if (elementType && !elementType.toUpperCase().includes('INPUT_GROUP')) {
         //if the element is not INPUT_GROUP
         const showFn = !elementType.toUpperCase().includes('MIMICOUT') ? "showElement" : "showMimicout";
         const type = !elementType.toUpperCase().includes('MIMICOUT') ? `'${elementType}'` : JSON.stringify(params).replaceAll('"', '\'');
@@ -2024,6 +2044,7 @@ async function inputGroupTextGenerator(last, elementType) {
 
 // showing element function
 async function showElement(id, elementType) {
+    if (!id || !elementType) return;
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
     let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
     let returnedJson;
@@ -2054,7 +2075,7 @@ async function showElement(id, elementType) {
             getZoneDevices(+id);
         }
     } catch (e) {
-        alert('Error ' + e);
+        alert('Error showElement' + e);
     }
 }
 

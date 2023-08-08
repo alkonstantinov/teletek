@@ -26,8 +26,8 @@ namespace common
     public delegate JObject dGetNode(string name);
     public delegate JObject dFindObjectByProperty(JToken _node, string prop_name, string val);
 
-    public enum eRWResult { Ok = 1, ConnectionError = 2 };
-
+    public enum eRWResult { Ok = 1, ConnectionError = 2, NullLoginCMD = 3, NullLoginOkByte = 4, NullLoginOkVal = 5, BadLogin = 6,
+                            BadCommandResult = 7};
     public static class constants
     {
         public static string NO_LOOP = "NO_LOOP";//{ get { return "NO_LOOP"; } }
@@ -547,7 +547,7 @@ namespace common
         internal List<cSeria> _wserias = null;
         internal Dictionary<string, Dictionary<string, List<cSeriaProperty>>> _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-        internal JObject _jwrite_prop { get { return JObject.FromObject(_jwrite_prop); } }
+        internal JObject _jwrite_prop { get { return JObject.FromObject(_dwrite_prop); } }
         //
         internal virtual void ParseReadSeriaIRIS(string elements, ref string last_path) { }
         internal virtual List<cSeria> cfgReadSeries(string xml) { return null; }
@@ -594,6 +594,8 @@ namespace common
         private string _base_read_file = null;
         private string _base_write_file = null;
         private string _ver_command = null;
+        private string _xml_login_cmd = null;
+        private string _xml_looptype_cmd = null;
         private Dictionary<string, string> _read_ver_files = new Dictionary<string, string>();
         private Dictionary<string, string> _write_ver_files = new Dictionary<string, string>();
         private void SetBaseFiles()
@@ -614,16 +616,35 @@ namespace common
         }
         private void SetVersions()
         {
-            string _read = File.ReadAllText(_base_read_file);
-            _read = Regex.Replace(_read, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
+            _ver_command = null;
+            _xml_looptype_cmd = null;
+            _xml_login_cmd = null;
+            string _readf = File.ReadAllText(_base_read_file);
+            string _read = Regex.Replace(_readf, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
             foreach (Match m in Regex.Matches(_read, @"<COMMANDS>([\w\W]+?)</COMMANDS>"))
             {
                 string cmd = m.Groups[1].Value;
                 Match mm = Regex.Match(cmd, @"<COMMAND\s+?BYTES\s*?=\s*?""([\w\W]+?)""[\w\W]*?/>");
                 if (Regex.IsMatch(mm.Value, @"SAVEAS\s*?=\s*?""VERSION"""))
-                {
                     _ver_command = mm.Groups[1].Value;
+                else if (Regex.IsMatch(mm.Value, @"SAVEAS\s*?=\s*?""LOOPTYPE"""))
+                    _xml_looptype_cmd = mm.Value;
+                else if (Regex.IsMatch(mm.Value, @"ADDITION\s*?=\s*?""PASSWORD"""))
+                    _xml_login_cmd = mm.Value;
+                if (_ver_command != null && _xml_login_cmd != null && _xml_looptype_cmd != null)
                     break;
+            }
+            if (_xml_looptype_cmd == null || _xml_login_cmd == null)
+            {
+                _readf = Regex.Replace(_readf, @"^[\w\W]+?</VERSIONING>[\w\W]*?</PREOPERATIONS>", "");
+                foreach (Match m in Regex.Matches(_readf, @"<COMMAND\s([\w\W]+?)/>"))
+                {
+                    if (Regex.IsMatch(m.Value, @"SAVEAS\s*?=\s*?""LOOPTYPE"""))
+                        _xml_looptype_cmd = m.Value;
+                    else if (Regex.IsMatch(m.Value, @"ADDITION\s*?=\s*?""PASSWORD"""))
+                        _xml_login_cmd = m.Value;
+                    if (_xml_login_cmd != null && _xml_looptype_cmd != null)
+                        break;
                 }
             }
             _read_ver_files.Clear();
@@ -691,6 +712,73 @@ namespace common
                 string s = null;
                 Monitor.Enter(_cs_config);
                 s = _ver_command;
+                Monitor.Exit(_cs_config);
+                return s;
+            }
+        }
+        public string LoginCommand
+        {
+            get
+            {
+                string s = null;
+                Monitor.Enter(_cs_config);
+                string _xml = _xml_login_cmd;
+                Match m = Regex.Match(_xml, @"BYTES\s*?=\s*?""([\w\W]+?)""");
+                if (m.Success)
+                    s = m.Groups[1].Value;
+                Monitor.Exit(_cs_config);
+                return s;
+            }
+        }
+        public int LoginOkByte
+        {
+            get
+            {
+                int i = -1;
+                Monitor.Enter(_cs_config);
+                string _xml = _xml_login_cmd;
+                Match m = Regex.Match(_xml, @"OKBYTE\s*?=\s*?""([\w\W]+?)""");
+                if (m.Success)
+                    i = Convert.ToInt32(m.Groups[1].Value, 16);
+                Monitor.Exit(_cs_config);
+                return i;
+            }
+        }
+        public string LoginOkValStr
+        {
+            get
+            {
+                string s = null;
+                Monitor.Enter(_cs_config);
+                string _xml = _xml_login_cmd;
+                Match m = Regex.Match(_xml, @"OKVALUE\s*?=\s*?""([\w\W]+?)""");
+                if (m.Success)
+                    s = m.Groups[1].Value;
+                Monitor.Exit(_cs_config);
+                return s;
+            }
+        }
+        public int LoginOkVal
+        {
+            get
+            {
+                int i = -1;
+                string s = LoginOkValStr;
+                if (s != null)
+                    i = Convert.ToInt32(s, 16);
+                return i;
+            }
+        }
+        public string LooptypeCommand
+        {
+            get
+            {
+                string s = null;
+                Monitor.Enter(_cs_config);
+                string _xml = _xml_looptype_cmd;
+                Match m = Regex.Match(_xml, @"BYTES\s*?=\s*?""([\w\W]+?)""");
+                if (m.Success)
+                    s = m.Groups[1].Value;
                 Monitor.Exit(_cs_config);
                 return s;
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -89,7 +90,53 @@ namespace ProstePrototype
 
             // Check if the folder exists.
             if (Directory.Exists(folderPath))
+            // if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) // checks for internet
             {
+                /*
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.example.com/remote/path/");
+                request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                request.Credentials = new NetworkCredential("username", "password");
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+                string fileData = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+                string[] files = fileData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                
+                foreach (string file in files)
+        {
+            string[] details = file.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string fileName = details[details.Length - 1];
+
+            FtpWebRequest requestFile = (FtpWebRequest)WebRequest.Create("ftp://ftp.example.com/remote/path/" + fileName);
+            requestFile.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+            requestFile.Credentials = new NetworkCredential("username", "password");
+            FtpWebResponse responseFile = (FtpWebResponse)requestFile.GetResponse();
+            DateTime creationDate = responseFile.LastModified;
+            responseFile.Close();
+
+            // Download the file to a temporary location
+            WebClient client = new WebClient();
+            client.Credentials = new NetworkCredential("username", "password");
+            client.DownloadFile("ftp://ftp.example.com/remote/path/" + fileName, Path.GetTempPath() + fileName);
+
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Path.GetTempPath() + fileName);
+
+            Console.WriteLine("File Name: " + fileName);
+            Console.WriteLine("Creation Date: " + creationDate.ToString());
+            Console.WriteLine("Version Info: " + myFileVersionInfo.FileVersion);
+            
+                // If the file is the required update (TODO this check) Run the file (teh file shoudl run the setup in silent mode
+                Process.Start(Path.GetTempPath() + fileName);
+                // Wait for the process to finish
+                Process.WaitForExit()
+
+            // Delete the temporary file
+            File.Delete(Path.GetTempPath() + fileName);
+                }
+                 */
+
                 // Get the list of all files in the folder.
                 string[] files = Directory.GetFiles(folderPath, "*.exe");
 

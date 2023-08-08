@@ -29,7 +29,8 @@
     <system:String xml:space="preserve" x:Key="MainMenuTE">Teletek Electronics</system:String>
     <system:String x:Key="SettingsMenuSettings">Settings</system:String>
     <system:String x:Key="SettingsMenuAuto">Automatic check for updates</system:String>
-    <system:String x:Key="SettingsMenuOK">OK</system:String>
+    <system:String x:Key="MenuCode">Code</system:String>
+    <system:String x:Key="MenuOK">OK</system:String>
     <system:String x:Key="MenuClose">Close</system:String>
     <system:String x:Key="ScanMenuHeader">Read from device</system:String>
     <system:String x:Key="ScanMenuTCP">TCP</system:String>

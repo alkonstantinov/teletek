@@ -1385,15 +1385,50 @@ namespace ljson
             }
         }
         private static object _connection_cache = null;
-        private static string VersionKey(object conn_params, string vercmd, out eRWResult rwres)
+        private static eRWResult PanelLogin(cTransport conn, cXmlConfigs cfg, string _code)
         {
+            if (_code == null || _code.Trim() == "")
+                return eRWResult.Ok;
+            string _login_cmd = cfg.LoginCommand;
+            if (_login_cmd == null)
+                return eRWResult.NullLoginCMD;
+            //
+            int _login_ok_byte = cfg.LoginOkByte;
+            if (_login_ok_byte < 0)
+                return eRWResult.NullLoginOkByte;
+            //
+            int _login_ok_val = cfg.LoginOkVal;
+            if (_login_ok_val < 0)
+                return eRWResult.NullLoginOkVal;
+            //
+            _login_cmd = (_code.Length * 2).ToString("X2") + _login_cmd.Substring(2, _login_cmd.Length - 2);
+            for (int i = 0; i < _code.Length; i++) _login_cmd += "00" + Convert.ToByte(_code[i].ToString()).ToString("X2");
+            _login_cmd += "00";
+            byte[] bres = cComm.SendCommand(conn, _login_cmd);
+            if (_login_ok_byte >= bres.Length)
+                return eRWResult.BadCommandResult;
+            if (bres[_login_ok_byte] != _login_ok_val)
+                return eRWResult.BadLogin;
+            if (settings.logreads)
+            {
+                if (!_log_bytesreaded.ContainsKey(_login_cmd))
+                    _log_bytesreaded.Add(_login_cmd, bres);
+            }
+            return eRWResult.Ok;
+        }
+        private static string VersionKey(object conn_params, string vercmd, cXmlConfigs cfg, string _code, out eRWResult rwres)
+        {
+            rwres = eRWResult.Ok;
+            if (_code == null || _code.Trim() == "")
+                return cfg.CurrentVersion;
             cTransport conn = cComm.ConnectBase(conn_params);
             if (conn == null)
             {
                 rwres = eRWResult.ConnectionError;
                 return null;
             }
-            rwres = eRWResult.Ok;
+            rwres = PanelLogin(conn, cfg, _code);
+            if (rwres != eRWResult.Ok) return null;
             byte[] bres = cComm.SendCommand(conn, vercmd);
             _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
@@ -1403,11 +1438,11 @@ namespace ljson
             string res = bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2");
             return res;
         }
-        private static eRWResult SetRWFiles(object conn_params)
+        private static eRWResult SetRWFiles(object conn_params, string _code)
         {
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             eRWResult rwres = eRWResult.Ok;
-            string ver = VersionKey(conn_params, cfg.VersionCommand, out rwres);
+            string ver = VersionKey(conn_params, cfg.VersionCommand, cfg, _code, out rwres);
             if (rwres == eRWResult.Ok && ver != cfg.CurrentVersion || WriteReadMerge == null)
             {
                 cfg.SetRWFiles(ver);
@@ -1462,7 +1497,7 @@ namespace ljson
             }
             Monitor.Exit(_cs_current_panel);
         }
-        public static eRWResult ReadDevice(object conn_params)
+        public static eRWResult ReadDevice(object conn_params, string _code)
         {
             bool isRepeaterIris = false;
             bool isSimpoPanel = false;
@@ -1481,7 +1516,7 @@ namespace ljson
             //string slog = ReadLog(conn_params);
             ClearPanelCache(CurrentPanelID);
             //
-            eRWResult rwres = SetRWFiles(conn_params);
+            eRWResult rwres = SetRWFiles(conn_params, _code);
             if (rwres != eRWResult.Ok)
                 return rwres;
             string _panel_id = CurrentPanelID;
@@ -2364,9 +2399,9 @@ namespace ljson
             //
             return res;
         }
-        public static eRWResult WriteDevice(object conn_params)
+        public static eRWResult WriteDevice(object conn_params, string _code)
         {
-            eRWResult rwres = SetRWFiles(conn_params);
+            eRWResult rwres = SetRWFiles(conn_params, _code);
             if (rwres != eRWResult.Ok)
                 return rwres;
             //
@@ -2521,6 +2556,13 @@ namespace ljson
             }
             //
             cTransport conn = cComm.ConnectBase(conn_params);
+            cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
+            rwres = PanelLogin(conn, cfg, _code);
+            if (rwres != eRWResult.Ok)
+            {
+                cComm.CloseConnection(conn);
+                return rwres;
+            }
             /////////////////////
             //byte[] ver = cComm.SendCommand(conn, "035111000007");
             //cComm.CloseConnection(conn);
@@ -2533,8 +2575,9 @@ namespace ljson
             //log += ((log != "") ? "\r\n" : "") + ln;
             //File.WriteAllText("read.log", log);
             ////////////////////////////
-            byte[] pass = new byte[] { 0x08, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
-            byte[] loginres = cComm.SendCommand(conn, pass);
+            //byte[] pass = new byte[] { 0x08, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
+            //byte[] loginres = cComm.SendCommand(conn, pass);
+            ////////////////////////////
             Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled);
             cComm.CloseConnection(conn);
             if (settings.logreads)

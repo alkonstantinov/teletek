@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="ProstePrototype.WpfControls.WPFNumericPassInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProstePrototype.WpfControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="200">
+    <Border Name="dataBitsBorder" Width="{Binding Width}"
+            BorderBrush="Gray"
+            BorderThickness="0.2"
+            Background="White"
+            CornerRadius="2" MouseLeftButtonDown="Click_handler" 
+            MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event">
+        <Border.Resources>
+            <Style TargetType="Border">
+                <Setter Property="Border.Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="#dfdfdf" Direction="270" ShadowDepth="3" BlurRadius="20" Opacity="0.6" />
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="false">
+                        <Setter Property="Background" Value="LightGray"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#dae4f0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" x:Name="Row1"/>
+                <RowDefinition Height="*" x:Name="Row2"/>
+            </Grid.RowDefinitions>
+            <TextBox Text="{Binding Label}" Name="dataBitsLabel" IsReadOnly="True"
+                VerticalAlignment="Center" Margin="6,0,-4,0" Foreground="Gray" Background="Transparent"
+                FontSize="{Binding LabelFontSize}" FontFamily="{StaticResource poppins_demibold}" BorderThickness="0" 
+                GotFocus="Click_handler" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
+
+            <PasswordBox Grid.Row="1" Name="dataBitsText" Padding="8, 0"
+                FontFamily="{StaticResource poppins_regular}" FontSize="16" Foreground="Gray"
+                HorizontalAlignment="Left" BorderThickness="0" Height="0"
+                PreviewTextInput="NumericOnly" Background="Transparent"
+                Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType={x:Type Border}}}" 
+                GotFocus="Click_handler" LostFocus="LostFocus_handler" 
+                MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"
+                local:PasswordBoxAssistant.BindPassword="true"
+                local:PasswordBoxAssistant.BoundPassword=
+                "{Binding Path=Password, 
+                    Mode=TwoWay, 
+                    UpdateSourceTrigger=PropertyChanged}" >
+            </PasswordBox>
+
+        </Grid>
+    </Border>
+</UserControl>

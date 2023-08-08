@@ -38,12 +38,18 @@ namespace lcommunicate
         }
         private void ProcessElement(JObject relement, JObject felement)
         {
-            JToken tprop = relement["PROPERTIES"]["PROPERTY"];
+            JToken tprop = null;
+            if (relement["PROPERTIES"] != null)
+                tprop = relement["PROPERTIES"]["PROPERTY"];
+            //else if (relement["ELEMENT"] != null && relement["ELEMENT"]["ELEMENTS"] != null)
+
             if (tprop != null && tprop.Type == JTokenType.Object)
             {
                 string sbytes = PropertySBytes(tprop["@ID"].ToString(), (JObject)felement["PROPERTIES"]);
                 if (sbytes == null)
                 {
+                    if (tprop["@LENGTH"] == null && tprop["@value"] != null)
+                        tprop["@LENGTH"] = tprop["@value"].ToString().Length.ToString();
                     int i = Convert.ToInt32(tprop["@LENGTH"].ToString()) * 2;
                     sbytes = "";
                     while (sbytes.Length < i)
@@ -59,6 +65,8 @@ namespace lcommunicate
                     string sbytes = PropertySBytes(t["@ID"].ToString(), (JObject)felement["PROPERTIES"]);
                     if (sbytes == null)
                     {
+                        if (t["@LENGTH"] == null && t["@value"] != null)
+                            t["@LENGTH"] = t["@value"].ToString().Length.ToString();
                         int i = Convert.ToInt32(t["@LENGTH"].ToString()) * 2;
                         sbytes = "";
                         while (sbytes.Length < i)
@@ -73,6 +81,8 @@ namespace lcommunicate
             foreach (JToken p in props)
             {
                 string val = "";
+                if (p["@LENGTH"] == null && p["@value"] != null)
+                    p["@LENGTH"] = p["@value"].ToString().Length.ToString();
                 int i = Convert.ToInt32(p["@LENGTH"].ToString()) * 2;
                 while (val.Length < i)
                     val += "0";
@@ -116,7 +126,8 @@ namespace lcommunicate
                     {
                         ProcessElement((JObject)t, of);
                     }
-                    else
+                    //else
+                    if (of["ELEMENTS"] != null && of["ELEMENTS"].Type != JTokenType.Null && of["ELEMENTS"]["ELEMENT"] != null && of["ELEMENTS"]["ELEMENT"].Type != JTokenType.Null)
                     {
                         JArray af = null;
                         JToken telements = of["ELEMENTS"]["ELEMENT"];
@@ -154,6 +165,10 @@ namespace lcommunicate
                         continue;
                     string slen = cmd.Substring(cmd.Length - 2);
                     int len = Convert.ToInt32(slen, 16);
+                    //if (cmd.ToLower() == "03520300002f")
+                    //{
+                    //    string huj = "";
+                    //}
                     if (!res.ContainsKey(cmd))
                         res.Add(cmd, "");
                     byte next_start = 2;

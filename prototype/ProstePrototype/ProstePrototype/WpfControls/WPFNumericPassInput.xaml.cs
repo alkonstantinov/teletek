@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace ProstePrototype.WpfControls
 {
     /// <summary>
-    /// Interaction logic for WPFNumericInput.xaml
+    /// Interaction logic for WPFNumericPassInput.xaml
     /// </summary>
-    public partial class WPFNumericInput : UserControl
+    public partial class WPFNumericPassInput : UserControl
     {
         public static readonly DependencyProperty LabelProperty = 
             DependencyProperty.Register("Label", typeof(string),
-            typeof(WPFNumericInput));
+            typeof(WPFNumericPassInput));
         public string Label { 
             get { return (string)GetValue(LabelProperty); }
             set { SetValue(LabelProperty, value); }
@@ -29,33 +29,32 @@ namespace ProstePrototype.WpfControls
 
         public static readonly DependencyProperty LabelFontSizeProperty =
             DependencyProperty.Register("LabelFontSize", typeof(int),
-            typeof(WPFNumericInput));
+            typeof(WPFNumericPassInput));
         public int LabelFontSize
         {
             get { return (int)GetValue(LabelFontSizeProperty); }
             set { SetValue(LabelFontSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty ValueProperty = 
-            DependencyProperty.Register("Value", typeof(string),
-            typeof(WPFNumericInput), new PropertyMetadata(null));
-        public string Value
-        {
-            get { return (string)GetValue(ValueProperty); }
-            set
-            {
-                if (value == null || Regex.IsMatch(value, "^[0-9]*$"))
-                {
-                    SetValue(ValueProperty, value);
-                }
-            }
-        }
-        public WPFNumericInput()
+        //public static readonly DependencyProperty ValueProperty = 
+        //    DependencyProperty.Register("PasswordValue", typeof(System.Security.SecureString),
+        //    typeof(WPFNumericPassInput), new PropertyMetadata(null));
+        //public System.Security.SecureString PasswordValue
+        //{
+        //    get { return (System.Security.SecureString)GetValue(ValueProperty); }
+        //    set
+        //    {
+        //        if (value == null || Regex.IsMatch(SecureStringToStringConverter.SecureStringToString(value), "^[0-9]*$"))
+        //        {
+        //            SetValue(ValueProperty, value);
+        //        }
+        //    }
+        //}
+        public WPFNumericPassInput()
         {
             InitializeComponent();
 
             this.DataContext = this;
-            Value = null;
             dataBitsBorder.Loaded += new RoutedEventHandler(LostFocus_handler);
         }
 
@@ -75,10 +74,12 @@ namespace ProstePrototype.WpfControls
         }
         private void LostFocus_handler(object sender, RoutedEventArgs e)
         {            
-            if (dataBitsText.Text.Length == 0)
+            if (dataBitsText.Password.Length == 0)
             {
                 Row2.Height = new GridLength(0, GridUnitType.Star);
-                dataBitsBorder.Background = dataBitsBorder.IsEnabled ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffffff")) : new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"));
+                dataBitsBorder.Background = dataBitsBorder.IsEnabled ? 
+                    new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffffff")) : 
+                    new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGray"));
                 dataBitsLabel.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
                 dataBitsLabel.VerticalAlignment = VerticalAlignment.Center;
                 dataBitsLabel.VerticalContentAlignment = VerticalAlignment.Center;

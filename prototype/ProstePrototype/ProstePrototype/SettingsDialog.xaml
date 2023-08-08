@@ -66,8 +66,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <DockPanel Margin="10, 10, 10, 10" Height="50">
-                        <Button Click="OKSettings_Clicked" Background="Blue" Foreground="#eee" Height="40" BorderThickness="0">
-                            <TextBlock Text="{DynamicResource SettingsMenuOK}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
+                        <Button Click="OKSettings_Clicked" Background="Blue" Foreground="#eee" Height="40" BorderThickness="0" IsDefault="True">
+                            <TextBlock Text="{DynamicResource MenuOK}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="6"/>
@@ -81,7 +81,7 @@
                         </Button>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Margin="10, 10, 10, 10" Height="50">
-                        <Button Click="ExitSettings_Clicked" Background="#777" Foreground="#eee" Height="40" BorderThickness="0">
+                        <Button Click="ExitSettings_Clicked" Background="#777" Foreground="#eee" Height="40" BorderThickness="0" IsCancel="True">
                             <TextBlock Text="{DynamicResource MenuClose}" FontSize="16" FontWeight="DemiBold" FontFamily="{StaticResource poppins_demibold}" VerticalAlignment="Bottom"></TextBlock>
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
