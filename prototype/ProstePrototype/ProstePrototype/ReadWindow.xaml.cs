@@ -121,49 +121,55 @@ namespace ProstePrototype
                 Image image = im as Image;
                 var b = imgsource as BitmapImage;
                 image.Source = (ImageSource)(new FormatConvertedBitmap(b, PixelFormats.Gray8, null, 0));
-            } else if (im is TextBlock)
+            }
+            else if (im is TextBlock)
             {
                 TextBlock textBlock = im as TextBlock;
                 textBlock.Foreground = grayColorBrush;
             }
+            prevIndex = selectedIndex;
         }
 
         private void Button0_Click(object sender, RoutedEventArgs e)
         {
-            selectedIndex = 0;
+            ChangeSelectedIndex(0);
             Button_LostFocus(sender, e);
             uc0.Resources = Application.Current.Resources;
             tcp_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc0;
-            prevIndex= 0;
         }
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            selectedIndex = 1;
+            ChangeSelectedIndex(1);
             Button_LostFocus(sender, e);
             uc1.Resources = Application.Current.Resources;
             usb_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc1;
-            prevIndex= 1;
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            selectedIndex = 2;
+            ChangeSelectedIndex(2);
             Button_LostFocus(sender, e);
             uc2.Resources = Application.Current.Resources;
             rs232_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc2;
-            prevIndex= 2;
         }
         
         private void Button3_Click(object sender, RoutedEventArgs e)
         {
-            selectedIndex = 3;
+            ChangeSelectedIndex(3);
             Button_LostFocus(sender, e);
             uc3.Resources = Application.Current.Resources;
             img3.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc3;
-            prevIndex= 3;
+        }
+
+        private void ChangeSelectedIndex(short index)
+        {
+            selectedIndex = index;
+            Properties.Settings.Default.ReadWindowStartIndex = index;
+            Properties.Settings.Default.Save();
+            //prevIndex = index;
         }
 
         #region MouseEnter-MouseLeave

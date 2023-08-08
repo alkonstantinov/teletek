@@ -22,8 +22,13 @@ namespace ProstePrototype
         public UserControl1()
         {
             InitializeComponent();
-            
             this.DataContext = this;
+            txtHostIp.Address = Properties.Settings.Default.TCPHostIp;
+            txtPort.Value = Properties.Settings.Default.TCPPort;
+
+            // Add event handlers for ValueChanged and AddressChanged events
+            txtPort.ValueChanged += TxtPort_ValueChanged;
+            txtHostIp.AddressChanged += TxtHostIp_AddressChanged;
         }
 
         public string Address
@@ -42,5 +47,18 @@ namespace ProstePrototype
             }
         }
 
-    }
+        private void TxtHostIp_AddressChanged(object sender, EventArgs e)
+        {
+            // Update Properties.Settings.Default.TCPHostIp when the Address property changes
+            Properties.Settings.Default.TCPHostIp = txtHostIp.Address.ToString();
+            Properties.Settings.Default.Save();
+        }
+
+        private void TxtPort_ValueChanged(object sender, EventArgs e)
+        {
+            // Update Properties.Settings.Default.TCPPort when the Value property changes
+            Properties.Settings.Default.TCPPort = txtPort.Value;
+            Properties.Settings.Default.Save();
+        }
+}
 }

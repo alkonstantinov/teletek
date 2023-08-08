@@ -34,5 +34,65 @@ namespace ProstePrototype.Properties {
                 this["LastUsedDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Theme {
+            get {
+                return ((bool)(this["Theme"]));
+            }
+            set {
+                this["Theme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Launguage {
+            get {
+                return ((string)(this["Launguage"]));
+            }
+            set {
+                this["Launguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public short ReadWindowStartIndex {
+            get {
+                return ((short)(this["ReadWindowStartIndex"]));
+            }
+            set {
+                this["ReadWindowStartIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.17.17")]
+        public string TCPHostIp {
+            get {
+                return ((string)(this["TCPHostIp"]));
+            }
+            set {
+                this["TCPHostIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7000")]
+        public string TCPPort {
+            get {
+                return ((string)(this["TCPPort"]));
+            }
+            set {
+                this["TCPPort"] = value;
+            }
+        }
     }
 }

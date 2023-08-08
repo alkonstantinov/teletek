@@ -36,7 +36,6 @@ namespace ProstePrototype
         private readonly JObject pages;
         private ReadWindow rw;
         private SettingsDialog settings;
-        private JObject useSetting;
 
         public bool DarkMode { get; set; }
 
@@ -94,17 +93,10 @@ namespace ProstePrototype
 
             //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
-            try
-            {
-                useSetting = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "useSetting.json")));
-            } catch 
-            { 
-                useSetting = new JObject();
-            }
 
             DataContext = this;
 
-            DarkMode = false;
+            DarkMode = Properties.Settings.Default.Theme;
             ChangeTheme(DarkMode);
             wb1.Tag = new BrowserParams { Name = "wb1", JSfunc = "receiveMessageWPF" };
             wb2.Tag = new BrowserParams { Name = "wb2", JSfunc = "receiveMessageWPF" };
@@ -238,6 +230,9 @@ namespace ProstePrototype
         public void ChangeTheme_Click(object param)
         {
             DarkMode = !DarkMode;
+
+            Properties.Settings.Default.Theme = DarkMode;
+            Properties.Settings.Default.Save(); // saving the new DarkModeValue in Theme property.
 
             ChangeTheme(DarkMode);
 
@@ -726,7 +721,7 @@ namespace ProstePrototype
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
             //rw = new ReadWindow(0); // for delivery to Teletek
-            rw = new ReadWindow(); // default 
+            rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
@@ -1083,7 +1078,6 @@ namespace ProstePrototype
 
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
-            File.WriteAllTextAsync("useSetting.json", useSetting.ToString());
             Environment.Exit(0);
         }
         #endregion

@@ -19,6 +19,8 @@ namespace ProstePrototype.WpfControls
     /// </summary>
     public partial class WPFNumericInput : UserControl
     {
+        public event EventHandler ValueChanged;
+
         public static readonly DependencyProperty LabelProperty = 
             DependencyProperty.Register("Label", typeof(string),
             typeof(WPFNumericInput));
@@ -38,7 +40,20 @@ namespace ProstePrototype.WpfControls
 
         public static readonly DependencyProperty ValueProperty = 
             DependencyProperty.Register("Value", typeof(string),
-            typeof(WPFNumericInput), new PropertyMetadata(null));
+            typeof(WPFNumericInput), new PropertyMetadata(null, OnValueChanged));
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            WPFNumericInput control = d as WPFNumericInput;
+            if (control != null)
+            {
+                control.OnValueChanged(e);
+            }
+        }
+        protected virtual void OnValueChanged(DependencyPropertyChangedEventArgs e)
+        {
+            // Raise the ValueChanged event
+            ValueChanged?.Invoke(this, EventArgs.Empty);
+        }
         public string Value
         {
             get { return (string)GetValue(ValueProperty); }

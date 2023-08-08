@@ -18,6 +18,8 @@ namespace ProstePrototype.WpfControls
     /// </summary>
     public partial class WPFIPInput : UserControl
     {
+        public event EventHandler AddressChanged;
+
         private static readonly List<Key> DigitKeys = new List<Key> { Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9 };
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
         private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
@@ -54,12 +56,12 @@ namespace ProstePrototype.WpfControls
         }
 
         public static readonly DependencyProperty AddressProperty = DependencyProperty.Register(
-            "Address", typeof(string), typeof(WPFIPInput), new FrameworkPropertyMetadata(default(string), AddressChanged)
+            "Address", typeof(string), typeof(WPFIPInput), new FrameworkPropertyMetadata(default(string), OnAddressChanged)
             {
                 BindsTwoWayByDefault = true
             });
 
-        private static void AddressChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnAddressChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             var ipTextBox = dependencyObject as WPFIPInput;
             var text = e.NewValue as string;
@@ -75,7 +77,14 @@ namespace ProstePrototype.WpfControls
                     i++;
                 }
                 ipTextBox._suppressAddressUpdate = false;
+                ipTextBox.OnAddressChanged(e);
             }
+        }
+
+        protected virtual void OnAddressChanged(DependencyPropertyChangedEventArgs e)
+        {
+            // Raise the ValueChanged event
+            AddressChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public string Address
