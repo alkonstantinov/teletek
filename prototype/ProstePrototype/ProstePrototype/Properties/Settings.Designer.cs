@@ -50,12 +50,12 @@ namespace ProstePrototype.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Launguage {
+        public string Language {
             get {
-                return ((string)(this["Launguage"]));
+                return ((string)(this["Language"]));
             }
             set {
-                this["Launguage"] = value;
+                this["Language"] = value;
             }
         }
         

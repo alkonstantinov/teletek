@@ -95,9 +95,17 @@ namespace ProstePrototype.WpfControls
                 if (Languages == null || !Languages.ContainsKey(elLang.Code))
                     Languages.Add(elLang.Code, elLang);
             };
-            var init = TransJson["initial"].Value<string>();
-            var findInitId = allLanguages.First(e => (string)e["key"] == init);
-            language = (langKey == null) ? findInitId["id"].Value<string>() : language = langKey;
+            string init;
+            JToken findInitId;
+            if (string.IsNullOrEmpty(Properties.Settings.Default.Language))
+            {
+                init = TransJson["initial"].Value<string>();
+                findInitId = allLanguages.First(e => (string)e["key"] == init);
+                language = langKey != null ? language = langKey : findInitId["id"].Value<string>();
+            } else
+            {
+                language = langKey != null ? language = langKey : Properties.Settings.Default.Language;
+            }
 
             CurrentLanguage = language;
         }
@@ -129,6 +137,9 @@ namespace ProstePrototype.WpfControls
                 control.ToolTip = languageClass.Name;
                 control.SetRessourceDictionary();
                 control.SetWebBrowsersLang();
+
+                Properties.Settings.Default.Language = languageCode;
+                Properties.Settings.Default.Save();
             }
         }
 
