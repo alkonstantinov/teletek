@@ -318,7 +318,7 @@ namespace ProstePrototype
             foreach (Button button in buttons)
             {
                 button.Foreground = new SolidColorBrush(btn_fgd);
-                if (button.IsEnabled)
+                if (button.IsEnabled && button.Name != "")
                 {
                     button.Background = new SolidColorBrush(btn_bgd);
                 }
