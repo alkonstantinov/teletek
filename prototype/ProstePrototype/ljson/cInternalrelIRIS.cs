@@ -16,6 +16,7 @@ using Microsoft.Windows.Themes;
 
 namespace ljson
 {
+    #region cIOChannel
     internal class cIOChannel
     {
         private JObject _tab = null;
@@ -113,6 +114,7 @@ namespace ljson
             }
         }
     }
+    #endregion
     internal class cInternalrelIRIS : cInternalRel
     {
         private enum eIO { Input = 1, Output = 2, FAT_IN = 3, FAT_OUT = 4 };
@@ -1001,6 +1003,28 @@ namespace ljson
             res["_used_channels"] = _j_used_channels;
             return res;
         }
+        public override void Load(JObject o)
+        {
+            ClearCache();
+            if (o["_io_channels"] != null && o["_io_channels"].Type != JTokenType.Null)
+            {
+                JObject _j_io_channels = (JObject)o["_io_channels"];
+                foreach (JProperty p in _j_io_channels.Properties())
+                    _io_channels.Add(p.Name, p.Value.ToString());
+            }
+            if (o["_used_channels"] != null && o["_used_channels"].Type != JTokenType.Null)
+            {
+                JObject _j_used_channels = (JObject)o["_used_channels"];
+                foreach (JProperty p in _j_used_channels.Properties())
+                {
+                    _used_channels.Add(p.Name, new Dictionary<string, string>());
+                    Dictionary<string, string> d = _used_channels[p.Name];
+                    JObject _j_channel = (JObject)p.Value;
+                    foreach (JProperty pp in _j_channel.Properties())
+                        d.Add(pp.Name, pp.Value.ToString());
+                }
+            }
+        }
         private void CopyUsedChannels(Dictionary<string, Dictionary<string, string>> _from, Dictionary<string, Dictionary<string, string>> _to)
         {
             _to.Clear();
@@ -1551,9 +1575,37 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"^simpo_zone$", RegexOptions.IgnoreCase))
             {
-                for (int i = 0; i < val.Length; i++)
-                    if (val[i] != 0)
-                        return true;
+                int sdelay = -1;
+                int fdelay = -1;
+                if (node["PROPERTIES"] != null && node["PROPERTIES"]["Groups"] != null && node["PROPERTIES"]["Groups"]["Delays"] != null)
+                {
+                    JObject delaygrp = (JObject)node["PROPERTIES"]["Groups"]["Delays"];
+                    if (delaygrp["fields"] != null)
+                    {
+                        JObject delayfields = (JObject)delaygrp["fields"];
+                        if (delayfields["SOUNDERDELAY"] != null && delayfields["SOUNDERDELAY"]["@VALUE"] != null)
+                            sdelay = Convert.ToInt32(delayfields["SOUNDERDELAY"]["@VALUE"].ToString());
+                        if (delayfields["FIREBRIGADEDELAY"] != null && delayfields["FIREBRIGADEDELAY"]["@VALUE"] != null)
+                            fdelay = Convert.ToInt32(delayfields["FIREBRIGADEDELAY"]["@VALUE"].ToString());
+                    }
+                }
+                int sdelay_idx = -1;
+                int fdelay_idx = -1;
+                if (read_props.ContainsKey("SOUNDERDELAY"))
+                {
+                    sdelay_idx = read_props["SOUNDERDELAY"].offset;
+                    if (val[read_props["SOUNDERDELAY"].offset] != sdelay) return true;
+                }
+                if (read_props.ContainsKey("FIREBRIGADEDELAY"))
+                {
+                    fdelay_idx = read_props["FIREBRIGADEDELAY"].offset;
+                    if (val[read_props["FIREBRIGADEDELAY"].offset] != fdelay) return true;
+                }
+                for (int i = 2; i < val.Length; i++)
+                {
+                    if (i == sdelay_idx || i == fdelay_idx) continue;
+                    if (val[i] != 0) return true;
+                }
                 return false;
             }
             else if (Regex.IsMatch(key, @"zone$", RegexOptions.IgnoreCase))

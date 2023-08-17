@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Converters;
 
 namespace lcommunicate
 {
@@ -145,15 +146,34 @@ namespace lcommunicate
                     FillZElements((JArray)t["ELEMENTS"]["ELEMENT"]);
             }
         }
+        private string cmdMerged(string cmd, string cmdold)
+        {
+            if (cmdold == null || cmdold.Trim() == "") return cmd;
+            int len = cmd.Length;
+            if (cmdold.Length > len) len = cmdold.Length;
+            string res = "";
+            for (int i = 0; i < len; i = i + 2)
+            {
+                if (i < cmd.Length - 2 && cmd.Substring(i, 2) != "00") res += cmd.Substring(i, 2);
+                else if (i < cmdold.Length - 2 && cmdold.Substring(i, 2) != "00") res += cmdold.Substring(i, 2);
+                else if (i < cmd.Length - 2) res += cmd.Substring(i, 2);
+                else res += cmdold.Substring(i, 2);
+            }
+            return res;
+        }
+        private bool isSimpo = false;
         private Dictionary<string, string> MakeCommands(Dictionary<string, string> res, JObject json)
         {
             if (res == null)
                 res = new Dictionary<string, string>();
             //
+            if (json["@ID"] != null) isSimpo |= Regex.IsMatch(json["@ID"].ToString(), "^SIMPO_");
+            //
             if (json["COMMANDS"] != null && json["PROPERTIES"] != null)
             {
                 string prop_path = Regex.Replace(json["PROPERTIES"]["PROPERTY"].Path, @"^[\w\W]+?ELEMENTS\.ELEMENT\.", "");
                 int prop_idx = 0;
+                int last_cmd_offs = 0;
                 foreach (JToken tcmd in json["COMMANDS"]["COMMAND"])
                 {
                     string cmd = null;
@@ -169,8 +189,14 @@ namespace lcommunicate
                     //{
                     //    string huj = "";
                     //}
+                    string cmdold = null;
                     if (!res.ContainsKey(cmd))
                         res.Add(cmd, "");
+                    else
+                    {
+                        cmdold = res[cmd];
+                        res[cmd] = "";
+                    }
                     byte next_start = 2;
                     while (true)
                     {
@@ -183,22 +209,44 @@ namespace lcommunicate
                                 res[cmd] += "00";
                             break;
                         }
-                        int prop_start = Convert.ToInt32(tprop["@BYTE"].ToString());
-                        while (next_start < prop_start)
+                        int prop_start = Convert.ToInt32(tprop["@BYTE"].ToString()) - last_cmd_offs;
+                        while (/*next_start*/res[cmd].Length / 2 < prop_start - 2)
                         {
                             res[cmd] += "00";
                             next_start++;
                         }
                         next_start += Convert.ToByte(tprop["@LENGTH"].ToString());
-                        if ((res[cmd].Length + tprop["~values"].ToString().Length) / 2 >= len)
+                        if (isSimpo && tprop["@ID"] != null)
                         {
-                            while (res[cmd].Length / 2 < len)
-                                res[cmd] += "00";
-                            break;
+                            string pval = tprop["~values"].ToString();
+                            string newval = pval;
+                            if (Regex.IsMatch(tprop["@ID"].ToString(), @"^(Code|LOGO)[12]$") || Regex.IsMatch(tprop["@ID"].ToString(), @"^PANELNAME$"))
+                            {
+                                newval = "";
+                                for (int i = 0; i < pval.Length; i += 4) newval += pval.Substring(i, 2);
+                                //if (Regex.IsMatch(tprop["@ID"].ToString(), @"LOGO")) newval += "00";
+                                if (Regex.IsMatch(tprop["@ID"].ToString(), @"LOGO2")) newval = "00" + newval;
+                            }
+                            else if (tprop["@INC"] != null)
+                            {
+                                byte inc = Convert.ToByte(tprop["@INC"].ToString(), 16);
+                                byte bnew = Convert.ToByte(pval.ToString(), 16);
+                                if (bnew >= inc) bnew = (byte)(bnew - inc);
+                                newval = bnew.ToString("X2");
+                            }
+                            tprop["~values"] = newval;
                         }
+                        //if ((res[cmd].Length + tprop["~values"].ToString().Length) / 2 < len)
+                        //{
+                        //    while (res[cmd].Length / 2 < len)
+                        //        res[cmd] += "00";
+                        //    //break;
+                        //}
                         prop_idx++;
                         res[cmd] += tprop["~values"].ToString();
                     }
+                    last_cmd_offs += len + 2;
+                    res[cmd] = cmdMerged(res[cmd], cmdold);
                 }
             }
             if (json["ELEMENTS"] != null)
@@ -211,6 +259,47 @@ namespace lcommunicate
             //
             return res;
         }
+        private void MergeCommandsDict(Dictionary<string, string> scmd)
+        {
+            Dictionary<string, Dictionary<string, string>> dmerge = new Dictionary<string, Dictionary<string, string>>();
+            foreach (string cmd in scmd.Keys)
+            {
+                string cmdbase = cmd.Substring(0, cmd.Length - 2);
+                if (!dmerge.ContainsKey(cmdbase)) dmerge.Add(cmdbase, new Dictionary<string, string>());
+                Dictionary<string, string> d = dmerge[cmdbase];
+                d.Add(cmd, scmd[cmd]);
+            }
+            foreach (string cmdbase in dmerge.Keys)
+            {
+                if (dmerge[cmdbase].Count <= 1) continue;
+                //
+                int maxlen = -1;
+                string maxkey = null;
+                foreach (string cmd in dmerge[cmdbase].Keys)
+                    if (dmerge[cmdbase][cmd].Length > maxlen)
+                    {
+                        maxlen = dmerge[cmdbase][cmd].Length;
+                        maxkey = cmd;
+                    }
+                string maxcmd = dmerge[cmdbase][maxkey];
+                string newcmd = "";
+                Dictionary<string, string> dcmd = dmerge[cmdbase];
+                for (int i = 0; i < maxlen; i += 2)
+                {
+                    foreach (string cmd in dcmd.Keys)
+                    {
+                        if (i + 2 < dcmd[cmd].Length && dcmd[cmd].Substring(i, 2) != "00")
+                        {
+                            newcmd += dcmd[cmd].Substring(i, 2);
+                            break;
+                        }
+                    }
+                    if (newcmd.Length < i + 2) newcmd += maxcmd.Substring(i, 2);
+                }
+                foreach (string cmd in dmerge[cmdbase].Keys)
+                    scmd[cmd] = newcmd;
+            }
+        }
         private void FillCommands(JObject readcfg, JObject tdf, JObject template)
         {
             JObject relement = (JObject)readcfg["OPERATIONS"]["ELEMENTS"]["ELEMENT"];
@@ -219,7 +308,9 @@ namespace lcommunicate
             JArray ar = (JArray)relement["ELEMENTS"]["ELEMENT"];
             JArray af = (JArray)felement["ELEMENTS"]["ELEMENT"];
             FillElements(ar, af);
+            isSimpo = false;
             Dictionary<string, string> scmd = MakeCommands(null, new JObject((JObject)readcfg["OPERATIONS"]["ELEMENTS"]["ELEMENT"]));
+            MergeCommandsDict(scmd);
             if (_commands == null)
                 _commands = new Dictionary<string, byte[]>();
             _commands.Clear();

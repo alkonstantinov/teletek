@@ -24,6 +24,8 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using ProstePrototype.WpfControls;
 using System.Windows.Threading;
+using System.Security.Policy;
+using System.Windows.Markup;
 
 namespace ProstePrototype
 {
@@ -110,7 +112,7 @@ namespace ProstePrototype
 
             //define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA")); valid for fa_solid font
             loadWb1 = true;
-
+            File.WriteAllText("eventlog.log", string.Empty);
         }
        
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -531,6 +533,8 @@ namespace ProstePrototype
                     break;
             }
 
+            File.AppendAllText("eventlog.log", json["Command"].ToString() + " --> " + json["Params"].ToString() + "\n\n");
+
             if (json["Callback"] != null)
             {
                 ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
@@ -720,7 +724,7 @@ namespace ProstePrototype
 
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
-            //rw = new ReadWindow(0); // for delivery to Teletek
+            //rw = new ReadWindow(0); // for delivery to Teletek not mandatory
             rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -784,7 +788,10 @@ namespace ProstePrototype
             eRWResult resp = cJson.ReadDevice(conn_params, code);
             switch (resp)
             {
-                case eRWResult.Ok: wb1.ExecuteScriptAsync($"alertScanFinished('alert')"); break;
+                case eRWResult.Ok:
+                    wb1.ExecuteScriptAsync($"alertScanFinished('alert')");
+                    File.AppendAllText("eventlog.log", "ReadDevice using code: " + code + "and connection parameters: " + conn_params.ToString() + "\n");
+                    break;
                 case eRWResult.ConnectionError: 
                 case eRWResult.BadLogin: 
                 case eRWResult.NullLoginCMD: 
@@ -810,6 +817,7 @@ namespace ProstePrototype
             if (resp == eRWResult.Ok)
             {
                 wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
+                File.AppendAllText("eventlog.log", "WriteDevice using code: " + code + "and connection parameters: " + conn_params.ToString() + "\n");
             }
             else
             {
@@ -832,9 +840,50 @@ namespace ProstePrototype
 
             if (openFileDialog.ShowDialog() == true)
             {
-                cJson.LoadFile(openFileDialog.FileName);
-                currentFileName = openFileDialog.FileName;
-                SaveLastUsedDirectory(openFileDialog.FileName);
+                try
+                {
+                    JToken panels = cJson.LoadFile(openFileDialog.FileName);
+                    currentFileName = openFileDialog.FileName;
+                    SaveLastUsedDirectory(openFileDialog.FileName);
+                
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        ((BrowserParams)wb1.Tag).Params = panels.ToString();
+                    });
+                    AddPagesConstant();
+                    ApplyTheme();
+                    string url = "file:///" + System.IO.Path.Combine(applicationDirectory, "html", "menu-automatic.html");
+                    wb1.Load(url);
+                    wb2.Load("about:blank");
+                
+                    var script = $"toggleLang('{Properties.Settings.Default.Language}');";
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        wb1.ExecuteScriptAsyncWhenPageLoaded(script);
+                        wb2.ExecuteScriptAsyncWhenPageLoaded(script);
+                    });
+
+                    cJson.CurrentPanelID = ((JObject)panels.Last())["~panel_id"].ToString();
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        scan_btn.IsEnabled = true;
+                        ChangeTheme(DarkMode);
+                    });
+
+                    loadWb1 = false;
+                } catch (Exception)
+                {
+                    string showMsg = $"Reading Error - unable to read values from \"{openFileDialog.SafeFileName}\"";
+                    if (wb1.CanExecuteJavascriptInMainFrame)
+                    {
+                        wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+                    } else
+                    {
+                        throw new Exception(showMsg);
+                    }
+                }
             }
         }
         
@@ -928,7 +977,7 @@ namespace ProstePrototype
             // Save document
             string filename = currentFileName;
             //TODO!!!
-            cJson.SaveAs(filename);
+            cJson.Save(filename);
             // no need to SaveLastUsedDirectory(filename)
 
         }
@@ -947,9 +996,9 @@ namespace ProstePrototype
             if (result == true)
             {
                 // Save document
-                string filename = dlg.FileName;
-                cJson.SaveAs(filename);
-                SaveLastUsedDirectory(filename);
+                currentFileName = dlg.FileName;
+                cJson.SaveAs(currentFileName);
+                SaveLastUsedDirectory(currentFileName);
             }
         }
         private void SettingsClicked(object sender, RoutedEventArgs e)
@@ -1310,7 +1359,7 @@ namespace ProstePrototype
 
         private void ShowEventsLog_Clicked(object sender, RoutedEventArgs e)
         {
-            ShowLog("read-simpo.log");
+            ShowLog("eventlog.log");
         }
 
         private void ShowLog(string fileName)

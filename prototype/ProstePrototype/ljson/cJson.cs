@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -392,7 +393,59 @@ namespace ljson
         }
 
         #region save/load
-        public static JObject Data2Save()
+        private static byte[] Compress(byte[] bytes)
+        {
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(mso, CompressionMode.Compress))
+                {
+                    msi.CopyTo(gs);
+                    //CopyTo(msi, gs);
+                }
+
+                return mso.ToArray();
+            }
+            //MemoryStream mstr = new MemoryStream();
+            //GZipStream gz = new GZipStream(mstr, CompressionMode.Compress);
+            //gz.Write(bytes, 0, bytes.Length);
+            //gz.Dispose();
+            //return mstr.ToArray();
+        }
+        private static byte[] Compress(StringBuilder sb)
+        {
+            return Compress(Encoding.UTF8.GetBytes(sb.ToString()));
+        }
+        private static byte[] Compress(string s)
+        {
+            return Compress(Encoding.UTF8.GetBytes(s));
+        }
+        private static byte[] Decompress(byte[] bytes)
+        {
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
+                {
+                    gs.CopyTo(mso);
+                    //CopyTo(gs, mso);
+                }
+
+                return mso.ToArray();
+                //MemoryStream mstr = new MemoryStream(bytes);
+                //MemoryStream strout = new MemoryStream();
+                //GZipStream gz = new GZipStream(mstr, CompressionMode.Decompress);
+                //gz.CopyTo(strout);
+                //gz.Dispose();
+                //return strout.ToArray();
+            }
+        }
+        private static string DecompressStr(byte[] bytes)
+        {
+            byte[] gz = Decompress(bytes);
+            return Encoding.UTF8.GetString(gz);
+        }
+        public static void Save(string saveto)
         {
             JObject res = new JObject();
             res["cComm"] = cComm.Data2Save();
@@ -403,25 +456,92 @@ namespace ljson
             Monitor.Enter(_cs_panel_templates);
             foreach (string pid in _system_panels.Keys)
             {
+                oPanels[pid] = new JObject();
                 string filename = _system_panels[pid];
                 JObject _panel = _panel_templates[filename];
-                oPanels["panel"] = _panel;
+                oPanels[pid]["panel"] = _panel;
                 cInternalRel ir = _panel_internal_operators[pid];
                 JObject ir2save = ir.Data2Save();
-                oPanels["internal_rel"] = ir2save;
+                oPanels[pid]["internal_rel"] = ir2save;
                 cXmlConfigs cfg = GetPanelXMLConfigs(filename);
+                oPanels[pid]["cfg"] = cfg.Save();
             }
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
             //
-            return res;
+            //StringBuilder sb = new StringBuilder();
+            //StringWriter sw = new StringWriter(sb);
+            //JsonWriter writer = new JsonTextWriter(sw);
+            //res.WriteTo(writer);
+            //
+            byte[] gz = Compress(res.ToString());
+            File.WriteAllBytes(saveto, gz);
+            //System.IO.StreamWriter file = new System.IO.StreamWriter(saveto);
+            //file.Write(sb);
+            //file.Close();
+            //writer.
+            //File.WriteAllText(saveto, res.ToString());
+            //
+            //return res;
         }
         public static void SaveAs(string filename)
         {
-            JObject data = Data2Save();
+            Save(filename);
         }
         public static JArray LoadFile(string filename)
         {
+            ClearCache();
+            byte[] b = File.ReadAllBytes(filename);
+            string s = DecompressStr(b);
+            JObject osys = JObject.Parse(s);
+            //
+            if (osys["cComm"] != null) cComm.Load((JObject)osys["cComm"]);
+            //
+            if (osys["panels"] != null && osys["panels"].Type != JTokenType.Null)
+            {
+                JObject panels = (JObject)osys["panels"];
+                Monitor.Enter(_cs_current_panel);
+                Monitor.Enter(_cs_panel_templates);
+                Monitor.Enter(_cs_panel_xmls);
+                //
+                _current_panel_id = null;
+                _panel_templates.Clear();
+                _system_panels.Clear();
+                _panel_internal_operators.Clear();
+                _panel_xmls.Clear();
+                //
+                foreach (JProperty _panel_prop in panels.Properties())
+                {
+                    string _panel_id = _panel_prop.Name;
+                    if (_current_panel_id == null) _current_panel_id = _panel_id;
+                    JObject o = (JObject)_panel_prop.Value;
+                    JObject opanel = (JObject)o["panel"];
+                    JObject ointernal_rel = (JObject)o["internal_rel"];
+                    JObject ocfg = (JObject)o["cfg"];
+                    //
+                    string _panel_type = opanel["~panel_type"].ToString();
+                    cInternalRel _internal = null;
+                    if (Regex.IsMatch(_panel_type, @"iris", RegexOptions.IgnoreCase))
+                        _internal = new cInternalrelIRIS();
+                        
+                    else
+                        _internal = new cInternalRel();
+                    _internal.Load(ointernal_rel);
+                    _panel_internal_operators.Add(_panel_id, _internal);
+                    //
+                    cXmlConfigs cfg = new cXmlConfigs(_panel_type, jobj2string, jstring2obj);
+                    cfg.Load(ocfg);
+                    string f = opanel["~template_loaded_from"].ToString();
+                    _panel_xmls.Add(f, cfg);
+                    _panel_templates.Add(f, opanel);
+                    _system_panels.Add(_panel_id, f);
+                }
+                //
+                Monitor.Exit(_cs_panel_xmls);
+                Monitor.Exit(_cs_panel_templates);
+                Monitor.Exit(_cs_current_panel);
+            }
+            //
             return PanelsInLeftBrowser();
         }
         #endregion
@@ -1480,7 +1600,7 @@ namespace ljson
         public static void ClearCache()
         {
             cComm.ClearCache();
-            _internal_relations_operator.ClearCache();
+            if (_internal_relations_operator != null) _internal_relations_operator.ClearCache();
             _tteloops_count_in_peripherial_devs = -1;
             _sensloops_count_in_peripherial_devs = -1;
         }
@@ -2783,7 +2903,7 @@ namespace ljson
             {
                 Monitor.Enter(_cs_current_panel);
                 cInternalRel res = null;
-                if (_panel_internal_operators.ContainsKey(CurrentPanelID))
+                if (CurrentPanelID != null && _panel_internal_operators.ContainsKey(CurrentPanelID))
                     res = _panel_internal_operators[CurrentPanelID];
                 Monitor.Exit(_cs_current_panel);
                 return res;
@@ -3146,6 +3266,7 @@ namespace ljson
         {
             JObject json = CurrentPanel;
             string content_key = MainContentKey;
+            if (content_key == null && json["~panel_type"] != null) content_key = json["~panel_type"].ToString();
             if (json["ELEMENTS"][content_key] == null) content_key = key;
             if (content_key != null)
             {

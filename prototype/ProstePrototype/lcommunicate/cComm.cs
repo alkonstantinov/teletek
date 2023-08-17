@@ -1012,6 +1012,69 @@ namespace lcommunicate
             //
             return res;
         }
+        public static void Load(JObject o)
+        {
+            ClearCache();
+            Monitor.Enter(_cs_cache);
+            Monitor.Enter(_cs_pseudo_element_cache);
+            //
+            if (o["_cache_panels"] != null && o["_cache_panels"].Type != JTokenType.Null)
+            {
+                JObject _panels = (JObject)o["_cache_panels"];
+                if (_cache_panels == null) _cache_panels = new Dictionary<string, Dictionary<string, string>>();
+                foreach (JProperty p in _panels.Properties())
+                {
+                    _cache_panels.Add(p.Name, new Dictionary<string, string>());
+                    Dictionary<string, string> d = _cache_panels[p.Name];
+                    JObject _rows = (JObject)p.Value;
+                    foreach (JProperty r in _rows.Properties())
+                        d.Add(r.Name, r.Value.ToString());
+                }
+            }
+            //
+            if (o["_cache_list_panels"] != null && o["_cache_list_panels"].Type != JTokenType.Null)
+            {
+                JObject _list_panels = (JObject)o["_cache_list_panels"];
+                if (_cache_list_panels == null) _cache_list_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+                foreach (JProperty p in _list_panels.Properties())
+                {
+                    _cache_list_panels.Add(p.Name, new Dictionary<string, Dictionary<string, string>>());
+                    Dictionary<string, Dictionary<string, string>> d = _cache_list_panels[p.Name];
+                    JObject _panels = (JObject)p.Value;
+                    foreach (JProperty pp in _panels.Properties())
+                    {
+                        d.Add(pp.Name, new Dictionary<string, string>());
+                        Dictionary<string, string> dd = d[pp.Name];
+                        JObject _rows = (JObject)pp.Value;
+                        foreach (JProperty r in _rows.Properties())
+                            dd.Add(r.Name, r.Value.ToString());
+                    }
+                }
+            }
+            //
+            if (o["_cache_pseudo_element_panels"] != null && o["_cache_pseudo_element_panels"].Type != JTokenType.Null)
+            {
+                JObject _pseudo_panels = (JObject)o["_cache_pseudo_element_panels"];
+                if (_cache_pseudo_element_panels == null) _cache_pseudo_element_panels = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+                foreach (JProperty p in _pseudo_panels.Properties())
+                {
+                    _cache_pseudo_element_panels.Add(p.Name, new Dictionary<string, Dictionary<string, string>>());
+                    Dictionary<string, Dictionary<string, string>> d = _cache_pseudo_element_panels[p.Name];
+                    JObject _panels = (JObject)p.Value;
+                    foreach (JProperty pp in _panels.Properties())
+                    {
+                        d.Add(pp.Name, new Dictionary<string, string>());
+                        Dictionary<string, string> dd = d[pp.Name];
+                        JObject _rows = (JObject)pp.Value;
+                        foreach (JProperty r in _rows.Properties())
+                            dd.Add(r.Name, r.Value.ToString());
+                    }
+                }
+            }
+            //
+            Monitor.Exit(_cs_pseudo_element_cache);
+            Monitor.Exit(_cs_cache);
+        }
         #endregion
 
         #region scan&new system

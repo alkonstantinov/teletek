@@ -280,6 +280,7 @@ namespace ljson
         public virtual void AfterInputRemoved(string _panel_id) { }
         public virtual void ClearCache() { }
         public virtual JObject Data2Save() { return null; }
+        public virtual void Load(JObject o) { }
         public virtual void RemoveTABCache(string tab, string idx) { }
         public virtual void OnElementAddressChanged(string oldAddress, string elementType, string newAddress) { }
         public virtual void OnDeviceAddressChanged(string oldAddress, string loopType, string newAddress) { }

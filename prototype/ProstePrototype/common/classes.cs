@@ -524,6 +524,21 @@ namespace common
 
     internal class cRW
     {
+        #region Save/Load
+        internal JObject Save()
+        {
+            JObject res = new JObject();
+            res["_jread_prop"] = _jread_prop;
+            res["_jwrite_prop"] = _jwrite_prop;
+            return res;
+        }
+        internal void Load(JObject o)
+        {
+            if (o == null) return;
+            if (o["_jread_prop"] != null) _jread_prop = (JObject)o["_jread_prop"];
+            if (o["_jwrite_prop"] != null) _jwrite_prop = (JObject)o["_jwrite_prop"];
+        }
+        #endregion
         #region command analysis
         internal virtual string CommandIO(string _cmd) { return null; }
         internal virtual string CommandDataType(string _cmd) { return null; }
@@ -541,13 +556,29 @@ namespace common
 
         //
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-        internal JObject _jread_prop { get { return JObject.FromObject(_dread_prop); } }
+        internal JObject _jread_prop {
+            get {
+                return JObject.FromObject(_dread_prop);
+            }
+            set
+            {
+                _dread_prop = value.ToObject<Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>>();
+            }
+        }
         internal string _read_xml_no_serias = null;
         internal object _cs_ = new object();
         internal List<cSeria> _wserias = null;
         internal Dictionary<string, Dictionary<string, List<cSeriaProperty>>> _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-        internal JObject _jwrite_prop { get { return JObject.FromObject(_dwrite_prop); } }
+        internal JObject _jwrite_prop {
+            get {
+                return JObject.FromObject(_dwrite_prop);
+            }
+            set
+            {
+                _dwrite_prop = value.ToObject<Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>>();
+            }
+        }
         //
         internal virtual void ParseReadSeriaIRIS(string elements, ref string last_path) { }
         internal virtual List<cSeria> cfgReadSeries(string xml) { return null; }
@@ -583,9 +614,46 @@ namespace common
         public JObject Save()
         {
             JObject res = new JObject();
-            res["jread_prop"] = _readwriter._jread_prop;
-            res["jwrite_prop"] = _readwriter._jwrite_prop;
+            res["_readwriter"] = _readwriter.Save();
+            //
+            Monitor.Enter(_cs_config);
+            //
+            res["PanelType"] = PanelType.ToString();
+            res["_config_path"] = _config_path;
+            res["_base_read_file"] = _base_read_file;
+            res["_base_write_file"] = _base_write_file;
+            res["_ver_command"] = _ver_command;
+            res["_xml_login_cmd"] = _xml_login_cmd;
+            res["_xml_looptype_cmd"] = _xml_looptype_cmd;
+            res["_read_ver_files"] = JObject.FromObject(_read_ver_files);
+            res["_write_ver_files"] = JObject.FromObject(_write_ver_files);
+            //
+            Monitor.Exit(_cs_config);
             return res;
+        }
+        public void Load(JObject o)
+        {
+            if (o["_readwriter"] != null) _readwriter.Load((JObject)o["_readwriter"]);
+            Monitor.Enter(_cs_config);
+            //
+            if (o["_config_path"] != null && o["_config_path"].Type != JTokenType.Null)
+                _config_path = o["_config_path"].ToString();
+            if (o["_base_read_file"] != null && o["_base_read_file"].Type != JTokenType.Null)
+                _base_read_file = o["_base_read_file"].ToString();
+            if (o["_base_write_file"] != null && o["_base_write_file"].Type != JTokenType.Null)
+                _base_write_file = o["_base_write_file"].ToString();
+            if (o["_ver_command"] != null && o["_ver_command"].Type != JTokenType.Null)
+                _ver_command = o["_ver_command"].ToString();
+            if (o["_xml_login_cmd"] != null && o["_xml_login_cmd"].Type != JTokenType.Null)
+                _xml_login_cmd = o["_xml_login_cmd"].ToString();
+            if (o["_xml_looptype_cmd"] != null && o["_xml_looptype_cmd"].Type != JTokenType.Null)
+                _xml_looptype_cmd = o["_xml_looptype_cmd"].ToString();
+            if (o["_read_ver_files"] != null && o["_read_ver_files"].Type != JTokenType.Null)
+                _read_ver_files = ((JObject)o["_read_ver_files"]).ToObject<Dictionary<string, string>>();
+            if (o["_write_ver_files"] != null && o["_write_ver_files"].Type != JTokenType.Null)
+                _write_ver_files = ((JObject)o["_write_ver_files"]).ToObject<Dictionary<string, string>>();
+            //
+            Monitor.Exit(_cs_config);
         }
 
         private object _cs_config = new object();
