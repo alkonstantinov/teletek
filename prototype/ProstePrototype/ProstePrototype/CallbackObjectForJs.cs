@@ -64,17 +64,35 @@ namespace ProstePrototype
             //File.WriteAllTextAsync("wb4.json", el.ToString());
             return el.ToString();
         }
-        public string getJsonForElement(string elementType, int elementNumber)
+        public string getJsonForElement(string elementType, int elementNumber, string fieldName)
         {
             // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
             //string res = cComm.GetListElement(cJson.CurrentPanelID, elementType, elementNumber.ToString());
             string res = cJson.GetListElement(elementType, elementNumber.ToString());
             //
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.AddingSegmentElements(elementType, fieldName);
+            });
+            
+
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
             File.WriteAllText("wb3.json", res);
             return res;
+        }
+
+        public void addingSegmentsToElement(string elementType, string fieldName)
+        {
+            //
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.AddingSegmentElements(elementType, fieldName);
+            });
+
         }
 
         public string addingElementSync(string elementType, int elementNumber)

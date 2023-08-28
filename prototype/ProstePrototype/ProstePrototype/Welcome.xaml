@@ -7,70 +7,79 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowState="Normal" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        AllowsTransparency="True"
         Topmost="True"
-        Title="Welcome" Height="320" Width="610" ShowInTaskbar="False">
-    <!--<Window.Resources>
-        <local:MyAppInfo x:Key="MyAppInfo"/>
-    </Window.Resources>-->
-    <!--Background="#8090aa"-->
-    <Border BorderBrush="#8090aa" BorderThickness="1" CornerRadius="0" Opacity="0.85">
+        Title="Welcome" Height="312" Width="484" ShowInTaskbar="False">
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border CornerRadius="8" Background="White">
+                            <AdornerDecorator>
+                                <ContentPresenter />
+                            </AdornerDecorator>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    
+    <Border BorderBrush="#8090aa" BorderThickness="0" CornerRadius="8">
         <Border.Background>
-            <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.7,0">
-                <GradientStop Color="White" Offset="0.7"/>
-                <GradientStop Color="#0c2b90" Offset="0"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="pack://application:,,,/html/imports/images/splash-background1.jpg" 
+                        Opacity="0.6" Stretch="Fill" />
         </Border.Background>
-        <Border.OpacityMask>
-            <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.7,0">
-                <GradientStop Color="#FFACBCD7" Offset="1"/>
-                <GradientStop Color="White" Offset="0"/>
-            </LinearGradientBrush>
-        </Border.OpacityMask>
-        <StackPanel>            
-            <!--<TextBlock FontSize="18" Foreground="#eee" TextAlignment="Center" Margin="0, 4, 0, 0"><Run Text="Teletek Electronics"/></TextBlock>
-            <TextBlock FontSize="18" Foreground="#eee" TextAlignment="Center"><Run Text="Programming Software ver 6.1"/></TextBlock>-->
-            <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="82"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"/>
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.1*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Rectangle Width="200" Height="100" Fill="#ec454e" Margin="10, 10, 0, 0"/>
-                    <Image Grid.Column="0" Source="/Images/Addressables-resized.png" Width="200" Height="100"/>
-                    <Rectangle Grid.Column="1" Width="176" Height="100" Fill="#1e73be" Margin="10, 10, 0, 0"/>
-                    <Image Grid.Column="1" Source="/Images/SOT_Bravo_7-resized.png" Width="200" Height="100" />
-                    <Rectangle Grid.Column="2" Width="175" Height="100" Fill="#08893a" Margin="10, 10, 0, 0"/>
-                    <Image Grid.Column="2" Source="/Images/TTE_Combo-resized.png" Width="200" Height="100"/>
-
-                </Grid>
+                <Image Grid.Row="0" Source="pack://application:,,,/html/imports/images/teletek-manager-logo.png" 
+                       Width="270" Height="70" AutomationProperties.IsOffscreenBehavior="Onscreen" VerticalAlignment="Top"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.1*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Rectangle Width="200" Height="100" Fill="#ec454e" Margin="10, 10, 0, 0"/>
-                    <Image Grid.Column="0" Source="/Images/convectional_5-resized.png" Width="200" Height="100"/>
-                    <Rectangle Grid.Column="1" Width="175" Height="100" Fill="#1e73be" Margin="10, 10, 0, 0"/>
-                    <Image Grid.Column="1" Source="/Images/SOT_Eclipse_5-resized.png" Width="200" Height="100" />
-                    <Rectangle Grid.Column="2" Width="175" Height="100" Fill="#08893a" Margin="10, 10, 0, 0"/>
-                    <Image Grid.Column="2" Source="/Images/TTE-GPRS-Standard-resized.png" Width="200" Height="100"/>
+                    <Border Grid.Column="1" Background="White" CornerRadius="8" 
+                            Width="35" Height="35" VerticalAlignment="Bottom">
+                        <TextBlock Text="&#xe908;" FontFamily="{StaticResource ram_icons}" FontSize="16" 
+                                   Foreground="#FF484B" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <Border Grid.Column="3" Background="White" CornerRadius="8" 
+                            Width="35" Height="35" VerticalAlignment="Bottom">
+                        <TextBlock Text="&#xe906;" FontFamily="{StaticResource ram_icons}" FontSize="16" 
+                                   Foreground="#0064FF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <Border Grid.Column="5" Background="White" CornerRadius="8" 
+                            Width="35" Height="35" VerticalAlignment="Bottom">
+                        <TextBlock Text="&#xe907;" FontFamily="{StaticResource ram_icons}" FontSize="16" 
+                                   Foreground="#87D23D" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
                 </Grid>
             </Grid>
-            <Image Source="pack://application:,,,/Images/teletek_logo_m.png" Width="400" Height="80" Margin="0, 10, 0, -20" AutomationProperties.IsOffscreenBehavior="Onscreen" >
-                <Image.Effect>
-                    <DropShadowEffect/>
-                </Image.Effect>
-            </Image>
-            <TextBlock FontSize="12" Foreground="#332" TextAlignment="Center" Margin="0, 10, 0, 0">
-                <Run Text="© Teletek Electronics JSC., 2022; Teletek Manager ver."/>
-                <Run x:Name="ver"/>
-            </TextBlock>
-        </StackPanel>
+            
+            <Grid Grid.Row="2">
+                <TextBlock FontSize="10" Foreground="#332" TextAlignment="Center" 
+                           Margin="0, 10, 0, 0" VerticalAlignment="Bottom">
+                    <Run Text="© Teletek Electronics JSC., 2022; Teletek Manager ver."/>
+                    <Run x:Name="ver"/>
+                </TextBlock>
+            </Grid>
+        </Grid>
     </Border>
 </Window>

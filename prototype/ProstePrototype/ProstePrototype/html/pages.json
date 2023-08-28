@@ -110,11 +110,21 @@
     "picture": "panels", // "fa-network-wired"
     "icon": "\ue90b"
   },
+  "iris_panels_in_network_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_panels_in_network" ],
+    "picture": "panels", // "fa-network-wired"
+    "icon": "\ue90b"
+  },
   "iris_inputs": {
     "title": "Inputs",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ],
+    "picture": "inputs", // "fa-arrow-down-1-9"
+    "icon": "\ue90c"
+  },
+  "iris_inputs_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_inputs" ],
     "picture": "inputs", // "fa-arrow-down-1-9"
     "icon": "\ue90c"
   },
@@ -126,12 +136,22 @@
     "picture": "input_groups", // "fa-arrow-down-wide-short"
     "icon": "\ue90e"
   },
+  "iris_inputs_group_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_inputs_group" ],
+    "picture": "input_groups", // "fa-arrow-down-wide-short"
+    "icon": "\ue90e"
+  },
   "iris_outputs": {
-    "title": "Output",
+    "title": "Outputs",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ],
     "picture": "outputs", // "fa-arrow-up-9-1"
+    "icon": "\ue90d"
+  },
+  "iris_outputs_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_outputs" ],
+    "picture": "outputs", // "fa-arrow-down-1-9"
     "icon": "\ue90d"
   },
   "iris_fat_fbf": {
@@ -150,11 +170,21 @@
     "picture": "zones", // "fa-clone"
     "icon": "\ue90f"
   },
+  "iris_zones_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_zones" ],
+    "picture": "zones", // "fa-clone"
+    "icon": "\ue90f"
+  },
   "iris_evac_zones": {
     "title": "Evac zones",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ],
+    "picture": "fa-arrows-to-circle",
+    "icon": "\ue915"
+  },
+  "iris_evac_zones_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_evac_zones" ],
     "picture": "fa-arrows-to-circle",
     "icon": "\ue915"
   },
@@ -166,6 +196,11 @@
     "picture": "peripheral_devices", // "fa-hard-drive"
     "icon": "\ue910"
   },
+  "iris_peripheral_devices_elements": {
+    "breadcrumbs": [ "index", "iris", "iris_peripheral_devices" ],
+    "picture": "peripheral_devices", // "fa-hard-drive"
+    "icon": "\ue910"
+  },
   "iris_loop_devices": {
     "title": "Loop devices",
     "left": "menu-automatic.html",
@@ -174,19 +209,16 @@
     "picture": "loop_devices", // "fa-compact-disc"
     "icon": "\ue911"
   },
-  //"loop_devices_system_sensor_loop": {
-  //  "title": "Sensor loop",
-  //  "left": "menu-automatic.html",
-  //  "right": "IRIS/loop_devices_system_sensor.html",
-  //  "breadcrumbs": [ "index", "iris", "iris_loop_devices" ]
-  //},
-  //"loop_devices_teletek_loop": {
-  //  "title": "Teletek loop",
-  //  "left": "menu-automatic.html",
-  //  "right": "IRIS/loop_devices_teletek.html",
-  //  "breadcrumbs": [ "index", "iris", "iris_loop_devices" ],
-  //  "picture": "\ue912"
-  //},
+  "loop_devices_system_sensor_loop": {
+    "breadcrumbs": [ "index", "iris", "iris_loop_devices" ],
+    "picture": "loop_devices",
+    "icon": "\ue912"
+  },
+  "loop_devices_teletek_loop": {
+    "breadcrumbs": [ "index", "iris", "iris_loop_devices" ],
+    "picture": "loop_devices",
+    "icon": "\ue912"
+  },
   "tte": {
     "title": "TTE",
     "left": "menu-automatic.html",

@@ -35,7 +35,7 @@ namespace ProstePrototype
     public partial class MainWindow : Window
     {
         private readonly string applicationDirectory;
-        private readonly JObject pages;
+        public readonly JObject pages;
         private ReadWindow rw;
         private SettingsDialog settings;
 
@@ -1184,6 +1184,32 @@ namespace ProstePrototype
 
         #region breadcrumb
 
+        public void AddingSegmentElements(string elementType, string fieldName)
+        {
+            string type = string.Join("_", elementType.Split("_").Skip(1).ToArray<string>());
+            switch (true)
+            {
+                case true when type == "INPUT": type = "iris_inputs_elements"; break;
+                case true when type == "PANELINNETWORK": type = "iris_panels_in_network"; break;
+                case true when type == "INPUT_GROUP": type = "iris_inputs_group_elements"; break;
+                case true when type == "OUTPUT": type = "iris_outputs_elements"; break;
+                case true when type == "ZONE": type = "iris_zones_elements"; break;
+                case true when type == "EVAC_ZONE_GROUP": type = "iris_evac_zones_elements"; break;
+                case true when type.StartsWith("TTELOOP") && type.Length > 7: type = "loop_devices_teletek_loop"; break;
+                case true when type.StartsWith("LOOP") && type.Length > 4: type = "loop_devices_teletek_loop"; break;
+                default: type = "iris_peripheral_devices_elements"; break;
+            }
+            pages[type]["title"] = fieldName;
+            initBreadCrumbs(
+                elementType.Split("_")[0].ToLower(), // in order to get the directory source to define the color type
+                pages[type].Value<JObject>()["breadcrumbs"].Value<JArray>() // takes the respective pages ["breadcrumbs"]
+                );
+            addLastBreadCrumb(
+                elementType.Split("_")[0].ToLower(), // get the directory source to define the color type
+                type
+                );
+        }
+
         private void addLastBreadCrumb(string panel_type, string page)
         {
             string color = "Blue";
@@ -1331,8 +1357,8 @@ namespace ProstePrototype
             JObject jnode = new JObject(cJson.GetNode(page));
             //string panel_type = (string)jnode["@PRODUCTNAME"];
             string panel_type = (jnode["@PRODUCTNAME"] != null) ? (string)jnode["@PRODUCTNAME"] : "";
-            lvBreadCrumbs.Items.Clear();            
-
+            lvBreadCrumbs.Items.Clear();
+            
             string color = "Blue";
             if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") ||
                 page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";

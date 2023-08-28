@@ -15,6 +15,8 @@
     <None Remove="html\imports\images\icons\17-settings.png" />
     <None Remove="html\imports\images\icons\18-help.png" />
     <None Remove="html\imports\images\icons\19-log-out.png" />
+    <None Remove="html\imports\images\splash-background1.jpg" />
+    <None Remove="html\imports\images\teletek-manager-logo.png" />
     <None Remove="html\imports\webfonts\fa-brands-400.ttf" />
     <None Remove="html\imports\webfonts\fa-regular-400.ttf" />
     <None Remove="html\imports\webfonts\fa-solid-900.ttf" />
@@ -33,13 +35,6 @@
     <None Remove="Images\de.png" />
     <None Remove="Images\ProsTE.ico" />
     <None Remove="Images\ProsTE.png" />
-    <None Remove="Images\SOT_Bravo_7-resized.png" />
-    <None Remove="Images\SOT_Eclipse_5-resized.png" />
-    <None Remove="Images\teletek_logo.png" />
-    <None Remove="Images\teletek_logo_m.png" />
-    <None Remove="Images\teletek_manager.png" />
-    <None Remove="Images\TTE-GPRS-Standard-resized.png" />
-    <None Remove="Images\TTE_Combo-resized.png" />
     <None Remove="Images\t_m_icon.png" />
   </ItemGroup>
 
@@ -64,6 +59,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="html\imports\images\icons\19-log-out.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\splash-background1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="html\imports\images\teletek-manager-logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="html\imports\webfonts\fa-brands-400.ttf">
@@ -111,32 +112,8 @@
     <Resource Include="Images\convectional_5-resized.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\SOT_Bravo_7-resized.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\SOT_Eclipse_5-resized.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\TTE-GPRS-Standard-resized.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\TTE_Combo-resized.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\t_m_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Images\teletek_manager.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Images\teletek_logo_m.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
@@ -159,9 +136,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ProsTE.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\teletek_logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -1142,8 +1116,29 @@
     <None Update="Images\1102. motherboard.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\SOT_Bravo_7-resized.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\SOT_Eclipse_5-resized.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Images\teletek_favicon_hfk_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\teletek_logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\teletek_logo_m.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\teletek_manager.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\TTE-GPRS-Standard-resized.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\TTE_Combo-resized.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="languages\BG.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

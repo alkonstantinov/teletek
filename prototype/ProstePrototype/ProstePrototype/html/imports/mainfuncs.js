@@ -2047,9 +2047,10 @@ async function showElement(id, elementType) {
     if (!id || !elementType) return;
     let elType = Object.keys(BUTTON_IMAGES).find(im => elementType.toUpperCase().includes(im));
     let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
+    const fieldName = `${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+id + Number(INC)}`;
     let returnedJson;
     try {
-        let result = await boundAsync.getJsonForElement(elementType, +id); // ret for test////////////////////////////////////////////////////////////////
+        let result = await boundAsync.getJsonForElement(elementType, +id, fieldName); // ret for test////////////////////////////////////////////////////////////////
         returnedJson = JSON.parse(result);
         if (!returnedJson) {
             alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
@@ -2062,7 +2063,7 @@ async function showElement(id, elementType) {
             fieldset.id = `id_${id}`;
             fieldset.insertAdjacentHTML(
                 'afterbegin',
-                `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+id+Number(INC)}</legend>
+                `<legend>${fieldName}</legend>
                 <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
             drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];

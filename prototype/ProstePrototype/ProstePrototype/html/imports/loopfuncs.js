@@ -583,6 +583,8 @@ function showLoop(loopNumber, loopType) {
     //resizer2.innerHTML = '';
     resizer2.classList = 'ram_panel ram_resizable ram_animate';
     let btnTitle = `${new T().t(localStorage.getItem('lang'), "add_new")} ${loopType.includes("TTE") ? new T().t(localStorage.getItem('lang'), "device_in_loop") : new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}`;
+
+    boundAsync.addingSegmentsToElement(loopType, `${loopType.includes("TTE") ? "Teletek Loop" : "System Sensors Loop"} ${loopNumber}`);
     resizer2.insertAdjacentHTML('beforeend',
         `<div class="ram_settings middle">
             <button class="btn ram_btn btn_white fire" onclick="javacript: calculateLoopDevices(${loopNumber})" id="calculateDevices" data-bs-toggle="modal" data-bs-target="#showDevicesListModal" title="${new T().t(localStorage.getItem('lang'), "number_of_devices")}">

@@ -210,8 +210,8 @@
         input_groups: {
             'bg': 'Входни групи', 'en': 'Input Groups', 'ge': 'Input Groups' 
         },
-        output: {
-            'bg': 'Изходи', 'en': 'Output', 'ge': 'Output' 
+        outputs: {
+            'bg': 'Изходи', 'en': 'Outputs', 'ge': 'Outputs' 
         },
         fat_fbf: {
             'bg': 'FAT FBF', 'en': 'FAT FBF', 'ge': 'FAT FBF' 
