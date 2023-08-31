@@ -86,89 +86,91 @@ namespace ProstePrototype
         {
             // send for comparison in current version
             // Get the path to the folder.
-            string folderPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Release";
+            //string folderPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Release";
 
             // Check if the folder exists.
-            if (Directory.Exists(folderPath))
-            // if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) // checks for internet
+            //if (Directory.Exists(folderPath))
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) // checks for internet
             {
-                /*
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.example.com/remote/path/");
-                request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-                request.Credentials = new NetworkCredential("username", "password");
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                Stream responseStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(responseStream);
-                string fileData = reader.ReadToEnd();
-                reader.Close();
-                response.Close();
-                string[] files = fileData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                
-                foreach (string file in files)
-        {
-            string[] details = file.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string fileName = details[details.Length - 1];
 
-            FtpWebRequest requestFile = (FtpWebRequest)WebRequest.Create("ftp://ftp.example.com/remote/path/" + fileName);
-            requestFile.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-            requestFile.Credentials = new NetworkCredential("username", "password");
-            FtpWebResponse responseFile = (FtpWebResponse)requestFile.GetResponse();
-            DateTime creationDate = responseFile.LastModified;
-            responseFile.Close();
+                //FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://teletek.bg/teletek-man");
+                //request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                //request.Credentials = new NetworkCredential("teletek-man", "t3l3t3k@man");
+                //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                //Stream responseStream = response.GetResponseStream();
+                //StreamReader reader = new StreamReader(responseStream);
+                //// go to "teletek-man"
+                //string fileData = reader.ReadToEnd();
+                //reader.Close();
+                //response.Close();
+                //string[] files = fileData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            // Download the file to a temporary location
-            WebClient client = new WebClient();
-            client.Credentials = new NetworkCredential("username", "password");
-            client.DownloadFile("ftp://ftp.example.com/remote/path/" + fileName, Path.GetTempPath() + fileName);
+                //foreach (string file in files)
+                //{
+                //    string[] details = file.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                //    string fileName = details[details.Length - 1];
+                //    // TODO! based on fileName decides if the fileName is higher version, so it is worth downloading it
+                //    FtpWebRequest requestFile = (FtpWebRequest)WebRequest.Create("ftp://teletek.bg/teletek-man" + fileName);
+                //    requestFile.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                //    requestFile.Credentials = new NetworkCredential("teletek-man", "t3l3t3k@man");
+                //    FtpWebResponse responseFile = (FtpWebResponse)requestFile.GetResponse();
+                //    DateTime creationDate = responseFile.LastModified;
+                //    responseFile.Close();
 
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Path.GetTempPath() + fileName);
+                //    //Download the file to a temporary location
+                //    WebClient client = new WebClient();
+                //    client.Credentials = new NetworkCredential("teletek-man", "t3l3t3k@man");
+                //    client.DownloadFile("ftp://teletek.bg/teletek-man" + fileName, System.IO.Path.GetTempPath() + fileName);
 
-            Console.WriteLine("File Name: " + fileName);
-            Console.WriteLine("Creation Date: " + creationDate.ToString());
-            Console.WriteLine("Version Info: " + myFileVersionInfo.FileVersion);
-            
-                // If the file is the required update (TODO this check) Run the file (teh file shoudl run the setup in silent mode
-                Process.Start(Path.GetTempPath() + fileName);
-                // Wait for the process to finish
-                Process.WaitForExit()
+                //    FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(System.IO.Path.GetTempPath() + fileName);
 
-            // Delete the temporary file
-            File.Delete(Path.GetTempPath() + fileName);
-                }
-                 */
+                //    Console.WriteLine("File Name: " + fileName);
+                //    Console.WriteLine("Creation Date: " + creationDate.ToString());
+                //    Console.WriteLine("Version Info: " + myFileVersionInfo.FileVersion);
 
-                // Get the list of all files in the folder.
-                string[] files = Directory.GetFiles(folderPath, "*.exe");
+                //    //If the file is the required update(TODO this check) Run the file(the file should run the setup in silent mode   
+                //    Process.Start(System.IO.Path.GetTempPath() + fileName);
+                    
+                //    //Wait for the process to finish
+                //    //Process.WaitForExit();
 
-                // Get the creation date and version of each file.
-                DateTime[] creationDates = new DateTime[files.Length];
-                string[] versions = new string[files.Length];
-                string[] descr = new string[files.Length];
-                for (int i = 0; i < files.Length; i++)
-                {
-                    creationDates[i] = File.GetCreationTime(files[i]);
-                    versions[i] = FileVersionInfo.GetVersionInfo(files[i]).FileVersion;
-                    descr[i] = FileVersionInfo.GetVersionInfo(files[i]).FileDescription;
-                }
+                //    //Delete the temporary file   
+                //    File.Delete(System.IO.Path.GetTempPath() + fileName);
+                //}
 
-                Debug.WriteLine("currentVersion" + currentVersion);
-                // Display the creation date and version of each file.
-                for (int i = 0; i < files.Length; i++)
-                {
-                    Debug.WriteLine("File: " + files[i] + ", Creation Date: " + creationDates[i] + ", Version: " + versions[i]+ ", Descr: " + descr[i]);
-                    if (!string.IsNullOrEmpty(versions[i]) && currentVersion.CompareTo(versions[i].Trim()) < 0)
-                    {
-                        // perform install this update
-                        Debug.WriteLine("Hurray");
-                    }
-                }
+
+                //// Get the list of all files in the folder.
+                //string[] files = Directory.GetFiles(folderPath, "*.exe");
+
+                //// Get the creation date and version of each file.
+                //DateTime[] creationDates = new DateTime[files.Length];
+                //string[] versions = new string[files.Length];
+                //string[] descr = new string[files.Length];
+                //for (int i = 0; i < files.Length; i++)
+                //{
+                //    creationDates[i] = File.GetCreationTime(files[i]);
+                //    versions[i] = FileVersionInfo.GetVersionInfo(files[i]).FileVersion;
+                //    descr[i] = FileVersionInfo.GetVersionInfo(files[i]).FileDescription;
+                //}
+
+                //Debug.WriteLine("currentVersion" + currentVersion);
+                //// Display the creation date and version of each file.
+                //for (int i = 0; i < files.Length; i++)
+                //{
+                //    Debug.WriteLine("File: " + files[i] + ", Creation Date: " + creationDates[i] + ", Version: " + versions[i]+ ", Descr: " + descr[i]);
+                //    if (!string.IsNullOrEmpty(versions[i]) && currentVersion.CompareTo(versions[i].Trim()) < 0)
+                //    {
+                //        // perform install this update
+                //        Debug.WriteLine("Hurray");
+                //    }
+                //}
             }
             else
             {
                 // No Connection to the Internet
                 MessageBox.Show("Please check your Internet Connection and then try again", "No Connection to the Internet", MessageBoxButton.OK, MessageBoxImage.Warning);
                 // The folder is wrong.
-                Debug.WriteLine("No Connection to the Internet. Path used: " + folderPath);
+                //Debug.WriteLine("No Connection to the Internet. Path used: " + folderPath);
             }
         }
     }

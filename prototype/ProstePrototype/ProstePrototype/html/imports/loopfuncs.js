@@ -158,7 +158,7 @@ const openDeviceAddressModal = (deviceName, loopNumber, loopType, noneElement, c
 }
 
 // adding the new device button to the device list
-function visualizeLoopElement(deviceName, address, loopType, loopNumber, key, noneElement) {    
+function visualizeLoopElement(deviceName, address, loopType, loopNumber, key, noneElement, name="") {    
     attachedDevicesList.push(+address);
 
     // update deviceNmbr button
@@ -168,6 +168,7 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key, no
 
     const sensorsSign = (!loopType.includes("TTELOOP") && !el.querySelector(`#${loopType}_0`)) ? `<p id="${loopType}_0">${new T().t(localStorage.getItem('lang'), 'sensors')}</p>` : "";
     const modulesSign = (!loopType.includes("TTELOOP") && !el.querySelector(`#${loopType}_100`)) ? `<p id="${loopType}_100">${new T().t(localStorage.getItem('lang'), 'modules')}</p>` : "";
+    const visibleName = name ? name : DEVICES_CONSTS[key].sign;
 
     //alert(`loopType:'${loopType}', deviceName:'${deviceName}', loopNumber:'${loopNumber}', address:'${address}', noneElement:'${noneElement}', key:${key}`);
     const newDeviceInner = `<div class="ram_card fire" id='${loopType}_${address}' onclick="javascript:showDevice('${loopType}', '${deviceName}', '${loopNumber}', '${address}', '${noneElement}'); addActive('ram_panel_2')">
@@ -175,7 +176,7 @@ function visualizeLoopElement(deviceName, address, loopType, loopNumber, key, no
                                     <img src="${DEVICES_CONSTS[key].im}" alt="${address + '. ' + DEVICES_CONSTS[key].sign}">
                                 </div>
                                 <div class="ram_card_body">
-                                    <h5 class="ram_card_title">${address + '. ' + DEVICES_CONSTS[key].sign}</h5>
+                                    <h5 class="ram_card_title">${address + '. ' + visibleName}</h5>
                                 </div>
                                 <div class="ram_add_btn"
                                     onclick="javascript: event.stopPropagation(); removeDevice('${loopType}', '${loopNumber}', '${deviceName}', '${address}')">
@@ -213,7 +214,7 @@ const modifyLoopDeviceCurrentAddress = (oldAddress, loopType, deviceName, newAdd
 } 
 
 const showDevice = (loopType, deviceName, loopNumber, address, noneElement) => {
-    boundAsync.getLoopDevices(mainKey, +loopNumber, deviceName.split("_").slice(1).join(" ")).then(res => {
+    boundAsync.getLoopDevices(mainKey, +loopNumber, address + ". " + deviceName.split("_").slice(1).join(" ")).then(res => {
         if (res) {
             let resJSONList = JSON.parse(res);
             let deviceData = resJSONList.find(dd => dd["~address"] === `${address}` && dd["~device"] === deviceName)["Groups"]["~noname"]["fields"];
