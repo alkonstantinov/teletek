@@ -64,7 +64,7 @@ namespace ProstePrototype
             //File.WriteAllTextAsync("wb4.json", el.ToString());
             return el.ToString();
         }
-        public string getJsonForElement(string elementType, int elementNumber, string fieldName)
+        public string getJsonForElement(string elementType, int elementNumber, string fieldName = "")
         {
             // var e = elementType;
             //return @"{ ""pageName"": ""wb1"" }";
@@ -123,15 +123,25 @@ namespace ProstePrototype
             return o.ToString();
         }
 
-        public string getLoopDevices(string elementType, int elementNumber)
+        public string getLoopDevices(string elementType, int elementNumber, string fieldName = "")
         {
             Dictionary<string, string> d = cComm.GetPseudoElementDevices(cJson.CurrentPanelID, elementType, elementNumber.ToString());
+            
+            if (!String.IsNullOrEmpty(fieldName))
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                    mw.AddingSegmentElements(elementType, fieldName);
+                });
+            }
             //string zdevs = zoneDevices(1);
             if (d == null)
                 return null;
             //string[] akeys = new string[d.Count];
             //d.Keys.CopyTo(akeys);
             //akeys.so
+
             JArray res = new JArray();
             foreach (string addr in d.Keys)
             {

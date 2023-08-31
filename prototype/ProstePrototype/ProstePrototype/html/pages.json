@@ -181,12 +181,12 @@
     "right": "IRIS/io-automatic.html",
     "breadcrumbs": [ "index", "iris" ],
     "picture": "fa-arrows-to-circle",
-    "icon": "\ue915"
+    "icon": "\ue912" // "\ue4bd"
   },
   "iris_evac_zones_elements": {
     "breadcrumbs": [ "index", "iris", "iris_evac_zones" ],
     "picture": "fa-arrows-to-circle",
-    "icon": "\ue915"
+    "icon": "\ue912" // "\ue4bd"
   },
   "iris_peripheral_devices": {
     "title": "Peripheral devices",
@@ -212,12 +212,17 @@
   "loop_devices_system_sensor_loop": {
     "breadcrumbs": [ "index", "iris", "iris_loop_devices" ],
     "picture": "loop_devices",
-    "icon": "\ue912"
+    "icon": "\ue911"
   },
   "loop_devices_teletek_loop": {
     "breadcrumbs": [ "index", "iris", "iris_loop_devices" ],
     "picture": "loop_devices",
-    "icon": "\ue912"
+    "icon": "\ue911"
+  },
+  "loop_devices": {
+    "breadcrumbs": [ "index", "iris", "iris_loop_devices", "replace" ],
+    "picture": "loop_devices",
+    "icon": "\ue911"
   },
   "tte": {
     "title": "TTE",
@@ -279,7 +284,7 @@
     "title": "Panel outputs",
     "left": "menu-automatic.html",
     "right": "IRIS/IRISPanel-automatic.html",
-    "breadcrumbs": [ "index", "simpo" ],
+    "breadcrumbs": [ "index", "iris" ],
     "picture": "outputs", // "fa-arrow-up-9-1"
     "icon": "\ue90d"
   },
@@ -287,8 +292,18 @@
     "title": "Simpo Mimic Panels",
     "left": "menu-automatic.html",
     "right": "IRIS/io-automatic.html",
-    "breadcrumbs": [ "index", "simpo" ],
+    "breadcrumbs": [ "index", "iris" ],
     "picture": "input_groups",
     "icon": "\ue90e"
+  },
+  "simpo_mimicpanels_elements": {
+    "breadcrumbs": [ "index", "iris", "simpo_mimicpanels" ],
+    "picture": "input_groups",
+    "icon": "\ue90e"
+  },
+  "simpo_mimicpanels_elements_outputs": {
+    "breadcrumbs": [ "index", "iris", "simpo_mimicpanels", "simpo_mimicpanels_elements" ],
+    "picture": "input_groups",
+    "icon": "\ue90d"
   }
 }

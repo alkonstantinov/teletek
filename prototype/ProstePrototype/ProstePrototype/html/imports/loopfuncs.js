@@ -213,13 +213,13 @@ const modifyLoopDeviceCurrentAddress = (oldAddress, loopType, deviceName, newAdd
 } 
 
 const showDevice = (loopType, deviceName, loopNumber, address, noneElement) => {
-    boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
+    boundAsync.getLoopDevices(mainKey, +loopNumber, deviceName.split("_").slice(1).join(" ")).then(res => {
         if (res) {
             let resJSONList = JSON.parse(res);
             let deviceData = resJSONList.find(dd => dd["~address"] === `${address}` && dd["~device"] === deviceName)["Groups"]["~noname"]["fields"];
             let elem = document.getElementById(`selected_area`);
             showOrderedDevices(loopType, deviceName, address, elem, deviceData, loopNumber, noneElement)
-            collapsible();
+            //collapsible();
             addVisitedBackground();
         }
     }).catch(err => alert(err));
@@ -227,7 +227,7 @@ const showDevice = (loopType, deviceName, loopNumber, address, noneElement) => {
 
 function showOrderedDevices(loopType, deviceName, address, elem, deviceData, loopNumber, noneElement) {
     let { key } = getConfig(deviceName);
-    let fieldsetDevice = createFieldset(`selected_${loopType}_${deviceName}_${address}`, `${address}. ${DEVICES_CONSTS[key].sign}`);
+    let fieldsetDevice = createFieldset(`selected_${loopType}_${deviceName}_${address}`, `${address}. ${DEVICES_CONSTS[key].sign}`, 'first');
     fieldsetDevice.insertAdjacentHTML(
         "beforeend",
         `<button onclick="javascript: openDeviceAddressModal('${deviceName}', '${loopNumber}', '${loopType}', '${noneElement}', '${address}')" type="button" class="btn btn-position-right">
@@ -347,7 +347,7 @@ const removeDevice = (loopType, loopNumber, deviceName, address) => {
 }
 
 const fillLoopElements = (loopNumber, loopType) => {
-    boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
+    boundAsync.getLoopDevices(mainKey, +loopNumber, "").then(res => {
         if (res) {
             attachedDevicesList = [];
             let resJSONList = JSON.parse(res);
@@ -520,6 +520,7 @@ function addLoop(loopType, newFlag = "new") {
 
     let color = Object.keys(BUTTON_COLORS).find(c => loopType.toUpperCase().includes(c));
     let elType = Object.keys(BUTTON_IMAGES).find(im => loopType.toUpperCase().includes(im));
+    let fieldName = `${BUTTON_IMAGES[elType].sign} ${last}`;
 
     let img = BUTTON_IMAGES[elType].im.split('.').pop().length === 3
         ? `<img src="${BUTTON_IMAGES[elType].im}" alt="${BUTTON_IMAGES[elType].sign}">`
@@ -529,7 +530,7 @@ function addLoop(loopType, newFlag = "new") {
                             ${img}
                         </div>
                         <div class="ram_card_body">
-                            <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign} ${last}</h5>
+                            <h5 class="ram_card_title">${fieldName}</h5>
                         </div>
                     </div>`;
                         // <div class="ram_add_btn" onclick="javascript: exchangingLoop('${loopType}')"><i class="ram_icon edit"></i></div>
@@ -659,7 +660,7 @@ async function removeLoop() {
 
         $("#showConfirmationModal").modal("show");
     } else {
-        let devicesListStr = await boundAsync.getLoopDevices(mainKey, lst.at(-1));
+        let devicesListStr = await boundAsync.getLoopDevices(mainKey, lst.at(-1), "");
         let deviceListJSON;
         if (devicesListStr) { 
             deviceListJSON = JSON.parse(devicesListStr);
@@ -742,7 +743,7 @@ function calculateLoopDevices(loopNumber) {
     let modalContent = modal.find('.modal-body')[0];
 
     const deviceMap = new Map();
-    boundAsync.getLoopDevices(mainKey, +loopNumber).then(res => {
+    boundAsync.getLoopDevices(mainKey, +loopNumber, "").then(res => {
         if (res) {
             let deviceListJSON = JSON.parse(res);
             deviceListJSON.forEach(e => {
@@ -807,11 +808,16 @@ function updateDeviceNmbr() {
 }
 
 // creating a fieldset
-function createFieldset(id, legendName) {
-    let fieldset = document.createElement("fieldset");
+function createFieldset(id, legendName, first='') {
+    let fieldset = document.createElement("div");
     fieldset.id = id;
-    fieldset.className = "row align-items-center";
-    fieldset.insertAdjacentHTML("afterbegin", `<legend>${legendName}</legend>`);
+    fieldset.className = `${!first && "ram_attribute_holder "}row align-items-center`;
+    if (!first) {
+        fieldset.insertAdjacentHTML("afterbegin", `<legend class="ram_attribute_holder_title">${legendName}</legend>`);
+    } else {
+        fieldset.insertAdjacentHTML("afterbegin", `<p class="ram_attribute_holder_title">${legendName}</p>`);
+    }
+        
     return fieldset;
 }
 //#endregion UTILS

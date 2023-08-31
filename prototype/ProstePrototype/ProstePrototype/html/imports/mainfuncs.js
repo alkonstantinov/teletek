@@ -323,7 +323,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
             }
 
             getAvailableElements(k.toUpperCase());
-        } else if (k && !k.includes('~')) { // collapsible parts
+        } else if (k && !k.includes('~')) { // collapsible parts -> transformed to ram_attribute_holder (request meeting 30.08.2023)
             const { input_name, input_id } = {
                 input_name: divLevel.name,
                 input_id: divLevel.name.toLowerCase().trim().replaceAll(' ', '_').replace(/["\\]/g, '\\$&').replace(/[/()]/g, '')
@@ -331,8 +331,8 @@ function drawFields(body, json, inheritedColor = 'normal') {
 
             var colors = Object.keys(BUTTON_COLORS).find(x => k.includes(x));
 
-            var inside = `<button class="${inheritedColor || (colors ? BUTTON_COLORS[colors] : '')} collapsible ml-1 collapsible_${input_id}">${input_name}</button>
-                <div class="collapsible-content col-12">
+            var inside = `<div class="${inheritedColor || (colors ? BUTTON_COLORS[colors] : '')} ram_attribute_holder">
+                <p class="ram_attribute_holder_title">${input_name}</p>
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
 
@@ -341,7 +341,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
 
             elementsCreationHandler(div, divLevel.fields);
 
-            collapsible(`collapsible_${input_id}`)
+            //collapsible(`collapsible_${input_id}`)
         }
     });
 }
@@ -359,7 +359,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
     cleanKeys.forEach(field => {
         // guard for null value of jsonAtLevel[field]
         if (jsonAtLevel[field] && jsonAtLevel[field]['@TYPE']) {
-            if (jsonAtLevel[field]['@TYPE'] === "AND") {
+            if (jsonAtLevel[field]['@TYPE'] === "AND" && !jsonAtLevel[field]["PROPERTIES"]["PROPERTY"]) {
                 elementsCreationHandler(div, jsonAtLevel[field]["PROPERTIES"]);
                 return;
             }
@@ -539,8 +539,8 @@ function fatFbfFunc(json) {
                     input_id: jObj["@PRODUCTNAME"].replaceAll(" ", "_")
                 }
 
-                var inside = `<button class="fire collapsible ml-1 collapsible_${input_id}">${input_name}</button>
-                <div class="collapsible-content col-12">
+                var inside = `<div class="fire ram_attribute_holder">
+                <p class="ram_attribute_holder_title">${input_name}</p>
                     <div class="row align-items-center m-2" id="${input_id}"></div>
                 </div>`;
 
@@ -550,7 +550,7 @@ function fatFbfFunc(json) {
 
                 elementsCreationHandler(div, jObj["PROPERTIES"]["Groups"]);
 
-                collapsible(`collapsible_${input_id}`)
+                //collapsible(`collapsible_${input_id}`)
             }
         }).catch(err => alert("Error " + err));
     });
@@ -688,7 +688,7 @@ function showLoopType(level, type, key, showDivId, selectDivId) {
     
     showDiv.insertAdjacentHTML('beforeend', inner);
 
-    adjustCollapsibleHeight(selectDiv);
+    //adjustCollapsibleHeight(selectDiv);
     addVisitedBackground();
 
     if (dataUsed.some(x => x["selected"])) {
@@ -825,6 +825,8 @@ function showMimicOutputs(elementType, elementNumber) {
         );
 
         body.appendChild(ram_panel_2);
+
+        boundAsync.addingSegmentsToElement(elementType, elementType.split("_").slice(1).join(' '))
     } else {
         const btn = ram_panel_2.querySelector("#_btn_devices");
         btn.onclick = function () {
@@ -847,7 +849,7 @@ function showMimicOutputs(elementType, elementNumber) {
             'deviceName': changeJson["@ID"],
             'deviceAddress': ""
         };
-        boundAsync.getLoopDevices(elementType.match(/^(.*?)(?=\d+$)/)[1], +elementNumber).then(res => {
+        boundAsync.getLoopDevices(elementType.match(/^(.*?)(?=\d+$)/)[1], +elementNumber, elementType.split("_").slice(1).join(" ")).then(res => {
             if (res) {
                 let returnedJson = JSON.parse(res);
 
@@ -893,7 +895,7 @@ async function showMimicout(id, params) {
     let color = Object.keys(BUTTON_COLORS).find(x => elementType.includes(x));
     let returnedJson;
     try {
-        let result = await boundAsync.getLoopDevices(clearElementType, +params['loopNumber']);
+        let result = await boundAsync.getLoopDevices(clearElementType, +params['loopNumber'], "");
 
         returnedJson = JSON.parse(result);
         
@@ -906,18 +908,21 @@ async function showMimicout(id, params) {
         if (Object.keys(returnedJson).length > 0) {
             const el = document.getElementById("selected_area");
             id = parseInt(id);
-            const fieldset = document.createElement('fieldset');
+            const fieldset = document.createElement('div');
             fieldset.id = `id_${id}`;
+            let legendName = `${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}`;
             fieldset.insertAdjacentHTML(
                 'afterbegin',
-                `<legend>${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${id}</legend>
+                `<legend class="ram_attribute_holder_title">${legendName}</legend>
                 <button onclick="javascript: callAddressModal('${elementType}', '${id}', ${JSON.stringify(params).replaceAll('"', '\'')})" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
 
             drawFields(fieldset, returnedJson["Groups"], color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
             if (oldFieldset) oldFieldset.replaceWith(fieldset);
             else el.appendChild(fieldset);
-            collapsible();
+
+            boundAsync.addingSegmentsToElement(clearElementType, legendName);
+            //collapsible();
             addVisitedBackground();
         }
     } catch (e) {
@@ -932,7 +937,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
     let attributes = {
         type: elementJson['@TYPE'],
         input_name: newT.t(localStorage.getItem('lang'), elementJson['@LNGID']), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
-        input_id: elementJson['@TEXT'] ? elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_') : elementJson['@LNGID'], //.replaceAll("-", "_"),
+        input_id: elementJson['@TEXT'] ? elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_') + "_" + elementJson['@LNGID'] : elementJson['@LNGID'], //.replaceAll("-", "_"),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
         maxTextLength: elementJson['@LENGTH'],
@@ -963,7 +968,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
             let fs = document.createElement('div');
             fs.id = attributes.input_id;
             //fs.classList.add('ram_attribute_holder');
-            //fs.insertAdjacentHTML('afterbegin', `<p class="ram_attribute_holder_title">${attributes.input_name}</p>`);
+            fs.insertAdjacentHTML('afterbegin', `<p class="input-group-text">${attributes.input_name}</p>`);
             let ds = document.createElement('div');
             ds.classList = 'row align-items-center';
 
@@ -974,12 +979,18 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                     ds.insertAdjacentHTML('beforeend', innerString);
                 } else {
                     let andElDiv = document.createElement('div');
-                    andElDiv.classList = 'col-12 col-lg-' + (andElementsList.length > 4 ? 3 : 12 / andElementsList.length);
+                    if (innerString.endsWith("$")) {
+                        innerString = innerString.slice(0, -1);
+                        andElDiv.classList = 'col-12';
+                    } else {
+                        andElDiv.classList = 'col-12 col-lg-' + (andElementsList.length > 4 ? 3 : Math.ceil(12 / (andElementsList.length-1)));
+                    }
                     andElDiv.insertAdjacentHTML('beforeend', innerString);
                     ds.appendChild(andElDiv);
                 }
             }
             fs.appendChild(ds);
+
             return fs.outerHTML;
         case 'HIDDEN': return '';
         case 'TAB':
@@ -1163,7 +1174,7 @@ const transformGroupElement = (elementJson, fieldName = '') => {
                     selected: sel
                 };
                 if (o['ScheduleKey']) tmp.link = o['ScheduleKey'];
-                if (!o['ScheduleKey'] && elementJson["@TEXT"] === "Day Mode") tmp.link = "DayNightschedule"; // added for SIMPO only - it has a typo in the JSON
+                if (!o['ScheduleKey'] && elementJson["@TEXT"] === "Day Mode" && o["@NAME"] === "Schedule") tmp.link = "DayNightschedule"; // added for SIMPO only - it has a typo in the JSON
                 if (o['@IMAGE']) tmp.imageKey = o['@IMAGE'].split('.')[0];
                 return tmp;
             });
@@ -1202,29 +1213,29 @@ const transformGroupElement = (elementJson, fieldName = '') => {
 }
 
 //#region collapsible part
-function collapsible(param) {
-    var coll = param ? document.getElementsByClassName(param) : document.getElementsByClassName("collapsible");
-    var i;
+//function collapsible(param) {
+//    var coll = param ? document.getElementsByClassName(param) : document.getElementsByClassName("collapsible");
+//    var i;
 
-    function handleClick() {
-        this.classList.toggle("cactive");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + 54 + "px";
-        }
-    };
+//    function handleClick() {
+//        this.classList.toggle("cactive");
+//        var content = this.nextElementSibling;
+//        if (content.style.maxHeight) {
+//            content.style.maxHeight = null;
+//        } else {
+//            content.style.maxHeight = content.scrollHeight + 54 + "px";
+//        }
+//    };
 
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", handleClick);
-    }
+//    for (i = 0; i < coll.length; i++) {
+//        coll[i].addEventListener("click", handleClick);
+//    }
 
-    for (i = 0; i < coll.length; i++) {
-        coll[i].click();
-    }
-}
-collapsible();
+//    for (i = 0; i < coll.length; i++) {
+//        coll[i].click();
+//    }
+//}
+//collapsible();
 //#endregion
 
 //#region pagePreparation, contextMenu, toggleDarkMode
@@ -1496,7 +1507,7 @@ const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, leng
 
 const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
     path = path.replaceAll("'", "§");
-    return `<div class="form-item roww fire">
+    return `<div class="form-item roww fire mb-3">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
                 </button>` : ""}
@@ -1528,8 +1539,9 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
     let link = selectList.filter(x => x.link !== undefined).length > 0 && selectList.filter(x => x.link !== undefined)[0].link;
     let image = selectList.filter(x => x.imageKey).length > 0;
 
-    let str = `<${image ? "fieldset" : "div"} class="form-floating mb-3 ${addButton ? "col" : ""}">
-                    ${image ? `<legend>${input_name}</legend>` : ""}
+    /*${image ? `<legend>${input_name}</legend>` : ""}*/
+    let str = image ? '<div class="ram_attribute_holder">' : '';
+    str += `<div class="form-floating mb-3 ${addButton ? "col" : ""}">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
                     </button>` : ""}
@@ -1548,10 +1560,10 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
         selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
     }
     str += '</select>';
-    str += image ? "" : `<label for="${input_id}">${input_name}</label>`
+    str += `<label for="${input_id}">${input_name}</label>`
     if (link.length > 0)
         str += `<img src onerror="javascript: changeStyleDisplay('${link}', '${input_id}')" />`; // dirty workaround
-    str += image ? "" : "</div>";
+    str += "</div>";
     if (addButton) str += `<button type="button"
                                 id="popoverData_${input_id}" class="btn btn_q col-1"
                                 onmouseover="javascript: showChannelInfo(this, '${path}');"
@@ -1571,7 +1583,7 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
         selectList.map(o => str += `<div style="display: none" id="${o["value"] + "_function"}">
             <img src="${BUTTON_IMAGES[o.imageKey].im}" alt="${o.imageKey}" />
         </div>`);
-        str += "</fieldset>"
+        str += "</div>$"
     }
     return str;
     /* old way: let str = `<${image ? "fieldset" : "div"} class="form-item roww mt-1">
@@ -1611,7 +1623,7 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
 const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "", value }) => {
     return `<div>
                 <label for="${input_id}" class="input-group-text">${input_name}</label>
-                <div class="input-group mb-3 pb-3">
+                <div class="input-group mb-3">
                     ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                         <i class="fa-solid fa-square-minus fa-2x"></i>
                     </button>` : ""}                
@@ -1634,13 +1646,13 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                             onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);"
                             class="ram_number_input_button_right"></button>
-                    <div class="valid-feedback">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
-                            <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
-                            <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
-                        </svg>
-                    </div>
             </div></div>`;
+                    //<div class="valid-feedback">
+                    //    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
+                    //        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
+                    //        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
+                    //    </svg>
+                    //</div>
             /*old style: <div class="form-item roww">
                 ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
                     <i class="fa-solid fa-square-minus fa-2x"></i>
@@ -1951,7 +1963,7 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
             `sendMessageWPF({ 'Command': 'RemovingElement', 'Params': { 'elementType': '${elementType}', 'elementNumber': '${last}' } }, comm = { 'funcName': 'addElement', 'params': { 'id': '${last}', 'elementType': '' } })` :
             `sendMessageWPF({ 'Command': 'RemovingLoopElement', 'Params': ${JSON.stringify(params).replaceAll('"', '\'')} }, comm = { 'funcName': 'addElement', 'params': { 'id': '${last}', 'elementType': '', 'btnId': '${fieldBtnId}' } })`;
 
-        newUserElement = `<div onclick="javascript: ${showFn}('${last}', ${type}); addActive('ram_panel_1')" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
+        newUserElement = `<div onclick="javascript: ${showFn}('${last}', ${type}); addActive('ram_panel_2')" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
                                 <div class="ram_card_img_top">
                                     <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
                                 </div>
@@ -2006,7 +2018,7 @@ function inputGroupHandler(checked, trueValue, falseValue, path, id) {
 async function inputGroupTextGenerator(last, elementType) {
     let result;
     try {
-        result = await boundAsync.getJsonForElement(elementType, +last);
+        result = await boundAsync.getJsonForElement(elementType, +last, newT.t(localStorage.getItem('lang'), 'input_groups'));
 
         if (result) {
             let returnedJson = JSON.parse(result);
@@ -2059,17 +2071,17 @@ async function showElement(id, elementType) {
         if (Object.keys(returnedJson).length > 0) {
             var el = document.getElementById("selected_area");
             id = parseInt(id);
-            const fieldset = document.createElement('fieldset');
+            const fieldset = document.createElement('div');
             fieldset.id = `id_${id}`;
             fieldset.insertAdjacentHTML(
                 'afterbegin',
-                `<legend>${fieldName}</legend>
+                `<legend class="ram_attribute_holder_title">${fieldName}</legend>
                 <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
             drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
             if (oldFieldset) oldFieldset.replaceWith(fieldset);
             else el.appendChild(fieldset);
-            collapsible();
+            //collapsible();
             addVisitedBackground();
         }
         if (elementType.endsWith("ZONE")) {
@@ -2101,21 +2113,21 @@ function loadDiv(it, id, value, type) {
     } else {
         createLoopTypeMenu(it, addElement, type); return;
     }
-    adjustCollapsibleHeight(it, element.scrollHeight)
+    //adjustCollapsibleHeight(it, element.scrollHeight)
     addVisitedBackground();
 }
 
-function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {
-    var content = selectElement.parentNode;
-    while (!content.classList.contains("collapsible-content")) {
-        content = content.parentNode;
-        if (content === document.body)
-            break;
-    }
-    if (content.classList.contains("collapsible-content")) {
-        content.style.maxHeight = (content.scrollHeight + addElementHeight) + "px";
-    }
-}
+//function adjustCollapsibleHeight(selectElement, addElementHeight = 0) {
+//    var content = selectElement.parentNode;
+//    while (!content.classList.contains("collapsible-content")) {
+//        content = content.parentNode;
+//        if (content === document.body)
+//            break;
+//    }
+//    if (content.classList.contains("collapsible-content")) {
+//        content.style.maxHeight = (content.scrollHeight + addElementHeight) + "px";
+//    }
+//}
 
 function alertScanFinished(show) {
     if (show === 'alert') {

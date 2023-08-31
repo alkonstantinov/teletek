@@ -533,7 +533,14 @@ namespace ProstePrototype
                     break;
             }
 
-            File.AppendAllText("eventlog.log", json["Command"].ToString() + " --> " + json["Params"].ToString() + "\n\n");
+            string filePath = "eventlog.log";
+            string logEntry = json["Command"].ToString() + " --> " + json["Params"].ToString() + "\n\n";
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite))
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.Write(logEntry);
+            }
 
             if (json["Callback"] != null)
             {
@@ -1195,8 +1202,25 @@ namespace ProstePrototype
                 case true when type == "OUTPUT": type = "iris_outputs_elements"; break;
                 case true when type == "ZONE": type = "iris_zones_elements"; break;
                 case true when type == "EVAC_ZONE_GROUP": type = "iris_evac_zones_elements"; break;
-                case true when type.StartsWith("TTELOOP") && type.Length > 7: type = "loop_devices_teletek_loop"; break;
-                case true when type.StartsWith("LOOP") && type.Length > 4: type = "loop_devices_teletek_loop"; break;
+                case true when type.StartsWith("TTELOOP") && type.Length > 7: 
+                    type = "loop_devices_teletek_loop";
+                    JArray breadcrumbs = (JArray)pages["loop_devices"]["breadcrumbs"];
+                    breadcrumbs[3] = type;
+                    pages["loop_devices"]["breadcrumbs"] = breadcrumbs;
+                    break;
+                case true when type.StartsWith("LOOP") && type.Length > 4: 
+                    type = "loop_devices_teletek_loop";
+                    breadcrumbs = (JArray)pages["loop_devices"]["breadcrumbs"];
+                    breadcrumbs[3] = type;
+                    pages["loop_devices"]["breadcrumbs"] = breadcrumbs;
+                    break;
+                case true when type.StartsWith("MIMIC"): 
+                    type = "simpo_mimicpanels_elements";
+                    if (fieldName.Contains("Output")) {
+                        type += "_outputs";
+                    }
+                    break;
+                case true when type.StartsWith("NO_LOOP") || elementType == "SIMPO_TTELOOP": type = "loop_devices"; break;
                 default: type = "iris_peripheral_devices_elements"; break;
             }
             pages[type]["title"] = fieldName;
@@ -1218,13 +1242,20 @@ namespace ProstePrototype
                 page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
 
+            string currPage = page;
             if (page == "iris" && panel_type.ToLower().StartsWith("simpo")) // unique case when page === "iris"
             {
-                page = "simpo";
+                currPage = "simpo";
             }
 
-            string title = pages[page].Value<JObject>()["title"].Value<string>();
-            string icon = pages[page].Value<JObject>()["icon"].Value<string>();
+            string title = pages[currPage].Value<JObject>()["title"].Value<string>();
+            string icon = pages[currPage].Value<JObject>()["icon"].Value<string>();
+
+            Regex regex = new Regex(@"^(SIMPO Panel|IRIS Panel|TTE|Eclipse)$");
+            if (regex.IsMatch(title) && cJson.ContentBrowserParam(page) != null)
+            {
+                title = (string)(JObject.Parse(cJson.ContentBrowserParam(page))["~panel_name"]);
+            }
 
             var lastBreadCrumb = new StackPanel()
             {
@@ -1283,9 +1314,11 @@ namespace ProstePrototype
                 Cursor = Cursors.Hand
             };
 
+            bool noClick = false;
             string text1 = " \ue914", text2 = " ", text3 = title;
             switch (page)
             {
+                case "simpo":
                 case "iris":
                     text2 = " \ue908 ";
                     break;
@@ -1299,6 +1332,11 @@ namespace ProstePrototype
                     text1 = "";
                     break;
                 default:
+                    if (pages[page]["icon"] != null)
+                    {
+                        text2 = " " + pages[page]["icon"] + " ";
+                    }
+                    noClick = true;
                     break;
             }
             btn.Content = new StackPanel()
@@ -1327,7 +1365,10 @@ namespace ProstePrototype
                     }
                 }
             };
-            btn.Click += breadCrumbItemClick;
+            if (!noClick )
+            {
+                btn.Click += breadCrumbItemClick;
+            }
 
             var style = new Style(typeof(Button));
             style.Setters.Add(new Setter(Button.BackgroundProperty, Brushes.Transparent));
@@ -1370,7 +1411,14 @@ namespace ProstePrototype
                 {
                     currItem = "simpo";
                 }
+                
                 string title = pages[currItem].Value<JObject>()["title"].Value<string>();
+                Regex regex = new Regex(@"^(SIMPO Panel|IRIS Panel|TTE|Eclipse)$");
+                if (regex.IsMatch(title) && cJson.ContentBrowserParam(item) != null)
+                {
+                    title = (string)(JObject.Parse(cJson.ContentBrowserParam(item))["~panel_name"]);
+                }
+                
                 addBreadCrumb(title, currItem, color);
                 //addBreadCrumb(title, currItem);
             }

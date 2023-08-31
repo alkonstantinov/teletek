@@ -210,6 +210,9 @@
         input_groups: {
             'bg': 'Входни групи', 'en': 'Input Groups', 'ge': 'Input Groups' 
         },
+        output: {
+            'bg': 'Изход', 'en': 'Output', 'ge': 'Output' 
+        },
         outputs: {
             'bg': 'Изходи', 'en': 'Outputs', 'ge': 'Outputs' 
         },
