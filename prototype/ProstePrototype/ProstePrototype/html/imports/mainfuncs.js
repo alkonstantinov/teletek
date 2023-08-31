@@ -1646,7 +1646,8 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                             onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.parentNode.querySelector('input[type=number]').value}}); addVisitedNumeric(this);"
                             class="ram_number_input_button_right"></button>
-            </div></div>`;
+                </div>
+            </div>`;
                     //<div class="valid-feedback">
                     //    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
                     //        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
@@ -1741,10 +1742,10 @@ const getIntListInput = ({ input_id, input_name, max, min, RmBtn = false, path =
                             ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
                             ${value[i] ? `value="${value[i]}"` : ""}/>
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                            onblur="javascript:intListChangedValueHandler(${i}, this.parentNode.querySelector('input[type=number]').value, '${path}', '${input_id}', ${size});"
+                            onblur="javascript:intListChangedValueHandler(${i}, this.parentNode.querySelector('input[type=number]').value, '${path}', '${input_id}', ${size}); addVisitedNumeric(this);"
                             class="ram_number_input_button_left"></button>
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                            onblur="javascript:intListChangedValueHandler(${i}, this.parentNode.querySelector('input[type=number]').value, '${path}', '${input_id}', ${size});"
+                            onblur="javascript:intListChangedValueHandler(${i}, this.parentNode.querySelector('input[type=number]').value, '${path}', '${input_id}', ${size}); addVisitedNumeric(this);"
                             class="ram_number_input_button_right"></button>
             </div>
                     </div>`;

@@ -715,6 +715,7 @@ fieldset {
 }
 
     .form-item.roww {
+        flex-flow: wrap;
         display: -webkit-box;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
@@ -1529,7 +1530,7 @@ input:checked + .slider:before {
 
 .is-valid ~ .valid-feedback, .is-valid ~ .valid-tooltip, .was-validated :valid ~ .valid-feedback, .was-validated :valid ~ .valid-tooltip,
 p:has(label input[type=checkbox].is-valid) ~ .valid-feedback {
-    display: block;
+    display: contents;
     color: #98D056;
     font-size: 0.7em;
     /*margin-top: 5px;*/
