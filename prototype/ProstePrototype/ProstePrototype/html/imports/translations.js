@@ -10673,7 +10673,7 @@
         },
         "a3247402-58e0-4d7a-8ac3-c21759d904e3": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "bh": null,
             "el": null,
             "fr": null,
@@ -11643,7 +11643,7 @@
         },
         "70ed0e77-57e3-45fb-9da8-a350b12c431a": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "bh": null,
             "el": null,
             "fr": null,
@@ -42339,7 +42339,7 @@
         },
         "bf447ce9-f68b-4e79-bc32-bbf7cfbf6d97": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -42435,7 +42435,7 @@
         },
         "9012abcb-4a16-4ed2-8c94-81b64bd3e6d5": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -42531,7 +42531,7 @@
         },
         "7ad68e5a-9a61-487a-892b-838fa8e5dbb8": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -42627,7 +42627,7 @@
         },
         "c6799c67-d314-40d8-bba4-8c5b06edecb2": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -42771,7 +42771,7 @@
         },
         "3f452ccb-3fde-43bb-ac46-c0932cbed33e": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -42915,7 +42915,7 @@
         },
         "7bfd17cf-741b-4a6c-bbf6-647ddeb9ead7": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -43059,7 +43059,7 @@
         },
         "61d3e306-c2c8-4f3f-9cea-bceaaf4c0e32": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -44019,7 +44019,7 @@
         },
         "a3b22819-49c0-41b9-bfb6-ada4c8766e96": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -79784,7 +79784,7 @@
         },
         "652e221a-b24f-4edb-86a9-b0f2009cb6e1": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "1fe5d790-d9d8-41d7-a940-5524ca56be30": {
             "en": "NONE",
@@ -79808,7 +79808,7 @@
         },
         "fc95205c-67a1-4004-b2aa-311c47866c38": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "eb28fc7c-75ed-47d0-8e89-eb1ad1a26bec": {
             "en": "NONE",
@@ -79832,7 +79832,7 @@
         },
         "4c6c9aea-fd1e-4216-b395-bc9b9d6d4f63": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "5d0025bd-fdac-40fa-b00d-d2121a0574b1": {
             "en": "NONE",
@@ -79868,7 +79868,7 @@
         },
         "d7f895ce-a3c6-44c0-97fa-ea952f37eeaa": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "6d6802dd-6896-4314-b0e8-ded0dd376e8d": {
             "en": "NONE",
@@ -79904,7 +79904,7 @@
         },
         "ac98228f-3d22-4830-b7a9-565fbdf77ba2": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "3196143e-905e-4ef9-a07b-435ba4ebc37a": {
             "en": "NONE",
@@ -79940,7 +79940,7 @@
         },
         "b571e4f5-953a-4014-8a7e-794ad3ebd55e": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние",
         },
         "97651379-95af-4dc3-8b41-68bee50084e5": {
             "en": "NONE",
@@ -80196,11 +80196,11 @@
         },
         "5767759e-1e50-45fb-aed8-a4d94aa764ab": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "8fd8384d-65ca-45f1-8c3e-fa5a2fa8e3f4": {
             "en": "State",
-            "bg": null
+            "bg": "Състояние"
         },
         "6b0b1384-9896-4875-affa-b4669253e9ae": {
             "en": "Days of week",
@@ -104236,7 +104236,7 @@
         },
         "c8c61e24-2b5e-4a0d-bc08-98f5336129f2": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104286,7 +104286,7 @@
         },
         "f3c76942-7b3d-40f2-badf-db0b96e2d449": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104336,7 +104336,7 @@
         },
         "50328ebf-0205-4172-8c3a-110d5a20ae30": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104386,7 +104386,7 @@
         },
         "cc0a4ee5-5b32-4e7e-819d-125a35a29755": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104626,7 +104626,7 @@
         },
         "70d47b17-824c-467e-bf76-45aedb5288c1": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104676,7 +104676,7 @@
         },
         "f3ccb7ac-18de-40ad-ac71-b8c1be5cdf72": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104726,7 +104726,7 @@
         },
         "d120475d-0604-4688-907c-0b779dd04421": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -104776,7 +104776,7 @@
         },
         "e2f49da0-a7ba-4c58-9b81-1a7c1da7e5d7": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -110746,7 +110746,7 @@
         },
         "c7e71da7-4949-465d-8a59-1465f377a28a": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -110796,7 +110796,7 @@
         },
         "3385a53a-eb4b-4378-b23a-18299649627e": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -110846,7 +110846,7 @@
         },
         "0e1764db-ce7b-4271-b04a-aa809333ff86": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -110896,7 +110896,7 @@
         },
         "b6debfb8-fea9-4245-b483-56ebf929590f": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -111106,7 +111106,7 @@
         },
         "39b0fe29-10d2-4d9a-90c4-b7e97be01c17": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -111156,7 +111156,7 @@
         },
         "46d06732-d443-4424-97d3-415dd37d5b10": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -111206,7 +111206,7 @@
         },
         "2026d650-68da-4192-a441-412907b19e2b": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
@@ -111256,7 +111256,7 @@
         },
         "dd5952fd-0025-4841-a116-a106d0538bab": {
             "en": "State",
-            "bg": null,
+            "bg": "Състояние",
             "fr": null,
             "ge": null,
             "it": null,
