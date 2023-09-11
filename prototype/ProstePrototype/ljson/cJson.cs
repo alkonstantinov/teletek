@@ -523,7 +523,7 @@ namespace ljson
                     cInternalRel _internal = null;
                     if (Regex.IsMatch(_panel_type, @"iris", RegexOptions.IgnoreCase))
                         _internal = new cInternalrelIRIS();
-                        
+
                     else
                         _internal = new cInternalRel();
                     _internal.Load(ointernal_rel);
@@ -1872,7 +1872,7 @@ namespace ljson
                         cRWProperty prop = ReadProperties[propname];
                         byte[] pbytes = new byte[prop.bytescnt];
                         for (int i = prop.offset; i < prop.offset + prop.bytescnt; i++)
-                            pbytes[i - prop.offset] = result[i];
+                            pbytes[i - prop.offset] = (i < result.Length) ? result[i] : (byte)0;
                         Tuple<string, string> path_val = _internal_relations_operator.GroupPropertyVal(CurrentPanelID, groups, propname, pbytes, prop.xmltag);
                         if (path_val == null)
                         {
@@ -3231,6 +3231,13 @@ namespace ljson
                 _panel_type = "iris";
                 _panel_subtype = prod;
                 sj = cIRIS.Convert(json, _pages);
+            }
+            else if (Regex.IsMatch(prod, @"natron", RegexOptions.IgnoreCase))
+            {
+                _internal_relations_operator = new cInternalrelIRIS();
+                _panel_type = "natron";
+                _panel_subtype = prod;
+                sj = cNatron.Convert(json, _pages);
             }
             else if (Regex.IsMatch(prod, @"eclipse", RegexOptions.IgnoreCase))
             {

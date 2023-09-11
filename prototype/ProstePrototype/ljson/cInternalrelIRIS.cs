@@ -1234,6 +1234,8 @@ namespace ljson
                 res = "SounderGroupB";
             else if (Regex.IsMatch(PropertyName, "soundergroup3$", RegexOptions.IgnoreCase))
                 res = "SounderGroupC";
+            //else if (Regex.IsMatch(PropertyName, "emacETHADDR0$", RegexOptions.IgnoreCase))
+            //    res = "emacETHADDR";
             return res;
         }
         public override string WritePropertyVal(JObject groups, string PropertyName, string _xmltag)

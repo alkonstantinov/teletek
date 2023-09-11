@@ -1,0 +1,707 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OPERATIONS XMLVERSION="20">
+  <PREOPERATIONS>
+    <!--Свързване-->
+    <OPERATION>
+      <COMMANDS>
+        <COMMAND BYTES="71" OKBYTE="1" OKVALUE="00574C3130" SAVEAS="IDENTIFICATION"/>
+      </COMMANDS>
+    </OPERATION>
+    <!--Логване-->
+    <OPERATION>
+      <COMMANDS>
+        <COMMAND BYTES="72" OKBYTE="1" OKVALUE="00" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
+      </COMMANDS>
+    </OPERATION>
+	<!-- Versions -->
+    <VERSIONING SAVEDDATA="IDENTIFICATION" BYTE="9" LENGTH="2" SUPPORTEDVERSIONS="0001|0002|0003|0004|0005" ERRORMESSAGE="There is a new verson of ProsTE software. If you continue (Yes) the operation then some errors may occur. We recommend you to cancel (No), update the ProsTE and try again." >
+      <VERSION VALUE="0001" FILE="ReadConfig_BRAVO_0001.xml"/> 	
+      <VERSION VALUE="0002" FILE="ReadConfig_BRAVO_0002.xml"/> 	
+      <VERSION VALUE="0003" FILE="ReadConfig_BRAVO_0003.xml"/> 	
+	    <VERSION VALUE="0004" FILE="ReadConfig_BRAVO_0004.xml"/> 	
+    </VERSIONING>	
+  </PREOPERATIONS>
+
+  <ELEMENTS>
+    <ELEMENT ID="BRAVO_BRAVO">
+      <ELEMENTS>
+        <!--Base 0-->
+		<ELEMENT ID="BRAVO_GENERAL_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1000000020"/>
+				<COMMAND BYTES="100030000A"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="STANDARD"       	 BYTE="0"  LENGTH="1"/>
+                <PROPERTY ID="TROUBLESSOUND" 	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="ACLOSSDELAY"       BYTE="2"  LENGTH="1"/>
+                <PROPERTY ID="TAMPER_ALARM"      BYTE="3"  LENGTH="1"/>
+                <PROPERTY ID="PNLSOUND" 	     BYTE="4"  LENGTH="1"/>
+                <PROPERTY ID="ExitTime"  		 BYTE="5"  LENGTH="1"/>
+                <PROPERTY ID="EntryTime" 		 BYTE="6"  LENGTH="1"/>
+                <PROPERTY ID="BellTime"  		 BYTE="7"  LENGTH="1"/>
+                <PROPERTY ID="ACODE"   		     BYTE="8"  LENGTH="3"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="NAME"      		 BYTE="11" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="LostArmTime" 		 BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="LostDisarmTime" 	 BYTE="28" LENGTH="1"/>
+				<PROPERTY ID="TAMPER_LOST" 	 	 BYTE="29" LENGTH="1"/>	
+				<PROPERTY ID="PANIC_ALARM" 	 	 BYTE="30" LENGTH="1"/>	
+				<PROPERTY ID="ACODE_SIZE" 	 	 BYTE="31" LENGTH="1"/>				
+				<PROPERTY ID="AutoBypass" 	 	 BYTE="32" LENGTH="1"/>
+				<!--                             BYTE="33" LENGTH="8" -->
+				<PROPERTY ID="LostPreventTime" 	 BYTE="41" LENGTH="1"/>
+				</PROPERTIES>
+		</ELEMENT>
+
+        <!--Base 0 Offset 0x20-->
+			<ELEMENT ID="BRAVO_STAR_SETTINGS" >
+	       <ELEMENTS>
+									<!-- RC 1 -->
+								
+			<ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="10922B0101"/>
+              <COMMAND BYTES="1000200001"/>
+               <COMMAND BYTES="1000310001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>
+			
+			
+			
+									<!-- RC 2 -->
+			<ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="10922F0101"/>
+              <COMMAND BYTES="1000210001"/>
+               <COMMAND BYTES="1000320001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>
+			
+			
+							     	<!-- RC 3 -->
+			<ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="1092330101"/>
+              <COMMAND BYTES="1000220001"/>
+               <COMMAND BYTES="1000330001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>	
+			
+		   
+							    <!-- RC 4 -->
+		   <ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="1092370101"/>
+              <COMMAND BYTES="1000230001"/>
+               <COMMAND BYTES="1000340001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>	
+			
+									<!-- RC 5 -->					
+		   <ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="10923B0101"/>
+              <COMMAND BYTES="1000240001"/>
+               <COMMAND BYTES="1000350001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>	
+			
+									<!-- RC 6 -->					
+		   <ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="10923F0101"/>
+              <COMMAND BYTES="1000250001"/>
+               <COMMAND BYTES="1000360001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>
+			
+			
+									<!-- RC 7 -->					
+		   <ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="1092430101"/>
+              <COMMAND BYTES="1000260001"/>
+               <COMMAND BYTES="1000370001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>
+			 
+								 	<!-- RC 8 -->					
+		   <ELEMENT ID="BRAVO_RC_NONE" DEVPROPERTY="TYPE">
+			  <COMMANDS>
+			<COMMAND BYTES="1092470101"/>
+              <COMMAND BYTES="1000270001"/>
+               <COMMAND BYTES="1000380001"/> 
+              </COMMANDS>
+              <PROPERTIES>
+				<PROPERTY ID="TYPE"          BYTE="0"  LENGTH="1"/>			
+                <PROPERTY ID="RC_STAR_1"  	 BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="RC_STAR_1_B4"  BYTE="2"  LENGTH="1"/> 
+			  </PROPERTIES>
+			</ELEMENT>	
+			
+	      </ELEMENTS>
+		</ELEMENT>
+		
+        <!--Base 1-->
+        <ELEMENT ID="BRAVO_INFO_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1010000029"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="PANEL_VER"        BYTE="0"   LENGTH="6"  OPERATION="ASCII2TEXT"/>
+                <PROPERTY ID="WL_VER"           BYTE="6"   LENGTH="6"  OPERATION="ASCII2TEXT"/>
+                <PROPERTY ID="VER_DATE"         BYTE="12"  LENGTH="12" OPERATION="ASCII2TEXT"/>
+				<PROPERTY ID="DOWN_CNTR"  		BYTE="24"  LENGTH="2"/>
+				<PROPERTY ID="FREQ_OFFSET"  	BYTE="26"  LENGTH="2"/>
+				<PROPERTY ID="VBATT"  		 	BYTE="28"  LENGTH="2"/>
+				<PROPERTY ID="TEMP"  		 	BYTE="30"  LENGTH="2"/>
+				<PROPERTY ID="CHANNEL"  		BYTE="32"  LENGTH="1"/>
+				<PROPERTY ID="SW"  				BYTE="33"  LENGTH="1"/>				
+				<PROPERTY ID="PANEL_SN"     	BYTE="34"  LENGTH="7"  OPERATION="ASCII2TEXT"/>				
+             </PROPERTIES>
+		</ELEMENT>
+		
+        <!--Base 3-->
+        <ELEMENT ID="BRAVO_CODE_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1030000016"/>
+              </COMMANDS>
+              <PROPERTIES>				  					  
+                <PROPERTY ID="UPCID"     BYTE="0"   LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ENGCODE"   BYTE="2"   LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="MAN1CODE"  BYTE="4"   LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="MAN2CODE"  BYTE="6"   LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="USER1CODE" BYTE="8"   LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="USER2CODE" BYTE="10"  LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="USER3CODE" BYTE="12"  LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="USER4CODE" BYTE="14"  LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="USER5CODE" BYTE="16"  LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="USER6CODE" BYTE="18"  LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="UMASTER"   BYTE="20"  LENGTH="2"  OPERATION="PASSWORD2TEXT"/>
+             </PROPERTIES>
+		</ELEMENT>
+
+        <!--Base 5-->
+        <ELEMENT ID="BRAVO_STAY_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1050000004"/>
+              </COMMANDS>
+              <PROPERTIES>				  					  
+                <PROPERTY ID="BYPASS"   BYTE="0"  LENGTH="4"/>
+              </PROPERTIES>
+		</ELEMENT>
+				
+        <!--Base 7 -->		
+		<ELEMENT ID="BRAVO_SLOT_SETTINGS">
+			<!-- base 0x70 -->
+			<COMMANDS>
+				<COMMAND BYTES="1070000010"/>
+			</COMMANDS>
+			<PROPERTIES>
+				<PROPERTY ID="SLOTS_ENBL"   	BYTE="0"  LENGTH="1"/>		
+				<PROPERTY ID="TMPERIOD"    		BYTE="1"  LENGTH="1"/>
+				<PROPERTY ID="TMSTARTTIME" 		BYTE="2"  LENGTH="2"/>
+				
+				<PROPERTY ID="SLOT1_TYPE"   	BYTE="4"  LENGTH="1"/>			
+				<PROPERTY ID="SLOT1_VERSION"   	BYTE="5"  LENGTH="1"  OPERATION="PHONE2TEXT"/>			
+				<PROPERTY ID="SLOT1_PRIORITY"   BYTE="6"  LENGTH="1"/>			
+				<!--<PROPERTY ID="SLOT1_STATUS "    BYTE="7"  LENGTH="1"/>-->			
+				<PROPERTY ID="SLOT1_ERRORS"     BYTE="8"  LENGTH="2"/>		
+				<PROPERTY ID="SLOT2_TYPE"   	BYTE="10"  LENGTH="1"/>			
+				<PROPERTY ID="SLOT2_VERSION"   	BYTE="11"  LENGTH="1"  OPERATION="PHONE2TEXT"/>						
+				<PROPERTY ID="SLOT2_PRIORITY"   BYTE="12"  LENGTH="1"/>			
+				<!--<PROPERTY ID="SLOT2_STATUS "    BYTE="13"  LENGTH="1"/>-->
+				<PROPERTY ID="SLOT2_ERRORS"     BYTE="14"  LENGTH="2"/>			
+			</PROPERTIES>
+		
+		
+			<ELEMENTS>
+				<!-- base 0x71 -->
+				<ELEMENT ID="BRAVO_SLOT_GPRS">
+					<ELEMENTS>
+						<ELEMENT ID="BRAVO_GPRS_SETTINGS">
+							<COMMANDS>
+								<COMMAND BYTES="1071000020"/>
+								<COMMAND BYTES="10713C0010"/>
+								<COMMAND BYTES="10712E0140"/>
+							</COMMANDS>
+							<PROPERTIES>
+								<PROPERTY ID="GPRSAPN"   					BYTE="0"   LENGTH="32" OPERATION="ASCII2TEXT"/>
+							<!--<PROPERTY ID="GPRSUSERNAME"   				BYTE="24"  LENGTH="12" OPERATION="ASCII2TEXT"/> -->
+							<!--<PROPERTY ID="GPRSPASSWORD"   				BYTE="36"  LENGTH="12" OPERATION="ASCII2TEXT"/> -->
+								
+								<PROPERTY ID="SMSBackUP"   					BYTE="32"  LENGTH="16" OPERATION="TELEPHONE2TEXT"/>															
+								<PROPERTY ID="GPRSUSERNAME"   				BYTE="48"  LENGTH="32" OPERATION="ASCII2TEXT"/>
+								<PROPERTY ID="GPRSPASSWORD"   				BYTE="80" LENGTH="32" OPERATION="ASCII2TEXT"/>
+							</PROPERTIES>
+						</ELEMENT>
+
+						<ELEMENT ID="BRAVO_GPRS_SERVERS">
+							<COMMANDS>
+								
+								<COMMAND BYTES="1071380004"/>
+								<COMMAND BYTES="10714C0002"/>						
+								<COMMAND BYTES="10714E0005"/>
+								<COMMAND BYTES="1071660014"/>
+								<COMMAND BYTES="10717A0028"/>
+								<COMMAND BYTES="1075000080"/>
+								<COMMAND BYTES="1071300008"/>
+							</COMMANDS>
+							
+							<PROPERTIES>
+
+								
+								<PROPERTY ID="ENABLE_Bravo_AJAXSERVERPRO" 			BYTE="0"  LENGTH="1" />
+								<PROPERTY ID="Bravo_IP_DNS" 						BYTE="1"  LENGTH="1" />								
+ 								<PROPERTY ID="ENABLE_Bravo_AJAXSERVERPRO_1" 		BYTE="2"  LENGTH="1" />								
+ 								<PROPERTY ID="Bravo_IP_DNS_1" 						BYTE="3"  LENGTH="1" />								
+ 								<PROPERTY ID="ENABLE_Bravo_STANDARD_SERVER" 		BYTE="4"  LENGTH="1" />		
+ 								<PROPERTY ID="ENABLE_Bravo_STANDARD_SERVER_1" 		BYTE="5"  LENGTH="1" />
+								<PROPERTY ID="GPRSServerProIPAddress1" 				BYTE="6"  LENGTH="4" />
+								<PROPERTY ID="GprsNullEventPeriod" 					BYTE="10"  LENGTH="1" />
+								<PROPERTY ID="GPRSServerProIPAddress2" 				BYTE="11"  LENGTH="4" />							
+ 								<PROPERTY ID="GPRSServerProEncryptionKey_1" 		BYTE="15"  LENGTH="16" OPERATION="PASSWORD2TEXT" />						
+								<PROPERTY ID="GPRSServerProPort_1" 					BYTE="31"  LENGTH="4" />									
+ 								<PROPERTY ID="GPRSServerProPort" 					BYTE="35"  LENGTH="4" />
+								<PROPERTY ID="GPRSServerProSystemID" 				BYTE="39" LENGTH="16" OPERATION="ASCII2TEXT"/>
+								<PROPERTY ID="GPRSServerProEncryptionKey" 			BYTE="55" LENGTH="16" OPERATION="PASSWORD2TEXT"/>
+								<PROPERTY ID="DNS" 									BYTE="71" LENGTH="64" OPERATION="ASCII2TEXT" />
+								<PROPERTY ID="DNS_1" 								BYTE="135" LENGTH="64" OPERATION="ASCII2TEXT" />
+								<PROPERTY ID="AccountNumber"   						BYTE="199" LENGTH="8"  OPERATION="ASCII2TEXT"/>
+								
+							</PROPERTIES>
+						</ELEMENT>
+
+						<ELEMENT ID="BRAVO_GPRS_SMS">
+						
+							<COMMANDS>
+								<COMMAND BYTES="1071EE0001"/>
+								<COMMAND BYTES="1071E40001"/>
+								<COMMAND BYTES="1071F00004"/>								
+							</COMMANDS>
+							<PROPERTIES>
+								<PROPERTY ID="VoiceOptions"     			BYTE="0"   LENGTH="1"/>
+								<PROPERTY ID="EnablePhoneNumberForSMS"   	BYTE="1"   LENGTH="1"/>							
+								<PROPERTY ID="EnablePhoneNumberForVoice" 	BYTE="2"   LENGTH="1" />
+								<PROPERTY ID="VoiceMsgRepetition" 		   	BYTE="3"   LENGTH="1"/>
+								<PROPERTY ID="RedialAttempts"    		   	BYTE="4"   LENGTH="1"/>
+								<PROPERTY ID="VoiceLanguage"   			   	BYTE="5"   LENGTH="1"/>
+			
+
+							</PROPERTIES>						
+						  <ELEMENTS>
+								<ELEMENT ID="BRAVO_USER_PHONE">
+								<COMMANDS>
+									<COMMAND BYTES="1071A20010"/>
+									<COMMAND BYTES="1071E60001"/>
+									<COMMAND BYTES="1071F40001"/>
+									<COMMAND BYTES="1071FC0001"/>								
+								</COMMANDS>
+								<PROPERTIES>
+									<PROPERTY ID="PhoneNumber" 			BYTE="0"   LENGTH="16" OPERATION="TELEPHONE2TEXT" />
+									<PROPERTY ID="EventsTypeForSMS" 	BYTE="16" LENGTH="1"/>
+									<PROPERTY ID="Messaging"   			BYTE="17" LENGTH="1"/>
+									<PROPERTY ID="MessageAreas"   		BYTE="18" LENGTH="1"/>
+								</PROPERTIES>
+							</ELEMENT>
+							<ELEMENT ID="BRAVO_USER_PHONE">
+								<COMMANDS>
+									<COMMAND BYTES="1071B20010"/>
+									<COMMAND BYTES="1071E80001"/>
+									<COMMAND BYTES="1071F50001"/>
+									<COMMAND BYTES="1071FD0001"/>
+								</COMMANDS>
+								<PROPERTIES>
+									<PROPERTY ID="PhoneNumber" 			BYTE="0"   LENGTH="16" OPERATION="TELEPHONE2TEXT" />
+									<PROPERTY ID="EventsTypeForSMS" 	BYTE="16" LENGTH="1"/>
+									<PROPERTY ID="Messaging"   			BYTE="17" LENGTH="1"/>
+									<PROPERTY ID="MessageAreas"   		BYTE="18" LENGTH="1"/>
+								</PROPERTIES>
+							</ELEMENT>
+							<ELEMENT ID="BRAVO_USER_PHONE">
+								<COMMANDS>
+									<COMMAND BYTES="1071C20010"/>
+									<COMMAND BYTES="1071EA0001"/>
+									<COMMAND BYTES="1071F60001"/>
+									<COMMAND BYTES="1071FE0001"/>
+								</COMMANDS>
+								<PROPERTIES>
+									<PROPERTY ID="PhoneNumber" 			BYTE="0"   LENGTH="16" OPERATION="TELEPHONE2TEXT" />
+									<PROPERTY ID="EventsTypeForSMS" 	BYTE="16" LENGTH="1"/>
+									<PROPERTY ID="Messaging"   			BYTE="17" LENGTH="1"/>
+									<PROPERTY ID="MessageAreas"   		BYTE="18" LENGTH="1"/>
+								</PROPERTIES>
+							</ELEMENT>
+							<ELEMENT ID="BRAVO_USER_PHONE">
+								<COMMANDS>
+									<COMMAND BYTES="1071D20010"/>
+									<COMMAND BYTES="1071EC0001"/>
+									<COMMAND BYTES="1071F70001"/>
+									<COMMAND BYTES="1071FF0001"/>
+								</COMMANDS>
+								<PROPERTIES>
+									<PROPERTY ID="PhoneNumber" 			BYTE="0"   LENGTH="16" OPERATION="TELEPHONE2TEXT" />
+									<PROPERTY ID="EventsTypeForSMS" 	BYTE="16" LENGTH="1"/>
+									<PROPERTY ID="Messaging"   			BYTE="17" LENGTH="1"/>
+									<PROPERTY ID="MessageAreas"   		BYTE="18" LENGTH="1"/>
+								</PROPERTIES>
+							</ELEMENT>							
+
+
+
+						  </ELEMENTS>
+						</ELEMENT>
+
+						
+					</ELEMENTS>
+				</ELEMENT>
+
+				<!-- base 0x72 -->
+				<ELEMENT ID="BRAVO_SLOT_PSTN">
+					<COMMANDS>
+						<COMMAND BYTES="1072000003"/>
+						<COMMAND BYTES="10724E0004"/>
+						<COMMAND BYTES="1072D20001"/>
+					</COMMANDS>
+					<PROPERTIES>
+						<PROPERTY ID="DIALEROPT"   	  BYTE="0" LENGTH="1"/> 
+						<PROPERTY ID="COMMATT"     	  BYTE="1" LENGTH="1"/>					
+						<PROPERTY ID="ALARMDELAY"  	  BYTE="2" LENGTH="1"/>
+
+						<PROPERTY ID="VOICEDIALEROPT" BYTE="3" LENGTH="1"/>
+						<PROPERTY ID="VD_REPS"        BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="VD_ATTEMPTS"    BYTE="5" LENGTH="1"/> 
+						<PROPERTY ID="VD_LANGUAGE"    BYTE="6" LENGTH="1"/>
+						
+						<PROPERTY ID="INRNUM"   	  BYTE="7" LENGTH="1"/>
+					</PROPERTIES>	
+					
+					<ELEMENTS>
+								<ELEMENT ID="BRAVO_PHONE_NUMBERS">
+									<COMMANDS>
+										<COMMAND BYTES="1072060012"/>
+									</COMMANDS>
+									<PROPERTIES>
+										<PROPERTY ID="NUMBER"   BYTE="0"  LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+										<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+										<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+									</PROPERTIES>
+								</ELEMENT> 
+								<ELEMENT ID="BRAVO_PHONE_NUMBERS">
+									<COMMANDS>
+										<COMMAND BYTES="1072180012"/>
+									</COMMANDS>
+									<PROPERTIES>
+										<PROPERTY ID="NUMBER"   BYTE="0"  LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+										<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+										<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+									</PROPERTIES>
+								</ELEMENT> 
+						<ELEMENT ID="BRAVO_PHONE_NUMBERS">
+							<COMMANDS>
+								<COMMAND BYTES="10722A0012"/>
+							</COMMANDS>
+							<PROPERTIES>
+								<PROPERTY ID="NUMBER"   BYTE="0"  LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+								<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+								<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+							</PROPERTIES>
+						</ELEMENT> 					
+						<ELEMENT ID="BRAVO_PHONE_NUMBERS">
+							<COMMANDS>
+								<COMMAND BYTES="10723C0012"/>
+							</COMMANDS>
+							<PROPERTIES>
+								<PROPERTY ID="NUMBER"   BYTE="0"  LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+								<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+								<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+							</PROPERTIES>
+						</ELEMENT> 					
+					</ELEMENTS>	
+				</ELEMENT>
+				
+
+				<!-- base 0x74 -->
+				<ELEMENT ID="BRAVO_SLOT_PGM">
+					<COMMANDS>
+						<COMMAND BYTES="10743A0002"/>
+						<COMMAND BYTES="1074000036"/>
+					</COMMANDS>
+					<PROPERTIES>
+						<PROPERTY ID="MODE" 	 LENGTH="2" BYTE="0"/>
+						<PROPERTY ID="PGM_NAME1" LENGTH="9" BYTE="2"  OPERATION="MATRIX_CYR2TEXT"/>	
+						<PROPERTY ID="PGM_NAME2" LENGTH="9" BYTE="11" OPERATION="MATRIX_CYR2TEXT"/>
+						<PROPERTY ID="PGM_NAME3" LENGTH="9" BYTE="20" OPERATION="MATRIX_CYR2TEXT"/>
+						<PROPERTY ID="PGM_NAME4" LENGTH="9" BYTE="29" OPERATION="MATRIX_CYR2TEXT"/>
+						<PROPERTY ID="PGM_NAME5" LENGTH="9" BYTE="38" OPERATION="MATRIX_CYR2TEXT"/>
+						<PROPERTY ID="PGM_NAME6" LENGTH="9" BYTE="47" OPERATION="MATRIX_CYR2TEXT"/>
+					</PROPERTIES>
+				</ELEMENT>
+			<ELEMENT ID="BRAVO_SLOT_LAN">
+			  <COMMANDS>
+				<COMMAND BYTES="1073E50003"/>								
+			  </COMMANDS>
+			  
+			  <PROPERTIES>
+				<PROPERTY ID="ENABLE_MODBUS" 						BYTE="0"  	LENGTH="1" />
+				<PROPERTY ID="ModbusPort" 							BYTE="1"  	LENGTH="2" />
+			  </PROPERTIES>
+			  <ELEMENTS>
+				<ELEMENT ID="BRAVO_SLOT_LAN_SETTINGS">
+					<COMMANDS>
+						<COMMAND BYTES="1073000015"/>
+						<!-- <COMMAND BYTES="1073E50006"/> -->						
+					</COMMANDS>
+					<PROPERTIES>
+						<PROPERTY ID="IP_SETTINGS" 							BYTE="0"   LENGTH="1" />					
+						<PROPERTY ID="LAN_IP_ADDRESS" 						BYTE="1"   LENGTH="4" />
+						<PROPERTY ID="LAN_GATEWAY" 							BYTE="5"   LENGTH="4" />
+						<PROPERTY ID="LAN_SUBNET_MASK" 						BYTE="9"   LENGTH="4" />
+						<PROPERTY ID="LAN_DNS_SERVER1" 						BYTE="13"  LENGTH="4" />
+						<PROPERTY ID="LAN_DNS_SERVER2" 						BYTE="17"  LENGTH="4" />
+<!-- 						<PROPERTY ID="MAC_ADDRESS" 							BYTE="21"  LENGTH="6" OPERATION="PASSWORD2TEXT" />	 -->					
+					</PROPERTIES>
+				</ELEMENT>
+
+						<ELEMENT ID="BRAVO_LAN_SERVERS">
+							<COMMANDS>
+								<COMMAND BYTES="10731500D4"/>								
+							</COMMANDS>
+							<PROPERTIES>
+								<PROPERTY ID="GPRSServerProSystemID" 				BYTE="0"   	LENGTH="16" OPERATION="ASCII2TEXT"/>
+								<PROPERTY ID="AccountNumber"   						BYTE="16"  	LENGTH="8"  OPERATION="ASCII2TEXT"/>
+								
+								<PROPERTY ID="GPRSServerProIPAddress1" 				BYTE="24"  	LENGTH="4" />								
+ 								<PROPERTY ID="GPRSServerProPort" 					BYTE="28"  	LENGTH="4" />								
+								<PROPERTY ID="GPRSServerProEncryptionKey" 			BYTE="32"  	LENGTH="16" OPERATION="PASSWORD2TEXT"/>
+								<PROPERTY ID="ENABLE_Bravo_AJAXSERVERPRO" 			BYTE="48"  	LENGTH="1" />								
+ 								<PROPERTY ID="ENABLE_Bravo_STANDARD_SERVER" 		BYTE="50"  	LENGTH="1" />
+								<PROPERTY ID="Bravo_IP_DNS" 						BYTE="51"  	LENGTH="1" />								
+								<PROPERTY ID="DNS" 									BYTE="52"  	LENGTH="64" OPERATION="ASCII2TEXT" />
+
+								<PROPERTY ID="GPRSServerProIPAddress2" 				BYTE="116"  LENGTH="4" />
+								<PROPERTY ID="GPRSServerProPort_1" 					BYTE="120"  LENGTH="4" />
+ 								<PROPERTY ID="GPRSServerProEncryptionKey_1" 		BYTE="124"  LENGTH="16" OPERATION="PASSWORD2TEXT" />
+ 								<PROPERTY ID="ENABLE_Bravo_AJAXSERVERPRO_1" 		BYTE="140"  LENGTH="1" />								
+ 								<PROPERTY ID="ENABLE_Bravo_STANDARD_SERVER_1" 		BYTE="142"  LENGTH="1" />																
+ 								<PROPERTY ID="Bravo_IP_DNS_1" 						BYTE="143"  LENGTH="1" />								
+								<PROPERTY ID="DNS_1" 								BYTE="144" 	LENGTH="64" OPERATION="ASCII2TEXT" />
+								<!-- 								<PROPERTY ID="ModBusEnable" 						BYTE="208"  	LENGTH="1" />
+								<PROPERTY ID="ModbusPort" 							BYTE="209"  	LENGTH="2" /> -->
+								<PROPERTY ID="LanNullEventPeriod" 					BYTE="211"  	LENGTH="1" />
+
+							</PROPERTIES>
+						</ELEMENT>				
+
+			  </ELEMENTS>	
+			</ELEMENT>
+
+			</ELEMENTS>
+		</ELEMENT>
+		
+        <!--Base 81-->
+        <ELEMENT ID="BRAVO_ZONE_NAMES">
+              <COMMANDS>
+                <COMMAND BYTES="10810000F0"/>
+              </COMMANDS>
+              <PROPERTIES>				  					  
+                <PROPERTY ID="ZNAME1"       BYTE="0"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME2"       BYTE="15"  LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME3"       BYTE="30"  LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME4"       BYTE="45"  LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME5"       BYTE="60"  LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME6"       BYTE="75"  LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME7"       BYTE="90"  LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME8"       BYTE="105" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME9"       BYTE="120" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME10"      BYTE="135" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME11"      BYTE="150" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME12"      BYTE="165" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME13"      BYTE="180" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME14"      BYTE="195" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME15"      BYTE="210" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="ZNAME16"      BYTE="225" LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>             
+              </PROPERTIES>
+		</ELEMENT>		
+
+        <!--Base 82-->
+        <ELEMENT ID="BRAVO_VOLUME_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="108200000A"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="VOL_BEEP"			BYTE="0"  LENGTH="1"/>
+                <PROPERTY ID="VOL_WARNING"      BYTE="1"  LENGTH="1"/>
+                <PROPERTY ID="VOL_CONFIRM"      BYTE="2"  LENGTH="1"/>
+                <PROPERTY ID="VOL_ARM"        	BYTE="3"  LENGTH="1"/>
+                <PROPERTY ID="VOL_DISARM"       BYTE="4"  LENGTH="1"/>
+                <PROPERTY ID="VOL_CANCEL"       BYTE="5"  LENGTH="1"/>
+                <PROPERTY ID="VOL_CHIME"        BYTE="6"  LENGTH="1"/>
+                <PROPERTY ID="VOL_EXIT1"        BYTE="7"  LENGTH="1"/>
+                <PROPERTY ID="VOL_EXIT2"        BYTE="8"  LENGTH="1"/>
+                <PROPERTY ID="VOL_ENTRY"        BYTE="9"  LENGTH="1"/>
+             </PROPERTIES>
+		</ELEMENT>
+			
+       <!--Base 92-->
+        <ELEMENT ID="BRAVO_DM_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="10920400A0"/>
+                <COMMAND BYTES="1092A800A0"/>
+				<COMMAND BYTES="10810000F0"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="DM1"			BYTE="0"    LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM2"			BYTE="32"   LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM3"			BYTE="64"   LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM4"			BYTE="96"   LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM5"			BYTE="128"  LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM6"			BYTE="160"  LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM7"			BYTE="192"  LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM8"			BYTE="224"  LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM9"			BYTE="256"  LENGTH="32" OPERATION="PASSWORD2TEXT" />
+                <PROPERTY ID="DM10"			BYTE="288"  LENGTH="32" OPERATION="PASSWORD2TEXT" />
+				
+                <PROPERTY ID="Z_1"			BYTE="160"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_2"			BYTE="164"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_3"			BYTE="168"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_4"			BYTE="172"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_5"			BYTE="176"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_6"			BYTE="180"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_7"			BYTE="184"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_8"			BYTE="188"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_9"			BYTE="192"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_10"			BYTE="196"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_11"			BYTE="200"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_12"			BYTE="204"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_13"			BYTE="208"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_14"			BYTE="212"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_15"			BYTE="216"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="Z_16"			BYTE="220"   LENGTH="4" OPERATION="PHONE2TEXT" />
+
+                <PROPERTY ID="SIR_1"		BYTE="224"   LENGTH="4" OPERATION="PHONE2TEXT" />
+								
+                <PROPERTY ID="RC_1"			BYTE="288"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_2"			BYTE="292"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_3"			BYTE="296"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_4"			BYTE="300"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_5"			BYTE="304"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_6"			BYTE="308"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_7"			BYTE="312"   LENGTH="4" OPERATION="PHONE2TEXT" />
+                <PROPERTY ID="RC_8"			BYTE="316"   LENGTH="4" OPERATION="PHONE2TEXT" />
+
+				<PROPERTY ID="ZONE_NAME1"        BYTE="320"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME2"        BYTE="335"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME3"        BYTE="350"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME4"        BYTE="365"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME5"        BYTE="380"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME6"        BYTE="395"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME7"        BYTE="410"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME8"        BYTE="425"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME9"        BYTE="440"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME10"       BYTE="455"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME11"       BYTE="470"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME12"       BYTE="485"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME13"       BYTE="500"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME14"       BYTE="515"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME15"       BYTE="530"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				<PROPERTY ID="ZONE_NAME16"       BYTE="545"   LENGTH="15" OPERATION="MATRIX_CYR2TEXT"/>
+				
+				<PROPERTY ID="BRAVO_DEV1"			BYTE="163"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV2"			BYTE="167"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV3"			BYTE="171"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV4"			BYTE="175"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV5"			BYTE="179"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV6"			BYTE="183"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV7"			BYTE="187"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV8"			BYTE="191"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV9"			BYTE="195"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV10"			BYTE="199"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV11"			BYTE="203"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV12"			BYTE="207"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV13"			BYTE="211"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV14"			BYTE="215"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV15"			BYTE="219"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV16"			BYTE="223"   LENGTH="1" />
+				<PROPERTY ID="BRAVO_DEV17"			BYTE="291"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV18"			BYTE="295"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV19"			BYTE="299"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV20"			BYTE="303"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV21"			BYTE="307"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV22"			BYTE="311"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV23"			BYTE="315"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV24"			BYTE="319"   LENGTH="1" />
+                <PROPERTY ID="BRAVO_DEV25"			BYTE="227"   LENGTH="1" />
+				
+			</PROPERTIES>
+		</ELEMENT>
+		
+        <!--Base 00-->
+        <ELEMENT ID="BRAVO_DLS_SETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1000280008"/>				
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="DLS_S_ENABLE"		BYTE="0"   LENGTH="1"/>
+                <PROPERTY ID="DLS_S_MM"			BYTE="1"   LENGTH="1"/>
+                <PROPERTY ID="DLS_S_DW"			BYTE="2"   LENGTH="1"/>
+                <PROPERTY ID="DLS_S_HH"			BYTE="3"   LENGTH="1"/>
+                <PROPERTY ID="DLS_W_ENABLE"		BYTE="4"   LENGTH="1"/>
+                <PROPERTY ID="DLS_W_MM"			BYTE="5"   LENGTH="1"/>
+                <PROPERTY ID="DLS_W_DW"			BYTE="6"   LENGTH="1"/>
+                <PROPERTY ID="DLS_W_HH"			BYTE="7"   LENGTH="1"/>
+             </PROPERTIES>
+		</ELEMENT>
+		
+	</ELEMENTS>
+	</ELEMENT>
+  </ELEMENTS>
+
+  <POSTOPERATIONS>
+    <!--Преустановяване връзка-->
+    <OPERATION>
+      <COMMANDS>
+        <COMMAND BYTES="70"/>
+      </COMMANDS>
+    </OPERATION>
+
+  </POSTOPERATIONS>
+
+
+
+</OPERATIONS>

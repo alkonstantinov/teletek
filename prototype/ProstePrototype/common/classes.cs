@@ -25,9 +25,15 @@ namespace common
     public delegate void dFilterValueChanged(string path, string _new_val);
     public delegate JObject dGetNode(string name);
     public delegate JObject dFindObjectByProperty(JToken _node, string prop_name, string val);
+    public delegate void dFileCRCProcessing(string filename);
+    public delegate void dFileDownloadProgress(string filename, int counter, int cntall);
 
-    public enum eRWResult { Ok = 1, ConnectionError = 2, NullLoginCMD = 3, NullLoginOkByte = 4, NullLoginOkVal = 5, BadLogin = 6,
-                            BadCommandResult = 7};
+    public enum eUPDResult { Ok = 1, FilesMapNotExists = 2, Other = 3 };
+    public enum eRWResult
+    {
+        Ok = 1, ConnectionError = 2, NullLoginCMD = 3, NullLoginOkByte = 4, NullLoginOkVal = 5, BadLogin = 6,
+        BadCommandResult = 7
+    };
     public static class constants
     {
         public static string NO_LOOP = "NO_LOOP";//{ get { return "NO_LOOP"; } }
@@ -75,6 +81,20 @@ namespace common
             get
             {
                 return Convert.ToBoolean(Settings["logreads"].ToString());
+            }
+        }
+        public static string updmapfilename
+        {
+            get
+            {
+                return Settings["updmapfilename"].ToString();
+            }
+        }
+        public static string updhttppath
+        {
+            get
+            {
+                return Settings["updhttppath"].ToString();
             }
         }
         public static string[] Paths2INC
@@ -354,7 +374,7 @@ namespace common
         public Dictionary<string, cSeriaProperty> properties = new Dictionary<string, cSeriaProperty>();
     }
 
-    public enum ePanelType { ptIRIS = 1, ptEclipse = 2 };
+    public enum ePanelType { ptIRIS = 1, ptEclipse = 2, ptNatron };
     public enum eIO { ioNull = 0, ioRead = 1, ioWrite = 2 };
     public enum eWriteOperation { woBytes = 1, woProperty = 2 };
     public enum eInOut { Input = 1, Output = 2 };
@@ -556,8 +576,10 @@ namespace common
 
         //
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dread_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-        internal JObject _jread_prop {
-            get {
+        internal JObject _jread_prop
+        {
+            get
+            {
                 return JObject.FromObject(_dread_prop);
             }
             set
@@ -570,8 +592,10 @@ namespace common
         internal List<cSeria> _wserias = null;
         internal Dictionary<string, Dictionary<string, List<cSeriaProperty>>> _write_property_groups = new Dictionary<string, Dictionary<string, List<cSeriaProperty>>>();
         internal Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> _dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
-        internal JObject _jwrite_prop {
-            get {
+        internal JObject _jwrite_prop
+        {
+            get
+            {
                 return JObject.FromObject(_dwrite_prop);
             }
             set
@@ -607,6 +631,11 @@ namespace common
             {
                 _readwriter = new cRWIRIS();
                 PanelType = ePanelType.ptIRIS;
+            }
+            else if (Regex.IsMatch(_s_panel_type, "natron", RegexOptions.IgnoreCase))
+            {
+                _readwriter = new cRWNatron();
+                PanelType = ePanelType.ptNatron;
             }
             _serialyzer = serialyzer;
             _deserialyzer = deserialyzer;
@@ -731,10 +760,13 @@ namespace common
                 if (verkey != "" && ver_file != "")
                     _read_ver_files.Add(verkey, read_path + ver_file);
             }
+            if (_read_ver_files.Count == 0) _read_ver_files.Add("default", _base_read_file);
             //
-            string _write = File.ReadAllText(_base_write_file);
+            string _write = "";
+            if (File.Exists(_base_write_file)) _write = File.ReadAllText(_base_write_file);
             _write = Regex.Replace(_write, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
             _write_ver_files.Clear();
+            if (_base_write_file == null) _base_write_file = Regex.Replace(System.IO.Path.GetDirectoryName(_base_read_file), @"[\\/]Read$", @"\Write", RegexOptions.IgnoreCase);
             string write_path = Regex.Replace(System.IO.Path.GetDirectoryName(_base_write_file), @"[\\/]$", "") + @"\";
             foreach (Match m in Regex.Matches(_write, @"<VERSION[\w\W]+?/>"))
             {
@@ -750,6 +782,7 @@ namespace common
                 if (verkey != "" && ver_file != "")
                     _write_ver_files.Add(verkey, write_path + ver_file);
             }
+            if (_write_ver_files.Count == 0) _write_ver_files.Add("default", _base_write_file);
         }
         /// <summary>
         /// файл, съдържащ основна конфигурация на устройство
@@ -1398,6 +1431,7 @@ namespace common
                         Monitor.Exit(_cs_config);
                         return res;
                     }
+                    if (!File.Exists(f)) return null;
                     string xml = File.ReadAllText(f);
                     _xpaths = new Dictionary<string, Dictionary<string, cWriteField>>();
                     foreach (Match mop in Regex.Matches(xml, @"<WRITEOPERATION>[\w\W]+?</WRITEOPERATION>", RegexOptions.IgnoreCase))

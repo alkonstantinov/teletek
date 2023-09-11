@@ -190,6 +190,7 @@
         iris4: { 'bg': 'IRIS4', 'en': 'IRIS4', 'ge': 'IRIS4' },
         iris8: { 'bg': 'IRIS8', 'en': 'IRIS8', 'ge': 'IRIS8' },
         simpo: { 'bg': 'SIMPO', 'en': 'SIMPO', 'ge': 'SIMPO' },
+        natron: { 'bg': 'NATRON', 'en': 'NATRON', 'ge': 'NATRON' },
         repeater_iris_simpo: { 'bg': 'Repeater Iris Simpo', 'en': 'Repeater Iris Simpo', 'ge': 'Repeater Iris Simpo' },
         eclipse: { 'bg': 'ECLIPSE', 'en': 'ECLIPSE', 'ge': 'ECLIPSE' },
         eclipse99: { 'bg': 'ECLIPSE99', 'en': 'ECLIPSE99', 'ge': 'ECLIPSE99' },

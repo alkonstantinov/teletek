@@ -1239,7 +1239,7 @@ namespace ProstePrototype
             string color = "Blue";
             if (panel_type == null) panel_type = "";
             if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") || 
-                page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";
+                page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris") || page.ToLower().StartsWith("natron")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
 
             string currPage = page;
@@ -1251,7 +1251,7 @@ namespace ProstePrototype
             string title = pages[currPage].Value<JObject>()["title"].Value<string>();
             string icon = pages[currPage].Value<JObject>()["icon"].Value<string>();
 
-            Regex regex = new Regex(@"^(SIMPO Panel|IRIS Panel|TTE|Eclipse)$");
+            Regex regex = new Regex(@"^(SIMPO Panel|IRIS Panel|Natron|TTE|Eclipse)$");
             if (regex.IsMatch(title) && cJson.ContentBrowserParam(page) != null)
             {
                 title = (string)(JObject.Parse(cJson.ContentBrowserParam(page))["~panel_name"]);
@@ -1402,7 +1402,7 @@ namespace ProstePrototype
             
             string color = "Blue";
             if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") ||
-                page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris")) color = "Red";
+                page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris") || page.ToLower().StartsWith("natron")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
             foreach (string item in breadCrumbs.Select(x => x.Value<string>()))
             {
@@ -1413,7 +1413,7 @@ namespace ProstePrototype
                 }
                 
                 string title = pages[currItem].Value<JObject>()["title"].Value<string>();
-                Regex regex = new Regex(@"^(SIMPO Panel|IRIS Panel|TTE|Eclipse)$");
+                Regex regex = new Regex(@"^(SIMPO Panel|IRIS Panel|Natron|TTE|Eclipse)$");
                 if (regex.IsMatch(title) && cJson.ContentBrowserParam(item) != null)
                 {
                     title = (string)(JObject.Parse(cJson.ContentBrowserParam(item))["~panel_name"]);

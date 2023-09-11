@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "updprep": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\work\\teletek\\prototype\\ProstePrototype\\ProstePrototype\\bin\\Debug\\netcoreapp3.1",
+      "workingDirectory": "C:\\work\\teletek\\prototype\\ProstePrototype\\ProstePrototype\\bin\\Debug\\netcoreapp3.1"
+    }
+  }
+}

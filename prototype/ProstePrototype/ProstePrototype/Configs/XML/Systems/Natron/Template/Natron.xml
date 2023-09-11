@@ -1,0 +1,79 @@
+<ELEMENTS XMLVERSION="10">
+	<ELEMENT ID="Natron" SORTORDER="70" IMAGEINDEX="-1" AUTOCREATE="0"  CANDEL="1" CANADD="1" CANCOMMUNICATE="1" NATRONREP="1" PRODUCTNAME="Natron" HELPFILE="..\..\..\help\help.chm" HELP="main.html" READXML="ReadConfig_Natron.xml" DEVICE="ProsTE.Device.Natron.dll!1.0.0.0!ProsTE.Device.Natron" FIRMWAREUPDATE="ProsTE.Device.Natron.dll!1.0.0.0!ProsTE.Device.UI.fNatronFirmwareTool" MIN="0" MAX="1">
+		<MEDIA>
+			<ITEMS>
+				<ITEM NAME="RS232" BAUDRATE="96000"/>
+			</ITEMS>
+		</MEDIA>
+		<CONTAINS>
+			<ELEMENT ID="Natron_NONE" MIN="1" MAX="1"/>
+		</CONTAINS>
+		<PROPERTIES>
+			<PROPERTY TYPE="TEXT" ID="VERSION_PANEL" LENGTH="8" SIZE="4" TEXT="Ver. " READONLY="1" >
+			</PROPERTY>
+		</PROPERTIES>
+	</ELEMENT>
+	<ELEMENT ID="Natron_NONE" AUTOCREATE="1" PRODUCTNAME="NONE" AUTOCREATECOUNT="32" IMAGEINDEX="1">
+		<CHANGE>
+			<ELEMENT ID="Natron_NONE"/>
+		</CHANGE>
+		<PROPERTIES>
+			<PROPERTY TYPE="HIDDEN" ID="TYPE" READONLY="1" TEXT="Type" VALUE="00" SIZE="1"/>
+			<PROPERTY TYPE="TEXT" ID="SERIALID" LENGTH="4" SIZE="4" TEXT="Serial Id" VALUE="    " READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="CHANEL" SIZE="1" TEXT="Chanel" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_DBM" SIZE="2" MIN="-128" TEXT="RSSI dBm" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_LEVEL" SIZE="1" TEXT="RSSI Level" READONLY="1"/>
+			<PROPERTY TYPE="TEXT" ID="BATTERY" SIZE="2" TEXT="Battery,%" LENGTH="9" READONLY="1"/>
+		</PROPERTIES>
+	</ELEMENT>
+	<ELEMENT ID="Natron_MD" AUTOCREATE="1" PRODUCTNAME="Natron MD" AUTOCREATECOUNT="32" IMAGEINDEX="1">
+		<PROPERTIES>
+			<PROPERTY TYPE="HIDDEN" ID="TYPE" READONLY="1" TEXT="Type" VALUE="133" SIZE="1"/>
+			<PROPERTY TYPE="TEXT" ID="SERIALID" LENGTH="4" SIZE="4" TEXT="Serial Id" VALUE="    " READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="CHANEL" SIZE="1" TEXT="Chanel" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_DBM" SIZE="2" MIN="-128" TEXT="RSSI dBm" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_LEVEL" SIZE="1" TEXT="RSSI Level" READONLY="1"/>
+			<PROPERTY TYPE="TEXT" ID="BATTERY" SIZE="2" TEXT="Battery,%" LENGTH="9" READONLY="1"/>
+		</PROPERTIES>
+	</ELEMENT>
+	<ELEMENT ID="Natron_SD" AUTOCREATE="1" PRODUCTNAME="Natron SD" AUTOCREATECOUNT="32" IMAGEINDEX="1">																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+		<PROPERTIES>
+			<PROPERTY TYPE="HIDDEN" ID="TYPE" READONLY="1" TEXT="Type" VALUE="132" SIZE="1"/>
+			<PROPERTY TYPE="TEXT" ID="SERIALID" LENGTH="4" SIZE="4" TEXT="Serial Id" VALUE="    " READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="CHANEL" SIZE="1" TEXT="Chanel" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_DBM" SIZE="2" MIN="-128" TEXT="RSSI dBm" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_LEVEL" SIZE="1" TEXT="RSSI Level" READONLY="1"/>
+			<PROPERTY TYPE="TEXT" ID="BATTERY" SIZE="2" TEXT="Battery,%" LENGTH="9" READONLY="1"/>
+		</PROPERTIES>
+	</ELEMENT>
+	<ELEMENT ID="Natron_TD" AUTOCREATE="1" PRODUCTNAME="Natron TD" AUTOCREATECOUNT="32" IMAGEINDEX="1">
+		<PROPERTIES>
+			<PROPERTY TYPE="HIDDEN" ID="TYPE" READONLY="1" TEXT="Type" VALUE="131" SIZE="1"/>
+			<PROPERTY TYPE="TEXT" ID="SERIALID" LENGTH="4" SIZE="4" TEXT="Serial Id" VALUE="    " READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="CHANEL" SIZE="1" TEXT="Chanel" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_DBM" SIZE="2" MIN="-128" TEXT="RSSI dBm" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_LEVEL" SIZE="1" TEXT="RSSI Level" READONLY="1"/>
+			<PROPERTY TYPE="TEXT" ID="BATTERY" SIZE="2" TEXT="Battery,%" LENGTH="9" READONLY="1"/>
+		</PROPERTIES>
+	</ELEMENT>
+	<ELEMENT ID="Natron_MCP" AUTOCREATE="1" PRODUCTNAME="Natron MCP" AUTOCREATECOUNT="32" IMAGEINDEX="1">
+		<PROPERTIES>
+			<PROPERTY TYPE="HIDDEN" ID="TYPE" READONLY="1" TEXT="Type" VALUE="56" SIZE="1"/>
+			<PROPERTY TYPE="TEXT" ID="SERIALID" LENGTH="4" SIZE="4" TEXT="Serial Id" VALUE="    " READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="CHANEL" SIZE="1" TEXT="Chanel" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_DBM" SIZE="2" MIN="-128" TEXT="RSSI dBm" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_LEVEL" SIZE="1" TEXT="RSSI Level" READONLY="1"/>
+			<PROPERTY TYPE="TEXT" ID="BATTERY" SIZE="2" TEXT="Battery,%" LENGTH="9" READONLY="1"/>
+		</PROPERTIES>
+	</ELEMENT>
+	<ELEMENT ID="Natron_WSS" AUTOCREATE="1" PRODUCTNAME="Natron WSS" AUTOCREATECOUNT="32" IMAGEINDEX="1">
+		<PROPERTIES>
+			<PROPERTY TYPE="HIDDEN" ID="TYPE" READONLY="1" TEXT="Type" VALUE="72" SIZE="1"/>
+			<PROPERTY TYPE="TEXT" ID="SERIALID" LENGTH="4" SIZE="4" TEXT="Serial Id" VALUE="    " READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="CHANEL" SIZE="1" TEXT="Chanel" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_DBM" SIZE="2" MIN="-128" TEXT="RSSI dBm" READONLY="1"/>
+			<PROPERTY TYPE="INT" ID="RSSI_LEVEL" SIZE="1" TEXT="RSSI Level" READONLY="1"/>
+			<PROPERTY TYPE="TEXT" ID="BATTERY" SIZE="2" TEXT="Battery,%" LENGTH="9" READONLY="1"/>
+		</PROPERTIES>
+	</ELEMENT>
+</ELEMENTS>

@@ -82,6 +82,79 @@ namespace ljson
             for (int i = 0; i < from.Count; i++)
                 from[i].Replace(to[i]);
         }
+        private static bool TypeGroupExists(JObject groups, JProperty prop)
+        {
+            string name = prop.Name;
+            JObject field = (JObject)prop.Value;
+            if (field["@TEXT"] != null) name = field["@TEXT"].ToString().ToLower();
+            string ftype = "";
+            if (field["@TYPE"] != null) ftype = field["@TYPE"].ToString().ToLower();
+                foreach (JProperty p in groups.Properties())
+                if (p.Name.ToLower() == name)
+                {
+                    JObject grp = (JObject)p.Value;
+                    string gtype = null;
+                    if (grp["~type"] != null) gtype = grp["~type"].ToString().ToLower();
+                    if (gtype != null && gtype == ftype) return true;
+                }
+            return false;
+        }
+        private static void AddMissetFields(JObject groups, JObject old, string grp2add)
+        {
+            if (grp2add == null)
+            {
+                int i = 0;
+                while (true)
+                {
+                    grp2add = "~noname" + ((i > 0) ? i.ToString() : "");
+                    if (groups[grp2add] == null) break;
+                    i++;
+                }
+                //grp2add = "~new";
+                groups[grp2add] = new JObject();
+                groups[grp2add]["name"] = "";
+                groups[grp2add]["fields"] = new JObject();
+            }
+            Dictionary<string, string> found = new Dictionary<string, string>();
+            Dictionary<string, string> foundbytext = new Dictionary<string, string>();
+            if (groups[grp2add] == null)
+                groups[grp2add] = new JObject();
+            if (groups[grp2add]["fields"] == null)
+                groups[grp2add]["fields"] = new JObject();
+            JObject fields2add = (JObject)groups[grp2add]["fields"];
+            foreach (JProperty pgrp in groups.Properties())
+                if (pgrp.Value != null && pgrp.Value.Type == JTokenType.Object)
+                {
+                    JObject grp = (JObject)pgrp.Value;
+                    if (grp["fields"] == null && !Regex.IsMatch(pgrp.Name, @"^~noname")) continue;
+                    JObject fields = null;
+                    if (grp["fields"] != null)
+                        fields = (JObject)grp["fields"];
+                    else if (Regex.IsMatch(pgrp.Name, @"^~noname"))
+                        fields = grp;
+                    if (fields == null) continue;
+                    foreach (JProperty pfld in fields.Properties())
+                    {
+                        if (!found.ContainsKey(pfld.Name.ToLower()) && pfld.Value.Type == JTokenType.Object)
+                            found.Add(pfld.Name.ToLower(), null);
+                        if (pfld.Value.Type != JTokenType.Object) continue;
+                        JObject ofound = (JObject)pfld.Value;
+                        if (ofound["@TEXT"] != null && !foundbytext.ContainsKey(ofound["@TEXT"].ToString()))
+                            foundbytext.Add(ofound["@TEXT"].ToString().ToLower(), null);
+                    }
+                }
+            foreach (JProperty pold in old.Properties())
+            {
+                JObject fo = (JObject)pold.Value;
+                string txt = "~~~~~~~~~~~~~~~~~~~~~";
+                if (fo["@TEXT"] != null) txt = fo["@TEXT"].ToString().ToLower();
+                if (!found.ContainsKey(pold.Name.ToLower()) && !foundbytext.ContainsKey(txt) && !TypeGroupExists(groups, pold) && !Regex.IsMatch(pold.Name, @"^\s*?emacETH[\w\W]+?\d$"))
+                    fields2add[pold.Name] = pold.Value;
+            }
+            if (groups[grp2add]["fields"].Count() == 0) groups.Remove(grp2add);
+            else
+                return;
+        }
         #endregion
 
         #region main
@@ -397,6 +470,7 @@ namespace ljson
             json["iris"]["PROPERTIES"]["Groups"]["CompanyInfo"] = grp7;
             //
             json["iris"]["PROPERTIES"]["OLD"] = o;
+            AddMissetFields((JObject)json["iris"]["PROPERTIES"]["Groups"], o, "Parameters");
         }
 
         private static void ConvertMainArraysLeft(JObject json)
@@ -451,6 +525,8 @@ namespace ljson
             json["iris_access_code"]["PROPERTIES"]["Groups"]["Code4"] = grp4;
             //
             json["iris_access_code"]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json["iris_access_code"]["PROPERTIES"]["Groups"], o, null);
         }
 
         private static void ConvertAccessCode(JObject json, JObject _pages)
@@ -546,7 +622,7 @@ namespace ljson
             JObject f2 = new JObject();
             f2["HostIP"] = o["HostIP"];
             f2["NetMask"] = o["NetMask"];
-            f2["Gateway"] = o["Router"];
+            f2["Router"] = o["Router"];
             f2["Port"] = o["Port"];
             //f2["PanelEvacNumber"] = o["PanelEvacNumber"];
             //f2["emacETHADDR0"] = o["emacETHADDR0"];
@@ -565,6 +641,8 @@ namespace ljson
             json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TEXT"] = "EMAC";
             //
             json["iris_network"]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json["iris_network"]["PROPERTIES"]["Groups"], o, null);
         }
         private static void ConvertNetwork(JObject json, JObject _pages)
         {
@@ -878,6 +956,8 @@ namespace ljson
             json[key]["PROPERTIES"]["Groups"]["InputType"] = grp3;
             //
             json[key]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json[key]["PROPERTIES"]["Groups"], o, null);
         }
         private static void ConvertInput(JObject json)
         {
@@ -946,6 +1026,8 @@ namespace ljson
             //json[key]["PROPERTIES"]["Groups"]["ANDORInputs"] = grp4;
             //
             json[key]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json[key]["PROPERTIES"]["Groups"], o, null);
         }
         private static void ConvertOutput(JObject json)
         {
@@ -998,11 +1080,13 @@ namespace ljson
             JObject f3 = new JObject();
             if (o["SOUNDERGROUP"] != null) f3["SounderGroupA"] = o["SOUNDERGROUP"]; else f3["SGROUP_A"] = o["SGROUP_A"];
             if (o["SOUNDERGROUP2"] != null) f3["SounderGroupB"] = o["SOUNDERGROUP2"]; else f3["SGROUP_B"] = o["SGROUP_B"];
-            if (o["SOUNDERGROUP3"] != null) f3["SounderGroupC"] = o["SOUNDERGROUP3"]; f3["SGROUP_C"] = o["SGROUP_C"];
+            if (o["SOUNDERGROUP3"] != null) f3["SounderGroupC"] = o["SOUNDERGROUP3"]; else f3["SGROUP_C"] = o["SGROUP_C"];
             grp3["fields"] = f3;
             json[key]["PROPERTIES"]["Groups"]["Sounder"] = grp3;
             //
             json[key]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json[key]["PROPERTIES"]["Groups"], o, null);
         }
         private static void ConvertZone(JObject json)
         {
@@ -1168,6 +1252,8 @@ namespace ljson
             json[key]["PROPERTIES"]["Groups"]["~noname"]["PANELFLAGS"] = o["PANELFLAGS"];
             //
             json[key]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json[key]["PROPERTIES"]["Groups"], o, "~noname");
         }
         private static void CreateSimpoPanelPanelInNetworkGroups(JObject json, string key)
         {
@@ -1179,11 +1265,14 @@ namespace ljson
             json[key]["PROPERTIES"]["Groups"] = new JObject();
             //not grouped params
             json[key]["PROPERTIES"]["Groups"]["~noname"] = new JObject();
-            json[key]["PROPERTIES"]["Groups"]["~noname"]["status"] = o["status"];
-            json[key]["PROPERTIES"]["Groups"]["~noname"]["panel_flags"] = o["panel_flags"];
-            json[key]["PROPERTIES"]["Groups"]["~noname"]["PANELFLAGS"] = o["PANELFLAGS"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["fields"] = new JObject();
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["fields"]["status"] = o["status"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["fields"]["panel_flags"] = o["panel_flags"];
+            json[key]["PROPERTIES"]["Groups"]["~noname"]["fields"]["PANELFLAGS"] = o["PANELFLAGS"];
             //
             json[key]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json[key]["PROPERTIES"]["Groups"], o, "~noname");
         }
         private static void CreatePanelInNetworkGroups(JObject json, string key)
         {
@@ -1207,19 +1296,23 @@ namespace ljson
             //
             JObject grp2 = new JObject();
             grp2["name"] = "Panel Outputs";
+            grp2["~type"] = "AND";
             JObject props = Array2Object((JArray)o["panel_flags"]["PROPERTIES"]["PROPERTY"]);
             grp2["fields"] = props;
             json[key]["PROPERTIES"]["Groups"]["Panel Outputs"] = grp2;
+            //json[key]["PROPERTIES"]["Groups"]["panel_flags"] = grp2;
             //
             JObject grp3 = new JObject();
             grp3["name"] = "Missed";
             JObject f3 = new JObject();
-            f3["status"] = o["status"];
-            f3["state"] = o["state"];
+            if (o["status"] != null) f3["status"] = o["status"];
+            if (o["state"] != null) f3["state"] = o["state"];
             grp3["fields"] = f3;
-            json[key]["PROPERTIES"]["Groups"]["~noname1"] = grp3;
+            if (f3.Count > 0) json[key]["PROPERTIES"]["Groups"]["~noname1"] = grp3;
             //
             json[key]["PROPERTIES"]["OLD"] = o;
+            //
+            AddMissetFields((JObject)json[key]["PROPERTIES"]["Groups"], o, "~noname1");
         }
         private static void ConvertPanelInNetwork(JObject json)
         {
@@ -1337,22 +1430,6 @@ namespace ljson
             ((JObject)c)[key]["~path"] = Regex.Replace(((JObject)c)[key]["~path"].ToString(), @"\d+$", "");
             //
             SetLooDevsContent(json);
-        }
-        #endregion
-
-        #region INC
-        private static void doINC(JObject json)
-        {
-            string[] paths = settings.Paths2INC;
-            foreach (string path in paths)
-            {
-                JToken t = json.SelectToken(path);
-                if (t == null || t.Type != JTokenType.Object)
-                    continue;
-                JObject o = (JObject)t;
-                o["@MIN"] = (System.Convert.ToInt32(o["@MIN"].ToString()) + 1).ToString();
-                o["@MAX"] = (System.Convert.ToInt32(o["@MAX"].ToString()) + 1).ToString();
-            }
         }
         #endregion
 

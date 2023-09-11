@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using common;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -241,5 +242,87 @@ namespace ljson
             }
             //root["~path"] = root.Path;
         }
+        #region INC
+        internal static void doINC(JObject json)
+        {
+            string[] paths = settings.Paths2INC;
+            foreach (string path in paths)
+            {
+                JToken t = json.SelectToken(path);
+                if (t == null || t.Type != JTokenType.Object)
+                    continue;
+                JObject o = (JObject)t;
+                o["@MIN"] = (System.Convert.ToInt32(o["@MIN"].ToString()) + 1).ToString();
+                o["@MAX"] = (System.Convert.ToInt32(o["@MAX"].ToString()) + 1).ToString();
+            }
+        }
+        #endregion
+        #region translation
+        internal static string TranslateKey(string name)
+        {
+            if (Regex.IsMatch(name, @"iris[\w\W]*?_accesscode$", RegexOptions.IgnoreCase))
+                name = "iris_access_code";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK_R$", RegexOptions.IgnoreCase))
+                name = "iris_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_network";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANELSINNETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_panels_in_network";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS_R$", RegexOptions.IgnoreCase))
+                name = "iris_panels_in_network";
+            //else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS$", RegexOptions.IgnoreCase))
+            //    name = "iris_panels_in_network";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_INPUTS$", RegexOptions.IgnoreCase))
+                name = "iris_inputs";
+            else if (Regex.IsMatch(name, @"INPUTS[\w\W]*?_GROUP$", RegexOptions.IgnoreCase))
+                name = "iris_inputs_group";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_OUTPUTS$", RegexOptions.IgnoreCase))
+                name = "iris_outputs";
+            else if (Regex.IsMatch(name, @"FAT[\w\W]*?_FBF$", RegexOptions.IgnoreCase))
+                name = "iris_fat_fbf";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_ZONES$", RegexOptions.IgnoreCase))
+                name = "iris_zones";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_ZONES$", RegexOptions.IgnoreCase))
+                name = "iris_zones";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_EVAC_ZONES_GROUPS$", RegexOptions.IgnoreCase))
+                name = "iris_evac_zones";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_EVAC_ZONES_GROUPS$", RegexOptions.IgnoreCase))
+                name = "iris_evac_zones";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PERIPHERIALDEVICES$", RegexOptions.IgnoreCase))
+                name = "iris_peripheral_devices";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_LOOPDEVICES$", RegexOptions.IgnoreCase))
+                name = "iris_loop_devices";
+            else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_LOOPDEVICES$", RegexOptions.IgnoreCase))
+                name = "iris_loop_devices";
+            else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANEL$", RegexOptions.IgnoreCase))
+                name = "iris";
+            else if (Regex.IsMatch(name, @"^R_PANEL$", RegexOptions.IgnoreCase))
+                name = "iris";
+            else if (Regex.IsMatch(name, @"^SIMPO_PANEL$", RegexOptions.IgnoreCase))
+                name = "iris";
+            else if (Regex.IsMatch(name, @"^Natron_NONE$", RegexOptions.IgnoreCase))
+                name = "natron_device";
+            return name;
+        }
+        internal static void TranslateObjectsKeys(JObject content)
+        {
+            bool isRepeater = Regex.IsMatch(content.ToString(), @"""@PRODUCTNAME""\s*?:\s*?""REPEATER\s+?Iris/Simpo", RegexOptions.IgnoreCase);
+            List<JToken> from = new List<JToken>();
+            List<JToken> to = new List<JToken>();
+            foreach (JToken t in (JToken)content)
+            {
+                string name = TranslateKey(((JProperty)t).Name);
+                if (isRepeater && Regex.IsMatch(name, @"panels[\w\W]+?in[\w\W]+?network$", RegexOptions.IgnoreCase))
+                    name = ((JProperty)t).Name;
+                JProperty p = new JProperty(name, ((JProperty)t).Value);
+                from.Add(t);
+                to.Add((JToken)p);
+            }
+            for (int i = 0; i < from.Count; i++)
+                from[i].Replace(to[i]);
+        }
+        #endregion
     }
 }

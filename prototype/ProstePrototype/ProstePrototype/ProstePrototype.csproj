@@ -282,6 +282,12 @@
     <None Update="Configs\XML\Systems\IRIS\Write\WriteConfig_iris_version24.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Systems\Natron\Read\ReadConfig_Natron.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\Natron\Template\Natron.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Systems\Repeater_Iris_Simpo\Read\ReadConfig_SimpoR.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

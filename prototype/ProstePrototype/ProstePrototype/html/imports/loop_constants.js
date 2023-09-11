@@ -5,6 +5,7 @@
     REPEATER_TFT: { im: "imports/images/pics/Repeater_TFT.png", sign: "Repeater_TFT", type: "panel" },
     REPEATER_IRIS_SIMPO: { im: "imports/images/pics/Repeater.png", sign: "Repeater Iris/SIMPO", type: "panel" },
     SIMPO: { im: "imports/images/pics/SIMPO.png", sign: "SIMPO Panel", type: "panel" },
+    NATRON: { im: "imports/images/pics/NATRON_WE.png", sign: "Natron", type: "panel" },
     ECLIPSE: { im: "", sign: "Eclipse", type: "panel" },
     ECLIPSE99: { im: "", sign: "Eclipse 99", type: "panel" },
     MM210E: { im: "../../Images/25. M201_M221 (IRIS).ico", sign: "M210E", type: "module" },

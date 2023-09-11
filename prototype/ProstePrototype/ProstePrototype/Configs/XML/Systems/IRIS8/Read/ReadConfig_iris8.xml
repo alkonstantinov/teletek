@@ -6,18 +6,21 @@
         <COMMAND BYTES="035111000007" SAVEAS="VERSION"/>
       </COMMANDS>
     </OPERATION>
-    <!--<OPERATION>
+    <OPERATION>
       <COMMANDS>
         <COMMAND BYTES="0061FF" SAVEAS="LOOPTYPE"/>
       </COMMANDS>
-    </OPERATION>-->
-    <!--<OPERATION>
+    </OPERATION>
+    <OPERATION>
       <COMMANDS>
         <COMMAND BYTES="0760" OKBYTE="1" OKVALUE="10" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
       </COMMANDS>
-    </OPERATION>-->
-    <VERSIONING SAVEDDATA="VERSION" BYTE="7" LENGTH="2">
+    </OPERATION>
+    <VERSIONING SAVEDDATA="VERSION" BYTE="7" LENGTH="2" SUPPORTEDVERSIONS="0001|0002|0003|0004" ERRORMESSAGE="There is a new verson of ProsTE software. If you continue (Yes) the operation then some errors may occur. We recommend you to cancel (No), update the ProsTE and try again." >
       <VERSION VALUE="0001" FILE="ReadConfig_iris8_version01.xml" />
+      <VERSION VALUE="0002" FILE="ReadConfig_iris8_version02.xml" />
+      <VERSION VALUE="0003" FILE="ReadConfig_iris8_version03.xml" />
+      <VERSION VALUE="0004" FILE="ReadConfig_iris8_version04.xml" />
     </VERSIONING>
   </PREOPERATIONS>
   <ELEMENTS>

@@ -1277,6 +1277,8 @@ namespace common
                     return key;
                 if (Regex.IsMatch(key, loop + "$"))
                     return key;
+                if (Regex.IsMatch(Regex.Replace(key, @"/IRIS\d*_(S|M)NONE$", ""), loop + "$"))
+                    return key;
                 if (Regex.IsMatch(key, "^" + tteloop))
                     return key;
                 if (Regex.IsMatch(key, tteloop + "$"))

@@ -1,0 +1,3294 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OPERATIONS XMLVERSION="20">
+  <PREOPERATIONS>
+    <!--Свързване-->
+    <OPERATION>
+      <COMMANDS>
+        <COMMAND BYTES="71" OKBYTE="1" OKVALUE="0045303332|0043413878" SAVEAS="IDENTIFICATION"/>
+      </COMMANDS>
+    </OPERATION>
+    <!--Логване-->
+    <OPERATION>
+      <COMMANDS>
+        <COMMAND BYTES="72" OKBYTE="1" OKVALUE="00" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
+      </COMMANDS>
+    </OPERATION>
+
+    <VERSIONING SAVEDDATA="IDENTIFICATION" BYTE="9" LENGTH="2">
+      <VERSION VALUE="0001" FILE="ReadConfig_eclipse_0001.xml"/> 	
+    </VERSIONING>
+	
+  </PREOPERATIONS>
+  <ELEMENTS>
+    <ELEMENT ID="ECLIPSE_ECLIPSE">
+      <ELEMENTS>
+        <ELEMENT ID="ECLIPSE_GENERALSETTINGS">
+          <ELEMENTS>
+            <ELEMENT ID="ECLIPSE_CODES">
+              <COMMANDS>
+                <COMMAND BYTES="1000000007"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENG_CODE" BYTE="0" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="MAI_CODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="AMBUSHCODE" BYTE="6" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_SYSTEMSETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1000000026"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="SYSTEMNAME" BYTE="15" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="HARDWARERESET" BYTE="14" LENGTH="1"/>
+                <PROPERTY ID="KBDBLOCKING" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="TROUBLESSOUNDMASK" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="ACLOSSDELAY" BYTE="11" LENGTH="1"/>
+                <PROPERTY ID="TAMPERALARM" BYTE="12" LENGTH="1"/>
+                <PROPERTY ID="CHIMEGLOBAL" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="CONFMODETIMER" BYTE="10" LENGTH="1"/>
+                <PROPERTY ID="ENTRYDELAYEDALARM" BYTE="13" LENGTH="1"/>
+                <PROPERTY ID="ENGINEERMENUSTYLE" BYTE="31" LENGTH="1" MASK="0F" />
+                <PROPERTY ID="SOFTWAREVERSION" BYTE="32" LENGTH="6" OPERATION="ASCII2TEXT"/>
+              </PROPERTIES>
+            </ELEMENT>
+          </ELEMENTS>
+        </ELEMENT>
+        <ELEMENT ID="ECLIPSE_USERS">
+          <COMMANDS>
+            <COMMAND BYTES="1011000001"/>
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="CODESIZE" BYTE="0" LENGTH="1"/>
+          </PROPERTIES>
+          <ELEMENTS>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101000001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10101C001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101038001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101054001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101070001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10108C001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010A8001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010C4001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010E0001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010FC001C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101018011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101034011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101050011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10106C011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101088011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010A4011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010C0011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010DC011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010F8011C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101014021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101030021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10104C021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101068021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101084021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010A0021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010BC021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010D8021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010F4021C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101010031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10102C031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101048031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101064031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101080031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10109C031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010B8031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010D4031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010F0031C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10100C041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101028041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101044041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101060041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10107C041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101098041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010B4041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010D0041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010EC041C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101008051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101024051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101040051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10105C051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101078051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101094051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010B0051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010CC051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010E8051C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101004061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101020061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="10103C061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101058061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101074061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="101090061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010AC061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010C8061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_USER">
+              <COMMANDS>
+                <COMMAND BYTES="1010E4061C"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="CODE" BYTE="5" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PROXYCODE" BYTE="0" LENGTH="5" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTRIBUTES" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="AREAS" BYTE="9" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="10" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="PROXYATTR" BYTE="27" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+          </ELEMENTS>
+        </ELEMENT>
+        <ELEMENT ID="ECLIPSE_ZONES">
+          <COMMANDS>
+            <COMMAND BYTES="1021000005"/>
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="CONNTYPE" BYTE="0" LENGTH="1" />
+            <PROPERTY ID="BPSCOUNTER" BYTE="1" LENGTH="1"/>
+            <PROPERTY ID="INSTANTZONES" BYTE="2" LENGTH="1"/>
+            <PROPERTY ID="PULSECOUNT" BYTE="3" LENGTH="1"/>
+            <PROPERTY ID="PULSECOUNTTIMER" BYTE="4" LENGTH="1"/>
+          </PROPERTIES>
+		  <ELEMENTS>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020000018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020180018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020300018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020480018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020600018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020780018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020900018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020A80018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020C00018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020D80018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020F00018"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020080118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020200118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020380118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020500118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020680118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020800118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020980118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020B00118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020C80118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020E00118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020F80118"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020100218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020280218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020400218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020580218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020700218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020880218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020A00218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020B80218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020D00218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_ZONE">
+			  <COMMANDS>
+				<COMMAND BYTES="1020E80218"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="20" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="TYPE" BYTE="23" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="17" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES2" BYTE="18" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTESKEYSWITCH" BYTE="19" LENGTH="1"/>
+				<PROPERTY ID="ATTRAUX" BYTE="22" LENGTH="1"/>
+				<PROPERTY ID="NAME" BYTE="1" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+			  </PROPERTIES>
+			</ELEMENT>
+		  </ELEMENTS>
+        </ELEMENT>
+        <ELEMENT ID="ECLIPSE_OUTPUTS">
+          <COMMANDS>
+            <COMMAND BYTES="1031000001"/>
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="PGM4MODE" BYTE="0" LENGTH="1"/>
+          </PROPERTIES>
+          <ELEMENTS>
+            <ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030000009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030090009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030120009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10301B0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030240009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10302D0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030360009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10303F0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030480009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030510009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10305A0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030630009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10306C0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030750009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10307E0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030870009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030900009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030990009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030A20009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030AB0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030B40009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030BD0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030C60009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030CF0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030D80009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030E10009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030EA0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030F30009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030FC0009"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030050109"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="10300E0109"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+			<ELEMENT ID="ECLIPSE_PGM">
+			  <COMMANDS>
+				<COMMAND BYTES="1030170109"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="ATTDEVICENUMBER" BYTE="0" LENGTH="1"/>
+				<PROPERTY ID="ATTTERMINALNMBER" BYTE="1" LENGTH="1"/>
+				<PROPERTY ID="ATTRIBUTES1" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="AREAS" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="ACTEVENT" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="P1" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="P2" BYTE="6" LENGTH="1"/>
+				<PROPERTY ID="DEACTIVATION_TIMER" BYTE="7" LENGTH="1"/>
+				<PROPERTY ID="DELAY" BYTE="8" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+          </ELEMENTS>          
+        </ELEMENT>
+		
+        <ELEMENT ID="ECLIPSE_AREAS">
+          <COMMANDS>
+            <COMMAND BYTES="1041000004"/>
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="ACCLEN" BYTE="0" LENGTH="1"/>
+            <PROPERTY ID="DBLKNOCKTIME" BYTE="1" LENGTH="1"/>
+            <PROPERTY ID="AUTOARMNOMOV" BYTE="2" LENGTH="1"/>
+            <PROPERTY ID="POSTPONEALARM" BYTE="3" LENGTH="1"/>
+          </PROPERTIES>
+          <ELEMENTS>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="104000001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="10401B001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="104036001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="104051001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="10406C001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="104087001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="1040A2001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_AREA">
+              <COMMANDS>
+                <COMMAND BYTES="1040BD001B"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="ENTRYTIME" BYTE="1" LENGTH="1"/>
+                <PROPERTY ID="EXITTIME" BYTE="0" LENGTH="1"/>
+                <PROPERTY ID="BELLTIME" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="ACCCODE" BYTE="3" LENGTH="3" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="ATTR1" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="ATTR2" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="PANICS" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="NAME" BYTE="9" LENGTH="16" OPERATION="MATRIX_CYR2TEXT"/>
+                <PROPERTY ID="BELLDELAY" BYTE="25" LENGTH="1"/>
+                <PROPERTY ID="TIMESLOT" BYTE="26" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+          </ELEMENTS>
+        </ELEMENT>
+		
+		<ELEMENT ID="ECLIPSE_TIMESLOTS">
+		  <ELEMENTS>
+			<ELEMENT ID="ECLIPSE_TIMESLOT_SETTINGS">
+				<ELEMENTS>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="1050000006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="1050060006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="10500C0006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="1050120006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="1050180006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="10501E0006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="1050240006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+					<ELEMENT ID="ECLIPSE_TIMESLOT">
+					  <COMMANDS>
+						<COMMAND BYTES="10502A0006"/>
+					  </COMMANDS>
+					  <PROPERTIES>
+						<PROPERTY ID="BEGINTIME" BYTE="0" LENGTH="2"/>
+						<PROPERTY ID="ENDTIME" BYTE="2" LENGTH="2"/>
+						<PROPERTY ID="WEEKDAYS" BYTE="4" LENGTH="1"/>
+						<PROPERTY ID="ENABLEHOLIDAYS" BYTE="5" LENGTH="1"/>
+					  </PROPERTIES>
+					</ELEMENT>
+				</ELEMENTS>
+			</ELEMENT>
+
+			<ELEMENT ID="ECLIPSE_HOLIDAYS">
+			  <ELEMENTS>
+				<ELEMENT ID="ECLIPSE_JANUARY">
+				  <COMMANDS>
+					<COMMAND BYTES="1051000004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_FEBRUARY">
+				  <COMMANDS>
+					<COMMAND BYTES="1051040004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_MARCH">
+				  <COMMANDS>
+					<COMMAND BYTES="1051080004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_APRIL">
+				  <COMMANDS>
+					<COMMAND BYTES="10510C0004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_MAY">
+				  <COMMANDS>
+					<COMMAND BYTES="1051100004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_JUNE">
+				  <COMMANDS>
+					<COMMAND BYTES="1051140004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_JULY">
+				  <COMMANDS>
+					<COMMAND BYTES="1051180004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_AUGUST">
+				  <COMMANDS>
+					<COMMAND BYTES="10511C0004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_SEPTEMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1051200004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_OCTOBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1051240004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_NOVEMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1051280004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_DECEMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="10512C0004"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="DAYS" BYTE="0" LENGTH="4"/>
+				  </PROPERTIES>
+				</ELEMENT>
+			  </ELEMENTS>
+			</ELEMENT>
+		  </ELEMENTS>
+		</ELEMENT>
+
+  
+        <ELEMENT ID="ECLIPSE_COMMUNICATOR">
+          <COMMANDS>
+            <COMMAND BYTES="1061000006"/>
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="DIALEROPT" BYTE="0" LENGTH="1"/>
+            <PROPERTY ID="COMMATT" BYTE="1" LENGTH="1"/>
+            <PROPERTY ID="TMPERIOD" BYTE="2" LENGTH="1"/>
+            <PROPERTY ID="TMSTARTTIME" BYTE="3" LENGTH="2"/>
+            <PROPERTY ID="ALARMDELAY" BYTE="5" LENGTH="1"/>
+          </PROPERTIES>
+		  
+          <ELEMENTS>
+            <ELEMENT ID="ECLIPSE_PHONENUMBER_SETTINGS">
+			  <ELEMENTS>
+				<ELEMENT ID="ECLIPSE_PHONENUMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1060000013"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="NUMBER" BYTE="0" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+					<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+					<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+					<PROPERTY ID="CAREAS" BYTE="18" LENGTH="1"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_PHONENUMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1060130013"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="NUMBER" BYTE="0" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+					<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+					<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+					<PROPERTY ID="CAREAS" BYTE="18" LENGTH="1"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_PHONENUMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1060260013"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="NUMBER" BYTE="0" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+					<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+					<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+					<PROPERTY ID="CAREAS" BYTE="18" LENGTH="1"/>
+				  </PROPERTIES>
+				</ELEMENT>
+				<ELEMENT ID="ECLIPSE_PHONENUMBER">
+				  <COMMANDS>
+					<COMMAND BYTES="1060390013"/>
+				  </COMMANDS>
+				  <PROPERTIES>
+					<PROPERTY ID="NUMBER" BYTE="0" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+					<PROPERTY ID="PROTOCOL" BYTE="16" LENGTH="1"/>
+					<PROPERTY ID="MSGTYPES" BYTE="17" LENGTH="1"/>
+					<PROPERTY ID="CAREAS" BYTE="18" LENGTH="1"/>
+				  </PROPERTIES>
+				</ELEMENT>
+			  </ELEMENTS>
+			</ELEMENT>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - version 2 - - - - - - - - - - - - - - - - -  - -->
+		
+			<ELEMENT ID="ECLIPSE_VOICEDIALER">
+			  <COMMANDS>
+				<COMMAND BYTES="10A1000004"/>
+				<COMMAND BYTES="10A0000088"/>
+			  </COMMANDS>
+			  <PROPERTIES>
+				<PROPERTY ID="VOICEDIALEROPT" BYTE="0" LENGTH="1" />
+				<PROPERTY ID="VD_REPS" BYTE="1" LENGTH="1" />
+				<PROPERTY ID="VD_ATTEMPTS" BYTE="2" LENGTH="1" />
+				<PROPERTY ID="VD_LANGUAGE" BYTE="3" LENGTH="1"/>
+
+				<PROPERTY ID="VD_NUMBER1" BYTE="4" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_1" BYTE="20" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER2" BYTE="21" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_2" BYTE="37" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER3" BYTE="38" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_3" BYTE="54" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER4" BYTE="55" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_4" BYTE="71" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER5" BYTE="72" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_5" BYTE="88" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER6" BYTE="89" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_6" BYTE="105" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER7" BYTE="106" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_7" BYTE="122" LENGTH="1"/>
+				
+				<PROPERTY ID="VD_NUMBER8" BYTE="123" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+				<PROPERTY ID="VD_AREAS_8" BYTE="139" LENGTH="1"/>
+			  </PROPERTIES>
+			</ELEMENT>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - version 2 - - - - - - - - - - - - - - - - -  - -->
+            <ELEMENT ID="ECLIPSE_UDLSETTINGS">
+              <COMMANDS>
+                <COMMAND BYTES="1062000018"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="NUMBER" BYTE="0" LENGTH="16" OPERATION="TELEPHONE2TEXT"/>
+                <PROPERTY ID="PCID" BYTE="16" LENGTH="2" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="PANELID" BYTE="18" LENGTH="2" OPERATION="PASSWORD2TEXT"/>
+                <PROPERTY ID="OPTIONS" BYTE="20" LENGTH="1"/>
+                <PROPERTY ID="INRNUM" BYTE="21" LENGTH="1"/>
+				<PROPERTY ID="AJAXCODE" BYTE="22" LENGTH="2" OPERATION="PASSWORD2TEXT"/>
+              </PROPERTIES>
+            </ELEMENT>
+          </ELEMENTS>
+        </ELEMENT>
+        <ELEMENT ID="ECLIPSE_DEVICES">
+          <ELEMENTS>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080040004"/>
+                <COMMAND BYTES="1081020002"/>
+                <COMMAND BYTES="1070040004"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080080004"/>
+                <COMMAND BYTES="1081040002"/>
+                <COMMAND BYTES="1070080004"/>
+		<COMMAND BYTES="1082000008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10800C0004"/>
+                <COMMAND BYTES="1081060002"/>
+                <COMMAND BYTES="10700C0004"/>
+		<COMMAND BYTES="1082080008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080100004"/>
+                <COMMAND BYTES="1081080002"/>
+                <COMMAND BYTES="1070100004"/>
+		<COMMAND BYTES="1082100008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080140004"/>
+                <COMMAND BYTES="10810A0002"/>
+                <COMMAND BYTES="1070140004"/>
+		<COMMAND BYTES="1082180008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080180004"/>
+                <COMMAND BYTES="10810C0002"/>
+                <COMMAND BYTES="1070180004"/>
+		<COMMAND BYTES="1082200008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10801C0004"/>
+                <COMMAND BYTES="10810E0002"/>
+                <COMMAND BYTES="10701C0004"/>
+			<COMMAND BYTES="1082280008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080200004"/>
+                <COMMAND BYTES="1081100002"/>
+                <COMMAND BYTES="1070200004"/>
+		<COMMAND BYTES="1082300008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080240004"/>
+                <COMMAND BYTES="1081120002"/>
+                <COMMAND BYTES="1070240004"/>
+		<COMMAND BYTES="1082380008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080280004"/>
+                <COMMAND BYTES="1081140002"/>
+                <COMMAND BYTES="1070280004"/>
+		<COMMAND BYTES="1082400008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+	      </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10802C0004"/>
+                <COMMAND BYTES="1081160002"/>
+                <COMMAND BYTES="10702C0004"/>
+		<COMMAND BYTES="1082480008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080300004"/>
+                <COMMAND BYTES="1081180002"/>
+                <COMMAND BYTES="1070300004"/>
+		<COMMAND BYTES="1082500008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080340004"/>
+                <COMMAND BYTES="10811A0002"/>
+                <COMMAND BYTES="1070340004"/>
+		<COMMAND BYTES="1082580008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080380004"/>
+                <COMMAND BYTES="10811C0002"/>
+                <COMMAND BYTES="1070380004"/>
+		<COMMAND BYTES="1082600008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10803C0004"/>
+                <COMMAND BYTES="10811E0002"/>
+                <COMMAND BYTES="10703C0004"/>
+		<COMMAND BYTES="1082680008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080400004"/>
+                <COMMAND BYTES="1081200002"/>
+                <COMMAND BYTES="1070400004"/>
+		<COMMAND BYTES="1082700008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080440004"/>
+                <COMMAND BYTES="1081220002"/>
+                <COMMAND BYTES="1070440004"/>
+		<COMMAND BYTES="1082780008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080480004"/>
+                <COMMAND BYTES="1081240002"/>
+                <COMMAND BYTES="1070480004"/>
+		<COMMAND BYTES="1082800008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10804C0004"/>
+                <COMMAND BYTES="1081260002"/>
+                <COMMAND BYTES="10704C0004"/>
+		<COMMAND BYTES="1082880008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080500004"/>
+                <COMMAND BYTES="1081280002"/>
+                <COMMAND BYTES="1070500004"/>
+		<COMMAND BYTES="1082900008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080540004"/>
+                <COMMAND BYTES="10812A0002"/>
+                <COMMAND BYTES="1070540004"/>
+		<COMMAND BYTES="1082980008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080580004"/>
+                <COMMAND BYTES="10812C0002"/>
+                <COMMAND BYTES="1070580004"/>
+		<COMMAND BYTES="1082A00008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10805C0004"/>
+                <COMMAND BYTES="10812E0002"/>
+                <COMMAND BYTES="10705C0004"/>
+		<COMMAND BYTES="1082A80008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080600004"/>
+                <COMMAND BYTES="1081300002"/>
+                <COMMAND BYTES="1070600004"/>
+		<COMMAND BYTES="1082B00008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080640004"/>
+                <COMMAND BYTES="1081320002"/>
+                <COMMAND BYTES="1070640004"/>
+		<COMMAND BYTES="1082B80008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080680004"/>
+                <COMMAND BYTES="1081340002"/>
+                <COMMAND BYTES="1070680004"/>
+		<COMMAND BYTES="1082C00008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10806C0004"/>
+                <COMMAND BYTES="1081360002"/>
+                <COMMAND BYTES="10706C0004"/>
+		<COMMAND BYTES="1082C80008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080700004"/>
+                <COMMAND BYTES="1081380002"/>
+                <COMMAND BYTES="1070700004"/>
+		<COMMAND BYTES="1082D00008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080740004"/>
+                <COMMAND BYTES="10813A0002"/>
+                <COMMAND BYTES="1070740004"/>
+		<COMMAND BYTES="1082D80008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="1080780004"/>
+                <COMMAND BYTES="10813C0002"/>
+                <COMMAND BYTES="1070780004"/>
+		<COMMAND BYTES="1082E00008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="ECLIPSE_NONE" OPERATION="GETDEVICETYPE" PROPERTY="TYPE">
+              <COMMANDS>
+                <COMMAND BYTES="10807C0004"/>
+                <COMMAND BYTES="10813E0002"/>
+                <COMMAND BYTES="10707C0004"/>
+		<COMMAND BYTES="1082E80008"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="TYPE" BYTE="3" LENGTH="1"/>
+                <PROPERTY ID="IDENTIFICATION" BYTE="0" LENGTH="4" OPERATION="PHONE2TEXT"/>
+                <PROPERTY ID="AREAS" BYTE="4" LENGTH="1"/>
+                <PROPERTY ID="OPTIONS" BYTE="5" LENGTH="1"/>
+                <PROPERTY ID="BUZZERLEVEL" BYTE="6" LENGTH="1"/>
+                <PROPERTY ID="BRIGHTNESS" BYTE="7" LENGTH="1"/>
+                <PROPERTY ID="SCROLLSPEED" BYTE="8" LENGTH="1"/>
+                <PROPERTY ID="BACKLIGHTENABLED" BYTE="9" LENGTH="1"/>
+		<PROPERTY ID="MOD_A1" BYTE="10" LENGTH="1"/>
+		<PROPERTY ID="MOD_A2" BYTE="11" LENGTH="1"/>
+		<PROPERTY ID="MOD_A3" BYTE="12" LENGTH="1"/>
+		<PROPERTY ID="MOD_A4" BYTE="13" LENGTH="1"/>
+		<PROPERTY ID="MOD_A5" BYTE="14" LENGTH="1"/>
+		<PROPERTY ID="MOD_A6" BYTE="15" LENGTH="1"/>
+		<PROPERTY ID="MOD_A7" BYTE="16" LENGTH="1"/>
+		<PROPERTY ID="MOD_A8" BYTE="17" LENGTH="1"/>
+              </PROPERTIES>
+            </ELEMENT>
+          </ELEMENTS>
+        </ELEMENT>
+      </ELEMENTS>
+
+    </ELEMENT>
+  </ELEMENTS>
+
+  <POSTOPERATIONS>
+    <!--Преустановяване връзка-->
+    <OPERATION>
+      <COMMANDS>
+        <COMMAND BYTES="70"/>
+      </COMMANDS>
+    </OPERATION>
+
+  </POSTOPERATIONS>
+
+
+
+</OPERATIONS>

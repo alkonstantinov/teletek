@@ -134,6 +134,11 @@ function receiveMessageWPF(jsonTxt) {
 
                 let panelIcon, pageType, color;
                 switch (true) {
+                    case jsonKeys[0].toLowerCase().startsWith("natron"):
+                        panelIcon = '<i class="ram_icon fireicon fire"></i>';
+                        pageType = "natron";
+                        color = "fire";
+                        break;
                     case jsonKeys[0].toLowerCase().startsWith("simpo"):
                     case jsonKeys[0].toLowerCase().startsWith("iris"):
                         panelIcon = '<i class="ram_icon fireicon fire"></i>';
@@ -170,7 +175,9 @@ function receiveMessageWPF(jsonTxt) {
                 
                 body.appendChild(panelItem);
 
-                setTimeout(() => openAccordionItem(id), 100);
+                if (!jsonKeys[0].toLowerCase().startsWith("natron")) {
+                    setTimeout(() => openAccordionItem(id), 100);
+                }
             }
             break;
     }
@@ -261,8 +268,9 @@ const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
 
     const pathStr = "~path";
     let cleanKeys = elementKeys.filter(x => x !== pathStr && x !== "~panel_id" && x !== "~panel_name"); // for the usual new panel adding
-    
+
     cleanKeys.forEach(field => {
+        if (field.startsWith("natron")) return;
         // guard for null value of jsonAtLevel[field]
         if (jsonAtLevel[field] && jsonAtLevel[field].title) {
             let title = jsonAtLevel[field].title;

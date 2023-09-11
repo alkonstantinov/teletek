@@ -92,6 +92,35 @@ namespace ProstePrototype
             //if (Directory.Exists(folderPath))
             if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) // checks for internet
             {
+                /*
+                 * using this approach below to launch upd Program
+                */
+
+                string relativePathToConsoleApp = "upd\\bin\\Debug\\netcoreapp3.1\\upd.exe"; // Relative path from your WPF app to the console app
+
+                // Get the current working directory of your WPF app
+                string currentWorkingDirectory = Environment.CurrentDirectory;
+
+                // Combine the current working directory with the relative path to get the full path
+                //string pathToConsoleApp = System.IO.Path.Combine(currentWorkingDirectory, relativePathToConsoleApp);
+
+                string pathToConsoleApp = "C:\\Users\\vbb12\\GitHub\\Teletek\\teletek\\prototype\\ProstePrototype\\upd\\bin\\Debug\\netcoreapp3.1\\upd.exe"; // Replace with the actual path to your console app executable
+
+                // Create a new process to start the console application
+                Process process = new Process();
+                process.StartInfo.FileName = pathToConsoleApp;
+
+                // You can pass any command-line arguments if needed
+                // process.StartInfo.Arguments = "arg1 arg2 arg3";
+
+                // Start the process
+                process.Start();
+
+                // Optionally, you can wait for the process to exit and handle its exit code
+                process.WaitForExit();
+
+                // Close the process to release resources
+                process.Close();
 
                 //FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://teletek.bg/teletek-man");
                 //request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
@@ -130,7 +159,7 @@ namespace ProstePrototype
 
                 //    //If the file is the required update(TODO this check) Run the file(the file should run the setup in silent mode   
                 //    Process.Start(System.IO.Path.GetTempPath() + fileName);
-                    
+
                 //    //Wait for the process to finish
                 //    //Process.WaitForExit();
 

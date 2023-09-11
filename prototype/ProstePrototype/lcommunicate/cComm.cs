@@ -1179,7 +1179,7 @@ namespace lcommunicate
             {
                 string dir = Path.GetFileName(s);
                 JObject jSys = new JObject();
-                if (Regex.IsMatch(dir, "^(iris|simpo)", RegexOptions.IgnoreCase) || Regex.IsMatch(dir, @"^repeater[\w\W]+?simpo$", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(dir, "^(iris|simpo|natron)", RegexOptions.IgnoreCase) || Regex.IsMatch(dir, @"^repeater[\w\W]+?simpo$", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
                 else if (Regex.IsMatch(dir, "^eclipse", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "guard";
@@ -1224,7 +1224,7 @@ namespace lcommunicate
             {
                 HidDevice _dev = hid[s];
                 JObject jSys = new JObject();
-                if (Regex.IsMatch(s, "^(iris|simpo)", RegexOptions.IgnoreCase) ||
+                if (Regex.IsMatch(s, "^(iris|simpo|natron)", RegexOptions.IgnoreCase) ||
                     Regex.IsMatch(s, @"repeater[\w\W]+?iris[\w\W]+?simpo", RegexOptions.IgnoreCase) ||
                     Regex.IsMatch(s, @"Fire\s+?panel\s+?simpo", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
