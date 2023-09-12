@@ -1558,7 +1558,7 @@ namespace ljson
             string res = bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2");
             return res;
         }
-        private static eRWResult SetRWFiles(object conn_params, string _code)
+        private static eRWResult SetRWFiles(object conn_params, string _code, ref string panel_version, ref string xml_version)
         {
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             eRWResult rwres = eRWResult.Ok;
@@ -1568,6 +1568,8 @@ namespace ljson
                 cfg.SetRWFiles(ver);
                 WriteReadMerge = cfg.RWMerged();
             }
+            panel_version = ver;
+            xml_version = cfg.CurrentVersion;
             return rwres;
         }
         public static string ReadLog(object conn_params)
@@ -1617,7 +1619,7 @@ namespace ljson
             }
             Monitor.Exit(_cs_current_panel);
         }
-        public static eRWResult ReadDevice(object conn_params, string _code)
+        public static eRWResult ReadDevice(object conn_params, string _code, dConfirmVersionsDiff verdiff)
         {
             bool isRepeaterIris = false;
             bool isSimpoPanel = false;
@@ -1636,7 +1638,10 @@ namespace ljson
             //string slog = ReadLog(conn_params);
             ClearPanelCache(CurrentPanelID);
             //
-            eRWResult rwres = SetRWFiles(conn_params, _code);
+            string panel_version = null;
+            string xml_version = null;
+            eRWResult rwres = SetRWFiles(conn_params, _code, ref panel_version, ref xml_version);
+            if (panel_version != xml_version && !verdiff(panel_version, xml_version)) return eRWResult.VersionDiff;
             if (rwres != eRWResult.Ok)
                 return rwres;
             string _panel_id = CurrentPanelID;
@@ -2519,9 +2524,12 @@ namespace ljson
             //
             return res;
         }
-        public static eRWResult WriteDevice(object conn_params, string _code)
+        public static eRWResult WriteDevice(object conn_params, string _code, dConfirmVersionsDiff verdiff)
         {
-            eRWResult rwres = SetRWFiles(conn_params, _code);
+            string panel_version = null;
+            string xml_version = null;
+            eRWResult rwres = SetRWFiles(conn_params, _code, ref panel_version, ref xml_version);
+            if (panel_version != xml_version && !verdiff(panel_version, xml_version)) return eRWResult.VersionDiff;
             if (rwres != eRWResult.Ok)
                 return rwres;
             //

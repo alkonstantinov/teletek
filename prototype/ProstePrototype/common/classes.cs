@@ -27,12 +27,13 @@ namespace common
     public delegate JObject dFindObjectByProperty(JToken _node, string prop_name, string val);
     public delegate void dFileCRCProcessing(string filename);
     public delegate void dFileDownloadProgress(string filename, int counter, int cntall);
+    public delegate bool dConfirmVersionsDiff(string panel_version, string xml_version);
 
     public enum eUPDResult { Ok = 1, FilesMapNotExists = 2, Other = 3 };
     public enum eRWResult
     {
         Ok = 1, ConnectionError = 2, NullLoginCMD = 3, NullLoginOkByte = 4, NullLoginOkVal = 5, BadLogin = 6,
-        BadCommandResult = 7
+        BadCommandResult = 7, VersionDiff = 8
     };
     public static class constants
     {
@@ -928,7 +929,8 @@ namespace common
                 fread = _read_ver_files[_version];
             if (_write_ver_files.ContainsKey(_version))
                 fwrite = _write_ver_files[_version];
-            _current_version = _version;
+            if (_read_ver_files.ContainsKey(_version))
+                _current_version = _version;
             Monitor.Exit(_cs_config);
             if (fread != null)
                 ReadConfigPath = fread;

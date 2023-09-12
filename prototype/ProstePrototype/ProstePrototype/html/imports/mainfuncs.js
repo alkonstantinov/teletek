@@ -2133,6 +2133,8 @@ function loadDiv(it, id, value, type) {
 function alertScanFinished(show) {
     if (show === 'alert') {
         document.location.reload();
+    } else {
+        confirm(show);
     }
 }
 

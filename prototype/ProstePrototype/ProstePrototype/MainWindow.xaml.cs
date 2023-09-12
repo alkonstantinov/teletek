@@ -26,6 +26,7 @@ using ProstePrototype.WpfControls;
 using System.Windows.Threading;
 using System.Security.Policy;
 using System.Windows.Markup;
+using CefSharp.DevTools.DOM;
 
 namespace ProstePrototype
 {
@@ -790,49 +791,75 @@ namespace ProstePrototype
                 popUpWindow.Close();
             }
         }
+
         private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
         {
-            eRWResult resp = cJson.ReadDevice(conn_params, code);
-            switch (resp)
-            {
-                case eRWResult.Ok:
-                    wb1.ExecuteScriptAsync($"alertScanFinished('alert')");
-                    File.AppendAllText("eventlog.log", "ReadDevice using code: " + code + "and connection parameters: " + conn_params.ToString() + "\n");
-                    break;
-                case eRWResult.ConnectionError: 
-                case eRWResult.BadLogin: 
-                case eRWResult.NullLoginCMD: 
-                case eRWResult.NullLoginOkByte: 
-                case eRWResult.NullLoginOkVal: 
-                case eRWResult.BadCommandResult:
-                default:
-                    string showMsg = (conn_params != null && (string)conn_params != "read.log") ?
-                    $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
-                    $"Connection Error: Please check your provided details";
-                    wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')"); 
-                    break;
-            }
+            eRWResult resp = cJson.ReadDevice(conn_params, code, VersionDiff);
+            HandleRespMessage(conn_params, resp, code, "Read");
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
             {
                 popUpWindow._functionFinished = true;
             });
         }
-        private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
+
+        private void HandleRespMessage(object conn_params, eRWResult resp, string code, string readOrWrite)
         {
-            eRWResult resp = cJson.WriteDevice(conn_params, code);
-            if (resp == eRWResult.Ok)
+            string showMsg = $"Unexpected Error: Please check your provided details";
+            switch (resp)
             {
-                wb2.ExecuteScriptAsync($"alertScanFinished('alert')");
-                File.AppendAllText("eventlog.log", "WriteDevice using code: " + code + "and connection parameters: " + conn_params.ToString() + "\n");
+                case eRWResult.Ok:
+                    showMsg = "alert";
+                    File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + "and connection parameters: " + conn_params.ToString() + "\n");
+                    break;
+                case eRWResult.ConnectionError:
+                    showMsg = (conn_params != null && (string)conn_params != "read.log") ?
+                        $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
+                        $"Connection Error: Please check your provided details";
+                    break;
+                case eRWResult.BadLogin:
+                    showMsg = $"Bad Login: Please check your provided details"; break;
+                case eRWResult.NullLoginCMD:
+                    showMsg = $"Null Login CMD: Please check your provided details"; break;
+                case eRWResult.NullLoginOkByte:
+                    showMsg = $"Null Login Ok Byte: Please check your provided details"; break;
+                case eRWResult.NullLoginOkVal:
+                    showMsg = $"Null Login Ok Val: Please check your provided details"; break;
+                case eRWResult.BadCommandResult:
+                    showMsg = $"Bad Command Result: Please check your provided details"; break;
+                case eRWResult.VersionDiff:
+                    showMsg = "alert";
+                    File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + "and connection parameters: " + conn_params.ToString() +
+                        " despite the Version Difference between panel and opened document." + "\n");
+                    break;
+                default:
+                    break;
             }
-            else
+            if (readOrWrite == "Read")
             {
-                string showMsg = conn_params != null ?
-                    $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
-                    $"Connection Error: Please, provided some connection details";
+                wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+            } else
+            {
                 wb2.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
             }
+        }
+
+        private bool VersionDiff(string panel_version, string xml_version)
+        {
+            if (panel_version != xml_version)
+            {
+                string q = $"A difference is found between the panel version and the currently " +
+                    $"loaded version. Choose \"No\" to stop the process. Or, you can continue by clicking the \"Yes\" button below" +
+                    $"keeping in mind that this might result in incorrect interpretation of the data";
+                YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
+                return yesNoDialog.ShowDialog().Value;
+            }
+            return true;
+        }
+        private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
+        {
+            eRWResult resp = cJson.WriteDevice(conn_params, code, VersionDiff);
+            HandleRespMessage(conn_params, resp, code, "Write");
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
             {

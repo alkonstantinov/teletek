@@ -120,3 +120,9 @@ NewTeletekSW/bin
 /prototype/TeletekProstePrototypeSetup.exe
 /prototype/ProstePrototype/ProstePrototype/Properties/PublishProfiles
 /prototype/ProstePrototype/ProstePrototype/html/IRIS/Test2.html
+/prototype/ProstePrototype/lupd/bin
+/prototype/ProstePrototype/lupd/obj
+/prototype/ProstePrototype/upd/bin
+/prototype/ProstePrototype/upd/obj
+/prototype/ProstePrototype/updprep/bin
+/prototype/ProstePrototype/updprep/obj
