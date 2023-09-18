@@ -153,3 +153,7 @@ NewTeletekSW/bin
 /prototype/ProstePrototype/kill_run/robocopy_log.txt
 /prototype/ProstePrototype/lupd/obj/lupd.csproj.nuget.dgspec.json
 /prototype/ProstePrototype/lupd/obj/project.assets.json
+/prototype/ProstePrototype/upd/obj/project.assets.json
+/prototype/ProstePrototype/upd/obj/upd.csproj.nuget.dgspec.json
+/prototype/ProstePrototype/updprep/obj/project.assets.json
+/prototype/ProstePrototype/updprep/obj/updprep.csproj.nuget.dgspec.json

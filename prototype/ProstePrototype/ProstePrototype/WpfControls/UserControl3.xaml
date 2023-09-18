@@ -49,7 +49,7 @@
                                    VerticalContentAlignment="Center" HorizontalAlignment="Left" 
                                    Width="200" />
 
-                <uc:WPFNumericInput Label="{DynamicResource ScanMenuRSDataBits}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" 
+                <uc:WPFNumericInput x:Name="dataBits" Label="{DynamicResource ScanMenuRSDataBits}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" 
                         Margin="10" />
             </Grid>
         </StackPanel>

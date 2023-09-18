@@ -914,6 +914,12 @@ namespace lcommunicate
             else
                 return null;
         }
+        public static cTransport ConnectCOM(cCOMParams p)
+        {
+            cTransport t = new cCOM();
+            object conn = t.Connect(new cCOMParams(p.COMName, p.rate));
+            return t;
+        }
         public static cTransport ConnectBase(object conn_params)
         {
             cTransport conn = null;
@@ -1080,6 +1086,29 @@ namespace lcommunicate
         #region scan&new system
         private static Dictionary<string, List<string>> _version_commands = null;
         private static object _cs_ver_cmds = new object();
+        private static string VerCommandsNatron(string read_xml)
+        {
+            string res = null;
+            foreach (Match m in Regex.Matches(read_xml, @"<COMMANDS>[\w\W]+?</PROPERTIES>"))
+            {
+                string cmds = m.Value;
+                Match mm = Regex.Match(cmds, @"<PROPERTIES>[\w\W]+?</PROPERTIES>");
+                if (mm.Success && Regex.IsMatch(mm.Value, @"ID\s*?=\s*?""VERSION_PANEL"""))
+                {
+                    mm = Regex.Match(cmds, @"<COMMANDS>([\w\W]+?)</COMMANDS>");
+                    if (mm.Success)
+                    {
+                        foreach (Match mcmd in Regex.Matches(mm.Groups[1].Value, @"<COMMAND\s+?BYTES\s*?=\s*?""(\w+?)"""))
+                        {
+                            if (res == null) res = "";
+                            res += ((res != "") ? "\n" : "") + mcmd.Groups[1].Value;
+                        }
+                        if (res != null) return res;
+                    }
+                }
+            }
+            return res;
+        }
         public static Dictionary<string, List<string>> VersionCommands
         {
             get
@@ -1106,14 +1135,19 @@ namespace lcommunicate
                             if (Regex.IsMatch(s, @"0\d+?\.xml$", RegexOptions.IgnoreCase)) continue;
                             if (Regex.IsMatch(s, @"version\d+?\.xml$", RegexOptions.IgnoreCase)) continue;
                             string xml = System.IO.File.ReadAllText(rf);
-                            Match m = Regex.Match(xml, @"<COMMAND\s[\w\W]+?/>", RegexOptions.IgnoreCase);
-                            if (!m.Success) continue;
-                            string cmd = m.Value;
-                            m = Regex.Match(cmd, @"SAVEAS\s*?=\s*?""VERSION""", RegexOptions.IgnoreCase);
-                            if (!m.Success) continue;
-                            m = Regex.Match(cmd, @"BYTES\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
-                            if (!m.Success) continue;
-                            cmd = m.Groups[1].Value;
+                            string cmd = null;
+                            if (Regex.IsMatch(s, "natron", RegexOptions.IgnoreCase)) cmd = VerCommandsNatron(xml);
+                            else
+                            {
+                                Match m = Regex.Match(xml, @"<COMMAND\s[\w\W]+?/>", RegexOptions.IgnoreCase);
+                                if (!m.Success) continue;
+                                cmd = m.Value;
+                                m = Regex.Match(cmd, @"SAVEAS\s*?=\s*?""VERSION""", RegexOptions.IgnoreCase);
+                                if (!m.Success) continue;
+                                m = Regex.Match(cmd, @"BYTES\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
+                                if (!m.Success) continue;
+                                cmd = m.Groups[1].Value;
+                            }
                             string sysname = System.IO.Path.GetFileName(sys);
                             if (!_version_commands.ContainsKey(cmd)) _version_commands.Add(cmd, new List<string>());
                             _version_commands[cmd].Add(sysname);
@@ -1135,13 +1169,35 @@ namespace lcommunicate
             foreach (string port in ports)
             {
                 cCOM com = new cCOM();
-                object conn = com.Connect(new SerialPort(port));
+                object conn = com.Connect(new cCOMParams(port, 9600));
                 foreach (string cmd in cmds.Keys)
                 {
-                    byte[] aver = com.SendCommand(conn, cmd);
+                    string[] cmda = cmd.Split('\n');
+                    byte[] aver = null;
+                    List<byte[]> lstVer = new List<byte[]>();
+                    int len = 0;
+                    foreach (string cmdln in cmda)
+                    {
+                        byte[] averln = com.SendCommand(conn, cmdln);
+                        if (averln != null)
+                        {
+                            lstVer.Add(averln);
+                            len += averln.Length;
+                        }
+                    }
+                    if (len > 0)
+                    {
+                        aver = new byte[len];
+                        int offs = 0;
+                        foreach (byte[] b in lstVer)
+                        {
+                            b.CopyTo(aver, offs);
+                            offs += b.Length;
+                        }
+                    }
                     if (aver == null) continue;
-                    com.Close(conn);
                 }
+                com.Close();
                 //bool f = cCOM.TryOpen(port);
                 //if (!f) continue;
             }

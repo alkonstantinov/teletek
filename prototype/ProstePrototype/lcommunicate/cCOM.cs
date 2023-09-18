@@ -37,10 +37,11 @@ namespace lcommunicate
         private SerialPort _last_port = null;
         internal override object Connect(object o)
         {
-            SerialPort conn = (SerialPort)o;
+            cCOMParams cp = (cCOMParams)o;
+            SerialPort conn = new SerialPort(cp.COMName);
             _last_port = conn;
             conn.Open();
-            return o;
+            return conn;
         }
 
         internal override void Close(object o)
@@ -68,8 +69,8 @@ namespace lcommunicate
             conn.Write(_command, 0, _command.Length);
             conn.WriteLine("");
             //byte[] buff = new byte[2048];
-            string buf = conn.ReadExisting();
             byte[] res = new byte[conn.BytesToRead];
+            //string buf = conn.ReadExisting();
             conn.Read(res, 0, res.Length);
             if (res.Length == 0) return null;
             return res;

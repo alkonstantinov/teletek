@@ -194,6 +194,13 @@ namespace common
         public JObject readcfg;
         public JObject template;
     }
+    public class cCOMParams
+    {
+        public string COMName;
+        public int rate;
+
+        public cCOMParams(string comname, int _rate) { COMName = comname; rate = _rate; }
+    }
 
     public class cWriteField
     {

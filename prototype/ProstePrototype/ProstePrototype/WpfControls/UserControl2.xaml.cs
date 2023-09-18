@@ -42,6 +42,13 @@ namespace ProstePrototype
                 listBox.Items.Add(item);
             }
 
+            // Check if there is at least one item in the ListBox
+            if (listBox.Items.Count > 0)
+            {
+                // Select the first item
+                listBox.SelectedIndex = 0;
+            }
+
         }
         public object USBDevice
         {

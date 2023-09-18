@@ -114,8 +114,8 @@
                         <TextBlock Text="{DynamicResource ScanMenuUSB}" FontFamily="{StaticResource poppins_demibold}" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <!--<Button Name="Button2" Margin="10" Click="Button2_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">--><!--Default original state-->
-                <Button Name="Button2" Margin="10" Click="Button2_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Visibility="Collapsed"><!--requested via Viber on 26.07.23-->
+                <Button Name="Button2" Margin="10" Click="Button2_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"><!--Default original state-->
+                <!--<Button Name="Button2" Margin="10" Click="Button2_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Visibility="Collapsed">--><!--requested via Viber on 26.07.23-->
                     <StackPanel Orientation="Vertical">
                         <TextBlock x:Name="rs232_icon" Text="&#xe91b;" FontFamily="{StaticResource ram_icons}" FontSize="18" TextAlignment="Center" Margin="0, 0, 0, 8" />
                         <TextBlock Text="{DynamicResource ScanMenuRS}" FontFamily="{StaticResource poppins_demibold}" TextAlignment="Center"/>

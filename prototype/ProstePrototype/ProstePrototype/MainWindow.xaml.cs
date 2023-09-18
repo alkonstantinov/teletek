@@ -29,6 +29,7 @@ using System.Windows.Markup;
 using CefSharp.DevTools.DOM;
 using lupd;
 using System.Windows.Shapes;
+using System.ComponentModel.Composition.Primitives;
 
 namespace ProstePrototype
 {
@@ -772,6 +773,15 @@ namespace ProstePrototype
                 else if (tabIdx == 1)
                 {
                     conn_params = rw.uc1.USBDevice;
+                }
+                else if (tabIdx == 2)
+                {
+                    string com = rw.uc2.Com;
+                    string parity = rw.uc2.Parity;
+                    string baudRate = rw.uc2.BaudRate;
+                    string stopBits = rw.uc2.StopBits;
+                    int dataBits = rw.uc2.DataBits;
+                    conn_params = new cCOMParams(com, Convert.ToInt32(baudRate));
                 }
                 else if (tabIdx == 3)
                     conn_params = "read.log";

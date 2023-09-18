@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Primitives;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -34,8 +35,18 @@ namespace ProstePrototype
         {
             InitializeComponent();
 
-            StringArray1 = new[] { (string)Application.Current.Resources["ScanMenuRSComChoice"], "1", "3", "9" };
-            IsSelectedValue1= 0;
+            string[] comPorts = System.IO.Ports.SerialPort.GetPortNames();
+
+            StringArray1 = new string[comPorts.Length + 1]; // +1 for the additional item start item
+
+            StringArray1[0] = (string)Application.Current.Resources["ScanMenuRSComChoice"]; // Set the additional item
+
+            // Copy the COM port names to StringArray1 starting from index 1
+            for (int i = 0; i < comPorts.Length; i++)
+            {
+                StringArray1[i + 1] = comPorts[i];
+            }
+            IsSelectedValue1 = 0;
 
             StringArray2 = new[] { 
                 (string)Application.Current.Resources["ScanMenuRSParityChoice"], 
@@ -47,14 +58,53 @@ namespace ProstePrototype
             };
             IsSelectedValue2= 0;
 
-            StringArray3 = new[] { (string)Application.Current.Resources["ScanMenuRSBaudRateChoice"], "2400", "4800", "9600", "19200", "38400" };
-            IsSelectedValue3 = 0;
+            StringArray3 = new[] { (string)Application.Current.Resources["ScanMenuRSBaudRateChoice"], "2400", "4800", "9600", "19200", "38400", "96000" };
+            IsSelectedValue3 = 6;
 
             StringArray4 = new[] { (string)Application.Current.Resources["ScanMenuRSStopBitsChoice"], "0", "1", "1.5", "2" };
             IsSelectedValue4 = 0;
 
             this.DataContext = this;
         }
-        
+
+        public string Com
+        {
+            get
+            {
+                return StringArray1[Convert.ToInt16(com.IsSelectedValue)].ToString();
+            }
+        }
+
+        public string Parity
+        {
+            get
+            {
+                return StringArray2[Convert.ToInt16(parity.IsSelectedValue)].ToString();
+            }
+        }
+
+        public string BaudRate
+        {
+            get
+            {
+                return StringArray3[Convert.ToInt16(baudRate.IsSelectedValue)].ToString();
+            }
+        }
+
+        public string StopBits
+        {
+            get
+            {
+                return StringArray1[Convert.ToInt16(stopBits.IsSelectedValue)].ToString();
+            }
+        }
+
+        public int DataBits
+        {
+            get
+            {
+                return Convert.ToInt32(dataBits.Value);
+            }
+        }
     }
 }
