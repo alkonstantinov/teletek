@@ -91,6 +91,20 @@ namespace common
                 return Settings["updmapfilename"].ToString();
             }
         }
+        public static string updpath
+        {
+            get
+            {
+                return Settings["updpath"].ToString();
+            }
+        }
+        public static string killrunpath
+        {
+            get
+            {
+                return Settings["killrunpath"].ToString();
+            }
+        }
         public static string updhttppath
         {
             get

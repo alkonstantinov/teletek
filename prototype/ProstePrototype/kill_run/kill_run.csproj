@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="robocopy &quot;$(TargetDir)&quot; &quot;C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\bin\Debug\netcoreapp3.1\kill_run&quot; /MIR /COPYALL /R:3 /W:1" />
+  </Target>
+
+</Project>

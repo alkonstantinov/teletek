@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProstePrototype"
         mc:Ignorable="d"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" WindowStartupLocation="Manual"
         Title="ScanPopUpWindow" Height="150" Width="150"
         ShowInTaskbar="False" Topmost="True" WindowStyle="None">
     <Grid>

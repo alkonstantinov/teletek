@@ -27,6 +27,8 @@ using System.Windows.Threading;
 using System.Security.Policy;
 using System.Windows.Markup;
 using CefSharp.DevTools.DOM;
+using lupd;
+using System.Windows.Shapes;
 
 namespace ProstePrototype
 {
@@ -114,8 +116,22 @@ namespace ProstePrototype
             //define_size_txt.Text = Encoding.UTF8.GetString(Convert.FromBase64String("74SA")); valid for fa_solid font
             loadWb1 = true;
             File.WriteAllText("eventlog.log", string.Empty);
+
+            bool shouldLaunchAutoUpdate = Properties.Settings.Default.AutoUpdate;
+
+            if (shouldLaunchAutoUpdate && lupd.cUpd.Check4Updates(common.settings.updpath))
+            {
+                Welcome w = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
+                w.RunUpdate();
+            }
+
+            string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
+            if (Directory.Exists(locks))
+            {
+                SettingsDialog.KillRun(applicationDirectory, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, common.settings.updpath);
+            }
         }
-       
+
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -723,7 +739,7 @@ namespace ProstePrototype
         private void SaveLastUsedDirectory(string fileName)
         {
             // Save last used directory to file or registry key
-            Properties.Settings.Default.LastUsedDirectory = Path.GetDirectoryName(fileName);
+            Properties.Settings.Default.LastUsedDirectory = System.IO.Path.GetDirectoryName(fileName);
             Properties.Settings.Default.Save();
         }
         #endregion
@@ -828,9 +844,9 @@ namespace ProstePrototype
                 case eRWResult.BadCommandResult:
                     showMsg = $"Bad Command Result: Please check your provided details"; break;
                 case eRWResult.VersionDiff:
-                    showMsg = "alert";
-                    File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + "and connection parameters: " + conn_params.ToString() +
-                        " despite the Version Difference between panel and opened document." + "\n");
+                    showMsg = "Execution stopped due to version difference";
+                    File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + " and connection parameters: " + conn_params.ToString() +
+                        " stopped due to Version Difference between panel and opened document." + "\n");
                     break;
                 default:
                     break;
@@ -849,10 +865,20 @@ namespace ProstePrototype
             if (panel_version != xml_version)
             {
                 string q = $"A difference is found between the panel version and the currently " +
-                    $"loaded version. Choose \"No\" to stop the process. Or, you can continue by clicking the \"Yes\" button below" +
-                    $"keeping in mind that this might result in incorrect interpretation of the data";
-                YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
-                return yesNoDialog.ShowDialog().Value;
+                    $"loaded version. \n - Choose \"No\" to stop the process. \n - Or, you can continue by clicking the \"Yes\" button below " +
+                    $"keeping in mind that this might result in incorrect interpretation of the data.";
+                return (MessageBox.Show(
+                        q,
+                        "Version difference found",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes);
+
+                //bool result = this.Dispatcher.Invoke(() =>
+                //{
+                //    YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
+                //    return yesNoDialog.ShowDialog().Value;
+                //});
+                //return result;
             }
             return true;
         }

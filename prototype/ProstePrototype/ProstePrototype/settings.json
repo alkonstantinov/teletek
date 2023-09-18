@@ -1,6 +1,10 @@
 ﻿{
   "logreads": true,
-  "paths2inc": [ "ELEMENTS.iris_zones.CONTAINS.IRIS_ZONE", "ELEMENTS.iris_zones.CONTAINS.IRIS4_ZONE", "ELEMENTS.iris_zones.CONTAINS.IRIS8_ZONE", "ELEMENTS.iris_panels_in_network.CONTAINS.IRIS_PANELINNETWORK" ],
+  "updpath": ".",
+  "killrunpath": "\\kill_run",
+  "updmapfilename": "fmap.json",
+  "updhttppath": "https://teletek-man.teletek.bg/teletek-man/",
+  "paths2inc": [ "ELEMENTS.iris_zones.CONTAINS.IRIS_ZONE", "ELEMENTS.iris_zones.CONTAINS.IRIS4_ZONE", "ELEMENTS.iris_zones.CONTAINS.IRIS8_ZONE", "ELEMENTS.iris_zones.CONTAINS.SIMPO_ZONE", "ELEMENTS.iris_panels_in_network.CONTAINS.IRIS_PANELINNETWORK" ],
   "inc_fields_on_read": {
     "IRIS8": {
       "IRIS8_INPUT": {
@@ -28,6 +32,24 @@
         {
           "match": "<PROPERTY ID=\"LOGO2\" BYTE=\"85\" LENGTH=\"39\" OPERATION=\"MATRIX_CYR2TEXT\"/>",
           "replacewith": "<PROPERTY ID=\"LOGO2\" BYTE=\"86\" LENGTH=\"39\" OPERATION=\"MATRIX_CYR2TEXT\"/>"
+        }
+      ]
+    },
+    {
+      "ELEMENT_ID": "SIMPO_LOGO",
+      "replacements": [
+        {
+          "match": "<PROPERTY ID=\"LOGO2\" BYTE=\"92\" LENGTH=\"40\" OPERATION=\"MATRIX_CYR2TEXT\"/>",
+          "replacewith": "<PROPERTY ID=\"LOGO2\" BYTE=\"93\" LENGTH=\"40\" OPERATION=\"MATRIX_CYR2TEXT\"/>"
+        }
+      ]
+    },
+    {
+      "ELEMENT_ID": "SIMPO_PANELS",
+      "replacements": [
+        {
+          "match": "<PROPERTY ID=\"status\" BYTE=\"2\" LENGTH=\"4\"/>",
+          "replacewith": "<PROPERTY ID=\"status\" BYTE=\"2\" LENGTH=\"1\"/>"
         }
       ]
     }

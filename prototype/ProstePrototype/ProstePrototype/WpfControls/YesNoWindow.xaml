@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProstePrototype.WpfControls"
         mc:Ignorable="d"
-        Title="YesNoWindow" Height="Auto" Width="Auto" MinWidth="200" MinHeight="170"
+        Title="YesNoWindow" Width="Auto" MinWidth="200" Height="Auto"
         WindowStyle="None" WindowStartupLocation ="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="qText" MinHeight="80" HorizontalAlignment="Left" Margin="20,0,20,0" TextWrapping="Wrap" />
-        <Border Grid.Row="1" BorderBrush="#e8e9ea" BorderThickness="0 2 0 0" >
+        <TextBlock Grid.Row="0" x:Name="qText" MinHeight="80" HorizontalAlignment="Left" Margin="20,5,20,0" 
+                   FontSize="16" FontFamily="{StaticResource poppins_demibold}" TextWrapping="Wrap" />
+        <Border Grid.Row="1" BorderBrush="#e8e9ea" BorderThickness="0 2 0 0" MaxHeight="70">
             <StackPanel Margin="10" VerticalAlignment="Center" >
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "kill_run": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\work\\teletek\\teletek\\prototype\\ProstePrototype\\ProstePrototype\\bin\\Debug\\netcoreapp3.1\\ProstePrototype.exe c:\\work\\tmp\\3\\"
+    }
+  }
+}

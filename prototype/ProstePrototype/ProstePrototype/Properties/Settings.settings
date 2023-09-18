@@ -20,5 +20,8 @@
     <Setting Name="TCPPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">7000</Value>
     </Setting>
+    <Setting Name="AutoUpdate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -135,7 +135,7 @@ namespace lupd
             }
             return content;
         }
-        private static JObject fMap(ref eUPDResult res, ref string err)
+        public static JObject fMap(ref eUPDResult res, ref string err)
         {
             string updhttppath = settings.updhttppath;
             if (!Regex.IsMatch(updhttppath, @"/$")) updhttppath += "/";
@@ -157,6 +157,14 @@ namespace lupd
             }
             return FilesMap(crcprocess, updpath);
         }
+        private static void Save2Locks(string updpath, string _relpath, byte[] content)
+        {
+            if (!Regex.IsMatch(updpath, @"[\\/]$")) updpath += Path.DirectorySeparatorChar.ToString();
+            string locks = updpath + "~locks" + Path.DirectorySeparatorChar.ToString() + Regex.Replace(_relpath, @"^[\\/]", "");
+            string dir = Path.GetDirectoryName(locks);
+            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            File.WriteAllBytes(locks, content);
+        }
         private static void Download(string updpath, JObject downloads, dFileDownloadProgress downloading, ref eUPDResult res, ref string err)
         {
             string updhttppath = Regex.Replace(settings.updhttppath, @"[\\/]$", "");
@@ -172,10 +180,18 @@ namespace lupd
                 if (res != eUPDResult.Ok) return;
                 //
                 string savepath = Regex.Replace(Regex.Replace(updpath, @"[\\/]", Path.DirectorySeparatorChar.ToString()), @"[\\/]$", "") + Path.DirectorySeparatorChar;
-                savepath += Regex.Replace(Regex.Replace(of["relpath"].ToString(), @"^[\\/]", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
+                string _relpath = Regex.Replace(Regex.Replace(of["relpath"].ToString(), @"^[\\/]", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
+                savepath += _relpath;
                 string dir = Path.GetDirectoryName(savepath);
                 if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-                File.WriteAllBytes(savepath, content);
+                try
+                {
+                    File.WriteAllBytes(savepath, content);
+                }
+                catch
+                {
+                    Save2Locks(updpath, _relpath, content);
+                }
             }
         }
         private static void DeleteUnusedFiles(string updpath, JObject files4del)
@@ -203,13 +219,23 @@ namespace lupd
             JObject downloads = files4download(crcProcessing, localmap, fmap);
             Download(updpath, downloads, downloading, ref res, ref err);
             JObject files4del = files4download(crcProcessing, fmap, localmap);
-            DeleteUnusedFiles(updpath, files4del);
+            //DeleteUnusedFiles(updpath, files4del);
             //
             string fmapfile = Regex.Replace(Regex.Replace(updpath, @"[\\/]$", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
             fmapfile += Path.DirectorySeparatorChar + settings.updmapfilename;
             File.WriteAllText(fmapfile, fmap.ToString());
             //
             return res;
+        }
+        public static bool Check4Updates(string updpath)
+        {
+            eUPDResult res = eUPDResult.Ok;
+            string err = "";
+            JObject fmap = fMap(ref res, ref err);
+            if (res != eUPDResult.Ok) return false;
+            JObject localmap = updPathMap(updpath, null);
+            JObject downloads = files4download(null, localmap, fmap);
+            return downloads != null && downloads.Properties().Count() > 0;
         }
     }
 }

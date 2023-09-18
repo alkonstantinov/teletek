@@ -13,11 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lcommunicate", "lcommunicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "common", "common\common.csproj", "{29BE0FE3-D4F2-49F4-A108-0E53EE9F428E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lupd", "lupd\lupd.csproj", "{BEF85202-EC49-406D-BB26-A692E7A6EAC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lupd", "lupd\lupd.csproj", "{BEF85202-EC49-406D-BB26-A692E7A6EAC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "updprep", "updprep\updprep.csproj", "{85E04D02-5D1B-42B4-9D56-DAE60DEA7EEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "updprep", "updprep\updprep.csproj", "{85E04D02-5D1B-42B4-9D56-DAE60DEA7EEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "upd", "upd\upd.csproj", "{62E0E5DB-49E3-46BF-A7D6-A9AE63003AC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "upd", "upd\upd.csproj", "{62E0E5DB-49E3-46BF-A7D6-A9AE63003AC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kill_run", "kill_run\kill_run.csproj", "{DCF01CCD-FB4B-4111-A67B-5173770DAB3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{62E0E5DB-49E3-46BF-A7D6-A9AE63003AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E0E5DB-49E3-46BF-A7D6-A9AE63003AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E0E5DB-49E3-46BF-A7D6-A9AE63003AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF01CCD-FB4B-4111-A67B-5173770DAB3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF01CCD-FB4B-4111-A67B-5173770DAB3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF01CCD-FB4B-4111-A67B-5173770DAB3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF01CCD-FB4B-4111-A67B-5173770DAB3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,13 @@
-﻿using System;
+﻿using common;
+using lupd;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,6 +29,7 @@ namespace ProstePrototype
         public SettingsDialog(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.DataContext = this;
             _mainWindow = mainWindow;
             changeTheme_btn.Command = new RelayCommand(changeTheme_Click);
             currentVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
@@ -82,125 +87,110 @@ namespace ProstePrototype
             
         }
 
-        private void Update_Clicked(object sender, RoutedEventArgs e)
+        #region Update
+        private static void crcprocess(string filename)
         {
-            // send for comparison in current version
-            // Get the path to the folder.
-            //string folderPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Release";
+            Console.WriteLine(filename);
+        }
+        private static void http_progress(string filename, int counter, int cntall)
+        {
+            SettingsDialog settingsWindow = Application.Current.Windows.OfType<SettingsDialog>().FirstOrDefault();
+            ProgressBar progrBar = settingsWindow.progressBar.FindName("progrBar") as ProgressBar;
+            double percentageCalc = counter / cntall;
+            progrBar.Value = percentageCalc;
+            progrBar.Maximum = 100;
+            settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("0.##%");
+        }
 
-            // Check if the folder exists.
-            //if (Directory.Exists(folderPath))
-            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) // checks for internet
+        public void RunUpdate()
+        {
+            progrBar.Visibility = Visibility.Visible;
+            progrBarText.Text = "Newer version found! Proceeding with update... 0%";
+
+            string err = "";
+            eUPDResult res = cUpd.DoUpdate(common.settings.updpath, crcprocess, http_progress, ref err);
+            if (res != eUPDResult.Ok)
             {
-                /*
-                 * using this approach below to launch upd Program
-                */
-
-                string relativePathToConsoleApp = "upd\\bin\\Debug\\netcoreapp3.1\\upd.exe"; // Relative path from your WPF app to the console app
-
-                // Get the current working directory of your WPF app
-                string currentWorkingDirectory = Environment.CurrentDirectory;
-
-                // Combine the current working directory with the relative path to get the full path
-                //string pathToConsoleApp = System.IO.Path.Combine(currentWorkingDirectory, relativePathToConsoleApp);
-
-                string pathToConsoleApp = "C:\\Users\\vbb12\\GitHub\\Teletek\\teletek\\prototype\\ProstePrototype\\upd\\bin\\Debug\\netcoreapp3.1\\upd.exe"; // Replace with the actual path to your console app executable
-
-                // Create a new process to start the console application
-                Process process = new Process();
-                process.StartInfo.FileName = pathToConsoleApp;
-
-                // You can pass any command-line arguments if needed
-                // process.StartInfo.Arguments = "arg1 arg2 arg3";
-
-                // Start the process
-                process.Start();
-
-                // Optionally, you can wait for the process to exit and handle its exit code
-                process.WaitForExit();
-
-                // Close the process to release resources
-                process.Close();
-
-                //FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://teletek.bg/teletek-man");
-                //request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-                //request.Credentials = new NetworkCredential("teletek-man", "t3l3t3k@man");
-                //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                //Stream responseStream = response.GetResponseStream();
-                //StreamReader reader = new StreamReader(responseStream);
-                //// go to "teletek-man"
-                //string fileData = reader.ReadToEnd();
-                //reader.Close();
-                //response.Close();
-                //string[] files = fileData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-                //foreach (string file in files)
-                //{
-                //    string[] details = file.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                //    string fileName = details[details.Length - 1];
-                //    // TODO! based on fileName decides if the fileName is higher version, so it is worth downloading it
-                //    FtpWebRequest requestFile = (FtpWebRequest)WebRequest.Create("ftp://teletek.bg/teletek-man" + fileName);
-                //    requestFile.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-                //    requestFile.Credentials = new NetworkCredential("teletek-man", "t3l3t3k@man");
-                //    FtpWebResponse responseFile = (FtpWebResponse)requestFile.GetResponse();
-                //    DateTime creationDate = responseFile.LastModified;
-                //    responseFile.Close();
-
-                //    //Download the file to a temporary location
-                //    WebClient client = new WebClient();
-                //    client.Credentials = new NetworkCredential("teletek-man", "t3l3t3k@man");
-                //    client.DownloadFile("ftp://teletek.bg/teletek-man" + fileName, System.IO.Path.GetTempPath() + fileName);
-
-                //    FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(System.IO.Path.GetTempPath() + fileName);
-
-                //    Console.WriteLine("File Name: " + fileName);
-                //    Console.WriteLine("Creation Date: " + creationDate.ToString());
-                //    Console.WriteLine("Version Info: " + myFileVersionInfo.FileVersion);
-
-                //    //If the file is the required update(TODO this check) Run the file(the file should run the setup in silent mode   
-                //    Process.Start(System.IO.Path.GetTempPath() + fileName);
-
-                //    //Wait for the process to finish
-                //    //Process.WaitForExit();
-
-                //    //Delete the temporary file   
-                //    File.Delete(System.IO.Path.GetTempPath() + fileName);
-                //}
-
-
-                //// Get the list of all files in the folder.
-                //string[] files = Directory.GetFiles(folderPath, "*.exe");
-
-                //// Get the creation date and version of each file.
-                //DateTime[] creationDates = new DateTime[files.Length];
-                //string[] versions = new string[files.Length];
-                //string[] descr = new string[files.Length];
-                //for (int i = 0; i < files.Length; i++)
-                //{
-                //    creationDates[i] = File.GetCreationTime(files[i]);
-                //    versions[i] = FileVersionInfo.GetVersionInfo(files[i]).FileVersion;
-                //    descr[i] = FileVersionInfo.GetVersionInfo(files[i]).FileDescription;
-                //}
-
-                //Debug.WriteLine("currentVersion" + currentVersion);
-                //// Display the creation date and version of each file.
-                //for (int i = 0; i < files.Length; i++)
-                //{
-                //    Debug.WriteLine("File: " + files[i] + ", Creation Date: " + creationDates[i] + ", Version: " + versions[i]+ ", Descr: " + descr[i]);
-                //    if (!string.IsNullOrEmpty(versions[i]) && currentVersion.CompareTo(versions[i].Trim()) < 0)
-                //    {
-                //        // perform install this update
-                //        Debug.WriteLine("Hurray");
-                //    }
-                //}
+                MessageBox.Show(
+                    err,
+                    "Update Message - Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                progrBarText.Text = err;
             }
             else
             {
-                // No Connection to the Internet
-                MessageBox.Show("Please check your Internet Connection and then try again", "No Connection to the Internet", MessageBoxButton.OK, MessageBoxImage.Warning);
-                // The folder is wrong.
-                //Debug.WriteLine("No Connection to the Internet. Path used: " + folderPath);
+                progrBar.Value = 100;
+                progrBarText.Text = "Successfully updated!";
             }
+        }
+
+        public static void KillRun(string appDir, string exePath, string updPath)
+        {
+            //File.WriteAllText
+            //    (@"C:\test.bat", 
+            //    $@"{System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName} -randomArgs /n del %0");
+
+            //var proc = new Process
+            //{
+            //    StartInfo = new ProcessStartInfo
+            //    {
+            //        FileName = "explorer.exe",
+            //        Arguments = @"C:\test.bat",
+            //        UseShellExecute = true,
+            //        Verb = "runas",
+            //        WindowStyle = ProcessWindowStyle.Hidden
+            //    }
+            //};
+            //proc.Start();;
+            //
+            
+            ProcessStartInfo killRun = new ProcessStartInfo(
+                appDir +
+                Regex.Replace(common.settings.killrunpath, @"[\\/]$", "") + 
+                System.IO.Path.DirectorySeparatorChar + 
+                "kill_run.exe"
+                );
+            killRun.WindowStyle = ProcessWindowStyle.Normal;                
+            killRun.Arguments = $"{exePath} {updPath}";
+            Process.Start(killRun);
+        }
+        #endregion
+        private void Update_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (lupd.cUpd.Check4Updates(common.settings.updpath))
+            {
+                RunUpdate();
+                string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
+                if (
+                    Directory.Exists(locks) &&
+                    MessageBox.Show(@$"Teletek Manager needs to restart to finish the update. Information on currently opened projects might be lost. Proceed?" +
+                    "\n If you choose \"No\" the update will automatically finalize next time you relaunch.",
+                        "Update Warning",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes
+                    )
+                {
+                    string appDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+                    SettingsDialog.KillRun(appDir, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, common.settings.updpath);
+                }
+                /* for the .dll file you can use, but it is not in processes
+                 * Environment.GetCommandLineArgs()[0], 
+                 * System.Reflection.Assembly.GetExecutingAssembly().Location, 
+                 * System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.FullyQualifiedName
+                 */
+            }
+            else
+            {
+                progrBarText.Text = "You are up to date!";
+            }
+        }
+
+        private void AutoCheck_Clicked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.AutoUpdate = (bool)autoCheck.IsChecked;
+            Properties.Settings.Default.Save();
         }
     }
 

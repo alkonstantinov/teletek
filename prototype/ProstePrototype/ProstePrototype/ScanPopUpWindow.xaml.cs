@@ -27,6 +27,8 @@ namespace ProstePrototype
             //MediaElement1.Source = new Uri(@"C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\Images\barcode-scan.gif", UriKind.RelativeOrAbsolute);
             //MediaElement1.Position = TimeSpan.Zero;
             //MediaElement1.Play();
+            this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = (SystemParameters.WorkArea.Height / 2) - (this.Height * 1.6);
             string gifPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory), "Images\\barcode-scan.gif");
             string html = $"<html><body style='overflow: hidden; display:grid; place-items: center; margin: 0; padding: 0;'><img src='{gifPath}' width='100%' height='100%' style='margin: auto;'/></body></html>";
             scanWb.NavigateToString(html);

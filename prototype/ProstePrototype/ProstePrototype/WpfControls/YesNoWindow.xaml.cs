@@ -36,7 +36,7 @@ namespace ProstePrototype.WpfControls
         private void YesNoWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Calculate the maximum width as 70% of the available width
-            double maxWidthPercentage = 0.7;
+            double maxWidthPercentage = 0.6;
             double maxWidth = SystemParameters.PrimaryScreenWidth * maxWidthPercentage;
 
             // Set the MaxWidth property of qText to "Auto" to allow it to expand as needed
@@ -44,11 +44,19 @@ namespace ProstePrototype.WpfControls
 
             // Ensure the window width doesn't exceed the maximum width
             Width = Math.Min(qText.DesiredSize.Width + 40, maxWidth);
+
+            // Calculate the maximum height as 70% of the available height
+            double maxHeightPercentage = 0.7;
+            double maxHeight = SystemParameters.PrimaryScreenHeight * maxHeightPercentage;
+            // Set the MaxHeight property of the window to the calculated value
+            MaxHeight = maxHeight;
+            // Ensure the window height doesn't exceed the maximum height
+            Height = Math.Min(qText.DesiredSize.Height + 100, maxHeight);
         }
 
 
-        private void Yes_Clicked (object sender, RoutedEventArgs e) { DialogResult = true; }
+        private void Yes_Clicked(object sender, RoutedEventArgs e) { DialogResult = true; }
 
-        private void No_Clicked (object sender, RoutedEventArgs e) { DialogResult = false; }
+        private void No_Clicked(object sender, RoutedEventArgs e) { DialogResult = false; }
     }
 }

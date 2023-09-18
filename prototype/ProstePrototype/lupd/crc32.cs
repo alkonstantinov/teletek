@@ -66,7 +66,7 @@ namespace lupd
         public static uint Hash(string file)
         {
             uint res = 0xffffffff;
-            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             while (true)
             {
                 int readed = fs.Read(buff, 0, buff.Length);

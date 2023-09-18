@@ -126,6 +126,7 @@
   <ItemGroup>
     <ProjectReference Include="..\lcommunicate\lcommunicate.csproj" />
     <ProjectReference Include="..\ljson\ljson.csproj" />
+    <ProjectReference Include="..\lupd\lupd.csproj" />
   </ItemGroup>
 
   <ItemGroup>
