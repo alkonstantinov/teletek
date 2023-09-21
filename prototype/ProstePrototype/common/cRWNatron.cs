@@ -65,28 +65,12 @@ namespace common
         public override int CommandLength() { return 6; }
         public override string CommandString()
         {
-            if (sio == null || sio == "")
-            {
-                sio = "0000";
-                if (io == eIO.ioRead)
-                    sio = "0351";
-                else if (io == eIO.ioWrite)
-                    sio = "0072";
-            }
-            return sio + sDataType + sindex + sbuffoffset + slen;
+            return sDataType + sindex + sbuffoffset + slen;
         }
         public override string CommandString(int idx)
         {
-            if (sio == null || sio == "")
-            {
-                sio = "0000";
-                if (io == eIO.ioRead)
-                    sio = "0351";
-                else if (io == eIO.ioWrite)
-                    sio = "0072";
-            }
             string sidx = idx.ToString("X2");
-            return sio + sDataType + sidx + sbuffoffset + slen;
+            return sDataType + sidx + sbuffoffset;
         }
         public override string CommandString(int _idx, int _subidx)
         {
@@ -136,14 +120,7 @@ namespace common
         }
         public override string CommandKey()
         {
-            if (sio == null || sio == "")
-            {
-                sio = "0000";
-                if (io == eIO.ioRead)
-                    sio = "0351";
-                else if (io == eIO.ioWrite)
-                    sio = "0072";
-            }
+            sio = "";
             return sio + sDataType;
         }
         public override int idxPosition()
@@ -153,7 +130,7 @@ namespace common
         public override bool IsValid(string _cmd)
         {
             bool res = base.IsValid(_cmd);
-            res &= _cmd.Length == CommandLength() + ((ssubidx != null) ? ssubidx.Length : 0);
+            res &= _cmd.Length == CommandLength();
             //
             return res;
         }
@@ -199,11 +176,12 @@ namespace common
         #region command analysis
         internal override string CommandIO(string _cmd)
         {
-            return _cmd.Substring(0, 2);
+            return "";// _cmd.Substring(0, 2);
         }
         internal override string CommandDataType(string _cmd)
         {
-            return (_cmd.Length >= 6) ? _cmd.Substring(4, 2) : null;
+            return (_cmd.Length >= 2) ? _cmd.Substring(0, 2) : null;
+            //return (_cmd.Length >= 6) ? _cmd.Substring(4, 2) : null;
         }
         internal override string CommandKey(string _cmd)
         {
@@ -219,7 +197,7 @@ namespace common
         }
         internal override string CommandBytesOffset(string _cmd)
         {
-            return (_cmd.Length >= 10) ? _cmd.Substring(8, 2) : null;
+            return (_cmd.Length >= 6) ? _cmd.Substring(4, 2) : null;
         }
         internal override string CommandBytesCnt(string _cmd)
         {
@@ -1205,6 +1183,7 @@ namespace common
             }
             foreach (string rkey in _dread_prop.Keys)
             {
+                if (_dwrite_prop.ContainsKey(rkey)) continue;
                 _dwrite_prop.Add(rkey, new Dictionary<string, Dictionary<string, List<string>>>());
                 Dictionary<string, Dictionary<string, List<string>>> dcmdr = _dread_prop[rkey];
                 Dictionary<string, Dictionary<string, List<string>>> dcmdw = _dwrite_prop[rkey];

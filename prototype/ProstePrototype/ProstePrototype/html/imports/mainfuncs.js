@@ -3,6 +3,7 @@
 const BUTTON_COLORS = {
     IRIS: 'fire',
     SIMPO: 'fire',
+    NATRON: 'fire',
     ECLIPSE: 'normal',
     TTE: 'grasse',
 };
@@ -284,7 +285,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                                 </button>`;
             } else {
                 // adding the button for everybody except PANNELIN // SIMPO_PANELS_R //IRIS8_PANELINNETWORK
-                if (k && !k.toUpperCase().includes("PANEL")) { 
+                if (k && (!k.toUpperCase().includes("PANEL") || !k.toUpperCase().includes("NATRON"))) { 
                     btnDiv.insertAdjacentHTML(
                         'afterbegin',
                         `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}">
@@ -321,8 +322,11 @@ function drawFields(body, json, inheritedColor = 'normal') {
                     );
                 }
             }
-
-            getAvailableElements(k.toUpperCase());
+            if (k && k.toUpperCase().includes('NATRON')) {
+                getAvailableElements("Natron_NONE");
+            } else {
+                getAvailableElements(k.toUpperCase());
+            }
         } else if (k && !k.includes('~')) { // collapsible parts -> transformed to ram_attribute_holder (request meeting 30.08.2023)
             const { input_name, input_id } = {
                 input_name: divLevel.name,
@@ -936,7 +940,7 @@ async function showMimicout(id, params) {
 const transformGroupElement = (elementJson, fieldName = '') => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: newT.t(localStorage.getItem('lang'), elementJson['@LNGID']), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: elementJson['@LNGID'] ? newT.t(localStorage.getItem('lang'), elementJson['@LNGID']) : elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] ? elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_') + "_" + elementJson['@LNGID'] : elementJson['@LNGID'], //.replaceAll("-", "_"),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -1966,7 +1970,8 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
 
         newUserElement = `<div onclick="javascript: ${showFn}('${last}', ${type}); addActive('ram_panel_2')" id="${last}" class="ram_card ${BUTTON_COLORS[color]}">
                                 <div class="ram_card_img_top">
-                                    <i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>
+                                    ${type.toUpperCase().includes("NATRON") ? `<img src="${BUTTON_IMAGES[elType].im}" alt="${BUTTON_IMAGES[elType].sign}">` :
+                                    `<i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>`}
                                 </div>
                                 <div class="ram_card_body">
                                     <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+last+Number(INC)}</h5>

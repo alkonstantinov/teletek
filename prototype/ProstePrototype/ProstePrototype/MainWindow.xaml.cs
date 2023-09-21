@@ -393,6 +393,26 @@ namespace ProstePrototype
             wb1.ExecuteScriptAsyncWhenPageLoaded(script);
             wb2.ExecuteScriptAsyncWhenPageLoaded(script);
         }
+
+        private string MakeTranslation(string keyword) 
+        {
+            JObject translationsJSON = JObject.Parse(Properties.Settings.Default.translations);
+            if (translationsJSON is null) return "Error attaching translations object";
+            if (translationsJSON[keyword] != null) 
+            {
+                var t = translationsJSON[keyword];
+                if (t[Properties.Settings.Default.Language]  != null)
+                {
+                    return t[Properties.Settings.Default.Language].ToString();
+                } else
+                {
+                    return "Not found translation language";
+                }
+            } else
+            {
+                return $"Not found translation key";
+            }
+        }
         #endregion
 
         #region PostMessage&LoadPage
@@ -552,7 +572,11 @@ namespace ProstePrototype
             }
 
             string filePath = "eventlog.log";
-            string logEntry = json["Command"].ToString() + " --> " + json["Params"].ToString() + "\n\n";
+            string logEntry = json["Command"].ToString();
+            if (json["Params"] != null)
+            {
+                logEntry += " --> " + json["Params"].ToString() + "\n\n";
+            } 
 
             using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite))
             using (StreamWriter writer = new StreamWriter(fs))
@@ -694,7 +718,7 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {data.RightBrowserUrl}"" }}";
-                ((BrowserParams)wb2.Tag).Params = cJson.GroupsBrowserParam(data.key);
+                ((BrowserParams)wb2.Tag).Params = cJson.GroupsBrowserParam(data.key == "natron" ? "Natron" : data.key);
             });
             wb2.Load(wb2UrlAddress);
 
@@ -785,17 +809,24 @@ namespace ProstePrototype
                 }
                 else if (tabIdx == 3)
                     conn_params = "read.log";
+
+                string panel_type = cJson.CurrentPanelType.ToString();
+                bool codeEntered = true;
                 CodeWindow cw = new CodeWindow();
-                cw.ShowDialog();
-                var codeEntered = cw.DialogResult;
+                if (panel_type != "natron")
+                {
+                    cw.ShowDialog();
+                    codeEntered = (bool)cw.DialogResult;
+                }
+                
                 Thread funcThread = new Thread(() =>
                 {
                     try
                     {
-                        if ((bool)codeEntered)
+                        if (codeEntered)
                         {
                             // Use Dispatcher.Invoke to access the property from the UI thread.
-                            string code = (string)Dispatcher.Invoke(new Func<string>(() => { return cw.Code; }));
+                            string code = panel_type != "natron" ? (string)Dispatcher.Invoke(new Func<string>(() => { return cw.Code; })) : "";
                             ReadDevice(conn_params, popUpWindow, code);
                         } else
                         {
@@ -840,21 +871,21 @@ namespace ProstePrototype
                     break;
                 case eRWResult.ConnectionError:
                     showMsg = (conn_params != null && (string)conn_params != "read.log") ?
-                        $"Connection Error: Please, check the provided {((common.cIPParams)conn_params).address} or {((common.cIPParams)conn_params).port}" :
-                        $"Connection Error: Please check your provided details";
+                        $"{MakeTranslation("ConnectionErrorFull")} {((common.cIPParams)conn_params).address}, {((common.cIPParams)conn_params).port}" :
+                        MakeTranslation("ConnectionError");
                     break;
                 case eRWResult.BadLogin:
-                    showMsg = $"Bad Login: Please check your provided details"; break;
+                    showMsg = MakeTranslation("BadLogin"); break;
                 case eRWResult.NullLoginCMD:
-                    showMsg = $"Null Login CMD: Please check your provided details"; break;
+                    showMsg = MakeTranslation("NullLoginCMD"); break;
                 case eRWResult.NullLoginOkByte:
-                    showMsg = $"Null Login Ok Byte: Please check your provided details"; break;
+                    showMsg = MakeTranslation("NullLoginOkByte"); break;
                 case eRWResult.NullLoginOkVal:
-                    showMsg = $"Null Login Ok Val: Please check your provided details"; break;
+                    showMsg = MakeTranslation("NullLoginOkVal"); break;
                 case eRWResult.BadCommandResult:
-                    showMsg = $"Bad Command Result: Please check your provided details"; break;
+                    showMsg = MakeTranslation("BadCommandResult"); break;
                 case eRWResult.VersionDiff:
-                    showMsg = "Execution stopped due to version difference";
+                    showMsg = MakeTranslation("VersionDiff");
                     File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + " and connection parameters: " + conn_params.ToString() +
                         " stopped due to Version Difference between panel and opened document." + "\n");
                     break;
@@ -872,24 +903,22 @@ namespace ProstePrototype
 
         private bool VersionDiff(string panel_version, string xml_version)
         {
-            if (panel_version != xml_version)
-            {
-                string q = $"A difference is found between the panel version and the currently " +
-                    $"loaded version. \n - Choose \"No\" to stop the process. \n - Or, you can continue by clicking the \"Yes\" button below " +
-                    $"keeping in mind that this might result in incorrect interpretation of the data.";
-                return (MessageBox.Show(
-                        q,
-                        "Version difference found",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Warning) == MessageBoxResult.Yes);
+            //if (panel_version != xml_version)
+            //{
+            //    string q = MakeTranslation("VersionDiffQuery");
+            //    return (MessageBox.Show(
+            //            q,
+            //            MakeTranslation("VersionDiffFound"),
+            //            MessageBoxButton.YesNo,
+            //            MessageBoxImage.Warning) == MessageBoxResult.Yes);
 
-                //bool result = this.Dispatcher.Invoke(() =>
-                //{
-                //    YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
-                //    return yesNoDialog.ShowDialog().Value;
-                //});
-                //return result;
-            }
+            //    //bool result = this.Dispatcher.Invoke(() =>
+            //    //{
+            //    //    YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
+            //    //    return yesNoDialog.ShowDialog().Value;
+            //    //});
+            //    //return result;
+            //}
             return true;
         }
         private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
@@ -945,7 +974,7 @@ namespace ProstePrototype
                     loadWb1 = false;
                 } catch (Exception)
                 {
-                    string showMsg = $"Reading Error - unable to read values from \"{openFileDialog.SafeFileName}\"";
+                    string showMsg = $"{MakeTranslation("ReadingError")} \"{openFileDialog.SafeFileName}\"";
                     if (wb1.CanExecuteJavascriptInMainFrame)
                     {
                         wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
@@ -1004,7 +1033,7 @@ namespace ProstePrototype
                         ReadDevice(conn, popUpWindow, "");
                     } catch (Exception)
                     {
-                        string showMsg = $"Reading Error - Temporarily unable to read values for \"{panelType}\" panel type from .TDF";
+                        string showMsg = $"{MakeTranslation("ReadingErrorTemp")} \"{panelType}\" {MakeTranslation("ReadingErrorTempFin")}";
                         wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");                        
                         popUpWindow._functionFinished = true;
                     }

@@ -640,6 +640,11 @@ namespace ljson
             {
                 foreach (string key in _merge.Keys)
                 {
+                    if (path == "natron_device")
+                    {
+                        rw = _merge[key];
+                        break;
+                    }
                     if (key.ToLower() == path.ToLower() || _merge[key].ReadPath.ToLower() == path.ToLower())
                     {
                         rw = _merge[key];
@@ -1216,6 +1221,18 @@ namespace ljson
                         typeidx = read_props[rpk].offset;
                 }
             }
+            else if (CurrentPanelType == "natron")
+            {
+                cRWPathNatron pn = (cRWPathNatron)p;
+                foreach (cRWCommandNatron cmd in pn.ReadCommands)
+                    cmds.Add(cmd);
+                foreach (string rpk in pn.ReadProperties.Keys)
+                {
+                    read_props.Add(rpk, (cRWPropertyNatron)pn.ReadProperties[rpk]);
+                    if (Regex.IsMatch(rpk, @"type", RegexOptions.IgnoreCase))
+                        typeidx = read_props[rpk].offset;
+                }
+            }
             else
             {
                 foreach (cRWCommand cmd in p.ReadCommands)
@@ -1249,8 +1266,13 @@ namespace ljson
                     foreach (cRWCommand cmd in cmds)
                     {
                         string scmd = cmd.CommandString();
-                        if (!Regex.IsMatch(read_path, @"SIMPO_MIMICOUT$"))
+                        if (!Regex.IsMatch(read_path, @"SIMPO_MIMICOUT$") && !Regex.IsMatch(read_path, @"natron", RegexOptions.IgnoreCase))
                             scmd = scmd.Substring(0, cmd.idxPosition() * 2) + idx.ToString("X2") + scmd.Substring((cmd.idxPosition() + 1) * 2);
+                        else if (Regex.IsMatch(read_path, @"natron", RegexOptions.IgnoreCase))
+                        {
+                            cmd.io = eIO.ioRead;
+                            scmd = cmd.CommandString(idx);
+                        }
                         else
                         {
                             cmd.io = eIO.ioRead;
@@ -1539,23 +1561,23 @@ namespace ljson
         private static string VersionKey(object conn_params, string vercmd, cXmlConfigs cfg, string _code, out eRWResult rwres)
         {
             rwres = eRWResult.Ok;
-            if (_code == null || _code.Trim() == "")
+            if ((_code == null || _code.Trim() == "") && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase))
                 return cfg.CurrentVersion;
-            cTransport conn = cComm.ConnectBase(conn_params);
+            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType);
             if (conn == null)
             {
                 rwres = eRWResult.ConnectionError;
                 return null;
             }
             rwres = PanelLogin(conn, cfg, _code);
-            if (rwres != eRWResult.Ok) return null;
+            if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD) return null;
             byte[] bres = cComm.SendCommand(conn, vercmd);
             _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
             if (settings.logreads && !_log_bytesreaded.ContainsKey(vercmd))
                 _log_bytesreaded.Add(vercmd, bres);
             //cComm.CloseConnection(conn);
-            string res = bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2");
+            string res = (bres != null) ? bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2") : null;
             return res;
         }
         private static eRWResult SetRWFiles(object conn_params, string _code, ref string panel_version, ref string xml_version)
@@ -1563,18 +1585,21 @@ namespace ljson
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             eRWResult rwres = eRWResult.Ok;
             string ver = VersionKey(conn_params, cfg.VersionCommand, cfg, _code, out rwres);
-            if (rwres == eRWResult.Ok && ver != cfg.CurrentVersion || WriteReadMerge == null)
+            if (ver != null)
             {
-                cfg.SetRWFiles(ver);
-                WriteReadMerge = cfg.RWMerged();
+                if ((rwres == eRWResult.Ok || rwres == eRWResult.NullLoginCMD) && ver != cfg.CurrentVersion || WriteReadMerge == null)
+                {
+                    cfg.SetRWFiles(ver);
+                    WriteReadMerge = cfg.RWMerged();
+                }
+                panel_version = ver;
             }
-            panel_version = ver;
             xml_version = cfg.CurrentVersion;
             return rwres;
         }
         public static string ReadLog(object conn_params)
         {
-            cTransport conn = cComm.ConnectBase(conn_params);
+            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType);
             byte[] blog = cComm.SendCommand(conn, settings.IRISLogCMD);
             cComm.CloseConnection(conn);
             if (settings.logreads)
@@ -1641,8 +1666,9 @@ namespace ljson
             string panel_version = null;
             string xml_version = null;
             eRWResult rwres = SetRWFiles(conn_params, _code, ref panel_version, ref xml_version);
-            if (panel_version != xml_version && !verdiff(panel_version, xml_version)) return eRWResult.VersionDiff;
-            if (rwres != eRWResult.Ok)
+            if (panel_version != xml_version && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase) && !verdiff(panel_version, xml_version))
+                return eRWResult.VersionDiff;
+            if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD)
                 return rwres;
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
@@ -1678,6 +1704,10 @@ namespace ljson
                             {
                                 cRWPathIRIS rwi = jrw.ToObject<cRWPathIRIS>();
                                 drw.Add(((JProperty)t).Name, rwi);
+                            } else if (panel_type == "natron")
+                            {
+                                cRWPathNatron rwn = jrw.ToObject<cRWPathNatron>();
+                                drw.Add(((JProperty)t).Name, rwn);
                             }
                             else
                             {
@@ -1706,8 +1736,20 @@ namespace ljson
                         dpath_minmax.Add(ppanel.Name, new Tuple<byte, byte>(pmin, pmax));
                     }
                 }
+                if (Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase))
+                {
+                    JObject natron = (JObject)CurrentPanel["ELEMENTS"]["Natron"]["CONTAINS"];
+                    JProperty pdev = natron.Properties().First();
+                    if (!dpath_minmax.ContainsKey(pdev.Name))
+                    {
+                        JObject opanelminmax = (JObject)pdev.Value;
+                        byte pmin = Convert.ToByte(opanelminmax["@MIN"].ToString());
+                        byte pmax = Convert.ToByte(opanelminmax["@MAX"].ToString());
+                        dpath_minmax.Add(pdev.Name, new Tuple<byte, byte>(pmin, pmax));
+                    }
+                }
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
-                cTransport conn = cComm.ConnectBaseCached(conn_params, _connection_cache);
+                cTransport conn = cComm.ConnectBaseCached(conn_params, CurrentPanelType, _connection_cache);
                 //LOGIN!!!!!!!!!!!!!!!!!!!!!!!
                 //byte[] loginres = cComm.SendCommand(conn, "076033333333");
                 //
@@ -1737,6 +1779,20 @@ namespace ljson
                             ReadProperties.Add(pkey, propi);
                         }
                         p = pi;
+                    }
+                    else if (panel_type == "natron")
+                    {
+                        cRWPathNatron pn = (cRWPathNatron)drw[key];
+                        List<cRWCommandNatron> read_commandsn = pn.ReadCommands;
+                        read_commands = new List<cRWCommand>();
+                        foreach (cRWCommandNatron c in read_commandsn)
+                            read_commands.Add(c);
+                        foreach (string pkey in pn.ReadProperties.Keys)
+                        {
+                            cRWPropertyNatron propn = pn.ReadProperties[pkey];
+                            ReadProperties.Add(pkey, propn);
+                        }
+                        p = pn;
                     }
                     else
                     {
@@ -1811,6 +1867,8 @@ namespace ljson
                     {
                         if (panel_type == "iris")
                             lstCmdS.Add(((cRWCommandIRIS)cmd).CommandString());
+                        else if (panel_type == "natron")
+                            lstCmdS.Add(((cRWCommandNatron)cmd).CommandString());
                         else
                             lstCmdS.Add(cmd.CommandString());
                         lstCmd.Add(cmd);
@@ -1819,7 +1877,7 @@ namespace ljson
                     if (dpath_minmax.ContainsKey(read_path) && !dpath_log.ContainsKey(read_path))
                         dpath_log.Add(read_path, dpath_minmax[read_path]);
                     ///////////////////////
-                    if (dpath_minmax.ContainsKey(read_path) || (Regex.IsMatch(key, @"_MIMICOUT$") && dpath_minmax.ContainsKey(key)))
+                    if (dpath_minmax.ContainsKey(read_path) || (Regex.IsMatch(key, @"(_MIMICOUT|natron_device)$") && dpath_minmax.ContainsKey(key)))
                     {
                         Tuple<byte, byte> tminmax = new Tuple<byte, byte>(0, 0);
                         if (dpath_minmax.ContainsKey(read_path))
@@ -1948,6 +2006,8 @@ namespace ljson
                     File.WriteAllText("read.log", log);
                 }
             }
+            if (rwres == eRWResult.NullLoginCMD && Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase))
+                rwres = eRWResult.Ok;
             return rwres;
         }
         //Write
@@ -2683,7 +2743,7 @@ namespace ljson
                 File.WriteAllText("write.log", _swrite);
             }
             //
-            cTransport conn = cComm.ConnectBase(conn_params);
+            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType);
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             rwres = PanelLogin(conn, cfg, _code);
             if (rwres != eRWResult.Ok)
@@ -2842,6 +2902,8 @@ namespace ljson
                         name = "iris";
                     if (Regex.IsMatch(name, "^simpo$", RegexOptions.IgnoreCase))
                         name = "iris";
+                    if (Regex.IsMatch(name, @"^natron[\w\W]*?none$", RegexOptions.IgnoreCase))
+                        name = "natron_device";
                     JObject _res = null;
                     JToken jbyname = _elements[name];
                     if (jbyname != null)
@@ -3317,7 +3379,7 @@ namespace ljson
             if (jkey != null)
             {
                 JObject jprop = (JObject)jkey["PROPERTIES"];
-                if (jprop != null)
+                if (jprop != null && jprop["Groups"] != null)
                 {
                     JObject jgrp = (JObject)jprop["Groups"];
                     if (jgrp != null)

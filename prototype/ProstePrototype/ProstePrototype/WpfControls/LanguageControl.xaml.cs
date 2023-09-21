@@ -108,6 +108,8 @@ namespace ProstePrototype.WpfControls
             }
 
             CurrentLanguage = language;
+            Properties.Settings.Default.translations = translationJson.ToString();
+            Properties.Settings.Default.Save();
         }
 
         private void SetRessourceDictionary()

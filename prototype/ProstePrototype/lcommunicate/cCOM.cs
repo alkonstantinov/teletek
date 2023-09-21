@@ -5,6 +5,7 @@ using common;
 using System.IO;
 using System.IO.Ports;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace lcommunicate
 {
@@ -40,8 +41,19 @@ namespace lcommunicate
             cCOMParams cp = (cCOMParams)o;
             SerialPort conn = new SerialPort(cp.COMName);
             _last_port = conn;
-            conn.Open();
-            return conn;
+            conn.BaudRate = cp.rate;//96000;// 115200;
+            //conn.Handshake = Handshake.XOnXOff;
+            //conn.DtrEnable = false;
+            //conn.RtsEnable = true;
+            try
+            {
+                conn.Open();
+                return conn;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         internal override void Close(object o)
@@ -56,6 +68,7 @@ namespace lcommunicate
             {
                 _last_port.Close();
                 _last_port.Dispose();
+                _last_port = null;
             }
         }
         //private byte[] GetBytes(NetworkStream ns)
@@ -65,15 +78,13 @@ namespace lcommunicate
 
         internal override byte[] SendCommand(object _connection, byte[] _command)
         {
+            _command = _packer.Pack(_command);
             SerialPort conn = (SerialPort)_connection;
             conn.Write(_command, 0, _command.Length);
-            conn.WriteLine("");
-            //byte[] buff = new byte[2048];
             byte[] res = new byte[conn.BytesToRead];
-            //string buf = conn.ReadExisting();
             conn.Read(res, 0, res.Length);
             if (res.Length == 0) return null;
-            return res;
+            return _packer.UnPack(res);
         }
         internal override byte[] SendCommand(object _connection, string _command)
         {
@@ -84,19 +95,45 @@ namespace lcommunicate
         }
         internal override byte[] SendCommand(byte[] _command)
         {
+            _command = _packer.Pack(_command);
             if (_last_port == null) return null;
             _last_port.Write(_command, 0, _command.Length);
+            _last_port.WriteLine("");
+            Thread.Sleep(10);
             byte[] res = new byte[_last_port.BytesToRead];
             _last_port.Read(res, 0, res.Length);
             if (res.Length == 0) return null;
-            return null;
+            return _packer.UnPack(res);
         }
         internal override byte[] SendCommand(string _command)
         {
-            byte[] cmd = new byte[_command.Length / 2];
-            for (int i = 0; i < cmd.Length; i++)
-                cmd[i] = Convert.ToByte(_command.Substring(i * 2, 2), 16);
-            return SendCommand(cmd);
+            List<byte[]> lstRes = new List<byte[]>();
+            int len = 0;
+            string[] cmds = _command.Split('\n');
+            foreach (string scmd in cmds)
+            {
+                byte[] cmd = new byte[scmd.Length / 2];
+                for (int i = 0; i < cmd.Length; i++)
+                    cmd[i] = Convert.ToByte(scmd.Substring(i * 2, 2), 16);
+                byte[] bres = SendCommand(cmd);
+                if (bres != null && bres.Length > 0)
+                {
+                    len+=bres.Length;
+                    lstRes.Add(bres);
+                }
+            }
+            if (len > 0)
+            {
+                byte[] res = new byte[len];
+                int offs = 0;
+                foreach (byte[] a in lstRes)
+                {
+                    a.CopyTo(res, offs);
+                    offs += a.Length;
+                }
+                return res;
+            }
+            return null;
         }
     }
 }

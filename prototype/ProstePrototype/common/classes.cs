@@ -733,6 +733,28 @@ namespace common
             if (m.Success)
                 _base_write_file = write_path + m.Groups[1].Value;
         }
+        private string VersionCMDFromProperty(string xml)
+        {
+            Match m = Regex.Match(xml, @"<PROPERTY\s[\w\W]*?ID\s*?=\s*?""VERSION_PANEL""[\w\W]*?/>");
+            if (m.Success)
+            {
+                xml = xml.Substring(0, m.Index + m.Length);
+                m = Regex.Match(xml, @"(<COMMANDS[\w\W]+?</COMMANDS>)\s*?<PROPERTIES");
+                if (m.Success)
+                {
+                    string cmds = m.Groups[1].Value;
+                    string res = null;
+                    foreach (Match mcmd in Regex.Matches(cmds, @"<COMMAND\s[\w\W]*?BYTES\s*?=\s*?""([\w\W]+?)"""))
+                    {
+                        if (res == null) res = "";
+                        res += ((res != "") ? "\n" : "") + mcmd.Groups[1].Value;
+                        break;
+                    }
+                    return res;
+                }
+            }
+            return null;
+        }
         private void SetVersions()
         {
             _ver_command = null;
@@ -753,6 +775,7 @@ namespace common
                 if (_ver_command != null && _xml_login_cmd != null && _xml_looptype_cmd != null)
                     break;
             }
+            if (_ver_command == null) _ver_command = VersionCMDFromProperty(_read);
             if (_xml_looptype_cmd == null || _xml_login_cmd == null)
             {
                 _readf = Regex.Replace(_readf, @"^[\w\W]+?</VERSIONING>[\w\W]*?</PREOPERATIONS>", "");
@@ -846,9 +869,12 @@ namespace common
                 string s = null;
                 Monitor.Enter(_cs_config);
                 string _xml = _xml_login_cmd;
-                Match m = Regex.Match(_xml, @"BYTES\s*?=\s*?""([\w\W]+?)""");
-                if (m.Success)
-                    s = m.Groups[1].Value;
+                if (_xml != null)
+                {
+                    Match m = Regex.Match(_xml, @"BYTES\s*?=\s*?""([\w\W]+?)""");
+                    if (m.Success)
+                        s = m.Groups[1].Value;
+                }
                 Monitor.Exit(_cs_config);
                 return s;
             }
@@ -946,11 +972,11 @@ namespace common
             string fread = null;
             string fwrite = null;
             Monitor.Enter(_cs_config);
-            if (_read_ver_files.ContainsKey(_version))
+            if (_version != null && _read_ver_files.ContainsKey(_version))
                 fread = _read_ver_files[_version];
-            if (_write_ver_files.ContainsKey(_version))
+            if (_version != null && _write_ver_files.ContainsKey(_version))
                 fwrite = _write_ver_files[_version];
-            if (_read_ver_files.ContainsKey(_version))
+            if (_version != null && _read_ver_files.ContainsKey(_version))
                 _current_version = _version;
             Monitor.Exit(_cs_config);
             if (fread != null)
@@ -1454,7 +1480,11 @@ namespace common
                         Monitor.Exit(_cs_config);
                         return res;
                     }
-                    if (!File.Exists(f)) return null;
+                    if (!File.Exists(f))
+                    {
+                        Monitor.Exit(_cs_config);
+                        return null;
+                    }
                     string xml = File.ReadAllText(f);
                     _xpaths = new Dictionary<string, Dictionary<string, cWriteField>>();
                     foreach (Match mop in Regex.Matches(xml, @"<WRITEOPERATION>[\w\W]+?</WRITEOPERATION>", RegexOptions.IgnoreCase))

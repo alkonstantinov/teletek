@@ -34,6 +34,15 @@ namespace lcommunicate
         internal byte[] _panel_in_nework_0_cmd = new byte[] { 0x03, 0x51, 0x16, 0x00, 0x00, 0x60 };
         //
         internal object _conn = null;
+        internal cPacker _packer = new cPacker();
+        internal string _panel_type
+        {
+            set
+            {
+                if (Regex.IsMatch(value, @"natron", RegexOptions.IgnoreCase))
+                    _packer = new cPackerNatron();
+            }
+        }
         //
         internal virtual object Connect(object o) { return null; }
         public virtual object GetCache() { return null; }
@@ -920,7 +929,7 @@ namespace lcommunicate
             object conn = t.Connect(new cCOMParams(p.COMName, p.rate));
             return t;
         }
-        public static cTransport ConnectBase(object conn_params)
+        public static cTransport ConnectBase(object conn_params, string panel_type)
         {
             cTransport conn = null;
             if (conn_params is cIPParams)
@@ -931,9 +940,12 @@ namespace lcommunicate
                 conn = cComm.ConnectTDF((cTDFParams)conn_params);
             else if (conn_params is HidDevice)
                 conn = cComm.ConnectHID((HidDevice)conn_params);
+            else if (conn_params is cCOMParams)
+                conn = cComm.ConnectCOM((cCOMParams)conn_params);
+            conn._panel_type = panel_type;
             return conn;
         }
-        public static cTransport ConnectBaseCached(object conn_params, object _cache)
+        public static cTransport ConnectBaseCached(object conn_params, string panel_type, object _cache)
         {
             cTransport conn = null;
             if (conn_params is cIPParams)
@@ -944,6 +956,9 @@ namespace lcommunicate
                 conn = cComm.ConnectTDFCached((cTDFParams)conn_params, _cache);
             else if (conn_params is HidDevice)
                 conn = cComm.ConnectHID((HidDevice)conn_params);
+            else if (conn_params is cCOMParams)
+                conn = cComm.ConnectCOM((cCOMParams)conn_params);
+            conn._panel_type = panel_type;
             return conn;
         }
         public static byte[] SendCommand(cTransport conn, string cmd)
@@ -1170,6 +1185,7 @@ namespace lcommunicate
             {
                 cCOM com = new cCOM();
                 object conn = com.Connect(new cCOMParams(port, 9600));
+                if (conn == null) continue;
                 foreach (string cmd in cmds.Keys)
                 {
                     string[] cmda = cmd.Split('\n');
@@ -1204,8 +1220,33 @@ namespace lcommunicate
             //
             return res;
         }
+        private static JObject SystemsHIDIds()
+        {
+            List<JObject> dirs = AvailableSystems();
+            JObject res = new JObject();
+            foreach (JObject d in dirs)
+                if (d["HIDs"] != null)
+                    res[d["HIDs"]["product"].ToString()] = d["HIDs"]["HIDs"];
+            if (res.Properties().Count() == 0) res = null;
+            return res;
+        }
+        private static string HidFound(JObject HIDs, HidDevice _dev)
+        {
+            foreach (JProperty p in HIDs.Properties())
+            {
+                JArray a = (JArray)p.Value;
+                foreach (JObject d in a)
+                {
+                    int vid = Convert.ToInt32(d["vid"].ToString());
+                    int pid = Convert.ToInt32(d["pid"].ToString());
+                    if (_dev.VendorID == vid && _dev.ProductID == pid) return p.Name;
+                }
+            }
+            return null;
+        }
         public static Dictionary<string, HidDevice> ScanHID()
         {
+            JObject HIDs = SystemsHIDIds();
             Dictionary<string, HidDevice> res = new Dictionary<string, HidDevice>();
             //
             //var device = loader.GetDevices(0x1234, 0x9876).First();
@@ -1218,11 +1259,60 @@ namespace lcommunicate
             {
                 if (Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) && !res.ContainsKey(_dev.ToString()))
                     res.Add(_dev.ToString(), _dev);
+                else
+                {
+                    string product = HidFound(HIDs, _dev);
+                    if (product != null) res.Add(product, _dev);
+                }
             }
             //DeviceList dLst = new FilteredDeviceList();
             //IEnumerable<Device> _devs = dLst.GetAllDevices();// GetHidDevices();
             //
             return res;
+        }
+        private static JObject _usb_devs(string sysdir)
+        {
+            if (!Regex.IsMatch(sysdir, @"[\\/]$")) sysdir += Path.DirectorySeparatorChar;
+            if (!Directory.Exists(sysdir + "Template")) return null;
+            string[] files = Directory.GetFiles(sysdir + "Template");
+            string template = null;
+            foreach (string f in files)
+                if (Regex.IsMatch(f, @"\.xml$", RegexOptions.IgnoreCase))
+                {
+                    template = f;
+                    break;
+                }
+            if (template != null)
+            {
+                string xml = File.ReadAllText(template);
+                Match m = Regex.Match(xml, @"<ELEMENT\s[\w\W]+?>");
+                if (m.Success)
+                {
+                    string prod = null;
+                    Match mm = Regex.Match(m.Value, @"PRODUCTNAME\s*?=\s*?""([\w\W]+?)""");
+                    if (mm.Success) prod = mm.Groups[1].Value;
+                    else return null;
+                    m = Regex.Match(m.Value, @"USBDEVICES\s*?=\s*?""([\w\W]+?)""");
+                    if (m.Success)
+                    {
+                        JObject res = new JObject();
+                        JArray adevs = new JArray();
+                        string[] _devs = m.Groups[1].Value.Split(';');
+                        foreach (string d in _devs)
+                        {
+                            string[] _dev = d.Split(':');
+                            JObject odev = new JObject();
+                            odev["vid"] = Convert.ToInt32(_dev[0], 16);
+                            odev["pid"] = Convert.ToInt32(_dev[1], 16);
+                            adevs.Add(odev);
+                        }
+                        res["HIDs"] = adevs;
+                        res["product"] = prod;
+                        return res;
+                    }
+                }
+            }
+            return null;
         }
         public static List<JObject> AvailableSystems()
         {
@@ -1235,6 +1325,8 @@ namespace lcommunicate
             {
                 string dir = Path.GetFileName(s);
                 JObject jSys = new JObject();
+                JObject _hids = _usb_devs(s);
+                if (_hids != null) jSys["HIDs"] = _hids;
                 if (Regex.IsMatch(dir, "^(iris|simpo|natron)", RegexOptions.IgnoreCase) || Regex.IsMatch(dir, @"^repeater[\w\W]+?simpo$", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
                 else if (Regex.IsMatch(dir, "^eclipse", RegexOptions.IgnoreCase))

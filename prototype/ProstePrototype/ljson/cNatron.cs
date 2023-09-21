@@ -104,6 +104,15 @@ namespace ljson
                 content["natron_none"]["icon"] = _pages["natron_none"]["icon"];
             }
         }
+        private static void SetContentMinMax(JObject json)
+        {
+            JObject odev = (JObject)json["ELEMENTS"]["natron_device"];
+            string min = odev["@AUTOCREATE"].ToString();
+            string max = odev["@AUTOCREATECOUNT"].ToString();
+            JObject ocontent = (JObject)json["ELEMENTS"]["Natron"]["CONTAINS"]["natron_device"];
+            ocontent["@MIN"] = min;
+            ocontent["@MAX"] = max;
+        }
         #endregion
 
         #region device
@@ -136,7 +145,7 @@ namespace ljson
         private static void SetDevicesList(JObject json)
         {
             JObject elements = (JObject)json["ELEMENTS"];
-            elements["~devtypes"] = new JObject();
+            json["~devtypes"] = new JObject();
             foreach (JProperty p in elements.Properties())
             {
                 if (p.Value.Type != JTokenType.Object) continue;
@@ -152,8 +161,9 @@ namespace ljson
                     }
                 if (otype == null) continue;
                 string key = System.Convert.ToInt32(otype["@VALUE"].ToString()).ToString();
-                elements["~devtypes"][key] = p.Name;
+                json["~devtypes"][key] = p.Name + ((Regex.IsMatch(p.Name, "natron_device"))? "_NONE":"");
             }
+            json["~pdtypes"] = new JObject((JObject)json["~devtypes"]);
         }
         #endregion
         public static string Convert(string json, JObject _pages)
@@ -221,6 +231,7 @@ namespace ljson
             //
             Arrays2Objects(o1, true);
             SetDevicesList(o1);
+            SetContentMinMax(o1);
             //
             doINC(o1);
             //

@@ -91,4 +91,10 @@ const BUTTON_IMAGES = {
     ZONE: { im: 'zones', sign: 'Zone' },
     ORFunction: { im: "../../Images/ORFunction.png", sign: '' },
     ANDFunction: { im: "../../Images/ANDFunction.png", sign: 'Zone' },
+    NATRON_MCP: { im: "../imports/images/pics/MCP150.png", sign: "NATRON MCP", type: "device" },
+    NATRON_WSS: { im: "../imports/images/pics/NATRON_WSS.png", sign: "NATRON WSS", type: "device" },
+    NATRON_TD: { im: "../imports/images/pics/NATRON_SD+TD.png", sign: "NATRON TD", type: "device" },
+    NATRON_SD: { im: "../imports/images/pics/NATRON_SD+TD.png", sign: "NATRON SD", type: "device" },
+    NATRON_MD: { im: "../imports/images/pics/NATRON_MD.png", sign: "NATRON MD", type: "device" },
+    NATRON_NONE: { im: '../imports/images/pics/NATRON_WE.png', sign: 'Natron device', type: "device" },
 };

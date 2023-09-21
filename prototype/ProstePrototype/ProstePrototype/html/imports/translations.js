@@ -365,6 +365,58 @@
             "en": "Device address",
             "bg": "Адрес на устройството",
         },
+        ReadingError: { 
+            "en": "Reading Error - unable to read values from",
+            "bg": "Грешка при четене - невъзможно четенето на стойности от",
+        },
+        ReadingErrorTemp: { 
+            "en": "Reading Error - Temporarily unable to read values for",
+            "bg": "Грешка при четене - Временно и невъзможно четенето на стойности за",
+        },
+        ReadingErrorTempFin: { 
+            "en": "panel type from .TDF",
+            "bg": "тип на панела от .TDF файлове",
+        },
+        BadLogin: { 
+            "en": "Bad Login: Please check your provided details",
+            "bg": "Bad Login: Моля проверете предоставените детайли",
+        },
+        NullLoginCMD: { 
+            "en": "Null Login CMD: Please check your provided details",
+            "bg": "Null Login CMD: Моля проверете предоставените детайли",
+        },
+        NullLoginOkByte: { 
+            "en": "Null Login Ok Byte: Please check your provided details",
+            "bg": "Null Login Ok Byte: Моля проверете предоставените детайли",
+        },
+        NullLoginOkVal: { 
+            "en": "Null Login Ok Val: Please check your provided details",
+            "bg": "Null Login Ok Val: Моля проверете предоставените детайли",
+        },
+        BadCommandResult: { 
+            "en": "Bad Command Result: Please check your provided details",
+            "bg": "Bad Command Result: Моля проверете предоставените детайли",
+        },
+        ConnectionError: { 
+            "en": "Connection Error: Please check your provided details",
+            "bg": "Connection Error: Моля проверете предоставените детайли",
+        },
+        ConnectionErrorFull: { 
+            "en": "Connection Error: Please, check the provided",
+            "bg": "Connection Error: Моля проверете предоставените детайли",
+        },
+        VersionDiff: { 
+            "en": "Execution stopped due to version difference",
+            "bg": "Прекъсване на изпълнението поради разлика в използваните версии",
+        },
+        VersionDiffFound: { 
+            "en": "Version difference found",
+            "bg": "Установена разлика в използваните версии",
+        },
+        VersionDiffQuery: { 
+            "en": "A difference is found between the panel version and the currently loaded version. \n - Choose \"No\" to stop the process. \n - Or, you can continue by clicking the \"Yes\" button below keeping in mind that this might result in incorrect interpretation of the data.",
+            "bg": "Идентифицирана е разлика между версията на панела и заредената. \n - Изберете \"No\" за да спрете изпълнението. \n - Или можете да натиснете \"Yes\" бутона за продължаване, като се вземе под внимание, че някои данни могат да не са коректно интерпретирани.",
+        },
         "activate": { 
             "en": "Activate",
             "bg": "Активен",
