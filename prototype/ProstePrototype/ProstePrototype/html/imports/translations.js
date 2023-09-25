@@ -365,6 +365,26 @@
             "en": "Device address",
             "bg": "Адрес на устройството",
         },
+        serial_id: { 
+            "en": "Serial Id",
+            "bg": "Сериен номер",
+        },
+        chanel: { 
+            "en": "Channel",
+            "bg": "Канал",
+        },
+        rssi_level: { 
+            "en": "RSSI Level",
+            "bg": "RSSI ниво",
+        },
+        rssi_dbm: { 
+            "en": "RSSI dBm",
+            "bg": "RSSI dBm",
+        },
+        "battery,%": { 
+            "en": "Battery,%",
+            "bg": "Батерия,%",
+        },
         ReadingError: { 
             "en": "Reading Error - unable to read values from",
             "bg": "Грешка при четене - невъзможно четенето на стойности от",

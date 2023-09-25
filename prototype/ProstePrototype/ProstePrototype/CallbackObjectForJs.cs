@@ -51,6 +51,8 @@ namespace ProstePrototype
             foreach (string key in dres.Keys)
             {
                 JObject ok = JObject.Parse(dres[key]);
+                if (ok["~value"] != null)
+                    ok["~strtype"] = cJson.DevName(ok["~value"].ToString());
                 ok.Remove("~rw");
                 o[key] = ok;
             }

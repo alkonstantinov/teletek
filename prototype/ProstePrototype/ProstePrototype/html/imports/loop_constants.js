@@ -96,5 +96,5 @@ const BUTTON_IMAGES = {
     NATRON_TD: { im: "../imports/images/pics/NATRON_SD+TD.png", sign: "NATRON TD", type: "device" },
     NATRON_SD: { im: "../imports/images/pics/NATRON_SD+TD.png", sign: "NATRON SD", type: "device" },
     NATRON_MD: { im: "../imports/images/pics/NATRON_MD.png", sign: "NATRON MD", type: "device" },
-    NATRON_NONE: { im: '../imports/images/pics/NATRON_WE.png', sign: 'Natron device', type: "device" },
+    NATRON_NONE: { im: '../imports/images/pics/NATRON_WE.png', sign: 'Natron', type: "device" },
 };

@@ -285,7 +285,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                                 </button>`;
             } else {
                 // adding the button for everybody except PANNELIN // SIMPO_PANELS_R //IRIS8_PANELINNETWORK
-                if (k && (!k.toUpperCase().includes("PANEL") || !k.toUpperCase().includes("NATRON"))) { 
+                if (k && !k.toUpperCase().includes("PANEL") && !k.toUpperCase().includes("NATRON")) {
                     btnDiv.insertAdjacentHTML(
                         'afterbegin',
                         `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}">
@@ -297,7 +297,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                         `<button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
                              <i class="ram_icon toggle"></i>
                          </button>`);
-                }  
+                }
                 if (k && k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
                     deviceNmbr = 0;                    
                     // add the section showing the attached_device per zone with the device summary button
@@ -940,7 +940,7 @@ async function showMimicout(id, params) {
 const transformGroupElement = (elementJson, fieldName = '') => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: elementJson['@LNGID'] ? newT.t(localStorage.getItem('lang'), elementJson['@LNGID']) : elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_'), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: elementJson['@LNGID'] ? newT.t(localStorage.getItem('lang'), elementJson['@LNGID']) : newT.t(localStorage.getItem('lang'), elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_')), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] ? elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_') + "_" + elementJson['@LNGID'] : elementJson['@LNGID'], //.replaceAll("-", "_"),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],
@@ -1822,7 +1822,11 @@ const getAvailableElements = (elementType) => {
         let elementList = JSON.parse(r);
         // creating the founded elements
         Object.keys(elementList).forEach(key => {
-            addConcreteElement(key, elementType);
+            if (elementType.toUpperCase().includes("NATRON") && elementList[key]["~strtype"]) {
+                addConcreteElement(key, "Natron_" + elementList[key]["~strtype"]);
+            } else {
+                addConcreteElement(key, elementType);
+            }
         });
     }).catch(err => alert("Error " + err));
 }
@@ -1976,11 +1980,11 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
                                 <div class="ram_card_body">
                                     <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+last+Number(INC)}</h5>
                                 </div>
-                                <div class="ram_add_btn" 
+                                ${elementType.toUpperCase().includes('NATRON') ? "" : `<div class="ram_add_btn" 
                                     onclick="javascript: event.stopPropagation();
                                         ${removeFn}">
                                     <i class="ram_icon add_device rot45"></i>
-                                </div>
+                                </div>`}
                             </div>`;
     } else { //if the element is INPUT_GROUP
         newUserElement = await inputGroupTextGenerator(last, elementType);
@@ -2082,7 +2086,9 @@ async function showElement(id, elementType) {
             fieldset.insertAdjacentHTML(
                 'afterbegin',
                 `<legend class="ram_attribute_holder_title">${fieldName}</legend>
-                <button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`);
+                ${elementType.toUpperCase().includes('NATRON') ?
+                    "" :
+                    `<button onclick="javascript: callAddressModal('${elementType}', '${id}')" type="button" class="btn btn-position-right">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>`}`);
             drawFields(fieldset, returnedJson, color ? BUTTON_COLORS[color] : '');
             var oldFieldset = el.querySelectorAll("[id^='id_']")[0];
             if (oldFieldset) oldFieldset.replaceWith(fieldset);

@@ -6,8 +6,4 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="robocopy $(TargetDir) C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\bin\Debug\netcoreapp3.1\kill_run *.* /MIR /COPYALL /R:3 /W:1 /B &gt;&gt; robocopy_log.txt 2&gt;&amp;1&#xD;&#xA;timeout /t 5 /nobreak" />
-  </Target>
-
 </Project>

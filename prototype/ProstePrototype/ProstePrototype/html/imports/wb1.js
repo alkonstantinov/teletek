@@ -175,9 +175,7 @@ function receiveMessageWPF(jsonTxt) {
                 
                 body.appendChild(panelItem);
 
-                if (!jsonKeys[0].toLowerCase().startsWith("natron")) {
-                    setTimeout(() => openAccordionItem(id), 100);
-                }
+                setTimeout(() => openAccordionItem(id), 100);
             }
             break;
     }
@@ -331,7 +329,8 @@ function alertScanFinished(show) {
 //#region pagePreparation, contextMenu, toggleDarkMode
 function pagePreparation() {
     $(() => { // $(function() {}) equivalent to $(document).ready(function () {})
-        $('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+        //$('.btnStyle').removeClass('active');// here remove class active from all btnStyle
+        $('li').removeClass('active');// here remove class active from all btnStyle
 
         let searchParams = new URLSearchParams(window.location.search)
 

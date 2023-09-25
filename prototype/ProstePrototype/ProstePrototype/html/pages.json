@@ -315,7 +315,7 @@
     "icon": "\ue90c"
   },
   "natron_none": {
-    "breadcrumbs": [ "index", "natron", "replace" ],
+    "breadcrumbs": [ "index", "natron" ],
     "picture": "inputs", // "fa-arrow-down-1-9"
     "icon": "\ue90c"
   }

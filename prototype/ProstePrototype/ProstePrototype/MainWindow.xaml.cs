@@ -1150,7 +1150,7 @@ namespace ProstePrototype
                 //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";rw.Resources
             });
             wb2.Load("file:///" + myFile);
-
+            //wb1.
             if (lvBreadCrumbs.Items.Count > 0)
             {
                 lvBreadCrumbs.Items.Clear();
@@ -1313,6 +1313,7 @@ namespace ProstePrototype
                     }
                     break;
                 case true when type.StartsWith("NO_LOOP") || elementType == "SIMPO_TTELOOP": type = "loop_devices"; break;
+                case true when elementType.StartsWith("Natron"): type = "natron_none"; break;
                 default: type = "iris_peripheral_devices_elements"; break;
             }
             pages[type]["title"] = fieldName;

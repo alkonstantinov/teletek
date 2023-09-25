@@ -3796,6 +3796,13 @@ namespace ljson
                 cComm.RemovePathValues(CurrentPanelID, path);
             }
         }
+        public static string DevName(string devtype)
+        {
+            if (CurrentPanel["~devtypes"] == null) return null;
+            JObject devs = (JObject)CurrentPanel["~devtypes"];
+            if (devs[devtype] != null) return Regex.Replace(devs[devtype].ToString(), "^natron_device_", "");
+            return "NONE";
+        }
         public static JObject GroupsWithValues(JObject grp)
         {
             List<JObject> lst = new List<JObject>();
@@ -3812,6 +3819,20 @@ namespace ljson
                 string val = cComm.GetPathValue(panel_id, path);
                 if (val != null)
                     o["~value"] = val;
+            }
+            if (res["~noname"] != null && res["~noname"]["fields"] != null  && res["~noname"]["fields"]["TYPE"] != null)
+            {
+                JObject otype = (JObject)res["~noname"]["fields"]["TYPE"];
+                string tpath = "";
+                if (otype["~path"] != null) tpath = otype["~path"].ToString();
+                if (Regex.IsMatch(tpath, "natron_device") && otype["~value"] != null)
+                {
+                    string sval = otype["~value"].ToString();
+                    if (CurrentPanel["~pdtypes"] != null && CurrentPanel["~pdtypes"][sval] != null)
+                        sval = Regex.Replace(CurrentPanel["~pdtypes"][sval].ToString(), "^natron_device_", "");
+                    else sval = "NONE";
+                    otype["~strtype"] = sval;
+                }
             }
             return res;
         }

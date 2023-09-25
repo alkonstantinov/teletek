@@ -753,6 +753,28 @@ namespace lcommunicate
                     Dictionary<string, Dictionary<string, string>> el = _cache_list_panels[panel_id];
                     if (el.ContainsKey(key))
                         res = el[key];
+                    if (res != null)
+                    {
+                        Dictionary<string, string> repl = new Dictionary<string, string>();
+                        foreach (string elkey in res.Keys)
+                        {
+                            string sel = res[elkey];
+                            JObject oel = JObject.Parse(sel);
+                            if (oel["~noname"] == null || oel["~noname"]["fields"] == null || oel["~noname"]["fields"]["TYPE"] == null) continue;
+                            JObject tp = (JObject)oel["~noname"]["fields"]["TYPE"];
+                            string path = "";
+                            if (tp["~path"] == null) break;
+                            path = tp["~path"].ToString();
+                            if (!Regex.IsMatch(path, "natron_device")) break;
+                            if (_cache_panels == null || !_cache_panels.ContainsKey(panel_id)) break;
+                            Dictionary<string, string> cache = _cache_panels[panel_id];
+                            string val = cache.ContainsKey(path) ? cache[path] : null;
+                            if (val != null) oel["~value"] = val;
+                            repl.Add(elkey, oel.ToString());
+                        }
+                        foreach (string rkey in repl.Keys)
+                            res[rkey] = repl[rkey];
+                    }
                 }
             }
             Monitor.Exit(_cs_cache);
