@@ -964,7 +964,8 @@ namespace lcommunicate
                 conn = cComm.ConnectHID((HidDevice)conn_params);
             else if (conn_params is cCOMParams)
                 conn = cComm.ConnectCOM((cCOMParams)conn_params);
-            conn._panel_type = panel_type;
+            if (conn != null)
+                conn._panel_type = panel_type;
             return conn;
         }
         public static cTransport ConnectBaseCached(object conn_params, string panel_type, object _cache)

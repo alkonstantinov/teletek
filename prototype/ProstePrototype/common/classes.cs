@@ -29,7 +29,7 @@ namespace common
     public delegate void dFileDownloadProgress(string filename, int counter, int cntall);
     public delegate bool dConfirmVersionsDiff(string panel_version, string xml_version);
 
-    public enum eUPDResult { Ok = 1, FilesMapNotExists = 2, Other = 3 };
+    public enum eUPDResult { Ok = 1, FilesMapNotExists = 2, Other = 3, NoInternet = 4 };
     public enum eRWResult
     {
         Ok = 1, ConnectionError = 2, NullLoginCMD = 3, NullLoginOkByte = 4, NullLoginOkVal = 5, BadLogin = 6,

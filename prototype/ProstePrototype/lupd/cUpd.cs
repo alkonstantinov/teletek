@@ -115,11 +115,12 @@ namespace lupd
             catch (System.Net.WebException e)
             {
                 HttpWebResponse resp = (HttpWebResponse)e.Response;
-                if (resp.StatusCode == HttpStatusCode.NotFound)
+                if (resp != null && resp.StatusCode == HttpStatusCode.NotFound)
                 {
                     res = eUPDResult.FilesMapNotExists;
                     err = uri + "\r\n" + resp.StatusDescription;
                 }
+                else if (resp == null) res = eUPDResult.NoInternet;
                 else res = eUPDResult.Other;
                 return null;
             }

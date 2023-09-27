@@ -870,8 +870,8 @@ namespace ProstePrototype
                     File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + "and connection parameters: " + conn_params.ToString() + "\n");
                     break;
                 case eRWResult.ConnectionError:
-                    showMsg = (conn_params != null && (string)conn_params != "read.log") ?
-                        $"{MakeTranslation("ConnectionErrorFull")} {((common.cIPParams)conn_params).address}, {((common.cIPParams)conn_params).port}" :
+                    showMsg = (conn_params != null && !(conn_params is string && (string)conn_params == "read.log")) ?
+                        $"{MakeTranslation("ConnectionErrorFull")} {((common.cIPParams)conn_params).address}:{((common.cIPParams)conn_params).port}" :
                         MakeTranslation("ConnectionError");
                     break;
                 case eRWResult.BadLogin:
@@ -903,22 +903,22 @@ namespace ProstePrototype
 
         private bool VersionDiff(string panel_version, string xml_version)
         {
-            //if (panel_version != xml_version)
-            //{
-            //    string q = MakeTranslation("VersionDiffQuery");
-            //    return (MessageBox.Show(
-            //            q,
-            //            MakeTranslation("VersionDiffFound"),
-            //            MessageBoxButton.YesNo,
-            //            MessageBoxImage.Warning) == MessageBoxResult.Yes);
+            if (panel_version != xml_version)
+            {
+                string q = MakeTranslation("VersionDiffQuery");
+                return (MessageBox.Show(
+                        q,
+                        MakeTranslation("VersionDiffFound"),
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes);
 
-            //    //bool result = this.Dispatcher.Invoke(() =>
-            //    //{
-            //    //    YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
-            //    //    return yesNoDialog.ShowDialog().Value;
-            //    //});
-            //    //return result;
-            //}
+                //bool result = this.Dispatcher.Invoke(() =>
+                //{
+                //    YesNoWindow yesNoDialog = new YesNoWindow(q, "Yes", "No");
+                //    return yesNoDialog.ShowDialog().Value;
+                //});
+                //return result;
+            }
             return true;
         }
         private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
