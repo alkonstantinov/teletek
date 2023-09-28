@@ -1221,6 +1221,7 @@ namespace common
         #region merge
         private bool IRIS4SpecificMerge(string wkey, string rkey)
         {
+            if (wkey == null || wkey.Trim() == "") return false;
             string rkey1 = Regex.Replace(rkey, "IRIS4_NO_LOOP", "IRIS4_LOOP");
             string wstart = Regex.Replace(wkey, "/IRIS4_SENSORS$", "");
             if (Regex.IsMatch(rkey1, "^" + wstart) && Regex.IsMatch(rkey, "IRIS4_SENSORS"))

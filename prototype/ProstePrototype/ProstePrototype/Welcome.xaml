@@ -35,8 +35,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="120"/>
-                <RowDefinition Height="41"/>
-                <RowDefinition Height="41"/>
+                <RowDefinition Height="61"/>
+                <RowDefinition Height="31"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"/>
             <Grid Grid.Row="1">
@@ -77,14 +77,19 @@
             <Grid Grid.Row="2">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock FontSize="10" Foreground="#332" TextAlignment="Center" 
                                x:Name="welcomeMsg" Text="{Binding Path=MyValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Margin="0, 10, 0, 0" VerticalAlignment="Bottom" FontFamily="{StaticResource poppins_demibold}">
                     </TextBlock>
-                    <DockPanel Grid.Row="1" x:Name="progressBar">
+                    <TextBlock Grid.Row="1" FontSize="10" Foreground="#332" TextAlignment="Center" 
+                                Text="{Binding Path=MyAddValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="0, 10, 0, 0" VerticalAlignment="Center" FontFamily="{StaticResource poppins_demibold}">
+                    </TextBlock>
+                    <DockPanel Grid.Row="2" x:Name="progressBar">
                         <ProgressBar x:Name="progrBar" Value="0" Maximum="100" Visibility="Collapsed"/>
                     </DockPanel>
                 </Grid>
@@ -92,7 +97,7 @@
 
             <Grid Grid.Row="3">
                 <TextBlock FontSize="10" Foreground="#332" TextAlignment="Center" 
-                           Margin="0, 10, 0, 0" VerticalAlignment="Bottom">
+                           Margin="0, 5, 0, 10" VerticalAlignment="Bottom">
                     <Run Text="© Teletek Electronics JSC., 2022; Teletek Manager ver."/>
                     <Run x:Name="ver"/>
                 </TextBlock>

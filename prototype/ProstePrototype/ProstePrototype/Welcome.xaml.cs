@@ -3,6 +3,7 @@ using lupd;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,16 @@ namespace ProstePrototype
     /// </summary>
     public partial class Welcome : Window, INotifyPropertyChanged
     {
+        private string myAddValue;
+        public string MyAddValue
+        {
+            get { return myAddValue; }
+            set
+            {
+                myAddValue = value;
+                NotifyPropertyChanged("myAddValue");
+            }
+        }
         private string myValue; 
         public string MyValue
         {
@@ -72,21 +83,30 @@ namespace ProstePrototype
         {
             Console.WriteLine(filename);
         }
-        private static void http_progress(string filename, int counter, int cntall)
+        private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
         {
-            Welcome welcomeWindow = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
-            ProgressBar progrBar = welcomeWindow.progressBar.FindName("progrBar") as ProgressBar;
-            double percentageCalc = counter / cntall;
-            progrBar.Value = percentageCalc;
-            welcomeWindow.MyValue = "A newer version of Teletek Manager found! Proceeding with update... - " + percentageCalc.ToString("0.##%");
-            // Console.WriteLine(filename + "  /" + counter.ToString() + " of " + cntall.ToString());
+            double percentageCalcAdd = 100 * (double)bytes_downloaded / bytes_all;
+            string f = filename.Split("/").Last();
+            double percentageCalc = 100 * (double)counter / cntall;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Welcome welcomeWindow = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
+                welcomeWindow.progrBar.Value = percentageCalc;
+                welcomeWindow.MyAddValue = $"Downloading {SettingsDialog.LimitCharacters(f, 45)}: {percentageCalcAdd.ToString("0.##")}%";
+                welcomeWindow.MyValue = "A newer version of Teletek Manager found! Proceeding with update... - " + percentageCalc.ToString("0.##") + "%";
+                welcomeWindow.Welcome_Activated(welcomeWindow, new EventArgs());
+            });
         }
 
         public void RunUpdate()
         {
-            progrBar.Visibility = Visibility.Visible;
+            this.Dispatcher.Invoke(() =>
+            {
+                progrBar.Visibility = Visibility.Visible;
 
-            MyValue = "A newer version of Teletek Manager found! Proceeding with update...";
+                MyValue = "A newer version of Teletek Manager found! Proceeding with update...";
+
+            });
 
             string err = "";
             eUPDResult res = cUpd.DoUpdate(common.settings.updpath, crcprocess, http_progress, ref err);
@@ -101,8 +121,11 @@ namespace ProstePrototype
             }
             else
             {
-                progrBar.Value = 100;
-                MyValue = "Teletek Manager has been successfully updated! Loading...";                    
+                this.Dispatcher.Invoke(() =>
+                {
+                    progrBar.Value = 100;
+                    MyValue = "Teletek Manager has been successfully updated! Loading...";
+                });
             }
         }
         #endregion

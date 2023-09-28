@@ -123,7 +123,7 @@ namespace ProstePrototype
             if (shouldLaunchAutoUpdate && lupd.cUpd.Check4Updates(common.settings.updpath))
             {
                 Welcome w = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
-                w.RunUpdate();
+                //w.RunUpdate();
             }
 
             string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;

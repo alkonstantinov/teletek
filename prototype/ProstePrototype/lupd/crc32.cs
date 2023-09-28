@@ -66,7 +66,7 @@ namespace lupd
         public static uint Hash(string file)
         {
             uint res = 0xffffffff;
-            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
             while (true)
             {
                 int readed = fs.Read(buff, 0, buff.Length);
@@ -94,6 +94,7 @@ namespace lupd
                 res[key]["type"] = "dir";
                 res[key]["Filename"] = dName;
             }
+            Dictionary<string, string> keys4del = new Dictionary<string, string>();
             foreach (string file in f)
             {
                 string fName = Path.GetFileName(file);
@@ -102,7 +103,14 @@ namespace lupd
                 res[key]["type"] = "file";
                 res[key]["Filename"] = fName;
                 if (crcprocess != null) crcprocess(file);
-                res[key]["crc"] = Hash(file).ToString("X8").ToLower();
+                try
+                {
+                    res[key]["crc"] = Hash(file).ToString("X8").ToLower();
+                }
+                catch {
+                    if (!keys4del.ContainsKey(key)) keys4del.Add(key, null);
+                }
+                foreach (string dkey in keys4del.Keys) res.Remove(dkey);
             }
             //
             return res;

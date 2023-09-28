@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ProstePrototype
 {
@@ -26,6 +28,7 @@ namespace ProstePrototype
     {
         private MainWindow _mainWindow;
         private string currentVersion;
+        private bool updateCheck;
         public SettingsDialog(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -34,6 +37,11 @@ namespace ProstePrototype
             changeTheme_btn.Command = new RelayCommand(changeTheme_Click);
             currentVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
             ver.Text = currentVersion;
+            autoCheck.IsChecked = Properties.Settings.Default.AutoUpdate;
+            updateCheck = lupd.cUpd.Check4Updates(common.settings.updpath);
+            update_btn.IsEnabled = updateCheck;
+
+            progrBarText.Text = updateCheck ? "Newer version is available for download." : "You are up to date!"; 
         }
 
         private void OKSettings_Clicked(object sender, RoutedEventArgs e)
@@ -92,21 +100,76 @@ namespace ProstePrototype
         {
             Console.WriteLine(filename);
         }
-        private static void http_progress(string filename, int counter, int cntall)
+        //private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
+        //{
+        //    SettingsDialog settingsWindow = Application.Current.Windows.OfType<SettingsDialog>().FirstOrDefault();
+        //    ProgressBar progrBar = settingsWindow.progressBar.FindName("progrBar") as ProgressBar;
+        //    double percentageCalc = counter / cntall;
+        //    progrBar.Value = percentageCalc;
+        //    progrBar.Maximum = 100;
+        //    settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("0.##%");
+        //    ProgressBar progrBarAdd = settingsWindow.progressBar.FindName("progrBarAdd") as ProgressBar;
+        //    double percentageCalcAdd = counter / cntall;
+        //    progrBarAdd.Value = percentageCalcAdd;
+        //    progrBarAdd.Maximum = 100;
+        //    settingsWindow.progrBarTextAdd.Text = $"Downloading {filename}: " + percentageCalcAdd.ToString("0.##%");
+        //}
+
+        private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
         {
-            SettingsDialog settingsWindow = Application.Current.Windows.OfType<SettingsDialog>().FirstOrDefault();
-            ProgressBar progrBar = settingsWindow.progressBar.FindName("progrBar") as ProgressBar;
-            double percentageCalc = counter / cntall;
-            progrBar.Value = percentageCalc;
-            progrBar.Maximum = 100;
-            settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("0.##%");
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                SettingsDialog settingsWindow = Application.Current.Windows.OfType<SettingsDialog>().FirstOrDefault();
+                ProgressBar progrBar = settingsWindow.progressBar.FindName("progrBar") as ProgressBar;
+                ProgressBar progrBarAdd = settingsWindow.progressBar.FindName("progrBarAdd") as ProgressBar;
+
+                //settingsWindow.Dispatcher.Invoke(() =>
+                //{
+                double percentageCalc = 100 * counter / cntall;
+                progrBar.Value = percentageCalc;
+                progrBar.Maximum = 100;
+                settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("##0.##") + "%";
+
+                double percentageCalcAdd = 100 * bytes_downloaded / bytes_all;
+                progrBarAdd.Value = percentageCalcAdd;
+                progrBarAdd.Maximum = 100;
+                string f = filename.Split("/").Last();
+                settingsWindow.progrBarTextAdd.Text = $"Downloading {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.##") + "%";
+                //});
+            });
         }
+
+        public static string LimitCharacters(string text, int length)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+
+            // If text in shorter or equal to length, just return it
+            if (text.Length <= length)
+            {
+                return text;
+            }
+
+            // Text is longer, so try to find out where to cut
+            char[] delimiters = new char[] { ' ', '.', ',', ':', ';' };
+            int index = text.LastIndexOfAny(delimiters, length - 3);
+
+            if (index > (length / 2))
+            {
+                return text.Substring(0, index) + "...";
+            }
+            else
+            {
+                return text.Substring(0, length - 3) + "...";
+            }
+        }
+
 
         public void RunUpdate()
         {
-            progrBar.Visibility = Visibility.Visible;
-            progrBarText.Text = "Newer version found! Proceeding with update... 0%";
-
+            ProgressBarChange(Visibility.Visible, "Newer version found! Proceeding with update... 0%", Visibility.Visible, "");
             string err = "";
             eUPDResult res = cUpd.DoUpdate(common.settings.updpath, crcprocess, http_progress, ref err);
             if (res != eUPDResult.Ok)
@@ -121,31 +184,12 @@ namespace ProstePrototype
             }
             else
             {
-                progrBar.Value = 100;
-                progrBarText.Text = "Successfully updated!";
+                ProgressBarChange(Visibility.Visible, "Successfully updated!", Visibility.Collapsed, "");
             }
         }
 
         public static void KillRun(string appDir, string exePath, string updPath)
-        {
-            //File.WriteAllText
-            //    (@"C:\test.bat", 
-            //    $@"{System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName} -randomArgs /n del %0");
-
-            //var proc = new Process
-            //{
-            //    StartInfo = new ProcessStartInfo
-            //    {
-            //        FileName = "explorer.exe",
-            //        Arguments = @"C:\test.bat",
-            //        UseShellExecute = true,
-            //        Verb = "runas",
-            //        WindowStyle = ProcessWindowStyle.Hidden
-            //    }
-            //};
-            //proc.Start();;
-            //
-            
+        {            
             ProcessStartInfo killRun = new ProcessStartInfo(
                 appDir +
                 Regex.Replace(common.settings.killrunpath, @"[\\/]$", "") + 
@@ -153,38 +197,50 @@ namespace ProstePrototype
                 "kill_run.exe"
                 );
             killRun.WindowStyle = ProcessWindowStyle.Normal;                
-            killRun.Arguments = $"{exePath} {updPath}";
+            killRun.Arguments = $"\"{exePath}\" \"{updPath}\"";
             Process.Start(killRun);
         }
         #endregion
         private void Update_Clicked(object sender, RoutedEventArgs e)
         {
-            if (lupd.cUpd.Check4Updates(common.settings.updpath))
-            {
-                RunUpdate();
-                string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
-                if (
-                    Directory.Exists(locks) &&
-                    MessageBox.Show(@$"Teletek Manager needs to restart to finish the update. Information on currently opened projects might be lost. Proceed?" +
-                    "\n If you choose \"No\" the update will automatically finalize next time you relaunch.",
-                        "Update Warning",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Warning) == MessageBoxResult.Yes
-                    )
+            ProgressBarChange(Visibility.Visible, "Checking for updates... please, wait!", Visibility.Collapsed, "");
+            
+            Task.Run(() =>
+            {                
+                if (updateCheck)
                 {
-                    string appDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-                    SettingsDialog.KillRun(appDir, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, common.settings.updpath);
+                    RunUpdate();
+                    string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
+                    if (
+                        Directory.Exists(locks) &&
+                        MessageBox.Show(@$"Teletek Manager needs to restart to finish the update. Information on currently opened projects might be lost. Proceed?" +
+                        "\n If you choose \"No\" the update will automatically finalize next time you relaunch.",
+                            "Update Warning",
+                            MessageBoxButton.YesNo,
+                            MessageBoxImage.Warning) == MessageBoxResult.Yes
+                        )
+                    {
+                        string appDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+                        SettingsDialog.KillRun(appDir, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, common.settings.updpath);
+                    }
                 }
-                /* for the .dll file you can use, but it is not in processes
-                 * Environment.GetCommandLineArgs()[0], 
-                 * System.Reflection.Assembly.GetExecutingAssembly().Location, 
-                 * System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.FullyQualifiedName
-                 */
-            }
-            else
+                else
+                {
+                    ProgressBarChange(Visibility.Visible, "You are up to date!", Visibility.Collapsed, "");
+                }
+            });
+            
+        }
+
+        private void ProgressBarChange(Visibility progrBarVisibility, string progrBarTextText, Visibility progrBarAddVisibility, string progrBarTextAddText)
+        {
+            this.Dispatcher.Invoke(() =>
             {
-                progrBarText.Text = "You are up to date!";
-            }
+                progrBar.Visibility = progrBarVisibility;
+                progrBarText.Text = progrBarTextText;
+                progrBarAdd.Visibility = progrBarAddVisibility;
+                progrBarTextAdd.Text = progrBarTextAddText;
+            });
         }
 
         private void AutoCheck_Clicked(object sender, RoutedEventArgs e)

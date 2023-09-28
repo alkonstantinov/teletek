@@ -356,7 +356,7 @@ const elementsCreationHandler = (div, jsonAtLevel, reverse = false) => {
     if (!jsonAtLevel) return;
     var elementKeys = Object.keys(jsonAtLevel);
     const pathStr = "~path";
-    let cleanKeys = elementKeys.filter(x => x !== pathStr);
+    let cleanKeys = elementKeys.filter(x => x !== "~path" && x !== "~invisible");
 
     if (reverse)
         cleanKeys = cleanKeys.reverse();
@@ -468,6 +468,10 @@ function getZoneDevices(elementNumber) {
             let loopType = device["~loop"];
             let loopNumber = device["~loop_nom"];
             let key = device["~device"].split("_").slice(1).join("_");
+            if (!DEVICES_CONSTS[key]) {
+                DEVICES_CONSTS["default"].sign = key;
+                key = "default";
+            }
             let showName = device["~devname"] || DEVICES_CONSTS[key].sign;
         
             const newDeviceInner = `<div class="ram_card" id='${deviceName}_${address}' 
@@ -940,7 +944,13 @@ async function showMimicout(id, params) {
 const transformGroupElement = (elementJson, fieldName = '') => {
     let attributes = {
         type: elementJson['@TYPE'],
-        input_name: elementJson['@LNGID'] ? newT.t(localStorage.getItem('lang'), elementJson['@LNGID']) : newT.t(localStorage.getItem('lang'), elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_')), //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
+        input_name: elementJson['@LNGID'] && newT.t(localStorage.getItem('lang'), elementJson['@LNGID']) !== "Not found translation key" ?
+                newT.t(localStorage.getItem('lang'), elementJson['@LNGID']) :
+                elementJson['@TEXT'] ?
+                    (newT.t(localStorage.getItem('lang'), elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_')) !== "Not found translation key" ?
+                        newT.t(localStorage.getItem('lang'), elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_')) :
+                        elementJson['@TEXT']) :
+                    "Not found translation key", //(elementJson['@TEXT'] ? elementJson['@TEXT'] : (elementJson['@ID'] && elementJson['@ID'] !== 'SUBTYPE' && elementJson['@TYPE'] !== 'AND') ? elementJson['@ID'] : elementJson['@TEXT']).trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, '')), //.charAt(0).toUpperCase() + elementJson['@TEXT'].slice(1),
         input_id: elementJson['@TEXT'] ? elementJson['@TEXT'].toLowerCase().replaceAll(' ', '_') + "_" + elementJson['@LNGID'] : elementJson['@LNGID'], //.replaceAll("-", "_"),
         max: elementJson['@MAX'],
         min: elementJson['@MIN'],

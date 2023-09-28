@@ -701,7 +701,7 @@ namespace ljson
                         break;
                     }
                     path1 = Regex.Replace(path, @"^\w+?_", "");
-                    if (Regex.IsMatch(key, path1 + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path1 + "$", RegexOptions.IgnoreCase))
+                    if (key != "" && (Regex.IsMatch(key, path1 + "$", RegexOptions.IgnoreCase) || Regex.IsMatch(_merge[key].ReadPath, path1 + "$", RegexOptions.IgnoreCase)))
                     {
                         rw = _merge[key];
                         break;
@@ -941,6 +941,8 @@ namespace ljson
                         nonekey = "IRIS_LOOPDEVICES/" + nonekey;
                     else if (merge.ContainsKey("IRIS8_LOOPDEVICES/" + nonekey))
                         nonekey = "IRIS8_LOOPDEVICES/" + nonekey;
+                    else if (merge.ContainsKey("IRIS4_LOOPDEVICES/" + nonekey))
+                        nonekey = "IRIS4_LOOPDEVICES/" + nonekey;
                     else
                     {
                         Match mnom = Regex.Match(loopkey, @"(\d+)$");
@@ -1529,6 +1531,8 @@ namespace ljson
         private static object _connection_cache = null;
         private static eRWResult PanelLogin(cTransport conn, cXmlConfigs cfg, string _code)
         {
+            //return eRWResult.Ok;
+            //
             if (_code == null || _code.Trim() == "")
                 return eRWResult.Ok;
             string _login_cmd = cfg.LoginCommand;

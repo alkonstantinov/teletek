@@ -19,6 +19,7 @@ namespace kill_run
                 string dName = Path.GetFileName(dir);
                 string reldir = Regex.Replace(toDir, @"[\\/]$", "") + Path.DirectorySeparatorChar + dName;
                 CopyFiles(dir, reldir);
+
                 //res[key] = files(crcprocess, dir, (JObject)res[key]);
                 //res[key]["type"] = "dir";
                 //res[key]["Filename"] = dName;
@@ -54,10 +55,12 @@ namespace kill_run
                     break;
                 }
             }
-            // Console.WriteLine(exePath + " and " + updPath);
+            //Console.WriteLine(exePath + " and " + updPath);
             string locks = Regex.Replace(updPath, @"[\\/]$", "") + Path.DirectorySeparatorChar + "~locks" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(locks)) return;
+
             CopyFiles(locks, updPath);
+
             DirectoryInfo di = new DirectoryInfo(locks);
             di.Delete(true);
             //

@@ -36,7 +36,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.3*"/>
             </Grid.RowDefinitions>
             <StackPanel Margin="10" Grid.Row="0">
                 <CheckBox Name="autoCheck" Click="AutoCheck_Clicked" FontSize="14" VerticalContentAlignment="Center" Foreground="{Binding Foreground}">
@@ -48,7 +48,8 @@
 
             <Grid Grid.Row="2" Margin="15,2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button Click="Update_Clicked" x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0" Background="Transparent">
@@ -61,7 +62,12 @@
                         </TextBlock>
                     </DockPanel>
                 </Button>
-                <Grid Grid.Row="1" x:Name="progressBar">
+                <Grid Grid.Row="1" x:Name="progressBarAdd">
+                    <ProgressBar x:Name="progrBarAdd" Value="0" Maximum="100" Visibility="Hidden"/>
+                    <TextBlock x:Name="progrBarTextAdd" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" 
+                                FontFamily="{StaticResource poppins_regular}"/>
+                </Grid>
+                <Grid Grid.Row="2" x:Name="progressBar">
                     <ProgressBar x:Name="progrBar" Value="0" Maximum="100" Visibility="Hidden"/>
                     <TextBlock x:Name="progrBarText" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" 
                                FontFamily="{StaticResource poppins_regular}"/>

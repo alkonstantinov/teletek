@@ -11,9 +11,9 @@ namespace upd
         {
             Console.WriteLine(filename);
         }
-        private static void http_progress(string filename, int counter, int cntall)
+        private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
         {
-            Console.WriteLine(filename + "  /" + counter.ToString() + " of " + cntall.ToString());
+            Console.WriteLine(filename + "  BYTES" + bytes_downloaded.ToString() + "of " + bytes_all.ToString() + " / FILES" + counter.ToString() + " of " + cntall.ToString());
         }
         static void Main(string[] args)
         {

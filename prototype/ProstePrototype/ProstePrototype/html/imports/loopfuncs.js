@@ -94,7 +94,7 @@ const getArrayToModal = (id, loopNumber, loopType, operation) => {
             let key = getKey(deviceName);
             deviceList.insertAdjacentHTML('beforeend', `
             <div class="ram_card fire" id="${deviceName}" onclick="javascript: openDeviceAddressModal(this.id, '${loopNumber}', '${loopType}', '${noneElement}' )">
-                <div class="ram_card_img">
+                <div class="ram_card_img" style="font-size: 0.75em">
                     <img src="${DEVICES_CONSTS[key].im}" alt="${DEVICES_CONSTS[key].sign}">
                 </div>
                 <div class="ram_card_body">
@@ -776,7 +776,10 @@ function calculateLoopDevices(loopNumber) {
 
 //#region UTILS
 function getKey(deviceName) {
-    return Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k) && DEVICES_CONSTS[k].type !== 'panel');
+    let keyToReturn = Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k) && DEVICES_CONSTS[k].type !== 'panel');
+    if (keyToReturn) return keyToReturn
+    DEVICES_CONSTS["default"].sign = deviceName;
+    return "default";
 }
 
 function getConfig(deviceName, device = '') {

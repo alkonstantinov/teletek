@@ -26,7 +26,7 @@ namespace common
     public delegate JObject dGetNode(string name);
     public delegate JObject dFindObjectByProperty(JToken _node, string prop_name, string val);
     public delegate void dFileCRCProcessing(string filename);
-    public delegate void dFileDownloadProgress(string filename, int counter, int cntall);
+    public delegate void dFileDownloadProgress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all);
     public delegate bool dConfirmVersionsDiff(string panel_version, string xml_version);
 
     public enum eUPDResult { Ok = 1, FilesMapNotExists = 2, Other = 3, NoInternet = 4 };

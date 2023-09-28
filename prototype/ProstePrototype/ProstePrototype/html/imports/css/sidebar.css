@@ -490,6 +490,7 @@
     .ram_card .ram_card_img {
         width: auto;
         height: 30px;
+        font-size: 0.75em;
     }
 
         .ram_card .ram_card_img img {

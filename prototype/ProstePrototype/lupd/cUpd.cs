@@ -105,7 +105,7 @@ namespace lupd
         {
             return files4download(crcprocess, JObject.Parse(srvFiles), path).ToString();
         }
-        private static byte[] HTTPGet(string uri, ref eUPDResult res, ref string err)
+        private static byte[] HTTPGet(string uri, ref eUPDResult res, ref string err, int counter, int cntall, dFileDownloadProgress downloading)
         {
             WebResponse oResp = null;
             try
@@ -132,6 +132,7 @@ namespace lupd
             {
                 int readed = reader.Read(content, total, content.Length - total);
                 total += readed;
+                if (downloading != null) downloading(uri, counter, cntall, total, content.Length);
                 f = total < content.Length;
             }
             return content;
@@ -142,7 +143,7 @@ namespace lupd
             if (!Regex.IsMatch(updhttppath, @"/$")) updhttppath += "/";
             string updmapfilename = settings.updmapfilename;
             string uri = updhttppath + updmapfilename;
-            byte[] content = HTTPGet(uri, ref res, ref err);
+            byte[] content = HTTPGet(uri, ref res, ref err, 1, 1, null);
             if (res != eUPDResult.Ok) return null;
             string fmap = Encoding.UTF8.GetString(content);
             return JObject.Parse(fmap);
@@ -176,8 +177,8 @@ namespace lupd
                 counter++;
                 JObject of = (JObject)p.Value;
                 string fpath = updhttppath + "/" + Regex.Replace(of["relpath"].ToString(), @"^[\\/]", "");
-                if (downloading != null) downloading(fpath, counter, cntall);
-                byte[] content = HTTPGet(fpath, ref res, ref err);
+                //if (downloading != null) downloading(fpath, counter, cntall);
+                byte[] content = HTTPGet(fpath, ref res, ref err, counter, cntall, downloading);
                 if (res != eUPDResult.Ok) return;
                 //
                 string savepath = Regex.Replace(Regex.Replace(updpath, @"[\\/]", Path.DirectorySeparatorChar.ToString()), @"[\\/]$", "") + Path.DirectorySeparatorChar;
