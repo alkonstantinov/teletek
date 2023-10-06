@@ -121,8 +121,8 @@
                         <TextBlock Text="{DynamicResource ScanMenuRS}" FontFamily="{StaticResource poppins_demibold}" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Name="Button3" Margin="10" Click="Button3_Click"><!--Default original state-->
-                <!--<Button Name="Button3" Margin="10" Click="Button3_Click" Visibility="Collapsed">-->
+                <!--<Button Name="Button3" Margin="10" Click="Button3_Click">--><!--Default original state-->
+                <Button Name="Button3" Margin="10" Click="Button3_Click" Visibility="Collapsed">
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="img3" Width="36" Height="36" Margin="0,0,0,2">
                             <Image.Source>

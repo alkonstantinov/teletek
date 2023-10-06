@@ -221,7 +221,7 @@ namespace lupd
             JObject downloads = files4download(crcProcessing, localmap, fmap);
             Download(updpath, downloads, downloading, ref res, ref err);
             JObject files4del = files4download(crcProcessing, fmap, localmap);
-            //DeleteUnusedFiles(updpath, files4del);
+            DeleteUnusedFiles(updpath, files4del);
             //
             string fmapfile = Regex.Replace(Regex.Replace(updpath, @"[\\/]$", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
             fmapfile += Path.DirectorySeparatorChar + settings.updmapfilename;

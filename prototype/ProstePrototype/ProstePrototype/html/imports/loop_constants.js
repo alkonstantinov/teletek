@@ -3,6 +3,7 @@
     IRIS4: { im: "imports/images/pics/iRIS4.png", sign: "iRIS4", type: "panel" },
     IRIS8: { im: "imports/images/pics/iRIS8.png", sign: "iRIS8", type: "panel" },
     REPEATER_TFT: { im: "imports/images/pics/Repeater_TFT.png", sign: "Repeater_TFT", type: "panel" },
+    TFT_REPEATER: { im: "imports/images/pics/Repeater_TFT.png", sign: "Repeater_TFT", type: "panel" },
     REPEATER_IRIS_SIMPO: { im: "imports/images/pics/Repeater.png", sign: "Repeater Iris/SIMPO", type: "panel" },
     SIMPO: { im: "imports/images/pics/SIMPO.png", sign: "SIMPO Panel", type: "panel" },
     NATRON: { im: "imports/images/pics/NATRON_WE.png", sign: "Natron", type: "panel" },

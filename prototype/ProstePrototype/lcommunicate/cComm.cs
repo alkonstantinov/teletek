@@ -1285,7 +1285,11 @@ namespace lcommunicate
                 else
                 {
                     string product = HidFound(HIDs, _dev);
-                    if (product != null) res.Add(product, _dev);
+                    if (product != null)
+                    {
+                        if (_dev.ProductName != null && _dev.ProductName.Trim() != "") product = _dev.ProductName;
+                        res.Add(product, _dev);
+                    }
                 }
             }
             //DeviceList dLst = new FilteredDeviceList();
@@ -1350,7 +1354,8 @@ namespace lcommunicate
                 JObject jSys = new JObject();
                 JObject _hids = _usb_devs(s);
                 if (_hids != null) jSys["HIDs"] = _hids;
-                if (Regex.IsMatch(dir, "^(iris|simpo|natron)", RegexOptions.IgnoreCase) || Regex.IsMatch(dir, @"^repeater[\w\W]+?simpo$", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(dir, "^(iris|simpo|natron|tft)", RegexOptions.IgnoreCase) ||
+                    Regex.IsMatch(dir, @"^repeater[\w\W]+?simpo$", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
                 else if (Regex.IsMatch(dir, "^eclipse", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "guard";
@@ -1382,6 +1387,8 @@ namespace lcommunicate
                 return "Repeater_Iris_Simpo";
             if (Regex.IsMatch(_dev.ProductName, @"Fire\s+?panel\s+?simpo", RegexOptions.IgnoreCase))
                 return "SIMPO";
+            if (Regex.IsMatch(_dev.ProductName, @"REPEATER\s+?TFT", RegexOptions.IgnoreCase))
+                return "TFT_REPEATER";
             return "";
         }
         private static List<JObject> SystemsFound(Dictionary<string, HidDevice> hid)
@@ -1395,9 +1402,10 @@ namespace lcommunicate
             {
                 HidDevice _dev = hid[s];
                 JObject jSys = new JObject();
-                if (Regex.IsMatch(s, "^(iris|simpo|natron)", RegexOptions.IgnoreCase) ||
+                if (Regex.IsMatch(s, "^(iris|simpo|natron|tft)", RegexOptions.IgnoreCase) ||
                     Regex.IsMatch(s, @"repeater[\w\W]+?iris[\w\W]+?simpo", RegexOptions.IgnoreCase) ||
-                    Regex.IsMatch(s, @"Fire\s+?panel\s+?simpo", RegexOptions.IgnoreCase))
+                    Regex.IsMatch(s, @"Fire\s+?panel\s+?simpo", RegexOptions.IgnoreCase) ||
+                    Regex.IsMatch(s, @"^repeater[\w\W]+?tft", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "fire";
                 else if (Regex.IsMatch(s, "^eclipse", RegexOptions.IgnoreCase))
                     jSys["deviceType"] = "guard";
@@ -1405,7 +1413,7 @@ namespace lcommunicate
                     jSys["deviceType"] = "";
                 string _schema = HidSchema(_dev);
                 jSys["schema"] = _schema.ToLower();
-                jSys["title"] = _schema;
+                jSys["title"] = _dev.ProductName;
                 jSys["interface"] = "USB";
                 jSys["address"] = _dev.VendorID.ToString() + "&" + _dev.ProductID.ToString();
                 //

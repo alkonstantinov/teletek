@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OPERATIONS XMLVERSION="10">
+	<ELEMENTS>
+		<ELEMENT ID="TFTR_PANEL">
+			<COMMANDS>
+				<COMMAND BYTES="03510F000089"/>
+				<COMMAND BYTES="035113000052"/>
+				<COMMAND BYTES="035113000152"/>
+				<COMMAND BYTES="035113000252"/>
+				<COMMAND BYTES="035113000352"/>
+				<COMMAND BYTES="03511200000c"/>
+				<COMMAND BYTES="0760" OKBYTE="1" OKVALUE="10" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
+				<COMMAND BYTES="0061FF" SAVEAS="LOOPTYPE"/>
+			</COMMANDS>
+			<PROPERTIES>
+				<PROPERTY ID="SounderDelayMode" BYTE="2" LENGTH="1"/>
+				<PROPERTY ID="FireBrigadeDelayMode" BYTE="3" LENGTH="1"/>
+				<PROPERTY ID="FireProtectionDelayMode" BYTE="4" LENGTH="1"/>
+				<PROPERTY ID="TFTR_FAT/FBF" BYTE="5" LENGTH="1"/>
+				<PROPERTY ID="SounderDelaySchedule" BYTE="6" LENGTH="28"/>
+				<PROPERTY ID="FireBrigadeDelaySchedule" BYTE="34" LENGTH="28"/>
+				<PROPERTY ID="FireProtectionDelaySchedule" BYTE="62" LENGTH="28"/>
+				<PROPERTY ID="DayNightSchedule" BYTE="90" LENGTH="28"/>
+				<PROPERTY ID="DayMode" BYTE="118" LENGTH="1"/>
+				<PROPERTY ID="SoundersMode" BYTE="119" LENGTH="1"/>
+				<PROPERTY ID="PRINTER" BYTE="120" LENGTH="1"/>
+				<PROPERTY ID="CallPointMode" BYTE="121" LENGTH="1"/>
+				<PROPERTY ID="T1DELAY" BYTE="122" LENGTH="1"/>
+				<PROPERTY ID="TONEALARM" BYTE="123" LENGTH="1"/>
+				<PROPERTY ID="TONEEVACUATE" BYTE="124" LENGTH="1"/>
+				<PROPERTY ID="TIMEAUTOLOGOFFINSTALLER" BYTE="125" LENGTH="1"/>
+				<PROPERTY ID="AUTOLOGOFFENABLED" BYTE="126" LENGTH="1"/>
+				<PROPERTY ID="EVACUATIONCYCLE INVERTED" BYTE="127" LENGTH="1"/>
+				<PROPERTY ID="EVACUATION_TIMEOUT" BYTE="128" LENGTH="1"/>
+				<PROPERTY ID="EVACUATE_SETTINGS" BYTE="129" LENGTH="1"/>
+				<PROPERTY ID="SOUNDERS_RESOUND" BYTE="130" LENGTH="1"/>
+				<PROPERTY ID="EVACUATECYCLE_ON" BYTE="132" LENGTH="2"/>
+				<PROPERTY ID="EVACUATECYCLE_OFF" BYTE="134" LENGTH="2"/>
+				<PROPERTY ID="ALARM_SETTINGS" BYTE="136" LENGTH="1"/>
+				<PROPERTY ID="TONECLASSCHANGE" BYTE="137" LENGTH="1"/>
+				<PROPERTY ID="LOGO1" BYTE="141" LENGTH="82"/>
+				<PROPERTY ID="LOGO2" BYTE="225" LENGTH="82"/>
+				<PROPERTY ID="LOGO3" BYTE="309" LENGTH="82"/>
+				<PROPERTY ID="LOGO4" BYTE="393" LENGTH="82"/>
+				<PROPERTY ID="VERSION_PANEL" BYTE="477" LENGTH="12"/>
+			</PROPERTIES>
+			<ELEMENTS>
+				<ELEMENT ID="TFTR_ACCESSCODE">
+					<COMMANDS>
+						<COMMAND BYTES="03511000000C"/>
+						<COMMAND BYTES="03511001000C"/>
+						<COMMAND BYTES="03511002000C"/>
+						<COMMAND BYTES="03511003000C"/>
+					</COMMANDS>
+					<PROPERTIES>
+						<PROPERTY ID="Code1" BYTE="2" LENGTH="10"/>
+						<PROPERTY ID="Level1" BYTE="12" LENGTH="1"/>
+						<PROPERTY ID="Code2" BYTE="16" LENGTH="10"/>
+						<PROPERTY ID="Level2" BYTE="26" LENGTH="1"/>
+						<PROPERTY ID="Code3" BYTE="30" LENGTH="10"/>
+						<PROPERTY ID="Level3" BYTE="40" LENGTH="1"/>
+						<PROPERTY ID="Code4" BYTE="44" LENGTH="10"/>
+						<PROPERTY ID="Level4" BYTE="54" LENGTH="1"/>
+					</PROPERTIES>
+				</ELEMENT>
+        <ELEMENT ID="TFTR_NETWORK">
+          <COMMANDS>
+            <COMMAND BYTES="035115000063"/>
+            <COMMAND BYTES="03510e000006"/>
+          </COMMANDS>
+          <PROPERTIES>
+            <PROPERTY ID="Name" BYTE="2" LENGTH="78"/>
+            <PROPERTY ID="IsNetworkEnabled" BYTE="84" LENGTH="1"/>
+            <PROPERTY ID="PanelNumber" BYTE="85" LENGTH="1" INC="1"/>
+            <PROPERTY ID="HostIP" BYTE="86" LENGTH="4"/>
+            <PROPERTY ID="NetMask" BYTE="90" LENGTH="4"/>
+            <PROPERTY ID="Router" BYTE="94" LENGTH="4"/>
+            <PROPERTY ID="Port" BYTE="98" LENGTH="2"/>
+			<PROPERTY ID="PanelEvacNumber" BYTE="100" LENGTH="1" INC="1"/>
+            <PROPERTY ID="emacETHADDR0" BYTE="103" LENGTH="1" OPERATION="BYTE2HEX"/>
+            <PROPERTY ID="emacETHADDR1" BYTE="104" LENGTH="1" OPERATION="BYTE2HEX"/>
+            <PROPERTY ID="emacETHADDR2" BYTE="105" LENGTH="1" OPERATION="BYTE2HEX"/>
+            <PROPERTY ID="emacETHADDR3" BYTE="106" LENGTH="1" OPERATION="BYTE2HEX"/>
+            <PROPERTY ID="emacETHADDR4" BYTE="107" LENGTH="1" OPERATION="BYTE2HEX"/>
+            <PROPERTY ID="emacETHADDR5" BYTE="108" LENGTH="1" OPERATION="BYTE2HEX"/>
+          </PROPERTIES>
+        </ELEMENT>
+		
+        <ELEMENT ID="TFTR_PANELSINNETWORK">
+          <ELEMENTS>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C000001"/>
+                <COMMAND BYTES="035116000060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C010001"/>
+                <COMMAND BYTES="035116010060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C020001"/>
+                <COMMAND BYTES="035116020060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C030001"/>
+                <COMMAND BYTES="035116030060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C040001"/>
+                <COMMAND BYTES="035116040060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C050001"/>
+                <COMMAND BYTES="035116050060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C060001"/>
+                <COMMAND BYTES="035116060060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C070001"/>
+                <COMMAND BYTES="035116070060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C080001"/>
+                <COMMAND BYTES="035116080060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C090001"/>
+                <COMMAND BYTES="035116090060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C0A0001"/>
+                <COMMAND BYTES="0351160A0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C0B0001"/>
+                <COMMAND BYTES="0351160B0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C0C0001"/>
+                <COMMAND BYTES="0351160C0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C0D0001"/>
+                <COMMAND BYTES="0351160D0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C0E0001"/>
+                <COMMAND BYTES="0351160E0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C0F0001"/>
+                <COMMAND BYTES="0351160F0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C100001"/>
+                <COMMAND BYTES="035116100060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C110001"/>
+                <COMMAND BYTES="035116110060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C120001"/>
+                <COMMAND BYTES="035116120060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C130001"/>
+                <COMMAND BYTES="035116130060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C140001"/>
+                <COMMAND BYTES="035116140060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C150001"/>
+                <COMMAND BYTES="035116150060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C160001"/>
+                <COMMAND BYTES="035116160060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C170001"/>
+                <COMMAND BYTES="035116170060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C180001"/>
+                <COMMAND BYTES="035116180060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C190001"/>
+                <COMMAND BYTES="035116190060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="0351161A0060"/>
+                <COMMAND BYTES="0351161A0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C1B0001"/>
+                <COMMAND BYTES="0351161B0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C1C0001"/>
+                <COMMAND BYTES="0351161C0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C1D0001"/>
+                <COMMAND BYTES="0351161D0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C1E0001"/>
+                <COMMAND BYTES="0351161E0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C1F0001"/>
+                <COMMAND BYTES="0351161F0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C200001"/>
+                <COMMAND BYTES="035116200060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C210001"/>
+                <COMMAND BYTES="035116210060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C220001"/>
+                <COMMAND BYTES="035116220060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C230001"/>
+                <COMMAND BYTES="035116230060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C240001"/>
+                <COMMAND BYTES="035116240060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C250001"/>
+                <COMMAND BYTES="035116250060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C260001"/>
+                <COMMAND BYTES="035116260060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C270001"/>
+                <COMMAND BYTES="035116270060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C280001"/>
+                <COMMAND BYTES="035116280060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C290001"/>
+                <COMMAND BYTES="035116290060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C2A0001"/>
+                <COMMAND BYTES="0351162A0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C2B0001"/>
+                <COMMAND BYTES="0351162B0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C2C0001"/>
+                <COMMAND BYTES="0351162C0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C2D0001"/>
+                <COMMAND BYTES="0351162D0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C2E0001"/>
+                <COMMAND BYTES="0351162E0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C2F0001"/>
+                <COMMAND BYTES="0351162F0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C300001"/>
+                <COMMAND BYTES="035116300060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C310001"/>
+                <COMMAND BYTES="035116310060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C320001"/>
+                <COMMAND BYTES="035116320060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C330001"/>
+                <COMMAND BYTES="035116330060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C340001"/>
+                <COMMAND BYTES="035116340060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C350001"/>
+                <COMMAND BYTES="035116350060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C360001"/>
+                <COMMAND BYTES="035116360060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C370001"/>
+                <COMMAND BYTES="035116370060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C380001"/>
+                <COMMAND BYTES="035116380060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C390001"/>
+                <COMMAND BYTES="035116390060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C3A0001"/>
+                <COMMAND BYTES="0351163A0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C3B0001"/>
+                <COMMAND BYTES="0351163B0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C3C0001"/>
+                <COMMAND BYTES="0351163C0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C3D0001"/>
+                <COMMAND BYTES="0351163D0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C3E0001"/>
+                <COMMAND BYTES="0351163E0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+            </ELEMENT>
+            <ELEMENT ID="TFTR_PANELINNETWORK">
+              <COMMANDS>
+                <COMMAND BYTES="03513C3F0001"/>
+                <COMMAND BYTES="0351163F0060"/>
+              </COMMANDS>
+              <PROPERTIES>
+                <PROPERTY ID="panel_status" BYTE="2" LENGTH="1"/>
+                <PROPERTY ID="IP" BYTE="5" LENGTH="4"/>
+                <PROPERTY ID="Panel_Name" BYTE="9" LENGTH="82"/>
+                <PROPERTY ID="Revision" BYTE="91" LENGTH="2"/>
+                <PROPERTY ID="panel" BYTE="93" LENGTH="1"/>
+                <PROPERTY ID="repeater" BYTE="94" LENGTH="1"/>
+                <PROPERTY ID="panel_flags" BYTE="95" LENGTH="1"/>
+                <PROPERTY ID="SendCommand" BYTE="96" LENGTH="1"/>
+                <PROPERTY ID="DeviceConfigured" BYTE="97" LENGTH="1"/>
+                <PROPERTY ID="Dummy1" BYTE="98" LENGTH="1"/>
+                <PROPERTY ID="Dummy2" BYTE="99" LENGTH="2"/>
+              </PROPERTIES>
+						</ELEMENT>
+					</ELEMENTS>			  
+            </ELEMENT>            
+          </ELEMENTS>
+		</ELEMENT>	
+    </ELEMENTS>
+</OPERATIONS>

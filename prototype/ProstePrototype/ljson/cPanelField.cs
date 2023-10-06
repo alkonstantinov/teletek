@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using lcommunicate;
 using System.Reflection.Metadata.Ecma335;
 using System.Linq;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ljson
 {
@@ -248,11 +249,22 @@ namespace ljson
         }
         private static void AddAndValues(Dictionary<string, string> values, JObject field, string sval, string sidx)
         {
-            if (field["PROPERTIES"] == null || field["PROPERTIES"]["PROPERTY"] == null)
+            if (field["PROPERTIES"] == null)
                 return;
-            if (field["PROPERTIES"]["PROPERTY"].Type == JTokenType.Object)
+            JToken t = null;
+            if (field["PROPERTIES"]["PROPERTY"] == null)
             {
-                JObject o = (JObject)field["PROPERTIES"]["PROPERTY"];
+                JArray a = new JArray();
+                JObject o = (JObject)field["PROPERTIES"];
+                foreach (JProperty p in o.Properties()) if (p.Value.Type == JTokenType.Object) a.Add(p.Value);
+                t = a;
+            }
+            else t = field["PROPERTIES"]["PROPERTY"];
+            if (t == null)
+                return;
+            if (t.Type == JTokenType.Object)
+            {
+                JObject o = (JObject)t;
                 if (o["~path"] == null)
                     return;
                 string fval = ANDValue(o, sval);
@@ -264,7 +276,7 @@ namespace ljson
             }
             else
             {
-                JArray a = (JArray)field["PROPERTIES"]["PROPERTY"];
+                JArray a = (JArray)t;
                 foreach (JObject o in a)
                 {
                     if (o["~path"] == null)

@@ -367,6 +367,21 @@
     <None Update="Configs\XML\Systems\SIMPO\Write\WriteConfig_Simpo0008.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Read\ReadConfig_TFTRepeater.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Read\ReadConfig_TFTRepeater_version01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Template\TFTRepeater.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Write\WriteConfig_TFTRepeater.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Write\WriteConfig_TFTRepeater_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Templates\ECLIPSE99.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

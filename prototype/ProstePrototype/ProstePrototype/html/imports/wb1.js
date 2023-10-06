@@ -103,7 +103,7 @@ function receiveMessageWPF(jsonTxt) {
                 divD.appendChild(h4);
                 const devices = devicesPerType[deviceType];
                 for (let i = 0; i < devices.length; i++) {
-                    addButton(devices[i].title, divD, i, devices[i]);
+                    addButton(divD, i, devices[i]);
                     body.appendChild(divD);
                 }
             });
@@ -187,10 +187,10 @@ function receiveMessageWPF(jsonTxt) {
 //#endregion
 
 // addButton function for creating the main panels buttons
-const addButton = (title, div, index, localJSON = {}) => {
+const addButton = (div, index, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
     // button color definition
-    let color = indexFlag ? localJSON.deviceType : "";
+    let color = indexFlag ? localJSON.deviceType : "normal";
     //if (color === 'guard') color = 'normal'; // options for color: "normal", "fire", "grasse"
     if (color === 'guard') return; // case without Eclipse - for delivering without Eclipse 
 
@@ -202,10 +202,10 @@ const addButton = (title, div, index, localJSON = {}) => {
         default: key = 'eclipse';
     }
 
-    title = title.toUpperCase();
+    title = localJSON.schema.toUpperCase();
     // title definition
-    const titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase());
-    let img = DEVICES_CONSTS[title].im ? `<img src="${DEVICES_CONSTS[title].im}" alt="${DEVICES_CONSTS[title].sign}">` : `<i class="ram_icon ${CONFIG_CONST[key].picture}"></i>`
+    const titleTranslated = localJSON.title;
+    let img = DEVICES_CONSTS[title]?.im ? `<img src="${DEVICES_CONSTS[title].im}" alt="${DEVICES_CONSTS[title].sign}">` : `<i class="ram_icon ${CONFIG_CONST[key].picture}"></i>`
     let localJSONString = JSON.stringify(localJSON).replaceAll("\"", "'");
     let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': ${localJSONString}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${index}_${localJSON.schema}">
                 <div class="${color} ram_card">

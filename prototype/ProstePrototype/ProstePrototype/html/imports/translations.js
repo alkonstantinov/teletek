@@ -437,6 +437,14 @@
             "en": "A difference is found between the panel version and the currently loaded version. \n - Choose \"No\" to stop the process. \n - Or, you can continue by clicking the \"Yes\" button below keeping in mind that this might result in incorrect interpretation of the data.",
             "bg": "Идентифицирана е разлика между версията на панела и заредената. \n - Изберете \"No\" за да спрете изпълнението. \n - Или можете да натиснете \"Yes\" бутона за продължаване, като се вземе под внимание, че някои данни могат да не са коректно интерпретирани.",
         },
+        panel: {
+            "en": "Panel",
+            "bg": "Панел",
+        },
+        loaded: {
+            "en": "Loaded",
+            "bg": "Заредена",
+        },
         "activate": { 
             "en": "Activate",
             "bg": "Активен",

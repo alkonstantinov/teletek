@@ -56,7 +56,12 @@ namespace ProstePrototype
                 ok.Remove("~rw");
                 o[key] = ok;
             }
-            File.WriteAllTextAsync("wb3.json", o.ToString());
+            try
+            {
+                File.WriteAllTextAsync("wb3.json", o.ToString());
+
+            }
+              catch { }
             return o.ToString();
         }
         public string getElement(string elementName)
@@ -82,7 +87,11 @@ namespace ProstePrototype
 
             res = cJson.GroupsWithValues(res).ToString();
             res = Regex.Replace(res, @",\s*?""~rw""[\w\W]+$", "") + "\r\n}";
-            File.WriteAllText("wb3.json", res);
+            try
+            {
+
+                File.WriteAllText("wb3.json", res);
+            } catch { }
             return res;
         }
 
@@ -121,7 +130,11 @@ namespace ProstePrototype
                 JObject ok = JObject.Parse(dres[key]);
                 o[key] = ok["~loop_type"];
             }
+            try
+            {
             File.WriteAllTextAsync("wb3.json", o.ToString());
+
+            } catch { }
             return o.ToString();
         }
 
@@ -159,7 +172,11 @@ namespace ProstePrototype
                 onew["~address"] = addr;
                 res.Add(onew);
             }
+            try
+            {
             File.WriteAllTextAsync("wb3.json", res.ToString());
+
+            } catch { }
             return res.ToString();
         }
 
@@ -179,21 +196,35 @@ namespace ProstePrototype
                 
                 if (t != null)
                 {
+                    try
+                    {
                     File.WriteAllTextAsync("wb3.json", t.ToString());
+
+                    } catch { }
                     return t.ToString();
                 }
                 if (jnode["PROPERTIES"] != null)
                     t = jnode["PROPERTIES"][key];
                 if (t != null)
                 {
-                    File.WriteAllTextAsync("wb3.json", t.ToString());
+                    try
+                    {
+                        File.WriteAllTextAsync("wb3.json", t.ToString());
+
+                    }
+                    catch { }
                     return t.ToString();
                 }
                 if (jnode["CONTAINS"] != null)
                     t = jnode["CONTAINS"];
                 if (t != null)
                 {
-                    File.WriteAllTextAsync("wb3.json", t.ToString());
+                    try
+                    {
+                        File.WriteAllTextAsync("wb3.json", t.ToString());
+
+                    }
+                    catch { }
                     return t.ToString();
                 }
             }
@@ -203,14 +234,23 @@ namespace ProstePrototype
         public string loopsInputs(string path)
         {
             JObject o = cJson.LoopsInputs(path);
-            File.WriteAllTextAsync("wb4.json", o.ToString());
+            try
+            {
+                File.WriteAllTextAsync("wb4.json", o.ToString());
+
+            }
+            catch { }
             return o.ToString();
         }
 
         public string loopsOutputs(string path)
         {
             JObject o = cJson.LoopsOutputs(path);
+            try
+            {
             File.WriteAllTextAsync("wb4.json", o.ToString());
+
+            } catch { }
             return o.ToString();
         }
         public string setNodeFilters(string elementName)
@@ -250,7 +290,11 @@ namespace ProstePrototype
         public string panelsInLeftBrowser()
         {
             JArray res = cJson.PanelsInLeftBrowser();
+            try
+            {
             File.WriteAllTextAsync("wb3.json", res.ToString());
+
+            } catch { }
             return res.ToString();
         }
         public string MIMICPanels()

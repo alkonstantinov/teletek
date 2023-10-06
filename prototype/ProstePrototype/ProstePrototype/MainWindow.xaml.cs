@@ -636,7 +636,7 @@ namespace ProstePrototype
             string _clean_key = Regex.Replace(page, @"[\d-]", string.Empty);
             if (Regex.IsMatch(_clean_key, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
                 _clean_key = "iris";
-            if (Regex.IsMatch(_clean_key, "^simpo", RegexOptions.IgnoreCase) && 
+            if (Regex.IsMatch(_clean_key, "^(simpo|tft)", RegexOptions.IgnoreCase) && 
                 !Regex.IsMatch(_clean_key, "paneloutputs$", RegexOptions.IgnoreCase) &&
                 !Regex.IsMatch(_clean_key, "mimicpanels$", RegexOptions.IgnoreCase))
                 _clean_key = "iris";
@@ -908,7 +908,7 @@ namespace ProstePrototype
                 string q = MakeTranslation("VersionDiffQuery");
                 return (MessageBox.Show(
                         q,
-                        MakeTranslation("VersionDiffFound"),
+                        MakeTranslation("VersionDiffFound") + " -> " + MakeTranslation("panel") + ": " + panel_version + " | " + MakeTranslation("loaded") +": " + xml_version,
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Warning) == MessageBoxResult.Yes);
 
@@ -1289,7 +1289,7 @@ namespace ProstePrototype
             switch (true)
             {
                 case true when type == "INPUT": type = "iris_inputs_elements"; break;
-                case true when type == "PANELINNETWORK": type = "iris_panels_in_network"; break;
+                case true when type == "PANELINNETWORK" || type == "PANELS_R" : type = "iris_panels_in_network_elements"; break;
                 case true when type == "INPUT_GROUP": type = "iris_inputs_group_elements"; break;
                 case true when type == "OUTPUT": type = "iris_outputs_elements"; break;
                 case true when type == "ZONE": type = "iris_zones_elements"; break;
@@ -1487,10 +1487,11 @@ namespace ProstePrototype
             LoadPage(page, "");
         }
         private void initBreadCrumbs(string page, JArray breadCrumbs)
-        {   
-            JObject jnode = new JObject(cJson.GetNode(page));
-            //string panel_type = (string)jnode["@PRODUCTNAME"];
-            string panel_type = (jnode["@PRODUCTNAME"] != null) ? (string)jnode["@PRODUCTNAME"] : "";
+        {
+            //JObject jnode = new JObject(cJson.GetNode(page));
+            //string paneltype = (string)jnode["@PRODUCTNAME"];
+            string panel_type = cJson.CurrentPanelType ?? ""; // (jnode["@PRODUCTNAME"] != null) ? (string)jnode["@PRODUCTNAME"] : "";
+            string panel_full_type = cJson.CurrentPanelFullType;
             lvBreadCrumbs.Items.Clear();
             
             string color = "Blue";
@@ -1500,7 +1501,7 @@ namespace ProstePrototype
             foreach (string item in breadCrumbs.Select(x => x.Value<string>()))
             {
                 string currItem = item;
-                if (item == "iris" && jnode.ToString().Contains("SIMPO") && !jnode.ToString().Contains("_R")) // SIMPO_NETWORK_R, SIMPO_PANEL_R exceptions
+                if (item == "iris" && panel_full_type.ToUpper().Contains("SIMPO") && !panel_full_type.ToUpper().Contains("REPEATER")) // SIMPO_NETWORK_R, SIMPO_PANEL_R exceptions
                 {
                     currItem = "simpo";
                 }
@@ -1540,7 +1541,7 @@ namespace ProstePrototype
         private void AddPagesConstant()
         {
             //string addConstScript = $"const CONFIG_CONST = {pages}";
-            string script = $"setConfigConst({pages.ToString()})";
+            string script = $"setConfigConst({pages})";
             wb1.LoadingStateChanged += (sender, args) =>
             {
                 //Wait for the Page to finish loading

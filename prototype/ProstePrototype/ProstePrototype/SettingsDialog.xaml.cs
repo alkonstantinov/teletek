@@ -196,7 +196,8 @@ namespace ProstePrototype
                 System.IO.Path.DirectorySeparatorChar + 
                 "kill_run.exe"
                 );
-            killRun.WindowStyle = ProcessWindowStyle.Normal;                
+            killRun.WindowStyle = ProcessWindowStyle.Normal;
+            // killRun.Verb = "runas";
             killRun.Arguments = $"\"{exePath}\" \"{updPath}\"";
             Process.Start(killRun);
         }

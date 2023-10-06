@@ -1665,15 +1665,16 @@ namespace ljson
             if (settings.logreads)
                 _log_bytesreaded.Clear();
             //string slog = ReadLog(conn_params);
-            ClearPanelCache(CurrentPanelID);
             //
             string panel_version = null;
             string xml_version = null;
             eRWResult rwres = SetRWFiles(conn_params, _code, ref panel_version, ref xml_version);
-            if (panel_version != xml_version && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase) && !verdiff(panel_version, xml_version))
-                return eRWResult.VersionDiff;
             if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD)
                 return rwres;
+            if (String.Compare(panel_version, xml_version) > 0 && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase) && !verdiff(panel_version, xml_version))
+                return eRWResult.VersionDiff;
+            //
+            ClearPanelCache(CurrentPanelID);
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
             Dictionary<string, JObject> dnodes = new Dictionary<string, JObject>();
@@ -2861,6 +2862,8 @@ namespace ljson
             _main_content_key = Regex.Replace(jSys["schema"].ToString(), @"\d+$", "");
             if (Regex.IsMatch(_main_content_key, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
                 _main_content_key = "iris";
+            if (Regex.IsMatch(_main_content_key, "^tft", RegexOptions.IgnoreCase))
+                _main_content_key = "iris";
             Monitor.Exit(_cs_main_content_key);
             Monitor.Exit(_cs_panel_templates);
             Monitor.Exit(_cs_current_panel);
@@ -2905,6 +2908,8 @@ namespace ljson
                     if (Regex.IsMatch(name, "^repeater_iris_simpo", RegexOptions.IgnoreCase))
                         name = "iris";
                     if (Regex.IsMatch(name, "^simpo$", RegexOptions.IgnoreCase))
+                        name = "iris";
+                    if (Regex.IsMatch(name, @"^tft[\w\W]+?repeater$", RegexOptions.IgnoreCase))
                         name = "iris";
                     if (Regex.IsMatch(name, @"^natron[\w\W]*?none$", RegexOptions.IgnoreCase))
                         name = "natron_device";
@@ -3299,7 +3304,7 @@ namespace ljson
             o = (JObject)t;
             string prod = o["@PRODUCTNAME"].ToString();
             string sj = "{}";
-            if (Regex.IsMatch(prod, @"(iris|simpo)", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(prod, @"(iris|simpo|tft)", RegexOptions.IgnoreCase))
             {
                 _internal_relations_operator = new cInternalrelIRIS();
                 _panel_type = "iris";

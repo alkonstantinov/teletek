@@ -22,11 +22,15 @@ namespace ljson
         {
             if (Regex.IsMatch(name, @"iris[\w\W]*?_accesscode$", RegexOptions.IgnoreCase))
                 name = "iris_access_code";
+            else if (Regex.IsMatch(name, @"tftr[\w\W]*?_accesscode$", RegexOptions.IgnoreCase))
+                name = "iris_access_code";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
                 name = "iris_network";
             else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK_R$", RegexOptions.IgnoreCase))
                 name = "iris_network";
             else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_network";
+            else if (Regex.IsMatch(name, @"TFTR[\w\W]*?_NETWORK$", RegexOptions.IgnoreCase))
                 name = "iris_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_PANELSINNETWORK$", RegexOptions.IgnoreCase))
                 name = "iris_panels_in_network";
@@ -34,6 +38,8 @@ namespace ljson
                 name = "iris_panels_in_network";
             //else if (Regex.IsMatch(name, @"SIMPO[\w\W]*?_PANELS$", RegexOptions.IgnoreCase))
             //    name = "iris_panels_in_network";
+            else if (Regex.IsMatch(name, @"TFTR[\w\W]*?_PANELSINNETWORK$", RegexOptions.IgnoreCase))
+                name = "iris_panels_in_network";
             else if (Regex.IsMatch(name, @"IRIS[\w\W]*?_INPUTS$", RegexOptions.IgnoreCase))
                 name = "iris_inputs";
             else if (Regex.IsMatch(name, @"INPUTS[\w\W]*?_GROUP$", RegexOptions.IgnoreCase))
@@ -61,6 +67,8 @@ namespace ljson
             else if (Regex.IsMatch(name, @"^R_PANEL$", RegexOptions.IgnoreCase))
                 name = "iris";
             else if (Regex.IsMatch(name, @"^SIMPO_PANEL$", RegexOptions.IgnoreCase))
+                name = "iris";
+            else if (Regex.IsMatch(name, @"^TFTR_PANEL$", RegexOptions.IgnoreCase))
                 name = "iris";
             return name;
         }
@@ -364,6 +372,34 @@ namespace ljson
             //
             json["iris"]["PROPERTIES"]["OLD"] = o;
         }
+        private static void CreateMainGroupsTFTRepeater(JObject json)
+        {
+            JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
+            JObject o = Array2Object(proparr);
+            //groups
+            json["iris"]["PROPERTIES"]["Groups"] = new JObject();
+            //
+            JObject grp1 = new JObject();
+            grp1["name"] = "Auto Log Off";
+            JObject f1 = new JObject();
+            f1["AUTOLOGOFFENABLED"] = o["AUTOLOGOFFENABLED"];
+            f1["TIMEAUTOLOGOFFINSTALLER"] = o["TIMEAUTOLOGOFFINSTALLER"];
+            grp1["fields"] = f1;
+            json["iris"]["PROPERTIES"]["Groups"]["AutoLogOff"] = grp1;
+            //
+            JObject grp2 = new JObject();
+            grp2["name"] = "Company Info";
+            JObject f2 = new JObject();
+            f2["LOGO1"] = o["LOGO1"];
+            f2["LOGO2"] = o["LOGO2"];
+            f2["LOGO3"] = o["LOGO3"];
+            f2["LOGO4"] = o["LOGO4"];
+            grp2["fields"] = f2;
+            json["iris"]["PROPERTIES"]["Groups"]["CompanyInfo"] = grp2;
+            //
+            json["iris"]["PROPERTIES"]["OLD"] = o;
+            AddMissetFields((JObject)json["iris"]["PROPERTIES"]["Groups"], o, "Parameters");
+        }
         private static void CreateMainGroups(JObject json)
         {
             if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
@@ -374,6 +410,11 @@ namespace ljson
             if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"Simpo[\w\W]+?panel\s*$", RegexOptions.IgnoreCase))
             {
                 CreateMainGroupsSimpoPanel(json);
+                return;
+            }
+            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"TFT[\w\W]+?Repeater[\w\W]+?panel\s*$", RegexOptions.IgnoreCase))
+            {
+                CreateMainGroupsTFTRepeater(json);
                 return;
             }
             JArray proparr = (JArray)json["iris"]["PROPERTIES"]["PROPERTY"];
@@ -610,6 +651,11 @@ namespace ljson
             JObject f1 = new JObject();
             f1["IsNetworkEnabled"] = o["IsNetworkEnabled"];
             JObject neprops = Array2Object((JArray)f1["IsNetworkEnabled"]["PROPERTIES"]["PROPERTY"]);
+            if (Regex.IsMatch(json["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+            {
+                JObject ontype = (JObject)neprops["NetworkType"];
+                if (ontype != null) ontype["@AND"] = "2";
+            }
             f1["IsNetworkEnabled"]["PROPERTIES"] = neprops;
             //f1["NetworkType"] = o["NetworkType"];
             //f1["Protocol"] = o["Protocol"];
@@ -635,7 +681,7 @@ namespace ljson
             json["iris_network"]["PROPERTIES"]["Groups"]["NetworkSettings"] = grp2;
             //not grouped params
             json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"] = new JObject();
-            json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["PanelEvacNumber"] = o["PanelEvacNumber"];
+            if (o["PanelEvacNumber"] != null) json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["PanelEvacNumber"] = o["PanelEvacNumber"];
             json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"] = o["emacETHADDR0"];
             json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TYPE"] = "EMAC";
             json["iris_network"]["PROPERTIES"]["Groups"]["~noname1"]["emacETHADDR"]["@TEXT"] = "EMAC";
@@ -659,7 +705,8 @@ namespace ljson
         private static void ConvertInputs(JObject json, JObject _pages)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -746,7 +793,8 @@ namespace ljson
         private static void ConvertFATFBF(JObject json, JObject _pages)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase)||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -765,7 +813,8 @@ namespace ljson
         private static void ConvertInputGroups(JObject json, JObject _pages)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -783,7 +832,8 @@ namespace ljson
         private static void ConvertOutputs(JObject json, JObject _pages)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -800,7 +850,8 @@ namespace ljson
         #region zones
         private static void ConvertZones(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -817,7 +868,8 @@ namespace ljson
         #region evac zones
         private static void ConvertEvacZones(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -835,7 +887,8 @@ namespace ljson
         private static void ConvertPeripheralDevices(JObject json, JObject _pages)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -852,7 +905,8 @@ namespace ljson
         #region loop devices
         private static void ConvertLoopDevices(JObject json, JObject _pages)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -890,7 +944,8 @@ namespace ljson
         private static void ConvertInputsGroup(JObject json)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -962,7 +1017,8 @@ namespace ljson
         private static void ConvertInput(JObject json)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1032,7 +1088,8 @@ namespace ljson
         private static void ConvertOutput(JObject json)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1090,7 +1147,8 @@ namespace ljson
         }
         private static void ConvertZone(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1164,7 +1222,8 @@ namespace ljson
         }
         private static void ConvertEvacZoneGroup(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1205,7 +1264,8 @@ namespace ljson
         private static void ConvertPreripherialDevicesContentNodes(JObject json)
         {
             if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase))
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^SIMPO[\w\W]+?Panel$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1402,7 +1462,8 @@ namespace ljson
         }
         private static void ChangeLoops(JObject json)
         {
-            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"REPEATER\s+?Iris[\w\W]+?Simpo$", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(json["ELEMENTS"]["iris"]["@PRODUCTNAME"].ToString(), @"^TFT[\w\W]+?Panel$", RegexOptions.IgnoreCase))
             {
                 return;
             }
@@ -1558,6 +1619,7 @@ namespace ljson
             elements["SIMPO_PANELS_R"] = panels;
         }
         #endregion
+
         #region Simpo panel
         private static string ReorderSimpoPanelTemplate(string json)
         {
