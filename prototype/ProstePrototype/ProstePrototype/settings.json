@@ -53,5 +53,11 @@
         }
       ]
     }
+  ],
+  "write_replacements": [
+    {
+      "match": "<xxxxBYTE XPATH=\"ELEMENTS/ELEMENT\\[@ID='TFTR_NETWORK'\\]/PROPERTIES/PROPERTY\\[@ID='Name'\\]\" LENGTH=\"82\"/>",
+      "replacewith": "<BYTE XPATH=\"ELEMENTS/ELEMENT[@ID='TFTR_NETWORK']/PROPERTIES/PROPERTY[@ID='Name']\" LENGTH=\"83\"/>"
+    }
   ]
 }

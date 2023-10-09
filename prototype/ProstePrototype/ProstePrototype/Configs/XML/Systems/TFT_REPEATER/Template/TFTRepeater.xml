@@ -17,20 +17,313 @@
     <PROPERTIES>
       <PROPERTY TYPE="TEXT" ID="VERSION_PANEL" LENGTH="6" SIZE="6" TEXT=" " VALUE="      " READONLY="1" LNGID="c089a75c-249f-4673-96b2-f580927fbb60">
       </PROPERTY>
-      <PROPERTY TYPE="AND" ID="AUTOLOGOFFENABLED" SIZE="1" TEXT="Auto Log off" LNGID="60b90a83-2eb3-4caf-a721-5f0b9f0a7273">
-        <PROPERTIES>
-          <PROPERTY TYPE="CHECK" ID="LOGOFFENABLED" SIZE="1" TEXT="Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="037e2800-f76b-4f0a-bbe9-0373ee320ee6" />
-        </PROPERTIES>
-      </PROPERTY>
-      <PROPERTY TYPE="INT" ID="TIMEAUTOLOGOFFINSTALLER" SIZE="1" MIN="1" MAX="60" VALUE="30" TEXT="Time Auto Log off Installer, [min]" LNGID="54749847-abe5-4094-b3f7-af577ca42f2b" />
-      <PROPERTY TYPE="TEXT" ID="LOGO1" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 1" LNGID="fce1137d-e8b5-46fb-a0be-6b7f31f58674">
-      </PROPERTY>
-      <PROPERTY TYPE="TEXT" ID="LOGO2" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 2" LNGID="a8c90669-3f2b-4ded-91b3-2a208ac1514c">
-      </PROPERTY>
-      <PROPERTY TYPE="TEXT" ID="LOGO3" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 3" LNGID="d4f0d4d3-c770-45bc-a198-9bbbe9912d32">
-      </PROPERTY>
-      <PROPERTY TYPE="TEXT" ID="LOGO4" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 4" LNGID="4c55757f-3855-481b-b13e-ce92a93476d8">
-      </PROPERTY>
+	  
+	  			<!-- DAY MODE -->
+			<PROPERTY TYPE="HIDDEN" ID="DayMode" SIZE="1" TEXT="Day Mode" LNGID="f6ef466d-a821-4efa-9acb-dbd626a0446a">
+				<ITEMS>
+					<ITEM NAME="OFF" VALUE="0" DEFAULT="1" LNGID="5d92f229-d7eb-4b89-b2ed-20f855211a04" />
+					<ITEM NAME="ON" VALUE="1" LNGID="14a2f2e5-169b-4e10-9852-d92b7bbdfb8f" />
+					<ITEM NAME="SCHEDULE" VALUE="2" LNGID="dc5f9ebe-fda1-4f34-bd8a-f50d2e37179d" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- TIMEZONE -->
+			<PROPERTY TYPE="HIDDEN" ID="TIMEZONE" SIZE="1" TEXT="Timezone" LNGID="16ef4661-a821-1efa-1acb-dbd626a04461">
+				<ITEMS>
+					<ITEM NAME="Midway, Pago Pago, Niue, Samoa" VALUE="0" />
+					<ITEM NAME="Honolulu, Johnston, Rarotonga, Tahiti" VALUE="1" />
+					<ITEM NAME="Anchorage, Nome, Juneau, Yakutat, Sitka, Metlakatla" VALUE="2" />
+					<ITEM NAME="Los Angeles, Vancouver, Tijuana" VALUE="3" />
+					<ITEM NAME="Phoenix, Hermosillo, Dawson Creek, Fort Nelson, Creston" VALUE="4" />
+					<ITEM NAME="Denver, Edmonton, Boise, Shiprock, Yellowknife" VALUE="5" />
+					<ITEM NAME="Chicago, Menominee, Winnipeg, Knox, New Salem, Tell City" VALUE="6" />
+					<ITEM NAME="Mexico City, Monterrey, Merida" VALUE="7" />
+					<ITEM NAME="New York, Toronto, Montreal, Detroit, Havana, Indianapolis" VALUE="8" />
+					<ITEM NAME="Halifax, Moncton, Goose Bay, Glace Bay, Thule" VALUE="9" />
+					<ITEM NAME="Santiago, Chile (Continental)" VALUE="10" />
+					<ITEM NAME="St Johns" VALUE="11" />
+					<ITEM NAME="Sao Paulo, Montevideo, Recife, Bahia, Fortaleza, Belem, Maceio" VALUE="12" />
+					<ITEM NAME="Buenos Aires, Cordoba, Mendoza, Tucuman, San Luis" VALUE="13" />
+					<ITEM NAME="London, Lisbon, Dublin, Guernsey, Isle of Man, Jersey" VALUE="14" />
+					<ITEM NAME="Berlin, Amsterdam, Vienna, Madrid, Zurich, Rome, Paris" VALUE="15" />
+					<ITEM NAME="Cairo, Windhoek, Johannesburg, Tripoli, Khartoum, Maputo" VALUE="16" />
+					<ITEM NAME="Helsinki, Athens, Bucharest, Sofia, Kiev, Zaporozhye, Riga" VALUE="17" />
+					<ITEM NAME="Jerusalem" VALUE="18" />
+					<ITEM NAME="Istanbul, Minsk, Moscow, Simferopol, Kirov" VALUE="19" />
+					<ITEM NAME="Kuwait, Baghdad, Riyadh, Qatar, Bahrain, Aden" VALUE="20" />
+					<ITEM NAME="Nairobi, Kampala, Dar es Salaam, Addis Ababa, Mogadishu" VALUE="21" />
+					<ITEM NAME="Tehran" VALUE="22" />
+					<ITEM NAME="Dubai, Baku, Tbilisi, Yerevan, Muscat" VALUE="23" />
+					<ITEM NAME="Karachi, Yekaterinburg, Tashkent, Ashgabat, Samarkand" VALUE="24" />
+					<ITEM NAME="Calcutta, Kolkata, Colombo" VALUE="25" />
+					<ITEM NAME="Katmandu" VALUE="26" />
+					<ITEM NAME="Rangoon, Yangon" VALUE="27" />
+					<ITEM NAME="Bangkok, Krasnoyarsk, Jakarta, Phnom Penh, Ho Chi Minh" VALUE="28" />
+					<ITEM NAME="Shanghai, Hong Kong, Singapore, Manila, Kuala Lumpur, Taipei" VALUE="29" />
+					<ITEM NAME="Perth" VALUE="30" />
+					<ITEM NAME="Seoul, Tokyo, Dili, Yakutsk, Jayapura, Chita, Khandyga" VALUE="31" />
+					<ITEM NAME="Adelaide, Broken Hill" VALUE="32" />
+					<ITEM NAME="Darwin, North" VALUE="33" />
+					<ITEM NAME="Brisbane, Queensland, Lindeman" VALUE="34" />
+					<ITEM NAME="Hobart, Sydney, Melbourne, New South Wales, Victoria, Currie" VALUE="35" />
+					<ITEM NAME="Guam, Port Moresby, Saipan, Truk, Chuuk" VALUE="36" />
+					<ITEM NAME="Auckland" VALUE="37" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- BOSEC -->
+			<PROPERTY TYPE="HIDDEN" ID="BOSEC_EN_DIS" SIZE="1" TEXT="Lines Quality Monitoring" LNGID="12345678-5958-4200-b9a7-9cd3ad6c4e71">
+				<ITEMS>
+					<ITEM NAME="Disabled" VALUE="0" LNGID="866259d0-5958-4200-b9a7-9cd3ad6c4e71"/>
+					<ITEM NAME="Enabled" VALUE="1" LNGID="037e2800-f76b-4f0a-bbe9-0373ee320ee6"  />
+				</ITEMS>
+			</PROPERTY>
+			<!-- Evac panel -->
+			<PROPERTY TYPE="HIDDEN" ID="Evac_protocol" SIZE="1" TEXT="EVAC Protocol" LNGID="866259d0-f76b-4200-bbe9-9cd3ad6c4e71">
+				<ITEMS>
+					<ITEM NAME="Teletek" VALUE="0" LNGID="337e2803-3763-3f0a-3be9-3373ee320ee3" />
+					<ITEM NAME="Paso" VALUE="1" LNGID="866259d0-3763-4200-3be9-dbd626a04461" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- SOUNDERS MODE -->
+			<PROPERTY TYPE="HIDDEN" ID="SoundersMode" SIZE="1" TEXT="Sounders Mode" LNGID="7cd8d889-5e8c-4bcd-a157-e598de684019">
+				<ITEMS>
+					<ITEM NAME="COMMON" VALUE="0" DEFAULT="1" LNGID="87e22d5a-1c46-48fc-930d-234a4a24b0d7" />
+					<ITEM NAME="ZONAL" VALUE="1" LNGID="44d9e917-0d6e-4ab7-8f57-4a0a08f446fb" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- PRINTER -->
+			<PROPERTY TYPE="HIDDEN" ID="PRINTER" SIZE="1" TEXT="Printer" LNGID="5ca5ee94-3dc3-45c9-bd9d-4f0c9e230d30">
+				<ITEMS>
+					<ITEM NAME="KAFKA" VALUE="0" LNGID="da6ee53b-a303-444b-9b80-f35d20f690a5" />
+					<ITEM NAME="DATECS" VALUE="1" LNGID="d9d37cd4-ed5a-42a0-a877-601ead8d66a2" />
+					<ITEM NAME="IRIS printer" VALUE="2" LNGID="2297b725-ee99-4e78-9f89-d94105102f3e" />
+					<ITEM NAME="NONE" VALUE="3" DEFAULT="1" LNGID="6c84d9c8-5878-4972-83f6-ee420a9989bc" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- FAT-FBF -->
+			<PROPERTY TYPE="HIDDEN" ID="IRIS8_FAT/FBF" SIZE="1" TEXT="FAT/FBF, ESPA 444" LNGID="bc63b71e-acd2-4f05-a728-67587a405c68">
+				<ITEMS>
+					<ITEM NAME="NONE" VALUE="0" DEFAULT="1" LNGID="905679f3-cbb8-41ee-b0e9-e1ab5a86a2dd" />
+					<ITEM NAME="FAT/FBF" VALUE="1" LNGID="260c6b81-7980-4b87-8938-74c3ef0a6428" />
+					<ITEM NAME="RS 485" VALUE="2" LNGID="d7d96922-2cae-48d6-bdff-0f7c1720e177" />
+					<ITEM NAME="ESPA 444" VALUE="3" LNGID="443ec265-9d16-4d0a-a0d9-8056fe32abe9" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- CALLPOINT MODE -->
+			<PROPERTY TYPE="HIDDEN" ID="CallPointMode" SIZE="1" TEXT="Call Point Mode" LNGID="406009ed-a06e-4dd7-8237-7eebf15c4d52">
+				<ITEMS>
+					<ITEM NAME="COMMON" VALUE="0" DEFAULT="1" LNGID="51905d56-ec82-4f2d-9103-57acaa479494" />
+					<ITEM NAME="ZONAL" VALUE="1" LNGID="4609b6a7-d24d-4811-8d6e-fa777086d690" />
+				</ITEMS>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="T1DELAY" SIZE="1" MIN="0" MAX="60" VALUE="30" TEXT="Delay (T1), [sec]" LNGID="1c41b455-f47d-4c0a-8500-57f483e9a02e" />
+			<!-- ALARM TON -->
+			<PROPERTY TYPE="HIDDEN" ID="TONEALARM" SIZE="1" TEXT="Tone Alarm" LNGID="9af9e98b-089b-4bbc-86cf-89bb08813a34">
+				<ITEMS>
+					<ITEM NAME="970 Hz" VALUE="0" DEFAULT="1" LNGID="1f4c7983-d8b7-4d46-8b5f-b9a6c61d2258" />
+					<ITEM NAME="800 Hz / 970 Hz @ 2 Hz" VALUE="1" LNGID="ccfe7b1d-e38d-4fa1-8fea-d27a687d5904" />
+					<ITEM NAME="800 Hz - 970 Hz @ 1 Hz" VALUE="2" LNGID="ddab311f-5f1c-426d-9a28-03fb1166a1d8" />
+					<ITEM NAME="970 Hz 1s OFF / 1s ON" VALUE="3" LNGID="5bbf809a-a0e4-4467-8d05-ec7ba8089c9a" />
+					<ITEM NAME="970 Hz, 0.5s / 630 Hz, 0.5s" VALUE="4" LNGID="01f75509-a2d0-4aa2-b97e-f66281e50d35" />
+					<ITEM NAME="554 Hz, 0.1s / 440 Hz, 0.4s" VALUE="5" LNGID="3e2cf89c-e3d4-4cb2-8770-f9ce76d14ae5" />
+					<ITEM NAME="500-1200 Hz, 3.5s / 0.5s OFF" VALUE="6" LNGID="f16329c0-0b95-42cc-bcd2-7b6f191c6e2a" />
+					<ITEM NAME="420 Hz 0.625s ON / 0.625s OFF" VALUE="7" LNGID="1a82a69f-9815-4221-b609-77c66afc9fae" />
+					<ITEM NAME="500-1200 Hz, 0.5s / OFF x 3/1.5s OFF" VALUE="8" LNGID="c8121cac-5ade-4e3c-8d79-1a87c6a0cc48" />
+					<ITEM NAME="550 Hz / 440 Hz @ 0.5 Hz" VALUE="9" LNGID="554c2cfc-5dc3-4239-add8-8f708ec543a0" />
+					<ITEM NAME="970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="10" LNGID="eaefb924-aff9-4389-b3b5-4c7e62044887" />
+					<ITEM NAME="2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="11" LNGID="c71cee30-51e5-4fc9-8984-b2e713003545" />
+					<ITEM NAME="1200 Hz - 500 Hz @ 1 Hz" VALUE="12" LNGID="abbe964a-e453-499c-be16-a1675c66a5af" />
+					<ITEM NAME="400 Hz" VALUE="13" LNGID="e20c087b-3692-4240-93c2-5f1184e08e61" />
+					<ITEM NAME="550 Hz, 0.7s / 1000 Hz, 0.33s" VALUE="14" LNGID="d9524ecf-e8d3-438f-96f6-9846f243f198" />
+					<ITEM NAME="1500 Hz - 2700 Hz @ 3 Hz" VALUE="15" LNGID="edb4f417-f4ef-4cd7-9ce0-d6397080edfc" />
+					<ITEM NAME="750 Hz" VALUE="16" LNGID="0068560c-3bd1-4ebb-a5a4-21b898b0c246" />
+					<ITEM NAME="2400 Hz" VALUE="17" LNGID="feeba773-7e27-4487-a823-03a53a4070a0" />
+					<ITEM NAME="660 Hz" VALUE="18" LNGID="8520b801-ff9d-436e-b0fc-a8b7690e004f" />
+					<ITEM NAME="660 Hz 1.8s ON / 1.8s OFF" VALUE="19" LNGID="b0b38716-e164-4a88-a3fa-cd7df3a8363c" />
+					<ITEM NAME="660 Hz 0.15s ON / 0.15s OFF" VALUE="20" LNGID="cf501382-ccdc-4608-aefc-a45731fc9b95" />
+					<ITEM NAME="510 Hz, 0.25s / 610 Hz, 0.25s" VALUE="21" LNGID="5ce6eecd-eef7-4e1c-83f0-445c0325cc8e" />
+					<ITEM NAME="800 / 1000 Hz 0.5s each (1 Hz)" VALUE="22" LNGID="4322750a-9f52-489b-84ad-5a4045450a0b" />
+					<ITEM NAME="250 Hz - 1200 Hz @ 12 Hz" VALUE="23" LNGID="81cc0445-3ea3-4b34-bbe7-f7ccb9f11d07" />
+					<ITEM NAME="500 Hz - 1200 Hz @ 0.33 Hz" VALUE="24" LNGID="edcceec2-f2e3-4cec-8a30-31091aae1c06" />
+					<ITEM NAME="2400 Hz - 2900 Hz @ 9 Hz" VALUE="25" LNGID="e0823cff-d0c1-4766-be26-f63792739ff3" />
+					<ITEM NAME="2400 Hz - 2900 Hz @ 3 Hz" VALUE="26" LNGID="accbecb1-82ef-450b-92bc-550989dc35a7" />
+					<ITEM NAME="800 Hz - 970 Hz @ 100 Hz" VALUE="27" LNGID="5a269f8d-212f-4f6b-8317-62144404b07c" />
+					<ITEM NAME="800 Hz - 970 Hz @ 9 Hz" VALUE="28" LNGID="22df0250-65b7-40e3-b031-46e03deb2221" />
+					<ITEM NAME="800 Hz - 970 Hz @ 3 Hz" VALUE="29" LNGID="12069950-8ec9-4e36-9682-47643149d62b" />
+					<ITEM NAME="800 Hz, 0.25s ON / 1s OFF" VALUE="30" LNGID="5d02a7ee-b9ac-4995-bbb4-5045ac08fca5" />
+					<ITEM NAME="500 Hz - 1200 Hz, 3.75s / 0.25s OFF" VALUE="31" LNGID="51090df5-df1c-4c50-90d6-feaf83efb440" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- EVACUATION TON -->
+			<PROPERTY TYPE="HIDDEN" ID="TONEEVACUATE" SIZE="1" TEXT="Tone Evacuate" LNGID="122c5666-f505-4582-a8f3-775b99b5ce0c">
+				<ITEMS>
+					<ITEM NAME="970 Hz" VALUE="0" DEFAULT="1" LNGID="d103b73b-186f-4a47-a735-71c2b04966ab" />
+					<ITEM NAME="800 Hz / 970 Hz @ 2 Hz" VALUE="1" LNGID="62acaad7-9e23-4755-9872-82655cca33e5" />
+					<ITEM NAME="800 Hz - 970 Hz @ 1 Hz" VALUE="2" LNGID="177656db-337d-4f64-bf16-e5d8b35578b1" />
+					<ITEM NAME="970 Hz 1s OFF / 1s ON" VALUE="3" LNGID="61ef4e1e-420b-4e98-9a87-8f7c74984349" />
+					<ITEM NAME="970 Hz, 0.5s / 630 Hz, 0.5s" VALUE="4" LNGID="86c9f8bf-fdee-4fc9-ba9a-3a22ff2bb047" />
+					<ITEM NAME="554 Hz, 0.1s / 440 Hz, 0.4s" VALUE="5" LNGID="941d2b6a-cf83-4ba5-86bc-04e423706b9c" />
+					<ITEM NAME="500-1200 Hz, 3.5s / 0.5s OFF" VALUE="6" LNGID="4aa9f180-e3f2-4eb4-99e0-f751cd7edce1" />
+					<ITEM NAME="420 Hz 0.625s ON / 0.625s OFF" VALUE="7" LNGID="e568a63a-9bb4-4c07-9853-f8ca6daa2928" />
+					<ITEM NAME="500-1200 Hz, 0.5s / OFF x 3/1.5s OFF" VALUE="8" LNGID="534a573a-d085-4d8b-bcbe-47c7eb127981" />
+					<ITEM NAME="550 Hz / 440 Hz @ 0.5 Hz" VALUE="9" LNGID="072be713-c795-400c-b7c6-675c93c27198" />
+					<ITEM NAME="970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="10" LNGID="cc2f0534-22ba-4684-a20f-8a9cd98da321" />
+					<ITEM NAME="2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="11" LNGID="90f83dca-781b-42e2-bc9b-ed23e291e392" />
+					<ITEM NAME="1200 Hz - 500 Hz @ 1 Hz" VALUE="12" LNGID="732e4092-1965-43a9-9de8-9b5de70f56fd" />
+					<ITEM NAME="400 Hz" VALUE="13" LNGID="29822936-0b3c-4af7-aefe-550d664747de" />
+					<ITEM NAME="550 Hz, 0.7s / 1000 Hz, 0.33s" VALUE="14" LNGID="cae6e181-5f2b-4e03-919d-f646ed45e783" />
+					<ITEM NAME="1500 Hz - 2700 Hz @ 3 Hz" VALUE="15" LNGID="15b78f5f-66b7-42ae-943c-409d144cd1f0" />
+					<ITEM NAME="750 Hz" VALUE="16" LNGID="b926ef7f-0422-40be-bcbd-8367de8ec9c0" />
+					<ITEM NAME="2400 Hz" VALUE="17" LNGID="63f5ad3f-5598-4845-8817-dfcdb6a80a51" />
+					<ITEM NAME="660 Hz" VALUE="18" LNGID="18eca36e-0ed1-4017-822c-9df73f8a1ceb" />
+					<ITEM NAME="660 Hz 1.8s ON / 1.8s OFF" VALUE="19" LNGID="8c6e858f-b7f0-4bc1-bc59-0ea83796c2b4" />
+					<ITEM NAME="660 Hz 0.15s ON / 0.15s OFF" VALUE="20" LNGID="2c1c3f14-68b3-468b-b216-75ab1133f940" />
+					<ITEM NAME="510 Hz, 0.25s / 610 Hz, 0.25s" VALUE="21" LNGID="71994cc4-79b2-40bf-8365-a1be8ef34e52" />
+					<ITEM NAME="800 / 1000 Hz 0.5s each (1 Hz)" VALUE="22" LNGID="025ddd00-a3f9-4419-8f7c-53d7f2738131" />
+					<ITEM NAME="250 Hz - 1200 Hz @ 12 Hz" VALUE="23" LNGID="c7243f24-21d7-4e01-b003-88501674a64c" />
+					<ITEM NAME="500 Hz - 1200 Hz @ 0.33 Hz" VALUE="24" LNGID="e25719d4-ce00-407c-8c72-633d5bd2db3d" />
+					<ITEM NAME="2400 Hz - 2900 Hz @ 9 Hz" VALUE="25" LNGID="da61aa4b-788b-4c4a-bc7b-9fd0937a159d" />
+					<ITEM NAME="2400 Hz - 2900 Hz @ 3 Hz" VALUE="26" LNGID="ddcd897b-57db-4c8f-b784-e2fe5ab4adbb" />
+					<ITEM NAME="800 Hz - 970 Hz @ 100 Hz" VALUE="27" LNGID="50a57c57-e31c-40e0-847f-7611788f23ab" />
+					<ITEM NAME="800 Hz - 970 Hz @ 9 Hz" VALUE="28" LNGID="9c1dde32-1559-4877-9678-4aeafc806808" />
+					<ITEM NAME="800 Hz - 970 Hz @ 3 Hz" VALUE="29" LNGID="3c8011dd-b4c4-447d-9b78-e64f3c08e368" />
+					<ITEM NAME="800 Hz, 0.25s ON / 1s OFF" VALUE="30" LNGID="7974a7d1-830b-4e01-833d-53379eb2b711" />
+					<ITEM NAME="500 Hz - 1200 Hz, 3.75s / 0.25s OFF" VALUE="31" LNGID="abc94068-2d1c-4eb5-8900-f45d4daeb927" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- CLASSCHANGE TON -->
+			<PROPERTY TYPE="HIDDEN" ID="TONECLASSCHANGE" SIZE="1" TEXT="Class Change Tone" LNGID="2b23b0a1-aa1a-43f9-9811-f96b82033afe">
+				<ITEMS>
+					<ITEM NAME="970 Hz" VALUE="0" DEFAULT="1" LNGID="5e3128ec-6904-43dc-8394-0104e96a9f1a" />
+					<ITEM NAME="800 Hz / 970 Hz @ 2 Hz" VALUE="1" LNGID="76256c98-b48d-479e-b354-d382cbd4ab3d" />
+					<ITEM NAME="800 Hz - 970 Hz @ 1 Hz" VALUE="2" LNGID="fc1e9a7b-ae2b-4d19-b86c-a0830961e3d5" />
+					<ITEM NAME="970 Hz 1s OFF / 1s ON" VALUE="3" LNGID="8a9ea94a-278a-44e2-9a32-14f65090148b" />
+					<ITEM NAME="970 Hz, 0.5s / 630 Hz, 0.5s" VALUE="4" LNGID="6fbde4cb-52d2-46b4-b267-927e6e326992" />
+					<ITEM NAME="554 Hz, 0.1s / 440 Hz, 0.4s" VALUE="5" LNGID="a1ec96b3-3b16-40c9-b6bc-da4c6e027b5a" />
+					<ITEM NAME="500-1200 Hz, 3.5s / 0.5s OFF" VALUE="6" LNGID="c36747df-2e0d-4d66-89a1-b79b95bb8861" />
+					<ITEM NAME="420 Hz 0.625s ON / 0.625s OFF" VALUE="7" LNGID="bb150f17-70e7-4dec-bd90-c95cd611e2dd" />
+					<ITEM NAME="500-1200 Hz, 0.5s / OFF x 3/1.5s OFF" VALUE="8" LNGID="36f9b872-4b85-4b3d-90a6-307c6de2af2d" />
+					<ITEM NAME="550 Hz / 440 Hz @ 0.5 Hz" VALUE="9" LNGID="3d563e8e-d7fd-4c71-a6ee-ab473fe43226" />
+					<ITEM NAME="970 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="10" DEFAULT="1" LNGID="bf1443d0-980f-4a34-829b-b0957702769f" />
+					<ITEM NAME="2850 Hz, 0.5s ON / 0.5s OFF x 3 / 1.5s OFF" VALUE="11" LNGID="3e55589a-bd15-4fff-aff7-6bbe8359edcc" />
+					<ITEM NAME="1200 Hz - 500 Hz @ 1 Hz" VALUE="12" LNGID="17522047-410b-433d-b356-6744c2e5ddad" />
+					<ITEM NAME="400 Hz" VALUE="13" LNGID="3121f2c2-5277-4b6f-8a00-785ef55c9dd0" />
+					<ITEM NAME="550 Hz, 0.7s / 1000 Hz, 0.33s" VALUE="14" LNGID="07951386-50e5-4e58-b56f-8205608a9e21" />
+					<ITEM NAME="1500 Hz - 2700 Hz @ 3 Hz" VALUE="15" LNGID="1b382493-6a9e-4067-9543-6f089c830f41" />
+					<ITEM NAME="750 Hz" VALUE="16" LNGID="027648b0-b2a5-4a2b-8a84-bb68e4557a99" />
+					<ITEM NAME="2400 Hz" VALUE="17" LNGID="73428610-9202-41cf-a909-8f0a0b548b7a" />
+					<ITEM NAME="660 Hz" VALUE="18" LNGID="eb8caa4b-1873-4832-b687-68dc6de1693a" />
+					<ITEM NAME="660 Hz 1.8s ON / 1.8s OFF" VALUE="19" LNGID="48c0763e-0645-4600-82b2-98bfa8624fb6" />
+					<ITEM NAME="660 Hz 0.15s ON / 0.15s OFF" VALUE="20" LNGID="18634e8f-e070-43a4-bcee-d0ea82fb7558" />
+					<ITEM NAME="510 Hz, 0.25s / 610 Hz, 0.25s" VALUE="21" LNGID="00dcdfa2-74e6-4aae-b6ed-0c04009a768a" />
+					<ITEM NAME="800 / 1000 Hz 0.5s each (1 Hz)" VALUE="22" LNGID="6f42a8bb-cf1c-4367-ad80-eaddcf5b6361" />
+					<ITEM NAME="250 Hz - 1200 Hz @ 12 Hz" VALUE="23" LNGID="7c29f755-3995-400a-ba35-8b3175d49a11" />
+					<ITEM NAME="500 Hz - 1200 Hz @ 0.33 Hz" VALUE="24" LNGID="c8285166-acc2-4194-b9f9-3cd31ae8c09f" />
+					<ITEM NAME="2400 Hz - 2900 Hz @ 9 Hz" VALUE="25" LNGID="d02c981e-156a-44c8-aede-4b7e70252238" />
+					<ITEM NAME="2400 Hz - 2900 Hz @ 3 Hz" VALUE="26" LNGID="adb0a94f-4ecc-44c7-9ee3-8c40354bc47b" />
+					<ITEM NAME="800 Hz - 970 Hz @ 100 Hz" VALUE="27" LNGID="ac3ab7fd-14e2-4894-a5ab-9fea62de9c7a" />
+					<ITEM NAME="800 Hz - 970 Hz @ 9 Hz" VALUE="28" LNGID="50d636f0-661b-427c-a631-fd4e3c631d28" />
+					<ITEM NAME="800 Hz - 970 Hz @ 3 Hz" VALUE="29" LNGID="8651959a-527d-491c-9510-ee2e7bcf1be4" />
+					<ITEM NAME="800 Hz, 0.25s ON / 1s OFF" VALUE="30" LNGID="4f526e32-ffb8-436c-b58d-8f92d52f3a81" />
+					<ITEM NAME="500 Hz - 1200 Hz, 3.75s / 0.25s OFF" VALUE="31" LNGID="db35b4d1-ae9c-4f30-a3cb-9b0dbd502b2e" />
+				</ITEMS>
+			</PROPERTY>
+			<PROPERTY TYPE="AND" ID="AUTOLOGOFFENABLED" SIZE="1" TEXT="Auto Log off" LNGID="60b90a83-2eb3-4caf-a721-5f0b9f0a7273">
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="LOGOFFENABLED" SIZE="1" TEXT="Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="037e2800-f76b-4f0a-bbe9-0373ee320ee6" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="INT" ID="TIMEAUTOLOGOFFINSTALLER" SIZE="1" MIN="1" MAX="60" VALUE="30" TEXT="Time Auto Log off Installer, [min]" LNGID="54749847-abe5-4094-b3f7-af577ca42f2b" />
+			<PROPERTY TYPE="HIDDEN" ID="EVACUATION_TIMEOUT_PARTIAL" SIZE="1" MIN="0" MAX="10" VALUE="0" TEXT="Evacuation Delay Stage 1 (Partial), [min]" LNGID="5834cedb-f5c7-49bc-8875-fcf7b9115ef1" />
+			<PROPERTY TYPE="HIDDEN" ID="EVACUATION_TIMEOUT" SIZE="1" MIN="0" MAX="10" VALUE="0" TEXT="Evacuation Delay Stage 2 (Full), [min]" LNGID="5836cedb-f5c9-49bc-8864-fcf7b9115efa" />
+			<PROPERTY TYPE="HIDDEN" ID="ONTRUIMINGS" SIZE="1" TEXT="Ontruimings Alarm" LNGID="4836ceda-05c8-19b2-1862-acf7b9115efb" >
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="OTRUIMINGS_ENABLED" SIZE="1" TEXT="Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0"  LNGID="b348e1e9-f895-4020-b457-61d3656da1c4"  />
+				</PROPERTIES>
+			</PROPERTY>
+			<!-- ALARM SETTINGS -->
+			<PROPERTY TYPE="HIDDEN" ID="ALARM_SETTINGS" SIZE="1" TEXT="Alarm Settings" LNGID="68c13544-0673-40d6-b1d8-c507e2a55970">
+				<ITEMS>
+					<ITEM NAME="Sound / Strob" VALUE="192" LNGID="64114ff9-e54b-428e-9bb2-4a2ec01eb1b7" />
+					<ITEM NAME="Sound " VALUE="64" LNGID="b3b31840-fd26-4f2f-bc0d-bc894d00af63" />
+					<ITEM NAME="Strob" VALUE="128" LNGID="6d4cb562-c897-49cc-9d10-9362c5ac8e22" />
+					<ITEM NAME="Individual" VALUE="0" DEFAULT="1" LNGID="dc2fe7ca-4c51-42d5-83ff-bec23260d429" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- EVACUATE SETTINGS -->
+			<PROPERTY TYPE="HIDDEN" ID="EVACUATE_SETTINGS" SIZE="1" TEXT="Evacuate Settings" LNGID="a93bd3a7-b8e0-460c-b755-d285d61581cb">
+				<ITEMS>
+					<ITEM NAME="Sound / Strob" VALUE="192" DEFAULT="1" LNGID="1cd0804c-1470-465a-a25f-5bdc52a936a4" />
+					<ITEM NAME="Sound " VALUE="64" LNGID="918ec7a3-b0fc-4df9-a7f6-67e87dbfb70a" />
+					<ITEM NAME="Strob" VALUE="128" LNGID="b7c57154-2e30-4837-ba94-76774317ede4" />
+				</ITEMS>
+			</PROPERTY>
+			<!-- EVACUATION CYCLE -->
+			<PROPERTY TYPE="HIDDEN" ID="EVACUATECYCLE_OFF" SIZE="2" MIN="0" MAX="600" VALUE="0" TEXT="Alert/EVAC Voice Cycle OFF, [sec]" LNGID="4bbb49d7-1cb8-4fce-8cd8-02030069e754" />
+			<PROPERTY TYPE="HIDDEN" ID="EVACUATECYCLE_ON" SIZE="2" MIN="0" MAX="600" VALUE="0" TEXT="Alert/EVAC Voice Cycle ON, [sec]" LNGID="7200ab18-c18c-4875-b549-1f8ddb9f5c49" />
+			<PROPERTY TYPE="HIDDEN" ID="EVACUATIONCYCLE INVERTED" SIZE="1" TEXT="Alert/EVAC Voice Cycle OFF/ON Inverted" LNGID="62f425ef-89fa-4b5f-af69-2e74e8e518af">
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="CYCLE INVERTED" SIZE="1" TEXT="Enabled" AND="2" YESVAL="2" NOVAL="0" CHECKED="0" LNGID="b348e1e9-f895-4020-b457-61d3656da1c4" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="SOUNDERS_RESOUND" SIZE="1" TEXT="Resound Alarm" LNGID="8db30347-d2a3-42f0-8cb3-fdd1e5b5fd8b">
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="RESOUND" SIZE="1" TEXT="Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="a178fd67-665c-4347-84b2-a2bece362f96" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="SounderDelayMode" SIZE="1" TEXT="Sounder Delay Mode" LNGID="9b66f026-d0d9-4543-8b7d-9894751b208e">
+				<ITEMS>
+					<ITEM NAME="OFF" VALUE="0" DEFAULT="1" LNGID="bbc2f34f-be7c-411a-a4db-a50c293c7fcd" />
+					<ITEM NAME="ON" VALUE="1" LNGID="ae980c9d-416b-46b9-9bb4-b615e6d4b476" />
+					<ITEM NAME="SCHEDULE" VALUE="2" LNGID="2e763bd3-6689-438b-8e4f-854fde5d5be1" />
+				</ITEMS>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="FireBrigadeDelayMode" SIZE="1" TEXT="Fire Brigade Delay Mode" LNGID="d7faf3b2-de93-4348-8c2a-0ab01835dc2b">
+				<ITEMS>
+					<ITEM NAME="OFF" VALUE="0" DEFAULT="1" LNGID="fdf44e1f-391c-4a46-9ea0-1a38cf3ff710" />
+					<ITEM NAME="ON" VALUE="1" LNGID="8b7e7135-fac5-460b-9c25-116f9730ea7f" />
+					<ITEM NAME="SCHEDULE" VALUE="2" LNGID="31193d4f-043d-4bbb-bb84-32edee3180ed" />
+				</ITEMS>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="FireProtectionDelayMode" SIZE="1" TEXT="Fire Protection Delay Mode" LNGID="5bdd25e3-0a49-4a68-8ef8-868a1f9ce0af">
+				<ITEMS>
+					<ITEM NAME="OFF" VALUE="0" DEFAULT="1" LNGID="d71d7d6f-3955-4ff0-b3b0-5a428bc63a9e" />
+					<ITEM NAME="ON" VALUE="1" LNGID="92a60159-e7fa-4438-ae31-db501171da7f" />
+					<ITEM NAME="SCHEDULE" VALUE="2" LNGID="66741cab-246f-4307-a41a-504e722bedaf" />
+				</ITEMS>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="SounderDelaySchedule" TEXT="Sounder Delay Schedule" SIZE="28" LNGID="cb12fb67-e320-4815-8db0-5728906c72c5">
+				<PROPERTIES>
+					<PROPERTY TYPE="TIME" ID="ACTIVATE" TEXT="Activate" SIZE="2" LNGID="8138c409-adc2-4173-8e63-fa3df716aafd" />
+					<PROPERTY TYPE="TIME" ID="DEACTIVATE" TEXT="Deactivate" SIZE="2" LNGID="dff7f0b3-81c8-422f-8397-d822b3421845" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="FireBrigadeDelaySchedule" TEXT="Fire Brigade Delay Schedule" SIZE="28" LNGID="18ac2716-b2f1-4345-9839-a0e47418fc71">
+				<PROPERTIES>
+					<PROPERTY TYPE="TIME" ID="ACTIVATE" TEXT="Activate" SIZE="2" LNGID="bb1d0598-263d-4d3a-8f67-1bd7127708e7" />
+					<PROPERTY TYPE="TIME" ID="DEACTIVATE" TEXT="Deactivate" SIZE="2" LNGID="da984bca-af74-4275-aae3-bd97bd14c57b" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="FireProtectionDelaySchedule" TEXT="Fire Protection Delay Schedule" SIZE="28" LNGID="179caa79-21f1-4329-a180-670b48ceaa86">
+				<PROPERTIES>
+					<PROPERTY TYPE="TIME" ID="ACTIVATE" TEXT="Activate" SIZE="2" LNGID="5b291f2a-a5d9-4f5c-ba0f-251f012b65be" />
+					<PROPERTY TYPE="TIME" ID="DEACTIVATE" TEXT="Deactivate" SIZE="2" LNGID="084de8d9-4bc7-491b-9d29-548f6bf5c8a4" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="DayNightSchedule" TEXT="Day/Night Schedule" SIZE="28" LNGID="d5880cd8-9d51-4071-a658-cff4668870bc">
+				<PROPERTIES>
+					<PROPERTY TYPE="TIME" ID="ACTIVATE" TEXT="Activate" SIZE="2" LNGID="a2b1b41d-ab65-4c1d-bc47-88bf2d221baa" />
+					<PROPERTY TYPE="TIME" ID="DEACTIVATE" TEXT="Deactivate" SIZE="2" LNGID="6e48aa9d-0b8b-47d2-9ca0-20daa1c1c9fa" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="TEXT" ID="LOGO1" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 1" LNGID="fce1137d-e8b5-46fb-a0be-6b7f31f58674">
+			</PROPERTY>
+			<PROPERTY TYPE="TEXT" ID="LOGO2" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 2" LNGID="a8c90669-3f2b-4ded-91b3-2a208ac1514c">
+			</PROPERTY>
+			<PROPERTY TYPE="TEXT" ID="LOGO3" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 3" LNGID="d4f0d4d3-c770-45bc-a198-9bbbe9912d32">
+			</PROPERTY>
+			<PROPERTY TYPE="TEXT" ID="LOGO4" VALUE="" SIZE="40" LENGTH="39" TEXT="Company Logo row 4" LNGID="4c55757f-3855-481b-b13e-ce92a93476d8">
+			</PROPERTY>
+
     </PROPERTIES>
   </ELEMENT>
   <ELEMENT ID="TFTR_ACCESSCODE" IMAGEINDEX="1002" AUTOCREATE="1" PRODUCTNAME="Access Codes" LNGID="d91cdf3c-7888-4010-93ea-feb89c30220b">
@@ -83,7 +376,7 @@
       <PROPERTY TYPE="AND" ID="IsNetworkEnabled" SIZE="1" TEXT="Parameters" LNGID="991c8e8e-9afb-47a2-8a67-f4d4e14e85d6">
         <PROPERTIES>
           <PROPERTY TYPE="CHECK" ID="IsNetwork" SIZE="1" TEXT="Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="9f134536-57b6-43f5-9b37-a6a98451cc16" />
-          <PROPERTY TYPE="LIST" ID="NetworkType" SIZE="1" AND="32" TEXT="Network Type" LNGID="56cf43ab-f5c6-4191-ae84-3c60ebe15bac">
+          <PROPERTY TYPE="LIST" ID="NetworkType" SIZE="1" AND="2" TEXT="Network Type" LNGID="56cf43ab-f5c6-4191-ae84-3c60ebe15bac">
             <!-- AND="32" - HEX -->
             <ITEMS>
               <ITEM NAME="LAN" VALUE="0" LNGID="df9e4c3f-04ea-4183-b774-96e1c561ce4e" />
@@ -97,6 +390,7 @@
             </ITEMS>
           </PROPERTY>
           <PROPERTY TYPE="CHECK" ID="Redundancy_En" SIZE="1" TEXT="Redundancy ON" AND="8" YESVAL="8" NOVAL="0" CHECKED="0" LNGID="7bf20f32-33b1-4615-bf2a-0e8266b10909" />
+		  <PROPERTY TYPE="CHECK" ID="DHCP" SIZE="1" TEXT="DHCP" AND="40" YESVAL="64" NOVAL="0" CHECKED="0" LNGID="7bf20f38-33b8-4618-bf28-0e8266b10908"/>
         </PROPERTIES>
       </PROPERTY>
       <PROPERTY TYPE="INT" ID="PanelNumber" SIZE="1" MIN="1" MAX="64" TEXT="Panel Number" LNGID="43f437f0-6fa2-40da-b8f3-5c75666ee82e" />
@@ -105,14 +399,54 @@
       <PROPERTY TYPE="IP" ID="NetMask" SIZE="4" TEXT="Net Mask" LNGID="ab7521db-2f7e-4e54-ad5b-fe2f0c875821" />
       <PROPERTY TYPE="IP" ID="Router" SIZE="4" TEXT="Gateway" LNGID="42422f9d-330e-4967-9893-ee725af3969b" />
       <PROPERTY TYPE="INT" ID="Port" SIZE="2" MIN="1" MAX="99999" TEXT="Port" LNGID="38f263ae-b68f-451c-9ae0-44d9781edf65" />
-      <!--<PROPERTY TYPE="INT" ID="PanelEvacNumber" SIZE="1" MIN="1" MAX="5" TEXT="EVAC Panel Number" LNGID="3224077e-6d0e-4716-bb25-187991b62c74" />-->
+	  <PROPERTY TYPE="IP" ID="MainDNS" SIZE="4" TEXT="Main DNS" LNGID="d6751c9e-cbd7-4e6a-9b89-d0d88520fd75" />
+	  <PROPERTY TYPE="IP" ID="SecDNS" SIZE="4" TEXT="Secondary DNS" LNGID="1a23399f-733b-45a8-8ea2-0cec1a2b5720" />
+      <PROPERTY TYPE="HIDDEN" ID="PanelEvacNumber" SIZE="1" MIN="1" MAX="5" TEXT="EVAC Panel Number" LNGID="3224077e-6d0e-4716-bb25-187991b62c74" />
       <PROPERTY TYPE="TEXT" ID="emacETHADDR0" LENGTH="50" SIZE="1" READONLY="1" TEXT="emacETHADDR0" LNGID="99954633-ed5c-4d03-b2a5-83be9df34333" />
       <PROPERTY TYPE="TEXT" ID="emacETHADDR1" LENGTH="50" SIZE="1" READONLY="1" TEXT="emacETHADDR1" LNGID="a1a157a8-a24e-43ed-954f-06985ac11e05" />
       <PROPERTY TYPE="TEXT" ID="emacETHADDR2" LENGTH="50" SIZE="1" READONLY="1" TEXT="emacETHADDR2" LNGID="6e7f2221-6ab8-4778-9c9c-740069f1fb75" />
       <PROPERTY TYPE="TEXT" ID="emacETHADDR3" LENGTH="50" SIZE="1" READONLY="1" TEXT="emacETHADDR3" LNGID="c595866b-c793-463d-8591-d50a74c9827f" />
       <PROPERTY TYPE="TEXT" ID="emacETHADDR4" LENGTH="50" SIZE="1" READONLY="1" TEXT="emacETHADDR4" LNGID="84b06dfe-23dc-487c-8071-29d750dcc5c2" />
       <PROPERTY TYPE="TEXT" ID="emacETHADDR5" LENGTH="50" SIZE="1" READONLY="1" TEXT="emacETHADDR5" LNGID="b35f5708-28d9-461d-8470-db3714b248c2" />
-    </PROPERTIES>
+      <PROPERTY TYPE="HIDDEN" ID="cloud_installer_notifications" SIZE="2" TEXT="Cloud Installer Notifications" LNGID="8b40d6ef-4a6f-46ab-b38b-a038e4fc42a6">
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="Installer_A_E" SIZE="2" TEXT="Fire Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" LNGID="27180c7c-3c58-411b-85a8-e55a9052f678" />
+					<PROPERTY TYPE="CHECK" ID="Installer_A_P" SIZE="2" TEXT="Fire Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="1" LNGID="021fb75e-2406-42d3-b347-6863712d1305" />
+					<PROPERTY TYPE="CHECK" ID="Installer_A_M" SIZE="2" TEXT="Fire Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="2" LNGID="d05e5b45-40c6-41e6-9965-3b83af3f2c5d" />
+					<PROPERTY TYPE="CHECK" ID="Installer_F_E" SIZE="2" TEXT="Fault Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="3" LNGID="990e70d1-0655-4897-a8d9-f29ce40ffbb6" />
+					<PROPERTY TYPE="CHECK" ID="Installer_F_P" SIZE="2" TEXT="Fault Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="4" LNGID="9759d19e-2bad-47db-be21-29804e6bad37" />
+					<PROPERTY TYPE="CHECK" ID="Installer_F_M" SIZE="2" TEXT="Fault Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="5" LNGID="ee0843e7-26c9-4076-8fc7-435994f76238" />
+					<PROPERTY TYPE="CHECK" ID="Installer_W_E" SIZE="2" TEXT="Warning Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="6" LNGID="6d15583d-af2e-48d4-9220-b1ff413e7f88" />
+					<PROPERTY TYPE="CHECK" ID="Installer_W_P" SIZE="2" TEXT="Warning Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="7" LNGID="b9ce376f-2831-41de-ac4f-40479498f435" />
+					<PROPERTY TYPE="CHECK" ID="Installer_W_M" SIZE="2" TEXT="Warning Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="8" LNGID="fc780e74-7964-4ae3-b676-997d193506ed" />
+				</PROPERTIES>
+			</PROPERTY>
+   	<PROPERTY TYPE="HIDDEN" ID="cloud_maintenance_notifications" SIZE="2" TEXT="Cloud Maintenance Notifications" LNGID="f66ea2f4-def5-4277-ac57-4ae03b08c8cc">
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="Maintenance_A_E" SIZE="2" TEXT="Fire Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" LNGID="fa91a909-e472-4d55-9485-b138bfb87f7f" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_A_P" SIZE="2" TEXT="Fire Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="1" LNGID="2446be15-adf2-4136-86c1-2ce3e8a7d28f" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_A_M" SIZE="2" TEXT="Fire Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="2" LNGID="21a22787-2d4d-4b63-891d-326be85b372d" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_F_E" SIZE="2" TEXT="Fault Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="3" LNGID="a4e25e6d-de92-4b81-8b78-b10713089293" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_F_P" SIZE="2" TEXT="Fault Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="4" LNGID="3bda959b-825c-42b1-9245-a2c1c38e633a" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_F_M" SIZE="2" TEXT="Fault Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="5" LNGID="0332f062-b426-4dee-a174-c9d9eaef659b" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_W_E" SIZE="2" TEXT="Warning Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="6" LNGID="cb7fc0ce-0855-4a2e-b311-b9265367fccf" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_W_P" SIZE="2" TEXT="Warning Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="7" LNGID="cc7868d1-dc05-46c6-b7e1-98d719f10c9a" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_W_M" SIZE="2" TEXT="Warning Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="8" LNGID="937fe6fc-fffc-4805-9171-62e7ac6f4e8b" />
+				</PROPERTIES>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="cloud_building_manager_notifications" SIZE="2" TEXT="Cloud Building Manager Notifications" LNGID="9b176949-90ae-4f96-a3a7-f6b3ba4e9663">
+				<PROPERTIES>
+					<PROPERTY TYPE="CHECK" ID="Maintenance_A_E" SIZE="2" TEXT="Fire Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" LNGID="97a3443b-6c51-4446-baeb-a74cdc762339" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_A_P" SIZE="2" TEXT="Fire Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="1" LNGID="45f649fd-5e4e-4f73-88f6-c76d2f89ba82" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_A_M" SIZE="2" TEXT="Fire Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="2" LNGID="a5530cbd-4f92-49f2-a912-44fd4cb19fe2" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_F_E" SIZE="2" TEXT="Fault Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="3" LNGID="0ff97090-8f61-4a54-a507-6e4729304f57" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_F_P" SIZE="2" TEXT="Fault Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="4" LNGID="f578c1a3-bd69-468b-9214-473a30ba62b9" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_F_M" SIZE="2" TEXT="Fault Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="5" LNGID="53dbac5e-d40e-4a5a-9947-43040a40aac7" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_W_E" SIZE="2" TEXT="Warning Email" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="6" LNGID="77fe1da8-b7a9-49ad-b43b-100846bab211" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_W_P" SIZE="2" TEXT="Warning Push" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="7" LNGID="3bd578ef-7b74-4d9c-9607-4bc0fd377b43" />
+					<PROPERTY TYPE="CHECK" ID="Maintenance_W_M" SIZE="2" TEXT="Warning Message Center" YESVAL="1" NOVAL="0" CHECKED="0" AND="01" SHIFT="8" LNGID="1d36d4d3-4008-4881-88c9-ad8b9d89d6f1" />
+				</PROPERTIES>
+			</PROPERTY>    </PROPERTIES>
   </ELEMENT>
   <!-- PANELINNETWORK 64 -->
   <ELEMENT ID="TFTR_PANELINNETWORK" IMAGEINDEX="1003" CANDEL="0" CANADD="0" AUTOCREATE="1" AUTOCREATECOUNT="64" PRODUCTNAME="Panel in network" LNGID="6919c071-f57f-451f-b884-60b2f0399024">

@@ -77,6 +77,17 @@ namespace common
                 return res;
             }
         }
+        public static Dictionary<string, string> write_replacements
+        {
+            get
+            {
+                Dictionary<string, string> res = new Dictionary<string, string>();
+                JArray arepl = (JArray)Settings["write_replacements"];
+                foreach (JObject e in arepl)
+                    res.Add(e["match"].ToString(), e["replacewith"].ToString());
+                return res;
+            }
+        }
         public static bool logreads
         {
             get
@@ -1390,7 +1401,15 @@ namespace common
                 _readwriter._dwrite_prop = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
             _readwriter._dwrite_prop = (Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>)_deserialyzer(s, _readwriter._dwrite_prop.GetType());
         }
-
+        private string DoReplacements_Write(string xml)
+        {
+            string res = xml;
+            Dictionary<string, string> drepl = settings.write_replacements;
+            foreach (string smatch in drepl.Keys)
+                res = Regex.Replace(res, smatch, drepl[smatch], RegexOptions.IgnoreCase);
+            //
+            return res;
+        }
         private void CreateWriteStructure()
         {
             Monitor.Enter(_cs_config);
@@ -1398,6 +1417,7 @@ namespace common
             string wxml = null;
             if (_wp != null && File.Exists(_wp))
                 wxml = File.ReadAllText(_wp);
+            wxml = DoReplacements_Write(wxml);
             Monitor.Exit(_cs_config);
             if (_wp == null || wxml == null || !Regex.IsMatch(wxml, @"^\s*?<[\w\W]+>\s*$"))
                 return;

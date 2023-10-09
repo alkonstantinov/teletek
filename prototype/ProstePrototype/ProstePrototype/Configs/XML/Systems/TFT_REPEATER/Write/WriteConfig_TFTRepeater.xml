@@ -18,11 +18,12 @@
         <COMMAND BYTES="0760" OKBYTE="1" OKVALUE="10" ADDITION="PASSWORD" ADDITIONOPERATION="TEXT2BYTES"/>
       </COMMANDS>
     </OPERATION>
-    <VERSIONING SAVEDDATA="VERSION" BYTE="7" LENGTH="2" SUPPORTEDVERSIONS="0001|0002|0003" ERRORMESSAGE="There is a new verson of ProsTE software. If you continue (Yes) the operation then some errors may occur. We recommend you to cancel (No), update the ProsTE and try again."> 
+    <VERSIONING SAVEDDATA="VERSION" BYTE="7" LENGTH="2" SUPPORTEDVERSIONS="0001|0002|0003|0004" ERRORMESSAGE="There is a new verson of ProsTE software. If you continue (Yes) the operation then some errors may occur. We recommend you to cancel (No), update the ProsTE and try again."> 
 	
       <VERSION VALUE="0001" FILE="WriteConfig_TFTRepeater_version01.xml"/>
       <VERSION VALUE="0002" FILE="WriteConfig_TFTRepeater_version01.xml"/>
       <VERSION VALUE="0003" FILE="WriteConfig_TFTRepeater_version01.xml"/>
+      <VERSION VALUE="0004" FILE="WriteConfig_TFTRepeater_version02.xml"/>
     </VERSIONING>
   </PREOPERATIONS>
   <WRITEOPERATIONS>

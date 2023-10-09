@@ -130,11 +130,14 @@ namespace ProstePrototype
                 progrBar.Maximum = 100;
                 settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("##0.##") + "%";
 
-                double percentageCalcAdd = 100 * bytes_downloaded / bytes_all;
-                progrBarAdd.Value = percentageCalcAdd;
-                progrBarAdd.Maximum = 100;
-                string f = filename.Split("/").Last();
-                settingsWindow.progrBarTextAdd.Text = $"Downloading {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.##") + "%";
+                if (bytes_all != 0)
+                {
+                    double percentageCalcAdd = 100 * bytes_downloaded / bytes_all;
+                    progrBarAdd.Value = percentageCalcAdd;
+                    progrBarAdd.Maximum = 100;
+                    string f = filename.Split("/").Last();
+                    settingsWindow.progrBarTextAdd.Text = $"Downloading {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.##") + "%";
+                }
                 //});
             });
         }

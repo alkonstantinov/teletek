@@ -453,7 +453,7 @@ namespace ljson
             }
             else if (_type == "AND")
             {
-                sval = Value(_field, _type);
+                sval = AndValueFromChilds(_field); //Value(_field, _type);
                 res = Convert.ToInt32(sval).ToString("X" + (_size * 2).ToString());
             }
             else if (_type == "WEEK")
@@ -485,6 +485,7 @@ namespace ljson
         }
         private static string Value(JObject _field, string _type)
         {
+            if (_type == null && _field["@TYPE"] != null) _type = _field["@TYPE"].ToString();
             string sval = null;
             if (_field["~value"] != null)
                 sval = _field["~value"].ToString();
@@ -518,6 +519,54 @@ namespace ljson
                 sval = "0";
             return sval;
         }
+        private static string ANDValue2Write(JObject o, string sval)
+        {
+            string val = Value(o, null);
+            if (val == null)
+                return sval;
+            //ushort uand = Convert.ToUInt16(o["~value"].ToString(), 16);
+            ushort uand = Convert.ToUInt16(val, 16);
+            ushort uval = Convert.ToUInt16(sval);
+            string fval = ((ushort)(uand | uval)).ToString();
+            return fval;
+        }
+        private static string AndValueFromChilds(JObject _field)
+        {
+            string res = "0";
+            string _val = "0";
+            if (_field["~value"] != null) _val = _field["~value"].ToString();
+            //if (Convert.ToUInt16(res) == 0) return res;
+            JArray a = null;
+            if (_field["PROPERTIES"] != null)
+            {
+                a = new JArray();
+                if (_field["PROPERTIES"]["PROPERTY"] != null)
+                {
+                    JToken t = _field["PROPERTIES"]["PROPERTY"];
+                    if (t.Type == JTokenType.Object) a.Add((JObject)t);
+                    else if (t.Type == JTokenType.Array)
+                    {
+                        JArray props = (JArray)t;
+                        foreach (JObject prop in props) a.Add(prop);
+                    }
+                }
+                else if (_field["PROPERTIES"].Type == JTokenType.Object)
+                {
+                    JObject props = (JObject)_field["PROPERTIES"];
+                    foreach (JProperty prop in props.Properties())
+                        if (prop.Value.Type == JTokenType.Object) a.Add((JObject)prop.Value);
+                }
+            }
+            if (a != null && a.Count > 0)
+                foreach (JObject _f in a)
+                {
+                    res = ANDValue2Write(_f, res);
+                    if (Convert.ToUInt16(res) == 0) break;
+                }
+            else res = _val;
+            //
+            return res;
+        }
         public static string WriteValue(JObject _field, string xmltag)
         {
             int size = 1;
@@ -534,6 +583,7 @@ namespace ljson
                 return null;
             //
             string sval = Value(_field, _type);
+            //if (_type.ToUpper() == "AND") sval = AndValueFromChilds(_field);
             int? inc = null;
             m = Regex.Match(xmltag, @"INC\s*?=\s*?""([\d\-]+?)""");
             if (m.Success)
