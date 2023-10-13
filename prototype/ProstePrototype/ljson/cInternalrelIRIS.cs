@@ -1612,6 +1612,7 @@ namespace ljson
             }
             else if (Regex.IsMatch(key, @"zone$", RegexOptions.IgnoreCase))
             {
+                //return true;
                 if (Array.FindIndex(val, 2, element => element > 0) < 0)
                     return false;
                 if (val[2] != 60 || val[4] != 60 || (val.Length > 97 && val[98] != 60))

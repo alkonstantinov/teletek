@@ -42,8 +42,20 @@ namespace ProstePrototype
             return "{}";
             //return "Hi from " + loopType + " with new address at " + newAddress;
         }
+        public string getUsedInputGroups()
+        {
+            string sinput = cJson.InputsElementName();
+            List<string> lst = cJson.SelectPathValuesDistinctIntSort(sinput + @"[\w\W]*?\.Group\.~index~\d+$");
+            try
+            {
+                File.WriteAllTextAsync("wb3.json", JArray.FromObject(lst).ToString());
+            }
+            catch { }
+            return JArray.FromObject(lst).ToString();
+        }
         public string getElements(string elementType)
         {
+            //string s = getUsedInputGroups();
             Dictionary<string, string> dres = cComm.GetElements(cJson.CurrentPanelID, elementType);
             if (dres == null)
                 return null;
@@ -279,7 +291,11 @@ namespace ProstePrototype
 
         public string zoneDevices(int elementNumber)
         {
-            JArray zdevs = cJson.ZoneDevices(elementNumber.ToString());
+            JArray zdevs = new JArray();
+            try
+            {
+                zdevs = cJson.ZoneDevices(elementNumber.ToString());
+            } catch { }
             return (zdevs != null) ? zdevs.ToString() : "[]";
         }
         public string setActivePanel(string panel_id)

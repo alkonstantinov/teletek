@@ -278,20 +278,28 @@ function drawFields(body, json, inheritedColor = 'normal') {
                 newEl.classList = "ram_main row";
                 oldEl.replaceWith(newEl);
 
-                body.innerHTML = `<button class="btn ram_btn btn_white ${inheritedColor}" id="add_group_btn" 
-                                    title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}"
-                                    onclick="javascript:addElement('element', '${k}')">
-                                    <i class="ram_icon add_device x14"></i>
-                                </button>`;
+                /* removal of INPUT_GROUP add new ('+') button - request from 11.10.13 */
+                body.innerHTML = '';
+                //body.innerHTML = `<button class="btn ram_btn btn_white ${inheritedColor}" id="add_group_btn"
+                //                    title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}"
+                //                    onclick="javascript:addElement('element', '${k}')">
+                //                    <i class="ram_icon add_device x14"></i>
+                //                </button>`;
+
+                getAvailableInputGroupElements(k.toUpperCase());
             } else {
-                // adding the button for everybody except PANNELIN // SIMPO_PANELS_R //IRIS8_PANELINNETWORK
+                // adding the button for everybody except PANNELIN // SIMPO_PANELS_R //IRIS8_PANELINNETWORK // NATRON
                 if (k && !k.toUpperCase().includes("PANEL") && !k.toUpperCase().includes("NATRON")) {
-                    btnDiv.insertAdjacentHTML(
-                        'afterbegin',
-                        `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}">
-                            <i class="ram_icon add_device"></i>
-                            <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}</div>
-                        </button>`);
+                    if (k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                        /* for ZONE element do nothing */
+                    } else {
+                        btnDiv.insertAdjacentHTML(
+                            'afterbegin',
+                            `<button class="btn ram_btn btn_white ${inheritedColor}" onclick="javascript:addElement('element', '${k}')" id="_btn" title="${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}">
+                                <i class="ram_icon add_device"></i>
+                                <div class="ram_btn_title">${newT.t(localStorage.getItem('lang'), 'add_new')} ${k.split('_').slice(1).join(' ')}</div>
+                            </button>`);
+                    }
                     btnDiv.parentElement.insertAdjacentHTML(
                         'beforeend',
                         `<button class="ram_btn ram_toggle_btn open" onclick="javascript: sidebar_toggle(this);">
@@ -299,7 +307,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                          </button>`);
                 }
                 if (k && k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
-                    deviceNmbr = 0;                    
+                    deviceNmbr = 0;
                     // add the section showing the attached_device per zone with the device summary button
                     body.insertAdjacentHTML(
                         'beforeend',
@@ -321,11 +329,14 @@ function drawFields(body, json, inheritedColor = 'normal') {
                         </div>`
                     );
                 }
-            }
-            if (k && k.toUpperCase().includes('NATRON')) {
-                getAvailableElements("Natron_NONE");
-            } else {
-                getAvailableElements(k.toUpperCase());
+
+                if (k && k.toUpperCase().includes('NATRON')) {
+                    getAvailableElements("Natron_NONE");
+                } else if (k && k.toUpperCase().includes('ZONE') && !k.toUpperCase().includes('EVAC')) {
+                    getAvailableZoneElements(k.toUpperCase());
+                } else {
+                    getAvailableElements(k.toUpperCase());
+                }
             }
         } else if (k && !k.includes('~')) { // collapsible parts -> transformed to ram_attribute_holder (request meeting 30.08.2023)
             const { input_name, input_id } = {
@@ -1472,23 +1483,7 @@ const getTextInput = ({ type, input_name, input_id, maxTextLength, placeHolderTe
                        ${lengthData ? `length="${lengthData}"` : ""} 
                        ${readOnly ? "disabled" : ''}/>
                 <label for="${input_id}">${input_name}</label>
-            </div>`
-            /*old style : <div class="form-item roww flex">
-                ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
-                    <i class="fa-solid fa-square-minus fa-2x"></i>
-                </button>` : ""}
-                <label for="${input_id}">${input_name}</label>
-                <input type="${type === 'passInput' ? 'password' : 'text'}" 
-                       id="${input_id}" name="${input_id}" 
-                       ${maxTextLength ? `maxlength="${maxTextLength}"` : (ip ? `maxlength = "15"` : "")}
-                       ${ip ? `ip="yes"` : ""}
-                       ${placeHolderText ? `placeholder="${placeHolderText}"` : (ip ? `placeholder = " 0 . 0 . 0 . 0 "` : "")} 
-                       onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
-                       ${value ? `value="${value}"` : ""}
-                       ${bytesData ? `bytes="${bytesData}"` : ""} 
-                       ${lengthData ? `length="${lengthData}"` : ""} 
-                       ${readOnly ? "disabled" : ''}/>
-            </div> */
+            </div>`;
 }
 
 const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
@@ -1504,19 +1499,7 @@ const getCheckboxInput = ({ input_name, yesval, noval, input_id, bytesData, leng
                     ${checked ? "checked" : ''}
                     onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}', this.id)" />
                 <label for="${input_id}" class="form-check-label">${input_name}</label>
-            </div>`
-            /*old style: <div class="form-item roww">
-                ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
-                    <i class="fa-solid fa-square-minus fa-2x"></i>
-                </button>` : ""}
-                <input type="checkbox" id="${input_id}" class="ml10"
-                    ${bytesData ? `bytes="${bytesData}"` : ""} 
-                    ${lengthData ? `length="${lengthData}"` : ""} 
-                    ${readOnly ? "disabled" : ''}
-                    ${checked ? "checked" : ''}
-                    onchange="javascript:inputGroupHandler(this.checked, '${yesval}', '${noval}', '${path}')" />
-                <label for="${input_id}">${input_name}</label>
-            </div> */
+            </div>`;
 }
 
 const getSliderInput = ({ input_name, input_name_off, input_name_on, yesval, noval, input_id, bytesData, lengthData, readOnly, checked = false, RmBtn = false, path = '' }) => {
@@ -1600,38 +1583,6 @@ const getSelectInput = ({ input_name, input_id, selectList, placeHolderText, byt
         str += "</div>$"
     }
     return str;
-    /* old way: let str = `<${image ? "fieldset" : "div"} class="form-item roww mt-1">
-                    ${image ? `<legend>${input_name}</legend>` : ""}
-                    ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
-                        <i class="fa-solid fa-square-minus fa-2x"></i>
-                    </button>` : ""}
-                    ${image ? "" : `<label for="${input_id}">${input_name}</label>`}
-                    ${addButton ? `<button 
-                                        id="popoverData_${input_id}" class="btn"
-                                        data-content="Popover with data - trigger"
-                                        onmouseover="javascript: showChannelInfo(this, '${path}');"
-                                        data-placement="top" data-original-title="Used in:">
-                                            <i class="fa-solid fa-circle-question"></i>
-                                    </button>`: ""}
-                    <div class="select">
-                        <select id="${input_id}" name="${input_id}"
-                            ${bytesData ? `bytes="${bytesData}"` : ""} 
-                            ${lengthData ? `length="${lengthData}"` : ""} 
-                            ${readOnly ? "disabled" : ''}                            
-                            onchange="javascript: ${modal ? modal : `sendMessageWPF(
-                                {'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}}
-                                ${link.length > 0 ? `, {'funcName': 'changeStyleDisplay', 'params': { 'goToId': '${link}', 'id': '${input_id}' }}` : ""})
-                                ${image ? `; loadDiv(this,'showSchema_${input_id}', this.value + '_function');` : ""}
-                            `}" >`;
-    if (selectList.length > 0) {
-        let isDefaultValue = selectList.map(v => v.selected).reduce((prevValue, currValue) => (prevValue || currValue), false);
-        str += `<option value="" disabled ${isDefaultValue ? "" : "selected"}>${placeHolderText || newT.t(localStorage.getItem('lang'), 'select_an_option')}</option>`;
-        selectList.map(o => str += `<option value="${o.value}" ${o.selected ? "selected" : ""}>${o.label}</option>`);
-    }
-    str += '</select>';
-    if (link.length > 0)
-        str += `<img src onerror="javascript: changeStyleDisplay('${link}', '${input_id}')" />`; // dirty workaround
-    str += `</div>${image ? "" : "</div>"}`; */
 }
 
 const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData, readOnly, RmBtn = false, path = "", value }) => {
@@ -1647,8 +1598,7 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                             name="${input_id}"
                             ${max ? `data-maxlength="${`${max}`.length}"` : ""}
                             oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
-                            onchange"javascript: myFunction2(this.id)"
-                            onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
+                            onblur="javascript: myFunction2(this.id, ${path})"
                             ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
                             ${value ? `value="${value}"` : ""}
                             ${bytesData ? `bytes="${bytesData}"` : ""} 
@@ -1662,31 +1612,6 @@ const getNumberInput = ({ input_name, input_id, max, min, bytesData, lengthData,
                             class="ram_number_input_button_right"></button>
                 </div>
             </div>`;
-                    //<div class="valid-feedback">
-                    //    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 29.46 29.46">
-                    //        <circle cx="14.73" cy="14.73" r="14.73" transform="translate(0 0)" fill="#98d056"></circle>
-                    //        <path d="M813.963,2653.587a.53.53,0,0,0-.75,0l-8.595,8.584-3.38-3.375a.529.529,0,0,0-.75.748l3.755,3.752a.533.533,0,0,0,.75,0l8.969-8.958A.53.53,0,0,0,813.963,2653.587Z" transform="translate(-792.496 -2643.924)" fill="#fff" stroke="#fff" stroke-width="0.5"></path>
-                    //    </svg>
-                    //</div>
-            /*old style: <div class="form-item roww">
-                ${RmBtn ? `<button type="button" id="${input_id}_btn" class="none-inherit" onclick="javascript: removeItem(this.id)">
-                    <i class="fa-solid fa-square-minus fa-2x"></i>
-                </button>` : ""}
-                <label for="${input_id}">${input_name}</label>
-                <input class="ml10"
-                        type="number"
-                        id="${input_id}"
-                        name="${input_id}"
-                        ${max ? `data-maxlength="${`${max}`.length}"` : ""}
-                        oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
-                        onchange"javascript: myFunction2(this.id)"
-                        onblur="javascript:sendMessageWPF({'Command': 'changedValue','Params':{'path':'${path}','newValue': this.value}})"
-                        ${min ? `min="${min}"` : ""} ${max ? `max="${max}"` : ""}
-                        ${value ? `value="${value}"` : ""}
-                        ${bytesData ? `bytes="${bytesData}"` : ""} 
-                        ${lengthData ? `length="${lengthData}"` : ""} 
-                        ${readOnly ? "disabled" : ''} />
-            </div> */
 }
 
 const getEmacInput = ({ input_id, input_name, readOnly, value, RmBtn = false, path = "" }) => {
@@ -1775,10 +1700,22 @@ function myFunction(id) {
     var element = document.getElementById(id);
     element.value = element.value.slice(0, element.dataset.maxlength);
 }
-function myFunction2(id) {
+function myFunction2(id, path = "") {
     var element = document.getElementById(id);
+    if (!element.max) return;
     if (+element.value > +element.max) {
-        element.value = element.max;
+        element.value = +element.max;
+        if (path) sendMessageWPF({
+            'Command': 'changedValue', 'Params': {
+                'path': `'${path}'`, 'newValue': `'${element.max}'`
+            }
+        });
+    } else {
+        if (path) sendMessageWPF({
+            'Command': 'changedValue', 'Params': {
+                'path': `'${path}'`, 'newValue': `'${element.value}'`
+            }
+        });
     }
 }
 function myFunction3(id) {
@@ -1825,6 +1762,56 @@ function addActive(doc = 'ram_panel_1') {
 //#endregion
 
 //#region //----- MYFUNCTION FUNCS Funcs -----////////////////////////////////////////////
+const getAvailableZoneElements = async (elementType) => {
+    //alert("minElements " + minElements + ", elements " + elements)
+    let availableZones = [];
+    await boundAsync.getElements(elementType).then((returnedZones) => {
+        if (returnedZones) {
+            const returnedZonesJson = JSON.parse(returnedZones);
+            Object.keys(returnedZonesJson).forEach(key => availableZones.push(+key));
+        }
+    });
+    //alert("availableZones " + availableZones + ", elementType " + elementType)
+    for (let i = minElements; i < elements; i++) {
+        boundAsync.zoneDevices(i).then(res => {
+            if (res && res !== "[]") {
+                addConcreteElement(i, elementType);
+                if (!availableZones.includes(i)) {
+                    sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `${elementType}`, 'elementNumber': `${i}` } });
+                }
+            }
+        }).catch(err => console.log(err));
+    }
+}
+
+const getAvailableInputGroupElements = async (elementType) => {
+    // alert("minElements " + minElements + ", elements " + elements)
+    let availableIG = [];
+    await boundAsync.getElements(elementType).then((returnedIG) => {
+        if (returnedIG) {
+            const returnedZonesJson = JSON.parse(returnedIG);
+            Object.keys(returnedZonesJson).forEach(key => availableIG.push(+key));
+        }
+    });
+    //alert("availableIG " + availableIG + ", elementType " + elementType)
+    boundAsync.getUsedInputGroups().then(res => {
+        if (res && res !== "[]") {
+            const elementList = JSON.parse(res);
+            elementList.forEach(key => {
+                const i = +key - Number(INC);
+                if (!availableIG.includes(i)) {
+                    boundAsync.addingElementSync(`${elementType}`, i).then(r => {
+                        if (r === "added") {
+                            addConcreteElement(`${i}`, elementType); // creating the fieldset of the INPUT_GROUP element
+                        }
+                    }).catch(err => alert("Error " + err));
+                } else {
+                    addConcreteElement(`${i}`, elementType);
+                }
+            });
+        }
+    }).catch(err => alert(err));
+}
 
 const getAvailableElements = (elementType) => {
     boundAsync.getElements(elementType).then(r => {
@@ -1856,7 +1843,7 @@ function addElement(id, elementType = "", btnId = "_btn") {
 
     if (id === "element") {
 
-        callAddressModal(elementType); // going through modal for defining the address of the element
+        callAddressModal(elementType, null, params = { "type" : id }); // going through modal for defining the address of the element
         
     } else {
         if (lst && lst.includes(+id)) {
@@ -1886,7 +1873,7 @@ function callAddressModal(elementType, current, params = {}) {
                                <label for="select_address" class="contents">${newT.t(localStorage.getItem('lang'), "set_address")} ${elementType}</label>                              
                                <select id="select_address" name="select_address" class="form-select ram_floating_select">`;
     for (var i = minElements; i <= elements; i++) {
-        let currentId = i === +current ? "selected" : "";
+        let currentId = current === null ? "" : (i === +current ? "selected" : "");
         let disabled = (lst && lst.includes(i)) ? "disabled style='background: #aaa;'" : ""
         innerSelectText += `<option value="${i}" ${disabled} ${currentId}>${i + Number(INC)}</option>`;
     }
@@ -1919,7 +1906,8 @@ function callAddressModal(elementType, current, params = {}) {
 }
 
 function addElementAtAddress(elementType, params) {
-    const last = params['deviceAddress'];
+    const last = params && params['deviceAddress'] && params['deviceAddress'];
+
     if (elementType.toUpperCase().endsWith("INPUT_GROUP")) {
         boundAsync.addingElementSync(`${elementType}`, +last).then(r => {
             if (r === "added") {
@@ -1932,6 +1920,21 @@ function addElementAtAddress(elementType, params) {
             'Params': params
         });
         createElementButton(last, params["deviceName"], "new_mimic_outputs", "_btn_devices", params);
+    } else if (elementType && elementType.toUpperCase().endsWith("INPUT")) {
+        sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });        
+        createElementButton(last, elementType, fieldId = "new", fieldBtnId = "_btn", params = params); // creating the button of the element
+        // {"Command":"changedValue","Params":{"path":"ELEMENTS.IRIS_INPUT.PROPERTIES.Groups.Settings.fields.Group.~index~0","newValue":"2"}}
+        sendMessageWPF({ 'Command': 'changedValue', 'Params': { 'path': `ELEMENTS.${elementType.toUpperCase()}.PROPERTIES.Groups.Settings.fields.Group.~index~${last}`, 'newValue': `${+last + Number(INC)}` } });
+        //const inputGroupElement = elementType.toUpperCase().startsWith("IRIS_") ? "INPUT_GROUP" : `${elementType.toUpperCase()}_GROUP`;
+        //boundAsync.getElements(inputGroupElement).then((returnedIG) => {
+        //    if (returnedIG) {
+        //        const returnedIGJson = JSON.parse(returnedIG);
+        //        if (Object.keys(returnedIGJson).includes(last)) {
+        //            return;
+        //        }
+        //    }
+        //    sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `${inputGroupElement}`, 'elementNumber': `${last}` } });
+        //});
     } else {
         sendMessageWPF({ 'Command': 'AddingElement', 'Params': { 'elementType': `'${elementType}'`, 'elementNumber': `${last}` } });
         createElementButton(last, elementType); // creating the button of the element
@@ -1990,7 +1993,9 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
                                 <div class="ram_card_body">
                                     <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+last+Number(INC)}</h5>
                                 </div>
-                                ${elementType.toUpperCase().includes('NATRON') ? "" : `<div class="ram_add_btn" 
+                                ${elementType.toUpperCase().includes('NATRON') || elementType.toUpperCase().includes("PANEL") || (
+                                    elementType.toUpperCase().endsWith('ZONE') && !elementType.toUpperCase().includes('EVAC')
+                                    ) ? "" : `<div class="ram_add_btn" 
                                     onclick="javascript: event.stopPropagation();
                                         ${removeFn}">
                                     <i class="ram_icon add_device rot45"></i>
@@ -2006,7 +2011,7 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
                     `;
 
     lst.push(+last);
-    
+
     element.innerHTML = new_inner;
 
     // reordering
@@ -2042,14 +2047,21 @@ async function inputGroupTextGenerator(last, elementType) {
 
         if (result) {
             let returnedJson = JSON.parse(result);
-            let currentJSON = returnedJson["~noname"]["fields"]["Input_Logic"];
-            let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
-            let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
-            let legend = (trans.length + `${last}.`.length) > 16 ? trans.substring(0, 9) + '...' : trans;
-            return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
+            return visualizeInputGroupsElements(returnedJson, elementType, last)
+        }
+        return '';
+    } catch (e) { alert('Error ' + e) }
+}
+
+function visualizeInputGroupsElements(json, elementType, last) {
+    let currentJSON = json["~noname"]["fields"]["Input_Logic"];
+    let isChecked = currentJSON["~value"] ? currentJSON["~value"] === currentJSON["ITEMS"]["ITEM"][1]["@VALUE"] : currentJSON["ITEMS"]["ITEM"][1].hasOwnProperty("@DEFAULT");
+    let trans = newT.t(localStorage.getItem('lang'), currentJSON["@LNGID"]);
+    let legend = (trans.length + `${last}.`.length) > 16 ? trans.substring(0, 9) + '...' : trans;
+    return `<div id="${last}" class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="ram_card fire">
                             <div style="min-width: 200px;" class="ram_card_body">
-                                <span>${+last+Number(INC)}. ${legend}</span> 
+                                <span>${+last + Number(INC)}. ${legend}</span> 
                                 <button onclick="javascript: callAddressModal('${elementType}', '${last}')" type="button" class="btn btn-position-right h5">${newT.t(localStorage.getItem('lang'), 'modif_address')}</button>
                                 <p class="fire">
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][0]["@LNGID"])}
@@ -2062,16 +2074,9 @@ async function inputGroupTextGenerator(last, elementType) {
                                     ${newT.t(localStorage.getItem('lang'), currentJSON["ITEMS"]["ITEM"][1]["@LNGID"])}
                                 </p>
                             </div>
-                            <div class="ram_rot_btn" onclick="javascript:sendMessageWPF({'Command':'RemovingElement', 'Params': { 'elementType':'${elementType}', 'elementNumber': '${last}' }}, comm = { 'funcName': 'addElement', 'params': {'id' : '${last}', 'elementType': '' }})">
-                                <i class="ram_icon add_device rot45 x14"></i>
-                            </div>
                         </div>
                     </div>`;
-        }
-        return '';
-    } catch (e) { alert('Error ' + e) }
 }
-
 //#endregion
 
 // showing element function

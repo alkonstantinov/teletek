@@ -1709,7 +1709,8 @@ namespace ljson
                             {
                                 cRWPathIRIS rwi = jrw.ToObject<cRWPathIRIS>();
                                 drw.Add(((JProperty)t).Name, rwi);
-                            } else if (panel_type == "natron")
+                            }
+                            else if (panel_type == "natron")
                             {
                                 cRWPathNatron rwn = jrw.ToObject<cRWPathNatron>();
                                 drw.Add(((JProperty)t).Name, rwn);
@@ -3739,6 +3740,40 @@ namespace ljson
         #endregion
 
         #region values
+        public static string InputsElementName()
+        {
+            JObject _panel = CurrentPanel;
+            JObject elements = (JObject)_panel["ELEMENTS"];
+            foreach (JProperty p in elements.Properties()) if (Regex.IsMatch(p.Name, @"IRIS\d*?_INPUT$")) return p.Name;
+            return null;
+        }
+        public static List<string> SelectPathValues(string match)
+        {
+            Dictionary<string, string> d = cComm.GetPathValues(CurrentPanelID, match);
+            List<string> res = new List<string>();
+            foreach (string key in d.Keys) res.Add(d[key]);
+            return res;
+        }
+        public static List<string> SelectPathValuesDistinctStrSort(string match)
+        {
+            Dictionary<string, string> d = cComm.GetPathValues(CurrentPanelID, match);
+            Dictionary<string, string> dchk = new Dictionary<string, string>();
+            foreach (string key in d.Keys) if (!dchk.ContainsKey(d[key])) dchk.Add(d[key], null);
+            List<string> res = dchk.Keys.ToList<string>();
+            res.Sort();
+            return res;
+        }
+        public static List<string> SelectPathValuesDistinctIntSort(string match)
+        {
+            Dictionary<string, string> d = cComm.GetPathValues(CurrentPanelID, match);
+            Dictionary<int, string> dchk = new Dictionary<int, string>();
+            foreach (string key in d.Keys) if (!dchk.ContainsKey(Convert.ToInt32(d[key]))) dchk.Add(Convert.ToInt32(d[key]), null);
+            List<int> lsti = dchk.Keys.ToList<int>();
+            lsti.Sort();
+            List<string> res = new List<string>();
+            foreach (int i in lsti) res.Add(i.ToString());
+            return res;
+        }
         public static void RemoveElement(string element, string idx)
         {
             string tab = null;
@@ -3829,7 +3864,7 @@ namespace ljson
                 if (val != null)
                     o["~value"] = val;
             }
-            if (res["~noname"] != null && res["~noname"]["fields"] != null  && res["~noname"]["fields"]["TYPE"] != null)
+            if (res["~noname"] != null && res["~noname"]["fields"] != null && res["~noname"]["fields"]["TYPE"] != null)
             {
                 JObject otype = (JObject)res["~noname"]["fields"]["TYPE"];
                 string tpath = "";

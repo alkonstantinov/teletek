@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Images\teletek_favicon_hfk_icon.ico</ApplicationIcon>
-    <Version>$(VersionPrefix)1.0.1.4</Version>
+    <Version>$(VersionPrefix)1.0.1.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -118,7 +118,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="115.3.110" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="117.2.40" />
     <PackageReference Include="HidSharp" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
@@ -181,6 +181,9 @@
     <None Update="Configs\XML\Systems\IRIS4\Read\ReadConfig_iris4_version03.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Systems\IRIS4\Read\ReadConfig_iris4_version04.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Systems\IRIS4\Template\IRIS4.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -193,10 +196,22 @@
     <None Update="Configs\XML\Systems\IRIS4\Write\WriteConfig_iris4_version03.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Systems\IRIS4\Write\WriteConfig_iris4_version04.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Systems\IRIS8\Read\ReadConfig_iris8.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Systems\IRIS8\Read\ReadConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Read\ReadConfig_iris8_version02.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Read\ReadConfig_iris8_version03.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Read\ReadConfig_iris8_version04.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Systems\IRIS8\Template\IRIS8.xml">
@@ -206,6 +221,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Systems\IRIS8\Write\WriteConfig_iris8_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Write\WriteConfig_iris8_version02.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Write\WriteConfig_iris8_version03.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\IRIS8\Write\WriteConfig_iris8_version04.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Systems\IRIS\Read\ReadConfig_iris.xml">
@@ -373,6 +397,9 @@
     <None Update="Configs\XML\Systems\TFT_REPEATER\Read\ReadConfig_TFTRepeater_version01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Read\ReadConfig_TFTRepeater_version02.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Configs\XML\Systems\TFT_REPEATER\Template\TFTRepeater.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -380,6 +407,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Systems\TFT_REPEATER\Write\WriteConfig_TFTRepeater_version01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\XML\Systems\TFT_REPEATER\Write\WriteConfig_TFTRepeater_version02.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configs\XML\Templates\ECLIPSE99.xml">
@@ -1235,15 +1265,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="115.3.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="117.2.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="115.3.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="117.2.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="115.3.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="117.2.4" />
   </ItemGroup>
 
   <ItemGroup>
