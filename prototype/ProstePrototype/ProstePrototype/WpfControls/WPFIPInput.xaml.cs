@@ -20,7 +20,10 @@ namespace ProstePrototype.WpfControls
     {
         public event EventHandler AddressChanged;
 
-        private static readonly List<Key> DigitKeys = new List<Key> { Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9 };
+        private static readonly List<Key> DigitKeys = new List<Key> { 
+            Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, 
+            Key.NumPad0, Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9
+        };
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
         private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
         private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
@@ -99,7 +102,7 @@ namespace ProstePrototype.WpfControls
         }
         private void MouseLeave_Event(object sender, MouseEventArgs e)
         {
-            if (!FirstSegment.IsFocused && !SecondSegment.IsFocused && !FirstSegment.IsFocused && !LastSegment.IsFocused)
+            if (!FirstSegment.IsFocused && !SecondSegment.IsFocused && !ThirdSegment.IsFocused && !LastSegment.IsFocused)
             {
                 mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
             }
@@ -108,7 +111,7 @@ namespace ProstePrototype.WpfControls
         private void UIElement_GotFocus(object sender, RoutedEventArgs e)
         {
             lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
-            var SenderElement = (Control)sender;
+            TextBox SenderElement = (TextBox)sender;
             SenderElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Blue"));
             mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#dae4f0"));
         }
@@ -116,36 +119,38 @@ namespace ProstePrototype.WpfControls
         private void UIElement_LostFocus(object sender, RoutedEventArgs e)
         {
             lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
-            var SenderElement = (Control)sender;
+            TextBox SenderElement = (TextBox)sender;
             SenderElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Gray"));
             mainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
         }
 
         private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
+            var currentTextBox = (TextBox)sender;
             if (DigitKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelDigitKeyPress();
-                HandleDigitPress();
+                e.Handled = ShouldCancelDigitKeyPress(currentTextBox);
+                if (e.Handled == true) MoveFocusToNextSegment(currentTextBox); // HandleDigitPress(currentTextBox); // left ofr validation logic?
             }
             else if (MoveBackwardKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelBackwardKeyPress();
-                HandleBackwardKeyPress();
+                e.Handled = ShouldCancelBackwardKeyPress(currentTextBox);
+                if (e.Handled == true && currentTextBox.SelectedText.Length == 0) 
+                    MoveFocusToPreviousSegment(currentTextBox); // HandleBackwardKeyPress(currentTextBox);
             }
             else if (MoveForwardKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelForwardKeyPress();
-                HandleForwardKeyPress();
+                e.Handled = ShouldCancelForwardKeyPress(currentTextBox);
+                HandleForwardKeyPress(currentTextBox);
             }
             else if (e.Key == Key.Back)
             {
-                HandleBackspaceKeyPress();
+                HandleBackspaceKeyPress(currentTextBox);
             }
-            else if (e.Key == Key.OemPeriod)
+            else if (e.Key == Key.OemPeriod || e.Key == Key.Decimal)
             {
                 e.Handled = true;
-                HandlePeriodKeyPress();
+                HandlePeriodKeyPress(currentTextBox);
             }
             else
             {
@@ -162,10 +167,8 @@ namespace ProstePrototype.WpfControls
                    OtherAllowedKeys.Contains(e.Key);
         }
 
-        private void HandleDigitPress()
+        private void HandleDigitPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
-
             if (currentTextBox != null && currentTextBox.Text.Length == 3 &&
                 currentTextBox.CaretIndex == 3 && currentTextBox.SelectedText.Length == 0)
             {
@@ -173,9 +176,8 @@ namespace ProstePrototype.WpfControls
             }
         }
 
-        private bool ShouldCancelDigitKeyPress()
+        private bool ShouldCancelDigitKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
             return currentTextBox != null &&
                    currentTextBox.Text.Length == 3 &&
                    currentTextBox.CaretIndex == 3 &&
@@ -189,7 +191,7 @@ namespace ProstePrototype.WpfControls
                 Address = string.Format("{0}.{1}.{2}.{3}", (FirstSegment != null) ? FirstSegment.Text : "0", (SecondSegment != null) ? SecondSegment.Text : "0", (ThirdSegment != null) ? ThirdSegment.Text : "0", (LastSegment != null) ? LastSegment.Text : "0");
             }
 
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender as TextBox;
 
             if (currentTextBox != null && currentTextBox.Text.Length == 3 && currentTextBox.CaretIndex == 3)
             {
@@ -197,52 +199,43 @@ namespace ProstePrototype.WpfControls
             }
         }
 
-        private bool ShouldCancelBackwardKeyPress()
+        private bool ShouldCancelBackwardKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
             return currentTextBox != null && currentTextBox.CaretIndex == 0;
         }
 
-        private void HandleBackspaceKeyPress()
+        private void HandleBackspaceKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
-
             if (currentTextBox != null && currentTextBox.CaretIndex == 0 && currentTextBox.SelectedText.Length == 0)
             {
                 MoveFocusToPreviousSegment(currentTextBox);
             }
         }
 
-        private void HandleBackwardKeyPress()
+        private void HandleBackwardKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
-
             if (currentTextBox != null && currentTextBox.CaretIndex == 0)
             {
                 MoveFocusToPreviousSegment(currentTextBox);
             }
         }
 
-        private bool ShouldCancelForwardKeyPress()
+        private bool ShouldCancelForwardKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
             return currentTextBox != null && currentTextBox.CaretIndex == 3;
         }
 
-        private void HandleForwardKeyPress()
+        private void HandleForwardKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
-
             if (currentTextBox != null && currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
         }
 
-        private void HandlePeriodKeyPress()
+        private void HandlePeriodKeyPress(TextBox currentTextBox)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
-
+            //var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
             if (currentTextBox != null && currentTextBox.Text.Length > 0 && currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
                 MoveFocusToNextSegment(currentTextBox);
