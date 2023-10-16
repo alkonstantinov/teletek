@@ -250,6 +250,9 @@
         add_new: {
             'bg': 'Добавете нов', 'en': 'Add New', 'ge': 'Add New' 
         },
+        add_new_o: {
+            'bg': 'Добавете ново', 'en': 'Add New', 'ge': 'Add New' 
+        },
         add_new_device: {
             'bg': 'Добавете ново устройство', 'en': 'Add New Device', 'ge': 'Add New Device' 
         },

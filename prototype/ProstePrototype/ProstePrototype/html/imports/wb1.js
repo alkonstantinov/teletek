@@ -417,6 +417,20 @@ function sendMsg(self) {
         sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': 'Delete', '~panel_id': currentPanelId });
         const el = document.getElementById(panelId);
         el.remove();
+        
+        setTimeout(() => {
+            const activePanel = document.querySelector("button:not(.collapsed)");
+            if (activePanel) {
+                let newPanelId = activePanel.parentElement.id;
+                selectNewPanel(newPanelId, activePanel.parentElement);
+            } else {
+                boundAsync.cleanBreadCrumbs().then(res => {
+                    if (res === "Breadcrumbs cleaned") {
+                        console.log("I am happy")
+                    }
+                }).catch(err => alert(err));
+            }
+        }, 300);
     } else {
         const panelId = self.parentNode.getAttribute('element').replaceAll("_", "-");
         sendMessageWPF({ 'Command': 'MainMenuBtn', 'Function': self.getAttribute('topic'), '~panel_id': panelId });

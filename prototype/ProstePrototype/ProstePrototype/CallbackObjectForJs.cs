@@ -295,6 +295,7 @@ namespace ProstePrototype
             try
             {
                 zdevs = cJson.ZoneDevices(elementNumber.ToString());
+                zdevs = new JArray(zdevs.Children().OrderBy(z => z.SelectToken("~devaddr").Value<int>()));
             } catch { }
             return (zdevs != null) ? zdevs.ToString() : "[]";
         }
@@ -312,6 +313,16 @@ namespace ProstePrototype
 
             } catch { }
             return res.ToString();
+        }
+
+        public string cleanBreadCrumbs()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.lvBreadCrumbs.Items.Clear();
+            });
+            return "Breadcrumbs cleaned";
         }
         public string MIMICPanels()
         {

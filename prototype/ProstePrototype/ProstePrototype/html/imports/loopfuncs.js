@@ -584,7 +584,7 @@ function showLoop(loopNumber, loopType) {
     deviceNmbr = attachedDevicesList.length;
     //resizer2.innerHTML = '';
     resizer2.classList = 'ram_panel ram_resizable ram_animate';
-    let btnTitle = `${new T().t(localStorage.getItem('lang'), "add_new")} ${loopType.includes("TTE") ? new T().t(localStorage.getItem('lang'), "device_in_loop") : new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}`;
+    let btnTitle = `${new T().t(localStorage.getItem('lang'), "add_new_o")} ${loopType.includes("TTE") ? new T().t(localStorage.getItem('lang'), "device_in_loop") : new T().t(localStorage.getItem('lang'), "sensormodule_in_loop")} ${loopNumber}`;
 
     boundAsync.addingSegmentsToElement(loopType, `${loopType.includes("TTE") ? "Teletek Loop" : "System Sensors Loop"} ${loopNumber}`);
     resizer2.insertAdjacentHTML('beforeend',
@@ -776,7 +776,7 @@ function calculateLoopDevices(loopNumber) {
 
 //#region UTILS
 function getKey(deviceName) {
-    let keyToReturn = Object.keys(DEVICES_CONSTS).find(k => deviceName.includes(k) && DEVICES_CONSTS[k].type !== 'panel');
+    let keyToReturn = Object.keys(DEVICES_CONSTS).find(k => deviceName.endsWith(k) && DEVICES_CONSTS[k].type !== 'panel');
     if (keyToReturn) return keyToReturn
     DEVICES_CONSTS["default"].sign = deviceName;
     return "default";
