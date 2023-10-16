@@ -2,6 +2,7 @@
 using lupd;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace ProstePrototype
         private MainWindow _mainWindow;
         private string currentVersion;
         private bool updateCheck;
+        private bool isClosing = false; // A flag to track whether the window is in the closing process
         public SettingsDialog(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -86,8 +88,32 @@ namespace ProstePrototype
         {
             this.Dispatcher.Invoke(() =>
             {
+                // CleanupAndClose(); // to be used if we can stop the proces of updating
                 this.Hide();
             });
+        }
+
+        private void CleanupAndClose()
+        {
+            if (!isClosing)
+            {
+                isClosing = true;
+
+                // Stop any processes or perform cleanup as needed
+                // specially if updating is launched
+
+                this.Close();
+
+                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.settings = null;
+            }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            CleanupAndClose();
+
+            base.OnClosing(e);
         }
 
         private void Help_Clicked(object sender, RoutedEventArgs e)
@@ -100,20 +126,6 @@ namespace ProstePrototype
         {
             Console.WriteLine(filename);
         }
-        //private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
-        //{
-        //    SettingsDialog settingsWindow = Application.Current.Windows.OfType<SettingsDialog>().FirstOrDefault();
-        //    ProgressBar progrBar = settingsWindow.progressBar.FindName("progrBar") as ProgressBar;
-        //    double percentageCalc = counter / cntall;
-        //    progrBar.Value = percentageCalc;
-        //    progrBar.Maximum = 100;
-        //    settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("0.##%");
-        //    ProgressBar progrBarAdd = settingsWindow.progressBar.FindName("progrBarAdd") as ProgressBar;
-        //    double percentageCalcAdd = counter / cntall;
-        //    progrBarAdd.Value = percentageCalcAdd;
-        //    progrBarAdd.Maximum = 100;
-        //    settingsWindow.progrBarTextAdd.Text = $"Downloading {filename}: " + percentageCalcAdd.ToString("0.##%");
-        //}
 
         private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
         {
@@ -123,22 +135,19 @@ namespace ProstePrototype
                 ProgressBar progrBar = settingsWindow.progressBar.FindName("progrBar") as ProgressBar;
                 ProgressBar progrBarAdd = settingsWindow.progressBar.FindName("progrBarAdd") as ProgressBar;
 
-                //settingsWindow.Dispatcher.Invoke(() =>
-                //{
-                double percentageCalc = 100 * counter / cntall;
+                double percentageCalc = 100 * (double)counter / (double)cntall;
                 progrBar.Value = percentageCalc;
                 progrBar.Maximum = 100;
-                settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("##0.##") + "%";
+                settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("##0.") + "%";
 
                 if (bytes_all != 0)
                 {
-                    double percentageCalcAdd = 100 * bytes_downloaded / bytes_all;
+                    double percentageCalcAdd = 100 * (double)bytes_downloaded / (double)bytes_all;
                     progrBarAdd.Value = percentageCalcAdd;
                     progrBarAdd.Maximum = 100;
                     string f = filename.Split("/").Last();
-                    settingsWindow.progrBarTextAdd.Text = $"Downloading {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.##") + "%";
+                    settingsWindow.progrBarTextAdd.Text = $"Downloading {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.") + "%";
                 }
-                //});
             });
         }
 
@@ -202,7 +211,8 @@ namespace ProstePrototype
             killRun.WindowStyle = ProcessWindowStyle.Normal;
             // killRun.Verb = "runas";
             killRun.Arguments = $"\"{exePath}\" \"{updPath}\"";
-            Process.Start(killRun);
+            Process p = Process.Start(killRun);
+            p.WaitForExit();
         }
         #endregion
         private void Update_Clicked(object sender, RoutedEventArgs e)
@@ -215,8 +225,9 @@ namespace ProstePrototype
                 {
                     RunUpdate();
                     string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
+                    string del_locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~files4del.lock";
                     if (
-                        Directory.Exists(locks) &&
+                        (Directory.Exists(locks) || File.Exists(del_locks)) &&
                         MessageBox.Show(@$"Teletek Manager needs to restart to finish the update. Information on currently opened projects might be lost. Proceed?" +
                         "\n If you choose \"No\" the update will automatically finalize next time you relaunch.",
                             "Update Warning",

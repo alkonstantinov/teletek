@@ -85,9 +85,16 @@ namespace ProstePrototype
         }
         private static void http_progress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all)
         {
-            double percentageCalcAdd = 100 * (double)bytes_downloaded / bytes_all;
+            double percentageCalcAdd = 100;
+            if (bytes_all > 0) { 
+                percentageCalcAdd = 100 * (double)bytes_downloaded / (double)bytes_all;
+            }
             string f = filename.Split("/").Last();
-            double percentageCalc = 100 * (double)counter / cntall;
+            double percentageCalc = 100;
+            if (cntall > 0)
+            {
+                percentageCalc  = 100 * (double)counter / (double)cntall;
+            }
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Welcome welcomeWindow = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();

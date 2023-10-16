@@ -41,7 +41,7 @@ namespace ProstePrototype
         private readonly string applicationDirectory;
         public readonly JObject pages;
         private ReadWindow rw;
-        private SettingsDialog settings;
+        public SettingsDialog settings;
 
         public bool DarkMode { get; set; }
 
@@ -1102,10 +1102,18 @@ namespace ProstePrototype
         }
         private void SettingsClicked(object sender, RoutedEventArgs e)
         {
-            settings = new SettingsDialog(this);
-            settings.Resources = this.Resources;
-            settings.changeTheme(DarkMode);
-            settings.ShowDialog();
+            if (settings == null )
+            {
+                settings = new SettingsDialog(this);
+                settings.Resources = this.Resources;
+                settings.changeTheme(DarkMode);
+                settings.ShowDialog();
+            } else
+            {
+                settings.changeTheme(DarkMode);
+                settings.Activate();
+                settings.Show();
+            }
         }
         private void NewSystem_Clicked(object sender, RoutedEventArgs e)
         {

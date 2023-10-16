@@ -167,6 +167,22 @@ namespace lupd
             if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
             File.WriteAllBytes(locks, content);
         }
+        private static void SaveDelFiles(string updpath, JObject files4del)
+        {
+            if (files4del == null || files4del.First == null) return;
+            if (!Regex.IsMatch(updpath, @"[\\/]$")) updpath += Path.DirectorySeparatorChar.ToString();
+            string delfile = updpath + "~files4del.lock";
+            string s = "";
+            foreach (JProperty p in files4del.Properties())
+            {
+                JObject o = (JObject)p.Value;
+                if (o["action"].ToString().ToLower() != "add") continue;
+                string sf = Regex.Replace(Regex.Replace(o["relpath"].ToString(), @"^[\\/]", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
+                string fpath = Regex.Replace(updpath, @"[\\/]$", "") + Path.DirectorySeparatorChar + sf;
+                s += ((s != "") ? "\n" : "") + fpath;
+            }
+            File.WriteAllText(delfile, s);
+        }
         private static void Download(string updpath, JObject downloads, dFileDownloadProgress downloading, ref eUPDResult res, ref string err)
         {
             string updhttppath = Regex.Replace(settings.updhttppath, @"[\\/]$", "");
@@ -202,13 +218,14 @@ namespace lupd
             foreach (JProperty p in files4del.Properties())
             {
                 JObject o = (JObject)p.Value;
+                if (o["action"].ToString().ToLower() != "add") continue;
                 string s = Regex.Replace(Regex.Replace(o["relpath"].ToString(), @"^[\\/]", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
                 string fpath = Regex.Replace(updpath, @"[\\/]$", "") + Path.DirectorySeparatorChar + s;
                 string dir = Path.GetDirectoryName(fpath);
                 if (!dir4del.ContainsKey(dir)) dir4del.Add(dir, null);
                 File.Delete(fpath);
             }
-            foreach (string dir in dir4del.Keys) if (Directory.Exists(dir)) Directory.Delete(dir, true);
+            foreach (string dir in dir4del.Keys) if (Directory.Exists(dir) && Directory.GetFiles(dir).Length == 0) Directory.Delete(dir, true);
         }
         public static eUPDResult DoUpdate(string updpath, dFileCRCProcessing crcProcessing, dFileDownloadProgress downloading, ref string err)
         {
@@ -221,7 +238,14 @@ namespace lupd
             JObject downloads = files4download(crcProcessing, localmap, fmap);
             Download(updpath, downloads, downloading, ref res, ref err);
             JObject files4del = files4download(crcProcessing, fmap, localmap);
-            DeleteUnusedFiles(updpath, files4del);
+            try
+            {
+                DeleteUnusedFiles(updpath, files4del);
+            }
+            catch
+            {
+                SaveDelFiles(updpath, files4del);
+            }
             //
             string fmapfile = Regex.Replace(Regex.Replace(updpath, @"[\\/]$", ""), @"[\\/]", Path.DirectorySeparatorChar.ToString());
             fmapfile += Path.DirectorySeparatorChar + settings.updmapfilename;
