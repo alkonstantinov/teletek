@@ -191,7 +191,7 @@ const drawWithModal = (body, json, colorClass) => {
                 <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || k.split('_').slice(1).join(' ').toUpperCase()}</h5>
             </div>
         </div>`);
-        getAvailableElements(k.toUpperCase());
+        getAvailableElements(k.toUpperCase(), true);
     };
 }
 
@@ -1813,7 +1813,7 @@ const getAvailableInputGroupElements = async (elementType) => {
     }).catch(err => alert("getAvailableInputGroupElements getUsedInputGroups Error: " + err));
 }
 
-const getAvailableElements = (elementType) => {
+const getAvailableElements = (elementType, special=false) => {
     boundAsync.getElements(elementType).then(r => {
         if (!r) return;
         let elementList = JSON.parse(r);
@@ -1822,19 +1822,19 @@ const getAvailableElements = (elementType) => {
             if (elementType.toUpperCase().includes("NATRON") && elementList[key]["~strtype"]) {
                 addConcreteElement(key, "Natron_" + elementList[key]["~strtype"]);
             } else {
-                addConcreteElement(key, elementType);
+                addConcreteElement(key, elementType, special);
             }
         });
     }).catch(err => alert("getAvailableElements getElements Error " + err));
 }
 
 // adding pre-defined elements function
-function addConcreteElement(id, elementType = "") {
+function addConcreteElement(id, elementType = "", special=false) {
     if (lst && lst.includes(+id)) {
         return;
     } else {
         last = parseInt(id);
-        createElementButton(last, elementType);
+        createElementButton(last, elementType, fieldId = "new", fieldBtnId = "_btn", params = { "number_first": special});
     }
 }
 
@@ -1991,7 +1991,7 @@ async function createElementButton(last, elementType, fieldId = "new", fieldBtnI
                                     `<i class="${BUTTON_IMAGES[elType].im.startsWith("fa-") ? `${BUTTON_IMAGES[elType].im} fa-2x` : `ram_icon ${BUTTON_IMAGES[elType].im}`}"></i>`}
                                 </div>
                                 <div class="ram_card_body">
-                                    <h5 class="ram_card_title">${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${+last+Number(INC)}</h5>
+                                    <h5 class="ram_card_title">${params && params["number_first"] ? `${+last + Number(INC)}.` : ""} ${BUTTON_IMAGES[elType].sign || elementType.split('_').slice(1).join(' ')} ${params && !params["number_first"] ? +last + Number(INC) : ""}</h5>
                                 </div>
                                 ${elementType.toUpperCase().includes('NATRON') || elementType.toUpperCase().includes("PANEL") || (
                                     elementType.toUpperCase().endsWith('ZONE') && !elementType.toUpperCase().includes('EVAC')
