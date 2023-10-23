@@ -3103,6 +3103,7 @@ namespace ljson
         {
             JArray res = new JArray();
             Dictionary<string, string> devall = cComm.GetPseudoElementsDevices(cJson.CurrentPanelID);
+            if (devall == null) return new JArray();
             foreach (string key in devall.Keys)
             {
                 string[] keys = Regex.Split(key, "~~~");

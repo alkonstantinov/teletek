@@ -78,7 +78,7 @@ function sendMessageWPF(json, comm = {}) {
                     break;
             }
         } catch (e) {
-            alert('error '+ e);
+            alert('sendMessageWPF '+ e);
         }
     }
     //alert(JSON.stringify(comm));
@@ -259,7 +259,7 @@ function drawFields(body, json, inheritedColor = 'normal') {
                 });
                 newDiv.insertAdjacentHTML('beforeend', newMimicInner);
 
-            }).catch(err => alert("Error " + err));
+            }).catch(err => alert("drawFields getJsonNode with Groups Error :" + err));
         } else if (!divLevel["@TYPE"] && !divLevel.name) { // cases for adding panels/inputs/outputs/loops/etc
             
             minElements = +divLevel["@MIN"];
@@ -504,7 +504,7 @@ function getZoneDevices(elementNumber) {
                 el.appendChild(elem);
             });
         });
-    }).catch(err => alert("Error " + err));
+    }).catch(err => alert("getZoneDevices zoneDevices " + elementNumber +" error: " + err));
 };
 
 function calculateZoneDevices(elementNumber) {
@@ -541,7 +541,7 @@ function calculateZoneDevices(elementNumber) {
             innerModalContent += `</tbody></table></div>`;
             modalContent.innerHTML = innerModalContent;
         }
-    }).catch(err => alert("Error " + err));
+    }).catch(err => alert("calculateZoneDevices zoneDevices " + elementNumber + "Error :" + err));
 }
 //#endregion
 
@@ -571,7 +571,7 @@ function fatFbfFunc(json) {
 
                 //collapsible(`collapsible_${input_id}`)
             }
-        }).catch(err => alert("Error " + err));
+        }).catch(err => alert("fatFbfFunc setNodeFilters Error: " + err));
     });
 }
 //#endregion
@@ -764,7 +764,7 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 
                 showLoopType(1, "Output", "", divInSet.id, selectDiv.id);
 
-            }).catch(err => alert("Error " + err)); break;
+            }).catch(err => alert("createLoopTypeMenu loopsOutputs Error: " + err)); break;
         case "FAT_FBF_IN1":
         case "FAT_FBF_IN2":
         case "FAT_FBF_IN3":
@@ -775,9 +775,9 @@ function createLoopTypeMenu(selectDiv, showDiv, path) {
 
                 showLoopType(1, "Input", "", divInSet.id, selectDiv.id);
 
-            }).catch(err => alert("Error " + err)); break;
+            }).catch(err => alert("createLoopTypeMenu loopsInputs Error: " + err)); break;
         default:
-            alert("something is wrong");
+            alert("createLoopTypeMenu type error: something is wrong with type= ", type);
     }
 
     showDiv.replaceChildren(divSet);
@@ -873,7 +873,7 @@ function showMimicOutputs(elementType, elementNumber) {
                 let returnedJson = JSON.parse(res);
 
                 if (!Array.isArray(returnedJson)) {
-                    alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
+                    alert(newT.t(localStorage.getItem('lang'), 'error_happened') + ": showMimicOutputs Array is not an array");
                     return;
                 }
 
@@ -883,8 +883,8 @@ function showMimicOutputs(elementType, elementNumber) {
                 })
                 deviceNmbr = lst.length;
             }
-        }).catch(err => alert("Error: " + err));
-    }).catch(err => alert("Error: " + err));;
+        }).catch(err => alert("showMimicOutputs getJsonNode getLoopDevices Error: " + err));
+    }).catch(err => alert("showMimicOutputs getJsonNode Error: " + err));;
 
        
 }
@@ -904,7 +904,7 @@ function addMimicOutput(elementType, elementNumber) {
         };
         
         callAddressModal(elementType, "", params);
-    }).catch(err => alert("Error " + err));
+    }).catch(err => alert("addMimicOutput getJsonNode Error " + err));
 }
 
 async function showMimicout(id, params) {    
@@ -920,7 +920,7 @@ async function showMimicout(id, params) {
         
         returnedJson = returnedJson.find(json => json["~address"] === id);
         if (!returnedJson) {
-            alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
+            alert(newT.t(localStorage.getItem('lang'), 'error_happened') + " in showMimicout getLoopDevices");
             return;
         }
         
@@ -945,7 +945,7 @@ async function showMimicout(id, params) {
             addVisitedBackground();
         }
     } catch (e) {
-        alert('Error ' + e);
+        alert('showMimicout getLoopDevices Error: ' + e);
     }
 }
 
@@ -1804,13 +1804,13 @@ const getAvailableInputGroupElements = async (elementType) => {
                         if (r === "added") {
                             addConcreteElement(`${i}`, elementType); // creating the fieldset of the INPUT_GROUP element
                         }
-                    }).catch(err => alert("Error " + err));
+                    }).catch(err => alert("getAvailableInputGroupElements getUsedInputGroups addingElementSync Error: " + err));
                 } else {
                     addConcreteElement(`${i}`, elementType);
                 }
             });
         }
-    }).catch(err => alert(err));
+    }).catch(err => alert("getAvailableInputGroupElements getUsedInputGroups Error: " + err));
 }
 
 const getAvailableElements = (elementType) => {
@@ -1825,7 +1825,7 @@ const getAvailableElements = (elementType) => {
                 addConcreteElement(key, elementType);
             }
         });
-    }).catch(err => alert("Error " + err));
+    }).catch(err => alert("getAvailableElements getElements Error " + err));
 }
 
 // adding pre-defined elements function
@@ -1913,7 +1913,7 @@ function addElementAtAddress(elementType, params) {
             if (r === "added") {
                 createElementButton(last, elementType); // creating the fieldset of the INPUT_GROUP element
             }
-        }).catch(err => alert("Error " + err));
+        }).catch(err => alert("addElementAtAddress addingElementSync Error: " + err));
     } else if (elementType && elementType.toUpperCase().includes("_MIMIC")) {
         sendMessageWPF({
             'Command': 'AddingLoopElement',
@@ -2050,7 +2050,7 @@ async function inputGroupTextGenerator(last, elementType) {
             return visualizeInputGroupsElements(returnedJson, elementType, last)
         }
         return '';
-    } catch (e) { alert('Error ' + e) }
+    } catch (e) { alert('inputGroupTextGenerator getJsonForElement Error ' + e) }
 }
 
 function visualizeInputGroupsElements(json, elementType, last) {
@@ -2090,7 +2090,7 @@ async function showElement(id, elementType) {
         let result = await boundAsync.getJsonForElement(elementType, +id, fieldName); // ret for test////////////////////////////////////////////////////////////////
         returnedJson = JSON.parse(result);
         if (!returnedJson) {
-            alert(newT.t(localStorage.getItem('lang'), 'error_happened'));
+            alert(newT.t(localStorage.getItem('lang'), 'error_happened') +': empty object from showElement getJsonForElement ' + elementType));
             return;
         }
         if (Object.keys(returnedJson).length > 0) {
@@ -2115,7 +2115,7 @@ async function showElement(id, elementType) {
             getZoneDevices(+id);
         }
     } catch (e) {
-        alert('Error showElement' + e);
+        alert(' showElement getJsonForElement Error: ' + e);
     }
 }
 

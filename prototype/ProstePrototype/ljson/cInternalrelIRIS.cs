@@ -1524,6 +1524,7 @@ namespace ljson
                 prop = (cRWPropertyIRIS)read_props["CHANNEL"];
                 int channel_byte = prop.offset;
                 byte btype = val[type_byte];
+                if (btype == 0) return false;
                 if (_group > 0 && _group != address + 1)
                     return true;
                 for (int i = 2; i < val.Length; i++)

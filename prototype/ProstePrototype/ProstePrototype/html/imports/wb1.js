@@ -54,9 +54,9 @@ function toggleLang(key) {
                 receiveMessageWPF(JSON.stringify(panel));                
             });
         } else {
-            alert("System error: No response from 'panelsInLeftBrowser'");
+            alert("toggleLang panelsInLeftBrowser System 1Error: No response from 'panelsInLeftBrowser'");
         }
-    }).catch(err => alert(err));
+    }).catch(err => alert("toggleLang panelsInLeftBrowser 1Error" + err));
 }
 
 function setLang(key) {
@@ -428,7 +428,7 @@ function sendMsg(self) {
                     if (res === "Breadcrumbs cleaned") {
                         console.log("I am happy")
                     }
-                }).catch(err => alert(err));
+                }).catch(err => alert("sendMsg cleanBreadCrumbs 1Error: " + err));
             }
         }, 300);
     } else {

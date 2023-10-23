@@ -223,7 +223,7 @@ const showDevice = (loopType, deviceName, loopNumber, address, noneElement) => {
             //collapsible();
             addVisitedBackground();
         }
-    }).catch(err => alert(err));
+    }).catch(err => alert("showDevice getLoopDevices loopError: " + err));
 }
 
 function showOrderedDevices(loopType, deviceName, address, elem, deviceData, loopNumber, noneElement) {
@@ -359,7 +359,7 @@ const fillLoopElements = (loopNumber, loopType) => {
                 visualizeLoopElement(deviceName, +address, loopType, +loopNumber, key)
             })
         }
-    }).catch(err => alert(err));
+    }).catch(err => alert("fillLoopElements getLoopDevices loopError: " + err));
 }
 //#endregion LOOP ELEMENT
 
@@ -377,7 +377,7 @@ function getLoops() {
         loopList.forEach(key => {
             addLoop(loopsJson[key], "old");
         });
-    }).catch(err => alert(err));
+    }).catch(err => alert("getLoops getLoops loopError: " + err));
     $("#deviceList").modal('hide')
 }
 
@@ -477,7 +477,7 @@ async function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE')
                         }
                     }
                 } catch (error) {
-                    alert("Err: " + error);
+                    alert("loopCallback getJsonNodeForElement getJsonNode loopError: " + error);
                 }
             }
         }
@@ -500,7 +500,7 @@ async function loopCallback(key = mainKey, len = lst.length, command = 'CHANGE')
         });
     }
     catch (err) {
-        alert("Err: " + err);
+        alert("loopCallback getJsonNodeForElement loopError: " + err);
     }
 }
 
@@ -515,7 +515,7 @@ function addLoop(loopType, newFlag = "new") {
 
     var last = parseInt(loopType.charAt(loopType.length - 1)); // get the index of the loop
     if (lst.includes(last)) {
-        alert("Error with index");
+        alert("addLoop Error with index - it is already included in lst");
         return;
     }
 
@@ -769,7 +769,7 @@ function calculateLoopDevices(loopNumber) {
             innerModalContent += `</tbody></table></div>`;
             modalContent.innerHTML = innerModalContent;
         }
-    }).catch(err => alert(err));
+    }).catch(err => alert("calculateLoopDevices getLoopDevices loopError: " + err));
 }
 //#endregion LOOP
 

@@ -655,10 +655,7 @@ namespace ProstePrototype
                     page, // in order to get the directory source to define the color type
                     pages[_clean_key].Value<JObject>()["breadcrumbs"].Value<JArray>() // takes the respective pages ["breadcrumbs"]
                     );
-                addLastBreadCrumb(
-                    (string)jnode["@PRODUCTNAME"], // get the directory source to define the color type
-                    _clean_key
-                    );
+                addLastBreadCrumb(_clean_key);
             });
 
         }
@@ -1320,7 +1317,7 @@ namespace ProstePrototype
                         type += "_outputs";
                     }
                     break;
-                case true when type.StartsWith("NO_LOOP") || elementType == "SIMPO_TTELOOP": type = "loop_devices"; break;
+                case true when type.StartsWith("NO_LOOP") || elementType.StartsWith("NO_LOOP") || elementType == "SIMPO_TTELOOP": type = "loop_devices"; break;
                 case true when elementType.StartsWith("Natron"): type = "natron_none"; break;
                 default: type = "iris_peripheral_devices_elements"; break;
             }
@@ -1329,22 +1326,21 @@ namespace ProstePrototype
                 elementType.Split("_")[0].ToLower(), // in order to get the directory source to define the color type
                 pages[type].Value<JObject>()["breadcrumbs"].Value<JArray>() // takes the respective pages ["breadcrumbs"]
                 );
-            addLastBreadCrumb(
-                elementType.Split("_")[0].ToLower(), // get the directory source to define the color type
-                type
-                );
+            addLastBreadCrumb(type);
         }
 
-        private void addLastBreadCrumb(string panel_type, string page)
+        private void addLastBreadCrumb(string page)
         {
             string color = "Blue";
+            string panel_type = cJson.CurrentPanelType ?? ""; // (jnode["@PRODUCTNAME"] != null) ? (string)jnode["@PRODUCTNAME"] : "";
             if (panel_type == null) panel_type = "";
+            string panel_full_type = cJson.CurrentPanelFullType;
             if (panel_type.ToLower().StartsWith("iris") || panel_type.ToLower().StartsWith("simpo") || 
                 page.ToLower().StartsWith("simpo") || page.ToLower().StartsWith("iris") || page.ToLower().StartsWith("natron")) color = "Red";
             else if (panel_type.ToLower().StartsWith("tte")) color = "LightGreen";
 
             string currPage = page;
-            if (page == "iris" && panel_type.ToLower().StartsWith("simpo")) // unique case when page === "iris"
+            if (page == "iris" && panel_full_type.ToLower().StartsWith("simpo")) // unique case when page === "iris"
             {
                 currPage = "simpo";
             }

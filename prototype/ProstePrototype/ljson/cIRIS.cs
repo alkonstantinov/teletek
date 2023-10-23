@@ -320,6 +320,8 @@ namespace ljson
             f1["BRIGHTNESS"] = o["BRIGHTNESS"];
             f1["AUTOLOGOFF"] = o["AUTOLOGOFF"];
             f1["LOGOFFENABLED"] = o["LOGOFFENABLED"];
+            f1["PRINTER"] = o["PRINTER"];
+            f1["PAPER"] = o["PAPER"];
             grp1["fields"] = f1;
             json["iris"]["PROPERTIES"]["Groups"]["PanelSettings"] = grp1;
             //
