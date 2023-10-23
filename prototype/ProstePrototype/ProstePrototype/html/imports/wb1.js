@@ -94,7 +94,9 @@ function receiveMessageWPF(jsonTxt) {
             document.body.style.backgroundColor = "#E6ECF4";
             body = document.getElementById('divDevices');
             const devicesPerType = json["pageName"]["wb2"];
-            Object.keys(devicesPerType).forEach(deviceType => {
+
+            for (deviceType in devicesPerType) { 
+                if (deviceType === 'guard') continue; // case without Eclipse - for delivering without Eclipse 
                 let divD = document.createElement('div');
                 divD.classList = "row m-2 g10 no-gutter border-top";
                 let h4 = document.createElement('h4');
@@ -106,7 +108,7 @@ function receiveMessageWPF(jsonTxt) {
                     addButton(divD, i, devices[i]);
                     body.appendChild(divD);
                 }
-            });
+            }            
             break;
         case !!document.getElementById("divPDevices"):
 
@@ -191,8 +193,7 @@ const addButton = (div, index, localJSON = {}) => {
     let indexFlag = Object.keys(localJSON).length > 0;
     // button color definition
     let color = indexFlag ? localJSON.deviceType : "normal";
-    //if (color === 'guard') color = 'normal'; // options for color: "normal", "fire", "grasse"
-    if (color === 'guard') return; // case without Eclipse - for delivering without Eclipse 
+    if (color === 'guard') color = 'normal'; // options for color: "normal", "fire", "grasse"
 
     // clean all digits from used deviceType
     let key;
@@ -202,6 +203,11 @@ const addButton = (div, index, localJSON = {}) => {
         default: key = 'eclipse';
     }
 
+    // define schema from title if it is not existing
+    const pattern = /[A-Z0-9]{3,}/;
+    if (!localJSON.schema) {
+        localJSON.schema = pattern.exec(localJSON.title.trim())[0].toLowerCase();
+    }
     title = localJSON.schema.toUpperCase();
     // title definition
     const titleTranslated = localJSON.title;
@@ -284,12 +290,12 @@ const panelCreationHandler = (color, panelItem, jsonAtLevel) => {
 
 const addAccordeonButton = (title, page, ul_element) => {
     // clean all digits from used schema
-    console.log(title)
+    //console.log(title)
     let key = page.toLowerCase().trim().replaceAll(' ', '_').replace(/[0-9]/g, '');
     
     // title definition
     var titleTranslated = newT.t(localStorage.getItem('lang'), title.trim().replaceAll(" ", "_").toLowerCase().replace(/[/*.?!#]/g, ''));
-    console.log(titleTranslated, key, CONFIG_CONST)
+    //console.log(titleTranslated, key, CONFIG_CONST)
     let el = `<li class="ram_list_group_item" onclick="javascript:sendMessageWPF({'Command': 'LoadPage','Params': '${page}'}); addActive()" id="${page}">
                    <div class="ram_list_item_content">
                        <i class="${CONFIG_CONST[key].picture.startsWith("fa-") ? "fa-solid" : "ram_icon"} ${CONFIG_CONST[key].picture}"></i>
@@ -467,7 +473,7 @@ function toggleDarkMode(show, filename) {
     }
     else {
         let ss = document.getElementById(darkModeStylesheetId);
-        ss.parentNode.removeChild(ss);
+        if (ss) ss.parentNode.removeChild(ss);
     }
 }
 

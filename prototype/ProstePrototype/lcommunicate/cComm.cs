@@ -1389,6 +1389,8 @@ namespace lcommunicate
                 return "SIMPO";
             if (Regex.IsMatch(_dev.ProductName, @"REPEATER\s+?TFT", RegexOptions.IgnoreCase))
                 return "TFT_REPEATER";
+            Match m = Regex.Match(_dev.ProductName.Trim(), @"^(iris\d*)", RegexOptions.IgnoreCase);
+            if (m.Success) return m.Groups[1].Value.ToLower();
             return "";
         }
         private static List<JObject> SystemsFound(Dictionary<string, HidDevice> hid)

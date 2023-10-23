@@ -873,7 +873,7 @@ function showMimicOutputs(elementType, elementNumber) {
                 let returnedJson = JSON.parse(res);
 
                 if (!Array.isArray(returnedJson)) {
-                    alert(newT.t(localStorage.getItem('lang'), 'error_happened') + ": showMimicOutputs Array is not an array");
+                    alert(newT.t(localStorage.getItem('lang'), 'error_happened') + ': showMimicOutputs Array is not an array');
                     return;
                 }
 
@@ -920,7 +920,7 @@ async function showMimicout(id, params) {
         
         returnedJson = returnedJson.find(json => json["~address"] === id);
         if (!returnedJson) {
-            alert(newT.t(localStorage.getItem('lang'), 'error_happened') + " in showMimicout getLoopDevices");
+            alert(newT.t(localStorage.getItem('lang'), 'error_happened') + ' in showMimicout getLoopDevices');
             return;
         }
         
@@ -1343,7 +1343,7 @@ function toggleDarkMode(show, filename) {
     }
     else {
         let ss = document.getElementById(darkModeStylesheetId);
-        ss.parentNode.removeChild(ss);
+        if (ss) ss.parentNode.removeChild(ss);
     }
 }
 //#endregion
@@ -2090,7 +2090,7 @@ async function showElement(id, elementType) {
         let result = await boundAsync.getJsonForElement(elementType, +id, fieldName); // ret for test////////////////////////////////////////////////////////////////
         returnedJson = JSON.parse(result);
         if (!returnedJson) {
-            alert(newT.t(localStorage.getItem('lang'), 'error_happened') +': empty object from showElement getJsonForElement ' + elementType));
+            alert(newT.t(localStorage.getItem('lang'), 'error_happened') + ': empty object from showElement getJsonForElement ' + elementType);
             return;
         }
         if (Object.keys(returnedJson).length > 0) {
