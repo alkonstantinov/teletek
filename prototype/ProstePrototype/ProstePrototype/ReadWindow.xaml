@@ -95,7 +95,7 @@
                                             <Setter TargetName="bd" Property="BorderBrush" Value="#0064ff"/>
                                             <Setter TargetName="bd" Property="BorderThickness" Value="3"/>
                                             <Setter Property="Foreground" Value="Black"/>
-                                        </Trigger>
+                                        </Trigger>                                        
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>

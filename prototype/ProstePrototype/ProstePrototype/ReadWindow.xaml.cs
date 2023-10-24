@@ -15,6 +15,7 @@ namespace ProstePrototype
     {
         public int selectedIndex = 3;
         public int prevIndex = 3;
+        public string clickedName = "";
 
         public bool DarkMode { get; set; }
         public UserControl1 uc0 { get; set; }
@@ -37,6 +38,7 @@ namespace ProstePrototype
             img3.Source = imgsource;
             ContentArea.Content = uc3;
             Button3.Focus();
+            clickedName = Button3.Name;
         }
         public ReadWindow(int startidx)
         {
@@ -54,6 +56,7 @@ namespace ProstePrototype
                 tcp_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc0;
                 Button0.Focus();
+                clickedName = Button0.Name;
             }
             else if (startidx == 1)
             {
@@ -61,6 +64,7 @@ namespace ProstePrototype
                 usb_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc1;
                 Button1.Focus();
+                clickedName = Button1.Name;
             }
             else if (startidx == 2)
             {
@@ -68,6 +72,7 @@ namespace ProstePrototype
                 rs232_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc2;
                 Button2.Focus();
+                clickedName = Button2.Name;
             }
             else if (startidx == 3)
             {
@@ -75,6 +80,7 @@ namespace ProstePrototype
                 img3.Source = imgsource;
                 ContentArea.Content = uc3;
                 Button3.Focus();
+                clickedName = Button3.Name;
             }
         }
         private void ReadWindow_KeyDown(object sender, KeyEventArgs e)
@@ -137,6 +143,7 @@ namespace ProstePrototype
             uc0.Resources = Application.Current.Resources;
             tcp_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc0;
+            clickedName = Button0.Name;
         }
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
@@ -145,6 +152,7 @@ namespace ProstePrototype
             uc1.Resources = Application.Current.Resources;
             usb_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc1;
+            clickedName = Button1.Name;
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
@@ -153,6 +161,7 @@ namespace ProstePrototype
             uc2.Resources = Application.Current.Resources;
             rs232_icon.Foreground = defaultColorBrush;
             ContentArea.Content = uc2;
+            clickedName = Button2.Name;
         }
         
         private void Button3_Click(object sender, RoutedEventArgs e)
@@ -162,6 +171,7 @@ namespace ProstePrototype
             uc3.Resources = Application.Current.Resources;
             img3.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
             ContentArea.Content = uc3;
+            clickedName = Button3.Name;
         }
 
         private void ChangeSelectedIndex(short index)
@@ -226,7 +236,7 @@ namespace ProstePrototype
                 if (imageName != null)
                 {
                     var image = button.FindName(imageName) as TextBlock;
-                    if (image != null && !button.IsFocused)
+                    if (image != null && button.Name != clickedName)
                     {
                         image.Foreground = grayColorBrush;
                         button.Foreground = grayColorBrush;

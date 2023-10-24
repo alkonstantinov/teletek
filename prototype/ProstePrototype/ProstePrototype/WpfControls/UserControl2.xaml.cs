@@ -42,14 +42,26 @@ namespace ProstePrototype
                 listBox.Items.Add(item);
             }
 
+
             // Check if there is at least one item in the ListBox
             if (listBox.Items.Count > 0)
             {
-                // Select the first item
                 listBox.SelectedIndex = 0;
             }
 
+            this.Loaded += Window_Activated;
         }
+
+        private void Window_Activated(object sender, RoutedEventArgs e)
+        {
+            // Check if there is at least one item in the ListBox
+            if (listBox.Items.Count > 0) {
+                listBox.Focus();
+                listBox.SelectedIndex = 0;
+                ((ListBoxItem)listBox.SelectedItem).Focus();
+            }
+        }
+
         public object USBDevice
         {
             get
