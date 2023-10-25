@@ -163,6 +163,8 @@
         Delete: { 'en': 'Delete', 'bg': 'Изтриване' },
         Write: { 'en': 'Write', 'bg': 'Запис' },
         Update: { 'en': 'Firmware update', 'bg': 'Обновяване' },
+        updateMsg: { 'en': 'Update Warning', 'bg': 'Предупреждение - обновяване' },
+        updateFound: { 'en': 'An update for Teletek Manager has been found. Proceed?', 'bg': 'Налично е обновяване за Teletek Manager. Стартиране?' },
         Verify: { 'en': 'Verify', 'bg': 'Проверка на валидност' },
         Help: { 'en': 'Help', 'bg': 'Помощ' },
         logout: { 'bg': 'Изход' },

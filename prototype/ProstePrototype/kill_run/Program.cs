@@ -137,8 +137,8 @@ namespace kill_run
             }
             Console.WriteLine("Ok");
             //
-            Console.WriteLine("Press Enter to continue!");
-            Console.ReadLine();
+            //Console.WriteLine("Press Enter to continue!");
+            //Console.ReadLine();
             Process.Start(exePath);
         }
     }

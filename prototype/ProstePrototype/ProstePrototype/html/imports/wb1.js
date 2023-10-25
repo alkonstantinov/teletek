@@ -93,7 +93,8 @@ function receiveMessageWPF(jsonTxt) {
             /* case index-page */
             document.body.style.backgroundColor = "#E6ECF4";
             body = document.getElementById('divDevices');
-            const devicesPerType = json["pageName"]["wb2"];
+            //const devicesPerType = json["pageName"]["wb2"];
+            const devicesPerType = json;
 
             for (deviceType in devicesPerType) { 
                 if (deviceType === 'guard') continue; // case without Eclipse - for delivering without Eclipse 
@@ -160,7 +161,7 @@ function receiveMessageWPF(jsonTxt) {
                     default: break;
                 }
                 let panelName = json["~panel_name"]; // [0].toUpperCase() + json["~panel_name"].slice(1).toLowerCase();
-                          
+                                          
                 // 2. create the new panel-item
                 let panelItem = document.createElement('div');
                 panelItem.classList.add("accordion-item", color);
@@ -210,7 +211,8 @@ const addButton = (div, index, localJSON = {}) => {
     }
     title = localJSON.schema.toUpperCase();
     // title definition
-    const titleTranslated = localJSON.title;
+    const titleTranslated = DEVICES_CONSTS[title].sign;
+    localJSON.title = titleTranslated;
     let img = DEVICES_CONSTS[title]?.im ? `<img src="${DEVICES_CONSTS[title].im}" alt="${DEVICES_CONSTS[title].sign}">` : `<i class="ram_icon ${CONFIG_CONST[key].picture}"></i>`
     let localJSONString = JSON.stringify(localJSON).replaceAll("\"", "'");
     let el = `<a href="javascript: showBackDrop(); sendMessageWPF({'Command': 'NewSystem','Params': ${localJSONString}})" onclick="javascript: addActive();" class="col-sm-3 minw" id="${index}_${localJSON.schema}">

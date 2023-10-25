@@ -868,6 +868,10 @@ namespace ljson
                     b.CopyTo(bcmdres, bidx);
                     bidx += b.Length;
                 }
+                if (idx > 56)
+                {
+                    bidx = bidx;
+                }
                 string devtype = Regex.Replace(nonekey, @"/[\w\W]*$", "");
                 JObject devbytype = null;
                 if (devtypes[devtype] != null)
@@ -1032,7 +1036,7 @@ namespace ljson
                         byte btype = didx[idx][typeidx];
                         string devname = null;
                         if (!Regex.IsMatch(none_element, @"^SIMPO_") || Regex.IsMatch(loopkey, "loop", RegexOptions.IgnoreCase))
-                            devname = devtypes[btype.ToString()].ToString();
+                            devname = (devtypes[btype.ToString()] != null) ? devtypes[btype.ToString()].ToString() : none_element;
                         else
                             devname = none_element;
                         el["~device"] = devname;

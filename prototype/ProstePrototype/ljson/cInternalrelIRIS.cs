@@ -1462,9 +1462,11 @@ namespace ljson
                         sval += ((sval != "") ? "," : "") + val[i].ToString();
                     return new Tuple<string, string>(path, sval);
                 }
-                sval = val[0].ToString() + val[1].ToString();
+                if (val != null && val.Length >= 2)
+                    sval = val[0].ToString() + val[1].ToString();
             }
             //
+            if (sval == null) sval = "";
             return new Tuple<string, string>(path, sval);
         }
         public override bool AddSerialDevice(string key, JObject node, byte[] val, byte address, Dictionary<string, cRWProperty> read_props)

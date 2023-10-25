@@ -79,7 +79,13 @@
 			<PROPERTY TYPE="LIST" ID="Evac_protocol" SIZE="1" TEXT="EVAC Protocol" LNGID="866259d0-f76b-4200-bbe9-9cd3ad6c4e71">
 				<ITEMS>
 					<ITEM NAME="Teletek" VALUE="0" LNGID="337e2803-3763-3f0a-3be9-3373ee320ee3" />
-					<ITEM NAME="Paso" VALUE="8" LNGID="866259d0-3763-4200-3be9-dbd626a04461" />
+					<ITEM NAME="Paso" VALUE="1" LNGID="866259d0-3763-4200-3be9-dbd626a04461" />
+				</ITEMS>
+			</PROPERTY>
+			<PROPERTY TYPE="HIDDEN" ID="BOSEC_EN_DIS" SIZE="1" TEXT="Lines Quality Monitoring" LNGID="12345678-5958-4200-b9a7-9cd3ad6c4e71">
+				<ITEMS>
+					<ITEM NAME="Disabled" VALUE="0" LNGID="866259d0-5958-4200-b9a7-9cd3ad6c4e71"/>
+					<ITEM NAME="Enabled" VALUE="1" LNGID="037e2800-f76b-4f0a-bbe9-0373ee320ee6"  />
 				</ITEMS>
 			</PROPERTY>
 			<!-- SOUNDERS MODE -->

@@ -86,7 +86,7 @@ namespace ProstePrototype
             //tempLeft = Left;
             //tempTop = Top;
             #endregion
-            Uri iconUri = new Uri("pack://application:,,,/ProstePrototype;component/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
+            Uri iconUri = new Uri("pack://application:,,,/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
             //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
@@ -123,7 +123,15 @@ namespace ProstePrototype
             if (shouldLaunchAutoUpdate && lupd.cUpd.Check4Updates(common.settings.updpath))
             {
                 Welcome w = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
-                //w.RunUpdate();
+                if (
+                    MessageBox.Show(MakeTranslation("updateFound"),
+                        MakeTranslation("updateMsg"),
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes
+                    )
+                {
+                    w.RunUpdate();
+                }
             }
 
             string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
@@ -394,7 +402,7 @@ namespace ProstePrototype
             wb2.ExecuteScriptAsyncWhenPageLoaded(script);
         }
 
-        private string MakeTranslation(string keyword) 
+        public string MakeTranslation(string keyword) 
         {
             JObject translationsJSON = JObject.Parse(Properties.Settings.Default.translations);
             if (translationsJSON is null) return "Error attaching translations object";
@@ -425,6 +433,7 @@ namespace ProstePrototype
                 case "NewSystem":
                     //JObject panel = cJson.AddPanel(json["Params"]["schema"].ToString());
                     JObject panel = cJson.AddPanel((JObject)json["Params"]);
+                    cJson.RenamePanel(cJson.CurrentPanelID.ToString(), json["Params"]["title"].Value<string>());
                     LoadPage(json["Params"]["schema"].Value<string>(), null);
                     loadWb1 = false;
                     break;
@@ -771,7 +780,14 @@ namespace ProstePrototype
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
             //rw = new ReadWindow(0); // for delivery to Teletek not mandatory
-            rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
+            string panelType = cJson.CurrentPanelFullType;
+            if (panelType == "natron")
+            {
+                rw = new ReadWindow(2);
+            } else
+            {
+                rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
+            }
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
@@ -1147,12 +1163,12 @@ namespace ProstePrototype
 
             this.Dispatcher.Invoke(() =>
             {
-                JObject jparam = new JObject();
-                jparam["pageName"] = new JObject();
+                //JObject jparam = new JObject();
+                //jparam["pageName"] = new JObject();
                 JToken arr = lcommunicate.cComm.Scan();
-                jparam["pageName"]["wb2"] = arr;
-                ((BrowserParams)wb2.Tag).Params = jparam.ToString();
-                //((BrowserParams)wb2.Tag).Params = $@"{{ ""pageName"": ""wb2: {index}"" }}";rw.Resources
+                //jparam["pageName"]["wb2"] = arr;
+                //((BrowserParams)wb2.Tag).Params = jparam.ToString();
+                ((BrowserParams)wb2.Tag).Params = arr.ToString();
             });
             wb2.Load("file:///" + myFile);
             //wb1.

@@ -142,7 +142,7 @@ namespace lcommunicate
                         FillElements((JArray)t["ELEMENTS"]["ELEMENT"], af);
                     }
                 }
-                else
+                else if (t["ELEMENTS"] != null)
                     FillZElements((JArray)t["ELEMENTS"]["ELEMENT"]);
             }
         }
@@ -215,7 +215,7 @@ namespace lcommunicate
                             res[cmd] += "00";
                             next_start++;
                         }
-                        next_start += Convert.ToByte(tprop["@LENGTH"].ToString());
+                        next_start += (tprop["@LENGTH"] != null) ? Convert.ToByte(tprop["@LENGTH"].ToString()) : (byte)1;
                         if (isSimpo && tprop["@ID"] != null)
                         {
                             string pval = tprop["~values"].ToString();

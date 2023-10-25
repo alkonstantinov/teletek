@@ -1404,6 +1404,7 @@ namespace common
         private string DoReplacements_Write(string xml)
         {
             string res = xml;
+            if (res == null) return xml;
             Dictionary<string, string> drepl = settings.write_replacements;
             foreach (string smatch in drepl.Keys)
                 res = Regex.Replace(res, smatch, drepl[smatch], RegexOptions.IgnoreCase);
