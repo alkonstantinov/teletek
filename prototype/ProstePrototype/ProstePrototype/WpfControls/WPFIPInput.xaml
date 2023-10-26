@@ -15,7 +15,7 @@
             Background="White"
             CornerRadius="2"
             Width="{Binding Width}"
-            MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event">
+            MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event" LostFocus="Element_LostFocus">
         <Border.Resources>
             <Style TargetType="Border">
                 <Setter Property="Border.Effect">
@@ -37,7 +37,7 @@
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" x:Name="lbHost" Text="{Binding Label}" Margin="6,0,-4,0" IsReadOnly="True"
                      Foreground="Gray" FontFamily="{StaticResource poppins_demibold}" FontSize="{Binding LabelFontSize}" FontWeight="DemiBold" 
-                     BorderThickness="0" Background="Transparent" MouseEnter="MouseEnter_Event" MouseLeave="MouseLeave_Event"/>
+                     BorderThickness="0" Background="Transparent" MouseEnter="MouseEnter_Event" />
             <Border Grid.Row="1"
                     BorderBrush="Gray"
                     BorderThickness="0.2"
@@ -72,39 +72,39 @@
                              VerticalContentAlignment="Center" BorderThickness="0" Foreground="Gray"
                              Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=1}"/>
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"/>
+                    <!--Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=1}"/>-->
 
                     <TextBox Grid.Column="1" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
                              BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
-                    <TextBox x:Name="SecondSegment" Grid.Column="2" TextAlignment="Center" MaxLength="3" 
+                        <TextBox x:Name="SecondSegment" Grid.Column="2" TextAlignment="Center" MaxLength="3" 
                              BorderThickness="0" VerticalContentAlignment="Center" Foreground="Gray"
                              Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=2}" />
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"/>
+                        <!--Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=2}" />-->
                     <TextBox Grid.Column="3" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
                              BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
-                    <TextBox x:Name="ThirdSegment" Grid.Column="4" TextAlignment="Center" MaxLength="3" 
+                            <TextBox x:Name="ThirdSegment" Grid.Column="4" TextAlignment="Center" MaxLength="3" 
                              BorderThickness="0" VerticalContentAlignment="Center" Foreground="Gray"
                              Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=3}" />
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"/>
+                            <!--Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=3}" />-->
                     <TextBox Grid.Column="5" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" 
                              BorderThickness="0" VerticalContentAlignment="Center" Background="Transparent"
                              IsReadOnlyCaretVisible="False" Padding="2" FontSize="12"/>
 
-                    <TextBox x:Name="LastSegment" Grid.Column="6" TextAlignment="Center" MaxLength="3" 
+                                <TextBox x:Name="LastSegment" Grid.Column="6" TextAlignment="Center" MaxLength="3" 
                              BorderThickness="0" VerticalContentAlignment="Center" Foreground="Gray"
                              Padding="2" FontSize="12" Background="Transparent" FontFamily="{StaticResource poppins_regular}"
                              TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" 
-                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"
-                             Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=4}"/>
+                             DataObject.Pasting="DataObject_OnPasting" GotFocus="UIElement_GotFocus" LostFocus="UIElement_LostFocus"/>
+                                <!--Text="{Binding Address, Converter={StaticResource SegmentConverter}, ConverterParameter=4}"/>-->
                 </Grid>
             </Border>
         </Grid>

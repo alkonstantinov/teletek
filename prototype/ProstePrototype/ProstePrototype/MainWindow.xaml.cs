@@ -75,6 +75,8 @@ namespace ProstePrototype
                 string root = System.IO.Directory.GetDirectoryRoot(applicationDirectory);
             }
             
+            Directory.SetCurrentDirectory(applicationDirectory);
+
             InitializeComponent();
 
             //MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth; // not to cover the taskBar
@@ -89,15 +91,6 @@ namespace ProstePrototype
             Uri iconUri = new Uri("pack://application:,,,/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
-            //string firstFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-            //string myFile = System.IO.Path.Combine(applicationDirectory, "html", "index.html");
-
-            //// binding Column1 and wb1 Width trial
-            //Binding binding = new Binding("Width");
-            //binding.Source = Column1.DataContext;
-            //wb1.SetBinding(DataGridColumn.WidthProperty, binding);
-
-            //wb0.Load("file:///" + navigation);
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
 
             DataContext = this;
@@ -908,10 +901,11 @@ namespace ProstePrototype
             if (readOrWrite == "Read")
             {
                 wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
-            } else
-            {
-                wb2.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
             }
+            //else
+            //{
+            //    wb2.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
+            //}
         }
 
         private bool VersionDiff(string panel_version, string xml_version)
@@ -1190,11 +1184,15 @@ namespace ProstePrototype
 
         private void Write_Clicked(object sender, RoutedEventArgs e)
         {
-            //Duration duration = new Duration(TimeSpan.FromSeconds(2));
-            //DoubleAnimation doubleanimation = new DoubleAnimation(100.00, 0, duration); // progressBar1.Value + 10
-            //progressBar1.BeginAnimation(ProgressBar.ValueProperty, doubleanimation);
-            //progressBar1.FlowDirection = FlowDirection.RightToLeft;
-            rw = new ReadWindow(0);
+            string panelType = cJson.CurrentPanelFullType;
+            if (panelType == "natron")
+            {
+                rw = new ReadWindow(2, MakeTranslation("ScanMenuHeaderW"));
+            }
+            else
+            {
+                rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex, MakeTranslation("ScanMenuHeaderW")); // default 
+            }
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;

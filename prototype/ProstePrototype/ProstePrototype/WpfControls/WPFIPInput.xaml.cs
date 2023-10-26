@@ -20,13 +20,13 @@ namespace ProstePrototype.WpfControls
     {
         public event EventHandler AddressChanged;
 
-        private static readonly List<Key> DigitKeys = new List<Key> { 
+        private static readonly HashSet<Key> DigitKeys = new HashSet<Key> { 
             Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, 
             Key.NumPad0, Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9
         };
-        private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
-        private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
-        private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
+        private static readonly HashSet<Key> MoveForwardKeys = new HashSet<Key> { Key.Right };
+        private static readonly HashSet<Key> MoveBackwardKeys = new HashSet<Key> { Key.Left };
+        private static readonly HashSet<Key> OtherAllowedKeys = new HashSet<Key> { Key.Tab, Key.Delete };
 
         private readonly List<TextBox> _segments = new List<TextBox>();
         private bool _suppressAddressUpdate = false;
@@ -108,6 +108,17 @@ namespace ProstePrototype.WpfControls
             }
         }
 
+        private void Element_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!FirstSegment.IsFocused && !SecondSegment.IsFocused && !ThirdSegment.IsFocused && !LastSegment.IsFocused)
+            {
+                if (!_suppressAddressUpdate)
+                {
+                    Address = string.Format("{0}.{1}.{2}.{3}", (FirstSegment != null) ? FirstSegment.Text : "0", (SecondSegment != null) ? SecondSegment.Text : "0", (ThirdSegment != null) ? ThirdSegment.Text : "0", (LastSegment != null) ? LastSegment.Text : "0");
+                }
+            }
+        }
+
         private void UIElement_GotFocus(object sender, RoutedEventArgs e)
         {
             lbHost.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
@@ -126,19 +137,19 @@ namespace ProstePrototype.WpfControls
 
         private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            var currentTextBox = (TextBox)sender;
+            TextBox currentTextBox = (TextBox)sender;
             if (DigitKeys.Contains(e.Key))
             {
                 e.Handled = ShouldCancelDigitKeyPress(currentTextBox);
                 if (e.Handled == true) MoveFocusToNextSegment(currentTextBox); // HandleDigitPress(currentTextBox); // left ofr validation logic?
             }
-            else if (MoveBackwardKeys.Contains(e.Key))
+            else if (e.Key == Key.Left) // MoveBackwardKeys
             {
                 e.Handled = ShouldCancelBackwardKeyPress(currentTextBox);
                 if (e.Handled == true && currentTextBox.SelectedText.Length == 0) 
                     MoveFocusToPreviousSegment(currentTextBox); // HandleBackwardKeyPress(currentTextBox);
             }
-            else if (MoveForwardKeys.Contains(e.Key))
+            else if (e.Key == Key.Right) // MoveForwardKeys
             {
                 e.Handled = ShouldCancelForwardKeyPress(currentTextBox);
                 HandleForwardKeyPress(currentTextBox);
@@ -186,12 +197,12 @@ namespace ProstePrototype.WpfControls
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_suppressAddressUpdate)
-            {
-                Address = string.Format("{0}.{1}.{2}.{3}", (FirstSegment != null) ? FirstSegment.Text : "0", (SecondSegment != null) ? SecondSegment.Text : "0", (ThirdSegment != null) ? ThirdSegment.Text : "0", (LastSegment != null) ? LastSegment.Text : "0");
-            }
+            //if (!_suppressAddressUpdate)
+            //{
+            //    Address = string.Format("{0}.{1}.{2}.{3}", (FirstSegment != null) ? FirstSegment.Text : "0", (SecondSegment != null) ? SecondSegment.Text : "0", (ThirdSegment != null) ? ThirdSegment.Text : "0", (LastSegment != null) ? LastSegment.Text : "0");
+            //}
 
-            var currentTextBox = sender as TextBox;
+            TextBox currentTextBox = sender as TextBox;
 
             if (currentTextBox != null && currentTextBox.Text.Length == 3 && currentTextBox.CaretIndex == 3)
             {

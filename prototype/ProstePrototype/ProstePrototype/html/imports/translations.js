@@ -138,6 +138,7 @@
         MenuClose: { 'en': 'Close', 'bg': 'Изход' },
         MenuCode: { 'en': 'Code', 'bg': 'Код' },
         ScanMenuHeader: { 'en': 'Read from device', 'bg': 'Четене от устройството чрез' },
+        ScanMenuHeaderW: { 'en': 'Write to device', 'bg': 'Запис към устройството чрез' },
         ScanMenuTCP: { 'en': 'TCP', 'bg': 'TCP' },
         ScanMenuHostIp: { 'en': 'Host IP', 'bg': 'Host IP' },
         ScanMenuPort: { 'en': 'Port', 'bg': 'Port' },

@@ -1281,7 +1281,7 @@ namespace lcommunicate
             foreach (HidDevice _dev in _devs)
             {
                 if (Regex.IsMatch(_dev.Manufacturer, "teletek", RegexOptions.IgnoreCase) && !res.ContainsKey(_dev.ToString()))
-                    res.Add(_dev.ToString(), _dev);
+                    res.Add(_dev.ProductName, _dev);
                 else
                 {
                     string product = HidFound(HIDs, _dev);

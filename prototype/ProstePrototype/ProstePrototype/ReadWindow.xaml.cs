@@ -40,11 +40,15 @@ namespace ProstePrototype
             Button3.Focus();
             clickedName = Button3.Name;
         }
-        public ReadWindow(int startidx)
+        public ReadWindow(int startidx, string topSign = "Read")
         {
             InitializeComponent();
             KeyDown += ReadWindow_KeyDown;
             this.DataContext = this;
+            if (topSign != "Read")
+            {
+                txtBlk.Text = topSign;
+            }
             uc0 = new UserControl1();
             uc1 = new UserControl2();
             uc2 = new UserControl3();
@@ -96,7 +100,7 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 this.DialogResult = false;
-                this.Hide();
+                this.Close();
             });
         }
 
@@ -105,7 +109,7 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 this.DialogResult = true;
-                this.Hide();
+                this.Close();
             });
         }
         
