@@ -391,6 +391,10 @@
             "en": "Battery,%",
             "bg": "Батерия,%",
         },
+        USBError : {
+            "en": "USB connection lost",
+            "bg": "Загубена е USB връзката",
+        },
         ReadingError: { 
             "en": "Reading Error - unable to read values from",
             "bg": "Грешка при четене - невъзможно четенето на стойности от",

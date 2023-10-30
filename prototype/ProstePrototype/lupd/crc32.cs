@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.ComponentModel.DataAnnotations;
 using System.IO.Compression;
+using System.Security.Cryptography;
 using common;
 
 namespace lupd
@@ -62,6 +63,15 @@ namespace lupd
             }
             return res ^ 0xffffffff;
         }
+        private static string sha256(string file)
+        {
+            byte[] bfile = File.ReadAllBytes(file);
+            SHA256 sha = SHA256.Create();
+            byte[] bsha = sha.ComputeHash(bfile);
+            string s = "";
+            for (int i = 0;i <  bsha.Length;i++) { s += bsha[i].ToString("X2"); }
+            return s;
+        }
         private static byte[] buff = new byte[4096];
         public static uint Hash(string file)
         {
@@ -105,7 +115,7 @@ namespace lupd
                 if (crcprocess != null) crcprocess(file);
                 try
                 {
-                    res[key]["crc"] = Hash(file).ToString("X8").ToLower();
+                    res[key]["crc"] = sha256(file);// Hash(file).ToString("X8").ToLower();
                 }
                 catch {
                     if (!keys4del.ContainsKey(key)) keys4del.Add(key, null);

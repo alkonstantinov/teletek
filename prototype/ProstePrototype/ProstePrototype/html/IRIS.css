@@ -1321,7 +1321,8 @@ input:checked + .slider:before {
     background-color: var(--grasse-hov);
 }
 .fire input:checked + .slider:not(.fire):before {
-    background-color: var(--fire);
+    background-color: var(--grasse-hov);
+    /*background-color: var(--fire);*/
 }
 
 .grasse input:checked + .slider:before {

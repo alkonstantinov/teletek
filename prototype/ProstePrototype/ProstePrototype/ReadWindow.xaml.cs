@@ -1,4 +1,8 @@
-﻿using System;
+﻿using HidSharp;
+using lcommunicate;
+using ljson;
+using System;
+using System.Collections.Generic;
 using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,10 +22,10 @@ namespace ProstePrototype
         public string clickedName = "";
 
         public bool DarkMode { get; set; }
-        public UserControl1 uc0 { get; set; }
-        public UserControl2 uc1 { get; set; }
-        public UserControl3 uc2 { get; set; }
-        public UserControl uc3 { get; set; }
+        public UserControl1 uc0 { get; set; } = new UserControl1();
+        public UserControl2 uc1 { get; set; } = new UserControl2();
+        public UserControl3 uc2 { get; set; } = new UserControl3();
+        public UserControl uc3 { get; set; } = new UserControl();
         public BitmapImage imgsource = new BitmapImage(new Uri("pack://application:,,,/Images/01.IRIS.ico")); //@" / Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
         private SolidColorBrush defaultColorBrush = (SolidColorBrush)App.Current.FindResource("DefaultColor");
         private SolidColorBrush grayColorBrush = (SolidColorBrush)App.Current.FindResource("GrayColor");
@@ -30,10 +34,6 @@ namespace ProstePrototype
             InitializeComponent();
             KeyDown += ReadWindow_KeyDown;
             this.DataContext = this;
-            uc0 = new UserControl1();
-            uc1 = new UserControl2();
-            uc2 = new UserControl3();
-            uc3 = new UserControl();
             uc3.Resources = Application.Current.Resources;
             img3.Source = imgsource;
             ContentArea.Content = uc3;
@@ -49,10 +49,36 @@ namespace ProstePrototype
             {
                 txtBlk.Text = topSign;
             }
-            uc0 = new UserControl1();
-            uc1 = new UserControl2();
-            uc2 = new UserControl3();
-            uc3 = new UserControl();
+            string panelType = cJson.CurrentPanelFullType;
+            if (panelType == "natron")
+            {
+                startidx = 2;
+                Button0.Visibility = Visibility.Collapsed;
+                Button1.Visibility = Visibility.Collapsed;
+            } else  
+            {
+                Button2.Visibility = Visibility.Collapsed;
+                if (panelType == "simpo")
+                {
+                    Button0.Visibility = Visibility.Collapsed;
+                }
+                Dictionary<string, HidDevice> devices = cComm.ScanHID();
+                if (devices.Count == 0)
+                {
+                    if (startidx == 1 && panelType != "simpo")
+                    {
+                        startidx = 0;
+                        Button1.Visibility = Visibility.Collapsed;
+                    } else if (startidx == 1 && panelType == "simpo")
+                    {                        
+                        this.Close();
+                    } else
+                    {
+                        Button1.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+
             selectedIndex = startidx;
             if (startidx == 0)
             {
@@ -60,7 +86,7 @@ namespace ProstePrototype
                 tcp_icon.Foreground = defaultColorBrush;
                 ContentArea.Content = uc0;
                 Button0.Focus();
-                clickedName = Button0.Name;
+                clickedName = Button0.Name;                
             }
             else if (startidx == 1)
             {

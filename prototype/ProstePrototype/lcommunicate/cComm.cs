@@ -53,6 +53,18 @@ namespace lcommunicate
         internal virtual byte[] SendCommand(object _connection, string _command) { return null; }
         internal virtual byte[] SendCommand(byte[] _command) { return null; }
         internal virtual byte[] SendCommand(string _command) { return null; }
+        private int _sleep_after_write_milliseconds = 0;
+        public int SleepAfterWriteMilliseconds
+        {
+            get
+            {
+                return _sleep_after_write_milliseconds;
+            }
+            set
+            {
+                _sleep_after_write_milliseconds = value;
+            }
+        }
     }
     public class cComm
     {
@@ -951,7 +963,7 @@ namespace lcommunicate
             object conn = t.Connect(new cCOMParams(p.COMName, p.rate));
             return t;
         }
-        public static cTransport ConnectBase(object conn_params, string panel_type)
+        public static cTransport ConnectBase(object conn_params, string panel_type, string panel_name)
         {
             cTransport conn = null;
             if (conn_params is cIPParams)
@@ -965,10 +977,13 @@ namespace lcommunicate
             else if (conn_params is cCOMParams)
                 conn = cComm.ConnectCOM((cCOMParams)conn_params);
             if (conn != null)
+            {
                 conn._panel_type = panel_type;
+                conn.SleepAfterWriteMilliseconds = settings.Sleep(panel_name);
+            }
             return conn;
         }
-        public static cTransport ConnectBaseCached(object conn_params, string panel_type, object _cache)
+        public static cTransport ConnectBaseCached(object conn_params, string panel_type, string _panel_name, object _cache)
         {
             cTransport conn = null;
             if (conn_params is cIPParams)
@@ -982,6 +997,7 @@ namespace lcommunicate
             else if (conn_params is cCOMParams)
                 conn = cComm.ConnectCOM((cCOMParams)conn_params);
             conn._panel_type = panel_type;
+            conn.SleepAfterWriteMilliseconds = settings.Sleep(_panel_name);
             return conn;
         }
         public static byte[] SendCommand(cTransport conn, string cmd)

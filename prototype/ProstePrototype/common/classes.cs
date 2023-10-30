@@ -59,6 +59,22 @@ namespace common
                 return _res;
             }
         }
+        public static int Sleep(string _panel_name)
+        {
+            int res = 10;
+            JObject sett = Settings;
+            if (sett != null && sett["sleep"] != null)
+            {
+                JObject sleep = (JObject)sett["sleep"];
+                foreach (JProperty p in sleep.Properties())
+                    if (p.Name.ToLower() == _panel_name.ToLower())
+                    {
+                        res = Convert.ToInt32(p.Value);
+                        break;
+                    }
+            }
+            return res;
+        }
         public static Dictionary<string, Dictionary<string, string>> read_replacements
         {
             get

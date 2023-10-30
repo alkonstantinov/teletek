@@ -1572,7 +1572,7 @@ namespace ljson
             rwres = eRWResult.Ok;
             if ((_code == null || _code.Trim() == "") && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase))
                 return cfg.CurrentVersion;
-            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType);
+            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType, CurrentPanelName);
             if (conn == null)
             {
                 rwres = eRWResult.ConnectionError;
@@ -1608,7 +1608,7 @@ namespace ljson
         }
         public static string ReadLog(object conn_params)
         {
-            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType);
+            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType, CurrentPanelName);
             byte[] blog = cComm.SendCommand(conn, settings.IRISLogCMD);
             cComm.CloseConnection(conn);
             if (settings.logreads)
@@ -1760,7 +1760,7 @@ namespace ljson
                     }
                 }
                 Dictionary<string, Tuple<byte, byte>> dpath_log = new Dictionary<string, Tuple<byte, byte>>();
-                cTransport conn = cComm.ConnectBaseCached(conn_params, CurrentPanelType, _connection_cache);
+                cTransport conn = cComm.ConnectBaseCached(conn_params, CurrentPanelType, CurrentPanelName, _connection_cache);
                 //LOGIN!!!!!!!!!!!!!!!!!!!!!!!
                 //byte[] loginres = cComm.SendCommand(conn, "076033333333");
                 //
@@ -2748,7 +2748,7 @@ namespace ljson
                 File.WriteAllText("write.log", _swrite);
             }
             //
-            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType);
+            cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType, CurrentPanelName);
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             rwres = PanelLogin(conn, cfg, _code);
             if (rwres != eRWResult.Ok)

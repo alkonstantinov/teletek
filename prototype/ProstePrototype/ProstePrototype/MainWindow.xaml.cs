@@ -790,85 +790,90 @@ namespace ProstePrototype
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
             //rw = new ReadWindow(0); // for delivery to Teletek not mandatory
-            string panelType = cJson.CurrentPanelFullType;
-            if (panelType == "natron")
-            {
-                rw = new ReadWindow(2);
-            } else
-            {
-                rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
-            }
+            rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
             ChangeThemeRW(DarkMode);
             rw.DarkMode = DarkMode;
-            rw.ShowDialog();
-            var c = rw.DialogResult;
-            ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
-            if ((bool)c)
+            try
             {
-                int tabIdx = rw.selectedIndex;
-                //cTransport t = null;
-                object conn_params = null;
-                if (tabIdx == 0) 
+                rw.ShowDialog();
+            
+                var c = rw.DialogResult;
+                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                if ((bool)c)
                 {
-                    string ip = rw.uc0.Address;
-                    int port = rw.uc0.Port;
-                    conn_params = new cIPParams(ip, port);
-                }
-                else if (tabIdx == 1)
-                {
-                    conn_params = rw.uc1.USBDevice;
-                }
-                else if (tabIdx == 2)
-                {
-                    string com = rw.uc2.Com;
-                    string parity = rw.uc2.Parity;
-                    string baudRate = rw.uc2.BaudRate;
-                    string stopBits = rw.uc2.StopBits;
-                    int dataBits = rw.uc2.DataBits;
-                    conn_params = new cCOMParams(com, Convert.ToInt32(baudRate));
-                }
-                else if (tabIdx == 3)
-                    conn_params = "read.log";
-
-                string panel_type = cJson.CurrentPanelType.ToString();
-                bool codeEntered = true;
-                CodeWindow cw = new CodeWindow();
-                if (panel_type != "natron")
-                {
-                    cw.ShowDialog();
-                    codeEntered = (bool)cw.DialogResult;
-                }
-                
-                Thread funcThread = new Thread(() =>
-                {
-                    try
+                    int tabIdx = rw.selectedIndex;
+                    //cTransport t = null;
+                    object conn_params = null;
+                    if (tabIdx == 0) 
                     {
-                        if (codeEntered)
+                        string ip = rw.uc0.Address;
+                        int port = rw.uc0.Port;
+                        conn_params = new cIPParams(ip, port);
+                    }
+                    else if (tabIdx == 1)
+                    {
+                        conn_params = rw.uc1.USBDevice;
+                    }
+                    else if (tabIdx == 2)
+                    {
+                        string com = rw.uc2.Com;
+                        string parity = rw.uc2.Parity;
+                        string baudRate = rw.uc2.BaudRate;
+                        string stopBits = rw.uc2.StopBits;
+                        int dataBits = rw.uc2.DataBits;
+                        conn_params = new cCOMParams(com, Convert.ToInt32(baudRate));
+                    }
+                    else if (tabIdx == 3)
+                        conn_params = "read.log";
+
+                    string panel_type = cJson.CurrentPanelType.ToString();
+                    bool codeEntered = true;
+                    CodeWindow cw = new CodeWindow();
+                    if (panel_type != "natron")
+                    {
+                        cw.ShowDialog();
+                        codeEntered = (bool)cw.DialogResult;
+                    }
+                
+                    Thread funcThread = new Thread(() =>
+                    {
+                        try
                         {
-                            // Use Dispatcher.Invoke to access the property from the UI thread.
-                            string code = panel_type != "natron" ? (string)Dispatcher.Invoke(new Func<string>(() => { return cw.Code; })) : "";
-                            ReadDevice(conn_params, popUpWindow, code);
-                        } else
+                            if (codeEntered)
+                            {
+                                // Use Dispatcher.Invoke to access the property from the UI thread.
+                                string code = panel_type != "natron" ? (string)Dispatcher.Invoke(new Func<string>(() => { return cw.Code; })) : "";
+                                ReadDevice(conn_params, popUpWindow, code);
+                            } else
+                            {
+                                Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
+                            }
+                        }
+                        catch (Exception ex)
                         {
+                            wb1.ExecuteScriptAsync($"alertScanFinished('{ex.Message}')");
                             Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        wb1.ExecuteScriptAsync($"alertScanFinished('{ex.Message}')");
-                        Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
-                    }
-                });
-                funcThread.Start();
+                    });
+                    funcThread.Start();
 
-                popUpWindow.ShowDialog();
+                    popUpWindow.ShowDialog();
 
-                funcThread.Join();
+                    funcThread.Join();
 
-                popUpWindow.Close();
+                    popUpWindow.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show(
+                    MakeTranslation("USBError"),
+                    MakeTranslation("ConnectionError"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
 
@@ -1201,62 +1206,65 @@ namespace ProstePrototype
 
         private void Write_Clicked(object sender, RoutedEventArgs e)
         {
-            string panelType = cJson.CurrentPanelFullType;
-            if (panelType == "natron")
-            {
-                rw = new ReadWindow(2, MakeTranslation("ScanMenuHeaderW"));
-            }
-            else
-            {
-                rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex, MakeTranslation("ScanMenuHeaderW")); // default 
-            }
+            rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex, MakeTranslation("ScanMenuHeaderW")); // default 
+
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             rw.Owner = this;
             ChangeThemeRW(DarkMode);
             rw.DarkMode = DarkMode;
-            rw.ShowDialog();
-            var c = rw.DialogResult;
-            ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
-            if ((bool)c)
+            try
             {
-                int tabIdx = rw.selectedIndex;
-                //cTransport t = null;
-                object conn_params = null;
-                if (tabIdx == 0)
+                rw.ShowDialog();
+                var c = rw.DialogResult;
+                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                if ((bool)c)
                 {
-                    string ip = rw.uc0.Address;
-                    int port = rw.uc0.Port;
-                    conn_params = new cIPParams(ip, port);
-                }
-                else if (tabIdx == 1)
-                {
-                    conn_params = rw.uc1.USBDevice;
-                }
-                else if (tabIdx == 3)
-                    conn_params = "read.log";
-                else
-                    return;
-                CodeWindow cw = new CodeWindow();
-                cw.ShowDialog();
-                var codeEntered = cw.DialogResult;
-                Thread funcThread = new Thread(() => {
-                    if ((bool)codeEntered)
+                    int tabIdx = rw.selectedIndex;
+                    //cTransport t = null;
+                    object conn_params = null;
+                    if (tabIdx == 0)
                     {
-                        string code = this.Dispatcher.Invoke(new Func<string>(() => cw.Code));
-                        WriteDevice(conn_params, popUpWindow, code);
-                    } else
+                        string ip = rw.uc0.Address;
+                        int port = rw.uc0.Port;
+                        conn_params = new cIPParams(ip, port);
+                    }
+                    else if (tabIdx == 1)
                     {
-                        Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
-                    }                   
-                });
-                funcThread.Start();
+                        conn_params = rw.uc1.USBDevice;
+                    }
+                    else if (tabIdx == 3)
+                        conn_params = "read.log";
+                    else
+                        return;
+                    CodeWindow cw = new CodeWindow();
+                    cw.ShowDialog();
+                    var codeEntered = cw.DialogResult;
+                    Thread funcThread = new Thread(() => {
+                        if ((bool)codeEntered)
+                        {
+                            string code = this.Dispatcher.Invoke(new Func<string>(() => cw.Code));
+                            WriteDevice(conn_params, popUpWindow, code);
+                        } else
+                        {
+                            Dispatcher.Invoke(new Action(() => popUpWindow.Close()));
+                        }                   
+                    });
+                    funcThread.Start();
 
-                popUpWindow.ShowDialog();
+                    popUpWindow.ShowDialog();
 
-                funcThread.Join();
+                    funcThread.Join();
 
-                popUpWindow.Close();
+                    popUpWindow.Close();
+                }
+            } catch
+            {
+                MessageBox.Show(
+                    MakeTranslation("USBError"),
+                    MakeTranslation("ConnectionError"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
 

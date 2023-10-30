@@ -81,10 +81,23 @@ namespace lcommunicate
             int maxLen = _hid_conn.Device.GetMaxOutputReportLength();
             List<byte[]> lcmd = split_command(_command, maxLen - 1);
             foreach (byte[] a in lcmd) _hid_conn.Write(pack_cmd(a));
-            //_hid_conn.Write(pack_cmd(_command));
-            Thread.Sleep(7);
+            //
+            Thread.Sleep(SleepAfterWriteMilliseconds);
             byte[] res = new byte[1024];
             int cnt = _hid_conn.Read(res);
+            //byte[] rbuf = new byte[1024];
+            //_hid_conn.ReadTimeout = SleepAfterWriteMilliseconds;
+            //int cnt = 0;
+            //int offs = 0;
+            //while (true)
+            //{
+            //    if (!_hid_conn.CanRead) break;
+            //    try { cnt = _hid_conn.Read(rbuf); }
+            //    catch { cnt = 0; }
+            //    if (cnt <= 0) break;
+            //    Array.Copy(rbuf, 0, res, offs, cnt);
+            //    offs += cnt;
+            //}
             res = unpack_result(_command, res);
             //byte[] res = unpack_result(_command, _hid_conn.Read());
             return res;
@@ -102,16 +115,33 @@ namespace lcommunicate
             int maxLen = _hid_conn.Device.GetMaxOutputReportLength();
             List<byte[]> lcmd = split_command(_command, maxLen - 1);
             foreach (byte[] a in lcmd) _hid_conn.Write(pack_cmd(a));
-            //_hid_conn.Write(pack_cmd(_command));
-            Thread.Sleep(7);
+            //
+            Thread.Sleep(SleepAfterWriteMilliseconds);
             byte[] res = new byte[1024];
             int cnt = _hid_conn.Read(res);
+            //_hid_conn.ReadTimeout = SleepAfterWriteMilliseconds;
+            //byte[] rbuf = new byte[1024];
+            //int cnt = 0;
+            //int offs = 0;
+            //while (true)
+            //{
+            //    //if (!_hid_conn.CanRead) break;
+            //    try { cnt = _hid_conn.Read(rbuf); }
+            //    catch { cnt = 0; }
+            //    if (cnt <= 0) break;
+            //    Array.Copy(rbuf, 0, res, offs, cnt);
+            //    offs += cnt;
+            //}
             res = unpack_result(_command, res);
             //byte[] res = unpack_result(_command, _hid_conn.Read());
             return res;
         }
         internal override byte[] SendCommand(string _command)
         {
+            //if (_command == "03520F000084")
+            //{
+            //    _command = _command;
+            //}
             byte[] cmd = new byte[_command.Length / 2];
             for (int i = 0; i < cmd.Length; i++)
                 cmd[i] = Convert.ToByte(_command.Substring(i * 2, 2), 16);
