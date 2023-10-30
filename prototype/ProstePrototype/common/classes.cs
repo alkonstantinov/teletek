@@ -689,6 +689,8 @@ namespace common
             res["_xml_looptype_cmd"] = _xml_looptype_cmd;
             res["_read_ver_files"] = JObject.FromObject(_read_ver_files);
             res["_write_ver_files"] = JObject.FromObject(_write_ver_files);
+            res["_xml_post_write_cmds"] = JObject.FromObject(_xml_post_write_cmds);
+            res["_xml_pre_write_cmds"] = JObject.FromObject(_xml_pre_write_cmds);
             //
             Monitor.Exit(_cs_config);
             return res;
@@ -714,6 +716,10 @@ namespace common
                 _read_ver_files = ((JObject)o["_read_ver_files"]).ToObject<Dictionary<string, string>>();
             if (o["_write_ver_files"] != null && o["_write_ver_files"].Type != JTokenType.Null)
                 _write_ver_files = ((JObject)o["_write_ver_files"]).ToObject<Dictionary<string, string>>();
+            if (o["_xml_post_write_cmds"] != null && o["_xml_post_write_cmds"].Type != JTokenType.Null)
+                _xml_post_write_cmds = ((JObject)o["_xml_post_write_cmds"]).ToObject<Dictionary<string, string>>();
+            if (o["_xml_pre_write_cmds"] != null && o["_xml_pre_write_cmds"].Type != JTokenType.Null)
+                _xml_pre_write_cmds = ((JObject)o["_xml_pre_write_cmds"]).ToObject<Dictionary<string, string>>();
             //
             Monitor.Exit(_cs_config);
         }
@@ -728,6 +734,8 @@ namespace common
         private string _xml_looptype_cmd = null;
         private Dictionary<string, string> _read_ver_files = new Dictionary<string, string>();
         private Dictionary<string, string> _write_ver_files = new Dictionary<string, string>();
+        private Dictionary<string, string> _xml_post_write_cmds = new Dictionary<string, string>();
+        private Dictionary<string, string> _xml_pre_write_cmds = new Dictionary<string, string>();
         private void SetBaseFiles()
         {
             if (_config_path == null)
@@ -837,6 +845,25 @@ namespace common
                     ver_file = mm.Groups[1].Value;
                 if (verkey != "" && ver_file != "")
                     _write_ver_files.Add(verkey, write_path + ver_file);
+                if (File.Exists(write_path + ver_file))
+                {
+
+                    string _ver_write_xml = File.ReadAllText(write_path + ver_file);
+                    mm = Regex.Match(_ver_write_xml, @"<POSTOPERATIONS>([\w\W]+?)</POSTOPERATIONS>", RegexOptions.IgnoreCase);
+                    if (mm.Success)
+                    {
+                        string postop = mm.Groups[1].Value;
+                        mm = Regex.Match(postop, @"<COMMAND\s+?BYTES\s*?=\s*?""([\w\W]+?)""/>", RegexOptions.IgnoreCase);
+                        if (mm.Success) _xml_post_write_cmds.Add(verkey, mm.Groups[1].Value);
+                    }
+                    mm = Regex.Match(_ver_write_xml, @"<WRITEOPERATION\s+?SAVEAS\s*?=\s*?""LOOPTYPE"">([\w\W]+?)</WRITEOPERATION>", RegexOptions.IgnoreCase);
+                    if (mm.Success)
+                    {
+                        string preop = mm.Groups[1].Value;
+                        mm = Regex.Match(preop, @"<BYTE\s+?VALUE\s*?=\s*?""([\w\W]+?)""/>", RegexOptions.IgnoreCase);
+                        if (mm.Success) _xml_pre_write_cmds.Add(verkey, mm.Groups[1].Value);
+                    }
+                }
             }
             if (_write_ver_files.Count == 0) _write_ver_files.Add("default", _base_write_file);
         }
@@ -967,6 +994,30 @@ namespace common
                 return res;
             }
         }
+        public Dictionary<string, string> PostWriteVersionCommands
+        {
+            get
+            {
+                Dictionary<string, string> res = new Dictionary<string, string>();
+                Monitor.Enter(_cs_config);
+                foreach (string key in _xml_post_write_cmds.Keys)
+                    res.Add(key, _xml_post_write_cmds[key]);
+                Monitor.Exit(_cs_config);
+                return res;
+            }
+        }
+        public Dictionary<string, string> PreWriteVersionCommands
+        {
+            get
+            {
+                Dictionary<string, string> res = new Dictionary<string, string>();
+                Monitor.Enter(_cs_config);
+                foreach (string key in _xml_pre_write_cmds.Keys)
+                    res.Add(key, _xml_pre_write_cmds[key]);
+                Monitor.Exit(_cs_config);
+                return res;
+            }
+        }
         private string _current_version = null;
         public string CurrentVersion
         {
@@ -982,6 +1033,8 @@ namespace common
         {
             string fread = null;
             string fwrite = null;
+            string postwrite = null;
+            string prewrite = null;
             Monitor.Enter(_cs_config);
             if (_version != null && _read_ver_files.ContainsKey(_version))
                 fread = _read_ver_files[_version];
@@ -989,11 +1042,19 @@ namespace common
                 fwrite = _write_ver_files[_version];
             if (_version != null && _read_ver_files.ContainsKey(_version))
                 _current_version = _version;
+            if (_version != null && _xml_post_write_cmds.ContainsKey(_version))
+                postwrite = _xml_post_write_cmds[_version];
+            if (_version != null && _xml_pre_write_cmds.ContainsKey(_version))
+                prewrite = _xml_pre_write_cmds[_version];
             Monitor.Exit(_cs_config);
             if (fread != null)
                 ReadConfigPath = fread;
             if (fwrite != null)
                 WriteConfigPath = fwrite;
+            if (postwrite != null)
+                PostWriteCommand = postwrite;
+            if (prewrite != null)
+                PreWriteCommand = prewrite;
         }
         public void SetRWFilesToLastVersion()
         {
@@ -1308,7 +1369,46 @@ namespace common
                 DeSerializeJSONReadStructs(_read_json_files);
             Monitor.Exit(_cs_read_structure);
         }
+        private string _post_write_cmd = null;
+        public string PostWriteCommand
+        {
+            get
+            {
+                string c = null;
+                Monitor.Enter(_cs_config);
+                c = _post_write_cmd;
+                Monitor.Exit(_cs_config);
+                return c;
+            }
+            set
+            {
+                Monitor.Enter(_cs_config);
+                _post_write_cmd = value;
+                Monitor.Exit(_cs_config);
 
+            }
+        }
+        //
+        private string _pre_write_cmd = null;
+        public string PreWriteCommand
+        {
+            get
+            {
+                string c = null;
+                Monitor.Enter(_cs_config);
+                c = _pre_write_cmd;
+                Monitor.Exit(_cs_config);
+                return c;
+            }
+            set
+            {
+                Monitor.Enter(_cs_config);
+                _pre_write_cmd = value;
+                Monitor.Exit(_cs_config);
+
+            }
+        }
+        //
         private string _read_path = null;
         /// <summary>
         /// файл, съдържащ read-конфигурация на устройство

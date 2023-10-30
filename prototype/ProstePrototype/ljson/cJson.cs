@@ -885,7 +885,8 @@ namespace ljson
                 }
             }
             //
-            if (didx.Count == 0)
+            //if (didx.Count == 0)
+            if (didx.Count == 0 && !Regex.IsMatch(read_path, @"SIMPO_MIMICOUT"))
                 res.Clear();
             return res;
         }
@@ -2154,73 +2155,56 @@ namespace ljson
             }
             bool isSIMPOTTENONE = Regex.IsMatch(_path, @"SIMPO_TTENONE");
             List<cWriteOperation> oTrunc = null;
-            foreach (string devaddr in loopdevs.Keys)
+            if ((loopdevs == null || loopdevs.Count <= 0) && isMIMIC)
             {
-                JObject jdev = JObject.Parse(loopdevs[devaddr]);
-                JObject orw = (JObject)jdev["~rw"];
-                cRWPath rw = orw.ToObject<cRWPath>();
-                jdev = GroupsWithValues(jdev);
-                //
-                List<string> commands = new List<string>();
-                //cRWCommand cmd = null;
-                //string scmd = null;
-                //string _params = "";
-                //
-                cRWCommand cmdl = null;
-                if (CurrentPanelType == "iris")
-                    cmdl = new cRWCommandIRIS();
-                else
-                    cmdl = new cRWCommand();
-                int command_len = cmdl.CommandLength();
-                if (isMIMIC)
+                Match m = Regex.Match(_path, @"\.([^\.]+$)");
+                if (m.Success)
                 {
-                    if (oTrunc == null)
+                    JObject jmimic = GetNode(m.Groups[1].Value);
+                    if (jmimic != null && jmimic["PROPERTIES"] != null && jmimic["PROPERTIES"]["Groups"] != null)
                     {
-                        rw.RepareSimpoMIMICOUTCommands(command_len);
-                        oTrunc = rw.WriteOperationOrder;
+                        JObject mimicout_groups = (JObject)jmimic["PROPERTIES"]["Groups"];
+                        mimicout_groups["~path"] = "SIMPO_MIMIC" + idx.ToString() + "/" + m.Groups[1].Value;
+                        RWData(mimicout_groups);
+                        if (loopdevs == null) loopdevs = new Dictionary<string, string>();
+                        loopdevs.Add("1", mimicout_groups.ToString());
                     }
-                    else
-                        rw.WriteOperationOrder = oTrunc;
                 }
-                //
-                FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
-                //
-                //foreach (cWriteOperation op in rw.WriteOperationOrder)
-                //{
-                //    if (op.operation == eWriteOperation.woBytes)
-                //    {
-                //        op.writeval = op.value;
-                //        //
-                //        if (cmd != null && op.value.Length == command_len && _params != null && _params != "")
-                //        {
-                //            cmds.Add(scmd, _params);
-                //            _params = "";
-                //        }
-                //        if (op.value.Length == command_len)
-                //        {
-                //            if (CurrentPanelType == "iris")
-                //                cmd = new cRWCommandIRIS();
-                //            else
-                //                cmd = new cRWCommand();
-                //            cmd.InitCommand(op.value);
-                //            scmd = cmd.CommandString(Convert.ToInt32(devaddr) + inc);
-                //            _params = "";
-                //        }
-                //        else
-                //            _params += op.value;
-                //    }
-                //    else
-                //    {
-                //        op.writeval = _internal_relations_operator.WritePropertyVal(jdev, op.value, rw.WriteProperties[op.value].xmltag);
-                //        _params += op.writeval;
-                //    }
-                //}
-                //if (scmd != "" && _params != "")
-                //{
-                //    //_params += "00";
-                //    cmds.Add(scmd, _params);
-                //}
             }
+            foreach (string devaddr in loopdevs.Keys)
+                {
+                    JObject jdev = JObject.Parse(loopdevs[devaddr]);
+                    JObject orw = (JObject)jdev["~rw"];
+                    cRWPath rw = orw.ToObject<cRWPath>();
+                    jdev = GroupsWithValues(jdev);
+                    //
+                    List<string> commands = new List<string>();
+                    //cRWCommand cmd = null;
+                    //string scmd = null;
+                    //string _params = "";
+                    //
+                    cRWCommand cmdl = null;
+                    if (CurrentPanelType == "iris")
+                        cmdl = new cRWCommandIRIS();
+                    else
+                        cmdl = new cRWCommand();
+                    int command_len = cmdl.CommandLength();
+                    if (isMIMIC)
+                    {
+                        if (oTrunc == null)
+                        {
+                            rw.RepareSimpoMIMICOUTCommands(command_len);
+                            oTrunc = rw.WriteOperationOrder;
+                        }
+                        else
+                            rw.WriteOperationOrder = oTrunc;
+                    }
+                    //
+                    FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
+                    //
+                }
+            //
+            //if (cmds.Count <= 0) return cmds;
             //
             string cmdfirst = cmds.Keys.First();
             string paramsfirst = cmds[cmdfirst];
@@ -2440,9 +2424,17 @@ namespace ljson
             //
             return res;
         }
-        private static Dictionary<string, string> ExecuteWriteCommands(cTransport conn, Dictionary<string, string> cmds)
+        private static Dictionary<string, string> ExecuteWriteCommands(cTransport conn, Dictionary<string, string> cmds, string postcmd, string precmd)
         {
             Dictionary<string, string> dres = new Dictionary<string, string>();
+            if (precmd != null)
+            {
+                byte[] resstart = cComm.SendCommand(conn, precmd/*"0061FF"*/);
+                string sresstart = "";
+                foreach (byte b in resstart)
+                    sresstart += b.ToString("X2");
+                dres.Add(precmd/*"0061FF"*/, sresstart);
+            }
             foreach (string cmd in cmds.Keys)
             {
                 string sfirs = (cmds[cmd].Length / 2 + 3).ToString("X2");
@@ -2454,11 +2446,14 @@ namespace ljson
                     sres += b.ToString("X2");
                 dres.Add(scmd, sres);
             }
-            byte[] resend = cComm.SendCommand(conn, "00fe00");
-            string sresend = "";
-            foreach (byte b in resend)
-                sresend += b.ToString("X2");
-            dres.Add("00fe00", sresend);
+            if (postcmd != null)
+            {
+                byte[] resend = cComm.SendCommand(conn, postcmd/*"00fe00"*/);
+                string sresend = "";
+                foreach (byte b in resend)
+                    sresend += b.ToString("X2");
+                dres.Add(postcmd/*"00fe00"*/, sresend);
+            }
             return dres;
         }
         private static Tuple<int, int> NONEElementsRange(string key)
@@ -2776,7 +2771,7 @@ namespace ljson
             //byte[] pass = new byte[] { 0x08, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
             //byte[] loginres = cComm.SendCommand(conn, pass);
             ////////////////////////////
-            Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled);
+            Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled, cfg.PostWriteCommand, cfg.PreWriteCommand);
             cComm.CloseConnection(conn);
             if (settings.logreads)
             {

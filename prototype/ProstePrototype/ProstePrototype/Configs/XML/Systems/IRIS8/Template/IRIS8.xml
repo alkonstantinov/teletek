@@ -382,7 +382,7 @@
 			<PROPERTY TYPE="AND" ID="IsNetworkEnabled" SIZE="1" TEXT="Parameters" LNGID="991c8e8e-9afb-47a2-8a67-f4d4e14e85d6">
 				<PROPERTIES>
 					<PROPERTY TYPE="CHECK" ID="IsNetwork" SIZE="1" TEXT="Enabled" AND="1" YESVAL="1" NOVAL="0" CHECKED="0" LNGID="9f134536-57b6-43f5-9b37-a6a98451cc16" />
-					<PROPERTY TYPE="LIST" ID="NetworkType" SIZE="1" AND="34" TEXT="Network Type" LNGID="56cf43ab-f5c6-4191-ae84-3c60ebe15bac">
+					<PROPERTY TYPE="LIST" ID="NetworkType" SIZE="1" AND="22" TEXT="Network Type" LNGID="56cf43ab-f5c6-4191-ae84-3c60ebe15bac">
 						<ITEMS>
 							<ITEM NAME="LAN" VALUE="32" LNGID="df9e4c3f-04ea-4183-b774-96e1c561ce4e" />
 							<ITEM NAME="RS 485" VALUE="2" LNGID="121eba74-49dd-4c1f-97a0-b006f21acf32" />

@@ -429,6 +429,23 @@ namespace ProstePrototype
                     cJson.RenamePanel(cJson.CurrentPanelID.ToString(), json["Params"]["title"].Value<string>());
                     LoadPage(json["Params"]["schema"].Value<string>(), null);
                     loadWb1 = false;
+                    if (json["Params"]["schema"].ToString() == "simpo")
+                    {
+                        JObject jnode = new JObject(cJson.GetNode("SIMPO_MIMICPANELS"));
+                        if (jnode != null && jnode["CONTAINS"] != null)
+                        {
+                            JObject t = (JObject)jnode["CONTAINS"];
+                            foreach( KeyValuePair<string, JToken> ele in t )
+                            {
+                                if (Regex.IsMatch(ele.Key, "^(simpo)", RegexOptions.IgnoreCase)) {
+                                    JObject newMimic = cJson.GetNode(ele.Key);
+                                    string s = Regex.Match(ele.Key, @"^.+?(?=\d)").Value;
+                                    string n = Regex.Match(ele.Key, @"(\d+$)").Value;
+                                    cComm.AddPseudoElement(cJson.CurrentPanelID, s, n, newMimic.ToString());
+                                }
+                            }
+                        }
+                    }
                     break;
                 case "LoadPage":
                     string highlight = json["Highlight"] == null ? null : json["Highlight"].Value<string>();

@@ -29,6 +29,7 @@
     MINP_FD: { im: "../imports/images/pics/MINP_M.png", sign: "MINP (FIRE)", type: "device" },
     MINP_GD: { im: "../imports/images/pics/MINP_M.png", sign: "MINP (GAS)", type: "device" },
     MINP_PANIC: { im: "../imports/images/pics/MINP_M.png", sign: "MINP (PANIC)", type: "device" },
+    MINOUT: { im: "../imports/images/pics/MIO.png", sign: "MINOUT", type: "device" },
     MOUT: { im: "../imports/images/pics/MIO.png", sign: "MOUT", type: "device" },
     MOUT240_1: { im: "../imports/images/pics/MIO.png", sign: "MOUT240_1", type: "device" },
     MOUT240_2: { im: "../imports/images/pics/MIO.png", sign: "MOUT240_2", type: "device" },

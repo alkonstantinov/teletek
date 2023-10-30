@@ -525,7 +525,7 @@ namespace ljson
             if (val == null)
                 return sval;
             //ushort uand = Convert.ToUInt16(o["~value"].ToString(), 16);
-            ushort uand = Convert.ToUInt16(val, 16);
+            ushort uand = Convert.ToUInt16(val);
             ushort uval = Convert.ToUInt16(sval);
             string fval = ((ushort)(uand | uval)).ToString();
             return fval;
@@ -561,7 +561,7 @@ namespace ljson
                 foreach (JObject _f in a)
                 {
                     res = ANDValue2Write(_f, res);
-                    if (Convert.ToUInt16(res) == 0) break;
+                    //if (Convert.ToUInt16(res) == 0) break;
                 }
             else res = _val;
             //
@@ -583,7 +583,7 @@ namespace ljson
                 return null;
             //
             string sval = Value(_field, _type);
-            //if (_type.ToUpper() == "AND") sval = AndValueFromChilds(_field);
+            //if (_type.ToUpper() == "AND" && Convert.ToInt32(sval) == 0) sval = AndValueFromChilds(_field);
             int? inc = null;
             m = Regex.Match(xmltag, @"INC\s*?=\s*?""([\d\-]+?)""");
             if (m.Success)

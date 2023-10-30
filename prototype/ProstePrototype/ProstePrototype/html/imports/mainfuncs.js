@@ -253,10 +253,11 @@ function drawFields(body, json, inheritedColor = 'normal') {
                                     <p class="ram_card_title">${newT.t(localStorage.getItem('lang'), addr["@LNGID"])}:${addr["~value"] ? addr["~value"] : addr["@VALUE"]}</p>
                                 </div>
                             </div>`;
-                sendMessageWPF({
-                    'Command': 'AddingLoop',
-                    'Params': { 'elementType': k, 'elementNumber': address }
-                });
+
+                //sendMessageWPF({
+                //    'Command': 'AddingLoop',
+                //    'Params': { 'elementType': k, 'elementNumber': address }
+                //});
                 newDiv.insertAdjacentHTML('beforeend', newMimicInner);
 
             }).catch(err => alert("drawFields getJsonNode with Groups Error :" + err));
