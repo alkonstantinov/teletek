@@ -595,94 +595,11 @@
                                 <TextBlock x:Name="GridView_or_ListView_text" Text=" List View" FontFamily="{StaticResource poppins_demibold}" FontSize="12" VerticalAlignment="Center"/>
                             </DockPanel>
                         </Button>-->
+                        <TextBlock TextAlignment="Right" FontFamily="{StaticResource fa_solid}" FontSize="20" VerticalAlignment="Bottom" Margin="0,15,20,5">
+                            <Run x:Name="update_available" Text="" Foreground="Transparent" ToolTip=""/>
+                        </TextBlock>
                     </StackPanel>
                 </Grid>
-
-
-                <!--<DockPanel Grid.Column="4">
-                    <Button x:Name="export_btn" Grid.Column="3" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2"
-                            ToolTip="{DynamicResource MainMenuExport}" Typography.Capitals="AllSmallCaps" Click="Export_Clicked">
-                        <DockPanel VerticalAlignment="Center">
-                            <TextBlock Text="&#xf56e;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
-                            <TextBlock Text="{DynamicResource MainMenuExport}" FontFamily="{StaticResource poppins_light}" VerticalAlignment="Center" FontSize="10"/>
-                        </DockPanel>
-                    </Button>
-                    <Button x:Name="write_btn" Style="{StaticResource ButtonShadow}" BorderBrush="AntiqueWhite" BorderThickness="0.2" 
-                            ToolTip="{DynamicResource MainMenuWrite}" Typography.Capitals="AllSmallCaps" Click="Write_Clicked">
-                        <DockPanel VerticalAlignment="Center">
-                            <TextBlock Text="&#xf31c;" FontFamily="{StaticResource fa_solid}" FontSize="10" Margin="0, 0, 3, 0" VerticalAlignment="Center"></TextBlock>
-                            <TextBlock Text="{DynamicResource MainMenuWrite}" FontFamily="{StaticResource poppins_light}" VerticalAlignment="Center" FontSize="10"/>
-                        </DockPanel>
-                    </Button>
-                </DockPanel>
-                <DockPanel Grid.Column="5">
-                    <Button x:Name="log_btn" ToolTip="{DynamicResource MainMenuLog}" Click="New_Clicked" BorderThickness="0">
-                        <TextBlock Text="&#xe59a;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                    </Button>
-                </DockPanel>
-                <DockPanel Grid.Column="6">
-                    <Button x:Name="clock_btn" ToolTip="{DynamicResource MainMenuClock}" Click="New_Clicked" BorderThickness="0">
-                        <TextBlock Text="&#xf017;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                    </Button>
-                </DockPanel>
-                <DockPanel Grid.Column="7">
-                    <Button x:Name="verify_btn" ToolTip="{DynamicResource MainMenuVerify}" BorderThickness="0">
-                        <TextBlock Text="&#xf772;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                    </Button>
-                </DockPanel>-->
-
-                <!--<Grid Grid.Column="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Button x:Name="minimize_btn" ToolTip="{DynamicResource MainMenuToTray}" Click="Button_Minimize_Click" BorderThickness="1, 0, 0, 1">
-                        <TextBlock Text="&#xf2d1;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
-                    </Button>
-                    <DockPanel Grid.Row="1">
-                        <Button x:Name="changeTheme_btn" ToolTip="{DynamicResource MainMenuTheme}" Click="ChangeTheme_Click" BorderThickness="0">
-                            <TextBlock Text="&#xf042;" FontFamily="{StaticResource fa_solid}" FontSize="36"/>
-                        </Button>
-                    </DockPanel>
-                </Grid>
-                <Grid Grid.Column="11">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Button Grid.Row="0" x:Name="maximize_btn" ToolTip="{DynamicResource MainMenuRestore}" Click="Button_Maximize_Click" BorderThickness="0, 0, 0, 1">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Style.Triggers>
-                                    <DataTrigger 
-									Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
-									Value="Maximized">
-                                        <Setter Property="Content">
-                                            <Setter.Value>
-                                                <TextBlock Text="&#xf2d0;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </DataTrigger>
-                                    <DataTrigger 
-									Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}"
-									Value="Normal">
-                                        <Setter Property="Content">
-                                            <Setter.Value>
-                                                <TextBlock Text="&#xf2d2;" FontFamily="{StaticResource fa_solid}" FontSize="24" VerticalAlignment="Bottom"></TextBlock>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <DockPanel Grid.Row="1">
-                        <Button x:Name="update_btn" ToolTip="{DynamicResource MainMenuUpdate}" BorderThickness="0">
-                            <TextBlock Text="&#xe4c2;" FontFamily="{StaticResource fa_solid}" FontSize="36" VerticalAlignment="Bottom"></TextBlock>
-                        </Button>
-                    </DockPanel>
-                </Grid>-->
-
             </Grid>
             <GridSplitter Grid.Row="1" Background="{StaticResource SideBar_Nav}" Height="2" Width="{Binding Width}"/>
             <Grid x:Name="gridBrowsers" Grid.Row="2">

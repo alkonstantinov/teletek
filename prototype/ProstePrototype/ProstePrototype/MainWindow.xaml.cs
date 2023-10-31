@@ -30,6 +30,7 @@ using CefSharp.DevTools.DOM;
 using lupd;
 using System.Windows.Shapes;
 using System.ComponentModel.Composition.Primitives;
+using System.Timers;
 
 namespace ProstePrototype
 {
@@ -61,6 +62,29 @@ namespace ProstePrototype
         }
 
         private bool loadWb1 { get; set; }
+        private void OnUpdTimer (object o, ElapsedEventArgs e)
+        {
+            _upd_timer.Stop();
+            if (UpdateLoop.UpdateExists)
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    update_available.ToolTip = "New update of Teletek Manager is available. Check Settings!";
+                    update_available.Text = "\ue4c2";
+                    update_available.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Red"));
+                });
+            } else
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    update_available.ToolTip = "";
+                    update_available.Text = "";
+                    update_available.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Transparent"));
+                });
+            }
+            _upd_timer.Start();
+        }
+        private System.Timers.Timer _upd_timer = new System.Timers.Timer(60000);
 
         public MainWindow()
         {
@@ -132,6 +156,10 @@ namespace ProstePrototype
             {
                 SettingsDialog.KillRun(applicationDirectory, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, common.settings.updpath);
             }
+            Thread th = new Thread(UpdateLoop.Loop);
+            th.Start();
+            _upd_timer.Elapsed += OnUpdTimer;
+            _upd_timer.Start();
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -789,7 +817,6 @@ namespace ProstePrototype
 
         private void Scan_Clicked(object sender, RoutedEventArgs e)
         {
-            //rw = new ReadWindow(0); // for delivery to Teletek not mandatory
             rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex); // default 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;

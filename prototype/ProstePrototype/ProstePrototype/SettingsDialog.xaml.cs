@@ -29,7 +29,7 @@ namespace ProstePrototype
     {
         private MainWindow _mainWindow;
         private string currentVersion;
-        private bool updateCheck;
+        private bool isFirstActivation = true;
         private bool isClosing = false; // A flag to track whether the window is in the closing process
         public SettingsDialog(MainWindow mainWindow)
         {
@@ -40,10 +40,27 @@ namespace ProstePrototype
             currentVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
             ver.Text = currentVersion;
             autoCheck.IsChecked = Properties.Settings.Default.AutoUpdate;
-            updateCheck = lupd.cUpd.Check4Updates(common.settings.updpath);
-            update_btn.IsEnabled = updateCheck;
+            
+            this.Activated += Window_Activated;
+        }
 
-            progrBarText.Text = updateCheck ? "Newer version is available for download." : "You are up to date!"; 
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            // code to execute every time the window is shown
+            if (isFirstActivation)
+            {
+                if (UpdateLoop.UpdateExists)
+                {
+                    update_btn.IsEnabled = true;
+                    progrBarText.Text = _mainWindow.MakeTranslation("newUpdateAvailable");
+                } else
+                {
+                    update_btn.IsEnabled = false;
+                    progrBarText.Text = _mainWindow.MakeTranslation("updated");
+                    progrBar.Visibility = Visibility.Hidden;
+                }
+                isFirstActivation = false;
+            }
         }
 
         private void OKSettings_Clicked(object sender, RoutedEventArgs e)
@@ -51,6 +68,7 @@ namespace ProstePrototype
             this.Dispatcher.Invoke(() =>
             {
                 this.Hide();
+                isFirstActivation = true;
             });
         }
 
@@ -90,6 +108,7 @@ namespace ProstePrototype
             {
                 // CleanupAndClose(); // to be used if we can stop the proces of updating
                 this.Hide();
+                isFirstActivation = true;
             });
         }
 
@@ -104,8 +123,7 @@ namespace ProstePrototype
 
                 this.Close();
 
-                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-                mw.settings = null;
+                _mainWindow.settings = null;
             }
         }
 
@@ -138,7 +156,7 @@ namespace ProstePrototype
                 double percentageCalc = 100 * (double)counter / (double)cntall;
                 progrBar.Value = percentageCalc;
                 progrBar.Maximum = 100;
-                settingsWindow.progrBarText.Text = "Updating... - " + percentageCalc.ToString("##0.") + "%";
+                settingsWindow.progrBarText.Text = settingsWindow._mainWindow.MakeTranslation("updating") + percentageCalc.ToString("##0.") + "%";
 
                 if (bytes_all != 0)
                 {
@@ -146,7 +164,7 @@ namespace ProstePrototype
                     progrBarAdd.Value = percentageCalcAdd;
                     progrBarAdd.Maximum = 100;
                     string f = filename.Split("/").Last();
-                    settingsWindow.progrBarTextAdd.Text = $"Downloading {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.") + "%";
+                    settingsWindow.progrBarTextAdd.Text = $"{settingsWindow._mainWindow.MakeTranslation("downloading")} {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.") + "%";
                 }
             });
         }
@@ -181,14 +199,14 @@ namespace ProstePrototype
 
         public void RunUpdate()
         {
-            ProgressBarChange(Visibility.Visible, "Newer version found! Proceeding with update... 0%", Visibility.Visible, "");
+            ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("newUpdate") + "0 %", Visibility.Visible, "");
             string err = "";
             eUPDResult res = cUpd.DoUpdate(common.settings.updpath, crcprocess, http_progress, ref err);
             if (res != eUPDResult.Ok)
             {
                 MessageBox.Show(
                     err,
-                    "Update Message - Error",
+                    _mainWindow.MakeTranslation("UpdateError"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error
                 );
@@ -196,7 +214,17 @@ namespace ProstePrototype
             }
             else
             {
-                ProgressBarChange(Visibility.Visible, "Successfully updated!", Visibility.Collapsed, "");
+                ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("updateSuccess"), Visibility.Collapsed, "");
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (_mainWindow != null)
+                    {
+                        _mainWindow.update_available.ToolTip = "";
+                        _mainWindow.update_available.Text = "";
+                        _mainWindow.update_available.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Transparent"));
+                    }
+                });
+                UpdateLoop.CheckUpdate();
             }
         }
 
@@ -217,20 +245,20 @@ namespace ProstePrototype
         #endregion
         private void Update_Clicked(object sender, RoutedEventArgs e)
         {
-            ProgressBarChange(Visibility.Visible, "Checking for updates... please, wait!", Visibility.Collapsed, "");
+            ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("checkingUpdate"), Visibility.Collapsed, "");
             
             Task.Run(() =>
             {                
-                if (updateCheck)
+                if (UpdateLoop.UpdateExists)
                 {
                     RunUpdate();
                     string locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~locks" + System.IO.Path.DirectorySeparatorChar;
                     string del_locks = Regex.Replace(common.settings.updpath, @"[\\/]$", "") + System.IO.Path.DirectorySeparatorChar + "~files4del.lock";
                     if (
                         (Directory.Exists(locks) || File.Exists(del_locks)) &&
-                        MessageBox.Show(@$"Teletek Manager needs to restart to finish the update. Information on currently opened projects might be lost. Proceed?" +
-                        "\n If you choose \"No\" the update will automatically finalize next time you relaunch.",
-                            "Update Warning",
+                        MessageBox.Show(
+                            _mainWindow.MakeTranslation("updateRestart"),
+                            _mainWindow.MakeTranslation("updateMsg"),
                             MessageBoxButton.YesNo,
                             MessageBoxImage.Warning) == MessageBoxResult.Yes
                         )
@@ -241,7 +269,7 @@ namespace ProstePrototype
                 }
                 else
                 {
-                    ProgressBarChange(Visibility.Visible, "You are up to date!", Visibility.Collapsed, "");
+                    ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("updated"), Visibility.Collapsed, "");
                 }
             });
             

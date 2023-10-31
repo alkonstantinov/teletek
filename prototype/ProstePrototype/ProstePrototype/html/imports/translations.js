@@ -165,7 +165,18 @@
         Write: { 'en': 'Write', 'bg': 'Запис' },
         Update: { 'en': 'Firmware update', 'bg': 'Обновяване' },
         updateMsg: { 'en': 'Update Warning', 'bg': 'Предупреждение - обновяване' },
+        updating: { 'en': "Updating... - ", 'bg': 'Обновяване... - ' },
+        downloading: { 'en': "Downloading", 'bg': 'Изтегляне на' },
+        updateSuccess: { 'en': "Successfully updated!", 'bg': 'Успешно актуализиран!' },
+        newUpdate: { 'en': "Newer version found! Proceeding with update... ", 'bg': 'Намерена е по-нова версия! Актуализиране...' },
+        newUpdateAvailable: { 'en': "Newer version is available for download.", 'bg': 'По-нова версия е достъпна за изтегляне.' },
+        checkingUpdate: { 'en': "Checking for updates... please, wait!", 'bg': 'Проверка за актуализации... моля, изчакайте!' },
         updateFound: { 'en': 'An update for Teletek Manager has been found. Proceed?', 'bg': 'Налично е обновяване за Teletek Manager. Стартиране?' },
+        updateRestart: {
+            'en': 'Teletek Manager needs to restart to finish the update. Information on currently opened projects might be lost. Proceed?\n If you choose \"No\" the update will automatically finalize next time you relaunch.', 
+            'bg': 'Teletek Manager трябва да рестартира, за да завърши актуализацията. Информацията за текущо отворените проекти може да бъде загубена. Продължавате ли?\n Ако изберете \"Не\", актуализацията ще се финализира автоматично следващия път, когато рестартирате.'
+        },
+        updated: { 'en': 'You are up to date!', 'bg': 'You are up to date!' },
         Verify: { 'en': 'Verify', 'bg': 'Проверка на валидност' },
         Help: { 'en': 'Help', 'bg': 'Помощ' },
         logout: { 'bg': 'Изход' },
@@ -390,6 +401,10 @@
         "battery,%": { 
             "en": "Battery,%",
             "bg": "Батерия,%",
+        },
+        UpdateError : {
+            "en": "Update Message - Error",
+            "bg": "Съобщение за актуализиране - грешка",
         },
         USBError : {
             "en": "USB connection lost",
