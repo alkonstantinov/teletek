@@ -109,6 +109,7 @@ namespace lupd
             {
                 string fName = Path.GetFileName(file);
                 string key = fName.ToLower();
+                if (key == "debugsettings.json") continue;
                 res[key] = new JObject();
                 res[key]["type"] = "file";
                 res[key]["Filename"] = fName;

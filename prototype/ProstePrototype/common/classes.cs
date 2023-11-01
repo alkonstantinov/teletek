@@ -28,7 +28,9 @@ namespace common
     public delegate void dFileCRCProcessing(string filename);
     public delegate void dFileDownloadProgress(string filename, int counter, int cntall, int bytes_downloaded, int bytes_all);
     public delegate bool dConfirmVersionsDiff(string panel_version, string xml_version);
+    public delegate void dRWProgress(eRWOperation op, string node, string index, int counter, int cntall);
 
+    public enum eRWOperation { Compile = 1, Read = 2, Write = 3, SetProperties = 4, FlashCopy = 5 };
     public enum eUPDResult { Ok = 1, FilesMapNotExists = 2, Other = 3, NoInternet = 4 };
     public enum eRWResult
     {

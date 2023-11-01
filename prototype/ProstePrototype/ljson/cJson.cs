@@ -745,7 +745,7 @@ namespace ljson
             //
             return res;
         }
-        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes, dRWProgress progress, ref int progress_pos, int progress_cnt)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             List<cRWCommand> cmds = new List<cRWCommand>();
@@ -853,6 +853,10 @@ namespace ljson
                     else
                         scmd = cmd.CommandStringSubIdxOnly(idx);
                     byte[] cmdres = cComm.SendCommand(conn, scmd);
+                    //progress
+                    progress_pos++;
+                    if (progress != null) progress(eRWOperation.Read, read_path, idx.ToString(), progress_pos, progress_cnt);
+                    //
                     if (settings.logreads)
                     {
                         if (!_log_bytesreaded.ContainsKey(scmd))
@@ -890,7 +894,7 @@ namespace ljson
                 res.Clear();
             return res;
         }
-        private static void SetLoopDevicesValues(string loopkey, Dictionary<string, Dictionary<string, byte[]>> dreaded, JObject devtypes, Dictionary<string, string> missedkeys, Dictionary<string, string> foundkeys, Dictionary<string, string> dloopdevs)
+        private static void SetLoopDevicesValues(string loopkey, Dictionary<string, Dictionary<string, byte[]>> dreaded, JObject devtypes, Dictionary<string, string> missedkeys, Dictionary<string, string> foundkeys, Dictionary<string, string> dloopdevs, dRWProgress progress, ref int progress_pos, int progress_cnt)
         {
             if (dreaded == null || dreaded.Count <= 0)
                 return;
@@ -1076,12 +1080,14 @@ namespace ljson
                                     foundkeys.Add(dev_save_path + "/" + propname, "");
                             }
                         }
+                        if (progress != null) progress(eRWOperation.SetProperties, loopkey, idx, progress_pos, progress_cnt);
+                        progress_pos++;
                     }
                     //
                 }
             }
         }
-        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllMIMICPanels(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllMIMICPanels(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes, dRWProgress progress, ref int progress_pos, int progress_cnt)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             Dictionary<string, cRWPath> _merge = WriteReadMerge;
@@ -1106,14 +1112,14 @@ namespace ljson
                     }
                     else
                         loopp = _merge[key];
-                    Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes);
+                    Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes, progress, ref progress_pos, progress_cnt);
                     foreach (string reskey in lres.Keys)
                         res.Add(reskey, lres[reskey]);
                 }
             //
             return res;
         }
-        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllSimpoLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllSimpoLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes, dRWProgress progress, ref int progress_pos, int progress_cnt)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             Dictionary<string, cRWPath> _merge = WriteReadMerge;
@@ -1138,14 +1144,14 @@ namespace ljson
                     }
                     else
                         loopp = _merge[key];
-                    Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes);
+                    Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes, progress, ref progress_pos, progress_cnt);
                     foreach (string reskey in lres.Keys)
                         res.Add(reskey, lres[reskey]);
                 }
             //
             return res;
         }
-        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadAllLoopDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes, dRWProgress progress, ref int progress_pos, int progress_cnt)
         {
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             Dictionary<string, cRWPath> _merge = WriteReadMerge;
@@ -1186,7 +1192,7 @@ namespace ljson
                 }
                 else
                     loopp = _merge[key];
-                Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes);
+                Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> lres = ReadLoopDevices(conn, loopp, min, max, loopp.ReadPath, devtypes, progress, ref progress_pos, progress_cnt);
                 foreach (string reskey in lres.Keys)
                     res.Add(reskey, lres[reskey]);
             }
@@ -1195,19 +1201,21 @@ namespace ljson
         }
         private static int _tteloops_count_in_peripherial_devs = -1;
         private static int _sensloops_count_in_peripherial_devs = -1;
-        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSeriaDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes)
+        private static int _ttedevs_count = -1;
+        private static int _sensdevs_count = -1;
+        private static Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> ReadSeriaDevices(cTransport conn, cRWPath p, byte min, byte max, string read_path, JObject devtypes, dRWProgress progress, ref int progress_pos, ref int progress_cnt)
         {
             //if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
             //    return ReadSimpoLoopDevices(conn, p, min, max, read_path, devtypes);
             //
             if (Regex.IsMatch(read_path, @"LOOP"))
                 //return ReadLoopDevices(conn, p, min, max, read_path, devtypes);
-                return ReadAllLoopDevices(conn, p, min, max, read_path, devtypes);
+                return ReadAllLoopDevices(conn, p, min, max, read_path, devtypes, progress, ref progress_pos, progress_cnt);
             //
             if (Regex.IsMatch(read_path, @"SIMPO_MIMICOUT$"))
-                return ReadAllMIMICPanels(conn, p, min, max, read_path, devtypes);
+                return ReadAllMIMICPanels(conn, p, min, max, read_path, devtypes, progress, ref progress_pos, progress_cnt);
             if (Regex.IsMatch(read_path, @"SIMPO_TTE"))
-                return ReadAllSimpoLoopDevices(conn, p, min, max, read_path, devtypes);
+                return ReadAllSimpoLoopDevices(conn, p, min, max, read_path, devtypes, progress, ref progress_pos, progress_cnt);
             Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> res = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
             JObject pdtypes = (JObject)CurrentPanel["~pdtypes"];
             if (pdtypes == null) pdtypes = new JObject();
@@ -1286,6 +1294,10 @@ namespace ljson
                             scmd = cmd.CommandString(0, idx);
                         }
                         byte[] cmdres = cComm.SendCommand(conn, scmd);
+                        //progress
+                        progress_pos++;
+                        if (progress != null) progress(eRWOperation.Read, read_path, idx.ToString(), progress_pos, progress_cnt);
+                        //
                         ////
                         //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
                         //{
@@ -1358,12 +1370,17 @@ namespace ljson
             //
             if (didx.Count == 0)
                 res.Clear();
+            if (Regex.IsMatch(read_path, @"PERIPHERIAL"))
+            {
+                if (_sensloops_count_in_peripherial_devs > 0) progress_cnt += _sensdevs_count * _sensloops_count_in_peripherial_devs;
+                if (_tteloops_count_in_peripherial_devs > 0) progress_cnt += _ttedevs_count * _tteloops_count_in_peripherial_devs;
+            }
             return res;
             //}
             //
             //return res;
         }
-        private static void SetSeriaDevicesValues(Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dreaded, JObject devtypes, Dictionary<string, string> missedkeys, Dictionary<string, string> foundkeys, Dictionary<string, string> dloopdevs)
+        private static void SetSeriaDevicesValues(Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dreaded, JObject devtypes, Dictionary<string, string> missedkeys, Dictionary<string, string> foundkeys, Dictionary<string, string> dloopdevs, dRWProgress progress, ref int progress_pos, int progress_cnt)
         {
             if (dreaded == null || dreaded.Count <= 0)
                 return;
@@ -1371,7 +1388,7 @@ namespace ljson
             {
                 if (Regex.IsMatch(loopkey, @"LOOP") || Regex.IsMatch(loopkey, @"SIMPO_MIMIC\d+$"))
                 {
-                    SetLoopDevicesValues(loopkey, dreaded[loopkey], devtypes, missedkeys, foundkeys, dloopdevs);
+                    SetLoopDevicesValues(loopkey, dreaded[loopkey], devtypes, missedkeys, foundkeys, dloopdevs, progress, ref progress_pos, progress_cnt); ;
                     continue;
                 }
                 Dictionary<string, cRWPath> merge = WriteReadMerge;
@@ -1529,6 +1546,8 @@ namespace ljson
                                     foundkeys.Add(readsubkey + "/" + propname, "");
                             }
                         }
+                        if (progress != null) progress(eRWOperation.SetProperties, loopkey, sidx, progress_pos, progress_cnt);
+                        progress_pos++;
                     }
                 }
             }
@@ -1567,9 +1586,10 @@ namespace ljson
             }
             return eRWResult.Ok;
         }
-        private static string VersionKey(object conn_params, string vercmd, cXmlConfigs cfg, string _code, out eRWResult rwres)
+        private static string VersionKey(object conn_params, string vercmd, cXmlConfigs cfg, string _code, out eRWResult rwres, out byte[] verloop)
         {
             rwres = eRWResult.Ok;
+            verloop = null;
             if ((_code == null || _code.Trim() == "") && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase))
                 return cfg.CurrentVersion;
             cTransport conn = cComm.ConnectBase(conn_params, CurrentPanelType, CurrentPanelName);
@@ -1581,6 +1601,7 @@ namespace ljson
             rwres = PanelLogin(conn, cfg, _code);
             if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD) return null;
             byte[] bres = cComm.SendCommand(conn, vercmd);
+            verloop = cComm.SendCommand(conn, cfg.LooptypeCommand);
             _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
             if (settings.logreads && !_log_bytesreaded.ContainsKey(vercmd))
@@ -1593,7 +1614,8 @@ namespace ljson
         {
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             eRWResult rwres = eRWResult.Ok;
-            string ver = VersionKey(conn_params, cfg.VersionCommand, cfg, _code, out rwres);
+            byte[] verloop;
+            string ver = VersionKey(conn_params, cfg.VersionCommand, cfg, _code, out rwres, out verloop);
             if (ver != null)
             {
                 if ((rwres == eRWResult.Ok || rwres == eRWResult.NullLoginCMD) && ver != cfg.CurrentVersion || WriteReadMerge == null)
@@ -1639,6 +1661,8 @@ namespace ljson
             if (_internal_relations_operator != null) _internal_relations_operator.ClearCache();
             _tteloops_count_in_peripherial_devs = -1;
             _sensloops_count_in_peripherial_devs = -1;
+            _ttedevs_count = -1;
+            _sensdevs_count = -1;
         }
         public static void ClearPanelCache(string _panel_id)
         {
@@ -1650,10 +1674,45 @@ namespace ljson
                 _inop.ClearCache();
                 _tteloops_count_in_peripherial_devs = -1;
                 _sensloops_count_in_peripherial_devs = -1;
+                _ttedevs_count = -1;
+                _sensdevs_count = -1;
             }
             Monitor.Exit(_cs_current_panel);
         }
-        public static eRWResult ReadDevice(object conn_params, string _code, dConfirmVersionsDiff verdiff)
+        private static int ReadCommandsCount(Dictionary<string, JArray> djrcmd)
+        {
+            int res = 0;
+            JObject _panel = CurrentPanel;
+            if (_panel["ELEMENTS"] == null) return 0;
+            JObject _elements = (JObject)_panel["ELEMENTS"];
+            foreach (string nodename in djrcmd.Keys)
+            {
+                JObject _el = (JObject)_elements[nodename];
+                int _cnt = djrcmd[nodename].Count;
+                //
+                if (_el["CONTAINS"] == null) { res += _cnt; continue; }
+                JObject _cont = (JObject)_el["CONTAINS"];
+                JToken t = _cont.First;
+                if (t.Type != JTokenType.Property) { res += _cnt; continue; }
+                JProperty p = (JProperty)t;
+                if (p.Value.Type != JTokenType.Object) { res += _cnt; continue; }
+                _cont = (JObject)p.Value;
+                if (_cont["@MIN"] == null || _cont["@MAX"] == null) { res += _cnt; continue; }
+                int _min = Convert.ToInt32(_cont["@MIN"].ToString());
+                int _max = Convert.ToInt32(_cont["@MAX"].ToString());
+                if (_min >= _max) { res += _cnt; continue; }
+                //
+                if (Regex.IsMatch(nodename, @"SENSORS$", RegexOptions.IgnoreCase) || Regex.IsMatch(nodename, @"MODULES$", RegexOptions.IgnoreCase))
+                    _sensdevs_count = (_sensdevs_count < 0) ? _cnt * (_max - _min + 1) : _sensdevs_count;
+                else if (Regex.IsMatch(nodename, @"LOOP\d+$", RegexOptions.IgnoreCase))
+                    _ttedevs_count = (_ttedevs_count < 0) ? _cnt * (_max - _min + 1) : _ttedevs_count;
+                else
+                    res += _cnt * (_max - _min + 1);
+            }
+            //
+            return res;
+        }
+        public static eRWResult ReadDevice(object conn_params, string _code, dConfirmVersionsDiff verdiff, dRWProgress progress = null)
         {
             bool isRepeaterIris = false;
             bool isSimpoPanel = false;
@@ -1682,6 +1741,7 @@ namespace ljson
             ClearPanelCache(CurrentPanelID);
             string _panel_id = CurrentPanelID;
             Dictionary<string, cRWPath> drw = new Dictionary<string, cRWPath>();
+            Dictionary<string, JArray> djrcmd = new Dictionary<string, JArray>();
             Dictionary<string, JObject> dnodes = new Dictionary<string, JObject>();
             Dictionary<string, string> missedkeys = new Dictionary<string, string>();
             Dictionary<string, string> foundkeys = new Dictionary<string, string>();
@@ -1693,6 +1753,10 @@ namespace ljson
             JObject _elements = (JObject)o["ELEMENTS"];
             //Type trw = typeof(cRWPath);
             string panel_type = CurrentPanelType;
+            //progress
+            int progress_pos = 0;
+            int progress_cnt = 0;
+            //
             foreach (JToken t in (JToken)_elements)
                 if (t.Type == JTokenType.Property && ((JProperty)t).Value.Type == JTokenType.Object)
                 {
@@ -1707,6 +1771,14 @@ namespace ljson
                     if (_node["~rw"] != null)
                     {
                         JObject jrw = (JObject)_node["~rw"];
+                        //progress
+                        if (jrw["ReadCommands"] != null)
+                        {
+                            JArray _arr_ = (JArray)jrw["ReadCommands"];
+                            djrcmd.Add(nodename, _arr_);
+                            //progress_cnt += _arr_.Count;
+                        }
+                        //
                         if (!drw.ContainsKey(((JProperty)t).Name))
                         {
                             string tname = ((JProperty)t).Name;
@@ -1734,6 +1806,8 @@ namespace ljson
                 }
             if (drw.Count > 0)
             {
+                progress_cnt = ReadCommandsCount(djrcmd);
+                if (progress != null) progress(eRWOperation.Read, "", "", progress_pos, progress_cnt);
                 Dictionary<string, Tuple<byte, byte>> dpath_minmax = new Dictionary<string, Tuple<byte, byte>>();
                 if (isRepeaterIris || isSimpoPanel)
                 {
@@ -1895,7 +1969,7 @@ namespace ljson
                             tminmax = dpath_minmax[read_path];
                         else
                             tminmax = dpath_minmax[key];
-                        Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dread = ReadSeriaDevices(conn, p, tminmax.Item1, tminmax.Item2, read_path, devtypes_bynone);
+                        Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> dread = ReadSeriaDevices(conn, p, tminmax.Item1, tminmax.Item2, read_path, devtypes_bynone, progress, ref progress_pos, ref progress_cnt);
                         foreach (string loopkey in dread.Keys)
                         {
                             if (!dserias.ContainsKey(loopkey))
@@ -1920,6 +1994,10 @@ namespace ljson
                     foreach (string cmd in lstCmdS)
                     {
                         byte[] cmdres = cComm.SendCommand(conn, cmd);
+                        //progress
+                        progress_pos++;
+                        if (progress != null) progress(eRWOperation.Read, read_path, "", progress_pos, progress_cnt);
+                        //
                         lstRes.Add(cmdres);
                         if (settings.logreads)
                         {
@@ -1998,7 +2076,21 @@ namespace ljson
                 }
                 //
                 cComm.CloseConnection(conn);
-                SetSeriaDevicesValues(dserias, devtypes, missedkeys, foundkeys, dloopdevs);
+                //
+                progress_pos = 0;
+                progress_cnt = 0;
+                foreach (string seria in dserias.Keys)
+                {
+                    Dictionary<string, Dictionary<string, byte[]>> dseria = dserias[seria];
+                    if (dseria.Count == 1)
+                    {
+                        string skey = dseria.First().Key;
+                        Dictionary<string, byte[]> ddevs = dseria[skey];
+                        progress_cnt += ddevs.Count;
+                    }
+                }
+                //
+                SetSeriaDevicesValues(dserias, devtypes, missedkeys, foundkeys, dloopdevs, progress, ref progress_pos, progress_cnt);
                 _internal_relations_operator.AfterRead(CurrentPanelID, CurrentPanel, GetNode, FilterValueChanged);
                 readed = true;
                 reading = false;
@@ -2172,37 +2264,37 @@ namespace ljson
                 }
             }
             foreach (string devaddr in loopdevs.Keys)
+            {
+                JObject jdev = JObject.Parse(loopdevs[devaddr]);
+                JObject orw = (JObject)jdev["~rw"];
+                cRWPath rw = orw.ToObject<cRWPath>();
+                jdev = GroupsWithValues(jdev);
+                //
+                List<string> commands = new List<string>();
+                //cRWCommand cmd = null;
+                //string scmd = null;
+                //string _params = "";
+                //
+                cRWCommand cmdl = null;
+                if (CurrentPanelType == "iris")
+                    cmdl = new cRWCommandIRIS();
+                else
+                    cmdl = new cRWCommand();
+                int command_len = cmdl.CommandLength();
+                if (isMIMIC)
                 {
-                    JObject jdev = JObject.Parse(loopdevs[devaddr]);
-                    JObject orw = (JObject)jdev["~rw"];
-                    cRWPath rw = orw.ToObject<cRWPath>();
-                    jdev = GroupsWithValues(jdev);
-                    //
-                    List<string> commands = new List<string>();
-                    //cRWCommand cmd = null;
-                    //string scmd = null;
-                    //string _params = "";
-                    //
-                    cRWCommand cmdl = null;
-                    if (CurrentPanelType == "iris")
-                        cmdl = new cRWCommandIRIS();
-                    else
-                        cmdl = new cRWCommand();
-                    int command_len = cmdl.CommandLength();
-                    if (isMIMIC)
+                    if (oTrunc == null)
                     {
-                        if (oTrunc == null)
-                        {
-                            rw.RepareSimpoMIMICOUTCommands(command_len);
-                            oTrunc = rw.WriteOperationOrder;
-                        }
-                        else
-                            rw.WriteOperationOrder = oTrunc;
+                        rw.RepareSimpoMIMICOUTCommands(command_len);
+                        oTrunc = rw.WriteOperationOrder;
                     }
-                    //
-                    FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
-                    //
+                    else
+                        rw.WriteOperationOrder = oTrunc;
                 }
+                //
+                FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
+                //
+            }
             //
             //if (cmds.Count <= 0) return cmds;
             //
@@ -2589,7 +2681,7 @@ namespace ljson
             //
             return res;
         }
-        public static eRWResult WriteDevice(object conn_params, string _code, dConfirmVersionsDiff verdiff)
+        public static eRWResult WriteDevice(object conn_params, string _code, dConfirmVersionsDiff verdiff, dRWProgress progress = null)
         {
             string panel_version = null;
             string xml_version = null;

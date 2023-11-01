@@ -39,6 +39,10 @@ namespace ProstePrototype
             ContentArea.Content = uc3;
             Button3.Focus();
             clickedName = Button3.Name;
+            if (common.debugSettings.readLog)
+            {
+                Button3.Visibility = Visibility.Visible;
+            }
         }
         public ReadWindow(int startidx, string topSign = "Read")
         {
@@ -77,6 +81,14 @@ namespace ProstePrototype
                         Button1.Visibility = Visibility.Collapsed;
                     }
                 }
+            }
+
+            if (common.debugSettings.readLog)
+            {
+                Button3.Visibility = Visibility.Visible;
+            } else
+            {
+                Button3.Visibility = Visibility.Collapsed;
             }
 
             selectedIndex = startidx;
