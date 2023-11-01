@@ -43,6 +43,7 @@ namespace ProstePrototype
         public readonly JObject pages;
         private ReadWindow rw;
         public SettingsDialog settings;
+        private ScanPopUpWindow popUpWindow;
 
         public bool DarkMode { get; set; }
 
@@ -160,6 +161,17 @@ namespace ProstePrototype
             th.Start();
             _upd_timer.Elapsed += OnUpdTimer;
             _upd_timer.Start();
+
+            this.Activated += MainWindow_Activated;
+        }
+
+        private void MainWindow_Activated(object sender, EventArgs e)
+        {
+            if (popUpWindow != null)
+            {
+                // When the main window regains focus, set PopupWindow's Topmost to true
+                popUpWindow.Activate();
+            }
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -828,7 +840,7 @@ namespace ProstePrototype
                 rw.ShowDialog();
             
                 var c = rw.DialogResult;
-                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                popUpWindow = new ScanPopUpWindow();
                 if ((bool)c)
                 {
                     int tabIdx = rw.selectedIndex;
@@ -892,6 +904,7 @@ namespace ProstePrototype
                     funcThread.Join();
 
                     popUpWindow.Close();
+                    popUpWindow = null;
                 }
             }
             catch
@@ -1049,7 +1062,7 @@ namespace ProstePrototype
             openFileDialog.InitialDirectory = GetLastUsedDirectory();
             if (openFileDialog.ShowDialog() == true)
             {
-                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                popUpWindow = new ScanPopUpWindow();
                 SaveLastUsedDirectory(openFileDialog.FileName);
 
                 Thread funcThread = new Thread(() =>
@@ -1101,6 +1114,7 @@ namespace ProstePrototype
                 funcThread.Join();
 
                 popUpWindow.Close();
+                popUpWindow = null;
             }
         }
 
@@ -1244,7 +1258,7 @@ namespace ProstePrototype
             {
                 rw.ShowDialog();
                 var c = rw.DialogResult;
-                ScanPopUpWindow popUpWindow = new ScanPopUpWindow();
+                popUpWindow = new ScanPopUpWindow();
                 if ((bool)c)
                 {
                     int tabIdx = rw.selectedIndex;
@@ -1284,6 +1298,7 @@ namespace ProstePrototype
                     funcThread.Join();
 
                     popUpWindow.Close();
+                    popUpWindow = null;
                 }
             } catch
             {
