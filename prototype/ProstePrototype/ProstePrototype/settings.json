@@ -5,6 +5,11 @@
   "updmapfilename": "fmap.json",
   "updhttppath": "https://teletek-man.teletek.bg/teletek-man/",
   "paths2inc": [ "ELEMENTS.iris_zones.CONTAINS.IRIS_ZONE", "ELEMENTS.iris_zones.CONTAINS.IRIS4_ZONE", "ELEMENTS.iris_zones.CONTAINS.IRIS8_ZONE", "ELEMENTS.iris_zones.CONTAINS.SIMPO_ZONE", "ELEMENTS.iris_panels_in_network.CONTAINS.IRIS_PANELINNETWORK" ],
+  "progress_read_seria_step": 37,
+  "progress_read_loop_devs_step": 37,
+  "progress_set_seria_step": 11,
+  "progress_set_loop_devs_step": 1,
+  "progress_write_cmds_step": 53,
   "sleep": {
     "simpo": 7,
     "iris": 10,

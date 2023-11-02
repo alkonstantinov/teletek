@@ -52,11 +52,11 @@ namespace ProstePrototype
                 if (UpdateLoop.UpdateExists)
                 {
                     update_btn.IsEnabled = true;
-                    progrBarText.Text = _mainWindow.MakeTranslation("newUpdateAvailable");
+                    progrBarText.Text = Utils.MakeTranslation("newUpdateAvailable");
                 } else
                 {
                     update_btn.IsEnabled = false;
-                    progrBarText.Text = _mainWindow.MakeTranslation("updated");
+                    progrBarText.Text = Utils.MakeTranslation("updated");
                     progrBar.Visibility = Visibility.Hidden;
                 }
                 isFirstActivation = false;
@@ -156,7 +156,7 @@ namespace ProstePrototype
                 double percentageCalc = 100 * (double)counter / (double)cntall;
                 progrBar.Value = percentageCalc;
                 progrBar.Maximum = 100;
-                settingsWindow.progrBarText.Text = settingsWindow._mainWindow.MakeTranslation("updating") + percentageCalc.ToString("##0.") + "%";
+                settingsWindow.progrBarText.Text = Utils.MakeTranslation("updating") + percentageCalc.ToString("##0.") + "%";
 
                 if (bytes_all != 0)
                 {
@@ -164,49 +164,22 @@ namespace ProstePrototype
                     progrBarAdd.Value = percentageCalcAdd;
                     progrBarAdd.Maximum = 100;
                     string f = filename.Split("/").Last();
-                    settingsWindow.progrBarTextAdd.Text = $"{settingsWindow._mainWindow.MakeTranslation("downloading")} {LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.") + "%";
+                    settingsWindow.progrBarTextAdd.Text = $"{Utils.MakeTranslation("downloading")} {Utils.LimitCharacters(f, 32)}: " + percentageCalcAdd.ToString("##0.") + "%";
                 }
             });
-        }
-
-        public static string LimitCharacters(string text, int length)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return string.Empty;
-            }
-
-            // If text in shorter or equal to length, just return it
-            if (text.Length <= length)
-            {
-                return text;
-            }
-
-            // Text is longer, so try to find out where to cut
-            char[] delimiters = new char[] { ' ', '.', ',', ':', ';' };
-            int index = text.LastIndexOfAny(delimiters, length - 3);
-
-            if (index > (length / 2))
-            {
-                return text.Substring(0, index) + "...";
-            }
-            else
-            {
-                return text.Substring(0, length - 3) + "...";
-            }
         }
 
 
         public void RunUpdate()
         {
-            ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("newUpdate") + "0 %", Visibility.Visible, "");
+            ProgressBarChange(Visibility.Visible, Utils.MakeTranslation("newUpdate") + "0 %", Visibility.Visible, "");
             string err = "";
             eUPDResult res = cUpd.DoUpdate(common.settings.updpath, crcprocess, http_progress, ref err);
             if (res != eUPDResult.Ok)
             {
                 MessageBox.Show(
                     err,
-                    _mainWindow.MakeTranslation("UpdateError"),
+                    Utils.MakeTranslation("UpdateError"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error
                 );
@@ -214,7 +187,7 @@ namespace ProstePrototype
             }
             else
             {
-                ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("updateSuccess"), Visibility.Collapsed, "");
+                ProgressBarChange(Visibility.Visible, Utils.MakeTranslation("updateSuccess"), Visibility.Collapsed, "");
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     if (_mainWindow != null)
@@ -245,7 +218,7 @@ namespace ProstePrototype
         #endregion
         private void Update_Clicked(object sender, RoutedEventArgs e)
         {
-            ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("checkingUpdate"), Visibility.Collapsed, "");
+            ProgressBarChange(Visibility.Visible, Utils.MakeTranslation("checkingUpdate"), Visibility.Collapsed, "");
             
             Task.Run(() =>
             {                
@@ -257,8 +230,8 @@ namespace ProstePrototype
                     if (
                         (Directory.Exists(locks) || File.Exists(del_locks)) &&
                         MessageBox.Show(
-                            _mainWindow.MakeTranslation("updateRestart"),
-                            _mainWindow.MakeTranslation("updateMsg"),
+                            Utils.MakeTranslation("updateRestart"),
+                            Utils.MakeTranslation("updateMsg"),
                             MessageBoxButton.YesNo,
                             MessageBoxImage.Warning) == MessageBoxResult.Yes
                         )
@@ -269,7 +242,7 @@ namespace ProstePrototype
                 }
                 else
                 {
-                    ProgressBarChange(Visibility.Visible, _mainWindow.MakeTranslation("updated"), Visibility.Collapsed, "");
+                    ProgressBarChange(Visibility.Visible, Utils.MakeTranslation("updated"), Visibility.Collapsed, "");
                 }
             });
             

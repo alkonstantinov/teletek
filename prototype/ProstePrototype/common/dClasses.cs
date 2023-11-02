@@ -46,7 +46,7 @@ namespace common
             get
             {
                 if (dSettings == null) return false;
-                return Convert.ToBoolean(dSettings["showReasWriteProgressSigns"].ToString());
+                return Convert.ToBoolean(dSettings["showReadWriteProgressSigns"].ToString());
             }
         }
     }

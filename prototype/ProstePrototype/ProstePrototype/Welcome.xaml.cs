@@ -99,7 +99,7 @@ namespace ProstePrototype
             {
                 Welcome welcomeWindow = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
                 welcomeWindow.progrBar.Value = percentageCalc;
-                welcomeWindow.MyAddValue = $"Downloading {SettingsDialog.LimitCharacters(f, 45)}: {percentageCalcAdd.ToString("0.##")}%";
+                welcomeWindow.MyAddValue = $"Downloading {Utils.LimitCharacters(f, 45)}: {percentageCalcAdd.ToString("0.##")}%";
                 welcomeWindow.MyValue = "A newer version of Teletek Manager found! Proceeding with update... - " + percentageCalc.ToString("0.##") + "%";
                 welcomeWindow.Welcome_Activated(welcomeWindow, new EventArgs());
             });

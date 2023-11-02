@@ -142,8 +142,8 @@ namespace ProstePrototype
             {
                 Welcome w = Application.Current.Windows.OfType<Welcome>().FirstOrDefault();
                 if (
-                    MessageBox.Show(MakeTranslation("updateFound"),
-                        MakeTranslation("updateMsg"),
+                    MessageBox.Show(Utils.MakeTranslation("updateFound"),
+                        Utils.MakeTranslation("updateMsg"),
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Warning) == MessageBoxResult.Yes
                     )
@@ -433,26 +433,6 @@ namespace ProstePrototype
             string script = $"{fn}('{currLang}');";
             wb1.ExecuteScriptAsyncWhenPageLoaded(script);
             wb2.ExecuteScriptAsyncWhenPageLoaded(script);
-        }
-
-        public string MakeTranslation(string keyword) 
-        {
-            JObject translationsJSON = JObject.Parse(Properties.Settings.Default.translations);
-            if (translationsJSON is null) return "Error attaching translations object";
-            if (translationsJSON[keyword] != null) 
-            {
-                var t = translationsJSON[keyword];
-                if (t[Properties.Settings.Default.Language]  != null)
-                {
-                    return t[Properties.Settings.Default.Language].ToString();
-                } else
-                {
-                    return "Not found translation language";
-                }
-            } else
-            {
-                return $"Not found translation key";
-            }
         }
         #endregion
 
@@ -910,8 +890,8 @@ namespace ProstePrototype
             catch
             {
                 MessageBox.Show(
-                    MakeTranslation("USBError"),
-                    MakeTranslation("ConnectionError"),
+                    Utils.MakeTranslation("USBError"),
+                    Utils.MakeTranslation("ConnectionError"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
@@ -919,7 +899,7 @@ namespace ProstePrototype
 
         private void ReadDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
         {
-            eRWResult resp = cJson.ReadDevice(conn_params, code, VersionDiff);
+            eRWResult resp = cJson.ReadDevice(conn_params, code, VersionDiff, popUpWindow.UpdateProgress);
             HandleRespMessage(conn_params, resp, code, "Read");
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
@@ -939,21 +919,21 @@ namespace ProstePrototype
                     break;
                 case eRWResult.ConnectionError:
                     showMsg = (conn_params != null && !(conn_params is string && (string)conn_params == "read.log")) ?
-                        $"{MakeTranslation("ConnectionErrorFull")} {((common.cIPParams)conn_params).address}:{((common.cIPParams)conn_params).port}" :
-                        MakeTranslation("ConnectionError");
+                        $"{Utils.MakeTranslation("ConnectionErrorFull")} {((common.cIPParams)conn_params).address}:{((common.cIPParams)conn_params).port}" :
+                        Utils.MakeTranslation("ConnectionError");
                     break;
                 case eRWResult.BadLogin:
-                    showMsg = MakeTranslation("BadLogin"); break;
+                    showMsg = Utils.MakeTranslation("BadLogin"); break;
                 case eRWResult.NullLoginCMD:
-                    showMsg = MakeTranslation("NullLoginCMD"); break;
+                    showMsg = Utils.MakeTranslation("NullLoginCMD"); break;
                 case eRWResult.NullLoginOkByte:
-                    showMsg = MakeTranslation("NullLoginOkByte"); break;
+                    showMsg = Utils.MakeTranslation("NullLoginOkByte"); break;
                 case eRWResult.NullLoginOkVal:
-                    showMsg = MakeTranslation("NullLoginOkVal"); break;
+                    showMsg = Utils.MakeTranslation("NullLoginOkVal"); break;
                 case eRWResult.BadCommandResult:
-                    showMsg = MakeTranslation("BadCommandResult"); break;
+                    showMsg = Utils.MakeTranslation("BadCommandResult"); break;
                 case eRWResult.VersionDiff:
-                    showMsg = MakeTranslation("VersionDiff");
+                    showMsg = Utils.MakeTranslation("VersionDiff");
                     File.AppendAllText("eventlog.log", readOrWrite + "Device using code: " + code + " and connection parameters: " + conn_params.ToString() +
                         " stopped due to Version Difference between panel and opened document." + "\n");
                     break;
@@ -974,10 +954,10 @@ namespace ProstePrototype
         {
             if (panel_version != xml_version)
             {
-                string q = MakeTranslation("VersionDiffQuery");
+                string q = Utils.MakeTranslation("VersionDiffQuery");
                 return (MessageBox.Show(
                         q,
-                        MakeTranslation("VersionDiffFound") + " -> " + MakeTranslation("panel") + ": " + panel_version + " | " + MakeTranslation("loaded") +": " + xml_version,
+                        Utils.MakeTranslation("VersionDiffFound") + " -> " + Utils.MakeTranslation("panel") + ": " + panel_version + " | " + Utils.MakeTranslation("loaded") +": " + xml_version,
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Warning) == MessageBoxResult.Yes);
 
@@ -992,7 +972,7 @@ namespace ProstePrototype
         }
         private void WriteDevice(object conn_params, ScanPopUpWindow popUpWindow, string code)
         {
-            eRWResult resp = cJson.WriteDevice(conn_params, code, VersionDiff);
+            eRWResult resp = cJson.WriteDevice(conn_params, code, VersionDiff, popUpWindow.UpdateProgress);
             HandleRespMessage(conn_params, resp, code, "Write");
             //set a flag
             Application.Current.Dispatcher.Invoke(() =>
@@ -1043,7 +1023,7 @@ namespace ProstePrototype
                     loadWb1 = false;
                 } catch (Exception)
                 {
-                    string showMsg = $"{MakeTranslation("ReadingError")} \"{openFileDialog.SafeFileName}\"";
+                    string showMsg = $"{Utils.MakeTranslation("ReadingError")} \"{openFileDialog.SafeFileName}\"";
                     if (wb1.CanExecuteJavascriptInMainFrame)
                     {
                         wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");
@@ -1102,7 +1082,7 @@ namespace ProstePrototype
                         ReadDevice(conn, popUpWindow, "");
                     } catch (Exception)
                     {
-                        string showMsg = $"{MakeTranslation("ReadingErrorTemp")} \"{panelType}\" {MakeTranslation("ReadingErrorTempFin")}";
+                        string showMsg = $"{Utils.MakeTranslation("ReadingErrorTemp")} \"{panelType}\" {Utils.MakeTranslation("ReadingErrorTempFin")}";
                         wb1.ExecuteScriptAsync($"alertScanFinished('{showMsg}')");                        
                         popUpWindow._functionFinished = true;
                     }
@@ -1247,7 +1227,7 @@ namespace ProstePrototype
 
         private void Write_Clicked(object sender, RoutedEventArgs e)
         {
-            rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex, MakeTranslation("ScanMenuHeaderW")); // default 
+            rw = new ReadWindow(Properties.Settings.Default.ReadWindowStartIndex, Utils.MakeTranslation("ScanMenuHeaderW")); // default 
 
             rw.Resources = Application.Current.Resources;
             rw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -1303,8 +1283,8 @@ namespace ProstePrototype
             } catch
             {
                 MessageBox.Show(
-                    MakeTranslation("USBError"),
-                    MakeTranslation("ConnectionError"),
+                    Utils.MakeTranslation("USBError"),
+                    Utils.MakeTranslation("ConnectionError"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }

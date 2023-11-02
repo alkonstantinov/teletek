@@ -61,6 +61,61 @@ namespace common
                 return _res;
             }
         }
+        public static byte progress_read_seria_step
+        {
+            get
+            {
+                byte res = 37;
+                JObject sett = Settings;
+                if (sett != null && sett["progress_read_seria_step"] != null)
+                    res = Convert.ToByte(sett["progress_read_seria_step"]);
+                return res;
+            }
+        }
+        public static byte progress_read_loop_devs_step
+        {
+            get
+            {
+                byte res = 37;
+                JObject sett = Settings;
+                if (sett != null && sett["progress_read_loop_devs_step"] != null)
+                    res = Convert.ToByte(sett["progress_read_loop_devs_step"]);
+                return res;
+            }
+        }
+        public static byte progress_set_seria_step
+        {
+            get
+            {
+                byte res = 37;
+                JObject sett = Settings;
+                if (sett != null && sett["progress_set_seria_step"] != null)
+                    res = Convert.ToByte(sett["progress_set_seria_step"]);
+                return res;
+            }
+        }
+        public static byte progress_set_loop_devs_step
+        {
+            get
+            {
+                byte res = 37;
+                JObject sett = Settings;
+                if (sett != null && sett["progress_set_loop_devs_step"] != null)
+                    res = Convert.ToByte(sett["progress_set_loop_devs_step"]);
+                return res;
+            }
+        }
+        public static int progress_write_cmds_step
+        {
+            get
+            {
+                int res = 53;
+                JObject sett = Settings;
+                if (sett != null && sett["progress_write_cmds_step"] != null)
+                    res = Convert.ToInt32(sett["progress_write_cmds_step"]);
+                return res;
+            }
+        }
         public static int Sleep(string _panel_name)
         {
             int res = 10;
@@ -981,9 +1036,12 @@ namespace common
                 string s = null;
                 Monitor.Enter(_cs_config);
                 string _xml = _xml_looptype_cmd;
-                Match m = Regex.Match(_xml, @"BYTES\s*?=\s*?""([\w\W]+?)""");
-                if (m.Success)
-                    s = m.Groups[1].Value;
+                if (_xml != null)
+                {
+                    Match m = Regex.Match(_xml, @"BYTES\s*?=\s*?""([\w\W]+?)""");
+                    if (m.Success)
+                        s = m.Groups[1].Value;
+                }
                 Monitor.Exit(_cs_config);
                 return s;
             }

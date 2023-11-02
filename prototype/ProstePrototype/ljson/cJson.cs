@@ -855,7 +855,6 @@ namespace ljson
                     byte[] cmdres = cComm.SendCommand(conn, scmd);
                     //progress
                     progress_pos++;
-                    if (progress != null) progress(eRWOperation.Read, read_path, idx.ToString(), progress_pos, progress_cnt);
                     //
                     if (settings.logreads)
                     {
@@ -887,7 +886,10 @@ namespace ljson
                 {
                     didx.Add((idx + idxinc).ToString(), bcmdres);
                 }
+                if (progress != null && idx % settings.progress_read_loop_devs_step == 0)
+                    progress(eRWOperation.Read, read_path, idx.ToString(), progress_pos, progress_cnt);
             }
+            //if (progress != null) progress(eRWOperation.Read, read_path, max.ToString(), progress_pos, progress_cnt);
             //
             //if (didx.Count == 0)
             if (didx.Count == 0 && !Regex.IsMatch(read_path, @"SIMPO_MIMICOUT"))
@@ -1080,7 +1082,8 @@ namespace ljson
                                     foundkeys.Add(dev_save_path + "/" + propname, "");
                             }
                         }
-                        if (progress != null) progress(eRWOperation.SetProperties, loopkey, idx, progress_pos, progress_cnt);
+                        if (progress != null && Convert.ToByte(idx) % settings.progress_set_loop_devs_step == 0)
+                            progress(eRWOperation.SetProperties, loopkey, idx, progress_pos, progress_cnt);
                         progress_pos++;
                     }
                     //
@@ -1296,7 +1299,6 @@ namespace ljson
                         byte[] cmdres = cComm.SendCommand(conn, scmd);
                         //progress
                         progress_pos++;
-                        if (progress != null) progress(eRWOperation.Read, read_path, idx.ToString(), progress_pos, progress_cnt);
                         //
                         ////
                         //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
@@ -1362,6 +1364,8 @@ namespace ljson
                 //}
                 if (_internal_relations_operator.AddSerialDevice(apath[1], node, bcmdres, (byte)(idx + idxinc), read_props))
                     didx.Add((idx + idxinc).ToString(), bcmdres);
+                if (progress != null && idx % settings.progress_read_seria_step == 0)
+                    progress(eRWOperation.Read, read_path, idx.ToString(), progress_pos, progress_cnt);
             }
             //if (Regex.IsMatch(read_path, @"(OUTPUT)"))
             //{
@@ -1546,7 +1550,8 @@ namespace ljson
                                     foundkeys.Add(readsubkey + "/" + propname, "");
                             }
                         }
-                        if (progress != null) progress(eRWOperation.SetProperties, loopkey, sidx, progress_pos, progress_cnt);
+                        if (progress != null && Convert.ToByte(sidx) == settings.progress_set_seria_step)
+                            progress(eRWOperation.SetProperties, loopkey, sidx, progress_pos, progress_cnt);
                         progress_pos++;
                     }
                 }
@@ -1601,7 +1606,7 @@ namespace ljson
             rwres = PanelLogin(conn, cfg, _code);
             if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD) return null;
             byte[] bres = cComm.SendCommand(conn, vercmd);
-            verloop = cComm.SendCommand(conn, cfg.LooptypeCommand);
+            if (cfg.LooptypeCommand != null) verloop = cComm.SendCommand(conn, cfg.LooptypeCommand);
             _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
             if (settings.logreads && !_log_bytesreaded.ContainsKey(vercmd))
@@ -1996,7 +2001,6 @@ namespace ljson
                         byte[] cmdres = cComm.SendCommand(conn, cmd);
                         //progress
                         progress_pos++;
-                        if (progress != null) progress(eRWOperation.Read, read_path, "", progress_pos, progress_cnt);
                         //
                         lstRes.Add(cmdres);
                         if (settings.logreads)
@@ -2006,6 +2010,7 @@ namespace ljson
                         }
                         len += lstRes[lstRes.Count - 1].Length;
                     }
+                    if (progress != null) progress(eRWOperation.Read, read_path, "", progress_pos, progress_cnt);
                     byte[] result = new byte[len];
                     int idx = 0;
                     foreach (byte[] arr in lstRes)
@@ -2516,9 +2521,11 @@ namespace ljson
             //
             return res;
         }
-        private static Dictionary<string, string> ExecuteWriteCommands(cTransport conn, Dictionary<string, string> cmds, string postcmd, string precmd)
+        private static Dictionary<string, string> ExecuteWriteCommands(cTransport conn, Dictionary<string, Tuple<string, string>> cmds, string postcmd, string precmd, dRWProgress progress)
         {
             Dictionary<string, string> dres = new Dictionary<string, string>();
+            int progress_cnt = cmds.Count + ((precmd != null) ? 1 : 0) + ((postcmd != null) ? 1 : 0);
+            int progress_pos = 0;
             if (precmd != null)
             {
                 byte[] resstart = cComm.SendCommand(conn, precmd/*"0061FF"*/);
@@ -2526,17 +2533,25 @@ namespace ljson
                 foreach (byte b in resstart)
                     sresstart += b.ToString("X2");
                 dres.Add(precmd/*"0061FF"*/, sresstart);
+                progress_pos++;
+                if (progress != null) progress(eRWOperation.Write, "", "", progress_pos, progress_cnt);
             }
+            string lastnode = "huj";
             foreach (string cmd in cmds.Keys)
             {
-                string sfirs = (cmds[cmd].Length / 2 + 3).ToString("X2");
+                string sfirs = (cmds[cmd].Item2.Length / 2 + 3).ToString("X2");
                 string cmdnew = Regex.Replace(sfirs + cmd.Substring(2), @"_[\da-fA-F]+$", "");
-                string scmd = cmdnew + cmds[cmd];
+                string scmd = cmdnew + cmds[cmd].Item2;
                 byte[] res = cComm.SendCommand(conn, scmd);
                 string sres = "";
                 foreach (byte b in res)
                     sres += b.ToString("X2");
                 dres.Add(scmd, sres);
+                progress_pos++;
+                if ((progress != null && progress_pos % settings.progress_write_cmds_step == 0) ||
+                    lastnode != cmds[cmd].Item1)
+                    progress(eRWOperation.Write, cmds[cmd].Item1, "", progress_pos, progress_cnt);
+                lastnode = cmds[cmd].Item1;
             }
             if (postcmd != null)
             {
@@ -2545,6 +2560,8 @@ namespace ljson
                 foreach (byte b in resend)
                     sresend += b.ToString("X2");
                 dres.Add(postcmd/*"00fe00"*/, sresend);
+                progress_pos++;
+                if (progress != null) progress(eRWOperation.FlashCopy, "", "", progress_pos, progress_cnt);
             }
             return dres;
         }
@@ -2781,16 +2798,16 @@ namespace ljson
                         dnormal.Add(writepath, dwrite[writepath][0]);
                 }
             }
-            Dictionary<string, string> compiled = new Dictionary<string, string>();
+            Dictionary<string, Tuple<string, string>> compiled = new Dictionary<string, Tuple<string, string>>();
             foreach (string key in dnormal.Keys)
             {
                 Dictionary<string, string> dsingle = WriteSingleElementCommands(key, dnormal[key]);
                 foreach (string singlekey in dsingle.Keys)
                 {
                     if (!compiled.ContainsKey(singlekey))
-                        compiled.Add(singlekey, dsingle[singlekey]);
+                        compiled.Add(singlekey, new Tuple<string, string>(key, dsingle[singlekey]));
                     else
-                        compiled[singlekey] = cRWPath.MergeWriteParams(compiled[singlekey], dsingle[singlekey]);
+                        compiled[singlekey] = new Tuple<string, string>(key, cRWPath.MergeWriteParams(compiled[singlekey].Item2, dsingle[singlekey]));
                     if (settings.logreads)
                     {
                         if (!_log_byteswrite.ContainsKey(singlekey))
@@ -2806,7 +2823,7 @@ namespace ljson
                 Dictionary<string, string> dseriac = WriteSeriaElementCommands(key, dseria[key]);
                 foreach (string seriakey in dseriac.Keys)
                 {
-                    compiled.Add(seriakey, dseriac[seriakey]);
+                    compiled.Add(seriakey, new Tuple<string, string>(key, dseriac[seriakey]));
                     if (settings.logreads)
                         _log_byteswrite.Add(seriakey, dseriac[seriakey]);
                 }
@@ -2863,7 +2880,10 @@ namespace ljson
             //byte[] pass = new byte[] { 0x08, 0x60, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00 };
             //byte[] loginres = cComm.SendCommand(conn, pass);
             ////////////////////////////
-            Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled, cfg.PostWriteCommand, cfg.PreWriteCommand);
+            //progress
+            if (progress != null) progress(eRWOperation.Write, "", "", 0, compiled.Count);
+            //
+            Dictionary<string, string> dres = ExecuteWriteCommands(conn, compiled, cfg.PostWriteCommand, cfg.PreWriteCommand, progress);
             cComm.CloseConnection(conn);
             if (settings.logreads)
             {

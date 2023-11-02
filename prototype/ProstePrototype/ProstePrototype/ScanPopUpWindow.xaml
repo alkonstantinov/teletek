@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:ProstePrototype"
         mc:Ignorable="d"
         ResizeMode="NoResize" WindowStartupLocation="Manual"
-        Title="ScanPopUpWindow" Height="150" Width="150"
+        Title="ScanPopUpWindow" Height="30" Width="450"
         ShowInTaskbar="False" Topmost="True" WindowStyle="None">
     <!--Change from: Height="150" Width="150" to: Height="30" Width="450" and vice versa-->
-    <!--<Window.Resources>
+    <Window.Resources>
         <SolidColorBrush x:Key="ProgressBar.Progress" Color="#FF08893a"/>
         <SolidColorBrush x:Key="ProgressBar.Background" Color="#FFE6E6E6"/>
         <SolidColorBrush x:Key="ProgressBar.Border" Color="#FFBCBCBC"/>
@@ -73,16 +73,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>-->
-    <!--<Border x:Name="grid" CornerRadius="5">-->
-    <Grid x:Name="grid">
+    </Window.Resources>
+    <Border x:Name="grid" CornerRadius="5">
+    <!--<Grid x:Name="grid">-->
         <!--<WebBrowser x:Name="scanWb" />-->
-        <!--<Grid>
-            <ProgressBar Style="{DynamicResource ProgressBarStyle1}" x:Name="readOrWriteProgress" Value="75" Maximum="100" />
+        <Grid>
+            <ProgressBar Style="{DynamicResource ProgressBarStyle1}" x:Name="readOrWriteProgress" Value="0" Maximum="100" />
             <TextBlock x:Name="statusTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" 
             FontFamily="{StaticResource poppins_regular}"/>
-        </Grid>-->
-        <MediaElement x:Name="gifPlayer" LoadedBehavior="Play" UnloadedBehavior="Manual" />
-    </Grid>
-    <!--</Border>-->
+        </Grid>
+        <!--<MediaElement x:Name="gifPlayer" LoadedBehavior="Play" UnloadedBehavior="Manual" />-->
+    <!--</Grid>-->
+    </Border>
 </Window>
