@@ -26,7 +26,7 @@ namespace ProstePrototype
         public UserControl2 uc1 { get; set; } = new UserControl2();
         public UserControl3 uc2 { get; set; } = new UserControl3();
         public UserControl uc3 { get; set; } = new UserControl();
-        public BitmapImage imgsource = new BitmapImage(new Uri("pack://application:,,,/Images/01.IRIS.ico")); //@" / Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+        public BitmapImage imgsource = new BitmapImage(new Uri("pack://application:,,,/html/imports/images/01.IRIS.ico", UriKind.RelativeOrAbsolute)); //@" / Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
         private SolidColorBrush defaultColorBrush = (SolidColorBrush)App.Current.FindResource("DefaultColor");
         private SolidColorBrush grayColorBrush = (SolidColorBrush)App.Current.FindResource("GrayColor");
         public ReadWindow()
@@ -211,7 +211,7 @@ namespace ProstePrototype
             ChangeSelectedIndex(3);
             Button_LostFocus(sender, e);
             uc3.Resources = Application.Current.Resources;
-            img3.Source = new BitmapImage(new Uri(@"/Images/01.IRIS.ico", UriKind.RelativeOrAbsolute));
+            img3.Source = imgsource;
             ContentArea.Content = uc3;
             clickedName = Button3.Name;
         }

@@ -132,6 +132,54 @@ namespace common
             }
             return res;
         }
+        public static byte? ResponceLenByte(string _panel_type)
+        {
+            byte? res = null;
+            JObject sett = Settings;
+            if (sett != null && sett["responce_len_byte"] != null)
+            {
+                JObject b = (JObject)sett["responce_len_byte"];
+                foreach (JProperty p in b.Properties())
+                    if (p.Name.ToLower() == _panel_type.ToLower())
+                    {
+                        res = Convert.ToByte(p.Value);
+                        break;
+                    }
+            }
+            return res;
+        }
+        public static byte? ResponceDefaultLen(string _panel_type)
+        {
+            byte? res = null;
+            JObject sett = Settings;
+            if (sett != null && sett["responce_default_len"] != null)
+            {
+                JObject b = (JObject)sett["responce_default_len"];
+                foreach (JProperty p in b.Properties())
+                    if (p.Name.ToLower() == _panel_type.ToLower())
+                    {
+                        res = Convert.ToByte(p.Value);
+                        break;
+                    }
+            }
+            return res;
+        }
+        public static byte ResponceSysBytes(string _panel_type)
+        {
+            byte res = 0;
+            JObject sett = Settings;
+            if (sett != null && sett["responce_sys_bytes"] != null)
+            {
+                JObject b = (JObject)sett["responce_sys_bytes"];
+                foreach (JProperty p in b.Properties())
+                    if (p.Name.ToLower() == _panel_type.ToLower())
+                    {
+                        res = Convert.ToByte(p.Value);
+                        break;
+                    }
+            }
+            return res;
+        }
         public static Dictionary<string, Dictionary<string, string>> read_replacements
         {
             get
@@ -758,6 +806,7 @@ namespace common
             res["_base_read_file"] = _base_read_file;
             res["_base_write_file"] = _base_write_file;
             res["_ver_command"] = _ver_command;
+            res["_write_ver_command"] = _write_ver_command;
             res["_xml_login_cmd"] = _xml_login_cmd;
             res["_xml_looptype_cmd"] = _xml_looptype_cmd;
             res["_read_ver_files"] = JObject.FromObject(_read_ver_files);
@@ -781,6 +830,8 @@ namespace common
                 _base_write_file = o["_base_write_file"].ToString();
             if (o["_ver_command"] != null && o["_ver_command"].Type != JTokenType.Null)
                 _ver_command = o["_ver_command"].ToString();
+            if (o["_write_ver_command"] != null && o["_write_ver_command"].Type != JTokenType.Null)
+                _write_ver_command = o["_write_ver_command"].ToString();
             if (o["_xml_login_cmd"] != null && o["_xml_login_cmd"].Type != JTokenType.Null)
                 _xml_login_cmd = o["_xml_login_cmd"].ToString();
             if (o["_xml_looptype_cmd"] != null && o["_xml_looptype_cmd"].Type != JTokenType.Null)
@@ -803,6 +854,7 @@ namespace common
         private string _base_read_file = null;
         private string _base_write_file = null;
         private string _ver_command = null;
+        private string _write_ver_command = null;
         private string _xml_login_cmd = null;
         private string _xml_looptype_cmd = null;
         private Dictionary<string, string> _read_ver_files = new Dictionary<string, string>();
@@ -850,6 +902,7 @@ namespace common
         private void SetVersions()
         {
             _ver_command = null;
+            _write_ver_command = null;
             _xml_looptype_cmd = null;
             _xml_login_cmd = null;
             string _readf = File.ReadAllText(_base_read_file);
@@ -901,6 +954,20 @@ namespace common
             //
             string _write = "";
             if (File.Exists(_base_write_file)) _write = File.ReadAllText(_base_write_file);
+            Match mwpre = Regex.Match(_write, @"<PREOPERATIONS>[\w\W]+?</PREOPERATIONS>", RegexOptions.IgnoreCase);
+            if (mwpre.Success)
+            {
+                foreach (Match mmwpre in Regex.Matches(mwpre.Value, @"<COMMAND[\w\W]+?/>"))
+                    if (Regex.IsMatch(mmwpre.Value, @"SAVEAS\s*?=\s*?""VERSION""", RegexOptions.IgnoreCase))
+                    {
+                        Match mwver = Regex.Match(mmwpre.Value, @"BYTES\s*?=\s*?""([\w\W]+?)""", RegexOptions.IgnoreCase);
+                        if (mwver.Success)
+                        {
+                            _write_ver_command = mwver.Groups[1].Value;
+                            break;
+                        }
+                    }
+            }
             _write = Regex.Replace(_write, @"</VERSIONING>[\w\W]*?</PREOPERATIONS>[\w\W]+$", "");
             _write_ver_files.Clear();
             if (_base_write_file == null) _base_write_file = Regex.Replace(System.IO.Path.GetDirectoryName(_base_read_file), @"[\\/]Read$", @"\Write", RegexOptions.IgnoreCase);
@@ -969,6 +1036,17 @@ namespace common
                 string s = null;
                 Monitor.Enter(_cs_config);
                 s = _ver_command;
+                Monitor.Exit(_cs_config);
+                return s;
+            }
+        }
+        public string WriteVersionCommand
+        {
+            get
+            {
+                string s = null;
+                Monitor.Enter(_cs_config);
+                s = _write_ver_command;
                 Monitor.Exit(_cs_config);
                 return s;
             }

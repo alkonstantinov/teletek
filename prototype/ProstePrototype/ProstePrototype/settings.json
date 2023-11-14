@@ -16,6 +16,15 @@
     "iris4": 7,
     "iris8": 7
   },
+  "responce_len_byte": {
+    "iris": 0
+  },
+  "responce_default_len": {
+    "iris": 3
+  },
+  "responce_sys_bytes": {
+    "iris": 2
+  },
   "inc_fields_on_read": {
     "IRIS8": {
       "IRIS8_INPUT": {

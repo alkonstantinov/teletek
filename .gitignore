@@ -160,3 +160,7 @@ NewTeletekSW/bin
 /prototype/ProstePrototype/ProstePrototype/html/Test.html
 /prototype/ProstePrototype/kill_run/bin/Debug/netcoreapp3.1/kill_run.dll
 /.vs/teletek/v17/.wsuo
+/prototype/ProstePrototype/lcommunicate/bin/Debug/netcoreapp3.1/lcommunicate.deps.json
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/HidLibrary.dll
+/prototype/ProstePrototype/jtest/bin/Debug/netcoreapp3.1/jtest.deps.json
+/prototype/ProstePrototype/ljson/bin/Debug/netcoreapp3.1/ljson.deps.json

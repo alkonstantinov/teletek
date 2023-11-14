@@ -1773,7 +1773,7 @@ const getAvailableZoneElements = async (elementType) => {
         }
     });
     //alert("availableZones " + availableZones + ", elementType " + elementType)
-    for (let i = minElements; i < elements; i++) {
+    for (let i = minElements; i <= elements; i++) {
         boundAsync.zoneDevices(i).then(res => {
             if (res && res !== "[]") {
                 addConcreteElement(i, elementType);

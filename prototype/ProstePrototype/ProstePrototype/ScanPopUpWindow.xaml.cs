@@ -1,6 +1,8 @@
 ﻿using common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
@@ -9,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -21,41 +24,61 @@ namespace ProstePrototype
     /// </summary>
     public partial class ScanPopUpWindow : Window
     {
+        private MainWindow _mainWindow;
         public bool _functionFinished  = false;
         //private string gifPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory), "Images\\barcode-scan.gif");
-        public ScanPopUpWindow()
+        public ScanPopUpWindow(MainWindow mainWindow)
         {
             InitializeComponent();
 
-            // calculate the position relative to the mainwindow
-            double mainWindowRight = Application.Current.MainWindow.Left + Application.Current.MainWindow.ActualWidth;
-            double mainWindowBottom = Application.Current.MainWindow.Top + Application.Current.MainWindow.ActualHeight;
+            _mainWindow = mainWindow;
+            Point maxPrimary = new Point(SystemParameters.MaximizedPrimaryScreenWidth, SystemParameters.MaximizedPrimaryScreenHeight);
+            Point mainWindowTopLeft = new Point(_mainWindow.Left , _mainWindow.Top);
 
-            // Calculate the screen dimensions
-            double screenWidth = SystemParameters.WorkArea.Width;
-            double screenHeight = SystemParameters.WorkArea.Height;
-            double screenWidth1 = SystemParameters.VirtualScreenWidth;
-            double screenHeight2 = SystemParameters.VirtualScreenHeight - screenHeight;
+            double add = _mainWindow.WindowState == WindowState.Maximized ? 30 : 35;
 
-            // determine the screen that the mainwindow is primarily located on,
-            // and set the position for the popupwindow
-            if (mainWindowRight > screenWidth)
+            if (mainWindowTopLeft.X >= 0 && mainWindowTopLeft.X <= maxPrimary.X && mainWindowTopLeft.Y >= 0 && mainWindowTopLeft.Y <= maxPrimary.Y)
             {
-                // case secondary screen
-                this.Left = Math.Min(mainWindowRight, screenWidth1) - this.Width - 1;   // Adjust as needed
-                this.Top = Math.Min(mainWindowBottom, screenHeight2) - this.Height - 1;   // Adjust as needed
-            }
-            else
+                // we are on primary screen
+                if (_mainWindow.WindowState == WindowState.Maximized)
+                {
+                    this.Left = SystemParameters.FullPrimaryScreenWidth - this.Width - 2;
+                    this.Top = add - this.Height / 2;
+                } else
+                {
+                    this.Left = _mainWindow.RestoreBounds.Right - this.Width - 7;
+                    this.Top = _mainWindow.RestoreBounds.Top + add - this.Height / 2;
+                }
+            } else
             {
-                // case primary screen
-                this.Left = Math.Min(mainWindowRight, screenWidth) - this.Width - 1;   // Adjust as needed
-                this.Top = Math.Min(mainWindowBottom, screenHeight) - this.Height - 1;   // Adjust as needed
+                // we are on secondary screen
+                if (_mainWindow.WindowState == WindowState.Maximized)
+                {                    
+                    if (SystemParameters.VirtualScreenLeft == 0)
+                    {
+                        this.Left = SystemParameters.VirtualScreenWidth - this.Width - 2;
+                        this.Top = (
+                            SystemParameters.VirtualScreenTop < 0 ? 
+                            SystemParameters.VirtualScreenTop : 
+                            SystemParameters.VirtualScreenHeight - (_mainWindow.RenderSize.Height + 33.6)
+                            ) + add - this.Height / 2;
+                    } else
+                    {
+                        this.Left = SystemParameters.VirtualScreenLeft + _mainWindow.RenderSize.Width - 14.4 - this.Width - 2;
+                        this.Top = (
+                            SystemParameters.VirtualScreenTop < 0 ?
+                            SystemParameters.VirtualScreenTop :
+                            SystemParameters.VirtualScreenHeight - (_mainWindow.RenderSize.Height + 33.6)
+                            ) + add - this.Height / 2;
+                    }
+                }
+                else
+                {
+                    this.Left = _mainWindow.RestoreBounds.Right - this.Width - 7;
+                    this.Top = _mainWindow.RestoreBounds.Top + add - this.Height / 2;
+                }
             }
-            //this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
-            //this.Top = (SystemParameters.WorkArea.Height / 2) - (this.Height * 1.6);           
-            ////string html = $"<html><body style='overflow: hidden; display:grid; place-items: center; margin: 0; padding: 0;'><img src='{gifPath}' width='100%' height='100%' style='margin: auto;'/></body></html>";
-            ////scanWb.NavigateToString(html);
-            //InitializeGifPlayer();
+            // InitializeGifPlayer();
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);
@@ -87,11 +110,11 @@ namespace ProstePrototype
                 // Update a readOrWriteProgress bar
                 readOrWriteProgress.Value = (double)counter * 100.0 / (double)cntall;
 
-                if (common.debugSettings.showReadWriteProgressSigns)
-                {
+                //if (common.debugSettings.showReadWriteProgressSigns)
+                //{
                     // Show text in statusTextBlock
-                    statusTextBlock.Text = $"{Utils.MakeTranslation(op.ToString())}, Node: {Utils.LimitCharacters(node, 36)}" + (String.IsNullOrEmpty(index) ? "" : $", Index: {index}");
-                }
+                    statusTextBlock.Text = $"{Utils.LimitCharacters(node, 36)}" + (String.IsNullOrEmpty(index) ? "" : $" {index}");
+                //}
             });
         }
 
@@ -116,7 +139,7 @@ namespace ProstePrototype
 
         private void CloseWindow()
         {
-            //// Dispose of the gifPlayer if it exists
+            // Dispose of the gifPlayer if it exists
             //if (gifPlayer != null)
             //{
             //    gifPlayer.Stop();

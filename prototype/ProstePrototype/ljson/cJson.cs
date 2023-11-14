@@ -1605,7 +1605,19 @@ namespace ljson
             }
             rwres = PanelLogin(conn, cfg, _code);
             if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD) return null;
+            byte? _lenbyte = conn.ResponceLenByte;
+            byte? _defaultlen = conn.ResponceDefaultLen;
+            if (CurrentPanelType.ToLower() == "iris")
+            {
+                conn.ResponceLenByte = null;
+                conn.ResponceDefaultLen = null;
+            }
             byte[] bres = cComm.SendCommand(conn, vercmd);
+            if (CurrentPanelType.ToLower() == "iris")
+            {
+                conn.ResponceLenByte = _lenbyte;
+                conn.ResponceDefaultLen = _defaultlen;
+            }
             if (cfg.LooptypeCommand != null) verloop = cComm.SendCommand(conn, cfg.LooptypeCommand);
             _connection_cache = conn.GetCache();
             cComm.CloseConnection(conn);
@@ -1615,12 +1627,14 @@ namespace ljson
             string res = (bres != null) ? bres[bres.Length - 2].ToString("X2") + bres[bres.Length - 1].ToString("X2") : null;
             return res;
         }
-        private static eRWResult SetRWFiles(object conn_params, string _code, ref string panel_version, ref string xml_version)
+        private static eRWResult SetRWFiles(object conn_params, string _code, bool write, ref string panel_version, ref string xml_version)
         {
             cXmlConfigs cfg = GetPanelXMLConfigs(PanelTemplatePath());
             eRWResult rwres = eRWResult.Ok;
             byte[] verloop;
-            string ver = VersionKey(conn_params, cfg.VersionCommand, cfg, _code, out rwres, out verloop);
+            string vercmd = cfg.VersionCommand;
+            if (write) vercmd = cfg.WriteVersionCommand;
+            string ver = VersionKey(conn_params, vercmd, cfg, _code, out rwres, out verloop);
             if (ver != null)
             {
                 if ((rwres == eRWResult.Ok || rwres == eRWResult.NullLoginCMD) && ver != cfg.CurrentVersion || WriteReadMerge == null)
@@ -1737,7 +1751,7 @@ namespace ljson
             //
             string panel_version = null;
             string xml_version = null;
-            eRWResult rwres = SetRWFiles(conn_params, _code, ref panel_version, ref xml_version);
+            eRWResult rwres = SetRWFiles(conn_params, _code, false, ref panel_version, ref xml_version);
             if (rwres != eRWResult.Ok && rwres != eRWResult.NullLoginCMD)
                 return rwres;
             if (String.Compare(panel_version, xml_version) > 0 && !Regex.IsMatch(CurrentPanelType, "natron", RegexOptions.IgnoreCase) && !verdiff(panel_version, xml_version))
@@ -2268,38 +2282,38 @@ namespace ljson
                     }
                 }
             }
-            foreach (string devaddr in loopdevs.Keys)
-            {
-                JObject jdev = JObject.Parse(loopdevs[devaddr]);
-                JObject orw = (JObject)jdev["~rw"];
-                cRWPath rw = orw.ToObject<cRWPath>();
-                jdev = GroupsWithValues(jdev);
-                //
-                List<string> commands = new List<string>();
-                //cRWCommand cmd = null;
-                //string scmd = null;
-                //string _params = "";
-                //
-                cRWCommand cmdl = null;
-                if (CurrentPanelType == "iris")
-                    cmdl = new cRWCommandIRIS();
-                else
-                    cmdl = new cRWCommand();
-                int command_len = cmdl.CommandLength();
-                if (isMIMIC)
+            if (loopdevs != null) foreach (string devaddr in loopdevs.Keys)
                 {
-                    if (oTrunc == null)
-                    {
-                        rw.RepareSimpoMIMICOUTCommands(command_len);
-                        oTrunc = rw.WriteOperationOrder;
-                    }
+                    JObject jdev = JObject.Parse(loopdevs[devaddr]);
+                    JObject orw = (JObject)jdev["~rw"];
+                    cRWPath rw = orw.ToObject<cRWPath>();
+                    jdev = GroupsWithValues(jdev);
+                    //
+                    List<string> commands = new List<string>();
+                    //cRWCommand cmd = null;
+                    //string scmd = null;
+                    //string _params = "";
+                    //
+                    cRWCommand cmdl = null;
+                    if (CurrentPanelType == "iris")
+                        cmdl = new cRWCommandIRIS();
                     else
-                        rw.WriteOperationOrder = oTrunc;
+                        cmdl = new cRWCommand();
+                    int command_len = cmdl.CommandLength();
+                    if (isMIMIC)
+                    {
+                        if (oTrunc == null)
+                        {
+                            rw.RepareSimpoMIMICOUTCommands(command_len);
+                            oTrunc = rw.WriteOperationOrder;
+                        }
+                        else
+                            rw.WriteOperationOrder = oTrunc;
+                    }
+                    //
+                    FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
+                    //
                 }
-                //
-                FillJNodeCommands(idx - 1, jdev, rw, devaddr, command_len, inc, cmds);
-                //
-            }
             //
             //if (cmds.Count <= 0) return cmds;
             //
@@ -2541,7 +2555,15 @@ namespace ljson
             {
                 string sfirs = (cmds[cmd].Item2.Length / 2 + 3).ToString("X2");
                 string cmdnew = Regex.Replace(sfirs + cmd.Substring(2), @"_[\da-fA-F]+$", "");
-                string scmd = cmdnew + cmds[cmd].Item2;
+                string cmddata = cmds[cmd].Item2;
+                if (CurrentPanelType.ToLower() == "iris" && false)
+                {
+                    string slen = cmd.Substring(cmd.Length - 2, 2);
+                    byte bfirst = (byte)(Convert.ToByte(slen, 16) + 3);
+                    while (cmddata.Length / 2 < bfirst) cmddata += "00";
+                    sfirs = bfirst.ToString("X2");
+                }
+                string scmd = cmdnew + cmddata;
                 byte[] res = cComm.SendCommand(conn, scmd);
                 string sres = "";
                 foreach (byte b in res)
@@ -2702,7 +2724,7 @@ namespace ljson
         {
             string panel_version = null;
             string xml_version = null;
-            eRWResult rwres = SetRWFiles(conn_params, _code, ref panel_version, ref xml_version);
+            eRWResult rwres = SetRWFiles(conn_params, _code, true, ref panel_version, ref xml_version);
             if (panel_version != xml_version && !verdiff(panel_version, xml_version)) return eRWResult.VersionDiff;
             if (rwres != eRWResult.Ok)
                 return rwres;

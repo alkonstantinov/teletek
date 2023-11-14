@@ -53,17 +53,29 @@ namespace lcommunicate
         internal virtual byte[] SendCommand(object _connection, string _command) { return null; }
         internal virtual byte[] SendCommand(byte[] _command) { return null; }
         internal virtual byte[] SendCommand(string _command) { return null; }
-        private int _sleep_after_write_milliseconds = 0;
+        private int _sleep_after_write_milliseconds = 10;
         public int SleepAfterWriteMilliseconds
         {
-            get
-            {
-                return _sleep_after_write_milliseconds;
-            }
-            set
-            {
-                _sleep_after_write_milliseconds = value;
-            }
+            get { return _sleep_after_write_milliseconds; }
+            set { _sleep_after_write_milliseconds = value; }
+        }
+        private byte? _responce_len_byte = null;
+        public byte? ResponceLenByte
+        {
+            get { return _responce_len_byte; }
+            set { _responce_len_byte = value; }
+        }
+        private byte? _responce_default_len = null;
+        public byte? ResponceDefaultLen
+        {
+            get { return _responce_default_len; }
+            set { _responce_default_len = value; }
+        }
+        private byte _responce_sys_bytes = 0;
+        public byte ResponceSysBytes
+        {
+            get { return _responce_sys_bytes; }
+            set { _responce_sys_bytes = value; }
         }
     }
     public class cComm
@@ -980,6 +992,9 @@ namespace lcommunicate
             {
                 conn._panel_type = panel_type;
                 conn.SleepAfterWriteMilliseconds = settings.Sleep(panel_name);
+                conn.ResponceLenByte = settings.ResponceLenByte(panel_type);
+                conn.ResponceDefaultLen = settings.ResponceDefaultLen(panel_type);
+                conn.ResponceSysBytes = settings.ResponceSysBytes(panel_type);
             }
             return conn;
         }
@@ -996,12 +1011,22 @@ namespace lcommunicate
                 conn = cComm.ConnectHID((HidDevice)conn_params);
             else if (conn_params is cCOMParams)
                 conn = cComm.ConnectCOM((cCOMParams)conn_params);
-            conn._panel_type = panel_type;
-            conn.SleepAfterWriteMilliseconds = settings.Sleep(_panel_name);
+            if (conn != null)
+            {
+                conn._panel_type = panel_type;
+                conn.SleepAfterWriteMilliseconds = settings.Sleep(_panel_name);
+                conn.ResponceLenByte = settings.ResponceLenByte(panel_type);
+                conn.ResponceDefaultLen = settings.ResponceDefaultLen(panel_type);
+                conn.ResponceSysBytes = settings.ResponceSysBytes(panel_type);
+            }
             return conn;
         }
         public static byte[] SendCommand(cTransport conn, string cmd)
         {
+            //if (cmd == "03511000000C")
+            //{
+            //    cmd = cmd;
+            //}
             byte[] res = conn.SendCommand(cmd);
             return res;
         }

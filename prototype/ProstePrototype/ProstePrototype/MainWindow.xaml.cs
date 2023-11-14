@@ -46,13 +46,6 @@ namespace ProstePrototype
         private ScanPopUpWindow popUpWindow;
 
         public bool DarkMode { get; set; }
-
-        private double tempLeft { get; set; }
-        private double tempTop { get; set; }
-        private double tempHeight { get; set; }
-        private double tempWidth { get; set; }
-        private double tempMaxHeight { get; set; }
-        private double tempMaxWidth { get; set; }
         private string currentFileName { get; set; }
 
         private class BrowserParams
@@ -113,7 +106,7 @@ namespace ProstePrototype
             //tempLeft = Left;
             //tempTop = Top;
             #endregion
-            Uri iconUri = new Uri("pack://application:,,,/Images/t_m_icon.png", UriKind.RelativeOrAbsolute);
+            Uri iconUri = new Uri("pack://application:,,,/html/imports/images/teletek-manager-icon.ico", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
 
             pages = JObject.Parse(File.ReadAllText(System.IO.Path.Combine(applicationDirectory, "html/pages.json")));
@@ -820,7 +813,7 @@ namespace ProstePrototype
                 rw.ShowDialog();
             
                 var c = rw.DialogResult;
-                popUpWindow = new ScanPopUpWindow();
+                popUpWindow = new ScanPopUpWindow(this);
                 if ((bool)c)
                 {
                     int tabIdx = rw.selectedIndex;
@@ -1042,7 +1035,7 @@ namespace ProstePrototype
             openFileDialog.InitialDirectory = GetLastUsedDirectory();
             if (openFileDialog.ShowDialog() == true)
             {
-                popUpWindow = new ScanPopUpWindow();
+                popUpWindow = new ScanPopUpWindow(this);
                 SaveLastUsedDirectory(openFileDialog.FileName);
 
                 Thread funcThread = new Thread(() =>
@@ -1238,7 +1231,7 @@ namespace ProstePrototype
             {
                 rw.ShowDialog();
                 var c = rw.DialogResult;
-                popUpWindow = new ScanPopUpWindow();
+                popUpWindow = new ScanPopUpWindow(this);
                 if ((bool)c)
                 {
                     int tabIdx = rw.selectedIndex;
@@ -1314,24 +1307,12 @@ namespace ProstePrototype
 
             if (this.WindowState != WindowState.Maximized)
             {
-                tempHeight = this.Height;
-                tempWidth = this.Width;
-                tempLeft = this.Left;
-                tempTop = this.Top;
-                tempMaxHeight = this.MaxHeight;
-                tempMaxWidth = this.MaxWidth;
                 WindowStyle = WindowStyle.SingleBorderWindow;
                 WindowState = WindowState.Maximized;
                 WindowStyle = WindowStyle.None;
             }
             else
             {
-                this.Left = tempLeft;
-                this.Top = tempTop;
-                this.Width = tempWidth;
-                this.Height = tempHeight;
-                this.MaxHeight = tempMaxHeight;
-                this.MaxWidth = tempMaxWidth;
                 WindowStyle = WindowStyle.SingleBorderWindow;
                 WindowState = WindowState.Normal;
                 WindowStyle = WindowStyle.None;

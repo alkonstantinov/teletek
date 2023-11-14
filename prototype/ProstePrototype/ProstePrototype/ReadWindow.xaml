@@ -125,11 +125,11 @@
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="img3" Width="36" Height="36" Margin="0,0,0,2">
                             <Image.Source>
-                                <FormatConvertedBitmap Source="Images\01.IRIS.ico"
+                                <FormatConvertedBitmap Source="html\imports\Images\01.IRIS.ico"
                                    DestinationFormat="Gray8"/>
                             </Image.Source>
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="Images\01.IRIS.ico"/>
+                                <ImageBrush ImageSource="html\imports\Images\01.IRIS.ico"/>
                             </Image.OpacityMask>
                         </Image>
 
