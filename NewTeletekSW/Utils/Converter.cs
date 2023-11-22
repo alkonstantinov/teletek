@@ -15,11 +15,11 @@ namespace NewTeletekSW.Utils
         public static void ReadXML(string filename)
         {
             XDocument xml = XDocument.Load(filename);
-            JObject json = new JObject();
+            JObject json = new();
 
             foreach (var xmlEl in xml.Elements())
             {
-                JObject jsonTemp = new JObject();
+                JObject jsonTemp = new();
                 ConvertElements(xmlEl, jsonTemp);
                 Checker(xmlEl, json, jsonTemp);
                 //json.Add(xmlEl.Name.ToString(), json);
@@ -31,7 +31,7 @@ namespace NewTeletekSW.Utils
 
         private static void ConvertElements(XElement node, JObject jsonObject)
         {
-            var childs = new JObject();
+            JObject childs = new();
             if (node.HasElements)
             {
                 if (node.HasAttributes)
@@ -61,7 +61,7 @@ namespace NewTeletekSW.Utils
                 if (childs.ContainsKey(attribute.Name.ToString()))
                 {
                     var prevValue = childs.GetValue(attribute.Name.ToString());
-                    JArray series = new JArray();
+                    JArray series = new();
                     if (prevValue != null)
                     {
                         if (prevValue.Type == JTokenType.Array)
@@ -89,7 +89,7 @@ namespace NewTeletekSW.Utils
             if (jsonObject.ContainsKey(node.Name.ToString()))
             {
                 var prevValue = jsonObject.GetValue(node.Name.ToString());
-                JArray series = new JArray();
+                JArray series = new();
                 if (prevValue != null)
                 {
                     if (prevValue.Type == JTokenType.Array)
@@ -118,7 +118,6 @@ namespace NewTeletekSW.Utils
             XDocument xml = XDocument.Load(filename);
 
             var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
-            removeMe.Count();
             removeMe.Remove();
 
             foreach (var xmlEl in xml.Elements())
@@ -160,7 +159,7 @@ namespace NewTeletekSW.Utils
 
         private static void AddAttributesText(XElement node, JObject childs)
         {
-            JObject idMemo = new JObject();
+            JObject idMemo = new();
             string currentId = "";
             string keyJ = "";
             foreach (var attribute in node.Attributes())
@@ -207,12 +206,12 @@ namespace NewTeletekSW.Utils
                         var allKeys = childs.Properties();
                         foreach (var kk in allKeys)
                         {
-                            if (childs[kk.Name]?["id"] != null && childs[kk.Name]["id"].ToString() == new JArray { currentId }.ToString())
+                            if (childs[kk.Name]?["id"] != null && childs[kk.Name]!["id"]!.ToString() == new JArray { currentId }.ToString())
                             {
                                 keyJ = kk.Name;
                             }
                             else
-                            if (childs[kk.Name]?["countLst"] != null && Array.Exists<JToken>(childs[kk.Name]["countLst"].ToArray(), el => (int)el == count))
+                            if (childs[kk.Name]?["countLst"] != null && Array.Exists<JToken>(childs![kk.Name]!["countLst"]!.ToArray(), el => (int)el == count))
                             {
                                 keyJ = kk.Name;
                                 break;
@@ -250,7 +249,6 @@ namespace NewTeletekSW.Utils
 
             Console.WriteLine(xml.DescendantNodes().ToArray().Length);
             var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
-            removeMe.Count();
             removeMe.Remove();
             Console.WriteLine(xml.DescendantNodes().ToArray().Length);
 
@@ -346,7 +344,7 @@ namespace NewTeletekSW.Utils
                             //    keyJ = kk.Name;
                             //}
                             //else 
-                            if (childs[kk.Name]?["countLst"] != null && Array.Exists<JToken>(childs[kk.Name]["countLst"].ToArray(), el => (int)el == count))
+                            if (childs[kk.Name]?["countLst"] != null && Array.Exists<JToken>(childs![kk.Name]!["countLst"]!.ToArray(), el => (int)el == count))
                             {
                                 keyJ = kk.Name;
                                 break;
@@ -361,17 +359,6 @@ namespace NewTeletekSW.Utils
                     }
 
                 }
-                //else if (attribute.Name == "ID")
-                //{
-                //    string idValue = attribute.Value;
-                //    if (keyH == "en")
-                //    {
-                //        idMemo.Add("id", new JArray { idValue });
-                //    } else
-                //    {
-                //        currentId = idValue;
-                //    }
-                //}
             }
         }
 
@@ -379,10 +366,6 @@ namespace NewTeletekSW.Utils
         { // working for IRIS
             keyH = key.ToLower();
             XDocument xml = XDocument.Load(filename);
-
-            //var removeMe = xml.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment);
-            //removeMe.Count();
-            //removeMe.Remove();
 
             foreach (var xmlEl in xml.Elements())
             {
@@ -406,7 +389,7 @@ namespace NewTeletekSW.Utils
 
                 if (keyH == "en")
                 {
-                    keyJ = id; // value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { '/', '*', '.', '?', '!' }) : "";
+                    keyJ = id!; // value != null ? value.Trim().ToLower().Replace(" ", "_").Trim(new Char[] { '/', '*', '.', '?', '!' }) : "";
 
                     if (!String.IsNullOrEmpty(keyJ))
                     {
@@ -418,23 +401,11 @@ namespace NewTeletekSW.Utils
                     }
                 } else
                 {
-                    //var allKeys = json.Properties();
-                    ////string smtg  = allKeys.Select(x => x.Name).FirstOrDefault(el => (string)json[el]["id"] == id).ToString();
-                    //foreach (var kk in allKeys)
-                    //{
-                    //    if (json[kk.Name] != null && (string)kk.Name == id)
-                    //    {
-                    //        keyJ = kk.Name;
-                    //        break;
-                    //    }
-                    //}
-                    //if (!String.IsNullOrEmpty(keyJ))
-                    //{
-                    //    var prevValue = json[keyJ];
                     var prevValue = !String.IsNullOrEmpty(id) ? json[id] : null;
                     if (prevValue != null && !((JObject)prevValue).Properties().Select(p => p.Name).Contains(keyH))
+                    { 
                         ((JObject)prevValue).TryAdd(keyH, value);
-                    //}
+                    }
                 }
                 if (node.HasElements)
                 {

@@ -2181,9 +2181,10 @@ namespace ljson
                     if (m.Success)
                     {
                         int len = Convert.ToInt32(m.Groups[1].ToString());
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 1; i <= len; i++)
-                            sb.Append(op.value);
+                        StringBuilder sb = new StringBuilder(op.value);
+                        while (sb.Length/2 < len) sb.Append("00");
+                        //for (int i = 1; i <= len; i++)
+                        //    sb.Append(op.value);
                         op.writeval = sb.ToString();
                     }
                     else

@@ -1,22 +1,12 @@
-﻿using System;
-using System.Data.SqlTypes;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Xml;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Drawing;
+﻿using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using NewTeletekSW.Utils;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace XMLDocument
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
@@ -66,8 +56,8 @@ namespace XMLDocument
             #endregion
             #region getFiles
             var fileOrDirectory = args[pathIndex];
-            List<string> fileArgs = new List<string>();
-            if (fileOrDirectory.Contains(","))
+            List<string> fileArgs = new();
+            if (fileOrDirectory.Contains(','))
             {
                 fileArgs = fileOrDirectory.Split(",").Select(f => f.Trim()).ToList();
             }
@@ -108,7 +98,7 @@ namespace XMLDocument
                     break;
                 case "t":
                 case "transform": // read xml and transform it to json based on @ID
-                    JObject json = new JObject();
+                    JObject json = new();
 
                     var mergeSettings = new JsonMergeSettings
                     {
@@ -119,7 +109,7 @@ namespace XMLDocument
                     {
                         foreach (string fileName in fileArgs)
                         {
-                            string purFileName = (fileName.Split("."))[0];
+                            string purFileName = fileName.Split(".")[0];
                             string[] arr = purFileName.Split("_");
                             string key = "en";
                             if (arr.GetType() == typeof(string[]) && arr[arr.Length - 1].Length == 2)
@@ -148,7 +138,7 @@ namespace XMLDocument
                     {
                         foreach (string fileName in fileArgs)
                         {
-                            string purFileName = (fileName.Split("."))[0];
+                            string purFileName = fileName.Split(".")[0];
                             string[] arr = purFileName.Split("_");
                             string key = "en";
                             if (arr.GetType() == typeof(string[]) && arr[arr.Length - 1].Length == 2)
@@ -167,59 +157,69 @@ namespace XMLDocument
                 case "toXLS":
                     // read json file and transform it to Excel
                     // Command line:
-                    // '-f "C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\html\imports\translations.js"
                     // -p toXLS'
-                    var jsonString = Regex.Replace(File.ReadAllText(fileArgs[0]), @"^const Translations = ", "", RegexOptions.IgnoreCase); // fileArgs[0] should be a JSON file
-                    var jsonData = JObject.Parse(jsonString);
+                    // '-f "C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\html\imports\translations.js"
+                    string jsonString = RemoveConstRegex().Replace(File.ReadAllText(fileArgs[0]), ""); // fileArgs[0] should be a JSON file
+                    JObject jsonData = JObject.Parse(jsonString);
 
-                    string intialLang = (string)jsonData["initial"];
-                    JObject translationJson = (JObject)jsonData["translations"];
-                    JArray allLanguages = (JArray)jsonData["languages"];
+                    string intialLang = "";
+                    if (jsonData.ContainsKey("initial") && jsonData["initial"] != null) 
+                    {
+                        intialLang = jsonData["initial"]!.ToString();
+                    }
+                    JObject? translationJson = jsonData["translations"] as JObject;
+                    JArray? allLanguages = jsonData["languages"] as JArray;
                     // creating the header based on all languges found
-                    List<string> h = new List<string>();
-                    h = allLanguages.Select(x => (JObject)x).Select(y => y["id"].ToString()).ToList();
-                    List<string> propKeys = new List<string>();
-                    propKeys = translationJson.Properties().Select(k => k.Name).ToList();
+                    List<string> h = new();
+                    if (allLanguages != null)
+                        h = allLanguages.Select(x => (JObject)x).Select(y => y["id"]!.ToString()).ToList();
+                    List<string> propKeys = new();
+                    if (translationJson != null)
+                        propKeys = translationJson.Properties().Select(k => k.Name).ToList();
 
+                    string? destinationPath = Path.GetDirectoryName(fileOrDirectory);
                     // create the file
-                    new ExcelExporter(propKeys, h, @"C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\html\imports\translations.xlsx").WriteFile(intialLang.ToString(), translationJson, allLanguages);
+                    new ExcelExporter(
+                        propKeys, 
+                        h, 
+                        destinationPath + Path.DirectorySeparatorChar + "translations.xlsx" // @"C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\html\imports\translations.xlsx"
+                    ).WriteFile(
+                        intialLang.ToString(),
+                        translationJson ?? new JObject(),
+                        allLanguages ?? new JArray()
+                    );
                     break;
                 case "fromXLS":
                     // read .xlsx file and transform it to json
                     // Command line:
-                    // '-f "C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\html\imports\translations.xlsx"
                     // -p fromXLS'
+                    // '-f "C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\ProstePrototype\html\imports\translations.xlsx"
 
-                    JObject translationObj = new JObject();
+                    JObject translationObj = new();
                     using (SpreadsheetDocument document = SpreadsheetDocument.Open(fileArgs[0], false)) // open the document (false for read-only)
                     {
-                        WorkbookPart wbPart = document.WorkbookPart; // each spreadsheet has a workbook part, that contains sheets
+                        WorkbookPart wbPart = document.WorkbookPart!; // each spreadsheet has a workbook part, that contains sheets
 
                         // sheets contains list of sheet and each sheet has its own sheet definition (worksheet) which contains sheetData
-                        List<string> sheetsNames = wbPart.Workbook.Sheets.Elements<Sheet>().Select(x => (string)x.Name).ToList();
+                        List<string?> sheetsNames = wbPart.Workbook.Sheets!.Elements<Sheet>().Select(x => (string?)x.Name).ToList();
                         
-                        for (int i = 0; i < sheetsNames.Count(); i++)
+                        for (int i = 0; i < sheetsNames.Count; i++)
                         {
-                            string sheetName = sheetsNames[i];
+                            string? sheetName = sheetsNames[i];
                             // get the sheet object based on the sheet names
-                            Sheet theSheet = wbPart.Workbook.Descendants<Sheet>().Where(s => s.Name == sheetName).FirstOrDefault(); 
-                            // Throw an exception if there is no sheet.
-                            if (theSheet == null)
-                            {
-                                throw new ArgumentException("sheetName");
-                            }
+                            Sheet? theSheet = wbPart.Workbook.Descendants<Sheet>().Where(s => s.Name == sheetName).FirstOrDefault() ?? throw new ArgumentException("sheetName");
                             // find the worksheet part based on the sheet id
-                            WorksheetPart wsPart = (WorksheetPart)(wbPart.GetPartById(theSheet.Id)); 
-                            JObject jsonEl = (JObject)(JsonExporter.ReadExcelFileTranslations(wsPart, wbPart));
+                            WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(theSheet.Id!); 
+                            JObject jsonEl = JsonExporter.ReadExcelFileTranslations(wsPart, wbPart);
                             if (sheetName == "languages")
                             {
-                                JArray lang = new JArray();
-                                foreach (var l in ((JObject)jsonEl["id"]).Properties().Select(x => x.Name))
+                                JArray lang = new();
+                                foreach (var l in ((JObject)jsonEl["id"]!).Properties().Select(x => x.Name))
                                 {
-                                    JObject o = new JObject();
+                                    JObject o = new();
                                     foreach (string s in jsonEl.Properties().Select(p => p.Name))
                                     {
-                                        o.Add(s, jsonEl[s][l]);
+                                        o.Add(s, jsonEl[s]![l]);
                                     }
                                     lang.Add(o);
                                 }
@@ -243,20 +243,24 @@ namespace XMLDocument
                         catch (DirectoryNotFoundException dirNotFoundException)
                         {
                             // Create and try again
+                            Console.WriteLine(dirNotFoundException.Message.ToString());
                         }
                         catch (UnauthorizedAccessException unauthorizedAccessException)
                         {
                             // Show a message to the user
+                            Console.WriteLine(unauthorizedAccessException.Message.ToString());
                         }
                         catch (IOException ioException)
                         {
                             //logger.Error(ioException, "Error during file write");
                             // Show a message to the user
+                            Console.WriteLine(ioException.Message.ToString());
                         }
                         catch (Exception exception)
                         {
                             //logger.Fatal(exception, "We need to handle this better");
                             // Show general message to the user
+                            Console.WriteLine(exception.Message.ToString());
                         }
                     }
                     break;
@@ -276,7 +280,7 @@ namespace XMLDocument
                     {
                         foreach (string fileName in fileArgs)
                         {
-                            string purFileName = (fileName.Split("."))[0];
+                            string purFileName = fileName.Split(".")[0];
                             string[] arr = purFileName.Split("_");
                             string key = "en";
                             if (arr.GetType() == typeof(string[]) && arr[arr.Length - 1].Length == 2)
@@ -294,5 +298,8 @@ namespace XMLDocument
                     break;
             }
         }
+
+        [GeneratedRegex("^const Translations = ", RegexOptions.IgnoreCase, "bg-BG")]
+        private static partial Regex RemoveConstRegex();
     }
 }

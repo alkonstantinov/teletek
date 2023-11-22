@@ -24,3 +24,4 @@ C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\lupd\obj\Debug\n
 C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\lupd\obj\Debug\netcoreapp3.1\lupd.csproj.CopyComplete
 C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\lupd\obj\Debug\netcoreapp3.1\lupd.dll
 C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\lupd\obj\Debug\netcoreapp3.1\lupd.pdb
+C:\Users\vbb12\GitHub\Teletek\teletek\prototype\ProstePrototype\lupd\obj\Debug\netcoreapp3.1\lupd.sourcelink.json

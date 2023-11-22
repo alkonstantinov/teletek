@@ -15,23 +15,21 @@ namespace NewTeletekSW.Utils
     {
         public static void ReadExcelFileLanguages(string fileName)
         {
-            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(fileName, false))
+            using SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(fileName, false);
+            WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart!;
+            WorksheetPart worksheetPart = workbookPart.WorksheetParts.First();
+            OpenXmlReader reader = OpenXmlReader.Create(worksheetPart);
+            string text;
+            while (reader.Read())
             {
-                WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart;
-                WorksheetPart worksheetPart = workbookPart.WorksheetParts.First();
-                OpenXmlReader reader = OpenXmlReader.Create(worksheetPart);
-                string text;
-                while (reader.Read())
+                if (reader.ElementType == typeof(CellValue))
                 {
-                    if (reader.ElementType == typeof(CellValue))
-                    {
-                        text = reader.GetText();
-                        Console.Write(text + " ");
-                    }
+                    text = reader.GetText();
+                    Console.Write(text + " ");
                 }
-                Console.WriteLine();
-                Console.ReadKey();
             }
+            Console.WriteLine();
+            Console.ReadKey();
         }
 
         internal static string GetValueFromCell(Cell c, WorkbookPart wbPart)
@@ -53,19 +51,19 @@ namespace NewTeletekSW.Utils
         // The non-SAX approach.
         internal static JObject ReadExcelFileTranslations(WorksheetPart worksheetPart, WorkbookPart wbPart)
         {
-            JObject result = new JObject();
+            JObject result = new();
             // sheetData (cell table grouped by row) contains row, c (cell in row), v (value in cell)
             SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
             string text;
 
             // deal with header -> languages
-            List<string> languages = new List<string>();
+            List<string> languages = new();
 
             // deal with translation per lang cells
             foreach (Row r in sheetData.Elements<Row>())
             {
                 string key = GetValueFromCell(r.Elements<Cell>().First(), wbPart);
-                JObject internalObj = new JObject();
+                JObject internalObj = new();
                 int index = 0;
                 foreach (Cell c in r.Elements<Cell>())
                 {

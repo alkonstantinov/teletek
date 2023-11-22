@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lupd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e54b1b16b91ca8be069b530ae9c5ce135a8797d")]
 [assembly: System.Reflection.AssemblyProductAttribute("lupd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lupd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
